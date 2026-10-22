@@ -16,45 +16,47 @@ By default, the service listens for agent enrollment requests on TCP port 1515. 
 
 For more information about agent enrollment and the available authentication methods, see the :doc:`Agent enrollment service </user-manual/manager/wazuh-manager-services>` section of the User Manual.
 
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| Option         | Description                                                                                                 |
-+================+=============================================================================================================+
-| -c <ciphers>   | Specifies the list of TLS 1.3 cipher suites. The default is                                                 |
-|                | TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256. The daemon exits                |
-|                | if the value is not a valid list of TLS 1.3 cipher suites.                                                  |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -d             | Runs the daemon in debug mode. Repeat the option to increase the debug level.                               |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -D <directory> | Specifies the Wazuh manager installation directory used to build the default server                         |
-|                | certificate and key paths. The default is /var/wazuh-manager. This option does not change                   |
-|                | the working directory of the daemon.                                                                        |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -f             | Runs the daemon in the foreground.                                                                          |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -g <group>     | Specifies the group under which the daemon runs. The default is wazuh-manager.                              |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -h             | Displays the help message and exits.                                                                        |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -k <path>      | Specifies the full path to the server private key. The default is /etc/wazuh-manager/certs/remoted-key.pem. |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -p <port>      | Specifies the port used by the enrollment service. The default is 1515.                                     |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -P             | Forces shared-password enrollment on. The daemon itself has this method disabled by default,                |
-|                | but the configuration shipped by the installer enables it. The password is read from                        |
-|                | /etc/wazuh-manager/authd.pass or generated automatically.                                                   |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -s             | Enables source host verification. Use this option with -v.                                                  |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -t             | Tests the configuration and exits.                                                                          |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -u <user>      | Specifies the user under which the daemon runs. The default is wazuh-manager.                               |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -v <path>      | Specifies the full path to the certificate authority certificate used to verify agents.                     |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -V             | Displays version and license information.                                                                   |
-+----------------+-------------------------------------------------------------------------------------------------------------+
-| -x <path>      | Specifies the full path to the server certificate. The default is /etc/wazuh-manager/certs/remoted.pem.     |
-+----------------+-------------------------------------------------------------------------------------------------------------+
++----------------+----------------------------------------------------------------------------------------------+
+| Option         | Description                                                                                  |
++================+==============================================================================================+
+| -c <ciphers>   | Specifies the list of TLS 1.3 cipher suites. The default is                                  |
+|                | TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256. The daemon exits |
+|                | if the value is not a valid list of TLS 1.3 cipher suites.                                   |
++----------------+----------------------------------------------------------------------------------------------+
+| -d             | Runs the daemon in debug mode. Repeat the option to increase the debug level.                |
++----------------+----------------------------------------------------------------------------------------------+
+| -D <directory> | Specifies the Wazuh manager installation directory used to build the default server          |
+|                | certificate and key paths. The default is /var/wazuh-manager. This option does not change    |
+|                | the working directory of the daemon.                                                         |
++----------------+----------------------------------------------------------------------------------------------+
+| -f             | Runs the daemon in the foreground.                                                           |
++----------------+----------------------------------------------------------------------------------------------+
+| -g <group>     | Specifies the group under which the daemon runs. The default is wazuh-manager.               |
++----------------+----------------------------------------------------------------------------------------------+
+| -h             | Displays the help message and exits.                                                         |
++----------------+----------------------------------------------------------------------------------------------+
+| -k <path>      | Specifies the full path to the server private key. The default is                            |
+|                | /etc/wazuh-manager/certs/remoted-key.pem.                                                    |
++----------------+----------------------------------------------------------------------------------------------+
+| -p <port>      | Specifies the port used by the enrollment service. The default is 1515.                      |
++----------------+----------------------------------------------------------------------------------------------+
+| -P             | Forces shared-password enrollment on. The daemon itself has this method disabled by default, |
+|                | but the configuration shipped by the installer enables it. The password is read from         |
+|                | /etc/wazuh-manager/authd.pass or generated automatically.                                    |
++----------------+----------------------------------------------------------------------------------------------+
+| -s             | Enables source host verification. Use this option with -v.                                   |
++----------------+----------------------------------------------------------------------------------------------+
+| -t             | Tests the configuration and exits.                                                           |
++----------------+----------------------------------------------------------------------------------------------+
+| -u <user>      | Specifies the user under which the daemon runs. The default is wazuh-manager.                |
++----------------+----------------------------------------------------------------------------------------------+
+| -v <path>      | Specifies the full path to the certificate authority certificate used to verify agents.      |
++----------------+----------------------------------------------------------------------------------------------+
+| -V             | Displays version and license information.                                                    |
++----------------+----------------------------------------------------------------------------------------------+
+| -x <path>      | Specifies the full path to the server certificate. The default is                            |
+|                | /etc/wazuh-manager/certs/remoted.pem.                                                        |
++----------------+----------------------------------------------------------------------------------------------+
 
 Enrollment token commands
 -------------------------

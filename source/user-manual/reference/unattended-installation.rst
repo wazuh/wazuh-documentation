@@ -184,29 +184,31 @@ The certificate, key, and CA paths must be absolute paths in ``/etc/wazuh-manage
 
 The options most often changed at installation time are:
 
-+------------------------------------+---------------------------------------------------------------------+------------------------------------------+--------------------+
-| Variable                           | Description                                                         | Default                                  | Allowed values     |
-+====================================+=====================================================================+==========================================+====================+
-| ``WAZUH_REMOTE_HTTPS_PORT``        | Port of the HTTPS listener used by 5.0 agents for enrollment and    | 1517                                     | 1-65535            |
-|                                    | communication.                                                      |                                          |                    |
-+------------------------------------+---------------------------------------------------------------------+------------------------------------------+--------------------+
-| ``WAZUH_REMOTE_HTTPS_BIND_ADDR``   | Address the HTTPS listener binds to. 127.0.0.1 only accepts         | 0.0.0.0                                  | A valid IP address |
-|                                    | local connections.                                                  |                                          |                    |
-+------------------------------------+---------------------------------------------------------------------+------------------------------------------+--------------------+
-| ``WAZUH_REMOTE_HTTPS_CERTIFICATE`` | Listener certificate, an absolute path in /etc/wazuh-manager/certs. | /etc/wazuh-manager/certs/remoted.pem     | A path             |
-|                                    | When set, WAZUH_REMOTE_HTTPS_KEY is also required.                  |                                          |                    |
-+------------------------------------+---------------------------------------------------------------------+------------------------------------------+--------------------+
-| ``WAZUH_REMOTE_HTTPS_KEY``         | Listener private key, an absolute path in /etc/wazuh-manager/certs. | /etc/wazuh-manager/certs/remoted-key.pem | A path             |
-|                                    | When set, WAZUH_REMOTE_HTTPS_CERTIFICATE is also required.          |                                          |                    |
-+------------------------------------+---------------------------------------------------------------------+------------------------------------------+--------------------+
-| ``WAZUH_REMOTE_LEGACY_ENABLED``    | Enables the legacy listener used by 4.x agents. Set it to no to     | yes                                      | yes, no            |
-|                                    | disable that listener.                                              |                                          |                    |
-+------------------------------------+---------------------------------------------------------------------+------------------------------------------+--------------------+
-| ``WAZUH_REMOTE_LEGACY_PORT``       | Port of the legacy listener.                                        | 1514                                     | 1-65535            |
-+------------------------------------+---------------------------------------------------------------------+------------------------------------------+--------------------+
-| ``WAZUH_REMOTE_LEGACY_LOCAL_IP``   | Address the legacy listener binds to. 127.0.0.1 only accepts        | 0.0.0.0                                  | A valid IP address |
-|                                    | local connections.                                                  |                                          |                    |
-+------------------------------------+---------------------------------------------------------------------+------------------------------------------+--------------------+
++------------------------------------+------------------------------------------------------------------+------------------------------------------+--------------------+
+| Variable                           | Description                                                      | Default                                  | Allowed values     |
++====================================+==================================================================+==========================================+====================+
+| ``WAZUH_REMOTE_HTTPS_PORT``        | Port of the HTTPS listener used by 5.0 agents for enrollment and | 1517                                     | 1-65535            |
+|                                    | communication.                                                   |                                          |                    |
++------------------------------------+------------------------------------------------------------------+------------------------------------------+--------------------+
+| ``WAZUH_REMOTE_HTTPS_BIND_ADDR``   | Address the HTTPS listener binds to. 127.0.0.1 only accepts      | 0.0.0.0                                  | A valid IP address |
+|                                    | local connections.                                               |                                          |                    |
++------------------------------------+------------------------------------------------------------------+------------------------------------------+--------------------+
+| ``WAZUH_REMOTE_HTTPS_CERTIFICATE`` | Listener certificate, an absolute path in                        | /etc/wazuh-manager/certs/remoted.pem     | A path             |
+|                                    | /etc/wazuh-manager/certs. When set, WAZUH_REMOTE_HTTPS_KEY is    |                                          |                    |
+|                                    | also required.                                                   |                                          |                    |
++------------------------------------+------------------------------------------------------------------+------------------------------------------+--------------------+
+| ``WAZUH_REMOTE_HTTPS_KEY``         | Listener private key, an absolute path in                        | /etc/wazuh-manager/certs/remoted-key.pem | A path             |
+|                                    | /etc/wazuh-manager/certs. When set,                              |                                          |                    |
+|                                    | WAZUH_REMOTE_HTTPS_CERTIFICATE is also required.                 |                                          |                    |
++------------------------------------+------------------------------------------------------------------+------------------------------------------+--------------------+
+| ``WAZUH_REMOTE_LEGACY_ENABLED``    | Enables the legacy listener used by 4.x agents. Set it to no to  | yes                                      | yes, no            |
+|                                    | disable that listener.                                           |                                          |                    |
++------------------------------------+------------------------------------------------------------------+------------------------------------------+--------------------+
+| ``WAZUH_REMOTE_LEGACY_PORT``       | Port of the legacy listener.                                     | 1514                                     | 1-65535            |
++------------------------------------+------------------------------------------------------------------+------------------------------------------+--------------------+
+| ``WAZUH_REMOTE_LEGACY_LOCAL_IP``   | Address the legacy listener binds to. 127.0.0.1 only accepts     | 0.0.0.0                                  | A valid IP address |
+|                                    | local connections.                                               |                                          |                    |
++------------------------------------+------------------------------------------------------------------+------------------------------------------+--------------------+
 
 Every other option of the remote block can be set the same way, using WAZUH_REMOTE\_ followed by the section (HTTPS\_, LEGACY\_ or AGENTS\_) and the option name in capitals. See the remote section of the Wazuh manager configuration reference for all the options.
 

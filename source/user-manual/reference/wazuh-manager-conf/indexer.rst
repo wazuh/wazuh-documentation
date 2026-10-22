@@ -65,33 +65,39 @@ Path to one or more CA certificates used to verify the Indexer's TLS certificate
 
 ``ca`` — CA certificate file path. The path must exist on disk at startup time.
 
-+----------------------+----------------------------------------------------------------------------------------------------------------------+
-| **Default value**    | None (The installer sets this automatically to /etc/wazuh-manager/certs/indexer-ca.pem, the CA of the Wazuh indexer) |
-+----------------------+----------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**   | Absolute path to a PEM-encoded CA certificate directly in /etc/wazuh-manager/certs (existence checked at startup)    |
-+----------------------+----------------------------------------------------------------------------------------------------------------------+
++----------------------+---------------------------------------------------------------------------------------------+
+| **Default value**    | None (The installer sets this automatically to /etc/wazuh-manager/certs/indexer-ca.pem, the |
+|                      | CA of the Wazuh indexer)                                                                    |
++----------------------+---------------------------------------------------------------------------------------------+
+| **Allowed values**   | Absolute path to a PEM-encoded CA certificate directly in /etc/wazuh-manager/certs          |
+|                      | (existence checked at startup)                                                              |
++----------------------+---------------------------------------------------------------------------------------------+
 
 certificate
 ~~~~~~~~~~~~
 
 Path to the client certificate presented by the Wazuh manager when mutual TLS authentication is enabled. The path must exist on disk at startup time.
 
-+--------------------+----------------------------------------------------------------------------------------------------------------+
-| **Default value**  | None (The installer sets this automatically to /etc/wazuh-manager/certs/indexer-connector.pem)                 |
-+--------------------+----------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Absolute path to a PEM-encoded certificate directly in /etc/wazuh-manager/certs (existence checked at startup) |
-+--------------------+----------------------------------------------------------------------------------------------------------------+
++--------------------+----------------------------------------------------------------------------------------+
+| **Default value**  | None (The installer sets this automatically to                                         |
+|                    | /etc/wazuh-manager/certs/indexer-connector.pem)                                        |
++--------------------+----------------------------------------------------------------------------------------+
+| **Allowed values** | Absolute path to a PEM-encoded certificate directly in /etc/wazuh-manager/certs        |
+|                    | (existence checked at startup)                                                         |
++--------------------+----------------------------------------------------------------------------------------+
 
 key
 ~~~~
 
 Path to the private key corresponding to ``certificate``. Required if ``certificate`` is specified. Path must exist on disk at startup time.
 
-+----------------------+----------------------------------------------------------------------------------------------------------------+
-| **Default value**    | None (The installer sets this automatically to /etc/wazuh-manager/certs/indexer-connector-key.pem)             |
-+----------------------+----------------------------------------------------------------------------------------------------------------+
-| **Allowed values**   | Absolute path to a PEM-encoded private key directly in /etc/wazuh-manager/certs (existence checked at startup) |
-+----------------------+----------------------------------------------------------------------------------------------------------------+
++----------------------+------------------------------------------------------------------------------------------+
+| **Default value**    | None (The installer sets this automatically to                                           |
+|                      | /etc/wazuh-manager/certs/indexer-connector-key.pem)                                      |
++----------------------+------------------------------------------------------------------------------------------+
+| **Allowed values**   | Absolute path to a PEM-encoded private key directly in /etc/wazuh-manager/certs          |
+|                      | (existence checked at startup)                                                           |
++----------------------+------------------------------------------------------------------------------------------+
 
 Sample configuration
 ---------------------
