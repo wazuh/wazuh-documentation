@@ -239,23 +239,26 @@ The cluster is built on top of `asyncio.Protocol <https://docs.python.org/3/libr
 The Wazuh cluster protocol is defined on top of this framework. The following diagram shows all Python classes defined based on ``asyncio.Protocol``:
 
 .. thumbnail:: ../images/development/cluster-protocol-handler.png
-    :title: Wazuh cluster protocol class inheritance
-    :align: center
-    :width: 80%
+   :title: Wazuh cluster protocol class inheritance
+   :alt: Class diagram: asyncio.protocols.BaseProtocol and Protocol, then wazuh.core.cluster.common.Handler, with AbstractServerHandler, WazuhCommon and AbstractClient below it, and MasterHandler, WorkerHandler, LocalServerHandler, LocalClientHandler, LocalServerHandlerMaster and LocalServerHandlerWorker as subclasses
+   :align: center
+   :width: 80%
 
 The higher classes on the diagram (``wazuh.core.cluster.common.Handler``, ``wazuh.core.cluster.server.AbstractServerHandler``, ``wazuh.core.cluster.common.WazuhCommon``, and ``wazuh.core.cluster.client.AbstractClient``) define abstract concepts of what a client and a server is. Those abstract concepts are used by the lower classes on the diagram (``wazuh.core.cluster.local_server.LocalServerHandler``, ``wazuh.core.cluster.master.MasterHandler``, ``wazuh.core.cluster.worker.WorkerHandler`` and ``wazuh.core.cluster.local_client.LocalClientHandler``) to define specific communication protocols. These specific protocols are described in the `Protocols`_ section.
 
 There are abstract server and client classes to handle multiple connections from multiple clients and connections to the server. This way, all the logic to connect to a server or to handle multiple clients can be shared between all types of servers and clients in the cluster. These classes are shown in the diagrams below:
 
 .. thumbnail:: ../images/development/cluster-clients.png
-    :title: Wazuh cluster protocol class inheritance
-    :align: center
-    :width: 80%
+   :title: Wazuh cluster client manager classes
+   :alt: Class diagram: wazuh.core.cluster.local_client.LocalClient and wazuh.core.cluster.worker.Worker inherit from wazuh.core.cluster.client.AbstractClientManager
+   :align: center
+   :width: 80%
 
 .. thumbnail:: ../images/development/cluster-servers.png
-    :title: Wazuh cluster protocol class inheritance
-    :align: center
-    :width: 80%
+   :title: Wazuh cluster server classes
+   :alt: Class diagram: wazuh.core.cluster.local_server.LocalServer and wazuh.core.cluster.master.Master inherit from wazuh.core.cluster.server.AbstractServer, and LocalServerMaster and LocalServerWorker inherit from LocalServer
+   :align: center
+   :width: 80%
 
 When the ``wazuh-clusterd`` process starts in the Wazuh server master node, it creates a ``Master`` object. Every time a new Wazuh server worker node connects to the master node, a ``MasterHandler`` object is created to handle the connection with that worker node (incoming requests, synchronization processes, etc). This means that there will always be at least a ``Master`` object and as many ``MasterHandler`` objects to match the number of connected worker nodes. The ``Master`` object is responsible for managing all ``MasterHandler`` objects created.
 
@@ -270,9 +273,10 @@ Protocol definition
 The communication protocol used for all communications (both cluster and API) is defined in ``wazuh.core.cluster.common.Handler``. Each message in the protocol has the following structure:
 
 .. thumbnail:: ../images/development/structure-message-protocol.png
-    :title: Structure for each message in the protocol
-    :align: center
-    :width: 80%
+   :title: Structure for each message in the protocol
+   :alt: Structure of a cluster protocol message: a 22-byte header with the counter and payload length as integers, an 11-character command and a 1-character divide_flag, followed by a payload of 5242880 bytes
+   :align: center
+   :width: 80%
 
 The protocol message has two parts:
 
@@ -443,9 +447,10 @@ In addition to the tasks already described, additional tasks are created wheneve
 One such task, implemented as a class, is responsible for receiving and processing files from a peer. An instance of this class is created at the start of a synchronization process and is destroyed once the process is complete. Internally, it launches an asynchronous task that remains active until all files required for synchronization have been successfully received. This asynchronous task has a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was an error during the synchronization process.
 
 .. thumbnail:: ../images/development/receive-file-task-cluster.png
-    :title: Receive file class inheritance
-    :align: center
-    :width: 80%
+   :title: Receive file class inheritance
+   :alt: Class diagram: ReceiveExtraValidTask, ReceiveAgentInfoTask and ReceiveIntegrityTask in wazuh.core.cluster.master, and ReceiveIntegrityTask in wazuh.core.cluster.worker, below wazuh.core.cluster.common.ReceiveFileTask
+   :align: center
+   :width: 80%
 
 Multiprocessing
 ~~~~~~~~~~~~~~~
@@ -475,9 +480,10 @@ Worker nodes
 Below is an example diagram of how the process pool is used in the Wazuh server master node:
 
 .. thumbnail:: ../images/development/cluster-process-pool.png
-    :title: Cluster process pool
-    :align: center
-    :width: 80%
+   :title: Cluster process pool
+   :alt: Sequence diagram: the master node runs local integrity and agent-info database tasks in a process pool while it exchanges agent-info and integrity sync messages with a worker node, then sends the responses back
+   :align: center
+   :width: 80%
 
 
 Integrity synchronization process
@@ -486,9 +492,10 @@ Integrity synchronization process
 This section explains the integrity synchronization process and how asyncio tasks are created to handle data exchanged with the peer. The diagram below outlines the complete workflow involved in integrity synchronization:
 
 .. thumbnail:: ../images/development/sync-integrity-diagram.png
-    :title: Sync integrity diagram
-    :align: center
-    :width: 80%
+   :title: Sync integrity diagram
+   :alt: Sequence diagram of integrity synchronization between WorkerHandler and MasterHandler in seven steps: permission request, start, integrity.zip sent in chunks with its SHA256, end, then the master sends integrity_master.zip back the same way
+   :align: center
+   :width: 80%
 
 
 - **1**: The ``sync_integrity`` task on the worker wakes up after sleeping during interval seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/framework/wazuh/core/cluster/cluster.json>`__ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``syn_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished, and the worker can start a new one.
@@ -515,9 +522,10 @@ The type association with every endpoint can be found here: `API controllers <ht
 Imagine a Wazuh server cluster with two nodes, where there is an agent reporting to the worker node with ID: 020. The following diagram shows the process of running a distributed API request by requesting the ``GET/sca/020`` API endpoint:
 
 .. thumbnail:: ../images/development/distributed-dapi-worker.png
-    :title: Distributed API requests
-    :align: center
-    :width: 80%
+   :title: Distributed API requests
+   :alt: Sequence diagram of a distributed API request from a worker node in nine steps: the request goes from LocalClient, DAPI and LocalServer on the worker through WorkerHandler and MasterHandler to the DAPI on the master, and the response returns in chunks to LocalClient
+   :align: center
+   :width: 80%
 
 - **1**: The user does an API request. The API server receives the connection and calls ``distribute_function``. Since the requested endpoint is ``distributed_master`` the worker node realizes it can't solve the request locally and proceeds to forward the request to the master node.
 - **2**: The API server doesn't have direct contact with the Wazuh server cluster master node. So the API process forwards the request to a Unix socket, because the cluster has to receive API requests locally. This Unix server is running inside the cluster process, so it can send requests to the master node. In order to identify the API request when the master node sends a response back, the local server adds an ID (``local_client1``  in this example).
