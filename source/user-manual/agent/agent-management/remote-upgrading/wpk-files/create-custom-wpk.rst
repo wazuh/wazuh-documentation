@@ -100,7 +100,7 @@ To use this tool, the previously created :ref:`certificate and key <create-wpk-k
 Linux WPK
 ~~~~~~~~~
 
-Download the latest version of the Wazuh DEB or RPM package :ref:`here <wazuh_agent_packages_list_linux>`. For example, for Debian:
+Download the latest version of the Wazuh DEB or RPM package from the :ref:`Linux agent packages list <wazuh_agent_packages_list_linux>`. For example, for Debian:
 
 .. code-block:: console
 
@@ -224,7 +224,7 @@ Linux WPK
       # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
       # cd wazuh-|WAZUH_CURRENT|
 
-#. Download the latest version of the Wazuh DEB or RPM package :ref:`here <wazuh_agent_packages_list_linux>`. For example, for Debian:
+#. Download the latest version of the Wazuh DEB or RPM package from the :ref:`Linux agent packages list <wazuh_agent_packages_list_linux>`. For example, for Debian:
 
    .. code-block:: console
 
