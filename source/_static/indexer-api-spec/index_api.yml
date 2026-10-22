@@ -411,6 +411,40 @@ paths:
         - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/fielddata'
         - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/file'
+        - $ref: '#/components/parameters/clear_cache_index'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/query'
+        - $ref: '#/components/parameters/request'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClearCacheSuccess'
+        '400':
+          $ref: '#/components/responses/ClearCacheBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_cache/clear:
+    post:
+      tags: [Index APIs]
+      summary: Clear cache (all indexes)
+      description: |
+        The Clear Cache API removes cached data from one or more indexes. If used on a data stream, it clears the caches of all associated backing indexes.
+      operationId: postCacheClear
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices_op'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/fielddata'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/file'
+        - $ref: '#/components/parameters/clear_cache_index'
         - $ref: '#/components/parameters/ignore_unavailable'
         - $ref: '#/components/parameters/query'
         - $ref: '#/components/parameters/request'
@@ -601,6 +635,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/allow_no_indices'
         - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
         - $ref: '#/components/parameters/cluster_manager_timeout'
         - $ref: '#/components/parameters/timeout'
       responses:
@@ -649,6 +684,38 @@ paths:
 
         However, this operation cannot be used to modify mappings that are already applied to existing data in the index. To update those mappings, you must first create a new index with the desired mappings and then use the [Reindex API](https://documentation.wazuh.com/indexer-api/user-manual/indexer-api/reference.html#operation/reindexDocuments) to transfer the documents from the old index to the new one.
       operationId: putTargetIndexMapping
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/write_index_only'
+      requestBody:
+        $ref: '#/components/requestBodies/MappingRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MappingSuccess'
+        '400':
+          $ref: '#/components/responses/MappingBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      tags: [Index APIs]
+      summary: Create or update mappings (POST)
+      description: |
+        To create or add mappings and fields to an index, you can use the POST mapping API. If the mapping already exists, this operation will update it.
+
+        However, this operation cannot be used to modify mappings that are already applied to existing data in the index. To update those mappings, you must first create a new index with the desired mappings and then use the Reindex API to transfer the documents from the old index to the new one.
+      operationId: postTargetIndexMapping
       security:
         - basicAuth: []
         - jwtAuth: []
@@ -737,6 +804,7 @@ paths:
         - $ref: '#/components/parameters/create'
         - $ref: '#/components/parameters/cluster_manager_timeout'
         - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/local'
       responses:
         '200':
           $ref: '#/components/responses/GetIndexTemplateSuccess'
@@ -773,6 +841,55 @@ paths:
           $ref: 'spec.yml#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/DeleteIndexTemplateNotFound'
+
+    head:
+      tags: [Index APIs]
+      summary: Index template exists
+      description: |
+        The Get Index Template API returns information about one or more index templates.
+      operationId: headIndexTemplate
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/local'
+      responses:
+        '200':
+          description: The index template exists.
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          description: The index template doesn't exist.
+
+  /_index_template:
+    get:
+      tags: [Index APIs]
+      summary: List index templates
+      description: |
+        The Get Index Template API returns information about all index templates. To retrieve one template, include its name in the path.
+      operationId: listIndexTemplates
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/local'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetIndexTemplateSuccess'
+        '400':
+          $ref: '#/components/responses/GetIndexTemplateBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/GetIndexTemplateNotFound'
 
   /_component_template/{component_template_name}:
     parameters:
@@ -820,6 +937,37 @@ paths:
 
         Component templates are only applied during index creation. In the case of data streams, this applies both to the creation of the stream itself and to the creation of its backing indexes. Any changes made to component templates do not impact existing indexes, including the backing indexes of already created data streams.
       operationId: getComponentTemplate
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/create'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/ComponentTemplateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ComponentTemplateSuccess'
+        '400':
+          $ref: '#/components/responses/ComponentTemplateBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+    post:
+      tags: [Index APIs]
+      summary: Create or update component template (POST)
+      description: |
+        The Component Template API allows you to create or update a component template. These templates serve as reusable building blocks that define settings, mappings, and aliases, which can be shared across multiple index templates.
+
+        An index template can include multiple component templates. To use a component template within an index template, it must be listed in the `composed_of` section of the index template. Component templates are only applied to new indexes or data streams that match the conditions defined in the associated index template.
+
+        If an index template or an index creation request specifies its own settings or mappings, those will override any conflicting settings or mappings from the component template.
+
+        Component templates are only applied during index creation. In the case of data streams, this applies both to the creation of the stream itself and to the creation of its backing indexes. Any changes made to component templates do not impact existing indexes, including the backing indexes of already created data streams.
+      operationId: postComponentTemplate
       security:
         - basicAuth: []
         - jwtAuth: []
@@ -1066,6 +1214,7 @@ paths:
         - $ref: '#/components/parameters/max_num_segments'
         - $ref: '#/components/parameters/only_expunge_deletes'
         - $ref: '#/components/parameters/primary_only'
+        - $ref: '#/components/parameters/wait_for_completion'
       responses:
         '200':
           $ref: '#/components/responses/ForcemergeSuccess'
@@ -1110,6 +1259,7 @@ paths:
         - $ref: '#/components/parameters/max_num_segments'
         - $ref: '#/components/parameters/only_expunge_deletes'
         - $ref: '#/components/parameters/primary_only'
+        - $ref: '#/components/parameters/wait_for_completion'
       responses:
         '200':
           $ref: '#/components/responses/ForcemergeSuccess'
@@ -1487,6 +1637,38 @@ paths:
         '404':
           $ref: '#/components/responses/GetSettingsNotFound'
 
+    put:
+      tags: [Index APIs]
+      summary: Update settings (all indexes)
+      description: |
+        The Update Settings API allows you to modify settings at the index level. You can adjust dynamic settings at any time, while static settings are fixed once the index is created and cannot be changed afterward. For details on the distinction between static and dynamic settings, refer to the Configuring OpenSearch documentation.
+
+        In addition to index settings, you can update configurations specific to individual plugins. To get the full list of updatable settings, run `GET <TARGET-INDEX>/_settings?include_defaults=true`.
+      operationId: putGlobalSettings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/preserve_existing'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateSettingsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateSettingsSuccess'
+        '400':
+          $ref: '#/components/responses/UpdateSettingsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   /{target_index}/_settings:
     parameters:
       - $ref: '#/components/parameters/target_index_settings'
@@ -1529,6 +1711,38 @@ paths:
       description: |
         The Get Settings API retrieves all configuration settings associated with a specified index.
       operationId: getSettingsTargetSetting
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/include_defaults'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetSettingsSuccess'
+        '400':
+          $ref: '#/components/responses/GetSettingsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/GetSettingsNotFound'
+
+  /_settings/{setting}:
+    parameters:
+      - $ref: '#/components/parameters/setting'
+    get:
+      tags: [Index APIs]
+      summary: Get settings (Global Setting GET)
+      description: |
+        The Get Settings API retrieves all configuration settings associated with a specified index.
+      operationId: getSettingsGlobalSetting
       security:
         - basicAuth: []
         - jwtAuth: []
@@ -2097,6 +2311,23 @@ components:
       schema:
         type: string
       example: "wazuh-alerts-4.x-2025.03.14"
+
+    file:
+      name: file
+      in: query
+      required: false
+      description: When true, clears the file cache of indexes that use searchable snapshots.
+      schema:
+        type: boolean
+        default: false
+
+    clear_cache_index:
+      name: index
+      in: query
+      required: false
+      description: A comma-separated list of index names whose cache should be cleared.
+      schema:
+        type: string
 
     fielddata:
       name: fielddata

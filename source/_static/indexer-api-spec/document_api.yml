@@ -300,6 +300,43 @@ paths:
         - $ref: '#/components/parameters/refresh'
         - $ref: '#/components/parameters/require_alias'
         - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/bulk_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/batch_size'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/BulkRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/BulkSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    put:
+      tags: [Document APIs]
+      summary: Bulk (PUT)
+      description: |
+        The bulk operation allows you to add, update, or delete multiple documents within a single request. This approach offers significant performance improvements over individual Wazuh indexing requests. Whenever possible, it is recommended to batch indexing operations using bulk requests for better efficiency.
+      operationId: bulkOperationsPut
+      parameters:
+        - $ref: '#/components/parameters/pipeline_bulk'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/bulk_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
         - $ref: '#/components/parameters/timeout'
         - $ref: '#/components/parameters/type'
         - $ref: '#/components/parameters/wait_for_active_shards'
@@ -334,6 +371,43 @@ paths:
         - $ref: '#/components/parameters/refresh'
         - $ref: '#/components/parameters/require_alias'
         - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/bulk_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/batch_size'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/BulkRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/BulkSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    put:
+      tags: [Document APIs]
+      summary: Bulk (Index) (PUT)
+      description: |
+        The bulk operation allows you to add, update, or delete multiple documents within a single request. This approach offers significant performance improvements over individual Wazuh indexing requests. Whenever possible, it is recommended to batch indexing operations using bulk requests for better efficiency.
+      operationId: bulkOperationsIndexPut
+      parameters:
+        - $ref: '#/components/parameters/pipeline_bulk'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/bulk_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
         - $ref: '#/components/parameters/timeout'
         - $ref: '#/components/parameters/type'
         - $ref: '#/components/parameters/wait_for_active_shards'
@@ -791,6 +865,13 @@ components:
       schema:
         type: boolean
         default: false
+
+    bulk_source:
+      name: _source
+      in: query
+      description: Whether to return the `_source` field of updated documents in the response, or a comma-separated list of fields to return.
+      schema:
+        type: string
 
     _source:
       name: _source
