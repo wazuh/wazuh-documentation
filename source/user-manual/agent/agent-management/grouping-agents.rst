@@ -12,9 +12,9 @@ There are two methods for grouping enrolled Wazuh agents. They can either be con
 
    Refer to the `agent groups and centralized configuration <https://wazuh.com/blog/agent-groups-and-centralized-configuration/>`__ blog post for more information.
 
-Unless otherwise assigned, all newly connected Wazuh agents automatically belong to the *'default'* group. This group is created during the installation process with the configuration files placed in the ``/var/wazuh-manager/etc/shared/default/`` folder on the Wazuh manager. These files will be pushed from the Wazuh manager to all Wazuh agents belonging to this group.
+Unless otherwise assigned, all newly connected Wazuh agents automatically belong to the *'default'* group. This group is created during the installation process with the configuration files placed in the ``/etc/wazuh-manager/shared/default/`` folder on the Wazuh manager. These files will be pushed from the Wazuh manager to all Wazuh agents belonging to this group.
 
-Each group has a configuration file ``/var/wazuh-manager/etc/shared/<GROUP_NAME>/agent.conf`` located on the Wazuh manager, where ``<GROUP_NAME>`` is the name of the agent group. This file is empty by default, and here, you can define centralized agent configurations. After creating a group, you can modify the group's configuration file to apply configurations to all agents in that group.
+Each group has a configuration file ``/etc/wazuh-manager/shared/<GROUP_NAME>/agent.conf`` located on the Wazuh manager, where ``<GROUP_NAME>`` is the name of the agent group. This file is empty by default, and here, you can define centralized agent configurations. After creating a group, you can modify the group's configuration file to apply configurations to all agents in that group.
 
 Creating agent groups
 ---------------------
@@ -226,9 +226,9 @@ Below are the steps to assign agents to a group with a specific configuration:
          "error": 0
       }
 
-#. Once a group is created, its ``agent.conf`` file can be edited to include the specific configuration you wish to assign to this group. For this example, for a group named dbms, the file to be edited is located at ``/var/wazuh-manager/etc/shared/dbms/agent.conf`` on the Wazuh manager and each agent belonging to this group will receive this file.
+#. Once a group is created, its ``agent.conf`` file can be edited to include the specific configuration you wish to assign to this group. For this example, for a group named dbms, the file to be edited is located at ``/etc/wazuh-manager/shared/dbms/agent.conf`` on the Wazuh manager and each agent belonging to this group will receive this file.
 
-#. After connecting to the Wazuh manager, each agent assigned to the group will receive the files contained in the ``/var/wazuh-manager/etc/shared/dbms/`` folder from the Wazuh manager, including the ``agent.conf`` file that was modified in the previous step. The length of time it takes for the Wazuh manager to push these files to the Wazuh agents depends on the size of the files, the number of agents in the group, and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding merged.mg file) on 100 Wazuh 4.x agents using UDP, less time if using TCP. Wazuh 5.0 agents always communicate over HTTPS (TCP), so this UDP/TCP distinction does not apply to them.
+#. After connecting to the Wazuh manager, each agent assigned to the group will receive the files contained in the ``/etc/wazuh-manager/shared/dbms/`` folder from the Wazuh manager, including the ``agent.conf`` file that was modified in the previous step. The length of time it takes for the Wazuh manager to push these files to the Wazuh agents depends on the size of the files, the number of agents in the group, and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding merged.mg file) on 100 Wazuh 4.x agents using UDP, less time if using TCP. Wazuh 5.0 agents always communicate over HTTPS (TCP), so this UDP/TCP distinction does not apply to them.
 
 #. Once a specific agent belongs to a group, it will not be automatically reassigned to this group even if it is re-enrolled under another name or ID. After re-enrollment, it will be added to the *default* group which is the default behavior. If you want the Wazuh agent to be automatically reassigned after re-enrollment, it must be explicitly configured by the user in the ``/var/ossec/etc/local_internal_options.conf`` file on the Wazuh agent by adding the option ``remoted.guess_agent_group=1`` (see section remoted in :doc:`internal options </user-manual/reference/internal-options>`).
 

@@ -67,7 +67,7 @@ Wazuh 5.x manager
 
    .. code-block:: console
 
-      # install -m 660 -o wazuh-manager -g wazuh-manager /root/wazuh-4x-backup/client.keys /var/wazuh-manager/etc/client.keys
+      # install -m 660 -o wazuh-manager -g wazuh-manager /root/wazuh-4x-backup/client.keys /etc/wazuh-manager/client.keys
 
 #. Copy the agent registrations and group memberships from the Wazuh 4.x database into the Wazuh 5.x database. Wazuh 5.x uses a different database schema, so you can't replace the database file:
 
@@ -100,8 +100,8 @@ Wazuh 5.x manager
 
    .. code-block:: console
 
-      # tar -xzf /root/wazuh-4x-backup/groups.tar.gz -C /var/wazuh-manager/etc/
-      # chown -R wazuh-manager:wazuh-manager /var/wazuh-manager/etc/shared/
+      # tar -xzf /root/wazuh-4x-backup/groups.tar.gz -C /etc/wazuh-manager/
+      # chown -R wazuh-manager:wazuh-manager /etc/wazuh-manager/shared/*
 
    Review the restored ``agent.conf`` files and update or remove any settings that Wazuh 5.x doesn't support.
 
@@ -165,7 +165,7 @@ Upgrade the migrated Wazuh agents
 
 Wazuh 5.x agents verify the Wazuh manager certificate. A package upgrade doesn't install the Wazuh manager root certificate on the agent, so the upgraded agent connects with TLS verification disabled. Perform the following steps on each Linux agent that you upgrade with a package.
 
-#. Copy ``/var/wazuh-manager/etc/certs/root-ca.pem`` from the Wazuh 5.x manager to the agent. Then create the ``certs`` directory and install the file with the required ownership and permissions:
+#. Copy ``/etc/wazuh-manager/certs/root-ca.pem`` from the Wazuh 5.x manager to the agent. Then create the ``certs`` directory and install the file with the required ownership and permissions:
 
    .. code-block:: console
 

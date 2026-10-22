@@ -6,38 +6,51 @@
 Amazon Virtual Private Cloud (VPC)
 ==================================
 
-`Amazon Virtual Private Cloud <https://aws.amazon.com/vpc/?nc1=h_ls>`__ (Amazon VPC) lets users provision a logically isolated section of the AWS Cloud where they can launch AWS resources in a virtual network that they define. Users have complete control over their virtual networking environment, including the selection of their IP address range, creation of subnets, and configuration of route tables and network gateways. Users can use both IPv4 and IPv6 in their VPC for secure and easy access to resources and applications.
+`Amazon Virtual Private Cloud <https://aws.amazon.com/vpc/?nc1=h_ls>`__ (Amazon VPC) lets users provision a logically isolated section of the AWS Cloud. There, they can launch AWS resources in a virtual network they define. Users have complete control over their virtual networking environment. That environment includes their IP address range, subnets, route tables, and network gateways. Users can use both IPv4 and IPv6 in their VPC for secure and easy access to resources and applications.
 
-Amazon configuration
---------------------
+AWS configuration
+-----------------
 
 The following sections cover how to configure the Amazon VPC service to integrate with Wazuh.
 
-#. Go to `S3 buckets <https://s3.console.aws.amazon.com/>`__, select an existing S3 bucket or create a new one, then copy the Amazon Resource Name (ARN) of the S3 bucket.
+Amazon VPC configuration
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Select an existing S3 bucket or :doc:`create a new one </cloud-security/amazon/services/prerequisites/S3-bucket>`, then copy the Amazon Resource Name (ARN) of the S3 bucket.
 
    .. thumbnail:: /images/cloud-security/aws/vpc/01-go-to-s3-bucket.png
+      :title: Copy the ARN of the S3 bucket
+      :alt: Copy the ARN of the S3 bucket
       :align: center
       :width: 80%
 
 #. On your AWS console, go to **Services** > **Compute** > **EC2**.
 
    .. thumbnail:: /images/cloud-security/aws/vpc/02-go-to-ec2.png
+      :title: Go to EC2 in the Compute services menu
+      :alt: Go to EC2 in the Compute services menu
       :align: center
       :width: 80%
 
 #. Go to **Network & Security** > **Network Interfaces** on the left menu. Select a network interface and select **Create flow log** on the **Actions** menu.
 
    .. thumbnail:: /images/cloud-security/aws/vpc/03-create-flow-logs.png
+      :title: Create flow log on the Actions menu of a network interface
+      :alt: Create flow log on the Actions menu of a network interface
       :align: center
       :width: 80%
 
-#. Change all fields to look like the following screenshot and paste the Amazon Resource Name (ARN) of the previously created bucket.
+#. Set **Filter** to **All** so that the flow log records accepted and rejected traffic, and choose a **Maximum aggregation interval**. For **Destination**, select **Send to an Amazon S3 bucket** and paste the ARN of the bucket from step 1 in **S3 bucket ARN**. Keep **AWS default format** as the **Log record format** and click **Create flow log**.
 
    .. thumbnail:: /images/cloud-security/aws/vpc/04-flow-log-settings-1.png
+      :title: Flow log settings with the filter, aggregation interval, and S3 bucket ARN
+      :alt: Flow log settings with the filter, aggregation interval, and S3 bucket ARN
       :align: center
       :width: 80%
 
    .. thumbnail:: /images/cloud-security/aws/vpc/04-flow-log-settings-2.png
+      :title: Flow log record format settings and the Create flow log button
+      :alt: Flow log record format settings and the Create flow log button
       :align: center
       :width: 80%
 
@@ -47,36 +60,99 @@ Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 
 .. include:: /_templates/cloud/amazon/create_policy.rst
-.. include:: /_templates/cloud/amazon/bucket_policies.rst
+
+.. include:: /_templates/cloud/amazon/read_only_policy_description.rst
+
+.. code-block:: json
+   :emphasize-lines: 12,13
+
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "VisualEditor0",
+               "Effect": "Allow",
+               "Action": [
+                   "s3:GetObject",
+                   "s3:ListBucket"
+               ],
+               "Resource": [
+                   "arn:aws:s3:::<WAZUH_AWS_BUCKET>/*",
+                   "arn:aws:s3:::<WAZUH_AWS_BUCKET>"
+               ]
+           },
+           {
+               "Sid": "DescribeFlowLogs",
+               "Effect": "Allow",
+               "Action": "ec2:DescribeFlowLogs",
+               "Resource": "*"
+           }
+       ]
+   }
+
+.. include:: /_templates/cloud/amazon/delete_policy_description.rst
+
+.. code-block:: json
+   :emphasize-lines: 13,14
+
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "VisualEditor0",
+               "Effect": "Allow",
+               "Action": [
+                   "s3:GetObject",
+                   "s3:ListBucket",
+                   "s3:DeleteObject"
+               ],
+               "Resource": [
+                   "arn:aws:s3:::<WAZUH_AWS_BUCKET>/*",
+                   "arn:aws:s3:::<WAZUH_AWS_BUCKET>"
+               ]
+           },
+           {
+               "Sid": "DescribeFlowLogs",
+               "Effect": "Allow",
+               "Action": "ec2:DescribeFlowLogs",
+               "Resource": "*"
+           }
+       ]
+   }
+
+.. note::
+
+   ``<WAZUH_AWS_BUCKET>`` is a placeholder. Replace it with the actual name of the bucket from which you want to retrieve logs.
+
+Wazuh deletes the log files from the bucket only if you set ``remove_from_bucket`` to yes in the bucket configuration. This option is off by default and isn't in the sample configuration, so you need the second policy only if you turn it on.
+
 .. include:: /_templates/cloud/amazon/attach_policy.rst
 
-To allow an AWS user to execute the VPC integration, it must also have a policy like the following attached:
+Both policies above include the ``DescribeFlowLogs`` statement, because the Wazuh module for AWS calls ``ec2:DescribeFlowLogs`` to find the flow logs before it reads the bucket. If you prefer to grant this permission in a separate policy, remove the statement from the policy above and attach the following policy as well:
 
 .. code-block:: json
 
    {
-     "Sid": "VisualEditor0",
-     "Effect": "Allow",
-     "Action": "ec2:DescribeFlowLogs",
-     "Resource": "*"
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "DescribeFlowLogs",
+               "Effect": "Allow",
+               "Action": "ec2:DescribeFlowLogs",
+               "Resource": "*"
+           }
+       ]
    }
 
 Configure Wazuh to process Amazon VPC logs
 ------------------------------------------
 
-#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
+#. Make sure that the AWS integrations are enabled on the Wazuh dashboard, as described in :doc:`Enable AWS integration on the Wazuh dashboard </cloud-security/amazon/services/prerequisites/enabling-integration>`.
 
-   .. thumbnail:: /images/cloud-security/aws/vpc/01-wazuh-configuration.png
-      :align: center
-      :width: 80%
-
-   .. thumbnail:: /images/cloud-security/aws/vpc/02-wazuh-configuration.png
-      :align: center
-      :width: 80%
-
-#. Add the following :doc:`Wazuh module for AWS configuration </user-manual/reference/ossec-conf/wodle-s3>` to the file, replacing ``<WAZUH_AWS_BUCKET>`` with the name of the S3 bucket:
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration to the ``/var/ossec/etc/ossec.conf`` file on the Wazuh agent. Replace ``<WAZUH_AWS_BUCKET>`` with the name of the S3 bucket. If the file already has a ``<wodle name="aws-s3">`` block, add only the ``<bucket>`` section to it:
 
    .. code-block:: xml
+      :emphasize-lines: 7
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -91,68 +167,54 @@ Configure Wazuh to process Amazon VPC logs
 
    .. note::
 
-      In this example, the ``aws_profile`` authentication parameter was used. Check the :doc:`credentials <../prerequisites/credentials>` section to learn more about the different authentication options and how to use them.
+      This example uses the ``aws_profile`` authentication parameter. Check the :doc:`Configure AWS credentials </cloud-security/amazon/services/prerequisites/credentials>` section to learn more about the different authentication options and how to use them.
 
-#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
+#. Save the changes and restart the Wazuh agent service to apply the changes.
 
-   -  Wazuh manager:
+   .. code-block:: console
 
-      .. code-block:: console
+      # systemctl restart wazuh-agent
 
-         # systemctl restart wazuh-manager
+VPC use cases
+-------------
 
-   -  Wazuh agent:
+-  :ref:`Create a VPC <aws_vpc_create_vpc>`
+-  :ref:`Monitor rejected network traffic <aws_vpc_monitor_rejected_network_traffic>`
 
-      .. code-block:: console
+Monitor changes to your VPCs, because they control how your AWS resources are isolated from the rest of your cloud infrastructure.
 
-         # systemctl restart wazuh-agent
-
-Use cases
----------
-
-.. contents::
-   :local:
-   :depth: 2
-   :backlinks: none
-
-Using an Amazon VPC (Virtual Private Cloud), users can logically isolate some of their AWS assets from the rest of their cloud infrastructure. Users can set up their networks in the cloud. This is why it is usually important to monitor changes to their VPCs.
+.. _aws_vpc_create_vpc:
 
 Create a VPC
 ^^^^^^^^^^^^
 
-If a VPC is created, the following alerts with rule ID *80202* will be shown on the Wazuh dashboard.
+If a VPC is created, the AWS VPC created finding is shown on the Wazuh dashboard. This finding comes from AWS CloudTrail logs, so it needs the :doc:`AWS CloudTrail configuration </cloud-security/amazon/services/supported-services/cloudtrail>`.
 
 .. thumbnail:: /images/cloud-security/aws/vpc/1-create-a-vpc.png
+   :title: AWS VPC created finding
+   :alt: AWS VPC created finding
    :align: center
    :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/vpc/2-create-a-vpc.png
+.. _aws_vpc_monitor_rejected_network_traffic:
+
+Monitor rejected network traffic
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+VPC flow logs record the IP traffic of the network interfaces in your VPC. When a security group or network ACL rejects a connection, the Cloud firewall or WAF connection denied or blocked finding is shown on the Wazuh dashboard. It shows the source and destination addresses and ports, and the protocol.
+
+Accepted connections appear as events and don't raise findings. To see them, go to **Explore** > **Discover**, select the ``wazuh-events-v5*`` index pattern, and filter by ``wazuh.integration.decoders: decoder/aws-vpcflow/0`` and ``event.action: connection-established``.
+
+.. thumbnail:: /images/cloud-security/aws/vpc/1-monitor-rejected-network-traffic.png
+   :title: Cloud firewall or WAF connection denied or blocked findings
+   :alt: Cloud firewall or WAF connection denied or blocked findings
    :align: center
    :width: 80%
 
-If a user without proper permissions attempts to create a VPC, the following alerts with rule ID *80203* will be shown on the Wazuh dashboard.
+Expand the finding to see its details.
 
-.. thumbnail:: /images/cloud-security/aws/vpc/3-create-a-vpc-without-permission.png
+.. thumbnail:: /images/cloud-security/aws/vpc/2-monitor-rejected-network-traffic.png
+   :title: Details of the Cloud firewall or WAF connection denied or blocked finding
+   :alt: Details of the Cloud firewall or WAF connection denied or blocked finding
    :align: center
    :width: 80%
-
-.. thumbnail:: /images/cloud-security/aws/vpc/4-create-a-vpc-without-permission.png
-   :align: center
-   :width: 80%
-
-Working with VPC Data
-^^^^^^^^^^^^^^^^^^^^^
-
-A VPC alert contains data such as destination and source IP address, destination and source port, and how many bytes were sent.
-
-.. thumbnail:: /images/cloud-security/aws/vpc/1-working-with-vpc-data.png
-   :align: center
-   :width: 80%
-
-These alerts can be easily analyzed by creating visualizations like the following one following the :doc:`custom dashboard </user-manual/wazuh-dashboard/creating-custom-dashboards>` guide.
-
-.. thumbnail:: /images/cloud-security/aws/vpc/2-vpc-dashboard.png
-   :align: center
-   :width: 80%
-
-You can monitor your network with this visualization to identify peaks. Once a peak is identified, apply filters to view the alerts generated during that time and examine the communication between IP addresses. Since the IP address is a field in numerous AWS alerts, you may discover additional alerts and gain insights into the events that occurred.

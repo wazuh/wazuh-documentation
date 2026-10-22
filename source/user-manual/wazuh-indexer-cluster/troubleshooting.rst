@@ -29,4 +29,4 @@ Troubleshooting
    * - The cluster health is red.
      - One or more primary shards are unassigned, and part of the data is unavailable. Check for stopped nodes and verify the available disk space on each node, since the disk usage watermarks stop shard allocation on almost-full nodes.
    * - The Wazuh indexer credentials were lost.
-     - Run the :doc:`Wazuh passwords tool </user-manual/user-administration/password-management>` on any Wazuh indexer node to set a new password, for example, ``bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u admin -p <NEW_PASSWORD>``, then update the Wazuh manager keystore and the Wazuh dashboard configuration.
+     - Run the :doc:`Wazuh passwords tool </user-manual/user-administration/password-management>` on any Wazuh indexer node to set a new password, for example, ``printf '%s\n' '<NEW_PASSWORD>' | bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u admin -p``, then update the Wazuh manager keystore and the Wazuh dashboard configuration.

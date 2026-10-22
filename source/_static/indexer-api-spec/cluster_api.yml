@@ -219,6 +219,7 @@ paths:
         - $ref: '#/components/parameters/awareness_attribute_health'
         - $ref: '#/components/parameters/local'
         - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/ensure_node_weighed_in'
         - $ref: '#/components/parameters/timeout'
         - $ref: '#/components/parameters/wait_for_active_shards'
         - $ref: '#/components/parameters/wait_for_nodes'
@@ -257,6 +258,7 @@ paths:
         - $ref: '#/components/parameters/awareness_attribute_health'
         - $ref: '#/components/parameters/local'
         - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/ensure_node_weighed_in'
         - $ref: '#/components/parameters/timeout'
         - $ref: '#/components/parameters/wait_for_active_shards'
         - $ref: '#/components/parameters/wait_for_nodes'
@@ -303,6 +305,7 @@ paths:
         - $ref: '#/components/parameters/flat_settings'
         - $ref: '#/components/parameters/include_defaults'
         - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/local'
         - $ref: 'spec.yml#/components/parameters/pretty'
       responses:
         '200':
@@ -526,7 +529,7 @@ components:
       schema:
         type: string
         enum: [all, open, closed, hidden, none]
-        default: open
+        default: all
 
     level:
       name: level
@@ -616,6 +619,14 @@ components:
         type: string
         enum: [green, yellow, red]
 
+    ensure_node_weighed_in:
+      name: ensure_node_weighed_in
+      in: query
+      description: Whether to fail the request if the node that receives it has a weighted routing weight of zero.
+      schema:
+        type: boolean
+        default: false
+
     weights:
       name: weights
       in: query
@@ -643,6 +654,7 @@ components:
         the names and current values of settings you want to update.
       schema:
         type: boolean
+        default: false
 
     node_filters:
       name: node_filters

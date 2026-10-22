@@ -22,7 +22,7 @@ Prerequisites
 
 Before a Wazuh agent can be enrolled in the Wazuh manager using the password authentication method, you must complete the following on the Wazuh manager:
 
-#. Password authentication is enabled by default. The ``<auth>`` section of the Wazuh manager configuration file ``/var/wazuh-manager/etc/wazuh-manager.conf`` includes the following setting:
+#. The configuration that the installer generates enables password authentication. When ``<use_password>`` is absent, the default value is ``no``. The ``<auth>`` section of the Wazuh manager configuration file ``/etc/wazuh-manager/wazuh-manager.conf`` includes the following setting:
 
    .. code-block:: xml
 
@@ -32,20 +32,20 @@ Before a Wazuh agent can be enrolled in the Wazuh manager using the password aut
 
 #. Set a password to be used for Wazuh agent enrollment. You can achieve this in two ways:
 
-   -  **Recommended** - Set your password. This is done by creating the ``/var/wazuh-manager/etc/authd.pass`` file on the Wazuh manager with your password.
+   -  **Recommended** - Set your password. This is done by creating the ``/etc/wazuh-manager/authd.pass`` file on the Wazuh manager with your password.
 
       #. Replace ``<CUSTOM_PASSWORD>`` with your chosen Wazuh agent enrollment password and run the following command:
 
          .. code-block:: console
 
-            # echo "<CUSTOM_PASSWORD>" > /var/wazuh-manager/etc/authd.pass
+            # echo "<CUSTOM_PASSWORD>" > /etc/wazuh-manager/authd.pass
 
       #. Change the ``authd.pass`` file permissions and ownership.
 
          .. code-block:: console
 
-            # chmod 640 /var/wazuh-manager/etc/authd.pass
-            # chown root:wazuh-manager /var/wazuh-manager/etc/authd.pass
+            # chmod 640 /etc/wazuh-manager/authd.pass
+            # chown root:wazuh-manager /etc/wazuh-manager/authd.pass
 
       #. Restart the Wazuh service for the changes to take effect.
 
@@ -55,7 +55,7 @@ Before a Wazuh agent can be enrolled in the Wazuh manager using the password aut
 
    -  Alternatively, the Wazuh manager can generate a random enrollment password.
 
-      #. Restart the Wazuh manager service without creating the ``/var/wazuh-manager/etc/authd.pass`` file manually:
+      #. Restart the Wazuh manager service without creating the ``/etc/wazuh-manager/authd.pass`` file manually:
 
          .. code-block:: console
 
@@ -65,18 +65,18 @@ Before a Wazuh agent can be enrolled in the Wazuh manager using the password aut
 
          .. code-block:: console
 
-            # grep "etc/authd.pass" /var/wazuh-manager/logs/wazuh-manager.log
+            # grep authd.pass /var/wazuh-manager/logs/wazuh-manager.log
 
          .. code-block:: none
             :class: output
 
-            2026/07/09 16:15:06 wazuh-manager-authd: INFO: A new enrollment password was generated and written to 'etc/authd.pass'
+            2026/07/09 16:15:06 wazuh-manager-authd: INFO: A new enrollment password was generated and written to '/etc/wazuh-manager/authd.pass'
 
       #. Run the following command to view the generated password:
 
          .. code-block:: console
 
-            # cat /var/wazuh-manager/etc/authd.pass
+            # cat /etc/wazuh-manager/authd.pass
 
          .. code-block:: none
             :class: output

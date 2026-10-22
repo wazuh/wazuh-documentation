@@ -240,9 +240,10 @@ For agents with unrestricted address (address ``any`` or netmask different from 
 This is the encryption flow chart:
 
 .. thumbnail:: ../images/development/encryption-flow.png
-    :title: OSSEC message encryption flow chart
-    :align: center
-    :width: 60%
+   :title: OSSEC message encryption flow chart
+   :alt: Flow chart of agent message encryption: the random number, global counter, local counter and event are hashed with MD5 and the hash is prepended, the block is compressed with zlib and padded to a multiple of 8 bytes, then encrypted with AES and prefixed with the agent ID for agents with a dynamic IP address
+   :align: center
+   :width: 60%
 
 Network protocol
 ~~~~~~~~~~~~~~~~

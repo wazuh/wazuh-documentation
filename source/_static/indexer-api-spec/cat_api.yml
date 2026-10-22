@@ -141,6 +141,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
         - $ref: '#/components/parameters/s'
         - $ref: '#/components/parameters/v_count'
         - $ref: '#/components/parameters/pretty'
@@ -171,6 +172,7 @@ paths:
         - $ref: '#/components/parameters/IndexName'
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
         - $ref: '#/components/parameters/s'
         - $ref: '#/components/parameters/v_count'
         - $ref: '#/components/parameters/pretty'
@@ -199,6 +201,7 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/fields'
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
@@ -232,6 +235,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/FieldName'
         - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/fields'
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
@@ -299,13 +303,18 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
+        - $ref: '#/components/parameters/bytes'
         - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/health'
         - $ref: '#/components/parameters/help'
         - $ref: '#/components/parameters/ignore_throttled'
         - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/include_unloaded_segments'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/pri'
         - $ref: '#/components/parameters/s'
         - $ref: '#/components/parameters/time'
         - $ref: '#/components/parameters/v'
@@ -335,13 +344,18 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: '#/components/parameters/IndexName'
+        - $ref: '#/components/parameters/bytes'
         - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/health'
         - $ref: '#/components/parameters/help'
         - $ref: '#/components/parameters/ignore_throttled'
         - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/include_unloaded_segments'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/pri'
         - $ref: '#/components/parameters/s'
         - $ref: '#/components/parameters/time'
         - $ref: '#/components/parameters/v'
@@ -374,6 +388,7 @@ paths:
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
         - $ref: '#/components/parameters/s'
         - $ref: '#/components/parameters/v'
         - $ref: '#/components/parameters/pretty'
@@ -433,8 +448,10 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
+        - $ref: '#/components/parameters/bytes'
         - $ref: '#/components/parameters/cluster_manager_timeout'
         - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/full_id'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
         - $ref: '#/components/parameters/s'
@@ -469,6 +486,7 @@ paths:
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
         - $ref: '#/components/parameters/s'
         - $ref: '#/components/parameters/time'
         - $ref: '#/components/parameters/v'
@@ -561,6 +579,7 @@ paths:
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
         - $ref: '#/components/parameters/s'
         - $ref: '#/components/parameters/v'
         - $ref: '#/components/parameters/pretty'
@@ -588,10 +607,14 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
+        - $ref: '#/components/parameters/active_only'
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/detailed'
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
         - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
         - $ref: '#/components/parameters/v'
         - $ref: '#/components/parameters/pretty'
       responses:
@@ -619,10 +642,14 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: '#/components/parameters/IndexName'
+        - $ref: '#/components/parameters/active_only'
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/detailed'
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
         - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
         - $ref: '#/components/parameters/v'
         - $ref: '#/components/parameters/pretty'
       responses:
@@ -653,6 +680,7 @@ paths:
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
         - $ref: '#/components/parameters/s'
         - $ref: '#/components/parameters/v'
         - $ref: '#/components/parameters/pretty'
@@ -825,6 +853,7 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/cancel_after_time_interval'
         - $ref: '#/components/parameters/cluster_manager_timeout'
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
@@ -859,6 +888,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/IndexName'
         - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/cancel_after_time_interval'
         - $ref: '#/components/parameters/cluster_manager_timeout'
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
@@ -1057,6 +1087,7 @@ paths:
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
         - $ref: '#/components/parameters/s'
         - $ref: '#/components/parameters/v'
       responses:
@@ -1156,6 +1187,13 @@ components:
             items:
               type: string
 
+    fields:
+      name: fields
+      in: query
+      description: A comma-separated list of fields to return. You can also specify the fields in the path.
+      schema:
+        type: string
+
     format:
       name: format
       in: query
@@ -1240,7 +1278,15 @@ components:
       description: Enables verbose mode, which displays column headers.
       schema:
         type: boolean
-        default: true
+        default: false
+
+    cancel_after_time_interval:
+      name: cancel_after_time_interval
+      in: query
+      description: The time after which the request is canceled. By default, the request isn't canceled.
+      schema:
+        type: string
+        format: duration
 
     time:
       name: time

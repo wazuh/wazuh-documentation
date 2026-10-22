@@ -66,7 +66,7 @@ Wazuh manager
 
       The Wazuh indexer connector username is ``wazuh-manager``. Its password is generated during installation and stored as ``WAZUH_INDEXER_MANAGER_PASSWORD`` in ``/etc/wazuh/credentials.env``.
 
-#. Add one ``<host>`` entry for each Wazuh indexer node in the ``<indexer>`` block of the Wazuh manager ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
+#. Add one ``<host>`` entry for each Wazuh indexer node in the ``<indexer>`` block of the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file:
 
    .. code-block:: xml
 

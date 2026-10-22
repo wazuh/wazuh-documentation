@@ -21,7 +21,7 @@ Options
 | -d        | Runs the tool in debug mode.                                                               |
 +-----------+--------------------------------------------------------------------------------------------+
 | -f <file> | Specifies the full path to the agent.conf file to validate. If omitted, the tool validates |
-|           | all agent.conf files in the shared configuration directory.                                |
+|           | all agent.conf files in the ``/etc/wazuh-manager/shared`` directory.                       |
 +-----------+--------------------------------------------------------------------------------------------+
 | -h        | Displays the help message and exits.                                                       |
 +-----------+--------------------------------------------------------------------------------------------+
@@ -40,11 +40,11 @@ The command output looks similar to this:
 .. code-block:: none
    :class: output
 
-   verify-agent-conf: Verifying [etc/shared/default/agent.conf]
+   verify-agent-conf: Verifying [/etc/wazuh-manager/shared/default/agent.conf]
    verify-agent-conf: OK
-   verify-agent-conf: Verifying [etc/shared/macOS/agent.conf]
+   verify-agent-conf: Verifying [/etc/wazuh-manager/shared/macOS/agent.conf]
    verify-agent-conf: OK
-   verify-agent-conf: Verifying [etc/shared/Windows/agent.conf]
+   verify-agent-conf: Verifying [/etc/wazuh-manager/shared/Windows/agent.conf]
    verify-agent-conf: OK
-   verify-agent-conf: Verifying [etc/shared/Linux/agent.conf]
+   verify-agent-conf: Verifying [/etc/wazuh-manager/shared/Linux/agent.conf]
    verify-agent-conf: OK

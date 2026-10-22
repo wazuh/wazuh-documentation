@@ -323,7 +323,7 @@ Logs stored in ``/var/wazuh-manager/logs/wazuh-manager.log`` in the Wazuh manage
 Settings
 ^^^^^^^^
 
-Users can modify the Wazuh manager configuration file located at ``/var/wazuh-manager/etc/wazuh-manager.conf`` from the Wazuh dashboard.
+Users can modify the Wazuh manager configuration file located at ``/etc/wazuh-manager/wazuh-manager.conf`` from the Wazuh dashboard.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/settings.png
    :align: center
