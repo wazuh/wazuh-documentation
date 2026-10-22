@@ -24,7 +24,7 @@ Getting your API key and the AWS token
       curl -XPOST https://api.cloud.wazuh.com/v2/storage/token -H "x-api-key: <YOUR_API_KEY>" -H "Content-Type: application/json" --data '
       {
          "environment_cloud_id": "012345678ab",
-         "token_expiration": "3600"
+         "token_expiration": 3600
       }'
 
    .. code-block:: console
@@ -98,7 +98,7 @@ This command downloads the ``012345678ab_output_alerts_20240419T2050_VqaWCpX9oPf
 
 .. code-block:: console
 
-   # aws --profile wazuh_cloud_storage --region us-east-1 s3 cp --recursive s3://wazuh-cloud-cold-us-east-1/012345678ab/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz /home/test/
+   # aws --profile wazuh_cloud_storage --region us-east-1 s3 cp s3://wazuh-cloud-cold-us-east-1/012345678ab/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz /home/test/
 
 .. code-block:: none
    :class: output

@@ -25,9 +25,10 @@ In this use case, Wazuh runs an SCA check to determine whether any users are ass
 The image below shows the result of the SCA check on the Wazuh dashboard.
 
 .. thumbnail:: /images/compliance/gdpr/SCA-28680-no-alerts.png
-    :title: Filtering SCA 28680 check alerts
-    :align: center
-    :width: 80%
+   :title: Filtering SCA 28680 check alerts
+   :alt: Wazuh dashboard Configuration Assessment checks for the CIS Ubuntu Linux 22.04 LTS Benchmark, with check 28680, Ensure all groups in /etc/passwd exist in /etc/group, expanded and passed
+   :align: center
+   :width: 80%
 
 Chapter IV, Article 28, Head 3 (c)
 ----------------------------------
@@ -96,11 +97,13 @@ The FIM module generates the alert below, showing the changed attributes.
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-mod-who1.png
    :title: Changed attributes full alert visualization
+   :alt: Wazuh dashboard document details of a who-data alert for /root/personal_data/subject_data.txt, with the owner and group changed from root to vboxuser
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-mod-who2.png
    :title: Changed attributes alert visualization
+   :alt: Wazuh dashboard document details with the syscheck fields of the who-data alert, including the audit user and process, and syscheck.changed_attributes uid, gid, user_name and group_name highlighted
    :align: center
    :width: 80%
 
@@ -195,6 +198,7 @@ When an invalid login attempt triggers rule 5710, you can see the alert below on
 
 .. thumbnail:: /images/compliance/gdpr/invalid-ssh-login-attempt1.png
    :title: Invalid SSH login attempt alert visualization
+   :alt: Wazuh dashboard GDPR module, document details of rule 5710, sshd: Attempt to login using a non-existent user, with the source IP, the source user nouser and the GDPR requirements IV_35.7.d and IV_32.2
    :align: center
    :width: 80%
 
@@ -329,6 +333,7 @@ Ubuntu endpoint
 
 	.. thumbnail:: /images/compliance/gdpr/integrity-monitoring-level-7.png
 	   :title: File Integrity Monitoring level 7 alert visualization
+	   :alt: Wazuh dashboard document details of a level 7 Integrity checksum changed alert, rule 550, for /customers/regular_data.txt
 	   :align: center
 	   :width: 80%
 
@@ -343,6 +348,7 @@ Ubuntu endpoint
 
 	.. thumbnail:: /images/compliance/gdpr/integrity-monitoring-level-15.png
 	   :title: File Integrity Monitoring level 15 alert visualization
+	   :alt: Wazuh dashboard document details of a level 15 alert from custom rule 100002, Changes made to a sensitive file, for /customers/personal_data/sensitive_data.txt
 	   :align: center
 	   :width: 80%
 

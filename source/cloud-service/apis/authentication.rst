@@ -13,7 +13,7 @@ To obtain a Wazuh Cloud API key:
 #. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 #. Go to the **Account** section and select **API Keys**.
 #. Click **Generate API Key**.
-#. Provide a name and click **Generate API key**.
+#. Provide a name and click **Generate API Key**.
 #. Copy the generated API key and store it in a safe place.
 
 .. note::
@@ -25,6 +25,6 @@ To revoke an API key:
 #. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 #. Go to the **Account** section and select **API Keys**.
 #. Click the trash icon under the **Revoke** column for any API key you want to delete.
-#. Click **Revoke Api key** to confirm the action.
+#. Click **Revoke API key** to confirm the action.
 
-The deleted API is removed from the list of API keys.
+The revoked API key is removed from the list of API keys.
