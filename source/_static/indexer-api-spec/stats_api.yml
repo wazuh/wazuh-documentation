@@ -203,7 +203,7 @@ paths:
               - shard_indexing_pressure
               - thread_pool
               - transport
-          example: "shard_indexing_pressure"
+          example: "indices"
         - name: index_metric
           in: path
           required: true
@@ -267,7 +267,7 @@ paths:
               - shard_indexing_pressure
               - thread_pool
               - transport
-          example: "shard_indexing_pressure"
+          example: "indices"
         - name: index_metric
           in: path
           required: true

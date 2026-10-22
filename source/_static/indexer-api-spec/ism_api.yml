@@ -812,7 +812,7 @@ paths:
             default: false
         - $ref: 'spec.yml#/components/parameters/pretty'
       requestBody:
-        required: false
+        required: true
         description: The request body applies to POST requests only.
         content:
           application/json:
@@ -876,7 +876,7 @@ paths:
       tags:
         - Index state management API
       summary: Explain all indexes
-      description: The Explain index API retrieves the current state of the managed indexes. Without an `index` path parameter, it returns every managed index.
+      description: The Explain index API retrieves the current state of the managed indexes. Without an `index` path parameter, it returns the managed indexes in the cluster. The response is paginated and returns up to 20 indexes by default.
       operationId: explainAllIndexes
       security:
         - basicAuth: []
@@ -951,7 +951,7 @@ paths:
       tags:
         - Index state management API
       summary: Explain all indexes (POST)
-      description: The Explain index API retrieves the current state of the managed indexes. Without an `index` path parameter, it returns every managed index.
+      description: The Explain index API retrieves the current state of the managed indexes. Without an `index` path parameter, it returns the managed indexes in the cluster. The response is paginated and returns up to 20 indexes by default.
       operationId: explainAllIndexesPost
       security:
         - basicAuth: []
@@ -977,7 +977,7 @@ paths:
             default: false
         - $ref: 'spec.yml#/components/parameters/pretty'
       requestBody:
-        required: false
+        required: true
         description: The request body applies to POST requests only.
         content:
           application/json:

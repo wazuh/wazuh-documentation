@@ -412,7 +412,6 @@ paths:
         - $ref: '#/components/parameters/fielddata'
         - $ref: '#/components/parameters/fields'
         - $ref: '#/components/parameters/file'
-        - $ref: '#/components/parameters/clear_cache_index'
         - $ref: '#/components/parameters/ignore_unavailable'
         - $ref: '#/components/parameters/query'
         - $ref: '#/components/parameters/request'
@@ -712,7 +711,7 @@ paths:
       tags: [Index APIs]
       summary: Create or update mappings (POST)
       description: |
-        To create or add mappings and fields to an index, you can use the PUT mapping API. If the mapping already exists, this operation will update it.
+        To create or add mappings and fields to an index, you can use the POST mapping API. If the mapping already exists, this operation will update it.
 
         However, this operation cannot be used to modify mappings that are already applied to existing data in the index. To update those mappings, you must first create a new index with the desired mappings and then use the Reindex API to transfer the documents from the old index to the new one.
       operationId: postTargetIndexMapping

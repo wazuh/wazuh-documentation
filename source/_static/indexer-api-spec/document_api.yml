@@ -300,7 +300,7 @@ paths:
         - $ref: '#/components/parameters/refresh'
         - $ref: '#/components/parameters/require_alias'
         - $ref: '#/components/parameters/routing'
-        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/bulk_source'
         - $ref: '#/components/parameters/_source_excludes'
         - $ref: '#/components/parameters/_source_includes'
         - $ref: '#/components/parameters/timeout'
@@ -334,7 +334,7 @@ paths:
         - $ref: '#/components/parameters/refresh'
         - $ref: '#/components/parameters/require_alias'
         - $ref: '#/components/parameters/routing'
-        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/bulk_source'
         - $ref: '#/components/parameters/_source_excludes'
         - $ref: '#/components/parameters/_source_includes'
         - $ref: '#/components/parameters/timeout'
@@ -371,7 +371,7 @@ paths:
         - $ref: '#/components/parameters/refresh'
         - $ref: '#/components/parameters/require_alias'
         - $ref: '#/components/parameters/routing'
-        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/bulk_source'
         - $ref: '#/components/parameters/_source_excludes'
         - $ref: '#/components/parameters/_source_includes'
         - $ref: '#/components/parameters/timeout'
@@ -405,7 +405,7 @@ paths:
         - $ref: '#/components/parameters/refresh'
         - $ref: '#/components/parameters/require_alias'
         - $ref: '#/components/parameters/routing'
-        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/bulk_source'
         - $ref: '#/components/parameters/_source_excludes'
         - $ref: '#/components/parameters/_source_includes'
         - $ref: '#/components/parameters/timeout'
@@ -865,6 +865,13 @@ components:
       schema:
         type: boolean
         default: false
+
+    bulk_source:
+      name: _source
+      in: query
+      description: Whether to return the `_source` field of updated documents in the response, or a comma-separated list of fields to return.
+      schema:
+        type: string
 
     _source:
       name: _source
