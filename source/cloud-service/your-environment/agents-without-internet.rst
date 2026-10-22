@@ -53,11 +53,11 @@ To achieve this configuration, follow these steps:
    	       server <CLOUD_ID>.cloud.wazuh.com:1514;
    	       }
    	     server {
-   	       listen nginx_ip:1515;
+   	       listen <nginx_ip>:1515;
    	       proxy_pass master;
    	     }
    	     server {
-   	       listen nginx_ip:1514;
+   	       listen <nginx_ip>:1514;
    	       proxy_pass mycluster;
    	     }
    	   }
