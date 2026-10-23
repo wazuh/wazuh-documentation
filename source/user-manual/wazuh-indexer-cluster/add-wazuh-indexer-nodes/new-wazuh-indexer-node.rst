@@ -234,7 +234,9 @@ After completing the steps above, test your cluster to ensure the indexer node w
 Using the validation script
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create a ``validate-cluster.sh`` script with the following content to automate the checks. The script lists the cluster nodes, retrieves the cluster health, and confirms that the given node is a member of a healthy cluster. It distinguishes a node that is missing from the cluster from a node that cannot be reached or rejects the credentials, so a failed check always names its cause:
+#. .. _wazuh_indexer_validate_cluster_script:
+
+   Create a ``validate-cluster.sh`` script with the following content to automate the checks. The script lists the cluster nodes, retrieves the cluster health, and confirms that the given node is a member of a healthy cluster. It distinguishes a node that is missing from the cluster from a node that cannot be reached or rejects the credentials, so a failed check always names its cause:
 
    .. code-block:: bash
 
