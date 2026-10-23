@@ -45,10 +45,10 @@ To create the certificates, edit the ``config.yml`` file and replace the node na
             #- name: node-3
             #  ip: "<indexer-node-ip>"
 
-          # Wazuh server nodes
-          # If there is more than one Wazuh server
+          # Wazuh manager nodes
+          # If there is more than one Wazuh manager
           # node, each one must have a node_type
-          server:
+          manager:
             - name: wazuh-1
               ip: "<wazuh-manager-ip>"
             #  node_type: master
@@ -80,12 +80,15 @@ After running the script, the directory ``wazuh-certificates`` will be created a
         ├── admin.pem
         ├── dashboard-key.pem
         ├── dashboard.pem
-        ├── indexer-key.pem
-        ├── indexer.pem
-        ├── root-ca.key
+        ├── node-1-key.pem
+        ├── node-1.pem
         ├── root-ca.pem
-        ├── server-key.pem
-        └── server.pem
+        ├── wazuh-1-apid-key.pem
+        ├── wazuh-1-apid.pem
+        ├── wazuh-1-key.pem
+        ├── wazuh-1-remoted-key.pem
+        ├── wazuh-1-remoted.pem
+        └── wazuh-1.pem
 
 Additionally, this script allows the use of a pre-existent rootCA certificate. To use it, copy ``root-ca.pem`` and ``root-ca.key`` to ``/etc/wazuh/ca``, and run the script with option ``-A``:
 
@@ -105,10 +108,15 @@ After running the script, the directory ``wazuh-certificates`` will be created a
         ├── admin.pem
         ├── dashboard-key.pem
         ├── dashboard.pem
-        ├── indexer-key.pem
-        ├── indexer.pem
-        ├── server-key.pem
-        └── server.pem
+        ├── node-1-key.pem
+        ├── node-1.pem
+        ├── root-ca.pem
+        ├── wazuh-1-apid-key.pem
+        ├── wazuh-1-apid.pem
+        ├── wazuh-1-key.pem
+        ├── wazuh-1-remoted-key.pem
+        ├── wazuh-1-remoted.pem
+        └── wazuh-1.pem
 
 Wazuh supports the use of third-party SSL/TLS certificates for securing access to the Wazuh dashboard. Instead of using self-signed SSL certificates, organizations can use certificates issued by a trusted Certificate Authority (CA) to provide trusted HTTPS connections for dashboard users.
 

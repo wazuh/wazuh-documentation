@@ -252,7 +252,7 @@ Detector behavior
 Updating a setting at runtime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the ``curl`` examples on this page, replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the credentials of a Wazuh indexer user that has the permissions the request needs, such as ``admin``. The ``admin`` password is the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh/credentials.env`` of a Wazuh indexer node, or in the ``credentials.env`` file of ``wazuh-install-files.tar``. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node.
+In the ``curl`` examples on this page, replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the credentials of a Wazuh indexer user that has the permissions the request needs, such as ``admin``. The ``admin`` password is the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh-indexer/export/credentials.env`` of a Wazuh indexer node, or in the ``credentials.env`` file of ``wazuh-install-files.tar``. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node.
 
 Almost every Security Analytics setting is dynamic. To change one without restarting the node, use the Cluster Settings API:
 

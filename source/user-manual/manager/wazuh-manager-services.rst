@@ -8,7 +8,7 @@ Wazuh manager services
 
 The Wazuh manager is composed of multiple services, each designed to perform a specific operational function within the Wazuh platform. These services work together to handle tasks such as securing and receiving Wazuh agent communications, managing cluster operations, and providing API access.
 
-This section describes the purpose, responsibilities, and configuration of each Wazuh manager service.
+Each Wazuh manager service has its own configuration block in the ``/etc/wazuh-manager/wazuh-manager.conf`` file.
 
 Agent enrollment service
 ------------------------
@@ -22,7 +22,7 @@ When a Wazuh agent starts, it contacts the Wazuh manager to begin enrollment. A 
 Enrollment tokens
 ^^^^^^^^^^^^^^^^^
 
-An enrollment token is a credential that a Wazuh 5.x agent presents during enrollment. It contains the Wazuh manager address, the certificate authority to trust, and a single-use credential. You create an enrollment token on the Wazuh manager using the token utility of the ``wazuh-manager-authd`` daemon. Specify the address that the Wazuh agent uses to connect to the Wazuh manager. The service validates the specified address against the Subject Alternative Names (SANs) in the Wazuh manager certificate. It rejects tokens that specify a name not included in the certificate.
+An enrollment token is a credential that a Wazuh 5.x agent presents during enrollment. It contains the Wazuh manager address, the certificate authority to trust, and an enrollment credential. By default, a token expires after 30 days and has no use limit. You create an enrollment token on the Wazuh manager using the token utility of the ``wazuh-manager-authd`` daemon. Specify the address that the Wazuh agent uses to connect to the Wazuh manager. The service validates the specified address against the Subject Alternative Names (SANs) in the Wazuh manager certificate. It rejects tokens that specify a name not included in the certificate.
 
 In a Wazuh manager cluster, the master node creates all enrollment tokens. It validates each address against its own certificate. A token for a worker node address is rejected unless the master certificate also includes that address.
 
@@ -59,12 +59,12 @@ Where:
 
 -  ``<disabled>`` enables or disables the process of the Wazuh agent enrolling and authenticating with the Wazuh manager. The default value is ``no``. The allowed values are ``yes`` and ``no``.
 -  ``<port>`` specifies the TCP port number for listening to connections. The default value is ``1515``. The allowed value is any port number between ``1`` and ``65535``.
--  ``<use_source_ip>`` defines whether to use the client's source IP address or the use of "any" to add a Wazuh agent. The allowed values are ``yes`` and ``no``. When the value is ``no``, the Wazuh agent can connect to the Wazuh manager even if the source IP used for enrollment changes. However, when the value is ``yes``, the Wazuh agent cannot connect to the Wazuh manager if the source IP address changes.
--  ``<purge>`` specifies whether the client keys will be deleted when Wazuh agents are removed. When the value is ``no``, removed Wazuh agents will remain in the client keys file marked as removed. When the value is set to ``yes``, the client keys file will be purged. When the option is absent, the value is ``no``. The configuration that the installer generates sets it to ``yes``. The possible values are ``yes`` and ``no``.
+-  ``<use_source_ip>`` defines whether to register a Wazuh agent with its source IP address instead of ``any``. The allowed values are ``yes`` and ``no``. When the value is ``no``, the Wazuh agent can connect to the Wazuh manager even if the source IP used for enrollment changes. However, when the value is ``yes``, the Wazuh agent cannot connect to the Wazuh manager if the source IP address changes.
+-  ``<purge>`` specifies whether the ``client.keys`` file keeps a record of removed Wazuh agents. When the value is ``no``, the file keeps each removed Wazuh agent as an entry marked as removed. When the value is ``yes``, the Wazuh manager removes the entry without leaving a trace. The installer sets the value to ``yes``, and the value is ``no`` when the option is absent. The possible values are ``yes`` and ``no``.
 -  ``<use_password>`` determines the use of shared password authentication. When the option is absent, the value is ``no``. The configuration that the installer generates sets it to ``yes``. When the value is ``no``, this option is disabled. When the value is set to ``yes``, a shared password is read from the ``/etc/wazuh-manager/authd.pass`` file.
--  ``<ciphers>`` sets the list of ciphers for network communication using SSL. The default value is ``TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256``.
+-  ``<ciphers>`` sets the TLS 1.3 cipher suites that the agent enrollment service accepts on port ``1515``. The default value is ``TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256``.
 -  ``<ssl_agent_ca>`` specifies the path to the CA certificate used to verify clients. It can be referred to as a relative path under the Wazuh installation directory or a full path. The possible value is any valid path.
--  ``<ssl_verify_host>`` toggles source host verification on and off when a CA certificate is specified. The client source IP address will be validated using the Common Name field. The default value is ``no``. The allowed values are ``yes`` and ``no``.
+-  ``<ssl_verify_host>`` toggles source host verification on and off when a CA certificate is specified. The agent enrollment service checks that the agent certificate names the source address, first in its Subject Alternative Names and then in its Common Name field. The default value is ``no``. The allowed values are ``yes`` and ``no``.
 -  ``<ssl_manager_cert>`` specifies the path to the Wazuh manager SSL certificate. The default value is ``/etc/wazuh-manager/certs/remoted.pem``. The possible value is an absolute path to a file in ``/etc/wazuh-manager/certs``.
 -  ``<ssl_manager_key>`` specifies the path to the Wazuh manager SSL key. The default value is ``/etc/wazuh-manager/certs/remoted-key.pem``. The possible value is an absolute path to a file in ``/etc/wazuh-manager/certs``.
 
@@ -81,9 +81,9 @@ Agent connection service
 
 The agent connection service, provided by the ``wazuh-manager-remoted`` daemon, manages secure communication between Wazuh agents and the Wazuh manager. It handles agent connections, authentication, event ingestion, state synchronization, and the delivery of centralized configuration and upgrade packages.
 
-In Wazuh 5.0, agents communicate over an HTTPS API on port ``1517``. The listener authenticates every request with a per-agent JWT bearer token that the agent signs with its ``client.keys`` key. The Wazuh manager also checks the request source address against the Wazuh agent ``client.keys`` entry.
+In Wazuh 5.0, agents communicate over an HTTPS API on port ``1517``. The listener authenticates every request with a per-agent JSON Web Token (JWT) bearer token that the agent signs with its ``client.keys`` key. The Wazuh manager also checks the request source address against the Wazuh agent ``client.keys`` entry.
 
-The legacy AES-encrypted TCP and UDP channel on port ``1514`` serves Wazuh 4.x agents. The configuration that the installer generates enables the ``<legacy>`` block inside ``<remote>``. Setting ``<enabled>`` to ``no`` or removing the ``<legacy>`` block disables this channel, and then only Wazuh 5.x agents can connect.
+The legacy AES-encrypted TCP and UDP channel on port ``1514`` serves Wazuh 4.x agents. The Wazuh manager starts it only when the ``<legacy>`` block inside ``<remote>`` is enabled. The configuration that the installer generates enables this block. Without that block, only Wazuh 5.x agents can connect.
 
 Configuration
 ^^^^^^^^^^^^^
@@ -129,7 +129,7 @@ Where:
 -  ``<bind_addr>`` specifies the address the HTTPS listener binds to. The default value is ``0.0.0.0``. The allowed values are any valid IPv4 or IPv6 address.
 -  ``<global_prefix>`` specifies the URL path prefix every HTTPS endpoint is served under. The default path is ``/wazuh-manager/``.
 -  ``<certificate>`` specifies the path to the TLS certificate chain (PEM) presented by the Wazuh manager. The default path is ``/etc/wazuh-manager/certs/remoted.pem``. It must be an absolute path to a file in ``/etc/wazuh-manager/certs``.
--  ``<key>`` specifies the path to the TLS private key (PEM) matching ``certificate``. The default path is ``/etc/wazuh-manager/certs/remoted-key.pem``. It must be an absolute path to a file in ``/etc/wazuh-manager/certs``.
+-  ``<key>`` specifies the path to the TLS private key (PEM) that matches the ``certificate``. The default path is ``/etc/wazuh-manager/certs/remoted-key.pem``. It must be an absolute path to a file in ``/etc/wazuh-manager/certs``.
 -  ``<ca_certificate>`` specifies the path to the CA certificate (PEM) that issued the listener certificate. The default path is ``/etc/wazuh-manager/certs/root-ca.pem``. It must be an absolute path to a file in ``/etc/wazuh-manager/certs``.
 
 **Legacy options**
@@ -140,6 +140,9 @@ Where:
 -  ``<protocol>`` specifies communication protocol(s) to accept from Wazuh agents. The default value is ``tcp``. The allowed values are ``tcp``, ``udp``, or ``tcp,udp``.
 -  ``<local_ip>`` binds ``wazuh-manager-remoted`` to a specific local IP address. The default value is ``0.0.0.0``. The allowed values are any valid IPv4 or IPv6 address.
 -  ``<queue_size>`` specifies the message queue size for incoming agent messages. The default value is ``131072``. The allowed value is any positive integer.
+
+**Agents options**
+
 -  ``<allow_higher_versions>`` allows the Wazuh manager to accept connections from Wazuh agents running a Wazuh version higher than the manager. The default value is ``no``. Enable when upgrading Wazuh agents before the Wazuh manager. This option is configurable under ``<agents>``.
 
 You can find more configuration options in the :doc:`remote </user-manual/reference/wazuh-manager-conf/remote>` section of the reference guide.
@@ -172,7 +175,7 @@ Enable or disable the service and tune the CVE feed download using the ``<vulner
 
 Where:
 
--  ``<enabled>`` specifies whether the Vulnerability Detection module is enabled or not. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
+-  ``<enabled>`` specifies whether the vulnerability detection service is enabled. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 -  ``<feed-update-interval>`` specifies the time interval for periodic feed updates. The default value is ``60m`` (one hour). The allowed value is a positive number that contains a suffix character indicating a time unit, such as ``s`` (seconds), ``m`` (minutes), ``h`` (hours), and ``d`` (days).
 
 The ``<vulnerability-detection>`` block does not configure a scan interval. Scan frequency follows the rate at which Wazuh agents synchronize their inventory.
@@ -188,7 +191,7 @@ Cluster service
 
 The cluster service synchronizes shared information across the nodes of a Wazuh manager cluster. It is managed by the ``wazuh-manager-clusterd`` daemon. Synchronized data includes Wazuh agent registration information, shared configuration, and Wazuh agent group assignments.
 
-Every Wazuh manager installation runs as a cluster node, including single-node deployments. A cluster has exactly one master node and any number of worker nodes. Adding worker nodes provides horizontal scalability, and placing a load balancer in front of them provides high availability.
+Every Wazuh manager installation runs as a cluster node, including single-node deployments. A cluster has exactly one master node and any number of worker nodes. Worker nodes provide horizontal scalability, and a load balancer in front of them distributes Wazuh agent connections across the nodes.
 
 Configuration
 ^^^^^^^^^^^^^
@@ -222,9 +225,9 @@ Where:
 -  ``<key>`` specifies a unique 32-character key used to encrypt the communication between the Wazuh manager nodes. It must be the same on the master node and worker nodes. Replace ``<CLUSTER_ENCRYPTION_KEY>`` with your generated key.
 -  ``<node_type>`` specifies the role of the Wazuh manager node. It can be either ``master`` or ``worker``.
 -  ``<port>`` specifies the port to use for the Wazuh manager cluster communications. The default value is ``1516``.
--  ``<bind_addr>`` specifies the IP address the Wazuh manager node listens on (``0.0.0.0`` or a specific IP address). It binds to ``127.0.0.1`` by default.
+-  ``<bind_addr>`` specifies the IP address the master node listens on for worker node connections (``0.0.0.0`` or a specific IP address). Worker nodes ignore this option. The default value is ``127.0.0.1``.
 -  ``<node>`` specifies the address of the master node within the ``<nodes>`` block. Specify this value in all Wazuh manager nodes, including the master node itself. Replace ``<MASTER_NODE_IP>`` with the IP address or a DNS name of the master node.
--  ``<hidden>`` sets whether findings include information about the cluster node that generated them. Allowed values are ``yes`` and ``no``. The default value is ``no``.
+-  ``<hidden>`` has no effect in Wazuh 5.0. The Wazuh manager accepts the option only for configuration compatibility. Allowed values are ``yes`` and ``no``. The default value is ``no``.
 
 You can learn more about the configuration options in the :doc:`cluster </user-manual/reference/wazuh-manager-conf/cluster>` section of the reference guide.
 
