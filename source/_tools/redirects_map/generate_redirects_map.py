@@ -284,6 +284,9 @@ def generate_redirects_map():
       chains.append(single_chain)
     # A possible chain can be i.e.: 3.5/installation-guide/installing-splunk/splunk_installation.html -> 3.6/installing-splunk/splunk_installation.html ; 3.6/installing-splunk/splunk_installation.html -> 3.7/installing-splunk/splunk-basic.html ; 3.8/installing-splunk/splunk-basic.html -> 3.9/installation-guide/installing-splunk/splunk-basic.html ; 
 
+  # Paths re-added after being removed or redirected must not redirect in current
+  readded_paths = get_readded_paths(newUrls, removedUrls, forward_redirections)
+
   # Create redirect map from chains
   for chain in chains:
     transition_final_destiny = chain[-1][1] # target of the last element in the chain
@@ -302,7 +305,7 @@ def generate_redirects_map():
       transition_origin = element[0]
       old = 'current' + transition_origin[1]
       new = transition_final_destiny
-      if old not in redirect_map and old != new:
+      if old not in redirect_map and old != new and transition_origin[1] not in readded_paths:
         redirect_map[old] = new
 
   return redirect_map
@@ -321,6 +324,35 @@ def get_redirect_chain(release, path, redirections, chain, starting_path_checked
         newPath = newPath.split('#')[0]
       get_redirect_chain(redir[2],newPath, redirections, chain, starting_path_checked)
   return []
+
+def newest_version(releases):
+  """ Return the newest release from a list of x.y releases """
+  newest = releases[0]
+  for release in releases:
+    if compareVersions(newest, release) == 1:
+      newest = release
+  return newest
+
+def get_readded_paths(newUrls, removedUrls, forward_redirections):
+  """
+  Return the paths added again in a release newer than the one where they were
+  last removed or redirected. These paths exist in the current release.
+  """
+  added = {}
+  for release, path in newUrls:
+    added.setdefault(path, []).append(release)
+
+  gone = {}
+  for release, path in removedUrls:
+    gone.setdefault(path, []).append(release)
+  for redir in forward_redirections:
+    gone.setdefault(redir[1], []).append(redir[2])
+
+  readded = set()
+  for path in added:
+    if path in gone and compareVersions(newest_version(gone[path]), newest_version(added[path])) == 1:
+      readded.add(path)
+  return readded
 
 def has_redirect(path, redirections):
   for redir in redirections:
