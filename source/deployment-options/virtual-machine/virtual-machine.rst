@@ -266,7 +266,7 @@ Afterwards, point the agents enrolled before the change to the new address.
 Move enrolled agents to the new address
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh agents enrolled before the change keep their ID. Point each one to the new address with a token created with ``--no-credential``, which updates the address and the certificate authority of enrolled agents only.
+Wazuh agents enrolled before the change keep their ID. Point each one to the new address with a token created with ``--no-credential``, which carries only the new address and the certificate authority. Running ``wazuh-agent-auth --certs-only`` with that token updates an enrolled agent without registering it again.
 
 #. Run the following command in the VM as root. Replace ``<NEW_ADDRESS>`` with the new address, and copy the token from the output:
 
