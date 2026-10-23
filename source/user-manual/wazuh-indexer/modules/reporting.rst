@@ -86,7 +86,7 @@ After the report is generated, it appears in the **Reports** section, where you 
 Managing permissions via RBAC
 -----------------------------
 
-The Reporting module uses the Wazuh indexer RBAC system to manage permissions. Users must have the appropriate roles assigned to create, read, update, or delete reports. Roles are managed in the Wazuh dashboard under **Index management** > **Security** > **Roles**.
+The Reporting module uses the Wazuh indexer RBAC system to manage permissions. Users must have the appropriate roles assigned to create, read, update, or delete reports. Roles are managed in the Wazuh dashboard under **Indexer management** > **Security** > **Roles**.
 
 The following permissions are available:
 
