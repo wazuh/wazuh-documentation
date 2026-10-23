@@ -87,7 +87,7 @@ This section shows how to remove a Wazuh indexer node from the cluster safely by
    | Confirm the node left the cluster | ``GET _cat/nodes?v``                                                                           | ``curl -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v``                                                                                                                      |
    +-----------------------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-You can also validate the final state with the validation script, passing the name of any remaining node:
+You can also validate the final state with the :ref:`validation script <wazuh_indexer_validate_cluster_script>`, passing the name of any remaining node:
 
 .. code-block:: console
 

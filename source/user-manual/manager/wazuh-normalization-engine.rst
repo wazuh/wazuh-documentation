@@ -124,7 +124,7 @@ The available enrichments include:
 .. _geo_enrichment:
 
 Geo enrichment
-''''''''''''''
+""""""""""""""
 
 Geo enrichment evaluates the event fields defined for Geo/ASN observation and, when applicable, adds location and autonomous system context to the event. The observed fields are determined from the generated Geo enrichment definitions based on the WCS and typically include fields that may contain IP addresses relevant for enrichment.
 
@@ -161,7 +161,7 @@ Conceptually, the event is enriched with the following Geo/ASN context:
 .. _ioc_enrichment:
 
 IOC enrichment
-''''''''''''''
+""""""""""""""
 
 IOC enrichment evaluates the event fields defined for IOC observation and checks whether their values match known indicators of compromise. The observed fields are determined from the generated IOC enrichment definitions based on the WCS and the predefined observation rules.
 
