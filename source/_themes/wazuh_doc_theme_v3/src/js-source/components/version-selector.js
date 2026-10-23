@@ -64,7 +64,7 @@ jQuery(function($) {
   for (let i = 0; i < listOfVersions.length; i++ ) {
     pathsInVersion = newUrls[listOfVersions[i]];
     for (let j = 0; j < pathsInVersion.length; j++) {
-      allCreatedPaths.push(normalizeUrl(pathsInVersion[j]));
+      allCreatedPaths.push(normalizeUrl(pathsInVersion[j]).split('#')[0]);
     }
   }
 
@@ -153,7 +153,7 @@ jQuery(function($) {
 
       const link = document.querySelector('.link-latest');
       let targetURL = 'https://' + window.location.hostname + '/current';
-      if ( documentHistory.hasOwnProperty(latestVersion) && allCreatedPaths.includes(normalizeUrl(redirHistory[latestVersion])) ) {
+      if ( documentHistory.hasOwnProperty(latestVersion) && isCreatedPath(redirHistory[latestVersion]) ) {
         targetURL = targetURL + redirHistory[latestVersion];
       }
       if ( link ) {
@@ -235,7 +235,7 @@ jQuery(function($) {
       ver = versionsCopy[i];
       verNoDot = ver.replace('.','_');
       aEle = $('#to'+verNoDot);
-      if ( redirHistory[ver] != null && redirHistory[ver].length && allCreatedPaths.includes(normalizeUrl(redirHistory[ver])) ) {
+      if ( redirHistory[ver] != null && redirHistory[ver].length && isCreatedPath(redirHistory[ver]) ) {
         if ( i == 0 ) { // the latest release version
           href = '/current'+redirHistory[ver]+param;
         } else {
@@ -332,6 +332,15 @@ jQuery(function($) {
     } else {
       return originalUrl;
     }
+  }
+
+  /**
+   * Check if a page was created in any release, ignoring the URL hash
+   * @param {string} path Partial URL of the page
+   * @return {boolean} True if the page path is in allCreatedPaths
+   */
+  function isCreatedPath(path) {
+    return allCreatedPaths.includes(normalizeUrl(path).split('#')[0]);
   }
 
   /**
