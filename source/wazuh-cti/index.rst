@@ -8,9 +8,9 @@
 Wazuh CTI
 =========
 
-Wazuh Cyber Threat Intelligence (CTI) is an independent, centrally maintained platform that provides security content and cyber threat intelligence through a publicly accessible website. It provides detection content, indicators of compromise (IoCs), and vulnerability intelligence that Wazuh synchronizes to support event enrichment, threat detection, and vulnerability detection. The Wazuh CTI service can also be accessed through the `Wazuh CTI website <https://cti.wazuh.com/vulnerabilities/cves>`__. Currently, the website provides access only to vulnerability intelligence, allowing users to browse CVE data and related vulnerability information.
+Wazuh Cyber Threat Intelligence (CTI) is an independent, centrally maintained platform that provides security content and cyber threat intelligence through the Wazuh CTI API. It provides detection content, indicators of compromise (IoCs), and vulnerability intelligence that Wazuh synchronizes to support event enrichment, threat detection, and vulnerability detection. The Wazuh CTI platform can also be accessed through the `Wazuh CTI website <https://cti.wazuh.com/vulnerabilities/cves>`__. The website provides access to vulnerability intelligence and indicators of compromise (IoC) data, including CVEs, file hashes, IP addresses, domains, and URLs.
 
-The Wazuh indexer consumes CTI content through the Wazuh Content Manager, which retrieves and synchronizes updates from the Wazuh CTI platform. Once synchronized, the content is available to the Wazuh capabilities that use it. For example, the normalization engine uses the detection content and indicators of compromise (IoCs) during event processing, while the Vulnerability Scanner module uses vulnerability intelligence to identify vulnerabilities affecting monitored endpoints.
+The Wazuh indexer consumes CTI content through the Wazuh Content Manager, which retrieves and synchronizes updates from the Wazuh CTI service. Once synchronized, the content is available to the Wazuh capabilities that use it. For example, the normalization engine uses the detection content and indicators of compromise (IoCs) during event processing, while the Vulnerability Scanner module uses vulnerability intelligence to identify vulnerabilities affecting monitored endpoints.
 
 Wazuh CTI provides the following categories of content:
 
