@@ -1,17 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. tabs::
+.. code-block:: console
 
-   .. group-tab:: Systemd
-
-      .. code-block:: console
-
-         # systemctl restart wazuh-dashboard
-
-   .. group-tab:: SysV Init
-
-      .. code-block:: console
-
-         # service wazuh-dashboard restart
+   # systemctl restart wazuh-dashboard
 
 .. End of include file

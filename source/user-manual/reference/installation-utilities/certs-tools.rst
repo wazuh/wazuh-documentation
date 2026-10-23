@@ -27,7 +27,8 @@ Options list
 | -A, --all                                                                           | Creates certificates specified in config.yml and admin certificates. If there is no root CA  |
 |                                                                                     | in the CA directory, a new one is created there.                                             |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -ca, --root-ca-certificates                                                         | Creates the root-ca certificates.                                                            |
+| -ca, --root-ca-certificates                                                         | Creates the root CA in the CA directory, if it does not exist yet. An existing root CA is    |
+|                                                                                     | validated and reused, never replaced.                                                        |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -v, --verbose                                                                       | Enables verbose mode.                                                                        |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
@@ -37,6 +38,7 @@ Options list
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -wm, --wazuh-manager-certificates                                                   | Creates the Wazuh manager certificates.                                                      |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -tmp, --cert_tmp_path </path/to/tmp_dir>                                            | Modifies the default tmp directory (/tmp/wazuh-ceritificates) to the specified one. Must be  |
+| -tmp, --cert_tmp_path </path/to/tmp_dir>                                            | Uses this directory to create the certificates, instead of a new one with a random name in   |
+|                                                                                     | /tmp. The directory must not exist, or must be an empty directory owned by root. Must be     |
 |                                                                                     | used along with one of these options: -a, -A, -ca, -wi, -wd, -wm                             |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+

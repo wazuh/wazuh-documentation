@@ -92,8 +92,8 @@ Configuring existing components to connect with the new node
         - "<NEW_WAZUH_INDEXER_IP>"
 
       plugins.security.nodes_dn:
-        - "CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
-        - "CN=<NEW_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+        - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+        - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<NEW_WAZUH_INDEXER_NODE_NAME>"
 
    .. note::
 

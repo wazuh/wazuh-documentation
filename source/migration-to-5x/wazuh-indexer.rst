@@ -106,7 +106,7 @@ Perform the following steps on every Wazuh indexer node of the new Wazuh 5.x clu
 
    .. note::
 
-      Retrieve the generated ``WAZUH_INDEXER_ADMIN_PASSWORD`` from ``/etc/wazuh/credentials.env`` on the Wazuh indexer.
+      Retrieve the generated ``WAZUH_INDEXER_ADMIN_PASSWORD`` from ``/etc/wazuh-indexer/export/credentials.env`` on the Wazuh indexer.
 
 .. _migration_wazuh_indexer_security_configuration:
 
