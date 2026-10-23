@@ -216,7 +216,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
            hipaa:
              - 164.312.b
            nist_800_53:
-             - AU.6
+             - AU-6
 
 #. Navigate to **Ruleset management** > **Overview**, select the space **Draft** and click **Actions** > **Promote** to promote the decoders and rule to the ``Test`` space.
 
