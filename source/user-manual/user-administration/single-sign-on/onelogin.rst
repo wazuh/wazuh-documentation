@@ -179,7 +179,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:
-      ...
+            # ... other existing auth domains ...
             basic_internal_auth_domain:
               description: "Authenticate via HTTP Basic against internal users database"
               http_enabled: true
@@ -208,7 +208,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                   exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
-      ...
+            # ... other existing auth domains ...
 
 
    Ensure to change the following parameters to their corresponding value:
@@ -519,7 +519,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:
-      ...
+            # ... other existing auth domains ...
             basic_internal_auth_domain:
               description: "Authenticate via HTTP Basic against internal users database"
               http_enabled: true
@@ -548,7 +548,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                   exchange_key: 'b1d6dd32753374557dcf92e241......'
               authentication_backend:
                 type: noop
-      ...
+            # ... other existing auth domains ...
 
    Ensure to change the following parameters to their corresponding value:
 

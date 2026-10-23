@@ -66,8 +66,8 @@ Visualize the findings
 Navigate to **Endpoint security** → **File Integrity Monitoring** → **Findings** on the Wazuh dashboard to view the findings. You can see four findings related to the monitored directory.
 
 .. thumbnail:: /images/manual/fim/alerts-related-monitored-directory.png
-   :title: Alerts related to the monitored directory
-   :alt: Alerts related to the monitored directory
+   :title: Findings related to the monitored directory
+   :alt: Findings related to the monitored directory
    :align: center
    :width: 80%
 
@@ -82,7 +82,7 @@ Expand the finding for the ``appreport.conf`` to see information about the chang
 Expand the finding for the ``private-file.conf`` file to see information about the changes made to the file. In the image below, under the **event.original** field, you see that FIM does not report the content added to the file.
 
 .. thumbnail:: /images/manual/fim/alert-for-the-private-file-conf.png
-   :title: Alert for the private-file.conf file
-   :alt: Alert for the private-file.conf file
+   :title: Finding for the private-file.conf file
+   :alt: Finding for the private-file.conf file
    :align: center
    :width: 80%

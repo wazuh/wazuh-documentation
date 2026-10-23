@@ -259,7 +259,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       :emphasize-lines: 7,10,22,23,25,26,27,28,29
 
           authc:
-      ...
+            # ... other existing auth domains ...
             basic_internal_auth_domain:
               description: "Authenticate via HTTP Basic against internal users database"
               http_enabled: true
@@ -682,7 +682,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       :emphasize-lines: 7,10,22,23,25,26,27,28,29
 
           authc:
-      ...
+            # ... other existing auth domains ...
             basic_internal_auth_domain:
               description: "Authenticate via HTTP Basic against internal users database"
               http_enabled: true
