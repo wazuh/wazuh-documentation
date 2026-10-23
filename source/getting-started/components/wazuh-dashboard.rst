@@ -18,7 +18,7 @@ The Wazuh dashboard is a flexible and intuitive web interface for visualizing se
 Data visualization and analysis
 -------------------------------
 
-The Wazuh dashboard enables users to navigate security data collected from Wazuh agents and agentless devices. It provides an overview of the security posture of monitored environments. The Wazuh dashboard summarizes Wazuh agent status, security findings, and MITRE ATT&CK activity, providing quick access to the corresponding dashboard sections for further investigation.
+The Wazuh dashboard enables users to navigate security data collected from Wazuh agents. It provides an overview of the security posture of monitored environments. The Wazuh dashboard summarizes Wazuh agent status, security findings, and MITRE ATT&CK activity, providing quick access to the corresponding dashboard sections for further investigation.
 
 .. thumbnail::  /images/getting-started/dashboard-overview.png
    :align: center

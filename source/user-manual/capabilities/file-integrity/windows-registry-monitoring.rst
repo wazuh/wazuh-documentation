@@ -190,8 +190,8 @@ Navigate to **Endpoint security** → **File Integrity Monitoring → Findings**
 Expand the finding to see the changed fields.
 
 .. thumbnail:: /images/manual/fim/changed-fields-expanded-alert.png
-   :title: Changed fields expanded alert
-   :alt: Changed fields expanded alert
+   :title: Changed fields expanded finding
+   :alt: Changed fields expanded finding
    :align: center
    :width: 80%
 

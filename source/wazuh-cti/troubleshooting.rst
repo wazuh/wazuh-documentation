@@ -37,7 +37,7 @@ Perform the following checks:
    -  If ``local_offset`` is lower than ``remote_offset``, newer content is available but has not yet been synchronized.
    -  If ``local_offset`` is ``0``, the content category has not completed its initial synchronization.
 
-#. Check the Wazuh indexer logs. Review ``/var/log/wazuh-indexer/wazuh-indexer.log`` for the Content Manager or CTI-related errors.
+#. Check the Wazuh indexer logs. Review ``/var/log/wazuh-indexer/wazuh-cluster.log`` for the Content Manager or CTI-related errors.
 
 CTI synchronization fails
 ---------------------------
@@ -56,14 +56,14 @@ Then review the Wazuh indexer log:
 .. code-block:: console
 
    $ grep -Ei "content.manager|Contentmanager|CatalogSync|consumer-sync|cti|CTIClient" \
-     /var/log/wazuh-indexer/wazuh-indexer.log
+     /var/log/wazuh-indexer/wazuh-cluster.log
 
 To search specifically for related errors, run:
 
 .. code-block:: console
 
    $ grep -Ei "ERROR.*content.manager" \
-     /var/log/wazuh-indexer/wazuh-indexer.log
+     /var/log/wazuh-indexer/wazuh-cluster.log
 
 Common causes include connectivity problems, invalid or expired subscription credentials, unavailable CTI services, and errors while processing or storing synchronized content.
 
@@ -165,6 +165,6 @@ Search the logs for job scheduling errors:
 .. code-block:: console
 
    $ grep -Ei "CatalogSyncJob|scheduling|content.manager" \
-     /var/log/wazuh-indexer/wazuh-indexer.log
+     /var/log/wazuh-indexer/wazuh-cluster.log
 
 If the ``.wazuh-content-manager-jobs`` index is unavailable or unhealthy, investigate the Wazuh indexer cluster health and shard allocation before restarting the affected Wazuh indexer node.
