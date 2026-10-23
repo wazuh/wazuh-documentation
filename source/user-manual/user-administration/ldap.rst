@@ -245,7 +245,7 @@ The ``authc`` section of the Wazuh indexer security configuration file handles a
          :emphasize-lines: 5,7,14,15,19-25
 
          authc:
-         ...
+           # ... other existing auth domains ...
            ldap:
              description: "Authenticate via LDAP or Active Directory"
              http_enabled: true

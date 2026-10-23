@@ -55,7 +55,6 @@ Wazuh manager
 #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the ``wazuh-manager-keystore`` tool.
 
    .. code-block:: console
-      :emphasize-lines: 1,2
 
       # echo '<WAZUH_INDEXER_USERNAME>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k username
       # echo '<WAZUH_INDEXER_PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password

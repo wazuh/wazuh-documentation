@@ -26,6 +26,6 @@ An index is a collection of related documents. The documents stored in the Wazuh
 
 The Wazuh indexer is well-suited for time-sensitive use cases like security analytics and infrastructure monitoring, as it is a near real-time search platform. The latency from the time a document is indexed until it becomes searchable is very short, typically one second.
 
-In addition to its speed, scalability, and resiliency, the Wazuh indexer has several built-in features that make storing and searching data even more efficient, such as data roll-ups, alerting, anomaly detection, and index lifecycle management.
+In addition to its speed, scalability, and resiliency, the Wazuh indexer has several built-in features that make storing and searching data even more efficient, such as data roll-ups, alerting, and index lifecycle management.
 
 Visit the :doc:`installation guide </installation-guide/wazuh-indexer/index>` to learn how to install the Wazuh indexer.

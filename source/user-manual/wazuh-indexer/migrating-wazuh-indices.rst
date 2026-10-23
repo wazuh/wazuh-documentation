@@ -115,7 +115,7 @@ Set up snapshot repository
 
 Perform the following steps on the source and destination Wazuh dashboards to configure the ``/mnt/snapshots`` directory as the snapshot storage location:
 
-#. Click the **upper left menu ☰** > **Index management** > **Snapshot Management** > **Repositories**, and select **+ Create repository** to create a new snapshot repository.
+#. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Repositories**, and select **+ Create repository** to create a new snapshot repository.
 #. Enter a repository name, select the repository type **Shared file system**, enter the repository location ``/mnt/snapshots``, and select **Add** to register the new repository.
 
    .. thumbnail:: /images/manual/wazuh-indexer/create-snapshot-repository.gif
@@ -129,7 +129,7 @@ Take snapshot
 
 Perform the following steps on the source Wazuh dashboard to take a snapshot:
 
-#. Click the **upper left menu ☰** > **Index management** > **Snapshot Management** > **Snapshots**.
+#. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Snapshots**.
 #. Select **+ Take snapshot**, and enter a Snapshot name.
 #. Click **Select or input indexes or index patterns**, and select or type a source index pattern. For example, ``wazuh-findings*``.
 #. Select the earlier created repository to store the snapshots.
@@ -208,7 +208,7 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
 
       # systemctl restart wazuh-indexer
 
-#. Click the **upper left menu ☰** > **Index management** > **Snapshot Management** > **Snapshots**, and select **Refresh** to reload the Snapshots page. The snapshot in the repository location ``/mnt/snapshots`` will show on the destination Wazuh dashboard.
+#. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Snapshots**, and select **Refresh** to reload the Snapshots page. The snapshot in the repository location ``/mnt/snapshots`` will show on the destination Wazuh dashboard.
 #. Select the snapshot and click **Restore**.
 
    .. thumbnail:: /images/manual/wazuh-indexer/select-snapshot-restore.png
@@ -261,7 +261,6 @@ Perform the following steps to set up NFS on a dedicated endpoint:
 
             # yum update
             # yum install -y nfs-utils
-            # yum install exportfs
             # systemctl enable nfs-server
             # systemctl start nfs-server
 
@@ -275,7 +274,6 @@ Perform the following steps to set up NFS on a dedicated endpoint:
 #. Add the ``/mnt/snapshots`` directory to the ``/etc/exports`` file using the command below. Replace the ``<NETWORK_ADDRESS/CIDR>`` variable with your network address.
 
    .. code-block:: console
-      :emphasize-lines: 1
 
       # echo "/mnt/snapshots <NETWORK_ADDRESS/CIDR>(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
 
@@ -365,8 +363,8 @@ Perform the following steps on the source and destination Wazuh indexer nodes to
       plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/indexer-key.pem
       plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
       plugins.security.ssl.http.enabled: true
-      plugins.security.ssl.transport.enforce_hostname_verification: false
-      plugins.security.ssl.transport.resolve_hostname: false
+      transport.ssl.enforce_hostname_verification: true
+      transport.ssl.resolve_hostname: false
 
       plugins.security.authcz.admin_dn:
       - "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
@@ -411,7 +409,7 @@ Set up snapshot repository
 
 Perform the following steps on the source and destination Wazuh dashboards to configure the ``/mnt/snapshots`` directory as the snapshot storage location:
 
-#. Click the **upper left menu ☰** > **Index management** > **Snapshot Management** > **Repositories**, and select **+ Create repository** to create a new snapshot repository.
+#. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Repositories**, and select **+ Create repository** to create a new snapshot repository.
 #. Enter a repository name, select the repository type **Shared file system**, enter the repository location ``/mnt/snapshots``, and select **Add** to register the new repository.
 
    .. thumbnail:: /images/manual/wazuh-indexer/create-snapshot-repository.gif
@@ -425,7 +423,7 @@ Take snapshot
 
 Perform the following steps on the source Wazuh dashboard to take a snapshot:
 
-#. Click the **upper left menu ☰** > **Index management** > **Snapshot Management** > **Snapshots**.
+#. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Snapshots**.
 #. Select **+ Take snapshot**, and enter a Snapshot name.
 #. Click **Select or input indexes or index patterns**, and select or type a source index pattern. For example, ``wazuh-findings*``.
 #. Select the earlier created repository to store the snapshots.
@@ -462,7 +460,7 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
 
       # systemctl restart wazuh-indexer
 
-#. Click the **upper left menu ☰** > **Index management** > **Snapshot Management** > **Snapshots**, and select **Refresh** to reload the Snapshots page. The snapshot in the repository location ``/mnt/snapshots`` will show on the destination Wazuh dashboard.
+#. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Snapshots**, and select **Refresh** to reload the Snapshots page. The snapshot in the repository location ``/mnt/snapshots`` will show on the destination Wazuh dashboard.
 #. Select the snapshot and click **Restore**.
 
    .. thumbnail:: /images/manual/wazuh-indexer/select-snapshot-restore.png

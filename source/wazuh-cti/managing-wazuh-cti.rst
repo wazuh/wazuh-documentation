@@ -24,7 +24,7 @@ The following table shows the Content Manager settings related to Wazuh CTI sync
 +========================================================+=========+=========+==========================================+
 | ``plugins.content_manager.catalog.sync_interval``      | Integer | 60      | Defines the interval, in minutes,        |
 |                                                        |         |         | between scheduled synchronization        |
-|                                                        |         |         | cycles. The allowed range is 1 to 1440.  |
+|                                                        |         |         | cycles. The allowed range is 10 to 1440. |
 +--------------------------------------------------------+---------+---------+------------------------------------------+
 | ``plugins.content_manager.catalog.update_on_start``    | Boolean | true    | Specifies whether the Content Manager    |
 |                                                        |         |         | checks for content updates when it       |
@@ -44,10 +44,10 @@ The following table shows the Content Manager settings related to Wazuh CTI sync
 |                                                        |         |         | requests to the Wazuh CTI service. The   |
 |                                                        |         |         | allowed range is 10 to 50.               |
 +--------------------------------------------------------+---------+---------+------------------------------------------+
-| ``plugins.content_manager.max_items_per_bulk``         | Integer | 999     | Defines the maximum number of documents  |
+| ``plugins.content_manager.max_items_per_bulk``         | Integer | 1000    | Defines the maximum number of documents  |
 |                                                        |         |         | included in each bulk indexing operation |
 |                                                        |         |         | during synchronization. The allowed      |
-|                                                        |         |         | range is 10 to 999.                      |
+|                                                        |         |         | range is 10 to 1000.                     |
 +--------------------------------------------------------+---------+---------+------------------------------------------+
 | ``plugins.content_manager.max_concurrent_bulks``       | Integer | 5       | Defines the maximum number of bulk       |
 |                                                        |         |         | indexing operations that Content Manager |
@@ -66,7 +66,7 @@ For example, the following configuration changes the synchronization interval to
 
    plugins.content_manager.catalog.sync_interval: 1440
 
-Set the value according to how frequently you want the Content Manager to check for available CTI content updates. The allowed range is 1 to 1440 minutes.
+Set the value according to how frequently you want the Content Manager to check for available CTI content updates. The allowed range is 10 to 1440 minutes.
 
 Restart the Wazuh indexer after modifying this setting.
 
@@ -83,9 +83,9 @@ The ``plugins.content_manager.max_items_per_bulk`` setting controls the maximum 
 
 .. code-block:: yaml
 
-   plugins.content_manager.max_items_per_bulk: 999
+   plugins.content_manager.max_items_per_bulk: 1000
 
-The allowed range is 10 to 999.
+The allowed range is 10 to 1000.
 
 The ``plugins.content_manager.max_concurrent_bulks`` setting controls the maximum number of bulk operations that can run concurrently:
 
@@ -287,7 +287,7 @@ Run the following request:
      }
    }
 
-You can also perform this action using the **Dev tools** console on the Wazuh dashboard. Navigate to **Indexer management** > **Dev tools**, then send the post request below.
+You can also perform this action using the **Dev tools** console on the Wazuh dashboard. Navigate to **Indexer management** > **Dev tools**, then send the request below.
 
 .. code-block:: none
 
@@ -321,7 +321,7 @@ You can also compare the local and remote synchronization offsets:
 -  ``local_offset`` is lower than ``remote_offset``: Newer content is available, and the content category requires synchronization.
 -  ``local_offset`` is ``0``: The content category has not completed its initial synchronization and requires snapshot initialization.
 
-If a content category remains in the ``running`` state for an extended period or reports a ``failed`` status, check the Wazuh indexer logs ``/var/log/wazuh-indexer/wazuh-indexer.log`` for Content Manager synchronization errors.
+If a content category remains in the ``running`` state for an extended period or reports a ``failed`` status, check the Wazuh indexer logs ``/var/log/wazuh-indexer/wazuh-cluster.log`` for Content Manager synchronization errors.
 
 .. note::
 
