@@ -422,7 +422,7 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** -> **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** -> **Wazuh API access**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/ldap/select-roles-mapping.gif
          :title: Roles mapping selection
@@ -467,7 +467,7 @@ Map LDAP role to Wazuh read-only role
 #. Follow these steps to create a new role mapping and grant read-only permissions to the backend role.
 
    #. Log in to the Wazuh dashboard as an administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** -> **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** -> **Users and data access**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
@@ -492,7 +492,7 @@ Map LDAP role to Wazuh read-only role
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** -> **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** -> **Wazuh API access**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/ldap/select-roles-mapping.gif
          :title: Roles mapping selection

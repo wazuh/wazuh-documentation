@@ -860,7 +860,7 @@ Configuring multi-tenancy
 
 Follow the instructions below on the Wazuh dashboard to enable multi-tenancy.
 
-#. Navigate to **Indexer management** > **Security** > **Tenants** on the Wazuh dashboard. Click on **Configure tenancy** to enable multi-tenancy.
+#. Navigate to **Indexer management** > **Users and data access** > **Tenants** on the Wazuh dashboard. Click on **Configure tenancy** to enable multi-tenancy.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/configure-tenancy.png
       :align: center
