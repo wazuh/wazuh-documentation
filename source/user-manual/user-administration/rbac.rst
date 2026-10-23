@@ -22,7 +22,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log in to the Wazuh dashboard as an administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page
@@ -34,7 +34,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user with Wazuh, follow these steps:
 
-   #. Click the upper-left menu icon **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+   #. Click the upper-left menu icon **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Wazuh API access**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.gif
          :title: Wazuh role mapping
@@ -63,7 +63,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log in to the Wazuh dashboard as an administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page
@@ -75,7 +75,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user to the appropriate role, follow these steps:
 
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Roles** to open the roles page.
 
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
@@ -90,7 +90,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user with Wazuh, follow these steps:
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Wazuh API access**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.gif
          :title: Wazuh role mapping
@@ -119,7 +119,7 @@ Follow these steps to create an internal user and map it to a role of your choic
 
 #. Log in to the Wazuh dashboard as an administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page
@@ -131,13 +131,13 @@ Follow these steps to create an internal user and map it to a role of your choic
 
 #. To map the user to a given role, follow these steps:
 
-   #. Click the upper-left menu icon to open the options, select **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon to open the options, select **Users and data access**, and then **Roles** to open the roles page.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
 #. To map the user with Wazuh, follow these steps:
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Wazuh API access**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.gif
          :title: Wazuh role mapping
