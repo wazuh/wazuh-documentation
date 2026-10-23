@@ -6,7 +6,7 @@
 Configuring third-party SSL certificates
 ========================================
 
-In the :doc:`Wazuh dashboard installation </installation-guide/wazuh-dashboard/step-by-step>` guide, self-signed SSL certificates generated during the Wazuh indexer installation were configured for the Wazuh dashboard.
+By default, the Wazuh dashboard serves a certificate that it issues from its own certificate authority (CA) during the :doc:`Wazuh dashboard installation </installation-guide/wazuh-dashboard/step-by-step>`.
 
 You can use third-party certificates instead of self-signed ones in the Wazuh dashboard. This guide includes instructions for creating and configuring Let's Encrypt certificates. Let's Encrypt is a nonprofit Certificate Authority (CA) providing free SSL/TLS certificates to millions of websites.
 

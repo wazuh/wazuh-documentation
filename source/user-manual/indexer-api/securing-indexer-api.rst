@@ -6,7 +6,7 @@
 Securing the Wazuh indexer API
 ==============================
 
-The communication with the Wazuh indexer API is encrypted with HTTPS by default. The installation generates certificates signed by a root certificate authority (CA) that it creates for the deployment, and you can supply your own certificates instead. The installation also creates an ``admin`` user with administrative access to the Wazuh indexer API and stores its password in ``/etc/wazuh/credentials.env``. We recommend that you change the default password and use certificates signed by a trusted CA, especially when the Wazuh indexer is reachable from the internet.
+The communication with the Wazuh indexer API is encrypted with HTTPS by default. The installation generates certificates signed by a root certificate authority (CA) that it creates for the deployment, and you can supply your own certificates instead. The installation also creates an ``admin`` user with administrative access to the Wazuh indexer API and stores its password in ``/etc/wazuh-indexer/export/credentials.env``. We recommend that you change the default password and use certificates signed by a trusted CA, especially when the Wazuh indexer is reachable from the internet.
 
 Recommended changes to secure the Wazuh indexer API
 ---------------------------------------------------
@@ -28,7 +28,7 @@ Use the Wazuh passwords tool to change the password of the Wazuh indexer users t
 
    .. code-block:: console
 
-      # grep -m 1 '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
+      # grep -m 1 '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
 
 A password you set with ``-p`` is saved in this file only if the file already exists. Use the new password in your next requests and in the Wazuh dashboard login. Each run of the tool also saves a backup of ``internal_users.yml`` in ``/etc/wazuh-indexer/internalusers-backup/``.
 
@@ -51,7 +51,7 @@ Replace ``<OLD_PASSWORD>`` and ``<NEW_PASSWORD>`` with the corresponding values.
 
 .. note::
 
-   The Wazuh dashboard and the API don't update ``/etc/wazuh/credentials.env``.
+   The Wazuh dashboard and the API don't update ``/etc/wazuh-indexer/export/credentials.env``.
 
 Restrict network access
 ^^^^^^^^^^^^^^^^^^^^^^^

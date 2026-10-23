@@ -25,9 +25,9 @@ For more information about agent enrollment and the available authentication met
 +----------------+----------------------------------------------------------------------------------------------+
 | -d             | Runs the daemon in debug mode. Repeat the option to increase the debug level.                |
 +----------------+----------------------------------------------------------------------------------------------+
-| -D <directory> | Specifies the Wazuh manager installation directory used to build the default server          |
-|                | certificate and key paths. The default is /var/wazuh-manager. This option does not change    |
-|                | the working directory of the daemon.                                                         |
+| -D <directory> | Accepted, but has no effect: the daemon has already moved into the Wazuh manager             |
+|                | installation directory, /var/wazuh-manager, when it reads this option. The default           |
+|                | certificate and key paths are fixed in /etc/wazuh-manager/certs/.                            |
 +----------------+----------------------------------------------------------------------------------------------+
 | -f             | Runs the daemon in the foreground.                                                           |
 +----------------+----------------------------------------------------------------------------------------------+

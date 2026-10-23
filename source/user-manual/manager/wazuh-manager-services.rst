@@ -140,6 +140,9 @@ Where:
 -  ``<protocol>`` specifies communication protocol(s) to accept from Wazuh agents. The default value is ``tcp``. The allowed values are ``tcp``, ``udp``, or ``tcp,udp``.
 -  ``<local_ip>`` binds ``wazuh-manager-remoted`` to a specific local IP address. The default value is ``0.0.0.0``. The allowed values are any valid IPv4 or IPv6 address.
 -  ``<queue_size>`` specifies the message queue size for incoming agent messages. The default value is ``131072``. The allowed value is any positive integer.
+
+**Agents options**
+
 -  ``<allow_higher_versions>`` allows the Wazuh manager to accept connections from Wazuh agents running a Wazuh version higher than the manager. The default value is ``no``. Enable when upgrading Wazuh agents before the Wazuh manager. This option is configurable under ``<agents>``.
 
 You can find more configuration options in the :doc:`remote </user-manual/reference/wazuh-manager-conf/remote>` section of the reference guide.
