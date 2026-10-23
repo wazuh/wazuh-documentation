@@ -108,7 +108,7 @@ Rule matching and findings visualization
 
 In this phase, the Wazuh detection engine in the Wazuh indexer compares normalized events against a ruleset and outputs a finding. Each finding combines the matched rule metadata with the normalized event data, providing the context needed to investigate the activity. In the Wazuh dashboard, analysts filter for related findings during triage and can review affected assets, event fields, ATT&CK mappings, and compliance information.
 
-By default, the Wazuh detection engine generates findings with rule severity ``informational``, ``low``, ``medium``, ``high``, and ``critical``. In this scenario, the log triggers a ``High`` finding.
+By default, the Wazuh detection engine generates findings with rule severity ``informational``, ``low``, ``medium``, ``high``, and ``critical``. In this scenario, the log triggers a ``high`` finding.
 
 #. Click on the rule to view its details:
 

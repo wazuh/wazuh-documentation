@@ -134,8 +134,8 @@ Edit ``/etc/wazuh-indexer/opensearch.yml`` on the new node. Use the same ``clust
      - "<EXISTING_WAZUH_INDEXER_IP>"
      - "<NEW_WAZUH_INDEXER_IP>"
    plugins.security.nodes_dn:
-     - "CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
-     - "CN=<NEW_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+     - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+     - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<NEW_WAZUH_INDEXER_NODE_NAME>"
 
 Replace the following values:
 
@@ -234,7 +234,9 @@ After completing the steps above, test your cluster to ensure the indexer node w
 Using the validation script
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create a ``validate-cluster.sh`` script with the following content to automate the checks. The script lists the cluster nodes, retrieves the cluster health, and confirms that the given node is a member of a healthy cluster. It distinguishes a node that is missing from the cluster from a node that cannot be reached or rejects the credentials, so a failed check always names its cause:
+#. .. _wazuh_indexer_validate_cluster_script:
+
+   Create a ``validate-cluster.sh`` script with the following content to automate the checks. The script lists the cluster nodes, retrieves the cluster health, and confirms that the given node is a member of a healthy cluster. It distinguishes a node that is missing from the cluster from a node that cannot be reached or rejects the credentials, so a failed check always names its cause:
 
    .. code-block:: bash
 

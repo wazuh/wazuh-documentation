@@ -6,7 +6,7 @@
 Logging
 =======
 
-The Wazuh manager generates and stores operational logs in the ``/var/wazuh-manager/logs/`` directory. Rotated logs are kept for 31 days by default. To change the retention period, set the ``wazuh_modules.manager_task_log_keep_days`` option in the ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file.
+The Wazuh manager generates and stores operational logs in the ``/var/wazuh-manager/logs/`` directory. Rotated ``wazuh-manager.log`` and ``wazuh-manager.json`` files are kept for 31 days by default. To change this retention period, set the ``wazuh_modules.manager_task_log_keep_days`` option in the ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file.
 
 The table below describes the log files and their storage location on the Wazuh manager.
 
@@ -48,17 +48,19 @@ Log compression and rotation
 
 Log files can quickly accumulate and consume significant disk space on the Wazuh manager endpoint. To prevent this behavior, the Wazuh manager compresses logs during its rotation process, helping to manage disk usage efficiently and maintain system performance.
 
-The Wazuh manager rotates its log files daily, shortly after midnight, and whenever a log file exceeds 512 MB. Rotated files are compressed with ``gzip`` by default and kept for 31 days. During rotation, the Wazuh manager creates a new log file with the original filename and continues writing to it. It stores the compressed old file in the ``/var/wazuh-manager/logs/`` directory within nested directories in the format ``.../<FILENAME>/<YEAR>/<MONTH>/``, where:
+The Wazuh manager rotates the ``wazuh-manager.log`` and ``wazuh-manager.json`` files daily, shortly after midnight, and whenever one of them exceeds 512 MB. These rotated files are compressed with ``gzip`` by default and kept for 31 days. The Wazuh manager stores them in the ``/var/wazuh-manager/logs/wazuh/<YEAR>/<MONTH>/`` directory as ``wazuh-<DAY>.log.gz`` and ``wazuh-<DAY>.json.gz``. The Wazuh manager API and cluster daemons rotate the ``api.log`` and ``cluster.log`` files daily at midnight. During rotation, each daemon creates a new log file with the original filename and continues writing to it. Each daemon stores the compressed ``api.log`` and ``cluster.log`` files in nested directories in the format ``.../<FILENAME>/<YEAR>/<MONTH>/``, where:
 
 -  The ``<FILENAME>`` indicates the name of the original log file.
 -  The ``<YEAR>`` indicates the current year.
 -  The ``<MONTH>`` indicates the current month of the year.
 
-For example, the log file ``/var/wazuh-manager/logs/cluster.log`` compressed on ``June 01, 2026`` is stored in the ``/var/wazuh-manager/logs/cluster/2026/Jun/`` directory. You can list the contents of the directory by executing the command below:
+For example, the log file ``/var/wazuh-manager/logs/cluster.log`` compressed on ``June 1, 2026`` is stored in the ``/var/wazuh-manager/logs/cluster/2026/Jun/`` directory. You can list the contents of the directory by executing the command below:
 
 .. code-block:: console
 
    # ls -la /var/wazuh-manager/logs/cluster/2026/Jun/
+
+The command output looks similar to this:
 
 .. code-block:: none
    :class: output
@@ -69,8 +71,8 @@ For example, the log file ``/var/wazuh-manager/logs/cluster.log`` compressed on 
    drwxr-x--- 3 wazuh-manager wazuh-manager  4096 Jun  2 09:13 ..
    -rw-r----- 1 wazuh-manager wazuh-manager 12728 Jun  2 09:13 cluster.log-01.gz
 
-The Wazuh manager appends the suffix ``-<DAY_OF_THE_MONTH>`` to the original filename as seen in the highlighted output above (``cluster.log-01.gz``).
+The Wazuh manager appends the suffix ``-<DAY_OF_THE_MONTH>`` to the original filename as the output shows (``cluster.log-01.gz``).
 
 The ``wazuh_modules.manager_task_log_*`` internal options in the ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file control the rotation schedule, size threshold, compression, daily rotation slots, and retention period.
 
-Depending on your needs, you can configure the removal of compressed files after a specified period. You can move them to log management systems, backup servers, or cloud-based storage devices for longer-term retention.
+You can configure the removal of compressed files after a specified period to suit your needs. You can move them to log management systems, backup servers, or cloud-based storage devices for longer-term retention.
