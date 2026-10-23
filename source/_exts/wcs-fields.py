@@ -6,6 +6,7 @@ import subprocess
 import time
 from urllib.request import urlopen
 
+import yaml
 from docutils import nodes
 from sphinx.errors import ExtensionError
 from sphinx.util import logging
@@ -13,8 +14,8 @@ from sphinx.util.docutils import SphinxDirective
 
 logger = logging.getLogger(__name__)
 
-# Builds one section per field set, each with a table of that field set's fields
-# read from the WCS fields.csv file. Values go into the document as plain text
+# Builds one section per field set, each with a one-sentence description and a
+# table of that field set's fields read from the WCS fields.csv file. Values go into the document as plain text
 # nodes, never as reStructuredText, so no value is parsed as markup.
 MAX_AGE = 60 * 15  # 15 minutes, same as the manager API spec download
 COLUMNS = ['Field', 'Type', 'Level', 'Normalization', 'Indexed', 'Example', 'Description']
@@ -26,9 +27,30 @@ REPO = 'wazuh/wazuh-indexer-plugins'
 FILE = '/wcs/stateless/events/main/docs/fields.csv'
 RESOLVED = {}
 
+# The ECS version WCS is based on. The ECS field sets take their description from
+# the `short` attribute of the same version's schemas.
+ECS_VERSION = '9.1.0'
+ECS_URL = 'https://raw.githubusercontent.com/elastic/ecs/v%s/generated/ecs/ecs_nested.yml' % ECS_VERSION
+# `span`, `trace` and `transaction` are fields of the ECS tracing field set, so
+# their description is the short description of their `id` field.
+ECS_TRACING = {'span': 'span.id', 'trace': 'trace.id', 'transaction': 'transaction.id'}
+
+# The field sets WCS adds have no description in ECS.
+WCS_DESCRIPTIONS = {
+    'wazuh': 'Fields Wazuh adds to describe how it collected and processed the event.',
+    'check': 'The results of Security Configuration Assessment (SCA) checks, including the condition, the result, the rationale, and the remediation.',
+    'policy': 'The SCA policies that group the checks.',
+    'compliance': 'The compliance requirements an event relates to.',
+    'mitre': 'The MITRE ATT&CK tactics, techniques, and subtechniques an event relates to.',
+}
+
 
 def cache_path(app):
     return os.path.join(app.doctreedir, 'wcs-fields.csv')
+
+
+def ecs_cache_path(app):
+    return os.path.join(app.doctreedir, 'wcs-ecs-nested.yml')
 
 
 def ref_exists(kind, name):
@@ -73,14 +95,11 @@ def set_ref(app, config):
     config.custom_replacements['|WCS_FIELDS_PAGE_URL|'] = 'https://github.com/%s/blob/%s%s' % (REPO, ref, FILE)
 
 
-def download(app):
-    ''' Runs once per build. The cached file is rewritten only when its content
+def fetch(url, path, ref):
+    ''' Downloads url to path. The cached file is rewritten only when its content
         changes, so an incremental build re-reads the page only after a real change. '''
-    ref = RESOLVED['ref']
-    url = 'https://raw.githubusercontent.com/%s/%s%s' % (REPO, ref, FILE)
-    path = cache_path(app)
     # A separate stamp file records when the download last ran and for which ref:
-    # touching the CSV itself would make Sphinx read the page again for nothing.
+    # touching the file itself would make Sphinx read the page again for nothing.
     stamp = path + '.stamp'
     try:
         with open(stamp) as stamp_file:
@@ -97,18 +116,25 @@ def download(app):
         if os.path.exists(path):
             logger.warning('Could not refresh %s (%s); using the cached copy', url, error)
             return
-        raise ExtensionError('Could not download the WCS field reference from %s: %s' % (url, error))
+        raise ExtensionError('Could not download %s: %s' % (url, error))
     os.makedirs(os.path.dirname(path), exist_ok=True)
     try:
-        with open(path, 'rb') as csv_file:
-            unchanged = csv_file.read() == data
+        with open(path, 'rb') as cached_file:
+            unchanged = cached_file.read() == data
     except OSError:
         unchanged = False
     if not unchanged:
-        with open(path, 'wb') as csv_file:
-            csv_file.write(data)
+        with open(path, 'wb') as cached_file:
+            cached_file.write(data)
     with open(stamp, 'w') as stamp_file:
         stamp_file.write('%s %s' % (time.time(), ref))
+
+
+def download(app):
+    ''' Runs once per build. '''
+    ref = RESOLVED['ref']
+    fetch('https://raw.githubusercontent.com/%s/%s%s' % (REPO, ref, FILE), cache_path(app), ref)
+    fetch(ECS_URL, ecs_cache_path(app), ECS_VERSION)
 
 
 def text_nodes(value):
@@ -167,9 +193,21 @@ class WCSFieldTables(SphinxDirective):
         self.state.document.note_implicit_target(section, section)
         return section
 
+    def ecs_descriptions(self):
+        path = ecs_cache_path(self.env.app)
+        self.env.note_dependency(path)
+        with open(path, encoding='utf-8') as ecs_file:
+            ecs = yaml.safe_load(ecs_file)
+        descriptions = {name: ' '.join(fieldset['short'].split()) for name, fieldset in ecs.items()
+                        if fieldset.get('short')}
+        for name, field in ECS_TRACING.items():
+            descriptions[name] = ' '.join(ecs['tracing']['fields'][field]['short'].split())
+        return descriptions
+
     def run(self):
         path = cache_path(self.env.app)
         self.env.note_dependency(path)
+        descriptions = dict(self.ecs_descriptions(), **WCS_DESCRIPTIONS)
         with open(path, newline='', encoding='utf-8') as csv_file:
             rows = list(csv.DictReader(csv_file))
         sets = {}
@@ -178,6 +216,10 @@ class WCSFieldTables(SphinxDirective):
         result = []
         for name in sorted(sets):
             section = self.make_section(name)
+            if name in descriptions:
+                section += nodes.paragraph('', '', *text_nodes(descriptions[name]))
+            else:
+                logger.warning('No description for the %s field set', name)
             section += build_table(sets[name])
             result.append(section)
         return result
