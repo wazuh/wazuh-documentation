@@ -122,12 +122,12 @@ By default, the connector points to the localhost with certificate paths relativ
 
    The Wazuh manager prioritizes reporting to the first Wazuh indexer node in the list and switches to the next available node if the first one becomes unavailable.
 
-#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the Wazuh-keystore tool:
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the ``wazuh-manager-keystore`` tool:
 
    .. code-block:: console
 
-      # echo '<WAZUH_INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
-      # echo '<WAZUH_INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
+      # echo '<WAZUH_INDEXER_USERNAME>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k username
+      # echo '<WAZUH_INDEXER_PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password
 
    The tool also accepts the value inline with the ``-v`` option or from a file with the ``-vp`` option.
 
