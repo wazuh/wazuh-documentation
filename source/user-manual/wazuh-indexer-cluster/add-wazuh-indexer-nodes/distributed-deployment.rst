@@ -63,7 +63,6 @@ Use the pre-existing root CA to generate the certificate for the new node, so th
 #. Compress the certificates that the new node requires, taken from the complete set assembled in ``wazuh-install-files``, and copy the archive to the new Wazuh indexer node. You can use the ``scp`` utility to copy the compressed file securely:
 
    .. code-block:: console
-      :emphasize-lines: 1,2
 
       # tar -cvf ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar -C ./wazuh-install-files/ ./<NEW_WAZUH_INDEXER_NODE_NAME>.pem ./<NEW_WAZUH_INDEXER_NODE_NAME>-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
       # scp ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar <TARGET_USERNAME>@<TARGET_IP>:

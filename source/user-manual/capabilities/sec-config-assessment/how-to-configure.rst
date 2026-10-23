@@ -497,7 +497,7 @@ By combining the aforementioned rule types and operators, both existence and con
     - **Command** rules only allow content (output) checks.
 
 Existence checking rules
-'''''''''''''''''''''''''
+"""""""""""""""""""""""""
 
 Existence checks are created by setting rules without a content operator. The general form is as follows:
 
@@ -514,7 +514,7 @@ Examples of existence checks:
 - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse`` checks for the existence of the ``LimitBlankPasswordUse`` value in the key.
 
 Content checking rules
-'''''''''''''''''''''''
+"""""""""""""""""""""""
 
 The general form of a rule testing for contents is as follows:
 
@@ -556,7 +556,7 @@ Examples of content checks:
 - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that the value of ``LimitBlankPasswordUse`` is 1.
 
 Examples
-'''''''''
+"""""""""
 
 The following sections cover each rule type, illustrating them with several examples. It is also recommended to check the actual policies and, for minimalistic although complete examples, the `SCA test suite policies
 <https://github.com/wazuh/wazuh-qa/tree/master/tests/legacy/test_sca/test_basic_usage/data>`_.
