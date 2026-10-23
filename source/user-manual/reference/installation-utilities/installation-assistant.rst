@@ -25,7 +25,7 @@ Options list
 | -a, --all-in-one                                    | Install and configure Wazuh manager, Wazuh indexer, Wazuh dashboard.                         |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -d [pre-release|local], --development               | Use development repositories. By default, it uses the pre-release package repository. If     |
-|                                                     | local is specified, it will use a local artifact_urls.yml file located in the same path as   |
+|                                                     | local is specified, it will use a local artifact_urls.yaml file located in the same path as  |
 |                                                     | the wazuh-install.sh file.                                                                   |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -dw, --download-wazuh <deb|rpm>                     | Download all the packages necessary for offline installation. Type of packages to download   |
@@ -84,7 +84,7 @@ Or the short form:
 Use development packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To use packages that are in development, it is necessary to have an ``artifact_urls.yml`` file located in the same path as the ``wazuh-install.sh`` script. This file must contain the URLs of the development packages that will be used in the installation.
+To use packages that are in development, it is necessary to have an ``artifact_urls.yaml`` file located in the same path as the ``wazuh-install.sh`` script. This file must contain the URLs of the development packages that will be used in the installation.
 
 It must have the following format:
 
@@ -95,11 +95,11 @@ It must have the following format:
    wazuh_manager_amd64_deb: "http://example.com/wazuh-manager_amd64.deb"
    wazuh_manager_arm64_deb: "http://example.com/wazuh-manager_arm64.deb"
    wazuh_manager_x86_64_rpm: "http://example.com/wazuh-manager.x86_64.rpm"
-   wazuh_indexer_aarch64_rpm: "http://example.com/wazuh-manager.aarch64.rpm"
+   wazuh_indexer_aarch64_rpm: "http://example.com/wazuh-indexer.aarch64.rpm"
    wazuh_indexer_amd64_deb: "http://example.com/wazuh-indexer_amd64.deb"
    wazuh_indexer_arm64_deb: "http://example.com/wazuh-indexer_arm64.deb"
    wazuh_indexer_x86_64_rpm: "http://example.com/wazuh-indexer.x86_64.rpm"
-   wazuh_dashboard_aarch64_rpm: "http://example.com/wazuh-manager.aarch64.rpm"
+   wazuh_dashboard_aarch64_rpm: "http://example.com/wazuh-dashboard.aarch64.rpm"
    wazuh_dashboard_amd64_deb: "http://example.com/wazuh-dashboard_amd64.deb"
    wazuh_dashboard_arm64_deb: "http://example.com/wazuh-dashboard_arm64.deb"
    wazuh_dashboard_x86_64_rpm: "http://example.com/wazuh-dashboard_64.rpm"
@@ -117,4 +117,4 @@ Or the short form:
 
    # sudo bash wazuh-install.sh -a -d local
 
-This command will automatically detect the ``artifact_urls.yml`` file in the same path as the ``wazuh-install.sh`` script and will use the URLs specified in it to download the necessary packages for the installation.
+This command will automatically detect the ``artifact_urls.yaml`` file in the same path as the ``wazuh-install.sh`` script and will use the URLs specified in it to download the necessary packages for the installation.
