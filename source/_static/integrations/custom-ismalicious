@@ -1,0 +1,165 @@
+#!/var/ossec/framework/python/bin/python3
+"""Custom Wazuh Integrator example. Never enables automatic blocking."""
+
+import ipaddress
+import json
+import re
+import socket
+import sys
+from pathlib import Path
+from urllib.parse import quote
+
+import requests
+
+API_URL = "https://api.ismalicious.com/check"
+QUEUE = "/var/ossec/queue/sockets/queue"
+DOMAIN = re.compile(
+    r"^(?=.{1,253}$)(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,63}\.?$"
+)
+HASH = re.compile(r"^(?:[0-9a-fA-F]{32}|[0-9a-fA-F]{40}|[0-9a-fA-F]{64})$")
+
+
+def indicators_from_alert(alert):
+    """Only selected observable fields leave the Wazuh manager."""
+    if "ismalicious" in alert.get("rule", {}).get("groups", []):
+        return []
+    data = alert.get("data") or {}
+    event = (data.get("win") or {}).get("eventdata") or {}
+    indicators = []
+    for value in (data.get("srcip"), data.get("dstip"), event.get("destinationIp")):
+        if not isinstance(value, str):
+            continue
+        try:
+            if ipaddress.ip_address(value).is_global:
+                indicators.append((value, "ip"))
+        except ValueError:
+            pass
+    value = event.get("queryName")
+    if isinstance(value, str) and DOMAIN.fullmatch(value):
+        indicators.append((value, "domain"))
+    syscheck = alert.get("syscheck") or {}
+    for value in (
+        syscheck.get("sha256_after"),
+        syscheck.get("sha1_after"),
+        syscheck.get("md5_after"),
+    ):
+        if isinstance(value, str) and HASH.fullmatch(value):
+            indicators.append((value, "hash"))
+            break  # A single file needs one reputation lookup, prefer SHA256.
+    return list(dict.fromkeys(indicators))[:5]
+
+
+def lookup(indicator, indicator_type, credential):
+    result = {
+        "indicator": indicator,
+        "type": indicator_type,
+        "status": "error",
+        "verdict": "unknown",
+        "report_url": "https://ismalicious.com/report?query="
+        + quote(indicator, safe=""),
+    }
+    try:
+        response = requests.get(
+            API_URL,
+            params={"query": indicator, "enrichment": "standard"},
+            headers={"X-API-KEY": credential, "Accept": "application/json"},
+            timeout=25,
+            allow_redirects=False,
+        )
+    except requests.Timeout:
+        result["error"] = "request timed out"
+        return result
+    except requests.RequestException:
+        result["error"] = "request failed"
+        return result
+    if response.status_code != 200:
+        result["http_status"] = response.status_code
+        result["error"] = (
+            "HTTP failure; check authentication, quota or provider availability"
+        )
+        return result
+    try:
+        payload = response.json()
+    except ValueError:
+        result["error"] = "invalid JSON response"
+        return result
+    if not isinstance(payload, dict) or not isinstance(payload.get("malicious"), bool):
+        result["error"] = "invalid response shape"
+        return result
+    evidence = payload.get("evidence") or {}
+    trust = payload.get("dataTrust") or {}
+    risk = payload.get("riskScore") or {}
+    confidence = payload.get("confidence") or {}
+    if not all(
+        isinstance(field, dict) for field in (evidence, trust, risk, confidence)
+    ):
+        result["error"] = "invalid response field shape"
+        return result
+    result.update(
+        {
+            "status": "ok",
+            "verdict": evidence.get(
+                "verdict", "malicious" if payload["malicious"] else "unknown"
+            ),
+            "risk_score": risk.get("score"),
+            "confidence": confidence.get("score"),
+            "blocklist_hits": payload.get("blocklistHits"),
+            "lookup_status": payload.get("lookupStatus"),
+            "known_good": payload.get("knownGood"),
+            "delisted": payload.get("delisted"),
+            "reasons": evidence.get("reasons", []),
+            "source_summary": evidence.get("sourceSummary"),
+            "contradictions": evidence.get("contradictorySignals", []),
+            "observed_at": evidence.get("observedAt"),
+            "freshness": trust.get("freshness"),
+        }
+    )
+    if payload.get("lookupStatus") == "unknown" or payload.get("delisted") is True:
+        result["verdict"] = "unknown"
+    return result
+
+
+def queue_message(alert, result):
+    output = {
+        "integration": "ismalicious",
+        "ismalicious": result,
+        "original_alert_id": alert.get("id"),
+    }
+    agent = alert.get("agent") or {}
+    agent_id = str(agent.get("id", "000"))
+    if agent_id == "000":
+        return "1:ismalicious:" + json.dumps(output)
+    # Queue protocol fields must not contain separators or line breaks.
+    safe = lambda value: re.sub(r"[:\r\n]", "_", str(value))
+    location = "[%s] (%s) %s" % (
+        safe(agent_id),
+        safe(agent.get("name", "unknown")),
+        safe(agent.get("ip", "any")),
+    )
+    return "1:%s->ismalicious:%s" % (location, json.dumps(output))
+
+
+def send_to_queue(message):
+    with socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM) as client:
+        client.connect(QUEUE)
+        client.send(message.encode("utf-8"))
+
+
+def main(argv):
+    if len(argv) < 3 or not argv[2]:
+        return 1
+    try:
+        alert = json.loads(Path(argv[1]).read_text())
+        if not isinstance(alert, dict):
+            return 1
+        for indicator, indicator_type in indicators_from_alert(alert):
+            result = lookup(indicator, indicator_type, argv[2])
+            send_to_queue(queue_message(alert, result))
+    except (OSError, ValueError, TypeError, AttributeError):
+        # Do not print argv, API credentials, alert contents or response bodies.
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))

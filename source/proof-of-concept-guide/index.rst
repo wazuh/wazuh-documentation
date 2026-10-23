@@ -72,3 +72,4 @@ Use cases
    audit-commands-run-by-user
    detect-web-attack-shellshock
    leveraging-llms-for-alert-enrichment
+   ismalicious-integration
