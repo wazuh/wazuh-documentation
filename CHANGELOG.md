@@ -66,6 +66,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Using Wazuh for NIST 800-53 compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10381](https://github.com/wazuh/wazuh-documentation/pull/10381))
 - Updated the *Wazuh indexer API* documentation for Wazuh 5.0, including the use of data streams and the Wazuh Common Schema fields in the examples, and the JSON Web Token authentication steps. ([#10419](https://github.com/wazuh/wazuh-documentation/pull/10419)) ([#10442](https://github.com/wazuh/wazuh-documentation/pull/10442)) ([#10460](https://github.com/wazuh/wazuh-documentation/pull/10460))
 - Updated the *Monitoring Amazon Web Services (AWS)* documentation in *Cloud security* to Wazuh 5.0, covering the Wazuh agent-only prerequisites, enabling the AWS integrations from the Wazuh dashboard, the updated policies and service configuration, findings-based use cases, the new Amazon ECR image scanning use case, the Custom Logs Buckets and AWS Security Hub CSPM sections, and troubleshooting. ([#10420](https://github.com/wazuh/wazuh-documentation/pull/10420)) ([#10446](https://github.com/wazuh/wazuh-documentation/pull/10446))
+- Explained in *Upgrading the Wazuh agent* when Wazuh agents earlier than 5.0 receive a remote upgrade task and how to confirm its delivery. ([#10464](https://github.com/wazuh/wazuh-documentation/pull/10464))
 
 ### Removed
 
