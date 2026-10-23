@@ -1018,7 +1018,7 @@ There are different types of metric aggregations as shown below:
   Unique count aggregation helps in determining the number of distinct IP addresses accessing a system, the number of unique users triggering alerts, the count of unique event types, and more.
 
 Parent pipeline aggregations
-............................
+""""""""""""""""""""""""""""
 
 This category of pipeline aggregations is able to compute new buckets based on other parent aggregations.
 
@@ -1037,7 +1037,7 @@ This category of pipeline aggregations is able to compute new buckets based on o
 - **Serial Diff**: Calculates the difference between consecutive values in a time series or ordered dataset. It measures the absolute change from one data point to the next. Serial diff aggregation identifies the difference in event counts or resource usage between consecutive data points, showing changes or trends.
 
 Sibling pipeline aggregations
-.............................
+"""""""""""""""""""""""""""""
 
 This category of aggregations computes new aggregations that will be at the same level as the sibling aggregation from which its input was provided.
 

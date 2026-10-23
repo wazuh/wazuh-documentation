@@ -179,7 +179,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:
-      ...
+            # ... other existing auth domains ...
             basic_internal_auth_domain:
               description: "Authenticate via HTTP Basic against internal users database"
               http_enabled: true
@@ -208,7 +208,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                   exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
-      ...
+            # ... other existing auth domains ...
 
 
    Ensure to change the following parameters to their corresponding value:
@@ -304,15 +304,15 @@ Wazuh dashboard configuration
 #. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
-      :emphasize-lines: 7
+      :emphasize-lines: 6
 
       wazuh_core.hosts:
         default:
           url: https://127.0.0.1
           port: 55000
           username: wazuh-internal-client
-          password: "<WAZUH_WUI_PASSWORD>"
           run_as: true
+          ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
@@ -519,7 +519,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:
-      ...
+            # ... other existing auth domains ...
             basic_internal_auth_domain:
               description: "Authenticate via HTTP Basic against internal users database"
               http_enabled: true
@@ -548,7 +548,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                   exchange_key: 'b1d6dd32753374557dcf92e241......'
               authentication_backend:
                 type: noop
-      ...
+            # ... other existing auth domains ...
 
    Ensure to change the following parameters to their corresponding value:
 
@@ -610,15 +610,15 @@ Wazuh dashboard configuration
 #. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
-      :emphasize-lines: 7
+      :emphasize-lines: 6
 
       wazuh_core.hosts:
         default:
           url: https://127.0.0.1
           port: 55000
           username: wazuh-internal-client
-          password: "<WAZUH_WUI_PASSWORD>"
           run_as: true
+          ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
