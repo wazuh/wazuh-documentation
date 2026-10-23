@@ -90,7 +90,6 @@ It must have the following format:
 
 .. code-block:: yaml
 
-   ...
    wazuh_manager_aarch64_rpm: "https://example.com/wazuh-manager.aarch64.rpm"
    wazuh_manager_amd64_deb: "https://example.com/wazuh-manager_amd64.deb"
    wazuh_manager_arm64_deb: "https://example.com/wazuh-manager_arm64.deb"
@@ -103,7 +102,6 @@ It must have the following format:
    wazuh_dashboard_amd64_deb: "https://example.com/wazuh-dashboard_amd64.deb"
    wazuh_dashboard_arm64_deb: "https://example.com/wazuh-dashboard_arm64.deb"
    wazuh_dashboard_x86_64_rpm: "https://example.com/wazuh-dashboard.x86_64.rpm"
-   ...
 
 Then, to use these development packages in the installation, simply add the ``-d local, --development local`` option to the installation command. For example, to perform an all-in-one installation using development packages, the command would be:
 

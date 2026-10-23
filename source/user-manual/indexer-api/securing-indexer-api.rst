@@ -14,7 +14,7 @@ Recommended changes to secure the Wazuh indexer API
 Change the default password for the administrative users
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use the Wazuh passwords tool to change the password of the Wazuh indexer users that the installation creates: ``admin``, ``kibanaserver``, and ``wazuh-manager``. The tool changes the password, saves a generated password in ``/etc/wazuh/credentials.env``. It updates the keystores of the Wazuh components on the same node.
+Use the Wazuh passwords tool to change the password of the Wazuh indexer users that the installation creates: ``admin``, ``kibanaserver``, and ``wazuh-manager``. The tool changes the password, saves a generated password in ``/etc/wazuh-indexer/export/credentials.env``. It updates the keystores of the Wazuh components on the same node.
 
 #. Run the following command on any Wazuh indexer node to set a random password for the ``admin`` user:
 
