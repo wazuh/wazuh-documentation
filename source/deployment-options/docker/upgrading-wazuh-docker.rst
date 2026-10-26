@@ -6,7 +6,7 @@
 Upgrading the Wazuh Docker deployment
 =====================================
 
-This procedure upgrades a Wazuh Docker deployment created with Wazuh |WAZUH_CURRENT| RC 2. For a deployment created with Wazuh 4.x, deploy Wazuh 5.0 as a new deployment with new volumes.
+This procedure upgrades a Wazuh 5.0 Docker deployment to a later 5.0.x release. It does not cover a Wazuh 4.x deployment.
 
 The upgrade replaces the images and keeps everything else. Your indexed data and the configuration each component stores are in the stack's named volumes. The certificates and passwords are files in the ``config/`` directory of your deployment. Do not run the certificate creation script ``certificates-conf.sh`` or the credentials creation script ``credentials-conf.sh`` again.
 
