@@ -214,7 +214,7 @@ Configuring the Wazuh dashboard
              port: 55000
              username: wazuh-internal-client
              run_as: true
-         ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
+             ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
       .. note::
 

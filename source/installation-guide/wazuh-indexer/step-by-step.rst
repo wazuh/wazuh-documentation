@@ -208,7 +208,7 @@ Wazuh uses certificates to establish confidentiality and encrypt communications 
 
 Run this stage once, on the first Wazuh indexer node, after its package is installed. It creates the certificates of every node and packs them, with the passwords every node needs, into ``wazuh-certificates.tar``.
 
-Skip this stage and :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>` for a single-node Wazuh indexer: the package already issued its certificates.
+Skip this stage and :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>` for an all-in-one installation, where the Wazuh manager and Wazuh dashboard run on the same host as a single-node Wazuh indexer: the package already issued its certificates.
 
 .. _wazuh_indexer_generating_certificates:
 
