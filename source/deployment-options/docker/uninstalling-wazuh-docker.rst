@@ -41,15 +41,15 @@ You need root user privileges to run the commands below. If you use Docker as a 
 
    .. code-block:: console
 
-      # rm -rf wazuh-certificates/ wazuh-certificates-tool.log config.yml wazuh-certs-tool.sh wazuh-credentials.sh config/*/certs config/credentials
+      # rm -rf wazuh-certificates/ wazuh-certificates-tool.log config.yml wazuh-certs-tool.sh config/*/certs config/credentials
 
    If you kept the volumes in step 2, keep ``config/credentials/`` too. The volumes hold the passwords from these files, and the files are the only record of them.
 
-#. Optional: remove the root CA. The certificate creation script keeps the root CA and its private key in ``/etc/wazuh/ca``. The steps above do not remove them. The next run of the script on this host reuses them. Remove them only if you deleted the volumes in step 2 and no other Wazuh deployment on this host uses them:
+#. Optional: remove the root CA. The certificate creation tool keeps the root CA and its private key in ``wazuh-ca/``, in the directory of your stack. The steps above keep this directory, and the next run of the script from this directory reuses it. Remove it only if you deleted the volumes in step 2 and no other Wazuh deployment uses this root CA. If you set ``WAZUH_CA_DIR`` when you created the certificates, remove that directory instead:
 
    .. code-block:: console
 
-      # rm -rf /etc/wazuh/ca
+      # rm -rf wazuh-ca/
 
 #. Optional: remove the images of the stack. For a single-node deployment:
 
