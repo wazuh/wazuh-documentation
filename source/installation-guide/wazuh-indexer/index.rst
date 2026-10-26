@@ -12,6 +12,8 @@ You can install the Wazuh indexer on a single host or distribute it across multi
 
 Check the requirements below and choose an installation method to start installing the Wazuh indexer.
 
+-  :ref:`All-in-one deployment <wazuh_indexer_all_in_one_deployment>`: Install the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host.
+
 -  :doc:`Assisted installation <installation-assistant>`: Install this component by running an assistant that automates the installation and configuration process.
 
 -  :doc:`Step-by-step installation <step-by-step>`: Install this component by following detailed step-by-step instructions.
@@ -72,12 +74,16 @@ Requirements
 
 Check the recommended operating systems and hardware requirements for the Wazuh indexer installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
+The Wazuh indexer package needs ``iproute2``, ``openssl``, and ``passwd`` on Debian and Ubuntu, and ``iproute``, ``openssl``, and ``shadow-utils`` on Red Hat Enterprise Linux and Amazon Linux. It opens no firewall port: open the ports in :ref:`Required ports <wazuh_indexer_required_ports>` yourself. You can't install it over a Wazuh indexer 4.x. The package refuses with ``Upgrade from Wazuh indexer versions prior to 5.x is not supported.`` To move from 4.x, see the :doc:`migration guide </migration-to-5x/index>`.
+
 Recommended operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Wazuh indexer requires a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture). Wazuh recommends the following operating system versions:
 
 .. include:: /_templates/installations/wazuh/recommended-operating-systems.rst
+
+.. _wazuh_indexer_hardware_requirements:
 
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
@@ -94,7 +100,7 @@ You can install the Wazuh indexer as a single-node or multi-node cluster.
    | Wazuh indexer           |     8    |     4        |     32       |       8        |
    +-------------------------+----------+--------------+--------------+----------------+
 
-   All-in-one host (the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host), up to 25 agents: 4 CPU cores and 8 GB of RAM, as in the Quickstart. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
+   All-in-one host (the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host), up to 25 agents: 4 CPU cores and 8 GB of RAM, as in the :doc:`Quickstart </quickstart>`. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
 
 -  Disk space requirements: The amount of disk space required depends on the generated events per second (EPS). This table details the estimated disk space needed per agent to store 90 days of events on a Wazuh indexer server, depending on the type of monitored endpoints.
 
@@ -125,6 +131,17 @@ Make sure that your firewall allows the following traffic to every Wazuh indexer
 +-----------------+---------------------------------------------------------------+------------------------+
 | 9300 - 9400/TCP | Other Wazuh indexer nodes                                     | Cluster communication  |
 +-----------------+---------------------------------------------------------------+------------------------+
+
+.. _wazuh_indexer_all_in_one_deployment:
+
+All-in-one deployment
+---------------------
+
+You can install the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host with either installation method. Size the host as :ref:`Hardware requirements <wazuh_indexer_hardware_requirements>` describes for an all-in-one host.
+
+The :doc:`Quickstart </quickstart>` is the fastest way to install them on one host. To install them on one host with the installation assistant, follow the Wazuh indexer, Wazuh manager, and Wazuh dashboard assisted installation sections on that host, in that order. :ref:`Initial configuration <wazuh_indexer_assisted_initial_configuration>` says which ``config.yml`` values to use and which step to skip for an all-in-one installation.
+
+To install them on one host with the step-by-step method, follow the Wazuh indexer, Wazuh manager, and Wazuh dashboard step-by-step sections on that host, in that order. Each section says which steps to skip when the components share a host.
 
 .. toctree::
    :hidden:
