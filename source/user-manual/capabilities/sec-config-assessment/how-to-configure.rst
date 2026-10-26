@@ -38,13 +38,21 @@ To disable a policy included with the Wazuh agent, specify its path relative to 
      </policies>
    </sca>
 
-For a policy distributed through centralized configuration, use its path in the ``etc/shared`` directory:
+For a policy distributed through centralized configuration, use its path in the ``etc/shared`` directory on Linux and macOS agents, or in the ``shared`` directory on Windows agents:
 
 .. code-block:: xml
 
    <sca>
      <policies>
        <policy enabled="no">etc/shared/<POLICY_FILE_TO_DISABLE></policy>
+     </policies>
+   </sca>
+
+.. code-block:: xml
+
+   <sca>
+     <policies>
+       <policy enabled="no">shared\<POLICY_FILE_TO_DISABLE></policy>
      </policies>
    </sca>
 
@@ -122,17 +130,31 @@ You can enable this feature to push policy files to the Wazuh agents in defined 
 
 
      .. code-block:: xml
-        :emphasize-lines: 5
 
-        <agent_config>
-          <!-- Shared agent configuration here -->
+        <agent_config os="Linux">
           <sca>
             <policies>
-                <policy>etc/shared/<NEW_POLICY_FILE></policy>
+              <policy>etc/shared/<NEW_POLICY_FILE></policy>
             </policies>
           </sca>
         </agent_config>
 
-   All files remotely pushed from the Wazuh server are saved in the ``/<WAZUH_HOME_DIRECTORY>/etc/shared/`` directory on the agent endpoints regardless of the group they belong to. We specify the relative file path of the policy in the configuration because the full file path could differ depending on the operating system of the monitored endpoint.
+        <agent_config os="macOS">
+          <sca>
+            <policies>
+              <policy>etc/shared/<NEW_POLICY_FILE></policy>
+            </policies>
+          </sca>
+        </agent_config>
+
+        <agent_config os="Windows">
+          <sca>
+            <policies>
+              <policy>shared\<NEW_POLICY_FILE></policy>
+            </policies>
+          </sca>
+        </agent_config>
+
+   The Wazuh agent saves all files pushed from the Wazuh server in the ``etc/shared/`` directory on Linux and macOS endpoints and in the ``shared\`` directory on Windows endpoints, regardless of the group they belong to. We specify the relative file path of the policy because the installation directory differs between operating systems.
 
 The new ``<sca>`` block in the Wazuh server ``/var/ossec/etc/shared/default/agent.conf`` file is merged with the ``<sca>`` block on the Wazuh agent side, and the new configuration is added.

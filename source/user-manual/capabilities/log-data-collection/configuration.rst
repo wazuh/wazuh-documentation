@@ -260,15 +260,19 @@ The macOS unified logging system (ULS) centralizes the management and storage of
 Collecting macOS ULS logs with the Wazuh agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh interfaces with the CLI log tool using the ``--style syslog`` format to collect logs from macOS ULS:
+The Wazuh agent installs the following default configuration to collect logs from macOS ULS. Wazuh interfaces with the CLI log tool using the ``--style syslog`` format:
 
    .. code-block:: xml
 
       <localfile>
         <location>macos</location>
         <log_format>macos</log_format>
-        <query type="trace,log,activity" level="info">(process == "sudo") or (process == "sessionlogoutd" and message contains "logout is complete.") or (process == "sshd") or (process == "tccd" and message contains "Update Access Record") or (message contains "SessionAgentNotificationCenter") or (process == "screensharingd" and message contains "Authentication") or (process == "securityd" and eventMessage contains "Session" and subsystem == "com.apple.securityd")</query>
+        <query type="trace,log,activity" level="info">(process == "sudo") or (process == "sessionlogoutd" and message contains "logout is complete.") or (process == "sshd") or (process == "sshd-session") or (process == "sshd-auth") or (process == "tccd" and message contains "Update Access Record") or (message contains "SessionAgentNotificationCenter") or (process == "screensharingd" and message contains "Authentication") or (process == "securityd" and eventMessage contains "Session" and subsystem == "com.apple.securityd")</query>
       </localfile>
+
+.. note::
+
+   On macOS 15 and later, ``/etc/sudoers`` contains ``Defaults !log_allowed``, so macOS doesn't log successful ``sudo`` commands and the Wazuh agent can't collect them. To log them, add ``Defaults log_allowed`` in a file under ``/etc/sudoers.d/`` and check the file with ``visudo -cf <FILE>``.
 
 .. note:: You can only have one configuration block with ``log_format`` set as ``macos``. If you add more blocks, only the last one will be used.
 

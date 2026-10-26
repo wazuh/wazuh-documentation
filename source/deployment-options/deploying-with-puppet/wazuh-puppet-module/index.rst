@@ -381,7 +381,12 @@ Indexer users
         class { 'wazuh::filebeat_oss':
           filebeat_oss_elastic_password  => '<NEW_PASSWORD>'
         }
+        class { 'wazuh::manager':
+          vulnerability_indexer_password => '<NEW_PASSWORD>'
+        }
       }
+
+   Add these parameters to the existing class declarations of your manifest. ``wazuh::manager`` writes ``vulnerability_indexer_password`` to the Wazuh manager keystore on every Puppet run, so it must match the new ``admin`` password. If you use a different indexer user for the Wazuh manager, also set ``vulnerability_indexer_username``.
 
 -  ``kibanaserver`` user:
 
@@ -402,14 +407,23 @@ Wazuh API users
 
       node "<PUPPET_AGENT_NODE_NAME>" {
         class { 'wazuh::dashboard':
-          dashboard_wazuh_api_credentials => '<NEW_PASSWORD>'
+          dashboard_wazuh_api_credentials => [
+            {
+              'id'       => 'default',
+              'url'      => 'https://<WAZUH_SERVER_IP_ADDRESS>',
+              'port'     => '55000',
+              'user'     => 'wazuh-wui',
+              'password' => '<NEW_PASSWORD>',
+              'run_as'   => 'true',
+            },
+          ]
         }
       }
 
 Install Wazuh agent via Puppet
 ------------------------------
 
-The agent is configured by installing the ``wazuh::agent`` class. Here is an example of a manifest ``wazuh-agent.pp`` (please replace ``<MANAGER_IP_ADDRESS>`` with your manager IP address).
+The agent is configured by installing the ``wazuh::agent`` class.
 
 #. Install the following packages if missing on the Puppet agent. The Wazuh central components require these packages:
 
@@ -449,9 +463,9 @@ The agent is configured by installing the ``wazuh::agent`` class. Here is an exa
 
    Where:
 
-   - ``WAZUH_AGENT_NODE_NAME`` is the hostname of the Wazuh agent host.
+   - ``<PUPPET_AGENT_NODE_NAME>`` is the hostname of the Puppet agent node where you install the Wazuh agent.
 
-   - ``MANAGER_IP_ADDRESS`` is the hostname of the Wazuh server node.
+   - ``<MANAGER_IP_ADDRESS>`` is the IP address or hostname of the Wazuh server.
 
 #. Perform a Puppet run on the Puppet agent to start the deployment of the Wazuh stack. Skip this step if you want the stack to run on the specified node once the run interval time, as set in ``puppet.conf`` elapses:
 
