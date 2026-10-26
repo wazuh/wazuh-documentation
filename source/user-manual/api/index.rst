@@ -1,33 +1,35 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh server API is an open source RESTful API that enables secure interaction with the Wazuh server infrastructure.
+   :description: The Wazuh manager API is an open source RESTful API that enables secure interaction with the Wazuh manager component.
 
-Wazuh server API
-================
+Wazuh manager API
+=================
 
-The Wazuh server API is an open source RESTful API that enables secure interaction with the Wazuh server infrastructure. You can interact with it using the built-in API console in the Wazuh dashboard, a command-line tool such as cURL, or any script or program capable of making web requests.
+The Wazuh manager API is an open source RESTful API that enables secure interaction with the Wazuh manager component. You can interact with it using the built-in API console in the Wazuh dashboard, cURL, or any program that makes web requests.
 
-The Wazuh dashboard relies on the Wazuh server API to remotely manage the Wazuh server infrastructure. You can utilize the Wazuh server API to perform common tasks such as adding agents, restarting the manager(s) or agent(s), or retrieving detailed File Integrity Monitoring (FIM) events and status, managing users, roles, and permissions and more.
+The Wazuh dashboard relies on the Wazuh manager API to remotely manage the Wazuh manager infrastructure. You can use the Wazuh manager API to perform common tasks such as adding and restarting Wazuh agents, managing agent groups, and managing the Wazuh manager cluster. The Wazuh manager API has no File Integrity Monitoring (FIM) endpoint in Wazuh 5.0. Wazuh 5.0 stores the FIM state of each agent in the Wazuh indexer, in the wazuh-states-fim-files, wazuh-states-fim-registry-keys, and wazuh-states-fim-registry-values indices.
 
-Here is a list of the Wazuh server API capabilities:
+Here is a list of the Wazuh manager API capabilities:
 
 -  Wazuh agent management
--  Wazuh manager control and overview
+-  Agent enrollment token management (create, list, revoke, and purge)
+-  Agent and agent group reload
+-  On-demand vulnerability scans of Wazuh agents
+-  Wazuh manager node information, status, logs, configuration, and restart
 -  Cluster control and overview
--  File integrity monitoring control and search
+-  Cluster reload, which restarts the Wazuh manager daemons and keeps active agent connections
+-  Node readiness, reported for each Wazuh manager daemon
+-  Validity of the TLS certificate that wazuh-manager-remoted serves to Wazuh agents
 -  MITRE ATT&CK overview
--  Ruleset information
--  Testing and verification of rules and decoders
--  Syscollector information
 -  Role-Based Access Control (RBAC)
 -  API management (HTTPS, configuration)
 -  Users management
 -  Statistical information
 -  Error handling
--  Query remote configuration
+-  Wazuh manager node configuration queries
 
-Refer to the :doc:`Wazuh server API reference </user-manual/api/reference>` for details about all the Wazuh server API endpoints. For practical, real-world examples of how to use these capabilities, see the :doc:`use cases <use-cases>` section.
+Refer to the :doc:`Wazuh manager API reference </user-manual/api/reference>` for details about all the Wazuh manager API endpoints. For practical, real-world examples of how to use these capabilities, see the :doc:`use cases <use-cases>` section.
 
 .. topic:: Contents
 
