@@ -44,7 +44,7 @@ Run the commands below as root, or as a user in the ``docker`` group.
 
 #. Run the build script. Choose one of the following commands:
 
-   -  To tag the images ``|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|``, as the ``docker-compose.yml`` files of Wazuh |WAZUH_CURRENT_DOCKER| RC 2 expect, add the release stage with the ``-d`` option:
+   -  To tag the images ``|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|``, as the ``docker-compose.yml`` files of Wazuh |WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV| expect, add the release stage with the ``-d`` option:
 
       .. code-block:: console
 

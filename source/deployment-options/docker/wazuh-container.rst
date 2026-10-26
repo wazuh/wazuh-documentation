@@ -239,7 +239,7 @@ Prepare the certificates
 
 Secure communication between Wazuh components requires the use of certificates. Follow the steps below to prepare and generate the certificates:
 
-#. Use the certificate creation tool from Wazuh |WAZUH_CURRENT| RC 2. Earlier versions don't create the Wazuh manager API certificates (``apid``) that each Wazuh manager node needs. If you already ran the certificate creation script with an earlier version, run ``rm -rf wazuh-certificates/`` before you run it again. Run the following command to download the tool:
+#. Use the certificate creation tool from Wazuh 5.0.0 RC 2. Earlier versions don't create the Wazuh manager API certificates (``apid``) that each Wazuh manager node needs. If you already ran the certificate creation script with an earlier version, run ``rm -rf wazuh-certificates/`` before you run it again. Run the following command to download the tool:
 
    .. code-block:: console
 
