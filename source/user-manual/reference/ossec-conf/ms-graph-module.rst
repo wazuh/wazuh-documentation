@@ -46,7 +46,7 @@ enabled
 only_future_events
 ^^^^^^^^^^^^^^^^^^^^
 
-Set it to **yes** to collect only events generated from the module start onward. The first scan starts ``time_delay`` before the module start, so it also collects events up to ``time_delay`` older than the start.
+Set it to ``yes`` to collect only events generated from the module start onward. The first scan starts ``time_delay`` before the module start, so it also collects events up to ``time_delay`` older than the start.
 
 By default, the Microsoft Graph module only reads logs from the module start onward.
 
