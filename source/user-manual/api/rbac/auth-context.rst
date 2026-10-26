@@ -75,6 +75,8 @@ At the default info log level, the API log replaces the authorization context wi
 
 Compare the preceding log output with the log output from the :ref:`basic login method <api_getting_started_authenticate_the_wazuh_manager_api_from_the_command_line>`:
 
+The command output looks similar to this:
+
 .. code-block:: none
    :class: output
 

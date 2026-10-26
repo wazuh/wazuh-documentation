@@ -75,7 +75,7 @@ The following example changes the password using cURL:
 
    .. warning::
 
-      Changing the ``wazuh-internal-client`` user password breaks the Wazuh dashboard connection. After changing it, store the new password in the ``wazuh_core.hosts.default.password`` entry of the Wazuh dashboard keystore, ``/etc/wazuh-dashboard/opensearch_dashboards.keystore``. See the :ref:`Update the wazuh-wui password <update_wazuh_internal_client_password>` section of the Password management documentation for details.
+      Changing the ``wazuh-internal-client`` user password breaks the Wazuh dashboard connection. After changing it, store the new password in the ``wazuh_core.hosts.default.password`` entry of the Wazuh dashboard keystore, ``/etc/wazuh-dashboard/opensearch_dashboards.keystore``. See the :ref:`Update the wazuh-internal-client password <update_wazuh_internal_client_password>` section of the Password management documentation for details.
 
 Change the default host and port
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
