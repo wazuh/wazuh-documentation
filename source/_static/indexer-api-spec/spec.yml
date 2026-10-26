@@ -238,8 +238,8 @@ paths:
   /_cat/count:
     $ref: 'cat_api.yml#/paths/~1_cat~1count'
 
-  /_cat/count/{INDEX}:
-    $ref: 'cat_api.yml#/paths/~1_cat~1count~1{INDEX}'
+  /_cat/count/{index}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1count~1{index}'
 
   /_cat/fielddata:
     $ref: 'cat_api.yml#/paths/~1_cat~1fielddata'
