@@ -20,7 +20,7 @@ The Syscollector module is enabled by default on all endpoints where the Wazuh a
 
 - ``/var/ossec/etc/ossec.conf`` for Linux endpoints.
 - ``C:\Program Files (x86)\ossec-agent\ossec.conf`` for Windows endpoints.
-- ``/Library/Ossec/ossec.conf`` for macOS endpoints.
+- ``/Library/Ossec/etc/ossec.conf`` for macOS endpoints.
 
 You can also use the :doc:`centralized configuration </user-manual/reference/centralized-configuration>` file to make changes to the Syscollector module across multiple monitored endpoints that belong to the same agent group. For example, the ``default`` group uses the configuration file, which you can find at ``/var/ossec/etc/shared/default/agent.conf`` on the Wazuh server. Any setting done with the centralized configuration will take precedence over the local agent configuration.
 
@@ -38,7 +38,7 @@ The block below is the default Syscollector configuration present in the Wazuh a
         <os>yes</os>
         <network>yes</network>
         <packages>yes</packages>
-        <ports all="no">yes</ports>
+        <ports all="yes">yes</ports>
         <processes>yes</processes>
         <users>yes</users>
         <groups>yes</groups>
@@ -63,7 +63,7 @@ Where:
 - ``<os>`` option enables or disables the operating system scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<network>`` enables or disables the network scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<packages>`` enables or disables the scanning of packages, with a default value of ``yes``. The allowed values are ``yes`` and ``no``.
-- ``<ports all="no">`` enables or disables the port scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``. This option also accepts an additional parameter ``all``, with which you can restrict the scan to only listening ports using ``<ports all="no">``. If you want Syscollector to scan all ports, then you change the value to ``yes``.
+- ``<ports all="yes">`` enables or disables the port scan. The default value is ``yes``. The ``all`` attribute determines the scope of the scan. The default value of ``all`` is ``yes``, which scans all ports. Setting the value to ``no`` restricts the scan to listening ports only.
 - ``<processes>`` enables or disables the scanning for running processes on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<users>`` enables or disables the scanning for user accounts on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<groups>`` enables or disables the scanning for user account groups on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.

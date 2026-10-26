@@ -218,7 +218,7 @@ When Microsoft Defender for Office 365 detects a malicious email event, a log si
       }
 
 
-The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph API. This log matches an out-of-the-box rule with ID ``99506``. This triggers an alert with the following details:
+The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph API. This log matches an out-of-the-box rule with ID ``99633``. This triggers an alert with the following details:
 
    .. code-block:: none
       :class: output
@@ -226,16 +226,12 @@ The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph 
       {
           "timestamp":"2024-08-29T14:53:15.301+0000",
           "rule":{
-              "id":"99506",
-
-
-                 "level":6,
-
-
-                 "description":"MS Graph message: The alert is true positive and detected malicious activity.",
-                  "groups":["ms-graph"],
-                  "firedtimes":1,
-                  "mail":"false"
+              "id":"99633",
+              "level":3,
+              "description":"MS Graph message: This indicates that the alert has been resolved.",
+              "groups":["ms-graph"],
+              "firedtimes":1,
+              "mail":"false"
           },
           "agent":{
               "id":"001",
@@ -246,7 +242,7 @@ The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph 
           },
           "id":"1623276774.47272",
           "decoder":{
-              "name":"json"
+              "name":"json-msgraph"
           },
           "data":{
               "integration":"ms-graph",
@@ -434,7 +430,7 @@ Once Wazuh connects with the Microsoft Graph API, the previous log triggers the 
        },
        "id": "1723228143.38630",
        "decoder": {
-           "name": "json"
+           "name": "json-msgraph"
        },
        "data": {
            "integration": "ms-graph",

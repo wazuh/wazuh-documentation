@@ -164,6 +164,8 @@ These wildcards will be reloaded every time a scheduled scan is run.
 |                    | Any environment variable           |
 +--------------------+------------------------------------+
 
+On macOS agents, the default value is ``/private/etc,/usr/bin,/usr/sbin,/bin,/sbin``, because ``/etc`` is a symbolic link to ``/private/etc``.
+
 Attributes:
 
 +--------------------------+-----------------------------------------------------------------------------------------------------------------------+
@@ -1450,25 +1452,25 @@ Default syscheck configuration:
     <frequency>43200</frequency>
     <scan_on_start>yes</scan_on_start>
     <!-- Directories to check  (perform all possible verifications) -->
-    <directories>/etc,/usr/bin,/usr/sbin</directories>
+    <directories>/private/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin</directories>
     <!-- Files/directories to ignore -->
-    <ignore>/etc/mtab</ignore>
-    <ignore>/etc/hosts.deny</ignore>
-    <ignore>/etc/mail/statistics</ignore>
-    <ignore>/etc/random-seed</ignore>
-    <ignore>/etc/random.seed</ignore>
-    <ignore>/etc/adjtime</ignore>
-    <ignore>/etc/httpd/logs</ignore>
-    <ignore>/etc/utmpx</ignore>
-    <ignore>/etc/wtmpx</ignore>
-    <ignore>/etc/cups/certs</ignore>
-    <ignore>/etc/dumpdates</ignore>
-    <ignore>/etc/svc/volatile</ignore>
+    <ignore>/private/etc/mtab</ignore>
+    <ignore>/private/etc/hosts.deny</ignore>
+    <ignore>/private/etc/mail/statistics</ignore>
+    <ignore>/private/etc/random-seed</ignore>
+    <ignore>/private/etc/random.seed</ignore>
+    <ignore>/private/etc/adjtime</ignore>
+    <ignore>/private/etc/httpd/logs</ignore>
+    <ignore>/private/etc/utmpx</ignore>
+    <ignore>/private/etc/wtmpx</ignore>
+    <ignore>/private/etc/cups/certs</ignore>
+    <ignore>/private/etc/dumpdates</ignore>
+    <ignore>/private/etc/svc/volatile</ignore>
     <!-- File types to ignore -->
     <ignore type="sregex">.log$|.swp$</ignore>
     <!-- Check the file, but never compute the diff -->
-    <nodiff>/etc/ssl/private.key</nodiff>
+    <nodiff type="sregex">^/private/etc/ssl/private/</nodiff>
     <skip_nfs>yes</skip_nfs>
     <skip_dev>yes</skip_dev>
     <skip_proc>yes</skip_proc>

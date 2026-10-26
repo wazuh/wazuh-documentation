@@ -181,7 +181,7 @@ The scan result for check ``19098`` changes to **Passed** as shown in the image 
      :align: center
      :width: 80%
 
-A check is marked as ``Not applicable`` in case an error occurs while performing the check. In such cases, instead of including the ``result`` field, the ``status`` and ``reason`` fields are included.
+A check is marked as ``Not applicable`` when it can't be evaluated, for example when one of its rules fails to run. Its ``result`` is ``not applicable``, and the ``reason`` field says why. Rule ``19009`` generates the alert, and the :api-ref:`GET /sca/{agent_id}/checks/{policy_id} <operation/api.controllers.sca_controller.get_sca_checks>` endpoint returns the check with the same ``result`` and ``reason``.
 
 Integrity mechanisms
 --------------------
