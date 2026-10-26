@@ -46,6 +46,12 @@ Wazuh 4.x manager
 
    If you customized ``shared/default/agent.conf``, merge its settings into the Wazuh 5.x ``default`` group manually.
 
+   If the Wazuh 4.x manager requires an enrollment password, also back up the password file. Wazuh 4.x agents that enroll again, for example after you rebuild an endpoint, use this password:
+
+   .. code-block:: console
+
+      # cp /var/ossec/etc/authd.pass /root/wazuh-4x-backup/
+
 #. Start the Wazuh 4.x manager:
 
    .. code-block:: console
@@ -104,6 +110,12 @@ Wazuh 5.x manager
       # chown -R wazuh-manager:wazuh-manager /etc/wazuh-manager/shared/*
 
    Review the restored ``agent.conf`` files and update or remove any settings that Wazuh 5.x doesn't support.
+
+   If you backed up the enrollment password, restore it. Otherwise, the Wazuh 5.x manager generates a new password, and Wazuh 4.x agents that enroll again with the old one fail:
+
+   .. code-block:: console
+
+      # install -m 640 -o wazuh-manager -g wazuh-manager /root/wazuh-4x-backup/authd.pass /etc/wazuh-manager/authd.pass
 
 #. Start the Wazuh 5.x manager:
 
@@ -195,3 +207,5 @@ Wazuh 5.x agents verify the Wazuh manager certificate. A package upgrade doesn't
    .. note::
 
       Wazuh 4.x agents can connect to a Wazuh 5.x manager. However, File Integrity Monitoring (FIM), Security Configuration Assessment (SCA), System Inventory, Active Response, and Vulnerability Detection are not fully supported until the agents are upgraded to Wazuh 5.x. We recommend upgrading migrated agents to Wazuh 5.x to ensure full compatibility with Wazuh 5.x functionality.
+
+      A new Wazuh 4.x agent enrolls on port ``1515`` with the enrollment password of the Wazuh 5.x manager. Otherwise, the agent logs ``Invalid password. Unable to add agent (from manager)`` and stays pending. Read the password from ``/etc/wazuh-manager/authd.pass`` on the Wazuh 5.x manager. Then set it in the ``WAZUH_REGISTRATION_PASSWORD`` variable when you install the agent.
