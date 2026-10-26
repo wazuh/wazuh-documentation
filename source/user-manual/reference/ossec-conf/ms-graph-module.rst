@@ -80,7 +80,7 @@ Specifies the maximum size allowed for the Microsoft Graph API response.
 | **Default value**    | 1M                                                                                           |
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Allowed values**   | A positive number that should contain a suffix character indicating a size unit, such as b/B |
-|                      | (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes). Minimum value of 1KB.        |
+|                      | (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes). Minimum value of 1K.         |
 +----------------------+----------------------------------------------------------------------------------------------+
 
 page_size
