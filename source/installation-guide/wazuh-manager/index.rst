@@ -140,7 +140,7 @@ Wazuh agents connect to a Wazuh manager node only through an address in its agen
 
 -  **Step-by-step installation:** The certificates tool issues the certificate with the node's name and its addresses from ``config.yml``. To add an address, use ``-as <ALTERNATE_ADDRESS>`` when you create the certificates. The root CA must be in place before you install the package, as :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>` describes.
 
-In both methods, pass every address in the same run, because the certificate holds only the ``-as`` values of that run. For a cluster behind a load balancer, use a TCP passthrough load balancer on 1517/TCP. Add its address to the certificate of every Wazuh manager node. Create enrollment tokens on the master node. A worker node refuses the command, and the master node accepts only addresses in its own certificate. Agents therefore enroll through the load balancer or the master node's address.
+In both methods, pass every address in the same run, because the certificate holds only the ``-as`` values of that run. For a cluster behind a load balancer, use a TCP passthrough load balancer on 1517/TCP. Add its address to the certificate of every Wazuh manager node. Create enrollment tokens on the master node. A worker node refuses the command, and the master node accepts only addresses in its own certificate. Agents therefore enroll through the load balancer or the master node's address. To create a token for a worker node's address, add that address with ``-as`` too.
 
 .. toctree::
    :hidden:

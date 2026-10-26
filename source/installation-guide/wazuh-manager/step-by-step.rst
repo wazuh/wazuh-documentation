@@ -235,7 +235,7 @@ Configuring the Wazuh indexer connection
 Starting the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Enable and start the Wazuh manager service. The package neither enables nor starts it. The first start can take up to a few minutes:
+#. Enable and start the Wazuh manager service. The package neither enables nor starts it. The first start usually takes a few seconds, and systemd reports a failure after three minutes:
 
    .. code-block:: console
 
@@ -269,7 +269,7 @@ Your Wazuh manager node is now successfully installed. Repeat this stage of the 
 Cluster configuration for multi-node deployment
 -----------------------------------------------
 
-After completing the installation of the Wazuh manager on every node, configure one Wazuh manager node as the master and the rest as workers. The Wazuh server API runs on the master node, so only the master node's API passwords are used. Every node, workers included, needs its own Wazuh indexer password and client certificate from :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`. Each node also needs the deployment's root CA in ``/etc/wazuh-manager/ca`` before its package is installed. Every node gets the same API passwords from the archive, so a worker that you promote later has known passwords. These passwords must be in ``local.env`` before you install each node. Otherwise, the node generates its own API passwords, which differ from the master node's. Read the Wazuh server API passwords on the master node, and point the Wazuh dashboard to the master node.
+After completing the installation of the Wazuh manager on every node, configure one Wazuh manager node as the master and the rest as workers. The Wazuh server API runs on the master node, so only the master node's API passwords are used. Every node, workers included, needs its own Wazuh indexer password and client certificate from :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`. Each node also needs the deployment's root CA in ``/etc/wazuh-manager/ca`` before its package is installed. Every node gets the same API passwords from the archive, so a worker that you promote later has known passwords. These passwords must be in ``local.env`` before you install each node. Otherwise, the node generates its own API passwords, which differ from the master node's. Read the Wazuh server API passwords on the master node, and point the Wazuh dashboard to the master node. On a worker node, ignore ``/etc/wazuh-manager/export/credentials.env``, because the Wazuh server API runs only on the master node.
 
 The package writes a single-node ``<cluster>`` block on every node, with ``node_type`` set to ``master``, a random key, and ``127.0.0.1`` as the ``bind_addr`` and node address. Edit that block in place on each node, and don't add a second ``<cluster>`` block. The ``node_name`` parameter is the node's name inside the Wazuh manager cluster. It doesn't need to match the certificate name in ``config.yml``.
 

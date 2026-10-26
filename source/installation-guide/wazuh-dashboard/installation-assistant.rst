@@ -112,7 +112,7 @@ After every component is installed and running, each component stores the passwo
 
       # rm -f /etc/wazuh-indexer/ca/root-ca.key /etc/wazuh-manager/ca/root-ca.key /etc/wazuh-manager/ca/root-ca.srl
 
-To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation.
+Editing ``local.env`` after installation doesn't change any password. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation.
 
 Disable Wazuh updates
 ---------------------
