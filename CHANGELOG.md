@@ -95,6 +95,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Removed the `auth.timeout_seconds` and `auth.timeout_microseconds` internal options from the *Internal configuration* reference documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
+- Updated the *Wazuh server API* documentation to the new *Wazuh manager API* documentation in the *User manual*, including its use cases. ([#10530](https://github.com/wazuh/wazuh-documentation/pull/10530))
 
 ### Fixed
 
