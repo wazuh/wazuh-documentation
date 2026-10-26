@@ -16,4 +16,4 @@ Then start the Wazuh agent:
 
 .. code-block:: console
 
-   # /Library/Ossec/bin/wazuh-control start
+   # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
