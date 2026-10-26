@@ -70,9 +70,9 @@ The Traefik ingress controller routes and load balances external traffic to the 
       namespace/traefik created
       serviceaccount/traefik created
       clusterrole.rbac.authorization.k8s.io/traefik created
-      clusterrolebinding.rbac.authorization.k8s.io/traefik created
       service/traefik created
       deployment.apps/traefik created
+      networkpolicy.networking.k8s.io/traefik-ingress created
 
 #. Run the command below to view all running services in the ``traefik`` namespace:
 
@@ -97,12 +97,11 @@ Setup SSL certificates
 
 Perform the steps below to generate the required certificates for the deployment:
 
-#. Download the ``wazuh-certs-tool.sh`` and ``wazuh-credentials.sh`` script and the ``config.yml`` configuration file. These files are used to create the certificates that encrypt communications between the Wazuh central components.
+#. Download the ``wazuh-certs-tool.sh`` script and the ``config.yml`` configuration file. These files are used to create the certificates that encrypt communications between the Wazuh central components.
 
    .. code-block:: console
 
       $ cd wazuh
-      $ curl -so wazuh-credentials.sh https://raw.githubusercontent.com/wazuh/wazuh-installation-assistant/|WAZUH_CURRENT|/credentials_lib/wazuh-credentials.sh
       $ curl -so wazuh-certs-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
       $ curl -so config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yml
 
@@ -145,7 +144,7 @@ Perform the steps below to generate the required certificates for the deployment
 
    -  ``<EXTERNAL-IP>`` with the load balancer FQDN shown in the ``EXTERNAL-IP`` column of ``kubectl -n traefik get svc``.
 
-#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<EXTERNAL-IP>`` with the same load balancer FQDN. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517``. Repeat the option for every other address agents will use.
+#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<EXTERNAL-IP>`` with the same load balancer FQDN. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517``. Repeat the option for every other address agents will use. The script also issues the Wazuh server API certificate (``manager-apid.pem``), which the Wazuh manager master needs to start. Its names come from the ``manager`` entry in ``config.yml``. Add any other name or address that clients of the Wazuh manager API use with the ``--api-san`` option.
 
    .. code-block:: console
 
@@ -160,39 +159,32 @@ Perform the steps below to generate the required certificates for the deployment
       Detected manager nodes:   manager
       Detected dashboard nodes: dashboard
       Generating certificates
-      09/10/2026 09:50:10 INFO: Verbose logging redirected to .../wazuh-kubernetes/wazuh/wazuh-certificates-tool.log
-      09/10/2026 09:50:11 INFO: Generating the root certificate in /etc/wazuh/ca.
-      09/10/2026 09:50:11 WARNING: There is no root CA in /etc/wazuh/ca, so a new one is created. The certificates issued from it do not chain to the root CA of any existing deployment. To add nodes to an existing deployment, stop here and run the tool on the host that holds its root CA, or set WAZUH_CA_DIR to a directory with a copy of that root CA and its key.
-      09/10/2026 09:50:11 INFO: Generating Admin certificates.
-      09/10/2026 09:50:12 INFO: Admin certificates created.
-      09/10/2026 09:50:12 INFO: Generating Wazuh indexer certificates.
-      09/10/2026 09:50:13 INFO: Wazuh indexer certificates created.
-      09/10/2026 09:50:13 INFO: Generating Wazuh manager certificates.
-      09/10/2026 09:50:13 INFO: Wazuh manager certificates created.
-      09/10/2026 09:50:13 INFO: Generating Wazuh dashboard certificates.
-      09/10/2026 09:50:14 INFO: Wazuh dashboard certificates created.
+      26/10/2026 10:20:41 INFO: Verbose logging redirected to /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-certificates-tool.log
+      26/10/2026 10:20:41 WARNING: The IP 98.92.152.55 of dashboard node dashboard is public. Make sure it is meant to be reachable from outside your network.
+      26/10/2026 10:20:41 INFO: Generating the root certificate in /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-ca.
+      26/10/2026 10:20:41 WARNING: There is no root CA in /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-ca, so a new one is created. The certificates issued from it do not chain to the root CA of any existing deployment. To add nodes to an existing deployment, stop here and run the tool where its root CA is, or set WAZUH_CA_DIR to a directory with a copy of that root CA and its key.
+      26/10/2026 10:20:42 INFO: Generating Admin certificates.
+      26/10/2026 10:20:42 INFO: Admin certificates created.
+      26/10/2026 10:20:42 INFO: Generating Wazuh indexer certificates.
+      26/10/2026 10:20:42 INFO: Wazuh indexer certificates created.
+      26/10/2026 10:20:44 INFO: Generating Wazuh manager certificates.
+      26/10/2026 10:20:44 INFO: Wazuh dashboard certificates created.
       Copying certificates for indexer: indexer -> config/indexer/certs/
       Copying certificates for manager: manager -> config/manager/certs/
       Copying certificates for dashboard: dashboard -> config/dashboard/certs/
-      Copying root-ca certificates -> config/root-ca/certs/
-      Setting ownership for indexer indexer (1001:1002)
-      Setting ownership for manager manager (1001:1002)
-      Setting ownership for dashboard dashboard (1001:1002)
-      Setting ownership for root-ca certificates (1001:1002)
+      Copying the root CA certificate -> config/root-ca/certs/
+      Setting ownership for indexer indexer (1000:1000)
+      Setting ownership for manager manager (1000:1000)
+      Setting ownership for dashboard dashboard (1000:1000)
+      Setting ownership for root-ca certificates (1000:1000)
       Process completed.
 
-   The script keeps the root CA certificate and its private key in ``/etc/wazuh/ca`` on the machine where you run it, and reuses them on later runs. Protect this directory, because anyone with the key can issue certificates that the Wazuh components trust. To issue new certificates later, remove the ``wazuh-certificates/`` directory first. Otherwise, the script reports success without issuing new certificates.
+   The script keeps the root CA certificate and its private key in the ``wazuh-ca/`` directory next to ``wazuh-certs-tool.sh`` (owned by ``root``, mode ``0700``) on the machine where you run it, and reuses them on later runs. Protect this directory, because anyone with the key can issue certificates that the Wazuh components trust. To issue new certificates later, remove the ``wazuh-certificates/`` directory first. Otherwise, the script reports success without issuing new certificates. Only ``root-ca.pem`` is copied into the cluster Secrets, so the key stays on this machine. To keep the root CA in another directory, set ``WAZUH_CA_DIR`` to its absolute path on the ``sudo`` command line, for example, ``sudo WAZUH_CA_DIR=<CA_DIRECTORY> bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv --agent-san <EXTERNAL-IP>``. A ``WAZUH_CA_DIR`` exported in your shell doesn't reach the script because ``sudo`` drops it.
 
 Generate credentials
 ~~~~~~~~~~~~~~~~~~~~
 
 The Wazuh images ship with no default passwords. Each deployment generates its own before the first deployment. Perform the steps below to generate the required credentials.
-
-#. Download the ``wazuh-credentials.sh`` library. This file provides the credential generation functions used by the script in the next step.
-
-   .. code-block:: console
-
-      $ curl -o wazuh-credentials.sh https://raw.githubusercontent.com/wazuh/wazuh-installation-assistant/|WAZUH_CURRENT|/credentials_lib/wazuh-credentials.sh
 
 #. Run the ``credentials-conf.sh`` script to generate the credentials and import them via ``secretGenerator`` in the ``kustomization.yml`` file.
 
@@ -210,104 +202,18 @@ The Wazuh images ship with no default passwords. Each deployment generates its o
       WAZUH_INDEXER_MANAGER_PASSWORD: generated
       WAZUH_MANAGER_API_PASSWORD: generated
       WAZUH_MANAGER_WUI_PASSWORD: generated
-      Credentials written to ./config/credentials: indexer.env, manager.env, dashboard.env
+      WAZUH_CLUSTER_KEY: generated
+      Credentials written to ./config/credentials: indexer.env, manager.env, dashboard.env, cluster.key
       Log in to the Wazuh dashboard as 'admin'. Read its password with:
         grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' ./config/credentials/indexer.env | cut -d= -f2-
 
-   The command creates the ``indexer.env``, ``manager.env``, and ``dashboard.env`` in the ``wazuh/config/credentials/`` directory, holding only the credentials that each component needs. Keep these files for the life of the deployment; every ``kubectl apply -k`` and ``kubectl delete -k`` reads them, and a recreated indexer pod retrieves its credentials from them again.
+   The command creates the ``indexer.env``, ``manager.env``, ``dashboard.env``, and ``cluster.key`` files in the ``wazuh/config/credentials/`` directory, holding only the credentials that each component needs, and the Wazuh manager cluster key. Keep these files for the life of the deployment; every ``kubectl apply -k`` and ``kubectl delete -k`` reads them, and a recreated indexer pod retrieves its credentials from them again.
 
 #. Return to the root of the repository and retrieve the generated password for the ``admin`` user. You need it to log in to the Wazuh dashboard after the deployment is completed.
 
    .. code-block:: console
 
       $ grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' ./config/credentials/indexer.env | cut -d= -f2-
-
-Set the cluster key and the agent enrollment password
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The repository ships ``wazuh/secrets/wazuh-cluster-key-secret.yaml`` and ``wazuh/secrets/wazuh-authd-pass-secret.yaml`` with placeholder values. These values must be replaced manually before the first deployment. Perform the steps below to create the cluster key and agent enrollment password.
-
-#. Generate a ``CLUSTER_KEY``. It must be exactly 32 alphanumeric characters.
-
-   .. code-block:: console
-
-      $ openssl rand -hex 16
-
-   The command output looks similar to this:
-
-   .. code-block:: none
-      :class: output
-
-      e9e059de43c6631e0a52e8acb3738c21
-
-#. Encode the key in base64.
-
-   .. code-block:: console
-
-      $ echo -n "<CLUSTER_KEY>" | base64
-
-#. Replace the ``data.key`` value in ``wazuh/secrets/wazuh-cluster-key-secret.yaml`` with the encoded ``CLUSTER_KEY``.
-
-   .. code-block:: yaml
-      :emphasize-lines: 14
-
-      # Copyright (C) 2019, Wazuh Inc.
-      #
-      # This program is a free software; you can redistribute it
-      # and/or modify it under the terms of the GNU General Public
-      # License (version 2) as published by the FSF - Free Software
-      # Foundation.
-      # Wazuh cluster key secret
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: wazuh-cluster-key
-        namespace: wazuh
-      data:
-        key: <ENCODED_CLUSTER_KEY>
-
-   .. warning::
-
-      Every Wazuh manager master and worker presents its cluster key when joining the Wazuh manager cluster. A node whose key doesn't match the Wazuh manager master’s key cannot join the cluster.
-
-#. Generate an agent enrollment password ``ENROLLMENT_PASSWORD``.
-
-   .. code-block:: console
-
-      $ openssl rand -base64 24 | tr -dc A-Za-z0-9 | head -c 24
-
-   The command output looks similar to this:
-
-   .. code-block:: none
-      :class: output
-
-      ul0GkIsq9zGa0lVpbB5WOKsF
-
-#. Encode the ``ENROLLMENT_PASSWORD`` in base64.
-
-   .. code-block:: console
-
-      $ echo -n "<ENROLLMENT_PASSWORD>" | base64
-
-#. Replace the ``data.authd.pass`` value in ``wazuh/secrets/wazuh-authd-pass-secret.yaml`` with the encoded ``ENROLLMENT_PASSWORD``.
-
-   .. code-block:: yaml
-      :emphasize-lines: 14
-
-      # Copyright (C) 2019, Wazuh Inc.
-      #
-      # This program is a free software; you can redistribute it
-      # and/or modify it under the terms of the GNU General Public
-      # License (version 2) as published by the FSF - Free Software
-      # Foundation.
-      # Wazuh authd password secret
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: wazuh-authd-pass
-        namespace: wazuh
-      data:
-        authd.pass: <ENCODED_ENROLLMENT_PASSWORD>
 
 Apply all manifests
 ~~~~~~~~~~~~~~~~~~~
@@ -397,12 +303,11 @@ Set up SSL certificates
 
 Perform the steps below to generate the required certificates for the deployment:
 
-#. Download the ``wazuh-certs-tool.sh`` and ``wazuh-credentials.sh`` script and the ``config.yml`` configuration file. These files are used to generate certificates that encrypt communications between Wazuh's central components.
+#. Download the ``wazuh-certs-tool.sh`` script and the ``config.yml`` configuration file. These files are used to generate certificates that encrypt communications between Wazuh's central components.
 
    .. code-block:: console
 
       $ cd wazuh
-      $ curl -so wazuh-credentials.sh https://raw.githubusercontent.com/wazuh/wazuh-installation-assistant/|WAZUH_CURRENT|/credentials_lib/wazuh-credentials.sh
       $ curl -so wazuh-certs-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
       $ curl -so config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yml
 
@@ -444,7 +349,7 @@ Perform the steps below to generate the required certificates for the deployment
 
    Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with an IP address of the machine where you run ``kubectl`` that your browser and your Wazuh agents can reach, for example its LAN IP address. You use the same address with ``kubectl port-forward --address`` in the Apply all manifests section. Adding it as an ``ip`` entry puts it in the Wazuh dashboard certificate, so the certificate matches the address you open the dashboard with. The browser still warns until you trust the deployment's root CA, ``wazuh/config/root-ca/certs/root-ca.pem``.
 
-#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with the same address. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517`` through the port-forward. Repeat the option for every other address agents will use.
+#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with the same address. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517`` through the port-forward. Repeat the option for every other address agents will use. The script also issues the Wazuh server API certificate (``manager-apid.pem``), which the Wazuh manager master needs to start. Its names come from the ``manager`` entry in ``config.yml``. Add any other name or address that clients of the Wazuh manager API use with the ``--api-san`` option.
 
    .. code-block:: console
 
@@ -459,39 +364,32 @@ Perform the steps below to generate the required certificates for the deployment
       Detected manager nodes:   manager
       Detected dashboard nodes: dashboard
       Generating certificates
-      09/10/2026 09:50:10 INFO: Verbose logging redirected to .../wazuh-kubernetes/wazuh/wazuh-certificates-tool.log
-      09/10/2026 09:50:11 INFO: Generating the root certificate in /etc/wazuh/ca.
-      09/10/2026 09:50:11 WARNING: There is no root CA in /etc/wazuh/ca, so a new one is created. The certificates issued from it do not chain to the root CA of any existing deployment. To add nodes to an existing deployment, stop here and run the tool on the host that holds its root CA, or set WAZUH_CA_DIR to a directory with a copy of that root CA and its key.
-      09/10/2026 09:50:11 INFO: Generating Admin certificates.
-      09/10/2026 09:50:12 INFO: Admin certificates created.
-      09/10/2026 09:50:12 INFO: Generating Wazuh indexer certificates.
-      09/10/2026 09:50:13 INFO: Wazuh indexer certificates created.
-      09/10/2026 09:50:13 INFO: Generating Wazuh manager certificates.
-      09/10/2026 09:50:13 INFO: Wazuh manager certificates created.
-      09/10/2026 09:50:13 INFO: Generating Wazuh dashboard certificates.
-      09/10/2026 09:50:14 INFO: Wazuh dashboard certificates created.
+      26/10/2026 10:20:41 INFO: Verbose logging redirected to /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-certificates-tool.log
+      26/10/2026 10:20:41 WARNING: The IP 98.92.152.55 of dashboard node dashboard is public. Make sure it is meant to be reachable from outside your network.
+      26/10/2026 10:20:41 INFO: Generating the root certificate in /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-ca.
+      26/10/2026 10:20:41 WARNING: There is no root CA in /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-ca, so a new one is created. The certificates issued from it do not chain to the root CA of any existing deployment. To add nodes to an existing deployment, stop here and run the tool where its root CA is, or set WAZUH_CA_DIR to a directory with a copy of that root CA and its key.
+      26/10/2026 10:20:42 INFO: Generating Admin certificates.
+      26/10/2026 10:20:42 INFO: Admin certificates created.
+      26/10/2026 10:20:42 INFO: Generating Wazuh indexer certificates.
+      26/10/2026 10:20:42 INFO: Wazuh indexer certificates created.
+      26/10/2026 10:20:44 INFO: Generating Wazuh manager certificates.
+      26/10/2026 10:20:44 INFO: Wazuh dashboard certificates created.
       Copying certificates for indexer: indexer -> config/indexer/certs/
       Copying certificates for manager: manager -> config/manager/certs/
       Copying certificates for dashboard: dashboard -> config/dashboard/certs/
-      Copying root-ca certificates -> config/root-ca/certs/
-      Setting ownership for indexer indexer (1001:1002)
-      Setting ownership for manager manager (1001:1002)
-      Setting ownership for dashboard dashboard (1001:1002)
-      Setting ownership for root-ca certificates (1001:1002)
+      Copying the root CA certificate -> config/root-ca/certs/
+      Setting ownership for indexer indexer (1000:1000)
+      Setting ownership for manager manager (1000:1000)
+      Setting ownership for dashboard dashboard (1000:1000)
+      Setting ownership for root-ca certificates (1000:1000)
       Process completed.
 
-   The script keeps the root CA certificate and its private key in ``/etc/wazuh/ca`` on the machine where you run it, and reuses them on later runs. Protect this directory, because anyone with the key can issue certificates that the Wazuh components trust. To issue new certificates later, remove the ``wazuh-certificates/`` directory first. Otherwise, the script reports success without issuing new certificates.
+   The script keeps the root CA certificate and its private key in the ``wazuh-ca/`` directory next to ``wazuh-certs-tool.sh`` (owned by ``root``, mode ``0700``) on the machine where you run it, and reuses them on later runs. Protect this directory, because anyone with the key can issue certificates that the Wazuh components trust. To issue new certificates later, remove the ``wazuh-certificates/`` directory first. Otherwise, the script reports success without issuing new certificates. Only ``root-ca.pem`` is copied into the cluster Secrets, so the key stays on this machine. To keep the root CA in another directory, set ``WAZUH_CA_DIR`` to its absolute path on the ``sudo`` command line, for example ``sudo WAZUH_CA_DIR=<CA_DIRECTORY> bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv --agent-san <KUBERNETES_HOST_IP_ADDRESS>``. A ``WAZUH_CA_DIR`` exported in your shell doesn't reach the script because ``sudo`` drops it.
 
 Generate credentials
 ~~~~~~~~~~~~~~~~~~~~
 
 The Wazuh images ship with no default passwords. Each deployment generates its own before the first deployment. Perform the steps below to generate the required credentials.
-
-#. Download the ``wazuh-credentials.sh`` library. This file provides the credential generation functions used by the script in the next step.
-
-   .. code-block:: console
-
-      $ curl -o wazuh-credentials.sh https://raw.githubusercontent.com/wazuh/wazuh-installation-assistant/|WAZUH_CURRENT|/credentials_lib/wazuh-credentials.sh
 
 #. Run the ``credentials-conf.sh`` script to generate the credentials and import them via ``secretGenerator`` in the ``kustomization.yml`` file.
 
@@ -509,104 +407,18 @@ The Wazuh images ship with no default passwords. Each deployment generates its o
       WAZUH_INDEXER_MANAGER_PASSWORD: generated
       WAZUH_MANAGER_API_PASSWORD: generated
       WAZUH_MANAGER_WUI_PASSWORD: generated
-      Credentials written to ./config/credentials: indexer.env, manager.env, dashboard.env
+      WAZUH_CLUSTER_KEY: generated
+      Credentials written to ./config/credentials: indexer.env, manager.env, dashboard.env, cluster.key
       Log in to the Wazuh dashboard as 'admin'. Read its password with:
         grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' ./config/credentials/indexer.env | cut -d= -f2-
 
-   The command creates the ``indexer.env``, ``manager.env``, and ``dashboard.env`` in the ``wazuh/config/credentials/`` directory, holding only the credentials that each component needs. Keep these files for the life of the deployment; every ``kubectl apply -k`` and ``kubectl delete -k`` reads them, and a recreated indexer pod retrieves its credentials from them again.
+   The command creates the ``indexer.env``, ``manager.env``, ``dashboard.env``, and ``cluster.key`` files in the ``wazuh/config/credentials/`` directory, holding only the credentials that each component needs, and the Wazuh manager cluster key. Keep these files for the life of the deployment; every ``kubectl apply -k`` and ``kubectl delete -k`` reads them, and a recreated indexer pod retrieves its credentials from them again.
 
 #. Retrieve the generated dashboard password to log in after deployment.
 
    .. code-block:: console
 
       $ grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' ./config/credentials/indexer.env | cut -d= -f2-
-
-Set the cluster key and the agent enrollment password
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The repository ships ``wazuh/secrets/wazuh-cluster-key-secret.yaml`` and ``wazuh/secrets/wazuh-authd-pass-secret.yaml`` with placeholder values. These values must be replaced manually before the first deployment. Perform the steps below to create the cluster key and agent enrollment password.
-
-#. Generate a ``CLUSTER_KEY``. It must be exactly 32 alphanumeric characters.
-
-   .. code-block:: console
-
-      $ openssl rand -hex 16
-
-   The command output looks similar to this:
-
-   .. code-block:: none
-      :class: output
-
-      e9e059de43c6631e0a52e8acb3738c21
-
-#. Encode the key in base64.
-
-   .. code-block:: console
-
-      $ echo -n "<CLUSTER_KEY>" | base64
-
-#. Replace the ``data.key`` value in ``wazuh/secrets/wazuh-cluster-key-secret.yaml`` with the encoded ``CLUSTER_KEY``.
-
-   .. code-block:: yaml
-      :emphasize-lines: 14
-
-      # Copyright (C) 2019, Wazuh Inc.
-      #
-      # This program is a free software; you can redistribute it
-      # and/or modify it under the terms of the GNU General Public
-      # License (version 2) as published by the FSF - Free Software
-      # Foundation.
-      # Wazuh cluster key secret
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: wazuh-cluster-key
-        namespace: wazuh
-      data:
-        key: <ENCODED_CLUSTER_KEY>
-
-   .. warning::
-
-      Every Wazuh manager master and worker presents its cluster key when joining the Wazuh manager cluster. A node whose key doesn't match the Wazuh manager master’s key cannot join the cluster.
-
-#. Generate an agent enrollment password ``ENROLLMENT_PASSWORD``.
-
-   .. code-block:: console
-
-      $ openssl rand -base64 24 | tr -dc A-Za-z0-9 | head -c 24
-
-   The command output looks similar to this:
-
-   .. code-block:: none
-      :class: output
-
-      ul0GkIsq9zGa0lVpbB5WOKsF
-
-#. Encode the ``ENROLLMENT_PASSWORD`` in base64.
-
-   .. code-block:: console
-
-      $ echo -n "<ENROLLMENT_PASSWORD>" | base64
-
-#. Replace the ``data.authd.pass`` value in ``wazuh/secrets/wazuh-authd-pass-secret.yaml`` with the encoded ``ENROLLMENT_PASSWORD``.
-
-   .. code-block:: yaml
-      :emphasize-lines: 14
-
-      # Copyright (C) 2019, Wazuh Inc.
-      #
-      # This program is a free software; you can redistribute it
-      # and/or modify it under the terms of the GNU General Public
-      # License (version 2) as published by the FSF - Free Software
-      # Foundation.
-      # Wazuh authd password secret
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: wazuh-authd-pass
-        namespace: wazuh
-      data:
-        authd.pass: <ENCODED_ENROLLMENT_PASSWORD>
 
 Apply all manifests
 ~~~~~~~~~~~~~~~~~~~
@@ -793,7 +605,7 @@ Run the command below to confirm the Wazuh agent enrollment password string.
 
 .. code-block:: console
 
-   $ kubectl exec -it wazuh-manager-master-0 -n wazuh -- cat /wazuh-config-mount/etc/authd.pass
+   $ kubectl exec -it wazuh-manager-master-0 -n wazuh -- cat /etc/wazuh-manager/authd.pass
 
 Accessing the Wazuh dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
