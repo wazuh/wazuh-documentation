@@ -15,7 +15,7 @@ The Wazuh architecture consists of a multi-platform :doc:`Wazuh agent <component
 
 Wazuh 5.0 removes the agentless monitoring service and the syslog remote input of Wazuh 4.x. To monitor a system where you can't install the Wazuh agent, run a collection script from another monitored endpoint.
 
-The Wazuh central components can be deployed in different ways, depending on scalability and availability needs:
+You can deploy the Wazuh central components in different ways, depending on scalability and availability needs:
 
 -  **All-in-one deployment:** All Wazuh components (manager, indexer, and dashboard) are installed on a single server. This deployment is best suited for labs and small environments with a limited number of monitored endpoints.
 
