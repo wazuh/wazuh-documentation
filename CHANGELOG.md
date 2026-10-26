@@ -10,15 +10,25 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Removed the `auth.timeout_seconds` and `auth.timeout_microseconds` internal options from the *Internal configuration* reference documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
+- Documented that `logcollector.remote_commands` also controls the sockets and socket targets that Wazuh agents receive through centralized configuration, in the *Internal configuration*, *localfile*, *socket*, and *Centralized configuration* reference documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
 
 ### Fixed
 
 - Removed Amazon Inspector Classic from the *Amazon Inspector* integration documentation, which now covers Amazon Inspector (v2) only. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
-- Added the Windows and macOS agent restart commands to the steps for enabling and disabling policies in the *Security Configuration Assessment* documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399)) ([#10425](https://github.com/wazuh/wazuh-documentation/pull/10425))
+- Added the Windows and macOS agent restart commands and the Windows path of shared policies to the steps for enabling, disabling, and sharing policies, and corrected the fields of checks marked as not applicable, in the *Security Configuration Assessment* documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399)) ([#10425](https://github.com/wazuh/wazuh-documentation/pull/10425)) ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
 - Added a note about the pages that a read-only user cannot open to the *User administration* documentation. ([#10425](https://github.com/wazuh/wazuh-documentation/pull/10425))
 - Added a note that the Wazuh module for Google Cloud Pub/Sub supports only one `gcp-pubsub` block per configuration file to the *Monitoring Google Cloud Pub/Sub* documentation. ([#10430](https://github.com/wazuh/wazuh-documentation/pull/10430))
 - Corrected the queue list in the *Wazuh server queue* documentation, the allowed `<protocol>` values in the *Wazuh manager* documentation, and the archives files in the *Event logging* documentation. ([#10430](https://github.com/wazuh/wazuh-documentation/pull/10430))
 - Corrected the restart step in the *SSL with NGINX* documentation and the node address placeholders in the *Wazuh dashboard certificates* documentation. ([#10430](https://github.com/wazuh/wazuh-documentation/pull/10430))
+- Corrected the Shuffle webhook URL in the *Integration with external APIs* documentation and the request method and log files in the *VirusTotal integration* documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
+- Corrected the default values of `email_alert_level` and `email_log_source` in the *Local configuration (ossec.conf)* reference, and the rule `502` example and the SMTP relay packages for RHEL 9 in the *Alert management* documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
+- Corrected the default port scan setting, the macOS configuration file path, the port field mappings, the *Traffic* tab description, and the alert field names in the *System inventory* documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
+- Added CentOS Stream 9 and 10 to the *Packages list*, and corrected the default port scan setting, the macOS configuration file path, and the CentOS entries of the compatibility matrix in the *Vulnerability detection* documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
+- Corrected the command that adds the attacker IP address in the *Blocking a known malicious actor* proof of concept, and added a note about the initial scan to the *File integrity monitoring* proof of concept. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
+- Corrected the sample alerts in the *Microsoft Graph* setup documentation and the `only_future_events` and invalid configuration descriptions in the *ms-graph* reference. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
+- Corrected the macOS default directories in the *syscheck* reference and the macOS Unified Logging query in the *Log data collection* documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
+- Corrected the password change and agent installation steps in the *Wazuh Puppet module* documentation and the Puppet repository commands in the *Puppet server* and *Puppet agent* installation documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
+- Corrected the Python dependency steps for Ubuntu 24.04, Debian 13, and RHEL 10 in the *Google Cloud* and *Microsoft Azure* documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
 
 ## [v4.14.9]
 
