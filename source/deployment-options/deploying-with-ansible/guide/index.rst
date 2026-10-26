@@ -540,217 +540,179 @@ Using the wazuh-production-ready playbook, we deploy a Wazuh manager and indexer
 .. code-block:: yaml
    :class: output
 
+   ---
    # Certificates generation
-     - hosts: wi1
-       roles:
-         - role: ../roles/wazuh/wazuh-indexer
-           indexer_network_host: "{{ private_ip }}"
+       - hosts: wi1
+         roles:
+           - role: ../roles/wazuh/wazuh-indexer
+             indexer_network_host: "{{ private_ip }}"
+             indexer_cluster_nodes:
+               - "{{ hostvars.wi1.indexer_node_name }}"
+               - "{{ hostvars.wi2.indexer_node_name }}"
+               - "{{ hostvars.wi3.indexer_node_name }}"
+             indexer_discovery_nodes:
+               - "{{ hostvars.wi1.private_ip }}"
+               - "{{ hostvars.wi2.private_ip }}"
+               - "{{ hostvars.wi3.private_ip }}"
+             perform_installation: false
+         become: no
+         vars:
+           indexer_node_master: true
+           instances:
+             node1:
+               name: node-1       # Important: must be equal to indexer_node_name.
+               ip: "{{ hostvars.wi1.private_ip }}"   # When unzipping, the node will search for its node name folder to get the cert.
+               role: indexer
+             node2:
+               name: node-2
+               ip: "{{ hostvars.wi2.private_ip }}"
+               role: indexer
+             node3:
+               name: node-3
+               ip: "{{ hostvars.wi3.private_ip }}"
+               role: indexer
+             node4:
+               name: node-4
+               ip: "{{ hostvars.manager.private_ip }}"
+               role: wazuh
+               node_type: master
+             node5:
+               name: node-5
+               ip: "{{ hostvars.worker.private_ip }}"
+               role: wazuh
+               node_type: worker
+             node6:
+               name: node-6
+               ip: "{{ hostvars.dashboard.private_ip }}"
+               role: dashboard
+         tags:
+           - generate-certs
+
+   # Wazuh indexer cluster
+       - hosts: wi_cluster
+         strategy: free
+         roles:
+           - role: ../roles/wazuh/wazuh-indexer
+             indexer_network_host: "{{ private_ip }}"
+         become: yes
+         become_user: root
+         vars:
            indexer_cluster_nodes:
-             - "{{ hostvars.wi1.private_ip }}"
-             - "{{ hostvars.wi2.private_ip }}"
-             - "{{ hostvars.wi3.private_ip }}"
+             - "{{ hostvars.wi1.indexer_node_name }}"
+             - "{{ hostvars.wi2.indexer_node_name }}"
+             - "{{ hostvars.wi3.indexer_node_name }}"
            indexer_discovery_nodes:
              - "{{ hostvars.wi1.private_ip }}"
              - "{{ hostvars.wi2.private_ip }}"
              - "{{ hostvars.wi3.private_ip }}"
-           perform_installation: false
-       become: no
-       vars:
-         indexer_node_master: true
-         instances:
-           node1:
-             name: node-1       # Important: must be equal to indexer_node_name.
-             ip: "{{ hostvars.wi1.private_ip }}"   # When unzipping, the node will search for its node name folder to get the cert.
-             role: indexer
-           node2:
-             name: node-2
-             ip: "{{ hostvars.wi2.private_ip }}"
-             role: indexer
-           node3:
-             name: node-3
-             ip: "{{ hostvars.wi3.private_ip }}"
-             role: indexer
-           node4:
-             name: node-4
-             ip: "{{ hostvars.manager.private_ip }}"
-             role: wazuh
-             node_type: master
-           node5:
-             name: node-5
-             ip: "{{ hostvars.worker.private_ip }}"
-             role: wazuh
-             node_type: worker
-           node6:
-             name: node-6
-             ip: "{{ hostvars.dashboard.private_ip }}"
-             role: dashboard
-       tags:
-         - generate-certs
-
-   # Wazuh indexer cluster
-     - hosts: wi_cluster
-       strategy: free
-       roles:
-         - role: ../roles/wazuh/wazuh-indexer
-           indexer_network_host: "{{ private_ip }}"
-       become: yes
-       become_user: root
-       vars:
-         indexer_cluster_nodes:
-           - "{{ hostvars.wi1.private_ip }}"
-           - "{{ hostvars.wi2.private_ip }}"
-           - "{{ hostvars.wi3.private_ip }}"
-         indexer_discovery_nodes:
-           - "{{ hostvars.wi1.private_ip }}"
-           - "{{ hostvars.wi2.private_ip }}"
-           - "{{ hostvars.wi3.private_ip }}"
-         indexer_node_master: true
-         instances:
-           node1:
-             name: node-1       # Important: must be equal to indexer_node_name.
-             ip: "{{ hostvars.wi1.private_ip }}"   # When unzipping, the node will search for its node name folder to get the cert.
-             role: indexer
-           node2:
-             name: node-2
-             ip: "{{ hostvars.wi2.private_ip }}"
-             role: indexer
-           node3:
-             name: node-3
-             ip: "{{ hostvars.wi3.private_ip }}"
-             role: indexer
-           node4:
-             name: node-4
-             ip: "{{ hostvars.manager.private_ip }}"
-             role: wazuh
-             node_type: master
-           node5:
-             name: node-5
-             ip: "{{ hostvars.worker.private_ip }}"
-             role: wazuh
-             node_type: worker
-           node6:
-             name: node-6
-             ip: "{{ hostvars.dashboard.private_ip }}"
-             role: dashboard
+           indexer_node_master: true
+           instances:
+             node1:
+               name: node-1       # Important: must be equal to indexer_node_name.
+               ip: "{{ hostvars.wi1.private_ip }}"   # When unzipping, the node will search for its node name folder to get the cert.
+               role: indexer
+             node2:
+               name: node-2
+               ip: "{{ hostvars.wi2.private_ip }}"
+               role: indexer
+             node3:
+               name: node-3
+               ip: "{{ hostvars.wi3.private_ip }}"
+               role: indexer
+             node4:
+               name: node-4
+               ip: "{{ hostvars.manager.private_ip }}"
+               role: wazuh
+               node_type: master
+             node5:
+               name: node-5
+               ip: "{{ hostvars.worker.private_ip }}"
+               role: wazuh
+               node_type: worker
+             node6:
+               name: node-6
+               ip: "{{ hostvars.dashboard.private_ip }}"
+               role: dashboard
 
    # Wazuh cluster
-     - hosts: manager
-       roles:
-         - role: "../roles/wazuh/ansible-wazuh-manager"
-         - role: "../roles/wazuh/ansible-filebeat-oss"
+       - hosts: manager
+         roles:
+           - role: "../roles/wazuh/ansible-wazuh-manager"
+           - role: "../roles/wazuh/ansible-filebeat-oss"
+         become: yes
+         become_user: root
+         vars:
            filebeat_node_name: node-4
-       become: yes
-       become_user: root
-       vars:
-         wazuh_manager_config:
-           connection:
-               - type: 'secure'
-                 port: '1514'
-                 protocol: 'tcp'
-                 queue_size: 131072
-           api:
-               https: 'yes'
-           cluster:
-               disable: 'no'
-               node_name: 'master'
-               node_type: 'master'
-               key: 'c98b62a9b6169ac5f67dae55ae4a9088'
-               nodes:
-                   - "{{ hostvars.manager.private_ip }}"
-               hidden: 'no'
-         wazuh_api_users:
-           - username: custom-user
-             password: SecretPassword1!
-         filebeat_output_indexer_hosts:
-                 - "{{ hostvars.wi1.private_ip }}"
-                 - "{{ hostvars.wi2.private_ip }}"
-                 - "{{ hostvars.wi3.private_ip }}"
+           wazuh_manager_config:
+             connection:
+                 - type: 'secure'
+                   port: '1514'
+                   protocol: 'tcp'
+                   queue_size: 131072
+             api:
+                 https: 'yes'
+             cluster:
+                 disable: 'no'
+                 node_name: 'master'
+                 node_type: 'master'
+                 key: 'c98b62a9b6169ac5f67dae55ae4a9088'
+                 nodes:
+                     - "{{ hostvars.manager.private_ip }}"
+                 hidden: 'no'
+           filebeat_output_indexer_hosts:
+                   - "{{ hostvars.wi1.private_ip }}"
+                   - "{{ hostvars.wi2.private_ip }}"
+                   - "{{ hostvars.wi3.private_ip }}"
 
-     - hosts: worker
-       roles:
-         - role: "../roles/wazuh/ansible-wazuh-manager"
-         - role: "../roles/wazuh/ansible-filebeat-oss"
+       - hosts: worker
+         roles:
+           - role: "../roles/wazuh/ansible-wazuh-manager"
+           - role: "../roles/wazuh/ansible-filebeat-oss"
+         become: yes
+         become_user: root
+         vars:
            filebeat_node_name: node-5
-       become: yes
-       become_user: root
-       vars:
-         wazuh_manager_config:
-           connection:
-               - type: 'secure'
-                 port: '1514'
-                 protocol: 'tcp'
-                 queue_size: 131072
-           api:
-               https: 'yes'
-           cluster:
-               disable: 'no'
-               node_name: 'worker_01'
-               node_type: 'worker'
-               key: 'c98b62a9b6169ac5f67dae55ae4a9088'
-               nodes:
-                   - "{{ hostvars.manager.private_ip }}"
-               hidden: 'no'
-         filebeat_output_indexer_hosts:
-                 - "{{ hostvars.wi1.private_ip }}"
-                 - "{{ hostvars.wi2.private_ip }}"
-                 - "{{ hostvars.wi3.private_ip }}"
+           wazuh_manager_config:
+             connection:
+                 - type: 'secure'
+                   port: '1514'
+                   protocol: 'tcp'
+                   queue_size: 131072
+             api:
+                 https: 'yes'
+             cluster:
+                 disable: 'no'
+                 node_name: 'worker_01'
+                 node_type: 'worker'
+                 key: 'c98b62a9b6169ac5f67dae55ae4a9088'
+                 nodes:
+                     - "{{ hostvars.manager.private_ip }}"
+                 hidden: 'no'
+           filebeat_output_indexer_hosts:
+                   - "{{ hostvars.wi1.private_ip }}"
+                   - "{{ hostvars.wi2.private_ip }}"
+                   - "{{ hostvars.wi3.private_ip }}"
 
-   # Indexer + dashboard node
-     - hosts: dashboard
-       roles:
-         - role: "../roles/wazuh/wazuh-indexer"
-         - role: "../roles/wazuh/wazuh-dashboard"
-       become: yes
-       become_user: root
-       vars:
-         indexer_network_host: "{{ hostvars.dashboard.private_ip }}"
-         indexer_node_name: node-6
-         indexer_node_master: false
-         indexer_node_ingest: false
-         indexer_node_data: false
-         indexer_cluster_nodes:
+   # Wazuh dashboard node
+       - hosts: dashboard
+         roles:
+           - role: "../roles/wazuh/wazuh-dashboard"
+         become: yes
+         become_user: root
+         vars:
+           indexer_network_host: "{{ hostvars.wi1.private_ip }}"
+           indexer_cluster_nodes:
              - "{{ hostvars.wi1.private_ip }}"
              - "{{ hostvars.wi2.private_ip }}"
              - "{{ hostvars.wi3.private_ip }}"
-         indexer_discovery_nodes:
-             - "{{ hostvars.wi1.private_ip }}"
-             - "{{ hostvars.wi2.private_ip }}"
-             - "{{ hostvars.wi3.private_ip }}"
-         dashboard_node_name: node-6
-         wazuh_api_credentials:
-           - id: default
-             url: https://{{ hostvars.manager.private_ip }}
-             port: 55000
-             username: custom-user
-             password: SecretPassword1!
-         instances:
-           node1:
-             name: node-1
-             ip: "{{ hostvars.wi1.private_ip }}"   # When unzipping, the node will search for its node name folder to get the cert.
-             role: indexer
-           node2:
-             name: node-2
-             ip: "{{ hostvars.wi2.private_ip }}"
-             role: indexer
-           node3:
-             name: node-3
-             ip: "{{ hostvars.wi3.private_ip }}"
-             role: indexer
-           node4:
-             name: node-4
-             ip: "{{ hostvars.manager.private_ip }}"
-             role: wazuh
-             node_type: master
-           node5:
-             name: node-5
-             ip: "{{ hostvars.worker.private_ip }}"
-             role: wazuh
-             node_type: worker
-           node6:
-             name: node-6
-             ip: "{{ hostvars.dashboard.private_ip }}"
-             role: dashboard
-         ansible_shell_allow_world_readable_temp: true
+           dashboard_node_name: node-6
+           wazuh_api_credentials:
+             - id: default
+               url: https://{{ hostvars.manager.private_ip }}
+               port: 55000
+               username: "wazuh-wui"
+               password: "wazuh-wui"
+           ansible_shell_allow_world_readable_temp: true
 
 **Where:**
 
@@ -884,11 +846,11 @@ Before deploying Wazuh agents with Ansible, check your Ansible version:
 .. note::
 
    -  SSH key-pairing should already be configured between the Ansible control server and the endpoints.
-   -  Add the endpoints where the agent will be deployed in the ``/etc/ansible/hosts`` Ansible hosts file under the ``[wazuh-agents]`` hosts group.
+   -  Add the endpoints where the agent will be deployed in the ``/etc/ansible/hosts`` Ansible hosts file under the ``[wazuh_agents]`` hosts group.
 
    .. code-block:: ini
 
-      [wazuh-agents]
+      [wazuh_agents]
       agent_1 ansible_host=<WAZUH_AGENT_IP_ADDRESS> ansible_ssh_user=<USERNAME>
 
 .. _agent-access-wazuh-ansible-directory:
@@ -1004,12 +966,12 @@ More details on default configuration variables can be found in the :doc:`variab
 Prepare the playbook
 ^^^^^^^^^^^^^^^^^^^^
 
-Add ``wazuh-agents`` as host group of the endpoints where the installation of the Wazuh agent will be done in the hosts section and the IP address of the Wazuh server in the ``wazuh_managers:`` section of the ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-agent.yml`` file.
+Add ``wazuh_agents`` as host group of the endpoints where the installation of the Wazuh agent will be done in the hosts section and the IP address of the Wazuh server in the ``wazuh_managers:`` section of the ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-agent.yml`` file.
 
 .. code-block:: yaml
 
    ---
-   - hosts: wazuh-agents
+   - hosts: wazuh_agents
      become: yes
      become_user: root
      roles:
