@@ -192,8 +192,8 @@ Use the following API endpoints (requires administrator privileges and a valid J
 
 All examples assume you have ``$TOKEN`` set from :ref:`authentication steps <api_getting_started_authentication>`. Each PUT or DELETE request to ``/security/config`` revokes all JWTs, including the one in $TOKEN. Obtain a new token before you run the next example.
 
-**View current settings (**\ ``GET /security/config``\ **)**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+View current settings (``GET /security/config``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: console
 
@@ -213,8 +213,8 @@ The command output looks similar to this:
       "error": 0
    }
 
-**Update settings (**\ ``PUT /security/config``\ **)**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Update settings (``PUT /security/config``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. For ``auth_token_exp_timeout``: Set the token expiration time in seconds (for example, ``1800`` for 30 minutes).
 #. For ``rbac_mode``: Choose ``white`` (allow only permitted resources, the more secure option) or ``black`` (deny only restricted resources).

@@ -106,7 +106,7 @@ Search operations
 
 The search operations in the rules are used to search in the authorization context for a specific object or string.
 
--  ``MATCH``\ **:** This operation searches the authorization context for the structure indicated inside MATCH. An **exact** match is not necessary. In the following case, it searches for an ``auth`` key and, within it, an ``office`` key whose value must contain the number ``20``:
+-  ``MATCH``: This operation searches the authorization context for the structure indicated inside ``MATCH``. An **exact** match is not necessary. In the following case, it searches for an ``auth`` key and, within it, an ``office`` key whose value must contain the number ``20``:
 
 .. code-block:: json
 
@@ -118,7 +118,7 @@ The search operations in the rules are used to search in the authorization conte
        }
    }
 
--  ``MATCH$``\ **:** This operation is the same as **MATCH** with the difference that it is strict in terms of content. It evaluates to **False** even if the clause is contained in a larger set (list) in the authorization context. The previous example does not evaluate to True, because the content of the ``auth`` key is not an exact match. For this rule to evaluate to True, use the exact list of values:
+-  ``MATCH$``: This operation is the same as ``MATCH`` with the difference that it is strict in terms of content. It evaluates to **False** even if the clause is contained in a larger set (list) in the authorization context. The previous example does not evaluate to True, because the content of the ``auth`` key is not an exact match. For this rule to evaluate to True, use the exact list of values:
 
 .. code-block:: json
 
@@ -130,7 +130,7 @@ The search operations in the rules are used to search in the authorization conte
        }
    }
 
--  ``FIND``\ **:** This operation is a recursive MATCH, up to eight levels deep, of the authorization context. MATCH searches the structure only at the root of the authorization context. In the FIND case, the operation searches the structure up to eight levels deep. If the authorization context is nested more deeply, the role is not granted. In the following example, you can omit the key auth, because the FIND operation searches for the key ``office`` inside all the authorization contexts:
+-  ``FIND``: This operation is a recursive ``MATCH``, up to eight levels deep, of the authorization context. ``MATCH`` searches the structure only at the root of the authorization context. In the ``FIND`` case, the operation searches the structure up to eight levels deep. If the authorization context is nested more deeply, the role is not granted. In the following example, you can omit the key auth, because the ``FIND`` operation searches for the key ``office`` inside all the authorization contexts:
 
 .. code-block:: json
 
@@ -140,7 +140,7 @@ The search operations in the rules are used to search in the authorization conte
        }
    }
 
--  ``FIND$``\ **:** This operation is a recursive MATCH$, up to eight levels deep, of the authorization context. As with the **MATCH$** operation, the exact list of values in the office key must be included for it to evaluate to True. The ``name`` is optional as it depends on how specific it needs to be:
+-  ``FIND$``: This operation is a recursive ``MATCH$``, up to eight levels deep, of the authorization context. As with the ``MATCH$`` operation, the exact list of values in the office key must be included for it to evaluate to True. The ``name`` is optional as it depends on how specific it needs to be:
 
 .. code-block:: json
 
@@ -154,9 +154,9 @@ The search operations in the rules are used to search in the authorization conte
 Logical operations
 ^^^^^^^^^^^^^^^^^^
 
-In defining rules for authorization contexts, logical operations play a crucial role. Rules combine clauses with the AND, OR, and NOT logical operations.
+In defining rules for authorization contexts, logical operations play a crucial role. Rules combine clauses with the ``AND``, ``OR``, and ``NOT`` logical operations.
 
--  ``AND``\ **:** Requires all contained clauses to be true for the overall expression to be true. For example:
+-  ``AND``: Requires all contained clauses to be true for the overall expression to be true. For example:
 
 .. code-block:: json
 
@@ -177,7 +177,7 @@ In defining rules for authorization contexts, logical operations play a crucial 
        ]
    }
 
--  ``OR``\ **:** The result is true if at least one of the enclosed clauses is satisfied. For example:
+-  ``OR``: The result is true if at least one of the enclosed clauses is satisfied. For example:
 
 .. code-block:: json
 
@@ -199,7 +199,7 @@ In defining rules for authorization contexts, logical operations play a crucial 
        ]
    }
 
--  ``NOT``\ **:** This operation inverts the result of the enclosed clause, resulting in it being true only if the enclosed clause is false. For example:
+-  ``NOT``: This operation inverts the result of the enclosed clause, resulting in it being true only if the enclosed clause is false. For example:
 
 .. code-block:: json
 
@@ -288,7 +288,7 @@ Example 1
        ]
    }
 
-The **OR** operation in the rule contains two sub-operations. The first is a **FIND$** operation looking for an ``office`` key matching any positive number. The second is an **AND** operation requiring a **MATCH** on both ``authLevel`` as ``administrator`` and ``department`` as ``Technical``. The **FIND$** operation fails because the context has no office key. The AND operation succeeds, because the authorization context directly matches the required ``authLevel`` and ``department``. Consequently, since one of the conditions within the **OR** operation succeeds, the rule matches, allowing the authorization process to proceed.
+The ``OR`` operation in the rule contains two sub-operations. The first is a ``FIND$`` operation looking for an ``office`` key matching any positive number. The second is an ``AND`` operation requiring a ``MATCH`` on both ``authLevel`` as ``administrator`` and ``department`` as ``Technical``. The ``FIND$`` operation fails because the context has no office key. The ``AND`` operation succeeds, because the authorization context directly matches the required ``authLevel`` and ``department``. Consequently, since one of the conditions within the ``OR`` operation succeeds, the rule matches, allowing the authorization process to proceed.
 
 Example 2
 ^^^^^^^^^
@@ -404,4 +404,4 @@ Example 2
        }
    }
 
-This context does not satisfy the rule. MATCH searches only at the root of the authorization context, and this context holds office under auth. The first MATCH clause of the outermost AND operation therefore fails. The **FIND** operation meets the criteria with the help of the regular expression matching. The concluding **OR** operation fails too. Its MATCH$ clause looks for the name Wazuh and the office 20 at the root of the context, where the name is First_example and there is no office key, and neither clause of the nested OR operation matches. An AND operation is true only when all its clauses are true, so the rule does not match. The login gets no role from this rule.
+This context does not satisfy the rule. ``MATCH`` searches only at the root of the authorization context, and this context holds office under auth. The first ``MATCH`` clause of the outermost ``AND`` operation therefore fails. The ``FIND`` operation meets the criteria with the help of the regular expression matching. The concluding ``OR`` operation fails too. Its ``MATCH$`` clause looks for the name Wazuh and the office 20 at the root of the context, where the name is First_example and there is no office key, and neither clause of the nested ``OR`` operation matches. An ``AND`` operation is true only when all its clauses are true, so the rule does not match. The login gets no role from this rule.

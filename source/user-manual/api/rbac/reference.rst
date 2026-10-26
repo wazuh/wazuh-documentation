@@ -6,7 +6,7 @@
 RBAC reference
 ==============
 
-RBAC policies consist of three elements: **actions**, **resources**, and **effect**. Each API endpoint involves one or more actions and can be performed on specific resources.
+RBAC policies consist of three elements: *actions*, *resources*, and *effect*. Each API endpoint involves one or more actions and can be performed on specific resources.
 
 For example, the :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` endpoint is used to obtain the information of one or all Wazuh agents. This endpoint applies the action ``agent:read`` on the resource ``agent:id`` or ``agent:group``. For example, ``agent:id:001`` (agent 001) or ``agent:id:*`` (all agents). All the existing resources, available actions, and the endpoints affected by each one can be found on this reference page.
 
