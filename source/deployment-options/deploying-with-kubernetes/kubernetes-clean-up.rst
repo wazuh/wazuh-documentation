@@ -98,10 +98,10 @@ Follow the steps below to delete all deployments, services, and volumes.
 
       Do not forget to delete the volumes manually where necessary.
 
-#. Stop the port-forwards and remove the local files. Keep ``/etc/wazuh/ca`` only if you plan to redeploy with the same CA.
+#. Stop the port-forwards and remove the local files. Keep ``wazuh/wazuh-ca/`` only if you plan to redeploy with the same CA. These local files hold the passwords, the cluster key, and the private keys in clear text, so delete them unless you plan to restore the volumes. ``wazuh/wazuh-ca/`` is owned by ``root`` with mode ``0700``, so removing it needs ``sudo``.
 
    .. code-block:: console
 
       $ pkill -f 'kubectl -n wazuh port-forward'
       $ sudo rm -rf wazuh/config/credentials wazuh/wazuh-certificates
-      $ sudo rm -rf /etc/wazuh/ca
+      $ sudo rm -rf wazuh/wazuh-ca

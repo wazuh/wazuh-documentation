@@ -524,7 +524,8 @@ The ``logcollector.*`` internal options configure the Logcollector module.
 | **logcollector.open_attempts**            | Number of attempts to open a log file before stopping retries. A value of 0 means unlimited  | 0               | 0 or integer from 2 to 998             |
 |                                           | retries.                                                                                     |                 |                                        |
 +-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
-| **logcollector.remote_commands**          | Controls whether Logcollector accepts commands from centralized configuration.               | 0               | 0 (disabled), 1 (enabled)              |
+| **logcollector.remote_commands**          | Controls whether Logcollector accepts commands, sockets, and socket targets from centralized | 0               | 0 (disabled), 1 (enabled)              |
+|                                           | configuration.                                                                               |                 |                                        |
 +-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
 | **logcollector.vcheck_files**             | Interval, in seconds, for checking file metadata changes such as rotation or deletion.       | 64              | Integer from 0 to 1024                 |
 +-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+

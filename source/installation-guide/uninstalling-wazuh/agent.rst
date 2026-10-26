@@ -85,7 +85,7 @@ Run the following commands to uninstall a Linux agent.
 
             # yum remove wazuh-agent
 
-         The package manager leaves ``/var/ossec/`` behind. It holds the agent key (``etc/client.keys.rpmsave``), the re-enrollment secret (``etc/reenroll.secret``), and the Wazuh manager CA (``etc/certs/root-ca.pem``). Delete it:
+         The package manager can leave an empty ``/var/ossec/`` directory behind. Delete it:
 
          .. code-block:: console
 
@@ -97,7 +97,7 @@ Run the following commands to uninstall a Linux agent.
 
             # dnf remove wazuh-agent
 
-         The package manager leaves ``/var/ossec/`` behind. It holds the agent key (``etc/client.keys.rpmsave``), the re-enrollment secret (``etc/reenroll.secret``), and the Wazuh manager CA (``etc/certs/root-ca.pem``). Delete it:
+         The package manager can leave an empty ``/var/ossec/`` directory behind. Delete it:
 
          .. code-block:: console
 
@@ -109,7 +109,7 @@ Run the following commands to uninstall a Linux agent.
 
             # zypper remove wazuh-agent
 
-         The package manager leaves ``/var/ossec/`` behind. It holds the agent key (``etc/client.keys.rpmsave``), the re-enrollment secret (``etc/reenroll.secret``), and the Wazuh manager CA (``etc/certs/root-ca.pem``). Delete it:
+         The package manager can leave an empty ``/var/ossec/`` directory behind. Delete it:
 
          .. code-block:: console
 
@@ -172,9 +172,11 @@ Follow these steps in an elevated session to uninstall the Wazuh agent from your
 
       .. code-block:: ps1con
 
-         > Start-Process msiexec.exe -ArgumentList '/x "<MSI_PATH>" /qn' -Wait
+         > (Start-Process msiexec.exe -ArgumentList '/x "<MSI_PATH>" /qn' -Wait -PassThru).ExitCode
 
-   If you no longer have the installer, uninstall **Wazuh Agent** from **Settings** > **Apps** > **Installed apps**, or run the **Uninstall** shortcut in the Start menu folder **OSSEC**, then continue with step 2. To check the removal, run ``Get-Service WazuhSvc``: it reports that no service was found.
+   If you no longer have the installer, uninstall **Wazuh Agent** from **Settings** > **Apps** > **Installed apps**, or run the **Uninstall** shortcut in the Start menu folder **Wazuh**, then continue with step 2. To check the removal, run ``Get-Service WazuhSvc``: it reports that no service was found.
+
+   The exit code is 0, or 3010 when a restart is pending, on success. 1605 means that the installer does not match the installed agent: use the installer that installed or last upgraded it, or uninstall from Settings.
 
 #. Remove the Wazuh agent installation folder. After the removal, the folder still holds the agent key in ``client.keys.save``.
 
@@ -234,9 +236,6 @@ Follow these steps to uninstall the Wazuh agent from your macOS endpoint.
    .. code-block:: console
 
       # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
-      # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent-etc
-
-   If the second command prints a "No receipt" error, you can ignore it.
 
 #. Check that no Wazuh receipt remains. The following command prints nothing:
 

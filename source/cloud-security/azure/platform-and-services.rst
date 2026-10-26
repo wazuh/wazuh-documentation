@@ -112,7 +112,7 @@ You need the libraries below to set up your Wazuh agent endpoint and monitor you
 
          .. code-block:: console
 
-            # pip3 install --break-system-packages azure-storage-blob==12.20.0 SQLAlchemy==2.0.23 pytz==2020.1 six==1.17.0
+            # pip3 install --break-system-packages azure-storage-blob==12.20.0 SQLAlchemy==2.0.36 pytz==2020.1 six==1.17.0
 
       If you use a virtual environment, remove the ``--break-system-packages`` parameter from the above command.
 

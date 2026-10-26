@@ -19,8 +19,8 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
 #. To start the installation process, download the Wazuh agent according to your architecture:
 
-   -  Intel: |macOS_intel_64|. Suitable for macOS Sonoma (14) and Sequoia (15) on Intel.
-   -  Apple Silicon: |macOS_arm64|. Suitable for macOS Sonoma (14) and Sequoia (15) on Apple Silicon.
+   -  Intel: |macOS_intel_64|. Suitable for macOS Sonoma (14), Sequoia (15), Tahoe (26), and 27 on Intel.
+   -  Apple Silicon: |macOS_arm64|. Suitable for macOS Sonoma (14), Sequoia (15), Tahoe (26), and 27 on Apple Silicon.
 
 #. Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
 
@@ -40,7 +40,9 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
                      :emphasize-lines: 2
 
                      # curl -O https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
-                     # echo "WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>'" > /tmp/wazuh_envs && echo "WAZUH_AGENT_NAME='<AGENT_NAME>'" >> /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
+                     # (umask 077 && echo "WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>'" > /tmp/wazuh_envs && echo "WAZUH_AGENT_NAME='<AGENT_NAME>'" >> /tmp/wazuh_envs) && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
+
+                  The installer deletes ``/tmp/wazuh_envs`` when it finishes.
 
                .. group-tab:: Apple Silicon
 
@@ -48,9 +50,11 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
                      :emphasize-lines: 2
 
                      # curl -O https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg
-                     # echo "WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>'" > /tmp/wazuh_envs && echo "WAZUH_AGENT_NAME='<AGENT_NAME>'" >> /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
+                     # (umask 077 && echo "WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>'" > /tmp/wazuh_envs && echo "WAZUH_AGENT_NAME='<AGENT_NAME>'" >> /tmp/wazuh_envs) && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
-            For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>` section.
+                  The installer deletes ``/tmp/wazuh_envs`` when it finishes.
+
+            For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-macos>` section.
 
             .. note::
 
@@ -62,7 +66,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
                # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
-         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**.
+         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first alerts can take a few minutes to appear on a new deployment.
 
          The installation process is now complete, and the Wazuh agent is now successfully running on your macOS endpoint.
 
@@ -89,6 +93,6 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
                # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
-         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. The installation process is now complete, and the Wazuh agent is successfully running on your macOS endpoint.
+         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first alerts can take a few minutes to appear on a new deployment. The installation process is now complete, and the Wazuh agent is successfully running on your macOS endpoint.
 
 By default, all agent files are stored in ``/Library/Ossec/`` after the installation.
