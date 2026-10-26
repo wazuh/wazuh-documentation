@@ -27,7 +27,7 @@ RBAC policies
 
 Policies control the Wazuh manager API permissions using three elements: actions, resources, and effect.
 
-An action is what a user can do. It names both the component the action belongs to and the action itself, written as ``component:action``\ **.** The structure it follows looks like the example below, where the restart of an agent is specified.
+An action is what a user can do. It names both the component the action belongs to and the action itself, written as ``component:action``. The structure it follows looks like the example below, where the restart of an agent is specified.
 
 .. code-block:: none
 

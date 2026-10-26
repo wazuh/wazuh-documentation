@@ -95,7 +95,7 @@ To ensure secure access, all Wazuh manager API endpoints require authentication.
 
       # echo $TOKEN
 
-   The output is a lengthy string similar to the following:
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output

@@ -68,7 +68,9 @@ To create this policy, use the following Wazuh manager API request:
 
    # curl -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/policies?pretty=true" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}"
 
-The Wazuh manager API response is similar to the following. Note the highlighted policy ID, which you use later to assign the policy to the role:
+Note the highlighted policy ID in the response, which you use later to assign the policy to the role.
+
+The command output looks similar to this:
 
 .. code-block:: json
    :class: output
@@ -126,7 +128,9 @@ To create this role, use the following Wazuh manager API request:
 
    # curl -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/roles?pretty=true" -H "accept: application/json" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"team-alpha\"}"
 
-The Wazuh manager API response is similar to the following. Note the highlighted role ID, which you use later to link policies to this role:
+Note the highlighted role ID in the response, which you use later to link policies to this role.
+
+The command output looks similar to this:
 
 .. code-block:: json
    :class: output
@@ -171,7 +175,7 @@ To create this user, use the following Wazuh manager API request:
 
    # curl -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/users?pretty=true" -H "accept: application/json" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"username\":\"alpha-member-1\",\"password\":\"Alpha-Member-1\"}"
 
-The Wazuh manager API response is similar to the following:
+The command output looks similar to this:
 
 .. code-block:: json
    :class: output

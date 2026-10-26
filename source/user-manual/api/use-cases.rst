@@ -1547,7 +1547,9 @@ Install the Wazuh agent package on the endpoint first. Then follow these steps t
    -  ``max_uses`` is the number of Wazuh agents that can enroll with the token.
    -  ``description`` is an optional label that helps you identify the token.
 
-#. Click the play button to execute the request. A response similar to the following is returned:
+#. Click the play button to execute the request.
+
+   The command output looks similar to this:
 
    .. code-block:: json
       :class: output
@@ -1783,7 +1785,9 @@ To upgrade a Wazuh agent, you can use the ``/agents/upgrade`` endpoint. You can 
 
    -  ``023`` is the ID of the Wazuh agent to upgrade. The ``agents_list`` parameter accepts a comma-separated list of Wazuh agent IDs. You can also use ``all`` to send the request to all Wazuh agents.
 
-#. Click the play button to execute the request. A response similar to the following is received:
+#. Click the play button to execute the request.
+
+   The command output looks similar to this:
 
    .. code-block:: json
       :class: output
@@ -1830,7 +1834,7 @@ Run ``echo $TOKEN`` to confirm that the token was generated:
 
    # echo $TOKEN
 
-The output is similar to the following:
+The command output looks similar to this:
 
 .. code-block:: none
    :class: output
@@ -1869,7 +1873,7 @@ Where:
 
 -  ``<AGENT_ID>`` is the ID of the Wazuh agent. You can also pass a comma-separated list of Wazuh agent IDs, or ``all``. ``status=all`` deletes the Wazuh agents, regardless of their connection status. This parameter is required. ``older_than=1`` includes Wazuh agents whose last keepalive is older than one second. Without it, only Wazuh agents whose last keepalive is older than seven days are deleted.
 
-A response similar to the following is expected when the command runs:
+The command output looks similar to this:
 
 .. code-block:: json
    :class: output
@@ -1900,7 +1904,7 @@ You can use the ``/agents/summary`` endpoint to return a summary of the availabl
 
       # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents/summary?pretty=true" -H "Authorization: Bearer $TOKEN"
 
-   A response similar to the following is expected when the command runs:
+   The command output looks similar to this:
 
    .. code-block:: json
       :class: output
