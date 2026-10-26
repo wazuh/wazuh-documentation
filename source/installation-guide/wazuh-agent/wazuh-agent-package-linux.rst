@@ -141,7 +141,7 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
             # WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' zypper install -y wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
 
-#. For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>` section. Enable and start the Wazuh agent service:
+#. For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux>` section. Enable and start the Wazuh agent service:
 
    .. tabs::
 
@@ -186,7 +186,7 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
       # grep ^status /var/ossec/var/run/wazuh-agentd.state
       # grep 'Token bootstrap: enrollment succeeded' /var/ossec/logs/ossec.log
 
-   The first command prints ``status='connected'``. If it prints ``status='pending'``, wait a few seconds and run it again. The second prints a line that ends in ``Token bootstrap: enrollment succeeded; the manager's CA is now the agent's trust anchor.`` In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**.
+   The first command prints ``status='connected'``. If it prints ``status='pending'``, wait a few seconds and run it again. The second prints a line that ends in ``Token bootstrap: enrollment succeeded; the manager's CA is now the agent's trust anchor.`` In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first alerts can take a few minutes to appear on a new deployment.
 
    If ``systemctl start wazuh-agent`` failed or the agent didn't enroll, the cause is one of these:
 
@@ -194,11 +194,12 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
    -  The install command printed ``deployment variables refused [ERR_BAD_TOKEN]``: the token changed when you copied it.
    -  ``/var/ossec/logs/ossec.log`` shows ``Enrollment-token bootstrap failed``: the Wazuh manager refused the token, for example because it was revoked, it expired, or it was already used as many times as ``--max-uses`` allows.
 
-   In each case, save a valid token to a file, enroll the agent, delete the file, and start the agent. In the first two cases, the installer kept no agent name, so the agent enrolls under the endpoint's host name.
+   In each case, save a valid token to a file, enroll the agent, delete the file, and start the agent. In the first two cases, the installer kept no agent name, so the agent enrolls under the endpoint's host name. Replace ``<TOKEN_FILE_PATH>`` with a file path, for example, ``/root/wazuh-token``.
 
    .. code-block:: console
-      :emphasize-lines: 1,2
+      :emphasize-lines: 1,2,3
 
+      # (umask 077 && echo '<ENROLLMENT_TOKEN>' > <TOKEN_FILE_PATH>)
       # /var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE_PATH>
       # rm -f <TOKEN_FILE_PATH>
       # systemctl start wazuh-agent

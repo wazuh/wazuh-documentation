@@ -80,7 +80,7 @@ Import and access the virtual machine
 
       $ VBoxManage modifyvm "<VM_NAME>" --graphicscontroller vmsvga --rtc-use-utc on
 
-#. Start the VM. The first start configures the VM and takes about 5 minutes.
+#. Start the VM. The first start configures the VM and takes 5 to 10 minutes.
 
 #. Log in on the VM console, or over SSH to the VM's IP address. To find the address, run the following command on the console. Use the ``inet`` address of the interface on the network you connect from. With the default single network adapter, that is ``eth0``.
 
@@ -93,7 +93,7 @@ Import and access the virtual machine
    -  User: ``wazuh-user``
    -  Password: ``wazuh``
 
-   The SSH ``root`` user login is disabled. The ``wazuh-user`` has sudo privileges. To switch to root, execute the following command:
+   You must change this password at your first login, because the VM ships with it expired. The SSH ``root`` user login is disabled. The ``wazuh-user`` has sudo privileges. To switch to root, execute the following command:
 
    .. code-block:: console
 
@@ -112,32 +112,38 @@ Import and access the virtual machine
 Access the Wazuh dashboard
 --------------------------
 
-When the first start has finished, access the Wazuh dashboard in a web browser. Replace ``<VM_IP_ADDRESS>`` with the VM's IP address from step 5 of :ref:`vm_import_and_access`:
+The ``admin`` password is generated for this VM at its first start. To print it, run the following command in the VM:
+
+.. code-block:: console
+
+   $ sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
+
+When the first start has finished, access the Wazuh dashboard in a web browser with these credentials. Replace ``<VM_IP_ADDRESS>`` with the VM's IP address from step 5 of :ref:`vm_import_and_access`:
 
 -  URL: ``https://<VM_IP_ADDRESS>``
 -  User: ``admin``
--  Password: generated for this VM at its first start. Print it by running the following command in the VM as root:
+-  Password: the one the command above prints
 
-   .. code-block:: console
+The Wazuh indexer and Wazuh dashboard passwords, including this one, are in ``/etc/wazuh-indexer/export/credentials.env``. The Wazuh manager API passwords, for the ``wazuh`` and ``wazuh-internal-client`` users, are in ``/etc/wazuh-manager/export/credentials.env``. Only root can read these files. Keep both files, because the Wazuh components read them. To change a password, use ``/usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh``.
 
-      # grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
-
-The ``/etc/wazuh/credentials.env`` file holds every password generated for this VM, including the one for the Wazuh manager API user ``wazuh``. Save the passwords somewhere safe, then delete the file.
+Until you trust the VM's certificate authority, your web browser warns about the Wazuh dashboard certificate. To trust it, copy ``/etc/wazuh-dashboard/export/ca.pem`` from the VM and import it into your web browser or operating system as a trusted certificate authority.
 
 Configuration files
 -------------------
 
 All components in this virtual image are configured to work out of the box. However, all components can be fully customized. These are the configuration file locations:
 
--  Wazuh manager: ``/var/wazuh-manager/etc/wazuh-manager.conf``
+-  Wazuh manager: ``/etc/wazuh-manager/wazuh-manager.conf``
 -  Wazuh indexer: ``/etc/wazuh-indexer/opensearch.yml``
 -  Wazuh dashboard: ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
 -  Wazuh agent: ``/var/ossec/etc/ossec.conf``
 
+The VM sets the Wazuh indexer heap to a quarter of its RAM at its first start. To change it later, for example, after you change the RAM of the VM, edit the ``-Xms`` and ``-Xmx`` values in ``/etc/wazuh-indexer/jvm.options``, then restart the Wazuh indexer. To keep your values after a reboot, also disable the service that sets the heap at boot by running ``systemctl disable updateIndexerHeap.service`` as root.
+
 Network configuration
 ---------------------
 
-By default, the network interface type is set to **Bridged Adapter**. The VM attempts to obtain an IP address from the network DHCP server. Alternatively, you can give the VM a static IP address as described in :ref:`vm_set_static_ip_address`. If the VM's address changes after its first start, reissue the agent listener certificate as described in :ref:`vm_reissue_agent_listener_certificate`.
+By default, the network interface type is set to **Bridged Adapter**. The VM attempts to obtain an IP address from the network DHCP server. Alternatively, you can give the VM a static IP address as described in :ref:`vm_set_static_ip_address`. If the VM's address changes after its first start, reissue its certificates as described in the :ref:`vm_reissue_manager_certificates` and :ref:`vm_reissue_dashboard_certificate` sections.
 
 .. _vm_set_static_ip_address:
 
@@ -174,14 +180,14 @@ The VM gets its addresses from DHCP. To give one of its network interfaces a sta
 
       # systemctl restart systemd-networkd
 
-#. Reissue the agent listener certificate as described in the :ref:`vm_reissue_agent_listener_certificate` section, so agents can verify the Wazuh manager at the new address.
+#. Reissue the certificates as described in the :ref:`vm_reissue_manager_certificates` and :ref:`vm_reissue_dashboard_certificate` sections, so agents and web browsers can verify the VM at the new address.
 
 Enroll additional Wazuh agents
 ------------------------------
 
 Once the virtual machine is imported and running, it is ready for monitoring using the preinstalled Wazuh agent. To monitor additional endpoints, enroll Wazuh agents on them with an enrollment token. Wazuh 5.x agents connect to the VM on TCP port ``1517`` for enrollment and for their connection, while older agents still use the legacy ports.
 
-#. Run the following command in the VM as root to create an enrollment token. Replace ``<VM_IP_ADDRESS>`` with the address the agents use to reach the VM. It must be an address the VM had when it first started. If the address has changed since then, see :ref:`vm_reissue_agent_listener_certificate` below.
+#. Run the following command in the VM as root to create an enrollment token. Replace ``<VM_IP_ADDRESS>`` with the address the agents use to reach the VM. It must be an address in the VM's certificates. At its first start, the VM adds only the addresses of network interfaces that have a default route. On a network without a gateway, such as a VirtualBox host-only network, reissue the certificates first. If the address has changed since then, see :ref:`vm_reissue_manager_certificates` below.
 
    .. code-block:: console
 
@@ -191,14 +197,14 @@ Once the virtual machine is imported and running, it is ready for monitoring usi
 
 #. :doc:`Deploy the Wazuh agent </installation-guide/wazuh-agent/index>` on each endpoint, and use the token as the value of ``WAZUH_ENROLLMENT_TOKEN``. See the :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>` for more information.
 
-.. _vm_reissue_agent_listener_certificate:
+.. _vm_reissue_manager_certificates:
 
-Reissue the agent listener certificate
+Reissue the Wazuh manager certificates
 --------------------------------------
 
-Wazuh agents verify the Wazuh manager with its agent listener certificate, ``/var/wazuh-manager/etc/certs/remoted.pem``. The VM issues it at its first start, for the addresses it has at that moment and for loopback. If the VM's address changes later, or agents reach it through an address that is not on the VM, such as a NAT port forward, agents fail to verify it. Creating an enrollment token for that address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
+Wazuh agents verify the Wazuh manager with its agent listener certificate, ``/etc/wazuh-manager/certs/remoted.pem``. Clients of the Wazuh manager API verify it with ``/etc/wazuh-manager/certs/apid.pem``. The VM issues both certificates at its first start, for its hostname, for the addresses of its network interfaces that have a default route, and for loopback. If the VM's address changes later, or agents reach it through an address that is not on the VM, such as a NAT port forward, agents fail to verify the Wazuh manager. Creating an enrollment token for that address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
 
-Reissue the certificate from the VM's own certificate authority. Run the following steps in the VM as root. Agents enrolled before the change keep trusting the Wazuh manager because the certificate authority stays the same.
+Reissue both certificates from the VM's own certificate authority. Run the following steps in the VM as root. Agents enrolled before the change keep trusting the Wazuh manager because the certificate authority stays the same.
 
 #. Stop the Wazuh manager, then check that none of its processes are still running:
 
@@ -213,48 +219,41 @@ Reissue the certificate from the VM's own certificate authority. Run the followi
 
       # /var/wazuh-manager/bin/wazuh-manager-control stop
 
-#. Check the Wazuh manager's indexer certificate:
+#. List the addresses that agents and Wazuh manager API clients use to reach the VM. Set the following lines in ``/etc/wazuh-manager/local.env``, and create the file if it doesn't exist. Each key can appear only once, so if the file already has these keys, replace their values. Replace ``<NEW_ADDRESS>`` with the address. Prefix each entry with ``IP:`` for an IP address or ``DNS:`` for a hostname, and separate several entries with commas:
+
+   .. code-block:: ini
+
+      WAZUH_MANAGER_REMOTED_CERT_SANS=IP:<NEW_ADDRESS>
+      WAZUH_MANAGER_APID_CERT_SANS=IP:<NEW_ADDRESS>
+
+   The lists replace the addresses the VM discovers, and loopback is always added. For a NAT port forward, forward TCP port ``1517`` to the VM and list the address agents use. Then restrict the file to root:
 
    .. code-block:: console
 
-      # openssl verify -CAfile /etc/wazuh/ca/root-ca.pem /var/wazuh-manager/etc/certs/indexer-connector.pem
+      # chown root:root /etc/wazuh-manager/local.env
+      # chmod 600 /etc/wazuh-manager/local.env
 
-   The output ends in ``OK``. If it doesn't, also move the indexer certificate pair in the next step.
-
-#. Move the current certificate pair to a backup directory:
+#. Move both current certificate pairs to a backup directory. A pair left in place keeps the old addresses.
 
    .. code-block:: console
 
       # mkdir -p /root/wazuh-certs-backup
-      # mv /var/wazuh-manager/etc/certs/remoted.pem /var/wazuh-manager/etc/certs/remoted-key.pem /root/wazuh-certs-backup/
+      # mv /etc/wazuh-manager/certs/remoted.pem /etc/wazuh-manager/certs/remoted-key.pem /etc/wazuh-manager/certs/apid.pem /etc/wazuh-manager/certs/apid-key.pem /root/wazuh-certs-backup/
 
-   If step 2 did not print ``OK``, also run:
+#. Issue the new certificates, then publish the certificate authority bundle to the agents:
 
    .. code-block:: console
 
-      # mv /var/wazuh-manager/etc/certs/indexer-connector.pem /var/wazuh-manager/etc/certs/indexer-connector-key.pem /root/wazuh-certs-backup/
+      # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install
+      # /var/wazuh-manager/bin/wazuh-manager-certs stamp
 
-#. Issue the new certificate. Use the command that matches how agents reach the VM.
-
-   -  **The address is on the VM**, for example, a new DHCP lease or a static IP. The certificate covers the VM's hostname, ``localhost``, loopback, and every address the VM has now:
-
-      .. code-block:: console
-
-         # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install
-
-   -  **The address is not on the VM**, for example, a NAT port forward. Forward TCP port ``1517`` to the VM, then list the addresses agents use. The list replaces the discovered addresses, and loopback is always added. Replace ``<AGENT_FACING_ADDRESS>``:
-
-      .. code-block:: console
-
-         # WAZUH_MANAGER_REMOTED_CERT_SANS='IP:<AGENT_FACING_ADDRESS>' /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install
-
-   The output includes a line that starts with ``resolve-credentials: remoted.pem:`` and lists the new address. If that line is missing, the certificate was not issued. Move the files in ``/root/wazuh-certs-backup/`` back to ``/var/wazuh-manager/etc/certs/`` and start the Wazuh manager.
+   The output includes a line that starts with ``resolve-credentials: /etc/wazuh-manager/certs/remoted.pem: issued;`` and lists the new address. If that line is missing, the certificate was not issued. Move the files in ``/root/wazuh-certs-backup/`` back to ``/etc/wazuh-manager/certs/`` and start the Wazuh manager.
 
 #. Start the Wazuh manager:
 
    .. code-block:: console
 
-      # systemctl restart wazuh-manager
+      # systemctl start wazuh-manager
 
 #. Create an enrollment token for the new address to confirm the change. The command now succeeds:
 
@@ -262,10 +261,12 @@ Reissue the certificate from the VM's own certificate authority. Run the followi
 
       # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <NEW_ADDRESS>
 
+Afterwards, point the agents enrolled before the change to the new address.
+
 Move enrolled agents to the new address
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh agents enrolled before the change keep their ID. Point each one to the new address with a token that cannot enroll new agents.
+Wazuh agents enrolled before the change keep their ID. Point each one to the new address with a token created with ``--no-credential``, which carries only the new address and the certificate authority. Running ``wazuh-agent-auth --certs-only`` with that token updates an enrolled agent without registering it again.
 
 #. Run the following command in the VM as root. Replace ``<NEW_ADDRESS>`` with the new address, and copy the token from the output:
 
@@ -319,6 +320,22 @@ Wazuh agents enrolled before the change keep their ID. Point each one to the new
          Write the token file with ``Set-Content`` as shown. A file with a byte order mark, such as one ``Out-File`` writes in Windows PowerShell, fails with ``invalid enrollment token: malformed token``. The output of ``wazuh-agent-auth.exe`` confirms the new address: ``ossec.conf now points <manager><endpoint> at '<NEW_ADDRESS>'.``
 
          Alternatively, open **Manage Agent** GUI from the Start menu and select **Manage** > **Update CA**. Paste the token and click **OK**. Click **Yes** to stop the Wazuh agent service. When the message ``Trust anchor and manager address refreshed.`` appears, click **OK**, then click **Yes** to start the service.
+
+.. _vm_reissue_dashboard_certificate:
+
+Reissue the Wazuh dashboard certificate
+---------------------------------------
+
+The Wazuh dashboard certificate, ``/etc/wazuh-dashboard/certs/dashboard.pem``, names the VM's host name and the addresses of its network interfaces that have a default route at its first start. After an address change, the Wazuh dashboard keeps working, but the web browser reports a name mismatch for the new address. To reissue the certificate, run the following commands in the VM as root:
+
+.. code-block:: console
+
+   # systemctl stop wazuh-dashboard
+   # rm -f /etc/wazuh-dashboard/certs/dashboard.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
+   # /usr/share/wazuh-dashboard/bin/resolve-credentials --install
+   # systemctl start wazuh-dashboard
+
+The new certificate covers the addresses the VM has now. To set the list yourself, add ``WAZUH_DASHBOARD_CERT_SANS`` to ``/etc/wazuh-dashboard/local.env`` before you run the commands, with an ``IP:`` or ``DNS:`` prefix on each entry. Restrict the file to root with ``chmod 600``. The Wazuh dashboard keeps its stored passwords.
 
 Troubleshooting
 ---------------

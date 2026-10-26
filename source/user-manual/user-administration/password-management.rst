@@ -143,6 +143,8 @@ When you change the ``kibanaserver`` password, update the ``opensearch.password`
 
    # echo '<KIBANASERVER_PASSWORD>' | runuser -u wazuh-dashboard -- /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore add opensearch.password --stdin --force
 
+.. _update_wazuh_internal_client_password:
+
 Update the wazuh-internal-client password
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

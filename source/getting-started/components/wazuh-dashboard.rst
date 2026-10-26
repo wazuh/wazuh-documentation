@@ -1,127 +1,176 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh dashboard is a flexible and intuitive web interface for visualizing, analyzing, and managing security data.
+   :description: The Wazuh dashboard is the web interface for viewing and managing Wazuh security data, ruleset content, Wazuh agents, and the Wazuh manager and Wazuh indexer.
 
 Wazuh dashboard
 ===============
 
-The Wazuh dashboard is a flexible and intuitive web interface for visualizing security data. It queries the Wazuh indexer to visualize alerts, events, and security analytics. It enables users to perform the following tasks.
+The Wazuh dashboard is the web interface for viewing and managing Wazuh security data. It queries the Wazuh indexer to show events, findings, and security analytics, and it calls the Wazuh manager API to manage your deployment.
 
--  Investigate events and alerts.
--  Configure the Wazuh manager and Wazuh indexer.
--  Enforce role-based access control (RBAC) and single sign-on (SSO).
--  Manage Wazuh agents and enrollment workflows.
--  Health checks, notifications, and alerting integrations.
--  Test custom rules and decoders (Developer tools).
+You can use the Wazuh dashboard to perform the following tasks:
+
+-  Investigate findings and events across Wazuh capabilities
+-  Manage decoders, rules, and key-value databases (KVDBs), and test logs against them
+-  Manage Wazuh indexer users and roles, and Wazuh manager API role-based access control (RBAC)
+-  Manage Wazuh agents, agent groups, and enrollment tokens
+-  Monitor and configure the Wazuh manager and the Wazuh indexer
+-  Configure notifications and alerting integrations
+-  Generate reports
+-  Check the health status of the Wazuh components
 
 Data visualization and analysis
 -------------------------------
 
-The Wazuh dashboard enables users to navigate security data collected from Wazuh agents. It provides an overview of the security posture of monitored environments. The Wazuh dashboard summarizes Wazuh agent status, security findings, and MITRE ATT&CK activity, providing quick access to the corresponding dashboard sections for further investigation.
+The Wazuh dashboard organizes security data into pages that you open from the side navigation menu. Each page combines dashboards, event tables, and filters for one area of your environment.
 
-.. thumbnail::  /images/getting-started/dashboard-overview.png
+The **Home** > **Overview** page is the default landing page. It summarizes Wazuh agent status and findings, and provides links to other pages.
+
+.. thumbnail:: /images/getting-started/dashboard-home-overview.png
+   :title: Home overview page
+   :alt: Home overview page
    :align: center
    :width: 80%
-   :title: Data visualization
-   :alt: Data visualization
 
-It also presents information across Wazuh capabilities, including configuration assessment, file integrity monitoring, malware detection, threat hunting, vulnerability detection, IT hygiene, incident response, and regulatory compliance. It also provides information about available threat intelligence content and access to supported cloud and SaaS integrations. You can generate reports and create custom visualizations and dashboards.
+The Wazuh pages are grouped into these menus:
 
-.. thumbnail::  /images/getting-started/dashboard-overview-threat-hunting.png
+-  **Endpoint security**: **Configuration Assessment**, **Malware Detection**, and **File Integrity Monitoring**
+-  **Threat intelligence**: **Threat Hunting**, **MITRE ATT&CK**, **Vulnerability Detection**, and **Case Management**
+-  **Security operations**: **IT Hygiene**, **Regulatory Compliance**, and **Incident Response**
+-  **Cloud security**: **Docker**, **Amazon Web Services**, **Google Cloud**, **GitHub**, **Office 365**, and **Microsoft Graph API**
+
+.. thumbnail:: /images/getting-started/dashboard-menus-security-threat.png
+   :title: Endpoint security and threat intelligence pages
+   :alt: Endpoint security and threat intelligence pages
    :align: center
    :width: 80%
-   :title: Threat hunting and threat intelligence
-   :alt: Threat hunting and threat intelligence
 
-.. thumbnail::  /images/getting-started/dashboard-overview-security-operations.png
+.. thumbnail:: /images/getting-started/dashboard-menus-operations-cloud.png
+   :title: Security operations and cloud security pages
+   :alt: Security operations and cloud security pages
    :align: center
    :width: 80%
-   :title: Security operations
-   :alt: Security operations
 
-.. thumbnail::  /images/getting-started/dashboard-overview-cloud-security.png
+The **Explore** menu includes **Discover**, **Dashboards**, and **Visualize**. You can use them to search raw data and build custom dashboards and charts.
+
+.. thumbnail:: /images/getting-started/dashboard-explore-menu.png
+   :title: Explore menu
+   :alt: Explore menu
    :align: center
    :width: 80%
-   :title: Cloud security
-   :alt: Cloud security
 
 Wazuh manager and Wazuh indexer management
 ------------------------------------------
 
-The Wazuh dashboard provides a user interface to manage a Wazuh deployment. This includes monitoring the status, logs, and statistics of Wazuh components, configuring the Wazuh manager, and creating custom rules and decoders for log analysis and threat detection.
+The Wazuh dashboard provides a user interface to manage a Wazuh deployment. You can monitor the status, logs, and statistics of the Wazuh manager, and configure the Wazuh manager and the Wazuh indexer.
 
-.. thumbnail::  /images/getting-started/platform-management.png
+The **Server management** menu contains pages for the Wazuh manager:
+
+-  **Status**: The status of the Wazuh manager
+-  **Statistics**: Statistics about the environment
+-  **Logs**: The logs of the Wazuh manager cluster
+-  **Settings**: The Wazuh manager cluster configuration
+-  **Dev Tools**: A console to send requests to the Wazuh manager API
+-  **Security**: Wazuh manager API users, roles, and policies
+
+.. thumbnail:: /images/getting-started/dashboard-server-management.png
+   :title: Server management menu
+   :alt: Server management menu
    :align: center
-   :width: 100%
-   :title: Wazuh manager and indexer management
-   :alt: Wazuh manager and indexer management
+   :width: 80%
+
+The **Indexer management** menu contains **Dev Tools**, a console to send requests to the Wazuh indexer API. It also contains the index management pages and the Wazuh indexer **Settings** page.
+
+.. thumbnail:: /images/getting-started/dashboard-indexer-management.png
+   :title: Indexer management menu
+   :alt: Indexer management menu
+   :align: center
+   :width: 80%
+
+The **Dashboard management** menu contains **Dashboards Management**, **Health Check**, **Server API**, and **About**. **Health Check** runs checks on the Wazuh dashboard setup, such as the Wazuh manager API connection, certificates, and index patterns. **Server API** shows and manages the connection to the Wazuh manager API.
+
+Ruleset management
+------------------
+
+The Wazuh dashboard provides a user interface for the ruleset content that normalizes events and detects threats. You create and edit decoders, rules, and KVDBs in the dashboard, and the Wazuh indexer stores them.
+
+The **Ruleset management** menu contains the following pages:
+
+-  **Overview**: The integrations available in your deployment
+-  **Decoders**: Decoders that normalize raw events
+-  **KVDBs**: Key-value databases that the ruleset uses
+-  **Detectors**: Detectors that run rules continuously on an index or alias
+-  **Rules**: Detection rules that the detectors run
+-  **Log test**: A tool that processes a sample log and shows the result
+
+.. thumbnail:: /images/getting-started/dashboard-ruleset-management.png
+   :title: Ruleset management menu
+   :alt: Ruleset management menu
+   :align: center
+   :width: 80%
+
+The Wazuh dashboard sends this content to the content manager REST API of the Wazuh indexer. You can use **Log test** to check custom decoders and rules before you rely on them.
+
+.. thumbnail:: /images/getting-started/dashboard-log-test.png
+   :title: Log test
+   :alt: Log test
+   :align: center
+   :width: 80%
 
 Wazuh agents management
 -----------------------
 
-The Wazuh dashboard allows users to manage Wazuh agents in several ways including:
+The Wazuh dashboard gives you a central place to deploy, organize, and maintain Wazuh agents. You can manage Wazuh agents from enrollment to upgrade.
 
--  Deployment and registration
--  Centralized configuration
--  Grouping Wazuh agents
--  Monitoring and troubleshooting Wazuh agent status
--  Wazuh agent upgrades
+The **Agents management** menu contains the following pages:
 
-.. thumbnail::  /images/getting-started/dashboard-endpoints.png
-   :align: center
-   :width: 80% 
-   :title: Wazuh agents management
-   :alt: Wazuh agents management
+-  **Summary**: The list of Wazuh agents and their status
+-  **Groups**: Agent groups and their shared configuration
+-  **Enrollment tokens**: The tokens that Wazuh agents enroll with
 
-.. thumbnail::  /images/getting-started/agent-upgrades.png
+.. thumbnail:: /images/getting-started/dashboard-agents-management.png
+   :title: Agents management menu
+   :alt: Agents management menu
    :align: center
    :width: 80%
-   :title: Agent upgrades
-   :alt: Agent upgrades
 
-For each monitored endpoint, users can define which Wazuh agent modules are enabled, which log files are read, which files are monitored for integrity changes, and which configuration checks are performed.
+For each agent group, you can edit the shared configuration in the ``agent.conf`` file. The shared configuration defines which Wazuh agent modules are enabled and which log files they read. It also defines which files they monitor for integrity changes and which configuration checks they run.
 
-.. thumbnail::  /images/getting-started/agent-modules-config.png
+Health checks, notifications, and alerting integrations
+-------------------------------------------------------
+
+You can monitor the status and statistics of the Wazuh manager cluster, and run health checks on the Wazuh dashboard setup.
+
+.. thumbnail:: /images/getting-started/dashboard-manager-status.png
+   :title: Wazuh manager status
+   :alt: Wazuh manager status
    :align: center
    :width: 80%
-   :title: Endpoint agent configuration
-   :alt: Endpoint agent configuration
 
-Health checks, notifications and alerting integrations
-------------------------------------------------------
+You can also send notifications to external services, such as Slack, Jira, PagerDuty, and Shuffle. The Wazuh indexer creates a default notification channel for each of these services when it starts for the first time. The channels start disabled with placeholder values, so you configure and enable them under **Explore** > **Notifications** > **Channels**. **Health Check** verifies that the default channels exist.
 
-The Wazuh dashboard provides the ability to monitor performance and cluster health of the Wazuh components.
-
-.. thumbnail::  /images/getting-started/component-status.png
+.. thumbnail:: /images/getting-started/dashboard-notification-channels.png
+   :title: Notification channels
+   :alt: Notification channels
    :align: center
-   :width: 100%
-   :title: Wazuh components health monitoring
-   :alt: Wazuh components health monitoring
+   :width: 80%
 
-The Wazuh dashboard provides the ability to integrate external APIs and services for enhanced alerting, incident management, and threat intelligence capabilities. It supports integration with Slack, PagerDuty, Shuffle, and others.
+AI Assistant
+------------
 
-.. thumbnail::  /images/getting-started/dashboard-alerting-int.png
+The Wazuh dashboard includes an AI Assistant that you open from the **Home** menu. It provides a chat interface where you ask security questions in plain language and get answers from your Wazuh data.
+
+.. thumbnail:: /images/getting-started/dashboard-ai-assistant.png
+   :title: AI Assistant
+   :alt: AI Assistant
    :align: center
-   :width: 100%
-   :title: Notifications and alerting integrations
-   :alt: Notifications and alerting integrations
+   :width: 80%
 
-Developer tools
----------------
+The Wazuh dashboard encrypts the AI provider API keys that the AI Assistant stores. The Wazuh dashboard package generates the ``wazuh_ai_assistant.encryptionKey`` encryption key in the Wazuh dashboard keystore if it is not defined in either the keystore or ``opensearch_dashboards.yml``.
 
-The Wazuh dashboard includes a ruleset testing tool (Log Test) that processes log messages to show how they are decoded by the Wazuh normalization engine and whether they match a detection rule. This tool is useful for testing custom decoders and rules.
+Next steps
+----------
 
-.. thumbnail::  /images/getting-started/dashboard-logtest.png
-   :align: center
-   :width: 80% 
-   :title: Log test
-   :alt: Log test
+To install the Wazuh dashboard, see the :doc:`Wazuh dashboard installation guide </installation-guide/wazuh-dashboard/index>`.
 
-The Wazuh dashboard also provides API consoles for interacting with the Wazuh manager API and the Wazuh indexer API. These consoles are used to manage Wazuh manager capabilities and interact with Wazuh indexer indices.
-
-.. thumbnail::  /images/getting-started/dashboard-dev-tools.png
-   :align: center
-   :width: 100%
-   :title: API consoles
-   :alt: API consoles
+To learn how to navigate and configure the Wazuh dashboard, see the :doc:`Wazuh dashboard </user-manual/wazuh-dashboard/index>` section of the user manual.

@@ -46,6 +46,10 @@ Perform the following steps to configure the Wazuh agent to monitor filesystem c
 
       $ sudo systemctl restart wazuh-agent
 
+   .. note::
+
+      Wait until the Wazuh agent finishes its initial scan before you test the configuration. The agent logs ``(6012): Real-time file integrity monitoring started.`` in the ``/var/ossec/logs/ossec.log`` file. Changes made before that aren't reported. See :ref:`Real-time monitoring <real_time_monitoring>`.
+
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
@@ -66,6 +70,10 @@ Take the following steps to configure the Wazuh agent to monitor filesystem chan
    .. code-block:: powershell
 
       > Restart-Service -Name wazuh
+
+   .. note::
+
+      Wait until the Wazuh agent finishes its initial scan before you test the configuration. The agent logs ``(6012): Real-time file integrity monitoring started.`` in the ``C:\Program Files (x86)\ossec-agent\ossec.log`` file. Changes made before that aren't reported. See :ref:`Real-time monitoring <real_time_monitoring>`.
 
 As an alternative to local configurations on the Wazuh agents, you can centrally configure groups of agents.
 

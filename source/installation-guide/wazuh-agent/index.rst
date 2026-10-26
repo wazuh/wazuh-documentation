@@ -27,78 +27,7 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
    * - Cloud security
      -
 
-.. _agent-installation-requirements:
-
-Prerequisite
-------------
-
-During enrollment, the Wazuh agent authenticates to the Wazuh manager using an enrollment token. The token tells the agent which Wazuh manager to trust and lets it enroll. Create the token on the Wazuh manager. In a cluster, create it on the master node. A worker node can't create it. The endpoint must reach the Wazuh manager on port 1517/TCP, which Wazuh 5.x agents use for enrollment and communication.
-
-.. _generate_enrollment_token:
-
-Generate the enrollment token
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Complete the following steps on the Wazuh manager master node to generate the enrollment token.
-
-#. List the addresses that agents can use to reach the Wazuh manager:
-
-   .. code-block:: console
-
-      # openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
-
-   The list holds the node name, the ``ip`` and ``dns`` values of the node in ``config.yml``, and any address added with ``-as|--agent-san``. After an installation with the Quickstart, it holds the server's host name, its fully qualified domain name, and its global IP addresses. A token for any other address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
-
-#. Run the following command to create an enrollment token. Replace ``<WAZUH_MANAGER_ADDRESS>`` with an address from that list that the endpoints can resolve and reach. With an IP address, enrollment works, but the Wazuh manager logs a warning. Use a DNS name if agents must verify the Wazuh manager by name or its IP address can change.
-
-   .. code-block:: console
-
-      # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
-
-   The command output looks similar to this:
-
-   .. code-block:: none
-      :class: output
-
-      eyJ2ZXIiO***********TM3IiwicGluIjoiWThMTGU5SHVpM3RMZ0xL****************WZyIs0tem5ERVI0Qm9NSVR********dNRXcifQ
-      id: 6WKOJawvF--znDE***IQ
-      endpoint: 192.168.33.137
-      expires: 2026-11-01T02:49:26Z (1793501366)
-      pin: 63c2cb7bd1******6cd8ea****02158
-      credential: yes
-
-   The token is the long line starting with ``eyJ``. The ``id``, ``endpoint``, ``expires``, ``pin``, and ``credential`` lines describe the token. The command displays the token only once. By default, tokens are valid for 30 days and can enroll any number of agents. Treat the token like a password. To limit its validity or usage, add ``--ttl <DURATION>``, ``--max-uses <N>``, or both, for example ``--ttl 24h``.
-
-   To save the token to a file that only root can read, run the command this way instead. Only the token goes to the file.
-
-   .. code-block:: console
-
-      # (umask 077 && /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS> > <TOKEN_FILE_PATH>)
-
-   List existing tokens with:
-
-   .. code-block:: console
-
-      # /var/wazuh-manager/bin/wazuh-manager-authd --list-enrollment-tokens
-
-   Revoke a token with:
-
-   .. code-block:: console
-
-      # /var/wazuh-manager/bin/wazuh-manager-authd --revoke-enrollment-token <TOKEN_ID>
-
-   Replace ``<TOKEN_ID>`` with the token's ``id`` value.
-
-#. Copy the token. You pass it as ``WAZUH_ENROLLMENT_TOKEN`` when you install the Wazuh agent, as the section for your operating system describes: Linux, Windows, or macOS. The installation doesn't start the Wazuh agent. The agent enrolls with the Wazuh manager when it first starts.
-
-.. note::
-
-   To enroll a Wazuh agent that already has a key, for example, after you move it to another Wazuh manager, see :ref:`Re-enrolling a Wazuh agent <reenrolling_wazuh_agent>`.
-
-Choose your operating system
-----------------------------
-
-Select your operating system and follow the instructions.
+Before you install a Wazuh agent, create an enrollment token on the Wazuh manager, as described in **Prerequisite** below. Then select your operating system and follow the instructions.
 
 .. raw:: html
 
@@ -161,6 +90,80 @@ Then follow the steps on the Wazuh dashboard to deploy a new agent.
    :width: 80%
    :title: Deploy a new agent instructions
    :alt: Deploy a new agent instructions
+
+.. _agent-installation-requirements:
+
+Prerequisite
+------------
+
+During enrollment, the Wazuh agent authenticates to the Wazuh manager using an enrollment token. The token tells the agent which Wazuh manager to trust and lets it enroll. Create the token on the Wazuh manager. In a cluster, create it on the master node. A worker node can't create it. The endpoint must reach the Wazuh manager on port 1517/TCP, which Wazuh 5.x agents use for enrollment and communication.
+
+.. _generate_enrollment_token:
+
+Generate the enrollment token
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Complete the following steps on the Wazuh manager master node to generate the enrollment token.
+
+#. List the addresses that agents can use to reach the Wazuh manager:
+
+   .. code-block:: console
+
+      # openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
+
+   The list depends on how you installed the Wazuh manager. After an assisted installation, it holds the node name, its ``ip`` and ``dns`` values in ``config.yml``, and any address added with ``-as|--agent-san``. After a step-by-step installation, it holds the same values from the certificates tool's ``config.yml``, and any address added with ``-as``. After the Quickstart, it holds the server's host name, its fully qualified domain name, and its IP addresses. In every case, it also holds ``localhost``, ``127.0.0.1``, and ``::1``. A token for any other address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
+
+#. Run the following command to create an enrollment token. Replace ``<WAZUH_MANAGER_ADDRESS>`` with an address from that list that the endpoints can resolve and reach. With an IP address, enrollment works, but the Wazuh manager logs a warning. Use a DNS name if agents must verify the Wazuh manager by name or its IP address can change.
+
+   If an address that the agents use, such as a load balancer, a NAT address, or a public name, isn't in the list, add it to the Wazuh manager certificate first, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes.
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      eyJ2ZXIiO***********TM3IiwicGluIjoiWThMTGU5SHVpM3RMZ0xL****************WZyIs0tem5ERVI0Qm9NSVR********dNRXcifQ
+      id: 6WKOJawvF--znDE***IQ
+      endpoint: 192.168.33.137
+      expires: 2026-11-01T02:49:26Z (1793501366)
+      pin: 63c2cb7bd1******6cd8ea****02158
+      credential: yes
+
+   The token is the long line starting with ``eyJ``. The ``id``, ``endpoint``, ``expires``, ``pin``, and ``credential`` lines describe the token. The command displays the token only once. By default, tokens are valid for 30 days and can enroll any number of agents. Treat the token like a password.
+
+   To limit its validity or usage, add ``--ttl <DURATION>``, ``--max-uses <N>``, or both, for example ``--ttl 24h``.
+
+   To save the token to a file that only root can read, run the command this way instead. Only the token goes to the file.
+
+   .. code-block:: console
+
+      # (umask 077 && /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS> > <TOKEN_FILE_PATH>)
+
+   List existing tokens with:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-authd --list-enrollment-tokens
+
+   Revoke a token with:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-authd --revoke-enrollment-token <TOKEN_ID>
+
+   Replace ``<TOKEN_ID>`` with the token's ``id`` value.
+
+   You can also create, list, and revoke tokens in the Wazuh dashboard, under **Agents management** > **Enrollment tokens**. Click **Create token**, enter an address from the list, and click **Create**. The dashboard shows the token only once.
+
+#. Copy the token. You pass it as ``WAZUH_ENROLLMENT_TOKEN`` when you install the Wazuh agent, as the section for your operating system describes. The installation doesn't start the Wazuh agent. The agent enrolls with the Wazuh manager when it first starts.
+
+.. note::
+
+   To enroll a Wazuh agent that already has a key, for example, after you move it to another Wazuh manager, see :ref:`Re-enrolling a Wazuh agent <reenrolling_wazuh_agent>`.
 
 .. _reenrolling_wazuh_agent:
 

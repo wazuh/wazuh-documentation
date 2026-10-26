@@ -72,6 +72,8 @@ Requirements
 
 Check the recommended operating systems and hardware requirements for the Wazuh manager installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
+The Wazuh manager package doesn't install on a host that has a Wazuh manager 4.x, even a fresh one: :doc:`migrate </migration-to-5x/index>` instead. The Wazuh manager doesn't start until it has the Wazuh indexer password and certificates.
+
 .. _supported_operating_systems:
 
 Recommended operating systems
@@ -96,7 +98,7 @@ You can install the Wazuh manager as a single-node or multi-node cluster.
    | Wazuh manager           |     8    |     4        |     16       |       8        |
    +-------------------------+----------+--------------+--------------+----------------+
 
-   All-in-one host (the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host), up to 25 agents: 4 CPU cores and 8 GB of RAM, as in the Quickstart. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
+   All-in-one host (the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host), up to 25 agents: 4 CPU cores and 8 GB of RAM, as in the :doc:`Quickstart </quickstart>`. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
 
 -  Disk space requirements
 
@@ -132,7 +134,13 @@ If no Wazuh 4.x agents connect to this Wazuh manager, you can keep 1514 and 1515
 Agent connection address
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Agents connect to the Wazuh manager only through an address in its agent listener certificate, and you can create enrollment tokens only for those addresses. The certificates include each Wazuh manager node's name and its ``ip`` and ``dns`` values from ``config.yml``. To add any other address, such as a load balancer, a NAT address, or a public name, use ``-as <ALTERNATE_ADDRESS>`` when you create the certificates. For a cluster behind a load balancer, use a TCP passthrough load balancer on 1517/TCP and add its address with ``-as``.
+Wazuh agents connect to a Wazuh manager node only through an address in its agent listener certificate, ``remoted.pem``. You can create enrollment tokens only for those addresses. To add an address, such as a load balancer, a NAT address, or a public name, follow your installation method:
+
+-  **Assisted installation:** The certificate lists the node's name and its addresses from ``config.yml``. To add an address, use ``-as <ALTERNATE_ADDRESS>`` when you generate the configuration files. The tool adds it to the certificate of every Wazuh manager node.
+
+-  **Step-by-step installation:** The certificates tool issues the certificate with the node's name and its addresses from ``config.yml``. To add an address, use ``-as <ALTERNATE_ADDRESS>`` when you create the certificates. The root CA must be in place before you install the package, as :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>` describes.
+
+In both methods, pass every address in the same run, because the certificate holds only the ``-as`` values of that run. For a cluster behind a load balancer, use a TCP passthrough load balancer on 1517/TCP. Add its address to the certificate of every Wazuh manager node. Create enrollment tokens on the master node. A worker node refuses the command, and the master node accepts only addresses in its own certificate. Agents therefore enroll through the load balancer or the master node's address. To create a token for a worker node's address, add that address with ``-as`` too.
 
 .. toctree::
    :hidden:

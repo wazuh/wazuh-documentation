@@ -6,14 +6,14 @@
 Uninstalling the Wazuh central components
 =========================================
 
-Uninstalling deletes the components' data and configuration, including indexed alerts and certificates, and asks no confirmation. It can also delete the root CA private key in ``/etc/wazuh/ca``, which you need to add nodes or renew certificates. Back up anything you want to keep first, ``/etc/wazuh/ca`` included.
+Uninstalling deletes the components' data and configuration, including indexed alerts and certificates, and asks for no confirmation. It can also delete the root CA private keys in ``/etc/wazuh-manager/ca``, ``/etc/wazuh-indexer/ca``, and ``/etc/wazuh-dashboard/ca``, which you need to add nodes or renew certificates. The Wazuh agents trust the Wazuh manager CA. Back up anything you want to keep first, these directories included. After an assisted installation, the root CA key is also in the ``wazuh-ca`` directory beside the installation assistant, on the host where you ran ``--generate-config-files``. Uninstalling doesn't remove that directory.
 
 You can remove the Wazuh central components in two ways. Use only one. The installation assistant removes every Wazuh central component on the host at once. The package manager removes one component at a time, as described in :ref:`Uninstall one component with the package manager <uninstall_one_component>`.
 
 Uninstall all central components with the installation assistant
 ----------------------------------------------------------------
 
-Follow these steps to uninstall the Wazuh central components with the installation assistant. Back up ``/etc/wazuh/ca`` first, as described at the start of this section.
+Follow these steps to uninstall the Wazuh central components with the installation assistant. Back up the CA directories first, as described at the start of this section.
 
 #. If you no longer have the Wazuh installation assistant script, download it:
 
@@ -27,20 +27,13 @@ Follow these steps to uninstall the Wazuh central components with the installati
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --uninstall
 
-   This removes the Wazuh indexer, the Wazuh manager, and the Wazuh dashboard packages that are installed on the host, and their data. It leaves the ``wazuh-indexer`` user and group on every host that had the Wazuh indexer.
+   This removes the Wazuh indexer, the Wazuh manager, and the Wazuh dashboard packages that are installed on the host, with their data and their configuration directories ``/etc/wazuh-indexer``, ``/etc/wazuh-manager``, and ``/etc/wazuh-dashboard``, including ``local.env``, ``ca/``, ``certs/``, and ``export/``. It also removes the ``wazuh-indexer``, ``wazuh-manager``, and ``wazuh-dashboard`` users.
 
-#. On every host that had the Wazuh indexer, remove its user and the Java performance data directory it leaves in ``/tmp``:
-
-   .. code-block:: console
-
-      # userdel wazuh-indexer
-      # rm -rf /tmp/hsperfdata_wazuh-indexer
-
-#. On a host with the Wazuh indexer and without the Wazuh dashboard, ``/etc/wazuh`` also remains. It can hold ``credentials.env`` and, on the host where you created the certificates (the first Wazuh indexer node, or the host where you ran ``--generate-config-files``), the root CA private key in ``ca/``. Once you have the backup described at the start of this section, remove the directory:
+   On the host where you ran ``--generate-config-files``, the ``wazuh-ca`` directory beside the installation assistant remains. It holds the root CA private key and the passwords of all the Wazuh users. Once you have the backup described at the start of this section, or if you no longer need to add nodes or renew certificates, remove it:
 
    .. code-block:: console
 
-      # rm -rf /etc/wazuh
+      # rm -rf ./wazuh-ca
 
 #. Confirm the removal:
 
@@ -58,13 +51,13 @@ Follow these steps to uninstall the Wazuh central components with the installati
 
             # dpkg -l 'wazuh-*'
 
-   No Wazuh central component package is listed.
+   No Wazuh central component package is listed. On Debian-based systems, ``dpkg`` prints ``dpkg-query: no packages found matching wazuh-*`` and exits with status 1 when no package matches.
 
-#. The ``wazuh-install-files.tar`` holds the passwords and every node's private key. Remove it along with ``/var/log/wazuh-install.log``, the assistant script, and the other generated files in your working directory:
+#. The ``wazuh-install-files.tar`` holds the passwords and every node's private key. Remove it along with ``/var/log/wazuh-install.log``, ``/var/log/wazuh-passwords-tool.log``, the assistant script, ``config.yml``, and the other generated files in your working directory:
 
    .. code-block:: console
 
-      # rm -rf /var/log/wazuh-install.log ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh ./artifact_urls_|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yaml ./wazuh-install-files.tar ./wazuh-install-packages
+      # rm -rf /var/log/wazuh-install.log /var/log/wazuh-passwords-tool.log ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh ./config.yml ./artifact_urls_|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yaml ./wazuh-install-files.tar ./wazuh-install-packages
 
 If you installed the components step by step, also remove the Wazuh repository as described in :ref:`Removing the Wazuh repository <uninstall_wazuh_repository>`.
 
@@ -73,18 +66,20 @@ If you installed the components step by step, also remove the Wazuh repository a
 Uninstall one component with the package manager
 ------------------------------------------------
 
-Remove the components in any order. Removing the last Wazuh central component on a host can delete the root CA private key in ``/etc/wazuh/ca``, which you need to add nodes or renew certificates. On the host that holds ``/etc/wazuh/ca/root-ca.key``, copy the directory to a safe place before you start:
+Remove the components in any order. Removing a component can delete the root CA private key it created, which you need to add nodes or renew certificates. The Wazuh agents trust the Wazuh manager CA. Before you start, copy the CA directory of each component on the host to a safe place:
 
 .. code-block:: console
 
-   # cp -a /etc/wazuh/ca <BACKUP_DIRECTORY>/
+   # cp -a /etc/wazuh-manager/ca <BACKUP_DIRECTORY>/wazuh-manager-ca
+   # cp -a /etc/wazuh-indexer/ca <BACKUP_DIRECTORY>/wazuh-indexer-ca
+   # cp -a /etc/wazuh-dashboard/ca <BACKUP_DIRECTORY>/wazuh-dashboard-ca
 
-Replace ``<BACKUP_DIRECTORY>`` with a directory outside ``/etc/wazuh``, preferably on another host.
+Run only the lines for the components installed on the host. The keys that matter most are on the Wazuh manager master node and the first Wazuh indexer node. To reinstall later with the same certificates and passwords, also copy the ``certs`` and ``export`` directories and the ``local.env`` file of each component. Replace ``<BACKUP_DIRECTORY>`` with a directory outside ``/etc``, preferably on another host.
 
 -  :ref:`Uninstalling the Wazuh dashboard <uninstall_dashboard>`
 -  :ref:`Uninstalling the Wazuh manager <uninstall_server>`
 -  :ref:`Uninstalling the Wazuh indexer <uninstall_indexer>`
--  :ref:`Removing the shared directory <uninstall_shared_directory>`
+-  :ref:`Checking for leftover directories <uninstall_leftover_directories>`
 -  :ref:`Removing the Wazuh repository <uninstall_wazuh_repository>`
 
 .. _uninstall_dashboard:
@@ -92,7 +87,7 @@ Replace ``<BACKUP_DIRECTORY>`` with a directory outside ``/etc/wazuh``, preferab
 Uninstalling the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run the following commands to uninstall the Wazuh dashboard:
+Run the following commands to stop the Wazuh dashboard, remove its package, and delete its files:
 
 #. Remove the Wazuh dashboard installation:
 
@@ -104,9 +99,6 @@ Run the following commands to uninstall the Wazuh dashboard:
 
             # systemctl disable --now wazuh-dashboard
             # apt-get remove --purge wazuh-dashboard -y
-            # rm -rf /var/lib/wazuh-dashboard/
-            # rm -rf /usr/share/wazuh-dashboard/
-            # rm -rf /etc/wazuh-dashboard/
 
       .. group-tab:: Yum
 
@@ -117,6 +109,7 @@ Run the following commands to uninstall the Wazuh dashboard:
             # rm -rf /var/lib/wazuh-dashboard/
             # rm -rf /usr/share/wazuh-dashboard/
             # rm -rf /etc/wazuh-dashboard/
+            # rm -f /etc/default/wazuh-dashboard.rpmsave
 
       .. group-tab:: DNF
 
@@ -127,13 +120,14 @@ Run the following commands to uninstall the Wazuh dashboard:
             # rm -rf /var/lib/wazuh-dashboard/
             # rm -rf /usr/share/wazuh-dashboard/
             # rm -rf /etc/wazuh-dashboard/
+            # rm -f /etc/default/wazuh-dashboard.rpmsave
 
 .. _uninstall_server:
 
 Uninstalling the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run the following commands to uninstall the Wazuh manager:
+Run the following commands to stop the Wazuh manager, remove its package, and delete its directories, including the CA private key:
 
 #. Remove the Wazuh manager installation:
 
@@ -153,7 +147,7 @@ Run the following commands to uninstall the Wazuh manager:
 
             # systemctl disable --now wazuh-manager
             # yum remove wazuh-manager -y
-            # rm -rf /var/wazuh-manager/
+            # rm -rf /var/wazuh-manager/ /etc/wazuh-manager/
 
       .. group-tab:: DNF
 
@@ -161,14 +155,14 @@ Run the following commands to uninstall the Wazuh manager:
 
             # systemctl disable --now wazuh-manager
             # dnf remove wazuh-manager -y
-            # rm -rf /var/wazuh-manager/
+            # rm -rf /var/wazuh-manager/ /etc/wazuh-manager/
 
 .. _uninstall_indexer:
 
 Uninstalling the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run the following commands to uninstall the Wazuh indexer:
+Run the following commands to stop the Wazuh indexer, remove its package, and delete its data, logs, and configuration. To keep the configuration and data for a reinstall on a DEB system, run ``apt-get remove wazuh-indexer -y`` instead.
 
 #. Remove the Wazuh indexer installation:
 
@@ -183,8 +177,6 @@ Run the following commands to uninstall the Wazuh indexer:
             # rm -rf /var/lib/wazuh-indexer/ /usr/share/wazuh-indexer/ /etc/wazuh-indexer/ /var/log/wazuh-indexer/
             # rm -rf /etc/systemd/system/wazuh-indexer.service.d/
             # systemctl daemon-reload
-            # userdel wazuh-indexer
-            # rm -rf /tmp/hsperfdata_wazuh-indexer
 
          ``dpkg`` may warn that some directories are not empty. The ``rm -rf`` command removes them.
 
@@ -197,8 +189,6 @@ Run the following commands to uninstall the Wazuh indexer:
             # rm -rf /var/lib/wazuh-indexer/ /usr/share/wazuh-indexer/ /etc/wazuh-indexer/ /var/log/wazuh-indexer/
             # rm -rf /etc/systemd/system/wazuh-indexer.service.d/
             # systemctl daemon-reload
-            # userdel wazuh-indexer
-            # rm -rf /tmp/hsperfdata_wazuh-indexer
 
       .. group-tab:: DNF
 
@@ -209,27 +199,31 @@ Run the following commands to uninstall the Wazuh indexer:
             # rm -rf /var/lib/wazuh-indexer/ /usr/share/wazuh-indexer/ /etc/wazuh-indexer/ /var/log/wazuh-indexer/
             # rm -rf /etc/systemd/system/wazuh-indexer.service.d/
             # systemctl daemon-reload
-            # userdel wazuh-indexer
-            # rm -rf /tmp/hsperfdata_wazuh-indexer
 
-.. _uninstall_shared_directory:
+To confirm, run ``dpkg -l 'wazuh-*'`` (DEB) or ``rpm -qa 'wazuh-*'`` (RPM). The output lists no Wazuh central component package.
 
-Removing the shared directory
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _uninstall_leftover_directories:
 
-The Wazuh central components share the ``/etc/wazuh/`` directory. While they are installed, ``credentials.env`` holds the generated passwords and ``ca/`` holds the root CA and its private key. Removing a component's package takes its own passwords out of ``credentials.env``. What happens to the rest depends on the last component to leave the host. The Wazuh manager or the Wazuh dashboard, as the last one, deletes the whole directory, ``ca/root-ca.key`` included. The Wazuh indexer never deletes ``credentials.env``, so the directory remains. As the last one, it deletes the root CA files in ``ca/`` if no other component's password is left in ``credentials.env``. If you already removed ``credentials.env``, as :ref:`Securing your Wazuh installation <wazuh_dashboard_securing_installation>` recommends, it leaves ``ca/`` as it is.
+Checking for leftover directories
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-On the host that holds ``ca/root-ca.key``, back up ``/etc/wazuh/ca`` before you uninstall the last Wazuh central component. You need the key to add nodes or renew certificates.
-
-After you uninstall the last Wazuh central component on a host, check whether the directory remains with ``ls /etc/wazuh``. If it is still there, remove it:
+The Wazuh central components don't share a directory. Each one keeps its configuration, certificates, and passwords in its own directory: ``/etc/wazuh-indexer``, ``/etc/wazuh-manager``, or ``/etc/wazuh-dashboard``. A package removal can leave that directory behind, as the uninstall steps of each component describe. After you uninstall the last Wazuh central component on a host, check which of these directories remain:
 
 .. code-block:: console
 
-   # rm -rf /etc/wazuh
+   # ls -d /etc/wazuh-indexer /etc/wazuh-manager /etc/wazuh-dashboard
+
+The command prints ``No such file or directory`` for each directory that is gone. If one is still there, back up its ``ca`` directory if you need it, then remove it:
+
+.. code-block:: console
+
+   # rm -rf /etc/wazuh-<COMPONENT>
+
+Replace ``<COMPONENT>`` with indexer, manager, or dashboard.
 
 .. note::
 
-   Don't run this command while a Wazuh central component is still installed on the host. Each component checks this directory every time it starts, and on the host where you created the certificates (the first Wazuh indexer node, or the host where you ran ``--generate-config-files``), ``/etc/wazuh/ca`` holds the root CA private key you need to add nodes or renew certificates.
+   Don't run this command while a Wazuh central component is still installed on the host.
 
 .. _uninstall_wazuh_repository:
 

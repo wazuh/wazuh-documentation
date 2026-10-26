@@ -72,6 +72,15 @@ Requirements
 
 Check the recommended operating systems and hardware requirements for the Wazuh dashboard installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
+The Wazuh dashboard package opens no port. To open 443/TCP on a host with ``firewalld``, run:
+
+.. code-block:: console
+
+   # firewall-cmd --permanent --add-port=443/tcp
+   # firewall-cmd --reload
+
+Use another port number if you changed ``server.port``. The Wazuh dashboard supports only systemd.
+
 Recommended operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -94,7 +103,7 @@ The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh
    | Wazuh dashboard         |     4    |     2        |     8        |       4        |
    +-------------------------+----------+--------------+--------------+----------------+
 
-   All-in-one host (the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host), up to 25 agents: 4 CPU cores and 8 GB of RAM, as in the Quickstart. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
+   All-in-one host (the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host), up to 25 agents: 4 CPU cores and 8 GB of RAM, as in the :doc:`Quickstart </quickstart>`. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
 
 .. _wazuh_dashboard_required_ports:
 

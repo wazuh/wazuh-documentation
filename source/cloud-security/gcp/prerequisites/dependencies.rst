@@ -62,6 +62,12 @@ The `google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub/>`__ and 
 
 The integration uses the Pub/Sub client to retrieve messages from configured subscriptions and the Cloud Storage client to retrieve data from configured buckets.
 
+On Debian and Ubuntu, first install the ``typing_extensions`` package with ``--ignore-installed``. The newer copy is installed next to the one from the system package, which pip can't remove:
+
+.. code-block:: console
+
+   # sudo pip3 install --break-system-packages --ignore-installed typing_extensions
+
 Run the following command to install the required dependencies for Python 3.11–3.13:
 
 .. code-block:: console
