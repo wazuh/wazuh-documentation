@@ -35,7 +35,6 @@ The following example shows the SCA configuration with the available configurati
        <enabled>yes</enabled>
        <interval>5m</interval>
        <integrity_interval>1h</integrity_interval>
-       <max_eps>75</max_eps>
      </synchronization>
    </sca>
 
@@ -49,9 +48,7 @@ Where:
 
   - ``<enabled>``: Enables or disables SCA state synchronization between the Wazuh agent and the Wazuh manager. The default value is ``yes``.
   - ``<interval>``: Defines how often the Wazuh agent initiates the synchronization process with the Wazuh manager to synchronize SCA state data.
-  - ``<integrity_interval>``: Specifies how often the Wazuh agent performs an integrity check to verify that the SCA policy files match those stored on the Wazuh manager.
-  - ``<response_timeout>``: Specifies how long the Wazuh agent waits for a synchronization response before timing out.
-  - ``<max_eps>``: Specifies the maximum number of SCA synchronization events that the Wazuh agent can send per second.
+  - ``<integrity_interval>``: Specifies how often the Wazuh agent checks that its synchronized SCA results match the state in the Wazuh indexer. On a mismatch, the Wazuh agent starts a full resend (recovery) of its SCA state.
 
 - Optional
 
@@ -90,13 +87,21 @@ To disable a policy included with the Wazuh agent, specify its path relative to 
      </policies>
    </sca>
 
-For a policy distributed through centralized configuration, use its path in the ``etc/shared`` directory:
+For a policy distributed through centralized configuration, use its path in the ``etc/shared`` directory on Linux and macOS agents, or in the ``shared`` directory on Windows agents:
 
 .. code-block:: xml
 
    <sca>
      <policies>
        <policy enabled="no">etc/shared/<POLICY_FILE_TO_DISABLE></policy>
+     </policies>
+   </sca>
+
+.. code-block:: xml
+
+   <sca>
+     <policies>
+       <policy enabled="no">shared\<POLICY_FILE_TO_DISABLE></policy>
      </policies>
    </sca>
 
@@ -168,10 +173,8 @@ You can enable this feature to push policy files to Wazuh agents in defined grou
 #. Add the following configuration block to the Wazuh manager ``/var/wazuh-manager/etc/shared/default/agent.conf`` file to configure the new policy file in the Wazuh agent:
 
    .. code-block:: xml
-      :emphasize-lines: 5
 
-      <agent_config>
-        <!-- Shared agent configuration here -->
+      <agent_config os="Linux">
         <sca>
           <policies>
             <policy>etc/shared/<NEW_POLICY_FILE></policy>
@@ -179,7 +182,23 @@ You can enable this feature to push policy files to Wazuh agents in defined grou
         </sca>
       </agent_config>
 
-   Wazuh saves every file pushed remotely from the server in the ``/<WAZUH_HOME_DIRECTORY>/etc/shared/`` directory on the agent endpoints, regardless of the group they belong to. We specify the policy's relative file path in the configuration because the full file path might differ depending on the endpoint's operating system.
+      <agent_config os="macOS">
+        <sca>
+          <policies>
+            <policy>etc/shared/<NEW_POLICY_FILE></policy>
+          </policies>
+        </sca>
+      </agent_config>
+
+      <agent_config os="Windows">
+        <sca>
+          <policies>
+            <policy>shared\<NEW_POLICY_FILE></policy>
+          </policies>
+        </sca>
+      </agent_config>
+
+   The Wazuh agent saves all files pushed from the Wazuh server in the ``etc/shared/`` directory on Linux and macOS endpoints and in the ``shared\`` directory on Windows endpoints, regardless of the group they belong to. We specify the relative file path of the policy because the installation directory differs between operating systems.
 
 The new ``<sca>`` block in the Wazuh manager ``/var/wazuh-manager/etc/shared/default/agent.conf`` file merges with the ``<sca>`` block on the Wazuh agent side, and Wazuh adds the new configuration.
 

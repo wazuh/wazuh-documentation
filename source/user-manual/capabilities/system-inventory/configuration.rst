@@ -20,7 +20,7 @@ The Syscollector module is enabled by default on all endpoints where the Wazuh a
 
 - ``/var/ossec/etc/ossec.conf`` for Linux endpoints.
 - ``C:\Program Files (x86)\ossec-agent\ossec.conf`` for Windows endpoints.
-- ``/Library/Ossec/ossec.conf`` for macOS endpoints.
+- ``/Library/Ossec/etc/ossec.conf`` for macOS endpoints.
 
 You can also use the centralized configuration file to make changes to the Wazuh Syscollector module across multiple monitored endpoints that belong to the same agent group. For example, the ``default`` group uses the configuration file, which you can find at ``/var/ossec/etc/shared/default/agent.conf`` on the Wazuh manager. Settings applied with the centralized configuration take precedence over the local Wazuh agent configuration.
 
