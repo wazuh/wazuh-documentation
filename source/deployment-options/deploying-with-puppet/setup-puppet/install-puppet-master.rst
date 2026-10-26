@@ -42,12 +42,12 @@ The manifest supports the following releases for installing Wazuh.
       # apt-get update
       # apt-get install curl apt-transport-https lsb-release wget
 
-#. Install the appropriate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct Debian file to install the Puppet 8 repo for your Linux distribution.
+#. Install the appropriate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct Debian file to install the Puppet 7 repo for your Linux distribution.
 
    .. code-block:: console
 
-      # wget https://apt.puppet.com/puppet7-release-focal.deb
-      # dpkg -i puppet7-release-focal.deb
+      # wget https://apt.puppet.com/puppet7-release-$(lsb_release -cs).deb
+      # dpkg -i puppet7-release-$(lsb_release -cs).deb
       # apt-get update
       # apt-get install -y puppetserver
 

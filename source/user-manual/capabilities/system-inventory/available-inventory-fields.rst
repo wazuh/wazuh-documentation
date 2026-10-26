@@ -531,7 +531,8 @@ This scan collects browser extension details from monitored endpoints, including
 +--------------------------------+---------+---------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+
 | Field                          | Type    | Description                                                                                 | Example (Windows)                              | Example (Linux)     |
 +================================+=========+=============================================================================================+================================================+=====================+
-| ``browser.name``               | keyword | Name of the browser. Valid values: chrome, chromium, opera, yandex, brave, edge, edge_beta. | chrome                                         |                     |
+| ``browser.name``               | keyword | Name of the browser. Valid values: chrome, chromium, opera, yandex, brave, edge, edge_beta, | chrome                                         |                     |
+|                                |         | firefox (all operating systems), safari (macOS), and ie (Windows).                          |                                                |                     |
 +--------------------------------+---------+---------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+
 | ``browser.profile.name``       | keyword | Name of the browser profile.                                                                | Person 1                                       |                     |
 +--------------------------------+---------+---------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+
