@@ -1,17 +1,22 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This guide provides the essential information needed to utilize the Wazuh server API.
+   :description: Learn how to start and stop the Wazuh manager API, use the API console in the Wazuh dashboard, and authenticate with a JSON Web Token.
 
 Getting started
 ===============
 
-This guide provides the essential information needed to utilize the Wazuh server API.
+The Wazuh manager API runs inside the Wazuh manager service and listens on port 55000. In a cluster, it runs only on the master node. Every request except the two login requests must carry a JSON Web Token (JWT).
 
-Starting and stopping the Wazuh server API
-------------------------------------------
+Prerequisites
+-------------
 
-The Wazuh server API is automatically installed and runs as part of the Wazuh manager service. You can manage or monitor the Wazuh server API by executing the ``systemctl`` or ``service`` commands with the Wazuh manager service:
+The steps in this guide target Wazuh |WAZUH_CURRENT|, in an all-in-one or a distributed deployment. The credential and configuration steps need root access on the Wazuh manager. The command-line examples use cURL, and the Wazuh agent examples need at least one enrolled Wazuh agent. You can run the cURL commands and scripts on the Wazuh manager or on any host that reaches it on port 55000.
+
+Start and stop the Wazuh manager API
+------------------------------------
+
+The Wazuh manager API is automatically installed and runs as part of the Wazuh manager service. You can manage or monitor the Wazuh manager API by executing the ``systemctl`` or ``service`` commands with the Wazuh manager service:
 
 .. tabs::
 
@@ -27,29 +32,30 @@ The Wazuh server API is automatically installed and runs as part of the Wazuh ma
 
          # service wazuh-manager start/status/stop/restart
 
-Using the Wazuh server API console in the Wazuh dashboard
----------------------------------------------------------
+To check whether a Wazuh manager node is ready to process events, send :api-ref:`GET /cluster/{node_id}/status <operation/api.controllers.cluster_controller.get_status_node>`. In Wazuh 5.0, it reports for each Wazuh manager daemon whether it is running and ready.
 
-You can interact with the Wazuh server API via the built-in API Console in the Wazuh dashboard. To do this, follow the steps below:
+Using the API console from the Wazuh dashboard
+----------------------------------------------
 
-#. Log into the Wazuh dashboard with a user that has administrator privileges. For example, the default ``admin`` user has administrator privileges.
+You can interact with the Wazuh manager API through the built-in API console in the Wazuh dashboard.
 
-#. Navigate to **Server management** > **Dev Tools** to access the Wazuh server API console on the dashboard, click on the menu icon and navigate.
+#. Log in to the Wazuh dashboard as a user with administrator privileges, such as the default ``admin`` user.
+#. Click the menu icon and select **Server management > Dev Tools** to access the Wazuh manager API console.
 
    .. thumbnail:: /images/manual/api/api-console-access.png
-      :title: Access the Wazuh server API console
-      :alt: Access the Wazuh server API console
+      :title: Access the Wazuh manager API console
+      :alt: Access the Wazuh manager API console
       :align: center
       :width: 80%
 
 #. In the **API Console**:
 
-   -  Select HTTP method (GET, POST, PUT, DELETE)
-   -  Enter the endpoint (e.g. ``/agents``, ``/manager/info``)
-   -  Add any query parameters (e.g. ``?pretty=true&limit=10``)
-   -  Click the **Play** button.
+   -  Select HTTP method (GET, POST, PUT, or DELETE).
+   -  Enter the endpoint, such as ``/cluster/nodes`` or ``/cluster/<NODE_NAME>/info``.
+   -  Add any query parameters, such as ``?pretty=true``.
+   -  Click **Play**.
 
-All requests are automatically authenticated using your current dashboard session. See :doc:`requests-responses` to learn more about the basic concepts.
+All requests are automatically authenticated using your current dashboard session. See :doc:`Wazuh manager API requests and responses </user-manual/api/requests-responses>` to learn more about the basic concepts.
 
 .. thumbnail:: /images/manual/api/api-console-execution.gif
    :title: Execute API request in console
@@ -57,29 +63,31 @@ All requests are automatically authenticated using your current dashboard sessio
    :align: center
    :width: 80%
 
-.. _api_log_in:
+.. _api_getting_started_authentication:
 
-Authentication – Obtaining a JWT token
---------------------------------------
+Authentication
+--------------
 
-All API endpoints (except the login endpoint itself) require authentication using a JSON Web Token (JWT). Users must include a JSON Web Token (JWT) in every request. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object.
+All endpoints except ``POST /security/user/authenticate`` and ``POST /security/user/authenticate/run_as`` require authentication using a JSON Web Token (JWT). These two endpoints use HTTP basic authentication. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object.
 
-Authenticate the Wazuh server API via command line
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _api_getting_started_authenticate_the_wazuh_manager_api_from_the_command_line:
 
-To ensure secure access, all Wazuh server API endpoints require authentication. Follow the steps outlined in the :api-ref:`POST /security/user/authenticate <operation/api.controllers.security_controller.login_user>` reference guide to obtain a token necessary for accessing the API endpoints:
+Authenticate the Wazuh manager API from the command line
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Run the following command to send a user authentication POST request to the Wazuh server API and store the returned JWT in the ``TOKEN`` variable. Replace ``<WAZUH_API_USER>`` and ``<WAZUH_API_PASSWORD>`` with your credentials.
+To ensure secure access, all Wazuh manager API endpoints require authentication. Follow the steps outlined in the :api-ref:`POST /security/user/authenticate <operation/api.controllers.security_controller.login_user>` reference guide to obtain a token necessary for accessing the API endpoints:
+
+#. Run the following command to authenticate with the Wazuh manager API and store the returned JWT in the ``TOKEN`` variable, replacing ``<WAZUH_API_USER>`` and ``<WAZUH_API_PASSWORD>`` with your credentials.
 
    .. code-block:: console
 
-      # TOKEN=$(curl -u <WAZUH_API_USER>:<WAZUH_API_PASSWORD> -k -X POST "https://localhost:55000/security/user/authenticate?raw=true")
+      # TOKEN=$(curl -u <WAZUH_API_USER>:<WAZUH_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
 
    .. note::
 
-      -  If SSL (HTTPS) is enabled in the API and it is using the default self-signed certificates, you need to add the parameter ``-k`` to avoid the server connection verification. We recommend using the ``raw=true`` query parameter when authenticating via cURL commands, as it simplifies handling by returning the token in plain text, especially useful for long JWTs.
-      -  The default Wazuh server API credential is ``wazuh:wazuh``, This should be changed after installation to avoid vulnerabilities. But if the Wazuh deployment was performed using the installation script, the Wazuh API user is ``wazuh`` and you can extract the password from ``wazuh-install-files.tar`` by running the command ``tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'wazuh\'" -A 1``.
-      -  You can :doc:`reset the password </user-manual/user-administration/password-management>` for the ``wazuh`` user if you cannot retrieve the password.
+      -  The Wazuh manager certificate authority (CA) issues the Wazuh manager API certificate. Add ``-k`` to skip certificate verification, or use ``--cacert`` with a copy of ``/etc/wazuh-manager/export/ca.pem`` to verify the certificate. We recommend the ``raw=true`` query parameter when you authenticate with cURL. It returns the token in plain text, which simplifies handling long JWTs.
+      -  The ``wazuh`` and ``wazuh-internal-client`` Wazuh manager API users have no default password. The installation generates a password for each user and stores it in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager, readable only by root. In a distributed deployment, the passwords are also in ``wazuh-install-files/credentials.env`` inside the ``wazuh-install-files.tar`` file. Both ``credentials.env`` files hold the ``wazuh`` password as ``WAZUH_MANAGER_API_PASSWORD`` and the ``wazuh-internal-client`` password as ``WAZUH_MANAGER_WUI_PASSWORD``. The Wazuh dashboard uses ``wazuh-internal-client``, so use ``wazuh`` for your own requests. To print the ``wazuh`` password, run ``sed -n 's/^WAZUH_MANAGER_API_PASSWORD=//p' /etc/wazuh-manager/export/credentials.env`` as root on the Wazuh manager.
+      -  You can reset the password for the ``wazuh`` user if you can't retrieve it. The ``/etc/wazuh-manager/export/credentials.env`` file holds the password set at installation. If you change the ``wazuh`` password later, the file no longer holds the current password.
 
 #. Verify that the token has been generated:
 
@@ -87,66 +95,74 @@ To ensure secure access, all Wazuh server API endpoints require authentication. 
 
       # echo $TOKEN
 
-   The output should be a lengthy string similar to the following:
+   The output is a lengthy string similar to the following:
 
    .. code-block:: none
       :class: output
 
-      eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNzA3ODk4NTEzLCJleHAiOjE3MDc4OTk0MTMsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.ACcJ3WdV3SnTOC-PV2oGZGCyH3GpStSOu161UHHT7w6eUm_REOP_g8SqqIJDDW0gCcQNJTEECortIuI4zj7nybNhACRlBrDBZoG4Re4HXEpAchyFQXwq0SsZ3HHSj7eJinBF0pJDG0D8d1_LkcoxaX3FpxpsCZ4xzJ492CpnVZLT8qI4
+      eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNzkxOTg2NjIzLCJuYmZfbXMiOjE3OTE5ODY2MjM4ODUsImV4cCI6MTc5MTk4NzUyMywic3ViIjoid2F6dWgiLCJydW5fYXMiOmZhbHNlLCJyYmFjX3JvbGVzIjpbMV0sInJiYWNfbW9kZSI6IndoaXRlIn0.AeKHOdYaBEW4U-kZiHMXlYwVzSAHOdOQdPdDJ874450WdligB3PWxc2Jrz2WuUVWHOUBHDn05iyi42UQwWZN0IRPAa0OG7arhv0w2psqOWwHU8OnDs-RH7QAnwpFe47_tGeH0rweikwRmT-nS09u-x3uh3SaTNfydQnnqOa5VUyryDQ0
 
-   If the authentication fails, the output will either display an error message or remain blank. In such cases, double-check your user credentials and ensure you have network connectivity to the Wazuh server API.
+   If the authentication fails, the output either displays an error message or remains blank. In such cases, double-check your user credentials and make sure you have network connectivity to the Wazuh manager API.
 
-#. Send an API request to confirm that everything is working as expected:
+   After you authenticate, you can access any API endpoint using the following structure. Replace ``<METHOD>`` with the desired method and ``<ENDPOINT>`` with the string corresponding to the endpoint you wish to access. If you are not using an environment variable, replace ``$TOKEN`` with the obtained JWT.
 
    .. code-block:: console
 
-      # curl -k -X GET "https://localhost:55000/" -H "Authorization: Bearer $TOKEN"
+      # curl -k -X <METHOD> "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/<ENDPOINT>" -H "Authorization: Bearer $TOKEN"
 
-   The command returns output similar to the following example:
+#. Send an API request to return basic API info about the Wazuh manager:
 
-   .. code-block:: none
+   .. code-block:: console
+
+      # curl -k -s -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
+
+   Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address of your Wazuh manager.
+
+   The command output looks similar to this:
+
+   .. code-block:: json
       :class: output
 
       {
          "data": {
             "title": "Wazuh API REST",
-            "api_version": "4.14.1",
+            "api_version": "5.0.0",
             "revision": "rc2",
             "license_name": "GPL 2.0",
-            "license_url": "https://github.com/wazuh/wazuh/blob/v4.14.1/LICENSE",
-            "hostname": "thecotilking-VirtualBox",
-            "timestamp": "2026-01-23T13:57:11Z"
+            "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc2/LICENSE",
+            "hostname": "ubuntu-QEMU-Virtual-Machine",
+            "timestamp": "2026-09-23T07:30:59Z"
          },
          "error": 0
       }
 
-Once authenticated, you can access any API endpoint using the below structure. Replace ``<METHOD>`` with the desired method and ``<ENDPOINT>`` with the string corresponding to the endpoint you wish to access. If you are not using an environment variable, replace ``$TOKEN`` with the obtained JWT.
+It sends an authenticated GET request to the root endpoint of the Wazuh manager API. The API returns basic API info (title, version, revision, hostname, timestamp) in a human-readable (pretty-printed) format.
 
-.. code-block:: console
+To end a session, send :api-ref:`DELETE /security/user/authenticate <operation/api.controllers.security_controller.logout_user>` with the token. The request invalidates every token of the current user. For a token from ``POST /security/user/authenticate/run_as``, the request invalidates only the tokens granted for the same authorization context.
 
-   # curl -k -X <METHOD> "https://localhost:55000/<ENDPOINT>" -H "Authorization: Bearer $TOKEN"
+A token expires after 900 seconds by default. Request a new token when it expires. To change the lifetime, use ``PUT /security/config``. This change revokes all existing tokens. After 50 failed login attempts from an IP address, the Wazuh manager API rejects login requests from that address with HTTP ``403`` and error ``6000`` until 300 seconds have passed since its first failed attempt.
 
-Authenticate the Wazuh server API via scripts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Authenticate the Wazuh manager API with scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Automating interactions with the Wazuh server API requires obtaining a JWT token programmatically. The examples below show how to authenticate and make authenticated requests using popular scripting languages like Python and Bash.
+A script that interacts with the Wazuh manager API must obtain a JWT programmatically. The examples below show how to authenticate and make authenticated requests using popular scripting languages like Python and Bash.
 
 When you call the authentication endpoint ``/security/user/authenticate``, you can choose how the API returns the token:
 
--  By default (without any special parameter) - the response is a structured JSON object containing the token inside a ``data`` field. This format is convenient when your script can easily parse JSON.
--  With the query parameter ``?raw=true`` - the API returns only the plain text token (no JSON wrapper). This is much simpler when using tools like cURL in shell scripts, because you can capture the token directly into a variable without extra parsing steps.
+-  By default (without any special parameter), the response is a structured JSON object containing the token inside a data field. This format is convenient when your script can easily parse JSON.
+-  With the ``raw=true`` query parameter, the Wazuh manager API returns only the plain text token (no JSON wrapper). A plain token suits ``cURL`` in shell scripts, because you can capture the token directly into a variable without extra parsing steps.
 
-These scripts are intended for users looking to enhance their operational efficiency through automation or those seeking to understand how to programmatically access the Wazuh server API for custom integrations.
+Use these scripts to automate tasks, or to learn how to access the Wazuh manager API programmatically for custom integrations.
 
-Authenticate via Python script
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Authenticate with a Python script
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can authenticate to the Wazuh server API and obtain a JWT using a Python script. The following script ``wazuh_api_authenticator.py`` gets the token and uses it to retrieve basic Wazuh server API information and Wazuh agent status summary.
+You can authenticate to the Wazuh manager API and obtain a JWT using a Python script. The following script ``wazuh_api_authenticator.py``, gets the token and uses it to retrieve basic Wazuh manager API information and Wazuh agent status summary.
 
-#. Copy the script below into a file named ``wazuh_api_authenticator.py``, Replace ``<WAZUH_API_USER>`` and ``<WAZUH_API_PASSWORD>`` with the correct credentials:
+#. Copy the following script into a file named ``wazuh_api_authenticator.py``,
 
    .. code-block:: python3
-      :emphasize-lines: 15,16
+      :emphasize-lines: 13,15,16
 
       #!/usr/bin/env python3
 
@@ -155,12 +171,12 @@ You can authenticate to the Wazuh server API and obtain a JWT using a Python scr
       import urllib3
       from base64 import b64encode
 
-      # Disable insecure https warnings (for self-signed SSL certificates)
+      # Disable insecure HTTPS warnings (when the client does not trust the Wazuh manager CA)
       urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
       # Configuration
       protocol = 'https'
-      host = 'localhost'
+      host = '<WAZUH_MANAGER_IP_ADDRESS>'
       port = 55000
       user = '<WAZUH_API_USER>'
       password = '<WAZUH_API_PASSWORD>'
@@ -194,20 +210,26 @@ You can authenticate to the Wazuh server API and obtain a JWT using a Python scr
 
       print("\nEnd of the script.\n")
 
-#. Install the Python ``requests`` module, if it doesn't exist:
+   Replace:
+
+   -  ``<WAZUH_API_USER>`` with your Wazuh manager API username.
+   -  ``<WAZUH_API_PASSWORD>`` with your Wazuh manager API password.
+   -  ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager IP address.
+
+#. Install the Python ``requests`` module if it doesn't exist:
 
    .. code-block:: console
 
-      # python3 -m pip install requests
+      # apt update && apt install python3-requests -y
 
    .. note::
 
-      The Python module ``urllib3`` version 2.0 and above only supports OpenSSL version 1.1.1 or later. If your system has an older version of OpenSSL, you will need to either:
+      ``urllib3`` 2.0 and later requires OpenSSL 1.1.1 or later. If your system has an older version of OpenSSL, you must either:
 
       -  Upgrade OpenSSL to version 1.1.1 or higher.
       -  Downgrade ``urllib3`` to a version compatible with your current OpenSSL version.
 
-      Please ensure your software dependencies are properly aligned to avoid compatibility issues.
+      Make sure your software dependencies are properly aligned to avoid compatibility issues.
 
 #. Run the Python script ``wazuh_api_authenticator.py``:
 
@@ -215,74 +237,86 @@ You can authenticate to the Wazuh server API and obtain a JWT using a Python scr
 
       # python3 wazuh_api_authenticator.py
 
-   The command returns output similar to the following example:
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
 
       Login request ...
-      eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjAyMjMxNjU2LCJleHAiOjE2MDIyMzUyNTYsInN1YiI6IndhenVoIiwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.V60_otHPaT4NTkrS6SF3GHva0Z9r5p4mqe5Cn0hk4o4
+
+      eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNzkwMTY5MjEwLCJuYmZfbXMiOjE3OTAxNjkyMTAwMTksImV4cCI6MTc5MDE3MDExMCwic3ViIjoid2F6dWgiLCJydW5fYXMiOmZhbHNlLCJyYmFjX3JvbGVzIjpbMV0sInJiYWNfbW9kZSI6IndoaXRlIn0.AcFXKKtz39b6mIyYSufP2w_BBVjWrBycvfA3gE4EYKwN7nZkOhG5DJlnHXSwpvOc7jcvAQP_vOgrCR9QsBCvUTAdAfHemlEDBU4tpZbnRv7Gamn4CN-Z4qEr8lPriROzYe4S4Z-jkYO37Hj_4NirGQPeenL23IbWnzzgYJ8wc8kdki1H
+
       - API calls with TOKEN environment variable ...
+
       Getting API information:
       {
          "data": {
             "title": "Wazuh API REST",
-            "api_version": "4.14.1",
+            "api_version": "5.0.0",
             "revision": "rc2",
             "license_name": "GPL 2.0",
-            "license_url": "https://github.com/wazuh/wazuh/blob/v4.14.1/LICENSE",
-            "hostname": "thecotilking-VirtualBox",
-            "timestamp": "2026-01-23T13:57:11Z"
+            "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc2/LICENSE",
+            "hostname": "ubuntu-QEMU-Virtual-Machine",
+            "timestamp": "2026-09-23T13:13:30Z"
          },
          "error": 0
       }
+
       Getting agents status summary:
       {
          "data": {
-             "connection": {
-                 "active": 1,
-                 "disconnected": 0,
-                 "never_connected": 0,
-                 "pending": 0,
-                 "total": 1
-             },
-             "configuration": {
-                 "synced": 1,
-                 "not_synced": 0,
-                 "total": 1
-             }
+            "connection": {
+               "active": 1,
+               "disconnected": 0,
+               "never_connected": 0,
+               "pending": 0,
+               "total": 1
+            }
          },
          "error": 0
       }
+
       End of the script.
 
-Authenticate via Bash script
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Authenticate with a Bash script
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can also authenticate to the Wazuh server API using a Bash script. The following script ``wazuh_api_authenticator.sh`` authenticates with the Wazuh server API to obtain a JWT. It then uses the token within the request header to retrieve a summary of operating systems used by Wazuh agents.
+You can also authenticate to the Wazuh manager API using a Bash script. The following script ``wazuh_api_authenticator.sh`` authenticates with the Wazuh manager API to obtain a JWT. It then uses the token within the request header to retrieve a summary of operating systems used by Wazuh agents.
 
-#. Copy the script below into a file named ``wazuh_api_authenticator.sh``, replace ``<WAZUH_API_USER>`` and ``<WAZUH_API_PASSWORD>`` with the correct credentials:
+#. Copy the following script into a file named ``wazuh_api_authenticator.sh``:
 
    .. code-block:: bash
-      :emphasize-lines: 5
+      :emphasize-lines: 5,11,15
 
       #!/bin/bash
 
       echo -e "\n- Getting token...\n"
 
-      TOKEN=$(curl -u <WAZUH_API_USER>:<WAZUH_API_PASSWORD> -k -X POST "https://localhost:55000/security/user/authenticate?raw=true")
+      TOKEN=$(curl -s -u <WAZUH_API_USER>:<WAZUH_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
 
       echo -e "\n- API calls with TOKEN environment variable ...\n"
 
       echo -e "Getting default information:\n"
 
-      curl -k -X GET "https://localhost:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
+      curl -k -s -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
 
       echo -e "\n\nGetting /agents/summary/os:\n"
 
-      curl -k -X GET "https://localhost:55000/agents/summary/os?pretty=true" -H "Authorization: Bearer $TOKEN"
+      curl -k -s -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents/summary/os?pretty=true" -H "Authorization: Bearer $TOKEN"
 
       echo -e "\n\nEnd of the script.\n"
+
+   Replace:
+
+   -  ``<WAZUH_API_USER>`` with your Wazuh manager API username.
+   -  ``<WAZUH_API_PASSWORD>`` with your Wazuh manager API password.
+   -  ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager IP address.
+
+#. Make the script executable:
+
+   .. code-block:: console
+
+      # chmod +x wazuh_api_authenticator.sh
 
 #. Run the Bash script ``wazuh_api_authenticator.sh``:
 
@@ -290,40 +324,43 @@ You can also authenticate to the Wazuh server API using a Bash script. The follo
 
       # bash wazuh_api_authenticator.sh
 
-   The command returns output similar to the following example:
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
 
       - Getting token...
-      Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                       Dload  Upload   Total   Spent    Left  Speed
-      100  3059  100  3059    0     0  17089      0 --:--:-- --:--:-- --:--:-- 17089
+
       - API calls with TOKEN environment variable ...
+
       Getting default information:
+
       {
          "data": {
             "title": "Wazuh API REST",
-            "api_version": "4.14.1",
+            "api_version": "5.0.0",
             "revision": "rc2",
             "license_name": "GPL 2.0",
-            "license_url": "https://github.com/wazuh/wazuh/blob/v4.14.1/LICENSE",
-            "hostname": "thecotilking-VirtualBox",
-            "timestamp": "2026-01-23T13:57:11Z"
+            "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc2/LICENSE",
+            "hostname": "ubuntu-QEMU-Virtual-Machine",
+            "timestamp": "2026-09-23T13:36:02Z"
          },
          "error": 0
       }
+
       Getting /agents/summary/os:
+
       {
-          "data": {
-              "affected_items": [
-                  "windows"
-              ],
-              "total_affected_items": 1,
-              "total_failed_items": 0,
-              "failed_items": []
-          },
-          "message": "Showing the operative system of all specified agents",
-          "error": 0
+         "data": {
+            "affected_items": [
+               "ubuntu"
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 0,
+            "failed_items": []
+         },
+         "message": "Showing the operative system of all specified agents",
+         "error": 0
       }
+
       End of the script.

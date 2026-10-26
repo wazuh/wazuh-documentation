@@ -1,430 +1,317 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn about the Wazuh server API configuration in this section of the documentation.
+   :description: Learn how to configure the Wazuh manager API with its configuration file, the security configuration, and the configuration endpoints.
 
 Configuration
 =============
 
-This section covers how to configure and secure the Wazuh server API. Proper configuration and hardening are essential for production environments to prevent unauthorized access and ensure reliable operation.
+The Wazuh manager API takes its general settings from a configuration file and its security settings from API endpoints. Proper configuration and hardening are essential for production environments to prevent unauthorized access and make sure reliable operation.
 
-.. _api_configuration_file:
+.. _api_configuration_wazuh_manager_api_configuration_file:
 
-Wazuh server API configuration file
------------------------------------
+Wazuh manager API configuration file
+------------------------------------
 
-The Wazuh server API configuration file is located at ``/var/ossec/api/configuration/api.yaml`` on the Wazuh server. By default, most settings are commented out. To apply a different configuration, uncomment and edit the desired line.
+The Wazuh manager API configuration file is located at ``/var/wazuh-manager/api/configuration/api.yaml`` on the Wazuh manager. By default, most settings are commented out. To apply a different configuration, uncomment and edit the desired line. The file owner is ``root:wazuh-manager``, with mode ``0660``. An unknown option or a value of the wrong type stops the Wazuh manager API with error ``2000``. To check the file before you restart the Wazuh manager, run ``/var/wazuh-manager/bin/wazuh-manager-apid -t -c /var/wazuh-manager/api/configuration/api.yaml``.
 
-Below are some of the available settings for the ``/var/ossec/api/configuration/api.yaml`` configuration file. For more information on each of the settings, check the :ref:`configuration options <api_configuration_options>`:
+The following block is the shipped template of the ``/var/wazuh-manager/api/configuration/api.yaml`` configuration file, with every setting commented out. For more information on each of the settings, check the :ref:`configuration options <api_configuration_api_configuration_options>`:
 
 .. code-block:: yaml
 
-   host: ['0.0.0.0', '::']
-   port: 55000
+   # USE THIS FILE AS A TEMPLATE. UNCOMMENT LINES TO APPLY CUSTOM CONFIGURATION
 
-   drop_privileges: yes
-   experimental_features: no
-   max_upload_size: 10485760
-   authentication_pool_size: 2
+   # host: ['0.0.0.0', '::']
+   # port: 55000
 
-   intervals:
-      request_timeout: 10
+   # Advanced configuration
 
-   https:
-      enabled: yes
-      key: "server.key"
-      cert: "server.crt"
-      use_ca: False
-      ca: "ca.crt"
-      ssl_protocol: "auto"
-      ssl_ciphers: ""
+   # https:
+   #  enabled: yes
+   #  key: "apid-key.pem"
+   #  cert: "apid.pem"
+   #  use_ca: False
+   #  ca: "root-ca.pem"
+   #  ssl_ciphers: ""  # Passed to OpenSSL as written (case-sensitive); empty = ECDHE+AESGCM:ECDHE+CHACHA20
 
-   logs:
-      level: "info"
-      format: "plain"
-      max_size:
-       enabled: false
+   # Modify API's intervals (time in seconds)
+   # intervals:
+   #   request_timeout: 10
 
-   cors:
-      enabled: no
-      source_route: "*"
-      expose_headers: "*"
-      allow_headers: "*"
-      allow_credentials: no
+   # Logging configuration
+   # Values for API log level: critical, error, warning, info, debug, debug2 (each level includes the previous levels).
+   # Values for API log max_size: <value><unit>. Valid units: K (kilobytes), M (megabytes)
+   # Enabling the API log max_size will disable the time based rotation (on midnight)
+   # logs:
+   #  level: "info"
+   #  format: "plain"
+   #  max_size:
+   #    enabled: False
+   #    size: "1M"
 
-   access:
-      max_login_attempts: 50
-      block_time: 300
-      max_request_per_minute: 300
+   # Cross-origin resource sharing: https://www.starlette.io/middleware/#corsmiddleware
+   # cors:
+   #  enabled: no
+   #  source_route: "*"
+   #  expose_headers: "*"
+   #  allow_headers: "*"
+   #  allow_credentials: no
 
-   upload_configuration:
-      remote_commands:
-         localfile:
-            allow: yes
-            exceptions: []
-         wodle_command:
-            allow: yes
-            exceptions: []
-      limits:
-         eps:
-            allow: yes
-      agents:
-         allow_higher_versions:
-            allow: yes
-      indexer:
-         allow: yes
-      integrations:
-         virustotal:
-            public_key:
-               allow: yes
-               minimum_quota: 240
+   # Access parameters
+   # access:
+   #  max_login_attempts: 50
+   #  block_time: 300
+   #  max_request_per_minute: 300
+   #  max_unauthenticated_request_per_minute: 10
+
+   # Drop privileges (Run as wazuh-manager user)
+   # drop_privileges: yes
+
+   # Maximum body size that the API can accept, in bytes (0 -> limitless)
+   # max_upload_size: 10485760
+
+   # Maximum size, in bytes, of the run_as authentication context payload
+   # (POST /security/user/authenticate/run_as). AD/LDAP/SSO logins with large
+   # group memberships may need to raise this. Independent of max_upload_size,
+   # which still bounds the overall request body for every endpoint.
+   # auth_context_max_payload_size: 65536
+
+   # Number of processes dedicated to processing authentication requests.
+   # authentication_pool_size: 2
+
+   # Uploadable Wazuh configuration sections
+   # upload_configuration:
+   #   agents:
+   #     allow_higher_versions:
+   #       allow: yes
+   #   indexer:
+   #     allow: yes
 
 .. note::
 
-   When running a Wazuh server cluster, the master node does not automatically send its local Wazuh server API configuration file to the worker nodes. Each node maintains its own Wazuh server API configuration. Therefore, if any changes are made to the configuration file on the master node, you must manually update the configuration on each worker node to ensure consistency. Ensure that the IP address and port are not overwritten in the local configuration of each worker.
+   In a Wazuh manager cluster, the Wazuh manager API runs only on the master node. It forwards requests that concern a worker node to that worker. Edit ``/var/wazuh-manager/api/configuration/api.yaml`` on the master node, and send every Wazuh manager API request to the master node.
 
-Make sure to restart the Wazuh server API using the Wazuh manager service after editing the configuration file:
+Make sure to restart the Wazuh manager API using the Wazuh manager service after editing the configuration file:
 
-  .. include:: /_templates/common/restart_manager.rst
+.. include:: /_templates/common/restart_manager.rst
 
-.. _api_configuration_options:
+.. _api_configuration_api_configuration_options:
 
 API configuration options
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-host
-^^^^
-
-+-------------------------------------------+---------------------+------------------------------------------------------------------------------------------+
-| Allowed values                            | Default value       | Description                                                                              |
-+===========================================+=====================+==========================================================================================+
-| A list of valid IP addresses or hostnames | ['0.0.0.0', '::']   | IP addresses or hostnames of the Wazuh manager where the Wazuh server API is running.    |
-+-------------------------------------------+---------------------+------------------------------------------------------------------------------------------+
-
-port
-^^^^
-
-+-------------------------------+---------------+----------------------------------------------+
-| Allowed values                | Default value | Description                                  |
-+===============================+===============+==============================================+
-| Any value between 1 and 65535 | 55000         | Port where the Wazuh server API will listen. |
-+-------------------------------+---------------+----------------------------------------------+
-
-use_only_authd
-~~~~~~~~~~~~~~
-
-.. deprecated:: 4.3.0
-
-+----------------------+---------------+--------------------------------------------------------------------+
-| Allowed values       | Default value | Description                                                        |
-+======================+===============+====================================================================+
-| yes, true, no, false | false         | Force the use of wazuh-authd when registering and removing agents. |
-+----------------------+---------------+--------------------------------------------------------------------+
-
-drop_privileges
+General options
 ~~~~~~~~~~~~~~~
 
-+----------------------+---------------+----------------------------------------------+
-| Allowed values       | Default value | Description                                  |
-+======================+===============+==============================================+
-| yes, true, no, false | true          | Run wazuh-api process as the ``wazuh`` user. |
-+----------------------+---------------+----------------------------------------------+
-
-experimental_features
-~~~~~~~~~~~~~~~~~~~~~
-
-+----------------------+---------------+-----------------------------------+
-| Allowed values       | Default value | Description                       |
-+======================+===============+===================================+
-| yes, true, no, false | false         | Enable features under development |
-+----------------------+---------------+-----------------------------------+
-
-max_upload_size
-~~~~~~~~~~~~~~~
-
-+----------------------+---------------+------------------------------------------------------------------------------+
-| Allowed values       | Default value | Description                                                                  |
-+======================+===============+==============================================================================+
-| Any positive integer | 10485760      | Set the maximum body size that the API can accept, in bytes (0 -> limitless) |
-+----------------------+---------------+------------------------------------------------------------------------------+
-
-authentication_pool_size
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. versionadded:: 4.11.2
-
-+------------------------------+---------------+------------------------------------------------------------------------------+
-| Allowed values               | Default value | Description                                                                  |
-+==============================+===============+==============================================================================+
-| Any integer between 1 and 50 | 2             | Number of processes dedicated to processing authentication requests.         |
-+------------------------------+---------------+------------------------------------------------------------------------------+
-
-intervals
-~~~~~~~~~
-
-+-----------------+----------------------+---------------+-----------------------------------------------------------------+
-| Sub-fields      | Allowed values       | Default value | Description                                                     |
-+=================+======================+===============+=================================================================+
-| request_timeout | Any positive integer | 10            | Set the maximum response time (in seconds) for each API request |
-+-----------------+----------------------+---------------+-----------------------------------------------------------------+
-
-https
-~~~~~
-
-+--------------+------------------------------------+----------------------------------+------------------------------------------------------------------------------------------------------------+
-| Sub-fields   | Allowed values                     | Default value                    | Description                                                                                                |
-+==============+====================================+==================================+============================================================================================================+
-| enabled      | yes, true, no, false               | true                             | Enable or disable SSL (https) in the Wazuh server API.                                                     |
-+--------------+------------------------------------+----------------------------------+------------------------------------------------------------------------------------------------------------+
-| key          | Any text string                    | server.key                       | Name of the private key. Stored in ``/var/ossec/api/configuration/ssl``.                                   |
-+--------------+------------------------------------+----------------------------------+------------------------------------------------------------------------------------------------------------+
-| cert         | Any text string                    | server.crt                       | Name of the certificate. Stored in ``/var/ossec/api/configuration/ssl``.                                   |
-+--------------+------------------------------------+----------------------------------+------------------------------------------------------------------------------------------------------------+
-| use_ca       | yes, true, no, false               | false                            | Whether to use a certificate from a Certificate Authority or not.                                          |
-+--------------+------------------------------------+----------------------------------+------------------------------------------------------------------------------------------------------------+
-| ca           | Any text string                    | ca.crt                           | Name of the certificate of the Certificate Authority (CA). Stored in ``/var/ossec/api/configuration/ssl``. |
-+--------------+------------------------------------+----------------------------------+------------------------------------------------------------------------------------------------------------+
-| ssl_protocol | TLS, TLSv1, TLSv1.1, TLSv1.2, auto |                                  |                                                                                                            |
-|              |                                    |                                  |                                                                                                            |
-|              |                                    | auto                             | SSL protocol to allow. Its value is not case sensitive.                                                    |
-+--------------+------------------------------------+----------------------------------+------------------------------------------------------------------------------------------------------------+
-| ssl_ciphers  | Any text string                    | None                             | SSL ciphers to allow. Its value is not case sensitive.                                                     |
-+--------------+------------------------------------+----------------------------------+------------------------------------------------------------------------------------------------------------+
-
-logs
-~~~~
-
-+---------------------------+----------------------------------------------------------------------------------------+---------------+--------------------------------------------------------+
-| Sub-fields                | Allowed values                                                                         | Default value | Description                                            |
-+===========================+========================================================================================+===============+========================================================+
-| level                     | disabled, info, warning, error, debug, debug2 (each level includes the previous level) | info          | Set the verbosity level of the Wazuh server API logs.  |
-+---------------------------+----------------------------------------------------------------------------------------+---------------+--------------------------------------------------------+
-| path                      | Any text string.                                                                       | logs/api.log  | .. deprecated:: 4.3.0                                  |
-|                           |                                                                                        |               |                                                        |
-|                           |                                                                                        |               | Path where the Wazuh server API logs will be saved.    |
-+---------------------------+----------------------------------------------------------------------------------------+---------------+--------------------------------------------------------+
-| format                    | plain, json or both (plain,json)                                                       | plain         |                                                        |
-|                           |                                                                                        |               |                                                        |
-|                           |                                                                                        |               | Set the format of the Wazuh server API logs.           |
-+---------------------------+----------------------------------------------------------------------------------------+---------------+--------------------------------------------------------+
-
-max_size
-~~~~~~~~
-
-+------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
-| Sub-fields | Allowed values                                | Default value | Description                                                                                                                |
-+============+===============================================+===============+============================================================================================================================+
-| enabled    | yes, true, no, false                          | false         | Toggle between time-based and size-based Wazuh API log rotation.                                                           |
-|            |                                               |               | Enabling this option disables time-based rotation, enabling rotation based on file size instead.                           |
-+------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
-| size       | Any positive number followed by a valid unit. | 1M            | Set the maximum file size to not trigger size-based log rotation. Lower than 1 M values are considered as 1 M.             |
-|            | K/k for kilobytes, M/m for megabytes.         |               |                                                                                                                            |
-+------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
-
-
-cors
-~~~~
-
-+-------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------+
-| Sub-fields        | Allowed values       | Default value | Description                                                                                   |
-+===================+======================+===============+===============================================================================================+
-| enabled           | yes, true, no, false | false         | Enable or disable the use of CORS in the Wazuh server API.                                    |
-+-------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------+
-| source_route      | Any text string      | ``*``         | Sources for which the resources will be available. For example ``http://client.example.org``. |
-+-------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------+
-| expose_headers    | Any text string      | ``*``         | Which headers can be exposed as part of the response.                                         |
-+-------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------+
-| allow_headers     | Any text string      | ``*``         | Which HTTP headers can be used during the actual request.                                     |
-+-------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------+
-| allow_credentials | yes, true, no, false | false         | Tell browsers whether to expose the response to frontend JavaScript or not.                   |
-+-------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------+
-
-.. _api_configuration_access:
-
-access
-~~~~~~
-+------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Sub-fields             | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                                                                   |
-+========================+======================+===============+===============================================================================================================================================================================================================================================================================================================================================================================================+
-| max_login_attempts     | Any positive integer | 50            | Set a maximum number of login attempts during a specified ``block_time`` number of seconds.                                                                                                                                                                                                                                                                                                   |
-+------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| block_time             | Any positive integer | 300           | Established period of time (in seconds) to attempt login requests. If the established number of requests (``max_login_attempts``) is exceeded within this time limit, the IP address is blocked until the end of the block time period.                                                                                                                                                       |
-+------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| max_request_per_minute | Any positive integer | 300           | The maximum number of requests allowed per minute. It applies to all Wazuh server API endpoints except for authentication requests. Reaching this limit in less than a minute blocks all incoming requests from any user for the remaining time. A value of ``0`` disables this feature. For ``POST /events`` requests, the effective value is ``30`` for values greater than 30.             |
-+------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Option                            |                                        | Allowed values                                                                          | Default value     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                       |
++===================================+========================================+=========================================================================================+===================+===================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+| ``host``                          |                                        | List of IP addresses or hostnames                                                       | ['0.0.0.0', '::'] | IP address or hostname of the Wazuh manager where the Wazuh manager API is running.                                                                                                                                                                                                                                                                                                                                                               |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``port``                          |                                        | Any value between 1 and 65535                                                           | 55000             | Port where the Wazuh manager API listens.                                                                                                                                                                                                                                                                                                                                                                                                         |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``drop_privileges``               |                                        | yes, true, no, false                                                                    | true              | Run the wazuh-manager-apid process as the ``wazuh-manager`` user.                                                                                                                                                                                                                                                                                                                                                                                 |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``auth_context_max_payload_size`` |                                        | Any integer from 1024 to 1048576                                                        | 65536             | Maximum size, in bytes, of the authorization context body that ``POST /security/user/authenticate/run_as`` accepts. A larger body gets HTTP ``413``.                                                                                                                                                                                                                                                                                              |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_upload_size``               |                                        | 0 (no limit) or any positive integer                                                    | 10485760          | Set the maximum body size that the API can accept, in bytes (0 -> limitless).                                                                                                                                                                                                                                                                                                                                                                     |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``authentication_pool_size``      |                                        | Any integer between 1 and 50                                                            | 2                 | Number of processes dedicated to processing authentication requests.                                                                                                                                                                                                                                                                                                                                                                              |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``intervals``                     | request_timeout                        | Any non-negative number                                                                 | 10                | Set the maximum response time (in seconds) for each API request.                                                                                                                                                                                                                                                                                                                                                                                  |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``https``                         | enabled                                | yes, true, no, false                                                                    | true              | Enable or disable SSL (https) in the Wazuh manager API.                                                                                                                                                                                                                                                                                                                                                                                           |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | key                                    | Any text string                                                                         | ``apid-key.pem``  | Name of the private key. Stored in ``/etc/wazuh-manager/certs``.                                                                                                                                                                                                                                                                                                                                                                                  |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | cert                                   | Any text string                                                                         | ``apid.pem``      | Name of the certificate. Stored in ``/etc/wazuh-manager/certs``.                                                                                                                                                                                                                                                                                                                                                                                  |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | use_ca                                 | yes, true, no, false                                                                    | false             | Require a client certificate signed by the ca certificate. The Wazuh dashboard doesn't present a client certificate in Wazuh 5.0. Setting ``use_ca`` to ``true`` breaks the connection between the Wazuh dashboard and the Wazuh manager API.                                                                                                                                                                                                     |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | ca                                     | Any text string                                                                         | ``root-ca.pem``   | Name of the certificate authority (CA) certificate. Stored in ``/etc/wazuh-manager/certs``.                                                                                                                                                                                                                                                                                                                                                       |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | ssl_ciphers                            | Any text string                                                                         | ""                | OpenSSL cipher list for TLS 1.2. The Wazuh manager API passes it to OpenSSL as written, so keywords are case-sensitive. An empty value allows only ``ECDHE+AESGCM:ECDHE+CHACHA20``. This setting does not affect TLS 1.3 cipher suites.                                                                                                                                                                                                           |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``logs``                          | level                                  | critical, error, warning, info, debug, debug2 (each level includes the previous levels) | info              | Set the verbosity level of the Wazuh manager API logs.                                                                                                                                                                                                                                                                                                                                                                                            |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | format                                 | plain, json or both (plain,json)                                                        | plain             | Set the format of the Wazuh manager API logs.                                                                                                                                                                                                                                                                                                                                                                                                     |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_size``                      | enabled                                | yes, true, no, false                                                                    | false             | Toggle between time-based and size-based Wazuh manager API log rotation. Enabling this option disables time-based rotation, enabling rotation based on file size instead.                                                                                                                                                                                                                                                                         |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | size                                   | Any positive number followed by a valid unit. K/k for kilobytes, M/m for megabytes.     | 1M                | Set the log file size that triggers size-based log rotation. The minimum is 1M. A lower value stops the Wazuh manager API from starting with error ``2011``.                                                                                                                                                                                                                                                                                      |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``cors``                          | enabled                                | yes, true, no, false                                                                    | false             | Enable or disable the use of CORS in the Wazuh manager API.                                                                                                                                                                                                                                                                                                                                                                                       |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | source_route                           | Any text string                                                                         | ``*``             | Sources for which the resources are available. For example ``http://client.example.org``.                                                                                                                                                                                                                                                                                                                                                         |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | expose_headers                         | Any text string                                                                         | ``*``             | Which headers can be exposed as part of the response.                                                                                                                                                                                                                                                                                                                                                                                             |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | allow_headers                          | Any text string                                                                         | ``*``             | Which HTTP headers can be used during the actual request.                                                                                                                                                                                                                                                                                                                                                                                         |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | allow_credentials                      | yes, true, no, false                                                                    | false             | Tell browsers whether to expose the response to frontend JavaScript or not.                                                                                                                                                                                                                                                                                                                                                                       |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``access``                        | max_login_attempts                     | Any positive integer                                                                    | 50                | Maximum number of failed login attempts from an IP address before the Wazuh manager API blocks its login requests. See ``block_time``.                                                                                                                                                                                                                                                                                                            |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | block_time                             | Any positive integer                                                                    | 300               | Time, in seconds, after which the count of failed login attempts from an IP address, and any block on it, are cleared. The period starts at the first counted failed attempt and does not restart with later attempts. An address that reaches ``max_login_attempts`` failed attempts is blocked from logging in until then.                                                                                                                      |
+|                                   +----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | max_request_per_minute                 | 0 (no limit) or any positive integer                                                    | 300               | The maximum number of requests allowed per minute from each client address. It applies to all Wazuh manager API endpoints, including authentication requests. A client address that reaches this limit gets HTTP ``429`` for the rest of the minute, and other addresses are not affected. Unauthenticated and failed requests count against ``max_unauthenticated_request_per_minute`` instead, 10 by default. A value of 0 disables this limit. |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                   | max_unauthenticated_request_per_minute | 0 (no limit) or any positive integer                                                    | 10                | The maximum number of unauthenticated and failed requests allowed per minute from each client address. A client address that reaches this limit gets HTTP ``429`` for the rest of the minute. A value of 0 disables this limit.                                                                                                                                                                                                                   |
++-----------------------------------+----------------------------------------+-----------------------------------------------------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 upload_configuration
-^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~
 
-remote_commands (localfile and wodle "command")
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+These options control which sections of ``wazuh-manager.conf`` a ``PUT /cluster/{node_id}/configuration`` request can change. With ``indexer.allow`` set to ``true``, the change also requires the ``cluster:read_secrets`` permission. The Wazuh manager API still accepts the ``upload_configuration.remote_commands`` and ``upload_configuration.limits.eps`` options and the ``cache`` section, but they have no effect. The ``logcollector.remote_commands`` and ``wazuh_command.remote_commands`` internal options of the Wazuh agent control remote commands.
 
-+------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
-+============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
-| allow      | yes, true, no, false | true          | Allow uploading configurations with remote commands through the Wazuh server API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files that contain the :ref:`wodle "command" option <wodle_command>` or the ``<command>`` option inside the :ref:`localfile <reference_ossec_localfile>` tag.                          |
-+------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| exceptions | command list         | [ ]           | Set a list of commands allowed to be uploaded through the API. These exceptions can always be uploaded regardless of the ``allow`` configuration.                                                                                                                                                                                           |
-+------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| agents                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
++-----------------------+-------+----------------------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| allow_higher_versions | allow | yes, true, no, false | true | Allow uploading configurations that accept higher Wazuh agent versions through the Wazuh manager API. Setting this option to ``false`` prevents uploading ``wazuh-manager.conf`` files that contain the ``<allow_higher_versions>`` section with the ``yes`` value inside the :doc:`auth </user-manual/reference/wazuh-manager-conf/auth>` or :doc:`remote </user-manual/reference/wazuh-manager-conf/remote>` tags. |
++-----------------------+-------+----------------------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| indexer               | allow | yes, true, no, false | true | Allows uploading an updated :doc:`indexer configuration section </user-manual/reference/wazuh-manager-conf/indexer>` through the Wazuh manager API. Setting this option to ``false`` prevents updating the Wazuh indexer configuration when uploading ``wazuh-manager.conf``.                                                                                                                                        |
++-----------------------+-------+----------------------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-limits
-~~~~~~
+Wazuh manager API security configuration
+----------------------------------------
 
-.. rubric:: eps
-   :class: h5
+Security-related settings such as token expiration ``auth_token_exp_timeout``, and RBAC behavior ``rbac_mode`` are managed exclusively through the Wazuh manager API, not through a configuration file.
 
-+------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
-+============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
-| allow      | yes, true, no, false | true          | Allow uploading configurations with modified EPS limits through the Wazuh server API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files if the ``<limits><eps>`` section inside the :ref:`global <reference_ossec_global>` tag has changed.                                                                          |
-+------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+-  :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>`: View current security configuration
+-  :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`: Update security settings
+-  :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`: Reset to default values
 
-agents
-~~~~~~
+The ``auth_token_exp_timeout`` defines the duration in seconds before an authentication token expires and requires renewal. The ``rbac_mode`` determines the default behavior of the Role-Based Access Control system. It either permits or denies access to any resource that no policy explicitly covers. Refer to the :doc:`Role-Based Access Control </user-manual/api/rbac/index>` documentation for more details. In a cluster, the configuration applies to the Wazuh manager API on the master node, the only node that runs it.
 
-.. rubric:: allow_higher_versions
-   :class: h5
-
-+------------+----------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                        |
-+============+======================+===============+====================================================================================================================================================================================================================================================================================================================================================+
-| allow      | yes, true, no, false | true          | Allow uploading configurations that accept higher agent versions through the Wazuh server API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files that contain the ``<allow_higher_versions>`` section with the ``yes`` value inside the :ref:`auth <reference_ossec_auth>` or :ref:`remote <reference_ossec_remote>` tags.  |
-+------------+----------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. rubric:: indexer
-   :class: h5
-
-+------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
-+============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
-| allow      | yes, true, no, false | true          | Allows uploading an updated :doc:`indexer configuration </user-manual/reference/ossec-conf/indexer>` section through the Wazuh server API. Setting this option to ``false`` prevents updating the indexer configuration when uploading ``ossec.conf``.                                                                                      |
-+------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. rubric:: integrations
-   :class: h5
-
-.. rubric:: virustotal (public_key)
-   :class: h6
-
-+-----------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Sub-fields      | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
-+=================+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
-| allow           | yes, true, no, false | true          | Allows uploading an updated :doc:`Virus Total integration configuration section </user-manual/reference/ossec-conf/integration>` using a public API key through the Wazuh server API. Setting this option to ``false`` prevents updating the integrations Virus Total configuration when uploading ``ossec.conf``.                          |
-+-----------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| minimum_quota   | Any positive integer | 240           | Minimum quota value for Virus Total public API key.                                                                                                                                                                                                                                                                                         |
-+-----------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-Wazuh server API security configuration
----------------------------------------
-
-Security-related settings such as token expiration ``auth_token_exp_timeout``, and RBAC behavior ``rbac_mode`` are managed exclusively through the Wazuh server API endpoints:
-
--  :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>` - View current security configuration
--  :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` - Update security settings
--  :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>` - Reset to default values
-
-The ``auth_token_exp_timeout`` defines the duration in seconds before an authentication token expires and requires renewal. The ``rbac_mode`` determines the overall behavior of the Role-Based Access Control system, which can be configured to either broadly permit or restrict access to resources and endpoints based on user roles and permissions. Refer to the :doc:`Role-Based Access Control <rbac/index>` documentation for more details. The configuration is applied to every Wazuh server API in a cluster if applicable.
-
-For more information on each of the settings, please check the :ref:`security configuration options <api_security_configuration_options>`.
+For more information on each of the settings, see the :ref:`security configuration options <api_configuration_security_configuration_options>`.
 
 Example security configuration settings
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use the following API endpoints (requires administrator privileges and a valid JWT token).
+Use the following API endpoints (requires administrator privileges and a valid JWT).
 
-All examples assume you have ``$TOKEN`` set from :ref:`authentication steps <api_log_in>`.
+All examples assume you have ``$TOKEN`` set from :ref:`authentication steps <api_getting_started_authentication>`. Each PUT or DELETE request to ``/security/config`` revokes all JWTs, including the one in $TOKEN. Obtain a new token before you run the next example.
 
-**View current settings (GET /security/config)**
+**View current settings (**\ ``GET /security/config``\ **)**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: console
 
-   # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/security/config?pretty=true" \
+   # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/config?pretty=true" \
         -H "Authorization: Bearer $TOKEN"
+
+The command output looks similar to this:
 
 .. code-block:: json
    :class: output
 
    {
-     "data": {
-       "auth_token_exp_timeout": 900,
-       "rbac_mode": "white"
-     },
-     "error": 0
+      "data": {
+         "auth_token_exp_timeout": 900,
+         "rbac_mode": "white"
+      },
+      "error": 0
    }
 
-**Update settings (PUT /security/config)**
+**Update settings (**\ ``PUT /security/config``\ **)**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  For ``auth_token_exp_timeout``: Set the token expiration time in seconds (for example, 1800 for 30 minutes).
--  For ``rbac_mode``: Choose ``white`` (allow only permitted resources – more secure) or ``black`` (deny only restricted resources).
+#. For ``auth_token_exp_timeout``: Set the token expiration time in seconds (for example, ``1800`` for 30 minutes).
+#. For ``rbac_mode``: Choose ``white`` (allow only permitted resources, the more secure option) or ``black`` (deny only restricted resources).
 
 **Example: Update token expiration to 30 minutes**
 
 .. code-block:: console
 
-   # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/security/config" \
+   # curl -k -X PUT "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/config" \
         -H "Authorization: Bearer $TOKEN" \
         -H "Content-Type: application/json" \
         -d '{"auth_token_exp_timeout": 1800}'
+
+The command output looks similar to this:
+
+.. code-block:: json
+   :class: output
+
+   {"message": "Configuration was successfully updated", "error": 0}
 
 **Example: Change RBAC mode to black**
 
 .. code-block:: console
 
-   # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/security/config" \
+   # curl -k -X PUT "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/config" \
         -H "Authorization: Bearer $TOKEN" \
         -H "Content-Type: application/json" \
         -d '{"rbac_mode": "black"}'
 
-**Reset to defaults (DELETE /security/config)**
+The command output looks similar to this:
 
-This resets both settings back to defaults (``auth_token_exp_timeout``: ``900``, ``rbac_mode``: ``white``).
+.. code-block:: json
+   :class: output
+
+   {"message": "Configuration was successfully updated", "error": 0}
+
+Reset to defaults (``DELETE /security/config``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This request resets both settings back to defaults (``auth_token_exp_timeout``: ``900``, ``rbac_mode``: ``white``).
 
 .. code-block:: console
 
-   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP>:55000/security/config?pretty=true" \
+   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/config?pretty=true" \
         -H "Authorization: Bearer $TOKEN"
 
-.. warning::
+The command output looks similar to this:
 
-   For security reasons, changing the security configuration revokes all JWTs. You will need to log in and obtain a new token after the change.
+.. code-block:: json
+   :class: output
 
-.. _api_security_configuration_options:
+   {
+      "message": "Configuration was successfully updated",
+      "error": 0
+   }
+
+For security reasons, changing the security configuration revokes all JWTs. You must log in and obtain a new token after the change.
+
+.. _api_configuration_security_configuration_options:
 
 Security configuration options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 auth_token_exp_timeout
 ~~~~~~~~~~~~~~~~~~~~~~
-+-----------------------+---------------+---------------------------------------------------------+
-| Allowed values        | Default value | Description                                             |
-+=======================+===============+=========================================================+
-| Any positive integer  | 900           | Set how many seconds it takes for JWT tokens to expire. |
-+-----------------------+---------------+---------------------------------------------------------+
+
++--------------------------+---------------+---------------------------------------------------+
+| Allowed values           | Default value | Description                                       |
++==========================+===============+===================================================+
+| An integer of 30 or more | 900           | Set how many seconds it takes for JWTs to expire. |
++--------------------------+---------------+---------------------------------------------------+
 
 rbac_mode
 ~~~~~~~~~
-+----------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Allowed values | Default value | Description                                                                                                                                                                                                                                                                                                                                                           |
-+================+===============+=======================================================================================================================================================================================================================================================================================================================================================================+
-| black,white    | white         | Set the behavior of RBAC. By default, everything is allowed in black mode while everything is denied in white mode. Choose the rbac_mode that better suits the desired RBAC infrastructure. In black mode it is very easy to deny a few specific action-resources pairs with just some policies while white mode is more secure and requires building from scratch.   |
-+----------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
++----------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Allowed values | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
++================+===============+=============================================================================================================================================================================================================================================================================================================================================+
+| black, white   | white         | Set the behavior of RBAC. By default, everything is allowed in black mode, while everything is denied in white mode. Choose the ``rbac_mode`` that better suits the desired RBAC infrastructure. In black mode, a few policies can deny specific action-resource pairs, while white mode is more secure and requires building from scratch. |
++----------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration endpoints
 -----------------------
 
-The Wazuh server API has several endpoints that allow querying its current configuration. To modify the general API configuration, edit the ``/var/ossec/api/configuration/api.yaml`` file as detailed in the :ref:`Wazuh server API configuration file <api_configuration_file>` section.
+The Wazuh manager API has several endpoints that allow querying its current configuration. To modify the general API configuration, edit the ``/var/wazuh-manager/api/configuration/api.yaml`` file as detailed in the :ref:`Wazuh manager API configuration file <api_configuration_wazuh_manager_api_configuration_file>` section.
 
 Get configuration
 ^^^^^^^^^^^^^^^^^
 
--  :api-ref:`GET /manager/api/config <operation/api.controllers.manager_controller.get_api_config>`: Get the complete local Wazuh server API configuration.
--  :api-ref:`GET /cluster/api/config <operation/api.controllers.cluster_controller.get_api_config>`: Get the complete Wazuh server API configuration of all (or a list) of the cluster nodes.
--  :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>`: Get the current security configuration.
+-  :api-ref:`GET /cluster/api/config <operation/api.controllers.cluster_controller.get_api_config>`: Retrieve the complete Wazuh manager API configuration of all (or a list) of the cluster nodes.
+-  :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>`: Retrieve the current security-related configuration.
+-  :api-ref:`GET /cluster/{node_id}/configuration/{component}/{configuration} <operation/api.controllers.cluster_controller.get_node_config>`: Retrieve the active configuration of a Wazuh manager node. In Wazuh 5.0, component is ``auth``, ``request``, ``wazuh-manager-db``, or ``wmodules``, and configuration is ``global``, ``auth``, ``internal``, ``remote``, ``wdb``, or ``wmodules``.
 
 Modify configuration
 ^^^^^^^^^^^^^^^^^^^^
 
--  :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`: Modify the security configuration.
+-  :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`: Update the security-related settings.
 
 Restore configuration
 ^^^^^^^^^^^^^^^^^^^^^
@@ -436,25 +323,27 @@ SSL certificate
 
 .. note::
 
-   This process is done automatically when the Wazuh server API is run for the first time.
+   The installation issues the Wazuh manager API certificate, signed by the Wazuh manager certificate authority (CA) in ``/etc/wazuh-manager/ca/``.
 
-The SSL certificate ensures secure communication between the Wazuh server API and its clients. The certificate files are stored within the ``/var/ossec/api/configuration/ssl/`` directory.
+The SSL certificate ensures secure communication between the Wazuh manager API and its clients. The certificate files are in the ``/etc/wazuh-manager/certs/`` directory.
 
-Take the following steps to generate new certificates for the Wazuh server API:
+Take the following steps to issue a new certificate for the Wazuh manager API from the Wazuh manager CA:
 
-#. Generate the key and certificate request (the ``openssl`` package is required):
-
-   .. code-block:: console
-
-      # cd /var/ossec/api/configuration/ssl
-      # openssl req -newkey rsa:2048 -new -nodes -x509 -days 365 -keyout server.key -out server.crt
-
-   By default, the key's password must be entered every time the server is run. If the key was generated by the Wazuh server API or the command above, it would not have a password.
-
-#. (Optional) Secure the key with a password:
+#. Move the current key and certificate out of the ``/etc/wazuh-manager/certs`` directory. Optionally, set the names that the new certificate must cover in the ``WAZUH_MANAGER_APID_CERT_SANS`` variable of ``/etc/wazuh-manager/local.env``. Then run the credential resolver to issue a new pair:
 
    .. code-block:: console
 
-      # ssh-keygen -p -f server.key
+      # cd /etc/wazuh-manager/certs
+      # mkdir -p /root/apid-certs-backup
+      # mv apid-key.pem apid.pem /root/apid-certs-backup/
+      # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install
 
-   You will be prompted to enter and confirm the new password.
+   The command issues ``apid.pem`` and ``apid-key.pem`` from the Wazuh manager CA, with the owner and mode that the Wazuh manager requires.
+
+   To use your own certificate instead, place the key and the certificate, followed by any intermediate certificates, directly in ``/etc/wazuh-manager/certs``. Set their owner to ``root:wazuh-manager`` and their mode to ``0640``, and set ``https.key`` and ``https.cert`` in ``api.yaml`` to the filenames. The certificate must chain to the CA in ``/etc/wazuh-manager/ca/root-ca.pem``, must not be a CA certificate, and must include the hostnames of the Wazuh manager as subject alternative names. Do not protect the key with a passphrase. Run ``/var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check`` to validate the files. If any check fails, the Wazuh manager does not start.
+
+#. Restart the Wazuh manager to load the new certificate:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-manager

@@ -1,410 +1,705 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This section provides several use cases to demonstrate some of the potentials of the Wazuh server API.
+   :description: This section provides use cases that demonstrate some of the potential of the Wazuh manager API.
 
-Wazuh server API use cases
-==========================
+Wazuh manager API use cases
+===========================
 
-This guide explains practical ways to use the Wazuh server API to manage and automate core security operations. It shows how administrators can configure Wazuh modules, manage custom rules and decoders, and perform Wazuh agent tasks directly from the dashboard or from the command line of an authorized endpoint. The guide includes step-by-step examples, request formats, and sample responses to help streamline Wazuh server administration through the API.
-
-.. contents::
-   :local:
-   :depth: 4
-   :backlinks: none
+You can use the Wazuh manager API to check the health of the Wazuh manager, read its logs, and enroll, query, restart, upgrade, and delete Wazuh agents. You can send each request from **Dev Tools** in the Wazuh dashboard or with cURL from a terminal. These use cases apply to Wazuh |WAZUH_CURRENT|.
 
 Using the Wazuh dashboard
 -------------------------
 
-The following use cases demonstrate how to manage the Wazuh server, Wazuh agent, rules, and decoders, and automate security workflows using the Wazuh server API via the Wazuh dashboard.
+The following use cases demonstrate how to manage the Wazuh manager and Wazuh agents using the Wazuh manager API through the Wazuh dashboard.
 
-Wazuh server management
-^^^^^^^^^^^^^^^^^^^^^^^
+Wazuh manager operations
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can use the Wazuh server API to manage and update the Wazuh manager configuration and retrieve information about the Wazuh server, including the status of the Wazuh daemon. Review the :api-ref:`API manager reference <tag/Manager>` for more information on managing the Wazuh manager using the Wazuh server API.
+You can use the Wazuh manager API to check the status, statistics, and logs of the Wazuh manager and to restart it. Review the :api-ref:`API manager reference <tag/Cluster>` for more information on managing the Wazuh manager using the Wazuh manager API.
 
-The following use cases demonstrate how to perform various operations on the Wazuh server.
+The following use cases show how to check and restart the Wazuh manager.
 
 Retrieving the Wazuh manager daemon status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the Wazuh server API to retrieve the current status of all Wazuh manager daemons. The ``/manager/status`` endpoint provides a quick overview of which services are running, stopped, or unavailable, helping administrators verify the health of the Wazuh manager and troubleshoot operational issues.
+Use the Wazuh manager API to retrieve the current status of all Wazuh manager daemons. The ``/cluster/<NODE_ID>/status`` endpoint shows whether each Wazuh manager daemon is running and ready. Use it to check the health of the Wazuh manager and to troubleshoot it.
 
-Follow the steps below to retrieve the Wazuh daemon status:
+Follow these steps to retrieve the Wazuh daemon status:
 
-#. Navigate to **Server management > Dev Tools** to open the Wazuh server API Console.
-#. Set the method and endpoint as ``GET /manager/status``.
-#. Click the play button to execute the request. A response similar to the one below is returned:
+#. Navigate to **Server management** > **Dev Tools** to open the Wazuh manager API Console.
+#. Set the method and endpoint to ``GET /cluster/<NODE_ID>/status``, where ``<NODE_ID>`` is the name of the Wazuh manager node. You can get the node name with ``GET /cluster/local/info``.
+#. Click the play button to execute the request. A response similar to the following is returned:
 
    .. thumbnail:: /images/manual/api/retrieve-wazuh-manager-daemon-status.png
       :title: Retrieve the Wazuh manager daemon status
       :alt: Retrieve the Wazuh manager daemon status
       :align: center
-      :width: 100%
+      :width: 80%
+
+   The command output looks similar to this:
 
    .. code-block:: json
       :class: output
-   
+
       {
         "data": {
           "affected_items": [
             {
-              "wazuh-agentlessd": "stopped",
-              "wazuh-analysisd": "running",
-              "wazuh-authd": "running",
-              "wazuh-csyslogd": "stopped",
-              "wazuh-monitord": "running",
-              "wazuh-execd": "running",
-              "wazuh-integratord": "stopped",
-              "wazuh-logcollector": "running",
-              "wazuh-maild": "stopped",
-              "wazuh-remoted": "running",
-              "wazuh-reportd": "stopped",
-              "wazuh-syscheckd": "running",
-              "wazuh-clusterd": "stopped",
-              "wazuh-modulesd": "running",
-              "wazuh-db": "running",
-              "wazuh-apid": "running"
+              "wazuh-manager-analysisd": {
+                "ready": true,
+                "running": true,
+                "spaces": {
+                  "custom": {
+                    "available": true,
+                    "enabled": true,
+                    "status": "ready",
+                    "hash": "612518d566f89c806f39f6b1852535312f5e840e08670e388543ca5f3ac12fc2",
+                    "last_successful_update": 1792075878
+                  },
+                  "standard": {
+                    "available": true,
+                    "enabled": true,
+                    "status": "ready",
+                    "hash": "67b5c5a77bd0d60b674170291a85cec03767c6d6c2512de9c4094ffcb44ebe43",
+                    "last_successful_update": 1792141956
+                  }
+                },
+                "ioc": {
+                  "connection": {
+                    "available": true,
+                    "status": "ready",
+                    "hash": "5930276f2375b03cd4c9964f9a4f62059e1a0a9395afb3c726bbe9ce9b06c36b",
+                    "last_successful_update": 1790792515
+                  },
+                  "hash_sha1": {
+                    "available": true,
+                    "status": "ready",
+                    "hash": "464f52d41b3d8a7fc37c9a7876affbee99bd7db0298923fa753d914f9ddcb9d2",
+                    "last_successful_update": 1791578471
+                  },
+                  "url_full": {
+                    "available": true,
+                    "status": "ready",
+                    "hash": "7e2bc89c6130487bb508998961f827c5a901bae9b0a50fa8c051ba1f0fdafb47",
+                    "last_successful_update": 1791915251
+                  },
+                  "url_domain": {
+                    "available": true,
+                    "status": "ready",
+                    "hash": "066b294c7ab0582126778d4d9a154bceb249d1e9f364b2b1d6a82027c5f499bd",
+                    "last_successful_update": 1792437225
+                  },
+                  "hash_sha256": {
+                    "available": true,
+                    "status": "ready",
+                    "hash": "c97799701a881ed6d0c9821eef3ef6c5b04d2f40057bcd3d654683db78534466",
+                    "last_successful_update": 1791915293
+                  },
+                  "hash_md5": {
+                    "available": true,
+                    "status": "ready",
+                    "hash": "5ffd996f08a08bca3e441bbd406b1ccc8f9536716efaa4cfb82d2c57b04d377c",
+                    "last_successful_update": 1791915291
+                  }
+                },
+                "geo": {
+                  "asn": {
+                    "available": true,
+                    "status": "ready",
+                    "hash": "5a80bc4d5d9d7d60037d195ae547172e",
+                    "last_successful_update": 1792419413
+                  },
+                  "city": {
+                    "available": true,
+                    "status": "ready",
+                    "hash": "a14e3b6ba4d67ea2bbf54f66b1257da3",
+                    "last_successful_update": 1792246439
+                  }
+                }
+              },
+              "wazuh-manager-authd": {
+                "ready": true,
+                "running": true
+              },
+              "wazuh-manager-remoted": {
+                "ready": true,
+                "running": true,
+                "keystore": {
+                  "readable": true,
+                  "agents_loaded": 12,
+                  "entries_skipped": 0
+                },
+                "enrollment_password": {
+                  "ready": true
+                }
+              },
+              "wazuh-manager-clusterd": {
+                "ready": true,
+                "running": true
+              },
+              "wazuh-manager-modulesd": {
+                "ready": true,
+                "running": true,
+                "modules": {
+                  "vulnerability-detector": {
+                    "available": true,
+                    "enabled": true,
+                    "last_successful_update": 1792500481,
+                    "offset": 1141562,
+                    "status": "ready"
+                  },
+                  "inventory-sync": {
+                    "available": true
+                  },
+                  "content-manager": {
+                    "available": true
+                  },
+                  "task-manager": {
+                    "available": true
+                  }
+                }
+              },
+              "wazuh-manager-db": {
+                "ready": true,
+                "running": true,
+                "global": {
+                  "available": true
+                }
+              },
+              "wazuh-manager-apid": {
+                "ready": true,
+                "running": true
+              },
+              "ready": true
             }
           ],
           "total_affected_items": 1,
           "total_failed_items": 0,
           "failed_items": []
         },
-        "message": "Processes status was successfully read",
+        "message": "Node status was successfully read in specified node",
         "error": 0
       }
 
 Retrieving Wazuh manager daemon statistics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use the Wazuh server API to retrieve real-time statistics for the Wazuh manager daemon. The ``/manager/daemons/stats`` endpoint returns detailed metrics for components such as ``wazuh-remoted``, ``wazuh-analysisd``, and ``wazuh-db``. The information retrieved from these daemons helps administrators monitor event processing, queue usage, and database activity on the manager.
+You can use the Wazuh manager API to retrieve real-time statistics for the Wazuh manager daemon. The ``/cluster/<NODE_ID>/daemons/stats`` endpoint returns detailed metrics for components such as ``wazuh-manager-remoted``, ``wazuh-manager-analysisd``, and ``wazuh-manager-db``. The information retrieved from these daemons helps administrators monitor event processing, queue usage, and database activity on the manager.
 
-Follow the steps below to retrieve Wazuh daemon statistics:
+Follow these steps to retrieve Wazuh daemon statistics:
 
-#. Navigate to **Server management > Dev Tools** to open the Wazuh server API Console.
-#. Set the method and endpoint as ``GET /manager/daemons/stats``.
-#. Click the play button to execute the request. A response similar to the one below is returned:
+#. Navigate to **Server management** > **Dev Tools** to open the Wazuh manager API Console.
+#. Set the method and endpoint to ``GET /cluster/<NODE_ID>/daemons/stats``, where ``<NODE_ID>`` is the name of the Wazuh manager node.
+#. Click the play button to execute the request. A response similar to the following is returned:
 
    .. thumbnail:: /images/manual/api/retrieve-wazuh-manager-daemon-statistics.png
       :title: Retrieve Wazuh manager daemon statistics
       :alt: Retrieve Wazuh manager daemon statistics
       :align: center
-      :width: 100%
+      :width: 80%
+
+   The command output looks similar to this:
 
    .. code-block:: json
       :class: output
-   
+
       {
         "data": {
           "affected_items": [
             {
-              "uptime": "2025-11-25T11:08:55+00:00",
-              "timestamp": "2025-11-25T11:12:19+00:00",
-              "name": "wazuh-remoted",
+              "uptime": "2026-10-20T11:48:00+00:00",
+              "timestamp": "2026-10-20T12:57:05+00:00",
+              "name": "wazuh-manager-remoted",
               "metrics": {
                 "bytes": {
-                  "received": 6804778,
-                  "sent": 1958
+                  "received": 0,
+                  "sent": 0
                 },
                 "keys_reload_count": 0,
                 "messages": {
                   "received_breakdown": {
-                    "control": 22,
+                    "control": 0,
                     "control_breakdown": {
-                      "keepalive": 21,
+                      "keepalive": 0,
                       "request": 0,
                       "shutdown": 0,
-                      "startup": 1
+                      "startup": 0
                     },
+                    "events_failed": 0,
                     "dequeued_after": 0,
                     "discarded": 0,
-                    "event": 8341,
+                    "events": 0,
                     "ping": 0,
-                    "unknown": 0
+                    "unknown": 0,
+                    "upgrade_ack": 0
                   },
                   "sent_breakdown": {
-                    "ack": 22,
-                    "ar": 0,
+                    "ack": 0,
                     "discarded": 0,
-                    "request": 0,
-                    "sca": 0,
                     "shared": 0
                   }
                 },
                 "queues": {
                   "received": {
-                    "size": 131072,
+                    "size": 67108864,
                     "usage": 0
                   }
                 },
-                "tcp_sessions": 1,
+                "tcp_sessions": 0,
+                "tcp_sessions_unassociated": 0,
                 "control_messages_queue_usage": 0,
                 "control_messages_queue_breakdown": {
-                  "inserted": 22,
+                  "inserted": 0,
                   "replaced": 0,
-                  "processed": 22
-                }
-              }
-            },
-            {
-              "uptime": "2025-11-25T11:08:56+00:00",
-              "timestamp": "2025-11-25T11:12:19+00:00",
-              "name": "wazuh-analysisd",
-              "metrics": {
-                "bytes": {
-                  "received": 14507032
+                  "processed": 0
                 },
-                "events": {
-                  "processed": 8690,
-                  "received": 9849,
-                  "received_breakdown": {
-                    "decoded_breakdown": {
-                      "agent": 0,
-                      "agentless": 0,
-                      "dbsync": 1155,
-                      "integrations_breakdown": {
-                        "virustotal": 0
-                      },
-                      "modules_breakdown": {
-                        "aws": 0,
-                        "azure": 0,
-                        "ciscat": 0,
-                        "command": 0,
-                        "docker": 0,
-                        "gcp": 0,
-                        "github": 0,
-                        "logcollector_breakdown": {
-                          "eventchannel": 7039,
-                          "eventlog": 0,
-                          "macos": 0,
-                          "others": 82
-                        },
-                        "office365": 0,
-                        "ms-graph": 0,
-                        "oscap": 0,
-                        "osquery": 0,
-                        "rootcheck": 3,
-                        "sca": 288,
-                        "syscheck": 615,
-                        "syscollector": 666,
-                        "upgrade": 0,
-                        "vulnerability": 0
-                      },
-                      "monitor": 1,
-                      "remote": 0,
-                      "syslog": 0
+                "http_server": {
+                  "timestamp": "2026-10-20T12:57:05Z",
+                  "responses": {
+                    "stateless": {
+                      "total": 263,
+                      "2xx": 263,
+                      "400": 0,
+                      "403": 0,
+                      "409": 0,
+                      "413": 0,
+                      "429": 0,
+                      "500": 0,
+                      "503": 0,
+                      "other": 0
                     },
-                    "dropped_breakdown": {
-                      "agent": 0,
-                      "agentless": 0,
-                      "dbsync": 0,
-                      "integrations_breakdown": {
-                        "virustotal": 0
-                      },
-                      "modules_breakdown": {
-                        "aws": 0,
-                        "azure": 0,
-                        "ciscat": 0,
-                        "command": 0,
-                        "docker": 0,
-                        "gcp": 0,
-                        "github": 0,
-                        "logcollector_breakdown": {
-                          "eventchannel": 0,
-                          "eventlog": 0,
-                          "macos": 0,
-                          "others": 0
-                        },
-                        "office365": 0,
-                        "ms-graph": 0,
-                        "oscap": 0,
-                        "osquery": 0,
-                        "rootcheck": 0,
-                        "sca": 0,
-                        "syscheck": 0,
-                        "syscollector": 0,
-                        "upgrade": 0,
-                        "vulnerability": 0
-                      },
-                      "monitor": 0,
-                      "remote": 0,
-                      "syslog": 0
+                    "stateful": {
+                      "total": 2,
+                      "2xx": 2,
+                      "400": 0,
+                      "403": 0,
+                      "409": 0,
+                      "413": 0,
+                      "429": 0,
+                      "500": 0,
+                      "503": 0,
+                      "other": 0
+                    },
+                    "stats": {
+                      "total": 0,
+                      "2xx": 0,
+                      "400": 0,
+                      "403": 0,
+                      "409": 0,
+                      "413": 0,
+                      "429": 0,
+                      "500": 0,
+                      "503": 0,
+                      "other": 0
+                    },
+                    "config": {
+                      "total": 0,
+                      "2xx": 0,
+                      "400": 0,
+                      "403": 0,
+                      "409": 0,
+                      "413": 0,
+                      "429": 0,
+                      "500": 0,
+                      "503": 0,
+                      "other": 0
+                    },
+                    "enroll": {
+                      "total": 0,
+                      "2xx": 0,
+                      "400": 0,
+                      "403": 0,
+                      "409": 0,
+                      "413": 0,
+                      "429": 0,
+                      "500": 0,
+                      "503": 0,
+                      "other": 0
+                    },
+                    "cacerts": {
+                      "total": 0,
+                      "2xx": 0,
+                      "400": 0,
+                      "403": 0,
+                      "409": 0,
+                      "413": 0,
+                      "429": 0,
+                      "500": 0,
+                      "503": 0,
+                      "other": 0
                     }
                   },
-                  "written_breakdown": {
-                    "alerts": 1142,
-                    "archives": 0,
-                    "firewall": 0,
-                    "fts": 0,
-                    "stats": 1
-                  }
-                },
-                "queues": {
-                  "alerts": {
-                    "size": 16384,
-                    "usage": 0
+                  "latency": {
+                    "stateless": {
+                      "count": 263,
+                      "sum": 1796452,
+                      "min": 795,
+                      "max": 59904,
+                      "p50": 5632,
+                      "p90": 11264,
+                      "p99": 36864
+                    },
+                    "stateful": {
+                      "count": 2,
+                      "sum": 77574,
+                      "min": 30571,
+                      "max": 47003,
+                      "p50": 45056,
+                      "p90": 45056,
+                      "p99": 45056
+                    },
+                    "enroll": {
+                      "count": 0,
+                      "sum": 0,
+                      "min": 0,
+                      "max": 0,
+                      "p50": 0,
+                      "p90": 0,
+                      "p99": 0
+                    }
                   },
-                  "archives": {
-                    "size": 16384,
-                    "usage": 0
+                  "auth_rejections": {
+                    "total": 15,
+                    "unknown_agent": 0,
+                    "invalid_signature": 0,
+                    "bad_token": 0,
+                    "identity_mismatch": 0,
+                    "clock_skew": 15,
+                    "unusable_key": 0,
+                    "address_not_allowed": 0,
+                    "enrollment_key_unavailable": 0,
+                    "payload_mismatch": 0,
+                    "body_too_large": 0,
+                    "bad_encoding": 0,
+                    "malformed": 0
                   },
-                  "dbsync": {
-                    "size": 16384,
-                    "usage": 0
+                  "enrollment": {
+                    "accepted": 0,
+                    "rejected_auth": 0,
+                    "rejected_validation": 0,
+                    "disabled": 0,
+                    "authd_error": 0,
+                    "authd_unavailable": 0,
+                    "authd_queue": {
+                      "depth": 0,
+                      "capacity": 256,
+                      "rejected_total": 0
+                    },
+                    "rate_limited": 0,
+                    "rate_limit": {
+                      "limit": 100,
+                      "burst": 200,
+                      "available": 200
+                    }
                   },
-                  "eventchannel": {
-                    "size": 16384,
-                    "usage": 0
+                  "control": {
+                    "startup": 0,
+                    "notify": 747,
+                    "shutdown": 0,
+                    "rejected": 0,
+                    "wdb_error": 0,
+                    "task_fetch": 747,
+                    "task_fetch_error": 0,
+                    "registry_agents": 3,
+                    "wdb_latency": {
+                      "count": 252,
+                      "sum": 510083,
+                      "min": 212,
+                      "max": 31427,
+                      "p50": 1152,
+                      "p90": 4608,
+                      "p99": 13312
+                    }
                   },
-                  "firewall": {
-                    "size": 16384,
-                    "usage": 0
+                  "keystore": {
+                    "agents": 12,
+                    "entries_skipped": 0,
+                    "reloads_total": 1,
+                    "reload_failures_total": 0
                   },
-                  "fts": {
-                    "size": 16384,
-                    "usage": 0
+                  "downstream": {
+                    "downstream_5xx": 0,
+                    "route_mismatch": 0,
+                    "errors": {
+                      "connect": 0,
+                      "connect_timeout": 0,
+                      "write_timeout": 0,
+                      "response_timeout": 0,
+                      "transport": 0,
+                      "protocol": 0,
+                      "response_too_large": 0
+                    },
+                    "deferred": {
+                      "capacity": 128,
+                      "inflight": 0,
+                      "rejected_total": 0
+                    }
                   },
-                  "hostinfo": {
-                    "size": 16384,
-                    "usage": 0
+                  "backpressure": {
+                    "available_bytes": 268435456,
+                    "inflight_bytes": 0,
+                    "inflight_requests": 0,
+                    "rejected_total": 0,
+                    "connections_open": 0,
+                    "connections_max": 256
                   },
-                  "others": {
-                    "size": 16384,
-                    "usage": 0
+                  "downloads": {
+                    "started": 0,
+                    "rejected": 0,
+                    "not_found": 0,
+                    "open_error": 0,
+                    "bytes_total": 0
                   },
-                  "processed": {
-                    "size": 16384,
-                    "usage": 0
+                  "tls": {
+                    "cert_expiry_days": 3630,
+                    "ca_matches_leaf": 1
                   },
-                  "rootcheck": {
-                    "size": 16384,
-                    "usage": 0
+                  "cacerts": {
+                    "served": 0,
+                    "not_found": 0,
+                    "ca_mismatch": 0,
+                    "rate_limited": 0,
+                    "rate_limit": {
+                      "limit": 50,
+                      "burst": 100,
+                      "available": 100
+                    }
                   },
-                  "sca": {
-                    "size": 16384,
-                    "usage": 0
-                  },
-                  "stats": {
-                    "size": 16384,
-                    "usage": 0
-                  },
-                  "syscheck": {
-                    "size": 16384,
-                    "usage": 0
-                  },
-                  "syscollector": {
-                    "size": 16384,
-                    "usage": 0
-                  },
-                  "upgrade": {
-                    "size": 16384,
-                    "usage": 0
+                  "vd_scan": {
+                    "requests_total": 0,
+                    "accepted": 0,
+                    "version_mismatch": 0,
+                    "queue_full": 0,
+                    "invalid_agent": 0,
+                    "vd_error": 0,
+                    "indexer_unavailable": 0
                   }
                 }
               }
             },
             {
-              "uptime": "2025-11-25T10:54:56+00:00",
-              "timestamp": "2025-11-25T11:12:19+00:00",
-              "name": "wazuh-db",
+              "status": "OK",
+              "global": [
+                {
+                  "name": "server.events.received",
+                  "type": "counter",
+                  "enabled": true,
+                  "value": 2064
+                },
+                {
+                  "name": "server.bytes.received",
+                  "type": "counter",
+                  "enabled": true,
+                  "value": 4406958
+                },
+                {
+                  "name": "agent.cache.entries",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 2
+                },
+                {
+                  "name": "agent.cache.evictions",
+                  "type": "counter",
+                  "enabled": true,
+                  "value": 7
+                },
+                {
+                  "name": "agent.cache.insertions",
+                  "type": "counter",
+                  "enabled": true,
+                  "value": 9
+                },
+                {
+                  "name": "agent.cache.hits",
+                  "type": "counter",
+                  "enabled": true,
+                  "value": 254
+                },
+                {
+                  "name": "router.events.processed",
+                  "type": "counter",
+                  "enabled": true,
+                  "value": 2064
+                },
+                {
+                  "name": "indexer.queue.usage.percent",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "agent.cache.updates",
+                  "type": "counter",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "router.queue.size",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "router.eps.30m",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0.7083333333333334
+                },
+                {
+                  "name": "router.queue.usage.percent",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "router.queue.bytes.usage.percent",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "router.queue.bytes.used",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "router.events.dropped",
+                  "type": "counter",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "router.eps.1m",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0.6833333333333333
+                },
+                {
+                  "name": "router.eps.5m",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0.6666666666666666
+                },
+                {
+                  "name": "indexer.queue.size",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "indexer.events.dropped",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                }
+              ],
+              "spaces": [
+                {
+                  "name": "custom",
+                  "metrics": [
+                    {
+                      "name": "events.discarded",
+                      "type": "counter",
+                      "enabled": true,
+                      "value": 0
+                    },
+                    {
+                      "name": "events.unclassified",
+                      "type": "counter",
+                      "enabled": true,
+                      "value": 0
+                    },
+                    {
+                      "name": "events.discarded.prefilter",
+                      "type": "counter",
+                      "enabled": true,
+                      "value": 0
+                    },
+                    {
+                      "name": "events.discarded.postfilter",
+                      "type": "counter",
+                      "enabled": true,
+                      "value": 0
+                    }
+                  ]
+                },
+                {
+                  "name": "standard",
+                  "metrics": [
+                    {
+                      "name": "events.unclassified",
+                      "type": "counter",
+                      "enabled": true,
+                      "value": 47
+                    },
+                    {
+                      "name": "events.discarded.postfilter",
+                      "type": "counter",
+                      "enabled": true,
+                      "value": 0
+                    },
+                    {
+                      "name": "events.discarded",
+                      "type": "counter",
+                      "enabled": true,
+                      "value": 0
+                    },
+                    {
+                      "name": "events.discarded.prefilter",
+                      "type": "counter",
+                      "enabled": true,
+                      "value": 0
+                    }
+                  ]
+                }
+              ],
+              "name": "wazuh-manager-analysisd",
+              "uptime": "2026-10-20T11:47:59.651Z",
+              "timestamp": "2026-10-20T12:57:05.602Z"
+            },
+            {
+              "uptime": "2026-10-20T11:47:59+00:00",
+              "timestamp": "2026-10-20T12:57:05+00:00",
+              "name": "wazuh-manager-db",
               "metrics": {
                 "queries": {
-                  "received": 4624,
+                  "received": 805,
                   "received_breakdown": {
-                    "agent": 3026,
-                    "agent_breakdown": {
-                      "db": {
-                        "begin": 0,
-                        "close": 0,
-                        "commit": 0,
-                        "remove": 0,
-                        "sql": 0,
-                        "vacuum": 0,
-                        "get_fragmentation": 0,
-                        "sleep": 0
-                      },
-                      "tables": {
-                        "ciscat": {
-                          "ciscat": 0
-                        },
-                        "rootcheck": {
-                          "rootcheck": 3
-                        },
-                        "sca": {
-                          "sca": 586
-                        },
-                        "sync": {
-                          "dbsync": 666
-                        },
-                        "syscheck": {
-                          "fim_file": 249,
-                          "fim_registry": 0,
-                          "fim_registry_key": 1,
-                          "fim_registry_value": 1,
-                          "syscheck": 615
-                        },
-                        "syscollector": {
-                          "syscollector_hotfixes": 2,
-                          "syscollector_hwinfo": 3,
-                          "syscollector_network_address": 13,
-                          "syscollector_network_iface": 12,
-                          "syscollector_network_protocol": 8,
-                          "syscollector_osinfo": 3,
-                          "syscollector_packages": 45,
-                          "syscollector_ports": 190,
-                          "syscollector_processes": 582,
-                          "syscollector_users": 15,
-                          "syscollector_groups": 2,
-                          "syscollector_browser_extensions": 27,
-                          "syscollector_services": 2,
-                          "deprecated": {
-                            "hardware": 0,
-                            "hotfix": 0,
-                            "netaddr": 0,
-                            "netinfo": 0,
-                            "netproto": 0,
-                            "osinfo": 1,
-                            "package": 0,
-                            "port": 0,
-                            "process": 0
-                          }
-                        }
-                      }
-                    },
-                    "global": 195,
+                    "global": 812,
                     "global_breakdown": {
                       "db": {
                         "backup": 0,
-                        "sql": 20,
+                        "sql": 285,
                         "vacuum": 0,
-                        "get_fragmentation": 0,
-                        "sleep": 0
+                        "commit": 0,
+                        "get_fragmentation": 0
                       },
                       "tables": {
                         "agent": {
                           "delete-agent": 0,
-                          "disconnect-agents": 0,
+                          "disconnect-agents": 13,
                           "find-agent": 0,
-                          "get-agent-info": 13,
-                          "get-agents-by-connection-status": 80,
+                          "get-agent-info": 0,
+                          "get-agents-by-connection-status": 0,
                           "get-all-agents": 1,
-                          "get-distinct-groups": 21,
+                          "get-distinct-groups": 251,
                           "get-groups-integrity": 0,
                           "recalculate-agent-group-hashes": 0,
                           "insert-agent": 0,
                           "reset-agents-connection": 1,
-                          "select-agent-group": 21,
-                          "select-agent-name": 2,
+                          "select-agent-group": 126,
                           "set-agent-groups": 0,
                           "sync-agent-groups-get": 0,
                           "sync-agent-info-get": 0,
                           "sync-agent-info-set": 0,
-                          "update-agent-data": 22,
-                          "update-agent-name": 1,
+                          "update-agent-data": 126,
                           "update-connection-status": 0,
                           "update-status-code": 0,
-                          "update-keepalive": 1
+                          "update-keepalive": 0,
+                          "set-agent-credentials": 0
                         },
                         "belongs": {
                           "get-group-agents": 0,
@@ -412,145 +707,56 @@ Follow the steps below to retrieve Wazuh daemon statistics:
                         },
                         "group": {
                           "delete-group": 0,
-                          "find-group": 2,
+                          "find-group": 1,
                           "insert-agent-group": 0,
                           "select-groups": 1
-                        },
-                        "labels": {
-                          "get-labels": 9
                         }
                       }
                     },
-                    "mitre": 1400,
+                    "mitre": 0,
                     "mitre_breakdown": {
                       "db": {
-                        "sql": 1400
-                      }
-                    },
-                    "task": 3,
-                    "task_breakdown": {
-                      "db": {
                         "sql": 0
-                      },
-                      "tables": {
-                        "tasks": {
-                          "delete_old": 1,
-                          "set_timeout": 1,
-                          "upgrade": 0,
-                          "upgrade_cancel_tasks": 1,
-                          "upgrade_custom": 0,
-                          "upgrade_get_status": 0,
-                          "upgrade_result": 0,
-                          "upgrade_update_status": 0
-                        }
-                      }
-                    },
-                    "wazuhdb": 0,
-                    "wazuhdb_breakdown": {
-                      "db": {
-                        "remove": 0
                       }
                     }
                   }
                 },
                 "time": {
-                  "execution": 50016,
+                  "execution": 908,
                   "execution_breakdown": {
-                    "agent": 49617,
-                    "agent_breakdown": {
-                      "db": {
-                        "open": 33872,
-                        "begin": 0,
-                        "close": 0,
-                        "commit": 0,
-                        "remove": 0,
-                        "sql": 0,
-                        "vacuum": 0,
-                        "get_fragmentation": 0,
-                        "sleep": 0
-                      },
-                      "tables": {
-                        "ciscat": {
-                          "ciscat": 0
-                        },
-                        "rootcheck": {
-                          "rootcheck": 50
-                        },
-                        "sca": {
-                          "sca": 245
-                        },
-                        "sync": {
-                          "dbsync": 800
-                        },
-                        "syscheck": {
-                          "fim_file": 393,
-                          "fim_registry": 0,
-                          "fim_registry_key": 364,
-                          "fim_registry_value": 751,
-                          "syscheck": 12174
-                        },
-                        "syscollector": {
-                          "syscollector_hotfixes": 14,
-                          "syscollector_hwinfo": 81,
-                          "syscollector_network_address": 2,
-                          "syscollector_network_iface": 12,
-                          "syscollector_network_protocol": 32,
-                          "syscollector_osinfo": 14,
-                          "syscollector_packages": 277,
-                          "syscollector_ports": 177,
-                          "syscollector_processes": 348,
-                          "syscollector_groups": 23,
-                          "syscollector_users": 44,
-                          "syscollector_browser_extensions": 176,
-                          "syscollector_services": 128,
-                          "deprecated": {
-                            "hardware": 0,
-                            "hotfix": 0,
-                            "netaddr": 0,
-                            "netinfo": 0,
-                            "netproto": 0,
-                            "osinfo": 0,
-                            "package": 0,
-                            "port": 0,
-                            "process": 0
-                          }
-                        }
-                      }
-                    },
-                    "global": 78,
+                    "global": 908,
                     "global_breakdown": {
                       "db": {
-                        "open": 10,
+                        "open": 9,
                         "backup": 0,
-                        "sql": 9,
+                        "sql": 75,
                         "vacuum": 0,
-                        "get_fragmentation": 0,
-                        "sleep": 0
+                        "commit": 0,
+                        "get_fragmentation": 0
                       },
                       "tables": {
                         "agent": {
                           "delete-agent": 0,
-                          "disconnect-agents": 0,
+                          "disconnect-agents": 3,
                           "find-agent": 0,
-                          "get-agent-info": 5,
-                          "get-agents-by-connection-status": 26,
-                          "get-all-agents": 0,
-                          "get-distinct-groups": 6,
+                          "get-agent-info": 0,
+                          "get-agents-by-connection-status": 0,
+                          "get-all-agents": 18,
+                          "get-distinct-groups": 452,
                           "get-groups-integrity": 0,
                           "recalculate-agent-group-hashes": 0,
                           "insert-agent": 0,
                           "reset-agents-connection": 0,
-                          "select-agent-group": 2,
-                          "select-agent-name": 0,
+                          "select-agent-group": 36,
                           "set-agent-groups": 0,
                           "sync-agent-groups-get": 0,
                           "sync-agent-info-get": 0,
                           "sync-agent-info-set": 0,
-                          "update-agent-data": 15,
-                          "update-agent-name": 0,
+                          "update-agent-data": 267,
                           "update-connection-status": 0,
                           "update-status-code": 0,
-                          "update-keepalive": 0
+                          "update-keepalive": 0,
+                          "set-agent-credentials": 0
                         },
                         "belongs": {
                           "get-group-agents": 0,
@@ -558,43 +764,16 @@ Follow the steps below to retrieve Wazuh daemon statistics:
                         },
                         "group": {
                           "delete-group": 0,
-                          "find-group": 0,
+                          "find-group": 1,
                           "insert-agent-group": 0,
-                          "select-groups": 0
-                        },
-                        "labels": {
-                          "get-labels": 0
+                          "select-groups": 41
                         }
                       }
                     },
-                    "mitre": 355,
+                    "mitre": 0,
                     "mitre_breakdown": {
                       "db": {
-                        "sql": 355
-                      }
-                    },
-                    "task": 6,
-                    "task_breakdown": {
-                      "db": {
                         "sql": 0
-                      },
-                      "tables": {
-                        "tasks": {
-                          "delete_old": 3,
-                          "set_timeout": 2,
-                          "upgrade": 0,
-                          "upgrade_cancel_tasks": 0,
-                          "upgrade_custom": 0,
-                          "upgrade_get_status": 0,
-                          "upgrade_result": 0,
-                          "upgrade_update_status": 0
-                        }
-                      }
-                    },
-                    "wazuhdb": 0,
-                    "wazuhdb_breakdown": {
-                      "db": {
-                        "remove": 0
                       }
                     }
                   }
@@ -613,654 +792,659 @@ Follow the steps below to retrieve Wazuh daemon statistics:
 Retrieving Wazuh manager logs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use the Wazuh server API to retrieve log messages generated by the Wazuh manager. The ``/manager/logs`` endpoint provides insight into module activity, scan progress, errors, warnings, and other operational events. The endpoint helps troubleshoot issues with modules such as Syscollector, Rootcheck, SCA, or File Integrity Monitoring (FIM). It also helps verify that scheduled scans and evaluations are running correctly.
+You can use the Wazuh manager API to retrieve log messages generated by the Wazuh manager.
 
-Follow the steps below to retrieve the last 100 log messages generated by the Wazuh manager:
+The ``/cluster/<NODE_ID>/logs`` endpoint provides insight into module activity, scan progress, errors, warnings, and other operational events. The endpoint helps troubleshoot Wazuh manager components such as the vulnerability scanner, the content updater, and ``wazuh-manager-remoted``.
 
-#. Navigate to **Server management > Dev Tools** to open the Wazuh server API Console.
-#. Set the method and endpoint as ``GET /manager/logs?limit=100``.
+Follow these steps to retrieve the last 100 log messages generated by the Wazuh manager:
+
+#. Navigate to **Server management** > **Dev Tools** to open the Wazuh manager API Console.
+#. Set the method and endpoint to ``GET /cluster/<NODE_ID>/logs?limit=100``, where ``<NODE_ID>`` is the name of the Wazuh manager node.
+#. Click the play button to execute the request. A response similar to the following is returned:
 
    .. thumbnail:: /images/manual/api/retrieve-wazuh-manager-logs.png
       :title: Retrieve Wazuh manager logs
       :alt: Retrieve Wazuh manager logs
       :align: center
-      :width: 100%
+      :width: 80%
 
-#. Click the play button to execute the request. A response similar to the one below is returned:
+   The command output looks similar to this:
 
    .. code-block:: json
       :class: output
-   
+
       {
         "data": {
           "affected_items": [
             {
-              "timestamp": "2025-11-25T12:18:38Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:18:38Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:18:23Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:18:23Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:18:08Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:18:08Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:17:52Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:17:52Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:17:37Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:17:37Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:17:22Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:17:22Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:17:19Z",
-              "tag": "wazuh-modulesd:vulnerability-scanner",
+              "timestamp": "2026-10-20T14:48:01Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " Triggered a re-scan after content update."
+              "description": " IndexerDownloader: Consumer 'cti:catalog:consumer:vulnerabilities' in index '.wazuh-cti-consumers' is ready. Starting feed download."
             },
             {
-              "timestamp": "2025-11-25T12:17:19Z",
-              "tag": "wazuh-modulesd:vulnerability-scanner",
+              "timestamp": "2026-10-20T14:48:01Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " Feed update process completed."
+              "description": " IndexerDownloader: Starting incremental update from offset 1141562"
             },
             {
-              "timestamp": "2025-11-25T12:17:06Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:17:06Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:16:50Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:16:50Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:16:34Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:16:34Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:16:19Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:16:19Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:16:04Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:16:04Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:15:48Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:15:48Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:15:32Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:15:32Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:15:17Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:15:17Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:15:00Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:15:00Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:14:44Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:14:44Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:14:29Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:14:29Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:14:13Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:14:13Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:13:59Z",
-              "tag": "wazuh-rootcheck",
+              "timestamp": "2026-10-20T14:48:01Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " Ending rootcheck scan."
+              "description": " IndexerDownloader: Incremental update download phase complete — 0 documents, new cursor: '1141562'"
             },
             {
-              "timestamp": "2025-11-25T12:13:56Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:13:56Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:13:54Z",
-              "tag": "wazuh-syscheckd",
+              "timestamp": "2026-10-20T14:48:01Z",
+              "tag": "wazuh-manager-modulesd:vulnerability-scanner",
               "level": "info",
-              "description": " netstat not available. Skipping port check."
+              "description": " Feed update process completed (changed=false)."
             },
             {
-              "timestamp": "2025-11-25T12:13:40Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:13:40Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:13:24Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:13:24Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:13:07Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:13:07Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:12:51Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:12:51Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:12:36Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:12:36Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:12:19Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:12:19Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:12:04Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:12:04Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:11:48Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:11:48Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:11:32Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:11:32Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:11:16Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:11:16Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:10:58Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:10:58Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:10:42Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:10:42Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:10:41Z",
-              "tag": "wazuh-syscheckd",
+              "timestamp": "2026-10-20T14:48:01Z",
+              "tag": "wazuh-manager-modulesd:vulnerability-scanner",
               "level": "info",
-              "description": " (6009): File integrity monitoring scan ended."
+              "description": " CVE feed fully loaded — per-agent scans unblocked."
             },
             {
-              "timestamp": "2025-11-25T12:10:41Z",
-              "tag": "wazuh-syscheckd",
+              "timestamp": "2026-10-20T14:15:42Z",
+              "tag": "wazuh-manager-remoted:endpoints",
+              "level": "warning",
+              "description": " Rejected 2 request(s) in the last 90 s whose token fell outside the accepted time window (stale_token). Check clock synchronization between the agents and the manager; the window is set by 'jwt_max_age' and 'jwt_clock_skew' (remoted internal options)."
+            },
+            {
+              "timestamp": "2026-10-20T14:10:53Z",
+              "tag": "wazuh-manager-remoted:endpoints",
+              "level": "warning",
+              "description": " Rejected 2 request(s) in the last 90 s whose token fell outside the accepted time window (stale_token). Check clock synchronization between the agents and the manager; the window is set by 'jwt_max_age' and 'jwt_clock_skew' (remoted internal options)."
+            },
+            {
+              "timestamp": "2026-10-20T13:59:07Z",
+              "tag": "wazuh-manager-remoted:endpoints",
+              "level": "warning",
+              "description": " Rejected 2 request(s) in the last 90 s whose token fell outside the accepted time window (stale_token). Check clock synchronization between the agents and the manager; the window is set by 'jwt_max_age' and 'jwt_clock_skew' (remoted internal options)."
+            },
+            {
+              "timestamp": "2026-10-20T13:56:15Z",
+              "tag": "wazuh-manager-remoted:endpoints",
+              "level": "warning",
+              "description": " Rejected 3 request(s) in the last 90 s whose token fell outside the accepted time window (stale_token). Check clock synchronization between the agents and the manager; the window is set by 'jwt_max_age' and 'jwt_clock_skew' (remoted internal options)."
+            },
+            {
+              "timestamp": "2026-10-20T13:50:31Z",
+              "tag": "wazuh-manager-remoted:endpoints",
+              "level": "warning",
+              "description": " Rejected 1 request(s) in the last 90 s whose token fell outside the accepted time window (stale_token). Check clock synchronization between the agents and the manager; the window is set by 'jwt_max_age' and 'jwt_clock_skew' (remoted internal options)."
+            },
+            {
+              "timestamp": "2026-10-20T13:49:37Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server:sync",
               "level": "info",
-              "description": " FIM sync module started."
+              "description": " Deletion of agent 013 state documents completed (wazuh-states-*)."
             },
             {
-              "timestamp": "2025-11-25T12:10:26Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:10:26Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:10:14Z",
-              "tag": "sca",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:task-manager:http",
               "level": "info",
-              "description": " Evaluation finished for policy '/var/ossec/ruleset/sca/cis_ubuntu24-04.yml'"
+              "description": " task manager server bound to 'queue/sockets/task-http.sock' (mode 0660, 2 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 8388608 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
             },
             {
-              "timestamp": "2025-11-25T12:10:14Z",
-              "tag": "sca",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:task-manager:http",
               "level": "info",
-              "description": " Security Configuration Assessment scan finished. Duration: 76 seconds."
+              "description": " Listening on 'queue/sockets/task-http.sock'"
             },
             {
-              "timestamp": "2025-11-25T12:10:06Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:10:06Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:09:57Z",
-              "tag": "wazuh-modulesd:vulnerability-scanner",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:task-manager",
               "level": "info",
-              "description": " Initiating update feed process."
+              "description": " Task manager started: 4 executor workers, database 'queue/tasks/tasks.db'"
             },
             {
-              "timestamp": "2025-11-25T12:09:41Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Command ran successfully."
-            },
-            {
-              "timestamp": "2025-11-25T12:09:41Z",
-              "tag": "wazuh-integratord",
-              "level": "debug",
-              "description": " Sending new alert."
-            },
-            {
-              "timestamp": "2025-11-25T12:09:40Z",
-              "tag": "wazuh-modulesd:syscollector",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server:server",
               "level": "info",
-              "description": " Evaluation finished."
+              "description": " inventory sync server bound to 'queue/sockets/inventory-sync-http.sock' (mode 0660, 4 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
             },
             {
-              "timestamp": "2025-11-25T12:09:23Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-services-wazuh-virtualbox."
+              "description": " inventory sync server listening on 'queue/sockets/inventory-sync-http.sock' (routes: GET /, GET /metrics, /stateful, /stats, /config, /_internal/agents/delete and /_internal/vd/scan; 2 sync worker(s))."
             },
             {
-              "timestamp": "2025-11-25T12:09:19Z",
-              "tag": "wazuh-modulesd:vulnerability-scanner",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
               "level": "info",
-              "description": " Vulnerability scanner module started."
+              "description": " The indexer is reachable; inventory documents can be delivered."
             },
             {
-              "timestamp": "2025-11-25T12:09:18Z",
-              "tag": "indexer-connector",
-              "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-browser-extensions-wazuh-virtualbox."
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-remoted:vd-client",
+              "level": "warning",
+              "description": " Failed to query VD offset: status=0 (1 occurrence(s) in the last 90 s)."
             },
             {
-              "timestamp": "2025-11-25T12:09:18Z",
-              "tag": "logger-helper",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:vulnerability-scanner:server",
               "level": "info",
-              "description": " InventoryHarvesterFacade module started."
+              "description": " vulnerability detector server bound to 'queue/sockets/vd-http.sock' (mode 0660, 2 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=3600 write=10 drain=2)."
             },
             {
-              "timestamp": "2025-11-25T12:09:17Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-groups-wazuh-virtualbox."
+              "description": " IndexerDownloader: Consumer 'cti:catalog:consumer:vulnerabilities' in index '.wazuh-cti-consumers' is ready. Starting feed download."
             },
             {
-              "timestamp": "2025-11-25T12:09:16Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-users-wazuh-virtualbox."
+              "description": " IndexerDownloader: Starting incremental update from offset 1141562"
             },
             {
-              "timestamp": "2025-11-25T12:09:16Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-vulnerabilities-wazuh-virtualbox."
+              "description": " IndexerDownloader: Incremental update download phase complete — 0 documents, new cursor: '1141562'"
             },
             {
-              "timestamp": "2025-11-25T12:09:13Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:vulnerability-scanner",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-interfaces-wazuh-virtualbox."
+              "description": " Feed update process completed (changed=false)."
             },
             {
-              "timestamp": "2025-11-25T12:09:13Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:01Z",
+              "tag": "wazuh-manager-modulesd:vulnerability-scanner",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-networks-wazuh-virtualbox."
+              "description": " CVE feed fully loaded — per-agent scans unblocked."
             },
             {
-              "timestamp": "2025-11-25T12:09:12Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-hardware-wazuh-virtualbox."
+              "description": " Schema initialized"
             },
             {
-              "timestamp": "2025-11-25T12:09:12Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-protocols-wazuh-virtualbox."
+              "description": " HLP initialized"
             },
             {
-              "timestamp": "2025-11-25T12:09:11Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-ports-wazuh-virtualbox."
+              "description": " Scheduler initialized"
             },
             {
-              "timestamp": "2025-11-25T12:09:11Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-hotfixes-wazuh-virtualbox."
+              "description": " Indexer Connector initialized"
             },
             {
-              "timestamp": "2025-11-25T12:09:10Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-processes-wazuh-virtualbox."
+              "description": " Stream logger initialized"
             },
             {
-              "timestamp": "2025-11-25T12:09:06Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-system-wazuh-virtualbox."
+              "description": " Builder initialized"
             },
             {
-              "timestamp": "2025-11-25T12:09:04Z",
-              "tag": "indexer-connector",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " IndexerConnector initialized successfully for index: wazuh-states-inventory-packages-wazuh-virtualbox."
+              "description": " Content Manager CRUD Service initialized"
             },
             {
-              "timestamp": "2025-11-25T12:08:59Z",
-              "tag": "wazuh-logcollector",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " (9203): Monitoring journal entries."
+              "description": " Raw Event Indexer initialized"
             },
             {
-              "timestamp": "2025-11-25T12:08:58Z",
-              "tag": "wazuh-monitord",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " Started (pid: 6696)."
+              "description": " Orchestrator initialized and started with event queue size: 131072, events per second: unlimited, max bytes: 33554432."
             },
             {
-              "timestamp": "2025-11-25T12:08:58Z",
-              "tag": "wazuh-modulesd:router",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " Loaded router module."
+              "description": " Content Manager Sync Service initialized"
             },
             {
-              "timestamp": "2025-11-25T12:08:58Z",
-              "tag": "wazuh-modulesd:content_manager",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " Loaded content_manager module."
+              "description": " IOC Sync Service initialized"
             },
             {
-              "timestamp": "2025-11-25T12:08:58Z",
-              "tag": "wazuh-modulesd:inventory-harvester",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " Loaded Inventory harvester module."
+              "description": " Dumper Events initialized"
             },
             {
-              "timestamp": "2025-11-25T12:08:58Z",
-              "tag": "wazuh-modulesd",
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " Started (pid: 6706)."
+              "description": " Remote engine's server initialized and started"
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " Engine started"
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " Scheduler started"
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " [CMSync] Event processing is now active"
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:communication",
+              "level": "info",
+              "description": " Starting remoted module (port=1517, cluster='wazuh', workerNode=false)."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:keystore",
+              "level": "info",
+              "description": " Loaded 12 agent key(s) from '/etc/wazuh-manager/client.keys'."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:downstream",
+              "level": "info",
+              "description": " Downstream UDS client started (4 I/O thread(s))."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:downstream",
+              "level": "info",
+              "description": " Downstream UDS client started (1 I/O thread(s))."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:downstream",
+              "level": "info",
+              "description": " Downstream UDS client started (1 I/O thread(s))."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:downstream",
+              "level": "info",
+              "description": " Downstream UDS client started (1 I/O thread(s))."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:passwordKeySource",
+              "level": "info",
+              "description": " Enrollment password loaded from '/etc/wazuh-manager/authd.pass'."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:tokenKeySource",
+              "level": "info",
+              "description": " Enrollment token store loaded from '/etc/wazuh-manager/enrollment_tokens.json' (12 token(s) with a credential)."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:downstream",
+              "level": "info",
+              "description": " Downstream UDS client started (1 I/O thread(s))."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:http-server",
+              "level": "info",
+              "description": " HTTP server listening on https://0.0.0.0:1517 (4 I/O thread(s), 8 worker thread(s), max body 10485760 bytes, in-flight budget 268435456 bytes, max 256 connection(s))."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:http-server",
+              "level": "info",
+              "description": " All HTTP endpoints are served under the global prefix '/wazuh-manager' (e.g. https://0.0.0.0:1517/wazuh-manager/stateless); unprefixed paths answer 404; agents must send and sign the full prefixed target."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:communication",
+              "level": "info",
+              "description": " remoted HTTP server started."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:remoted-module:admin",
+              "level": "info",
+              "description": " remoted admin server bound to 'queue/sockets/remote-admin-http.sock' (mode 0660, 2 I/O thread(s), 2 concurrent accept(s), max 64 connection(s), 16 reserved for control, 48 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:communication",
+              "level": "info",
+              "description": " remoted admin server listening on 'queue/sockets/remote-admin-http.sock' (routes: GET /, GET /metrics, GET /status, and GET /tls)."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted",
+              "level": "info",
+              "description": " Started (pid: 1241435). Listening on port 1514/TCP (secure)."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted:communication",
+              "level": "info",
+              "description": " remoted module worker thread running."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-remoted",
+              "level": "info",
+              "description": " legacy_task_delivery: poller thread started (startup delay 65s, poll interval 900s)"
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-modulesd",
+              "level": "info",
+              "description": " Started (pid: 1241515)."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-modulesd:control",
+              "level": "info",
+              "description": " Starting control thread."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-modulesd:database",
+              "level": "info",
+              "description": " Started (pid: 1241515)."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-modulesd:vulnerability-scanner",
+              "level": "info",
+              "description": " Started (pid: 1241515)."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-modulesd:keystore-server",
+              "level": "info",
+              "description": " Started (pid: 1241515)."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": " Started (pid: 1241515)."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
+              "level": "info",
+              "description": " Started (pid: 1241515)."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
+              "level": "info",
+              "description": " Dispatching start; the module binds its socket asynchronously and reports under its own tag."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
+              "level": "info",
+              "description": " Starting inventory sync server (cluster='wazuh')."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-modulesd:keystore-server",
+              "level": "info",
+              "description": " keystore server listening on 'queue/sockets/keystore.sock'."
+            },
+            {
+              "timestamp": "2026-10-20T13:48:00Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
+              "level": "info",
+              "description": " inventory sync server worker thread running."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-authd",
+              "level": "info",
+              "description": " 12 enrollment token(s) loaded from '/etc/wazuh-manager/enrollment_tokens.json'."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-authd",
+              "level": "info",
+              "description": " Started (pid: 1241186)."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-authd",
+              "level": "info",
+              "description": " Using the existing enrollment password from '/etc/wazuh-manager/authd.pass'. To rotate the password, delete the file and restart."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-authd",
+              "level": "info",
+              "description": " Accepting connections on port 1515. Shared-password enrollment is required."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-authd",
+              "level": "info",
+              "description": " Raising the agent id counter from 12 to 13: ids that were handed out are never reused."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-db",
+              "level": "info",
+              "description": " Started (pid: 1241194)."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-db",
+              "level": "info",
+              "description": " wazuh-db HTTP server bound to 'queue/sockets/wdb-http.sock' (mode 0660, 4 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " Store initialized"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " Content Manager initialized"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " KVDB initialized"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " IOC initialized"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " GEO initialized"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:59Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " Fast metrics initialized"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": " Module finished."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-modulesd:keystore-server",
+              "level": "info",
+              "description": " keystore server stopped."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-modulesd:keystore-server",
+              "level": "info",
+              "description": " Module finished."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
+              "level": "info",
+              "description": " Stopping inventory sync server."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server:server",
+              "level": "info",
+              "description": " inventory sync server is no longer accepting on 'queue/sockets/inventory-sync-http.sock'; 0 deferred replies still outstanding, 0 pre-handler connection(s) answered 503."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server:server",
+              "level": "info",
+              "description": " inventory sync server fully stopped."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
+              "level": "info",
+              "description": " inventory sync server worker thread finished."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
+              "level": "info",
+              "description": " inventory sync server stopped."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
+              "level": "info",
+              "description": " Module finished."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " [RemoteConfig] Shutdown requested"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " [Stream logger] Shutdown requested"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " [indexer-connector] Shutdown requested"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " [indexer-connector] Shutdown initiated"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " [Scheduler] Requesting scheduler shutdown..."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:52Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " [Scheduler] Scheduler stopped."
+            },
+            {
+              "timestamp": "2026-10-20T13:47:50Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " [Server] Event services stopped"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:50Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " [Server] API services stopped"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:50Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " [Geo::Manager] Shutdown requested"
+            },
+            {
+              "timestamp": "2026-10-20T13:47:50Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": " [IOC::Sync] Shutdown requested"
             }
           ],
-          "total_affected_items": 284,
+          "total_affected_items": 903,
           "total_failed_items": 0,
           "failed_items": []
         },
-        "message": "Logs were successfully read",
+        "message": "Logs were successfully read in specified node",
         "error": 0
       }
 
-The output above shows a detailed look at the Wazuh manager logs, it contains module activity, scan progress, errors, warnings, and other operational events.
+The preceding output shows a detailed view of the Wazuh manager logs, including module activity, scan progress, errors, warnings, and other operational events.
 
-Restarting Wazuh manager cluster
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Restarting the Wazuh manager cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use the Wazuh server API to initiate a coordinated restart of the manager nodes within your environment. The ``/cluster/restart`` endpoint allows you to trigger a restart across the cluster to ensure that configuration changes or updates are properly applied. This endpoint is particularly useful for maintaining synchronization across the master and worker nodes without having to manually access each server's command line. It also helps verify that the cluster can gracefully reload its services and resume normal communication and data processing.
+You can use the Wazuh manager API to initiate a coordinated restart of the manager nodes within your environment. The ``/cluster/restart`` endpoint allows you to trigger a restart across the cluster to make sure that configuration changes or updates are properly applied. Every Wazuh manager node restarts, so send the request when a short interruption is acceptable.
 
-Follow the steps below to restart the Wazuh server cluster nodes:
+Follow these steps to restart the Wazuh manager cluster nodes:
 
-#. Navigate to **Server management** > **Dev Tools** to open the Wazuh server API Console.
-#. Set the method and endpoint as ``PUT /cluster/restart``.
-#. Click the play button to execute the request. A response similar to the one below is returned:
+#. Navigate to **Server management** > **Dev Tools** to open the Wazuh manager API Console.
+#. Set the method and endpoint to ``PUT /cluster/restart``.
+#. Click the play button to execute the request. A response similar to the following is returned:
 
-   .. thumbnail:: /images/manual/api/restart-wazuh-manager-cluster.png
+   .. thumbnail:: /images/manual/api/restart-wazuh-manager-cluster.jpg
       :title: Restart Wazuh manager cluster
       :alt: Restart Wazuh manager cluster
       :align: center
-      :width: 100%
+      :width: 80%
+
+   The command output looks similar to this:
 
    .. code-block:: json
       :class: output
@@ -1268,33 +1452,39 @@ Follow the steps below to restart the Wazuh server cluster nodes:
       {
         "data": {
           "affected_items": [
-            "manager",
+            "node01",
             "worker01"
           ],
           "total_affected_items": 2,
           "total_failed_items": 0,
-          "failed_items": []
+          "failed_items": [],
+          "nodes": {
+            "worker01": {
+              "affected_items": [
+                "worker01"
+              ]
+            }
+          }
         },
         "message": "Restart request sent to all specified nodes",
         "error": 0
       }
 
+The preceding output lists the Wazuh manager nodes that received the restart request. The restart takes about 10 seconds on a single node, and Dev Tools returns an ``ECONNREFUSED`` error until it finishes. Then run ``GET /cluster/<NODE_ID>/status`` to confirm that the Wazuh manager daemons are running again. On a multi-node cluster, worker nodes can take a minute or more to reconnect to the master node. Until a worker node reconnects, ``GET /cluster/<NODE_ID>/status`` for that node returns error ``1730``. Run ``GET /cluster/nodes`` to confirm that every node is connected.
 
-The output above confirms the successful execution of the cluster restart command across your environment. It shows the status of each node as the restart is triggered, ensuring that all manager services are synchronized and up to date.
-
-Wazuh agent management
+Wazuh agent operations
 ^^^^^^^^^^^^^^^^^^^^^^
 
-You can use the Wazuh server API to manage Wazuh agents, including enrolling, querying, and removing them from the Wazuh environment. Review the :api-ref:`API reference <tag/Agents>` to find out more about managing Wazuh agents using the Wazuh server API.
+You can use the Wazuh manager API to manage Wazuh agents, including enrolling, querying, restarting, and upgrading them. Review the :api-ref:`API reference <tag/Agents>` to find out more about managing Wazuh agents using the Wazuh manager API.
 
-The following use cases demonstrate how to perform various operations on Wazuh agents.
+The following use cases show how to enroll, query, restart, and upgrade Wazuh agents.
 
-Generating Wazuh agent enrollment key
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Generating a Wazuh agent enrollment key
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Follow the steps below to generate a key for enrolling a new Wazuh agent:
+Follow these steps to generate a key for enrolling a new Wazuh agent:
 
-#. Navigate to **Server management** > **Dev Tools,** then paste the following query:
+#. Navigate to **Server management** > **Dev Tools**, then paste the following query:
 
    .. code-block:: none
 
@@ -1305,37 +1495,192 @@ Follow the steps below to generate a key for enrolling a new Wazuh agent:
 
    Where:
 
-   * ``UBUNTU_AGENT_01`` is a unique name for the Wazuh agent.
+   -  ``UBUNTU_AGENT_01`` is a unique name for the Wazuh agent.
+   -  This request adds a Wazuh agent with this name to the Wazuh manager and returns its client key. The Wazuh agent shows as never connected until an endpoint uses the key. If a Wazuh agent with the same name or IP address already exists, the request fails with error ``1706``. To replace it, set ``force.enabled`` to ``true`` in the request body. By default, the Wazuh manager then replaces it only if it has been disconnected and registered for more than one hour.
 
-   This enrolls the Wazuh agent under the specified name and generates a key that maps the Wazuh agent to the Wazuh manager.
+#. Click the play button to execute the request. The Wazuh manager responds with the ID and client key of the new Wazuh agent:
 
-#. Click the play button to execute the request. The Wazuh server responds with an enrollment token, which can be used to enroll a Wazuh agent:
-
-   .. thumbnail:: /images/manual/api/generate-wazuh-agent-enrollment-key.png
+   .. thumbnail:: /images/manual/api/generate-wazuh-agent-enrollment-key.jpg
       :title: Generate Wazuh agent enrollment key
       :alt: Generate Wazuh agent enrollment key
       :align: center
-      :width: 100%
+      :width: 80%
+
+   The command output looks similar to this:
 
    .. code-block:: json
       :class: output
 
       {
         "data": {
-          "id": "004",
-          "key": "MDA0IFVCVU5UVV9BR0VOVF8wMSBhbnkgNGNjN2RiNzVmODRlODgzMTljMDRhYmYzMTJlM2M2MjkzYWQzNmZlNTI3ZTE0Y2IwMjExZWNhODllNmMxYWRjNA=="
+          "id": "017",
+          "key": "MDE3IFVCVU5UVV9BR0VOVF8wMSBhbnkgNjM5N2IzNDkwODE5MzdjN2Q0Njk2ZmM1NTk2N2UwMDJmOTViZjcyNjA3MTMxZTkxNjYxYTFjNzA3MDZjOGMwZA=="
         },
         "error": 0
       }
 
-   The output above shows a Wazuh agent enrollment key that can be used to register a new Wazuh agent.
+The preceding output shows the ID and client key of the new Wazuh agent. To use the key on a Linux endpoint, run ``/var/ossec/bin/manage_agents`` as root, enter ``I`` to import a key, and paste the key value from the output when prompted. Don't pass the key with the ``-i`` option, because other processes can read command-line arguments and the shell saves them in its history. Then set ``<endpoint>`` in the ``<manager>`` section of ``/var/ossec/etc/ossec.conf`` to the Wazuh manager IP address, and start the Wazuh agent. To enroll a new Wazuh agent without a key, use an enrollment token, as shown in the next section. A Wazuh agent added this way has no copy of the Wazuh manager CA, so it doesn't verify the Wazuh manager certificate. To install the CA, run ``wazuh-agent-auth --certs-only`` with an enrollment token.
+
+Enrolling a Wazuh agent with an enrollment token
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+An enrollment token lets a new Wazuh agent enroll with the Wazuh manager without the shared enrollment password. The Wazuh agent sends its enrollment request over HTTPS to port 1517 on the Wazuh manager. Each token contains the Wazuh manager address and a fingerprint of the Wazuh manager certificate authority (CA). You can also limit how long the token is valid and how many Wazuh agents can use it.
+
+Install the Wazuh agent package on the endpoint first. Then follow these steps to create an enrollment token and use it to enroll a Wazuh agent on Linux, macOS, or Windows:
+
+#. Navigate to **Server management** > **Dev Tools**, then paste the following request:
+
+   .. code-block:: none
+
+      POST /agents/enrollment-tokens
+      {
+        "address": "<WAZUH_MANAGER_IP_ADDRESS>",
+        "ttl": "12h",
+        "max_uses": 10,
+        "description": "Wazuh agent enrollment"
+      }
+
+   Where:
+
+   -  ``<WAZUH_MANAGER_IP_ADDRESS>`` is the IP address or FQDN of the Wazuh manager. It must match a name in the certificate of the Wazuh manager HTTPS listener, or the request fails with error ``1768``. To list those names, run ``GET /cluster/<NODE_ID>/daemons/remoted/tls`` and read ``listener.sans`` in the response. On an all-in-one installation, the names are the hostname and private IP address of the Wazuh manager, plus the loopback addresses. A default installation might not include a public address, so Wazuh agents outside the Wazuh manager network must use one of these names.
+   -  ``ttl`` is how long the token stays valid; for example, ``12h``.
+   -  ``max_uses`` is the number of Wazuh agents that can enroll with the token.
+   -  ``description`` is an optional label that helps you identify the token.
+
+#. Click the play button to execute the request. A response similar to the following is returned:
+
+   .. code-block:: json
+      :class: output
+
+      {
+        "data": {
+          "token": "eyJ2ZXIiOjEsImFkciI6IjE5Mi4xNjguNzEuMTUiLCJwaW4iOiJJZzlnaWU5UGJ0VTFKV3Z4VjFUUlU1TWpyVXIwNk90dGVUMnhQQmJ4YjlFIiwia2V5IjoiSTZjdkVUb085bWhPQlIzWVQxODg1V1MzWkZlVm9YOVNWQk56cnM2aVV3NCJ9",
+          "id": "I6cvEToO9mhOBR3YT1885Q",
+          "address": "192.168.71.15",
+          "expires": "2026-10-24T02:55:30+00:00",
+          "pin_hex": "220f6089ef4f6ed535256bf15754d1539323ad4af4e8eb6d793db13c16f16fd1"
+        },
+        "error": 0
+      }
+
+Copy the ``token`` value. The Wazuh manager API returns the token only in this response.
+
+Then enroll the Wazuh agent on the endpoint. Follow the steps for its operating system:
+
+**Linux**
+
+#. On the Linux endpoint, run the following command to save the token to a file that only the root user can read. Paste the token, press **Enter**, then press **Ctrl** + **D**:
+
+   .. code-block:: console
+
+      # (umask 077; cat > /root/wazuh-enrollment.tok)
+
+   Don't pass the token as a command-line argument. Other processes can read command-line arguments, and the shell saves them in its history.
+
+#. Stop the Wazuh agent:
+
+   .. code-block:: console
+
+      # systemctl stop wazuh-agent
+
+#. Enroll the Wazuh agent with the token:
+
+   .. code-block:: console
+
+      # /var/ossec/bin/wazuh-agent-auth --token-file /root/wazuh-enrollment.tok
+
+   The Wazuh agent name and groups come from the ``<enrollment>`` section of ``/var/ossec/etc/ossec.conf``. If the Wazuh agent is already enrolled, add ``--force-enroll`` to enroll it again. The Wazuh agent then gets a new ID. If the Wazuh manager still has a Wazuh agent with this name, it usually refuses the enrollment with a ``Duplicate name`` error. By default, it replaces the existing Wazuh agent only when that Wazuh agent has been disconnected and registered for more than one hour. Delete that Wazuh agent first, as shown in :ref:`Deleting Wazuh agents <api_use_cases_deleting_wazuh_agents>`. Add ``--dry-run`` to list the changes the command makes without contacting the Wazuh manager.
+
+#. Start the Wazuh agent to load its new identity:
+
+   .. code-block:: console
+
+      # systemctl start wazuh-agent
+
+#. Delete the token file:
+
+   .. code-block:: console
+
+      # rm /root/wazuh-enrollment.tok
+
+**macOS**
+
+#. On the macOS endpoint, run the following command to save the token to a file that only the root user can read. Paste the token, press **Enter**, then press **Ctrl** + **D**:
+
+   .. code-block:: console
+
+      # (umask 077; cat > /var/root/wazuh-enrollment.tok)
+
+#. Stop the Wazuh agent:
+
+   .. code-block:: console
+
+      # /Library/Ossec/bin/wazuh-control stop
+
+#. Enroll the Wazuh agent with the token:
+
+   .. code-block:: console
+
+      # /Library/Ossec/bin/wazuh-agent-auth --token-file /var/root/wazuh-enrollment.tok
+
+   The Wazuh agent name and groups come from the ``<enrollment>`` section of ``/Library/Ossec/etc/ossec.conf``. If the Wazuh agent is already enrolled, add ``--force-enroll`` to enroll it again. The Wazuh agent then gets a new ID. If the Wazuh manager still has a Wazuh agent with this name, it usually refuses the enrollment with a ``Duplicate name`` error. By default, it replaces the existing Wazuh agent only when that Wazuh agent has been disconnected and registered for more than one hour. Delete that Wazuh agent first, as shown in :ref:`Deleting Wazuh agents <api_use_cases_deleting_wazuh_agents>`.
+
+#. Start the Wazuh agent:
+
+   .. code-block:: console
+
+      # /Library/Ossec/bin/wazuh-control start
+
+#. Delete the token file:
+
+   .. code-block:: console
+
+      # rm /var/root/wazuh-enrollment.tok
+
+**Windows**
+
+Run the following commands in PowerShell as an administrator.
+
+#. Save the token to a file in your temporary folder. Paste the token when prompted:
+
+   .. code-block:: powershell
+
+      > Read-Host -Prompt "Enrollment token" | Set-Content -NoNewline -Path "$env:TEMP\wazuh-enrollment.tok"
+
+#. Stop the Wazuh agent:
+
+   .. code-block:: powershell
+
+      > Stop-Service -Name WazuhSvc
+
+#. Enroll the Wazuh agent with the token:
+
+   .. code-block:: powershell
+
+      > & "C:\Program Files (x86)\ossec-agent\wazuh-agent-auth.exe" --token-file "$env:TEMP\wazuh-enrollment.tok"
+
+   The Wazuh agent name and groups come from the ``<enrollment>`` section of ``C:\Program Files (x86)\ossec-agent\ossec.conf``. If the Wazuh agent is already enrolled, add ``--force-enroll`` to enroll it again. The Wazuh agent then gets a new ID. If the Wazuh manager still has a Wazuh agent with this name, it usually refuses the enrollment with a ``Duplicate name`` error. By default, it replaces the existing Wazuh agent only when that Wazuh agent has been disconnected and registered for more than one hour. Delete that Wazuh agent first, as shown in :ref:`Deleting Wazuh agents <api_use_cases_deleting_wazuh_agents>`.
+
+#. Start the Wazuh agent:
+
+   .. code-block:: powershell
+
+      > Start-Service -Name WazuhSvc
+
+#. Delete the token file:
+
+   .. code-block:: powershell
+
+      > Remove-Item "$env:TEMP\wazuh-enrollment.tok"
+
+To list the enrollment tokens, run ``GET /agents/enrollment-tokens``. The response shows each token's ID, expiry date, and number of uses, but not the token itself. To revoke a token before it expires, run ``DELETE /agents/enrollment-tokens/<TOKEN_ID>``.
 
 Querying the Wazuh agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``/agents`` endpoint queries all connected Wazuh agents to gather valuable information about them. For example, we can query for all inactive Wazuh agents. This is useful for troubleshooting Wazuh agent health issues.
+The ``/agents`` endpoint returns information about the enrolled Wazuh agents. For example, you can query for all inactive Wazuh agents. This is useful for troubleshooting Wazuh agent health issues.
 
-#. Navigate to **Server management** > **Dev Tools,** then paste the following query:
+#. Navigate to **Server management** > **Dev Tools**, then paste the following query:
 
    .. code-block:: none
 
@@ -1343,11 +1688,13 @@ The ``/agents`` endpoint queries all connected Wazuh agents to gather valuable i
 
 #. Click the play button to execute the request. This returns information about the IP and enrolled name of all inactive Wazuh agents:
 
-   .. thumbnail:: /images/manual/api/query-wazuh-agents.png
+   .. thumbnail:: /images/manual/api/query-wazuh-agents.jpg
       :title: Querying the Wazuh agents
       :alt: Querying the Wazuh agents
       :align: center
-      :width: 100%
+      :width: 80%
+
+   The command output looks similar to this:
 
    .. code-block:: json
       :class: output
@@ -1356,375 +1703,191 @@ The ``/agents`` endpoint queries all connected Wazuh agents to gather valuable i
         "data": {
           "affected_items": [
             {
-              "name": "NewAgent",
-              "id": "003",
-              "ip": "any"
-            },
-            {
+              "id": "017",
               "name": "UBUNTU_AGENT_01",
-              "id": "004",
               "ip": "any"
-            }
-          ],
-          "total_affected_items": 2,
-          "total_failed_items": 0,
-          "failed_items": []
-        },
-        "message": "All selected agents information was returned",
-        "error": 0
-      }
-
-   The output above shows two Wazuh agents with IP value ``any`` that were either disconnected, pending, or never connected.
-
-Restarting a Wazuh agent remotely
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Wazuh agents can be restarted using the Wazuh server API from the Wazuh dashboard. Follow the steps below to restart a Wazuh agent.
-
-#. Navigate to **Server management** > **Dev Tools,** then paste the following query:
-
-   .. code-block:: none
-
-      PUT /agents/001/restart
-
-   Where:
-   
-   * ``001`` is the ID of the Wazuh agent that is to be restarted.
-
-#. Click the play button to execute the request. A response similar to the one below is received:
-
-   .. thumbnail:: /images/manual/api/restart-wazuh-agent-remotely.png
-      :title: Restart a Wazuh agent remotely
-      :alt: Restart a Wazuh agent remotely
-      :align: center
-      :width: 100%
-
-   .. code-block:: json
-      :class: output
-
-      {
-        "data": {
-          "affected_items": [
-            {
-              "name": "NewAgent",
-              "id": "003",
-              "ip": "any"
-            },
-            {
-              "name": "UBUNTU_AGENT_01",
-              "id": "004",
-              "ip": "any"
-            }
-          ],
-          "total_affected_items": 2,
-          "total_failed_items": 0,
-          "failed_items": []
-        },
-        "message": "All selected agents information was returned",
-        "error": 0
-      }
-
-
-   The output above shows the Wazuh agent that was restarted.
-
-Upgrading the Wazuh agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To upgrade a Wazuh agent, can use the ``/agents/upgrade`` endpoint. We can specify the IDs of Wazuh agents to upgrade (separated by commas), or specify ``all`` to update all enrolled Wazuh agents.
-
-#. Navigate to **Server management** > **Dev Tools,** then paste the following query:
-
-   .. code-block:: none
-
-      PUT /agents/upgrade?agents_list=001
-
-   Where:
-   
-   * ``001`` is the ID of the Wazuh agent that is to be restarted. This parameter accepts a comma-separated list of Wazuh agent IDs. We can also use ``all`` to send the request to all Wazuh agents.
-
-#. Click the play button to execute the request. A response similar to the one below is received:
-
-   .. thumbnail:: /images/manual/api/upgrade-wazuh-agents.png
-      :title: Upgrading the Wazuh agents
-      :alt: Upgrading the Wazuh agents
-      :align: center
-      :width: 100%
-
-   .. code-block:: json
-      :class: output
-
-      {
-        "data": {
-          "affected_items": [
-            {
-              "agent": "006",
-              "task_id": 3
             }
           ],
           "total_affected_items": 1,
           "total_failed_items": 0,
           "failed_items": []
+        },
+        "message": "All selected agents information was returned",
+        "error": 0
+      }
+
+The preceding output shows the ID, name, and IP address of each Wazuh agent that is disconnected, pending, or never connected.
+
+Restarting a Wazuh agent remotely
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Wazuh agents can be restarted using the Wazuh manager API from the Wazuh dashboard. Follow these steps to restart a Wazuh agent.
+
+#. Navigate to **Server management** > **Dev Tools**, then paste the following query:
+
+   .. code-block:: none
+
+      PUT /agents/021/restart
+
+   Where:
+
+   -  ``021`` is the ID of the Wazuh agent that is to be restarted.
+
+#. Click the play button to execute the request. A response similar to the following is received:
+
+   .. thumbnail:: /images/manual/api/restart-wazuh-agent-remotely.jpg
+      :title: Restart a Wazuh agent remotely
+      :alt: Restart a Wazuh agent remotely
+      :align: center
+      :width: 80%
+
+   The command output looks similar to this:
+
+   .. code-block:: json
+      :class: output
+
+      {
+        "data": {
+          "affected_items": [
+            "021"
+          ],
+          "total_affected_items": 1,
+          "total_failed_items": 0,
+          "failed_items": [],
+          "nodes": {
+            "node01": {
+              "affected_items": [
+                "021"
+              ]
+            }
+          }
+        },
+        "message": "Restart command was sent to all agents",
+        "error": 0
+      }
+
+The preceding output shows the Wazuh agent that received the restart command.
+
+Upgrading the Wazuh agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To upgrade a Wazuh agent, you can use the ``/agents/upgrade`` endpoint. You can specify the IDs of Wazuh agents to upgrade, separated by commas, or specify ``all`` to upgrade every enrolled Wazuh agent. The Wazuh agents must run an older version than the Wazuh manager, and the Wazuh manager must be able to reach the WPK package repository. The Wazuh agents must also reach port 1517 on the Wazuh manager. If they can't, the upgrade stops before installing, and the Wazuh agent stays on 4.x. A Wazuh agent that already runs the version of the Wazuh manager returns error ``1820``. Wazuh agents on 4.x must run version 4.14.0 or later, or the request returns error ``1819``. Upgrade older Wazuh agents to 4.14.x first. The Wazuh manager checks for pending upgrades for 4.x Wazuh agents every 900 seconds by default. The upgrade can start up to 15 minutes after the request.
+
+#. Navigate to **Server management** > **Dev Tools**, then paste the following query:
+
+   .. code-block:: none
+
+      PUT /agents/upgrade?agents_list=023
+
+   Where:
+
+   -  ``023`` is the ID of the Wazuh agent to upgrade. The ``agents_list`` parameter accepts a comma-separated list of Wazuh agent IDs. You can also use ``all`` to send the request to all Wazuh agents.
+
+#. Click the play button to execute the request. A response similar to the following is received:
+
+   .. code-block:: json
+      :class: output
+
+      {
+        "data": {
+          "affected_items": [
+            "023"
+          ],
+          "total_affected_items": 1,
+          "total_failed_items": 0,
+          "failed_items": [],
+          "nodes": {
+            "node01": {
+              "affected_items": [
+                "023"
+              ]
+            }
+          }
         },
         "message": "All upgrade tasks were created",
         "error": 0
       }
 
-   The output above shows the upgraded Wazuh agent.
+The preceding output shows the upgrade task created for the Wazuh agent. The response doesn't report whether the upgrade succeeds. To check the result, run ``GET /agents?agents_list=023&select=version,status`` until the Wazuh agent reports the new version.
 
 Using an authenticated terminal
 -------------------------------
 
-The following use cases demonstrate how to run queries against Wazuh rules and decoders, and to manage the Wazuh agent using the Wazuh server API via an authenticated terminal.
+The following use cases demonstrate how to manage Wazuh agents using the Wazuh manager API through an authenticated terminal.
 
 Prerequisites
 ^^^^^^^^^^^^^
 
-Generate a JWT to authenticate with the Wazuh server API by making a curl request. The default Wazuh server API credentials are ``wazuh:wazuh``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or ``FQDN`` (Fully Qualified Domain Name):
+Your terminal must reach port 55000 on the Wazuh manager. Generate a JWT to authenticate with the Wazuh manager API by making a cURL request. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager. Replace ``<USER>`` with the Wazuh manager API user ``wazuh`` by default, and ``<PASSWORD>`` with its password:
 
 .. code-block:: console
 
    # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
 
-Run the command echo ``$TOKEN`` to confirm that the token was successfully generated:
+Run ``echo $TOKEN`` to confirm that the token was generated:
 
-   .. code-block:: console
-   
-      # echo $TOKEN
+.. code-block:: console
 
-You should get an output like this:
+   # echo $TOKEN
 
-   .. code-block:: none
-      :class: output
-   
-      eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjQzMDExMjQ0LCJleHAiOjE2NDMwMTIxNDQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.Ad6zOZvx0BEV7K0J6s3pIXAXTWB-zdVfxaX2fotLfZMQkiYPMkwDaQHUFiOInsWJ_7KZV3y2BbhEs9-kBqlJAMvMAD0NDBPhEQ2qBd_iutZ7QWZECd6eYfIP83xGqH9iqS7uMI6fXOKr3w4aFV13Q6qsHSUQ1A-1LgDnnDGGaqF5ITYo
+The output is similar to the following:
 
-This token will be used to make subsequent queries to the Wazuh server from your terminal.
+.. code-block:: none
+   :class: output
+
+   eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNzkyNzY3MzI5LCJuYmZfbXMiOjE3OTI3NjczMjk0MDUsImV4cCI6MTc5Mjc2ODIyOSwic3ViIjoid2F6dWgiLCJydW5fYXMiOmZhbHNlLCJyYmFjX3JvbGVzIjpbMV0sInJiYWNfbW9kZSI6IndoaXRlIn0.AVqR66Xjm2nbB4wryL9T6g4xattuIy7oKQHfyN1NO42fgtcpeff4TKsuO2Fe5XRFvTy5NPc1cnuhJ1Z0R6uCMyskATedb60RbrFrlS6tGMqzogePJOo87NQdrL7Ju3Ek2R0ndrWvO6m1debmfBTJKstFYLCdP8gHCa0w9YLHqdsvGzjz
+
+The following requests use this token to authenticate with the Wazuh manager API. The token expires after 900 seconds by default. When a request returns ``401``, run the first command again to get a new token.
 
 .. note::
 
-   You can find your Wazuh server API user password in the ``wazuh-install-files.tar`` file generated during the Wazuh server installation. You can also reset the password for the Wazuh server API user if you have forgotten it.
-
-Wazuh server management
-^^^^^^^^^^^^^^^^^^^^^^^
-
-You can use the Wazuh server API to manage and update the Wazuh manager configuration and retrieve information about the Wazuh server, including the ruleset. Review the :api-ref:`API manager reference <tag/Manager>` for more information on managing the Wazuh manager using the Wazuh server API.
-
-The following use cases demonstrate how to perform a log test from a terminal using the Wazuh server API.
-
-Testing rules and decoders
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You can use the Wazuh server API to perform a log test and see exactly which decoders and rules match a sample event. By sending a test log line to the ``/logtest`` endpoint, you can validate that your custom rules are applied as expected.
-
-#. Run the command below to execute a log test against a sample event and retrieve the rules and decoders that match it.:
-
-   .. code-block:: console
-
-      curl -k -X PUT "https://localhost:55000/logtest?pretty=true" \
-        -H "Authorization: Bearer $TOKEN" \
-        -H "Content-Type: application/json" \
-        -d '{
-              "log_format": "syslog",
-              "location": "myhost->/var/log/auth.log",
-              "event": "Jan 23 10:00:00 myhost sshd[12345]: Failed password for invalid user admin from 10.0.0.5 port 54321 ssh2"
-            }'
-
-   A response similar to the one below is expected when the command runs:
-
-   .. code-block:: json
-      :class: output
-   
-      {
-         "error": 0,
-         "data": {
-            "messages": [
-               "INFO: (7202): Session initialized with token '1f8ec388'"
-            ],
-            "token": "1f8ec388",
-            "output": {
-               "timestamp": "2026-01-23T09:20:51.969000Z",
-               "rule": {
-                  "level": 5,
-                  "description": "sshd: Attempt to login using a non-existent user",
-                  "id": "5710",
-                  "mitre": {
-                     "id": [
-                        "T1110.001",
-                        "T1021.004"
-                     ],
-                     "tactic": [
-                        "Credential Access",
-                        "Lateral Movement"
-                     ],
-                     "technique": [
-                        "Password Guessing",
-                        "SSH"
-                     ]
-                  },
-                  "firedtimes": 1,
-                  "mail": false,
-                  "groups": [
-                     "syslog",
-                     "sshd",
-                     "authentication_failed",
-                     "invalid_login"
-                  ],
-                  "gdpr": [
-                     "IV_35.7.d",
-                     "IV_32.2"
-                  ],
-                  "gpg13": [
-                     "7.1"
-                  ],
-                  "hipaa": [
-                     "164.312.b"
-                  ],
-                  "nist_800_53": [
-                     "AU.14",
-                     "AC.7",
-                     "AU.6"
-                  ],
-                  "pci_dss": [
-                     "10.2.4",
-                     "10.2.5",
-                     "10.6.1"
-                  ],
-                  "tsc": [
-                     "CC6.1",
-                     "CC6.8",
-                     "CC7.2",
-                     "CC7.3"
-                  ]
-               },
-               "agent": {
-                  "id": "000",
-                  "name": "wazuh.manager"
-               },
-               "manager": {
-                  "name": "wazuh.manager"
-               },
-               "id": "1769160011.119294",
-               "full_log": "Jan 23 10:00:00 myhost sshd[12345]: Failed password for invalid user admin from 10.0.0.5 port 54321 ssh2",
-               "predecoder": {
-                  "program_name": "sshd",
-                  "timestamp": "Jan 23 10:00:00",
-                  "hostname": "myhost"
-               },
-               "decoder": {
-                  "parent": "sshd",
-                  "name": "sshd"
-               },
-               "data": {
-                  "srcip": "10.0.0.5",
-                  "srcuser": "admin"
-               },
-               "location": "myhost->/var/log/auth.log"
-            },
-            "alert": true,
-            "codemsg": 0
-         }
-      }
-
-   The output above shows rules that match the log test event you submitted through the Wazuh server API.
+   The password of the ``wazuh`` user is in the ``WAZUH_MANAGER_API_PASSWORD`` variable of the ``/etc/wazuh-manager/export/credentials.env`` file on the Wazuh manager. Only the root user can read this file. In a distributed deployment, the password is in the ``wazuh-install-files/credentials.env`` file inside the ``wazuh-install-files.tar`` archive that the installation assistant creates. The ``admin`` account of the Wazuh dashboard can't authenticate with the Wazuh manager API. You can also reset the password for the Wazuh manager API user if you have forgotten it.
 
 Wazuh agent management
 ^^^^^^^^^^^^^^^^^^^^^^
 
-You can use the Wazuh server API to manage Wazuh agents, including enrolling, querying, and removing them from the Wazuh environment. Review the :api-ref:`API reference <tag/Agents>` to find out more about managing Wazuh agents using the Wazuh server API.
+You can use the Wazuh manager API from a terminal to delete Wazuh agents and to summarize them by status, operating system, and group. Review the :api-ref:`API reference <tag/Agents>` to find out more about managing Wazuh agents using the Wazuh manager API.
 
-The following use cases demonstrate how to perform various operations on Wazuh agents.
+The following use cases show how to delete and summarize Wazuh agents.
 
-Deleting Wazuh agent(s)
-~~~~~~~~~~~~~~~~~~~~~~~
+.. _api_use_cases_deleting_wazuh_agents:
 
-Using the Wazuh server API, we can delete all or specific Wazuh agents based on a predetermined criterion. Refer to the :api-ref:`Wazuh server API reference <tag/Agents>` to see other categories that can be queried.
+Deleting Wazuh agents
+~~~~~~~~~~~~~~~~~~~~~
+
+Using the Wazuh manager API, you can delete specific Wazuh agents, or every Wazuh agent that matches a filter such as connection status or time since the last keepalive. Refer to the :api-ref:`Wazuh manager API reference <tag/Agents>` to see other categories that can be queried.
 
 #. Run the following request:
 
    .. code-block:: console
 
-      # curl -k -X DELETE "https://localhost:55000/agents?agents_list=<AGENT_ID>&status=all&older_than=1&pretty=true" -H "Authorization: Bearer $TOKEN"
+      # curl -k -X DELETE "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?agents_list=<AGENT_ID>&status=all&older_than=1&pretty=true" -H "Authorization: Bearer $TOKEN"
 
-   This query deletes the specified Wazuh agent.
-
-   Where:
-
-   * ``<AGENT_ID>`` is the ID of the agent. We can also specify a list of Wazuh agent IDs (separated by commas) to be deleted.
-
-   A response similar to the one below is expected when the command runs:
-
-   .. code-block:: json
-      :class: output
-   
-      {
-        "data": {
-          "affected_items": [
-            "001"
-          ],
-          "total_affected_items": 1,
-          "total_failed_items": 0,
-          "failed_items": []
-        },
-        "message": "All selected agents were deleted",
-        "error": 0
-      }
-
-   The output above shows the deleted Wazuh agent.
-
-Getting Wazuh agent configuration state
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You can use the Wazuh server API to return the active configuration of any Wazuh agent. This is useful for checking the configuration state of a Wazuh agent: whether it has been modified or is still pending restart. Refer to the :api-ref:`Wazuh server API reference <tag/Agents>` to see other categories that can be queried.
-
-Run the following query to get the active configuration state of a Wazuh agent:
-
-   .. code-block:: console
-   
-      # curl -k -X GET "https://localhost:55000/agents/<AGENT_ID>/config/agent/client?&pretty=true" -H "Authorization: Bearer $TOKEN"
+This request deletes every Wazuh agent that matches the filters.
 
 Where:
 
-   * ``<AGENT_ID>`` is the ID of the Wazuh agent to be queried.
+-  ``<AGENT_ID>`` is the ID of the Wazuh agent. You can also pass a comma-separated list of Wazuh agent IDs, or ``all``. ``status=all`` deletes the Wazuh agents, regardless of their connection status. This parameter is required. ``older_than=1`` includes Wazuh agents whose last keepalive is older than one second. Without it, only Wazuh agents whose last keepalive is older than seven days are deleted.
 
-A response similar to the one below is expected when the command runs:
+A response similar to the following is expected when the command runs:
 
-   .. code-block:: json
-      :class: output
-   
-      {
-        "data": {
-          "client": {
-            "config-profile": "windows, windows10",
-            "notify_time": 10,
-            "time-reconnect": 60,
-            "force_reconnect_interval": 0,
-            "ip_update_interval": 0,
-            "auto_restart": "yes",
-            "remote_conf": "yes",
-            "crypto_method": "aes",
-            "server": [
-              {
-                "address": "192.168.56.105",
-                "port": 1514,
-                "max_retries": 5,
-                "retry_interval": 10,
-                "protocol": "tcp"
-              }
-            ],
-            "enrollment": {
-              "enabled": "yes",
-              "delay_after_enrollment": 20,
-              "port": 1515,
-              "agent_name": "windows_temp",
-              "ssl_cipher": "HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH",
-              "auto_method": "no"
-            }
-          }
-        },
-        "error": 0
-      }
+.. code-block:: json
+   :class: output
 
-The above output shows the configuration state of a Windows 10 endpoint running the Wazuh server agent.
+   {
+     "data": {
+       "affected_items": [
+         "001"
+       ],
+       "total_affected_items": 1,
+       "total_failed_items": 0,
+       "failed_items": []
+     },
+     "message": "All selected agents were deleted",
+     "error": 0
+   }
+
+The preceding output shows the deleted Wazuh agent. The Wazuh agent on the endpoint keeps running and retries enrollment. Stop or uninstall the Wazuh agent on the endpoint, or enroll it again with an enrollment token and ``--force-enroll``.
 
 Getting a summary of Wazuh agent information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1735,13 +1898,13 @@ You can use the ``/agents/summary`` endpoint to return a summary of the availabl
 
    .. code-block:: console
 
-      # curl -k -X GET "https://localhost:55000/agents/summary?pretty=true" -H "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents/summary?pretty=true" -H "Authorization: Bearer $TOKEN"
 
-   A response similar to the one below is expected when the command runs:
+   A response similar to the following is expected when the command runs:
 
    .. code-block:: json
       :class: output
-   
+
       {
         "data": {
           "status": {
@@ -1762,764 +1925,4 @@ You can use the ``/agents/summary`` endpoint to return a summary of the availabl
         "error": 0
       }
 
-   The output above shows details for all Wazuh agents connected to the Wazuh server, including their operating system and current status.
-
-Analyzing the File Integrity Monitoring (FIM) data of a Wazuh agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You can utilize the Wazuh server API to display information about all files monitored by the Wazuh FIM module. The following example shows all events associated with Python ``.py`` files installed on a monitored endpoint:
-
-   .. code-block:: console
-   
-      # curl -k -X GET "https://localhost:55000/syscheck/<AGENT_ID>?pretty=true&search=.py" -H "Authorization: Bearer $TOKEN"
-
-Where:
-
-   * ``<AGENT_ID>`` is the ID of the agent.
-
-   .. code-block:: json
-      :class: output
-   
-      {
-        "data": {
-          "affected_items": [
-            {
-              "file": "/etc/python2.7/sitecustomize.py",
-              "perm": "rw-r--r--",
-              "sha1": "67b0a8ccf18bf5d2eb8c7f214b5a5d0d4a5e409d",
-              "changes": 1,
-              "md5": "d6b276695157bde06a56ba1b2bc53670",
-              "inode": 29654607,
-              "size": 155,
-              "uid": "0",
-              "gname": "root",
-              "mtime": "2020-04-15T17:20:14Z",
-              "sha256": "43d81125d92376b1a69d53a71126a041cc9a18d8080e92dea0a2ae23be138b1e",
-              "date": "2020-05-25T14:28:41Z",
-              "uname": "root",
-              "type": "file",
-              "gid": "0"
-            },
-            {
-              "file": "/etc/python3.6/sitecustomize.py",
-              "perm": "rw-r--r--",
-              "sha1": "67b0a8ccf18bf5d2eb8c7f214b5a5d0d4a5e409d",
-              "changes": 1,
-              "md5": "d6b276695157bde06a56ba1b2bc53670",
-              "inode": 29762235,
-              "size": 155,
-              "uid": "0",
-              "gname": "root",
-              "mtime": "2020-04-18T01:56:04Z",
-              "sha256": "43d81125d92376b1a69d53a71126a041cc9a18d8080e92dea0a2ae23be138b1e",
-              "date": "2020-05-25T14:28:41Z",
-              "uname": "root",
-              "type": "file",
-              "gid": "0"
-            }
-          ],
-          "total_affected_items": 2,
-          "total_failed_items": 0,
-          "failed_items": []
-        },
-        "message": "FIM findings of the agent were returned",
-        "error": 0
-      }
-
-You can find a file using its SHA1 or MD5 hash. In the following examples, we retrieve the same using both its SHA1 and MD5 hash:
-
-   .. code-block:: console
-   
-      # curl -k -X GET "https://localhost:55000/syscheck/<AGENT_ID>?pretty=true&hash=bc929cb047b79d5c16514f2c553e6b759abfb1b8" -H "Authorization: Bearer $TOKEN"
-   
-   .. code-block:: json
-      :class: output
-   
-      {
-        "data": {
-          "affected_items": [
-            {
-              "file": "/sbin/swapon",
-              "perm": "rwxr-xr-x",
-              "sha1": "bc929cb047b79d5c16514f2c553e6b759abfb1b8",
-              "changes": 1,
-              "md5": "085c1161d814a8863562694b3819f6a5",
-              "inode": 14025822,
-              "size": 47184,
-              "uid": "0",
-              "gname": "root",
-              "mtime": "2020-01-08T18:31:23Z",
-              "sha256": "f274025a1e4870301c5678568ab9519152f49d3cb907c01f7c71ff17b1a6e870",
-              "date": "2020-05-25T14:29:44Z",
-              "uname": "root",
-              "type": "file",
-              "gid": "0"
-            }
-          ],
-          "total_affected_items": 1,
-          "total_failed_items": 0,
-          "failed_items": []
-        },
-        "message": "FIM findings of the agent were returned",
-        "error": 0
-      }
-   
-   .. code-block:: console
-   
-      # curl -k -X GET "https://localhost:55000/syscheck/<AGENT_ID>?pretty=true&hash=085c1161d814a8863562694b3819f6a5" -H "Authorization: Bearer $TOKEN"
-   
-   .. code-block:: json
-      :class: output
-   
-      {
-        "data": {
-          "affected_items": [
-            {
-              "file": "/sbin/swapon",
-              "perm": "rwxr-xr-x",
-              "sha1": "bc929cb047b79d5c16514f2c553e6b759abfb1b8",
-              "changes": 1,
-              "md5": "085c1161d814a8863562694b3819f6a5",
-              "inode": 14025822,
-              "size": 47184,
-              "uid": "0",
-              "gname": "root",
-              "mtime": "2020-01-08T18:31:23Z",
-              "sha256": "f274025a1e4870301c5678568ab9519152f49d3cb907c01f7c71ff17b1a6e870",
-              "date": "2020-05-25T14:29:44Z",
-              "uname": "root",
-              "type": "file",
-              "gid": "0"
-            }
-          ],
-          "total_affected_items": 1,
-          "total_failed_items": 0,
-          "failed_items": []
-        },
-        "message": "FIM findings of the agent were returned",
-        "error": 0
-      }
-
-Analyzing Syscollector data of a Wazuh agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You can use the Wazuh server API to retrieve endpoint inventory information collected by the Syscollector module on monitored endpoints. Syscollector gathers detailed data about the operating system, installed packages, hardware components, network interfaces, ports, and running processes. This information is useful for asset inventory, exposure analysis, and threat-hunting activities.
-
-Retrieving hardware inventory information
-"""""""""""""""""""""""""""""""""""""""""
-
-Run the following command to retrieve hardware inventory information collected by Syscollector from the monitored endpoint:
-
-   .. code-block:: console
-   
-      curl -k -X GET "https://localhost:55000/syscollector/<AGENT_ID>/hardware?pretty=true" -H "Authorization: Bearer $TOKEN"
-
-Where:
-
-   * ``<AGENT_ID>`` is the ID of the agent.
-
-A response similar to the one below is expected when the command is executed:
-
-   .. code-block:: json
-      :class: output
-   
-      {
-         "data": {
-            "affected_items": [
-               {
-                  "cpu": {
-                     "cores": 2,
-                     "mhz": 2593,
-                     "name": "Intel(R) Core(TM) i7-8850H CPU @ 2.60GHz"
-                  },
-                  "ram": {
-                     "free": 1455508,
-                     "total": 1965964,
-                     "usage": 26
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-05T16:36:32+00:00"
-                  },
-                  "board_serial": "None",
-                  "agent_id": "001"
-               }
-            ],
-            "total_affected_items": 1,
-            "total_failed_items": 0,
-            "failed_items": []
-         },
-         "message": "All specified syscollector information was returned",
-         "error": 0
-      }
-
-Retrieving software packages
-""""""""""""""""""""""""""""
-
-Run the following command to retrieve installed packages on the monitored endpoint that match the keyword ``python``:
-
-   .. code-block:: console
-   
-      curl -k -X GET "https://localhost:55000/syscollector/<AGENT_ID>/packages?pretty=true&search=python&limit=3" -H "Authorization: Bearer $TOKEN"
-
-Where:
-
-   * ``<AGENT_ID>`` is the ID of the agent.
-
-A response similar to the one below is expected when the command is executed:
-
-   .. code-block:: json
-      :class: output
-   
-      {
-         "data": {
-            "affected_items": [
-               {
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-01-06T14:03:22+00:00"
-                  },
-                  "size": 29901824,
-                  "name": "python-babel-localedata",
-                  "architecture": "all",
-                  "multiarch": "foreign",
-                  "description": "tools for internationalizing Python applications - locale data files",
-                  "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-                  "format": "deb",
-                  "location": " ",
-                  "install_time": " ",
-                  "section": "python",
-                  "version": "2.10.3-3build1",
-                  "source": "python-babel",
-                  "priority": "optional",
-                  "agent_id": "001"
-               },
-               {
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-01-06T14:03:24+00:00"
-                  },
-                  "size": 114688,
-                  "name": "python3-minimal",
-                  "architecture": "amd64",
-                  "multiarch": "allowed",
-                  "description": "minimal subset of the Python language (default python3 version)",
-                  "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-                  "format": "deb",
-                  "location": " ",
-                  "install_time": " ",
-                  "section": "python",
-                  "version": "3.12.3-0ubuntu2.1",
-                  "source": "python3-defaults",
-                  "priority": "optional",
-                  "agent_id": "001"
-               },
-               {
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-01-06T14:03:24+00:00"
-                  },
-                  "size": 1061888,
-                  "name": "python3-boto3",
-                  "architecture": "all",
-                  "description": "Python interface to Amazon's Web Services - Python 3.x",
-                  "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-                  "format": "deb",
-                  "location": " ",
-                  "install_time": " ",
-                  "section": "python",
-                  "version": "1.34.46+dfsg-1ubuntu1",
-                  "source": "python-boto3",
-                  "priority": "optional",
-                  "agent_id": "001"
-               }
-            ],
-            "total_affected_items": 96,
-            "total_failed_items": 0,
-            "failed_items": []
-         },
-         "message": "All specified syscollector information was returned",
-         "error": 0
-      }
-
-Retrieving network interface information
-""""""""""""""""""""""""""""""""""""""""
-
-Run the following command to retrieve network interface inventory information collected by Syscollector from the monitored endpoint:
-
-   .. code-block:: console
-   
-      curl -k -X GET "https://localhost:55000/syscollector/<AGENT_ID>/netiface?pretty=true" -H "Authorization: Bearer $TOKEN"
-
-Where:
-
-   * ``<AGENT_ID>`` is the ID of the agent.
-
-A response similar to the one below is expected when the command is executed:
-
-   .. code-block:: json
-      :class: output
-   
-      {
-         "data": {
-            "affected_items": [
-               {
-                  "rx": {
-                     "bytes": 338126113,
-                     "dropped": 0,
-                     "errors": 0,
-                     "packets": 349300
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-05T17:36:42+00:00"
-                  },
-                  "tx": {
-                     "bytes": 23743629,
-                     "dropped": 0,
-                     "errors": 0,
-                     "packets": 127261
-                  },
-                  "mtu": 1500,
-                  "state": "up",
-                  "name": "ens33",
-                  "type": "ethernet",
-                  "mac": "00:0c:29:dd:ed:65",
-                  "agent_id": "001"
-               }
-            ],
-            "total_affected_items": 1,
-            "total_failed_items": 0,
-            "failed_items": []
-         },
-         "message": "All specified syscollector information was returned",
-         "error": 0
-      }
-
-Retrieving open network ports
-"""""""""""""""""""""""""""""
-
-Run the following command to retrieve information about open ports detected by Syscollector on the monitored endpoint:
-
-   .. code-block:: console
-   
-      curl -k -X GET "https://localhost:55000/syscollector/<AGENT_ID>/ports?pretty=true" -H "Authorization: Bearer $TOKEN"
-
-Where:
-
-   * ``<AGENT_ID>`` is the ID of the agent.
-
-A response similar to the one below is expected when the command is executed:
-
-   .. code-block:: json
-      :class: output
-      
-      {
-         "data": {
-            "affected_items": [
-               {
-                  "local": {
-                     "ip": "::",
-                     "port": 22
-                  },
-                  "remote": {
-                     "ip": "::",
-                     "port": 0
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-02T19:11:59+00:00"
-                  },
-                  "protocol": "tcp6",
-                  "tx_queue": 0,
-                  "process": "systemd",
-                  "inode": 14404,
-                  "pid": 1,
-                  "rx_queue": 0,
-                  "state": "listening",
-                  "agent_id": "001"
-               },
-               {
-                  "local": {
-                     "ip": "0.0.0.0",
-                     "port": 22
-                  },
-                  "remote": {
-                     "ip": "0.0.0.0",
-                     "port": 0
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-02T19:12:00+00:00"
-                  },
-                  "protocol": "tcp",
-                  "tx_queue": 0,
-                  "process": "systemd",
-                  "inode": 14398,
-                  "pid": 1,
-                  "rx_queue": 0,
-                  "state": "listening",
-                  "agent_id": "001"
-               },
-               {
-                  "local": {
-                     "ip": "127.0.0.54",
-                     "port": 53
-                  },
-                  "remote": {
-                     "ip": "0.0.0.0",
-                     "port": 0
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-03T10:14:58+00:00"
-                  },
-                  "protocol": "udp",
-                  "tx_queue": 0,
-                  "process": "systemd-resolve",
-                  "inode": 705623,
-                  "pid": 125810,
-                  "rx_queue": 0,
-                  "agent_id": "001"
-               },
-               {
-                  "local": {
-                     "ip": "127.0.0.54",
-                     "port": 53
-                  },
-                  "remote": {
-                     "ip": "0.0.0.0",
-                     "port": 0
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-03T10:14:58+00:00"
-                  },
-                  "protocol": "tcp",
-                  "tx_queue": 0,
-                  "process": "systemd-resolve",
-                  "inode": 705624,
-                  "pid": 125810,
-                  "rx_queue": 0,
-                  "state": "listening",
-                  "agent_id": "001"
-               },
-               {
-                  "local": {
-                     "ip": "127.0.0.53",
-                     "port": 53
-                  },
-                  "remote": {
-                     "ip": "0.0.0.0",
-                     "port": 0
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-03T10:14:59+00:00"
-                  },
-                  "protocol": "tcp",
-                  "tx_queue": 0,
-                  "process": "systemd-resolve",
-                  "inode": 705622,
-                  "pid": 125810,
-                  "rx_queue": 0,
-                  "state": "listening",
-                  "agent_id": "001"
-               },
-               {
-                  "local": {
-                     "ip": "::",
-                     "port": 80
-                  },
-                  "remote": {
-                     "ip": "::",
-                     "port": 0
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-03T10:15:02+00:00"
-                  },
-                  "protocol": "tcp6",
-                  "tx_queue": 0,
-                  "process": "apache2",
-                  "inode": 705484,
-                  "pid": 125941,
-                  "rx_queue": 0,
-                  "state": "listening",
-                  "agent_id": "001"
-               },
-               {
-                  "local": {
-                     "ip": "127.0.0.53",
-                     "port": 53
-                  },
-                  "remote": {
-                     "ip": "0.0.0.0",
-                     "port": 0
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-03T10:15:03+00:00"
-                  },
-                  "protocol": "udp",
-                  "tx_queue": 0,
-                  "process": "systemd-resolve",
-                  "inode": 705621,
-                  "pid": 125810,
-                  "rx_queue": 0,
-                  "agent_id": "001"
-               },
-               {
-                  "local": {
-                     "ip": "192.168.71.129",
-                     "port": 49535
-                  },
-                  "remote": {
-                     "ip": "192.168.71.252",
-                     "port": 1514
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-05T16:36:32+00:00"
-                  },
-                  "protocol": "tcp",
-                  "tx_queue": 0,
-                  "process": "wazuh-agentd",
-                  "inode": 2390758,
-                  "pid": 126102,
-                  "rx_queue": 0,
-                  "state": "established",
-                  "agent_id": "001"
-               },
-               {
-                  "local": {
-                     "ip": "192.168.71.129",
-                     "port": 68
-                  },
-                  "remote": {
-                     "ip": "0.0.0.0",
-                     "port": 0
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-05T19:37:01+00:00"
-                  },
-                  "protocol": "udp",
-                  "tx_queue": 0,
-                  "process": "systemd-network",
-                  "inode": 2928082,
-                  "pid": 126024,
-                  "rx_queue": 0,
-                  "agent_id": "001"
-               }
-            ],
-            "total_affected_items": 9,
-            "total_failed_items": 0,
-            "failed_items": []
-         },
-         "message": "All specified syscollector information was returned",
-         "error": 0
-      }
-
-
-Retrieving running processes
-""""""""""""""""""""""""""""
-
-Run the following command to retrieve information about running processes collected by Syscollector on a monitored endpoint:
-
-   .. code-block:: console
-   
-      curl -k -X GET "https://localhost:55000/syscollector/<AGENT_ID>/processes?pretty=true&limit=5" -H "Authorization: Bearer $TOKEN"
-
-Where:
-
-   * ``<AGENT_ID>`` is the ID of the agent.
-
-A response similar to the one below is expected when the command is executed:
-
-   .. code-block:: json
-      :class: output
-   
-      {
-         "data": {
-            "affected_items": [
-               {
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-05T20:37:11+00:00"
-                  },
-                  "start_time": 1770113685,
-                  "fgroup": "root",
-                  "vm_size": 6824,
-                  "ppid": 1,
-                  "stime": 35,
-                  "egroup": "root",
-                  "processor": 0,
-                  "session": 125736,
-                  "tty": 0,
-                  "nlwp": 1,
-                  "argvs": "-f -P",
-                  "rgroup": "root",
-                  "state": "S",
-                  "share": 672,
-                  "size": 1706,
-                  "name": "cron",
-                  "utime": 6,
-                  "suser": "root",
-                  "resident": 2816,
-                  "tgid": 125736,
-                  "nice": 0,
-                  "pgrp": 125736,
-                  "priority": 20,
-                  "euser": "root",
-                  "ruser": "root",
-                  "pid": "125736",
-                  "sgroup": "root",
-                  "cmd": "/usr/sbin/cron",
-                  "agent_id": "001"
-               },
-               {
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-05T20:37:11+00:00"
-                  },
-                  "start_time": 1770113685,
-                  "fgroup": "root",
-                  "vm_size": 601328,
-                  "ppid": 1,
-                  "stime": 1407,
-                  "egroup": "root",
-                  "processor": 1,
-                  "session": 125745,
-                  "tty": 0,
-                  "nlwp": 6,
-                  "rgroup": "root",
-                  "state": "S",
-                  "share": 9408,
-                  "size": 150332,
-                  "name": "fwupd",
-                  "utime": 666,
-                  "suser": "root",
-                  "resident": 44368,
-                  "tgid": 125745,
-                  "nice": 0,
-                  "pgrp": 125745,
-                  "priority": 20,
-                  "euser": "root",
-                  "ruser": "root",
-                  "pid": "125745",
-                  "sgroup": "root",
-                  "cmd": "/usr/libexec/fwupd/fwupd",
-                  "agent_id": "001"
-               },
-               {
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-05T20:37:11+00:00"
-                  },
-                  "start_time": 1770113685,
-                  "fgroup": "root",
-                  "vm_size": 11344,
-                  "ppid": 1,
-                  "stime": 40,
-                  "egroup": "root",
-                  "processor": 0,
-                  "session": 125763,
-                  "tty": 0,
-                  "nlwp": 2,
-                  "rgroup": "root",
-                  "state": "S",
-                  "share": 448,
-                  "size": 2836,
-                  "name": "auditd",
-                  "utime": 30,
-                  "suser": "root",
-                  "resident": 1920,
-                  "tgid": 125763,
-                  "nice": -4,
-                  "pgrp": 125763,
-                  "priority": 16,
-                  "euser": "root",
-                  "ruser": "root",
-                  "pid": "125763",
-                  "sgroup": "root",
-                  "cmd": "/sbin/auditd",
-                  "agent_id": "001"
-               },
-               {
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-05T20:37:11+00:00"
-                  },
-                  "start_time": 1770113685,
-                  "fgroup": "root",
-                  "vm_size": 50416,
-                  "ppid": 1,
-                  "stime": 232,
-                  "egroup": "root",
-                  "processor": 0,
-                  "session": 125765,
-                  "tty": 0,
-                  "nlwp": 1,
-                  "rgroup": "root",
-                  "state": "S",
-                  "share": 4224,
-                  "size": 12604,
-                  "name": "systemd-journal",
-                  "utime": 195,
-                  "suser": "root",
-                  "resident": 17920,
-                  "tgid": 125765,
-                  "nice": -1,
-                  "pgrp": 125765,
-                  "priority": 19,
-                  "euser": "root",
-                  "ruser": "root",
-                  "pid": "125765",
-                  "sgroup": "root",
-                  "cmd": "/usr/lib/systemd/systemd-journald",
-                  "agent_id": "001"
-               },
-               {
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-05T20:37:11+00:00"
-                  },
-                  "start_time": 1770113685,
-                  "fgroup": "systemd-timesync",
-                  "vm_size": 91028,
-                  "ppid": 1,
-                  "stime": 94,
-                  "egroup": "systemd-timesync",
-                  "processor": 1,
-                  "session": 125777,
-                  "tty": 0,
-                  "nlwp": 2,
-                  "rgroup": "systemd-timesync",
-                  "state": "S",
-                  "share": 1728,
-                  "size": 22757,
-                  "name": "systemd-timesyn",
-                  "utime": 27,
-                  "suser": "systemd-timesync",
-                  "resident": 7808,
-                  "tgid": 125777,
-                  "nice": 0,
-                  "pgrp": 125777,
-                  "priority": 20,
-                  "euser": "systemd-timesync",
-                  "ruser": "systemd-timesync",
-                  "pid": "125777",
-                  "sgroup": "systemd-timesync",
-                  "cmd": "/usr/lib/systemd/systemd-timesyncd",
-                  "agent_id": "001"
-               }
-            ],
-            "total_affected_items": 223,
-            "total_failed_items": 0,
-            "failed_items": []
-         },
-         "message": "All specified syscollector information was returned",
-         "error": 0
-      }
-   
+The preceding output shows the number of Wazuh agents by status, operating system, and group.
