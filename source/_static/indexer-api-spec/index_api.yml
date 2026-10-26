@@ -2276,7 +2276,7 @@ components:
     target:
       name: target
       in: path
-      required: false
+      required: true
       description: |
         A comma-separated list of index names. Supports wildcard expressions (`*`). To apply the operation to all indexes in the cluster, use `_all` or `*`.
       schema:
@@ -2284,9 +2284,9 @@ components:
       example: "wazuh-alerts-4.x-2025.03.15"
 
     alias_name:
-      name: alias-name
+      name: alias_name
       in: path
-      required: false
+      required: true
       description: |
         The name of the alias to create or update.
       schema:
@@ -2555,7 +2555,7 @@ components:
     metric:
       name: metric
       in: path
-      required: false
+      required: true
       description: |
         A comma-separated list of metric groups that will be included in the response. The default value is all metrics.
 
@@ -2585,7 +2585,7 @@ components:
     index_ids:
       name: index_ids
       in: path
-      required: false
+      required: true
       description: |
         A comma-separated list of indexes, data streams, or index aliases that the operation is applied. Wildcard expressions such as (`*`) are supported. Use `_all` or `*` to apply the operation to all indexes and data streams in the cluster.
       schema:
