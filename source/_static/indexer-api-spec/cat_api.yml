@@ -156,7 +156,7 @@ paths:
         '405':
           $ref: '#/components/responses/CatCountMethodNotAllowed'
 
-  /_cat/count/{INDEX}:
+  /_cat/count/{index}:
     get:
       tags:
         - Cat APIs
@@ -1123,7 +1123,7 @@ components:
         type: string
 
     IndexName:
-      name: INDEX
+      name: index
       in: path
       required: true
       description: The name of the index.
