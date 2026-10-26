@@ -253,7 +253,7 @@ Starting the Wazuh dashboard service
       # chmod 0750 /etc/wazuh-dashboard/certs
       # chmod 0640 /etc/wazuh-dashboard/certs/*.pem
 
-   Repeat :ref:`Deploying certificates and passwords <wazuh_dashboard_deploying_certificates>` if a file is missing. Then run ``# systemctl reset-failed wazuh-dashboard``, because the service stops after three failed starts, and start the service again.
+   Repeat :ref:`Deploying certificates and passwords <wazuh_dashboard_deploying_certificates>` if a file is missing. Then run ``systemctl reset-failed wazuh-dashboard``, because the service stops after three failed starts, and start the service again.
 
 #. Get the ``admin`` password. On the Wazuh indexer node where you ran ``indexer-security-init.sh``, run the following command:
 

@@ -13,10 +13,6 @@ You need root user privileges to run all the commands described below.
 Wazuh manager cluster installation
 ----------------------------------
 
-.. note::
-
-   You need root user privileges to run all the commands described below.
-
 #. Download the Wazuh installation assistant. Skip this step if the Wazuh installation assistant is already in your working directory:
 
    .. code-block:: console
