@@ -41,7 +41,7 @@ The Wazuh manager components perform functions such as agent enrollment, agent i
    -  **Post-filter** *(optional)*: Evaluated after enrichment, or after pre-enrichment if enrichment is disabled. If configured, events that do not satisfy the filter conditions are discarded before reaching the outputs. If no post-filter is configured, all events are forwarded unconditionally.
    -  **Outputs** *(optional)*: Sends the final processed events to configured destinations, such as the Wazuh indexer or other downstream components. If no outputs are configured, processing ends after the last filter.
 
--  **Content manager:** Retrieves ruleset and content updates and makes them available to the Wazuh normalization engine and the vulnerability detection module.
+-  **Content manager:** Downloads the vulnerability feed and makes it available to the vulnerability detection module, its only consumer. The Wazuh normalization engine synchronizes its own content with the Wazuh indexer.
 
 -  **Wazuh manager API:** Provides a RESTful programmatic interface for interacting with the Wazuh manager. Administrators use it from the Wazuh dashboard or the command line to manage Wazuh agents, groups, and cluster nodes. It also enforces role-based access control (RBAC) and reports the status of Wazuh manager services.
 

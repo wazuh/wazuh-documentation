@@ -32,7 +32,7 @@ All agent modules are configurable and perform different security tasks. This mo
 
 -  **Log data collection:** Reads flat log files and Windows events, collecting operating system and application log messages. It supports XPath filters for Windows events and recognizes multi-line formats such as Linux Audit logs.
 
--  **Command monitoring**: Runs authorized commands periodically, collecting their output and reporting it to the Wazuh manager. You can use this module for different purposes, such as monitoring available disk space or getting a list of recently logged-in users.
+-  **Command monitoring:** Runs authorized commands periodically, collecting their output and reporting it to the Wazuh manager. You can use this module for different purposes, such as monitoring available disk space or getting a list of recently logged-in users.
 
 -  **File integrity monitoring (FIM):** Monitors the file system, reporting when files are created, deleted, or modified. It keeps track of changes in file attributes, permissions, ownership, and content. When an event occurs, it captures who, what, and when details in real time.
 
