@@ -463,9 +463,9 @@ The agent is configured by installing the ``wazuh::agent`` class.
 
    Where:
 
-   - ``<PUPPET_AGENT_NODE_NAME>`` is the hostname of the Puppet agent node where you install the Wazuh agent.
+   -  ``<PUPPET_AGENT_NODE_NAME>`` is the hostname of the Puppet agent node where you install the Wazuh agent.
 
-   - ``<MANAGER_IP_ADDRESS>`` is the IP address or hostname of the Wazuh server.
+   -  ``<MANAGER_IP_ADDRESS>`` is the IP address or hostname of the Wazuh server.
 
 #. Perform a Puppet run on the Puppet agent to start the deployment of the Wazuh stack. Skip this step if you want the stack to run on the specified node once the run interval time, as set in ``puppet.conf`` elapses:
 

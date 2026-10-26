@@ -54,4 +54,4 @@ Run the following command to install the dependencies depending on your Python v
 
       .. note::
 
-         If you're using a virtual environment, remove the ``--break-system-packages`` parameter from the command above.
+         If you're using a virtual environment, remove the ``--break-system-packages`` parameter from the commands above.

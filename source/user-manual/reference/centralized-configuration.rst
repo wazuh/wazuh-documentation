@@ -33,7 +33,7 @@ Logcollector commands and sockets have the same requirement. To accept ``command
 
 .. code-block:: shell
 
-    logcollector.remote_commands=1
+   logcollector.remote_commands=1
 
 Agent groups
 ------------
