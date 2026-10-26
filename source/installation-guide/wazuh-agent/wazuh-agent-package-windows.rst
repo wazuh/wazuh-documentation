@@ -38,7 +38,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
             Replace ``<ENROLLMENT_TOKEN>`` with the token you created in :ref:`Generate the enrollment token <generate_enrollment_token>`, and ``<AGENT_NAME>`` with a name for this endpoint that no other agent uses, for example, its host name. If you omit ``WAZUH_AGENT_NAME``, the agent enrolls under the endpoint's host name.
 
-            For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>` section.
+            For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-windows>` section.
 
             .. note::
 
@@ -84,11 +84,11 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
             You can also uninstall the agent and reinstall it with a valid token. After ``ERR_BAD_TOKEN``, the agent enrolls under the endpoint's host name. ``Select-String`` keeps showing the old failure lines above the new success line, because ``C:\Program Files (x86)\ossec-agent\ossec.log`` keeps them.
 
-         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. The installation process is now complete, and the Wazuh agent is successfully installed and configured.
+         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first alerts can take a few minutes to appear on a new deployment. The installation process is now complete, and the Wazuh agent is successfully installed and configured.
 
       .. group-tab:: GUI
 
-         #. Run the Windows installer. Accept the license agreement and click **Install**. On the last screen, select **Run Agent configuration interface** and click **Finish**. To open the agent GUI later, open the Start menu and select **Manage Agent** in the **OSSEC** folder. The agent GUI lets you configure the agent, open the log file, and start or stop the service.
+         #. Run the Windows installer. Accept the license agreement and click **Install**. On the last screen, select **Run Agent configuration interface** and click **Finish**. To open the agent GUI later, open the Start menu and select **Wazuh Agent Manager** in the **Wazuh** folder. The agent GUI lets you configure the agent, open the log file, and start or stop the service.
 
          #. In the agent GUI, go to **Manage** > **Enroll**, paste the enrollment token, and click **OK**. When asked **Start the Wazuh agent service now?**, click **Yes**. The GUI enrolls the agent under the computer's host name. To choose another name, use the CLI method and set ``WAZUH_AGENT_NAME``.
 
@@ -98,6 +98,6 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
                :title: Manage Enroll in the Windows agent GUI
                :alt: Manage Enroll in the Windows agent GUI
 
-         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. The installation process is now complete, and the Wazuh agent is successfully installed on your Windows endpoint.
+         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first alerts can take a few minutes to appear on a new deployment. The installation process is now complete, and the Wazuh agent is successfully installed on your Windows endpoint.
 
 By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.
