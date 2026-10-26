@@ -129,7 +129,7 @@ Contains the **Addresses**, **Interfaces**, **Protocols**, **Services**, and **T
       :align: center
       :width: 80%
 
--  The **Traffic** tab provides a detailed view of active listening ports, including source ports, destination ports, transport protocols, processes, and a summary data table for each endpoint.
+-  The **Traffic** tab provides a detailed view of the network connections that have a remote port, including source ports, destination ports, transport protocols, processes, and a summary data table for each endpoint. Listening ports are in the **Services** tab.
 
    .. thumbnail:: /images/manual/system-inventory/system-inventory-network-traffic-tab.png
       :title: System inventory - Network Traffic tab
@@ -842,7 +842,7 @@ Follow the steps below to query the system inventory indices from the command li
 
       curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/010/packages?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
-   The other inventory properties are ``hardware``, ``hotfixes``, ``netaddr``, ``netiface``, ``netproto``, ``os``, ``ports``, and ``processes``. These all correspond to the tables in the :doc:`inventory database </user-manual/capabilities/system-inventory/available-inventory-fields>`. You can learn more about these options in our :api-ref:`API documentation <tag/Syscollector>`.
+   The other inventory properties are ``hardware``, ``hotfixes``, ``netaddr``, ``netiface``, ``netproto``, ``os``, ``ports``, ``processes``, ``users``, ``groups``, ``browser_extensions``, and ``services``. These all correspond to the tables in the :doc:`inventory database </user-manual/capabilities/system-inventory/available-inventory-fields>`. You can learn more about these options in our :api-ref:`API documentation <tag/Syscollector>`.
 
    .. code-block:: console
       :class: output

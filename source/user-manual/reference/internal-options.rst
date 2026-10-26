@@ -538,13 +538,14 @@ Logcollector
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Allowed value | Any integer between 0 and 998                                              |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
-| **logcollector.remote_commands**         | Description   | Toggles Logcollector to accept remote commands from the manager or not.    |
+| **logcollector.remote_commands**         | Description   | Toggles whether Logcollector accepts remote commands, sockets, and socket  |
+|                                          |               | targets from the manager.                                                  |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 0                                                                          |
 +                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | 0: Disable remote commands                                                 |
+|                                          | Allowed value | 0: Disable remote commands, sockets, and socket targets                    |
 +                                          +               +----------------------------------------------------------------------------+
-|                                          |               | 1: Enable remote commands                                                  |
+|                                          |               | 1: Enable remote commands, sockets, and socket targets                     |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 |   **logcollector.vcheck_files**          | Description   | File checking interval, in seconds.                                        |
 +                                          +---------------+----------------------------------------------------------------------------+

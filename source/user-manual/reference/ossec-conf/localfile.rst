@@ -149,11 +149,11 @@ frequency
 
 Defines the interval (in seconds) between executions of the command. This option applies to both *command* and *full_command*.
 
-+--------------------+--------------------------------+
-| **Default value**  | 360                            |
-+--------------------+--------------------------------+
-| **Allowed values** | any positive number of seconds |
-+--------------------+--------------------------------+
++--------------------+-------------------------------------------------------------------------+
+| **Default value**  | 360                                                                     |
++--------------------+-------------------------------------------------------------------------+
+| **Allowed values** | any positive number of seconds, ``hourly`` (3600), or ``daily`` (86400) |
++--------------------+-------------------------------------------------------------------------+
 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
@@ -297,6 +297,8 @@ The additional fields configured above would appear in the resulting event as be
 
 .. note:: If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key is defined by using a symbol prior to the key name as in *@source*.
 
+.. _ossec_localfile_target:
+
 target
 ^^^^^^
 
@@ -307,6 +309,10 @@ Target specifies the name of the socket where the output will be redirected. The
 +--------------------+--------------------------------+
 | **Allowed values** | any defined socket             |
 +--------------------+--------------------------------+
+
+.. note::
+
+   When the ``<localfile>`` block comes from the centralized configuration (``agent.conf``), ``target`` only accepts ``agent`` or a socket defined in the local ``ossec.conf`` file of the agent, unless ``logcollector.remote_commands=1`` is set on the agent. The agent removes any other target, with the ``<out_format>`` bound to it, and ignores the ``<localfile>`` block if no target is left.
 
 .. _log_format:
 
@@ -389,7 +395,7 @@ Specifies the format of the log to be read. **This field is required.**
 
 .. note::
 
-   Agents ignore ``command`` and ``full_command`` log sources received through centralized configuration (``agent.conf``) unless ``logcollector.remote_commands=1`` is set in ``/var/ossec/etc/internal_options.conf`` or ``/var/ossec/etc/local_internal_options.conf``. This prevents the manager from executing arbitrary commands on agents with root privileges.
+   Agents ignore ``command`` and ``full_command`` log sources received through centralized configuration (``agent.conf``) unless ``logcollector.remote_commands=1`` is set in ``/var/ossec/etc/internal_options.conf`` or ``/var/ossec/etc/local_internal_options.conf``. This prevents the manager from executing arbitrary commands on agents with root privileges. The same option controls sockets and socket targets received through ``agent.conf``. See :ref:`target <ossec_localfile_target>` and :doc:`socket <socket>`.
 
 Sample of multi-line log message in the original log file:
 
@@ -779,7 +785,7 @@ Windows configuration:
       <reconnect_time>10s</reconnect_time>
     </localfile>
 
-macOS configuration:
+macOS configuration example. The Wazuh agent installs a broader default query, described in :ref:`Collecting macOS ULS logs <how-to-collect-macoslogs>`:
 
 .. code-block:: xml
 
