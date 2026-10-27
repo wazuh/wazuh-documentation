@@ -115,7 +115,7 @@ Complete the following steps on the Wazuh manager master node to generate the en
 
 #. Run the following command to create an enrollment token. Replace ``<WAZUH_MANAGER_ADDRESS>`` with an address from that list that the endpoints can resolve and reach. With an IP address, enrollment works, but the Wazuh manager logs a warning. Use a DNS name if agents must verify the Wazuh manager by name or its IP address can change.
 
-   If an address that the agents use, such as a load balancer, a NAT address, or a public name, isn't in the list, add it to the Wazuh manager certificate first, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes.
+   If an address that agents use isn't in the list, add it to the Wazuh manager certificate first, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. Examples are a load balancer, a NAT address, or a public name.
 
    .. code-block:: console
 

@@ -290,7 +290,7 @@ Once every component is installed and running, each component stores the passwor
 
    Also check that ``/etc/wazuh-dashboard/certs/manager-ca.pem`` exists on the Wazuh dashboard host, and run ``journalctl -u wazuh-dashboard -n 50`` to see the cause. Then click **Refresh**.
 
-#. Securely store the five passwords. The ``credentials.env`` file in the working directory of the first Wazuh indexer node holds all five. If the Wazuh manager runs on the same host as the Wazuh indexer, its package generates its own Wazuh manager API passwords. Store ``WAZUH_MANAGER_API_PASSWORD`` and ``WAZUH_MANAGER_WUI_PASSWORD`` from ``/etc/wazuh-manager/export/credentials.env`` instead of the values in ``credentials.env``.
+#. Securely store the five passwords. The ``credentials.env`` file in the working directory of the first Wazuh indexer node holds all five.
 
 #. Remove the ``credentials.env`` you created on the first Wazuh indexer node and any ``wazuh-certificates.tar`` left behind, on every node. The passwords of each component stay in ``local.env`` and ``export/credentials.env`` in its configuration directory, readable by ``root`` only:
 

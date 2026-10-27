@@ -70,7 +70,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
             If the service stopped or the agent didn't enroll, the cause is one of these:
 
             -  ``ERR_BAD_TOKEN``: the installer refused the token, for example because it lost a character when you copied it. No token was stored, and the service stops when you start it.
-            -  ``Enrollment rejected by the manager`` or ``Enrollment-token bootstrap failed`` means that the Wazuh manager refused the token, for example because it was revoked or expired. The service stops.
+            -  ``Enrollment rejected by the manager`` or ``Enrollment-token bootstrap failed`` means that the Wazuh manager refused the enrollment. For example, the token was revoked or expired, or another agent already uses the name. The service stops.
 
             In each case, enroll the agent with a valid token. In an administrator PowerShell, run:
 
