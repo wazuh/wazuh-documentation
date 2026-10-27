@@ -71,9 +71,9 @@ Before you install a Wazuh agent, create an enrollment token on the Wazuh manage
   </div>
 
 
-If you are deploying Wazuh in a large environment, with a high number of servers or endpoints, keep in mind that this deployment might be easier using automation tools such as SCCM or :doc:`Ansible </deployment-options/deploying-with-ansible/guide/index>`.
+In a large environment with many servers or endpoints, automation tools such as SCCM or :doc:`Ansible </deployment-options/deploying-with-ansible/guide/index>` can make the deployment easier.
 
-.. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent.
+.. note:: The Wazuh agent is compatible with a Wazuh manager of the same version or later.
 
 You can also deploy a new agent following the instructions in the Wazuh dashboard. Go to **Agents management** > **Summary** and click **Deploy new agent**.
 
