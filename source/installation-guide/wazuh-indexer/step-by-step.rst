@@ -8,7 +8,7 @@ Installing the Wazuh indexer step-by-step
 
 Install and configure the Wazuh indexer as a single-node or multi-node cluster by following these step-by-step instructions. The Wazuh indexer is a scalable search and analytics engine. It stores and indexes the events that the Wazuh manager forwards, so you can analyze them in near real time.
 
-Before you start, choose a name and an IP address for every Wazuh indexer, manager, and dashboard node. You create the certificates and passwords for all nodes on the first Wazuh indexer node. Then you copy one archive to each of the other nodes. The archive also holds each Wazuh manager node's agent listener and Wazuh server API certificates, issued from the same root CA.
+Before you start, choose a name and an IP address for every Wazuh indexer, manager, and dashboard node. You create the certificates and passwords for all nodes on the first Wazuh indexer node. Then you copy one archive to each of the other nodes. The archive also holds each Wazuh manager node's agent listener and Wazuh manager API certificates, issued from the same root CA.
 
 For an all-in-one deployment, see :ref:`All-in-one deployment <wazuh_indexer_all_in_one_deployment>` before you start.
 
@@ -273,7 +273,7 @@ Generating the SSL certificates
 
    For a **Wazuh manager cluster**, uncomment ``node_type`` in every manager entry. Set ``master`` on one node and ``worker`` on all others. For a single Wazuh manager, leave ``node_type`` commented. When two components share a host, give both entries that host's IP address.
 
-   Each node needs an ``ip``, a ``dns``, or both, and each accepts a list. The node's certificate includes its name and every ``ip`` and ``dns`` value. For a Wazuh manager node, this applies to its agent listener and Wazuh server API certificates. If a node has only a ``dns`` name, use that name wherever these sections ask for its address, for example ``network.host``.
+   Each node needs an ``ip``, a ``dns``, or both, and each accepts a list. The node's certificate includes its name and every ``ip`` and ``dns`` value. For a Wazuh manager node, this applies to its agent listener and Wazuh manager API certificates. If a node has only a ``dns`` name, use that name wherever these sections ask for its address, for example ``network.host``.
 
    The shipped file also has commented examples for a node with several addresses and for a TLS-terminating load balancer. For more about certificates, see :ref:`Certificates deployment <wazuh_indexer_cluster_certificates_deployment>`.
 
@@ -292,7 +292,7 @@ Generating the SSL certificates
 Adding the passwords
 ^^^^^^^^^^^^^^^^^^^^
 
-#. Add the five passwords from :ref:`Creating the passwords <wazuh_indexer_creating_passwords>` to the certificates. Each Wazuh manager node reads its Wazuh indexer password and two Wazuh server API passwords from ``/etc/wazuh-manager/local.env``. You write that file in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`. The Wazuh dashboard receives ``WAZUH_MANAGER_WUI_PASSWORD`` in the same archive:
+#. Add the five passwords from :ref:`Creating the passwords <wazuh_indexer_creating_passwords>` to the certificates. Each Wazuh manager node reads its Wazuh indexer password and two Wazuh manager API passwords from ``/etc/wazuh-manager/local.env``. You write that file in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`. The Wazuh dashboard receives ``WAZUH_MANAGER_WUI_PASSWORD`` in the same archive:
 
    .. code-block:: console
 

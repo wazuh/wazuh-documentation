@@ -116,7 +116,7 @@ Run these steps as root on one host of your deployment, for example, your first 
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --generate-config-files -id -as <ALTERNATE_ADDRESS>
 
-   If clients will reach the Wazuh server API through an address the host cannot know, add it with ``-ap|--api-san <API_ADDRESS>``. To use both options together, run:
+   If clients will reach the Wazuh manager API through an address the host cannot know, add it with ``-ap|--api-san <API_ADDRESS>``. To use both options together, run:
 
    .. code-block:: console
 

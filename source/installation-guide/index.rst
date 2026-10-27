@@ -25,7 +25,7 @@ Check our :doc:`Quickstart </quickstart>` documentation to perform an all-in-one
 
 For more deployment flexibility and customization, install the Wazuh central components by starting with the :doc:`Wazuh indexer <wazuh-indexer/index>` deployment. This deployment method supports both an all-in-one installation and installing components on separate hosts. For an all-in-one host, use the hardware requirements in the :doc:`Quickstart </quickstart>`.
 
-Before you start, choose the name and IP address of every Wazuh indexer, Wazuh manager, and Wazuh dashboard node. You create the certificates and passwords for all of them on one host, usually the first Wazuh indexer node. Then you copy one archive to every other node. The archive also holds each Wazuh manager node's agent listener and Wazuh server API certificates, issued from the same root CA.
+Before you start, choose the name and IP address of every Wazuh indexer, Wazuh manager, and Wazuh dashboard node. You create the certificates and passwords for all of them on one host, usually the first Wazuh indexer node. Then you copy one archive to every other node. The archive also holds each Wazuh manager node's agent listener and Wazuh manager API certificates, issued from the same root CA.
 
 +--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
 | **I want to...**                           | **Use**                                                                                                                   | **Typical time**                                   |

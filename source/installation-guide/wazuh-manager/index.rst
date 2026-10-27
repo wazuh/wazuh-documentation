@@ -118,7 +118,7 @@ The Wazuh manager uses the following ports.
 +--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
 | 1516/TCP           | Other Wazuh manager nodes                                                         | Cluster communication, multi-node only     |
 +--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
-| 55000/TCP          | Wazuh dashboard, API clients, and agents removing themselves under anti-tampering | Wazuh server API, master node              |
+| 55000/TCP          | Wazuh dashboard, API clients, and agents removing themselves under anti-tampering | Wazuh manager API, master node             |
 +--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
 | 1514/TCP           | Wazuh 4.x agents                                                                  | Legacy agent connection                    |
 +--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+

@@ -281,7 +281,7 @@ Cluster configuration for multi-node deployment
 
 After you install the Wazuh manager on every node, configure the master node first, then each worker node, and then test the cluster. Each node already has the deployment's root CA, its own certificates, and the same passwords from :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`.
 
-Only the master node runs the Wazuh server API. The Wazuh dashboard connects to it with the passwords from the archive, as :ref:`Configuring the Wazuh dashboard <wazuh_dashboard_configuring>` describes.
+Only the master node runs the Wazuh manager API. The Wazuh dashboard connects to it with the passwords from the archive, as :ref:`Configuring the Wazuh dashboard <wazuh_dashboard_configuring>` describes.
 
 The package writes a single-node ``<cluster>`` block on every node: ``node_type`` is ``master``, the key is random, and ``bind_addr`` and the node address are ``127.0.0.1``. Edit that block on each node instead of adding a second one. ``node_name`` is the node's name in the cluster and doesn't need to match its name in ``config.yml``.
 
@@ -406,7 +406,7 @@ An example output of the command looks as follows:
 
 Note that the IP addresses ``10.0.0.3``, ``10.0.0.4``, and ``10.0.0.5`` are used as examples.
 
-The Wazuh server API listens only on the master node, so port 55000 on a worker node doesn't answer.
+The Wazuh manager API listens only on the master node, so port 55000 on a worker node doesn't answer.
 
 Disable Wazuh updates
 ---------------------

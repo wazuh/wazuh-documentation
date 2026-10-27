@@ -60,7 +60,7 @@ Wazuh manager cluster installation
 
 Your Wazuh manager is now successfully installed.
 
-To check the Wazuh server API, run these commands on the master node. The API runs only on the master node. The first command prints the password of the ``wazuh`` API user, and the second asks for it:
+To check the Wazuh manager API, run these commands on the master node. The API runs only on the master node. The first command prints the password of the ``wazuh`` API user, and the second asks for it:
 
 .. code-block:: console
 

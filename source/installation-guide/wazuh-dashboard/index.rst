@@ -119,7 +119,7 @@ The Wazuh dashboard uses the following ports.
 +---------------------+--------------------------------------------------------+------------------------+
 | 9200/TCP, outbound  | This Wazuh dashboard, to the Wazuh indexer nodes       | Wazuh indexer REST API |
 +---------------------+--------------------------------------------------------+------------------------+
-| 55000/TCP, outbound | This Wazuh dashboard, to the Wazuh manager master node | Wazuh server API       |
+| 55000/TCP, outbound | This Wazuh dashboard, to the Wazuh manager master node | Wazuh manager API      |
 +---------------------+--------------------------------------------------------+------------------------+
 
 .. toctree::
