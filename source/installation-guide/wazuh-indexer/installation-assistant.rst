@@ -6,7 +6,7 @@
 Installing the Wazuh indexer using the assisted installation method
 ===================================================================
 
-Install and configure the Wazuh indexer as a single-node or multi-node cluster on a 64-bit (x86_64/AMD64 or AARCH64/ARM64) architecture using the assisted installation method. The Wazuh indexer is a scalable search and analytics engine that stores and indexes events forwarded by the Wazuh manager, enabling near real-time data analysis and several other features.
+Install and configure the Wazuh indexer as a single-node or multi-node cluster on a 64-bit (x86_64/AMD64 or AARCH64/ARM64) architecture using the assisted installation method. The Wazuh indexer is a scalable search and analytics engine. It stores and indexes the events that the Wazuh manager forwards, for near real-time analysis.
 
 Wazuh indexer cluster installation
 ----------------------------------
@@ -23,7 +23,7 @@ The Wazuh indexer installation process is divided into three stages:
 
    You need root user privileges to run all the commands described below.
 
-Before you start, choose the name and IP address of every Wazuh indexer, Wazuh manager, and Wazuh dashboard node. You create the certificates and passwords of all of them on one host, usually the first Wazuh indexer node, then copy one archive to every other node.
+Before you start, choose the name and IP address of every Wazuh indexer, Wazuh manager, and Wazuh dashboard node. You create the certificates and passwords for all of them on one host, usually the first Wazuh indexer node. Then you copy one archive to every other node.
 
 
 .. _wazuh_indexer_assisted_initial_configuration:
@@ -98,7 +98,7 @@ Run these steps as root on one host of your deployment, for example, your first 
 
    For a **Wazuh manager cluster**, uncomment ``node_type`` in every manager entry. Set ``master`` on exactly one node and ``worker`` on all other nodes. For a single Wazuh manager, leave ``node_type`` commented. When two components share a host, set both entries to that host's IP address.
 
-   For an :ref:`all-in-one installation <wazuh_indexer_all_in_one_deployment>`, keep one node in each section and set all three ``ip`` values to the address that users and agents use to reach the host. Skip step 4.
+   For an :ref:`all-in-one installation <wazuh_indexer_all_in_one_deployment>`, keep one node in each section. Set all three ``ip`` values to the address that users and agents use to reach the host. Skip step 4.
 
    Each node needs an ``ip``, a ``dns``, or both, and each accepts a list. The certificate of the node includes every value. The installation assistant configures the components with the first ``ip`` of each node, so give every node an ``ip``.
 
@@ -110,7 +110,7 @@ Run these steps as root on one host of your deployment, for example, your first 
 
    ``-id`` (``--install-dependencies``) installs the missing operating system packages that the installation requires, without asking.
 
-   If the Wazuh agents will connect to a Wazuh manager through a different address, such as a public IP, a NAT address, or a load balancer, add it with ``-as|--agent-san <ALTERNATE_ADDRESS>``. Agent enrollment tokens can only be created for an address that is in the listener certificate of the Wazuh manager.
+   If agents reach a Wazuh manager through another address, add it with ``-as|--agent-san <ALTERNATE_ADDRESS>``. Examples are a public IP, a NAT address, or a load balancer. Agent enrollment tokens can only be created for an address that is in the listener certificate of the Wazuh manager.
 
    .. code-block:: console
 
@@ -126,7 +126,7 @@ Run these steps as root on one host of your deployment, for example, your first 
 
       The root CA private key, ``root-ca.key``, stays in the ``wazuh-ca`` directory beside the installation assistant and is not included in the archive. The archive includes only the root CA certificate, ``root-ca.pem``. Back up ``wazuh-ca`` securely: you need the key to add nodes or renew certificates.
 
-#. **Distributed deployments only:** Copy the ``wazuh-install-files.tar`` file and the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` script from the host where you generated them to all servers in the distributed deployment, including the Wazuh manager, Wazuh indexer, and Wazuh dashboard nodes. Use ``scp`` or another secure file transfer method available in your environment.
+#. **Distributed deployments only:** Copy ``wazuh-install-files.tar`` and ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` from the host where you generated them to every Wazuh indexer, Wazuh manager, and Wazuh dashboard node. Use ``scp`` or another secure file transfer method available in your environment.
 
    The assisted method generates ``wazuh-install-files.tar``, while the step-by-step method generates ``wazuh-certificates.tar``.
 
@@ -153,12 +153,12 @@ Follow these steps to install and configure a single-node or multi-node Wazuh in
 
    Where
 
-   -  ``-id`` (``--install-dependencies``) installs the missing operating system packages that the installation requires, without asking, and removes the ones the assistant needed only for itself when it finishes. It does not install ``lsof``. The assistant checks ports with ``lsof``, or with ``ss`` when ``lsof`` is missing. If neither is installed, it prints ``WARNING: Cannot find lsof or ss. Port checking will be skipped.`` and continues.
+   -  ``-id`` (``--install-dependencies``) installs the missing operating system packages without asking. When it finishes, it removes the ones that only the assistant needed. It does not install ``lsof``. The assistant checks ports with ``lsof``, or with ``ss`` when ``lsof`` is missing. If neither is installed, it prints ``WARNING: Cannot find lsof or ss. Port checking will be skipped.`` and continues.
    -  ``-d pre-release`` downloads the release candidate packages. Remove ``-d pre-release`` for the final release.
 
 Repeat this stage of the installation process for every Wazuh indexer node in your cluster. The command installs, configures, and starts the Wazuh indexer on the host. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
-The installation assistant sets the Wazuh indexer heap to half of the host's RAM. On a host that also runs the Wazuh manager or the Wazuh dashboard, set it to a quarter of the RAM, as :ref:`Configuring the Wazuh indexer <wazuh_indexer_configuring>` in the step-by-step section describes, and restart the Wazuh indexer.
+The installation assistant sets the Wazuh indexer heap to half of the host's RAM. On a host that also runs the Wazuh manager or Wazuh dashboard, set it to a quarter of the RAM and restart the Wazuh indexer. :ref:`Configuring the Wazuh indexer <wazuh_indexer_configuring>`, in the step-by-step section, describes how.
 
 Cluster initialization
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -180,13 +180,13 @@ Testing the cluster installation
 
 Verify that the Wazuh indexer installed correctly and the Wazuh indexer cluster is functioning as expected by following the steps below.
 
-#. Run the following command on a Wazuh indexer node to print the Wazuh indexer admin user password. The same password is in ``wazuh-ca/credentials.env`` on the host where you ran ``--generate-config-files``.
+Run the following command on a Wazuh indexer node to print the Wazuh indexer admin user password. The same password is in ``wazuh-ca/credentials.env`` on the host where you ran ``--generate-config-files``.
 
-   .. code-block:: console
+.. code-block:: console
 
-      # grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
+   # grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
 
-#. Run the following command to confirm that the installation is successful. Replace ``<WAZUH_INDEXER_ADDRESS>`` with the IP address of the node in ``config.yml``. The Wazuh indexer doesn't listen on localhost. When prompted, enter the password that step 1 printed.
+#. Run the following command to confirm that the installation is successful. Replace ``<WAZUH_INDEXER_ADDRESS>`` with the IP address of the node in ``config.yml``. The Wazuh indexer doesn't listen on localhost. When prompted, enter the admin password that the first command printed.
 
    .. code-block:: console
 
@@ -215,7 +215,7 @@ Verify that the Wazuh indexer installed correctly and the Wazuh indexer cluster 
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-#. Run the following command to check if the cluster is working correctly. Replace ``<WAZUH_INDEXER_ADDRESS>`` with the IP address of the Wazuh indexer. When prompted, enter the password that step 1 printed:
+#. Run the following command to check if the cluster is working correctly. Replace ``<WAZUH_INDEXER_ADDRESS>`` with the IP address of the Wazuh indexer. When prompted, enter the admin password that the first command printed:
 
    .. code-block:: console
 

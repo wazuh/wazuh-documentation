@@ -8,7 +8,7 @@ Wazuh dashboard
 
 This Wazuh central component is a flexible and intuitive web interface for mining, analyzing, and visualizing security data. It provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. It also enables centralized management of the Wazuh manager and Wazuh agents, giving you full control from a single unified console.
 
-With the Wazuh dashboard, you can visualize security events, detected vulnerabilities, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance standards. If you want to learn more about the Wazuh components, see the :doc:`Getting started </getting-started/index>` section.
+The Wazuh dashboard shows security events, detected vulnerabilities, file integrity monitoring data, and configuration assessment results. It also shows cloud infrastructure monitoring events and regulatory compliance status. If you want to learn more about the Wazuh components, see the :doc:`Getting started </getting-started/index>` section.
 
 Check the requirements below and choose an installation method to start installing the Wazuh dashboard.
 
@@ -103,7 +103,7 @@ The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh
    | Wazuh dashboard         |     4    |     2        |     8        |       4        |
    +-------------------------+----------+--------------+--------------+----------------+
 
-   All-in-one host (the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host), up to 25 agents: 4 CPU cores and 8 GB of RAM, as in the :doc:`Quickstart </quickstart>`. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
+   An all-in-one host runs the Wazuh indexer, Wazuh manager, and Wazuh dashboard together. For up to 25 agents, it needs 4 CPU cores and 8 GB of RAM, as in the :doc:`Quickstart </quickstart>`. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
 
 .. _wazuh_dashboard_required_ports:
 
@@ -119,7 +119,7 @@ The Wazuh dashboard uses the following ports.
 +---------------------+--------------------------------------------------------+------------------------+
 | 9200/TCP, outbound  | This Wazuh dashboard, to the Wazuh indexer nodes       | Wazuh indexer REST API |
 +---------------------+--------------------------------------------------------+------------------------+
-| 55000/TCP, outbound | This Wazuh dashboard, to the Wazuh manager master node | Wazuh manager API      |
+| 55000/TCP, outbound | This Wazuh dashboard, to the Wazuh manager master node | Wazuh server API       |
 +---------------------+--------------------------------------------------------+------------------------+
 
 .. toctree::

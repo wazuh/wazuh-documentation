@@ -119,7 +119,7 @@ Creating the passwords
 
 On the **first Wazuh indexer node** only, create the five deployment passwords before installing the package. The Wazuh indexer uses three of these passwords instead of generating its own. In the next stage, all five passwords are packaged into ``wazuh-certificates.tar`` for use on the other nodes. The assisted method uses ``wazuh-install-files.tar`` instead.
 
-#. Create the five passwords in ``credentials.env``, in your working directory. A password must be 12 to 64 characters long, use only ``A-Z a-z 0-9 . , _ + : @ % ^ = ~ -``, and contain at least one uppercase letter, one lowercase letter, one digit and one symbol. You can choose them yourself, or run the following command to generate them with this function:
+#. Create the five passwords in ``credentials.env``, in your working directory. A password must be 12 to 64 characters long and use only ``A-Z a-z 0-9 . , _ + : @ % ^ = ~ -``. It must contain at least one uppercase letter, one lowercase letter, one digit, and one symbol. You can choose them yourself, or run the following command to generate them with this function:
 
    .. code-block:: bash
 
@@ -195,7 +195,7 @@ On the first Wazuh indexer node, the package uses the three passwords created in
 
    # grep '^WAZUH_INDEXER_' /etc/wazuh-indexer/export/credentials.env | sort -u
 
-The other Wazuh indexer nodes receive the same three passwords from ``wazuh-certificates.tar`` in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`, before their package is installed, so they never generate their own. Keep the file until all components are installed and running, then remove it as described in :ref:`Securing your Wazuh installation <wazuh_dashboard_securing_installation>`.
+The other Wazuh indexer nodes get the same three passwords from ``wazuh-certificates.tar`` in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`, before their package is installed. So they never generate their own. Keep the file until all components are installed and running, then remove it as described in :ref:`Securing your Wazuh installation <wazuh_dashboard_securing_installation>`.
 
 Passwords are generated once. Reinstalling, restarting, or upgrading the Wazuh indexer does not change them, and neither does removing this file. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation.
 
@@ -208,7 +208,7 @@ Wazuh uses certificates to establish confidentiality and encrypt communications 
 
 Run this stage once, on the first Wazuh indexer node, after its package is installed. It creates the certificates of every node and packs them, with the passwords every node needs, into ``wazuh-certificates.tar``.
 
-Skip this stage and :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>` for an all-in-one installation, where the Wazuh manager and Wazuh dashboard run on the same host as a single-node Wazuh indexer: the package already issued its certificates.
+For an all-in-one installation, skip this stage and :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`. The Wazuh indexer package already issued its certificates.
 
 .. _wazuh_indexer_generating_certificates:
 
@@ -271,21 +271,19 @@ Generating the SSL certificates
         #    ip:
         #      - "<load-balancer-ip>"
 
-   For a **Wazuh manager cluster**, uncomment ``node_type`` in every manager entry. Set ``master`` on exactly one node and ``worker`` on all other nodes. For a single Wazuh manager, leave ``node_type`` commented. When two components share a host, set both entries to that host's IP address.
+   For a **Wazuh manager cluster**, uncomment ``node_type`` in every manager entry. Set ``master`` on one node and ``worker`` on all others. For a single Wazuh manager, leave ``node_type`` commented. When two components share a host, give both entries that host's IP address.
 
-   The file that ships with the package also has commented examples for nodes with more than one address and for a TLS-terminating load balancer.
+   Each node needs an ``ip``, a ``dns``, or both, and each accepts a list. The node's certificate includes its name and every ``ip`` and ``dns`` value. For a Wazuh manager node, this applies to its agent listener and Wazuh server API certificates. If a node has only a ``dns`` name, use that name wherever these sections ask for its address, for example ``network.host``.
 
-   The name and the ``ip`` and ``dns`` values of each Wazuh manager entry go into that node's agent listener and Wazuh server API certificates. To learn more about how to create and configure the certificates, see the :ref:`Certificates deployment <wazuh_indexer_cluster_certificates_deployment>` section.
+   The shipped file also has commented examples for a node with several addresses and for a TLS-terminating load balancer. For more about certificates, see :ref:`Certificates deployment <wazuh_indexer_cluster_certificates_deployment>`.
 
-   Each node needs an ``ip``, a ``dns``, or both, and each accepts a list. The certificate of the node includes every value. If a node has only a ``dns`` name, use that name wherever these sections ask for the node's address, for example ``network.host``.
-
-   Run the tool to create the certificates. ``WAZUH_CA_DIR`` makes it sign them with the root CA the package created in ``/etc/wazuh-indexer/ca``. Without it, the tool creates a second root CA, and the certificates do not chain to the root CA that the Wazuh manager and Wazuh dashboard trust. The tool writes the certificates to ``wazuh-certificates/``, beside it:
+   Run the tool to create the certificates. ``WAZUH_CA_DIR`` makes it sign them with the root CA that the package created in ``/etc/wazuh-indexer/ca``. Without it, the tool creates a second root CA, which the Wazuh manager and Wazuh dashboard don't trust. The tool writes the certificates to ``wazuh-certificates/``, beside it:
 
    .. code-block:: console
 
       # WAZUH_CA_DIR=/etc/wazuh-indexer/ca bash /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh -A
 
-   To add an address that the Wazuh agents use to reach a Wazuh manager, such as a public IP, a NAT address, or a load balancer, add ``-as <ALTERNATE_ADDRESS>`` to the command, once per address. Pass every address in the same run: the certificate holds only the ``-as`` values of that run.
+   To add another address that agents use to reach a Wazuh manager, add ``-as <ALTERNATE_ADDRESS>`` to the command, once per address. Examples are a public IP, a NAT address, or a load balancer. Pass every address in the same run, because the certificate holds only the ``-as`` values of that run.
 
    .. note::
 
@@ -294,7 +292,7 @@ Generating the SSL certificates
 Adding the passwords
 ^^^^^^^^^^^^^^^^^^^^
 
-#. Add the five passwords from :ref:`Creating the passwords <wazuh_indexer_creating_passwords>` to the certificates. Each Wazuh manager node reads its Wazuh indexer password and the two Wazuh manager API passwords from ``/etc/wazuh-manager/local.env``, which you write in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`. The Wazuh dashboard receives ``WAZUH_MANAGER_WUI_PASSWORD`` in the same archive:
+#. Add the five passwords from :ref:`Creating the passwords <wazuh_indexer_creating_passwords>` to the certificates. Each Wazuh manager node reads its Wazuh indexer password and two Wazuh server API passwords from ``/etc/wazuh-manager/local.env``. You write that file in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`. The Wazuh dashboard receives ``WAZUH_MANAGER_WUI_PASSWORD`` in the same archive:
 
    .. code-block:: console
 
@@ -311,7 +309,7 @@ Packing and copying the archive
       # chmod 600 ./wazuh-certificates.tar
       # rm -rf /usr/share/wazuh-indexer/tools/wazuh-certificates
 
-#. Copy ``wazuh-certificates.tar`` to the working directory of each remaining Wazuh indexer, manager, and dashboard node. Transfer it as ``root``, or stage it as your login user with permissions set to ``0600`` and remove it after use. For example, to copy it with ``scp``, run the following commands on this node. Replace ``<USER>`` with a login user on this node, ``<REMOTE_USER>`` with a login user on the other node, and ``<NODE_IP>`` with the other node's IP address. ``<USER>`` must be able to sign in to the other node over SSH as ``<REMOTE_USER>``. The first connection asks you to confirm the host key.
+#. Copy ``wazuh-certificates.tar`` to the working directory of each remaining Wazuh indexer, manager, and dashboard node. Transfer it as ``root``, or stage it as your login user with permissions set to ``0600`` and remove it after use. For example, to copy it with ``scp``, run the following commands on this node. Replace ``<USER>`` with a login user on this node, ``<REMOTE_USER>`` with one on the other node, and ``<NODE_IP>`` with the other node's IP address. ``<USER>`` must be able to sign in to the other node over SSH as ``<REMOTE_USER>``. The first connection asks you to confirm the host key.
 
    .. code-block:: console
 
@@ -349,7 +347,7 @@ Deploying certificates
 
    -  Make sure that a copy of ``wazuh-certificates.tar``, created in the previous stage of the installation process, is placed in your working directory.
 
-#. Run the following commands in the directory that holds ``wazuh-certificates.tar``, replacing ``<INDEXER_NODE_NAME>`` with the name of the Wazuh indexer node you are configuring as defined in ``config.yml``. For example, ``indexer`` on the first node and ``indexer-2`` on the second node:
+#. Run the following commands in the directory that holds ``wazuh-certificates.tar``. Replace ``<INDEXER_NODE_NAME>`` with this node's name in ``config.yml``. For example, ``indexer`` on the first node and ``indexer-2`` on the second node:
 
    .. code-block:: console
 
@@ -457,7 +455,7 @@ Configuring the Wazuh indexer
          #  - "<WAZUH_INDEXER_2_ADDRESS>"
          #  - "<WAZUH_INDEXER_3_ADDRESS>"
 
-   #. ``plugins.security.nodes_dn``: the Distinguished Names (DNs) of the certificates of all Wazuh indexer nodes. The package writes this node's DN, so a single node needs no change. In a multi-node cluster, each node knows only its own DN. On every node, list one line per Wazuh indexer node in ``config.yml``. On the first node, also replace the line with the host name that the package wrote. Each entry is ``C=US,L=California,O=Wazuh,OU=Wazuh,CN=`` followed by the node's name in ``config.yml``, with the fields in this order, because the Security plugin compares each entry as an exact string. The ``openssl`` command in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>` prints this node's subject in that form, so you can check it:
+   #. ``plugins.security.nodes_dn``: the Distinguished Names (DNs) of the certificates of all Wazuh indexer nodes. The package writes this node's DN, so a single node needs no change. In a multi-node cluster, each node knows only its own DN. On every node, list one line per Wazuh indexer node in ``config.yml``. On the first node, also replace the line with the host name that the package wrote. Each entry is ``C=US,L=California,O=Wazuh,OU=Wazuh,CN=`` followed by the node's name in ``config.yml``. Keep the fields in this order, because the Security plugin compares each entry as an exact string. The ``openssl`` command in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>` prints this node's subject in that form, so you can check it:
 
       .. code-block:: yaml
          :emphasize-lines: 2-3
@@ -468,9 +466,9 @@ Configuring the Wazuh indexer
 
       .. note::
 
-         Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and ensure the necessary ports are open.
+         Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and make sure the necessary ports are open.
 
-#. Set the heap size in ``/etc/wazuh-indexer/jvm.options`` before you start the service. The package default is 1 GB. With 1 GB, the Wazuh dashboard can fail its first start with ``circuit_breaking_exception``. Use half of the system RAM when the Wazuh indexer runs alone on the host, or a quarter when the Wazuh manager or Wazuh dashboard runs on the same host. For example, use ``-Xms4g`` and ``-Xmx4g`` on a dedicated node with 8 GB of RAM or on a shared host with 16 GB, and ``-Xms2g`` and ``-Xmx2g`` on an all-in-one host with 8 GB. For a size that is not a whole number of gigabytes, use megabytes, for example ``-Xms1536m`` and ``-Xmx1536m``:
+#. Set the heap size in ``/etc/wazuh-indexer/jvm.options`` before you start the service. The package default is 1 GB. With 1 GB, the Wazuh dashboard can fail its first start with ``circuit_breaking_exception``. Use half of the system RAM when the Wazuh indexer runs alone on the host. Use a quarter when the Wazuh manager or Wazuh dashboard also runs there. For example, use ``-Xms4g`` and ``-Xmx4g`` on a dedicated node with 8 GB of RAM or a shared host with 16 GB. On an all-in-one host with 8 GB, use ``-Xms2g`` and ``-Xmx2g``. For a size that is not a whole number of gigabytes, use megabytes, for example ``-Xms1536m`` and ``-Xmx1536m``:
 
    .. code-block:: ini
 
@@ -554,7 +552,7 @@ The command prints ``/etc/wazuh-indexer/certs/indexer.pem: OK``. If it prints ``
 
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
 
-   Run the command as root. It loads the passwords in ``/etc/wazuh-indexer/export/credentials.env`` of the node where it runs. Every Wazuh indexer node holds the same passwords, because you placed the first node's passwords on the other nodes before installing them, so any node works.
+   Run the command as root. It loads the passwords in ``/etc/wazuh-indexer/export/credentials.env`` of the node where it runs. Any node works, because you placed the first node's passwords on the other nodes before installing them.
 
    The command output looks similar to this:
 

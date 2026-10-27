@@ -97,6 +97,6 @@ The installation assistant installs the Wazuh packages from downloaded files and
 Next steps
 ----------
 
--  If you want a Wazuh manager single-node cluster, everything is set, and you can proceed directly with :doc:`Installing the Wazuh dashboard <../wazuh-dashboard/installation-assistant>` using the assisted installation method.
+-  For a single Wazuh manager, everything is set. Continue with :doc:`Installing the Wazuh dashboard <../wazuh-dashboard/installation-assistant>` using the assisted installation method.
 
--  If you want a Wazuh manager multi-node cluster, repeat this process on every Wazuh manager node, replacing ``manager`` with that node's name in ``config.yml``, for example ``manager-2``. Install the master node first.
+-  For a Wazuh manager cluster, repeat this process on every Wazuh manager node. Replace ``manager`` with that node's name in ``config.yml``, for example ``manager-2``. Install the master node first.

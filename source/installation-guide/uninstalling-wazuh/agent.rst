@@ -14,7 +14,7 @@ This section describes how to uninstall Wazuh agents installed across the differ
 
 .. note::
 
-   After you uninstall a Wazuh agent, remove it from the Wazuh manager using the Wazuh dashboard or the Wazuh manager API, as :doc:`Remove agents </user-manual/agent/agent-management/remove-agents>` describes. This stops it from showing as disconnected, frees its name for reuse, and lets you reinstall it under the same name. Without this, or a new ``WAZUH_AGENT_NAME`` on reinstall, the manager refuses enrollment with "Duplicate name" until the old agent has been disconnected for one hour. Agents enrolled without ``WAZUH_AGENT_NAME``, and agents enrolled from the Windows GUI, use the host name.
+   After you uninstall a Wazuh agent, remove it from the Wazuh manager using the Wazuh dashboard or the Wazuh server API, as :doc:`Remove agents </user-manual/agent/agent-management/remove-agents>` describes. This stops it from showing as disconnected, frees its name for reuse, and lets you reinstall it under the same name. Without this, or a new ``WAZUH_AGENT_NAME`` on reinstall, the manager refuses enrollment with "Duplicate name" until the old agent has been disconnected for one hour. Agents enrolled without ``WAZUH_AGENT_NAME``, and agents enrolled from the Windows GUI, use the host name.
 
    If no other agent will use the enrollment token, revoke it on the Wazuh manager master node with ``/var/wazuh-manager/bin/wazuh-manager-authd --revoke-enrollment-token <TOKEN_ID>``. To find the token ID, run ``/var/wazuh-manager/bin/wazuh-manager-authd --list-enrollment-tokens``.
 
@@ -174,9 +174,9 @@ Follow these steps in an elevated session to uninstall the Wazuh agent from your
 
          > (Start-Process msiexec.exe -ArgumentList '/x "<MSI_PATH>" /qn' -Wait -PassThru).ExitCode
 
-   If you no longer have the installer, uninstall **Wazuh Agent** from **Settings** > **Apps** > **Installed apps**, or run the **Uninstall** shortcut in the Start menu folder **Wazuh**, then continue with step 2. To check the removal, run ``Get-Service WazuhSvc``: it reports that no service was found.
+   If you no longer have the installer, uninstall **Wazuh Agent** from **Settings** > **Apps** > **Installed apps**. You can also run the **Uninstall** shortcut in the **Wazuh** Start menu folder. Then continue with step 2. To check the removal, run ``Get-Service WazuhSvc``. It reports that no service was found.
 
-   The exit code is 0, or 3010 when a restart is pending, on success. 1605 means that the installer does not match the installed agent: use the installer that installed or last upgraded it, or uninstall from Settings.
+   The exit code is 0, or 3010 when a restart is pending, on success. Exit code ``1605`` means that the installer doesn't match the installed agent. Use the installer that installed or last upgraded it, or uninstall from Settings.
 
 #. Remove the Wazuh agent installation folder. After the removal, the folder still holds the agent key in ``client.keys.save``.
 
