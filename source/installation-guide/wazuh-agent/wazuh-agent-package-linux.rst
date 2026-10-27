@@ -192,7 +192,7 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
    -  The install command printed ``no manager configured [INFO_NO_MANAGER]``: the token didn't reach the installer, for example because ``sudo`` dropped it.
    -  The install command printed ``deployment variables refused [ERR_BAD_TOKEN]``: the token changed when you copied it.
-   -  ``/var/ossec/logs/ossec.log`` shows ``Enrollment-token bootstrap failed``. The Wazuh manager refused the token, for example because it was revoked, it expired, or it reached its ``--max-uses`` limit.
+   -  ``/var/ossec/logs/ossec.log`` shows ``Enrollment-token bootstrap failed``. The Wazuh manager refused the enrollment. For example, the token was revoked, expired, or used up, or another agent already uses the name.
 
    In each case, save a valid token to a file, enroll the agent, delete the file, and start the agent. In the first two cases, the installer kept no agent name, so the agent enrolls under the endpoint's host name. Replace ``<TOKEN_FILE_PATH>`` with a file path, for example, ``/root/wazuh-token``.
 
