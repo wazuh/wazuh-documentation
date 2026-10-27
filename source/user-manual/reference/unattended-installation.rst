@@ -164,9 +164,9 @@ Manager
 
    By default, the installer runs the credential resolver (``wazuh-manager-resolve-credentials --install``). It creates the Wazuh manager CA in ``/etc/wazuh-manager/ca``, and issues the agent listener pair (``remoted.pem``) and the Wazuh manager API pair (``apid.pem``) in ``/etc/wazuh-manager/certs``. It generates the passwords of the Wazuh manager API users and saves them in ``/etc/wazuh-manager/export/credentials.env``, which only root can read. It never issues the Wazuh indexer client pair.
 
-   The Wazuh manager doesn't start until it also has the Wazuh indexer password and trust. Install the Wazuh indexer on the same host first, or set WAZUH_INDEXER_MANAGER_PASSWORD in ``/etc/wazuh-manager/local.env`` and copy the Wazuh indexer CA and client pair to ``/etc/wazuh-manager/certs/indexer-ca.pem``, ``indexer-connector.pem`` and ``indexer-connector-key.pem``.
+   The Wazuh manager doesn't start until it also has the Wazuh indexer password and trust. Install the Wazuh indexer on the same host first, or set ``WAZUH_INDEXER_MANAGER_PASSWORD`` in ``/etc/wazuh-manager/local.env`` and copy the Wazuh indexer CA and client pair to ``/etc/wazuh-manager/certs/indexer-ca.pem``, ``indexer-connector.pem`` and ``indexer-connector-key.pem``.
 
-   To use your own certificates, place them in ``/etc/wazuh-manager/ca`` and ``/etc/wazuh-manager/certs`` before you install. The installer validates them and never replaces them, so you don't need USER_RESOLVE_CREDENTIALS="n". That setting leaves the installation with no credentials at all.
+   To use your own certificates, place them in ``/etc/wazuh-manager/ca`` and ``/etc/wazuh-manager/certs`` before you install. The installer validates them and never replaces them, so you don't need ``USER_RESOLVE_CREDENTIALS="n"``. That setting leaves the installation with no credentials at all.
 
 Example:
 
