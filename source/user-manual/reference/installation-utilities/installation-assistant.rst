@@ -10,11 +10,7 @@ Wazuh Installation Assistant
 
 The Wazuh Installation Assistant is a tool designed to simplify the deployment of Wazuh. It guides users through the process of installing Wazuh components. The Installation Assistant is used by executing the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` script.
 
-You can download the Wazuh Installation Assistant here:
-
-.. code-block:: none
-
-   https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+You can download the Wazuh Installation Assistant here: `wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh>`__.
 
 Options list
 --------------
@@ -24,9 +20,18 @@ Options list
 +=====================================================+==============================================================================================+
 | -a, --all-in-one                                    | Install and configure Wazuh manager, Wazuh indexer, Wazuh dashboard.                         |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
+| -as, --agent-san <ip|dns>                           | Adds an extra address to the subject alternative name of the agent listener certificate of   |
+|                                                     | every Wazuh manager node. Repeat it for more than one. Must be used along with -a or -g.     |
++-----------------------------------------------------+----------------------------------------------------------------------------------------------+
+| -ap, --api-san <ip|dns>                             | Adds an extra address to the subject alternative name of the Wazuh manager API certificate   |
+|                                                     | of every Wazuh manager node. Repeat it for more than one. Must be used along with -a or -g.  |
++-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -d [pre-release|local], --development               | Use development repositories. By default, it uses the pre-release package repository. If     |
 |                                                     | local is specified, it will use a local artifact_urls.yaml file located in the same          |
 |                                                     | directory as the installation assistant script.                                              |
++-----------------------------------------------------+----------------------------------------------------------------------------------------------+
+| --skip-signature-check                              | Install packages that are not signed with the Wazuh key. Only for development packages, must |
+|                                                     | be used along with -d.                                                                       |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -dw, --download-wazuh <deb|rpm>                     | Download all the packages necessary for offline installation. Type of packages to download   |
 |                                                     | for offline installation (rpm, deb)                                                          |
@@ -116,3 +121,14 @@ Or the short form:
    # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -d local
 
 This command will automatically detect the ``artifact_urls.yaml`` file in the same path as the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` script and will use the URLs specified in it to download the necessary packages for the installation.
+
+Package signature check
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Before it installs a package, the assistant checks that it's signed with the Wazuh key, also in offline installations. It downloads the key from ``https://packages.wazuh.com/key/GPG-KEY-WAZUH``, or takes it from ``wazuh-offline.tar.gz`` in an offline installation, and trusts it only if its fingerprint is ``0DCF CA55 47B1 9D2A 6099 5060 96B3 EE5F 2911 1145``. An unsigned package, a package signed with another key, or a modified package stops the installation.
+
+Packages in the nightly, pre-release and production repositories are signed. Development builds that didn't go through the signing process aren't, and need the ``--skip-signature-check`` option, which is only accepted along with ``-d``:
+
+.. code-block:: console
+
+   # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -d local --skip-signature-check

@@ -16,6 +16,7 @@ The following installation utilities are available:
 
 - :doc:`Wazuh Installation Assistant <installation-assistant>`
 - :doc:`Wazuh certs tool <certs-tools>`
+- :doc:`Wazuh passwords tool <passwords-tool>`
 
 .. toctree::
    :hidden:
@@ -23,3 +24,4 @@ The following installation utilities are available:
 
    installation-assistant
    certs-tools
+   passwords-tool

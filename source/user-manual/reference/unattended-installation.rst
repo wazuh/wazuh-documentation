@@ -38,14 +38,17 @@ The following variables apply to agent installations only and have no effect on 
 +---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
 | ``USER_INSTALL_TYPE``           | Role of the Wazuh instance being installed.                      | Not set (the installer asks) | agent, manager                           |
 +---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
-| ``USER_DIR``                    | Location where Wazuh is installed.                               | /var/wazuh-manager for a     | Any absolute path                        |
-|                                 |                                                                  | manager; /var/ossec for an   |                                          |
-|                                 |                                                                  | agent                        |                                          |
+| ``USER_DIR``                    | Location where Wazuh is installed. For a manager, it moves the   | /var/wazuh-manager for a     | Any absolute path                        |
+|                                 | installation directory only: the configuration stays in          | manager; /var/ossec for an   |                                          |
+|                                 | /etc/wazuh-manager. Don't use a directory under /home: the Wazuh | agent                        |                                          |
+|                                 | manager service can't run from it.                               |                              |                                          |
 +---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
 | ``USER_DELETE_DIR``             | If set to y, an existing installation directory is removed       | Not set (the installer asks) | y, n                                     |
 |                                 | before installing. If it is not set and the directory exists,    |                              |                                          |
 |                                 | the installer asks, and the prompt defaults to n (the existing   |                              |                                          |
-|                                 | files are kept and the installer continues over them).           |                              |                                          |
+|                                 | files are kept and the installer continues over them). For a     |                              |                                          |
+|                                 | manager, it also deletes /etc/wazuh-manager, including the       |                              |                                          |
+|                                 | private key of the Wazuh manager CA.                             |                              |                                          |
 +---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
 | ``USER_ENABLE_ACTIVE_RESPONSE`` | If set to n, Active Response is disabled (disabled is set to yes | y                            | y, n                                     |
 |                                 | in the active-response section of ossec.conf).                   |                              |                                          |
@@ -159,7 +162,11 @@ Manager
 
 .. note::
 
-   By default, the installer issues the TLS certificates (``/etc/wazuh-manager/certs/remoted.pem``, ``remoted-key.pem``, ``root-ca.pem`` and the indexer connector pair) and generates the Server API password, which it saves in ``/etc/wazuh/credentials.env`` (readable by root only). The manager does not start until it also has an indexer credential: set WAZUH_INDEXER_MANAGER_PASSWORD in that file, or install wazuh-indexer on the same host first. To provide your own certificates, set USER_RESOLVE_CREDENTIALS="n" and place them in ``/etc/wazuh-manager/certs`` before starting the manager.
+   By default, the installer runs the credential resolver (``wazuh-manager-resolve-credentials --install``). It creates the Wazuh manager CA in ``/etc/wazuh-manager/ca``, and issues the agent listener pair (``remoted.pem``) and the Wazuh manager API pair (``apid.pem``) in ``/etc/wazuh-manager/certs``. It generates the passwords of the Wazuh manager API users and saves them in ``/etc/wazuh-manager/export/credentials.env``, which only root can read. It never issues the Wazuh indexer client pair.
+
+   The Wazuh manager doesn't start until it also has the Wazuh indexer password and trust. Install the Wazuh indexer on the same host first, or set WAZUH_INDEXER_MANAGER_PASSWORD in ``/etc/wazuh-manager/local.env`` and copy the Wazuh indexer CA and client pair to ``/etc/wazuh-manager/certs/indexer-ca.pem``, ``indexer-connector.pem`` and ``indexer-connector-key.pem``.
+
+   To use your own certificates, place them in ``/etc/wazuh-manager/ca`` and ``/etc/wazuh-manager/certs`` before you install. The installer validates them and never replaces them, so you don't need USER_RESOLVE_CREDENTIALS="n". That setting leaves the installation with no credentials at all.
 
 Example:
 
@@ -178,7 +185,7 @@ Example:
 Manager remote listeners (WAZUH_REMOTE\_\*)
 -------------------------------------------
 
-The WAZUH_REMOTE\_\* variables customize the remote block of the generated ``wazuh-manager.conf``. They apply to manager installations only. The same variables are honored by the DEB and RPM manager packages when they are exported at installation time. The installer validates them and stops with an error if a value is invalid, for example, a port outside 1-65535 or a certificate without its key.
+The WAZUH_REMOTE\_\* variables customize the remote block of the generated ``wazuh-manager.conf``. They apply to manager installations only. The DEB and RPM manager packages also read these variables at installation time, when you set them on the sudo command line, for example ``sudo WAZUH_REMOTE_HTTPS_PORT=1517 apt-get install wazuh-manager``. A variable you export before running sudo doesn't reach the package, because sudo resets the environment. The installer validates them and stops with an error if a value is invalid, for example, a port outside 1-65535 or a certificate without its key.
 
 The certificate, key, and CA paths must be absolute paths in ``/etc/wazuh-manager/certs``.
 
