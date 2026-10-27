@@ -98,7 +98,7 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
 
    .. code-block:: console
 
-      # /Library/Ossec/bin/wazuh-control start
+      # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
 The Wazuh agent saves the CA as its trust anchor in ``etc/certs/root-ca.pem`` (``certs\root-ca.pem`` on Windows) and verifies the Wazuh manager certificate on every connection, without any ``<ssl>`` configuration.
 
