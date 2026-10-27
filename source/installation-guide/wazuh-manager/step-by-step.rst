@@ -192,6 +192,8 @@ The agent listener certificate, ``/etc/wazuh-manager/certs/remoted.pem``, lists 
       # rm -rf /usr/share/wazuh-indexer/tools/wazuh-certificates
       # WAZUH_CA_DIR=/etc/wazuh-indexer/ca bash /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh -wm -as <ADDRESS> -as <OTHER_ADDRESS>
 
+   The tool writes new certificates for every Wazuh manager node to ``/usr/share/wazuh-indexer/tools/wazuh-certificates``. Copy ``<NODE_NAME>-remoted.pem`` and ``<NODE_NAME>-remoted-key.pem`` to each Wazuh manager node.
+
 #. On each Wazuh manager node, install its new agent listener pair and restart the Wazuh manager:
 
    .. code-block:: console
