@@ -118,6 +118,8 @@ The following table lists the configuration sections available in ``wazuh-manage
 | :doc:`cluster <cluster>`                                 | Configures Wazuh manager cluster communication and synchronization.                          |
 +----------------------------------------------------------+----------------------------------------------------------------------------------------------+
 
+The ``<indexer>`` and ``<cluster>`` sections are required. ``<hosts>`` in ``<indexer>`` and ``<key>`` in ``<cluster>`` have no default value. The Wazuh manager validates the file when it starts: an unknown option, or a boolean value other than ``yes`` or ``no``, stops the start with a validation error.
+
 .. toctree::
    :hidden:
    :maxdepth: 1
