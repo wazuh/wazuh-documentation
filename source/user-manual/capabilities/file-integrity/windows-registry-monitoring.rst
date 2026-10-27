@@ -146,9 +146,11 @@ Reporting changes in registry values
 To report the exact content changed in a Windows Registry value, you can configure the FIM module with the ``report_changes`` attribute of the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` option. The allowed values are ``yes`` and ``no`` and the supported registry value types are:
 
 - ``REG_SZ``
+- ``REG_EXPAND_SZ``
 - ``REG_MULTI_SZ``
 - ``REG_DWORD``
 - ``REG_DWORD_BIG_ENDIAN``
+- ``REG_QWORD``
 
 You must use the ``report_changes`` attribute with caution. Wazuh copies every single monitored file to a ``C:\Program Files (x86)\ossec-agent\queue\diff\registry`` and this increases storage usage.
 

@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - Fixed the Python 3.11–3.13 dependency installation command in the *Google Cloud* prerequisites documentation, which failed on Python 3.13. ([#10414](https://github.com/wazuh/wazuh-documentation/pull/10414))
 - Fixed missing image alt text, generic "here" link text and a duplicate page title across the *Cloud security*, *Regulatory compliance*, *Development*, *Proof of concept guide* and *User manual* documentation. ([#10415](https://github.com/wazuh/wazuh-documentation/pull/10415))
 - Fixed the manager address placeholder in the configuration step of the *Solaris* and *HP-UX* Wazuh agent installation documentation to match the installed `ossec.conf`. ([#10555](https://github.com/wazuh/wazuh-documentation/pull/10555))
+- Fixed the list of registry value types supported by `report_changes` in the *Windows Registry monitoring* page of the *File integrity monitoring* documentation and in the *Reference* documentation. ([#10556](https://github.com/wazuh/wazuh-documentation/pull/10556))
 
 ## [v4.14.8]
 

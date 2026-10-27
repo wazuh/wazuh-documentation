@@ -1113,9 +1113,9 @@ Attributes:
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | Tags list separated by commas                            |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
-| **report_changes**       | Report registry value changes. This is limited to REG_SZ, REG_MULTI_SZ, REG_DWORD, REG_DWORD_BIG_ENDIAN,              |
+| **report_changes**       | Report registry value changes. This is limited to REG_SZ, REG_EXPAND_SZ, REG_MULTI_SZ, REG_DWORD,                     |
 +                          +                                                                                                                       +
-|                          | REG_QWORD value.                                                                                                      |
+|                          | REG_DWORD_BIG_ENDIAN, REG_QWORD value.                                                                                |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | no                                                       |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
