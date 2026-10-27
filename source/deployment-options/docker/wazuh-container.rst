@@ -453,6 +453,27 @@ Log in to the Wazuh dashboard with the ``admin`` username. The password is the `
 
 If the browser can't connect, or shows ``server is not ready yet``, wait until ``docker compose ps`` shows the ``wazuh.dashboard`` container as ``(healthy)``, then reload the page.
 
+
+Troubleshooting dashboard configuration permissions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When deploying the single-node or multi-node stack, attempting to save settings through the Wazuh dashboard UI (such as enabling **Remember server address** during agent enrollment) may trigger an error similar to:
+
+.. code-block:: none
+
+   3021 - Error setting configuration: EACCES: permission denied, open '/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml'
+
+This occurs because the volume mounted at ``/usr/share/wazuh-dashboard/data`` on the host lacks write permissions for the container's internal ``wazuh-dashboard`` user.
+
+To resolve this issue, set the appropriate ownership and permissions inside the dashboard container:
+
+.. code-block:: console
+
+   # docker compose exec -u 0 wazuh.dashboard chown -R wazuh-dashboard:wazuh-dashboard /usr/share/wazuh-dashboard/data
+   # docker compose exec -u 0 wazuh.dashboard chmod -R 775 /usr/share/wazuh-dashboard/data
+
+Alternatively, disable the **Remember server address** toggle in the deployment interface. The generated deployment command will still include the specified manager address without writing changes to ``wazuh.yml``.
+
 Wazuh agent
 -----------
 
