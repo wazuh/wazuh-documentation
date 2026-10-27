@@ -30,14 +30,14 @@ To start the installation process, select your architecture: i386 or SPARC.
 
                   # pkgadd -d wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg wazuh-agent
 
-            #. Edit the ``/var/ossec/etc/ossec.conf`` file and replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address of the Wazuh manager:
+            #. Edit the ``/var/ossec/etc/ossec.conf`` file and replace ``MANAGER_IP`` with the IP address of the Wazuh manager:
 
                .. code-block:: xml
                   :emphasize-lines: 3
 
                   <client>
                     <server>
-                      <address><WAZUH_MANAGER_IP_ADDRESS></address>
+                      <address>MANAGER_IP</address>
                     </server>
                   </client>
 
@@ -65,14 +65,14 @@ To start the installation process, select your architecture: i386 or SPARC.
 
                   # pkg set-publisher -g wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p wazuh && pkg install --accept wazuh-agent && pkg unset-publisher wazuh
 
-            #. Edit the ``/var/ossec/etc/ossec.conf`` file and replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address of the Wazuh manager:
+            #. Edit the ``/var/ossec/etc/ossec.conf`` file and replace ``MANAGER_IP`` with the IP address of the Wazuh manager:
 
                .. code-block:: xml
                   :emphasize-lines: 3
 
                   <client>
                     <server>
-                      <address><WAZUH_MANAGER_IP_ADDRESS></address>
+                      <address>MANAGER_IP</address>
                     </server>
                   </client>
 
@@ -100,14 +100,14 @@ To start the installation process, select your architecture: i386 or SPARC.
 
                   # pkgadd -d wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg wazuh-agent
 
-            #. Edit the ``/var/ossec/etc/ossec.conf`` file and replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address of the Wazuh manager:
+            #. Edit the ``/var/ossec/etc/ossec.conf`` file and replace ``MANAGER_IP`` with the IP address of the Wazuh manager:
 
                .. code-block:: xml
                   :emphasize-lines: 3
 
                   <client>
                     <server>
-                      <address><WAZUH_MANAGER_IP_ADDRESS></address>
+                      <address>MANAGER_IP</address>
                     </server>
                   </client>
 
@@ -135,14 +135,14 @@ To start the installation process, select your architecture: i386 or SPARC.
 
                   # pkg set-publisher -g wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p wazuh && pkg install --accept wazuh-agent && pkg unset-publisher wazuh
 
-            #. Edit the ``/var/ossec/etc/ossec.conf`` file and replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address of the Wazuh manager:
+            #. Edit the ``/var/ossec/etc/ossec.conf`` file and replace ``MANAGER_IP`` with the IP address of the Wazuh manager:
 
                .. code-block:: xml
                   :emphasize-lines: 3
 
                   <client>
                     <server>
-                      <address><WAZUH_MANAGER_IP_ADDRESS></address>
+                      <address>MANAGER_IP</address>
                     </server>
                   </client>
 
