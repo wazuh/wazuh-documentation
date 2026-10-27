@@ -94,13 +94,13 @@ Do this **before installing the package**. The package then uses these files and
 
 .. note::
 
-   If the Wazuh indexer is already installed on this host, the Wazuh manager package retrieves the Wazuh indexer password and certificates from ``/etc/wazuh-indexer/export`` during installation. Skip this section, but first place the two Wazuh manager API passwords. Run these commands in the directory that holds ``credentials.env`` from :ref:`Creating the passwords <wazuh_indexer_creating_passwords>`:
+   If this host is the first Wazuh indexer node, the Wazuh manager package retrieves the Wazuh indexer password and certificates from ``/etc/wazuh-indexer/export`` during installation. Skip this section, but first place the two Wazuh manager API passwords. On the other Wazuh indexer nodes, follow this section in full. Run these commands in the directory that holds ``wazuh-certificates.tar``:
 
    .. code-block:: console
 
       # install -d -m 0750 /etc/wazuh-manager
       # install -m 0600 /dev/null /etc/wazuh-manager/local.env
-      # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=' credentials.env > /etc/wazuh-manager/local.env
+      # tar -xOf wazuh-certificates.tar ./credentials.env | grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=' > /etc/wazuh-manager/local.env
 
    Make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
 
@@ -155,7 +155,7 @@ Installing the Wazuh manager
 
             # dnf -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-#. Place this node's certificates and the Wazuh indexer root CA. They are in the directory where you extracted ``wazuh-certificates.tar``. Skip this step if the Wazuh indexer runs on this host:
+#. Place this node's certificates and the Wazuh indexer root CA. They are in the directory where you extracted ``wazuh-certificates.tar``. Skip this step on the first Wazuh indexer node:
 
    .. code-block:: console
 
