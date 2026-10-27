@@ -32,7 +32,9 @@ The Wazuh indexer doesn't update its content automatically when the deployment h
 
       # cat /usr/share/wazuh-indexer/plugins/wazuh-indexer-content-manager/snapshots/manifest.json
 
-   The output looks like the following example. The ``resource`` line of each snapshot holds its address:
+   The ``resource`` line of each snapshot holds its address.
+
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
