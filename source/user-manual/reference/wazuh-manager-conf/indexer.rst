@@ -141,14 +141,23 @@ Multi-node cluster:
 Wazuh indexer credentials
 --------------------------
 
-When the Wazuh indexer requires username and password authentication, store the credentials in the Wazuh manager keystore instead of adding them to ``wazuh-manager.conf``.
+The Wazuh manager authenticates to the Wazuh indexer with the username and password stored in its keystore. They're never set in ``wazuh-manager.conf``. The credential resolver (``wazuh-manager-resolve-credentials``) stores them during the installation and before every start: the username is ``wazuh-manager``, and the password is the first value of ``WAZUH_INDEXER_MANAGER_PASSWORD`` it finds in:
+
+#. The environment of the installation command.
+#. ``/etc/wazuh-manager/local.env``.
+#. ``/etc/wazuh-indexer/export/credentials.env``, when the Wazuh indexer is installed on the same host.
+
+When the Wazuh indexer is on the same host, the resolver also imports its CA and the client pair it issued for the Wazuh manager into ``/etc/wazuh-manager/certs/indexer-ca.pem``, ``indexer-connector.pem`` and ``indexer-connector-key.pem``. When the Wazuh indexer is on another host, copy them there yourself.
+
+If the password or these files are missing, the Wazuh manager doesn't start, and ``wazuh-manager-control`` reports ``Unresolved credentials`` (error 21).
+
+The resolver never replaces a password already in the keystore. After you change the ``wazuh-manager`` password on the Wazuh indexer, write the new one with ``wazuh-manager-keystore`` and restart the Wazuh manager:
 
 .. code-block:: console
+   :emphasize-lines: 1
 
-   # wazuh-manager-keystore -f indexer -k username -v wazuh-manager
-   # wazuh-manager-keystore -f indexer -k password -v <PASSWORD>
-
-The Wazuh manager reads these credentials from the keystore when it starts.
+   # echo '<PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password
+   # systemctl restart wazuh-manager
 
 Verifying connectivity
 ------------------------
