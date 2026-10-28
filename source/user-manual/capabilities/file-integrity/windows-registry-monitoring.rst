@@ -105,7 +105,7 @@ Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM
 
       > Restart-Service -Name WazuhSvc
 
-When using the following registry structure and ``recursion_level="3"``, FIM generates findings for ``Subkey_3`` and all registry subkeys or values up to ``HKEY_LOCAL_MACHINE\SYSTEM\Setup\level_1\level_2\level_3\`` but not for any registry subkeys or values deeper than ``level_3``.
+When using the following registry structure and ``recursion_level="3"``, FIM generates findings for all registry subkeys or values up to ``HKEY_LOCAL_MACHINE\SYSTEM\Setup\level_1\level_2\level_3\`` but not for any registry subkeys or values deeper than ``level_3``.
 
 .. code-block:: none
 
