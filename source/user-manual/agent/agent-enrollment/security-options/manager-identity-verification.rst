@@ -69,15 +69,17 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
 
    -  Windows endpoints. Replace ``<WAZUH_AGENT_MSI>`` with the file name of the package you downloaded:
 
-      .. code-block:: doscon
+      .. code-block:: pwsh-session
 
-         > msiexec.exe /i <WAZUH_AGENT_MSI> /q WAZUH_ENROLLMENT_TOKEN="<TOKEN>"
+         > (Start-Process msiexec.exe -ArgumentList '/i "<WAZUH_AGENT_MSI>" /q WAZUH_ENROLLMENT_TOKEN="<TOKEN>"' -Wait -PassThru).ExitCode
 
-   For a Wazuh agent that is already installed, save the token to a file, stop the Wazuh agent, and run ``wazuh-agent-auth`` from the ``bin`` directory of the Wazuh agent installation. For example, on Linux:
+   For a Wazuh agent that is installed but not enrolled yet, save the token to a file and run ``wazuh-agent-auth`` from the ``bin`` directory of the Wazuh agent installation. For example, on Linux:
 
    .. code-block:: console
 
       # /var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE>
+
+   If the Wazuh agent already has a key, add ``--force-enroll``. The Wazuh agent is enrolled again and gets a new ID.
 
 #. Start the Wazuh agent:
 
@@ -98,7 +100,7 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
 
    .. code-block:: console
 
-      # /Library/Ossec/bin/wazuh-control start
+      # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
 The Wazuh agent saves the CA as its trust anchor in ``etc/certs/root-ca.pem`` (``certs\root-ca.pem`` on Windows) and verifies the Wazuh manager certificate on every connection, without any ``<ssl>`` configuration.
 
@@ -119,7 +121,7 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
 #. Create a certificate request configuration file ``req.conf`` on the Wazuh manager. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager where the Wazuh agents will be enrolled. The contents of the file can be as follows:
 
    .. code-block:: ini
-      :emphasize-lines: 7
+      :emphasize-lines: 7,14
 
       [req]
       distinguished_name = req_distinguished_name
@@ -130,9 +132,11 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
       CN = <WAZUH_MANAGER_IP>
       [req_ext]
       subjectAltName = @alt_names
+      basicConstraints = CA:FALSE
       [alt_names]
       DNS.1 = wazuh
       DNS.2 = wazuh.com
+      IP.1 = <WAZUH_MANAGER_IP>
 
    Where:
 
@@ -173,11 +177,14 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
       Certificate request self-signature ok
       subject=C=US, CN=192.168.xxx.xxx
 
-#. Copy the newly signed certificate and key files to ``/etc/wazuh-manager/certs`` on the Wazuh manager:
+#. Copy the newly signed certificate and key files to ``/etc/wazuh-manager/certs`` on the Wazuh manager, set their ownership and permissions, and copy ``rootCA.pem`` to ``/etc/wazuh-manager/certs/root-ca.pem``, the CA file the Wazuh agents receive:
 
    .. code-block:: console
 
       # cp sslmanager.cert sslmanager.key /etc/wazuh-manager/certs
+      # chown root:wazuh-manager /etc/wazuh-manager/certs/sslmanager.cert /etc/wazuh-manager/certs/sslmanager.key
+      # chmod 640 /etc/wazuh-manager/certs/sslmanager.cert /etc/wazuh-manager/certs/sslmanager.key
+      # cp rootCA.pem /etc/wazuh-manager/certs/root-ca.pem
 
 #. Restart the Wazuh manager to apply the changes made:
 
@@ -195,6 +202,17 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
       </auth>
 
    Without this step the manager keeps using its default certificate (``/etc/wazuh-manager/certs/remoted.pem``) and never loads the one you just created.
+
+   The ``<auth><ssl_manager_cert>`` setting covers port 1515 only. For Wazuh 5.0 agents (port 1517), also set the certificate and key in the ``<https>`` block of the ``<remote>`` section:
+
+   .. code-block:: xml
+
+      <remote>
+        <https>
+          <certificate>/etc/wazuh-manager/certs/sslmanager.cert</certificate>
+          <key>/etc/wazuh-manager/certs/sslmanager.key</key>
+        </https>
+      </remote>
 
 #. Restart the Wazuh manager to apply the changes:
 
@@ -252,7 +270,7 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
-   .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
+   .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled-web-server.png
       :title: Check newly enrolled Wazuh agent - Linux
       :alt: Check newly enrolled Wazuh agent - Linux
       :align: center

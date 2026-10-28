@@ -12,6 +12,12 @@ The ``wazuh-manager-keystore`` tool stores sensitive configuration values for th
 
 Use this tool to securely store key-value pairs used by Wazuh components, such as credentials and connection settings.
 
+Run the tool as root, with its full path, ``/var/wazuh-manager/bin/wazuh-manager-keystore``. It drops its privileges to the ``wazuh-manager`` user, and stores the values in ``/var/wazuh-manager/queue/keystore/``.
+
+The Wazuh manager uses one column family, ``indexer``, with the keys ``username`` and ``password``: the credentials of the Wazuh indexer connection. The credential resolver (:doc:`wazuh-manager-resolve-credentials <wazuh-manager-resolve-credentials>`) fills both during the installation and never replaces them afterwards.
+
+Restart the Wazuh manager after you change a value. Pass the value on standard input or with ``-vp`` instead of ``-v``: a value given with ``-v`` is visible in the process list.
+
 Options
 -------
 

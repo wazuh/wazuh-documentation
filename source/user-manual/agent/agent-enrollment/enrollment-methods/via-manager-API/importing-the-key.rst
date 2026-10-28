@@ -48,6 +48,19 @@ Follow the steps below to import the client key to a Linux/Unix endpoint:
 
 #. Add the Wazuh manager IP address or fully qualified domain name (FQDN)  to the Wazuh agent configuration file at ``/var/ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or FQDN.
 
+   **Wazuh 5.0 agents**:
+
+   .. code-block:: xml
+      :emphasize-lines: 3
+
+      <agent>
+        <manager>
+          <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+        </manager>
+      </agent>
+
+   **Wazuh 4.x agents**:
+
    .. code-block:: xml
       :emphasize-lines: 3
 
@@ -64,7 +77,7 @@ Follow the steps below to import the client key to a Linux/Unix endpoint:
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
-   .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
+   .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled-web-server.png
       :title: Check newly enrolled Wazuh agent - Linux
       :alt: Check newly enrolled Wazuh agent - Linux
       :align: center

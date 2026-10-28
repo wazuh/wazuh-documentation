@@ -27,9 +27,9 @@ Follow these steps to uninstall the Wazuh central components with the installati
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --uninstall
 
-   This removes the Wazuh indexer, the Wazuh manager, and the Wazuh dashboard packages that are installed on the host, with their data and their configuration directories ``/etc/wazuh-indexer``, ``/etc/wazuh-manager``, and ``/etc/wazuh-dashboard``, including ``local.env``, ``ca/``, ``certs/``, and ``export/``. It also removes the ``wazuh-indexer``, ``wazuh-manager``, and ``wazuh-dashboard`` users.
+   This removes the Wazuh indexer, Wazuh manager, and Wazuh dashboard packages installed on the host, with their data. It also removes their configuration directories, ``/etc/wazuh-indexer``, ``/etc/wazuh-manager``, and ``/etc/wazuh-dashboard``, including ``local.env``, ``ca/``, ``certs/``, and ``export/``. It also removes the ``wazuh-indexer``, ``wazuh-manager``, and ``wazuh-dashboard`` users.
 
-   On the host where you ran ``--generate-config-files``, the ``wazuh-ca`` directory beside the installation assistant remains. It holds the root CA private key and the passwords of all the Wazuh users. Once you have the backup described at the start of this section, or if you no longer need to add nodes or renew certificates, remove it:
+   On the host where you ran ``--generate-config-files``, the ``wazuh-ca`` directory beside the installation assistant remains. It holds the root CA private key and the passwords of all the Wazuh users. Remove it after the backup described at the start of this section, or if you won't add nodes or renew certificates:
 
    .. code-block:: console
 
@@ -230,7 +230,7 @@ Replace ``<COMPONENT>`` with indexer, manager, or dashboard.
 Removing the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After you remove the last Wazuh central component from a host installed with the step-by-step method, and no Wazuh agent runs on it, remove the Wazuh repository, its key, and the cached packages:
+If you removed the last Wazuh central component from a step-by-step host and no Wazuh agent runs on it, remove the Wazuh repository. Also remove its key and the cached packages:
 
 .. tabs::
 

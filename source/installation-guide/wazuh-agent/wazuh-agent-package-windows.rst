@@ -6,7 +6,7 @@
 Deploying Wazuh agents on Windows endpoints
 ===========================================
 
-The Wazuh agent runs on the endpoint you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel. You can deploy the Wazuh agent on Windows 10 and 11, and Windows Server 2008 R2, 2012 R2, 2016, 2019, 2022, and 2025. For the supported versions, see :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`.
+The Wazuh agent runs on the endpoint you want to monitor. It sends data to the Wazuh manager in near real time through an encrypted and authenticated channel. You can deploy the Wazuh agent on Windows 10 and 11, and Windows Server 2008 R2, 2012 R2, 2016, 2019, 2022, and 2025. For the supported versions, see :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`.
 
 Before you start, create an enrollment token on the Wazuh manager, as described in :ref:`Generate the enrollment token <generate_enrollment_token>`. The endpoint must reach the Wazuh manager on port 1517/TCP.
 
@@ -22,7 +22,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
       .. group-tab:: CLI
 
-         #. Choose one of the command shell alternatives to deploy the Wazuh agent on your endpoint. Ensure the downloaded Wazuh agent installation file is in your working directory and run the following command.
+         #. Choose one of the command shell alternatives to deploy the Wazuh agent on your endpoint. Make sure the downloaded Wazuh agent installation file is in your working directory and run the following command.
 
             -  Using CMD:
 
@@ -36,7 +36,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
                   > Start-Process -FilePath ".\wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi" -ArgumentList '/q WAZUH_ENROLLMENT_TOKEN="<ENROLLMENT_TOKEN>" WAZUH_AGENT_NAME="<AGENT_NAME>"' -Wait
 
-            Replace ``<ENROLLMENT_TOKEN>`` with the token you created in :ref:`Generate the enrollment token <generate_enrollment_token>`, and ``<AGENT_NAME>`` with a name for this endpoint that no other agent uses, for example, its host name. If you omit ``WAZUH_AGENT_NAME``, the agent enrolls under the endpoint's host name.
+            Replace ``<ENROLLMENT_TOKEN>`` with the token you created in :ref:`Generate the enrollment token <generate_enrollment_token>`. Replace ``<AGENT_NAME>`` with a name that no other agent uses, for example, the endpoint's host name. If you omit ``WAZUH_AGENT_NAME``, the agent enrolls under the endpoint's host name.
 
             For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-windows>` section.
 
@@ -70,7 +70,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
             If the service stopped or the agent didn't enroll, the cause is one of these:
 
             -  ``ERR_BAD_TOKEN``: the installer refused the token, for example because it lost a character when you copied it. No token was stored, and the service stops when you start it.
-            -  ``Enrollment rejected by the manager`` or ``Enrollment-token bootstrap failed``: the Wazuh manager refused the token, for example a revoked or expired token, and the service stops.
+            -  ``Enrollment rejected by the manager`` or ``Enrollment-token bootstrap failed`` means that the Wazuh manager refused the enrollment. For example, the token was revoked or expired, or another agent already uses the name. The service stops.
 
             In each case, enroll the agent with a valid token. In an administrator PowerShell, run:
 

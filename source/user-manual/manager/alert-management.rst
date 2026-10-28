@@ -384,7 +384,7 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
 
             relayhost = [smtp.gmail.com]:587
             smtp_sasl_auth_enable = yes
-            smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+            smtp_sasl_password_maps = ${default_database_type}:/etc/postfix/sasl_passwd
             smtp_sasl_security_options = noanonymous
             smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
             smtp_use_tls = yes
@@ -395,7 +395,7 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
 
             relayhost = [smtp.gmail.com]:587
             smtp_sasl_auth_enable = yes
-            smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+            smtp_sasl_password_maps = ${default_database_type}:/etc/postfix/sasl_passwd
             smtp_sasl_security_options = noanonymous
             smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
             smtp_use_tls = yes
@@ -412,12 +412,12 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
 
       The password must be an `App Password <https://security.google.com/settings/security/apppasswords>`__. App Passwords can only be used with accounts that have `2-Step Verification <https://myaccount.google.com/signinoptions/two-step-verification>`__ turned on.
 
-#. Secure your password DB file so that only the ``root`` user has full read and write access to it. This is because the ``/etc/postfix/sasl_passwd`` and ``/etc/postfix/sasl_passwd.db`` files have plaintext credentials.
+#. Secure your password files so that only the ``root`` user has full read and write access to them. This is because the ``/etc/postfix/sasl_passwd`` file and the database file that ``postmap`` creates from it, ``/etc/postfix/sasl_passwd.db`` or ``/etc/postfix/sasl_passwd.lmdb`` on RHEL 10, have plaintext credentials.
 
    .. code-block:: console
 
-      # chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
-      # chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+      # chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.*
+      # chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.*
 
 #. Restart Postfix to effect the configuration changes:
 

@@ -114,6 +114,8 @@ Do this **before installing the package**. The package then uses these files and
 
 .. note::
 
+   If the Wazuh indexer and Wazuh manager are already installed on this host, skip this section. Do not extract the archive or place any files manually. The Wazuh dashboard package retrieves the passwords and certificates from their export directories during installation and issues its own certificate.
+
    Make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
 
 #. Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same one used in the ``config.yml`` file to create the certificates. In our case, the node name is ``dashboard``. Then place the passwords, this node's certificates, the Wazuh indexer root CA, and the Wazuh manager CA:
@@ -133,13 +135,13 @@ Do this **before installing the package**. The package then uses these files and
       # install -m 0640 wazuh-certificates/root-ca.pem /etc/wazuh-dashboard/certs/indexer-ca.pem
       # rm -rf wazuh-certificates
 
-   Copy ``/etc/wazuh-manager/export/ca.pem`` from the Wazuh manager master node to ``/etc/wazuh-dashboard/certs/manager-ca.pem`` on this node. The Wazuh dashboard uses it to verify the Wazuh server API:
+   Copy ``/etc/wazuh-manager/export/ca.pem`` from the Wazuh manager master node to ``/etc/wazuh-dashboard/certs/manager-ca.pem`` on this node. The Wazuh dashboard uses it to verify the Wazuh manager API:
 
    .. code-block:: console
 
       # install -m 0640 <MANAGER_CA_FILE> /etc/wazuh-dashboard/certs/manager-ca.pem
 
-   The ``wazuh-dashboard`` user does not exist yet. When the package is installed, it keeps these files and gives them their owner. If the Wazuh indexer and Wazuh manager run on this host and are already installed, skip this step: the package imports everything from their ``export`` directories and issues its own certificate.
+   The ``wazuh-dashboard`` user does not exist yet. When the package is installed, it keeps these files and gives them their owner.
 
 #. **Recommended action**: If no other Wazuh components will be installed on this node, remove the ``wazuh-certificates.tar`` file.
 
@@ -172,6 +174,8 @@ Installing the Wazuh dashboard
 
             # dnf -y install wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
+.. _wazuh_dashboard_configuring:
+
 Configuring the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -179,7 +183,7 @@ Configuring the Wazuh dashboard
 
    #. ``server.host``: The package sets ``0.0.0.0``, which accepts connections on every address of the host. You don't need to change it.
 
-   #. ``opensearch.hosts``: The package sets ``https://localhost:9200``. Replace it with the URL of the Wazuh indexer node, using the address you set in ``network.host`` in :ref:`Configuring the Wazuh indexer <wazuh_indexer_configuring>`. If you set ``network.host`` to one IP address, the Wazuh indexer listens only on that address, and ``localhost`` fails even when the Wazuh indexer runs on this host. If you left the package default, ``https://localhost:9200`` works.
+   #. ``opensearch.hosts``: The package sets ``https://localhost:9200``. Replace it with the URL of the Wazuh indexer node, using the address you set in ``network.host`` in :ref:`Configuring the Wazuh indexer <wazuh_indexer_configuring>`. If you set ``network.host`` to one IP address, the Wazuh indexer listens only on that address. Then ``localhost`` fails, even when the Wazuh indexer runs on this host. If you left the package default, ``https://localhost:9200`` works.
 
       .. code-block:: yaml
          :emphasize-lines: 3
@@ -199,7 +203,7 @@ Configuring the Wazuh dashboard
 
    #. ``wazuh_core.hosts.default.url``: The Wazuh manager master node. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node. If the Wazuh manager master node is on this host, keep the shipped value, ``https://localhost``.
 
-   #. Edit the block that the package shipped, and don't add a second one or a password line. The host in ``url`` must be in the Wazuh server API certificate. To list its addresses, run this command on the master node:
+   #. Edit the block that the package shipped, and don't add a second one or a password line. The host in ``url`` must be in the Wazuh manager API certificate. To list its addresses, run this command on the master node:
 
       .. code-block:: console
 
@@ -218,7 +222,7 @@ Configuring the Wazuh dashboard
 
       .. note::
 
-         Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and ensure the necessary ports are open.
+         Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and make sure the necessary ports are open.
 
 Starting the Wazuh dashboard service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -245,7 +249,7 @@ Starting the Wazuh dashboard service
 
             # systemctl status wazuh-dashboard
 
-   If the service fails to start, run ``journalctl -u wazuh-dashboard``. A ``MISSING WAZUH_INDEXER_KIBANASERVER_PASSWORD`` or ``MISSING WAZUH_MANAGER_WUI_PASSWORD`` line means that the password is not in ``/etc/wazuh-dashboard/local.env``, and a ``MISSING /etc/wazuh-dashboard/certs/indexer-ca.pem`` line means that the CA is not there. An ``UNSAFE`` line means that a file or directory has the wrong owner or mode. Don't change the owner of ``/etc/wazuh-dashboard/certs`` to ``wazuh-dashboard``. To repair it, run:
+   If the service fails to start, run ``journalctl -u wazuh-dashboard``. A ``MISSING WAZUH_INDEXER_KIBANASERVER_PASSWORD`` or ``MISSING WAZUH_MANAGER_WUI_PASSWORD`` line means that the password isn't in ``/etc/wazuh-dashboard/local.env``. A ``MISSING /etc/wazuh-dashboard/certs/indexer-ca.pem`` line means that the CA isn't there. An ``UNSAFE`` line means that a file or directory has the wrong owner or mode. Don't change the owner of ``/etc/wazuh-dashboard/certs`` to ``wazuh-dashboard``. To repair it, run:
 
    .. code-block:: console
 
@@ -276,9 +280,9 @@ Starting the Wazuh dashboard service
 Securing your Wazuh installation
 --------------------------------
 
-Once every component is installed and running, each component stores the passwords it needs in its own keystore or database. Nothing reads ``local.env`` or ``export/credentials.env`` after installation, and deleting them doesn't affect running or restarted components. Every node received the passwords it needs from the ``credentials.env`` file you created in :ref:`Creating the passwords <wazuh_indexer_creating_passwords>`, directly on the first Wazuh indexer node and through ``wazuh-certificates.tar`` on the others.
+Once every component is installed and running, each component stores the passwords it needs in its own keystore or database. Nothing reads ``local.env`` or ``export/credentials.env`` after installation, and deleting them doesn't affect running or restarted components. Every node got its passwords from the ``credentials.env`` file you created in :ref:`Creating the passwords <wazuh_indexer_creating_passwords>`. The first Wazuh indexer node read it directly, and the other nodes got it through ``wazuh-certificates.tar``.
 
-#. Log in to the Wazuh dashboard. A successful login shows that the Wazuh dashboard reaches the Wazuh indexer. Then open the menu and go to **Dashboard management** > **Server API**. In the **API connection** card, the **Host** is the address of the Wazuh manager master node, and the **Status** is **Online**. This shows that the Wazuh dashboard reaches the Wazuh manager. If the **Status** is **Offline**, check that the ``wazuh-manager`` service is running on the master node, that port ``55000/TCP`` is reachable from the Wazuh dashboard host, and that the address in the **Host** field is in the Wazuh server API certificate. To list the addresses in the certificate, run this command on the master node:
+#. Log in to the Wazuh dashboard. A successful login shows that the Wazuh dashboard reaches the Wazuh indexer. Then open the menu and go to **Dashboard management** > **Server API**. In the **API connection** card, the **Host** is the address of the Wazuh manager master node, and the **Status** is **Online**. This shows that the Wazuh dashboard reaches the Wazuh manager. If the **Status** is **Offline**, check that the ``wazuh-manager`` service runs on the master node and that the Wazuh dashboard host reaches port ``55000/TCP``. Also check that the Wazuh manager API certificate lists the address in the **Host** field. To list the addresses in the certificate, run this command on the master node:
 
    .. code-block:: console
 
@@ -286,7 +290,7 @@ Once every component is installed and running, each component stores the passwor
 
    Also check that ``/etc/wazuh-dashboard/certs/manager-ca.pem`` exists on the Wazuh dashboard host, and run ``journalctl -u wazuh-dashboard -n 50`` to see the cause. Then click **Refresh**.
 
-#. Securely store the five passwords. The ``credentials.env`` file in the working directory of the first Wazuh indexer node holds all five. If the Wazuh manager runs on the same host as the Wazuh indexer, its package generates its own Wazuh server API passwords. Store ``WAZUH_MANAGER_API_PASSWORD`` and ``WAZUH_MANAGER_WUI_PASSWORD`` from ``/etc/wazuh-manager/export/credentials.env`` instead of the values in ``credentials.env``.
+#. Securely store the five passwords. The ``credentials.env`` file in the working directory of the first Wazuh indexer node holds all five.
 
 #. Remove the ``credentials.env`` you created on the first Wazuh indexer node and any ``wazuh-certificates.tar`` left behind, on every node. The passwords of each component stay in ``local.env`` and ``export/credentials.env`` in its configuration directory, readable by ``root`` only:
 

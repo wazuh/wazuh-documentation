@@ -104,6 +104,17 @@ Wazuh manager configuration
          <ssl_agent_ca>/etc/wazuh-manager/rootCA.pem</ssl_agent_ca>
       </auth>
 
+   For Wazuh 5.0 agents, set the CA in the ``<https>`` block of the ``<remote>`` section. Wazuh 5.0 agents without a certificate signed by this CA are then refused. Keep ``<ssl_agent_ca>`` for Wazuh 4.x agents (port 1515):
+
+   .. code-block:: xml
+
+      <remote>
+         ...
+         <https>
+           <ca>/etc/wazuh-manager/rootCA.pem</ca>
+         </https>
+      </remote>
+
 #. Restart the Wazuh manager service to apply the changes:
 
    .. code-block:: console
@@ -115,7 +126,7 @@ Linux/Unix
 
 Follow these steps to enroll a Linux/Unix endpoint by using certificates for agent verification.
 
-#. Ensure that the signed SSL certificate and key files (``sslagent.cert`` and ``sslagent.key``) for the Wazuh agent have been copied to the endpoint.
+#. Ensure that the signed SSL certificate and key files (``sslagent.cert`` and ``sslagent.key``) for the Wazuh agent have been copied to the endpoint. Move ``sslagent.cert`` and ``sslagent.key`` to ``/var/ossec/etc/``.
 
 #. Assign the right permissions and ownership to the ``sslagent.key`` and ``sslagent.cert`` files.
 
@@ -137,8 +148,8 @@ Follow these steps to enroll a Linux/Unix endpoint by using certificates for age
             <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
           </manager>
           <ssl>
-            <certificate>/<PATH_TO>/sslagent.cert</certificate>
-            <key>/<PATH_TO>/sslagent.key</key>
+            <certificate>/var/ossec/etc/sslagent.cert</certificate>
+            <key>/var/ossec/etc/sslagent.key</key>
           </ssl>
         </agent>
       </ossec_config>

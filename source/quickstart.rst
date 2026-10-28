@@ -60,7 +60,7 @@ You need a host that meets the requirements above, internet access, and a user w
 
    -  **1517/TCP**: Wazuh 5.x agent enrollment and connection.
    -  **443/TCP**: Wazuh dashboard web interface.
-   -  **1514/TCP and 1515/TCP**: only needed if Wazuh 4.x agents connect to this deployment.
+   -  **1514/TCP and 1515/TCP**: only needed if Wazuh 4.x agents connect to this deployment. A Wazuh 4.x agent that enrolls for the first time also needs this server's enrollment password. Read it with ``sudo cat /etc/wazuh-manager/authd.pass`` and pass it as ``WAZUH_REGISTRATION_PASSWORD`` when you install the agent, or write it to ``/var/ossec/etc/authd.pass`` on the agent and restart it.
 
    For example, with firewalld, run ``sudo firewall-cmd --permanent --add-port=443/tcp --add-port=1517/tcp && sudo firewall-cmd --reload``. With UFW, run ``sudo ufw allow 443/tcp && sudo ufw allow 1517/tcp``. To check whether a firewall is active, run ``sudo firewall-cmd --state`` or ``sudo ufw status``.
 
