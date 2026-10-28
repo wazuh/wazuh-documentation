@@ -260,7 +260,7 @@ The macOS unified logging system (ULS) centralizes the management and storage of
 Collecting macOS ULS logs with the Wazuh agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh agent installs the following default configuration to collect logs from macOS ULS. Wazuh interfaces with the CLI log tool using the ``--style syslog`` format:
+The Wazuh agent installs the following default configuration to collect logs from macOS ULS. On macOS 10.15 and later, Wazuh runs the CLI log tool with the ``--style ndjson`` format and turns each event into the line of the ``--style syslog`` format, so a message with line breaks stays one event. On earlier macOS releases, it uses the ``--style syslog`` format:
 
    .. code-block:: xml
 
