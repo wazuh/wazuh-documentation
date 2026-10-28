@@ -684,6 +684,6 @@ Next steps
 
 The Wazuh indexer is now successfully installed on your single-node or multi-node cluster, and you can proceed with installing the Wazuh manager. To perform this action, see the :doc:`../wazuh-manager/step-by-step` section.
 
-A Wazuh manager on the first Wazuh indexer node, or a Wazuh dashboard on a host with the Wazuh indexer and Wazuh manager, gets its passwords and certificates from the export directories when you install it. Install the Wazuh indexer first, and keep ``/etc/wazuh-indexer/export`` until the Wazuh manager and Wazuh dashboard on the host are installed. On other hosts, they take them from ``wazuh-certificates.tar``, as their sections describe.
+A Wazuh manager on the first Wazuh indexer node gets the Wazuh indexer password and certificates from ``/etc/wazuh-indexer/export`` when you install it. Its two Wazuh manager API passwords come from ``local.env``, as the Wazuh manager section describes. A Wazuh dashboard on a host with the Wazuh indexer and Wazuh manager gets its passwords and certificates from their export directories. Install the Wazuh indexer first, and keep ``/etc/wazuh-indexer/export`` until the Wazuh manager and Wazuh dashboard on the host are installed. On other hosts, they take them from ``wazuh-certificates.tar``, as their sections describe.
 
 To uninstall the Wazuh indexer, see :ref:`Uninstall the Wazuh indexer <uninstall_indexer>`.
