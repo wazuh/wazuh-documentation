@@ -98,11 +98,11 @@ You can install the Wazuh manager as a single-node or multi-node cluster.
    | Wazuh manager           |     8    |     4        |     16       |       8        |
    +-------------------------+----------+--------------+--------------+----------------+
 
-   All-in-one host (the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host), up to 25 agents: 4 CPU cores and 8 GB of RAM, as in the :doc:`Quickstart </quickstart>`. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
+   An all-in-one host runs the Wazuh indexer, Wazuh manager, and Wazuh dashboard together. For up to 25 agents, it needs 4 CPU cores and 8 GB of RAM, as in the :doc:`Quickstart </quickstart>`. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
 
 -  Disk space requirements
 
-   The Wazuh manager no longer stores alerts from monitored endpoints. Instead, it stores the content and databases required by its server-side modules. Because the Vulnerability Scanner feed requires at least 15 GB of storage, Wazuh recommends allocating at least 20 GB of disk space for a Wazuh manager.
+   The Wazuh manager no longer stores alerts from monitored endpoints. Instead, it stores the content and databases required by its server-side modules. The Vulnerability Scanner feed needs at least 15 GB of storage, so give a Wazuh manager at least 20 GB of disk space.
 
 .. _wazuh_manager_required_ports:
 

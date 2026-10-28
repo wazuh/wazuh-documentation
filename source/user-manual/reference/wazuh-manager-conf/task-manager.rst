@@ -74,7 +74,7 @@ Maximum tasks returned by a single poll; remaining pending tasks are returned on
 upgrade_enabled
 ^^^^^^^^^^^^^^^
 
-Enables or disables remote Wazuh agent upgrades (WPK upgrades requested through the Wazuh server API).
+Enables or disables remote Wazuh agent upgrades (WPK upgrades requested through the Wazuh manager API).
 
 +--------------------+---------+
 | **Default value**  | yes     |

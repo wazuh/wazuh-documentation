@@ -123,7 +123,7 @@ Specifies the port to use for the cluster node communications.
 bind_addr
 ^^^^^^^^^^
 
-Specifies the IP address on which the master node listens for connections from worker nodes. Worker nodes ignore this option.
+Specifies the IP address on which the master node listens for connections from worker nodes. Worker nodes ignore this option. In a multi-node cluster, set it on the master node to an address that the worker nodes can reach.
 
 +----------------------+------------------------+
 | **Default value**    | 127.0.0.1              |

@@ -174,9 +174,9 @@ Follow these steps in an elevated session to uninstall the Wazuh agent from your
 
          > (Start-Process msiexec.exe -ArgumentList '/x "<MSI_PATH>" /qn' -Wait -PassThru).ExitCode
 
-   If you no longer have the installer, uninstall **Wazuh Agent** from **Settings** > **Apps** > **Installed apps**, or run the **Uninstall** shortcut in the Start menu folder **Wazuh**, then continue with step 2. To check the removal, run ``Get-Service WazuhSvc``: it reports that no service was found.
+   If you no longer have the installer, uninstall **Wazuh Agent** from **Settings** > **Apps** > **Installed apps**. You can also run the **Uninstall** shortcut in the **Wazuh** Start menu folder. Then continue with step 2. To check the removal, run ``Get-Service WazuhSvc``. It reports that no service was found.
 
-   The exit code is 0, or 3010 when a restart is pending, on success. 1605 means that the installer does not match the installed agent: use the installer that installed or last upgraded it, or uninstall from Settings.
+   The exit code is 0, or 3010 when a restart is pending, on success. Exit code ``1605`` means that the installer doesn't match the installed agent. Use the installer that installed or last upgraded it, or uninstall from Settings.
 
 #. Remove the Wazuh agent installation folder. After the removal, the folder still holds the agent key in ``client.keys.save``.
 

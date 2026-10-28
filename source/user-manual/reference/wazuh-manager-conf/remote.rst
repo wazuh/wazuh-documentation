@@ -17,6 +17,8 @@ remote
 
 The ``<remote>`` section configures the Wazuh manager listeners that receive connections from Wazuh agents. Wazuh 5.0 managers accept two kinds of agent connections at once: a legacy TCP/UDP listener for Wazuh 4.x agents (``<legacy>``), and an HTTPS listener for Wazuh 5.0 agents (``<https>``). Both can be active simultaneously; ``<https>`` has no enable/disable toggle of its own; it always starts. If the certificate, the private key or the CA certificate (``ca_certificate``) that it uses is missing or can't be read, the Wazuh manager refuses to start.
 
+Each listener needs its own port. These ports must all be different: the legacy listener port (``<legacy><port>``, when the legacy listener is enabled), the HTTPS listener port (``<https><port>``), the agent enrollment port (``<auth><port>``, unless ``<auth><disabled>`` is ``yes``), and the cluster port (``<cluster><port>``). The Wazuh manager doesn't start when two of them are the same.
+
 Legacy listener options (``<legacy>``)
 ----------------------------------------
 
