@@ -242,15 +242,15 @@ To learn more, see the :doc:`troubleshooting <../agent-enrollment/troubleshootin
 Checking the synchronization status of Wazuh agents group configuration
 -----------------------------------------------------------------------
 
-Synchronization ensures the Wazuh agent has the latest security configurations and data for consistent monitoring. To check the synchronization status of the group configuration for agents, you can use the Wazuh dashboard or the :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` Wazuh manager API endpoint.
+Synchronization ensures the Wazuh agent has the latest security configurations and data for consistent monitoring. To check the synchronization status of the group configuration for agents, you can use the Wazuh dashboard.
 
 Using the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Navigate to the **Agents management** > **Summary** tab in the Wazuh dashboard. Select an agent and click on **Configuration**. The image below shows that the Wazuh agent configuration is **SYNCHRONIZED**. This means that the Wazuh agent's local configuration reflects the latest settings defined on the Wazuh manager.
+Navigate to the **Agents management** > **Summary** tab in the Wazuh dashboard. Select an agent and click on **Configuration**. The image below shows the Wazuh agent configuration. The **Reported N minutes ago** label at the top shows when the Wazuh agent last reported its configuration to the Wazuh manager. Click **Refresh** to request the current configuration from the Wazuh agent.
 
 .. thumbnail:: /images/manual/agent/agent-config-synchronized.png
-   :title: Wazuh agent configuration synchronized
-   :alt: Wazuh agent configuration synchronized
+   :title: Wazuh agent configuration
+   :alt: Wazuh agent configuration
    :align: center
    :width: 80%
