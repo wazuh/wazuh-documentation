@@ -129,7 +129,7 @@ The macOS unified logging system (ULS) centralizes log management and storage ac
 -  Filter by the log ``type``.
 -  Use a precise ``predicate`` to filter logs based on their specific characteristics.
 
-Wazuh interfaces with the log CLI tool using the ``--style syslog`` format to collect logs from macOS ULS:
+Wazuh runs the log CLI tool to collect logs from macOS ULS. On macOS 10.15 and later, it uses the ``--style ndjson`` format and turns each event into the line of the ``--style syslog`` format, so a message with line breaks stays one event. On earlier macOS releases, it uses the ``--style syslog`` format:
 
 .. code-block:: xml
 
