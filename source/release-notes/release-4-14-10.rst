@@ -76,6 +76,7 @@ Wazuh manager
 -  `#40490 <https://github.com/wazuh/wazuh/pull/40490>`__ Fixed SCA content checks opening non-regular files without validating them on UNIX systems, which could block the scan.
 -  `#40472 <https://github.com/wazuh/wazuh/pull/40472>`__ Fixed ``wazuh-modulesd`` and ``wazuh-syscheckd`` keeping a local request connection open when the request could not be read.
 -  `#40472 <https://github.com/wazuh/wazuh/pull/40472>`__ Fixed ``wazuh-modulesd`` delivering a synchronization message to the wrong module when its data contains another module's name.
+-  `#40647 <https://github.com/wazuh/wazuh/issues/40647>`__ Fixed the solved vulnerability alerts of a removed package reporting the severity and score of the default source instead of those of the detection alert and the inventory.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -143,6 +144,11 @@ Ruleset
 -  `#40102 <https://github.com/wazuh/wazuh/pull/40102>`__ Fixed polarity and matching errors in the Debian 10, Ubuntu 20.04 and RHEL 10 SCA policies (AppArmor bootloader, audit at boot, audit backlog limit and sudo timeout checks), the ``compare =>`` operator in 16 SCA policies, and GRUB kernel-line matching (tab or mixed indentation, memtest86+ entries) in 10 SCA policies.
 -  `#40154 <https://github.com/wazuh/wazuh/pull/40154>`__ Fixed ``gcp-bucket`` storage log rule (``65075``) sitting below the default ``log_alert_level``, and fixed its and the access log rule's (``65074``) descriptions, which referred to VPC.
 -  `#40196 <https://github.com/wazuh/wazuh/pull/40196>`__ Fixed the auditd decoders taking ``audit.key``, ``audit.list`` and ``audit.res`` from another record of the same event or from ``EXECVE`` arguments, not decoding ``audit.auid``, ``audit.session`` and ``audit.op`` on current ``CONFIG_CHANGE`` records, and including the ``ENRICHED`` interpreted fields in the last field of ``CONFIG_CHANGE``, ``LOGIN``, ``ANOM_PROMISCUOUS`` and ``MAC_STATUS`` records.
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+-  `#9426 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/9426>`__ Fixed the location shown for active responses in **Server management** > **Settings**.
 
 Changelogs
 ----------
