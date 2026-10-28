@@ -16,6 +16,8 @@ You can upgrade a Wazuh agent remotely using the Wazuh dashboard, the command li
 
    A Wazuh agent 5.0 or later picks up its upgrade task the next time it contacts the Wazuh manager. A Wazuh agent earlier than 5.0 receives the task from the Wazuh manager at a fixed interval, every 15 minutes by default, so its upgrade can start up to 15 minutes after you request it. The ``remoted.legacy_task_polling_interval`` internal option in ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` sets this interval in seconds, from ``300`` to ``86400``.
 
+.. warning::
+
    Each upgrade request creates a new upgrade task. Don't repeat the request for a Wazuh agent while it waits, or the Wazuh agent runs the upgrade more than once.
 
 Using the Wazuh dashboard
@@ -98,7 +100,7 @@ To upgrade agents using the command line, use the :doc:`/var/wazuh-manager/bin/a
 
       All agents are updated.
 
-   If the Wazuh agent is still listed after the delivery interval described at the top of this page, check the Wazuh agent log for errors. For a Wazuh agent earlier than 5.0, ``/var/wazuh-manager/logs/wazuh-manager.log`` shows a ``legacy_task_delivery`` line when the Wazuh manager delivers the task.
+   If the Wazuh agent is still listed after the delivery interval, 15 minutes by default, check the Wazuh agent log for errors. For a Wazuh agent earlier than 5.0, ``/var/wazuh-manager/logs/wazuh-manager.log`` shows a ``legacy_task_delivery`` line when the Wazuh manager delivers the task.
 
 Using the RESTful API
 ---------------------
@@ -208,4 +210,4 @@ Using the RESTful API
         "error": 0
       }
 
-   If the version doesn't change after the delivery interval described at the top of this page, check the Wazuh agent log for errors. For a Wazuh agent earlier than 5.0, ``/var/wazuh-manager/logs/wazuh-manager.log`` shows a ``legacy_task_delivery`` line when the Wazuh manager delivers the task.
+   If the version doesn't change after the delivery interval, 15 minutes by default, check the Wazuh agent log for errors. For a Wazuh agent earlier than 5.0, ``/var/wazuh-manager/logs/wazuh-manager.log`` shows a ``legacy_task_delivery`` line when the Wazuh manager delivers the task.
