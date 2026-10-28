@@ -11,7 +11,7 @@ Pass the variables as properties to the MSI package, then start the Wazuh agent.
 .. code-block:: pwsh-session
    :emphasize-lines: 1
 
-   > msiexec.exe /i <WAZUH_AGENT_MSI> /q WAZUH_ENROLLMENT_TOKEN="<TOKEN>" WAZUH_AGENT_NAME="windows-server-01"
+   > (Start-Process msiexec.exe -ArgumentList '/i "<WAZUH_AGENT_MSI>" /q WAZUH_ENROLLMENT_TOKEN="<TOKEN>" WAZUH_AGENT_NAME="windows-server-01"' -Wait -PassThru).ExitCode
    > Start-Service -Name wazuh
 
 .. note::

@@ -41,23 +41,35 @@ For a Wazuh 5.0 agent:
 
 .. code-block:: console
 
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1517 55000
+   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1517
+   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 55000
 
 For a Wazuh 4.x agent:
 
 .. code-block:: console
 
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1514 1515 55000
+   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1514
+   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1515
+   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 55000
 
 If there is connectivity, the output should be a connection success message:
+
+For a Wazuh 5.0 agent:
 
 .. code-block:: none
    :class: output
 
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> port 1517 [tcp] succeeded!
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> port 1514 [tcp] succeeded!
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> port 1515 [tcp] succeeded!
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> port 55000 [tcp] succeeded!
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> 1517 port [tcp/*] succeeded!
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> 55000 port [tcp/*] succeeded!
+
+For a Wazuh 4.x agent:
+
+.. code-block:: none
+   :class: output
+
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> 1514 port [tcp/*] succeeded!
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> 1515 port [tcp/*] succeeded!
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> 55000 port [tcp/*] succeeded!
 
 On Windows, open a PowerShell terminal and run the following commands:
 
@@ -101,6 +113,13 @@ The ``client.keys`` file stores the data used to authenticate the Wazuh agent an
 
    2026/10/04 22:44:48 wazuh-manager-remoted: WARNING: (1404): Authentication error. Wrong key or corrupt payload. Message received from agent '007' at 'any'.
 
+This log applies to Wazuh 4.x agents. For Wazuh 5.0 agents, the Wazuh manager logs nothing. Check the Wazuh agent log instead:
+
+.. code-block:: none
+   :class: output
+
+   2026/10/27 22:38:31 wazuh-agentd:https-client: ERROR: https_client: the manager refused this request's credential (401, invalid_signature); keeping the current identity and retrying.
+
 **Resolution**: Ensure that the client key on the Wazuh agent matches the key in the Wazuh manager ``client.keys`` file. You can find the ``client.keys`` key file at the following locations:
 
 ============= ====================================================
@@ -128,10 +147,14 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
 .. code-block:: none
    :class: output
 
-   2022/01/26 08:59:10 wazuh-agentd: INFO: Using agent name as: localhost.localdomain
-   2022/01/26 08:59:10 wazuh-agentd: INFO: Waiting for server reply
-   2022/01/26 08:59:10 wazuh-agentd: ERROR: Invalid agent name: localhost.localdomain (from manager)
-   2022/01/26 08:59:10 wazuh-agentd: ERROR: Unable to add agent (from manager)
+   2026/10/27 22:41:24 wazuh-agentd: ERROR: Enrollment rejected by the manager: duplicate agent. Duplicate name
+
+**Wazuh manager log**:
+
+.. code-block:: none
+   :class: output
+
+   2026/10/27 22:41:23 wazuh-manager-authd: WARNING: Duplicate name '<AGENT_NAME>', rejecting enrollment. Agent '<ID>' can't be replaced since it is not disconnected.
 
 **Resolution**: Ensure the Wazuh agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<client><enrollment><agent_name>`` section of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
 
@@ -211,29 +234,32 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
 -  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
 -  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
-..
-   Invalid password
-   ----------------
+Invalid password
+----------------
 
-   If you enable :doc:`password authentication <security-options/using-password-authentication>` for agent enrollment, the Wazuh agent may not be able to authenticate with the Wazuh manager if there's an invalid or missing password.
+If you enable :doc:`password authentication <security-options/using-password-authentication>` for agent enrollment, the Wazuh agent may not be able to authenticate with the Wazuh manager if there's an invalid or missing password.
 
-   **Location**: Wazuh agent log file
+**Location**: Wazuh agent log file
 
-   Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
+Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
 
-   **Error log**:
+**Error log** (wrong password):
 
-   .. code-block:: none
+.. code-block:: none
+   :class: output
 
-      2022/01/26 12:28:10 wazuh-agentd: INFO: Requesting a key from server: X.X.X.X
-      2022/01/26 12:28:10 wazuh-agentd: INFO: No authentication password provided
-      2022/01/26 12:28:10 wazuh-agentd: INFO: Using agent name as: random
-      2022/01/26 12:28:10 wazuh-agentd: INFO: Waiting for server reply
-      2022/01/26 12:28:10 wazuh-agentd: ERROR: Invalid password (from manager)
-      2022/01/26 12:28:10 wazuh-agentd: ERROR: Unable to add agent (from manager)
+   2026/10/27 22:40:14 wazuh-agentd: ERROR: Enrollment rejected by the manager: the credential's signature was refused: Invalid client authentication. This will keep failing until the credential is corrected on the manager; the agent is keeping the one it has and retrying.
 
-   **Resolution**:
+**Error log** (no password file):
 
-   #. Ensure the same password is used by the Wazuh manager and the Wazuh agent
-   #. Ensure that the ``authd.pass`` password file is in the ``/etc/wazuh-manager/`` directory of the Wazuh manager and has the right permission. The file permissions should be set to 640, and the owner should be ``root``.
-   #. If password authentication is not needed, it should be disabled in the ``<auth>`` section of the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file.
+.. code-block:: none
+   :class: output
+
+   2026/10/27 22:40:47 wazuh-agentd: INFO: No authentication password provided
+   2026/10/27 22:40:47 wazuh-agentd: INFO: Enrollment rejected by the manager: invalid_request: Invalid client authentication. Retrying.
+
+**Resolution**:
+
+#. Ensure the same password is used by the Wazuh manager and the Wazuh agent
+#. Ensure that the ``authd.pass`` password file is in the ``/etc/wazuh-manager/`` directory of the Wazuh manager and has the right permission. The file permissions should be set to 640, and the group should be ``wazuh-manager`` (``root:wazuh-manager`` or ``wazuh-manager:wazuh-manager``).
+#. If password authentication is not needed, it should be disabled in the ``<auth>`` section of the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file.

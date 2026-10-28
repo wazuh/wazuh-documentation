@@ -37,7 +37,7 @@ The following sections show how to request the Wazuh agent key on different oper
 
 .. note::
 
-   The Wazuh manager API administrator user is ``wazuh``. Its password is generated during installation and stored as ``WAZUH_MANAGER_API_PASSWORD`` in ``/etc/wazuh/credentials.env`` on the Wazuh manager. To read it, run ``grep WAZUH_MANAGER_API_PASSWORD /etc/wazuh/credentials.env`` as root. To change it, see :doc:`Password management </user-manual/user-administration/password-management>`.
+   The Wazuh manager API administrator user is ``wazuh``. Its password is generated during installation and stored as ``WAZUH_MANAGER_API_PASSWORD`` in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager. To read it, run ``grep WAZUH_MANAGER_API_PASSWORD /etc/wazuh-manager/export/credentials.env`` as root. To change it, see :doc:`Password management </user-manual/user-administration/password-management>`.
 
 Linux/Unix and macOS
 --------------------
@@ -123,7 +123,7 @@ Follow these steps to send a Wazuh agent enrollment request from a Windows endpo
 
       > $base64AuthInfo=[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "<WAZUH_MANAGER_API_USERNAME>", "<WAZUH_MANAGER_API_PASSWORD>")))
 
-#. Request a JSON Web Token (JWT). Replace ``<WAZUH_MANAGER_IP>`` the Wazuh manager IP address or fully qualified domain name (FQDN):
+#. Request a JSON Web Token (JWT). Replace ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
 
    .. code-block:: powershell
 
