@@ -14,7 +14,7 @@ You can query the actual configuration of a Wazuh agent or the Wazuh manager on 
    :align: center
    :width: 80%
 
-Navigate to the **Agents management** > **Summary** tab in the Wazuh dashboard. Select an agent and click on **Configuration**. The image below shows details about the Wazuh agent configuration. It also shows that the Wazuh agent configuration is **SYNCHRONIZED**. This means that the Wazuh agent's local configuration reflects the latest settings defined on the Wazuh manager.
+Navigate to the **Agents management** > **Summary** tab in the Wazuh dashboard. Select an agent and click on **Configuration**. The image below shows the configuration the Wazuh agent last reported and when it reported it.
 
 .. thumbnail:: /images/manual/agent/query-agent-configuration.png
    :title: Query the Wazuh agent configuration

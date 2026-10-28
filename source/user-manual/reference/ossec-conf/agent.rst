@@ -96,6 +96,9 @@ Sub options
 |                             |                                                                       |                                                                 | ``TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256``              |
 +-----------------------------+-----------------------------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+
 
+.. note::
+   When ``<ssl>`` names no CA, the agent verifies the Wazuh manager against its trust anchor, the file ``etc/certs/root-ca.pem`` (``certs\root-ca.pem`` on Windows). This file is the Wazuh manager's own CA. The enrollment-token bootstrap, a WPK upgrade from Wazuh 4.x, or an operator writes it, and the agent replaces it when the Wazuh manager publishes a newer CA bundle. An agent whose ``<certificate_authorities>`` names another file, or whose ``<verification_mode>`` is ``none`` or ``system``, doesn't get these updates.
+
 config-profile
 ^^^^^^^^^^^^^^^
 
@@ -178,6 +181,8 @@ Periodically sends a snapshot of the Wazuh agent configuration to the Wazuh mana
 |              |                                   |            | or d. Maximum 86400s (1d).                       |
 +--------------+-----------------------------------+------------+--------------------------------------------------+
 
+The report shows the value of an inline credential as ``*****``: ``access_key`` and ``secret_key`` (aws-s3), ``api_token`` (github), ``client_secret`` (office365), ``secret_value`` (ms-graph), and ``application_key`` and ``account_key`` (azure-logs). Paths to files that hold a credential, such as ``client_secret_path``, ``auth_path`` or ``credentials_file``, are reported as they are, and so are free-text options such as a ``command`` line, so don't put credentials in them. To report credentials in clear, set ``wazuh_modules.unmask_credentials=1`` in ``local_internal_options.conf``.
+
 ip_update_interval
 ^^^^^^^^^^^^^^^^^^^
 
@@ -232,6 +237,11 @@ Sub options
 | **use_source_ip**           | Use agent's source IP address for enrollment instead of      | no                 | yes, no                                  |
 |                             | configured address.                                          |                    |                                          |
 +-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
+
+.. note::
+   In Wazuh 5.0 the enrollment password is removed from the endpoint. A fresh installation never creates ``etc/authd.pass``, and ``WAZUH_REGISTRATION_PASSWORD`` is accepted but ignored. The package upgrade to 5.0 deletes an existing ``etc/authd.pass`` at the default path. A path you set explicitly in ``authorization_pass_path`` is never touched. Enroll agents with an enrollment token instead (``WAZUH_ENROLLMENT_TOKEN`` at installation time).
+
+After it enrolls with a Wazuh 5.0 manager, the agent stores a per-agent re-enrollment secret in ``etc/reenroll.secret`` (``reenroll.secret`` on Windows) and uses it to re-enroll when the Wazuh manager no longer knows its key. Agents enrolled before the upgrade to 5.0 don't have this secret. If such an agent is removed from the Wazuh manager, enroll it again with ``wazuh-agent-auth --force-enroll``.
 
 Removed options
 ^^^^^^^^^^^^^^^^

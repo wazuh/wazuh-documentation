@@ -191,8 +191,12 @@ Default Unix configuration
      <check_pids>yes</check_pids>
      <check_ports>yes</check_ports>
      <check_if>yes</check_if>
-     <ignore type="sregex">^/etc/</ignore>
+
      <!-- Frequency that rootcheck is executed - every 12 hours -->
      <frequency>43200</frequency>
+
      <skip_nfs>yes</skip_nfs>
+
+     <ignore>/var/lib/containerd</ignore>
+     <ignore>/var/lib/docker/overlay2</ignore>
    </rootcheck>

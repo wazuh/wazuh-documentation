@@ -71,9 +71,9 @@ Before you install a Wazuh agent, create an enrollment token on the Wazuh manage
   </div>
 
 
-If you are deploying Wazuh in a large environment, with a high number of servers or endpoints, keep in mind that this deployment might be easier using automation tools such as SCCM or :doc:`Ansible </deployment-options/deploying-with-ansible/guide/index>`.
+In a large environment with many servers or endpoints, automation tools such as SCCM or :doc:`Ansible </deployment-options/deploying-with-ansible/guide/index>` can make the deployment easier.
 
-.. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent.
+.. note:: The Wazuh agent is compatible with a Wazuh manager of the same version or later.
 
 You can also deploy a new agent following the instructions in the Wazuh dashboard. Go to **Agents management** > **Summary** and click **Deploy new agent**.
 
@@ -115,7 +115,7 @@ Complete the following steps on the Wazuh manager master node to generate the en
 
 #. Run the following command to create an enrollment token. Replace ``<WAZUH_MANAGER_ADDRESS>`` with an address from that list that the endpoints can resolve and reach. With an IP address, enrollment works, but the Wazuh manager logs a warning. Use a DNS name if agents must verify the Wazuh manager by name or its IP address can change.
 
-   If an address that the agents use, such as a load balancer, a NAT address, or a public name, isn't in the list, add it to the Wazuh manager certificate first, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes.
+   If an address that agents use isn't in the list, add it to the Wazuh manager certificate first, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. Examples are a load balancer, a NAT address, or a public name.
 
    .. code-block:: console
 

@@ -107,7 +107,7 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
 
          # chmod 640 /var/ossec/etc/authd.pass
          # chown root:wazuh /var/ossec/etc/authd.pass
-         # ll /var/ossec/etc/
+         # ls -l /var/ossec/etc/authd.pass
 
       The output below shows the recommended file owner and permissions.
 
@@ -188,13 +188,13 @@ The Wazuh agent installation directory depends on the host's architecture.
 
    .. code-block:: pwsh-session
 
-      > echo "<CUSTOM_PASSWORD>" > "C:\Program Files\ossec-agent\authd.pass"
+      > Set-Content -Path "C:\Program Files\ossec-agent\authd.pass" -Value "<CUSTOM_PASSWORD>" -Encoding ascii
 
    For 64-bit systems
 
    .. code-block:: pwsh-session
 
-      > echo "<CUSTOM_PASSWORD>" > "C:\Program Files (x86)\ossec-agent\authd.pass"
+      > Set-Content -Path "C:\Program Files (x86)\ossec-agent\authd.pass" -Value "<CUSTOM_PASSWORD>" -Encoding ascii
 
 #. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``C:\Program Files (x86)\ossec-agent\authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file.
 
