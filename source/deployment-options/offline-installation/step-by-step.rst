@@ -420,7 +420,7 @@ Install and configure the Wazuh dashboard node. Before installing it, install th
 
             # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-dashboard*.deb
 
-#. Check the ownership of the certificates. The package gives the files you placed to ``root`` with the ``wazuh-dashboard`` group, with mode ``0750`` for the directory and ``0640`` for the files. Don't give them to the ``wazuh-dashboard`` user. The Wazuh dashboard refuses to start when a file in ``/etc/wazuh-dashboard/certs`` isn't owned by ``root`` or is writable by its group or others.
+#. Check the ownership of the certificates. The package gives the certificates you placed to ``root`` with the ``wazuh-dashboard`` group, with mode ``0750`` for the directory and ``0640`` for the files. It keeps ``local.env`` readable by root only, with owner ``root:root`` and mode ``0600``. Don't give them to the ``wazuh-dashboard`` user. The Wazuh dashboard refuses to start when a file in ``/etc/wazuh-dashboard/certs`` isn't owned by ``root`` or is writable by its group or others.
 
    .. code-block:: console
 
@@ -443,7 +443,7 @@ Install and configure the Wazuh dashboard node. Before installing it, install th
 
    -  ``server.host``: This setting specifies the host of the Wazuh dashboard server. To allow remote users to connect, set the value to the IP address or DNS name of the Wazuh dashboard. The value ``0.0.0.0`` accepts all available IP addresses on the host.
    -  ``opensearch.hosts``: The URLs of the Wazuh indexer nodes. Set this value to the Wazuh indexer node addresses, even when all components share the same host. The addresses of the nodes are separated by commas.
-   -  ``wazuh_core.hosts``: The Wazuh manager API that the dashboard queries. ``url`` must point to the Wazuh manager API on the master node, the only node that runs it. Use one of the addresses in the master node's ``apid.pem`` certificate. Don't set a ``password``. The package stored the ``wazuh-internal-client`` password in the Wazuh dashboard keystore, and a value in this file would override it. Leave ``run_as`` as the package wrote it.
+   -  ``wazuh_core.hosts``: The Wazuh manager API that the dashboard queries. ``url`` must point to the Wazuh manager API on the master node, the only node that runs it. Use one of the addresses in the master node's ``apid.pem`` certificate. Don't set a ``password``. The package stored the ``wazuh-internal-client`` password in the Wazuh dashboard keystore, and the keystore value takes precedence over a password in this file. Leave ``run_as`` as the package wrote it.
 
 #. Enable and start the Wazuh dashboard service.
 
