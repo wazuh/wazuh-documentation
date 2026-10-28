@@ -836,16 +836,16 @@ Visualize the finding
 Navigate to **Endpoint security → File Integrity Monitoring → Findings** on the Wazuh dashboard and find the finding generated when the FIM module detects changes in the monitored directory.
 
 .. thumbnail:: /images/manual/fim/windows-whodata-finding.png
-  :title: WIndows whodata finding
-  :alt: WIndows whodata finding
+  :title: Windows whodata finding
+  :alt: Windows whodata finding
   :align: center
   :width: 80%
 
 Expand the finding to view all the information. In the finding fields below, you can see that the ``admin`` user modified the ``audit_docu.txt`` file using the Notepad text editor.
 
 .. thumbnail:: /images/manual/fim/windows-whodata-finding-expanded.png
-  :title: WIndows whodata finding expanded
-  :alt: WIndows whodata finding expanded
+  :title: Windows whodata finding expanded
+  :alt: Windows whodata finding expanded
   :align: center
   :width: 80%
 

@@ -8,13 +8,9 @@
 Wazuh Installation Assistant
 ===============================
 
-The Wazuh Installation Assistant is a tool designed to simplify the deployment of Wazuh. It guides users through the process of installing Wazuh components. The Installation Assistant is used by executing the ``wazuh-install.sh`` script.
+The Wazuh Installation Assistant is a tool designed to simplify the deployment of Wazuh. It guides users through the process of installing Wazuh components. The Installation Assistant is used by executing the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` script.
 
-You can download the Wazuh Installation Assistant here:
-
-.. code-block:: none
-
-   https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+You can download the Wazuh Installation Assistant here: `wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh>`__.
 
 Options list
 --------------
@@ -24,9 +20,18 @@ Options list
 +=====================================================+==============================================================================================+
 | -a, --all-in-one                                    | Install and configure Wazuh manager, Wazuh indexer, Wazuh dashboard.                         |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
+| -as, --agent-san <ip|dns>                           | Adds an extra address to the subject alternative name of the agent listener certificate of   |
+|                                                     | every Wazuh manager node. Repeat it for more than one. Must be used along with -a or -g.     |
++-----------------------------------------------------+----------------------------------------------------------------------------------------------+
+| -ap, --api-san <ip|dns>                             | Adds an extra address to the subject alternative name of the Wazuh manager API certificate   |
+|                                                     | of every Wazuh manager node. Repeat it for more than one. Must be used along with -a or -g.  |
++-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -d [pre-release|local], --development               | Use development repositories. By default, it uses the pre-release package repository. If     |
-|                                                     | local is specified, it will use a local artifact_urls.yml file located in the same path as   |
-|                                                     | the wazuh-install.sh file.                                                                   |
+|                                                     | local is specified, it will use a local artifact_urls.yaml file located in the same          |
+|                                                     | directory as the installation assistant script.                                              |
++-----------------------------------------------------+----------------------------------------------------------------------------------------------+
+| --skip-signature-check                              | Install packages that are not signed with the Wazuh key. Only for development packages, must |
+|                                                     | be used along with -d.                                                                       |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -dw, --download-wazuh <deb|rpm>                     | Download all the packages necessary for offline installation. Type of packages to download   |
 |                                                     | for offline installation (rpm, deb)                                                          |
@@ -73,48 +78,57 @@ If you want to use Wazuh pre-release packages instead of the official ones, simp
 
 .. code-block:: console
 
-   # sudo bash wazuh-install.sh --all-in-one --development pre-release
+   # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --all-in-one --development pre-release
 
 Or the short form:
 
 .. code-block:: console
 
-   # sudo bash wazuh-install.sh -a -d pre-release
+   # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -d pre-release
 
 Use development packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To use packages that are in development, it is necessary to have an ``artifact_urls.yml`` file located in the same path as the ``wazuh-install.sh`` script. This file must contain the URLs of the development packages that will be used in the installation.
+To use packages that are in development, it is necessary to have an ``artifact_urls.yaml`` file located in the same path as the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` script. This file must contain the URLs of the development packages that will be used in the installation.
 
 It must have the following format:
 
 .. code-block:: yaml
 
-   ...
-   wazuh_manager_aarch64_rpm: "http://example.com/wazuh-manager.aarch64.rpm"
-   wazuh_manager_amd64_deb: "http://example.com/wazuh-manager_amd64.deb"
-   wazuh_manager_arm64_deb: "http://example.com/wazuh-manager_arm64.deb"
-   wazuh_manager_x86_64_rpm: "http://example.com/wazuh-manager.x86_64.rpm"
-   wazuh_indexer_aarch64_rpm: "http://example.com/wazuh-manager.aarch64.rpm"
-   wazuh_indexer_amd64_deb: "http://example.com/wazuh-indexer_amd64.deb"
-   wazuh_indexer_arm64_deb: "http://example.com/wazuh-indexer_arm64.deb"
-   wazuh_indexer_x86_64_rpm: "http://example.com/wazuh-indexer.x86_64.rpm"
-   wazuh_dashboard_aarch64_rpm: "http://example.com/wazuh-manager.aarch64.rpm"
-   wazuh_dashboard_amd64_deb: "http://example.com/wazuh-dashboard_amd64.deb"
-   wazuh_dashboard_arm64_deb: "http://example.com/wazuh-dashboard_arm64.deb"
-   wazuh_dashboard_x86_64_rpm: "http://example.com/wazuh-dashboard_64.rpm"
-   ...
+   wazuh_manager_aarch64_rpm: "https://example.com/wazuh-manager.aarch64.rpm"
+   wazuh_manager_amd64_deb: "https://example.com/wazuh-manager_amd64.deb"
+   wazuh_manager_arm64_deb: "https://example.com/wazuh-manager_arm64.deb"
+   wazuh_manager_x86_64_rpm: "https://example.com/wazuh-manager.x86_64.rpm"
+   wazuh_indexer_aarch64_rpm: "https://example.com/wazuh-indexer.aarch64.rpm"
+   wazuh_indexer_amd64_deb: "https://example.com/wazuh-indexer_amd64.deb"
+   wazuh_indexer_arm64_deb: "https://example.com/wazuh-indexer_arm64.deb"
+   wazuh_indexer_x86_64_rpm: "https://example.com/wazuh-indexer.x86_64.rpm"
+   wazuh_dashboard_aarch64_rpm: "https://example.com/wazuh-dashboard.aarch64.rpm"
+   wazuh_dashboard_amd64_deb: "https://example.com/wazuh-dashboard_amd64.deb"
+   wazuh_dashboard_arm64_deb: "https://example.com/wazuh-dashboard_arm64.deb"
+   wazuh_dashboard_x86_64_rpm: "https://example.com/wazuh-dashboard.x86_64.rpm"
 
 Then, to use these development packages in the installation, simply add the ``-d local, --development local`` option to the installation command. For example, to perform an all-in-one installation using development packages, the command would be:
 
 .. code-block:: console
 
-   # sudo bash wazuh-install.sh --all-in-one --development local
+   # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --all-in-one --development local
 
 Or the short form:
 
 .. code-block:: console
 
-   # sudo bash wazuh-install.sh -a -d local
+   # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -d local
 
-This command will automatically detect the ``artifact_urls.yml`` file in the same path as the ``wazuh-install.sh`` script and will use the URLs specified in it to download the necessary packages for the installation.
+This command will automatically detect the ``artifact_urls.yaml`` file in the same path as the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` script and will use the URLs specified in it to download the necessary packages for the installation.
+
+Package signature check
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Before it installs a package, the assistant checks that it's signed with the Wazuh key, also in offline installations. It downloads the key from ``https://packages.wazuh.com/key/GPG-KEY-WAZUH``, or takes it from ``wazuh-offline.tar.gz`` in an offline installation, and trusts it only if its fingerprint is ``0DCF CA55 47B1 9D2A 6099 5060 96B3 EE5F 2911 1145``. An unsigned package, a package signed with another key, or a modified package stops the installation.
+
+Packages in the nightly, pre-release and production repositories are signed. Development builds that didn't go through the signing process aren't, and need the ``--skip-signature-check`` option, which is only accepted along with ``-d``:
+
+.. code-block:: console
+
+   # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -d local --skip-signature-check

@@ -23,7 +23,7 @@ The Wazuh passwords tool is located at ``/usr/share/wazuh-indexer/tools/wazuh-pa
 
 .. code-block:: console
 
-   # curl -so wazuh-passwords-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh
+   # curl -so wazuh-passwords-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
 
 In an all-in-one deployment, the tool automatically updates the passwords in the required components. In a distributed deployment, you must update the password in other components depending on the user whose password you change. See :ref:`Change the passwords in a distributed environment <passwords_distributed>` for more details.
 
@@ -142,6 +142,8 @@ When you change the ``kibanaserver`` password, update the ``opensearch.password`
 .. code-block:: console
 
    # echo '<KIBANASERVER_PASSWORD>' | runuser -u wazuh-dashboard -- /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore add opensearch.password --stdin --force
+
+.. _update_wazuh_internal_client_password:
 
 Update the wazuh-internal-client password
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

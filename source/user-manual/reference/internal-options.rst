@@ -254,12 +254,16 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 Authd
 ^^^^^^
 
-The ``authd.*`` internal options configure the Wazuh enrollment service.
+The ``authd.*`` and ``auth.*`` internal options configure the Wazuh enrollment service.
 
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
 | Setting                                            | Description                                                                                    | Default value | Allowed values                       |
 +====================================================+================================================================================================+===============+======================================+
 | **authd.debug**                                    | Debug logging level for the authd daemon.                                                      | 0             | 0 (disabled), 1 (basic), 2 (verbose) |
++----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
+| **auth.timeout_seconds**                           | Seconds component of the timeout for agent enrollment requests.                                | 1             | Integer                              |
++----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
+| **auth.timeout_microseconds**                      | Microseconds component of the timeout for agent enrollment requests.                           | 0             | Integer                              |
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
 | **authd.max_agents**                               | Maximum number of agents that can be registered. A value of 0 means unlimited.                 | 0             | Non-negative integer                 |
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
@@ -524,7 +528,8 @@ The ``logcollector.*`` internal options configure the Logcollector module.
 | **logcollector.open_attempts**            | Number of attempts to open a log file before stopping retries. A value of 0 means unlimited  | 0               | 0 or integer from 2 to 998             |
 |                                           | retries.                                                                                     |                 |                                        |
 +-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
-| **logcollector.remote_commands**          | Controls whether Logcollector accepts commands from centralized configuration.               | 0               | 0 (disabled), 1 (enabled)              |
+| **logcollector.remote_commands**          | Controls whether Logcollector accepts commands, sockets, and socket targets from centralized | 0               | 0 (disabled), 1 (enabled)              |
+|                                           | configuration.                                                                               |                 |                                        |
 +-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
 | **logcollector.vcheck_files**             | Interval, in seconds, for checking file metadata changes such as rotation or deletion.       | 64              | Integer from 0 to 1024                 |
 +-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+

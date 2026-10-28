@@ -140,11 +140,11 @@ frequency
 
 Defines the interval (in seconds) between executions of the command. This option applies to both ``command`` and ``full_command``.
 
-+----------------------+----------------------------------+
-| **Default value**    | 360                              |
-+----------------------+----------------------------------+
-| **Allowed values**   | any positive number of seconds   |
-+----------------------+----------------------------------+
++----------------------+-------------------------------------------------------------------------+
+| **Default value**    | 360                                                                     |
++----------------------+-------------------------------------------------------------------------+
+| **Allowed values**   | any positive number of seconds, ``hourly`` (3600), or ``daily`` (86400) |
++----------------------+-------------------------------------------------------------------------+
 
 only-future-events
 ^^^^^^^^^^^^^^^^^^^^
@@ -278,6 +278,8 @@ The command output looks similar to this:
 .. note::
    If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key is defined by using a symbol prior to the key name as in ``@source``.
 
+.. _ossec_localfile_target:
+
 target
 ^^^^^^
 
@@ -288,6 +290,10 @@ Target specifies the name of the socket where the output will be redirected. The
 +----------------------+----------------------+
 | **Allowed values**   | any defined socket   |
 +----------------------+----------------------+
+
+.. note::
+
+   When the ``<localfile>`` block comes from the centralized configuration (``agent.conf``), ``target`` only accepts ``agent`` or a socket defined in the local ``ossec.conf`` file of the agent, unless ``logcollector.remote_commands=1`` is set on the agent. The agent removes any other target, with the ``<out_format>`` bound to it, and ignores the ``<localfile>`` block if no target is left.
 
 log_format
 ^^^^^^^^^^^
@@ -344,7 +350,7 @@ Default value: n/a. Allowed values are listed below:
 +--------------------+----------------------------------------------------------------------------------------------+
 | nmapg              | Used for grep-able output from the Nmap security scanner.                                    |
 +--------------------+----------------------------------------------------------------------------------------------+
-| ossecalert         | Used for OSSEC alert logs.                                                                   |
+| wazuhalert         | Used for Wazuh alert logs.                                                                   |
 +--------------------+----------------------------------------------------------------------------------------------+
 | postgresql_log     | Used for PostgreSQL database logs. Does not support multi-line logs.                         |
 +--------------------+----------------------------------------------------------------------------------------------+
@@ -360,7 +366,7 @@ Default value: n/a. Allowed values are listed below:
 +--------------------+----------------------------------------------------------------------------------------------+
 
 .. note::
-   Only one configuration block with ``log_format`` set as ``macos`` is allowed. If more blocks are added, the last one will be used. The ``eventchannel`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log. Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their ``/var/ossec/etc/internal_options.conf`` or ``/var/ossec/etc/local_internal_options.conf`` file. This is a security precaution to prevent the Wazuh manager from running arbitrary commands on agents in their root security context. When ``command`` or ``full_command`` log sources are distributed through centralized configuration in ``agent.conf``, agents ignore them unless ``logcollector.remote_commands=1`` is enabled in ``/var/ossec/etc/local_internal_options.conf``. This security control prevents the Wazuh manager from remotely causing agents to execute commands. It does not apply to ``command`` sources configured directly in the agent's local ``ossec.conf``.
+   Only one configuration block with ``log_format`` set as ``macos`` is allowed. If more blocks are added, the last one will be used. The ``eventchannel`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log. Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their ``/var/ossec/etc/internal_options.conf`` or ``/var/ossec/etc/local_internal_options.conf`` file. This is a security precaution to prevent the Wazuh manager from running arbitrary commands on agents in their root security context. When ``command`` or ``full_command`` log sources are distributed through centralized configuration in ``agent.conf``, agents ignore them unless ``logcollector.remote_commands=1`` is enabled in ``/var/ossec/etc/local_internal_options.conf``. This security control prevents the Wazuh manager from remotely causing agents to execute commands. It does not apply to ``command`` sources configured directly in the agent's local ``ossec.conf``. The same option controls sockets and socket targets received through ``agent.conf``. See :ref:`target <ossec_localfile_target>` and :doc:`socket <socket>`.
 
 Sample of multi-line log message in original log file:
 
@@ -728,7 +734,7 @@ Windows configuration:
      <reconnect_time>10s</reconnect_time>
    </localfile>
 
-macOS configuration:
+macOS configuration example. The Wazuh agent installs a broader default query:
 
 .. code-block:: xml
 

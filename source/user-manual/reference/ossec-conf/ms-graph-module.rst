@@ -46,9 +46,9 @@ enabled
 only_future_events
 ^^^^^^^^^^^^^^^^^^^^
 
-Set it to yes to collect events generated since the Wazuh manager was started.
+Set it to ``yes`` to collect only events generated from the module start onward. The first scan starts ``time_delay`` before the module start, so it also collects events up to ``time_delay`` older than the start.
 
-By default, the Microsoft Graph module will only read logs from when the module was started onward.
+By default, the Microsoft Graph module only reads logs from the module start onward.
 
 +----------------------+-----------+
 | **Default value**    | yes       |
@@ -80,7 +80,7 @@ Specifies the maximum size allowed for the Microsoft Graph API response.
 | **Default value**    | 1M                                                                                           |
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Allowed values**   | A positive number that should contain a suffix character indicating a size unit, such as b/B |
-|                      | (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes). Minimum value of 1M.         |
+|                      | (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes). Minimum value of 1K.         |
 +----------------------+----------------------------------------------------------------------------------------------+
 
 page_size
@@ -139,7 +139,7 @@ This block configures the credentials used for authenticating with the Microsoft
 - `api_auth\\api_type`_
 
 .. note::
-   In the case of an invalid configuration, a warning message will be generated in the log file.
+   If the credentials are invalid, the module logs a warning when it requests the access token. If the configuration block is malformed, for example an ``api_auth`` block without ``client_id``, ``wazuh-modulesd`` logs an error and stops with a configuration error.
 
 api_auth\\tenant_id
 ~~~~~~~~~~~~~~~~~~~~~~~

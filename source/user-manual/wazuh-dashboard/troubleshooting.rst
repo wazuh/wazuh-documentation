@@ -111,7 +111,7 @@ If you do not see any Wazuh related index, it means you do not have alerts store
 
 .. note::
 
-   The default credential for the Wazuh index is ``admin:admin``.
+   Wazuh 5.0 has no default credentials. The ``admin`` password is the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh-indexer/export/credentials.env`` on the Wazuh indexer node.
 
 Could not connect to API with ID error
 --------------------------------------
@@ -128,6 +128,7 @@ The example has no password for the default host. The Wazuh manager sets the ``w
        port: 55000
        username: wazuh-internal-client
        run_as: true
+       ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
 Wazuh manager and Wazuh dashboard version mismatch error
 --------------------------------------------------------
@@ -169,19 +170,9 @@ If the restart does not solve the problem, we can execute this process manually:
 
 #. Stop the Wazuh dashboard service.
 
-   .. tabs::
+   .. code-block:: console
 
-      .. group-tab:: Systemd
-
-         .. code-block:: console
-
-            # systemctl stop wazuh-dashboard
-
-      .. group-tab:: SysV
-
-         .. code-block:: console
-
-            # service wazuh-dashboard stop
+      # systemctl stop wazuh-dashboard
 
 #. Identify the index or indices that have the wrong field mappings, this depends on the logged user that experiences the problem or the selected tenant.
 

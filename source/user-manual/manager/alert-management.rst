@@ -331,16 +331,16 @@ The minimum severity level to send an alert via email is ``12`` by default. You 
 -  ``no_email_alert`` to never alert by email.
 -  ``no_log`` to not log this alert.
 
-For example, the rule definition below sends an email every time rule ``502`` is triggered, regardless of what the minimum severity level is set to:
+For example, the rule definition below overwrites the shipped rule ``502`` so that it sends an email every time the Wazuh server starts, regardless of the minimum severity level. Add it to the ``/var/ossec/etc/rules/local_rules.xml`` file. See :ref:`Changing existing rules <changing_existing_rule>` for more information.
 
 .. code-block:: xml
    :emphasize-lines: 3
 
-   <rule id="502" level="3">
+   <rule id="502" level="3" overwrite="yes">
      <if_sid>500</if_sid>
      <options>alert_by_email</options>
-     <match>Ossec started</match>
-     <description>Ossec server started.</description>
+     <match>Manager started</match>
+     <description>Wazuh server started.</description>
    </rule>
 
 .. _smtp_server_with_authentication:
@@ -361,6 +361,12 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
          .. code-block:: console
 
             # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain
+
+         On RHEL 9 and its rebuilds, install ``s-nail`` instead of ``mailx``:
+
+         .. code-block:: console
+
+            # yum update && yum install postfix s-nail cyrus-sasl cyrus-sasl-plain
 
       .. group-tab:: Ubuntu
 

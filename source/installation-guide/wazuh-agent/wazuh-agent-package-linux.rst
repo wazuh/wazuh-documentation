@@ -6,7 +6,7 @@
 Deploying Wazuh agents on Linux endpoints
 =========================================
 
-The Wazuh agent runs on the endpoint you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel. For the supported versions, see :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`.
+The Wazuh agent runs on the endpoint you want to monitor. It sends data to the Wazuh manager in near real time through an encrypted and authenticated channel. For the supported versions, see :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`.
 
 Install the Wazuh agent from the Wazuh repository. The ``WAZUH_ENROLLMENT_TOKEN`` and ``WAZUH_AGENT_NAME`` variables in the install command enroll the agent with the Wazuh manager when it first starts. To download the package instead, see :doc:`Packages list </installation-guide/packages-list>`.
 
@@ -14,7 +14,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
 .. note::
 
-   Run the commands below as root. If you use ``sudo``, put the variables after it, for example ``sudo WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' apt-get install -y wazuh-agent``, because ``sudo`` doesn't pass your environment variables to the command.
+   Run the commands below as root. If you use ``sudo``, put the variables after it, because ``sudo`` doesn't pass your environment variables to the command. For example, ``sudo WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' apt-get install -y wazuh-agent``.
 
 .. _agent-installation-add-wazuh-repository:
 
@@ -23,7 +23,7 @@ Add the Wazuh repository
 
 Add the Wazuh repository to download the official packages.
 
-Use the tab of your system's package manager: DNF on Red Hat Enterprise Linux 8 and later and compatible systems, Yum on systems without DNF, ZYpp on SUSE, and APT on Debian and Ubuntu.
+Use the tab of your system's package manager: Use DNF on Red Hat Enterprise Linux 8 or later and compatible systems, and Yum on systems without DNF. Use ZYpp on SUSE, and APT on Debian and Ubuntu.
 
 .. tabs::
 
@@ -113,7 +113,7 @@ Deploy a Wazuh agent
 
 Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
-#. Select your package manager and run the following command. Replace ``<ENROLLMENT_TOKEN>`` with the token you created in :ref:`Generate the enrollment token <generate_enrollment_token>`, and ``<AGENT_NAME>`` with a name for this endpoint that no other agent uses, for example, its host name. If you omit ``WAZUH_AGENT_NAME``, the agent enrolls under the host name. The Wazuh manager refuses a name that another agent already uses.
+#. Select your package manager and run the following command. Replace ``<ENROLLMENT_TOKEN>`` with the token you created in :ref:`Generate the enrollment token <generate_enrollment_token>`. Replace ``<AGENT_NAME>`` with a name that no other agent uses, for example, the endpoint's host name. If you omit ``WAZUH_AGENT_NAME``, the agent enrolls under the host name. The Wazuh manager refuses a name that another agent already uses.
 
    .. tabs::
 
@@ -141,7 +141,7 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
             # WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' zypper install -y wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
 
-#. For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>` section. Enable and start the Wazuh agent service:
+#. For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux>` section. Enable and start the Wazuh agent service:
 
    .. tabs::
 
@@ -186,19 +186,20 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
       # grep ^status /var/ossec/var/run/wazuh-agentd.state
       # grep 'Token bootstrap: enrollment succeeded' /var/ossec/logs/ossec.log
 
-   The first command prints ``status='connected'``. If it prints ``status='pending'``, wait a few seconds and run it again. The second prints a line that ends in ``Token bootstrap: enrollment succeeded; the manager's CA is now the agent's trust anchor.`` In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**.
+   The first command prints ``status='connected'``. If it prints ``status='pending'``, wait a few seconds and run it again. The second prints a line that ends in ``Token bootstrap: enrollment succeeded; the manager's CA is now the agent's trust anchor.`` In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first alerts can take a few minutes to appear on a new deployment.
 
    If ``systemctl start wazuh-agent`` failed or the agent didn't enroll, the cause is one of these:
 
    -  The install command printed ``no manager configured [INFO_NO_MANAGER]``: the token didn't reach the installer, for example because ``sudo`` dropped it.
    -  The install command printed ``deployment variables refused [ERR_BAD_TOKEN]``: the token changed when you copied it.
-   -  ``/var/ossec/logs/ossec.log`` shows ``Enrollment-token bootstrap failed``: the Wazuh manager refused the token, for example because it was revoked, it expired, or it was already used as many times as ``--max-uses`` allows.
+   -  ``/var/ossec/logs/ossec.log`` shows ``Enrollment-token bootstrap failed``. The Wazuh manager refused the enrollment. For example, the token was revoked, expired, or used up, or another agent already uses the name.
 
-   In each case, save a valid token to a file, enroll the agent, delete the file, and start the agent. In the first two cases, the installer kept no agent name, so the agent enrolls under the endpoint's host name.
+   In each case, save a valid token to a file, enroll the agent, delete the file, and start the agent. In the first two cases, the installer kept no agent name, so the agent enrolls under the endpoint's host name. Replace ``<TOKEN_FILE_PATH>`` with a file path, for example, ``/root/wazuh-token``.
 
    .. code-block:: console
-      :emphasize-lines: 1,2
+      :emphasize-lines: 1,2,3
 
+      # (umask 077 && echo '<ENROLLMENT_TOKEN>' > <TOKEN_FILE_PATH>)
       # /var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE_PATH>
       # rm -f <TOKEN_FILE_PATH>
       # systemctl start wazuh-agent

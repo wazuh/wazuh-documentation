@@ -109,8 +109,8 @@ Perform the following actions to customize the Wazuh dashboard login page.
 
    -  ``title``: Defines the title displayed below the logo.
    -  ``subtitle``: Defines the subtitle displayed below the title.
-   -  ``showBrandImage``: Enables or disables the display of the logo.
-   -  ``brandImage``: Specifies the logo image to display.
+   -  ``showbrandimage``: Enables or disables the display of the logo.
+   -  ``brandimage``: Specifies the logo image to display.
 
    Replace ``<URL_TO_CUSTOM_LOGO>`` with the URL to your custom logo.
 
