@@ -35,13 +35,13 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
 -  :doc:`offline-installation/index`: Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection.
 
+.. raw:: html
+
+   <h3>From sources</h3>
+
+-  :doc:`Installing the Wazuh server from sources <wazuh-from-sources/index>`: Installing Wazuh from sources means installing the Wazuh manager without using a package manager. You compile the source code and copy the binaries to your computer instead.
+
 ..
-   .. raw:: html
-
-       <h3>From sources</h3>
-
-   - :doc:`Installing the Wazuh server from sources <wazuh-from-sources/index>`: Installing Wazuh from sources means installing the Wazuh manager without using a package manager. You compile the source code and copy the binaries to your computer instead.
-
    .. note::
 
       To integrate Wazuh with Elastic or Splunk, refer to our :doc:`/integrations-guide/index`.
@@ -95,12 +95,11 @@ If the Wazuh central components are already installed in your environment, selec
    </div>
 
 
-..
-   .. raw:: html
+.. raw:: html
 
-       <h3>From sources</h3>
+   <h3>From sources</h3>
 
-   - :doc:`Installing the Wazuh agent from sources <wazuh-from-sources/wazuh-agent/index>`: Installing Wazuh from sources means installing the Wazuh agent without using a package manager. You compile the source code and copy the binaries to your computer instead.
+-  :doc:`Installing the Wazuh agent from sources <wazuh-from-sources/wazuh-agent/index>`: Installing Wazuh from sources means installing the Wazuh agent without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
 Orchestration tools
 -------------------
@@ -120,8 +119,8 @@ These alternatives guide you to install the Wazuh central components along with 
    docker/index
    deploying-with-kubernetes/index
    offline-installation/index
+   wazuh-from-sources/index
    deploying-with-ansible/index
 ..
    amazon-machine-images/amazon-machine-images
-   wazuh-from-sources/index
    deploying-with-puppet/index
