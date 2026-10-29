@@ -144,8 +144,8 @@ This section covers downloading the Wazuh source code, compiling it, and running
 
          .. code-block:: console
 
-            # curl -Ls https://github.com/wazuh/wazuh/archive/v5.0.0-rc2.tar.gz | tar zx
-            # cd wazuh-5.0.0-rc2
+            # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|-|WAZUH_AGENT_CURRENT_REV|.tar.gz | tar zx
+            # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|-|WAZUH_AGENT_CURRENT_REV|
 
       #. If you have previously compiled for another platform, you must clean the build using the Makefile in ``src/``:
 
@@ -218,8 +218,8 @@ This section covers downloading the Wazuh source code, compiling it, and running
 
          .. code-block:: console
 
-            # curl -Ls https://github.com/wazuh/wazuh/archive/v5.0.0-rc2.tar.gz | tar zx
-            # cd wazuh-5.0.0-rc2
+            # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_REVISION_WINDOWS|.tar.gz | tar zx
+            # cd wazuh-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_REVISION_WINDOWS|
 
       #. Compile the Wazuh agent by running the ``make`` command:
 
@@ -239,13 +239,13 @@ This section covers downloading the Wazuh source code, compiling it, and running
 
          .. code-block:: console
 
-            # cd .. && zip -r wazuh.zip wazuh-5.0.0-rc2
+            # cd .. && zip -r wazuh.zip wazuh-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_REVISION_WINDOWS|
 
       #. Decompress the repository on the Windows machine, run the ``wazuh-installer-build-msi.bat`` script from the win32 folder:
 
          .. code-block:: doscon
 
-            > cd wazuh-5.0.0-rc2\src\win32
+            > cd wazuh-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_REVISION_WINDOWS|\src\win32
             > .\wazuh-installer-build-msi.bat
 
          The script signs the installer with ``signtool`` after it generates the MSI file. Without a code-signing certificate, the signing step fails, but the MSI file is still generated.
@@ -264,11 +264,11 @@ This section covers downloading the Wazuh source code, compiling it, and running
 
             C:\wazuh\wazuh-5.0.0-rc2\src\win32>SET MSI_NAME=wazuh-agent-5.0.0-rc2.msi
 
-      #. Install the ``wazuh-agent-5.0.0-rc2.msi`` package with an enrollment token created on the Wazuh manager. Replace ``<TOKEN>`` with the token:
+      #. Install the ``wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_REVISION_WINDOWS|.msi`` package with an enrollment token created on the Wazuh manager. Replace ``<TOKEN>`` with the token:
 
          .. code-block:: doscon
 
-            > start /wait msiexec.exe /i wazuh-agent-5.0.0-rc2.msi /q WAZUH_ENROLLMENT_TOKEN="<TOKEN>"
+            > start /wait msiexec.exe /i wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_ENROLLMENT_TOKEN="<TOKEN>"
 
       #. Run the following command to start the Wazuh agent.
 
@@ -286,8 +286,8 @@ This section covers downloading the Wazuh source code, compiling it, and running
 
          .. code-block:: console
 
-            # curl -Ls https://github.com/wazuh/wazuh/archive/v5.0.0-rc2.tar.gz | tar zx
-            # cd wazuh-5.0.0-rc2
+            # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.tar.gz | tar zx
+            # cd wazuh-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|
 
          .. note::
 
@@ -404,15 +404,15 @@ Uninstall
 
       .. code-block:: doscon
 
-         msiexec.exe /x wazuh-agent-5.0.0-rc2.msi /qn
+         msiexec.exe /x wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_REVISION_WINDOWS|.msi /qn
 
       The uninstall keeps ``C:\Program Files (x86)\ossec-agent`` with copies of the agent key and configuration as .save files.
 
       If you don't plan to reinstall, run the following command to delete the folder:
 
-      .. code-block:: console
+      .. code-block:: doscon
 
-         # rmdir /s /q "C:\Program Files (x86)\ossec-agent"
+         > rmdir /s /q "C:\Program Files (x86)\ossec-agent"
 
    .. group-tab:: macOS
 

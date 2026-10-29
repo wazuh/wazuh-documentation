@@ -60,8 +60,8 @@ Install the Wazuh indexer from packages first, as the :doc:`Installation guide <
 
    .. code-block:: console
 
-      # curl -Ls https://github.com/wazuh/wazuh/archive/v5.0.0-rc2.tar.gz | tar zx
-      # cd wazuh-5.0.0-rc2
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|-|WAZUH_MANAGER_CURRENT_REV|.tar.gz | tar zx
+      # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|-|WAZUH_MANAGER_CURRENT_REV|
 
 #. If you have previously compiled for another platform, clean the build using the Makefile in ``src/``:
 
