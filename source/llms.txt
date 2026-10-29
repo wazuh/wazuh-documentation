@@ -35,6 +35,7 @@ Step-by-step guides for installing Wazuh central components and agents across va
 - **[Deployment Alternatives](https://documentation.wazuh.com/current/deployment-options/index.md)** Install using different methods like Virtual Machines (OVA), Docker, or Kubernetes.
 - **[Deployment with Ansible](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/index.md)** Automate your Wazuh deployment using Ansible playbooks for configuration management.
 - **[Offline Installation Guide](https://documentation.wazuh.com/current/deployment-options/offline-installation/index.md)** Install Wazuh in environments without direct internet access.
+- **[Installation from sources](https://documentation.wazuh.com/current/deployment-options/wazuh-from-sources/index.md)** Compile and install the Wazuh manager and agent from source code as an alternative to the packages. Covers build dependencies, compiling, the installation wizard, enrollment, and uninstalling. The Wazuh manager is covered for Linux, and the Wazuh agent for Linux, Windows, and macOS.
 - **[Migration guide](https://documentation.wazuh.com/current/migration-to-5x/index.md)** Migrate supported Wazuh data and configurations from an existing Wazuh 4.x deployment to a newly deployed Wazuh 5.x environment. Covers migration planning, migrating indexed data and agent registrations, and recreating supported configuration for the Wazuh indexer, manager, dashboard, and agents.
 
 ### Configuration & Management
