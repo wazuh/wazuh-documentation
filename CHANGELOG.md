@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 - Removed the `auth.timeout_seconds` and `auth.timeout_microseconds` internal options from the *Internal configuration* reference documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
 - Documented that `logcollector.remote_commands` also controls the sockets and socket targets that Wazuh agents receive through centralized configuration, in the *Internal configuration*, *localfile*, *socket*, and *Centralized configuration* reference documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
 - Updated the macOS ULS log tool style description in the *Log data collection* documentation to cover the `--style ndjson` format used on macOS 10.15 and later. ([#10567](https://github.com/wazuh/wazuh-documentation/pull/10567))
-- Updated the `wazuh-certs-generator` image version to 0.0.5 in the *Deployment on Docker* documentation. ([#10588](https://github.com/wazuh/wazuh-documentation/pull/10588))
+- Updated the `wazuh-certs-generator` image version to 0.0.5 in the *Deployment on Docker* and *Upgrading Wazuh Docker* documentation. ([#10588](https://github.com/wazuh/wazuh-documentation/pull/10588))
 
 ### Fixed
 
