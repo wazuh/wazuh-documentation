@@ -63,7 +63,7 @@ Where:
 - ``<os>`` option enables or disables the operating system scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<network>`` enables or disables the network scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<packages>`` enables or disables the scanning of packages, with a default value of ``yes``. The allowed values are ``yes`` and ``no``.
-- ``<ports all="yes">`` enables or disables the port scan. The default value is ``yes``. The ``all`` attribute determines the scope of the scan. The default value of ``all`` is ``yes``, which scans all ports. Setting the value to ``no`` restricts the scan to listening ports only.
+- ``<ports all="yes">`` enables or disables the port scan. The default value is ``yes``. The ``all`` attribute determines the scope of the scan: ``yes`` scans all ports, and ``no`` restricts the scan to listening ports only. The ``ossec.conf`` file installed with the Wazuh agent sets ``all="yes"``. If you leave the attribute out, the Wazuh agent scans listening ports only.
 - ``<processes>`` enables or disables the scanning for running processes on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<users>`` enables or disables the scanning for user accounts on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<groups>`` enables or disables the scanning for user account groups on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
