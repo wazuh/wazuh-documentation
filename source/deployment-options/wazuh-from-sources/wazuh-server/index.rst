@@ -152,7 +152,7 @@ Install the Wazuh indexer from packages first, as the :doc:`Installation guide <
 
       # /var/wazuh-manager/bin/wazuh-manager-control status
 
-   If the Wazuh manager doesn't start, run ``/var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check``. It names each missing or invalid password and certificate, and prints ``check: no problem found`` when there is none.
+   If the Wazuh manager doesn't start, run ``journalctl -u wazuh-manager``. The start-up check lists each missing or invalid password and certificate. To check the files without starting the Wazuh manager, run ``/var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check``. It prints ``check: no problem found`` when there is none, but it doesn't check the indexer password.
 
 Installing other Wazuh components
 ---------------------------------
