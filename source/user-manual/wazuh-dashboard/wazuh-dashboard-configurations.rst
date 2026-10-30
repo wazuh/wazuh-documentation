@@ -830,7 +830,9 @@ Perform the following actions to configure the AI Assistant.
 
 #. Click **Save & test** to add the AI Assistant provider.
 
-#. Note: The Wazuh dashboard stores provider API keys encrypted when its keystore holds ``wazuh_ai_assistant.encryptionKey``. To check, run ``/usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore list --allow-root`` as root.
+   .. note::
+
+      The Wazuh dashboard stores provider API keys encrypted when its keystore holds ``wazuh_ai_assistant.encryptionKey``. To check, run ``/usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore list --allow-root`` as root.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/ai-assistant-save-provider.png
       :align: center

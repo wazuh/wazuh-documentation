@@ -112,6 +112,7 @@ Configure the proxy and the certificates
 #. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file and change only the ``server.port`` setting from 443 to another available port number, for example 8443. Leave every other line as installed:
 
    .. code-block:: yaml
+      :emphasize-lines: 2
 
       server.host: 0.0.0.0
       server.port: 443

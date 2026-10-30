@@ -220,8 +220,8 @@ This filter operator is used to find exact matches within a dataset. It is also 
 .. thumbnail:: /images/wazuh-dashboard/queries/os_name-ubuntu.png
    :align: center
    :width: 80%
-   :title: os.name equals to Ubuntu
-   :alt: os.name equals to Ubuntu
+   :title: Query name=Mimikatz in MITRE ATT&CK Intelligence Software
+   :alt: Query name=Mimikatz in MITRE ATT&CK Intelligence Software
 
 Inequality (!=)
 ~~~~~~~~~~~~~~~
@@ -231,8 +231,8 @@ This filter operator finds all data that does not match the specified value with
 .. thumbnail:: /images/wazuh-dashboard/queries/os_name-not-ubuntu.png
    :align: center
    :width: 80%
-   :title: Operating system not equal to Ubuntu
-   :alt: Operating system not equal to Ubuntu
+   :title: Query name!=Persistence in MITRE ATT&CK Intelligence Tactics
+   :alt: Query name!=Persistence in MITRE ATT&CK Intelligence Tactics
 
 Greater than (>)
 ~~~~~~~~~~~~~~~~
@@ -242,8 +242,8 @@ This *greater than* (``>``) operator filters values exceeding a specified thresh
 .. thumbnail:: /images/wazuh-dashboard/queries/port-greater-than-value.png
    :align: center
    :width: 80%
-   :title: Port greater than value
-   :alt: Port greater than value
+   :title: Query count>1 in Agents management Groups
+   :alt: Query count>1 in Agents management Groups
 
 Less than (<)
 ~~~~~~~~~~~~~
@@ -253,8 +253,8 @@ This *less than* (``<``) operator filters values below a specified limit in a da
 .. thumbnail:: /images/wazuh-dashboard/queries/port-less-than-value.png
    :align: center
    :width: 80%
-   :title: Port less than value
-   :alt: Port less than value
+   :title: Query count<2 in Agents management Groups
+   :alt: Query count<2 in Agents management Groups
 
 Like as (~)
 ~~~~~~~~~~~
@@ -404,8 +404,8 @@ WQL supports numeric inequalities using the ``>`` and ``<`` operators. For examp
 .. thumbnail:: /images/wazuh-dashboard/queries/port-ranges.png
    :align: center
    :width: 80%
-   :title: Port ranges
-   :alt: Port ranges
+   :title: Query id>000 and id<003 in Agents management Summary
+   :alt: Query id>000 and id<003 in Agents management Summary
 
 Example: Sending WQL queries with cURL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
