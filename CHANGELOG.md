@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v5.1.0]
 
-- Support for Wazuh 5.1.0
+### Fixed
+
+- Fixed the site header search button and footer links toggle, which had no accessible names for screen readers. ([#10592](https://github.com/wazuh/wazuh-documentation/pull/10592))
 
 ## [v5.0.1]
 
