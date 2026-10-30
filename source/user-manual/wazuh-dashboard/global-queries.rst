@@ -6,7 +6,7 @@
 Querying security information on the Wazuh dashboard
 ====================================================
 
-The Wazuh dashboard provides query capabilities that enable users to search, filter, analyze, and visualize security data collected from monitored endpoints. Users can query information related to system inventory, vulnerabilities, file integrity monitoring (FIM), security configuration assessments (SCA), and other security monitoring capabilities from a centralized interface. This information can be used to investigate security issues, assess compliance, monitor endpoint security posture, and support threat hunting activities. Much of this information is stored as Wazuh global state data, which represents the current state of all monitored endpoints and provides a consolidated view of endpoint security and compliance information.
+The Wazuh dashboard lets you search, filter, analyze, and visualize security data collected from monitored endpoints. You can query system inventory, vulnerabilities, file integrity monitoring (FIM), security configuration assessment (SCA), and other security data from one interface. This information can be used to investigate security issues, assess compliance, monitor endpoint security posture, and support threat hunting activities. Much of this information is stored as Wazuh global state data, which represents the current state of all monitored endpoints and provides a consolidated view of endpoint security and compliance information.
 
 Wazuh global state data
 -----------------------
@@ -165,21 +165,17 @@ Navigate to **Endpoint security** > **Configuration Assessment** on the Wazuh da
 Filtering data using Wazuh Query Language (WQL)
 -----------------------------------------------
 
-Wazuh Query Language (WQL) is a text-based language designed to allow users to perform advanced data filtering in the Wazuh dashboard. WQL stands out with its user-friendly syntax that leverages the Wazuh manager API to facilitate advanced data analysis to gain security insights.
+Wazuh Query Language (WQL) is a text-based language for advanced data filtering in the Wazuh dashboard. WQL stands out with its user-friendly syntax that leverages the Wazuh manager API to facilitate advanced data analysis to gain security insights.
 
 Beyond basic data retrieval, WQL extends the functionality of the Wazuh dashboard search bars, particularly within specialized tabs. This provides a seamless user experience, allowing for intuitive navigation and data manipulation on the Wazuh dashboard.
 
-This guide shows the specifics of operators, values, separators, and the unique syntax of WQL. With WQL, you can filter for specific threat group names or conduct a broad search for related terms. WQL is case-sensitive, meaning it differentiates between uppercase and lowercase letters. Therefore, when writing queries, it is important to use the correct case for identifiers, keywords, and other elements to ensure accurate and effective query execution.
+This guide shows the specifics of operators, values, separators, and the unique syntax of WQL. With WQL, you can filter for specific threat group names or conduct a broad search for related terms. WQL matches values regardless of case, so ``os.name=ubuntu`` and ``os.name=Ubuntu`` return the same agents. Write the ``and`` and ``or`` separators in lowercase.
 
-The WQL expands the search bar functionality to specialized tabs on the Wazuh dashboard. These tabs include the following:
+WQL is available in the search bars of the following pages:
 
--  Endpoint summary
--  MITRE ATT&CK Intelligence
--  IT Hygiene
--  Rule management
--  Decoder management
--  KVDB management
--  Group management
+-  Agents management > Summary
+-  MITRE ATT&CK > Intelligence
+-  Agents management > Groups, and the Agents tab of each group
 
 WQL queries
 ^^^^^^^^^^^
@@ -189,7 +185,7 @@ WQL enables precise data retrieval by defining detailed criteria. This approach 
 Field name
 ^^^^^^^^^^
 
-In WQL, "Field name" indicates the particular data type you want to filter, serving as the starting point in a query. It precedes the operator, pinpointing the exact data segment for targeted text searches. The image below demonstrates the WQL search bar in action on the **MITRE ATT&CK** > **Intelligence** tab. A click on the search bar reveals all available field names, enhancing user guidance and intuition.
+In WQL, "Field name" indicates the particular data type you want to filter, serving as the starting point in a query. It precedes the operator, pinpointing the exact data segment for targeted text searches. The image below demonstrates the WQL search bar in action on the **MITRE ATT&CK** > **Intelligence** tab. Click the search bar to list the available field names.
 
 .. thumbnail:: /images/wazuh-dashboard/queries/intelligence-field-names.png
    :align: center
@@ -219,46 +215,46 @@ In the Wazuh Query Language, operators enable precise data filtering and guide t
 Equality (=)
 ~~~~~~~~~~~~
 
-This filter operator is used to find exact matches within a dataset. It is also known as equals to and is denoted by the symbol ``=``. For example, you can filter by entities whose ``os.name`` is equal to a specific value such as “Ubuntu”.
+This filter operator is used to find exact matches within a dataset. It is also known as equals to and is denoted by the symbol ``=``. For example, the query ``name=Mimikatz`` returns only the Mimikatz entry in **MITRE ATT&CK** > **Intelligence** > **Software**.
 
 .. thumbnail:: /images/wazuh-dashboard/queries/os_name-ubuntu.png
    :align: center
    :width: 80%
-   :title: os.name equals to Ubuntu
-   :alt: os.name equals to Ubuntu
+   :title: Query name=Mimikatz in MITRE ATT&CK Intelligence Software
+   :alt: Query name=Mimikatz in MITRE ATT&CK Intelligence Software
 
 Inequality (!=)
 ~~~~~~~~~~~~~~~
 
-This filter operator finds all data that does not match the specified value within a dataset. It is also known as *not equal to* and denoted by the symbol ``!=``. For example, you can filter by Wazuh whose operating system does not equal a specific value, such as Ubuntu.
+This filter operator finds all data that does not match the specified value within a dataset. It is also known as *not equal to* and denoted by the symbol ``!=``. For example, the query ``name!=Persistence`` returns every tactic except Persistence in **MITRE ATT&CK** > **Intelligence** > **Tactics**.
 
 .. thumbnail:: /images/wazuh-dashboard/queries/os_name-not-ubuntu.png
    :align: center
    :width: 80%
-   :title: Operating system not equal to Ubuntu
-   :alt: Operating system not equal to Ubuntu
+   :title: Query name!=Persistence in MITRE ATT&CK Intelligence Tactics
+   :alt: Query name!=Persistence in MITRE ATT&CK Intelligence Tactics
 
-Greater than ( > )
-~~~~~~~~~~~~~~~~~~
+Greater than (>)
+~~~~~~~~~~~~~~~~
 
-This *greater than* (``>``) operator filters values exceeding a specified threshold in a dataset. For example, you can filter by entities whose local port number is greater than a specific value, such as 50000, with the query ``source.port>50000``.
+This *greater than* (``>``) operator filters values exceeding a specified threshold in a dataset. For example, the query ``count>1`` returns the groups that contain more than one agent in **Agents management** > **Groups**.
 
 .. thumbnail:: /images/wazuh-dashboard/queries/port-greater-than-value.png
    :align: center
    :width: 80%
-   :title: Port greater than value
-   :alt: Port greater than value
+   :title: Query count>1 in Agents management Groups
+   :alt: Query count>1 in Agents management Groups
 
 Less than (<)
 ~~~~~~~~~~~~~
 
-This *less than* (``<``) operator filters values below a specified limit in a dataset. For example, you can filter by entities whose local port number is less than a specific value, such as 50000, with the query ``source.port<50000``.
+This *less than* (``<``) operator filters values below a specified limit in a dataset. For example, the query ``count<2`` returns the groups that contain fewer than two agents in **Agents management** > **Groups**.
 
 .. thumbnail:: /images/wazuh-dashboard/queries/port-less-than-value.png
    :align: center
    :width: 80%
-   :title: Port less than value
-   :alt: Port less than value
+   :title: Query count<2 in Agents management Groups
+   :alt: Query count<2 in Agents management Groups
 
 Like as (~)
 ~~~~~~~~~~~
@@ -271,7 +267,7 @@ The *like as* operator (``~``) enables pattern matching, allowing data retrieval
    :title: Filter similar name groups
    :alt: Filter similar name groups
 
-Consider a query aimed at finding descriptions that include the term "threat group" shown below:
+Consider a query aimed at finding descriptions that include the term "*threat group*" shown below:
 
 .. thumbnail:: /images/wazuh-dashboard/queries/filter-similar-description-groups.png
    :align: center
@@ -279,16 +275,16 @@ Consider a query aimed at finding descriptions that include the term "threat gro
    :title: Filter similar description groups
    :alt: Filter similar description groups
 
-The query matches documents containing any search terms, irrespective of their order. By default, the query logic treats multiple search terms inclusively, using an *or* combination.
+The like as operator matches the whole value as one phrase, in the order written. For example, ``description~"threat group"`` returns the groups whose description contains threat group, and ``description~"group threat"`` returns none.
 
 Value
 ^^^^^
 
-Value is the specific data that is being filtered for. It represents the condition used to narrow down the results of a query. For instance, to display an entity named ``wazuh-agent``, the query would be structured accordingly:
+*Value* is the specific data that is being filtered for. It represents the condition used to narrow down the results of a query. For instance, to display the mitigation named Audit in **MITRE ATT&CK** > **Intelligence** > **Mitigations**, use the following query:
 
 .. code-block:: none
 
-   package.name:wazuh-agent
+   name=Audit
 
 .. thumbnail:: /images/wazuh-dashboard/queries/filter-value.png
    :align: center
@@ -300,7 +296,7 @@ As shown in the example above, no additional formatting is necessary when filter
 
 .. code-block:: none
 
-   package.name:"Vagrant VMware Utility"
+   name="OS Credential Dumping"
 
 .. thumbnail:: /images/wazuh-dashboard/queries/filter-value-spaces.png
    :align: center
@@ -315,16 +311,16 @@ As shown in the example above, no additional formatting is necessary when filter
 Separators
 ^^^^^^^^^^
 
-Separators are operators that combine multiple queries for complex filtering. WQL supports the use of the ``and`` and ``or`` boolean operators.
+*Separators* are operators that combine multiple queries for complex filtering. WQL supports the use of the ``and`` and ``or`` boolean operators.
 
 .. note::
 
-   WQL is case-sensitive and supports only lowercase separators; hence, ``AND`` & ``OR`` are invalid.
+   Write separators in lowercase. The search bar rejects ``AND`` and ``OR``.
 
 or separator
 ~~~~~~~~~~~~
 
-The *or* logical operator merges various conditions within a query, requiring at least one condition to be true for the query to succeed. For example, we show the query to filter software named “APT1” or “APT3” below:
+The *or* logical operator merges various conditions within a query, requiring at least one condition to be true for the query to succeed. For example, we show the query to filter threat groups named “APT1” or “APT3” below:
 
 .. code-block:: none
 
@@ -339,11 +335,11 @@ The *or* logical operator merges various conditions within a query, requiring at
 and separator
 ~~~~~~~~~~~~~
 
-The *and* logical operator links several conditions in a query, requiring all conditions to be met for the overall query to succeed. For example, run the following query to filter agents whose status is “active”, and whose operating system platform is “Ubuntu”:
+The *and* logical operator links several conditions in a query, requiring all conditions to be met for the overall query to succeed. For example, run the following query in **Agents management** > **Groups** > default > **Agents** to filter active agents whose operating system name contains Windows:
 
 .. code-block:: none
 
-   status=active and os.platform=ubuntu
+   status=active and os.name~Windows
 
 .. thumbnail:: /images/wazuh-dashboard/queries/and-filter.png
    :align: center
@@ -358,7 +354,7 @@ WQL utilizes parentheses ``()`` to prioritize expressions, ensuring those within
 
 .. code-block:: none
 
-   ( status=active and ip!=192.168.33.178 ) or id=001
+   ( status=active and os.platform=windows ) or id=001
 
 .. thumbnail:: /images/wazuh-dashboard/queries/grouping-operators.png
    :align: center
@@ -369,7 +365,7 @@ WQL utilizes parentheses ``()`` to prioritize expressions, ensuring those within
 Wildcards
 ^^^^^^^^^
 
-WQL does not support the use of wildcards represented as ``*``.
+WQL matches exact values. To match part of a value, use the like as operator (~). The search bar rejects the ``*`` character, as the image below shows.
 
 .. thumbnail:: /images/wazuh-dashboard/queries/wildcards-not-supported.png
    :align: center
@@ -379,7 +375,7 @@ WQL does not support the use of wildcards represented as ``*``.
 
 .. note::
 
-   WQL doesn't apply to the search bar in Threat hunting, Discover dashboard or other search bars labelled DQL. These search bars use Dashboards Query Language (DQL), which supports wildcards. For example, ``wazuh.rule.title:Failed*`` returns findings with a rule title that starts with Failed. For the full syntax, see `Dashboards Query Language (DQL) <https://docs.opensearch.org/latest/dashboards/dql/>`__ in the OpenSearch documentation.
+   WQL doesn't apply to the search bar in **Threat Hunting**, **Discover**, or other search bars labeled **DQL**. These search bars use Dashboards Query Language (DQL), which supports wildcards. For example, ``wazuh.rule.title:Failed*`` returns findings with a rule title that starts with ``Failed``. For the full syntax, see `Dashboards Query Language (DQL) <https://docs.opensearch.org/latest/dashboards/dql/>`__ in the OpenSearch documentation.
 
 Whitespaces
 ^^^^^^^^^^^
@@ -388,7 +384,7 @@ WQL supports the use of whitespaces between data tokens.
 
 .. code-block:: none
 
-   status = active and os.name = ubuntu
+   name = Persistence or name = Execution
 
 .. thumbnail:: /images/wazuh-dashboard/queries/whitespaces-supported.png
    :align: center
@@ -399,17 +395,17 @@ WQL supports the use of whitespaces between data tokens.
 Ranges
 ^^^^^^
 
-WQL supports numeric inequalities using the ``>``, and ``<`` operators. For example:
+WQL supports numeric inequalities using the ``>`` and ``<`` operators. For example:
 
 .. code-block:: none
 
-   source.port>100 and source.port<200
+   id>000 and id<003
 
 .. thumbnail:: /images/wazuh-dashboard/queries/port-ranges.png
    :align: center
    :width: 80%
-   :title: Port ranges
-   :alt: Port ranges
+   :title: Query id>000 and id<003 in Agents management Summary
+   :alt: Query id>000 and id<003 in Agents management Summary
 
 Example: Sending WQL queries with cURL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -423,16 +419,18 @@ Generate a token to be used to interact with the API:
 Replace:
 
 -  ``<WAZUH_API_USERNAME>`` with your Wazuh manager API user.
--  ``<WAZUH_API_PASSWORD>`` with your Wazuh manager API password.
--  ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager IP address.
+-  ``<WAZUH_API_PASSWORD>`` with your Wazuh manager API password. The installation stores it as ``WAZUH_MANAGER_API_PASSWORD`` in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager.
+-  ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager IP address. On an all-in-one deployment from the installation assistant, run the commands on the Wazuh manager host and use ``localhost``. The Wazuh manager API listens on ``127.0.0.1`` and ``::1`` only, as the host setting in ``/var/wazuh-manager/api/configuration/api.yaml`` shows.
 
-For example, the following query would be used to filter Ubuntu endpoints with a version higher than 18.
+For example, the following query filters Ubuntu endpoints with a major version higher than 18. The ``q`` parameter of the Wazuh manager API uses a semicolon (``;``) for ``and``, and a comma (``,``) for ``or``.
 
 We encode the value of the parameter ``q`` with the ``--data-urlencode`` flag:
 
 .. code-block:: console
 
-   # curl -G --data-urlencode "q=os.name=ubuntu" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,version,os.major" -H  "Authorization: Bearer $TOKEN"
+   # curl -G --data-urlencode "q=os.name=ubuntu;os.major>18" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,version,os.major" -H  "Authorization: Bearer $TOKEN"
+
+The command output looks similar to this:
 
 .. code-block:: none
    :class: output
@@ -442,11 +440,11 @@ We encode the value of the parameter ``q`` with the ``--data-urlencode`` flag:
          "affected_items": [
             {
                "os": {
-                  "major": "22",
+                  "major": "24",
                   "name": "Ubuntu"
                },
-               "id": "002",
-               "name": "Ubuntu",
+               "id": "001",
+               "name": "Ubuntu24",
                "version": "v5.0.0"
             }
          ],
@@ -458,11 +456,13 @@ We encode the value of the parameter ``q`` with the ``--data-urlencode`` flag:
       "error": 0
    }
 
-An example of using the *or* (``,``) separator and *like as* (``~``) operator can be filtering Wazuh agents whose operating system name contains ``windows`` or ``centos``.
+The following query uses the comma (``,``) separator for *or* and the like as (``~``) operator. It filters Wazuh agents whose operating system name contains ``windows`` or ``centos``.
 
 .. code-block:: console
 
    # curl -G --data-urlencode "q=os.name~centos,os.name~windows" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H  "Authorization: Bearer $TOKEN"
+
+The command output looks similar to this:
 
 .. code-block:: none
    :class: output
@@ -473,11 +473,11 @@ An example of using the *or* (``,``) separator and *like as* (``~``) operator ca
             {
                "os": {
                   "major": "10",
-                  "name": "Microsoft Windows 11 Home",
-                  "version": "10.0.26200.8457"
+                  "name": "Microsoft Windows Server 2022 Datacenter",
+                  "version": "10.0.20348.5761"
                },
                "id": "003",
-               "name": "Windows-11"
+               "name": "WindowsServer2022"
             }
          ],
          "total_affected_items": 1,

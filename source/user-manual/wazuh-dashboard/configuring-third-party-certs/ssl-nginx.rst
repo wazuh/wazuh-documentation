@@ -10,8 +10,8 @@ NGINX is an open source software for web serving, reverse proxying, caching, loa
 
 Install and configure the Let’s Encrypt SSL certificate using NGINX on a Wazuh dashboard by following the step-by-step instructions below.
 
-Setting up NGINX as Reverse proxy
----------------------------------
+Setting up NGINX as a reverse proxy
+-----------------------------------
 
 Installing the NGINX software on the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -82,10 +82,10 @@ Configure the proxy and the certificates
          .. code-block:: console
 
             # apt-get update
-            # apt-get install snap
+            # apt-get install snapd
             # snap install core; snap refresh core
 
-#. Install certbot:
+#. Install certbot
 
    .. tabs::
 
@@ -109,34 +109,39 @@ Configure the proxy and the certificates
 
       # ln -s /snap/bin/certbot /usr/bin/certbot
 
-#. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file and change the default dashboard port from ``443`` to another available port number:
+#. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file and change only the ``server.port`` setting from 443 to another available port number, for example 8443. Leave every other line as installed:
 
    .. code-block:: yaml
-      :emphasize-lines: 3
+      :emphasize-lines: 2
 
       server.host: 0.0.0.0
-      opensearch.hosts: https://127.0.0.1:9200
-      server.port: <PORT_NUMBER>
-      opensearch.ssl.verificationMode: certificate
-      # opensearch.username: kibanaserver
-      # opensearch.password: kibanaserver
-      opensearch.requestHeadersAllowlist: ["securitytenant","Authorization"]
+      server.port: 443
+      opensearch.hosts: https://localhost:9200
+      opensearch.ssl.verificationMode: full
+      #opensearch.username:
+      #opensearch.password:
+      opensearch.requestHeadersAllowlist: ['securitytenant', 'Authorization']
       opensearch_security.multitenancy.enabled: false
-      opensearch_security.readonly_mode.roles: ["kibana_read_only"]
+      opensearch_security.readonly_mode.roles: ['kibana_read_only']
       server.ssl.enabled: true
-      server.ssl.key: "/etc/wazuh-dashboard/certs/dashboard-key.pem"
-      server.ssl.certificate: "/etc/wazuh-dashboard/certs/dashboard.pem"
-      opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-      uiSettings.overrides.defaultRoute: /app/wazuh
-      opensearch_security.cookie.secure: true
+      server.ssl.key: '/etc/wazuh-dashboard/certs/dashboard-key.pem'
+      server.ssl.certificate: '/etc/wazuh-dashboard/certs/dashboard.pem'
+      opensearch.ssl.certificateAuthorities: ['/etc/wazuh-dashboard/certs/indexer-ca.pem']
+      uiSettings.overrides.defaultRoute: /app/wz-home
+      # Session expiration settings
+      opensearch_security.session.ttl: 900000
+      opensearch_security.session.keepalive: true
+
+      # Define the Wazuh server hosts
       wazuh_core.hosts:
         default:
           url: https://localhost
           port: 55000
           username: wazuh-internal-client
           run_as: true
+          ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-#. Navigate to the ``/etc/nginx/conf.d`` directory and create a ``wazuh.conf`` file for the certificate installation:
+#. On APT systems, remove the NGINX default site with the ``unlink`` command. Then create the ``/etc/nginx/conf.d/wazuh.conf`` file:
 
    .. code-block:: console
 
@@ -144,10 +149,9 @@ Configure the proxy and the certificates
       # cd /etc/nginx/conf.d
       # touch wazuh.conf
 
-#. Edit ``wazuh.conf`` and add the following configuration.
+#. Edit ``/etc/nginx/conf.d/wazuh.conf`` and add the following configuration.
 
    .. code-block:: nginx
-      :emphasize-lines: 4,7
 
       server {
          listen 80 default_server;
@@ -210,19 +214,20 @@ Configure the proxy and the certificates
 
          server_name <YOUR_DOMAIN_NAME>;
          return 404; # managed by Certbot
-
-
       }
 
 #. Restart the NGINX service:
 
-   .. include:: /_templates/common/restart_nginx.rst
+   .. code-block:: console
+
+      # systemctl restart nginx
 
 #. Access the Wazuh dashboard via the configured domain name.
 
    .. thumbnail:: /images/configuring-third-party-certs/nginx-wazuh-dashboard.png
       :title: Wazuh dashboard
+      :alt: Wazuh dashboard login page served through NGINX
       :align: center
       :width: 80%
 
-The NGINX server has been configured and the Let’s Encrypt certificate installation is active on the Wazuh dashboard. You can proceed to access it by using the configured domain name.
+The NGINX server has been configured, and the Let’s Encrypt certificate installation is active on the Wazuh dashboard. You can proceed to access it by using the configured domain name.
