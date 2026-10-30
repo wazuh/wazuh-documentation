@@ -8,10 +8,6 @@
 
 This section lists the changes in version 5.0.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
-.. note::
-
-   Wazuh 5.0.0 doesn't support frequency or threshold rules. Each matching event produces its own finding. Repeated events, such as a burst of failed SSH logins, don't escalate to a higher-level finding as rules 5712 and 5763 did in Wazuh 4.x. Correlation across events is planned for a later minor release.
-
 What's new
 ----------
 
