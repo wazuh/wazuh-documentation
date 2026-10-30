@@ -65,7 +65,7 @@ To check the Wazuh manager API, run these commands on the master node. The API r
 .. code-block:: console
 
    # sed -n 's/^WAZUH_MANAGER_API_PASSWORD=//p' /etc/wazuh-manager/export/credentials.env
-   # curl -k -u wazuh -X POST "https://localhost:55000/security/user/authenticate?raw=true"
+   # curl --cacert /etc/wazuh-manager/export/ca.pem -u wazuh -X POST "https://localhost:55000/security/user/authenticate?raw=true"
 
 The output is a token.
 

@@ -156,7 +156,7 @@ Disables active response on the Wazuh agent. When set to ``yes``, the Wazuh agen
 stats_report
 ^^^^^^^^^^^^
 
-Periodically sends Wazuh agent statistics to the Wazuh manager.
+Periodically sends Wazuh agent statistics to the Wazuh manager. These statistics fill the agent's **Stats** view in the Wazuh dashboard. The option is disabled by default, so enable it to see them. The first report arrives after one interval, 60 seconds by default.
 
 +--------------+--------------------------------+---------+--------------------------------------------------+
 | Option       | Description                    | Default | Allowed values                                   |

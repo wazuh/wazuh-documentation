@@ -12,16 +12,16 @@ You have now installed and configured all the Wazuh central components. Each pac
 
    .. code-block:: console
 
-      # curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/health?pretty
-      # curl -k -u kibanaserver https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_plugins/_security/authinfo?pretty
-      # curl -k -u wazuh-manager https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_plugins/_security/authinfo?pretty
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/health?pretty
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u kibanaserver https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_plugins/_security/authinfo?pretty
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u wazuh-manager https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_plugins/_security/authinfo?pretty
 
    On the Wazuh manager API of the master node, the users are ``wazuh`` (``WAZUH_MANAGER_API_PASSWORD``) and ``wazuh-internal-client`` (``WAZUH_MANAGER_WUI_PASSWORD``), in ``/etc/wazuh-manager/export/credentials.env`` of the master node. Each command prints a token:
 
    .. code-block:: console
 
-      # curl -k -u wazuh -X POST "https://<WAZUH_MASTER_IP_ADDRESS>:55000/security/user/authenticate?raw=true"
-      # curl -k -u wazuh-internal-client -X POST "https://<WAZUH_MASTER_IP_ADDRESS>:55000/security/user/authenticate?raw=true"
+      # curl --cacert /etc/wazuh-manager/export/ca.pem -u wazuh -X POST "https://<WAZUH_MASTER_IP_ADDRESS>:55000/security/user/authenticate?raw=true"
+      # curl --cacert /etc/wazuh-manager/export/ca.pem -u wazuh-internal-client -X POST "https://<WAZUH_MASTER_IP_ADDRESS>:55000/security/user/authenticate?raw=true"
 
 #. Store the five passwords securely, for example, in your password manager. The ``credentials.env`` file in ``wazuh-install-files.tar`` holds all of them. In an all-in-one installation, which creates no ``wazuh-install-files.tar``, they are in ``/etc/wazuh-indexer/export/credentials.env`` and ``/etc/wazuh-manager/export/credentials.env``.
 

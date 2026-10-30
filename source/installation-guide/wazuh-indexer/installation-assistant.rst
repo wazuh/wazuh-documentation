@@ -190,7 +190,7 @@ Run the following command on a Wazuh indexer node to print the Wazuh indexer adm
 
    .. code-block:: console
 
-      # curl -k -u admin https://<WAZUH_INDEXER_ADDRESS>:9200
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200
 
    The output is similar to the following. The ``build_type`` value is ``deb`` or ``rpm``, depending on the package.
 
@@ -219,7 +219,7 @@ Run the following command on a Wazuh indexer node to print the Wazuh indexer adm
 
    .. code-block:: console
 
-      # curl -k -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cat/nodes?v
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cat/nodes?v
 
    The command output should be similar to the following:
 

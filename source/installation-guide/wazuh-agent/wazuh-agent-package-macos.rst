@@ -58,7 +58,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
             .. note::
 
-               Alternatively, if you want to install an agent without enrolling it, omit the deployment variables. To learn more about the different enrollment methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
+               Alternatively, if you want to install an agent without enrolling it, omit the deployment variables. To learn more about the different enrollment methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section. Installing without the variables also keeps the token out of the shell history. Then enroll the agent from a token file, as the GUI tab describes.
 
          #. Start the Wazuh agent to complete the installation process:
 
@@ -79,11 +79,11 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
                :title: macOS agent installer
                :alt: macOS agent installer
 
-         #. Enroll the Wazuh agent before you start it. An agent installed without an enrollment token doesn't start until you enroll it. Save the token you created in :ref:`Generate the enrollment token <generate_enrollment_token>` to a file, enroll the agent, and delete the file:
+         #. Enroll the Wazuh agent before you start it. An agent installed without an enrollment token doesn't start until you enroll it. Save the token you created in :ref:`Generate the enrollment token <generate_enrollment_token>` to a file, enroll the agent, and delete the file. Paste the token when the first command waits for it, then press Ctrl+D:
 
             .. code-block:: console
 
-               # (umask 077 && echo '<ENROLLMENT_TOKEN>' > <TOKEN_FILE_PATH>)
+               # (umask 077 && cat > <TOKEN_FILE_PATH>)
                # /Library/Ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE_PATH>
                # rm -f <TOKEN_FILE_PATH>
 
