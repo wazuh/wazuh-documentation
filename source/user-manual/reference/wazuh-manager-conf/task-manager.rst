@@ -30,7 +30,7 @@ Options
 task_ttl
 ^^^^^^^^^
 
-Time-to-live for a task, measured from creation. Tasks older than this are moved to the expired state.
+Time-to-live for a pending agent task, measured from its creation. Pending agent tasks older than this are moved to the expired state. Manager tasks are never expired by age.
 
 +--------------------+-----------------------------------------------+
 | **Default value**  | 3600 (1 hour)                                 |
@@ -74,7 +74,7 @@ Maximum tasks returned by a single poll; remaining pending tasks are returned on
 upgrade_enabled
 ^^^^^^^^^^^^^^^
 
-Enables or disables remote Wazuh agent upgrades (WPK upgrades requested through the Wazuh server API).
+Enables or disables remote Wazuh agent upgrades (WPK upgrades requested through the Wazuh manager API).
 
 +--------------------+---------+
 | **Default value**  | yes     |

@@ -15,7 +15,9 @@ remote
       <remote>
       </remote>
 
-The ``<remote>`` section configures the Wazuh manager listeners that receive connections from Wazuh agents. Wazuh 5.0 managers accept two kinds of agent connections at once: a legacy TCP/UDP listener for Wazuh 4.x agents (``<legacy>``), and an HTTPS listener for Wazuh 5.0 agents (``<https>``). Both can be active simultaneously; ``<https>`` has no enable/disable toggle of its own; it always attempts to start and self-gates on the presence of a valid certificate and key.
+The ``<remote>`` section configures the Wazuh manager listeners that receive connections from Wazuh agents. Wazuh 5.0 managers accept two kinds of agent connections at once: a legacy TCP/UDP listener for Wazuh 4.x agents (``<legacy>``), and an HTTPS listener for Wazuh 5.0 agents (``<https>``). Both can be active simultaneously; ``<https>`` has no enable/disable toggle of its own; it always starts. If the certificate, the private key or the CA certificate (``ca_certificate``) that it uses is missing or can't be read, the Wazuh manager refuses to start.
+
+Each listener needs its own port. These ports must all be different: the legacy listener port (``<legacy><port>``, when the legacy listener is enabled), the HTTPS listener port (``<https><port>``), the agent enrollment port (``<auth><port>``, unless ``<auth><disabled>`` is ``yes``), and the cluster port (``<cluster><port>``). The Wazuh manager doesn't start when two of them are the same.
 
 Legacy listener options (``<legacy>``)
 ----------------------------------------
@@ -38,7 +40,6 @@ Legacy listener options (``<legacy>``)
 - `queue_size`_
 - `rids_closing_time`_
 - `connection_overtake_time`_
-- `agents/allow_higher_versions`_
 
 enabled
 ^^^^^^^^
@@ -139,7 +140,7 @@ Time after which the Wazuh manager closes inactive agent RIDS (registration iden
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Default value**    | 300 (5 minutes)                                                                              |
 +----------------------+----------------------------------------------------------------------------------------------+
-| **Allowed values**   | Positive time value with optional suffix - s, m, h, d. The value 300 without a suffix is     |
+| **Allowed values**   | Positive time value with optional suffix - s, m, h, d, w. The value 300 without a suffix is  |
 |                      | treated as seconds.                                                                          |
 +----------------------+----------------------------------------------------------------------------------------------+
 
@@ -154,10 +155,24 @@ Time, in seconds, that the Wazuh manager waits before allowing a new connection 
 | **Allowed values**   | Integer from 0 to 3600   |
 +----------------------+--------------------------+
 
-agents/allow_higher_versions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Agents options (``<agents>``)
+--------------------------------
 
-Controls whether the listener accepts connections from agents running a newer Wazuh version than the Wazuh manager.
+.. topic:: XML section name
+
+   .. code-block:: xml
+
+      <remote>
+        <agents>
+        </agents>
+      </remote>
+
+-  `allow_higher_versions`_
+
+allow_higher_versions
+^^^^^^^^^^^^^^^^^^^^^^
+
+Controls whether agents running a newer Wazuh version than the Wazuh manager can connect. It applies to the HTTPS listener (port 1517) and to the legacy listener (port 1514).
 
 +----------------------+-----------+
 | **Default value**    | no        |
@@ -166,7 +181,7 @@ Controls whether the listener accepts connections from agents running a newer Wa
 +----------------------+-----------+
 
 .. note::
-   This option controls the connection gate (remoted, port 1514). There is an independent option with the same name under ``<auth><agents>`` that controls the enrollment gate (authd, port 1515). Both must be set to ``yes`` for a higher-version agent to enroll and connect. If you set them differently, for example allowing connection but not enrollment, agents cannot obtain keys and therefore cannot communicate.
+   This option controls the connection gate. There is an independent option with the same name under ``<auth><agents>`` that controls the enrollment gate, both through HTTPS ``POST /enroll`` and through the enrollment service on port 1515. Both must be set to ``yes`` for a higher-version agent to enroll and connect. If you set them differently, for example allowing connection but not enrollment, agents cannot obtain keys and therefore cannot communicate.
 
 The ``<allow_higher_versions>`` option is nested under an ``<agents>`` sub-element:
 
@@ -257,20 +272,20 @@ Whether an IPv6 ``bind_addr`` also accepts IPv4 clients on the same socket.
 certificate
 ^^^^^^^^^^^
 
-Path to the TLS certificate chain (PEM) presented by the server.
+Path to the TLS certificate chain (PEM) presented by the server. Set it together with ``key``: setting only one of the two makes the configuration invalid.
 
-+----------------------+------------------------------+
-| **Default value**    | etc/certs/remoted.pem        |
-+----------------------+------------------------------+
++----------------------+--------------------------------------+
+| **Default value**    | /etc/wazuh-manager/certs/remoted.pem |
++----------------------+--------------------------------------+
 
 key
 ^^^
 
-Path to the TLS private key (PEM) matching ``certificate``.
+Path to the TLS private key (PEM) matching ``certificate``. Set it together with ``certificate``.
 
-+-------------------+---------------------------+
-| **Default value** | etc/certs/remoted-key.pem |
-+-------------------+---------------------------+
++-------------------+------------------------------------------+
+| **Default value** | /etc/wazuh-manager/certs/remoted-key.pem |
++-------------------+------------------------------------------+
 
 ca
 ^^
@@ -279,7 +294,7 @@ Path to a CA bundle (PEM) used to verify client (agent) certificates.
 
 +-------------------+---------------------------------------------------------------------------------------------+
 | **Default value** | Empty (agent certificate verification disabled). If ``verification_mode`` is set explicitly |
-|                   | and ``ca`` is empty, ``etc/certs/root-ca.pem`` is used.                                     |
+|                   | and ``ca`` is empty, ``/etc/wazuh-manager/certs/root-ca.pem`` is used.                      |
 +-------------------+---------------------------------------------------------------------------------------------+
 
 ca_certificate
@@ -287,9 +302,9 @@ ca_certificate
 
 Path to the CA certificate that signs the HTTPS listener certificate. The Wazuh manager serves it on ``GET /cacerts``, and enrollment tokens pin it. This is not the CA used to verify agent certificates (``ca``).
 
-+-------------------+-----------------------+
-| **Default value** | etc/certs/root-ca.pem |
-+-------------------+-----------------------+
++-------------------+--------------------------------------+
+| **Default value** | /etc/wazuh-manager/certs/root-ca.pem |
++-------------------+--------------------------------------+
 
 verification_mode
 ^^^^^^^^^^^^^^^^^^
@@ -328,7 +343,7 @@ Maximum accepted HTTP request body size.
 enroll_rate_limit
 ^^^^^^^^^^^^^^^^^
 
-Maximum sustained number of requests per second that the Wazuh manager serves across ``POST /enroll`` and ``POST /enroll/secret`` together. The limit applies to the manager as a whole, not per agent. Requests above the limit receive HTTP 429. Short bursts of up to twice the value are absorbed. Set it to ``0`` to disable the limit.
+Maximum sustained number of ``POST /enroll`` requests per second that the Wazuh manager forwards to ``wazuh-manager-authd``. The limit uses two buckets with this rate: one for enrollments whose password or enrollment token was verified, and one for everything else, such as re-enrollments and enrollments without a credential. A request is charged only after it passes the credential check. The limit applies to the manager as a whole, not per agent. Requests above the limit receive HTTP 429. Short bursts of up to twice the value are absorbed. Set it to ``0`` to disable the limit.
 
 +--------------------+--------------------------+
 | **Default value**  | 100                      |
@@ -357,8 +372,8 @@ Sample configuration
        <port>1517</port>
        <bind_addr>0.0.0.0</bind_addr>
        <global_prefix>/wazuh-manager/</global_prefix>
-       <certificate>etc/certs/remoted.pem</certificate>
-       <key>etc/certs/remoted-key.pem</key>
+       <certificate>/etc/wazuh-manager/certs/remoted.pem</certificate>
+       <key>/etc/wazuh-manager/certs/remoted-key.pem</key>
      </https>
      <legacy>
        <enabled>yes</enabled>

@@ -412,15 +412,15 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
 #. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
-      :emphasize-lines: 7
+      :emphasize-lines: 6
 
       wazuh_core.hosts:
         default:
           url: https://127.0.0.1
           port: 55000
-          username: wazuh-wui
-          password: "<WAZUH_WUI_PASSWORD>"
+          username: wazuh-internal-client
           run_as: true
+          ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** -> **Security**, and then **Roles mapping** to open the page.
 
@@ -482,15 +482,15 @@ Map LDAP role to Wazuh read-only role
 #. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
-      :emphasize-lines: 7
+      :emphasize-lines: 6
 
       wazuh_core.hosts:
         default:
           url: https://127.0.0.1
           port: 55000
-          username: wazuh-wui
-          password: "<WAZUH_WUI_PASSWORD>"
+          username: wazuh-internal-client
           run_as: true
+          ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** -> **Security**, and then **Roles mapping** to open the page.
 

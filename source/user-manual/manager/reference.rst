@@ -6,7 +6,7 @@
 Reference
 =========
 
-This section provides additional information about the Wazuh manager, including lookup tables for daemons, normalization engine modules, shared libraries, and CLI tools.
+The reference tables describe the Wazuh manager daemons, normalization engine modules, shared libraries, and CLI tools for quick lookup.
 
 .. _wazuh_manager_daemons:
 
@@ -29,9 +29,6 @@ Daemons
    * - Wazuh DB
      - ``wazuh-manager-db``
      - SQLite-based database daemon for the Wazuh agent and global state.
-   * - Monitord
-     - ``wazuh-manager-monitord``
-     - Wazuh agent monitoring and log rotation
    * - Auth
      - ``wazuh-manager-authd``
      - The Wazuh agent enrollment service owns all enrollment logic. It receives enrollment requests through the HTTPS ``POST /enroll`` endpoint and, for legacy Wazuh 4.x agents, through TLS port ``1515``.
@@ -40,7 +37,7 @@ Daemons
      - REST API (Python/Starlette, HTTPS) with JWT auth and RBAC
    * - Modulesd
      - ``wazuh-manager-modulesd``
-     - Hosts manager-side modules: vulnerability scanner, inventory sync, agent upgrade, task manager, and control (restart/reload)
+     - Hosts manager-side modules: vulnerability scanner, inventory sync server, keystore server, task manager (which also serves agent upgrades), database, and control (restart/reload)
    * - Clusterd
      - ``wazuh-manager-clusterd``
      - Multi-node Wazuh manager master-worker synchronization (Python, asyncio)
@@ -53,15 +50,15 @@ Normalization engine modules
 The modules of the Wazuh normalization engine work together to transform raw events into structured and enriched security data. Each module is responsible for a specific stage of the :ref:`event processing pipeline <event_processing_pipeline>`, including event reception, decoding, normalization, enrichment, and output generation. This modular architecture constitutes a unified event processing workflow.
 
 Server
-   The Server module includes two HTTP servers. The events socket receives raw events from the :ref:`Remoted <wazuh_manager_daemons>` module or the Vulnerability Detector module. The management API socket exposes operations that internal client dev tools and other Wazuh manager components use. These operations include managing routes, running tester sessions, applying content changes, querying GeoIP and IOC state, toggling raw event indexing, and reading metrics. Both sockets use HTTP with JSON bodies. Protocol buffers (protobuf) define the schema for every request and response.
+   The Server module includes two HTTP servers. The events socket receives raw events from the :ref:`Remoted <wazuh_manager_daemons>` daemon or the vulnerability scanner. The management API socket exposes operations that internal client dev tools and other Wazuh manager components use. These operations include managing routes, running tester sessions, applying content changes, querying GeoIP and IOC state, toggling raw event indexing, and reading metrics. Both sockets use HTTP with JSON bodies. Protocol buffers (protobuf) define the schema for every request and response.
 
 .. _orchestrator_module:
 
 Orchestrator
-   The Orchestrator is the runtime hub of the Wazuh normalization engine. It owns the routes table that maps each :ref:`space <space>` to the active security policy and the priority at which events are evaluated, plus the session table used by the tester. When an event arrives, the Orchestrator forwards an independent copy to each active policy, allowing a single incoming event to produce multiple output documents, one for each active policy. Routes can be added, replaced, or removed at runtime without restarting the normalization engine, which is what makes hot-swapping of synchronized content possible.
+   The Orchestrator is the runtime hub of the Wazuh normalization engine. It owns the routes table that maps each :ref:`space <space>` to the active security policy and its evaluation priority. It also owns the session table that the tester uses. When an event arrives, the Orchestrator forwards an independent copy to each active policy, allowing a single incoming event to produce multiple output documents, one for each active policy. Routes can be added, replaced, or removed at runtime without restarting the normalization engine, which is what makes hot-swapping of synchronized content possible.
 
 Builder
-   The Builder turns the declarative content stored in the :ref:`Engine Content Manager <engine_content_manager_module>` into an executable graph that the :ref:`Backend <backend_module>` can run. It validates field types against the :ref:`Schema <schema_module>`, resolves variables and definitions, and links every helper function used in ``check``, ``parse``, and ``normalize`` stages. The Engine Content Manager calls the Builder whenever content changes allowing the :ref:`Orchestrator <orchestrator_module>` to register the resulting graph as a route.
+   The Builder turns the declarative content stored in the :ref:`Engine Content Manager <engine_content_manager_module>` into an executable graph that the :ref:`Backend <backend_module>` can run. It validates field types against the :ref:`Schema <schema_module>`, resolves variables and definitions, and links every helper function used in ``check``, ``parse``, and ``normalize`` stages. The Engine Content Manager calls the Builder whenever content changes, so the :ref:`Orchestrator <orchestrator_module>` can register the resulting graph as a route.
 
 .. _backend_module:
 
@@ -71,7 +68,7 @@ Backend
 .. _engine_content_manager_module:
 
 Engine Content Manager
-   This is the local mirror of the content managed in the Wazuh indexer. It is organized by :ref:`spaces <space>`. The Engine Content Manager has three responsibilities:
+   The Engine Content Manager is the local mirror of the content managed in the Wazuh indexer. It is organized by :ref:`spaces <space>`. The Engine Content Manager has three responsibilities:
 
    -  Storage of decoders, filters, KVDBs, integrations, and policies on the normalization engine endpoint.
    -  :ref:`Synchronization <synchronization_process>` with the Wazuh indexer (CMSync), which periodically compares per-space content hashes and pulls the full content when they differ.
@@ -82,22 +79,24 @@ Engine Content Manager
 .. _schema_module:
 
 Schema
-   The Schema module loads the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>` document at startup and exposes it to the Builder for build-time field validation and to the Backend for runtime validation of dynamic values. It guarantees that every document the engine emits is type-consistent with the mappings configured in the Wazuh indexer.
+   The Schema module loads the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>` document at startup. It exposes the schema to the Builder for build-time field validation and to the Backend for runtime validation of dynamic values. It guarantees that every document the engine emits is type-consistent with the mappings configured in the Wazuh indexer.
 
 KVDB
-   Per-space key-value databases that decoders and filters consult during event processing, for example, mapping identifiers to canonical names or merging default values into events. Regular KVDBs are part of the per-space content which are synchronized along with the rest of the space's assets and rebuilt on the normalization engine when their source changes.
+   KVDBs are per-space key-value databases that decoders and filters consult during event processing. For example, decoders use them to map identifiers to canonical names or to merge default values into events. Regular KVDBs are part of the per-space content. CMSync synchronizes them with the rest of the space assets, and the normalization engine rebuilds them when their source changes.
 
 IOC
-   Indicators of compromise databases are used at the :ref:`IOC enrichment <ioc_enrichment>` stage to match fields in incoming events against threat intelligence. These databases are shared across spaces and are independent of the regular content sync. They are kept up to date by a dedicated IOC synchronizer that downloads updates into a temporary database and then atomically swaps it in, so readers never observe a partially updated database.
+   Indicators of compromise databases are used at the :ref:`IOC enrichment <ioc_enrichment>` stage to match fields in incoming events against threat intelligence. These databases are shared across spaces and are independent of the regular content sync. A dedicated IOC synchronizer keeps them up to date. It downloads updates into a temporary database and then swaps it in atomically, so readers never observe a partially updated database.
 
 Geo
    The Geo module performs GeoIP and ASN lookups using ``MaxMind MMDB`` databases. Like the IOC databases, the Geo databases are global rather than per-space. They are refreshed in the background and hot-reloaded without restarting the Wazuh normalization engine. Refer to the :ref:`Geo enrichment <geo_enrichment>` section of the documentation for more information.
 
 Indexer connector
-   The :doc:`indexer connector <wazuh-indexer-connector>` is the single component that communicates with the Wazuh indexer. It manages three traffic flows: outbound processed events (driven by policy outputs), inbound content (consumed by the Engine Content Manager and the IOC synchronizer), and inbound runtime configuration (consumed by the Configuration module). Concentrating all Wazuh indexer traffic in one place is what allows the rest of the normalization engine to stay independent of the Wazuh indexer transport details.
+   The :doc:`indexer connector <wazuh-indexer-connector>` carries the Wazuh indexer traffic of the normalization engine. It sends outbound processed events (driven by policy outputs) and receives inbound runtime configuration (consumed by the :ref:`Configuration <configuration_module>` module). The shared content manager library downloads the ruleset and IOC content through the read calls of the same connection, so content downloads never delay events.
 
 Stream Log
    Stream Log provides asynchronous, rotating log channels with size-based and time-based rotation, gzip compression, and retention by file count and total size. It backs the file outputs that policies can configure, and it is also what the optional event dumper uses to persist raw events for forensic investigation. Hot-path writes never block on disk I/O.
+
+.. _configuration_module:
 
 Configuration
    The local configuration is loaded from the Wazuh manager ``XML/ini`` at startup, allowing every module to read from it. A subset of runtime parameters is also pulled periodically from the Wazuh indexer as remote configuration, so operators can tune behavior without restarting the engine. Remote configuration changes are applied with rollback if a module rejects the new values.
@@ -118,18 +117,18 @@ The table below lists the shared libraries provided by the Wazuh manager, their 
    * - Indexer connector
      - ``shared_modules/indexer_connector``
      - Normalization engine, Vulnerability scanner, Inventory sync, Content manager
-     - Client library for pushing data to the Wazuh indexer
+     - Client library for reading data from and pushing data to the Wazuh indexer
    * - Content manager
      - ``shared_modules/content_manager``
-     - Vulnerability scanner, Modulesd
-     - Plugin framework for downloading and managing content (feeds, rulesets)
-   * - Router
-     - ``shared_modules/router``
-     - Remoted, Wazuh DB, Auth, Inventory Sync, Agent Upgrade
-     - Pub/sub IPC messaging between daemons via per-topic sockets under ``queue/router/``
+     - Vulnerability scanner, Normalization engine
+     - Fetches CVE feeds, rulesets, and IOC data from the Wazuh indexer and delivers them page by page to the consumer
+   * - Unix domain socket (UDS) HTTP server
+     - ``shared_modules/uds_http_server``
+     - Wazuh DB, Inventory sync, Task manager, Vulnerability scanner, Remoted
+     - HTTP/1.1 server over Unix domain sockets for communication between daemons
    * - Keystore
      - ``shared_modules/keystore``
-     - Indexer connector
+     - Indexer connector, Keystore server, wazuh-manager-keystore
      - AES-256 encrypted credential store (RocksDB)
 
 CLI tools
@@ -144,7 +143,7 @@ The Wazuh manager provides a set of command-line interface (CLI) tools for manag
    * - Binary
      - Purpose
    * - ``wazuh-manager-control``
-     - The Wazuh manager service control script is used to start, stop, restart, and check the status of all daemons
+     - The Wazuh manager service control script is used to start, stop, restart, reload, and check the status of all daemons, and show version information
    * - ``wazuh-manager-keystore``
      - Manage secrets in the encrypted keystore (AES-256, RocksDB)
    * - ``verify-agent-conf``
@@ -156,6 +155,6 @@ The Wazuh manager provides a set of command-line interface (CLI) tools for manag
    * - ``cluster_control``
      - Query cluster status and node health
    * - ``rbac_control``
-     - Manage RBAC policies and role assignments
+     - Seed the RBAC database, change the passwords of the default Wazuh manager API users, or reset the RBAC database
    * - ``wazuh-manager-conf``
-     - Validates the Wazuh manager configuration. Run ``wazuh-manager-conf validate`` to check the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file before restarting the Wazuh manager.
+     - Validates the Wazuh manager configuration. Run ``wazuh-manager-conf validate`` to check the ``/etc/wazuh-manager/wazuh-manager.conf`` file before restarting the Wazuh manager.

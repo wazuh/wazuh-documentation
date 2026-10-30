@@ -38,7 +38,8 @@ Options
 +----------------------------------------------------------------------+--------------------------------------------------------------------------------------------+
 | --package_type <type>                                                | Specifies the Linux package type to use (rpm or deb).                                      |
 +----------------------------------------------------------------------+--------------------------------------------------------------------------------------------+
-| -r <repository>, --repository <repository>                           | Specifies the repository URL used to download upgrade packages.                            |
+| -r <repository>, --repository <repository>                           | Specifies the repository URL used to download upgrade packages. The default is the value   |
+|                                                                      | of task-manager.wpk_repository when set, otherwise packages.wazuh.com/<major>.x/wpk/.      |
 +----------------------------------------------------------------------+--------------------------------------------------------------------------------------------+
 | -s, --silent                                                         | Suppresses command output.                                                                 |
 +----------------------------------------------------------------------+--------------------------------------------------------------------------------------------+

@@ -8,7 +8,7 @@
 Wazuh manager local configuration (wazuh-manager.conf)
 ========================================================
 
-The ``/var/wazuh-manager/etc/wazuh-manager.conf`` file is the main local configuration file for the Wazuh manager. In Wazuh 5.0 and later, this file replaces the manager-side ``/var/ossec/etc/ossec.conf`` file from earlier versions.
+The ``/etc/wazuh-manager/wazuh-manager.conf`` file is the main local configuration file for the Wazuh manager. In Wazuh 5.0 and later, this file replaces the manager-side ``/var/ossec/etc/ossec.conf`` file from earlier versions.
 
 We recommend that you back up the file before editing it. An invalid configuration might prevent Wazuh manager services from starting.
 
@@ -29,10 +29,11 @@ The following configuration block shows the default configuration:
      <remote>
        <https>
          <port>1517</port>
-         <bind_addr>127.0.0.1</bind_addr>
+         <bind_addr>0.0.0.0</bind_addr>
          <global_prefix>/wazuh-manager/</global_prefix>
-         <certificate>etc/certs/remoted.pem</certificate>
-         <key>etc/certs/remoted-key.pem</key>
+         <certificate>/etc/wazuh-manager/certs/remoted.pem</certificate>
+         <key>/etc/wazuh-manager/certs/remoted-key.pem</key>
+         <ca_certificate>/etc/wazuh-manager/certs/root-ca.pem</ca_certificate>
        </https>
        <legacy>
          <enabled>yes</enabled>
@@ -55,13 +56,13 @@ The following configuration block shows the default configuration:
        </hosts>
        <ssl>
          <certificate_authorities>
-           <ca>etc/certs/root-ca.pem</ca>
+           <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
          </certificate_authorities>
-         <certificate>etc/certs/indexer-connector.pem</certificate>
-         <key>etc/certs/indexer-connector-key.pem</key>
+         <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
+         <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
        </ssl>
      </indexer>
-     <!-- Configuration for wazuh-authd -->
+     <!-- Configuration for wazuh-manager-authd -->
      <auth>
        <disabled>no</disabled>
        <port>1515</port>
@@ -71,16 +72,16 @@ The following configuration block shows the default configuration:
        <ciphers>TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256</ciphers>
        <!-- <ssl_agent_ca></ssl_agent_ca> -->
        <ssl_verify_host>no</ssl_verify_host>
-       <ssl_manager_cert>etc/certs/remoted.pem</ssl_manager_cert>
-       <ssl_manager_key>etc/certs/remoted-key.pem</ssl_manager_key>
+       <ssl_manager_cert>/etc/wazuh-manager/certs/remoted.pem</ssl_manager_cert>
+       <ssl_manager_key>/etc/wazuh-manager/certs/remoted-key.pem</ssl_manager_key>
      </auth>
      <cluster>
        <name>wazuh</name>
        <node_name>node01</node_name>
        <node_type>master</node_type>
-       <key>XXXXXXXXXXXXXXXXXXXX</key>
+       <key>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</key>
        <port>1516</port>
-       <bind_addr>0.0.0.0</bind_addr>
+       <bind_addr>127.0.0.1</bind_addr>
        <nodes>
          <node>127.0.0.1</node>
        </nodes>
@@ -88,7 +89,7 @@ The following configuration block shows the default configuration:
      </cluster>
    </wazuh_config>
 
-To manage agent configuration centrally, use the ``/var/wazuh-manager/etc/shared/<GROUP_NAME>/agent.conf`` file. The ``agent.conf`` file distributes supported configuration settings to all agents assigned to the specified group.
+To manage agent configuration centrally, use the ``/etc/wazuh-manager/shared/<GROUP_NAME>/agent.conf`` file. The ``agent.conf`` file distributes supported configuration settings to all agents assigned to the specified group.
 
 Configuration sections
 -----------------------
@@ -116,6 +117,8 @@ The following table lists the configuration sections available in ``wazuh-manage
 +----------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | :doc:`cluster <cluster>`                                 | Configures Wazuh manager cluster communication and synchronization.                          |
 +----------------------------------------------------------+----------------------------------------------------------------------------------------------+
+
+The ``<indexer>`` and ``<cluster>`` sections are required. ``<hosts>`` in ``<indexer>`` and ``<key>`` in ``<cluster>`` have no default value. The Wazuh manager validates the file when it starts: an unknown option, or a boolean value other than ``yes`` or ``no``, stops the start with a validation error.
 
 .. toctree::
    :hidden:

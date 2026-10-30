@@ -100,8 +100,8 @@ Perform the outlined steps on your existing Wazuh indexer node to generate the c
       # File names, permissions, and ownership follow the Wazuh 5.0 installation guide:
       #   /etc/wazuh-indexer/certs      indexer.pem, indexer-key.pem, admin.pem,
       #                                 admin-key.pem, root-ca.pem   400 wazuh-indexer:wazuh-indexer
-      #   /var/wazuh-manager/etc/certs  indexer-connector.pem, indexer-connector-key.pem,
-      #                                 root-ca.pem                  640 root:wazuh-manager
+      #   /etc/wazuh-manager/certs      indexer-connector.pem, indexer-connector-key.pem,
+      #                                 indexer-ca.pem               640 root:wazuh-manager
       #   /etc/wazuh-dashboard/certs    dashboard.pem, dashboard-key.pem,
       #                                 root-ca.pem                  400 wazuh-dashboard:wazuh-dashboard
 
@@ -279,9 +279,9 @@ Perform the outlined steps on your existing Wazuh indexer node to generate the c
         add_plan "root-ca.pem"           /etc/wazuh-indexer/certs/root-ca.pem     wazuh-indexer wazuh-indexer 400
       fi
       if [ -n "$MANAGER_NODE" ]; then
-        add_plan "$MANAGER_NODE.pem"     /var/wazuh-manager/etc/certs/indexer-connector.pem     root wazuh-manager 640
-        add_plan "$MANAGER_NODE-key.pem" /var/wazuh-manager/etc/certs/indexer-connector-key.pem root wazuh-manager 640
-        add_plan "root-ca.pem"           /var/wazuh-manager/etc/certs/root-ca.pem                root wazuh-manager 640
+        add_plan "$MANAGER_NODE.pem"     /etc/wazuh-manager/certs/indexer-connector.pem     root wazuh-manager 640
+        add_plan "$MANAGER_NODE-key.pem" /etc/wazuh-manager/certs/indexer-connector-key.pem root wazuh-manager 640
+        add_plan "root-ca.pem"           /etc/wazuh-manager/certs/indexer-ca.pem             root wazuh-manager 640
       fi
       if [ -n "$DASHBOARD_NODE" ]; then
         add_plan "$DASHBOARD_NODE.pem"     /etc/wazuh-dashboard/certs/dashboard.pem     wazuh-dashboard wazuh-dashboard 400
@@ -332,7 +332,7 @@ Perform the outlined steps on your existing Wazuh indexer node to generate the c
         install -d -m 500 -o wazuh-indexer -g wazuh-indexer /etc/wazuh-indexer/certs
       fi
       if [ -n "$MANAGER_NODE" ]; then
-        install -d -m 1770 -o root -g wazuh-manager /var/wazuh-manager/etc/certs
+        install -d -m 0750 -o root -g wazuh-manager /etc/wazuh-manager/certs
       fi
       if [ -n "$DASHBOARD_NODE" ]; then
         install -d -m 500 -o wazuh-dashboard -g wazuh-dashboard /etc/wazuh-dashboard/certs
@@ -347,7 +347,7 @@ Perform the outlined steps on your existing Wazuh indexer node to generate the c
         echo "Certificates deployed to /etc/wazuh-indexer/certs for node $INDEXER_NODE"
       fi
       if [ -n "$MANAGER_NODE" ]; then
-        echo "Certificates deployed to /var/wazuh-manager/etc/certs for node $MANAGER_NODE"
+        echo "Certificates deployed to /etc/wazuh-manager/certs for node $MANAGER_NODE"
       fi
       if [ -n "$DASHBOARD_NODE" ]; then
         echo "Certificates deployed to /etc/wazuh-dashboard/certs for node $DASHBOARD_NODE"
@@ -380,7 +380,7 @@ Perform the outlined steps on your existing Wazuh indexer node to generate the c
       done
       echo
       echo "  Wazuh indexer    network.host in /etc/wazuh-indexer/opensearch.yml"
-      echo "  Wazuh manager    <host> entries in /var/wazuh-manager/etc/wazuh-manager.conf"
+      echo "  Wazuh manager    <host> entries in /etc/wazuh-manager/wazuh-manager.conf"
       echo "  Wazuh dashboard  opensearch.hosts in /etc/wazuh-dashboard/opensearch_dashboards.yml"
       echo
       echo "Then restart the components on this node, one at a time."
@@ -429,8 +429,8 @@ In this section, we configure the Wazuh components of your existing all-in-one d
         - "<NEW_WAZUH_INDEXER_IP>"
 
       plugins.security.nodes_dn:
-        - "CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
-        - "CN=<NEW_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+        - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+        - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<NEW_WAZUH_INDEXER_NODE_NAME>"
 
    Replace the following values:
 
@@ -443,7 +443,7 @@ In this section, we configure the Wazuh components of your existing all-in-one d
 
       The ``cluster.initial_cluster_manager_nodes`` setting is only used the first time a cluster starts. For consistency, keep it aligned with the list across all Wazuh indexer nodes. Still, the settings that allow the new node to join a running cluster are ``discovery.seed_hosts`` and ``plugins.security.nodes_dn``.
 
-#. Edit the ``<indexer>`` block of the Wazuh manager configuration file ``/var/wazuh-manager/etc/wazuh-manager.conf`` to connect to the new Wazuh indexer node. In Wazuh 5.0, the Wazuh manager reports to the Wazuh indexer directly through its indexer connector.
+#. Edit the ``<indexer>`` block of the Wazuh manager configuration file ``/etc/wazuh-manager/wazuh-manager.conf`` to connect to the new Wazuh indexer node. In Wazuh 5.0, the Wazuh manager reports to the Wazuh indexer directly through its indexer connector.
 
    .. code-block:: xml
       :emphasize-lines: 2,3

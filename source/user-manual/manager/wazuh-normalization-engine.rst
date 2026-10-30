@@ -6,9 +6,9 @@
 Wazuh normalization engine
 ==========================
 
-The Wazuh normalization engine is the event processing pipeline of the Wazuh manager. It transforms raw events into structured documents, enriches them with contextual information, evaluates them against configured security policies, and forwards the resulting events to the Wazuh indexer and other configured destinations.
+The Wazuh normalization engine is the event processing pipeline of the Wazuh manager. It transforms raw events into structured documents, enriches them with contextual information, and evaluates them against configured security policies. It then forwards the resulting events to the Wazuh indexer and other configured destinations.
 
-The Wazuh normalization engine ingests events from monitored endpoints and from the Vulnerability Detector module for processing. During event processing, it retrieves required resources such as decoders, integrations, policies, and key-value databases from the Wazuh indexer through the :doc:`indexer connector <wazuh-indexer-connector>`. The indexer connector also serves as the only outbound path for sending processed events back to the Wazuh indexer.
+The Wazuh normalization engine ingests events from monitored endpoints and from the vulnerability detection service for processing. During event processing, it retrieves required resources such as decoders, integrations, policies, and key-value databases from the Wazuh indexer through the shared content manager library, which reads over the :doc:`indexer connector <wazuh-indexer-connector>` connection. The indexer connector also serves as the only outbound path for sending processed events back to the Wazuh indexer.
 
 The diagram below shows the Wazuh normalization engine and its relationships with other components. Refer to the reference section for a description of each :ref:`module <normalization_engine_modules>` of the Wazuh normalization engine.
 
@@ -33,7 +33,7 @@ The diagram below shows how an incoming event moves through the Wazuh normalizat
    :align: center
    :width: 80%
 
-Policies consist of an ordered set of stages that perform pre-filtering, decoding, enrichment, post-filtering, and output delivery. The pre-filtering, enrichment, and post-filtering stages are optional and may be omitted or disabled depending on the policy configuration. Each event passes through the following ordered stages inside a policy:
+Policies consist of an ordered set of stages that perform pre-filtering, decoding, enrichment, post-filtering, and output delivery. The pre-filtering, enrichment, and post-filtering stages are optional, and each policy configuration can omit or disable them. Each event passes through the following ordered stages inside a policy:
 
 -  **Pre-filtering** *(optional)*: Evaluated before decoding. If configured, events that do not satisfy the filter conditions are discarded immediately, avoiding unnecessary decoding work. If no pre-filter is configured, all events proceed to the decoding stage unconditionally.
 -  :ref:`Decoding <decoding_process>`: Normalize and extract fields from the raw event, mapping them to the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>`. This stage is mandatory as every event must traverse the decoder tree.
@@ -66,7 +66,7 @@ All events enter the decoder stage through the ``root`` decoder, which acts as t
    :align: center
    :width: 80%
 
-When a decoder evaluates an event, it checks whether the event satisfies its match conditions. If the conditions are not met, the event is passed to the next sibling decoder in the same hierarchy. This continues until a decoder accepts the event or no more sibling decoders remain at that level, at which point the event is considered to be fully decoded by that decoder branch.
+When a decoder evaluates an event, it checks whether the event satisfies its match conditions. If the conditions are not met, the event is passed to the next sibling decoder in the same hierarchy. This process continues until a decoder accepts the event or no more sibling decoders remain at that level. At that point, the decoder branch has fully decoded the event.
 
 Once a decoder accepts an event, it applies its transformations: normalizing fields, extracting values, or mapping data to schema fields. The transformed event is then forwarded to that decoder's child decoders for additional, more specialized processing. Each child decoder follows the same evaluation logic, making the overall process both hierarchical and iterative.
 
@@ -89,7 +89,7 @@ This stage prepares and filters the event before the configured :ref:`enrichment
 
 The pre-enrichment stage performs the following actions:
 
--  **Space enrichment**: The first pre-enrichment operation maps the policy space into the event. Its purpose is to annotate the event with the space from which the policy is being executed. This allows the event to carry the policy space context as part of its own data before enrichment is applied.
+-  **Space enrichment**: The first pre-enrichment operation maps the policy space into the event. Its purpose is to annotate the event with the space from which the policy is being executed. This annotation allows the event to carry the policy space context as part of its own data before enrichment is applied.
 
    Conceptually, the event is enriched with the space context as shown:
 
@@ -104,7 +104,7 @@ The pre-enrichment stage performs the following actions:
         }
       }
 
--  **Discarded events filter**: The discarded events filter evaluates whether discarded events should continue through the pipeline. This behavior is controlled by the policy configuration.
+-  **Discarded events filter**: The discarded events filter decides whether discarded events continue through the pipeline. This behavior is controlled by the policy configuration.
 -  **Cleanup of decoder temporary variables**: Decoders can only map fields that belong to the WCS or to temporary variables. Temporary variables are used to store intermediate values that help decoders share information while processing an event. After decoding is complete, all temporary variables are automatically removed. This cleanup step always runs at the end of pre-enrichment and requires no user configuration. As a result, only WCS-compliant fields remain in the event, ensuring it can be successfully indexed by the Wazuh indexer.
 
 .. _enrichment:
@@ -112,9 +112,9 @@ The pre-enrichment stage performs the following actions:
 Enrichment
 ~~~~~~~~~~
 
-The enrichments to apply are defined as an array within the policy document. During event processing, each configured enrichment is evaluated sequentially and applied according to its configuration. The enrichment stage does not decide whether the event should continue in the pipeline. Its sole purpose is to add context to the event when applicable.
+The enrichments to apply are defined as an array within the policy document. During event processing, each configured enrichment is evaluated sequentially and applied according to its configuration. The enrichment stage does not decide whether the event continues in the pipeline. Its sole purpose is to add context to the event when applicable.
 
-During installation, the Wazuh normalization engine generates enrichment source definition files for both ``Geo/ASN`` and ``IOC`` enrichments. These files define which event fields will be observed at runtime to decide whether enrichment should be applied. They are generated automatically from predefined rules that indicate which WCS-compliant fields should be observed for each type of enrichment. This means the set of fields inspected by enrichment is not decided dynamically for every event. Instead, it is determined beforehand through these generated definitions, which ensures a controlled and consistent enrichment process.
+During installation, the Wazuh normalization engine generates enrichment source definition files for both ``Geo/ASN`` and ``IOC`` enrichments. These files define which event fields the normalization engine observes at runtime to decide whether to apply enrichment. Predefined rules indicate which WCS-compliant fields to observe for each type of enrichment, and the installation generates the files from these rules. As a result, the engine does not decide the set of inspected fields dynamically for every event. Instead, it is determined beforehand through these generated definitions, which ensures a controlled and consistent enrichment process.
 
 The available enrichments include:
 
@@ -126,7 +126,7 @@ The available enrichments include:
 Geo enrichment
 """"""""""""""
 
-Geo enrichment evaluates the event fields defined for Geo/ASN observation and, when applicable, adds location and autonomous system context to the event. The observed fields are determined from the generated Geo enrichment definitions based on the WCS and typically include fields that may contain IP addresses relevant for enrichment.
+Geo enrichment evaluates the event fields defined for Geo/ASN observation and, when applicable, adds location and autonomous system context to the event. The observed fields are determined from the generated Geo enrichment definitions based on the WCS and typically include fields that might contain IP addresses relevant for enrichment.
 
 When a valid source value is found, Geo enrichment adds information such as:
 
@@ -165,7 +165,7 @@ IOC enrichment
 
 IOC enrichment evaluates the event fields defined for IOC observation and checks whether their values match known indicators of compromise. The observed fields are determined from the generated IOC enrichment definitions based on the WCS and the predefined observation rules.
 
-Depending on the observed field and the configured IOC types, this enrichment can evaluate values such as:
+Based on the observed field and the configured IOC types, IOC enrichment can evaluate values such as:
 
 -  Connection-based indicators represented as ``ip:port``
 -  Domains
@@ -180,18 +180,20 @@ Conceptually, the event is enriched with the following threat context:
 .. code-block:: json
 
    {
-     "threat": {
-       "indicator": {
-         "type": "ipv4-addr",
-         "ip": "203.0.113.10"
-       },
-       "enrichments": [
-         {
-           "matched": {
-             "field": "destination.ip"
+     "wazuh": {
+       "threat": {
+         "enrichments": [
+           {
+             "indicator": {
+               "type": "ipv4-addr",
+               "ip": "203.0.113.10"
+             },
+             "matched": {
+               "field": "destination.ip"
+             }
            }
-         }
-       ]
+         ]
+       }
      }
    }
 
@@ -207,18 +209,18 @@ Unlike decoders and enrichment assets, which are downloaded from the content dis
 Output directory structure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Outputs are stored under ``/var/wazuh-manager/etc/outputs/`` and organized by space name.
+Outputs are stored under ``/etc/wazuh-manager/outputs/`` and organized by space name.
 
 .. code-block:: none
 
-   /var/wazuh-manager/etc/outputs/
+   /etc/wazuh-manager/outputs/
    ├── default/                          # Fallback outputs, applied to all spaces unless overridden
    │   ├── indexer.yml                   # Sends decoded events to the Wazuh Indexer (enabled)
    │   └── file-output-integrations.yml  # Writes decoded events to a local file (disabled)
    ├── standard/                         # (Optional) Outputs specific to the standard space
    └── custom/                           # (Optional) Outputs specific to the custom space
 
-When building the output stage for a given security policy, the Wazuh normalization engine looks for a directory whose name matches the policy's space (e.g., ``standard`` or ``custom``). If that directory exists, only its outputs are loaded for that policy. If no space-specific directory is found, the normalization engine falls back to the ``default/`` directory, ensuring every policy has a working set of outputs from the start.
+To build the output stage for a security policy, the normalization engine looks for a directory whose name matches the policy space, such as ``standard`` or ``custom``. If that directory exists, only its outputs are loaded for that policy. If no space-specific directory is found, the normalization engine falls back to the ``default/`` directory, ensuring every policy has a working set of outputs from the start.
 
 Default outputs
 ~~~~~~~~~~~~~~~
@@ -250,7 +252,7 @@ The output stage operates as a broadcaster. It dispatches the processed event in
 Unclassified events
 ~~~~~~~~~~~~~~~~~~~
 
-An event is considered unclassified when only the ``root`` decoder processed it and no other decoder accepted it. When no child decoder matches the event, the root decoder remains the only one that has processed it. The Wazuh normalization engine tracks this by recording the decoder names in the ``wazuh.integration.decoders`` array field defined in the ``/var/wazuh-manager/etc/outputs/default/indexer.yml`` file. An event is therefore identified as unclassified when that array contains exactly one element (the ``root`` decoder).
+An event is unclassified when its ``wazuh.integration.category`` field equals unclassified. This category comes from a catch-all integration whose decoder accepts events that no other integration decoder matched. The ``/etc/wazuh-manager/outputs/default/indexer.yml`` output sends unclassified events to the ``wazuh-events-v5-unclassified`` index only when the policy enables indexing of unclassified events. Otherwise, the Wazuh normalization engine does not index them.
 
 Event format
 ------------
@@ -333,7 +335,7 @@ The following sample logs illustrate the transformation process:
 **Processed event:**
 
 .. code-block:: json
-   :emphasize-lines: 2-40,43-154
+   :emphasize-lines: 2-75,78-155
 
    {
      "wazuh": {
@@ -373,6 +375,41 @@ The following sample logs illustrate the transformation process:
        },
        "space": {
          "name": "standard"
+       },
+       "threat": {
+         "enrichments": [
+           {
+             "indicator": {
+               "confidence": 100,
+               "feed": {
+                 "name": "dyingbreeds_"
+               },
+               "first_seen": "2026-01-13T00:35:01.000Z",
+               "id": "1718594",
+               "last_seen": "2026-01-13T00:35:01.000Z",
+               "name": "8.8.8.8:8010",
+               "provider": "threat-fox",
+               "software": {
+                 "alias": [
+                   "Unknown malware"
+                 ],
+                 "name": "unknown",
+                 "type": "botnet_cc"
+               },
+               "tags": [
+                 "AS55990",
+                 "Botnet",
+                 "byob",
+                 "C2",
+                 "censys"
+               ],
+               "type": "connection"
+             },
+             "matched": {
+               "field": "source.ip, source.port"
+             }
+           }
+         ]
        }
      },
      "event": {
@@ -453,41 +490,6 @@ The following sample logs illustrate the transformation process:
        "hosts": [
          "amazonlinux-2-repos-us-east-1.s3.dualstack.us-east-1.amazonaws.com."
        ]
-     },
-     "threat": {
-       "enrichments": [
-         {
-           "indicator": {
-             "confidence": 100,
-             "feed": {
-               "name": "dyingbreeds_"
-             },
-             "first_seen": "2026-01-13T00:35:01.000Z",
-             "id": "1718594",
-             "last_seen": "2026-01-13T00:35:01.000Z",
-             "name": "8.8.8.8:8010",
-             "provider": "threat-fox",
-             "software": {
-               "alias": [
-                 "Unknown malware"
-               ],
-               "name": "unknown",
-               "type": "botnet_cc"
-             },
-             "tags": [
-               "AS55990",
-               "Botnet",
-               "byob",
-               "C2",
-               "censys"
-             ],
-             "type": "connection"
-           },
-           "matched": {
-             "field": "source.ip, source.port"
-           }
-         }
-       ]
      }
    }
 
@@ -496,14 +498,14 @@ The following sample logs illustrate the transformation process:
 Wazuh Common Schema (WCS)
 -------------------------
 
-A Wazuh Common Schema (WCS) defines a structured format for data, ensuring consistency, interoperability, and efficient querying. It establishes a common set of field names, data types, and relationships that standardize log and event data across different sources.
+The Wazuh Common Schema (WCS) defines a structured format for data, ensuring consistency, interoperability, and efficient querying. It establishes a common set of field names, data types, and relationships that standardize log and event data across different sources.
 
-The Wazuh normalization engine ensures that all operations, including parsing, normalization, and enrichment, transforms unstructured data into structured data that adheres to the schema. This structured approach provides:
+The Wazuh normalization engine ensures that all operations, including parsing, normalization, and enrichment, transform unstructured data into structured data that adheres to the schema. This structured approach provides:
 
 -  **Consistency**: Standardized field names prevent discrepancies when integrating data from different sources.
--  **Interoperability**: Facilitates integration with various tools and analytics platforms.
+-  **Interoperability**: Facilitates integration with multiple tools and analytics platforms.
 -  **Efficient querying**: Optimizes indexing and search performance.
--  **Data enrichment**: Enables meaningful correlations by aligning logs with predefined categories (e.g., network, process, user activity).
+-  **Data enrichment**: Enables meaningful correlations by aligning logs with predefined categories, such as network, process, and user activity.
 
 For example, a network event log structured according to the schema looks like this:
 
@@ -531,7 +533,7 @@ For example, a network event log structured according to the schema looks like t
 Schema configuration
 ^^^^^^^^^^^^^^^^^^^^
 
-The schema configuration for the Wazuh normalization engine follows a structured format in which each field is defined. The WCS is fetched (synchronized) from the Wazuh indexer repository as `wcs_flat.yml <https://raw.githubusercontent.com/wazuh/wazuh-indexer-plugins/refs/heads/main/wcs/stateless/events/main/docs/wcs_flat.yml>`__. This is the original YAML source and is not intended to be modified by the user. It consists of a JSON object with the following key elements:
+The schema configuration for the Wazuh normalization engine follows a structured format in which each field is defined. The WCS originates in the `wcs_flat.yml <https://raw.githubusercontent.com/wazuh/wazuh-indexer-plugins/refs/heads/main/wcs/stateless/events/main/docs/wcs_flat.yml>`__ file of the wazuh-indexer-plugins repository. The Wazuh manager build process downloads this YAML file and converts it into the engine schema, a JSON object that users must not modify. The engine schema consists of the following key elements:
 
 -  **Fields definition**: The fields object contains a list of field names as keys.
 
@@ -570,7 +572,7 @@ The following JSON object provides an example of a WCS definition:
 Content management
 ------------------
 
-This involves managing content of the Wazuh normalization engines. The content includes:
+Content management keeps the processing content of the Wazuh normalization engine in step with the Wazuh indexer. The content includes:
 
 -  **Policy configuration**: The list of integrations (ordered by evaluation priority) and policy-level settings.
 -  **Integrations**: Logical groups of decoders (and optionally KVDBs) for each log source.
@@ -578,14 +580,14 @@ This involves managing content of the Wazuh normalization engines. The content i
 -  **Filters**: Pre-filter and post-filter assets.
 -  **KVDBs**: Key-value databases used by decoders and filters during event processing.
 
-The normalization engine pulls all content and policy configurations from the Wazuh indexer and stores them locally for runtime execution. The Wazuh indexer is the single source of truth for all content management. Creating custom decoders and integrations, enabling or disabling them, and modifying policy-related settings are all actions performed through the Wazuh indexer and not directly on the Wazuh normalization engine.
+The normalization engine pulls all content and policy configurations from the Wazuh indexer and stores them locally for runtime execution. The Wazuh indexer is the single source of truth for all content management. You create custom decoders and integrations, enable or disable them, and modify policy-related settings through the Wazuh indexer, not directly on the Wazuh normalization engine.
 
 .. _synchronization_process:
 
 Synchronization process
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Before building the security policy, the Wazuh normalization engine must ensure that its local state reflects the latest configuration available in the Wazuh indexer. This is achieved through a CMSync module, which periodically pulls content from the Wazuh indexer and applies any detected changes to the local store of the Wazuh normalization engine.
+Before building the security policy, the Wazuh normalization engine must ensure that its local state reflects the latest configuration available in the Wazuh indexer. The CMSync module keeps the local state current. It periodically pulls content from the Wazuh indexer and applies any detected changes to the local store of the Wazuh normalization engine.
 
 CMSync synchronizes content independently for the ``standard`` and ``custom`` :ref:`spaces <space>`, following the same two-step process for each:
 
@@ -601,11 +603,11 @@ CMSync synchronizes content independently for the ``standard`` and ``custom`` :r
 Space
 ^^^^^
 
-A :doc:`space </user-manual/data-analysis/space>` is a content organization concept that originates in the Wazuh indexer. The Wazuh indexer has four spaces, including ``draft``, ``test``, ``custom``, and ``standard``. In the Wazuh manager, the normalization engine mirrors the relevant Wazuh indexer spaces by storing synchronized assets according to the space they belong to when CMSync pulls content from the Wazuh indexer.
+A :doc:`space </user-manual/data-analysis/space>` is a content organization concept that originates in the Wazuh indexer. The Wazuh indexer has four spaces: ``draft``, ``test``, ``custom``, and ``standard``. When CMSync pulls content from the Wazuh indexer, the normalization engine stores each synchronized asset under the space it belongs to. In this way, the Wazuh manager mirrors the relevant Wazuh indexer spaces.
 
 The Wazuh normalization engine manages the following spaces:
 
 -  **Standard**: Contains the default integrations curated and maintained by the `Wazuh CTI <https://cti.wazuh.com/>`__. The Wazuh indexer is responsible for downloading and hosting this content from the CTI feed. The Wazuh normalization engine never communicates with the Wazuh CTI directly. CMSync synchronizes the local copy from the Wazuh indexer.
 -  **Custom**: An independent space for user-defined or user-modified content. Users manage this space through the Wazuh indexer, and CMSync propagates any changes to the Wazuh normalization engine.
 
-When Wazuh starts, the normalization engine triggers an initial synchronization to pull both spaces from the Wazuh indexer, ensuring all assets are available before building policies and defining routes. After this initial load, subsequent synchronization cycles run periodically to keep the local state up to date. When both spaces are available and synchronized, the Wazuh normalization engine processes all incoming events through each active operational graph.
+When Wazuh starts, the normalization engine triggers an initial synchronization to pull both spaces from the Wazuh indexer. This initial synchronization makes all assets available before the engine builds security policies and defines routes. After this initial load, subsequent synchronization cycles run periodically to keep the local state up to date. When both spaces are available and synchronized, the Wazuh normalization engine processes all incoming events through each active operational graph.

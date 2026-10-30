@@ -22,7 +22,7 @@ The Syscollector module is enabled by default on all endpoints where the Wazuh a
 - ``C:\Program Files (x86)\ossec-agent\ossec.conf`` for Windows endpoints.
 - ``/Library/Ossec/etc/ossec.conf`` for macOS endpoints.
 
-You can also use the centralized configuration file to make changes to the Wazuh Syscollector module across multiple monitored endpoints that belong to the same agent group. For example, the ``default`` group uses the configuration file, which you can find at ``/var/ossec/etc/shared/default/agent.conf`` on the Wazuh manager. Settings applied with the centralized configuration take precedence over the local Wazuh agent configuration.
+You can also use the centralized configuration file to make changes to the Wazuh Syscollector module across multiple monitored endpoints that belong to the same agent group. For example, the ``default`` group uses the configuration file, which you can find at ``/etc/wazuh-manager/shared/default/agent.conf`` on the Wazuh manager. Settings applied with the centralized configuration take precedence over the local Wazuh agent configuration.
 
 The following block shows the default Syscollector configuration on a Wazuh agent:
 
@@ -86,11 +86,11 @@ On Windows endpoints, you can use the ``<hotfixes>`` option.
 Wazuh manager configuration
 ---------------------------
 
-The Wazuh Inventory Harvester component on the Wazuh manager processes the collected system inventory data and forwards it to the Wazuh indexer using the :doc:`indexer connector </user-manual/manager/wazuh-indexer-connector>` setting. The indexer connector setting is present by default in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file of the Wazuh manager.
+The ``inventory_sync_server`` module on the Wazuh manager processes the collected system inventory data and forwards it to the Wazuh indexer using the :doc:`indexer connector </user-manual/manager/wazuh-indexer-connector>` setting. The indexer connector setting is present by default in the ``/etc/wazuh-manager/wazuh-manager.conf`` file of the Wazuh manager.
 
-By default, the connector points to the localhost with certificate paths relative to the Wazuh manager installation. This default works for an all-in-one deployment, where the Wazuh manager and the Wazuh indexer run on the same host. In a distributed deployment, where the indexer runs on separate nodes, you must update the connector configuration to point to your indexer nodes. Follow the steps below to update it.
+By default, the connector points to the localhost and uses the certificates in ``/etc/wazuh-manager/certs/`` on the Wazuh manager. This default works for an all-in-one deployment, where the Wazuh manager and the Wazuh indexer run on the same host. In a distributed deployment, where the indexer runs on separate nodes, you must update the connector configuration to point to your indexer nodes. Follow the steps below to update it.
 
-#. Locate the indexer connector configuration block below to the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file on the Wazuh manager. By default, it points to the local host:
+#. Locate the indexer connector configuration block in the ``/etc/wazuh-manager/wazuh-manager.conf`` file on the Wazuh manager. By default, it points to the local host:
 
    .. code-block:: xml
 
@@ -100,44 +100,38 @@ By default, the connector points to the localhost with certificate paths relativ
         </hosts>
         <ssl>
           <certificate_authorities>
-            <ca>etc/certs/root-ca.pem</ca>
+            <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
           </certificate_authorities>
-          <certificate>etc/certs/indexer-connector.pem</certificate>
-          <key>etc/certs/indexer-connector-key.pem</key>
+          <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
+          <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
         </ssl>
       </indexer>
 
    For a distributed deployment, update the block to point to your Wazuh indexer nodes instead. Add a ``<host>`` entry for each one of your Wazuh indexer nodes. For example, in a two-node configuration:
 
    .. code-block:: xml
+      :emphasize-lines: 2,3
 
       <hosts>
         <host>https://<WAZUH_INDEXER1_IP>:9200</host>
         <host>https://<WAZUH_INDEXER2_IP>:9200</host>
       </hosts>
 
-   Ensure:
+   Ensure the Wazuh indexer CA and the Wazuh manager client certificate and key exist in ``/etc/wazuh-manager/certs/`` as ``indexer-ca.pem``, ``indexer-connector.pem``, and ``indexer-connector-key.pem``. If the Wazuh indexer runs on the same host, the Wazuh manager imports these files from ``/etc/wazuh-indexer/export/`` when it is installed and before every start.
 
-   -  The ``<ca>``, ``<certificate>``, and ``<key>`` values match the certificate files in the ``/var/wazuh-manager/etc/certs/`` directory. Relative paths resolve from the Wazuh manager installation directory at ``/var/wazuh-manager/``.
-
-   The Wazuh manager prioritizes reporting to the first Wazuh indexer node in the list and switches to the next available node if the first one becomes unavailable.
-
-#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the ``wazuh-manager-keystore`` tool:
+   You can check the certificates and the configuration files of the Wazuh manager with the following command. It prints ``check: no problem found`` on success, and exits ``1`` on any problem:
 
    .. code-block:: console
 
-      # echo '<WAZUH_INDEXER_USERNAME>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k username
-      # echo '<WAZUH_INDEXER_PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password
-
-   The tool also accepts the value inline with the ``-v`` option or from a file with the ``-vp`` option.
-
-   If you have forgotten your Wazuh indexer password, refer to the :doc:`password management guide </user-manual/user-administration/password-management>` to reset it.
+      # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check
 
 #. Run the command below to verify the connection to the Wazuh indexer from the Wazuh manager. Enter the Wazuh indexer password when prompted:
 
    .. code-block:: console
 
-      # curl --cacert /var/wazuh-manager/etc/certs/root-ca.pem --cert /var/wazuh-manager/etc/certs/indexer-connector.pem --key /var/wazuh-manager/etc/certs/indexer-connector-key.pem -u <WAZUH_INDEXER_USERNAME> -XGET "https://<WAZUH_INDEXER_IP>:9200/_cluster/health?pretty"
+      # curl -k -u <WAZUH_INDEXER_USERNAME> -XGET https://<INDEXER_IP_ADDRESS>:9200/_cluster/health?pretty
+
+   Replace ``<INDEXER_IP_ADDRESS>`` with the address in the ``<host>`` entry of the ``<indexer>`` section.
 
    A successful connection returns a result similar to the following:
 
@@ -146,38 +140,36 @@ By default, the connector points to the localhost with certificate paths relativ
 
       {
         "cluster_name" : "wazuh-cluster",
-        "status" : "yellow",
+        "status" : "green",
         "timed_out" : false,
         "number_of_nodes" : 1,
         "number_of_data_nodes" : 1,
         "discovered_master" : true,
         "discovered_cluster_manager" : true,
-        "active_primary_shards" : 98,
-        "active_shards" : 98,
+        "active_primary_shards" : 108,
+        "active_shards" : 108,
         "relocating_shards" : 0,
         "initializing_shards" : 0,
-        "unassigned_shards" : 1,
+        "unassigned_shards" : 0,
         "delayed_unassigned_shards" : 0,
         "number_of_pending_tasks" : 0,
         "number_of_in_flight_fetch" : 0,
         "task_max_waiting_in_queue_millis" : 0,
-        "active_shards_percent_as_number" : 98.98989898989899
+        "active_shards_percent_as_number" : 100.0
       }
 
    .. note::
 
-      A ``yellow`` status is expected on single-node deployments and indicates a successful connection. The status turns ``green`` when replica shards are assigned in multi-node deployments.
+      A ``green`` or ``yellow`` status means the connection works. A ``red`` status means some primary shards are unavailable, and the Wazuh manager stops sending data to that node until it recovers.
 
-   If this command fails, the Wazuh manager cannot connect to the Wazuh indexer. To check if the issue is related to certificates, bypass certificate verification using the ``-k`` option. Use this option for troubleshooting only. Enter the Wazuh indexer password when prompted:
+      The Wazuh manager stores the Wazuh indexer password in its keystore during installation. If your Wazuh indexer nodes use a different password, for example after you change it, update the keystore and then restart the Wazuh manager:
 
-   .. code-block:: console
+      .. code-block:: console
 
-      # curl -k -u <WAZUH_INDEXER_USERNAME> -XGET "https://<WAZUH_INDEXER_IP>:9200/_cluster/health?pretty"
-
-   If the command succeeds with the ``-k`` option but fails with the certificate options, verify that the certificate paths in the indexer connector configuration match the files in the ``/var/wazuh-manager/etc/certs/`` directory.
+         # printf '%s' '<NEW_INDEXER_PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password
 
 #. Restart the Wazuh manager to apply the configuration:
 
    .. code-block:: console
 
-      # sudo systemctl restart wazuh-manager
+      # systemctl restart wazuh-manager

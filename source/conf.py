@@ -61,6 +61,7 @@ extensions = [
     'sphinx.ext.extlinks', # Sphinx built-in extension
     'sphinx_tabs.tabs',
     'wazuh-doc-images', # Custom extension
+    'wcs-fields', # Custom extension
     'sphinx_reredirects',
     'sphinx_markdown_builder'
 ]
@@ -114,17 +115,7 @@ exclude_patterns = [
     'getting-started/use-cases/malware-detection.rst',
     'getting-started/use-cases/posture-management.rst',
     'deployment-options/amazon-machine-images/**',
-    'deployment-options/wazuh-from-sources/**',
     'deployment-options/deploying-with-puppet/**',
-    'user-manual/api/index.rst',
-    'user-manual/api/getting-started.rst',
-    'user-manual/api/configuration.rst',
-    'user-manual/api/securing-api.rst',
-    'user-manual/api/use-cases.rst',
-    'user-manual/api/api-examples.rst',
-    'user-manual/api/queries.rst',
-    'user-manual/api/requests-responses.rst',
-    'user-manual/api/rbac/**',
     'user-manual/capabilities/agentless-monitoring/**',
     'user-manual/capabilities/log-data-collection/journald.rst',
     'user-manual/capabilities/malware-detection/**',

@@ -226,7 +226,7 @@ The following example updates two Notifications module settings as persistent cl
 -  ``opensearch.notifications.core.http.max_connections``: Increases the maximum number of HTTP connections that the Notifications module can use simultaneously to deliver notifications.
 -  ``opensearch.notifications.general.filter_by_backend_roles``: Enables backend role filtering so users can access only the notification resources permitted by their assigned backend roles.
 
-Run the following command from a terminal on a host that can communicate with the Wazuh indexer REST API. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node. Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the credentials of a Wazuh indexer user allowed to update cluster settings, such as ``admin``. The ``admin`` password is the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh/credentials.env`` of a Wazuh indexer node, or in the ``credentials.env`` file of ``wazuh-install-files.tar``.
+Run the following command from a terminal on a host that can communicate with the Wazuh indexer REST API. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node. Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the credentials of a Wazuh indexer user allowed to update cluster settings, such as ``admin``. The ``admin`` password is the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh-indexer/export/credentials.env`` of a Wazuh indexer node, or in the ``credentials.env`` file of ``wazuh-install-files.tar``.
 
 .. code-block:: console
 

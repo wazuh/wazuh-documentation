@@ -20,11 +20,11 @@ Make sure that your environment meets these requirements before you enroll a Waz
       -  1514/TCP for agent communication.
       -  1515/TCP for enrollment via agent configuration.
 
-   -  55000/TCP for enrollment through the Wazuh manager API (both agent versions).
+   -  55000/TCP for enrollment through the Wazuh manager API (both agent versions). Only the master node serves the Wazuh manager API.
 
 .. note::
 
-   On the Wazuh manager, the 1517 and 1514 listeners are bound to 127.0.0.1 by default and only accept local connections. To accept Wazuh agents from other endpoints, set ``<bind_addr>0.0.0.0</bind_addr>`` (for ``<https>``) and ``<local_ip>0.0.0.0</local_ip>`` (for ``<legacy>``) in ``wazuh-manager.conf``.
+   On the Wazuh manager, the 1517 and 1514 listeners are bound to 0.0.0.0 by default and accept connections from any address. If you restricted them to local connections with ``<bind_addr>127.0.0.1</bind_addr>`` (for ``<https>``) or ``<local_ip>127.0.0.1</local_ip>`` (for ``<legacy>``) in ``wazuh-manager.conf``, set them back to ``0.0.0.0`` to accept Wazuh agents from other endpoints.
 
 Supported operating systems
 ---------------------------

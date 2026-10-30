@@ -6,7 +6,7 @@
 Wazuh manager
 =============
 
-The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer. It is also used to remotely manage the configurations of Wazuh agents and monitor their status. If you want to learn more about the Wazuh components, check the :doc:`Getting started </getting-started/index>` section.
+The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer. It is also used to remotely manage the configurations of Wazuh agents and monitor their status. If you want to learn more about the Wazuh components, check the :doc:`Getting started </getting-started/index>` section. The Wazuh manager doesn't monitor its own host. To monitor it, install a Wazuh agent on the same host and enroll it with a token for the host's own address.
 
 You can install the Wazuh manager on a single host or distribute it across multiple nodes in a cluster configuration. Multi-node configurations provide high availability and improved performance. When combined with a network load balancer, you can achieve efficient use of its capacity.
 
@@ -72,6 +72,8 @@ Requirements
 
 Check the recommended operating systems and hardware requirements for the Wazuh manager installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
+The Wazuh manager package doesn't install on a host that has a Wazuh manager 4.x, even a fresh one: :doc:`migrate </migration-to-5x/index>` instead. The Wazuh manager doesn't start until it has the Wazuh indexer password and certificates.
+
 .. _supported_operating_systems:
 
 Recommended operating systems
@@ -96,9 +98,11 @@ You can install the Wazuh manager as a single-node or multi-node cluster.
    | Wazuh manager           |     8    |     4        |     16       |       8        |
    +-------------------------+----------+--------------+--------------+----------------+
 
+   An all-in-one host runs the Wazuh indexer, Wazuh manager, and Wazuh dashboard together. For up to 25 agents, it needs 4 CPU cores and 8 GB of RAM, as in the :doc:`Quickstart </quickstart>`. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
+
 -  Disk space requirements
 
-   The Wazuh manager no longer stores alerts from monitored endpoints. Instead, it stores the content and databases required by its server-side modules. Because the Vulnerability Scanner feed requires at least 15 GB of storage, Wazuh recommends allocating at least 20 GB of disk space for a Wazuh manager.
+   The Wazuh manager no longer stores alerts from monitored endpoints. Instead, it stores the content and databases required by its server-side modules. The Vulnerability Scanner feed needs at least 15 GB of storage, so give a Wazuh manager at least 20 GB of disk space.
 
 .. _wazuh_manager_required_ports:
 
@@ -123,14 +127,20 @@ The Wazuh manager uses the following ports.
 | 9200/TCP, outbound | This Wazuh manager                                                                | Connection to the Wazuh indexer            |
 +--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
 
-If no Wazuh 4.x agents connect to this Wazuh manager, you can keep 1514 and 1515 closed. You can also disable them in ``/var/wazuh-manager/etc/wazuh-manager.conf`` with ``<remote><legacy><enabled>`` and ``<auth><disabled>``.
+If no Wazuh 4.x agents connect to this Wazuh manager, you can keep 1514 and 1515 closed. You can also disable them in ``/etc/wazuh-manager/wazuh-manager.conf`` with ``<remote><legacy><enabled>`` and ``<auth><disabled>``.
 
 .. _wazuh_manager_agent_connection_address:
 
 Agent connection address
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Agents connect to the Wazuh manager only through an address in its agent listener certificate, and you can create enrollment tokens only for those addresses. The certificates include each Wazuh manager node's name and its ``ip`` and ``dns`` values from ``config.yml``. To add any other address, such as a load balancer, a NAT address, or a public name, use ``-as <ALTERNATE_ADDRESS>`` when you create the certificates. For a cluster behind a load balancer, use a TCP passthrough load balancer on 1517/TCP and add its address with ``-as``.
+Wazuh agents connect to a Wazuh manager node only through an address in its agent listener certificate, ``remoted.pem``. You can create enrollment tokens only for those addresses. To add an address, such as a load balancer, a NAT address, or a public name, follow your installation method:
+
+-  **Assisted installation:** The certificate lists the node's name and its addresses from ``config.yml``. To add an address, use ``-as <ALTERNATE_ADDRESS>`` when you generate the configuration files. The tool adds it to the certificate of every Wazuh manager node.
+
+-  **Step-by-step installation:** The certificates tool issues the certificate with the node's name and its addresses from ``config.yml``. To add an address, use ``-as <ALTERNATE_ADDRESS>`` when you create the certificates. The root CA must be in place before you install the package, as :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>` describes.
+
+In both methods, pass every address in the same run, because the certificate holds only the ``-as`` values of that run. For a cluster behind a load balancer, use a TCP passthrough load balancer on 1517/TCP. Add its address to the certificate of every Wazuh manager node. Create enrollment tokens on the master node. A worker node refuses the command, and the master node accepts only addresses in its own certificate. Agents therefore enroll through the load balancer or the master node's address. To create a token for a worker node's address, add that address with ``-as`` too.
 
 .. toctree::
    :hidden:

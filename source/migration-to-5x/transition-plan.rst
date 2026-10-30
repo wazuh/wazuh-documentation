@@ -57,6 +57,10 @@ Wazuh 5.x introduces architectural and configuration changes that prevent some W
 
 -  Index data migration is supported from Wazuh 4.4.0 or later. Indices created before Wazuh 4.4.0 can't be restored, even if the deployment was later upgraded. Restored Wazuh 4.x indices retain their original mappings and field structure and remain separate from the indices and data streams created by Wazuh 5.x.
 
+-  The Wazuh 5.x manager doesn't monitor its own host as agent 000, as Wazuh 4.x did. To keep collecting the server's logs, inventory, SCA, and FIM data, install a Wazuh agent on the server host. Enroll it with a token for the host's own address.
+
+-  Wazuh 5.x doesn't support frequency or threshold rules. Each matching event produces its own finding. Repeated events, such as a burst of failed SSH logins, don't escalate to a higher-level finding as rules 5712 and 5763 did in Wazuh 4.x. Correlation across events is planned for a later minor release.
+
 Prerequisites
 -------------
 

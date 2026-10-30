@@ -12,6 +12,8 @@ The ``rbac_control`` tool manages the Wazuh role-based access control (RBAC) dat
 
 Use this tool to change the passwords of the default RBAC users, create and seed the RBAC database, or restore the RBAC database to its default state.
 
+On a worker node, ``change-password`` and ``factory-reset`` are forwarded to the master node. Neither command updates ``/etc/wazuh-manager/export/credentials.env``: after a change, the file keeps the previous passwords.
+
 Commands
 --------
 
@@ -141,7 +143,7 @@ The command output looks similar to this:
    :class: output
 
    New password for 'wazuh' (skip):
-   New password for 'wazuh-wui' (skip):
+   New password for 'wazuh-internal-client' (skip):
          wazuh: FAILED | Error 5009 - Insecure user password provided
 
 ``change-password`` example where the *wazuh* user password was changed successfully (to skip any of the user, leave the new password blank):
@@ -156,5 +158,5 @@ The command output looks similar to this:
    :class: output
 
    New password for 'wazuh' (skip):
-   New password for 'wazuh-wui' (skip):
+   New password for 'wazuh-internal-client' (skip):
      wazuh: UPDATED

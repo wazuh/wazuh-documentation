@@ -23,27 +23,27 @@ You can install the Wazuh indexer, Wazuh manager, and Wazuh dashboard on a singl
 
 Check our :doc:`Quickstart </quickstart>` documentation to perform an all-in-one installation of the Wazuh central components. This is the fastest way to get the Wazuh central components up and running.
 
-For more deployment flexibility and customization, install the Wazuh central components by starting with the :doc:`Wazuh indexer <wazuh-indexer/index>` deployment. This deployment method supports both an all-in-one installation and installing components on separate hosts.
+For more deployment flexibility and customization, install the Wazuh central components by starting with the :doc:`Wazuh indexer <wazuh-indexer/index>` deployment. This deployment method supports both an all-in-one installation and installing components on separate hosts. For an all-in-one host, use the hardware requirements in the :doc:`Quickstart </quickstart>`.
 
-Before you start, choose the name and IP address of every Wazuh indexer, Wazuh manager, and Wazuh dashboard node. You create the certificates and passwords for all of them on one host, usually the first Wazuh indexer node, then copy one archive to every other node.
+Before you start, choose the name and IP address of every Wazuh indexer, Wazuh manager, and Wazuh dashboard node. You create the certificates and passwords for all of them on one host, usually the first Wazuh indexer node. Then you copy one archive to every other node. The archive also holds each Wazuh manager node's agent listener and Wazuh manager API certificates, issued from the same root CA.
 
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| **I want to...**                           | **Use**                                                                                                                   |
-+============================================+===========================================================================================================================+
-| Try Wazuh on one Linux host                | :doc:`Quickstart </quickstart>`                                                                                           |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Install on one or more hosts with a script | :doc:`Assisted installation <wazuh-indexer/installation-assistant>`                                                       |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Control every step                         | :doc:`Step-by-step installation <wazuh-indexer/step-by-step>`                                                             |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Install without internet access            | :doc:`Offline installation </deployment-options/offline-installation/index>`                                              |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Import a ready virtual machine             | :doc:`Virtual machine (OVA) </deployment-options/virtual-machine/virtual-machine>`                                        |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Run in containers                          | :doc:`Docker </deployment-options/docker/index>`, :doc:`Kubernetes </deployment-options/deploying-with-kubernetes/index>` |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Automate with Ansible                      | :doc:`Ansible </deployment-options/deploying-with-ansible/index>`                                                         |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| **I want to...**                           | **Use**                                                                                                                   | **Typical time**                                   |
++============================================+===========================================================================================================================+====================================================+
+| Try Wazuh on one Linux host                | :doc:`Quickstart </quickstart>`                                                                                           | About 5 minutes                                    |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Install on one or more hosts with a script | :doc:`Assisted installation <wazuh-indexer/installation-assistant>`                                                       | About 6 minutes (all-in-one), 15 minutes (3 hosts) |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Control every step                         | :doc:`Step-by-step installation <wazuh-indexer/step-by-step>`                                                             | About 20 minutes (all-in-one)                      |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Install without internet access            | :doc:`Offline installation </deployment-options/offline-installation/index>`                                              | About 20 minutes, plus the download                |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Import a ready virtual machine             | :doc:`Virtual machine (OVA) </deployment-options/virtual-machine/virtual-machine>`                                        | About 15 minutes, plus a 3.9 GB download           |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Run in containers                          | :doc:`Docker </deployment-options/docker/index>`, :doc:`Kubernetes </deployment-options/deploying-with-kubernetes/index>` | About 15 minutes (Docker single-node)              |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Automate with Ansible                      | :doc:`Ansible </deployment-options/deploying-with-ansible/index>`                                                         | About 10 minutes (all-in-one)                      |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
 
 The assisted and step-by-step methods install one component at a time, and both start on the Wazuh indexer page. Use the same method for the three components.
 
@@ -100,19 +100,6 @@ Follow this installation workflow:
     </div>
   </div>
 
-All-in-one deployment
-^^^^^^^^^^^^^^^^^^^^^
-
-To install the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host with the step-by-step method:
-
--  Follow the Wazuh indexer, Wazuh manager, and Wazuh dashboard step-by-step sections in that order, as root, from the same directory.
--  In ``config.yml``, use the same IP address for the indexer, manager, and dashboard nodes.
--  In the ``<indexer>`` block of the Wazuh manager and in ``opensearch.hosts`` of the Wazuh dashboard, replace ``127.0.0.1`` and ``localhost`` with the IP address you set in ``config.yml``. The Wazuh indexer listens only on that address. Keep ``https://localhost`` in ``wazuh_core.hosts``.
--  Skip the steps for other nodes, and skip **Adding the Wazuh repository** in the Wazuh manager and Wazuh dashboard sections, because the repository is already added.
--  Keep ``wazuh-certificates.tar`` until you install the Wazuh dashboard.
--  Run **Disable Wazuh updates** once, after you install all three components.
--  For hardware requirements, see the all-in-one requirements in the Quickstart.
-
 .. _installing_the_wazuh_agent:
 
 Installing the Wazuh agent
@@ -120,7 +107,7 @@ Installing the Wazuh agent
 
 The Wazuh agent is a single, lightweight monitoring software. It is a multi-platform component that you can deploy to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the monitored endpoint by collecting critical system and application records, inventory data, and detecting potential anomalies.
 
-Before you install a Wazuh agent, create an enrollment token on the Wazuh manager, as described in **Generate the enrollment token**. Then select your endpoint operating system below and follow the installation steps.
+Before you install a Wazuh agent, create an enrollment token on the Wazuh manager, as described in :ref:`Generate the enrollment token <generate_enrollment_token>`. Then select your endpoint operating system below and follow the installation steps.
 
 .. raw:: html
 

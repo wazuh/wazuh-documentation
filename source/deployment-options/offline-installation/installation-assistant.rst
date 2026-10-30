@@ -15,7 +15,7 @@ Use the Wazuh assisted installation method to install and configure the Wazuh in
 
    You need root user privileges to run all the commands described below.
 
-Make sure that copies of the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh`` and ``wazuh-offline.tar.gz`` files are placed in your working directory.
+Make sure that copies of ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh`` and ``wazuh-offline.tar.gz`` are placed in your working directory.
 
 Install the following dependencies from your local package mirror, installation media, or copied packages (see :ref:`Prerequisites <offline_installation_prerequisites>`) before you run the assistant on this host.
 
@@ -33,7 +33,6 @@ Install the following dependencies from your local package mirror, installation 
       -  hostname
       -  iproute
       -  libcap
-      -  lsof
       -  openssl
       -  procps-ng
       -  sed
@@ -43,103 +42,89 @@ Install the following dependencies from your local package mirror, installation 
    .. group-tab:: DEB
 
       -  adduser
-      -  apt-transport-https
       -  curl
       -  debconf
       -  diffutils
+      -  gawk
       -  gnupg
       -  hostname
       -  iproute2
       -  libcap2-bin
-      -  lsof
       -  openssl
       -  procps
       -  tar
       -  util-linux
 
-#. Run the following command to install all the central components on this host. ``-a|--all-in-one`` installs the Wazuh indexer, Wazuh manager, and Wazuh dashboard, and ``--offline-installation`` installs them from ``wazuh-offline.tar.gz`` in the same directory as the script:
+#. Run the following command to install all the central components on this host. ``-a|--all-in-one`` installs the Wazuh indexer, Wazuh manager, and Wazuh dashboard. ``--offline-installation`` installs them from ``wazuh-offline.tar.gz`` in the same directory as the script:
 
    .. code-block:: console
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh --offline-installation -a
 
-   If Wazuh agents reach this host through an address that it doesn't have, such as a NAT address or a public DNS name, add the address with ``-as``, once per address. For example:
+   If Wazuh agents reach this host through an address it doesn't have, add the address with ``-as``, once per address. Examples are a NAT address or a public DNS name. For example:
 
    .. code-block:: console
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh --offline-installation -a -as 203.0.113.10 -as wazuh.example.com
 
-   After the installation completes, the output shows where the access credentials are, and a message confirming the installation was successful.
+   After the installation completes, the output shows the access credentials and a message confirming the installation was successful. There is one ``You can access`` line per address of the Wazuh dashboard certificate. In an interactive terminal, the ``Password:`` line shows the ``admin`` password, followed by the command that prints it again.
 
    .. code-block:: none
       :class: output
 
       INFO: --- Summary ---
-      INFO: You can access the web interface https://<WAZUH_DASHBOARD_ADDRESS>:443
+      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>:443
       INFO:     User: admin (Wazuh dashboard login and Wazuh indexer administrator)
-      INFO:     Password: to read it from the credentials file, run:
-      INFO:         sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
-      INFO: The other users of the deployment are listed at the top of /etc/wazuh/credentials.env.
+      INFO:     Password: <ADMIN_PASSWORD>
+      INFO:     To read the password again, run:
+      INFO:         sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
+      INFO: The passwords of the other users are in /etc/wazuh-indexer/export/credentials.env and /etc/wazuh-manager/export/credentials.env.
       INFO: Installation finished.
-
-   .. note::
-
-      The assisted all-in-one installation creates the root CA on this host. Its private key, ``root-ca.key``, is in ``/etc/wazuh/ca``, and the five passwords are in ``/etc/wazuh/credentials.env``. No ``wazuh-install-files.tar`` is created. Back up ``/etc/wazuh/ca`` and store the passwords before you remove ``/etc/wazuh/credentials.env``. You need the root CA private key to add nodes and to renew certificates.
 
 #. Access the Wazuh web interface with your ``admin`` user credentials. This is the administrator account for the Wazuh indexer, and it allows you to access the Wazuh dashboard.
 
-   -  **URL**: ``https://<WAZUH_DASHBOARD_ADDRESS>``. Replace ``<WAZUH_DASHBOARD_ADDRESS>`` with an address of this host that your browser can reach.
+   -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
    -  **Username**: ``admin``
-   -  **Password**: the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh/credentials.env``. Run the following command to show it.
+   -  **Password**: the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh-indexer/export/credentials.env``.
 
-      .. code-block:: console
-
-         # grep -m 1 '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
-
-   When you first access the Wazuh dashboard, your browser displays a warning that a trusted authority did not issue the certificate. To trust it, import ``/etc/wazuh/ca/root-ca.pem`` from this host into the certificate manager of the browser, or add an exception in the advanced options of the browser. The dashboard certificate names the addresses of this host, not the addresses you add with ``-as``.
+   When you first access the Wazuh dashboard, your browser displays a warning that a trusted authority did not issue the certificate. To trust it, import ``/etc/wazuh-dashboard/ca/root-ca.pem`` from this host into the browser's certificate manager. You can also add an exception in the browser's advanced options.
 
    If a firewall is active on this host, allow incoming connections to 443/TCP for the Wazuh dashboard and to 1517/TCP for Wazuh 5.x agents. Wazuh 4.x agents use 1514/TCP and 1515/TCP.
 
 Multi-node offline installation
 -------------------------------
 
+Make sure that copies of ``wazuh-install-files.tar`` and ``wazuh-offline.tar.gz``, created in :ref:`Download the packages and configuration files <offline_installation_download>`, are in the working directory of every node.
+
+On every node, the assistant also needs ``systemd``, ``grep``, ``tar``, ``coreutils``, ``sed``, ``gawk``, ``curl``, and ``procps`` (``procps-ng`` on RPM systems). Install any that are missing, together with each component's dependencies below.
+
 Installing the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install and configure the Wazuh indexer nodes on a 64-bit (x86_64/AMD64 or AARCH64/ARM64) architecture.
-
-Install the following dependencies from your local package mirror, installation media, or copied packages (see :ref:`Prerequisites <offline_installation_prerequisites>`) before you run the assistant on the Wazuh indexer nodes.
+Install and configure the Wazuh indexer nodes on a 64-bit (x86_64/AMD64 or AARCH64/ARM64) architecture. Install the following dependencies on the Wazuh indexer nodes, in addition to the :ref:`prerequisites <offline_installation_prerequisites>`:
 
 .. tabs::
 
    .. group-tab:: RPM
 
       -  coreutils
-      -  curl
       -  diffutils
-      -  gnupg2
       -  hostname
       -  iproute
-      -  lsof
       -  openssl
       -  procps-ng
-      -  tar
       -  util-linux
 
    .. group-tab:: DEB
 
       -  adduser
-      -  curl
       -  debconf
       -  diffutils
-      -  gnupg
       -  iproute2
-      -  lsof
       -  openssl
       -  procps
-      -  tar
 
-#. Run the multi-node assisted method with the ``--offline-installation`` option to perform an offline installation. Use the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` in step 4 of :ref:`Download the packages and configuration files <offline_installation_download>`, for example, ``indexer``.
+#. Run the multi-node assisted method with the ``--offline-installation`` option to perform an offline installation. Use the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml``, for example, ``indexer``.
 
    .. code-block:: console
 
@@ -147,7 +132,7 @@ Install the following dependencies from your local package mirror, installation 
 
    Repeat this step for every Wazuh indexer node in your cluster. Then, proceed with initializing your multi-node cluster in the next step.
 
-#. Run the Wazuh installation assistant with the ``--offline-installation`` and ``--start-cluster`` options on any Wazuh indexer node to load the new certificate information and start the cluster:
+#. Run the Wazuh installation assistant with ``--offline-installation`` and ``--start-cluster`` on any Wazuh indexer node. This loads the new certificate information and starts the cluster:
 
    .. code-block:: console
 
@@ -155,17 +140,17 @@ Install the following dependencies from your local package mirror, installation 
 
    .. note::
 
-      You only have to initialize the cluster once; there is no need to run this command on every node.
+      You only have to initialize the cluster once; there is no need to run this command on every node. The assistant waits up to 300 seconds for the Wazuh indexer cluster to form, and names the Wazuh indexer nodes in ``config.yml`` that must be running. If the time runs out, start the Wazuh indexer service on those nodes and run ``--start-cluster`` again.
 
 Testing the cluster installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Run the following command to confirm that the installation is successful. Replace ``<WAZUH_INDEXER_ADDRESS>`` with the address of a Wazuh indexer node. When ``curl`` asks for the password, enter the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value from ``/etc/wazuh/credentials.env`` on any Wazuh indexer node, or from the ``credentials.env`` file in ``wazuh-install-files.tar``. Every node holds the same value.
+#. Run the following commands to confirm that the installation is successful. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the address of a Wazuh indexer node. When ``curl`` asks for the password, enter the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value that the first command shows. Every Wazuh indexer node holds the same value.
 
    .. code-block:: console
 
-      # grep -m 1 '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
-      # curl -k -u admin https://<WAZUH_INDEXER_ADDRESS>:9200
+      # grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
 
    The command output looks similar to this:
 
@@ -184,11 +169,11 @@ Testing the cluster installation
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-#. Verify that the cluster is running correctly. Replace ``<WAZUH_INDEXER_ADDRESS>`` in the following command, then execute it and enter the same password:
+#. Verify that the cluster is running correctly. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` in the following command, then execute it and enter the same password:
 
    .. code-block:: console
 
-      # curl -k -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cat/nodes?v
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
    The output lists every Wazuh indexer node, and the node that manages the cluster has ``*`` in the ``cluster_manager`` column. For example:
 
@@ -202,41 +187,33 @@ Testing the cluster installation
 Installing the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install the following dependencies from your local package mirror, installation media, or copied packages (see :ref:`Prerequisites <offline_installation_prerequisites>`) before you run the assistant on the Wazuh manager nodes.
+Install the following dependencies on the Wazuh manager nodes, besides the :ref:`prerequisites <offline_installation_prerequisites>`:
 
 .. tabs::
 
    .. group-tab:: RPM
 
-      -  coreutils
-      -  curl
       -  diffutils
       -  findutils
       -  gawk
-      -  gnupg2
       -  grep
       -  hostname
       -  iproute
-      -  lsof
       -  openssl
       -  sed
-      -  tar
       -  util-linux
 
    .. group-tab:: DEB
 
-      -  apt-transport-https
       -  curl
       -  diffutils
       -  gnupg
       -  hostname
       -  iproute2
-      -  lsof
       -  openssl
-      -  tar
       -  util-linux
 
-#. Run the installation assistant with the ``--offline-installation`` option to perform an offline installation. Use the option ``--wazuh-manager`` followed by the node name to install the Wazuh manager. The node name must be the same one used in ``config.yml`` in step 4 of :ref:`Download the packages and configuration files <offline_installation_download>`, for example, ``manager``.
+#. Run the installation assistant with the ``--offline-installation`` option to perform an offline installation. Use the option ``--wazuh-manager`` followed by the node name to install the Wazuh manager. The node name must be the same one used in ``config.yml``, for example, ``manager``.
 
    .. code-block:: console
 
@@ -247,34 +224,26 @@ Install the following dependencies from your local package mirror, installation 
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install the following dependencies from your local package mirror, installation media, or copied packages (see :ref:`Prerequisites <offline_installation_prerequisites>`) before you run the assistant on the Wazuh dashboard node.
+Install the following dependencies on the Wazuh dashboard node, besides the :ref:`prerequisites <offline_installation_prerequisites>`:
 
 .. tabs::
 
    .. group-tab:: RPM
 
-      -  curl
       -  diffutils
-      -  gnupg2
       -  libcap
-      -  lsof
       -  openssl
-      -  tar
       -  util-linux
 
    .. group-tab:: DEB
 
-      -  adduser
       -  curl
-      -  debconf
       -  diffutils
-      -  gnupg
       -  libcap2-bin
-      -  lsof
       -  openssl
       -  tar
 
-#. Run the installation assistant with the ``--offline-installation`` option to perform an offline installation. Use the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` in step 4 of :ref:`Download the packages and configuration files <offline_installation_download>`, for example, ``dashboard``.
+#. Run the installation assistant with the ``--offline-installation`` option to perform an offline installation. Use the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml``, for example, ``dashboard``.
 
    .. code-block:: console
 
@@ -288,19 +257,19 @@ Install the following dependencies from your local package mirror, installation 
       :class: output
 
       INFO: --- Summary ---
-      INFO: You can access the web interface https://<WAZUH_DASHBOARD_ADDRESS>:443
+      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>:443
       INFO:     User: admin (Wazuh dashboard login and Wazuh indexer administrator)
       INFO:     Password: to read it from wazuh-install-files.tar, run:
       INFO:         sudo tar -xOf wazuh-install-files.tar wazuh-install-files/credentials.env | grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' | cut -d= -f2-
-      INFO: The other users of the deployment are listed at the top of wazuh-install-files/credentials.env of wazuh-install-files.tar.
+      INFO: The passwords of the other users are in wazuh-install-files/credentials.env of wazuh-install-files.tar.
       INFO: Installation finished.
 
    You have now installed and configured Wazuh.
 
 #. Access the Wazuh web interface with your ``admin`` user credentials. This is the administrator account for the Wazuh indexer, and it allows you to access the Wazuh dashboard.
 
-   -  **URL**: ``https://<WAZUH_DASHBOARD_ADDRESS>``
+   -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
    -  **Username**: ``admin``
-   -  **Password**: the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value. Run the command that the summary shows to read it.
+   -  **Password**: the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``wazuh-install-files/credentials.env`` of ``wazuh-install-files.tar``. Run the command that the summary shows to read it.
 
-   When you first access the Wazuh dashboard, your browser displays a warning that a trusted authority did not issue the certificate. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser instead. Alternatively, a certificate from a trusted authority can be configured. The certificate names only the Wazuh dashboard addresses in ``config.yml``. To reach the dashboard by another address or a DNS name without the warning, add it to the ``ip`` or ``dns`` list of the dashboard node in ``config.yml`` before you run ``-g``.
+   When you first access the Wazuh dashboard, your browser displays a warning that a trusted authority didn't issue the certificate. You can add an exception in the browser's advanced options. For better security, import the ``root-ca.pem`` file you generated earlier into the browser's certificate manager instead. You can also configure a certificate from a trusted authority. The certificate names only the Wazuh dashboard addresses in ``config.yml``. To reach the dashboard by another address or DNS name without the warning, add it to the dashboard node's ``ip`` or ``dns`` list in ``config.yml``. Do this before you run ``-g``.

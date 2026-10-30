@@ -6,7 +6,7 @@
 Configuring SSL certificates on the Wazuh dashboard using Let’s Encrypt
 =======================================================================
 
-Let’s Encrypt certificate can be configured for the Wazuh dashboard using the `certbot <https://certbot.eff.org/>`__ client. Follow the instructions below to install and configure a Let’s Encrypt certificate on an All-In-One Wazuh installation consisting of the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. In a clustered environment, the instructions should be applied to the Wazuh dashboard node(s).
+You can configure a Let’s Encrypt certificate for the Wazuh dashboard with the certbot client. Follow the instructions below to install and configure a Let’s Encrypt certificate on an All-In-One Wazuh installation consisting of the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard. In a clustered environment, apply the instructions on each Wazuh dashboard node.
 
 The process is divided into three stages:
 
@@ -40,16 +40,9 @@ Install certbot
          .. code-block:: console
 
             # apt-get update
-            # apt-get install snap
+            # apt-get install snapd
 
-      .. group-tab:: Amazon Linux 2
-
-         .. code-block:: console
-
-            # amazon-linux-extras enable epel
-            # yum install epel-release
-
-#. Confirm installed snap is the latest:
+#. Confirm the installed snap is the latest:
 
    .. code-block:: console
 
@@ -61,29 +54,11 @@ Install certbot
       core 16-2.61.4-20240607 from Canonical✓ installed
       snap "core" has no updates available
 
-   **For Amazon Linux 2**
-
-   Confirm the EPEL repository is available:
-
-   .. code-block:: console
-
-      # yum repolist
-
-   You should see a repo name that says "Amazon Extras repo for epel."
-
 #. Install certbot:
 
    .. code-block:: console
 
       # snap install --classic certbot
-
-   **For Amazon Linux 2**
-
-   .. code-block:: console
-
-      # yum install -y certbot python3-certbot-apache
-
-   Skip step 4 if your operating system is Amazon Linux 2.
 
 #. Run the following command to link the certbot from the snap directory to the user directory:
 
@@ -91,8 +66,8 @@ Install certbot
 
       # ln -s /snap/bin/certbot /usr/bin/certbot
 
-Configure certbot to generate Let’s Encrypt SSL certificate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configure certbot to generate a Let’s Encrypt SSL certificate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Open ports 80 (HTTP) and 443 (HTTPS):
 
@@ -105,6 +80,7 @@ Configure certbot to generate Let’s Encrypt SSL certificate
             # systemctl start firewalld
             # firewall-cmd --permanent --add-port=443/tcp
             # firewall-cmd --permanent --add-port=80/tcp
+            # firewall-cmd --reload
 
       .. group-tab:: APT
 
@@ -152,53 +128,14 @@ Configure certbot to generate Let’s Encrypt SSL certificate
 Configuring Let’s Encrypt SSL certificates on the Wazuh dashboard
 -----------------------------------------------------------------
 
-#. Copy the generated Let’s Encrypt certificates from the directory ``/etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/`` to the Wazuh dashboard certificate directory ``/etc/wazuh-dashboard/certs``:
+#. Install the generated Let’s Encrypt certificate and private key as the Wazuh dashboard certificate files in ``/etc/wazuh-dashboard/certs``. The ``install`` command copies the files that the ``/etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/`` links point to, and sets the owner and mode that the Wazuh dashboard requires:
 
    .. code-block:: console
 
-      # cp /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/privkey.pem /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem /etc/wazuh-dashboard/certs/
+      # install -m 0640 -o root -g wazuh-dashboard /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem /etc/wazuh-dashboard/certs/dashboard.pem
+      # install -m 0640 -o root -g wazuh-dashboard /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/privkey.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
 
-#. Replace the old certificates with the Let’s Encrypt certificates to the Wazuh dashboard by editing the configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` as shown below:
-
-   .. code-block:: console
-
-      server.ssl.key: "/etc/wazuh-dashboard/certs/privkey.pem"
-      server.ssl.certificate: "/etc/wazuh-dashboard/certs/fullchain.pem"
-
-   After editing, you get a configuration file like the one below:
-
-   .. code-block:: console
-      :emphasize-lines: 11,12
-
-      server.host: 0.0.0.0
-      opensearch.hosts: https://127.0.0.1:9200
-      server.port: 443
-      opensearch.ssl.verificationMode: certificate
-      opensearch.username: kibanaserver
-      opensearch.password: kibanaserver
-      opensearch.requestHeadersAllowlist: ["securitytenant","Authorization"]
-      opensearch_security.multitenancy.enabled: false
-      opensearch_security.readonly_mode.roles: ["kibana_read_only"]
-      server.ssl.enabled: true
-      server.ssl.key: "/etc/wazuh-dashboard/certs/privkey.pem"
-      server.ssl.certificate: "/etc/wazuh-dashboard/certs/fullchain.pem"
-      opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-      uiSettings.overrides.defaultRoute: /app/wazuh
-      opensearch_security.cookie.secure: true
-      wazuh_core.hosts:
-        default:
-          url: https://localhost
-          port: 55000
-          username: wazuh-wui
-          run_as: true
-
-#. Modify the permissions and ownership of the certificates:
-
-   .. code-block:: console
-
-      # chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/
-      # chmod -R 500 /etc/wazuh-dashboard/certs/
-      # chmod 440 /etc/wazuh-dashboard/certs/privkey.pem /etc/wazuh-dashboard/certs/fullchain.pem
+#. Keep the ``server.ssl`` settings in ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` as installed. They already point to these files, so you change nothing in this file.
 
 #. Restart the Wazuh dashboard service:
 
@@ -208,15 +145,16 @@ The Let’s Encrypt certificate installation on the Wazuh dashboard is now ready
 
 .. thumbnail:: /images/configuring-third-party-certs/lets-encrypt-wazuh-dashboard.jpg
    :title: Wazuh dashboard
+   :alt: Wazuh dashboard login page served with the Let’s Encrypt certificate
    :align: center
    :width: 80%
 
 Configuring auto-renewal of the certificates
 --------------------------------------------
 
-The generated Let’s Encrypt certificates are valid for ninety days. The certbot package previously installed renews the certificate by adding a renewal script to the ``/etc/cron.d`` directory on the Wazuh dashboard. This script runs twice a day and will renew the certificate thirty days before expiration.
+The generated Let’s Encrypt certificates are valid for ninety days. The certbot snap renews the certificate with the systemd timer ``snap.certbot.renew.timer``. The timer runs twice a day and renews the certificate 30 days before it expires. Run ``systemctl list-timers snap.certbot.renew.timer`` to see it.
 
-Also, we append a renewal hook, ``renew_hook`` to the configuration to restart or reload the Wazuh dashboard for the renewed certificate to apply.
+Also, we append a renewal hook, ``renew_hook``, to the configuration. It installs the renewed certificate and key for the Wazuh dashboard and restarts it, because the Wazuh dashboard uses copies of the files.
 
 Configure the renew_hook using the following steps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -224,7 +162,6 @@ Configure the renew_hook using the following steps
 #. Edit the domain configuration file at ``/etc/letsencrypt/renewal/<YOUR_DOMAIN_NAME>.conf`` and add the renewal hook at the end of the file:
 
    .. code-block:: console
-      :emphasize-lines: 15
 
       # renew_before_expiry = 30 days
       version = 1.32.0
@@ -240,7 +177,7 @@ Configure the renew_hook using the following steps
       authenticator = standalone
       server = https://acme-v02.api.letsencrypt.org/directory
       key_type = rsa
-      renew_hook = systemctl restart wazuh-dashboard
+      renew_hook = install -m 0640 -o root -g wazuh-dashboard /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem /etc/wazuh-dashboard/certs/dashboard.pem && install -m 0640 -o root -g wazuh-dashboard /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/privkey.pem /etc/wazuh-dashboard/certs/dashboard-key.pem && systemctl restart wazuh-dashboard
 
 #. Test the renewal hook by running the command below:
 

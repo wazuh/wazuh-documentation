@@ -25,9 +25,9 @@ For more information about agent enrollment and the available authentication met
 +----------------+----------------------------------------------------------------------------------------------+
 | -d             | Runs the daemon in debug mode. Repeat the option to increase the debug level.                |
 +----------------+----------------------------------------------------------------------------------------------+
-| -D <directory> | Specifies the Wazuh manager installation directory used to build the default server          |
-|                | certificate and key paths. The default is /var/wazuh-manager. This option does not change    |
-|                | the working directory of the daemon.                                                         |
+| -D <directory> | Accepted, but has no effect: the daemon has already moved into the Wazuh manager             |
+|                | installation directory, /var/wazuh-manager, when it reads this option. The default           |
+|                | certificate and key paths are fixed in /etc/wazuh-manager/certs/.                            |
 +----------------+----------------------------------------------------------------------------------------------+
 | -f             | Runs the daemon in the foreground.                                                           |
 +----------------+----------------------------------------------------------------------------------------------+
@@ -35,13 +35,14 @@ For more information about agent enrollment and the available authentication met
 +----------------+----------------------------------------------------------------------------------------------+
 | -h             | Displays the help message and exits.                                                         |
 +----------------+----------------------------------------------------------------------------------------------+
-| -k <path>      | Specifies the full path to the server private key. The default is etc/certs/remoted-key.pem. |
+| -k <path>      | Specifies the full path to the server private key. The default is                            |
+|                | /etc/wazuh-manager/certs/remoted-key.pem.                                                    |
 +----------------+----------------------------------------------------------------------------------------------+
 | -p <port>      | Specifies the port used by the enrollment service. The default is 1515.                      |
 +----------------+----------------------------------------------------------------------------------------------+
 | -P             | Forces shared-password enrollment on. The daemon itself has this method disabled by default, |
 |                | but the configuration shipped by the installer enables it. The password is read from         |
-|                | etc/authd.pass or generated automatically.                                                   |
+|                | /etc/wazuh-manager/authd.pass or generated automatically.                                    |
 +----------------+----------------------------------------------------------------------------------------------+
 | -s             | Enables source host verification. Use this option with -v.                                   |
 +----------------+----------------------------------------------------------------------------------------------+
@@ -53,7 +54,8 @@ For more information about agent enrollment and the available authentication met
 +----------------+----------------------------------------------------------------------------------------------+
 | -V             | Displays version and license information.                                                    |
 +----------------+----------------------------------------------------------------------------------------------+
-| -x <path>      | Specifies the full path to the server certificate. The default is etc/certs/remoted.pem.     |
+| -x <path>      | Specifies the full path to the server certificate. The default is                            |
+|                | /etc/wazuh-manager/certs/remoted.pem.                                                        |
 +----------------+----------------------------------------------------------------------------------------------+
 
 Enrollment token commands

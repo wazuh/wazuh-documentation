@@ -164,13 +164,13 @@ You can enable this feature to push policy files to Wazuh agents in defined grou
 
       Enabling remote command execution lets the Wazuh manager execute commands on the monitored endpoint. Remote commands are disabled by default as a security measure, which helps reduce the attack surface if the Wazuh manager is compromised. You don't need to enable remote commands if you add the policy files to each agent without using Wazuh to push them. For example, you can create the policy file directly on the monitored endpoint, or use ``scp`` to copy it there.
 
-#. On the Wazuh manager, place a new policy file in the ``/var/wazuh-manager/etc/shared/default`` folder and change its ownership. Replace ``<NEW_POLICY_FILE>`` with your policy name:
+#. On the Wazuh manager, place a new policy file in the ``/etc/wazuh-manager/shared/default`` folder and change its ownership. Replace ``<NEW_POLICY_FILE>`` with your policy name:
 
    .. code-block:: console
 
-      # chown wazuh-manager:wazuh-manager /var/wazuh-manager/etc/shared/default/<NEW_POLICY_FILE>
+      # chown wazuh-manager:wazuh-manager /etc/wazuh-manager/shared/default/<NEW_POLICY_FILE>
 
-#. Add the following configuration block to the Wazuh manager ``/var/wazuh-manager/etc/shared/default/agent.conf`` file to configure the new policy file in the Wazuh agent:
+#. Add the following configuration block to the Wazuh manager ``/etc/wazuh-manager/shared/default/agent.conf`` file to configure the new policy file in the Wazuh agent:
 
    .. code-block:: xml
 
@@ -200,7 +200,7 @@ You can enable this feature to push policy files to Wazuh agents in defined grou
 
    The Wazuh agent saves all files pushed from the Wazuh server in the ``etc/shared/`` directory on Linux and macOS endpoints and in the ``shared\`` directory on Windows endpoints, regardless of the group they belong to. We specify the relative file path of the policy because the installation directory differs between operating systems.
 
-The new ``<sca>`` block in the Wazuh manager ``/var/wazuh-manager/etc/shared/default/agent.conf`` file merges with the ``<sca>`` block on the Wazuh agent side, and Wazuh adds the new configuration.
+The new ``<sca>`` block in the Wazuh manager ``/etc/wazuh-manager/shared/default/agent.conf`` file merges with the ``<sca>`` block on the Wazuh agent side, and Wazuh adds the new configuration.
 
 .. _sca_creating_custom_policies:
 

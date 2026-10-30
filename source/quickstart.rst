@@ -60,7 +60,7 @@ You need a host that meets the requirements above, internet access, and a user w
 
    -  **1517/TCP**: Wazuh 5.x agent enrollment and connection.
    -  **443/TCP**: Wazuh dashboard web interface.
-   -  **1514/TCP and 1515/TCP**: only needed if Wazuh 4.x agents connect to this deployment.
+   -  **1514/TCP and 1515/TCP**: only needed if Wazuh 4.x agents connect to this deployment. A Wazuh 4.x agent that enrolls for the first time also needs this server's enrollment password. Read it with ``sudo cat /etc/wazuh-manager/authd.pass`` and pass it as ``WAZUH_REGISTRATION_PASSWORD`` when you install the agent, or write it to ``/var/ossec/etc/authd.pass`` on the agent and restart it.
 
    For example, with firewalld, run ``sudo firewall-cmd --permanent --add-port=443/tcp --add-port=1517/tcp && sudo firewall-cmd --reload``. With UFW, run ``sudo ufw allow 443/tcp && sudo ufw allow 1517/tcp``. To check whether a firewall is active, run ``sudo firewall-cmd --state`` or ``sudo ufw status``.
 
@@ -80,7 +80,13 @@ You need a host that meets the requirements above, internet access, and a user w
 
          $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -as <ALTERNATE_ADDRESS>
 
-   When the installation finishes, the assistant prints the address of the Wazuh dashboard, one URL for each IP address of the host, then the user name and the command that shows the password:
+   -  **Manager API address:** If Wazuh manager API clients, such as scripts or a Wazuh dashboard on another host, reach this server through an address it cannot know, add it with ``-ap|--api-san <MANAGER_API_ADDRESS>``. Replace ``<MANAGER_API_ADDRESS>`` with that address. To add more than one address, repeat the option for each. You can use ``-as`` and ``-ap`` in the same command.
+
+      .. code-block:: console
+
+         $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -ap <MANAGER_API_ADDRESS>
+
+   When the installation finishes, the assistant prints the address of the Wazuh dashboard, one URL for each IP address of the host, then the username, the password, and the command to read the password again:
 
    .. code-block:: none
       :class: output
@@ -89,25 +95,28 @@ You need a host that meets the requirements above, internet access, and a user w
       INFO: --- Summary ---
       INFO: You can access the web interface https://<WAZUH_DASHBOARD_ADDRESS>:443
       INFO:     User: admin (Wazuh dashboard login and Wazuh indexer administrator)
-      INFO:     Password: to read it from the credentials file, run:
-      INFO:         sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
-      INFO: The other users of the deployment are listed at the top of /etc/wazuh/credentials.env.
+      INFO:     Password: <ADMIN_PASSWORD>
+      INFO:     To read the password again, run:
+      INFO:         sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
+      INFO: The passwords of the other users are in /etc/wazuh-indexer/export/credentials.env and /etc/wazuh-manager/export/credentials.env.
       INFO: Installation finished.
 
-#. The installation assistant stores the passwords of all Wazuh users in ``/etc/wazuh/credentials.env``, which only root can read. Run the following command to show the ``admin`` password:
+#. The summary shows the password only when the assistant runs in an interactive terminal. If you redirect its output, for example to a file or a cloud-init log, the summary shows only the command. The password is never written to ``/var/log/wazuh-install.log``. The Wazuh packages generate the passwords during the installation: the Wazuh indexer users are in ``/etc/wazuh-indexer/export/credentials.env``, and the Wazuh manager API users are in ``/etc/wazuh-manager/export/credentials.env``. Only root can read these files. To show the ``admin`` password again, run:
 
    .. code-block:: console
 
-      $ sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
+      $ sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
 
 #. Open the Wazuh dashboard at ``https://<WAZUH_DASHBOARD_ADDRESS>`` in a browser. Replace ``<WAZUH_DASHBOARD_ADDRESS>`` with an address of this host that your browser can reach, such as one of the URLs the assistant printed. Log in with the following credentials:
 
    -  **Username:** ``admin``
    -  **Password:** the ``admin`` password from step 2
 
-The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import ``root-ca.pem`` into the browser's certificate manager. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
+The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import ``/etc/wazuh-dashboard/ca/root-ca.pem`` into the browser's certificate manager. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
 
-The ``/etc/wazuh/credentials.env`` file holds the passwords of all five Wazuh users, and no component reads it after the installation. Store the passwords in a safe place, then remove the file with ``sudo rm -f /etc/wazuh/credentials.env``. Keep ``/etc/wazuh/ca``, which holds the root CA private key you need to add nodes or renew certificates. The passwords tool writes new passwords to this file again, as described in :doc:`Password management </user-manual/user-administration/password-management>`.
+The Wazuh packages create the certificate authorities, the certificates, and the passwords of the Wazuh users during the installation. Store the passwords in a safe place, and keep the ``/etc/wazuh-indexer/export/credentials.env`` and ``/etc/wazuh-manager/export/credentials.env`` files on a host with more than one central component; the Wazuh manager and the Wazuh dashboard read their passwords from them. To change a password, see :doc:`Password management </user-manual/user-administration/password-management>`.
+
+Each package keeps its certificate authority and the private key of that authority in its ``ca/`` directory: ``/etc/wazuh-indexer/ca``, ``/etc/wazuh-manager/ca``, and ``/etc/wazuh-dashboard/ca``. Back up these three directories in a safe place. You need them to renew certificates.
 
 To remove the Wazuh central components and all their data, run the Wazuh installation assistant using the option ``-u`` or ``--uninstall``. See :doc:`Uninstalling the Wazuh central components </installation-guide/uninstalling-wazuh/central-components>` for details.
 
@@ -116,7 +125,7 @@ Next steps
 
 Now that your Wazuh installation is ready, you can start deploying the Wazuh agent. This can be used to protect laptops, desktops, servers, cloud instances, containers, or virtual machines. The Wazuh agent is lightweight and multi-purpose, providing a variety of security capabilities.
 
-Next, deploy Wazuh agents. Each agent enrolls with a token that you create on this server for the address agents connect to. To deploy agents, follow the instructions for your operating system below, or go to **Agents management** > **Summary** > **Deploy new agent** in the Wazuh dashboard.
+Next, deploy Wazuh agents. Each agent enrolls with a token that you create on this server for the address agents connect to. To deploy agents, follow the instructions for your operating system below, or go to **Agents management** > **Summary** > **Deploy new agent** in the Wazuh dashboard. The Wazuh manager doesn't monitor the server it runs on. To monitor this server too, deploy a Wazuh agent on it with a token for this server's own address.
 
 .. raw:: html
 

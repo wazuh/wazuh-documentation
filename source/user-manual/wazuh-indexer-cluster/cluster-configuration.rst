@@ -40,9 +40,9 @@ The following example shows the configuration of the first node of a three-node 
      - "10.0.0.12"
 
    plugins.security.nodes_dn:
-     - "CN=indexer-1,OU=Wazuh,O=Wazuh,L=California,C=US"
-     - "CN=indexer-2,OU=Wazuh,O=Wazuh,L=California,C=US"
-     - "CN=indexer-3,OU=Wazuh,O=Wazuh,L=California,C=US"
+     - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=indexer-1"
+     - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=indexer-2"
+     - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=indexer-3"
 
 Connecting the Wazuh manager and Wazuh dashboard to the cluster
 ---------------------------------------------------------------
@@ -63,9 +63,9 @@ Wazuh manager
 
    .. note::
 
-      The Wazuh indexer connector username is ``wazuh-manager``. Its password is generated during installation and stored as ``WAZUH_INDEXER_MANAGER_PASSWORD`` in ``/etc/wazuh/credentials.env``.
+      The Wazuh indexer connector username is ``wazuh-manager``. Its password is generated during installation and stored as ``WAZUH_INDEXER_MANAGER_PASSWORD`` in ``/etc/wazuh-indexer/export/credentials.env``.
 
-#. Add one ``<host>`` entry for each Wazuh indexer node in the ``<indexer>`` block of the Wazuh manager ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
+#. Add one ``<host>`` entry for each Wazuh indexer node in the ``<indexer>`` block of the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file:
 
    .. code-block:: xml
 
@@ -229,7 +229,7 @@ Apply the :ref:`Wazuh indexer cluster tuning <wazuh_indexer_cluster_tuning>` set
 
       You only have to initialize the cluster once. There is no need to run this command on every node, and you do not need to run it again when new nodes join the cluster.
 
-The Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``. Wazuh 5.0 has no default passwords. The installation generates the passwords for the ``admin``, ``kibanaserver``, and ``wazuh-manager`` users and stores them in ``/etc/wazuh/credentials.env``. Change a password with the Wazuh password tool on any Wazuh indexer node. The password must have between 12 and 64 characters, use only A-Z, a-z, 0-9, and ``. , _ + : @ % ^ = ~ -``, and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.
+The Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``. Wazuh 5.0 has no default passwords. The installation generates the passwords for the ``admin``, ``kibanaserver``, and ``wazuh-manager`` users and stores them in ``/etc/wazuh-indexer/export/credentials.env``. Change a password with the Wazuh password tool on any Wazuh indexer node. The password must have between 12 and 64 characters, use only A-Z, a-z, 0-9, and ``. , _ + : @ % ^ = ~ -``, and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.
 
 .. code-block:: console
    :emphasize-lines: 2
@@ -239,4 +239,4 @@ The Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/
 
 .. note::
 
-   After changing the admin password, update the Wazuh manager keystore and the Wazuh dashboard configuration with the new credentials. Otherwise, those components can no longer authenticate against the Wazuh indexer.
+   Changing the ``admin`` password needs no update on the other Wazuh components. The Wazuh manager and the Wazuh dashboard connect to the Wazuh indexer with their own users, ``wazuh-manager`` and ``kibanaserver``.

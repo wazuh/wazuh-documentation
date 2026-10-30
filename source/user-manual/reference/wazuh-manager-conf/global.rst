@@ -33,7 +33,7 @@ Time a Wazuh agent can remain without communication before the Wazuh manager mar
 | **Default value**    | 15m (900 s)                                                                                  |
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Allowed values**   | Positive integer with optional time unit suffix: `s` (seconds), `m` (minutes), `h` (hours),  |
-|                      | `d` (days). Minimum: 1s.                                                                     |
+|                      | `d` (days), `w` (weeks). Minimum: 1s.                                                        |
 +----------------------+----------------------------------------------------------------------------------------------+
 
 Sample configuration

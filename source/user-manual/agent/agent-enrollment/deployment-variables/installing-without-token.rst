@@ -6,12 +6,19 @@
 Installing without a token
 ==========================
 
-If you install the package without ``WAZUH_ENROLLMENT_TOKEN``, the installation completes, but the Wazuh agent isn't enrolled and can't start until it is. The installer records this message in ``ossec.log``. On Linux, it's also displayed:
+If you install the package without ``WAZUH_ENROLLMENT_TOKEN``, the installation completes, but the Wazuh agent isn't enrolled and can't start until it is. On Linux, the installer displays this message and records it in ``ossec.log``:
 
 .. code-block:: none
    :class: output
 
-   No manager configured [INFO_NO_MANAGER]: WAZUH_ENROLLMENT_TOKEN was not supplied, so the agent does not know where to connect.
+   wazuh-agent: no manager configured [INFO_NO_MANAGER]: WAZUH_ENROLLMENT_TOKEN was not supplied, so the agent does not know where to connect.
+
+On Windows, ``ossec.log`` has:
+
+.. code-block:: none
+   :class: output
+
+   No manager configured [INFO_NO_MANAGER]: enroll the agent with Manage > Enroll in the agent GUI or with wazuh-agent-auth.exe, or reinstall with WAZUH_ENROLLMENT_TOKEN.
 
 The other variables, such as ``WAZUH_AGENT_NAME`` and ``WAZUH_AGENT_GROUP``, are still applied. To enroll the Wazuh agent later, save the token to a file and run ``wazuh-agent-auth`` as root or as an administrator. It uses the name and groups set during installation:
 

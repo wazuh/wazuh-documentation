@@ -23,9 +23,9 @@ There are two methods to enable anti-tampering on Wazuh agents:
 Enable anti-tampering via centralized configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use centralized agent configuration to enable anti-tampering on multiple agents. The agent configuration file for each agent group is located at ``/var/wazuh-manager/etc/shared/<AGENT_GROUP_NAME>/agent.conf`` on the Wazuh manager.
+Use centralized agent configuration to enable anti-tampering on multiple agents. The agent configuration file for each agent group is located at ``/etc/wazuh-manager/shared/<AGENT_GROUP_NAME>/agent.conf`` on the Wazuh manager.
 
-For example, add the following to the ``/var/wazuh-manager/etc/shared/default/agent.conf`` file on the Wazuh manager to enable anti-tampering for all Linux endpoints in the ``default`` group:
+For example, add the following to the ``/etc/wazuh-manager/shared/default/agent.conf`` file on the Wazuh manager to enable anti-tampering for all Linux endpoints in the ``default`` group:
 
 .. code-block:: xml
 
@@ -77,7 +77,7 @@ Configure agent authentication
 You can authenticate the agent removal using any of the following methods:
 
 #. :ref:`Temporary authentication token <temporary_authentication_token>` (recommended): More secure as it avoids storing the Wazuh manager API username and password on the monitored endpoint.
-#. :ref:`Stored Wazuh server API credentials <stored_wazuh_server_API_credentials>`: Requires storing the Wazuh manager API username and password on the monitored endpoint.
+#. :ref:`Stored Wazuh manager API credentials <stored_wazuh_server_API_credentials>`: Requires storing the Wazuh manager API username and password on the monitored endpoint.
 
 .. _temporary_authentication_token:
 
@@ -142,6 +142,10 @@ Uninstall the Wazuh agent
 
 Perform the following steps on the endpoint you want to remove the agent from:
 
+#. Disable the Wazuh agent service.
+
+   .. include:: /_templates/installations/wazuh/common/disable_wazuh_agent_service.rst
+
 #. Remove the Wazuh agent installation.
 
    .. tabs::
@@ -182,10 +186,6 @@ Perform the following steps on the endpoint you want to remove the agent from:
 
          Some files are marked as configuration files. Due to this designation, the package manager does not remove these files from the filesystem. Delete the ``/var/ossec/`` folder to remove all files completely.
 
-#. Disable the Wazuh agent service.
-
-   .. include:: /_templates/installations/wazuh/common/disable_wazuh_agent_service.rst
-
 The Wazuh agent is now completely removed from your Linux endpoint.
 
 Troubleshooting agent removal
@@ -216,9 +216,7 @@ Log output from failed removal of the Wazuh agent:
 
 .. code-block:: none
 
-   2026/06/26 14:27:18 wazuh-agentd: INFO: (8700): Starting user validation to uninstall the Wazuh agent package.
-   2026/06/26 14:27:18 wazuh-agentd: ERROR: (5362): Unexpected status code in Wazuh agent package uninstallation request: 401
-
+   2026/06/26 14:27:18 wazuh-agentd: ERROR: (4116): Unexpected status code in Wazuh agent package uninstallation request: 401
    ERROR: Uninstallation not authorized, aborting...
 
 Verify that the correct API credentials are used in the environment file.

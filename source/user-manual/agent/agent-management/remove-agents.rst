@@ -25,7 +25,7 @@ You can remove Wazuh agents directly from the Wazuh dashboard.
 #. Select **Remove**.
 #. When prompted, click **Remove**.
 
-.. thumbnail:: /images/manual/agent/remove-agent-dashboard.gif
+.. thumbnail:: /images/manual/agent/remove-agent-dashboard.png
    :title: Remove agent from the Wazuh dashboard
    :alt: Remove agent from the Wazuh dashboard
    :align: center
@@ -55,9 +55,9 @@ You can remove specific Wazuh agents using a list. Use the parameter ``agents_li
 
 .. code-block:: console
 
-   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP>:55000/agents?pretty=true&older_than=0s&agents_list=012,014,016&status=all" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?pretty=true&older_than=0s&agents_list=012,014,016&status=all" -H  "Authorization: Bearer $TOKEN"
 
-Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
+Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh manager.
 
 
 .. code-block:: json

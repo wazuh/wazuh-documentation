@@ -23,18 +23,18 @@ The shared configuration supplements the local ``/var/ossec/etc/ossec.conf`` fil
 Location of the agent.conf file
 ----------------------------------
 
-Centralized configuration files are stored in the ``/var/wazuh-manager/etc/shared/`` directory on the Wazuh manager. Each agent group has its own subdirectory containing an ``agent.conf`` file.
+Centralized configuration files are stored in the ``/etc/wazuh-manager/shared/`` directory on the Wazuh manager. Each agent group has its own subdirectory containing an ``agent.conf`` file.
 
 .. code-block:: none
 
-   /var/wazuh-manager/etc/shared/<GROUP_NAME>/agent.conf
+   /etc/wazuh-manager/shared/<GROUP_NAME>/agent.conf
 
 The following example shows the directory structure:
 
 .. code-block:: none
    :class: output
 
-   /var/wazuh-manager/etc/shared/
+   /etc/wazuh-manager/shared/
    ├── agent-template.conf
    ├── default
    │   └── agent.conf
@@ -187,9 +187,9 @@ Create the configuration
 
    .. code-block:: console
 
-      # touch /var/wazuh-manager/etc/shared/default/agent.conf.tmp
-      # chown wazuh-manager:wazuh-manager /var/wazuh-manager/etc/shared/default/agent.conf.tmp
-      # chmod 660 /var/wazuh-manager/etc/shared/default/agent.conf.tmp
+      # touch /etc/wazuh-manager/shared/default/agent.conf.tmp
+      # chown wazuh-manager:wazuh-manager /etc/wazuh-manager/shared/default/agent.conf.tmp
+      # chmod 660 /etc/wazuh-manager/shared/default/agent.conf.tmp
 
 2. Define one or more configuration blocks. Use filters such as name, os, and profile to target specific agents:
 
@@ -224,7 +224,7 @@ Validate the configuration
 
    .. code-block:: console
 
-      # /var/wazuh-manager/bin/verify-agent-conf -f /var/wazuh-manager/etc/shared/default/agent.conf.tmp
+      # /var/wazuh-manager/bin/verify-agent-conf -f /etc/wazuh-manager/shared/default/agent.conf.tmp
 
    The command output looks similar to this:
 
@@ -240,7 +240,7 @@ Apply the configuration
 
    .. code-block:: console
 
-      # mv /var/wazuh-manager/etc/shared/default/agent.conf.tmp /var/wazuh-manager/etc/shared/default/agent.conf
+      # mv /etc/wazuh-manager/shared/default/agent.conf.tmp /etc/wazuh-manager/shared/default/agent.conf
 
    The Wazuh manager will automatically detect the new configuration and distribute it to all Wazuh agents in the ``default`` group.
 

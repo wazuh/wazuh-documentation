@@ -91,8 +91,8 @@ Configuring existing components to connect with the new node
         - "<NEW_WAZUH_INDEXER_IP>"
 
       plugins.security.nodes_dn:
-        - "CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
-        - "CN=<NEW_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+        - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+        - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<NEW_WAZUH_INDEXER_NODE_NAME>"
 
    .. note::
 
@@ -104,7 +104,7 @@ Configuring existing components to connect with the new node
 
       # systemctl restart wazuh-indexer
 
-#. Edit the ``<indexer>`` block of the Wazuh manager configuration file ``/var/wazuh-manager/etc/wazuh-manager.conf`` to add the new Wazuh indexer node, then restart the Wazuh manager:
+#. Edit the ``<indexer>`` block of the Wazuh manager configuration file ``/etc/wazuh-manager/wazuh-manager.conf`` to add the new Wazuh indexer node, then restart the Wazuh manager:
 
    .. code-block:: xml
       :emphasize-lines: 2,3

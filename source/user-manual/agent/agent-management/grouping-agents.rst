@@ -12,9 +12,9 @@ There are two methods for grouping enrolled Wazuh agents. They can either be con
 
    Refer to the `agent groups and centralized configuration <https://wazuh.com/blog/agent-groups-and-centralized-configuration/>`__ blog post for more information.
 
-Unless otherwise assigned, all newly connected Wazuh agents automatically belong to the *'default'* group. This group is created during the installation process with the configuration files placed in the ``/var/wazuh-manager/etc/shared/default/`` folder on the Wazuh manager. These files will be pushed from the Wazuh manager to all Wazuh agents belonging to this group.
+Unless otherwise assigned, all newly connected Wazuh agents automatically belong to the *'default'* group. This group is created during the installation process with the configuration files placed in the ``/etc/wazuh-manager/shared/default/`` folder on the Wazuh manager. These files will be pushed from the Wazuh manager to all Wazuh agents belonging to this group.
 
-Each group has a configuration file ``/var/wazuh-manager/etc/shared/<GROUP_NAME>/agent.conf`` located on the Wazuh manager, where ``<GROUP_NAME>`` is the name of the agent group. This file is empty by default, and here, you can define centralized agent configurations. After creating a group, you can modify the group's configuration file to apply configurations to all agents in that group.
+Each group has a configuration file ``/etc/wazuh-manager/shared/<GROUP_NAME>/agent.conf`` located on the Wazuh manager, where ``<GROUP_NAME>`` is the name of the agent group. This file contains a commented configuration template by default (a copy of ``/etc/wazuh-manager/shared/agent-template.conf``), and here, you can define centralized agent configurations. After creating a group, you can modify the group's configuration file to apply configurations to all agents in that group.
 
 Creating agent groups
 ---------------------
@@ -35,7 +35,7 @@ To create agent groups from the Wazuh dashboard:
 #. Navigate to **Agents management** > **Groups** and click the **Add new group** button.
 #. Enter a name for the agent group and click on the **Save new group** button.
 
-.. thumbnail:: /images/manual/agent/new-group-agent-dashboard.gif
+.. thumbnail:: /images/manual/agent/new-group-agent-dashboard.png
    :title: Enter name for the agent group
    :alt: Enter name for the agent group
    :align: center
@@ -112,7 +112,7 @@ Using the Wazuh manager API to create and manage groups programmatically is effe
       POST /groups {"group_id": "macOS"}
       POST /groups {"group_id": "Linux"}
 
-   .. thumbnail:: /images/manual/agent/new-group-agent-api.gif
+   .. thumbnail:: /images/manual/agent/new-group-agent-api.png
       :title: Create agent groups using Dev Tools
       :alt: Create agent groups using Dev Tools
       :align: center
@@ -226,9 +226,9 @@ Below are the steps to assign agents to a group with a specific configuration:
          "error": 0
       }
 
-#. Once a group is created, its ``agent.conf`` file can be edited to include the specific configuration you wish to assign to this group. For this example, for a group named dbms, the file to be edited is located at ``/var/wazuh-manager/etc/shared/dbms/agent.conf`` on the Wazuh manager and each agent belonging to this group will receive this file.
+#. Once a group is created, its ``agent.conf`` file can be edited to include the specific configuration you wish to assign to this group. For this example, for a group named dbms, the file to be edited is located at ``/etc/wazuh-manager/shared/dbms/agent.conf`` on the Wazuh manager and each agent belonging to this group will receive this file.
 
-#. After connecting to the Wazuh manager, each agent assigned to the group will receive the files contained in the ``/var/wazuh-manager/etc/shared/dbms/`` folder from the Wazuh manager, including the ``agent.conf`` file that was modified in the previous step. The length of time it takes for the Wazuh manager to push these files to the Wazuh agents depends on the size of the files, the number of agents in the group, and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding merged.mg file) on 100 Wazuh 4.x agents using UDP, less time if using TCP. Wazuh 5.0 agents always communicate over HTTPS (TCP), so this UDP/TCP distinction does not apply to them.
+#. After connecting to the Wazuh manager, each agent assigned to the group will receive the files contained in the ``/etc/wazuh-manager/shared/dbms/`` folder from the Wazuh manager, including the ``agent.conf`` file that was modified in the previous step. The length of time it takes for the Wazuh manager to push these files to the Wazuh agents depends on the size of the files, the number of agents in the group, and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding merged.mg file) on 100 Wazuh 4.x agents using UDP, less time if using TCP. Wazuh 5.0 agents always communicate over HTTPS (TCP), so this UDP/TCP distinction does not apply to them.
 
 #. Once a specific agent belongs to a group, it will not be automatically reassigned to this group even if it is re-enrolled under another name or ID. After re-enrollment, it will be added to the *default* group which is the default behavior. If you want the Wazuh agent to be automatically reassigned after re-enrollment, it must be explicitly configured by the user in the ``/var/ossec/etc/local_internal_options.conf`` file on the Wazuh agent by adding the option ``remoted.guess_agent_group=1`` (see section remoted in :doc:`internal options </user-manual/reference/internal-options>`).
 
@@ -241,7 +241,7 @@ When a Wazuh agent is enrolled in the Wazuh manager for the first time, the Wazu
 
 The ``merged.mg`` file plays a role in automatic re-assignment of agents to their original groups after re-enrollment (with the ``remoted.guess_agent_group=1`` option enabled). The checksum of the ``merged.mg`` file is used for comparison with other agents to determine the appropriate group.
 
-On the Wazuh manager, the file is located at ``var/wazuh-manager/etc/shared/<GROUP_NAME>/merged.mg``.
+On the Wazuh manager, the file is located at ``/etc/wazuh-manager/shared/<GROUP_NAME>/merged.mg``.
 
 On the Wazuh agent, it is located at ``/var/ossec/etc/shared/merged.mg`` for Linux and ``C:\Program Files (x86)\ossec-agent\shared\merged.mg`` on Windows.
 
@@ -358,11 +358,11 @@ In this case, the remote configuration for the group *apache* takes precedence o
 Using the CLI (agent_groups tool)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-With the CLI ``/var/wazuh-manager/bin/agent_groups`` tool, Wazuh agents can be assigned to groups in the same way. In this example, the agent ``001`` is added to the ``webserver`` group:
+With the CLI ``/var/wazuh-manager/bin/agent_groups`` tool, Wazuh agents can be assigned to groups in the same way. In this example, the agent *016* is added to the ``webserver`` group:
 
 .. code-block:: console
 
-   $ /var/wazuh-manager/bin/agent_groups -a -i 016 -g webserver
+   # /var/wazuh-manager/bin/agent_groups -a -i 016 -g webserver
 
 Output
 
@@ -374,7 +374,7 @@ Output
 
 .. code-block:: console
 
-   $ /var/wazuh-manager/bin/agent_groups -a -i 001 -g apache
+   # /var/wazuh-manager/bin/agent_groups -a -i 016 -g apache
 
 Output
 
@@ -407,7 +407,7 @@ Output
      ID: 012  Name: Ubuntu.
      ID: 016  Name: CentOS.
 
-We can also query which groups the Wazuh agent *001* is a member of:
+We can also query which groups the Wazuh agent *012* is a member of:
 
 .. code-block:: console
 
@@ -431,7 +431,7 @@ Just as agents can be assigned to multiple groups, it is also possible to revert
 
 .. code-block:: console
 
-   # /var/wazuh-manager/bin/agent_groups -r -i 001 -g apache -q
+   # /var/wazuh-manager/bin/agent_groups -r -i 012 -g apache -q
 
 Output
 
@@ -440,7 +440,7 @@ Output
 
    Agent '012' removed from apache.
 
-To verify the successful removal from the group, run this command on the Wazuh manager to check which groups Wazuh agent *001* belongs to.
+To verify the successful removal from the group, run this command on the Wazuh manager to check which groups Wazuh agent *012* belongs to.
 
 .. code-block:: console
 

@@ -10,30 +10,20 @@ The Wazuh dashboard is designed to provide an overview of security-related incid
 
 The Wazuh dashboard provides an overview of the security posture of monitored environments. It summarizes Wazuh agent status, security findings, and MITRE ATT&CK activity, providing quick access to the corresponding dashboard sections for further investigation.
 
+It also presents information across Wazuh capabilities, including configuration assessment, file integrity monitoring, malware detection, threat hunting, vulnerability detection, IT hygiene, incident response, and regulatory compliance. It also provides information about available threat intelligence content and access to supported cloud and SaaS integrations.
+
 .. thumbnail:: /images/wazuh-dashboard/navigating/dashboards.png
    :align: center
    :width: 80%
    :title: Wazuh dashboard Overview
    :alt: Wazuh dashboard Overview
 
-It also presents information across Wazuh capabilities, including configuration assessment, file integrity monitoring, malware detection, threat hunting, vulnerability detection, IT hygiene, incident response, and regulatory compliance. It also provides information about available threat intelligence content and access to supported cloud and SaaS integrations.
-
-.. thumbnail:: /images/wazuh-dashboard/navigating/dashboards2.png
-   :align: center
-   :width: 80%
-   :title: Wazuh dashboard Overview: Endpoint security and threat intelligence
-   :alt: Wazuh dashboard Overview: Endpoint security and threat intelligence
-
-.. thumbnail:: /images/wazuh-dashboard/navigating/dashboards3.png
-   :align: center
-   :width: 80%
-   :title: Wazuh dashboard Overview: Security operations and cloud security
-   :alt: Wazuh dashboard Overview: Security operations and cloud security
-
 Dashboards
 ----------
 
 The Wazuh dashboard provides prebuilt visualizations and reports that help users monitor, analyze, and investigate security events across their environment. These dashboards present security, operational, and compliance data collected and processed by Wazuh. The Wazuh dashboard includes interactive dashboards for endpoint security, threat intelligence, security operations, cloud security, and ruleset management. It also provides management interfaces for Wazuh agents and central components, including the Wazuh manager, indexer, and dashboard.
+
+Click **☰** to open the menu. **Home** contains **Overview** and **AI Assistant**. **Explore** contains **Discover**, **Dashboards**, **Visualize**, **Reporting**, **Alerting**, **Maps**, **Notifications**, and **Active Responses**. The following sections describe the other menu groups.
 
 Endpoint security
 ^^^^^^^^^^^^^^^^^
@@ -76,7 +66,7 @@ This dashboard shows file activity over time, monitored file inventory, and even
 Threat intelligence
 ^^^^^^^^^^^^^^^^^^^
 
-This section of the Wazuh dashboard provides dashboards for threat intelligence capabilities, including threat hunting, vulnerability detection, and MITRE ATT\&CK analysis.
+This section of the Wazuh dashboard provides dashboards for threat intelligence capabilities, including threat hunting, MITRE ATT\&CK analysis, vulnerability detection, and case management. The **Case Management** dashboard shows investigation cases by status, severity, and priority on its **Cases** tab.
 
 Threat Hunting
 ~~~~~~~~~~~~~~
@@ -130,7 +120,7 @@ This dashboard shows IT hygiene data, including system inventory information, in
 Regulatory compliance
 ~~~~~~~~~~~~~~~~~~~~~
 
-This dashboard shows compliance monitoring data mapped to regulatory standards and security benchmarks, including PCI DSS, HIPAA, GDPR, and CIS controls.
+This dashboard shows compliance monitoring data mapped to regulatory frameworks: PCI DSS, CMMC, FedRAMP, GDPR, HIPAA, ISO 27001, NIS2, NIST 800-53, NIST 800-171, and TSC.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/security-operations-compliance.png
    :align: center
@@ -141,7 +131,7 @@ This dashboard shows compliance monitoring data mapped to regulatory standards a
 Incident response
 ~~~~~~~~~~~~~~~~~
 
-This dashboard shows incident response activity, this includes the actions performed by the active response scripts across monitored endpoints. The image below shows an alert generated after an active response script was executed on a monitored endpoint.
+This dashboard shows incident response activity, including the actions that active response scripts perform on monitored endpoints. The image below shows the **Responses** tab with the responses recorded after an active response script ran on a monitored endpoint.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/security-operations-incident-response.png
    :align: center
@@ -152,7 +142,7 @@ This dashboard shows incident response activity, this includes the actions perfo
 Cloud security
 ^^^^^^^^^^^^^^
 
-This section shows dashboards for monitoring cloud workloads, cloud service activity, security events, and compliance data across supported cloud platforms and services, including Docker, Amazon Web Services (AWS), Google Cloud, GitHub, Office 365, and Microsoft Graph Services.
+This section shows dashboards for monitoring cloud workloads, cloud service activity, security events, and compliance data across supported cloud platforms and services, including Docker, Amazon Web Services (AWS), Google Cloud, GitHub, Office 365, and Microsoft Graph API.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/cloud-security.png
    :align: center
@@ -171,16 +161,16 @@ The **Ruleset management** section provides a centralized interface for managing
    :title: Ruleset management
    :alt: Ruleset management
 
-Integrations
-~~~~~~~~~~~~
+Overview
+~~~~~~~~
 
-This section allows users to view and manage integrations available across the active spaces (Draft, Test, Custom, and Standard). An :ref:`integration <dashboard_configurations_integration>` is the top-level organizational unit in **Ruleset Management** that groups related decoders and rules for a specific log source or use case. This section displays all integrations available across the active spaces (Draft, Test, Custom, and Standard), along with their status and associated metadata.
+The **Overview** page lists the integrations in the space you select in **Space** (Draft, Test, Custom, or Standard), with their status and associated metadata. An :ref:`integration <dashboard_configurations_integration>` is the top-level organizational unit in Ruleset Management that groups related decoders, KVDBs, and rules for a specific log source or use case.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/integrations.png
    :align: center
    :width: 80%
-   :title: Integrations
-   :alt: Integrations
+   :title: Overview
+   :alt: Overview
 
 Decoders
 ~~~~~~~~
@@ -191,18 +181,18 @@ The **Decoders** section allows users to query existing decoders and manage cust
    :align: center
    :width: 80%
    :title: Decoders
-   :alt: Decoders
+   :alt: Decoders page of Ruleset management
 
-Key-Value Database (KVDB)
-~~~~~~~~~~~~~~~~~~~~~~~~~
+KVDBs
+~~~~~
 
-The **KVDBs** section allows users to query existing KVDBs and manage custom KVDBs. A KVDB is a lookup table that can be referenced in the decoder or rule logic to enrich events with additional context. KVDB lists can act as either allow or deny lists and replace the Constant database lists used in Wazuh 4.x.
+The **KVDBs** section allows users to query existing Key-Value Databases and manage custom KVDBs. A KVDB is a lookup table that can be referenced in the decoder or rule logic to enrich events with additional context. KVDB lists can act as either allow or deny lists and replace the Constant database lists used in Wazuh 4.x.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/kvdb.png
    :align: center
    :width: 80%
-   :title: KVDB
-   :alt: KVDB
+   :title: KVDBs
+   :alt: KVDBs
 
 Detectors
 ~~~~~~~~~
@@ -213,7 +203,7 @@ The **Detectors** section allows users to query existing detectors and manage cu
    :align: center
    :width: 80%
    :title: Detectors
-   :alt: Detectors
+   :alt: Detectors page of Ruleset management
 
 Rules
 ~~~~~
@@ -224,7 +214,7 @@ The **Rules** section allows users to query existing rules and manage custom rul
    :align: center
    :width: 80%
    :title: Rules
-   :alt: Rules
+   :alt: Rules page of Ruleset management
 
 Log test
 ~~~~~~~~
@@ -238,7 +228,7 @@ The Wazuh **Log test** tool allows users to test Wazuh rules and decoders from t
    :alt: Log test
 
 Agents management
------------------
+^^^^^^^^^^^^^^^^^
 
 The **Agents management** section provides the **Summary**, **Groups**, and **Enrollment tokens** views for managing Wazuh agents.
 
@@ -249,9 +239,9 @@ The **Agents management** section provides the **Summary**, **Groups**, and **En
    :alt: Agents management
 
 Summary
-^^^^^^^
+~~~~~~~
 
-This section provides an overview of monitored endpoints and agent management options. It lists every enrolled Wazuh agent with its connection status, group membership, operating system, and version.
+This section provides an overview of monitored endpoints and agent management options. It lists every enrolled Wazuh agent with its IP address, group membership, operating system, version, and connection status.
 
 You can view endpoint details, deploy Wazuh agents, organize them into groups, remove agents, upgrade agents, and perform actions on individual agents.
 
@@ -262,7 +252,7 @@ You can view endpoint details, deploy Wazuh agents, organize them into groups, r
    :alt: Endpoints summary
 
 Groups
-^^^^^^
+~~~~~~
 
 This section describes how to manage agent groups from the Wazuh dashboard. An agent group organizes Wazuh agents that share a common purpose, such as a platform, location, or workload. Each group has a shared configuration that applies to every agent in the group.
 
@@ -275,9 +265,9 @@ You can create groups, assign agents to one or more groups, and edit each group'
    :alt: Endpoint groups
 
 Enrollment tokens
-^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~
 
-This section describes how to manage enrollment tokens from the Wazuh dashboard. An enrollment token is a credential that a Wazuh 5.x agent uses to enroll with the Wazuh manager. It encodes the Wazuh manager address, the certificate authority to trust, and a single-use credential.
+This section describes how to manage enrollment tokens from the Wazuh dashboard. An enrollment token is a credential that a Wazuh 5.x agent uses to enroll with the Wazuh manager. It carries the Wazuh manager address, the pin of the certificate authority to trust, and an enrollment credential. By default, a token can enroll any number of agents. To limit it, set **Enrollments allowed** when you create the token.
 
 The Wazuh dashboard manages tokens through the Wazuh manager API. You can create a token when deploying a new Wazuh agent, list active tokens, and revoke tokens that are no longer needed. Tokens expire after 30 days by default. In a Wazuh manager cluster, the master node creates, consumes, and revokes all tokens.
 
@@ -288,9 +278,9 @@ The Wazuh dashboard manages tokens through the Wazuh manager API. You can create
    :alt: Enrollment tokens
 
 Server management
------------------
+^^^^^^^^^^^^^^^^^
 
-Wazuh **Server Management** section provides options for managing the Wazuh manager and security configurations. It allows users to manage users, roles, policies, and review Wazuh manager logs on the Wazuh dashboard.
+The **Server management** section provides options for managing the Wazuh manager and its security configuration. It includes **Status**, **Statistics**, **Logs**, **Settings**, **Dev Tools**, and **API access control**. Statistics shows Wazuh manager event-processing metrics, such as bytes and events received, events processed and dropped, events per second, and queue usage.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/server-management.png
    :align: center
@@ -299,7 +289,7 @@ Wazuh **Server Management** section provides options for managing the Wazuh mana
    :alt: Server management
 
 Status
-^^^^^^
+~~~~~~
 
 Users can view the status of different Wazuh daemons, the overall Wazuh agent status, Wazuh manager information, and more.
 
@@ -307,32 +297,32 @@ Users can view the status of different Wazuh daemons, the overall Wazuh agent st
    :align: center
    :width: 80%
    :title: Status
-   :alt: Status
+   :alt: Status page of Server management
 
 Logs
-^^^^
+~~~~
 
-Logs stored in ``/var/wazuh-manager/logs/wazuh-manager.log`` in the Wazuh manager are shown in the section below.
+The **Logs** page shows the Wazuh manager log, ``/var/wazuh-manager/logs/wazuh-manager.log``. You can filter it by daemon, log level, and node, and turn on **Realtime** to follow new entries.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/logs.png
    :align: center
    :width: 80%
    :title: Logs
-   :alt: Logs
+   :alt: Logs page of Server management
 
 Settings
-^^^^^^^^
+~~~~~~~~
 
-Users can modify the Wazuh manager configuration file located at ``/var/wazuh-manager/etc/wazuh-manager.conf`` from the Wazuh dashboard.
+Users can modify the Wazuh manager configuration file located at ``/etc/wazuh-manager/wazuh-manager.conf`` from the Wazuh dashboard.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/settings.png
    :align: center
    :width: 80%
    :title: Settings
-   :alt: Settings
+   :alt: Settings page of Server management
 
 Dev Tools
-^^^^^^^^^
+~~~~~~~~~
 
 This section allows users to send queries using the Wazuh manager API. It can be used to retrieve information and perform operations related to agent management, security configuration, cluster management, file integrity monitoring, security events, inventory data, vulnerabilities, and other Wazuh platform features.
 
@@ -342,43 +332,43 @@ This section allows users to send queries using the Wazuh manager API. It can be
    :title: Dev Tools
    :alt: Dev Tools
 
-Security
-^^^^^^^^
+API access control
+~~~~~~~~~~~~~~~~~~
 
-This section provides role-based access control (RBAC) configuration options for the Wazuh platform. It allows administrators to manage internal users, roles, role mappings, and policies used to control access to Wazuh resources and features.
+This section provides role-based access control (RBAC) configuration options for the Wazuh platform. It allows administrators to manage Wazuh manager API users, roles, role mappings, and policies used to control access to Wazuh resources and features.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/users-security.png
    :align: center
    :width: 80%
-   :title: Security - Users
-   :alt: Security - Users
+   :title: API access control - Users
+   :alt: API access control - Users
 
-The **Roles** tab shows the existing roles alongside the policies assigned to those roles. It also includes the option for creating users.
+The **Roles** tab shows the existing roles alongside the policies assigned to those roles. It also includes the option for creating roles.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/roles-security.png
    :align: center
    :width: 80%
-   :title: Security - Roles
-   :alt: Security - Roles
+   :title: API access control - Roles
+   :alt: API access control - Roles
 
-The **Policies** tab shows the policies that define the actions that can be performed by the internal users. These policies are assigned to roles.
+The **Policies** tab shows the policies that define the actions that can be performed by Wazuh manager API users. These policies are assigned to roles.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/policies-security.png
    :align: center
    :width: 80%
-   :title: Security - Policies
-   :alt: Security - Policies
+   :title: API access control - Policies
+   :alt: API access control - Policies
 
-The Roles mapping tab presents users with the option to assign different roles and policies to internal users.
+The **Roles mapping** tab gives Wazuh roles to the users who sign in to the Wazuh dashboard. Each role mapping gives its roles to the users who match its rules, such as a user name, backend role, or indexer role.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/roles-mapping-security.png
    :align: center
    :width: 80%
-   :title: Security - Roles mapping
-   :alt: Security - Roles mapping
+   :title: API access control - Roles mapping
+   :alt: API access control - Roles mapping
 
 Indexer management
-------------------
+^^^^^^^^^^^^^^^^^^
 
 The Wazuh indexer is a scalable search and analytics engine that stores and indexes events forwarded by the Wazuh manager, enabling near real-time data analysis. It manages threat intelligence updates, including decoders, detection rules, vulnerability feeds, and Indicators of Compromise (IoCs) from the Wazuh Cyber Threat Intelligence (CTI) platform.
 
@@ -389,9 +379,9 @@ The Wazuh indexer is a scalable search and analytics engine that stores and inde
    :alt: Indexer management
 
 Index Management
-^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~
 
-The **Indexer Management** section provides tools for managing the storage, organization, and lifecycle of data in the Wazuh indexer. It allows users to create and manage state management policies, indices, data streams, templates, aliases, rollup jobs, and transform jobs. Please see the Wazuh indexer documentation to find out more.
+The **Index Management** section provides tools for managing the storage, organization, and lifecycle of data in the Wazuh indexer. It allows users to create and manage state management policies, indices, data streams, templates, aliases, rollup jobs, and transform jobs. Please see the :doc:`Wazuh indexer </user-manual/wazuh-indexer/index>` documentation to find out more.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/index-snapshot-management.png
    :align: center
@@ -400,7 +390,7 @@ The **Indexer Management** section provides tools for managing the storage, orga
    :alt: Index management
 
 Snapshot Management
-^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~
 
 The **Snapshot Management** section provides tools for creating, storing, and managing backups of data in the Wazuh indexer. It allows users to configure snapshot policies for automated backups, view and manage existing snapshots, and configure snapshot repositories where snapshots are stored.
 
@@ -410,19 +400,19 @@ The **Snapshot Management** section provides tools for creating, storing, and ma
    :title: Snapshot management
    :alt: Snapshot management
 
-Security (Indexer)
-^^^^^^^^^^^^^^^^^^
+Users and data access
+~~~~~~~~~~~~~~~~~~~~~
 
-This section includes the configuration for access to Wazuh resources based on the roles and permissions assigned to the users. Please see the Wazuh RBAC documentation to find out more.
+This section includes the configuration for access to Wazuh resources based on the roles and permissions assigned to the users. Please see the :doc:`Wazuh RBAC </user-manual/user-administration/rbac>` documentation to find out more.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/security-indexer.png
    :align: center
    :width: 80%
-   :title: Security - Indexer
-   :alt: Security - Indexer
+   :title: Users and data access
+   :alt: Users and data access
 
 Dev Tools
-^^^^^^^^^
+~~~~~~~~~
 
 This section allows users to send queries using the Wazuh indexer API. It can be used for indexer operations such as cluster management, querying index data, troubleshooting issues, and debugging errors.
 
@@ -433,9 +423,9 @@ This section allows users to send queries using the Wazuh indexer API. It can be
    :alt: Dev Tools - Indexer
 
 Settings
-^^^^^^^^
+~~~~~~~~
 
-This section allows you to enable or disable indexing of raw events into the ``wazuh-events-raw-v5`` indices. The ``wazuh-events-raw-v5\*`` index stores all events received from the Wazuh manager regardless of whether they trigger an alert. In Wazuh 4.x, similar data was stored in the ``wazuh-archives-\*`` indices.
+This section allows you to enable or disable indexing of raw events into the ``wazuh-events-raw-v5`` indices. The ``wazuh-events-raw-v5*`` index stores all events received from the Wazuh manager regardless of whether they trigger an alert. In Wazuh 4.x, similar data was stored in the ``wazuh-archives-*`` indices.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/settings-indexer.png
    :align: center
@@ -444,9 +434,9 @@ This section allows you to enable or disable indexing of raw events into the ``w
    :alt: Settings - Indexer
 
 Dashboard management
---------------------
+^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh Dashboard Management section includes the options for creating and managing your index patterns, data sources, saved objects, and advanced settings you can make to your Wazuh dashboard.
+The **Dashboard management** section includes **Dashboards Management**, **Server API**, **About**, and **Health Check**. Dashboards Management includes the options for creating and managing index patterns, data sources, saved objects, and advanced settings. Server API shows the Wazuh manager API connection that the Wazuh dashboard uses and its status. About shows the Wazuh dashboard version. Health Check shows the results of the checks the Wazuh dashboard runs on its saved objects, index patterns, and Wazuh manager API connection.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/dashboards-management.png
    :align: center
@@ -455,7 +445,7 @@ The Wazuh Dashboard Management section includes the options for creating and man
    :alt: Dashboard management
 
 Data sources
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 
 The Data sources section allows you to manage direct query data source connections.
 
@@ -466,7 +456,7 @@ The Data sources section allows you to manage direct query data source connectio
    :alt: Data sources
 
 Saved Objects
-^^^^^^^^^^^^^
+~~~~~~~~~~~~~
 
 The Saved Objects section allows users to query, import, and export existing saved objects.
 
@@ -477,9 +467,9 @@ The Saved Objects section allows users to query, import, and export existing sav
    :alt: Saved objects
 
 Advanced settings
-^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~
 
-The **Advanced Settings** section provides options for customizing the behavior and appearance of the Wazuh dashboard. Users can configure settings related to features such as Detection Insights, Discover, Notifications, Search, Timeline, VisBuilder, Visualization, as well as dashboard appearance and user experience preferences. These settings help tailor the dashboard to specific monitoring, analysis, and operational requirements.
+The **Advanced Settings** section provides options for customizing the behavior and appearance of the Wazuh dashboard. The settings are grouped into General, Appearance, Discover, Notifications, Reporting, Search, Timeline, VisBuilder, and Visualization. These settings help tailor the dashboard to specific monitoring, analysis, and operational requirements.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/advanced-settings.png
    :align: center

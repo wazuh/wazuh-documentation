@@ -40,7 +40,7 @@ const versions = [
 
 betaVersions.push(
   /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
-  ['5.0 (RC 1)', '5.0-rc', '/index.html']
+  ['5.0 (RC 2)', '5.0-rc', '/index.html']
 );
 
 /* Data structure for every release
@@ -89,6 +89,11 @@ newUrls['5.0'] = [
   '/compliance/hipaa/164.312.c.2.html',
   '/compliance/hipaa/164.312.d.html',
   '/user-manual/reference/ossec-conf/agent.html',
+  '/user-manual/reference/wazuh-common-schema.html',
+  '/user-manual/reference/wazuh-common-schema/how-wcs-works.html',
+  '/user-manual/reference/wazuh-common-schema/how-wazuh-uses-wcs-fields.html',
+  '/user-manual/reference/wazuh-common-schema/key-wcs-fields.html',
+  '/user-manual/reference/wazuh-common-schema/wcs-field-reference.html',
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
   '/user-manual/agent/agent-management/remove-agents.html',
@@ -158,9 +163,12 @@ newUrls['5.0'] = [
   '/user-manual/reference/tools/wazuh-manager-keystore.html',
   '/user-manual/reference/tools/wazuh-agent-auth.html',
   '/user-manual/reference/tools/wazuh-manager-conf.html',
+  '/user-manual/reference/tools/wazuh-manager-certs.html',
+  '/user-manual/reference/tools/wazuh-manager-resolve-credentials.html',
   '/user-manual/reference/installation-utilities/index.html',
   '/user-manual/reference/installation-utilities/installation-assistant.html',
   '/user-manual/reference/installation-utilities/certs-tools.html',
+  '/user-manual/reference/installation-utilities/passwords-tool.html',
   '/user-manual/capabilities/active-response/how-it-works.html',
   '/user-manual/capabilities/active-response/types-of-active-response.html',
   '/user-manual/capabilities/active-response/python-active-response-script-sample.html',
@@ -550,9 +558,6 @@ removedUrls['5.0'] = [
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/index.html',
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-agent-class.html',
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
-  '/deployment-options/wazuh-from-sources/index.html',
-  '/deployment-options/wazuh-from-sources/wazuh-agent/index.html',
-  '/deployment-options/wazuh-from-sources/wazuh-server/index.html',
   '/development/client-keys.html',
   '/development/coredump.html',
   '/development/index.html',
@@ -605,19 +610,6 @@ removedUrls['5.0'] = [
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/index.html',
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/install-custom-wpk.html',
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/wpk-list.html',
-  '/user-manual/api/api-examples.html',
-  '/user-manual/api/configuration.html',
-  '/user-manual/api/getting-started.html',
-  '/user-manual/api/index.html',
-  '/user-manual/api/queries.html',
-  '/user-manual/api/rbac/auth-context.html',
-  '/user-manual/api/rbac/configuration.html',
-  '/user-manual/api/rbac/how-it-works.html',
-  '/user-manual/api/rbac/index.html',
-  '/user-manual/api/rbac/reference.html',
-  '/user-manual/api/requests-responses.html',
-  '/user-manual/api/securing-api.html',
-  '/user-manual/api/use-cases.html',
   '/user-manual/capabilities/agentless-monitoring/agentless-configuration.html',
   '/user-manual/capabilities/agentless-monitoring/connection.html',
   '/user-manual/capabilities/agentless-monitoring/how-it-works.html',
