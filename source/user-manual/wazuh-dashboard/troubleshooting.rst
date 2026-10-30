@@ -269,6 +269,7 @@ If the restart does not solve the problem, we can execute this process manually:
       }
 
    In the output, we can see the field mapping for the ``type`` field in the ``.kibana_1`` index. The mapping shows that the ``type`` field is configured as ``keyword``, which is the expected result.
+
    These errors happened because there was no template that specified the appropriate field mappings at the time the saved object data was indexed. To solve the errors, we need to remove the index and rebuild it.
 
 #. Delete the index or indices that store the saved objects with the wrong field mapping. Replace ``<INDEX_NAMES>`` with their names, separated by commas, for example ``.kibana_1``.
