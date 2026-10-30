@@ -174,7 +174,7 @@ If a Wazuh agent already has a key, ``wazuh-agent-auth`` refuses a new token wit
 
 If the Wazuh manager still lists the agent, remove it there first, as :doc:`Remove agents </user-manual/agent/agent-management/remove-agents>` describes. Otherwise, the Wazuh manager refuses the enrollment with ``Duplicate name``.
 
-To enroll the agent again, run these commands on the endpoint. Replace ``<ENROLLMENT_TOKEN>`` with a token from :ref:`Generate the enrollment token <generate_enrollment_token>`, and ``<TOKEN_FILE_PATH>`` with a file path, for example ``/root/wazuh-token`` or ``C:\wazuh-token.txt``.
+To enroll the agent again, run these commands on the endpoint. Replace ``<ENROLLMENT_TOKEN>`` with a token from :ref:`Generate the enrollment token <generate_enrollment_token>`, and ``<TOKEN_FILE_PATH>`` with a file path, for example ``/root/wazuh-token`` or ``C:\wazuh-token.txt``. On Linux and macOS, the command that creates the file waits for the token. Paste it, press Enter, and then press Ctrl+D.
 
 .. tabs::
 
@@ -184,7 +184,7 @@ To enroll the agent again, run these commands on the endpoint. Replace ``<ENROLL
          :emphasize-lines: 2,3,4
 
          # systemctl stop wazuh-agent
-         # (umask 077 && echo '<ENROLLMENT_TOKEN>' > <TOKEN_FILE_PATH>)
+         # (umask 077 && cat > <TOKEN_FILE_PATH>)
          # /var/ossec/bin/wazuh-agent-auth --force-enroll --token-file <TOKEN_FILE_PATH>
          # rm -f <TOKEN_FILE_PATH>
          # systemctl start wazuh-agent
@@ -195,7 +195,7 @@ To enroll the agent again, run these commands on the endpoint. Replace ``<ENROLL
          :emphasize-lines: 2,3,4
 
          # launchctl bootout system /Library/LaunchDaemons/com.wazuh.agent.plist
-         # (umask 077 && echo '<ENROLLMENT_TOKEN>' > <TOKEN_FILE_PATH>)
+         # (umask 077 && cat > <TOKEN_FILE_PATH>)
          # /Library/Ossec/bin/wazuh-agent-auth --force-enroll --token-file <TOKEN_FILE_PATH>
          # rm -f <TOKEN_FILE_PATH>
          # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist

@@ -125,7 +125,7 @@ Next steps
 
 Now that your Wazuh installation is ready, you can start deploying the Wazuh agent. This can be used to protect laptops, desktops, servers, cloud instances, containers, or virtual machines. The Wazuh agent is lightweight and multi-purpose, providing a variety of security capabilities.
 
-Next, deploy Wazuh agents. Each agent enrolls with a token that you create on this server for the address agents connect to. To deploy agents, follow the instructions for your operating system below, or go to **Agents management** > **Summary** > **Deploy new agent** in the Wazuh dashboard.
+Next, deploy Wazuh agents. Each agent enrolls with a token that you create on this server for the address agents connect to. To deploy agents, follow the instructions for your operating system below, or go to **Agents management** > **Summary** > **Deploy new agent** in the Wazuh dashboard. The Wazuh manager doesn't monitor the server it runs on. To monitor this server too, deploy a Wazuh agent on it with a token for this server's own address.
 
 .. raw:: html
 

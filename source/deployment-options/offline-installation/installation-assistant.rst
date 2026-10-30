@@ -150,7 +150,7 @@ Testing the cluster installation
    .. code-block:: console
 
       # grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
-      # curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
 
    The command output looks similar to this:
 
@@ -173,7 +173,7 @@ Testing the cluster installation
 
    .. code-block:: console
 
-      # curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
    The output lists every Wazuh indexer node, and the node that manages the cluster has ``*`` in the ``cluster_manager`` column. For example:
 

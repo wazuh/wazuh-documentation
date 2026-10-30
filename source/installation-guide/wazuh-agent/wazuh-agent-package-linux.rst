@@ -14,7 +14,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
 .. note::
 
-   Run the commands below as root. If you use ``sudo``, put the variables after it, because ``sudo`` doesn't pass your environment variables to the command. For example, ``sudo WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' apt-get install -y wazuh-agent``.
+   Run the commands below as root. If you use ``sudo``, put the variables after it, because ``sudo`` doesn't pass your environment variables to the command. For example, ``sudo WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' apt-get install -y wazuh-agent``. A token in the command also stays in the shell history. To keep it out, install without the variables, then enroll the agent from a token file as the end of this section describes.
 
 .. _agent-installation-add-wazuh-repository:
 
@@ -194,12 +194,12 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
    -  The install command printed ``deployment variables refused [ERR_BAD_TOKEN]``: the token changed when you copied it.
    -  ``/var/ossec/logs/ossec.log`` shows ``Enrollment-token bootstrap failed``. The Wazuh manager refused the enrollment. For example, the token was revoked, expired, or used up, or another agent already uses the name.
 
-   In each case, save a valid token to a file, enroll the agent, delete the file, and start the agent. In the first two cases, the installer kept no agent name, so the agent enrolls under the endpoint's host name. Replace ``<TOKEN_FILE_PATH>`` with a file path, for example, ``/root/wazuh-token``.
+   In each case, save a valid token to a file, enroll the agent, delete the file, and start the agent. In the first two cases, the installer kept no agent name, so the agent enrolls under the endpoint's host name. Replace ``<TOKEN_FILE_PATH>`` with a file path, for example, ``/root/wazuh-token``. The first command waits for the token. Paste it, press Enter, and then press Ctrl+D.
 
    .. code-block:: console
       :emphasize-lines: 1,2,3
 
-      # (umask 077 && echo '<ENROLLMENT_TOKEN>' > <TOKEN_FILE_PATH>)
+      # (umask 077 && cat > <TOKEN_FILE_PATH>)
       # /var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE_PATH>
       # rm -f <TOKEN_FILE_PATH>
       # systemctl start wazuh-agent

@@ -207,8 +207,8 @@ This section covers downloading the Wazuh source code, compiling it, and running
          .. code-block:: console
             :emphasize-lines: 1
 
-            # TOKEN=$(curl -s -k -u wazuh:<WAZUH_PASSWORD> -X POST "https://localhost:55000/security/user/authenticate?raw=true")
-            # curl -s -k -X GET "https://localhost:55000/agents?select=id,name,status,ip&pretty=true" -H "Authorization: Bearer $TOKEN"
+            # TOKEN=$(curl -s --cacert /etc/wazuh-manager/export/ca.pem -u wazuh:<WAZUH_PASSWORD> -X POST "https://localhost:55000/security/user/authenticate?raw=true")
+            # curl -s --cacert /etc/wazuh-manager/export/ca.pem -X GET "https://localhost:55000/agents?select=id,name,status,ip&pretty=true" -H "Authorization: Bearer $TOKEN"
 
    .. group-tab:: Windows
 

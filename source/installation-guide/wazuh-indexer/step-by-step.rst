@@ -606,7 +606,7 @@ Testing the cluster installation
 
    .. code-block:: console
 
-      # curl -k -u admin https://<WAZUH_INDEXER_ADDRESS>:9200
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200
 
    The output is similar to the following. The ``build_type`` value is ``rpm`` or ``deb``, depending on the package.
 
@@ -635,7 +635,7 @@ Testing the cluster installation
 
    .. code-block:: console
 
-      # curl -k -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cat/nodes?v
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cat/nodes?v
 
    The command produces output similar to the following:
 
@@ -649,7 +649,7 @@ Testing the cluster installation
 
    .. code-block:: console
 
-      # curl -k -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cluster/health?pretty
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cluster/health?pretty
 
    The output shows ``"status" : "green"`` and ``number_of_nodes`` equal to your number of Wazuh indexer nodes.
 

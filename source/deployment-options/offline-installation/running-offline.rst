@@ -82,7 +82,7 @@ The Wazuh indexer doesn't update its content automatically when the deployment h
 
    .. code-block:: console
 
-      # curl -k -u admin -X POST "https://127.0.0.1:9200/_plugins/_content_manager/update?offline=true"
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin -X POST "https://127.0.0.1:9200/_plugins/_content_manager/update?offline=true"
 
    The response shows ``"status":202`` when the Wazuh indexer accepts the request. A ``409`` response means another content update is still running, for example, right after the Wazuh indexer starts. Wait a few minutes and send the request again.
 
@@ -90,7 +90,7 @@ The Wazuh indexer doesn't update its content automatically when the deployment h
 
    .. code-block:: console
 
-      # curl -k -u admin "https://127.0.0.1:9200/.wazuh-cti-consumers/_search?filter_path=hits.hits._source.type,hits.hits._source.status,hits.hits._source.local_offset&pretty"
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin "https://127.0.0.1:9200/.wazuh-cti-consumers/_search?filter_path=hits.hits._source.type,hits.hits._source.status,hits.hits._source.local_offset&pretty"
 
 Next steps
 ----------
