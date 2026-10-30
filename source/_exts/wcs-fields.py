@@ -165,15 +165,24 @@ def ecs_set_descriptions(app):
         enough and the build needs no YAML library. '''
     descriptions = {}
     current = None
+    collecting = False
     with open(ecs_cache_path(app), encoding='utf-8') as ecs_file:
         for line in ecs_file:
             match = re.match(r'^([a-z_0-9]+):\s*$', line)
             if match:
                 current = match.group(1)
+                collecting = False
                 continue
             match = re.match(r'^  short: (.*)$', line)
             if match and current and current not in descriptions:
                 descriptions[current] = match.group(1).strip()
+                collecting = True
+                continue
+            # A long description wraps onto lines indented deeper than its key
+            if collecting and re.match(r'^   +\S', line):
+                descriptions[current] += ' ' + line.strip()
+            else:
+                collecting = False
     return descriptions
 
 

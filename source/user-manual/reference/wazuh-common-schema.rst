@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh Common Schema (WCS) defines the fields the Wazuh indexer uses to store events. Learn about the WCS field sets and browse the complete field reference.
+   :description: The Wazuh Common Schema (WCS) defines the fields the Wazuh indexer uses to store events. Learn about the WCS field sets, and find pages on how WCS works, how Wazuh uses WCS fields, the key fields, and the field reference.
 
 .. _reference_wazuh_common_schema:
 
