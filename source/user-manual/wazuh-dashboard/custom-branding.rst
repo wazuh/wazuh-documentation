@@ -8,6 +8,10 @@ Setting up custom branding
 
 Wazuh supports custom branding, allowing organizations to customize the appearance of the Wazuh dashboard to match their corporate identity. Users can replace the default Wazuh logos and some texts displayed on the loading screen, login page, and dashboard interface with custom logos.
 
+.. note::
+
+   The loading logo, home logo, and application title settings all go under one ``opensearchDashboards.branding`` key. If the file already has this key, add the new settings under it. A second ``opensearchDashboards.branding`` key stops the Wazuh dashboard from starting, with a duplicated mapping key error.
+
 This section of the documentation covers the configuration of the following custom branding options in the Wazuh dashboard:
 
 -  :ref:`Loading logos <branding_loading_logos>`
@@ -23,16 +27,17 @@ Custom logos on the Wazuh dashboard
 Loading logos
 ^^^^^^^^^^^^^
 
-Perform the following actions to customize the global *App loading* logo.
+Perform the following actions to customize the *global App loading* logo.
 
-#. Edit ``opensearch_dashboards.yml``. You can find this file in the following locations:
+#. Edit ``opensearch_dashboards.yml`` at one of the following paths:
 
-   -  ``/usr/share/wazuh-dashboard/config/`` for Docker installations.
-   -  ``/etc/wazuh-dashboard/``
+   -  ``/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml`` in the Wazuh dashboard container, for Docker installations. Restart the container instead of running ``systemctl``.
+   -  ``/etc/wazuh-dashboard/opensearch_dashboards.yml``, for package installations.
 
 #. Add the URLs of your default and dark theme logos.
 
    .. code-block:: yaml
+      :emphasize-lines: 3,4
 
       opensearchDashboards.branding:
          loadingLogo:
@@ -47,6 +52,12 @@ Perform the following actions to customize the global *App loading* logo.
 
       # systemctl restart wazuh-dashboard
 
+   .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-loading-logo.png
+      :align: center
+      :width: 80%
+      :title: Loading logos
+      :alt: Loading logos
+
 .. _branding_home_logo:
 
 Wazuh dashboard home logo
@@ -54,10 +65,10 @@ Wazuh dashboard home logo
 
 Perform the following to customize the *Wazuh dashboard home* logo in the top header.
 
-#. Edit ``opensearch_dashboards.yml``. You can find this file in the following locations:
+#. Edit ``opensearch_dashboards.yml`` at one of the following paths:
 
-   -  ``/usr/share/wazuh-dashboard/config/`` for Docker installations.
-   -  ``/etc/wazuh-dashboard/``
+   -  ``/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml`` in the Wazuh dashboard container, for Docker installations. Restart the container instead of running ``systemctl``.
+   -  ``/etc/wazuh-dashboard/opensearch_dashboards.yml``, for package installations.
 
 #. Add the URLs of your default and dark theme logos.
 
@@ -87,16 +98,17 @@ Perform the following to customize the *Wazuh dashboard home* logo in the top he
 Wazuh dashboard login
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following actions to customize the Wazuh dashboard login page.
+Perform the following actions to customize the *Wazuh dashboard login page*.
 
-#. Edit ``opensearch_dashboards.yml``. You can find this file in the following locations:
+#. Edit ``opensearch_dashboards.yml`` at one of the following paths:
 
-   -  ``/usr/share/wazuh-dashboard/config/`` for Docker installations.
-   -  ``/etc/wazuh-dashboard/``
+   -  ``/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml`` in the Wazuh dashboard container, for Docker installations. Restart the container instead of running ``systemctl``.
+   -  ``/etc/wazuh-dashboard/opensearch_dashboards.yml``, for package installations.
 
-#. Add the URLs of your default and dark theme logos.
+#. Add the login page settings:
 
    .. code-block:: yaml
+      :emphasize-lines: 3,4,6
 
       opensearch_security.ui.basicauth:
         login:
@@ -112,7 +124,9 @@ Perform the following actions to customize the Wazuh dashboard login page.
    -  ``showbrandimage``: Enables or disables the display of the logo.
    -  ``brandimage``: Specifies the logo image to display.
 
-   Replace ``<URL_TO_CUSTOM_LOGO>`` with the URL to your custom logo.
+   Replace
+
+   -  ``<URL_TO_CUSTOM_LOGO>`` with the URL to your custom logo.
 
 #. Restart the Wazuh dashboard service:
 
@@ -131,14 +145,14 @@ Perform the following actions to customize the Wazuh dashboard login page.
 Application title and favicon
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following actions to customize the application title and favicon.
+Perform the following actions to customize the *application title and favicon*.
 
-#. Edit ``opensearch_dashboards.yml``. You can find this file in the following locations:
+#. Edit ``opensearch_dashboards.yml`` at one of the following paths:
 
-   -  ``/usr/share/wazuh-dashboard/config/`` for Docker installations.
-   -  ``/etc/wazuh-dashboard/``
+   -  ``/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml`` in the Wazuh dashboard container, for Docker installations. Restart the container instead of running ``systemctl``.
+   -  ``/etc/wazuh-dashboard/opensearch_dashboards.yml``, for package installations.
 
-#. Add the URLs of your default and dark theme logos.
+#. Add the application title and the favicon URL.
 
    .. code-block:: yaml
 
@@ -151,7 +165,9 @@ Perform the following actions to customize the application title and favicon.
    -  ``applicationTitle``: Defines the application name.
    -  ``faviconUrl``: Specifies the favicon image to display.
 
-   Replace ``<URL_TO_CUSTOM_LOGO>`` with the URL to your custom logo.
+   Replace
+
+   -  ``<URL_TO_CUSTOM_LOGO>`` with the URL to your custom logo.
 
 #. Restart the Wazuh dashboard service:
 

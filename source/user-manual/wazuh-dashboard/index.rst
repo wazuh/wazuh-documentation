@@ -19,7 +19,7 @@ The Wazuh dashboard supports the following web browsers:
 - Firefox 93 or later
 - Safari 14 or later
 
-Other Chromium-based browsers might also work. Internet Explorer 11 is not supported.
+Other Chromium-based browsers might also work.
 
 The following sections provide an overview of the Wazuh dashboard, covering topics from navigating the user interface to troubleshooting.
 

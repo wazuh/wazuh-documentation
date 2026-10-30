@@ -8,14 +8,85 @@ Troubleshooting
 
 This section highlights common installation or usage issues on the Wazuh dashboard and some basic steps to solve them.
 
+Wazuh dashboard does not start
+------------------------------
+
+The Wazuh dashboard checks its files and credentials every time it starts, and it refuses to start when something is wrong. Read the reason in the service journal:
+
+.. code-block:: console
+
+   # journalctl -u wazuh-dashboard -n 50
+
+These are some of the messages you can find:
+
+-  ``UNSAFE <PATH>: it is not owned by root``, ``UNSAFE <PATH>: it is group- or world-writable``, or ``UNSAFE <PATH>: it is a symbolic link``. A file or directory in ``/etc/wazuh-dashboard`` has the wrong owner, or is a link. Give it back to root, with the ``wazuh-dashboard`` group on the ``certs`` directory and its files, and replace links with copies.
+-  ``MISSING /etc/wazuh-dashboard/certs/indexer-ca.pem: no CA to verify the indexer with``. The Wazuh dashboard has no CA certificate for the Wazuh indexer. On a single host, it copies ``/etc/wazuh-indexer/export/ca.pem``, so check that this file exists. On a separate host, copy that file from the Wazuh indexer node to ``/etc/wazuh-dashboard/certs/indexer-ca.pem``, with owner root, group wazuh-dashboard, and mode ``0640``.
+-  ``MISSING WAZUH_INDEXER_KIBANASERVER_PASSWORD (the indexer's kibanaserver account)``. The Wazuh dashboard has no password for the kibanaserver user. On a single host, it reads it from ``/etc/wazuh-indexer/export/credentials.env``. On a separate host, copy the WAZUH_INDEXER_KIBANASERVER_PASSWORD line from that file on the Wazuh indexer node to ``/etc/wazuh-dashboard/local.env``, owned by root with mode ``0600``.
+-  ``EACCES: permission denied``, followed by a file name. The Wazuh dashboard cannot read that file. Set it to owner ``root``, group ``wazuh-dashboard``, and mode ``0640``.
+
+After you fix the cause, clear the failed state and start the Wazuh dashboard:
+
+.. code-block:: console
+
+   # systemctl reset-failed wazuh-dashboard
+   # systemctl start wazuh-dashboard
+
+Wazuh manager API certificate verification error
+------------------------------------------------
+
+The Wazuh dashboard verifies the Wazuh manager API certificate with ``/etc/wazuh-dashboard/certs/manager-ca.pem``. The host in the ``url`` setting of ``wazuh_core.hosts`` must be a name or IP address listed in that certificate. Run this command on the Wazuh dashboard host to check both:
+
+.. code-block:: console
+
+   # openssl s_client -connect <WAZUH_MANAGER_HOST>:55000 -CAfile /etc/wazuh-dashboard/certs/manager-ca.pem -verify_hostname <WAZUH_MANAGER_HOST> < /dev/null 2>/dev/null | grep "Verify return code"
+
+Replace ``<WAZUH_MANAGER_HOST>`` with the host in the ``url`` setting. If it is an IP address, use ``-verify_ip`` instead of ``-verify_hostname``. ``Verify return code: 0 (ok)`` means that both checks pass. A hostname mismatch or IP address mismatch means that the host is not in the certificate. A self-signed certificate in certificate chain error means that ``manager-ca.pem`` is not the CA of this Wazuh manager. No output means that the connection failed. Check that the host is in the host setting of ``/var/wazuh-manager/api/configuration/api.yaml``.
+
+Unauthorized errors after a password change
+-------------------------------------------
+
+The Wazuh dashboard keeps the passwords of the ``kibanaserver`` and ``wazuh-internal-client`` users in its keystore, ``/etc/wazuh-dashboard/opensearch_dashboards.keystore``. If one of these passwords changes and the keystore still holds the old one, the Wazuh dashboard cannot authenticate:
+
+-  With an old ``kibanaserver`` password, the browser shows that the Wazuh dashboard server is not ready, and ``journalctl -u wazuh-dashboard`` shows ``[ResponseError]: 401 GET /_nodes: Unauthorized``.
+-  With an old ``wazuh-internal-client`` password, the connection to the Wazuh manager API fails with ``3002 - Request failed with status code 401``.
+
+The Wazuh passwords tool updates this keystore when the Wazuh dashboard runs on the same host. If the Wazuh dashboard runs on another host, or you changed the password another way, write the new password to the keystore of each Wazuh dashboard node and restart it. For the ``kibanaserver`` user, run:
+
+.. code-block:: console
+
+   # echo '<NEW_PASSWORD>' | OSD_PATH_CONF=/etc/wazuh-dashboard /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add opensearch.password --stdin --force
+   # systemctl restart wazuh-dashboard
+
+For the ``wazuh-internal-client`` user, use ``wazuh_core.hosts.default.password`` instead of ``opensearch.password``.
+
+Setting the new password in ``/etc/wazuh-dashboard/local.env`` does not help while the keystore holds the old one. The Wazuh dashboard reads ``local.env``, and then the ``credentials.env`` file that the Wazuh indexer or the Wazuh manager publishes on the same host, only when its keystore has no entry for that password.
+
+Wazuh dashboard is unreachable on port 443
+------------------------------------------
+
+Port 443 must be open in the host firewall, and the Wazuh dashboard package leaves the firewall rules to you. If the Wazuh dashboard login page loads on the Wazuh dashboard host but not from other computers, check the firewall. With ufw, run ``ufw status``, and if it shows ``Status: active``, run ``ufw allow 443/tcp``. With firewalld, check whether it is running:
+
+.. code-block:: console
+
+   # systemctl is-active firewalld
+
+If the output is ``active``, open port 443 and reload the firewall rules:
+
+.. code-block:: console
+
+   # firewall-cmd --permanent --add-port=443/tcp
+   # firewall-cmd --reload
+
 Wazuh manager API seems to be down error
 ----------------------------------------
 
 This issue means that your Wazuh manager API might be unavailable. Check the status of the Wazuh manager to see if the service is active:
 
-.. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
+.. code-block:: console
 
-If the Wazuh manager API is running, try to fetch data using the CLI from the Wazuh dashboard server:
+   # systemctl status wazuh-manager
+
+If the Wazuh manager API is running, run these commands on the Wazuh dashboard host. On an all-in-one deployment from the installation assistant, use ``localhost`` as ``<WAZUH_MANAGER_IP_ADDRESS>``, because the Wazuh manager API listens on ``127.0.0.1`` and ``::1`` only. Use the wazuh user and the ``WAZUH_MANAGER_API_PASSWORD`` value in ``/etc/wazuh-manager/export/credentials.env``:
 
 .. code-block:: console
 
@@ -27,39 +98,36 @@ The command returns output similar to the following example:
 .. code-block:: none
    :class: output
 
-     % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                    Dload  Upload   Total   Spent    Left  Speed
-   100   398  100   398    0     0   3431      0 --:--:-- --:--:-- --:--:--  3431
    {
       "data": {
          "title": "Wazuh API REST",
          "api_version": "5.0.0",
-         "revision": "beta1",
+         "revision": "rc2",
          "license_name": "GPL 2.0",
-         "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-beta1/LICENSE",
+         "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc2/LICENSE",
          "hostname": "server",
          "timestamp": "2026-06-01T21:19:52Z"
       },
       "error": 0
    }
 
+Output if the Wazuh manager API is down:
+
 .. code-block:: none
    :class: output
-   :caption: Output if the Wazuh manager API is down:
 
-   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                    Dload  Upload   Total   Spent    Left  Speed
-     0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
    curl: (7) Failed to connect to 127.0.0.1 port 55000 after 0 ms: Couldn't connect to server
 
-If the Wazuh manager API is unavailable, restart the Wazuh manager and confirm that the API is running.
+The same error appears when ``<WAZUH_MANAGER_IP_ADDRESS>`` is outside the host setting in ``/var/wazuh-manager/api/configuration/api.yaml``. If the Wazuh manager API is unavailable, restart the Wazuh manager and confirm that the API is running.
 
-.. include:: /_templates/common/restart_manager.rst
+.. code-block:: console
+
+   # systemctl restart wazuh-manager
 
 No alerts on the Wazuh dashboard error
 --------------------------------------
 
-The first step is to check if there are alerts in the Wazuh indexer:
+The first step is to check if there are alerts in the Wazuh indexer. On an all-in-one deployment from the installation assistant, use ``localhost`` as ``<WAZUH_INDEXER_IP>``:
 
 .. code-block:: console
 
@@ -107,7 +175,7 @@ The first step is to check if there are alerts in the Wazuh indexer:
    green open .ds-wazuh-events-v5-other-000001               RIN87mGdQlWYs6yMTHcx-g 3 0      0   0    624b    624b
    green open .ds-wazuh-findings-v5-network-activity-000001  bqtm0coXQqWXBxKRjyFflA 3 0      0   0    624b    624b
 
-If you do not see any Wazuh related index, it means you do not have alerts stored in your Wazuh indexer.
+The Wazuh indexer stores alerts in the ``.ds-wazuh-findings-v5-*`` indices, which exist from installation. If the seventh column, ``docs.count``, is 0 for each of them, the Wazuh indexer stores no alerts.
 
 .. note::
 
@@ -116,9 +184,9 @@ If you do not see any Wazuh related index, it means you do not have alerts store
 Could not connect to API with ID error
 --------------------------------------
 
-The error *“Could not connect to API with id: default: 3003 - Missing param: API USERNAME”* is triggered when Wazuh cannot find the correct Wazuh server API username variable. Starting from Wazuh 4.0, the Wazuh server API username variable changed from ``user`` to ``username``. It is necessary to change the credentials (``foo:bar`` is no longer accepted) as well as the name of the variable in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file.
+The error “Could not connect to API with id: ``default``: 3003 - Missing param: API USERNAME” means that the default entry of ``wazuh_core.hosts`` in ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` has no username. Edit that block in place and set ``username: wazuh-internal-client``. Keep one wazuh_core.hosts key, because the Wazuh dashboard rejects a second one.
 
-The example has no password for the default host. The Wazuh manager sets the ``wazuh-internal-client`` password at installation, from ``WAZUH_MANAGER_WUI_PASSWORD`` or a generated value. The Wazuh dashboard keeps it in its keystore as ``wazuh_core.hosts.default.password``. For example:
+The example has no password for the ``default`` host. The Wazuh manager sets the ``wazuh-internal-client`` password at installation, from ``WAZUH_MANAGER_WUI_PASSWORD`` or a generated value. The Wazuh dashboard keeps it in its keystore as ``wazuh_core.hosts.default.password``. Keep it there: a password written in ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` overrides the keystore. For example:
 
 .. code-block:: yaml
 
@@ -174,7 +242,7 @@ If the restart does not solve the problem, we can execute this process manually:
 
       # systemctl stop wazuh-dashboard
 
-#. Identify the index or indices that have the wrong field mappings, this depends on the logged user that experiences the problem or the selected tenant.
+#. Identify the index or indices that have the wrong field mappings, this depends on the logged user who experiences the problem or the selected tenant.
 
 #. Get the field mapping for the ``type`` field for the indices that store the saved objects.
 
@@ -201,14 +269,13 @@ If the restart does not solve the problem, we can execute this process manually:
       }
 
    In the output, we can see the field mapping for the ``type`` field in the ``.kibana_1`` index. The mapping shows that the ``type`` field is configured as ``keyword``, which is the expected result.
-
    These errors happened because there was no template that specified the appropriate field mappings at the time the saved object data was indexed. To solve the errors, we need to remove the index and rebuild it.
 
-#. Delete the index or indices that store the saved objects with the wrong field mapping.
+#. Delete the index or indices that store the saved objects with the wrong field mapping. Replace ``<INDEX_NAMES>`` with their names, separated by commas, for example ``.kibana_1``.
 
    .. code-block:: console
 
-      # curl https://<WAZUH_INDEXER_IP>:9200/<INDEX/INDICES_SEPARATED_BY_COMMAS> -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -k -XDELETE
+      # curl https://<WAZUH_INDEXER_IP>:9200/<INDEX_NAMES> -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -k -XDELETE
 
    .. code-block:: none
       :class: output
@@ -255,11 +322,11 @@ Check the following log files:
 
       # cat /var/wazuh-manager/logs/wazuh-manager.log | grep -i -E "error|warn"
 
-- Wazuh dashboard:
+-  Wazuh dashboard:
 
    .. code-block:: console
 
-      # journalctl -u wazuh-dashboard | grep -i -E "error|warn"
+      # journalctl -u wazuh-dashboard | grep -i -E "error|warn|missing|invalid|unsafe"
 
 .. note::
 
