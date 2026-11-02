@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed the manager address placeholder in the configuration step of the *Solaris* and *HP-UX* Wazuh agent installation documentation to match the installed `ossec.conf`. ([#10555](https://github.com/wazuh/wazuh-documentation/pull/10555))
 - **Post-release**: Fixed the list of registry value types supported by `report_changes` in the *Windows Registry monitoring* page of the *File integrity monitoring* documentation and in the *Reference* documentation. ([#10556](https://github.com/wazuh/wazuh-documentation/pull/10556))
 - **Post-release**: Fixed the site header search button and footer links toggle, which had no accessible names for screen readers. ([#10593](https://github.com/wazuh/wazuh-documentation/pull/10593))
+- **Post-release**: Fixed the CloudTrail and CloudWatch spelling on the *Amazon S3* wodle page and the option group headings on the *SCA* page of the *Reference* documentation. ([#10603](https://github.com/wazuh/wazuh-documentation/pull/10603)) ([#10604](https://github.com/wazuh/wazuh-documentation/pull/10604))
 
 ## [v4.14.8]
 
