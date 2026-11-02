@@ -39,7 +39,7 @@ Wazuh manager cluster installation
 
    The output lists them, for example ``IP Address:<WAZUH_MANAGER_ADDRESS>, DNS:manager``. Make sure that every address your agents connect to is in this list.
 
-   If an address is missing, issue the agent listener certificates again on the host where you ran ``--generate-config-files``. That host keeps the root CA in the ``wazuh-ca`` directory and ``config.yml`` beside the installation assistant. Download the certificates tool to the same directory and run it with ``-wm``. Pass every address your agents use, not only the missing one, because the certificate holds only the ``-as`` values of that run:
+   If an address is missing, issue the agent listener certificates again on the host where you ran ``--generate-config-files``. That host keeps the root CA in the ``wazuh-ca`` directory and ``config.yml`` beside the installation assistant. If ``config.yml`` is gone, download the configuration template again and fill it in with the same node names and addresses, as in :ref:`Initial configuration <wazuh_indexer_assisted_initial_configuration>`. Download the certificates tool to the same directory and run it with ``-wm``. Pass every address your agents use, not only the missing one, because the certificate holds only the ``-as`` values of that run:
 
    .. code-block:: console
 

@@ -141,21 +141,21 @@ Installing the Wazuh manager
 
          .. code-block:: console
 
-            # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
+            # apt-get -y install wazuh-manager=|WAZUH_CURRENT|-1
 
       .. group-tab:: Yum
 
          .. code-block:: console
 
-            # yum -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
+            # yum -y install wazuh-manager-|WAZUH_CURRENT|-1
 
       .. group-tab:: DNF
 
          .. code-block:: console
 
-            # dnf -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
+            # dnf -y install wazuh-manager-|WAZUH_CURRENT|-1
 
-#. Place this node's certificates and the Wazuh indexer root CA. They are in the directory where you extracted ``wazuh-certificates.tar``. Skip this step on the first Wazuh indexer node:
+#. On a host without the Wazuh indexer, the installation prints MISSING lines for ``remoted.pem``, ``apid.pem``, ``indexer-ca.pem``, and ``indexer-connector.pem``, a WARNING about the dashboard client pair, and ``Credential resolution is incomplete``. This is expected, and you don't need to stage the root CA private key. Place this node's certificates and the Wazuh indexer root CA. They are in the directory where you extracted ``wazuh-certificates.tar``. Skip this step on the first Wazuh indexer node:
 
    .. code-block:: console
 

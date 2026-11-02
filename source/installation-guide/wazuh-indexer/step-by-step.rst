@@ -172,19 +172,19 @@ Installing the Wazuh indexer
 
          .. code-block:: console
 
-            # apt-get -y install wazuh-indexer|WAZUH_INDEXER_DEB_PKG_INSTALL|
+            # apt-get -y install wazuh-indexer=|WAZUH_CURRENT|-1
 
       .. group-tab:: Yum
 
          .. code-block:: console
 
-            # yum -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
+            # yum -y install wazuh-indexer-|WAZUH_CURRENT|-1
 
       .. group-tab:: DNF
 
          .. code-block:: console
 
-            # dnf -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
+            # dnf -y install wazuh-indexer-|WAZUH_CURRENT|-1
 
 Checking the passwords
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -401,19 +401,19 @@ Deploying certificates
 
          .. code-block:: console
 
-            # apt-get -y install wazuh-indexer|WAZUH_INDEXER_DEB_PKG_INSTALL|
+            # apt-get -y install wazuh-indexer=|WAZUH_CURRENT|-1
 
       .. group-tab:: Yum
 
          .. code-block:: console
 
-            # yum -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
+            # yum -y install wazuh-indexer-|WAZUH_CURRENT|-1
 
       .. group-tab:: DNF
 
          .. code-block:: console
 
-            # dnf -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
+            # dnf -y install wazuh-indexer-|WAZUH_CURRENT|-1
 
 #. **Recommended action**: If no other Wazuh components will be installed on this node, run the following command to remove the ``wazuh-certificates.tar`` file.
 
@@ -591,7 +591,7 @@ The command prints ``/etc/wazuh-indexer/certs/indexer.pem: OK``. If it prints ``
       SUCC: Expected 9 config types for node {"updated_config_types":["allowlist","tenants","rolesmapping","nodesdn","audit","roles","actiongroups","config","internalusers"],"updated_config_size":9,"message":null} is 9
       Done with success
 
-   The output includes the line ``Done with success``. The last ``SUCC`` line can end with ``due to: null``, and lines with ``java.nio.channels.ClosedSelectorException`` can follow ``Done with success``. Neither means that the initialization failed.
+   The output includes the line ``Done with success``. The last ``SUCC`` line can end with ``due to: null``. Lines with ``java.nio.channels.ClosedSelectorException``, or a line ending in ``httpclient-dispatch-2 ERROR null``, can follow ``Done with success``. None of these lines means that the initialization failed.
 
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
