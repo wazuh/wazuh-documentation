@@ -20,7 +20,7 @@ Follow these steps to install the Wazuh dashboard.
 Installing package dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Install the following packages if missing:
+#. Install the following packages if missing. Amazon Linux 2023 already has the ``curl`` command, so don't install the ``curl`` package there:
 
    .. tabs::
 
@@ -34,13 +34,13 @@ Installing package dependencies
 
          .. code-block:: console
 
-            # yum -y install tar curl
+            # yum -y install tar
 
       .. group-tab:: DNF
 
          .. code-block:: console
 
-            # dnf -y install tar curl
+            # dnf -y install tar
 
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -74,7 +74,7 @@ Remove the components in any order. Removing a component can delete the root CA 
    # cp -a /etc/wazuh-indexer/ca <BACKUP_DIRECTORY>/wazuh-indexer-ca
    # cp -a /etc/wazuh-dashboard/ca <BACKUP_DIRECTORY>/wazuh-dashboard-ca
 
-Run only the lines for the components installed on the host. The keys that matter most are on the Wazuh manager master node and the first Wazuh indexer node. To reinstall later with the same certificates and passwords, also copy the ``certs`` and ``export`` directories and the ``local.env`` file of each component. Replace ``<BACKUP_DIRECTORY>`` with a directory outside ``/etc``, preferably on another host.
+Run only the lines for the components installed on the host. Only a Wazuh dashboard whose package issued its own certificates, for example on an all-in-one host, has ``/etc/wazuh-dashboard/ca``. The keys that matter most are on the Wazuh manager master node and the first Wazuh indexer node. To reinstall later with the same certificates and passwords, also copy the ``certs`` and ``export`` directories and the ``local.env`` file of each component. Replace ``<BACKUP_DIRECTORY>`` with a directory outside ``/etc``, preferably on another host.
 
 -  :ref:`Uninstalling the Wazuh dashboard <uninstall_dashboard>`
 -  :ref:`Uninstalling the Wazuh manager <uninstall_server>`
@@ -200,7 +200,7 @@ Run the following commands to stop the Wazuh indexer, remove its package, and de
             # rm -rf /etc/systemd/system/wazuh-indexer.service.d/
             # systemctl daemon-reload
 
-To confirm, run ``dpkg -l 'wazuh-*'`` (DEB) or ``rpm -qa 'wazuh-*'`` (RPM). The output lists no Wazuh central component package.
+On RPM systems, ``yum`` and ``dnf`` may also warn that files were saved as ``.rpmsave``. The ``rm -rf`` command removes them. To confirm, run ``dpkg -l 'wazuh-*'`` (DEB) or ``rpm -qa 'wazuh-*'`` (RPM). The output lists no Wazuh central component package.
 
 .. _uninstall_leftover_directories:
 

@@ -591,7 +591,7 @@ The command prints ``/etc/wazuh-indexer/certs/indexer.pem: OK``. If it prints ``
       SUCC: Expected 9 config types for node {"updated_config_types":["allowlist","tenants","rolesmapping","nodesdn","audit","roles","actiongroups","config","internalusers"],"updated_config_size":9,"message":null} is 9
       Done with success
 
-   The output includes the line ``Done with success``. The last ``SUCC`` line can end with ``due to: null``, and lines with ``java.nio.channels.ClosedSelectorException`` can follow ``Done with success``. Neither means that the initialization failed.
+   The output includes the line ``Done with success``. The last ``SUCC`` line can end with ``due to: null``. Lines with ``java.nio.channels.ClosedSelectorException``, or a line ending in ``httpclient-dispatch-2 ERROR null``, can follow ``Done with success``. None of these lines means that the initialization failed.
 
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
