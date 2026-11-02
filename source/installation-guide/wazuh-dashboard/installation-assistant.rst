@@ -96,11 +96,17 @@ After every component is installed and running, each component stores the passwo
 
       # tar -xOf wazuh-install-files.tar wazuh-install-files/credentials.env
 
-#. Remove the installation files and the copies of the passwords. On every node, run the following command from the directory where you ran the installation assistant:
+#. Remove the installation files and the copies of the passwords. On every node except the one where you ran ``--generate-config-files``, run the following command from the directory where you ran the installation assistant:
 
    .. code-block:: console
 
       # rm -rf ./wazuh-install-files.tar ./config.yml ./artifact_urls_|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yaml ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+
+   On the host where you ran ``--generate-config-files``, keep ``config.yml`` with the ``wazuh-ca`` directory. You need both to add nodes or issue certificates again. Run this command there instead:
+
+   .. code-block:: console
+
+      # rm -f ./wazuh-install-files.tar ./artifact_urls_|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yaml
 
    The passwords of each component stay in ``local.env`` and ``export/credentials.env`` in its configuration directory, readable by ``root`` only.
 
