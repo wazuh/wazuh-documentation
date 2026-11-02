@@ -83,7 +83,7 @@ You can also deploy a new agent following the instructions in the Wazuh dashboar
    :title: Deploy new agent button
    :alt: Deploy new agent button
 
-Then follow the steps on the Wazuh dashboard to deploy a new agent.
+Then follow the steps on the Wazuh dashboard to deploy a new agent. The wizard also generates the enrollment token.
 
 .. thumbnail:: /images/installation/deploy-new-agent-from-ui-options.png
    :align: center

@@ -58,9 +58,10 @@ Preparing the packages
          .. code-block:: console
 
             # gpg --dearmor < wazuh-offline/GPG-KEY-WAZUH > wazuh.gpg
+            # command -v ar >/dev/null || echo "Install binutils first: the check needs ar."
             # for p in wazuh-offline/wazuh-packages/*.deb; do
                 ar p "$p" _gpgbuilder > _gpgbuilder
-                gpgv --keyring ./wazuh.gpg --output signed _gpgbuilder 2>/dev/null || { echo "$p: not signed with the Wazuh key"; continue; }
+                gpgv --keyring ./wazuh.gpg --output signed _gpgbuilder 2>/dev/null || { echo "$p: not signed with the Wazuh key, or ar is missing"; continue; }
                 awk 'NF == 4 && length($1) == 32 {print $2, $4}' signed | sort > signed-members
                 for m in $(ar t "$p" | grep -v '^_gpg'); do echo "$(ar p "$p" "$m" | sha1sum | cut -d' ' -f1) $m"; done | sort > members
                 cmp -s signed-members members && echo "$p: OK" || echo "$p: FAILED"
@@ -434,16 +435,18 @@ Install and configure the Wazuh dashboard node. Before installing it, install th
       server.host: 0.0.0.0
       server.port: 443
       opensearch.hosts: ["https://<WAZUH_INDEXER_1_IP_ADDRESS>:9200", "https://<WAZUH_INDEXER_2_IP_ADDRESS>:9200"]
-      opensearch.ssl.verificationMode: certificate
+      opensearch.ssl.verificationMode: full
       wazuh_core.hosts:
         default:
           url: https://<WAZUH_MASTER_IP_ADDRESS>
           port: 55000
           username: wazuh-internal-client
+          run_as: true
+          ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
    -  ``server.host``: This setting specifies the host of the Wazuh dashboard server. To allow remote users to connect, set the value to the IP address or DNS name of the Wazuh dashboard. The value ``0.0.0.0`` accepts all available IP addresses on the host.
    -  ``opensearch.hosts``: The URLs of the Wazuh indexer nodes. Set this value to the Wazuh indexer node addresses, even when all components share the same host. The addresses of the nodes are separated by commas.
-   -  ``wazuh_core.hosts``: The Wazuh manager API that the dashboard queries. ``url`` must point to the Wazuh manager API on the master node, the only node that runs it. Use one of the addresses in the master node's ``apid.pem`` certificate. Don't set a ``password``. The package stored the ``wazuh-internal-client`` password in the Wazuh dashboard keystore, and the keystore value takes precedence over a password in this file. Leave ``run_as`` as the package wrote it.
+   -  ``wazuh_core.hosts``: The Wazuh manager API that the dashboard queries. ``url`` must point to the Wazuh manager API on the master node, the only node that runs it. Use one of the addresses in the master node's ``apid.pem`` certificate. Don't set a ``password``. The package stored the ``wazuh-internal-client`` password in the Wazuh dashboard keystore, and the keystore value takes precedence over a password in this file. Leave ``run_as`` and ``ca`` as the package wrote them.
 
 #. Enable and start the Wazuh dashboard service.
 

@@ -10,7 +10,7 @@ The Wazuh agent runs on the endpoint you want to monitor. It sends data to the W
 
 Install the Wazuh agent from the Wazuh repository. The ``WAZUH_ENROLLMENT_TOKEN`` and ``WAZUH_AGENT_NAME`` variables in the install command enroll the agent with the Wazuh manager when it first starts. To download the package instead, see :doc:`Packages list </installation-guide/packages-list>`.
 
-Before you start, create an enrollment token on the Wazuh manager, as described in :ref:`Generate the enrollment token <generate_enrollment_token>`. The endpoint must reach the Wazuh manager on port 1517/TCP.
+Before you start, create an enrollment token on the Wazuh manager, as described in :ref:`Generate the enrollment token <generate_enrollment_token>`. You can also create it in the Wazuh dashboard, under **Agents management** > **Enrollment tokens**. The endpoint must reach the Wazuh manager on port 1517/TCP.
 
 .. note::
 
@@ -141,7 +141,7 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
             # WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' zypper install -y wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
 
-#. For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux>` section. Enable and start the Wazuh agent service:
+#. For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>` section. Enable and start the Wazuh agent service:
 
    .. tabs::
 

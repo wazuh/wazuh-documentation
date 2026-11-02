@@ -191,7 +191,7 @@ Configuring the Wazuh dashboard
          server.host: 0.0.0.0
          server.port: 443
          opensearch.hosts: https://<WAZUH_INDEXER_ADDRESS>:9200
-         opensearch.ssl.verificationMode: certificate
+         opensearch.ssl.verificationMode: full
 
       Keep the ``opensearch.ssl.certificateAuthorities`` value that the package ships, ``/etc/wazuh-dashboard/certs/indexer-ca.pem``.
 

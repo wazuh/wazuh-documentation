@@ -8,7 +8,7 @@ Deploying Wazuh agents on macOS endpoints
 
 The Wazuh agent runs on the endpoint you want to monitor. It sends data to the Wazuh manager in near real time through an encrypted and authenticated channel. For the supported versions, see :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`.
 
-Before you start, create an enrollment token on the Wazuh manager, as described in :ref:`Generate the enrollment token <generate_enrollment_token>`. The endpoint must reach the Wazuh manager on port 1517/TCP.
+Before you start, create an enrollment token on the Wazuh manager, as described in :ref:`Generate the enrollment token <generate_enrollment_token>`. You can also create it in the Wazuh dashboard, under **Agents management** > **Enrollment tokens**. The endpoint must reach the Wazuh manager on port 1517/TCP.
 
 .. note::
 
@@ -54,7 +54,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
                   The installer deletes ``/tmp/wazuh_envs`` when it finishes.
 
-            For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-macos>` section.
+            For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>` section.
 
             .. note::
 
