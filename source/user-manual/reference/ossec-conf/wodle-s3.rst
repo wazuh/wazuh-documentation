@@ -291,7 +291,7 @@ If defined, the path or prefix for the bucket.
 path_suffix
 ~~~~~~~~~~~~
 
-If defined, the suffix for the bucket. Only works with buckets that contain the folder named AWSLogs (Cloudtrail, VPC, and Macie).
+If defined, the suffix for the bucket. Only works with buckets that contain the folder named AWSLogs (CloudTrail, VPC, and Macie).
 
 +----------------------+--------------+
 | **Default value**    | N/A          |
@@ -560,7 +560,7 @@ discard_regex
 A regular expression to determine if an event must be discarded.
 
 - For inspector, it requires a mandatory field attribute which must be present in the fetched event. The regex is applied to the event field specified with this attribute.
-- For cloudwatchlogs, the field attribute is optional. You can omit it, for example, when monitoring Cloudwatch logs in JSON format and plain text.
+- For cloudwatchlogs, the field attribute is optional. You can omit it, for example, when monitoring CloudWatch logs in JSON format and plain text.
 
 +----------------------+----------------------------------+
 | **Default value**    | N/A                              |
@@ -828,7 +828,7 @@ Attributes:
 | Allowed values   | A str containing the full field name path   |
 +------------------+---------------------------------------------+
 
-Usage example for Cloudtrail fetched events:
+Usage example for CloudTrail fetched events:
 
 .. code-block:: xml
 
