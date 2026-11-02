@@ -103,7 +103,7 @@ Install the following dependencies from your local package mirror, installation 
 
    The Wazuh manager API clients must then use this host's name or IP address.
 
-   If a firewall is active on this host, allow incoming connections to 443/TCP for the Wazuh dashboard and to 1517/TCP for Wazuh 5.x agents. Wazuh 4.x agents use 1514/TCP and 1515/TCP.
+If a firewall is active on this host, allow incoming connections to 443/TCP for the Wazuh dashboard and to 1517/TCP for Wazuh 5.x agents. Wazuh 4.x agents use 1514/TCP and 1515/TCP.
 
 Multi-node offline installation
 -------------------------------
