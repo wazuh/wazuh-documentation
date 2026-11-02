@@ -160,19 +160,19 @@ Installing the Wazuh dashboard
 
          .. code-block:: console
 
-            # apt-get -y install wazuh-dashboard=|WAZUH_CURRENT|-1
+            # apt-get -y install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
 
       .. group-tab:: Yum
 
          .. code-block:: console
 
-            # yum -y install wazuh-dashboard-|WAZUH_CURRENT|-1
+            # yum -y install wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
       .. group-tab:: DNF
 
          .. code-block:: console
 
-            # dnf -y install wazuh-dashboard-|WAZUH_CURRENT|-1
+            # dnf -y install wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
 .. _wazuh_dashboard_configuring:
 
