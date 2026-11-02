@@ -3,8 +3,8 @@
 .. meta::
    :description: Learn how to deploy Wazuh on Kubernetes for Amazon EKS and local clusters, from preparation to verifying components.
 
-Deployment
-==========
+Deploying Wazuh on Kubernetes
+=============================
 
 Deploying the Wazuh central components
 --------------------------------------
@@ -144,7 +144,7 @@ Perform the steps below to generate the required certificates for the deployment
 
    -  ``<EXTERNAL-IP>`` with the load balancer FQDN shown in the ``EXTERNAL-IP`` column of ``kubectl -n traefik get svc``.
 
-#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<EXTERNAL-IP>`` with the same load balancer FQDN. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517``. Repeat the option for every other address agents will use. The script also issues the Wazuh server API certificate (``manager-apid.pem``), which the Wazuh manager master needs to start. Its names come from the ``manager`` entry in ``config.yml``. Add any other name or address that clients of the Wazuh manager API use with the ``--api-san`` option.
+#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<EXTERNAL-IP>`` with the same load balancer FQDN. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517``. Repeat the option for every other address agents will use. The script also issues the Wazuh manager API certificate (``manager-apid.pem``), which the Wazuh manager master needs to start. Its names come from the ``manager`` entry in ``config.yml``. Add any other name or address that clients of the Wazuh manager API use with the ``--api-san`` option.
 
    .. code-block:: console
 
@@ -349,7 +349,7 @@ Perform the steps below to generate the required certificates for the deployment
 
    Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with an IP address of the machine where you run ``kubectl`` that your browser and your Wazuh agents can reach, for example its LAN IP address. You use the same address with ``kubectl port-forward --address`` in the Apply all manifests section. Adding it as an ``ip`` entry puts it in the Wazuh dashboard certificate, so the certificate matches the address you open the dashboard with. The browser still warns until you trust the deployment's root CA, ``wazuh/config/root-ca/certs/root-ca.pem``.
 
-#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with the same address. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517`` through the port-forward. Repeat the option for every other address agents will use. The script also issues the Wazuh server API certificate (``manager-apid.pem``), which the Wazuh manager master needs to start. Its names come from the ``manager`` entry in ``config.yml``. Add any other name or address that clients of the Wazuh manager API use with the ``--api-san`` option.
+#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with the same address. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517`` through the port-forward. Repeat the option for every other address agents will use. The script also issues the Wazuh manager API certificate (``manager-apid.pem``), which the Wazuh manager master needs to start. Its names come from the ``manager`` entry in ``config.yml``. Add any other name or address that clients of the Wazuh manager API use with the ``--api-san`` option.
 
    .. code-block:: console
 
