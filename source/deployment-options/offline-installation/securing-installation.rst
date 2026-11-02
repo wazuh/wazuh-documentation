@@ -33,11 +33,11 @@ You have now installed and configured all the Wazuh central components. Each pac
 
    Don't remove the ``local.env`` and ``export/credentials.env`` files of the packages. Each package reads its passwords from its ``local.env``, and the Wazuh passwords tool updates both. Don't give other users read access to them.
 
-#. Only the system where you ran ``-g`` holds the root CA private key, in its ``wazuh-ca`` directory. Keep a backup of that directory, and remove it from that system when you no longer need to add nodes or renew certificates there. In a distributed deployment, ``/etc/wazuh-indexer/ca`` and ``/etc/wazuh-manager/ca`` on the installed nodes must not hold ``root-ca.key``. An all-in-one deployment has no ``wazuh-ca`` directory. Each package created its own root CA and keeps its ``root-ca.key`` in ``/etc/wazuh-indexer/ca``, ``/etc/wazuh-manager/ca``, and ``/etc/wazuh-dashboard/ca``. Back up these three directories instead:
+#. Only the system where you ran ``-g`` holds the root CA private key, in its ``wazuh-ca`` directory. Keep a backup of that directory, and remove it from that system when you no longer need to add nodes or renew certificates there. In a distributed deployment, ``/etc/wazuh-indexer/ca`` and ``/etc/wazuh-manager/ca`` on the installed nodes must not hold ``root-ca.key``. An all-in-one deployment has no ``wazuh-ca`` directory. Each package created its own root CA and keeps its ``root-ca.key`` in ``/etc/wazuh-indexer/ca``, ``/etc/wazuh-manager/ca``, and ``/etc/wazuh-dashboard/ca``. Back up these three directories instead. Run the following command to list the files in the ca directories of the node:
 
    .. code-block:: console
 
-      # ls -A /etc/wazuh-indexer/ca /etc/wazuh-manager/ca 2>/dev/null
+      # ls -A /etc/wazuh-indexer/ca /etc/wazuh-manager/ca /etc/wazuh-dashboard/ca 2>/dev/null
 
 Changing passwords with the Wazuh passwords tool
 ------------------------------------------------
@@ -109,7 +109,7 @@ The Wazuh manager API users are ``wazuh`` and ``wazuh-internal-client``. Their p
 
       # /var/wazuh-manager/bin/rbac_control change-password
 
-   ``rbac_control`` doesn't update ``/etc/wazuh-manager/export/credentials.env``, which keeps the previous value. Edit the ``WAZUH_MANAGER_API_PASSWORD`` or ``WAZUH_MANAGER_WUI_PASSWORD`` key there. The cluster doesn't synchronize this database. After promoting another node to master, change the passwords again on it.
+   ``rbac_control`` doesn't update ``/etc/wazuh-manager/export/credentials.env``. The file keeps the password set at installation, so store the new password in your password manager. The cluster doesn't synchronize this database. After promoting another node to master, change the passwords again on it.
 
 #. After changing the ``wazuh-internal-client`` password, run the following commands on every Wazuh dashboard node. Replace ``<WAZUH_MANAGER_WUI_PASSWORD>`` with the new password.
 

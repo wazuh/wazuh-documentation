@@ -29,7 +29,7 @@ Wazuh dashboard installation
 
    The default Wazuh web user interface port is 443, used by the Wazuh dashboard. To use another port after the installation, set ``server.port`` in ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` to the new port and restart the Wazuh dashboard service.
 
-   When the installation finishes, the assistant prints the address of the Wazuh dashboard, the username, and the command that shows the password:
+   When the installation finishes, the assistant prints the address of the Wazuh dashboard, the username, the command that shows the password, and how to enroll agents:
 
    The command output looks similar to this:
 
@@ -43,6 +43,10 @@ Wazuh dashboard installation
       INFO:     Password: to read it from wazuh-install-files.tar, run:
       INFO:         sudo tar -xOf wazuh-install-files.tar wazuh-install-files/credentials.env | grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' | cut -d= -f2-
       INFO: The passwords of the other users are in wazuh-install-files/credentials.env of wazuh-install-files.tar.
+      INFO: --- Next steps ---
+      INFO: To enroll agents, use Deploy new agent in the Wazuh dashboard, or create an enrollment token on the Wazuh manager (the master node in a cluster):
+      INFO:     sudo /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
+      INFO: For more information, see https://documentation.wazuh.com/5.0/installation-guide/wazuh-agent/index.html
       INFO: Installation finished.
 
    The assistant prints one URL for each address in the Wazuh dashboard certificate. Use the one your browser can reach.

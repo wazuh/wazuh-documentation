@@ -67,6 +67,8 @@ Install the following dependencies from your local package mirror, installation 
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh --offline-installation -a -as 203.0.113.10 -as wazuh.example.com
 
+   If scripts or a Wazuh dashboard on other hosts will call the Wazuh manager API through an address this host can't detect, such as a public IP address or DNS name, add ``-ap|--api-san <MANAGER_API_ADDRESS>``. Replace ``<MANAGER_API_ADDRESS>`` with that address. The API then keeps listening on all network interfaces, and this address is added to its certificate. Repeat ``-ap`` for each address, for example, ``-ap 203.0.113.20 -ap api.example.com``. You can combine ``-as`` and ``-ap``.
+
    After the installation completes, the output shows the access credentials and a message confirming the installation was successful. There is one ``You can access`` line per address of the Wazuh dashboard certificate. In an interactive terminal, the ``Password:`` line shows the ``admin`` password, followed by the command that prints it again.
 
    .. code-block:: none
@@ -79,6 +81,10 @@ Install the following dependencies from your local package mirror, installation 
       INFO:     To read the password again, run:
       INFO:         sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
       INFO: The passwords of the other users are in /etc/wazuh-indexer/export/credentials.env and /etc/wazuh-manager/export/credentials.env.
+      INFO: --- Next steps ---
+      INFO: To enroll agents, use Deploy new agent in the Wazuh dashboard, or create an enrollment token on this server:
+      INFO:     sudo /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
+      INFO: For more information, see https://documentation.wazuh.com/5.0/installation-guide/wazuh-agent/index.html
       INFO: Installation finished.
 
 #. Access the Wazuh web interface with your ``admin`` user credentials. This is the administrator account for the Wazuh indexer, and it allows you to access the Wazuh dashboard.
@@ -89,7 +95,15 @@ Install the following dependencies from your local package mirror, installation 
 
    When you first access the Wazuh dashboard, your browser displays a warning that a trusted authority did not issue the certificate. To trust it, import ``/etc/wazuh-dashboard/ca/root-ca.pem`` from this host into the browser's certificate manager. You can also add an exception in the browser's advanced options.
 
-   If a firewall is active on this host, allow incoming connections to 443/TCP for the Wazuh dashboard and to 1517/TCP for Wazuh 5.x agents. Wazuh 4.x agents use 1514/TCP and 1515/TCP.
+#. If you configured API access with the ``-ap`` option in step 1, skip this step. By default, the assistant makes the Wazuh manager API listen only on this host (``127.0.0.1`` and ``::1``). If scripts or a Wazuh dashboard on other hosts need to access the Wazuh manager API, set ``host: ['0.0.0.0', '::']`` in ``/var/wazuh-manager/api/configuration/api.yaml`` to allow external connections. Then run the following command to restart the Wazuh manager:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+   The Wazuh manager API clients must then use this host's name or IP address.
+
+If a firewall is active on this host, allow incoming connections to 443/TCP for the Wazuh dashboard and to 1517/TCP for Wazuh 5.x agents. Wazuh 4.x agents use 1514/TCP and 1515/TCP.
 
 Multi-node offline installation
 -------------------------------
@@ -262,6 +276,10 @@ Install the following dependencies on the Wazuh dashboard node, besides the :ref
       INFO:     Password: to read it from wazuh-install-files.tar, run:
       INFO:         sudo tar -xOf wazuh-install-files.tar wazuh-install-files/credentials.env | grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' | cut -d= -f2-
       INFO: The passwords of the other users are in wazuh-install-files/credentials.env of wazuh-install-files.tar.
+      INFO: --- Next steps ---
+      INFO: To enroll agents, use Deploy new agent in the Wazuh dashboard, or create an enrollment token on the Wazuh manager (the master node in a cluster):
+      INFO:     sudo /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
+      INFO: For more information, see https://documentation.wazuh.com/5.0/installation-guide/wazuh-agent/index.html
       INFO: Installation finished.
 
    You have now installed and configured Wazuh.
