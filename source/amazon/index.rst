@@ -8,8 +8,6 @@ Using Wazuh to monitor AWS
 .. meta::
   :description: Discover how Wazuh can help you to monitor your Amazon Web Services (AWS) infrastructure.
 
-.. versionadded:: 3.2.0
-
 Wazuh helps to increase the security of an AWS infrastructure in two different, complementary ways:
 
 - **Installing the Wazuh agent on the instances** to monitor the activity inside them. It collects different types of system and application data and forwards it to the Wazuh manager. Different agent tasks or processes are used to monitor the system in different ways (e.g., monitoring file integrity, reading system log messages and scanning system configurations).

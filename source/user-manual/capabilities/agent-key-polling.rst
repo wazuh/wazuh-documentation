@@ -5,8 +5,6 @@
 Agent key polling
 =================
 
-.. versionadded:: 3.8.0
-
 Wazuh module that allows fetching the keys stored on an external database.
 
 - `How it works`_

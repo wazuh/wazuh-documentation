@@ -18,33 +18,13 @@ Options
 -------
 
 - `disabled`_
-- :ref:`disable <legacy_disable>`
 - `queue_size`_
-- :ref:`length <legacy_length>`
 - `events_per_second`_
 
 disabled
 ^^^^^^^^
 
 Toggles the agent buffer on and off. When set to ``yes``, the agent will send events to the manager without any congestion control.
-
-+--------------------+---------------------+
-| **Default value**  | no                  |
-+--------------------+---------------------+
-| **Allowed values** | yes, no             |
-+--------------------+---------------------+
-
-.. warning::
-	Disabling this functionality in large environments may overwhelm the manager and the network causing them to fail.
-
-.. _legacy_disable:
-
-disable
-^^^^^^^
-
-.. deprecated:: 3.1.0
-
-Toggles the agent buffer on and off. When set to ``yes``, the agent will send events to the manager without any congestion control. Due to compatibility issues, it is recommended that this option be replaced by the `disabled`_ parameter.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
@@ -65,25 +45,6 @@ Sets the capacity of the agent buffer in number of events.
 +--------------------+----------------------------------+
 | **Allowed values** | Any number between 1 and 100000. |
 +--------------------+----------------------------------+
-
-.. _legacy_length:
-
-length
-^^^^^^
-
-.. deprecated:: 3.0.0
-
-Sets the capacity of the agent buffer in number of events.
-
-+--------------------+----------------------------------+
-| **Default value**  | 5000                             |
-+--------------------+----------------------------------+
-| **Allowed values** | Any number between 1 and 100000. |
-+--------------------+----------------------------------+
-
-.. warning::
-
-    Even if this field is accepted, it is recommended that it be replaced with the `queue_size`_ parameter.
 
 events_per_second
 ^^^^^^^^^^^^^^^^^
