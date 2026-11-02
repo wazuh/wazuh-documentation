@@ -23,7 +23,6 @@ Options
 -------
 
 Main options
-^^^^^^^^^^^^^
 
 - `enabled`_
 - `policies`_
@@ -32,7 +31,6 @@ Main options
 - `skip_nfs`_ (deprecated)
 
 Scheduling options
-^^^^^^^^^^^^^^^^^^^^
 
 - `scan_on_start`_
 - `interval`_
