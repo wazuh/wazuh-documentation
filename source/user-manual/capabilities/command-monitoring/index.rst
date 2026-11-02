@@ -9,7 +9,7 @@
 Command monitoring
 ==================
 
-There are times when you may want to monitor things that are not in the logs. To address this, Wazuh incorporates the ability to monitor the output of specific commands and treat the output as though it were log file content.
+Wazuh strengthens your system monitoring capabilities by allowing you to read the output of monitored commands to be run periodically on hosts. These specifically authorized commands can be configured to detect USB storage or check important system status data, such as running processes and system load averages, among other monitoring purposes.
 
 .. topic:: Contents
 
