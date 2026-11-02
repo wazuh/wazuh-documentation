@@ -64,7 +64,7 @@ jQuery(function($) {
   for (let i = 0; i < listOfVersions.length; i++ ) {
     pathsInVersion = newUrls[listOfVersions[i]];
     for (let j = 0; j < pathsInVersion.length; j++) {
-      allCreatedPaths.push(normalizeUrl(pathsInVersion[j]));
+      allCreatedPaths.push(normalizeUrl(pathsInVersion[j]).split('#')[0]);
     }
   }
 
@@ -153,7 +153,7 @@ jQuery(function($) {
 
       const link = document.querySelector('.link-latest');
       let targetURL = 'https://' + window.location.hostname + '/current';
-      if ( documentHistory.hasOwnProperty(latestVersion) ) {
+      if ( documentHistory.hasOwnProperty(latestVersion) && isCreatedPath(redirHistory[latestVersion]) ) {
         targetURL = targetURL + redirHistory[latestVersion];
       }
       if ( link ) {
@@ -235,7 +235,7 @@ jQuery(function($) {
       ver = versionsCopy[i];
       verNoDot = ver.replace('.','_');
       aEle = $('#to'+verNoDot);
-      if ( redirHistory[ver] != null && redirHistory[ver].length && allCreatedPaths.includes(normalizeUrl(redirHistory[ver])) ) {
+      if ( redirHistory[ver] != null && redirHistory[ver].length && isCreatedPath(redirHistory[ver]) ) {
         if ( i == 0 ) { // the latest release version
           href = '/current'+redirHistory[ver]+param;
         } else {
@@ -332,6 +332,15 @@ jQuery(function($) {
     } else {
       return originalUrl;
     }
+  }
+
+  /**
+   * Check if a page was created in any release, ignoring the URL hash
+   * @param {string} path Partial URL of the page
+   * @return {boolean} True if the page path is in allCreatedPaths
+   */
+  function isCreatedPath(path) {
+    return allCreatedPaths.includes(normalizeUrl(path).split('#')[0]);
   }
 
   /**
@@ -435,7 +444,7 @@ jQuery(function($) {
       }
     }
 
-    const pageRemoved = getInfoRemovedUrl(rtn[listOfVersions[listOfVersions.length-1]], removedUrls);
+    const pageRemoved = getInfoRemovedUrl(rtn[listOfVersions[listOfVersions.length-1]], removedUrls, newUrls, listOfVersions);
     if (pageRemoved !== false) {
       const pageRemovedNum = getReleaseNum(pageRemoved['release'], listOfVersions);
       for (r in rtn) {
@@ -515,15 +524,36 @@ jQuery(function($) {
   }
 
   /**
-   * Return the release when a URL was removed
+   * Return the key number of the latest release where a URL was added
+   * @param {string} page The page URL without hash
+   * @param {array} newUrls A list with all the new pages
+   * @param {array} listOfVersions A list with all the releases
+   * @return {number} The key number of the release, or -1 if the URL was never added
+   */
+  function getLastAddedNum(page, newUrls, listOfVersions) {
+    let lastAddedNum = -1;
+    for (forRelease in newUrls) {
+      if ({}.hasOwnProperty.call(newUrls, forRelease) && newUrls[forRelease].includes(page)) {
+        lastAddedNum = Math.max(lastAddedNum, parseInt(getReleaseNum(forRelease, listOfVersions)));
+      }
+    }
+    return lastAddedNum;
+  }
+
+  /**
+   * Return the release when a URL was removed, ignoring removals followed by a
+   * later re-addition of the same URL
    * @param {string} page The page URL
    * @param {array} removedUrls A list with all the removed pages
+   * @param {array} newUrls A list with all the new pages
+   * @param {array} listOfVersions A list with all the releases
    * @return {array|boolean} A list with the removeds pages related with the page URL
    */
-  function getInfoRemovedUrl(page, removedUrls) {
+  function getInfoRemovedUrl(page, removedUrls, newUrls, listOfVersions) {
     let removedUrlsTemp = false;
+    const lastAddedNum = getLastAddedNum(page.split('#')[0], newUrls, listOfVersions);
     for (forRelease in removedUrls) {
-      if ({}.hasOwnProperty.call(removedUrls, forRelease)) {
+      if ({}.hasOwnProperty.call(removedUrls, forRelease) && parseInt(getReleaseNum(forRelease, listOfVersions)) >= lastAddedNum) {
         for (forUrl in removedUrls[forRelease]) {
           if ({}.hasOwnProperty.call(removedUrls[forRelease], forUrl)) {
             const pageWithoutHash = page.split('#')[0];
