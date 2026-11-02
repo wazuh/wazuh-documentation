@@ -83,7 +83,7 @@ Perform the following steps on every Wazuh indexer node of the new Wazuh 5.x clu
 
 #. Review any custom JVM and logging configuration before you apply it to the Wazuh 5.x deployment. Copy only individual non-default lines into the Wazuh 5.x ``jvm.options`` and ``log4j2.properties`` files instead of replacing them. The Wazuh 5.x package sets a 1 GB JVM heap. Before you start the service, set ``-Xms`` and ``-Xmx`` to the same value: half of the RAM when the Wazuh indexer runs alone on the host, or a quarter when the Wazuh manager or the Wazuh dashboard runs on the same host.
 
-#. Edit the security configuration files as described in the :ref:`Wazuh indexer security configuration <migration_wazuh_indexer_security_configuration>` section. Apply the configuration after you start the Wazuh indexer service on every node, as described in Apply the security configuration.
+#. Edit the security configuration files as described in the :ref:`Wazuh indexer security configuration <migration_wazuh_indexer_security_configuration>` section. Apply the configuration after you start the Wazuh indexer service on every node, as described in :ref:`Apply the security configuration <migration_apply_security_configuration>`.
 
 #. Start the Wazuh indexer service:
 
@@ -155,6 +155,8 @@ Run the following commands on a Wazuh 4.x indexer node to export the active secu
 Replace ``<BACKUP_DIRECTORY>`` with the directory that stores the exported files, for example ``/var/tmp/security-backup``. Use the exported ``internal_users.yml``, ``roles.yml``, and ``roles_mapping.yml`` files as the reference for the Wazuh 5.x security configuration.
 
 Before applying the recreated security configuration, verify that the recreated roles reference valid permissions and that the role mappings reference users and roles defined in the Wazuh 5.x security configuration. Replace Wazuh 4.x index patterns in recreated roles, such as ``wazuh-alerts-*``, with the Wazuh 5.x index patterns, such as ``wazuh-events-v5-*``, ``wazuh-findings-v5-*``, and ``wazuh-states-*``. Keep the Wazuh 5.x permission names. Users with roles that reference Wazuh 4.x index patterns can log in, but the Wazuh dashboard doesn't display their data. Refer to the :doc:`user administration </user-manual/user-administration/index>` documentation for more information.
+
+.. _migration_apply_security_configuration:
 
 Apply the security configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -306,8 +308,8 @@ Perform the following steps on every Wazuh indexer node in the source Wazuh 4.x 
 
       In a distributed deployment, mount the shared directory and configure ``path.repo`` on every Wazuh indexer node in the cluster. In an all-in-one deployment, perform these steps on the host running the Wazuh indexer.
 
-Set up snapshot repository on Wazuh 4.x
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Set up a snapshot repository on Wazuh 4.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 On the Wazuh 4.x dashboard, perform the following steps:
 
@@ -322,7 +324,7 @@ On the Wazuh 4.x dashboard, perform the following steps:
       :width: 80%
 
 Take a snapshot of the Wazuh 4.x indices
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 On the Wazuh 4.x dashboard, perform the following steps:
 
@@ -355,7 +357,7 @@ On the Wazuh 4.x dashboard, perform the following steps:
       :width: 80%
 
 Set up a snapshot repository on Wazuh 5.x
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Run the command below on the Wazuh 5.x indexer node to set up a read-only snapshot repository:
 
@@ -383,8 +385,8 @@ The command output looks similar to this:
 
 Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh 5.x indexer. In an all-in-one deployment, use ``127.0.0.1`` because the Wazuh indexer listens on the loopback address.
 
-Restoring the snapshot on Wazuh 5.x
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Restore the snapshot on Wazuh 5.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Perform the following steps on the Wazuh 5.x deployment.
 
