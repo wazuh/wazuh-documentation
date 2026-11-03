@@ -31,7 +31,7 @@ You have now installed and configured all the Wazuh central components. Each pac
 
       # rm -rf ./wazuh-install-files ./wazuh-install-files.tar ./wazuh-offline ./wazuh-offline.tar.gz
 
-   Don't remove the ``local.env`` and ``export/credentials.env`` files of the packages. Each package reads its passwords from its ``local.env``, and the Wazuh passwords tool updates both. Don't give other users read access to them.
+   Keep the ``local.env`` and ``export/credentials.env`` files of the packages, readable by root only. The Wazuh passwords tool updates both. The components check them at every start and refuse to start if one has the wrong owner or permissions.
 
 #. Only the system where you ran ``-g`` holds the root CA private key, in its ``wazuh-ca`` directory. Keep a backup of that directory, and remove it from that system when you no longer need to add nodes or renew certificates there. In a distributed deployment, ``/etc/wazuh-indexer/ca`` and ``/etc/wazuh-manager/ca`` on the installed nodes must not hold ``root-ca.key``. An all-in-one deployment has no ``wazuh-ca`` directory. Each package created its own root CA and keeps its ``root-ca.key`` in ``/etc/wazuh-indexer/ca``, ``/etc/wazuh-manager/ca``, and ``/etc/wazuh-dashboard/ca``. Back up these three directories instead. Run the following command to list the files in the ca directories of the node:
 
