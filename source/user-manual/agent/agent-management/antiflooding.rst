@@ -113,7 +113,7 @@ Follow the steps below to configure the Wazuh agent queue.
 
          .. code-block:: pwsh-session
 
-            # Restart-Service -Name wazuh
+            > Restart-Service -Name wazuh
 
       .. group-tab:: macOS
 
