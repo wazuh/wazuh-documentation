@@ -56,7 +56,7 @@ Default SCA policy
 
       # cat /var/ossec/ruleset/sca/cis_ubuntu24-04.yml
 
-   You can view the full list of available SCA policies in the Wazuh documentation. On your Wazuh dashboard, navigate to the Configuration Assessment module and select the Ubuntu endpoint to view the results of the default SCA check.
+   You can view the full list of :doc:`available SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>` in the Wazuh documentation. On your Wazuh dashboard, navigate to the Configuration Assessment module and select the Ubuntu endpoint to view the results of the default SCA check.
 
 Custom SCA policy
 ~~~~~~~~~~~~~~~~~

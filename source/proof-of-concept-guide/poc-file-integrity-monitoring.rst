@@ -75,7 +75,7 @@ Take the following steps to configure the Wazuh agent to monitor filesystem chan
 
       Wait until the Wazuh agent finishes its initial scan before you test the configuration. The agent logs ``(6012): Real-time file integrity monitoring started.`` in the ``C:\Program Files (x86)\ossec-agent\ossec.log`` file. Changes made before that aren't reported. See :ref:`Real-time monitoring <real_time_monitoring>`.
 
-As an alternative to local configurations on the Wazuh agents, you can centrally configure groups of agents.
+As an alternative to local configurations on the Wazuh agents, you can :doc:`centrally configure groups of agents </user-manual/reference/centralized-configuration>`.
 
 Test the configuration
 ----------------------
