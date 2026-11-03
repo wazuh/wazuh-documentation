@@ -205,7 +205,7 @@ The following example shows a simplified lifecycle policy:
    }
 
 Rollover conditions
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 A rollover creates a new backing index and redirects write operations to the new index. By default, Wazuh rolls over a data stream when either of the following limits is reached:
 
