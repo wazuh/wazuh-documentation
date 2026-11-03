@@ -295,6 +295,8 @@ Target specifies the name of the socket where the output will be redirected. The
 
    When the ``<localfile>`` block comes from the centralized configuration (``agent.conf``), ``target`` only accepts ``agent`` or a socket defined in the local ``ossec.conf`` file of the agent, unless ``logcollector.remote_commands=1`` is set on the agent. The agent removes any other target, with the ``<out_format>`` bound to it, and ignores the ``<localfile>`` block if no target is left.
 
+.. _reference_ossec_localfile_log_format:
+
 log_format
 ^^^^^^^^^^^
 

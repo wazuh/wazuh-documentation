@@ -47,9 +47,9 @@ Configure the Wazuh agent configuration file on Windows, Linux, and macOS endpoi
    Where:
 
    -  ``location`` is the full path of the monitored file.
-   -  ``log_format`` is the log format. Refer to the log format documentation to learn more about the different types of ``log_format`` you can configure.
+   -  ``log_format`` is the log format. Refer to the :ref:`log format documentation <reference_ossec_localfile_log_format>` to learn more about the different types of ``log_format`` you can configure.
 
-   Refer to the localfile documentation to learn more about the options of the ``<localfile>`` configuration block.
+   Refer to the :doc:`localfile documentation </user-manual/reference/ossec-conf/localfile>` to learn more about the options of the ``<localfile>`` configuration block.
 
 #. Restart the Wazuh agent with root or administrator privileges to apply the configuration change:
 
@@ -113,7 +113,7 @@ Perform the following steps on the monitored endpoint to create a new output soc
    -  ``<mode>`` is the socket communication protocol; UDP by default. The allowed values are ``tcp`` or ``udp``. This field is optional.
    -  ``<prefix>`` is a string placed before the message. This field is optional.
 
-   Refer to the socket documentation for more information about defining a socket.
+   Refer to the :doc:`socket documentation </user-manual/reference/ossec-conf/socket>` for more information about defining a socket.
 
 #. Add the following to the agent configuration file to forward logs from ``file.log`` to ``custom_socket``:
 

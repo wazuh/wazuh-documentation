@@ -344,7 +344,7 @@ Perform the following steps to configure the Wazuh agent to pull audit logs from
 
       -  ``<subscription>`` specifies the content types from which Wazuh collects audit logs. The subscription types that can be configured include ``Audit.AzureActiveDirectory``, ``Audit.Exchange``, ``Audit.SharePoint``, ``Audit.General``, and ``DLP.All``.
 
-   For more information about the configuration options, see the Wazuh module for Office 365 reference guide.
+   For more information about the configuration options, see the :doc:`Wazuh module for Office 365 reference guide </user-manual/reference/ossec-conf/office365-module>`.
 
 #. Restart the Wazuh agent service to apply the changes:
 

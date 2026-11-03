@@ -6,7 +6,7 @@
 Monitoring Docker events
 ========================
 
-Docker automates the deployment of different applications inside software containers. The Wazuh module for Docker identifies security incidents across containers and alerts in real time. In this use case, you configure Wazuh to monitor Docker events on an Ubuntu endpoint hosting Docker containers. See this section of the documentation to learn more about monitoring Docker.
+Docker automates the deployment of different applications inside software containers. The Wazuh module for Docker identifies security incidents across containers and alerts in real time. In this use case, you configure Wazuh to monitor Docker events on an Ubuntu endpoint hosting Docker containers. See :doc:`Monitoring Docker environments </user-manual/capabilities/container-security/monitoring-docker>` to learn more about monitoring Docker.
 
 Infrastructure
 --------------

@@ -217,8 +217,8 @@ The options most often changed at installation time are:
 |                                    | local connections.                                               |                                          |                    |
 +------------------------------------+------------------------------------------------------------------+------------------------------------------+--------------------+
 
-Every other option of the remote block can be set the same way, using WAZUH_REMOTE\_ followed by the section (HTTPS\_, LEGACY\_ or AGENTS\_) and the option name in capitals. See the remote section of the Wazuh manager configuration reference for all the options.
+Every other option of the remote block can be set the same way, using WAZUH_REMOTE\_ followed by the section (HTTPS\_, LEGACY\_ or AGENTS\_) and the option name in capitals. See the :doc:`remote section of the Wazuh manager configuration reference </user-manual/reference/wazuh-manager-conf/remote>` for all the options.
 
 .. note::
 
-   To automate deployments from DEB, RPM, Windows (MSI), and macOS packages instead of building from source, use the deployment variables of each package type. See the Wazuh agent installation guide.
+   To automate deployments from DEB, RPM, Windows (MSI), and macOS packages instead of building from source, use the deployment variables of each package type. See the :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>`.
