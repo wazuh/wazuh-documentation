@@ -134,13 +134,13 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
 #. Run PowerShell as an administrator and create the test file and add some text to it, including the keyword ``password_enabled: yes``:
 
-   .. code-block:: console
+   .. code-block:: pwsh-session
    
       > New-Item "C:\Program Files\testfile.txt" -ItemType File -Value "config_file`nsecond line of configuration`npassword_enabled: yes"
 
 #. Verify that the file has been created:
 
-   .. code-block:: console
+   .. code-block:: pwsh-session
    
       > Get-Content "C:\Program Files\testfile.txt"
 
@@ -155,7 +155,7 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
 #. Create a new directory to save your custom policy files:
 
-   .. code-block:: console
+   .. code-block:: pwsh-session
    
       > New-Item "C:\Program Files (x86)\ossec-agent\custom-sca-files" -itemType Directory
 
@@ -204,7 +204,7 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
 #. Restart the Wazuh agent to apply the changes and to run the new SCA check:
 
-   .. code-block:: console
+   .. code-block:: pwsh-session
    
       > Restart-Service -Name wazuh
 
