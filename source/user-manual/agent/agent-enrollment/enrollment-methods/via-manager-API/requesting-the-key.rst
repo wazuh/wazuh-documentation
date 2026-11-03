@@ -103,7 +103,7 @@ Follow these steps to send Wazuh agent enrollment requests from a Windows endpoi
 
    .. code-block:: pwsh-session
 
-      # Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate | Select-Object -Expand Content
+      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate | Select-Object -Expand Content
 
    .. code-block:: none
       :class: output
@@ -134,7 +134,7 @@ Follow these steps to send Wazuh agent enrollment requests from a Windows endpoi
 
    .. code-block:: pwsh-session
 
-      # Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Bearer {0}" -f $TOKEN)} -Method POST -ContentType "application/json" -Uri https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents -Body $AgentName
+      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Bearer {0}" -f $TOKEN)} -Method POST -ContentType "application/json" -Uri https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents -Body $AgentName
 
    The output should look like this:
 

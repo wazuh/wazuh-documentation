@@ -136,13 +136,13 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
    .. code-block:: console
    
-      # New-Item "C:\Program Files\testfile.txt" -ItemType File -Value "config_file`nsecond line of configuration`npassword_enabled: yes"
+      > New-Item "C:\Program Files\testfile.txt" -ItemType File -Value "config_file`nsecond line of configuration`npassword_enabled: yes"
 
 #. Verify that the file has been created:
 
    .. code-block:: console
    
-      # Get-Content "C:\Program Files\testfile.txt"
+      > Get-Content "C:\Program Files\testfile.txt"
 
    You should get output similar to the following:
 
@@ -157,7 +157,7 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
    .. code-block:: console
    
-      # New-Item "C:\Program Files (x86)\ossec-agent\custom-sca-files" -itemType Directory
+      > New-Item "C:\Program Files (x86)\ossec-agent\custom-sca-files" -itemType Directory
 
 #. Open Notepad as an administrator, create a new SCA policy file with the following content and save it as ``C:\Program Files (x86)\ossec-agent\custom-sca-files\keywordcheck.yml``:
 
@@ -206,7 +206,7 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
    .. code-block:: console
    
-      # Restart-Service -Name wazuh
+      > Restart-Service -Name wazuh
 
 #. On your Wazuh dashboard, navigate to the **Configuration Assessment** module and select the Windows endpoint to view the results of the custom SCA check you have created.
 

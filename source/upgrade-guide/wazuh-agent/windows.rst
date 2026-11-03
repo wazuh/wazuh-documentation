@@ -24,7 +24,7 @@ Follow these steps to upgrade Wazuh agents locally on Windows endpoints.
 
             .. code-block:: none
 
-               # .\wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q
+               > .\wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q
 
 
       .. group-tab:: GUI
