@@ -114,14 +114,14 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
          .. code-block:: pwsh-session
 
-            # Restart-Service -Name wazuh
+            > Restart-Service -Name wazuh
 
       .. group-tab:: CMD (as an administrator):
 
          .. code-block:: doscon
 
-            # net stop wazuh
-            # net start wazuh
+            > net stop wazuh
+            > net start wazuh
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
