@@ -145,12 +145,6 @@ Perform the following steps on the source Wazuh dashboard to take a snapshot:
 
 The snapshot files are saved in the repository location ``/mnt/snapshots`` on the source Wazuh indexer node.
 
-.. thumbnail:: /images/manual/wazuh-indexer/snapshot-file-saved.gif
-   :title: Snapshot file saved
-   :alt: Snapshot file saved
-   :align: center
-   :width: 80%
-
 Migrate snapshot
 ^^^^^^^^^^^^^^^^
 
@@ -226,12 +220,6 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
       :width: 80%
 
 #. Click **Restore snapshot** to complete the migration process.
-
-   .. thumbnail:: /images/manual/wazuh-indexer/restore-snapshot.gif
-      :title: Restore snapshot
-      :alt: Restore snapshot
-      :align: center
-      :width: 80%
 
 .. _migrating_wazuh_indices_nfs:
 
@@ -439,12 +427,6 @@ Perform the following steps on the source Wazuh dashboard to take a snapshot:
 
 The snapshot files are saved in the repository location ``/mnt/snapshots`` on the source Wazuh indexer node.
 
-.. thumbnail:: /images/manual/wazuh-indexer/snapshot-file-saved.gif
-   :title: Snapshot file saved
-   :alt: Snapshot file saved
-   :align: center
-   :width: 80%
-
 Restore snapshot
 ^^^^^^^^^^^^^^^^
 
@@ -478,9 +460,3 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
       :width: 80%
 
 #. Click **Restore snapshot** to complete the migration process.
-
-   .. thumbnail:: /images/manual/wazuh-indexer/restore-snapshot.gif
-      :title: Restore snapshot
-      :alt: Restore snapshot
-      :align: center
-      :width: 80%
