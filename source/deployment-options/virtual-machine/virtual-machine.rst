@@ -263,6 +263,8 @@ Reissue both certificates from the VM's own certificate authority. Run the follo
 
 Afterwards, point the agents enrolled before the change to the new address.
 
+.. _vm_move_enrolled_agents:
+
 Move enrolled agents to the new address
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

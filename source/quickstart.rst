@@ -54,37 +54,27 @@ Installing Wazuh
 
 You need a host that meets the requirements above, internet access, and a user with sudo privileges. The installation takes about 5 to 10 minutes.
 
-.. note::
+#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard. In the command, ``-a`` installs all the central components on this host, ``-id`` installs missing operating system dependencies without asking, and ``-d pre-release`` downloads the release candidate packages.
 
-   If a firewall such as firewalld or UFW is active on the endpoint, allow incoming traffic on the following ports. This lets Wazuh agents and users reach the Wazuh central components:
+   If agents or Wazuh manager API clients will reach this server through another address, such as its public IP address, a DNS name, or a load balancer, see :ref:`Connecting through another address <quickstart_connecting_another_address>` before you install.
 
-   -  **1517/TCP**: Wazuh 5.x agent enrollment and connection.
-   -  **443/TCP**: Wazuh dashboard web interface.
-   -  **1514/TCP and 1515/TCP**: only needed if Wazuh 4.x agents connect to this deployment. A Wazuh 4.x agent that enrolls for the first time also needs this server's enrollment password. Read it with ``sudo cat /etc/wazuh-manager/authd.pass`` and pass it as ``WAZUH_REGISTRATION_PASSWORD`` when you install the agent, or write it to ``/var/ossec/etc/authd.pass`` on the agent and restart it.
+   Run the following command. The assistant adds this server's hostname and IP addresses to the certificate that agents check.
 
-   For example, with firewalld, run ``sudo firewall-cmd --permanent --add-port=443/tcp --add-port=1517/tcp && sudo firewall-cmd --reload``. With UFW, run ``sudo ufw allow 443/tcp && sudo ufw allow 1517/tcp``. To check whether a firewall is active, run ``sudo firewall-cmd --state`` or ``sudo ufw status``.
+   .. code-block:: console
 
-   See :ref:`required ports <default_ports>` for the full list of default ports.
+      $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release
 
-#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard. In the commands, ``-a`` installs all the central components on this host, ``-id`` installs missing operating system dependencies without asking, and ``-d pre-release`` downloads the release candidate packages.
+   .. note::
 
-   -  **Default address:** If agents connect to this server's hostname or one of its IP addresses, run the following command.
+      If firewalld or UFW is active, the assistant warns about it and lists the ports to open, for example, ``WARNING: The system has UFW enabled. Please ensure that traffic is allowed on these ports: 1515, 1517, 1514, 443.`` Allow incoming traffic on the following ports. This lets Wazuh agents and users reach the Wazuh central components:
 
-      .. code-block:: console
+      -  **1517/TCP**: Wazuh 5.x agent enrollment and connection.
+      -  **443/TCP**: Wazuh dashboard web interface.
+      -  **1514/TCP and 1515/TCP**: only needed if Wazuh 4.x agents connect to this deployment. A Wazuh 4.x agent that enrolls for the first time also needs this server's enrollment password. Read it with ``sudo cat /etc/wazuh-manager/authd.pass`` and pass it as ``WAZUH_REGISTRATION_PASSWORD`` when you install the agent, or write it to ``/var/ossec/etc/authd.pass`` on the agent and restart it.
 
-         $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release
+      For example, with firewalld, run ``sudo firewall-cmd --permanent --add-port=443/tcp --add-port=1517/tcp && sudo firewall-cmd --reload``. With UFW, run ``sudo ufw allow 443/tcp && sudo ufw allow 1517/tcp``.
 
-   -  **Alternative address:** If agents connect through an address this server can't detect, such as a public IP address, a NAT address, a DNS name, or a load balancer, add it with ``-as|--agent-san <ALTERNATE_ADDRESS>``. Repeat ``-as`` for each address, for example, ``-as 203.0.113.10 -as wazuh.example.com``.
-
-      .. code-block:: console
-
-         $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -as <ALTERNATE_ADDRESS>
-
-   -  **Manager API access:** If scripts or a Wazuh dashboard on other hosts will call the Wazuh manager API through an address this server can't detect, such as a public IP address or DNS name, add ``-ap|--api-san <MANAGER_API_ADDRESS>``. Replace ``<MANAGER_API_ADDRESS>`` with that address. The API then keeps listening on all network interfaces, and this address is added to its certificate. Repeat ``-ap`` for each address, for example, ``-ap 203.0.113.20 -ap api.example.com``. You can combine ``-as`` and ``-ap``.
-
-      .. code-block:: console
-
-         $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -ap <MANAGER_API_ADDRESS>
+      If you use another firewall or a cloud security group, allow these ports there too. See :ref:`required ports <default_ports>` for the full list of default ports.
 
    When the installation finishes, the assistant prints a summary. It shows one Wazuh dashboard URL for each IP address of the host, the username, and the password. It also shows the command to read the password again and how to enroll agents:
 
@@ -111,26 +101,115 @@ You need a host that meets the requirements above, internet access, and a user w
 
       $ sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
 
-#. Open the Wazuh dashboard at ``https://<WAZUH_DASHBOARD_ADDRESS>`` in a browser. Replace ``<WAZUH_DASHBOARD_ADDRESS>`` with an address of this host that your browser can reach, such as one of the URLs the assistant printed. Log in with the following credentials:
+#. Open the Wazuh dashboard at ``https://<WAZUH_DASHBOARD_ADDRESS>`` in a browser. Replace ``<WAZUH_DASHBOARD_ADDRESS>`` with an address of this host that your browser can reach, such as one of the URLs the assistant printed. On a cloud instance, the assistant might print only the instance's private address. Use its public IP address or DNS name instead. Log in with the following credentials:
 
    -  **Username:** ``admin``
    -  **Password:** the ``admin`` password from step 2
 
    The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import ``/etc/wazuh-dashboard/ca/root-ca.pem`` into the browser's certificate manager. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
 
-#. If you configured API access using the Manager API access option in step 1, skip this step. By default, the assistant makes the Wazuh manager API listen only on this host (``127.0.0.1`` and ``::1``). If scripts or a Wazuh dashboard on other hosts need to access the Wazuh manager API, set ``host: ['0.0.0.0', '::']`` in ``/var/wazuh-manager/api/configuration/api.yaml`` to allow external connections. Then run the following command to restart the Wazuh manager:
-
-   .. code-block:: console
-
-      $ sudo systemctl restart wazuh-manager
-
-   The Wazuh manager API clients must then use this host's name or IP address.
-
 The Wazuh packages create the certificate authorities, certificates, and Wazuh user passwords during installation. Store the passwords in a safe place. Keep the ``/etc/wazuh-indexer/export/credentials.env`` and ``/etc/wazuh-manager/export/credentials.env`` files, readable by root only. The running Wazuh components don't read these files. The command in step 2 reads the admin password from ``/etc/wazuh-indexer/export/credentials.env``. To change a password, see :doc:`Password management </user-manual/user-administration/password-management>`.
 
 Each package keeps its certificate authority and the private key of that authority in its ``ca/`` directory: ``/etc/wazuh-indexer/ca``, ``/etc/wazuh-manager/ca``, and ``/etc/wazuh-dashboard/ca``. Back up these three directories in a safe place. You need them to renew certificates.
 
 To remove the Wazuh central components and all their data, run the Wazuh installation assistant using the option ``-u`` or ``--uninstall``. See :doc:`Uninstalling the Wazuh central components </installation-guide/uninstalling-wazuh/central-components>` for details.
+
+.. _quickstart_connecting_another_address:
+
+Connecting through another address
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The assistant adds this server's hostname and IP addresses to the certificates that Wazuh agents and Wazuh manager API clients check. If they reach this server through another address, such as its public IP address, a NAT address, a DNS name, or a load balancer, add that address to the certificates. Otherwise, creating an enrollment token for that address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``. The address you use to open the Wazuh dashboard in a browser doesn't affect this choice.
+
+Adding the address during the installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Run one of the following commands instead of the default installation command:
+
+-  **Alternative address:** If agents connect through an address this server can't detect, such as a public IP address, a NAT address, a DNS name, or a load balancer, add it with ``-as|--agent-san <ALTERNATE_ADDRESS>``. Repeat ``-as`` for each address, for example, ``-as 203.0.113.10 -as wazuh.example.com``.
+
+   .. code-block:: console
+
+      $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -as <ALTERNATE_ADDRESS>
+
+-  **Manager API access:** If scripts or a Wazuh dashboard on other hosts will call the Wazuh manager API through an address this server can't detect, such as a public IP address or DNS name, add ``-ap|--api-san <MANAGER_API_ADDRESS>``. Replace ``<MANAGER_API_ADDRESS>`` with that address. The API then keeps listening on all network interfaces, and this address is added to its certificate. Repeat ``-ap`` for each address, for example, ``-ap 203.0.113.20 -ap api.example.com``. You can combine ``-as`` and ``-ap``.
+
+   .. code-block:: console
+
+      $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -ap <MANAGER_API_ADDRESS>
+
+Adding the address after the installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Wazuh manager reissues the certificates from its own certificate authority, so agents enrolled before the change keep trusting it. Run the following steps on this server:
+
+#. Stop the Wazuh manager and check that none of its processes are still running:
+
+   .. code-block:: console
+
+      $ sudo systemctl stop wazuh-manager
+      $ sudo /var/wazuh-manager/bin/wazuh-manager-control status
+
+   If any line ends in ``is running...``, run ``sudo /var/wazuh-manager/bin/wazuh-manager-control stop``.
+
+#. List the current addresses of the agent listener certificate. For a Wazuh manager API address, use ``/etc/wazuh-manager/certs/apid.pem`` instead:
+
+   .. code-block:: console
+
+      $ sudo openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
+
+#. Create ``/etc/wazuh-manager/local.env`` with the following line, or change the line if the file already has it. Replace ``<HOSTNAME>`` and ``<SERVER_IP_ADDRESS>`` with the addresses from the previous step, and ``<NEW_ADDRESS>`` with the new address:
+
+   .. code-block:: ini
+
+      WAZUH_MANAGER_REMOTED_CERT_SANS=DNS:<HOSTNAME>,IP:<SERVER_IP_ADDRESS>,IP:<NEW_ADDRESS>
+
+   List every address from the previous step except ``localhost``, ``127.0.0.1``, and ``::1``, which are always added. The list replaces the addresses the Wazuh manager finds on its own. Write ``IP Address:`` entries as ``IP:``, use ``DNS:`` for a name, and separate the entries with commas. For a Wazuh manager API address, set ``WAZUH_MANAGER_APID_CERT_SANS`` the same way. Then restrict the file to root:
+
+   .. code-block:: console
+
+      $ sudo chown root:root /etc/wazuh-manager/local.env
+      $ sudo chmod 600 /etc/wazuh-manager/local.env
+
+#. Move the agent listener certificate pair to a backup directory. A pair left in place keeps its old addresses:
+
+   .. code-block:: console
+
+      $ sudo mkdir -p /root/wazuh-certs-backup
+      $ sudo mv /etc/wazuh-manager/certs/remoted.pem /etc/wazuh-manager/certs/remoted-key.pem /root/wazuh-certs-backup/
+
+   For a Wazuh manager API address, move ``/etc/wazuh-manager/certs/apid.pem`` and ``/etc/wazuh-manager/certs/apid-key.pem`` too.
+
+#. Issue the new certificates and publish the certificate authority bundle to the agents:
+
+   .. code-block:: console
+
+      $ sudo /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install
+      $ sudo /var/wazuh-manager/bin/wazuh-manager-certs stamp
+
+   The output includes a line that starts with ``resolve-credentials: /etc/wazuh-manager/certs/remoted.pem: issued;`` and lists the new address. If that line is missing, the certificate wasn't issued. Move the files in ``/root/wazuh-certs-backup/`` back to ``/etc/wazuh-manager/certs/`` and start the Wazuh manager.
+
+#. Start the Wazuh manager and create an enrollment token for the new address to confirm the change:
+
+   .. code-block:: console
+
+      $ sudo systemctl start wazuh-manager
+      $ sudo /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <NEW_ADDRESS>
+
+Agents enrolled before the change keep connecting to their old address. To point them to the new one, follow :ref:`Move enrolled agents to the new address <vm_move_enrolled_agents>` in the Virtual machine (VM) documentation. For a Wazuh manager API address, also follow :ref:`Opening the Wazuh manager API to other hosts <quickstart_opening_manager_api>`.
+
+.. _quickstart_opening_manager_api:
+
+Opening the Wazuh manager API to other hosts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, the assistant makes the Wazuh manager API listen only on this host (``127.0.0.1`` and ``::1``). With the ``-ap`` option, the assistant already makes it listen on all network interfaces. Otherwise, if scripts or a Wazuh dashboard on other hosts need to access the Wazuh manager API, set ``host: ['0.0.0.0', '::']`` in ``/var/wazuh-manager/api/configuration/api.yaml`` to allow external connections. Then run the following command to restart the Wazuh manager:
+
+.. code-block:: console
+
+   $ sudo systemctl restart wazuh-manager
+
+The Wazuh manager API clients must then use this host's name or IP address, or an address you added to the Wazuh manager API certificate.
 
 Next steps
 ----------
