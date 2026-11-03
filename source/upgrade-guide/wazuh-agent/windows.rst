@@ -22,7 +22,7 @@ Follow these steps to upgrade Wazuh agents locally on Windows endpoints.
 
          To upgrade the Wazuh agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations.
 
-            .. code-block:: none
+            .. code-block:: pwsh-session
 
                > .\wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q
 
