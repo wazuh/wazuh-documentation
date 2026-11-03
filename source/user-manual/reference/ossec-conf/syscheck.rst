@@ -847,6 +847,8 @@ Attributes:
 | Allowed values   | sregex                                                                            |
 +------------------+-----------------------------------------------------------------------------------+
 
+.. _reference_ossec_syscheck_whodata:
+
 whodata
 ^^^^^^^
 
