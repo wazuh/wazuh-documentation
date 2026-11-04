@@ -6,14 +6,14 @@
 Uninstalling the Wazuh central components
 =========================================
 
-Uninstalling deletes the components' data and configuration, including indexed alerts and certificates, and asks for no confirmation. It can also delete the root CA private keys in ``/etc/wazuh-manager/ca``, ``/etc/wazuh-indexer/ca``, and ``/etc/wazuh-dashboard/ca``, which you need to add nodes or renew certificates. The Wazuh agents trust the Wazuh manager CA. Back up anything you want to keep first, these directories included. After an assisted installation, the root CA key is also in the ``wazuh-ca`` directory beside the installation assistant, on the host where you ran ``--generate-config-files``. Uninstalling doesn't remove that directory.
+Uninstalling deletes the components' data and configuration, including indexed alerts and certificates, and asks for no confirmation. It can also delete the root CA private keys in ``/etc/wazuh-manager/ca``, ``/etc/wazuh-indexer/ca``, and ``/etc/wazuh-dashboard/ca``, which you need to add nodes or renew certificates. The Wazuh agents trust the CA whose certificate is ``root-ca.pem`` in ``/etc/wazuh-manager/ca``. Back up anything you want to keep first, these directories included. After an assisted installation, the root CA key is also in the ``wazuh-ca`` directory beside the installation assistant, on the host where you ran ``--generate-config-files``. Uninstalling doesn't remove that directory.
 
 You can remove the Wazuh central components in two ways. Use only one. The installation assistant removes every Wazuh central component on the host at once. The package manager removes one component at a time, as described in :ref:`Uninstall one component with the package manager <uninstall_one_component>`.
 
 Uninstall all central components with the installation assistant
 ----------------------------------------------------------------
 
-Follow these steps to uninstall the Wazuh central components with the installation assistant. Back up the CA directories first, as described at the start of this section.
+Follow these steps to uninstall the Wazuh central components with the installation assistant. Back up the CA directories first. Run the ``mkdir`` and ``cp`` commands at the start of :ref:`Uninstall one component with the package manager <uninstall_one_component>`.
 
 #. If you no longer have the Wazuh installation assistant script, download it:
 
@@ -66,15 +66,16 @@ If you installed the components step by step, also remove the Wazuh repository a
 Uninstall one component with the package manager
 ------------------------------------------------
 
-Remove the components in any order. Removing a component can delete the root CA private key it created, which you need to add nodes or renew certificates. The Wazuh agents trust the Wazuh manager CA. Before you start, copy the CA directory of each component on the host to a safe place:
+Remove the components in any order. Removing a component can delete the root CA private key it created, which you need to add nodes or renew certificates. The Wazuh agents trust the CA whose certificate is ``root-ca.pem`` in ``/etc/wazuh-manager/ca``. Before you start, copy the CA directory of each component on the host to a safe place. Replace ``<BACKUP_DIRECTORY>`` with a directory outside ``/etc``, preferably on another host:
 
 .. code-block:: console
 
+   # mkdir -p <BACKUP_DIRECTORY>
    # cp -a /etc/wazuh-manager/ca <BACKUP_DIRECTORY>/wazuh-manager-ca
    # cp -a /etc/wazuh-indexer/ca <BACKUP_DIRECTORY>/wazuh-indexer-ca
    # cp -a /etc/wazuh-dashboard/ca <BACKUP_DIRECTORY>/wazuh-dashboard-ca
 
-Run only the lines for the components installed on the host. Only a Wazuh dashboard whose package issued its own certificates, for example on an all-in-one host, has ``/etc/wazuh-dashboard/ca``. The keys that matter most are on the Wazuh manager master node and the first Wazuh indexer node. To reinstall later with the same certificates and passwords, also copy the ``certs`` and ``export`` directories and the ``local.env`` file of each component. Replace ``<BACKUP_DIRECTORY>`` with a directory outside ``/etc``, preferably on another host.
+Run only the lines for the components installed on the host. Only a Wazuh dashboard whose package issued its own certificates, for example on an all-in-one host, has ``/etc/wazuh-dashboard/ca``. In a distributed deployment, the root CA private key is in ``/etc/wazuh-indexer/ca`` on the first Wazuh indexer node after a step-by-step installation. After an assisted installation, it's in the ``wazuh-ca`` directory beside the installation assistant, on the host where you ran ``--generate-config-files``. ``/etc/wazuh-manager/ca`` holds a key only where the Wazuh manager package issued its own certificates, for example on an all-in-one host. On the other nodes, ``/etc/wazuh-manager/ca`` and ``/etc/wazuh-indexer/ca`` hold only ``root-ca.pem``. To reinstall later with the same certificates and passwords, also copy the ``certs`` and ``export`` directories and the ``local.env`` file of each component.
 
 -  :ref:`Uninstalling the Wazuh dashboard <uninstall_dashboard>`
 -  :ref:`Uninstalling the Wazuh manager <uninstall_server>`

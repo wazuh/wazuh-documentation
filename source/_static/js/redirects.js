@@ -211,6 +211,7 @@ newUrls['5.0'] = [
   '/installation-guide/wazuh-manager/step-by-step.html',
   '/deployment-options/offline-installation/securing-installation.html',
   '/deployment-options/offline-installation/running-offline.html',
+  '/deployment-options/offline-installation/install-agents.html',
 ];
 
 /* Redirections 4.14—5.0  */

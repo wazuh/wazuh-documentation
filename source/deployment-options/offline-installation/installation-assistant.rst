@@ -36,6 +36,7 @@ Install the following dependencies from your local package mirror, installation 
       -  openssl
       -  procps-ng
       -  sed
+      -  shadow-utils
       -  tar
       -  util-linux
 
@@ -75,7 +76,7 @@ Install the following dependencies from your local package mirror, installation 
       :class: output
 
       INFO: --- Summary ---
-      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>:443
+      INFO: You can access the web interface https://<WAZUH_DASHBOARD_ADDRESS>:443
       INFO:     User: admin (Wazuh dashboard login and Wazuh indexer administrator)
       INFO:     Password: <ADMIN_PASSWORD>
       INFO:     To read the password again, run:
@@ -89,11 +90,11 @@ Install the following dependencies from your local package mirror, installation 
 
 #. Access the Wazuh web interface with your ``admin`` user credentials. This is the administrator account for the Wazuh indexer, and it allows you to access the Wazuh dashboard.
 
-   -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
+   -  **URL**: ``https://<WAZUH_DASHBOARD_ADDRESS>``
    -  **Username**: ``admin``
    -  **Password**: the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh-indexer/export/credentials.env``.
 
-   When you first access the Wazuh dashboard, your browser displays a warning that a trusted authority did not issue the certificate. To trust it, import ``/etc/wazuh-dashboard/ca/root-ca.pem`` from this host into the browser's certificate manager. You can also add an exception in the browser's advanced options.
+   When you first access the Wazuh dashboard, your browser displays a warning that a trusted authority did not issue the certificate. To trust it, import the Wazuh dashboard CA, ``/etc/wazuh-dashboard/export/ca.pem``, into the browser's certificate manager. Only ``root`` can read it. Run ``sudo cat /etc/wazuh-dashboard/export/ca.pem`` on this host, and save the output as ``ca.pem`` on the computer that runs the browser. You can also add an exception in the browser's advanced options.
 
 #. If you configured API access with the ``-ap`` option in step 1, skip this step. By default, the assistant makes the Wazuh manager API listen only on this host (``127.0.0.1`` and ``::1``). If scripts or a Wazuh dashboard on other hosts need to access the Wazuh manager API, set ``host: ['0.0.0.0', '::']`` in ``/var/wazuh-manager/api/configuration/api.yaml`` to allow external connections. Then run the following command to restart the Wazuh manager:
 
@@ -104,6 +105,8 @@ Install the following dependencies from your local package mirror, installation 
    The Wazuh manager API clients must then use this host's name or IP address.
 
 If a firewall is active on this host, allow incoming connections to 443/TCP for the Wazuh dashboard and to 1517/TCP for Wazuh 5.x agents. Wazuh 4.x agents use 1514/TCP and 1515/TCP.
+
+Next, continue with :doc:`Securing your Wazuh installation <securing-installation>`, which removes the installation files, and then read :doc:`Running Wazuh offline <running-offline>`. It lists the log messages that are expected without Internet access and explains how to update the detection content.
 
 Multi-node offline installation
 -------------------------------
@@ -127,6 +130,7 @@ Install and configure the Wazuh indexer nodes on a 64-bit (x86_64/AMD64 or AARCH
       -  iproute
       -  openssl
       -  procps-ng
+      -  shadow-utils
       -  util-linux
 
    .. group-tab:: DEB
@@ -159,12 +163,12 @@ Install and configure the Wazuh indexer nodes on a 64-bit (x86_64/AMD64 or AARCH
 Testing the cluster installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Run the following commands to confirm that the installation is successful. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the address of a Wazuh indexer node. When ``curl`` asks for the password, enter the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value that the first command shows. Every Wazuh indexer node holds the same value.
+#. Run the following commands to confirm that the installation is successful. Replace ``<WAZUH_INDEXER_ADDRESS>`` with the address of a Wazuh indexer node. When ``curl`` asks for the password, enter the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value that the first command shows. Every Wazuh indexer node holds the same value.
 
    .. code-block:: console
 
       # grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
-      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200
 
    The command output looks similar to this:
 
@@ -183,11 +187,11 @@ Testing the cluster installation
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-#. Verify that the cluster is running correctly. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` in the following command, then execute it and enter the same password:
+#. Verify that the cluster is running correctly. Replace ``<WAZUH_INDEXER_ADDRESS>`` in the following command, then execute it and enter the same password:
 
    .. code-block:: console
 
-      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cat/nodes?v
 
    The output lists every Wazuh indexer node, and the node that manages the cluster has ``*`` in the ``cluster_manager`` column. For example:
 
@@ -207,6 +211,7 @@ Install the following dependencies on the Wazuh manager nodes, besides the :ref:
 
    .. group-tab:: RPM
 
+      -  coreutils
       -  diffutils
       -  findutils
       -  gawk
@@ -215,6 +220,7 @@ Install the following dependencies on the Wazuh manager nodes, besides the :ref:
       -  iproute
       -  openssl
       -  sed
+      -  shadow-utils
       -  util-linux
 
    .. group-tab:: DEB
@@ -247,6 +253,7 @@ Install the following dependencies on the Wazuh dashboard node, besides the :ref
       -  diffutils
       -  libcap
       -  openssl
+      -  shadow-utils
       -  util-linux
 
    .. group-tab:: DEB
@@ -271,7 +278,7 @@ Install the following dependencies on the Wazuh dashboard node, besides the :ref
       :class: output
 
       INFO: --- Summary ---
-      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>:443
+      INFO: You can access the web interface https://<WAZUH_DASHBOARD_ADDRESS>:443
       INFO:     User: admin (Wazuh dashboard login and Wazuh indexer administrator)
       INFO:     Password: to read it from wazuh-install-files.tar, run:
       INFO:         sudo tar -xOf wazuh-install-files.tar wazuh-install-files/credentials.env | grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' | cut -d= -f2-
@@ -286,8 +293,10 @@ Install the following dependencies on the Wazuh dashboard node, besides the :ref
 
 #. Access the Wazuh web interface with your ``admin`` user credentials. This is the administrator account for the Wazuh indexer, and it allows you to access the Wazuh dashboard.
 
-   -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
+   -  **URL**: ``https://<WAZUH_DASHBOARD_ADDRESS>``
    -  **Username**: ``admin``
    -  **Password**: the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``wazuh-install-files/credentials.env`` of ``wazuh-install-files.tar``. Run the command that the summary shows to read it.
 
-   When you first access the Wazuh dashboard, your browser displays a warning that a trusted authority didn't issue the certificate. You can add an exception in the browser's advanced options. For better security, import the ``root-ca.pem`` file you generated earlier into the browser's certificate manager instead. You can also configure a certificate from a trusted authority. The certificate names only the Wazuh dashboard addresses in ``config.yml``. To reach the dashboard by another address or DNS name without the warning, add it to the dashboard node's ``ip`` or ``dns`` list in ``config.yml``. Do this before you run ``-g``.
+   When you first access the Wazuh dashboard, your browser displays a warning that a trusted authority didn't issue the certificate. You can add an exception in the browser's advanced options. For better security, import ``wazuh-install-files/root-ca.pem`` from ``wazuh-install-files.tar`` into the browser's certificate manager instead. You can also configure a certificate from a trusted authority. The certificate names only the Wazuh dashboard addresses in ``config.yml``. To reach the dashboard by another address or DNS name without the warning, add it to the dashboard node's ``ip`` or ``dns`` list in ``config.yml``. Do this before you run ``-g``.
+
+Next, continue with :doc:`Securing your Wazuh installation <securing-installation>`, which removes the installation files, and then read :doc:`Running Wazuh offline <running-offline>`. It lists the log messages that are expected without Internet access and explains how to update the detection content.

@@ -116,11 +116,11 @@ Run these steps as root on one host of your deployment, for example, your first 
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --generate-config-files -id -as <ALTERNATE_ADDRESS>
 
-   If clients will reach the Wazuh manager API through an address the host cannot know, add it with ``-ap|--api-san <API_ADDRESS>``. To use both options together, run:
+   If clients will reach the Wazuh manager API through an address the host cannot know, add it with ``-ap|--api-san <MANAGER_API_ADDRESS>``. To use both options together, run:
 
    .. code-block:: console
 
-      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --generate-config-files -id -as <ALTERNATE_ADDRESS> -ap <API_ADDRESS>
+      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --generate-config-files -id -as <ALTERNATE_ADDRESS> -ap <MANAGER_API_ADDRESS>
 
    .. note::
 
@@ -158,7 +158,13 @@ Follow these steps to install and configure a single-node or multi-node Wazuh in
 
 Repeat this stage of the installation process for every Wazuh indexer node in your cluster. The command installs, configures, and starts the Wazuh indexer on the host. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
-The installation assistant sets the Wazuh indexer heap to half of the host's RAM. On a host that also runs the Wazuh manager or Wazuh dashboard, set it to a quarter of the RAM and restart the Wazuh indexer. :ref:`Configuring the Wazuh indexer <wazuh_indexer_configuring>`, in the step-by-step section, describes how.
+The installation assistant sets the Wazuh indexer heap to half of the host's RAM. If this host also runs, or will run, the Wazuh manager or the Wazuh dashboard, for example an all-in-one host installed with these sections, set the heap to a quarter of the RAM. Replace ``<HEAP>`` with that value, for example ``2g`` on a host with 8 GB, and run:
+
+.. code-block:: console
+   :emphasize-lines: 1
+
+   # sed -i -E 's/^-Xm([sx]).*/-Xm\1<HEAP>/' /etc/wazuh-indexer/jvm.options
+   # systemctl restart wazuh-indexer
 
 Cluster initialization
 ^^^^^^^^^^^^^^^^^^^^^^

@@ -143,6 +143,8 @@ On the **first Wazuh indexer node** only, create the five deployment passwords b
       WAZUH_MANAGER_WUI_PASSWORD="$(wazuh_generate_password)"
       EOF
 
+#. ``WAZUH_MANAGER_API_PASSWORD`` is the password of the ``wazuh`` user of the Wazuh manager API, the one you use in API requests. ``WAZUH_MANAGER_WUI_PASSWORD`` is the password of ``wazuh-internal-client``, the user that the Wazuh dashboard uses.
+
 #. Copy the Wazuh indexer passwords from ``credentials.env`` to ``/etc/wazuh-indexer/local.env`` on this node. The following commands create the directory and file with the required permissions, then copy only the Wazuh indexer credentials:
 
    .. code-block:: console
@@ -596,7 +598,7 @@ The command prints ``/etc/wazuh-indexer/certs/indexer.pem: OK``. If it prints ``
    The output includes the line ``Done with success``. The last ``SUCC`` line can end with ``due to: null``. Lines with ``java.nio.channels.ClosedSelectorException``, or a line ending in ``httpclient-dispatch-2 ERROR null``, can follow ``Done with success``. None of these lines means that the initialization failed.
 
 Testing the cluster installation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------
 
 #. On the node where you ran ``indexer-security-init.sh``, run the following command to print the Wazuh indexer admin user password. Every Wazuh indexer node holds the same value.
 
