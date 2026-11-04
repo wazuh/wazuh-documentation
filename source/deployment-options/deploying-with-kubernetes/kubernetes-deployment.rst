@@ -300,6 +300,14 @@ The storage class provisioner varies by cluster.
 
    The provisioner column displays ``k8s.io/minikube-hostpath``.
 
+   On Minikube, comment out ``provisioner: microk8s.io/hostpath`` and uncomment ``provisioner: k8s.io/minikube-hostpath``:
+
+   .. code-block:: console
+
+      $ sed -i -e 's|^provisioner: microk8s.io/hostpath|# &|' -e 's|^# provisioner: k8s.io/minikube-hostpath|provisioner: k8s.io/minikube-hostpath|' envs/local-env/storage-class.yaml
+
+   On other clusters, set ``provisioner:`` to the value in the ``PROVISIONER`` column.
+
 Set up SSL certificates
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -501,7 +509,7 @@ You can adjust cluster resources by editing patch files in ``envs/local-env/``. 
 
       $ kubectl -n wazuh port-forward service/dashboard --address <KUBERNETES_HOST_IP_ADDRESS> 8443:443 > /tmp/wazuh-dashboard-port-forward.log 2>&1 &
 
-   Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with the IP address of the Kubernetes endpoint:
+   Use the same ``<KUBERNETES_HOST_IP_ADDRESS>`` that you added to ``config.yml`` and passed to ``--agent-san``.
 
    Refer to the :ref:`verifying the deployment <verifying-the-deployment>` section to confirm the deployment is successful.
 
