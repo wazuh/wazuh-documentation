@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to request the Wazuh agent key from the Wazuh manager API for different operating systems in this section of the documentation.
+   :description: Learn how to request the client key from the Wazuh manager API for different operating systems in this section of the documentation.
 
 Request the client key
 ======================
