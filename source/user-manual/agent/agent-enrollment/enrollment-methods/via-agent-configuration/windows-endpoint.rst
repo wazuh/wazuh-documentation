@@ -15,7 +15,7 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
 #. Use an administrator account to modify the Wazuh agent configuration file. For this guide, the examples use the 64-bit installation path: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
-   -  Add the Wazuh manager IP address or fully qualified domain name (FQDN). The setting depends on the Wazuh agent version:
+   -  Add the Wazuh manager IP address or fully qualified domain name (FQDN). For Wazuh 5.0 agents, replace the ``0.0.0.0:1517/wazuh-manager/`` value that the package writes in ``<endpoint>``. The setting depends on the Wazuh agent version:
 
       **Wazuh 5.0 agents**:
 
@@ -52,7 +52,13 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
    -  Store the enrollment password in ``C:\Program Files (x86)\ossec-agent\authd.pass``. For the steps, see the :doc:`Enroll Wazuh agents with password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>` section.
 
-   -  (Recommended) Configure the certificate authority (CA) that signs the Wazuh manager certificate, so that the Wazuh agent verifies the identity of the Wazuh manager. Copy the CA certificate to the endpoint. By default, it's ``/etc/wazuh-manager/certs/root-ca.pem`` on the Wazuh manager. The Wazuh manager also serves it at ``GET https://<WAZUH_MANAGER_ADDRESS>:1517/wazuh-manager/cacerts``. Then add the following to the Wazuh agent configuration file:
+   -  (Recommended) Configure the certificate authority (CA) that signs the Wazuh manager certificate, so that the Wazuh agent verifies the identity of the Wazuh manager. Copy the CA certificate to the endpoint. By default, it's ``/etc/wazuh-manager/certs/root-ca.pem`` on the Wazuh manager. The Wazuh manager also serves it at ``GET https://<WAZUH_MANAGER_ADDRESS>:1517/wazuh-manager/cacerts``. To download it on the endpoint, run the following command. The ``-k`` option skips the certificate check for this download only. To avoid it, copy the file from the Wazuh manager instead.
+
+      .. code-block:: pwsh-session
+
+         > curl.exe -k -o "C:\<PATH_TO>\root-ca.pem" https://<WAZUH_MANAGER_ADDRESS>:1517/wazuh-manager/cacerts
+
+      Then add the following to the Wazuh agent configuration file:
 
       .. code-block:: xml
          :emphasize-lines: 4
@@ -60,7 +66,7 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
          <ossec_config>
            <agent>
              <ssl>
-               <certificate_authorities>C:\<PATH_TO>\rootCA.pem</certificate_authorities>
+               <certificate_authorities>C:\<PATH_TO>\root-ca.pem</certificate_authorities>
                <verification_mode>full</verification_mode>
              </ssl>
            </agent>

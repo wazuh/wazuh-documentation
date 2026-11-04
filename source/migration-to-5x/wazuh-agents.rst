@@ -25,7 +25,7 @@ The Wazuh manager 4.x stores agent registrations in the ``/var/ossec/etc/client.
 Migrate agent registrations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps to migrate the Wazuh agent registrations from Wazuh 4.x to 5.x.
+Perform the following steps to migrate the Wazuh agent registrations from Wazuh 4.x to 5.x. Do this before you enroll any agent on the Wazuh 5.x manager. These steps replace the Wazuh 5.x ``client.keys`` file and any agent already registered with the same ID.
 
 Wazuh 4.x manager
 ~~~~~~~~~~~~~~~~~
@@ -77,6 +77,10 @@ Wazuh 5.x manager
 
 #. Copy the agent registrations and group memberships from the Wazuh 4.x database into the Wazuh 5.x database. Wazuh 5.x uses a different database schema, so you can't replace the database file:
 
+   .. note::
+
+      The command requires the ``sqlite3`` tool. If it isn't installed, install it, or run the same SQL statements with the Python interpreter included with the Wazuh manager, ``/var/wazuh-manager/framework/python/bin/python3``.
+
    .. code-block:: console
 
       # sqlite3 /var/wazuh-manager/queue/db/global.db <<'SQL'
@@ -99,8 +103,6 @@ Wazuh 5.x manager
       WHERE b.id_agent > 0;
       SQL
       # chown wazuh-manager:wazuh-manager /var/wazuh-manager/queue/db/global.db
-
-   The command requires the ``sqlite3`` tool. If it isn't installed, install it, or run the same SQL statements with the Python interpreter included with the Wazuh manager, ``/var/wazuh-manager/framework/python/bin/python3``.
 
 #. Restore the custom agent groups:
 
@@ -202,7 +204,7 @@ Wazuh 5.x agents verify the Wazuh manager certificate. A package upgrade doesn't
 
       # grep "TLS verification" /var/ossec/logs/ossec.log
 
-   If you already upgraded an agent without the root certificate, stop the agent and run ``/var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE> --certs-only``. Replace ``<TOKEN_FILE>`` with a file that contains an enrollment token generated on the Wazuh 5.x manager.
+   If you already upgraded an agent without the root certificate, stop the agent and run ``/var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE> --certs-only``. Replace ``<TOKEN_FILE>`` with a file that contains an enrollment token generated on the Wazuh 5.x manager. You can create the token in **Agents management** > **Enrollment tokens** > **Create token**.
 
    .. note::
 

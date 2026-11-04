@@ -10,7 +10,7 @@ Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent confi
 
 #. Launch the terminal, obtain root access, edit the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``, and make the following changes:
 
-   #. Add the Wazuh manager IP address or fully qualified domain name (FQDN). The setting depends on the Wazuh agent version:
+   #. Add the Wazuh manager IP address or fully qualified domain name (FQDN). For Wazuh 5.0 agents, replace the ``MANAGER_IP`` placeholder that the package writes in ``<endpoint>``. The setting depends on the Wazuh agent version:
 
       **Wazuh 5.0 agents**:
 
@@ -47,7 +47,13 @@ Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent confi
 
    #. Store the enrollment password in ``/var/ossec/etc/authd.pass``. For the steps and the required file permissions, see the :doc:`Enroll Wazuh agents with password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>` section.
 
-   #. (Recommended) Configure the certificate authority (CA) that signs the Wazuh manager certificate, so that the Wazuh agent verifies the identity of the Wazuh manager. Copy the CA certificate to the endpoint. By default, it's ``/etc/wazuh-manager/certs/root-ca.pem`` on the Wazuh manager. The Wazuh manager also serves it at ``GET https://<WAZUH_MANAGER_ADDRESS>:1517/wazuh-manager/cacerts``. Then add the following to the Wazuh agent configuration file:
+   #. (Recommended) Configure the certificate authority (CA) that signs the Wazuh manager certificate, so that the Wazuh agent verifies the identity of the Wazuh manager. Copy the CA certificate to the endpoint. By default, it's ``/etc/wazuh-manager/certs/root-ca.pem`` on the Wazuh manager. The Wazuh manager also serves it at ``GET https://<WAZUH_MANAGER_ADDRESS>:1517/wazuh-manager/cacerts``. To download it on the endpoint, run the following command. The ``-k`` option skips the certificate check for this download only. To avoid it, copy the file from the Wazuh manager instead.
+
+      .. code-block:: console
+
+         # curl -k -o /<PATH_TO>/root-ca.pem https://<WAZUH_MANAGER_ADDRESS>:1517/wazuh-manager/cacerts
+
+      Then add the following to the Wazuh agent configuration file:
 
       .. code-block:: xml
          :emphasize-lines: 4
@@ -55,7 +61,7 @@ Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent confi
          <ossec_config>
            <agent>
              <ssl>
-               <certificate_authorities>/<PATH_TO>/rootCA.pem</certificate_authorities>
+               <certificate_authorities>/<PATH_TO>/root-ca.pem</certificate_authorities>
                <verification_mode>full</verification_mode>
              </ssl>
            </agent>

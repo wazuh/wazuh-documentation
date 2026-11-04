@@ -79,7 +79,7 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
 
       # /var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE>
 
-   If the Wazuh agent already has a key, add ``--force-enroll``. The Wazuh agent is enrolled again and gets a new ID.
+   If the Wazuh agent already has a key, add ``--force-enroll``. The Wazuh agent is enrolled again and gets a new ID. The Wazuh manager replaces the existing Wazuh agent only as its ``<auth><force>`` settings allow. By default, the existing Wazuh agent must have been disconnected for more than 1 hour and registered more than 1 hour ago. Otherwise the Wazuh manager refuses the enrollment as a duplicate name or IP address (error 9008 or 9007), and ``wazuh-agent-auth`` exits with code 4.
 
 #. Start the Wazuh agent:
 
