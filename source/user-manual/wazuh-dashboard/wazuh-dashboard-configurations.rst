@@ -21,17 +21,17 @@ The following configuration and management capabilities are covered in this sect
 Ruleset management
 ------------------
 
-**Ruleset Management** is a core section of the Wazuh dashboard that provides tools for managing the full lifecycle of log normalization and event-based detection. It centralizes the configuration of integrations, decoders, key-value databases (KVDBs), detection rules, and detectors through a unified interface.
+**Ruleset management** is a core section of the Wazuh dashboard that provides tools for managing the full lifecycle of log normalization and event-based detection. It centralizes the configuration of integrations, decoders, key-value databases (KVDBs), detection rules, and detectors through a unified interface.
 
 Integrations, decoders, KVDBs, rules, and detectors are organized into :ref:`Spaces <dashboard_configurations_space>`. The Draft, Test, and Custom spaces are user-managed and represent different stages of the content lifecycle, while the Standard space is read-only and contains the built-in content shipped with Wazuh.
 
-The **Ruleset Management** section on the Wazuh dashboard is organized into the following sections:
+The **Ruleset management** section on the Wazuh dashboard is organized into the following sections:
 
 -  :ref:`dashboard_configurations_normalization`: Provides visibility and management over the components that are used to parse, enrich, and structure raw log data before detection and analysis. Users can configure and manage integrations, decoders, and the Key-Value database (KVDB) used during log normalization.
 -  :ref:`dashboard_configurations_detection`: Provides visibility and management over the rules responsible for generating findings from normalized events processed by the Wazuh normalization engine. Users can configure and manage detection rules and detectors for continuous threat monitoring.
 -  :ref:`dashboard_configurations_logtest`: Provides an interactive interface to validate that a specific log event is correctly parsed by active decoders and test detection logic directly from the Wazuh dashboard.
 
-To view the **Ruleset Management** dashboard, click **☰** to open the menu and navigate to **Ruleset management** > **Overview**.
+To view the **Ruleset management** dashboard, click **☰** to open the menu and navigate to **Ruleset management** > **Overview**.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/ruleset-management-overview.png
    :align: center
@@ -75,7 +75,7 @@ User-managed content moves from Draft to Test, and from Test to Custom, through 
 Normalization
 ^^^^^^^^^^^^^
 
-The **Normalization** section of **Ruleset Management** in the Wazuh dashboard provides visibility and management over the components responsible for parsing, enriching, and structuring raw log data before it is used for detection and analysis.
+The **Normalization** section of **Ruleset management** in the Wazuh dashboard provides visibility and management over the components responsible for parsing, enriching, and structuring raw log data before it is used for detection and analysis.
 
 The Normalization section manages the following components:
 
@@ -91,7 +91,7 @@ Integration
 
 An integration is the top-level organizational unit in the **Ruleset management** section of the Wazuh dashboard. It groups related decoders and rules that provide support for a specific log source or use case. Each integration is configured through a space policy within a space. The policy must be enabled before the integration can progress through the promotion workflow. It also defines the root decoder used by the normalization engine as the entry point for processing events for the integration in the Test and Custom spaces.
 
-In the **Ruleset Management** section of the Wazuh dashboard, click **Overview** to display the integrations in the space you select in **Space** (Draft, Test, Custom, or Standard), along with their status and associated metadata.
+In the **Ruleset management** section of the Wazuh dashboard, click **Overview** to display the integrations in the space you select in **Space** (Draft, Test, Custom, or Standard), along with their status and associated metadata.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/integrations-overview.png
    :align: center
@@ -99,7 +99,7 @@ In the **Ruleset Management** section of the Wazuh dashboard, click **Overview**
    :title: Integrations overview
    :alt: Integrations overview
 
-In the **Ruleset Management** section of the Wazuh dashboard, click **Overview** and select **Draft** in **Space**. Click **Actions** above the integrations table and select **Create**. Enter a **Title**, select a **Category**, enter an **Author**, and click **Create integration**. The Title accepts 2 to 50 lowercase letters, digits, hyphens, and underscores.
+In the **Ruleset management** section of the Wazuh dashboard, click **Overview** and select **Draft** in **Space**. Click **Actions** above the integrations table and select **Create**. Enter a **Title**, select a **Category**, enter an **Author**, and click **Create integration**. The Title accepts 2 to 50 lowercase letters, digits, hyphens, and underscores.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-integration1.png
    :align: center
@@ -131,7 +131,7 @@ Decoder
 
 A decoder defines how a raw log event is parsed and mapped to normalized fields. Decoders are written in YAML and are validated against the Wazuh Engine schema. Each decoder belongs to an integration.
 
-In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Normalization > Decoders** to display the decoders in the space you select in **Space** (Draft, Test, Custom, or Standard).
+In the **Ruleset management** section of the Wazuh dashboard, navigate to **Normalization > Decoders** to display the decoders in the space you select in **Space** (Draft, Test, Custom, or Standard).
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/decoders-list.png
    :align: center
@@ -139,7 +139,7 @@ In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Norm
    :title: Decoders list
    :alt: Decoders list
 
-In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Decoders** > **Draft** > **Actions** > **Create** to create custom decoders. In the creation form, select the **Integration**, then define the decoder in the **Visual Editor** or the **YAML Editor**. The **Name** follows the pattern ``decoder/<NAME>/<VERSION>``, and **Title**, **Author**, and **Description** are required. The decoder you use as the root decoder of the space has no parents; other decoders list their parent decoder under **Parents**. Click **Create decoder**.
+In the **Ruleset management** section of the Wazuh dashboard, navigate to **Decoders** > **Draft** > **Actions** > **Create** to create custom decoders. In the creation form, select the **Integration**, then define the decoder in the **Visual Editor** or the **YAML Editor**. The **Name** follows the pattern ``decoder/<NAME>/<VERSION>``, and **Title**, **Author**, and **Description** are required. The decoder you use as the root decoder of the space has no parents; other decoders list their parent decoder under **Parents**. Click **Create decoder**.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-decoder.png
    :align: center
@@ -156,7 +156,7 @@ A KVDB (Key-Value Database) is a lookup table that can be referenced in decoder 
 
 A KVDB holds key-value entries. Each key is a string, and each value is text or JSON. Decoders and rules use the value of an event field, such as an IP address, file hash, user name, or process name, as the key. They use the stored value to enrich the event or to check whether the key exists.
 
-In the **Ruleset Management** section of the Wazuh dashboard, navigate to **KVDBs** to display the KVDBs in the space you select in **Space** (Draft, Test, Custom, or Standard).
+In the **Ruleset management** section of the Wazuh dashboard, navigate to **KVDBs** to display the KVDBs in the space you select in **Space** (Draft, Test, Custom, or Standard).
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/kvdb-list.png
    :align: center
@@ -184,7 +184,7 @@ After creating the custom KVDB, go to the **Overview** page, select **Draft** in
 Detection
 ^^^^^^^^^
 
-The **Detection** section of **Ruleset Management** on the Wazuh dashboard provides visibility and management over the rules responsible for generating findings from normalized events.
+The **Detection** section of **Ruleset management** on the Wazuh dashboard provides visibility and management over the rules responsible for generating findings from normalized events.
 
 This **Detection** section provides the following components:
 
@@ -202,7 +202,7 @@ A detector connects detection rules to a specific data source (an index or alias
 
 A detector uses the selected data source to determine which events are analyzed by the associated rules. When incoming events match the configured rule conditions, the detector generates findings for further analysis and monitoring. This allows organizations to apply specific detection logic to selected log sources for continuous threat monitoring.
 
-In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Detection** > **Detectors** to view all available detectors.
+In the **Ruleset management** section of the Wazuh dashboard, navigate to **Detection** > **Detectors** to view all available detectors.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/detectors-list.png
    :align: center
@@ -210,7 +210,7 @@ In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Dete
    :title: Detectors list
    :alt: Detectors list
 
-To create a Detector, navigate to **Detection > Detectors > Create detector** under the **Ruleset Management** section of the Wazuh dashboard and perform the following actions:
+To create a Detector, navigate to **Detection > Detectors > Create detector** under the **Ruleset management** section of the Wazuh dashboard and perform the following actions:
 
 #. Under **Detector details**, enter a **Name**.
 #. Under **Data source**, select an index or alias in **Select indexes/aliases**.
@@ -233,7 +233,7 @@ A detection rule defines the conditions under which the detection engine generat
 
 Rules are written in YAML and follow the same promotion lifecycle as integrations and decoders. The Draft, Test, and Custom spaces are user-managed, while the Standard space is read-only.
 
-In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Detection** > **Rules** to display the rules in the space you select in **Space** (Draft, Test, Custom, or Standard).
+In the **Ruleset management** section of the Wazuh dashboard, navigate to **Detection** > **Rules** to display the rules in the space you select in **Space** (Draft, Test, Custom, or Standard).
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/rules-list.png
    :align: center
@@ -241,7 +241,7 @@ In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Dete
    :title: Rules list
    :alt: Rules list
 
-In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Detection > Rules** > **Draft** > **Actions** > **Create** to create custom rules. In the creation form, enter the **Rule name** and **Author**, then select the **Integration** and the **Rule level**. Define the match conditions under **Detection**, or switch to the **YAML Editor**. Click **Create rule**.
+In the **Ruleset management** section of the Wazuh dashboard, navigate to **Detection > Rules** > **Draft** > **Actions** > **Create** to create custom rules. In the creation form, enter the **Rule name** and **Author**, then select the **Integration** and the **Rule level**. Define the match conditions under **Detection**, or switch to the **YAML Editor**. Click **Create rule**.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-rule.png
    :align: center
@@ -258,7 +258,7 @@ Log test
 
 The Wazuh **Log test** tool provides an interactive interface to validate that a specific log event is correctly parsed by active decoders and test detection logic directly from the Wazuh dashboard.
 
-In the **Ruleset Management** section of the Wazuh dashboard, click **Log test**. Select **Test** in **Space**, select your integration under **Integration**, paste a sample event in **Log event**, and click **Test**. **Test Result** shows the normalized event on the **Normalization** tab and the matched rules on the **Detection** tab. Content promoted to the Test space can take a few minutes to apply.
+In the **Ruleset management** section of the Wazuh dashboard, click **Log test**. Select **Test** in **Space**, select your integration under **Integration**, paste a sample event in **Log event**, and click **Test**. **Test Result** shows the normalized event on the **Normalization** tab and the matched rules on the **Detection** tab. Content promoted to the Test space can take a few minutes to apply.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/log-test.png
    :align: center
@@ -312,7 +312,7 @@ Perform the following actions to create an active response.
 
 #. Click **Create** to save the configuration.
 
-The active response runs as the action of an **Active Response monitor**. To attach it, navigate to **Explore** > **Alerting** > **Monitors** and click **Create monitor**. Select **Active Response monitor** in **Monitor type**, define the query, and click **Add trigger**. In the trigger, click **Add active response**, select your active response in **Active response**, and click **Create**.
+The active response runs as the action of an **Active Response monitor**. To attach it, navigate to **Explore** > **Alerting** > **Monitors** and click **Create monitor**. Type a **Monitor name** and select **Active Response monitor** in **Monitor type**. Under **Index**, select the findings index to watch, for example ``wazuh-findings-v5-system-activity``. Active Response monitors need a concrete index name, not an index pattern. Define the query, selecting each field from its list, and click **Add trigger**. In the trigger, click **Add active response**, select your active response in **Active response**, and click **Create**.
 
 .. _dashboard_configurations_notifications:
 
@@ -323,15 +323,15 @@ External API integrations such as Slack, PagerDuty, Jira, and Shuffle are centra
 
 These capabilities are built into the Wazuh dashboard, and their availability depends on how the platform is installed and configured. To ensure proper functionality, Wazuh includes a health check mechanism that verifies the presence of the **Notifications** and **Alerting** plugins and confirms that a minimal, working configuration is in place. When both plugins are detected, the system automatically:
 
-- Creates default notification channels (muted by default) for the supported integrations.
-- Logs the verification and creation progress in the Wazuh dashboard server logs.
+-  Checks for the default notification channels of the supported integrations. The Wazuh indexer creates these channels, muted, when it starts.
+-  Logs the result of the check in the Wazuh dashboard server logs.
 
 This automation simplifies the setup process and ensures that notifications can be easily configured after installation.
 
 Default notification channels
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When notifications are enabled in the Wazuh dashboard, the health check creates the following four channels if they do not already exist. Each channel is muted and holds placeholder values until you edit it. To send notifications by email, create an email channel as described in **Email**.
+The Wazuh indexer creates the following four channels when it starts, if they do not already exist. The health check only reports whether they exist, and a default channel that you delete comes back when the Wazuh indexer restarts. Each channel is muted and holds placeholder values until you edit it. **Send test message** works only on an unmuted channel. On a muted channel, it is disabled on the channel page, and in the **Edit** form it fails with ``[status_exception] For input string: "LOCKED"``. To send notifications by email, create an email channel as described in **Email**.
 
 .. |slack_channel| replace:: `incoming webhook <https://api.slack.com/messaging/webhooks>`__
 .. |pagerduty_channel| replace:: `Events v2 API <https://developer.pagerduty.com/docs/events-api-v2-overview#getting-started>`__
@@ -350,7 +350,7 @@ When notifications are enabled in the Wazuh dashboard, the health check creates 
 | Shuffle   | Triggers Shuffle workflows via |shuffle_channel|.                           |
 +-----------+-----------------------------------------------------------------------------+
 
-The channels are named **Slack Channel**, **PagerDuty Channel**, **Jira Channel**, and **Shuffle Channel**.
+The channels are named **Slack Channel**, **PagerDuty Channel**, **Jira Channel**, and **Shuffle Channel**. They are notification configs in the Wazuh indexer, with the IDs ``default_slack_channel``, ``default_pagerduty_channel``, ``default_jira_channel``, and ``default_shuffle_channel``.
 
 .. note::
 
@@ -370,7 +370,7 @@ You can create monitors under **Explore** > **Alerting** > **Monitors**. For mor
 Notifications and alerting configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Notifications and Alerting configuration supports Slack, PagerDuty, Jira, Shuffle, and Email by default. Follow these steps to configure notifications and alerting for supported channels.
+The Notifications and Alerting configuration supports Slack, PagerDuty, Jira, Shuffle, and Email. Slack, PagerDuty, Jira, and Shuffle have default channels, and you create the Email channel. Follow these steps to configure notifications and alerting for supported channels.
 
 .. contents::
    :local:
@@ -408,7 +408,7 @@ Configure and enable the notification channel and monitor
       :title: Slack test message
       :alt: Slack test message
 
-#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Slack. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in ``wazuh-findings-v5-security``. Change the index to watch another category.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Slack. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/slack-monitor.png
       :align: center
@@ -461,7 +461,7 @@ Configure and enable the notification channel and monitor
 
 #. Save the PagerDuty channel configuration and unmute the channel.
 
-#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to PagerDuty. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in ``wazuh-findings-v5-security``. Change the index to watch another category.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to PagerDuty. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/pagerduty-monitor.png
       :align: center
@@ -514,7 +514,7 @@ Configure and enable the notification channel
 
 #. Save the Jira channel configuration and unmute the channel.
 
-#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Jira. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in ``wazuh-findings-v5-security``. Change the index to watch another category.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Jira. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/jira-monitor.png
       :align: center
@@ -557,7 +557,7 @@ Configure and enable the notification channel
       :title: Shuffle Channel
       :alt: Shuffle Channel
 
-#. Click **Actions** > **Edit** and enter the webhook URL of your Shuffle workflow in **Webhook URL**. To validate the channel, click **Send test message**.
+#. Click **Actions** > **Edit** and enter the webhook URL of your Shuffle workflow in **Webhook URL**.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/shuffle-edit.png
       :align: center
@@ -565,9 +565,9 @@ Configure and enable the notification channel
       :title: Edit Shuffle channel
       :alt: Edit Shuffle channel
 
-#. Save the Shuffle channel configuration and unmute the channel.
+#. Save the Shuffle channel configuration and unmute the channel. Then click **Actions** > **Send test message** to validate the channel.
 
-#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Shuffle. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in ``wazuh-findings-v5-security``. Change the index to watch another category.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Shuffle. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/shuffle-monitor.png
       :align: center
@@ -622,6 +622,19 @@ The SMTP sender defines the mail server that sends the notifications.
 .. note::
 
    SSL/TLS and STARTTLS require you to add the sender account credentials to the Wazuh indexer keystore.
+
+To add the credentials, run these commands as root on every Wazuh indexer node. Replace ``<SENDER_NAME>`` with the name of the SMTP sender, ``<SMTP_USERNAME>`` and ``<SMTP_PASSWORD>`` with the sender account credentials, ``<WAZUH_INDEXER_IP>`` with the Wazuh indexer IP address, and ``<ADMIN_PASSWORD>`` with the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh-indexer/export/credentials.env``.
+
+.. code-block:: console
+   :emphasize-lines: 1,2,5
+
+   # echo -n '<SMTP_USERNAME>' | /usr/share/wazuh-indexer/bin/opensearch-keystore add --stdin --force opensearch.notifications.core.email.<SENDER_NAME>.username
+   # echo -n '<SMTP_PASSWORD>' | /usr/share/wazuh-indexer/bin/opensearch-keystore add --stdin --force opensearch.notifications.core.email.<SENDER_NAME>.password
+   # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch.keystore
+   # chmod 0640 /etc/wazuh-indexer/opensearch.keystore
+   # curl -k -u admin:<ADMIN_PASSWORD> -X POST "https://<WAZUH_INDEXER_IP>:9200/_nodes/reload_secure_settings"
+
+The ``opensearch-keystore`` tool saves the keystore with the owner ``root:root``. The ``chown`` and ``chmod`` commands give the Wazuh indexer read access to it again. Otherwise, the reload fails with ``access_denied_exception``, and the Wazuh indexer does not start on its next restart. The last command loads the credentials without a restart.
 
 The **Encryption method** field offers three options:
 

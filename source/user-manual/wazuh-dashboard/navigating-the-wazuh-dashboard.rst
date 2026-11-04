@@ -164,7 +164,7 @@ The **Ruleset management** section provides a centralized interface for managing
 Overview
 ~~~~~~~~
 
-The **Overview** page lists the integrations in the space you select in **Space** (Draft, Test, Custom, or Standard), with their status and associated metadata. An :ref:`integration <dashboard_configurations_integration>` is the top-level organizational unit in Ruleset Management that groups related decoders, KVDBs, and rules for a specific log source or use case.
+The **Overview** page lists the integrations in the space you select in **Space** (Draft, Test, Custom, or Standard), with their status and associated metadata. An :ref:`integration <dashboard_configurations_integration>` is the top-level organizational unit in Ruleset management that groups related decoders, KVDBs, and rules for a specific log source or use case.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/integrations.png
    :align: center

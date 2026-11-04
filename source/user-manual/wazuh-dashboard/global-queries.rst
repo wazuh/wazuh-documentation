@@ -418,7 +418,7 @@ Generate a token to be used to interact with the API:
 
 Replace:
 
--  ``<WAZUH_API_USERNAME>`` with your Wazuh manager API user.
+-  ``<WAZUH_API_USERNAME>`` with your Wazuh manager API user. After installation, it is ``wazuh``.
 -  ``<WAZUH_API_PASSWORD>`` with your Wazuh manager API password. The installation stores it as ``WAZUH_MANAGER_API_PASSWORD`` in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager.
 -  ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager IP address. On an all-in-one deployment from the installation assistant, run the commands on the Wazuh manager host and use ``localhost``. The Wazuh manager API listens on ``127.0.0.1`` and ``::1`` only, as the host setting in ``/var/wazuh-manager/api/configuration/api.yaml`` shows.
 

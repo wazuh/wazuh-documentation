@@ -39,24 +39,24 @@ Save the ``config.yml`` template in the same directory as ``wazuh-certs-tool.sh`
    nodes:
      # Wazuh indexer nodes
      indexer:
-       - name: node-1
+       - name: indexer
          ip: "<indexer-node-ip>"
-       #- name: node-2
+       #- name: indexer-2
        #  ip: "<indexer-node-ip>"
-       #- name: node-3
+       #- name: indexer-3
        #  ip: "<indexer-node-ip>"
 
      # Wazuh manager nodes
      # If there is more than one Wazuh manager
      # node, each one must have a node_type
      manager:
-       - name: wazuh-1
+       - name: manager
          ip: "<wazuh-manager-ip>"
        #  node_type: master
-       #- name: wazuh-2
+       #- name: manager-2
        #  ip: "<wazuh-manager-ip>"
        #  node_type: worker
-       #- name: wazuh-3
+       #- name: manager-3
        #  ip: "<wazuh-manager-ip>"
        #  node_type: worker
 
@@ -64,6 +64,28 @@ Save the ``config.yml`` template in the same directory as ``wazuh-certs-tool.sh`
      dashboard:
        - name: dashboard
          ip: "<dashboard-node-ip>"
+
+     # ip and dns both accept a list, for a node reachable at more than one address.
+     # Every item reaches the certificate of the node; the first one is the address
+     # the components are configured with.
+     #- name: manager-2
+     #  ip:
+     #    - "<wazuh-manager-ip>"
+     #    - "<wazuh-manager-second-ip>"
+     #  dns:
+     #    - "<wazuh-manager-name>"
+
+     # Optional. Only for a proxy that TERMINATES the agents' TLS session: it issues the
+     # certificate that proxy serves, from the same root-ca the agents pin. A layer 4
+     # passthrough load balancer terminates nothing and needs --agent-san with its
+     # address instead, so that address reaches the listener certificate of every
+     # manager node.
+     #load_balancer:
+     #  - name: lb
+     #    dns:
+     #      - "<load-balancer-name>"
+     #    ip:
+     #      - "<load-balancer-ip>"
 
 
 Run the ``wazuh-certs-tool.sh`` script with the option ``-A`` to generate all the certificates after configuring the ``config.yml`` file.
@@ -74,22 +96,22 @@ Run the ``wazuh-certs-tool.sh`` script with the option ``-A`` to generate all th
 
 After running the script, the directory ``wazuh-certificates`` will be created and will have the following content:
 
-    .. code-block:: none
+.. code-block:: none
 
-        wazuh-certificates/
-        ├── admin-key.pem
-        ├── admin.pem
-        ├── dashboard-key.pem
-        ├── dashboard.pem
-        ├── node-1-key.pem
-        ├── node-1.pem
-        ├── root-ca.pem
-        ├── wazuh-1-apid-key.pem
-        ├── wazuh-1-apid.pem
-        ├── wazuh-1-key.pem
-        ├── wazuh-1-remoted-key.pem
-        ├── wazuh-1-remoted.pem
-        └── wazuh-1.pem
+   wazuh-certificates/
+   ├── admin-key.pem
+   ├── admin.pem
+   ├── dashboard-key.pem
+   ├── dashboard.pem
+   ├── indexer-key.pem
+   ├── indexer.pem
+   ├── manager-apid-key.pem
+   ├── manager-apid.pem
+   ├── manager-key.pem
+   ├── manager-remoted-key.pem
+   ├── manager-remoted.pem
+   ├── manager.pem
+   └── root-ca.pem
 
 The script also creates a ``wazuh-ca`` directory next to it, with the root CA certificate and its key. Back up this directory: you need it to add nodes or renew certificates.
 
@@ -104,22 +126,22 @@ Additionally, this script allows the use of a pre-existing rootCA certificate. T
 
 After running the script, the directory wazuh-certificates will be created and will have the following content:
 
-    .. code-block:: none
+.. code-block:: none
 
-        wazuh-certificates/
-        ├── admin-key.pem
-        ├── admin.pem
-        ├── dashboard-key.pem
-        ├── dashboard.pem
-        ├── node-1-key.pem
-        ├── node-1.pem
-        ├── root-ca.pem
-        ├── wazuh-1-apid-key.pem
-        ├── wazuh-1-apid.pem
-        ├── wazuh-1-key.pem
-        ├── wazuh-1-remoted-key.pem
-        ├── wazuh-1-remoted.pem
-        └── wazuh-1.pem
+   wazuh-certificates/
+   ├── admin-key.pem
+   ├── admin.pem
+   ├── dashboard-key.pem
+   ├── dashboard.pem
+   ├── indexer-key.pem
+   ├── indexer.pem
+   ├── manager-apid-key.pem
+   ├── manager-apid.pem
+   ├── manager-key.pem
+   ├── manager-remoted-key.pem
+   ├── manager-remoted.pem
+   ├── manager.pem
+   └── root-ca.pem
 
 The Wazuh dashboard certificate
 -------------------------------

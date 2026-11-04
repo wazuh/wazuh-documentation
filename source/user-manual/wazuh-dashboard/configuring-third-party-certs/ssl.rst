@@ -3,8 +3,8 @@
 .. meta::
    :description: Let’s Encrypt certificate can be configured for the Wazuh dashboard using the certbot client. Learn more in this section of the Wazuh documentation.
 
-Configuring SSL certificates on the Wazuh dashboard using Let’s Encrypt
-=======================================================================
+Configuring SSL certificates on the Wazuh dashboard with Let’s Encrypt
+======================================================================
 
 You can configure a Let’s Encrypt certificate for the Wazuh dashboard with the certbot client. Follow the instructions below to install and configure a Let’s Encrypt certificate on an All-In-One Wazuh installation consisting of the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard. In a clustered environment, apply the instructions on each Wazuh dashboard node.
 
