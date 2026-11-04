@@ -34,6 +34,19 @@ Update the image tags
 
 Each release of the Wazuh Docker repository sets its image tags in its own ``single-node/docker-compose.yml`` and ``multi-node/docker-compose.yml`` files. Use the tags from the release you upgrade to. If that release also changes other lines of those files, take its files and apply your own changes to them again.
 
+To take the files of the release you upgrade to, restore the Compose files you edited, including ``wazuh-agent/docker-compose.yml``, which holds the enrollment token. Then check out the release in your clone. From ``wazuh-docker/single-node/``, run the following commands, and replace ``<RELEASE_TAG>`` with the tag of the release, for example, ``v5.0.0``. For a multi-node deployment, go back to ``../multi-node/`` instead:
+
+.. code-block:: console
+
+   # git checkout docker-compose.yml
+   # cd ../wazuh-agent/
+   # git checkout docker-compose.yml
+   # cd ../single-node/
+   # git fetch --tags origin
+   # git checkout <RELEASE_TAG>
+
+If a Compose file that the release changes still has your edits, ``git checkout <RELEASE_TAG>`` stops with ``Your local changes to the following files would be overwritten by checkout``. The command doesn't change the certificates and passwords in ``config/`` or the root CA in ``wazuh-ca/``. After the checkout, apply your own changes to ``docker-compose.yml`` again. To keep your edited files instead, change only the image tags, as follows.
+
 Single-node deployment
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -96,3 +109,12 @@ Start the updated deployment
    .. code-block:: console
 
       # docker compose up -d
+
+#. If a Wazuh agent container runs on this host from the same clone, upgrade it when ``docker compose ps`` shows every Wazuh container as ``(healthy)``:
+
+   .. code-block:: console
+
+      # cd ../wazuh-agent/
+      # docker compose up -d
+
+   The Wazuh agent keeps its enrollment in the ``wazuh_agent_etc`` volume and ignores ``WAZUH_ENROLLMENT_TOKEN``, so the placeholder in the restored ``docker-compose.yml`` file doesn't matter. It reconnects with the same agent ID.
