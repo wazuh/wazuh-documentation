@@ -26,7 +26,7 @@ Wazuh supports deploying its central components and agent on Docker.
    -  Three Wazuh indexer containers: Work together in a cluster to store and replicate indexed data, ensuring scalability and fault tolerance.
    -  Two Wazuh manager containers: one master node and one worker node. The master node runs the Wazuh manager API and keeps the Wazuh agent registry, enrollment tokens, and agent group configuration, which it syncs to the worker. Both nodes receive Wazuh agent connections, so the worker adds redundancy and load distribution.
    -  One Wazuh dashboard container.
-   -  One Nginx container: the entry point for Wazuh agents. It passes each agent connection on ports 1517 and 1514 to the Wazuh manager master or worker node, chosen by the agent's IP address. Nginx doesn't decrypt this traffic. Each Wazuh manager node presents its own certificate, and both certificates carry the address that agents connect to (see :ref:`Prepare the certificates <multi-node-certificates>`). The Wazuh manager master node publishes the other Wazuh manager ports itself, as listed in :ref:`Exposed ports <docker-exposed-ports>`.
+   -  One Nginx container: the entry point for Wazuh agents. It passes each agent connection on ports 1517 and 1514 to the Wazuh manager master or worker node, chosen by the agent's IP address. Nginx hashes the source address it sees, so agents spread across the two nodes only when they connect from different addresses. Wazuh agent containers on the Docker host reach Nginx from the Docker network gateway, and agents behind one NAT share its address, so each of these groups goes to one Wazuh manager node. To see which node processes an agent's data, check the ``wazuh.cluster.node`` field of its events. Nginx doesn't decrypt this traffic. Each Wazuh manager node presents its own certificate, and both certificates carry the address that agents connect to (see :ref:`Prepare the certificates <multi-node-certificates>`). The Wazuh manager master node publishes the other Wazuh manager ports itself, as listed in :ref:`Exposed ports <docker-exposed-ports>`.
 
    This deployment stack provides persistent storage and secure communication. All its containers run on one Docker host. If one Wazuh manager node stops, Nginx passes new agent connections to the other node. While the Wazuh manager master node is stopped, the Wazuh manager API on port 55000 and the Wazuh dashboard pages that use it are unavailable.
 
@@ -157,7 +157,7 @@ Exposed ports
 
 The following ports are exposed when the Wazuh central components are deployed.
 
-In the multi-node stack, the Nginx container publishes ports 1517 and 1514, and the Wazuh manager master node publishes ports 1515 and 55000. Neither stack publishes the Wazuh indexer API on port 9200. Only the other containers can reach it.
+In the multi-node stack, the Nginx container publishes ports 1517 and 1514, and the Wazuh manager master node publishes ports 1515 and 55000. Neither stack publishes the Wazuh indexer API on port 9200. Only the other containers can reach it. The other ports are published on every network interface of the Docker host. The Wazuh dashboard container reaches the Wazuh manager API through the Docker network. If no other host needs port 55000, or the Wazuh 4.x agent ports 1514 and 1515, remove its line from the ports section of the service in ``docker-compose.yml``, or bind it to the local host, for example, ``"127.0.0.1:55000:55000"``.
 
 +----------+-------------------------------------------+
 | **Port** | **Component**                             |
@@ -188,7 +188,7 @@ Below are the steps for deploying the Wazuh central components in :ref:`single-n
 
       # docker compose down
 
-   This command removes the stack's containers and keeps its data volumes. The stacks do not share volumes, so switching does not need the ``-v`` flag, which deletes the stack's data.
+   This command removes the stack's containers and keeps its data volumes. The stacks do not share volumes, so switching does not need the ``-v`` flag, which deletes the stack's data. Docker Compose names the volumes after the directory of the stack. Another clone of the Wazuh Docker repository on the same Docker host uses the same volume names in its ``single-node`` or ``multi-node`` directory, so don't deploy a second stack from it while this one keeps its volumes.
 
    If you already tried to start the other stack while this one was running, also run ``docker compose down`` in the other stack's directory before you start it. Otherwise, Docker can start its Wazuh manager without a network, and the stack doesn't work.
 
@@ -372,6 +372,13 @@ Check that the stack is ready. Run the following command from the directory of y
 
       The stack is ready when the six Wazuh containers show ``(healthy)`` in the ``STATUS`` column. The Nginx container has no health check, so it shows only ``Up``. On a host with the minimum requirements, this takes about 4 minutes on the first run, image download included.
 
+      To check that the Wazuh manager cluster and the Wazuh indexer cluster formed, run the following commands from the directory of your stack. The first one lists the ``master`` and ``worker01`` nodes. The second one shows ``"status" : "green"`` and ``"number_of_nodes" : 3``. Run the second one again after you restart a Wazuh indexer container.
+
+      .. code-block:: console
+
+         # docker compose exec wazuh.master /var/wazuh-manager/bin/cluster_control -l
+         # docker compose exec wazuh1.indexer curl -sk -u "admin:$(grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' config/credentials/indexer.env | cut -d= -f2-)" "https://localhost:9200/_cluster/health?pretty"
+
 .. tabs::
 
    .. group-tab:: Single-node
@@ -527,7 +534,7 @@ You need root user privileges to run the commands below. If you use Docker as a 
    .. code-block:: yaml
       :emphasize-lines: 7,8
 
-      # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
+      # Wazuh App Copyright (C) Wazuh Inc. (License GPLv2)
       services:
         wazuh.agent:
           image: wazuh/wazuh-agent:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|
@@ -561,3 +568,8 @@ You need root user privileges to run the commands below. If you use Docker as a 
             # docker compose up
 
 #. Verify from your Wazuh dashboard that the Wazuh agent deployment was successful and visible. Navigate to **Agents management** > **Summary**, and you should see the Wazuh agent container active on your dashboard.
+
+Next steps
+----------
+
+To monitor more endpoints, deploy Wazuh agents on them as described in :doc:`Wazuh agent </installation-guide/wazuh-agent/index>`. To remove the deployment, see :doc:`Uninstalling the Wazuh Docker deployment <uninstalling-wazuh-docker>`.
