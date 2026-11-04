@@ -110,7 +110,7 @@ Follow the steps below to delete all deployments, services, and volumes.
       $ sudo rm -rf wazuh/config/credentials wazuh/wazuh-certificates wazuh/config/indexer/certs wazuh/config/manager/certs wazuh/config/dashboard/certs wazuh/config/root-ca/certs
       $ sudo rm -rf wazuh/wazuh-ca
 
-#. Also delete the Wazuh agent manifests you created in **Wazuh agent deployment on Kubernetes**. They hold the enrollment token in clear text. Run this command in the directory where you created them:
+#. Also delete the Wazuh agent manifests you created in :ref:`Wazuh agent deployment on Kubernetes <kubernetes-wazuh-agent-deployment>`. They hold the enrollment token in clear text. Run this command in the directory where you created them:
 
    .. code-block:: console
 
