@@ -20,7 +20,7 @@ Follow these steps to enroll a macOS endpoint through the Wazuh agent configurat
          <ossec_config>
            <agent>
              <manager>
-               <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+               <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
              </manager>
            </agent>
          </ossec_config>
@@ -33,7 +33,7 @@ Follow these steps to enroll a macOS endpoint through the Wazuh agent configurat
          <ossec_config>
            <client>
              <server>
-               <address><WAZUH_MANAGER_IP_ADDRESS></address>
+               <address><WAZUH_MANAGER_ADDRESS></address>
                ...
              </server>
            </client>
@@ -47,11 +47,11 @@ Follow these steps to enroll a macOS endpoint through the Wazuh agent configurat
 
    #. Store the enrollment password in ``/Library/Ossec/etc/authd.pass``. For the steps and the required file permissions, see the :doc:`Enroll Wazuh agents with password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>` section.
 
-   #. (Recommended) Configure the certificate authority (CA) that signs the Wazuh manager certificate, so that the Wazuh agent verifies the identity of the Wazuh manager. Copy the CA certificate to the endpoint. By default, it's ``/etc/wazuh-manager/certs/root-ca.pem`` on the Wazuh manager. The Wazuh manager also serves it at ``GET https://<WAZUH_MANAGER_IP_ADDRESS>:1517/wazuh-manager/cacerts``. To download it on the endpoint, run the following command. The ``-k`` option skips the certificate check for this download only. To avoid it, copy the file from the Wazuh manager instead.
+   #. (Recommended) Configure the certificate authority (CA) that signs the Wazuh manager certificate, so that the Wazuh agent verifies the identity of the Wazuh manager. Copy the CA certificate to the endpoint. By default, it's ``/etc/wazuh-manager/certs/root-ca.pem`` on the Wazuh manager. The Wazuh manager also serves it at ``GET https://<WAZUH_MANAGER_ADDRESS>:1517/wazuh-manager/cacerts``. To download it on the endpoint, run the following command. The ``-k`` option skips the certificate check for this download only. To avoid it, copy the file from the Wazuh manager instead.
 
       .. code-block:: console
 
-         # curl -k -o /<PATH_TO>/root-ca.pem https://<WAZUH_MANAGER_IP_ADDRESS>:1517/wazuh-manager/cacerts
+         # curl -k -o /<PATH_TO>/root-ca.pem https://<WAZUH_MANAGER_ADDRESS>:1517/wazuh-manager/cacerts
 
       Then add the following to the Wazuh agent configuration file:
 

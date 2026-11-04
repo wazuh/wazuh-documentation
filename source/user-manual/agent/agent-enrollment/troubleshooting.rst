@@ -33,24 +33,23 @@ The default ports on the Wazuh manager depend on the agent version:
 
 -  **Wazuh 5.0 agents**: 1517/TCP (HTTPS) - used for both enrollment and agent communication.
 -  **Wazuh 4.x agents**: 1515/TCP for enrollment and 1514/TCP for agent communication.
--  55000/TCP for enrollment via Wazuh manager API (both agent versions).
+-  55000/TCP only if you enroll agents through the Wazuh manager API, or for agents with anti-tampering that remove themselves. Wazuh 5.x agents enroll and connect on 1517/TCP.
 
-On Linux and macOS systems (with netcat installed) open a terminal and run the following commands. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager IP address or fully qualified domain name (FQDN).
+On Linux and macOS systems (with netcat installed) open a terminal and run the following commands. Replace ``<WAZUH_MANAGER_ADDRESS>`` with your Wazuh manager IP address or fully qualified domain name (FQDN).
 
 For a Wazuh 5.0 agent:
 
 .. code-block:: console
 
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1517
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 55000
+   # nc -zv <WAZUH_MANAGER_ADDRESS> 1517
 
 For a Wazuh 4.x agent:
 
 .. code-block:: console
 
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1514
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1515
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 55000
+   # nc -zv <WAZUH_MANAGER_ADDRESS> 1514
+   # nc -zv <WAZUH_MANAGER_ADDRESS> 1515
+   # nc -zv <WAZUH_MANAGER_ADDRESS> 55000
 
 If there is connectivity, the output should be a connection success message:
 
@@ -59,17 +58,16 @@ For a Wazuh 5.0 agent:
 .. code-block:: none
    :class: output
 
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> 1517 port [tcp/*] succeeded!
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> 55000 port [tcp/*] succeeded!
+   Connection to <WAZUH_MANAGER_ADDRESS> 1517 port [tcp/*] succeeded!
 
 For a Wazuh 4.x agent:
 
 .. code-block:: none
    :class: output
 
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> 1514 port [tcp/*] succeeded!
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> 1515 port [tcp/*] succeeded!
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> 55000 port [tcp/*] succeeded!
+   Connection to <WAZUH_MANAGER_ADDRESS> 1514 port [tcp/*] succeeded!
+   Connection to <WAZUH_MANAGER_ADDRESS> 1515 port [tcp/*] succeeded!
+   Connection to <WAZUH_MANAGER_ADDRESS> 55000 port [tcp/*] succeeded!
 
 On Windows, open a PowerShell terminal and run the following commands:
 
@@ -77,16 +75,15 @@ For a Wazuh 5.0 agent:
 
 .. code-block:: pwsh-session
 
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1517)
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 55000)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 1517)
 
 For a Wazuh 4.x agent:
 
 .. code-block:: pwsh-session
 
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1514)
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1515)
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 55000)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 1514)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 1515)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 55000)
 
 If there is connectivity, there is no output. Otherwise, an error is shown:
 

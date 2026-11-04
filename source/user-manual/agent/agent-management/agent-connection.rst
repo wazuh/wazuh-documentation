@@ -166,7 +166,7 @@ The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keepi
 
       .. code-block:: console
 
-         # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1517
+         # nc -zv <WAZUH_MANAGER_ADDRESS> 1517
 
       The command output looks similar to this:
 
@@ -193,7 +193,7 @@ The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keepi
 
       .. code-block:: pwsh-session
 
-         > Test-NetConnection <WAZUH_MANAGER_IP_ADDRESS> -Port 1517
+         > Test-NetConnection <WAZUH_MANAGER_ADDRESS> -Port 1517
 
       The command output looks similar to this:
 
@@ -220,7 +220,7 @@ The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keepi
 
       .. code-block:: console
 
-         # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1517
+         # nc -zv <WAZUH_MANAGER_ADDRESS> 1517
 
       The command output looks similar to this:
 

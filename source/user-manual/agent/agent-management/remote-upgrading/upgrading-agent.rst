@@ -105,11 +105,11 @@ To upgrade agents using the command line, use the :doc:`/var/wazuh-manager/bin/a
 Using the RESTful API
 ---------------------
 
-#. List all outdated Wazuh agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agent_controller.get_agent_outdated>`. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager:
+#. List all outdated Wazuh agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agent_controller.get_agent_outdated>`. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN of the Wazuh manager:
 
    .. code-block:: console
 
-      # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents/outdated?pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/outdated?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
    The command output looks similar to this:
 
@@ -150,11 +150,11 @@ Using the RESTful API
          "error": 0
       }
 
-#. Upgrade the Wazuh agent using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` (here, the Wazuh agent with ID 008). Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager:
+#. Upgrade the Wazuh agent using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` (here, the Wazuh agent with ID 008). Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN of the Wazuh manager:
 
    .. code-block:: console
 
-      # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/upgrade?agents_list=008&pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/upgrade?agents_list=008&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
    The command output looks similar to this:
 
@@ -187,7 +187,7 @@ Using the RESTful API
 
    .. code-block:: console
 
-      # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents?agents_list=008&pretty=true&select=version" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?agents_list=008&pretty=true&select=version" -H  "Authorization: Bearer $TOKEN"
 
    The command output looks similar to this:
 

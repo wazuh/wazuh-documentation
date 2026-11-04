@@ -86,11 +86,11 @@ Temporary authentication token
 
 You need to generate an authentication token on a trusted administrator endpoint and then copy it to the monitored endpoint.
 
-#. Run the following command on any Linux endpoint to generate a temporary authentication token. Replace ``<WAZUH_MANAGER_API_USER>``, ``<WAZUH_MANAGER_API_PASSWORD>``, and ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager API username, password, and IP address, respectively:
+#. Run the following command on any Linux endpoint to generate a temporary authentication token. Replace ``<WAZUH_MANAGER_API_USER>``, ``<WAZUH_MANAGER_API_PASSWORD>``, and ``<WAZUH_MANAGER_ADDRESS>`` with your Wazuh manager API username, password, and IP address or FQDN, respectively:
 
    .. code-block:: console
 
-      # TOKEN=$(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+      # TOKEN=$(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
 
 #. View the generated authentication token:
 
@@ -107,10 +107,10 @@ You need to generate an authentication token on a trusted administrator endpoint
       #!/bin/sh
 
       export VALIDATION_TOKEN="<AUTHENTICATION_TOKEN>"
-      export VALIDATION_HOST="<WAZUH_MANAGER_IP_ADDRESS>:55000"
+      export VALIDATION_HOST="<WAZUH_MANAGER_ADDRESS>:55000"
       export VALIDATION_SSL_VERIFY="false"
 
-   Replace ``<AUTHENTICATION_TOKEN>`` with the authentication token you generated earlier, and ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address.
+   Replace ``<AUTHENTICATION_TOKEN>`` with the authentication token you generated earlier, and ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or FQDN.
 
 You can now proceed to :ref:`uninstall the Wazuh  agent <uninstalling_the_wazuh_agent>`.
 
@@ -128,10 +128,10 @@ Create the file ``/var/ossec/etc/uninstall_validation.env`` on the monitored end
    #!/bin/sh
 
    export VALIDATION_LOGIN="<WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD>"
-   export VALIDATION_HOST="<WAZUH_MANAGER_IP_ADDRESS>:55000"
+   export VALIDATION_HOST="<WAZUH_MANAGER_ADDRESS>:55000"
    export VALIDATION_SSL_VERIFY="false"
 
-Replace ``<WAZUH_MANAGER_API_USER>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with your Wazuh manager API username and password, respectively. Also, replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address.
+Replace ``<WAZUH_MANAGER_API_USER>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with your Wazuh manager API username and password, respectively. Also, replace ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or FQDN.
 
 You can now proceed to :ref:`uninstall the Wazuh  agent <uninstalling_the_wazuh_agent>`.
 
