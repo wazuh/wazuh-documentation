@@ -8,7 +8,7 @@ Wazuh manager
 
 The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer. It is also used to remotely manage the configurations of Wazuh agents and monitor their status. If you want to learn more about the Wazuh components, check the :doc:`Getting started </getting-started/index>` section. The Wazuh manager doesn't monitor its own host. To monitor it, install a Wazuh agent on the same host and enroll it with a token for the host's own address.
 
-You can install the Wazuh manager on a single host or distribute it across multiple nodes in a cluster configuration. Multi-node configurations provide high availability and improved performance. When combined with a network load balancer, you can achieve efficient use of its capacity.
+You can install the Wazuh manager on a single host or distribute it across multiple nodes in a cluster configuration. Multi-node configurations provide high availability and improved performance when Wazuh agents connect through a network load balancer. Each Wazuh agent connects to one address only, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes.
 
 Check the requirements below and choose an installation method to start installing the Wazuh manager.
 
@@ -143,6 +143,8 @@ Wazuh agents connect to a Wazuh manager node only through an address in its agen
 -  **Step-by-step installation:** The certificates tool issues the certificate with the node's name and its addresses from ``config.yml``. To add an address, use ``-as <ALTERNATE_ADDRESS>`` when you create the certificates. The root CA must be in place before you install the package, as :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>` describes.
 
 In both methods, pass every address in the same run, because the certificate holds only the ``-as`` values of that run. For a cluster behind a load balancer, use a TCP passthrough load balancer on 1517/TCP. Add its address to the certificate of every Wazuh manager node. Create enrollment tokens on the master node. A worker node refuses the command, and the master node accepts only addresses in its own certificate. Agents therefore enroll through the load balancer or the master node's address. To create a token for a worker node's address, add that address with ``-as`` too.
+
+A Wazuh agent connects to one address only: the address of its enrollment token, saved as ``<agent><manager><endpoint>`` in ``ossec.conf``. It doesn't switch to another node if that node stops. In a Wazuh manager cluster, an agent enrolled with a token for the master node's address sends all its data to the master node. To spread agents across the nodes and keep them connected when a node stops, use a load balancer as described above. Without a load balancer, add the address of each worker node with ``-as``, and create tokens for the worker addresses on the master node. To see which node processes an agent's data, check the ``wazuh.cluster.node`` field of its events.
 
 .. toctree::
    :hidden:

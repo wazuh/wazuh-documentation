@@ -50,6 +50,8 @@ custom_replacements = {
     # --- Revision numbers for Wazuh agent package version
     # RPM and Deb agent package revisions
     "|WAZUH_AGENT_CURRENT_REV|" : "rc2", # RPM and Deb
+    # Repository package revision of the agent packages, as for |WAZUH_MANAGER_PKG_REV|.
+    "|WAZUH_AGENT_PKG_REV|" : "1",
     # --- Architectures for Wazuh agent packages
     "|WAZUH_AGENT_x64_RPM|" : "x86_64",
     "|WAZUH_AGENT_x64_DEB|" : "amd64",

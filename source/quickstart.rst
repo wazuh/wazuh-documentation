@@ -214,8 +214,6 @@ The Wazuh manager API clients must then use this host's name or IP address, or a
 Next steps
 ----------
 
-Now that your Wazuh installation is ready, you can start deploying the Wazuh agent. This can be used to protect laptops, desktops, servers, cloud instances, containers, or virtual machines. The Wazuh agent is lightweight and multi-purpose, providing a variety of security capabilities.
-
 Next, deploy Wazuh agents. Each agent enrolls with a token that you create on this server for the address agents connect to. The assistant printed the command that creates it, under Next steps in its summary. Create the token first, as described in :ref:`Generate the enrollment token <generate_enrollment_token>`. Then follow the instructions for your operating system below. You can also go to **Agents management** > **Summary** > **Deploy new agent** in the Wazuh dashboard. Its wizard generates the token too. The Wazuh manager doesn't monitor the server it runs on. To monitor this server too, deploy a Wazuh agent on it with a token for this server's own address.
 
 .. raw:: html

@@ -40,10 +40,11 @@ The following table summarizes the Wazuh data and configurations that you can mi
 | |custom_dashboards_visualizations_ref|   | Export from Wazuh 4.x and import into Wazuh 5.x.                                           |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
 | |agent_registration_ref|                 | Migrate existing Wazuh agent registrations to the Wazuh 5.x manager while preserving their |
-|                                          | agent IDs, authentication keys, registration dates, and group membership.                  |
+|                                          | agent IDs and authentication keys. Only the manual procedure keeps the registration dates  |
+|                                          | and the exact group memberships.                                                           |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
 | |agent_groups_ref|                       | Migrated with the agent registrations, including group configuration and agent             |
-|                                          | assignments.                                                                               |
+|                                          | assignments. The migration tool migrates only the ``agent.conf`` file of each group.       |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
 
 Limitations
@@ -57,7 +58,7 @@ Wazuh 5.x introduces architectural and configuration changes that prevent some W
 
 -  Index data migration is supported from Wazuh 4.4.0 or later. Indices created before Wazuh 4.4.0 can't be restored, even if the deployment was later upgraded. Restored Wazuh 4.x indices retain their original mappings and field structure and remain separate from the indices and data streams created by Wazuh 5.x.
 
--  The Wazuh 5.x manager doesn't monitor its own host as agent 000, as Wazuh 4.x did. To keep collecting the Wazuh manager host's logs, inventory, SCA, and FIM data, install a Wazuh agent on the Wazuh manager host. Enroll it with a token for the host's own address.
+-  The Wazuh 5.x manager doesn't monitor its own host as agent 000, as Wazuh 4.x did. To keep collecting the Wazuh manager host's logs, inventory, SCA, and FIM data, install a Wazuh agent on the Wazuh manager host. Enroll it with a token for the host's own address. Install it after you migrate the agent registrations, so that its agent ID doesn't conflict with a migrated agent.
 
 -  Wazuh 5.x doesn't support frequency or threshold rules. Each matching event produces its own finding. Repeated events, such as a burst of failed SSH logins, don't escalate to a higher-level finding as rules 5712 and 5763 did in Wazuh 4.x. Correlation across events is planned for a later minor release.
 
