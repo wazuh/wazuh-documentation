@@ -393,7 +393,7 @@ Rules
 
    .. thumbnail:: /images/poc/block-malicious-actor-rules-config.png
       :title: Rules configuration
-      :alt: Wazuh dashboard Ruleset management Decoders page in the Draft space listing the custom_http decoders
+      :alt: Wazuh dashboard Ruleset management Decoders page in the Draft space listing the apache-access and core-wazuh-message decoders of the custom_http integration
       :align: center
       :width: 80%
 
