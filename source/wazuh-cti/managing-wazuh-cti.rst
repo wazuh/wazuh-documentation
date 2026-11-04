@@ -194,22 +194,14 @@ The following table shows other responses that the request can return:
 |         | synchronization is disabled.                            |
 +---------+---------------------------------------------------------+
 
-On-demand synchronization must also be enabled through the ``plugins.content_manager.catalog.update_on_demand`` setting. If this option is disabled, the Content Manager rejects manual synchronization requests.
+On-demand synchronization is enabled by default. If you set the ``plugins.content_manager.catalog.update_on_demand`` setting to ``false``, the Content Manager rejects manual synchronization requests.
 
 .. _wazuh_cti_trigger_sync_dashboard:
 
 Wazuh dashboard
 ~~~~~~~~~~~~~~~
 
-You can also perform this action using the **Update CTI content** feature or the **Dev Tools** console on the Wazuh dashboard.
-
-To use the **Update CTI content** feature, navigate to **Indexer management** > **Settings**, then click **Update CTI content**.
-
-.. thumbnail:: /images/wazuh-cti/update-cti-content.png
-   :title: Update CTI content
-   :alt: Update CTI content
-   :align: center
-   :width: 80%
+You can also perform this action from the **Dev Tools** console on the Wazuh dashboard.
 
 To request a content synchronization from the **Dev Tools** console, navigate to **Indexer management** > **Dev Tools** and send the following request.
 
@@ -392,6 +384,8 @@ The Wazuh Content Manager uses a deployment's registration to authenticate reque
 To register a deployment, generate a one-time code in the Wazuh dashboard and enter it in the Wazuh Cloud Console. The dashboard then completes the registration with the Content Manager. For more information, see the :ref:`Registering a deployment <wazuh_cti_registering_deployment>` section.
 
 You can check or remove a registration through the Content Manager API. Until a deployment is registered and assigned a Professional Feed subscription, the Content Manager synchronizes Open Feed content on schedule or on demand.
+
+.. _wazuh_cti_buying_subscription:
 
 Buying a Professional Feed subscription
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -607,7 +601,7 @@ When you unregister a deployment, the Content Manager removes its registration. 
 The Wazuh Cloud Console keeps its records unchanged:
 
 -  The deployment stays listed in **CTI** > **Deployments**. To remove it from your organization, click **Delete** on the deployment and **Confirm**.
--  If the deployment has a Professional Feed subscription, the subscription stays active, and you're still billed for it. To stop billing, cancel the subscription as described in Buying a Professional Feed subscription.
+-  If the deployment has a Professional Feed subscription, the subscription stays active, and you're still billed for it. To stop billing, cancel the subscription as described in :ref:`Buying a Professional Feed subscription <wazuh_cti_buying_subscription>`.
 
 To connect the deployment again later, register it again from the Wazuh dashboard.
 
