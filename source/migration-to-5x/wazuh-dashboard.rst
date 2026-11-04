@@ -108,7 +108,7 @@ Perform the following steps to recreate the Wazuh dashboard configuration in Waz
 
       # systemctl restart wazuh-dashboard
 
-#. Verify that the Wazuh manager API connection succeeds. Navigate to **Dashboards Management** > **Health Check**.
+#. Verify that the Wazuh manager API connection succeeds. Navigate to **Dashboard management** > **Health Check**.
 
 .. _migration_custom_dashboards_and_visualization:
 
