@@ -6,7 +6,7 @@
 File integrity monitoring
 =========================
 
-File Integrity Monitoring (FIM) helps in auditing sensitive files and meeting regulatory compliance requirements. Wazuh has an inbuilt FIM module that monitors file system changes to detect the creation, modification, and deletion of files. This use case uses the Wazuh FIM module to detect changes in monitored directories on Ubuntu and Windows endpoints. The Wazuh FIM module enriches alert data by fetching information about the user and process that made the changes using who-data audit.
+File Integrity Monitoring (FIM) helps you audit sensitive files and meet regulatory compliance requirements. Wazuh has a built-in FIM module that monitors file system changes to detect the creation, modification, and deletion of files. This use case uses the Wazuh FIM module to detect changes in monitored directories on Ubuntu and Windows endpoints. The Wazuh FIM module enriches finding data by fetching information about the user and process that made the changes using who-data audit.
 
 Infrastructure
 --------------
@@ -25,13 +25,14 @@ Configuration
 Ubuntu endpoint
 ^^^^^^^^^^^^^^^
 
-Perform the following steps to configure the Wazuh agent to monitor filesystem changes in the ``/root`` directory.
+Perform the following steps to configure the Wazuh agent to monitor file system changes in the ``/root`` directory.
 
-#. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. Add the following configuration within the ``<syscheck>`` block to specify the monitored directory and whodata provider. For this use case, you configure Wazuh to monitor the ``/root`` directory:
+#. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. Add the following configuration within the ``<syscheck>`` block to specify the monitored directory and who-data provider. For this use case, you configure Wazuh to monitor the ``/root`` directory:
 
    .. code-block:: xml
 
       <directories check_all="yes" report_changes="yes" whodata="yes">/root</directories>
+
       <whodata>
         <provider>ebpf</provider>
       </whodata>
@@ -53,7 +54,7 @@ Perform the following steps to configure the Wazuh agent to monitor filesystem c
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
-Take the following steps to configure the Wazuh agent to monitor filesystem changes in the ``C:\Users\<USER_NAME>\Desktop`` directory.
+Take the following steps to configure the Wazuh agent to monitor file system changes in the ``C:\Users\<USER_NAME>\Desktop`` directory.
 
 #. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file on the monitored Windows endpoint. Add the directories for monitoring within the ``<syscheck>`` block. To get additional information about the user and the process that made the changes, enable who-data audit. Replace ``<USER_NAME>`` with the name of the user:
 
@@ -80,7 +81,7 @@ As an alternative to local configurations on the Wazuh agents, you can :doc:`cen
 Test the configuration
 ----------------------
 
-#. Create a text file in the monitored directories, then wait for 5 seconds.
+#. Create a text file in the monitored directory, then wait for 5 seconds.
 
 #. Add content to the text file and save it. Then wait for 5 seconds.
 
@@ -89,31 +90,32 @@ Test the configuration
 Visualize the findings
 ----------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, navigate to **Endpoint security** > **File Integrity Monitoring** and click the **Findings** tab.
+You can visualize the findings in the Wazuh dashboard. To do this, navigate to **Endpoint security** > **File Integrity Monitoring** and click the **Findings** tab.
 
 .. note::
 
-   Findings may take up to the FIM synchronization interval (the ``<frequency>`` setting in the ``<syscheck>`` block of the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file) to appear in the dashboard.
+   Findings might take up to the FIM synchronization interval (the ``<frequency>`` setting in the ``<syscheck>`` block of the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file) to appear in the dashboard.
 
 -  Windows and Ubuntu findings for the simulated events
 
    .. thumbnail:: /images/poc/fim-findings.png
       :title: Windows and Ubuntu findings for the simulated events
+      :alt: Wazuh dashboard File Integrity Monitoring Findings tab listing file created, modified, and deleted findings for the Ubuntu and Windows endpoints
       :align: center
       :width: 80%
 
--  Finding showing whodata information on Ubuntu
+-  Finding showing who-data information on Ubuntu
 
    .. thumbnail:: /images/poc/fim-findings-ubuntu.png
-      :title: Finding showing whodata information on Ubuntu
-      :alt: Wazuh dashboard Events table showing file added, modified, and deleted alerts for the Ubuntu agent AgentLinux
+      :title: Finding showing who-data information on Ubuntu
+      :alt: Wazuh dashboard Document Details panel showing who-data information for a file modified on the Ubuntu agent
       :align: center
       :width: 80%
 
--  Finding showing whodata information on Windows
+-  Finding showing who-data information on Windows
 
    .. thumbnail:: /images/poc/fim-findings-windows.png
-      :title: Finding showing whodata information on Windows
-      :alt: Wazuh dashboard Events table showing file added, modified, and deleted alerts for the Windows agent WindowsAgent
+      :title: Finding showing who-data information on Windows
+      :alt: Wazuh dashboard Document Details panel showing who-data information for a file modified on the Windows agent
       :align: center
       :width: 80%
