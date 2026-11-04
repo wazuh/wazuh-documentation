@@ -715,13 +715,13 @@ Follow the steps below to enroll a Wazuh agent outside the cluster in a Wazuh ma
    .. code-block:: console
 
       # WAZUH_ENROLLMENT_TOKEN="<ENROLLMENT_TOKEN>" \
-      WAZUH_AGENT_NAME="<WAZUH_AGENT_NAME>" \
+      WAZUH_AGENT_NAME="<AGENT_NAME>" \
       apt-get install -y wazuh-agent
 
    Replace:
 
    -  ``<ENROLLMENT_TOKEN>`` with the Wazuh agent enrollment token generated in the previous :ref:`section <kubernetes-creating-enrollment-token>`.
-   -  ``<WAZUH_AGENT_NAME>`` with the Wazuh agent name that will be used for enrollment.
+   -  ``<AGENT_NAME>`` with the Wazuh agent name that will be used for enrollment.
 
    Enable and start the Wazuh agent service with the following commands.
 
@@ -1087,3 +1087,9 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
 
       NAME                           READY   STATUS     RESTARTS   AGE
       tomcat-wazuh-agent-0   2/2     Running           0          18s
+
+Next steps
+----------
+
+-  To deploy Wazuh agents on other endpoints, see :doc:`Wazuh agent </installation-guide/wazuh-agent/index>`.
+-  To remove the deployment, see :doc:`Clean up <kubernetes-clean-up>`.
