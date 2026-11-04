@@ -307,7 +307,7 @@ The ``wazuh_database.*`` internal options configure the Database Sync module.
 Wazuh modules
 ^^^^^^^^^^^^^^
 
-The Inventory Sync Server module reads its tuning parameters from the ``wazuh_modules.inventory_sync_server_*`` internal options. These options are documented in the Wazuh internal reference, `docs/ref/modules/inventory-sync-server/configuration.md <https://github.com/wazuh/wazuh/blob/v5.0.0-rc1/docs/ref/modules/inventory-sync-server/configuration.md>`__.
+The Inventory Sync Server module reads its tuning parameters from the ``wazuh_modules.inventory_sync_server_*`` internal options.
 
 Vulnerability scanner
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -408,7 +408,7 @@ The Wazuh agent uses the ``/var/ossec/etc/internal_options.conf`` file for its d
 
 To override an internal setting, add the option to ``/var/ossec/etc/local_internal_options.conf``. This file preserves custom settings when the Wazuh agent is upgraded.
 
-All of the following settings exist in ``/var/ossec/etc/local_internal_options.conf``. Edit the file and restart the Wazuh agent service for changes to take effect.
+The following tables list the settings and their default values, which are set in ``/var/ossec/etc/internal_options.conf``. To change a setting, add it to ``/var/ossec/etc/local_internal_options.conf`` and restart the Wazuh agent service.
 
 - `Agent`_
 - `Execd`_
@@ -423,57 +423,72 @@ Agent
 
 The ``agent.*`` internal options configure the Wazuh agent daemon. The ``monitord.*`` options control agent log rotation.
 
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| Setting                        | Description                                                                                  | Default value   | Allowed values                                                    |
-+================================+==============================================================================================+=================+===================================================================+
-| **agent.debug**                | Debug logging level for the Wazuh agent daemon.                                              | 0               | 0 (disabled), 1 (basic), 2 (verbose)                              |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.send_timeout**         | Maximum time (in seconds) that ``send()`` may block on the agent → manager TCP socket before | 30              | Positive integer, 1-600                                           |
-|                                | giving up. Bounds how long the agent can stay stuck behind a full send buffer (e.g. a        |                 |                                                                   |
-|                                | stalled network path or a manager that stopped reading); once this expires, the agent closes |                 |                                                                   |
-|                                | the socket and reconnects instead of blocking indefinitely.                                  |                 |                                                                   |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.tcp_keepidle**         | Time (in seconds) the connection needs to remain idle before TCP starts sending keepalive    | 60              | Positive integer, 1-7200                                          |
-|                                | probes.                                                                                      |                 |                                                                   |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.tcp_keepintvl**        | Time (in seconds) between individual keepalive probes.                                       | 15              | Positive integer, 1-100                                           |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.tcp_keepcnt**          | Maximum number of unanswered keepalive probes before the kernel drops the connection.        | 4               | Positive integer, 1-50                                            |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.max_attempts**         | Maximum number of attempts for failed requests.                                              | 4               | Positive integer                                                  |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.request_pool**         | Size of the request pool used for manager communications.                                    | 1024            | Positive integer                                                  |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.request_rto_sec**      | Seconds component of the retransmission timeout for requests.                                | 1               | Positive integer                                                  |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.request_rto_msec**     | Milliseconds component of the retransmission timeout for requests.                           | 0               | Integer from 0 to 999                                             |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.remote_conf**          | Controls whether the agent accepts centralized configuration from the manager.               | 1               | 0 (disabled), 1 (enabled)                                         |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.min_eps**              | Minimum events per second permitted in <agent><batch> configuration.                         | 50              | Any integer between 1 and 1000.                                   |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.state_interval**       | Interval, in seconds, for updating the agent state information.                              | 5               | 0 (disables status file). Any other integer between 1 and 86400   |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.warn_level**           | Buffer usage percentage at which a warning state begins.                                     | 90              | Any integer between 1 and 100.                                    |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.normal_level**         | Buffer usage percentage at which the buffer returns to normal state.                         | 70              | Any integer between 0 and agent.warn_level - 1.                   |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.tolerance**            | Time, in seconds, that the agent buffer must remain full before the agent considers events   | 15              | Any integer between 0 and 600.                                    |
-|                                | to be flooding.                                                                              |                 |                                                                   |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **monitord.compress**          | Controls whether rotated logs are compressed.                                                | 1               | 0 (disabled), 1 (enabled)                                         |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **monitord.keep_log_days**     | Number of days to retain rotated logs.                                                       | 31              | Integer from 0 to 500                                             |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **monitord.day_wait**          | Delay, in seconds, that the agent waits after the day changes before it runs the daily log   | 10              | Integer from 0 to 600                                             |
-|                                | rotation.                                                                                    |                 |                                                                   |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **monitord.size_rotate**       | Maximum log-file size, in megabytes, before rotation. A value of 0 means unlimited.          | 512             | Integer from 0 to 4096                                            |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **monitord.daily_rotations**   | Number of daily log rotations to retain.                                                     | 12              | Positive integer                                                  |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **monitord.rotate_log**        | Controls whether automatic log rotation is enabled.                                          | 1               | 0 (disabled), 1 (enabled)                                         |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| Setting                                  | Description                                                                                  | Default value   | Allowed values                                                    |
++==========================================+==============================================================================================+=================+===================================================================+
+| **agent.debug**                          | Debug logging level for the Wazuh agent daemon.                                              | 0               | 0 (disabled), 1 (basic), 2 (verbose)                              |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_compression_enabled**      | Compresses HTTPS request bodies with zstd.                                                   | 1               | 0 (disabled), 1 (enabled)                                         |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_request_timeout**          | Time budget, in milliseconds, for each /control, /stateless, /stats and /config request,     | 10000           | 1000 to 600000                                                    |
+|                                          | including DNS, TCP, TLS and transfer. Change it together with the Wazuh manager timeouts.    |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_stateful_timeout**         | Time budget, in milliseconds, for each /stateful request and each POST /download of shared   | 90000           | 1000 to 3600000                                                   |
+|                                          | configuration or a WPK file.                                                                 |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_backoff_base**             | Base of the retry backoff, in milliseconds. The delay before attempt n is random between 0   | 1000            | 100 to 60000                                                      |
+|                                          | and the smaller of the cap and base x 2^n.                                                   |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_backoff_cap**              | Cap of the retry backoff, in milliseconds.                                                   | 60000           | 1000 to 3600000                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_rejected_retry_interval**  | Time, in seconds, between Startup retries after the Wazuh manager rejects the Wazuh agent    | 60              | 1 to 86400                                                        |
+|                                          | version.                                                                                     |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_wpk_max_download_bytes**   | Largest WPK file, in bytes, that a remote upgrade download accepts.                          | 209715200       | 1048576 to 2147483647                                             |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_control_attempts**         | Total tries for a /control request, including the first one.                                 | 4               | 1 to 64                                                           |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_stateless_attempts**       | Total tries for a /stateless request, including the first one.                               | 5               | 1 to 64                                                           |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_stateful_attempts**        | Total tries for a /stateful request, including the first one.                                | 5               | 1 to 64                                                           |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_download_attempts**        | Total tries for a POST /download request, for configuration and WPK files, including the     | 2               | 1 to 64                                                           |
+|                                          | first one.                                                                                   |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.https_producer_pause_threshold** | Consecutive undeliverable /control steps before the event producers pause. One deliverable   | 2               | 1 to 1000                                                         |
+|                                          | step releases the pause.                                                                     |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.sync_max_blocks_per_cycle**      | Maximum number of stateful sync sessions (blocks) that one FIM, SCA or Syscollector sync     | 50              | 1 to 1000                                                         |
+|                                          | cycle sends. Read at startup.                                                                |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.enrollment_retry_delta**         | Increase, in seconds, of the delay after each failed re-enrollment attempt. Read at startup. | 5               | 1 to 3600                                                         |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.enrollment_retry_max**           | Maximum delay, in seconds, between re-enrollment attempts. Read at startup.                  | 60              | 1 to 86400                                                        |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.remote_conf**                    | Controls whether the agent accepts centralized configuration from the manager.               | 1               | 0 (disabled), 1 (enabled)                                         |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.state_interval**                 | Interval, in seconds, for updating the agent state information.                              | 5               | 0 (disables status file). Any other integer between 1 and 86400   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.warn_level**                     | Buffer usage percentage at which a warning state begins.                                     | 90              | Any integer between 1 and 100.                                    |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.normal_level**                   | Buffer usage percentage at which the buffer returns to normal state.                         | 70              | Any integer between 0 and agent.warn_level - 1.                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.tolerance**                      | Time, in seconds, that the agent buffer must remain full before the agent considers events   | 15              | Any integer between 0 and 600.                                    |
+|                                          | to be flooding.                                                                              |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.compress**                    | Controls whether rotated logs are compressed.                                                | 1               | 0 (disabled), 1 (enabled)                                         |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.keep_log_days**               | Number of days to retain rotated logs.                                                       | 31              | Integer from 0 to 500                                             |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.day_wait**                    | Delay, in seconds, that the agent waits after the day changes before it runs the daily log   | 10              | Integer from 0 to 600                                             |
+|                                          | rotation.                                                                                    |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.size_rotate**                 | Maximum log-file size, in megabytes, before rotation. A value of 0 means unlimited.          | 512             | Integer from 0 to 4096                                            |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.daily_rotations**             | Number of daily log rotations to retain.                                                     | 12              | Positive integer                                                  |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.rotate_log**                  | Controls whether automatic log rotation is enabled.                                          | 1               | 0 (disabled), 1 (enabled)                                         |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
 
 Execd
 ^^^^^^

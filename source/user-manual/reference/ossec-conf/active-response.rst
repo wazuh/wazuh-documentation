@@ -28,7 +28,7 @@ disabled
 
 Enables or disables Active Response on the Wazuh agent. Set this option to ``yes`` to prevent the agent from executing Active Response commands.
 
-This option is mandatory in every ``<active-response>`` section.
+If you omit this option, Active Response is enabled. The ``<ca_store>`` and ``<ca_verification>`` options that the installer writes in this section are accepted for compatibility with Wazuh 4.x. Configure them in :doc:`agent-upgrade <agent-upgrade>` instead.
 
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |

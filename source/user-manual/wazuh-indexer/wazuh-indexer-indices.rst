@@ -310,6 +310,8 @@ The ISM policy below keeps matching indices in the hot state while they receive 
      }
    }
 
+.. _wazuh_indexer_indices_enabling_unclassified_events_storage:
+
 Enabling unclassified events storage
 ------------------------------------
 

@@ -45,7 +45,7 @@ Specifies the URLs of the Wazuh indexer nodes. Define each node in a separate ``
 
 Both schemes are accepted. Use ``https://`` for TLS-protected deployments.
 
-The Wazuh manager validates the host value: it must start with ``http://`` or ``https://``. The validation checks only the scheme, so a port number is not required.
+The Wazuh manager validates the host value: it must start with ``http://`` or ``https://``. Include the port: without one, the scheme's default port is used (443 for ``https://``, 80 for ``http://``), not the Wazuh indexer port, 9200 by default.
 
 .. code-block:: xml
 
@@ -149,7 +149,7 @@ The Wazuh manager authenticates to the Wazuh indexer with the username and passw
 
 When the Wazuh indexer is on the same host, the resolver also imports its CA and the client pair it issued for the Wazuh manager into ``/etc/wazuh-manager/certs/indexer-ca.pem``, ``indexer-connector.pem`` and ``indexer-connector-key.pem``. When the Wazuh indexer is on another host, copy them there yourself.
 
-If the password or these files are missing, the Wazuh manager doesn't start, and ``wazuh-manager-control`` reports ``Unresolved credentials`` (error 21).
+If the password or these files are missing, the Wazuh manager doesn't start, and ``wazuh-manager-control`` prints a ``MISSING`` line that names the missing item, then ``Unresolved credentials. Exiting``. With ``-j``, its JSON output has error 21. See :doc:`wazuh-manager-control </user-manual/reference/tools/wazuh-manager-control>` in Tools.
 
 The resolver never replaces a password already in the keystore. After you change the ``wazuh-manager`` password on the Wazuh indexer, write the new one with ``wazuh-manager-keystore`` and restart the Wazuh manager:
 
@@ -162,13 +162,15 @@ The resolver never replaces a password already in the keystore. After you change
 Verifying connectivity
 ------------------------
 
-Use the configured CA certificate and client credentials to verify connectivity to the Wazuh indexer:
+Run the following command as root to verify connectivity to the Wazuh indexer. It uses the same CA certificate, client certificate, and ``wazuh-manager`` password, read from the keystore, as the Wazuh manager. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with a Wazuh indexer address from the output of ``/var/wazuh-manager/bin/wazuh-manager-conf get indexer.hosts``:
 
 .. code-block:: console
+   :emphasize-lines: 5
 
-   $ curl --cacert /etc/wazuh-manager/certs/indexer-ca.pem \
+   # curl --cacert /etc/wazuh-manager/certs/indexer-ca.pem \
         --cert   /etc/wazuh-manager/certs/indexer-connector.pem \
         --key    /etc/wazuh-manager/certs/indexer-connector-key.pem \
-        https://127.0.0.1:9200/_cluster/health
+        -u "wazuh-manager:$(/var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password -g)" \
+        https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/health
 
 A successful response returns the Wazuh indexer cluster health information with a status such as ``green`` or ``yellow``.

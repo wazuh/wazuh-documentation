@@ -19,6 +19,8 @@ The following command-line tools are available in Wazuh 5.0.
 +------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
 | :doc:`cluster_control <cluster-control>`                                     | Manages and retrieves information about the Wazuh manager cluster.             | Wazuh manager          |
 +------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
+| manage_agents                                                                | Imports a client key on a Wazuh agent with ``-i <KEY>``.                       | Wazuh agent            |
++------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
 | :doc:`rbac_control <rbac-control>`                                           | Manages API role-based access control resources and the RBAC database.         | Wazuh manager          |
 +------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
 | :doc:`verify-agent-conf <verify-agent-conf>`                                 | Validates the centralized agent configuration.                                 | Wazuh manager          |
@@ -40,6 +42,9 @@ The following command-line tools are available in Wazuh 5.0.
 +------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
 | :doc:`wazuh-manager-resolve-credentials <wazuh-manager-resolve-credentials>` | Sets up and checks the passwords, certificate authority and certificates of    | Wazuh manager          |
 |                                                                              | the Wazuh manager.                                                             |                        |
++------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
+| wazuh-manager-service-control                                                | Restarts or reloads the Wazuh manager service. ``reload`` keeps agent          | Wazuh manager          |
+|                                                                              | connections active.                                                            |                        |
 +------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
 
 .. toctree::

@@ -8,6 +8,8 @@
 wodle name="docker-listener"
 ===============================
 
+Prerequisite: the Docker listener module needs Python 3 and the Python Docker package on the Wazuh agent, as described in :ref:`Monitoring Docker environments <monitoring_docker_configuration>`.
+
 .. topic:: XML section name
 
    .. code-block:: xml

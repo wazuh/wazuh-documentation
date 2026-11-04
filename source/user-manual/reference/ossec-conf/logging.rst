@@ -15,7 +15,7 @@ logging
       <logging>
       </logging>
 
-The ``<logging>`` section configures the Wazuh agent's internal logging behavior, including the log format and verbosity level.
+The ``<logging>`` section configures the Wazuh agent's internal log format. To change the log level, use ``agent.debug`` in :doc:`Internal configuration </user-manual/reference/internal-options>`.
 
 Options
 -------

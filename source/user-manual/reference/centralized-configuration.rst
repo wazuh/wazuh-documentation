@@ -165,7 +165,7 @@ When the same setting is defined in multiple places, the following precedence ap
 #. ``agent.conf`` (centralized configuration from the Wazuh manager)
 #. ``ossec.conf`` (local configuration on the agent)
 
-If an agent belongs to multiple groups, the configurations from all groups are merged. In case of conflicts between groups, the configuration from the group with the lowest alphabetical order takes precedence.
+If an agent belongs to multiple groups, the configurations from all groups are merged. Groups are merged in the order they were assigned to the agent, not by group name. In case of conflicts, the value from the group assigned last takes precedence. ``GET /agents?select=group`` shows the order.
 
 Best practices
 ^^^^^^^^^^^^^^^
