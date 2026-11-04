@@ -92,8 +92,8 @@ The Traefik ingress controller routes and load balances external traffic to the 
 
 .. _kubernetes_ssl_certificates:
 
-Setup SSL certificates
-~~~~~~~~~~~~~~~~~~~~~~
+Set up SSL certificates
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform the steps below to generate the required certificates for the deployment:
 
@@ -102,8 +102,8 @@ Perform the steps below to generate the required certificates for the deployment
    .. code-block:: console
 
       $ cd wazuh
-      $ curl -so wazuh-certs-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
-      $ curl -so config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yml
+      $ curl -fsSo wazuh-certs-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+      $ curl -fsSo config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yml
 
 #. Edit ``./config.yml`` and replace it with the following contents.
 
@@ -168,6 +168,8 @@ Perform the steps below to generate the required certificates for the deployment
       26/10/2026 10:20:42 INFO: Generating Wazuh indexer certificates.
       26/10/2026 10:20:42 INFO: Wazuh indexer certificates created.
       26/10/2026 10:20:44 INFO: Generating Wazuh manager certificates.
+      26/10/2026 10:20:44 INFO: Wazuh manager certificates created.
+      26/10/2026 10:20:44 INFO: Generating Wazuh dashboard certificates.
       26/10/2026 10:20:44 INFO: Wazuh dashboard certificates created.
       Copying certificates for indexer: indexer -> config/indexer/certs/
       Copying certificates for manager: manager -> config/manager/certs/
@@ -209,7 +211,7 @@ The Wazuh images ship with no default passwords. Each deployment generates its o
 
    The command creates the ``indexer.env``, ``manager.env``, ``dashboard.env``, and ``cluster.key`` files in the ``wazuh/config/credentials/`` directory, holding only the credentials that each component needs, and the Wazuh manager cluster key. Keep these files for the life of the deployment; every ``kubectl apply -k`` and ``kubectl delete -k`` reads them, and a recreated indexer pod retrieves its credentials from them again.
 
-#. Return to the root of the repository and retrieve the generated password for the ``admin`` user. You need it to log in to the Wazuh dashboard after the deployment is completed.
+#. Retrieve the generated password for the ``admin`` user. You need it to log in to the Wazuh dashboard after the deployment is completed.
 
    .. code-block:: console
 
@@ -222,7 +224,7 @@ The Wazuh Kubernetes cluster manifest for Amazon EKS clusters is located in ``en
 
 You can adjust cluster resources by editing patch files in ``envs/eks/`` or ``envs/local-env/``. These files override specific values in the base manifests for each environment, such as CPU, memory, and storage for persistent volumes.
 
-#. Edit the ``wazuh/base/ingressRoute-tcp-dashboard.yaml`` file and replace the ``<UPDATE-WITH-THE-FQDN-OF-THE-INGRESS>`` placeholder with the fully qualified domain name (FQDN) of the external load balancer created for the Traefik service. This configures TLS pass-through for the Wazuh dashboard.
+#. Return to the root of the repository with ``cd ..``, then edit the ``wazuh/base/ingressRoute-tcp-dashboard.yaml`` file and replace the ``<UPDATE-WITH-THE-FQDN-OF-THE-INGRESS>`` placeholder with the fully qualified domain name (FQDN) of the external load balancer created for the Traefik service. This configures TLS pass-through for the Wazuh dashboard.
 
    .. code-block:: yaml
       :emphasize-lines: 10
@@ -308,8 +310,8 @@ Perform the steps below to generate the required certificates for the deployment
    .. code-block:: console
 
       $ cd wazuh
-      $ curl -so wazuh-certs-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
-      $ curl -so config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yml
+      $ curl -fsSo wazuh-certs-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+      $ curl -fsSo config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yml
 
 #. Edit ``./config.yml`` and replace it with the following contents.
 
@@ -373,6 +375,8 @@ Perform the steps below to generate the required certificates for the deployment
       26/10/2026 10:20:42 INFO: Generating Wazuh indexer certificates.
       26/10/2026 10:20:42 INFO: Wazuh indexer certificates created.
       26/10/2026 10:20:44 INFO: Generating Wazuh manager certificates.
+      26/10/2026 10:20:44 INFO: Wazuh manager certificates created.
+      26/10/2026 10:20:44 INFO: Generating Wazuh dashboard certificates.
       26/10/2026 10:20:44 INFO: Wazuh dashboard certificates created.
       Copying certificates for indexer: indexer -> config/indexer/certs/
       Copying certificates for manager: manager -> config/manager/certs/
@@ -601,11 +605,20 @@ The command output looks similar to this:
    wazuh-manager-master-0            1/1     Running   3 (15h ago)   18h
    wazuh-manager-worker-0            1/1     Running   1 (16h ago)   18h
 
-Run the command below to confirm the Wazuh agent enrollment password string.
+Run the command below to confirm the Wazuh agent enrollment password string for Wazuh 4.x agents connecting on port ``1515``. Wazuh 5.x agents use an enrollment token instead.
 
 .. code-block:: console
 
    $ kubectl exec -it wazuh-manager-master-0 -n wazuh -- cat /etc/wazuh-manager/authd.pass
+
+Wazuh indexer
+~~~~~~~~~~~~~
+
+Run the command below from the root of the ``wazuh-kubernetes`` repository. The output shows ``"status" : "green"``.
+
+.. code-block:: console
+
+   $ kubectl -n wazuh exec wazuh-indexer-0 -c wazuh-indexer -- curl -sk -u "admin:$(grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' wazuh/config/credentials/indexer.env | cut -d= -f2-)" "https://localhost:9200/_cluster/health?pretty"
 
 Accessing the Wazuh dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -638,6 +651,8 @@ The command output looks similar to this:
 
 Log in with the username ``admin`` and the password you read in the Generate credentials section. With the port-forward, the Wazuh dashboard is accessible at ``https://<KUBERNETES_HOST_IP_ADDRESS>:8443``.
 
+.. _kubernetes-deploying-wazuh-agent:
+
 Deploying a Wazuh agent
 -----------------------
 
@@ -654,12 +669,12 @@ Creating an enrollment token
 
 Wazuh agents enroll with an enrollment token. The token carries the address that Wazuh agents use to reach the Wazuh manager on port ``1517``. Perform the following steps to generate an enrollment token for the Wazuh agent deployment.
 
-#. On the Wazuh dashboard, click **☰** to open the menu and navigate to **Agent management** > **Enrollment tokens**. Click on **Create token**.
+#. On the Wazuh dashboard, click **☰** to open the menu and navigate to **Agents management** > **Enrollment tokens**. Click **Create token**.
 #. Fill in the following configuration information
 
    #. **Address**: The address that the Wazuh agents use to reach the Wazuh manager. It must be one of the names in the Wazuh manager agent listener certificate, otherwise the token is refused with ``address not in certificate SAN``. For Wazuh agents deployed inside the cluster, use ``wazuh-agents.wazuh.svc.cluster.local``. For Wazuh agents outside the cluster, use the Traefik ``EXTERNAL-IP`` (EKS) or ``<KUBERNETES_HOST_IP_ADDRESS>`` of the port-forward (local cluster); that address must have been added to the certificate with ``--agent-san <ADDRESS>`` when you ran ``certificates-conf.sh``. Create one token for each address.
-   #. Toggle **Embed CA** to include the CA certificate in the token.
-   #. Click **Create Token**.
+   #. Optional: toggle **Embed CA** to include the CA certificate in the token. Without it, the Wazuh agent downloads the CA from the Wazuh manager during enrollment and installs it only if it matches the pin in the token.
+   #. Click **Create**.
 
    .. thumbnail:: /images/deployment-options/deploying-with-kubernetes/kubernetes-enrollment-token-address.png
       :title: Create enrollment token
@@ -885,18 +900,15 @@ This is the most common approach for full-cluster monitoring. Each node runs one
    .. code-block:: none
       :class: output
 
-      $ kubectl get pods -n wazuh-daemonset -o wide
       NAME                READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
       wazuh-agent-t2fwl   1/1     Running   0          21m   10.42.0.9   server   <none>           <none>
-
-   Check your container runtime in the ``CONTAINER-RUNTIME`` column of ``kubectl get nodes -o wide``.
 
 Deploying the Wazuh agent as a Sidecar
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The sidecar approach is ideal for targeted monitoring of sensitive applications or workloads that require isolated log collection. Perform the steps below to deploy Wazuh as a Sidecar:
 
-#. Modify your application’s deployment to include the Wazuh agent container. In the example below, we deploy Wazuh alongside the Apache Tomcat application from the ``wazuh-agent-sidecar.yaml`` deployment file:
+#. Modify your application’s deployment to include the Wazuh agent container. In the example below, the Wazuh agent runs alongside the Apache Tomcat application from the ``wazuh-agent-sidecar.yaml`` deployment file:
 
    .. code-block:: yaml
       :emphasize-lines: 13, 124

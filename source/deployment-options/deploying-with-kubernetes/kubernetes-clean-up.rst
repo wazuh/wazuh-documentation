@@ -18,13 +18,17 @@ Follow the steps below to delete all deployments, services, and volumes.
 
       $ kubectl delete namespace wazuh-daemonset wazuh-sidecar
 
-   Then remove ``/var/lib/wazuh`` on each node where you deployed a DaemonSet agent.
+   Then remove ``/var/lib/wazuh`` on each node where you deployed a DaemonSet agent. On Minikube, run the following command:
+
+   .. code-block:: console
+
+      $ minikube ssh -- sudo rm -rf /var/lib/wazuh
 
 #. Remove the entire cluster
 
    The Wazuh manager cluster deployment uses different `StatefulSet <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>`__ elements, as well as ConfigMaps and services.
 
-   To delete your Wazuh cluster, execute the following command from the repository directory.
+   To delete your Wazuh cluster, run the following command from the repository directory.
 
    .. tabs::
 
@@ -40,7 +44,7 @@ Follow the steps below to delete all deployments, services, and volumes.
 
             $ kubectl delete -k envs/local-env/
 
-   This will remove every resource defined in the ``kustomization.yml`` file.
+   This command removes every resource defined in the ``kustomization.yml`` file.
 
    .. note::
 
@@ -98,10 +102,22 @@ Follow the steps below to delete all deployments, services, and volumes.
 
       Do not forget to delete the volumes manually where necessary.
 
-#. Stop the port-forwards and remove the local files. Keep ``wazuh/wazuh-ca/`` only if you plan to redeploy with the same CA. These local files hold the passwords, the cluster key, and the private keys in clear text, so delete them unless you plan to restore the volumes. ``wazuh/wazuh-ca/`` is owned by ``root`` with mode ``0700``, so removing it needs ``sudo``.
+#. Stop the port-forwards and remove the local files. Keep ``wazuh/wazuh-ca/`` if you plan to redeploy with the same CA. In that case, skip the last command. These local files hold the passwords, the cluster key, and the private keys in clear text, so delete them unless you plan to restore the volumes. ``wazuh/wazuh-ca/`` is owned by ``root`` with mode ``0700``, so removing it needs ``sudo``.
 
    .. code-block:: console
 
       $ pkill -f 'kubectl -n wazuh port-forward'
-      $ sudo rm -rf wazuh/config/credentials wazuh/wazuh-certificates
+      $ sudo rm -rf wazuh/config/credentials wazuh/wazuh-certificates wazuh/config/indexer/certs wazuh/config/manager/certs wazuh/config/dashboard/certs wazuh/config/root-ca/certs
       $ sudo rm -rf wazuh/wazuh-ca
+
+#. Also delete the Wazuh agent manifests you created in **Wazuh agent deployment on Kubernetes**. They hold the enrollment token in clear text. Run this command in the directory where you created them:
+
+   .. code-block:: console
+
+      $ rm -f wazuh-agent-daemonset.yaml wazuh-agent-sidecar.yaml allow-agents-to-manager-np.yaml
+
+#. If you created a Minikube cluster only for this deployment, remove it with its images and volumes:
+
+   .. code-block:: console
+
+      $ minikube delete
