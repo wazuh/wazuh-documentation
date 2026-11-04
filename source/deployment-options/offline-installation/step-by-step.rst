@@ -11,11 +11,13 @@ Run these steps on each offline host, in the directory where you copied the file
 All-in-one deployment
 ---------------------
 
-An all-in-one deployment doesn't use ``wazuh-install-files.tar``. The Wazuh packages create the root CA, the certificates, and the passwords on the host. Follow :ref:`All-in-one deployment <wazuh_indexer_all_in_one_deployment>` in the Installation guide, but skip the steps that add the Wazuh repository. Install each package from ``./wazuh-offline/wazuh-packages/`` at the step where that guide installs it. Before that, decompress the packages and check their signatures as described in :ref:`Preparing the packages <offline_installation_preparing_packages>`.
+An all-in-one deployment doesn't use ``wazuh-install-files.tar``. The Wazuh packages create the root CA, the certificates, and the passwords on the host. Follow these steps:
 
-.. code-block:: console
+#. Decompress ``wazuh-offline.tar.gz`` and check the package signatures, as :ref:`Preparing the packages <offline_installation_preparing_packages>` describes.
 
-   # tar xf wazuh-offline.tar.gz
+#. Follow :ref:`All-in-one deployment <wazuh_indexer_all_in_one_deployment>` in the Installation guide with these changes: skip Adding the Wazuh repository and Disable Wazuh updates. Check that the listed dependencies are installed with ``rpm -q`` (DEB: ``dpkg -s``) instead of installing them, and bring any missing one as :ref:`Prerequisites <offline_installation_prerequisites>` describes. Where the guide installs a package, run ``rpm -ivh ./wazuh-offline/wazuh-packages/wazuh-indexer*.rpm`` (DEB: ``dpkg -i ./wazuh-offline/wazuh-packages/wazuh-indexer*.deb``), and the same for ``wazuh-manager`` and ``wazuh-dashboard``.
+
+#. When the Wazuh dashboard runs, come back to this guide. Continue with :doc:`Securing your Wazuh installation <securing-installation>` of this guide, instead of the section with the same name in the Installation guide, and then read :doc:`Running Wazuh offline <running-offline>`.
 
 .. _offline_installation_preparing_packages:
 
@@ -83,6 +85,7 @@ Install and configure the Wazuh indexer on each indexer node. Before installing 
       -  iproute
       -  openssl
       -  procps-ng
+      -  shadow-utils
       -  util-linux
 
    .. group-tab:: DEB
@@ -180,13 +183,13 @@ Install and configure the Wazuh indexer on each indexer node. Before installing 
 
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
 
-#. Check that every Wazuh indexer node joined the cluster and that its status is ``green``. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the address of a Wazuh indexer node. When ``curl`` asks for the password, enter the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value that the first command shows.
+#. Check that every Wazuh indexer node joined the cluster and that its status is ``green``. Replace ``<WAZUH_INDEXER_ADDRESS>`` with the address of a Wazuh indexer node. When ``curl`` asks for the password, enter the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value that the first command shows.
 
    .. code-block:: console
 
       # grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
-      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
-      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/health?pretty
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cat/nodes?v
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cluster/health?pretty
 
 Installing the Wazuh manager
 ----------------------------
@@ -377,6 +380,7 @@ Install and configure the Wazuh dashboard node. Before installing it, install th
       -  diffutils
       -  libcap
       -  openssl
+      -  shadow-utils
       -  util-linux
 
    .. group-tab:: DEB
@@ -438,7 +442,7 @@ Install and configure the Wazuh dashboard node. Before installing it, install th
       opensearch.ssl.verificationMode: full
       wazuh_core.hosts:
         default:
-          url: https://<WAZUH_MASTER_IP_ADDRESS>
+          url: https://<WAZUH_MASTER_ADDRESS>
           port: 55000
           username: wazuh-internal-client
           run_as: true
@@ -458,7 +462,7 @@ Install and configure the Wazuh dashboard node. Before installing it, install th
 
 #. Access the Wazuh web interface.
 
-   -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
+   -  **URL**: ``https://<WAZUH_DASHBOARD_ADDRESS>``
    -  **Username**: ``admin``
    -  **Password**: the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``wazuh-install-files/credentials.env``.
 

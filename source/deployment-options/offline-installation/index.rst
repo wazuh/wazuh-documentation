@@ -194,6 +194,7 @@ After the Wazuh files are ready and copied to the specified hosts, install the W
 
 -  :doc:`Install Wazuh components using the assisted method <installation-assistant>`: the installation assistant installs and configures each component with one command. Use it unless you need to place every file and setting yourself.
 -  :doc:`Install Wazuh components step by step <step-by-step>`: install each package and configure the certificates and settings yourself.
+-  :doc:`Install Wazuh agents on hosts without Internet access <install-agents>`: install Wazuh agents on offline hosts.
 
 .. toctree::
    :hidden:
@@ -203,3 +204,4 @@ After the Wazuh files are ready and copied to the specified hosts, install the W
    step-by-step
    securing-installation
    running-offline
+   install-agents

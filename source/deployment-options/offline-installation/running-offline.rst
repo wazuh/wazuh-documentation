@@ -14,10 +14,11 @@ The Wazuh indexer loads the ruleset, the IOC data, and the vulnerability content
 
       # grep -E 'Event processing is now active|CVE feed fully loaded' /var/wazuh-manager/logs/wazuh-manager.log
 
--  After each start, and then about every 7 minutes, the Wazuh manager tries to download a GeoIP manifest. Each failed try logs a ``Cannot download manifest`` warning.
--  The Wazuh indexer tries to update its content from Wazuh CTI when it starts and on its update schedule. It logs ``WARN`` and ``ERROR`` lines in ``/var/log/wazuh-indexer/wazuh-cluster.log``, such as ``Could not reach catalog URL``. These messages are expected. Don't turn the updates off with the ``plugins.content_manager.catalog`` settings, or the Wazuh indexer loads no content.
+-  After each start, and then every 6 minutes, the Wazuh manager tries to download a GeoIP manifest. Each failed try logs a ``Cannot download manifest`` warning.
+-  The Wazuh engine, which runs with the Wazuh indexer, also tries to download the GeoIP manifest from ``api.pre.cloud.wazuh.com`` when it starts and every 6 minutes. Each failed try logs a ``Cannot download manifest`` warning in ``/var/log/wazuh-indexer/wazuh-engine.log``. It keeps using the GeoIP databases of the Wazuh indexer package.
+-  The Wazuh indexer tries to update its content from Wazuh CTI when it starts and on its update schedule. It logs ``WARN`` and ``ERROR`` lines in ``/var/log/wazuh-indexer/wazuh-cluster.log``, such as ``Could not reach catalog URL``. These messages are expected. Each Wazuh dashboard login also adds ``Couldn't obtain catalog plans from CTI`` and ``Unexpected error during version check`` to that file, and the Wazuh dashboard logs ``Cannot get available updates from indexer``. These are expected too. Don't turn the updates off with the ``plugins.content_manager.catalog`` settings, or the Wazuh indexer loads no content.
 -  Optionally, set ``plugins.content_manager.telemetry.enabled: false`` in ``/etc/wazuh-indexer/opensearch.yml``. It stops only the daily update-check ping and its log lines.
--  If the deployment gets Internet access later, allow outbound HTTPS on port 443/TCP from the Wazuh indexer and Wazuh manager nodes to ``api.pre.cloud.wazuh.com``. The Wazuh indexer downloads ruleset, IOC, and vulnerability content updates from it, and the Wazuh manager downloads GeoIP database updates from it.
+-  If the deployment gets Internet access later, allow outbound HTTPS on port 443/TCP from the Wazuh indexer and Wazuh manager nodes to ``api.pre.cloud.wazuh.com``. The Wazuh indexer downloads ruleset, IOC, and vulnerability content updates from it, and the Wazuh manager and the Wazuh indexer nodes download GeoIP database updates from it.
 
 .. _offline_installation_updating_content:
 
@@ -78,23 +79,31 @@ The Wazuh indexer doesn't update its content automatically when the deployment h
 
       # install -m 0640 -o wazuh-indexer -g wazuh-indexer <FILE> /usr/share/wazuh-indexer/plugins/wazuh-indexer-content-manager/snapshots/
 
-#. On one Wazuh indexer node, request the update and enter the ``admin`` password. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml`` on that node:
+#. On one Wazuh indexer node, request the update and enter the ``admin`` password. Replace ``<WAZUH_INDEXER_ADDRESS>`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml`` on that node, or with ``127.0.0.1`` if that value is ``0.0.0.0``:
 
    .. code-block:: console
 
-      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin -X POST "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_plugins/_content_manager/update?offline=true"
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin -X POST "https://<WAZUH_INDEXER_ADDRESS>:9200/_plugins/_content_manager/update?offline=true"
 
    The response shows ``"status":202`` when the Wazuh indexer accepts the request. A ``409`` response means another content update is still running, for example, right after the Wazuh indexer starts. Wait a few minutes and send the request again.
 
-#. Check that each content type shows ``ready``. Loading the vulnerability content takes a few minutes:
+#. Check that each content type shows ``ready``. Loading the vulnerability content takes a few minutes. Use the same address as in the previous step:
 
    .. code-block:: console
 
-      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/.wazuh-cti-consumers/_search?filter_path=hits.hits._source.type,hits.hits._source.status,hits.hits._source.local_offset&pretty"
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin "https://<WAZUH_INDEXER_ADDRESS>:9200/.wazuh-cti-consumers/_search?filter_path=hits.hits._source.type,hits.hits._source.status,hits.hits._source.local_offset&pretty"
+
+   The Wazuh manager loads the new vulnerability content from the Wazuh indexer at its next feed update, within the ``feed-update-interval`` of its ``vulnerability-detection`` block (60 minutes by default). Run the following command on a Wazuh manager node to check it:
+
+   .. code-block:: console
+
+      # grep 'Feed update process completed (changed=true)' /var/wazuh-manager/logs/wazuh-manager.log | tail -1
+
+   The update is done when the output shows a line newer than your update request. The download takes some minutes.
 
 Next steps
 ----------
 
-Once the Wazuh environment is ready, Wazuh agents can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` installation section.
+Once the Wazuh environment is ready, Wazuh agents can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see :doc:`Install Wazuh agents on hosts without Internet access <install-agents>`.
 
 To uninstall all the Wazuh central components, see the :doc:`Uninstalling the Wazuh central components </installation-guide/uninstalling-wazuh/central-components>` section.

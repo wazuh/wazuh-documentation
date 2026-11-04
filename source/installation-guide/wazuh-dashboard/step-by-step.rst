@@ -133,13 +133,14 @@ Do this **before installing the package**. The package then uses these files and
       # install -m 0640 wazuh-certificates/$NODE_NAME.pem /etc/wazuh-dashboard/certs/dashboard.pem
       # install -m 0640 wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
       # install -m 0640 wazuh-certificates/root-ca.pem /etc/wazuh-dashboard/certs/indexer-ca.pem
+      # install -m 0640 wazuh-certificates/root-ca.pem /etc/wazuh-dashboard/certs/manager-ca.pem
       # rm -rf wazuh-certificates
 
-   Copy ``/etc/wazuh-manager/export/ca.pem`` from the Wazuh manager master node to ``/etc/wazuh-dashboard/certs/manager-ca.pem`` on this node. The Wazuh dashboard uses it to verify the Wazuh manager API:
+   The Wazuh dashboard uses ``manager-ca.pem`` to verify the Wazuh manager API. The Wazuh manager master node took its certificates from the same archive, so the archive's root CA verifies it. If the master node is the first Wazuh indexer node, the Wazuh manager package issued its own certificates instead. In that case, replace ``manager-ca.pem`` with the master node's ``/etc/wazuh-manager/export/ca.pem``. Only ``root`` can read that file. Run ``sudo cat /etc/wazuh-manager/export/ca.pem`` on the master node, save the output as ``manager-ca.pem`` in the working directory of this node, and run:
 
    .. code-block:: console
 
-      # install -m 0640 <MANAGER_CA_FILE> /etc/wazuh-dashboard/certs/manager-ca.pem
+      # install -m 0640 manager-ca.pem /etc/wazuh-dashboard/certs/manager-ca.pem
 
    The ``wazuh-dashboard`` user does not exist yet. When the package is installed, it keeps these files and gives them their owner.
 
@@ -271,9 +272,7 @@ Starting the Wazuh dashboard service
    -  **Username:** ``admin``
    -  **Password:** the password from step 3
 
-   The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import ``root-ca.pem`` into the browser's certificate manager. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
-
-#. To trust the certificate in your browser, import the Wazuh indexer root CA: ``/etc/wazuh-dashboard/certs/indexer-ca.pem``, which is the same file as ``root-ca.pem``. If the package issued the Wazuh dashboard certificate, import ``/etc/wazuh-dashboard/export/ca.pem`` instead.
+   The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import the CA that issued the certificate into the browser's certificate manager. If you followed :ref:`Deploying certificates and passwords <wazuh_dashboard_deploying_certificates>`, it's the root CA of ``wazuh-certificates.tar``, also at ``/etc/wazuh-dashboard/certs/indexer-ca.pem``. If you skipped that section, the Wazuh dashboard package issued the certificate, and its CA is ``/etc/wazuh-dashboard/export/ca.pem``. Only ``root`` can read these files. Run ``sudo cat`` with the file's path on this host, and save the output as ``ca.pem`` on the computer that runs the browser. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
 
 .. _wazuh_dashboard_securing_installation:
 

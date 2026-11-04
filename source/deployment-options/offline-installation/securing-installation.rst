@@ -6,22 +6,22 @@
 Securing your Wazuh installation
 ================================
 
-You have now installed and configured all the Wazuh central components. Each package keeps the passwords it uses in its ``local.env`` file. The Wazuh indexer and the Wazuh manager master node also publish their users' passwords in ``export/credentials.env``. All these files are readable by root only.
+You have now installed and configured all the Wazuh central components. Each package keeps the passwords that you gave it in its ``local.env`` file. On an all-in-one host, the Wazuh dashboard reads its passwords from the export directories of the Wazuh indexer and the Wazuh manager, and has no ``local.env``. The Wazuh indexer and the Wazuh manager master node also publish their users' passwords in ``export/credentials.env``. All these files are readable by root only.
 
 #. Check that the accounts work. When ``curl`` asks for a password, enter the value of the key given for each account. On the Wazuh indexer, the users are ``admin`` (``WAZUH_INDEXER_ADMIN_PASSWORD``), ``kibanaserver`` (``WAZUH_INDEXER_KIBANASERVER_PASSWORD``), and ``wazuh-manager`` (``WAZUH_INDEXER_MANAGER_PASSWORD``), in ``/etc/wazuh-indexer/export/credentials.env`` of a Wazuh indexer node:
 
    .. code-block:: console
 
-      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/health?pretty
-      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u kibanaserver https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_plugins/_security/authinfo?pretty
-      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u wazuh-manager https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_plugins/_security/authinfo?pretty
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cluster/health?pretty
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u kibanaserver https://<WAZUH_INDEXER_ADDRESS>:9200/_plugins/_security/authinfo?pretty
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u wazuh-manager https://<WAZUH_INDEXER_ADDRESS>:9200/_plugins/_security/authinfo?pretty
 
    On the Wazuh manager API of the master node, the users are ``wazuh`` (``WAZUH_MANAGER_API_PASSWORD``) and ``wazuh-internal-client`` (``WAZUH_MANAGER_WUI_PASSWORD``), in ``/etc/wazuh-manager/export/credentials.env`` of the master node. Each command prints a token:
 
    .. code-block:: console
 
-      # curl --cacert /etc/wazuh-manager/export/ca.pem -u wazuh -X POST "https://<WAZUH_MASTER_IP_ADDRESS>:55000/security/user/authenticate?raw=true"
-      # curl --cacert /etc/wazuh-manager/export/ca.pem -u wazuh-internal-client -X POST "https://<WAZUH_MASTER_IP_ADDRESS>:55000/security/user/authenticate?raw=true"
+      # curl --cacert /etc/wazuh-manager/export/ca.pem -u wazuh -X POST "https://<WAZUH_MASTER_ADDRESS>:55000/security/user/authenticate?raw=true"
+      # curl --cacert /etc/wazuh-manager/export/ca.pem -u wazuh-internal-client -X POST "https://<WAZUH_MASTER_ADDRESS>:55000/security/user/authenticate?raw=true"
 
 #. Store the five passwords securely, for example, in your password manager. The ``credentials.env`` file in ``wazuh-install-files.tar`` holds all of them. In an all-in-one installation, which creates no ``wazuh-install-files.tar``, they are in ``/etc/wazuh-indexer/export/credentials.env`` and ``/etc/wazuh-manager/export/credentials.env``.
 
@@ -29,7 +29,9 @@ You have now installed and configured all the Wazuh central components. Each pac
 
    .. code-block:: console
 
-      # rm -rf ./wazuh-install-files ./wazuh-install-files.tar ./wazuh-offline ./wazuh-offline.tar.gz
+      # rm -rf ./credentials.env ./wazuh-install-files ./wazuh-install-files.tar ./wazuh-offline ./wazuh-offline.tar.gz
+
+   With the step-by-step method, this also removes the ``credentials.env`` file that you created in the working directory.
 
    Keep the ``local.env`` and ``export/credentials.env`` files of the packages, readable by root only. The Wazuh passwords tool updates both. The components check them at every start and refuse to start if one has the wrong owner or permissions.
 
@@ -111,7 +113,7 @@ The Wazuh manager API users are ``wazuh`` and ``wazuh-internal-client``. Their p
 
    ``rbac_control`` doesn't update ``/etc/wazuh-manager/export/credentials.env``. The file keeps the password set at installation, so store the new password in your password manager. The cluster doesn't synchronize this database. After promoting another node to master, change the passwords again on it.
 
-#. After changing the ``wazuh-internal-client`` password, run the following commands on every Wazuh dashboard node. Replace ``<WAZUH_MANAGER_WUI_PASSWORD>`` with the new password.
+#. After changing the ``wazuh-internal-client`` password, run the following commands on every Wazuh dashboard node. Replace ``<WAZUH_MANAGER_WUI_PASSWORD>`` with the new password. If ``/etc/wazuh-dashboard/local.env`` doesn't exist, as on an all-in-one host, skip the ``sed`` command.
 
    .. code-block:: console
 

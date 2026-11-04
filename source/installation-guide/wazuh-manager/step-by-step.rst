@@ -94,13 +94,15 @@ Do this **before installing the package**. The package then uses these files and
 
 .. note::
 
-   If this host is the first Wazuh indexer node, the Wazuh manager package retrieves the Wazuh indexer password and certificates from ``/etc/wazuh-indexer/export`` during installation. Skip this section, but first place the two Wazuh manager API passwords. On the other Wazuh indexer nodes, follow this section in full. Run these commands in the directory that holds ``wazuh-certificates.tar``:
+   If this host is the first Wazuh indexer node, for example an all-in-one host, the Wazuh manager package retrieves the Wazuh indexer password and certificates from ``/etc/wazuh-indexer/export`` during installation. Skip this section, but first place the two Wazuh manager API passwords. Run these commands in the working directory that holds the ``credentials.env`` file you created in :ref:`Creating the passwords <wazuh_indexer_creating_passwords>`:
 
    .. code-block:: console
 
       # install -d -m 0750 /etc/wazuh-manager
       # install -m 0600 /dev/null /etc/wazuh-manager/local.env
-      # tar -xOf wazuh-certificates.tar ./credentials.env | grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=' > /etc/wazuh-manager/local.env
+      # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=' credentials.env > /etc/wazuh-manager/local.env
+
+   Without these two passwords, the Wazuh manager package generates its own, and the values in ``credentials.env`` don't work. On any other host, including a dedicated Wazuh manager node and the other Wazuh indexer nodes, follow this section in full.
 
    Make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
 
@@ -196,7 +198,7 @@ The agent listener certificate, ``/etc/wazuh-manager/certs/remoted.pem``, lists 
    .. code-block:: console
 
       # rm -rf /usr/share/wazuh-indexer/tools/wazuh-certificates
-      # WAZUH_CA_DIR=/etc/wazuh-indexer/ca bash /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh -wm -as <ADDRESS> -as <OTHER_ADDRESS>
+      # WAZUH_CA_DIR=/etc/wazuh-indexer/ca bash /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh -wm -as <ALTERNATE_ADDRESS> -as <OTHER_ALTERNATE_ADDRESS>
 
    The tool writes new certificates for every Wazuh manager node to ``/usr/share/wazuh-indexer/tools/wazuh-certificates``.
 

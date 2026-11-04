@@ -129,6 +129,8 @@ The Wazuh manager uses the following ports.
 
 If no Wazuh 4.x agents connect to this Wazuh manager, you can keep 1514 and 1515 closed. You can also disable them in ``/etc/wazuh-manager/wazuh-manager.conf`` with ``<remote><legacy><enabled>`` and ``<auth><disabled>``.
 
+The Wazuh manager API listens on 55000/TCP of the master node. After the Quickstart, and after an offline all-in-one installation with the installation assistant, it listens only on ``127.0.0.1`` and ``::1``. After the assisted and step-by-step installations of this guide, it listens on all network interfaces. To restrict it, set ``host`` in ``/var/wazuh-manager/api/configuration/api.yaml`` and restart the Wazuh manager.
+
 .. _wazuh_manager_agent_connection_address:
 
 Agent connection address
