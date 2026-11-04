@@ -6,7 +6,7 @@
 Deploying Wazuh agents on Windows endpoints
 ===========================================
 
-The Wazuh agent runs on the endpoint you want to monitor. It sends data to the Wazuh manager in near real time through an encrypted and authenticated channel. You can deploy the Wazuh agent on Windows 10 and 11, and Windows Server 2008 R2, 2012 R2, 2016, 2019, 2022, and 2025. For the supported versions, see :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`.
+The Wazuh agent runs on the endpoint you want to monitor. It sends data to the Wazuh manager in near real time through an encrypted and authenticated channel. For the supported Windows versions, see :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`.
 
 Before you start, create an enrollment token on the Wazuh manager, as described in :ref:`Generate the enrollment token <generate_enrollment_token>`. You can also create it in the Wazuh dashboard, under **Agents management** > **Enrollment tokens**. The endpoint must reach the Wazuh manager on port 1517/TCP.
 
@@ -90,7 +90,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
          #. Run the Windows installer. Accept the license agreement and click **Install**. On the last screen, select **Run Agent configuration interface** and click **Finish**. To open the agent GUI later, open the Start menu and select **Wazuh Agent Manager** in the **Wazuh** folder. The agent GUI lets you configure the agent, open the log file, and start or stop the service.
 
-         #. In the agent GUI, go to **Manage** > **Enroll**, paste the enrollment token, and click **OK**. When asked **Start the Wazuh agent service now?**, click **Yes**. The GUI enrolls the agent under the computer's host name. To choose another name, use the CLI method and set ``WAZUH_AGENT_NAME``.
+         #. In the agent GUI, go to **Manage** > **Enroll**, paste the enrollment token, and click **OK**. The GUI shows **Agent enrolled.** Click **OK**. When asked **Start the Wazuh agent service now?**, click **Yes**. The GUI enrolls the agent under the computer's host name. To choose another name, use the CLI method and set ``WAZUH_AGENT_NAME``.
 
             .. thumbnail:: /images/installation/windows-agent-gui-manage-enroll.png
                :align: center

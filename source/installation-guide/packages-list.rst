@@ -6,7 +6,9 @@
 Packages list
 =============
 
-Direct download links for the Wazuh |WAZUH_CURRENT| packages. Use them for offline or manual installations. The installation guides install the same packages from the Wazuh repository. Pick the table for the component, then the row for your operating system and CPU architecture. To print the architecture, run ``uname -m``, or ``dpkg --print-architecture`` on Debian and Ubuntu, which prints the ``amd64`` or ``arm64`` of the DEB rows. Each package has a SHA512 checksum file. To verify a download, compare the output of ``sha512sum <PACKAGE>`` (macOS: ``shasum -a 512 <PACKAGE>``) with the value in its ``.sha512`` file.
+Direct download links for the Wazuh |WAZUH_CURRENT| packages. Use them for offline or manual installations. The installation guides install the same packages from the Wazuh repository. Release candidate files carry the stage in their names, for example ``wazuh-agent_|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|_amd64.deb``, but the packages inside are version ``|WAZUH_CURRENT|-|WAZUH_AGENT_PKG_REV|``, so ``dpkg -l`` and ``rpm -q`` show ``|WAZUH_CURRENT|-|WAZUH_AGENT_PKG_REV|``. Pick the table for the component, then the row for your operating system and CPU architecture. To print the architecture, run ``uname -m``, or ``dpkg --print-architecture`` on Debian and Ubuntu, which prints the ``amd64`` or ``arm64`` of the DEB rows.
+
+Each package has a SHA512 checksum file. To verify a download, save the ``.sha512`` file in the directory of the package and run ``sha512sum -c <PACKAGE>.sha512`` (macOS: ``shasum -a 512 -c <PACKAGE>.sha512``). The output must be ``<PACKAGE>: OK``. The RPM packages are signed with the Wazuh GPG key. To check one, import the key with ``rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH``, then run ``rpm -K <PACKAGE>``. After you import the key, the output must be ``<PACKAGE>: digests signatures OK``. To check a DEB package, follow step 2 of :ref:`Preparing the packages <offline_installation_preparing_packages>` in the offline installation guide, with this key instead of ``wazuh-offline/GPG-KEY-WAZUH``. The Windows and macOS packages are code-signed by Wazuh, and the operating system checks the signature when you install them.
 
 Wazuh indexer
 -------------
@@ -107,7 +109,7 @@ Windows
 +------------------------------------------------------------------------------------+-------------------+----------------------+
 | Version                                                                            | Architecture      | Package              |
 +====================================================================================+===================+======================+
-| Windows 10 and 11, and Windows Server 2008 R2, 2012 R2, 2016, 2019, 2022, and 2025 | 32-bit and 64-bit | |Windows7Plus_32_64| |
+| See :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`         | 32-bit and 64-bit | |Windows7Plus_32_64| |
 +------------------------------------------------------------------------------------+-------------------+----------------------+
 
 .. _packages_list_agent_macos:

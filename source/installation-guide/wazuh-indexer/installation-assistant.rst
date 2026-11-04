@@ -110,7 +110,7 @@ Run these steps as root on one host of your deployment, for example, your first 
 
    ``-id`` (``--install-dependencies``) installs the missing operating system packages that the installation requires, without asking.
 
-   If agents reach a Wazuh manager through another address, add it with ``-as|--agent-san <ALTERNATE_ADDRESS>``. Examples are a public IP, a NAT address, or a load balancer. Agent enrollment tokens can only be created for an address that is in the listener certificate of the Wazuh manager.
+   If agents reach a Wazuh manager through another address, add it with ``-as|--agent-san <ALTERNATE_ADDRESS>``. Examples are a public IP, a NAT address, a load balancer, or the address of each Wazuh manager worker node that agents will use. Agent enrollment tokens can only be created for an address that is in the listener certificate of the Wazuh manager.
 
    .. code-block:: console
 

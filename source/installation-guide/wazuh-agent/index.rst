@@ -96,7 +96,7 @@ Then follow the steps on the Wazuh dashboard to deploy a new agent. The wizard a
 Prerequisite
 ------------
 
-During enrollment, the Wazuh agent authenticates to the Wazuh manager using an enrollment token. The token tells the agent which Wazuh manager to trust and lets it enroll. Create the token on the Wazuh manager. In a cluster, create it on the master node. A worker node can't create it. The endpoint must reach the Wazuh manager on port 1517/TCP, which Wazuh 5.x agents use for enrollment and communication.
+During enrollment, the Wazuh agent authenticates to the Wazuh manager using an enrollment token. The token tells the agent which Wazuh manager to trust and lets it enroll. Create the token on the Wazuh manager. In a cluster, create it on the master node. A worker node can't create it. The agent connects only to the address of its token. To spread agents across the nodes of a cluster, use a token for a load balancer address, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. The endpoint must reach the Wazuh manager on port 1517/TCP, which Wazuh 5.x agents use for enrollment and communication.
 
 .. _generate_enrollment_token:
 
