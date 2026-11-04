@@ -34,18 +34,18 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
 
       $ curl -sSL https://get.docker.com | sh
 
-#. Install `Python Docker library <https://pypi.org/project/docker/>`__ and other dependencies:
+#. Install the `Python Docker library <https://pypi.org/project/docker/>`__ and other dependencies:
 
    .. code-block:: console
 
-      $ apt remove python3-urllib3
+      $ sudo apt remove python3-urllib3
       $ sudo pip3 install docker==7.1.0 urllib3==1.26.20 requests==2.32.2 --break-system-packages
 
    .. note::
 
       This command modifies the default externally managed Python environment. See the `PEP 668 <https://peps.python.org/pep-0668/>`__ description for more information. To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the Docker ``/var/ossec/wodles/docker/DockerListener`` script shebang with your virtual environment interpreter, for example, ``#!</path/to/your/virtual/environment>/bin/python3``.
 
-      Some Ubuntu distributions will have ``urllib3`` already installed using Debian packages. Uninstall and reinstall with the method above.
+      Some Ubuntu distributions have ``urllib3`` already installed using Debian packages. Uninstall and reinstall with the method above. Before you confirm the removal, check the packages that ``apt`` lists. Removing ``python3-urllib3`` also removes the packages that depend on it, such as ``cloud-init`` and ``python3-boto3``.
 
 #. Start and enable the Docker service:
 
@@ -73,10 +73,24 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
 
       $ sudo systemctl restart wazuh-agent
 
+Perform the following steps on the Wazuh dashboard to enable the docker integration.
+
+#. Navigate to **Ruleset management** > **Overview**.
+
+#. Enter ``docker`` in the search box and select the **docker** integration.
+
+#. Click the **docker** integration name to open it, then click **Actions** and select **Enable**.
+
+   .. thumbnail:: /images/poc/docker-integration-enable.png
+      :title: Enable the docker integration
+      :alt: Wazuh dashboard Ruleset management page for the docker integration with the Actions menu open and Enable highlighted
+      :align: center
+      :width: 80%
+
 Test the configuration
 ----------------------
 
-Perform several Docker activities, such as pulling a Docker image, starting an instance, running additional Docker commands, and deleting the container.
+Perform several Docker activities, such as pulling a Docker image, running a container, running additional Docker commands, and deleting the container.
 
 #. Pull an image, such as the NGINX image, and run a container:
 
@@ -102,6 +116,6 @@ You can visualize the findings on the Wazuh dashboard. Go to **Cloud security** 
 
 .. thumbnail:: /images/poc/docker-findings.png
    :title: Visualize Docker findings
-   :alt: Wazuh dashboard Docker module Events view showing a histogram and table of Docker container alerts
+   :alt: Wazuh dashboard Docker module Findings tab showing a histogram and table of Docker container findings
    :align: center
    :width: 80%
