@@ -141,7 +141,7 @@ When you change the ``kibanaserver`` password, update the ``opensearch.password`
 
 .. code-block:: console
 
-   # echo '<KIBANASERVER_PASSWORD>' | runuser -u wazuh-dashboard -- /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore add opensearch.password --stdin --force
+   # echo '<KIBANASERVER_PASSWORD>' | OSD_PATH_CONF=/etc/wazuh-dashboard /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
 
 .. _update_wazuh_internal_client_password:
 
@@ -152,7 +152,21 @@ When you change the ``wazuh-internal-client`` password, update the ``wazuh_core.
 
 .. code-block:: console
 
-   # echo '<WAZUH_WUI_PASSWORD>' | runuser -u wazuh-dashboard -- /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore add wazuh_core.hosts.default.password --stdin --force
+   # echo '<WAZUH_WUI_PASSWORD>' | OSD_PATH_CONF=/etc/wazuh-dashboard /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin wazuh_core.hosts.default.password
+
+Give the keystore back to the ``wazuh-dashboard`` group:
+
+.. code-block:: console
+
+   # chown root:wazuh-dashboard /etc/wazuh-dashboard/opensearch_dashboards.keystore
+   # chmod 640 /etc/wazuh-dashboard/opensearch_dashboards.keystore
+
+If the node has a ``/etc/wazuh-dashboard/local.env`` file, update the same key there too:
+
+.. code-block:: console
+
+   # sed -i 's|^WAZUH_INDEXER_KIBANASERVER_PASSWORD=.*|WAZUH_INDEXER_KIBANASERVER_PASSWORD=<KIBANASERVER_PASSWORD>|' /etc/wazuh-dashboard/local.env
+   # sed -i 's|^WAZUH_MANAGER_WUI_PASSWORD=.*|WAZUH_MANAGER_WUI_PASSWORD=<WAZUH_WUI_PASSWORD>|' /etc/wazuh-dashboard/local.env
 
 Restart the Wazuh dashboard to apply the changes.
 
