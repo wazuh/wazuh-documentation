@@ -36,13 +36,19 @@ You can remove Wazuh agents directly from the Wazuh dashboard.
 Remove agents using the Wazuh manager API
 -----------------------------------------
 
-This section includes examples of using the :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>` request to delete a list of agents or agents disconnected for a given period. This action is performed on the Wazuh manager or on an authorized endpoint.
+This section includes examples of using the :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>` request to delete a list of agents or agents disconnected for a given period. Run these commands on the Wazuh manager master node, or on another host that can reach its API. After the Quickstart or an all-in-one installation with the installation assistant, the Wazuh manager API listens only on that host (127.0.0.1 and ::1), so run the commands there and use ``localhost`` as ``<WAZUH_MANAGER_ADDRESS>``.
 
-The examples use an authentication token. To get your token, replace ``<USER>:<PASSWORD>`` with your Wazuh manager API credentials, ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN), and run the following command:
+The examples use an authentication token. To get your token, replace ``<USER>:<PASSWORD>`` with your Wazuh manager API credentials, ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN), and run the following command:
 
 .. code-block:: console
 
-   # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+   # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
+
+After an installation from packages or with the installation assistant, use the ``wazuh`` user. Its password is the ``WAZUH_MANAGER_API_PASSWORD`` value in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager master node, unless you changed it later with ``rbac_control``. To print it, run this command:
+
+.. code-block:: console
+
+   # grep '^WAZUH_MANAGER_API_PASSWORD=' /etc/wazuh-manager/export/credentials.env | cut -d= -f2-
 
 .. note::
 
@@ -55,9 +61,9 @@ You can remove specific Wazuh agents using a list. Use the parameter ``agents_li
 
 .. code-block:: console
 
-   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?pretty=true&older_than=0s&agents_list=012,014,016&status=all" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X DELETE "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?pretty=true&older_than=0s&agents_list=012,014,016&status=all" -H  "Authorization: Bearer $TOKEN"
 
-Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh manager.
+Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN of the Wazuh manager.
 
 
 .. code-block:: json
@@ -87,9 +93,9 @@ You can remove Wazuh agents that never connected or agents that have been discon
 
 .. code-block:: console
 
-   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP>:55000/agents?pretty=true&older_than=21d&agents_list=all&status=never_connected,disconnected" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X DELETE "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?pretty=true&older_than=21d&agents_list=all&status=never_connected,disconnected" -H  "Authorization: Bearer $TOKEN"
 
-Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
+Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN of the Wazuh manager.
 
 
 .. code-block:: json

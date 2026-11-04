@@ -20,7 +20,7 @@ Make sure that your environment meets these requirements before you enroll a Waz
       -  1514/TCP for agent communication.
       -  1515/TCP for enrollment via agent configuration.
 
-   -  55000/TCP for enrollment through the Wazuh manager API (both agent versions). Only the master node serves the Wazuh manager API.
+   -  55000/TCP only if you enroll agents through the Wazuh manager API, or for agents with anti-tampering that remove themselves. Wazuh 5.x agents enroll and connect on 1517/TCP. Only the master node serves the Wazuh manager API.
 
 .. note::
 

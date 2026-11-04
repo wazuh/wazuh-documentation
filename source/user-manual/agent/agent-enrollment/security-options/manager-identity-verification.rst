@@ -118,7 +118,7 @@ Wazuh manager configuration
 
 Generate an SSL certificate on the Wazuh manager signed by the certificate authority. The steps to generate an SSL certificate for the Wazuh manager are as follows:
 
-#. Create a certificate request configuration file ``req.conf`` on the Wazuh manager. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager where the Wazuh agents will be enrolled. The contents of the file can be as follows:
+#. Create a certificate request configuration file ``req.conf`` on the Wazuh manager. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager where the Wazuh agents will be enrolled. The contents of the file can be as follows:
 
    .. code-block:: ini
       :emphasize-lines: 7,14
@@ -129,14 +129,14 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
       prompt = no
       [req_distinguished_name]
       C = US
-      CN = <WAZUH_MANAGER_IP>
+      CN = <WAZUH_MANAGER_ADDRESS>
       [req_ext]
       subjectAltName = @alt_names
       basicConstraints = CA:FALSE
       [alt_names]
       DNS.1 = wazuh
       DNS.2 = wazuh.com
-      IP.1 = <WAZUH_MANAGER_IP>
+      IP.1 = <WAZUH_MANAGER_ADDRESS>
 
    Where:
 
@@ -144,6 +144,7 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
    -  ``CN`` is the common name on the certificate. This should be the IP address or FQDN of the Wazuh manager. This field is not optional.
    -  ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. It should be included to allow the enrollment of the Wazuh agents with a SAN certificate.
    -  ``DNS.1`` and ``DNS.2`` refer to the additional identities that the certificate should be valid for. In this case, the Wazuh manager DNS names are wazuh and wazuh.com.
+   -  ``IP.1`` is the IP address of the Wazuh manager. If ``<WAZUH_MANAGER_ADDRESS>`` is an FQDN, replace this line with ``DNS.3 = <WAZUH_MANAGER_ADDRESS>``.
 
 #. Create a certificate signing request (CSR) on the Wazuh manager with the following command. The CSR will be used to request a digital certificate from a Certificate Authority (CA):
 
@@ -237,7 +238,7 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
           <ssl>
             <certificate_authorities>/<PATH_TO>/rootCA.pem</certificate_authorities>
@@ -254,7 +255,7 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
             <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
@@ -298,7 +299,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
           <ssl>
             <certificate_authorities>C:\<PATH_TO>\rootCA.pem</certificate_authorities>
@@ -315,7 +316,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
             <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
@@ -365,7 +366,7 @@ Follow the steps below to enroll a macOS endpoint by using certificates to verif
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
           <ssl>
             <certificate_authorities>/<PATH_TO>/rootCA.pem</certificate_authorities>
@@ -382,7 +383,7 @@ Follow the steps below to enroll a macOS endpoint by using certificates to verif
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
             <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>

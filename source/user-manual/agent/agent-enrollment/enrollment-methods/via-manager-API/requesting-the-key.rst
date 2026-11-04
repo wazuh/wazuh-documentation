@@ -42,11 +42,11 @@ The following sections show how to request the Wazuh agent key on different oper
 Linux/Unix and macOS
 --------------------
 
-#. Generate a JSON Web Token (JWT) to authenticate to the Wazuh manager API. Replace ``<USER>`` and ``<PASSWORD>`` with the Wazuh manager API credentials, and ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
+#. Generate a JSON Web Token (JWT) to authenticate to the Wazuh manager API. Replace ``<USER>`` and ``<PASSWORD>`` with the Wazuh manager API credentials, and ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
 
    .. code-block:: console
 
-      # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+      # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
 
    Confirm that the command generated the token successfully:
 
@@ -69,7 +69,7 @@ Linux/Unix and macOS
 
    .. code-block:: console
 
-      # curl -k -X POST -d '{"name":"<WAZUH_AGENT_NAME>"}' "https://<WAZUH_MANAGER_IP>:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN"
+      # curl -k -X POST -d '{"name":"<WAZUH_AGENT_NAME>"}' "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN"
 
    The output includes the client key and agent ID:
 
@@ -123,11 +123,11 @@ Follow these steps to send a Wazuh agent enrollment request from a Windows endpo
 
       > $base64AuthInfo=[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "<WAZUH_MANAGER_API_USERNAME>", "<WAZUH_MANAGER_API_PASSWORD>")))
 
-#. Request a JSON Web Token (JWT). Replace ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
+#. Request a JSON Web Token (JWT). Replace ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
 
    .. code-block:: powershell
 
-      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate | Select-Object -Expand Content
+      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate | Select-Object -Expand Content
 
    Output
 
@@ -156,11 +156,11 @@ Follow these steps to send a Wazuh agent enrollment request from a Windows endpo
 
    These environment variables will be used in subsequent requests made to the Wazuh manager.
 
-#. Request the client key and agent ID. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager.
+#. Request the client key and agent ID. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager.
 
    .. code-block:: powershell
 
-      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Bearer {0}" -f $TOKEN)} -Method POST -ContentType "application/json" -Uri https://<WAZUH_MANAGER_IP>:55000/agents -Body $AgentName
+      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Bearer {0}" -f $TOKEN)} -Method POST -ContentType "application/json" -Uri https://<WAZUH_MANAGER_ADDRESS>:55000/agents -Body $AgentName
 
    The output looks like this:
 

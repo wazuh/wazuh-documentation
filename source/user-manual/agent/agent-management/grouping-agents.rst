@@ -122,11 +122,11 @@ Using the Wazuh manager API to create and manage groups programmatically is effe
 
    .. code-block:: console
 
-      # curl -k -X POST "https://<WAZUH_MANAGER_IP>:55000/groups?pretty=true" -H "Content-Type: application/json" -d '{"group_id": "Linux"}' -H  "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true')"
+      # curl -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/groups?pretty=true" -H "Content-Type: application/json" -d '{"group_id": "Linux"}' -H  "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true')"
 
    Replace:
 
-   -  The ``<WAZUH_MANAGER_IP>`` variable with the IP address of your Wazuh manager. In case you have a distributed deployment, use the IP address of the master node.
+   -  The ``<WAZUH_MANAGER_ADDRESS>`` variable with the IP address or FQDN of your Wazuh manager. In case you have a distributed deployment, use the address of the master node.
    -  The ``<WAZUH_MANAGER_API_USER>`` variable with your Wazuh manager API username.
    -  The ``<WAZUH_MANAGER_API_PASSWORD>`` variable with the password of your Wazuh manager API user.
 
@@ -163,7 +163,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       .. code-block:: console
 
-         # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/016/group/dbms?pretty=true" -H "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true')"
+         # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/016/group/dbms?pretty=true" -H "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true')"
 
       Output
 
@@ -203,7 +203,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
    .. code-block:: console
 
-      # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/groups/dbms/agents?pretty=true&select=id,name" -H "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true')"
+      # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/groups/dbms/agents?pretty=true&select=id,name" -H "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true')"
 
    Output
 
@@ -278,7 +278,7 @@ In this example, agent *012* has been added to the *webserver* and *apache* grou
 
 .. code-block:: console
 
-   # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/012/group/webserver?pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/012/group/webserver?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 Output
 
@@ -300,7 +300,7 @@ Output
 
 .. code-block:: console
 
-   # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/012/group/apache?pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/012/group/apache?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 Output
 
@@ -324,7 +324,7 @@ Following this, we can query for groups to which a Wazuh agent belongs using the
 
 .. code-block:: console
 
-   # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents?pretty=true&agents_list=012&select=group" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?pretty=true&agents_list=012&select=group" -H  "Authorization: Bearer $TOKEN"
 
 Output
 
