@@ -6,9 +6,9 @@
 Request the client key
 ======================
 
-You can obtain the Wazuh agent key from the Wazuh dashboard or by sending a request to the Wazuh manager API. The default API port is 55000/TCP.
+You can obtain the client key from the Wazuh dashboard or by sending a request to the Wazuh manager API. The default API port is 55000/TCP.
 
-To obtain the Wazuh agent key from the Wazuh dashboard, follow these steps:
+To obtain the client key from the Wazuh dashboard, follow these steps:
 
 #. On the Wazuh dashboard, click the upper-left menu icon, then go to **Server management** > **Dev Tools.**
 
@@ -26,9 +26,9 @@ To obtain the Wazuh agent key from the Wazuh dashboard, follow these steps:
       :align: center
       :width: 80%
 
-Alternatively, request the Wazuh agent key from any endpoint that has connectivity to the Wazuh manager API. The endpoint that sends the enrollment request must reach the Wazuh manager on the configured API port.
+Alternatively, request the client key from any endpoint that has connectivity to the Wazuh manager API. The endpoint that sends the enrollment request must reach the Wazuh manager on the configured API port.
 
-The following sections show how to request the Wazuh agent key on different operating systems:
+The following sections show how to request the client key on different operating systems:
 
 .. contents::
    :local:

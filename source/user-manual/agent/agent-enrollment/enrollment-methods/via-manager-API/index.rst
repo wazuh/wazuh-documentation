@@ -14,8 +14,8 @@ How it works
 The Wazuh agent enrollment flow through the API works as follows:
 
 #. Send an API request with Wazuh manager API credentials to generate an authorization token in JSON Web Token (JWT) format. You can send this request from any authorized endpoint.
-#. Send an API request with the authorization token to the Wazuh manager API. This request enrolls the Wazuh agent and returns the agent key.
-#. Import the agent key on the Wazuh agent endpoint.
+#. Send an API request with the authorization token to the Wazuh manager API. This request enrolls the Wazuh agent and returns the client key.
+#. Import the client key on the Wazuh agent endpoint.
 #. Configure the Wazuh manager IP address or fully qualified domain name (FQDN) on the Wazuh agent.
 #. Restart the Wazuh agent to connect it to the Wazuh manager.
 
