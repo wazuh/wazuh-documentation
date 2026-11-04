@@ -37,6 +37,7 @@ Each release of the Wazuh Docker repository sets its image tags in its own ``sin
 To take the files of the release you upgrade to, restore the Compose files you edited, including ``wazuh-agent/docker-compose.yml``, which holds the enrollment token. Then check out the release in your clone. From ``wazuh-docker/single-node/``, run the following commands, and replace ``<RELEASE_TAG>`` with the tag of the release, for example, ``v5.0.0``. For a multi-node deployment, go back to ``../multi-node/`` instead:
 
 .. code-block:: console
+   :emphasize-lines: 6
 
    # git checkout docker-compose.yml
    # cd ../wazuh-agent/
