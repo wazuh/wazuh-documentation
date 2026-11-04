@@ -174,6 +174,8 @@ Installing the Wazuh dashboard
 
             # dnf -y install wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
+   Release candidate packages carry the version of the final release, ``|WAZUH_CURRENT|-|WAZUH_DASHBOARD_PKG_REV|``. Only their file names show the RC stage, for example ``wazuh-dashboard_|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|_|WAZUH_DASHBOARD_x64_DEB|.deb``, so ``dpkg -l`` and ``rpm -q`` show ``|WAZUH_CURRENT|-|WAZUH_DASHBOARD_PKG_REV|``.
+
 .. _wazuh_dashboard_configuring:
 
 Configuring the Wazuh dashboard
