@@ -48,7 +48,10 @@ The complete connection target: the Wazuh manager's address, optionally a port, 
 | **Required**       | Yes (host is the only mandatory part)                                                           |
 +--------------------+-------------------------------------------------------------------------------------------------+
 | **Allowed values** | [ "``https://``" ] host [ ":" port ] [ "/" [ prefix ] ] - host is an IPv4 address, hostname, or |
-|                    | bracketed IPv6 literal. Port defaults to 1517.                                                  |
+|                    | bracketed IPv6 literal. Port defaults to 1517. Without a slash, the prefix is                   |
+|                    | ``wazuh-manager``, which matches the default ``<global_prefix>`` of the Wazuh manager. A        |
+|                    | trailing slash with nothing after it means no prefix, for a Wazuh manager whose                 |
+|                    | ``<global_prefix>`` is /.                                                                       |
 +--------------------+-------------------------------------------------------------------------------------------------+
 | **Example**        | ``192.168.1.100``, ``manager.example.com:8443/gateway``, ``[2001:db8::1]:1517``                 |
 +--------------------+-------------------------------------------------------------------------------------------------+
@@ -81,10 +84,12 @@ Sub options
 |                             | ``certificate``.                                                      |                                                                 |                                                                      |
 +-----------------------------+-----------------------------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+
 | ``certificate_authorities`` | CA bundle used to verify the manager's certificate - a flat path      | None                                                            | Path to a PEM-encoded CA bundle file, readable by the agent          |
-|                             | value, not a container. Required when ``verification_mode`` is        |                                                                 |                                                                      |
-|                             | ``full`` or ``certificate`` (agent fails closed without it). Must NOT |                                                                 |                                                                      |
-|                             | be set when ``verification_mode`` is ``system``. Ignored (with a      |                                                                 |                                                                      |
-|                             | warning if unreadable) when ``verification_mode`` is ``none``.        |                                                                 |                                                                      |
+|                             | value, not a container. Optional. Without it, ``full`` and            |                                                                 |                                                                      |
+|                             | ``certificate`` use the trust anchor, ``etc/certs/root-ca.pem``.      |                                                                 |                                                                      |
+|                             | Required only when there is no trust anchor: the agent then fails     |                                                                 |                                                                      |
+|                             | closed with error 4118. Must NOT be set when ``verification_mode`` is |                                                                 |                                                                      |
+|                             | ``system``. Ignored (with a warning if unreadable) when               |                                                                 |                                                                      |
+|                             | ``verification_mode`` is ``none``.                                    |                                                                 |                                                                      |
 +-----------------------------+-----------------------------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+
 | ``verification_mode``       | How strictly the agent verifies the manager's TLS certificate.        | Depends on the trust material available: ``certificate`` when   | ``none`` (no verification - insecure, testing only). ``certificate`` |
 |                             |                                                                       | ``certificate_authorities`` is set; otherwise ``full`` when the | (verify against CA, no hostname check) ``full`` (verify + hostname)  |
@@ -257,9 +262,6 @@ Sample configuration
      <manager>
        <endpoint>192.168.1.100:1517</endpoint>
      </manager>
-     <ssl>
-       <verification_mode>none</verification_mode>
-     </ssl>
      <config-profile>webserver, debian8</config-profile>
      <notify_time>60</notify_time>
      <auto_restart>yes</auto_restart>

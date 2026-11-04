@@ -34,7 +34,7 @@ Options
 server
 ^^^^^^
 
-The ``<server>`` subsection configures the connection parameters for a Wazuh manager. Define multiple ``<server>`` subsections to configure more than one manager.
+The ``<server>`` subsection configures the connection parameters for a Wazuh manager. Wazuh 4.x agents can define several ``<server>`` subsections to configure more than one manager. A Wazuh 5.0 agent reads only the address (``<address>`` or ``<endpoint>``) of the last ``<server>`` subsection, with no failover, and ignores ``port``, ``interface_index``, ``max_retries`` and ``retry_interval``.
 
 Server subsection options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -365,7 +365,8 @@ Specifies the private key associated with the agent certificate.
 +----------------------+-----------------------------------+
 | **Default value**    | NULL                              |
 +----------------------+-----------------------------------+
-| **Allowed values**   | Path to a valid agent key file.   |
+| **Allowed values**   | Path to the agent's TLS private   |
+|                      | key file.                         |
 +----------------------+-----------------------------------+
 
 authorization_pass_path

@@ -8,6 +8,8 @@
 wodle name="aws-s3"
 ======================
 
+Prerequisite: the Wazuh module for AWS runs on a Wazuh agent and needs Python 3 and the Python packages listed in :doc:`Install dependencies </cloud-security/amazon/services/prerequisites/dependencies>`.
+
 .. topic:: XML section name
 
    .. code-block:: xml
@@ -23,6 +25,7 @@ Options
 The options available to use inside the aws-s3 section are the following:
 
 - `disabled`_
+- `skip_on_error`_
 - `run_on_start`_
 - `interval`_
 - `day`_
@@ -39,7 +42,7 @@ Disables the AWS-S3 wodle.
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
-| **Mandatory**        | yes       |
+| **Mandatory**        | no        |
 +----------------------+-----------+
 
 skip_on_error

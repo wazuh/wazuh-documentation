@@ -8,7 +8,7 @@
 sca
 ===
 
-This section covers the configuration for the `Security Configuration Assessment <https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html#manual-sec-config-assessment>`__ module.
+This section covers the configuration for the :doc:`Security Configuration Assessment </user-manual/capabilities/sec-config-assessment/index>` module.
 
 .. topic:: XML section name
 

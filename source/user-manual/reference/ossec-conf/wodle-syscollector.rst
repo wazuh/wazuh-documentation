@@ -15,7 +15,7 @@ wodle name="syscollector"
       <wodle name="syscollector">
       </wodle>
 
-Configuration options of the Syscollector wodle for `system inventory <https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/system-inventory/index.html>`__.
+Configuration options of the Syscollector wodle for :doc:`system inventory </user-manual/capabilities/system-inventory/index>`.
 
 Options
 -------

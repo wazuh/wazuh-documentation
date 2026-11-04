@@ -8,6 +8,8 @@
 wodle name="azure-logs"
 ==========================
 
+Prerequisite: the Wazuh module for Azure runs on a Wazuh agent and needs Python 3 and the Python packages listed in the :ref:`Prerequisites of Monitoring Microsoft Azure platform and services <azure_platform_and_services_prerequisites>`.
+
 .. topic:: XML section name
 
    .. code-block:: xml
@@ -428,7 +430,7 @@ Example of graph configuration
        <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
        <request>
          <tag>microsoft-entra_id</tag>
-         <query>activities/audit?api-version=beta</query>
+         <query>auditLogs/directoryaudits</query>
          <time_offset>1d</time_offset>
        </request>
      </graph>
@@ -622,7 +624,7 @@ Example of all integration
        <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
        <request>
          <tag>microsoft-entra_id</tag>
-         <query>activities/audit?api-version=beta</query>
+         <query>auditLogs/directoryaudits</query>
          <timeout>7200</timeout>
          <time_offset>1d</time_offset>
        </request>

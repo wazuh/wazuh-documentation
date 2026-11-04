@@ -256,7 +256,7 @@ This is a sample JSON object from the log file:
      }
    }
 
-The additional fields configured above would appear in the resulting event as below:
+The additional fields configured above would appear in the resulting event as below. An event that no decoder matches is stored in the Wazuh indexer only when unclassified events storage is enabled. See :ref:`Wazuh indexer indices <wazuh_indexer_indices_enabling_unclassified_events_storage>`.
 
 The command output looks similar to this:
 
@@ -368,7 +368,7 @@ Default value: n/a. Allowed values are listed below:
 +--------------------+----------------------------------------------------------------------------------------------+
 
 .. note::
-   Only one configuration block with ``log_format`` set as ``macos`` is allowed. If more blocks are added, the last one will be used. The ``eventchannel`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log. Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their ``/var/ossec/etc/internal_options.conf`` or ``/var/ossec/etc/local_internal_options.conf`` file. This is a security precaution to prevent the Wazuh manager from running arbitrary commands on agents in their root security context. When ``command`` or ``full_command`` log sources are distributed through centralized configuration in ``agent.conf``, agents ignore them unless ``logcollector.remote_commands=1`` is enabled in ``/var/ossec/etc/local_internal_options.conf``. This security control prevents the Wazuh manager from remotely causing agents to execute commands. It does not apply to ``command`` sources configured directly in the agent's local ``ossec.conf``. The same option controls sockets and socket targets received through ``agent.conf``. See :ref:`target <ossec_localfile_target>` and :doc:`socket <socket>`.
+   Only one configuration block with ``log_format`` set as ``macos`` is allowed. If more blocks are added, the last one will be used. The ``eventchannel`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log. When ``command`` or ``full_command`` log sources are distributed through centralized configuration in ``agent.conf``, agents ignore them unless ``logcollector.remote_commands=1`` is enabled in ``/var/ossec/etc/local_internal_options.conf``. This security control prevents the Wazuh manager from remotely causing agents to execute commands. It does not apply to ``command`` sources configured directly in the agent's local ``ossec.conf``. The same option controls sockets and socket targets received through ``agent.conf``. See :ref:`target <ossec_localfile_target>` and :doc:`socket <socket>`.
 
 Sample of multi-line log message in original log file:
 
@@ -700,7 +700,7 @@ When multiple journald blocks are present:
 Sample configuration
 ---------------------
 
-Linux configuration:
+Linux configuration. The ``<socket>`` block defines ``custom_socket``, the target that the last ``<localfile>`` block uses. See :doc:`socket <socket>` for its options:
 
 .. code-block:: xml
 
@@ -715,6 +715,13 @@ Linux configuration:
      <command>df -P</command>
      <frequency>360</frequency>
    </localfile>
+   <!-- Socket used by the custom target below -->
+   <socket>
+     <name>custom_socket</name>
+     <location>/var/run/custom.sock</location>
+     <mode>tcp</mode>
+     <prefix>custom_syslog: </prefix>
+   </socket>
    <!-- To use a custom target or format -->
    <localfile>
      <log_format>syslog</log_format>

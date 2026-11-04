@@ -1153,7 +1153,11 @@ Wazuh agent - Linux/Unix
      <!-- File types to ignore -->
      <ignore type="sregex">.log$|.swp$</ignore>
      <!-- Check the file, but never compute the diff -->
-     <nodiff>/etc/ssl/private.key</nodiff>
+     <nodiff type="sregex">^/etc/ssl/private/|^/etc/pki/tls/private/</nodiff>
+     <nodiff>/etc/shadow</nodiff>
+     <nodiff>/etc/shadow-</nodiff>
+     <nodiff>/etc/gshadow</nodiff>
+     <nodiff>/etc/gshadow-</nodiff>
      <skip_nfs>yes</skip_nfs>
      <skip_dev>yes</skip_dev>
      <skip_proc>yes</skip_proc>
@@ -1166,8 +1170,11 @@ Wazuh agent - Linux/Unix
      <synchronization>
        <enabled>yes</enabled>
        <interval>5m</interval>
+       <integrity_interval>24h</integrity_interval>
      </synchronization>
    </syscheck>
+
+This is the generic Linux/Unix template. On many distributions, such as Red Hat Enterprise Linux, Amazon Linux, Debian 12 and later, and Ubuntu 20.04 and later, the second directories line is ``<directories>/boot</directories>``.
 
 Wazuh agent - Windows
 

@@ -94,14 +94,14 @@ To share the key across the cluster, read it on the master node:
 
 .. code-block:: console
 
-   $ sed -n 's|.*<key>\(.*\)</key>.*|\1|p' /etc/wazuh-manager/wazuh-manager.conf
+   # sed -n '/<cluster>/,/<\/cluster>/s|.*<key>\(.*\)</key>.*|\1|p' /etc/wazuh-manager/wazuh-manager.conf
 
-Then set that value on each worker node and restart the manager:
+Then set that value on each worker node and restart the manager. Both ``sed`` commands read and change only the ``<key>`` inside ``<cluster>``. The file has two other ``<key>`` elements, in ``<remote><https>`` and ``<indexer><ssl>``:
 
 .. code-block:: console
 
-   $ sudo sed -i 's|<key>.*</key>|<key>PASTE_MASTER_KEY_HERE</key>|' /etc/wazuh-manager/wazuh-manager.conf
-   $ sudo systemctl restart wazuh-manager
+   # sed -i '/<cluster>/,/<\/cluster>/s|<key>.*</key>|<key>PASTE_MASTER_KEY_HERE</key>|' /etc/wazuh-manager/wazuh-manager.conf
+   # systemctl restart wazuh-manager
 
 Treat the cluster key as a credential. Do not include it in scripts, source control, documentation examples, or command history.
 
@@ -212,13 +212,13 @@ After editing ``/etc/wazuh-manager/wazuh-manager.conf`` on each node, restart th
 
 .. code-block:: console
 
-   $ systemctl restart wazuh-manager
+   # systemctl restart wazuh-manager
 
 Verify cluster status:
 
 .. code-block:: console
 
-   $ /var/wazuh-manager/bin/cluster_control -l
+   # /var/wazuh-manager/bin/cluster_control -l
 
 The command output looks similar to this:
 
