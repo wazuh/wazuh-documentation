@@ -131,7 +131,7 @@ macOS         ``/Library/Ossec/etc/client.keys``
 Windows       ``"C:\Program Files (x86)\ossec-agent\client.keys"``
 ============= ====================================================
 
-Also, verify that each agent has a unique agent key stored in the Wazuh manager ``/etc/wazuh-manager/client.keys`` file. Duplicate keys can arise if you previously deleted agents with the highest IDs or copied the ``client.keys`` file between agents.
+Also, verify that each agent has a unique client key stored in the Wazuh manager ``/etc/wazuh-manager/client.keys`` file. Duplicate keys can arise if you previously deleted agents with the highest IDs or copied the ``client.keys`` file between agents.
 
 Invalid agent name for enrollment
 ---------------------------------

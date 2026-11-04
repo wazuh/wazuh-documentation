@@ -120,7 +120,7 @@ Perform the following steps to recreate the Wazuh manager configuration in the W
 
 #. Review and update any settings affected by changes in Wazuh 5.x, including renamed file paths and manager-side capabilities.
 
-#. Validate the recreated configuration. The command lists every option that Wazuh 5.x doesn't support, with its location in the file. Fix each reported error before you start the Wazuh manager:
+#. Validate the recreated configuration. The command reports the first option that Wazuh 5.x doesn't support, with its location in the file. Fix it and run the command again until it reports no errors before you start the Wazuh manager:
 
    .. code-block:: console
 

@@ -30,7 +30,7 @@ Using the Wazuh dashboard
    -  To upgrade a single Wazuh agent, select **Upgrade** in the **Actions** column of that Wazuh agent, then confirm with **Upgrade**. If the Wazuh manager can't detect the package type, choose it in **Package type**. This action is only available for active Wazuh agents that are outdated.
    -  To upgrade several Wazuh agents, select them in the table, then click **More** > **Upgrade agents** and confirm with **Upgrade**.
 
-#. Review the **Upgrade status**. It lists the Wazuh agents for which an upgrade task was created and any errors, with a suggested remediation.
+#. Review the **Upgrade status**. **Agents queued for upgrade** lists the Wazuh agents for which an upgrade task was created. **Agents not queued for upgrade** lists the Wazuh agents that failed, with the error code and message. For example, error 1822 means that the WPK repository isn't reachable. When you upgrade a single Wazuh agent, the Wazuh dashboard shows a notification instead: "Upgrade request sent successfully", or "Could not upgrade agent" with the error.
 
 #. While the upgrade runs, the **Version** column shows **Upgrading**. The list refreshes once each Wazuh agent reports its new version.
 
