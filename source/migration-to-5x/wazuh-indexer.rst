@@ -81,7 +81,7 @@ Perform the following steps on every Wazuh indexer node of the new Wazuh 5.x clu
    | ``plugins.security.system_indices.indices``                                                                                                                                                                  | The Wazuh 5.x list drops the indices of the removed plugins and adds ``.wazuh-internal-state``. Keep the Wazuh 5.x values.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-#. Review any custom JVM and logging configuration before you apply it to the Wazuh 5.x deployment. Copy only individual non-default lines into the Wazuh 5.x ``jvm.options`` and ``log4j2.properties`` files instead of replacing them. The Wazuh 5.x package sets a 1 GB JVM heap. Before you start the service, set ``-Xms`` and ``-Xmx`` to the same value: half of the RAM when the Wazuh indexer runs alone on the host, or a quarter when the Wazuh manager or the Wazuh dashboard runs on the same host.
+#. Review any custom JVM and logging configuration before you apply it to the Wazuh 5.x deployment. Copy only individual non-default lines into the Wazuh 5.x ``jvm.options`` and ``log4j2.properties`` files instead of replacing them.
 
 #. Edit the security configuration files as described in the :ref:`Wazuh indexer security configuration <migration_wazuh_indexer_security_configuration>` section. Apply the configuration after you start the Wazuh indexer service on every node, as described in :ref:`Apply the security configuration <migration_apply_security_configuration>`.
 
@@ -102,7 +102,7 @@ Perform the following steps on every Wazuh indexer node of the new Wazuh 5.x clu
 
    -  ``<USERNAME>``: is the username of a Wazuh indexer user with permissions to query the cluster.
    -  ``<PASSWORD>``: is the password of the specified Wazuh indexer user.
-   -  ``<WAZUH_INDEXER_IP>``: is the IP address or hostname of a Wazuh indexer node in the Wazuh 5.x cluster.
+   -  ``<WAZUH_INDEXER_IP>``: is the IP address or hostname of a Wazuh indexer node in the Wazuh 5.x cluster. In an all-in-one deployment, use ``127.0.0.1``.
 
    .. note::
 
@@ -340,7 +340,7 @@ On the Wazuh 4.x dashboard, perform the following steps:
 
 #. Select the repository you created earlier to store the snapshots.
 
-#. Ensure **Include global state** is not selected in the **Advanced options** to prevent the snapshot from including cluster-level configuration.
+#. Ensure **Include cluster state in snapshots** is not selected in the **Advanced options** to prevent the snapshot from including cluster-level configuration.
 
 #. Click **Add** to create a new snapshot. The snapshot files are saved in the repository location ``/mnt/snapshots``.
 
@@ -422,7 +422,7 @@ Perform the following steps on the Wazuh 5.x deployment.
       :align: center
       :width: 80%
 
-#. Create an index pattern to retrieve the indices' data. On the Wazuh dashboard, navigate to **Dashboards management** > **Index patterns**, then click on **Create index pattern**.
+#. Create an index pattern to retrieve the indices' data. On the Wazuh dashboard, navigate to **Dashboards Management** > **Index patterns**, then click **Create index pattern**.
 
    .. thumbnail:: /images/migration-to-5x/create-index-pattern.png
       :title: Create an index pattern
@@ -430,7 +430,7 @@ Perform the following steps on the Wazuh 5.x deployment.
       :align: center
       :width: 80%
 
-#. Set the **Index pattern name**, then click on **Next step**. In the image below, we use the index pattern name ``restored_wazuh*``.
+#. Set the **Index pattern name**, then click **Next step**. In the image below, the index pattern name is ``restored_wazuh*``. Enter ``restored_wazuh`` as the name, because the dashboard adds the trailing ``*`` itself.
 
    .. thumbnail:: /images/migration-to-5x/index-pattern-name.png
       :title: Set the index pattern name
