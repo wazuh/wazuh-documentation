@@ -31,6 +31,8 @@ After you fix the cause, clear the failed state and start the Wazuh dashboard:
    # systemctl reset-failed wazuh-dashboard
    # systemctl start wazuh-dashboard
 
+.. _dashboard_troubleshooting_manager_api_certificate:
+
 Wazuh manager API certificate verification error
 ------------------------------------------------
 
@@ -86,12 +88,12 @@ This issue means that your Wazuh manager API might be unavailable. Check the sta
 
    # systemctl status wazuh-manager
 
-If the Wazuh manager API is running, run these commands on the Wazuh dashboard host. On an all-in-one deployment from the installation assistant, use ``localhost`` as ``<WAZUH_MANAGER_IP_ADDRESS>``, because the Wazuh manager API listens on ``127.0.0.1`` and ``::1`` only. Use the wazuh user and the ``WAZUH_MANAGER_API_PASSWORD`` value in ``/etc/wazuh-manager/export/credentials.env``:
+If the Wazuh manager API is running, run these commands on the Wazuh dashboard host. On an all-in-one deployment from the installation assistant, use ``localhost`` as ``<WAZUH_MANAGER_IP_ADDRESS>``, because the Wazuh manager API listens on ``127.0.0.1`` and ``::1`` only. Use the wazuh user and the ``WAZUH_MANAGER_API_PASSWORD`` value in ``/etc/wazuh-manager/export/credentials.env``: If a command fails with a certificate error, see :ref:`dashboard_troubleshooting_manager_api_certificate`.
 
 .. code-block:: console
 
-   # TOKEN=$(curl -u <WAZUH_API_USERNAME>:<WAZUH_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
-   # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
+   # TOKEN=$(curl -u <WAZUH_API_USERNAME>:<WAZUH_API_PASSWORD> --cacert /etc/wazuh-dashboard/certs/manager-ca.pem -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+   # curl --cacert /etc/wazuh-dashboard/certs/manager-ca.pem -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
 
 The command returns output similar to the following example:
 
@@ -133,47 +135,50 @@ The first step is to check if there are alerts in the Wazuh indexer. On an all-i
 
    # curl https://<WAZUH_INDEXER_IP>:9200/_cat/indices/wazuh* -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -k
 
+The command output looks similar to this:
+
 .. code-block:: none
    :class: output
 
-   green open .ds-wazuh-events-v5-system-activity-000001     ZWfhtYJ8QyC5-zLshj-ccA 3 0 370001   0   157mb   157mb
+   green open .ds-wazuh-events-v5-system-activity-000001     ZWfhtYJ8QyC5-zLshj-ccA 1 0 370001   0   157mb   157mb
    green open wazuh-states-inventory-users                   XLY62qJ9TfmRJxNADUofpw 1 0     44   0  59.5kb  59.5kb
-   green open .ds-wazuh-findings-v5-unclassified-000001      8Cy3yyI2RiWYxluU7gzsgA 3 0      0   0    624b    624b
-   green open .ds-wazuh-findings-v5-system-activity-000001   OLxn2t3KQqS3m653-CJjZA 3 0  81628   0  67.7mb  67.7mb
+   green open .ds-wazuh-findings-v5-unclassified-000001      8Cy3yyI2RiWYxluU7gzsgA 1 0      0   0    624b    624b
+   green open .ds-wazuh-findings-v5-system-activity-000001   OLxn2t3KQqS3m653-CJjZA 1 0  81628   0  67.7mb  67.7mb
    green open wazuh-states-inventory-packages                JQ7toQOTTKSWaco9-WYsEw 1 0    780   5 414.8kb 414.8kb
-   green open .ds-wazuh-active-responses-000001              bN_PvMEkQUifr4RYVsszYg 3 0      0   0    624b    624b
+   green open .ds-wazuh-active-responses-000001              bN_PvMEkQUifr4RYVsszYg 1 0      0   0    624b    624b
    green open wazuh-states-inventory-hardware                FwSUHTA7QNmfvOW00AmtBw 1 0      2   0  25.7kb  25.7kb
    green open wazuh-states-inventory-browser-extensions      hZs30G4jTo6FTvbfFlUIkQ 1 0     29   0  88.4kb  88.4kb
    green open wazuh-states-inventory-protocols               E1sT9505Q4C63QKm_9CmGw 1 0     30   2  48.9kb  48.9kb
    green open wazuh-states-inventory-services                ZvyQheflQcqFTPvKbjbHBA 1 0    928  66 802.2kb 802.2kb
    green open wazuh-states-fim-registry-keys                 iUpYlrmtRQam1xBy_X74QA 1 0   9308 374   4.1mb   4.1mb
-   green open .ds-wazuh-events-v5-security-000001            oykATY1YRsaxi2mi_s1BxQ 3 0    561   0   1.9mb   1.9mb
-   green open .ds-wazuh-findings-v5-security-000001          BmagEEMYQbSK9_Qd5zvtiw 3 0    484   0   2.5mb   2.5mb
+   green open .ds-wazuh-events-v5-security-000001            oykATY1YRsaxi2mi_s1BxQ 1 0    561   0   1.9mb   1.9mb
+   green open .ds-wazuh-findings-v5-security-000001          BmagEEMYQbSK9_Qd5zvtiw 1 0    484   0   2.5mb   2.5mb
    green open wazuh-states-sca                               XyzKW9PFQyefxBFfxQiOhQ 1 0    689   0   1.4mb   1.4mb
    green open wazuh-states-inventory-processes               6HiCY9lZSZGrgrKNX5LFJA 1 0    500   7 740.1kb 740.1kb
-   green open .ds-wazuh-metrics-comms-000001                 FrBBaRJbTdmjYVGrmNx17w 1 0   1734   0 530.9kb 530.9kb
-   green open .ds-wazuh-findings-v5-access-management-000001 -GRLurdjQ0G3rcd-GoCx4w 3 0      0   0    624b    624b
-   green open .ds-wazuh-events-raw-v5-000001                 UxSkDyaoTFSpN05_OO-26Q 3 0      0   0    624b    624b
+   green open .ds-wazuh-metrics-comms-v4-000001              FrBBaRJbTdmjYVGrmNx17w 1 0   1734   0 530.9kb 530.9kb
+   green open .ds-wazuh-metrics-normalization-000001         WTp5iN9zSZi2OXZqbjjyNA 1 0     24   0  10.6kb  10.6kb
+   green open .ds-wazuh-findings-v5-access-management-000001 -GRLurdjQ0G3rcd-GoCx4w 1 0      0   0    624b    624b
+   green open .ds-wazuh-events-raw-v5-000001                 UxSkDyaoTFSpN05_OO-26Q 1 0      0   0    624b    624b
    green open wazuh-states-fim-files                         jBQ_0Ze3TWqitKUE35AsAg 1 0   3152   6     2mb     2mb
    green open wazuh-states-inventory-interfaces              0qeNgaiVR9yeGv-eJp8wcg 1 0     15   0  51.6kb  51.6kb
-   green open .ds-wazuh-findings-v5-other-000001             b_0Z8YtuSGaEpxr2IocHMA 3 0      0   0    624b    624b
-   green open .ds-wazuh-events-v5-unclassified-000001        kgEY22_QSGew6eeXiyZwvQ 3 0      0   0    624b    624b
+   green open .ds-wazuh-findings-v5-other-000001             b_0Z8YtuSGaEpxr2IocHMA 1 0      0   0    624b    624b
+   green open .ds-wazuh-events-v5-unclassified-000001        kgEY22_QSGew6eeXiyZwvQ 1 0      0   0    624b    624b
    green open wazuh-states-inventory-hotfixes                56y4q9MkTwu8O1PH-nOf6w 1 0     15   0  14.7kb  14.7kb
-   green open .ds-wazuh-events-v5-network-activity-000001    K_n5VkgHSLmhHoUUAZhc-g 3 0      0   0    624b    624b
+   green open .ds-wazuh-events-v5-network-activity-000001    K_n5VkgHSLmhHoUUAZhc-g 1 0      0   0    624b    624b
    green open wazuh-states-inventory-ports                   h1W-2b7BTtCFQEY3yYZhxw 1 0    304 188 304.9kb 304.9kb
    green open wazuh-states-inventory-system                  rDruR8D4Q6mBvZvz0aaQVQ 1 0      2   0  30.6kb  30.6kb
-   green open .ds-wazuh-events-v5-cloud-services-000001      RRd90sPrTo-PIrKFPmZRDw 3 0      0   0    624b    624b
+   green open .ds-wazuh-events-v5-cloud-services-000001      RRd90sPrTo-PIrKFPmZRDw 1 0      0   0    624b    624b
    green open wazuh-states-inventory-groups                  -gbLLrIHSMmAz2Y8ukdIWA 1 0     76   0  49.5kb  49.5kb
    green open wazuh-states-inventory-networks                Vi87X-mgTcWFcgqWRI2qcg 1 0     34   4  65.5kb  65.5kb
    green open wazuh-states-fim-registry-values               TG4J3OilTMS43dfTTfLxug 1 0  27862 487  14.2mb  14.2mb
-   green open .ds-wazuh-events-v5-applications-000001        sinevCgKRVmSB6HMoHFKmw 3 0      0   0    624b    624b
-   green open .ds-wazuh-findings-v5-applications-000001      zLEJ0YGSQ1WsZYRHs6uHOQ 3 0      0   0    624b    624b
+   green open .ds-wazuh-events-v5-applications-000001        sinevCgKRVmSB6HMoHFKmw 1 0      0   0    624b    624b
+   green open .ds-wazuh-findings-v5-applications-000001      zLEJ0YGSQ1WsZYRHs6uHOQ 1 0      0   0    624b    624b
    green open wazuh-states-vulnerabilities                   8ip5i_PSRp6BTCbpF2HMTQ 1 0   7069   0 901.8kb 901.8kb
-   green open .ds-wazuh-events-v5-access-management-000001   ahTRx3ZfSPGGSbxuAj9y1Q 3 0      0   0    624b    624b
+   green open .ds-wazuh-events-v5-access-management-000001   ahTRx3ZfSPGGSbxuAj9y1Q 1 0      0   0    624b    624b
    green open .ds-wazuh-metrics-agents-000001                BS_gJjzlS1K235I14qgl9g 1 0   2885   0   1.1mb   1.1mb
-   green open .ds-wazuh-findings-v5-cloud-services-000001    r1y3bGpBTDGsxgIUhe7ulQ 3 0      0   0    624b    624b
-   green open .ds-wazuh-events-v5-other-000001               RIN87mGdQlWYs6yMTHcx-g 3 0      0   0    624b    624b
-   green open .ds-wazuh-findings-v5-network-activity-000001  bqtm0coXQqWXBxKRjyFflA 3 0      0   0    624b    624b
+   green open .ds-wazuh-findings-v5-cloud-services-000001    r1y3bGpBTDGsxgIUhe7ulQ 1 0      0   0    624b    624b
+   green open .ds-wazuh-events-v5-other-000001               RIN87mGdQlWYs6yMTHcx-g 1 0      0   0    624b    624b
+   green open .ds-wazuh-findings-v5-network-activity-000001  bqtm0coXQqWXBxKRjyFflA 1 0      0   0    624b    624b
 
 The Wazuh indexer stores alerts in the ``.ds-wazuh-findings-v5-*`` indices, which exist from installation. If the seventh column, ``docs.count``, is 0 for each of them, the Wazuh indexer stores no alerts.
 
@@ -299,6 +304,11 @@ If you encounter the message *Application Not Found* when accessing the Wazuh da
 .. code-block:: yaml
 
    uiSettings.overrides.defaultRoute: /app/wz-home
+
+Send test message fails with a LOCKED error
+-------------------------------------------
+
+In the **Edit** form of a muted notification channel, **Send test message** fails with ``[status_exception] For input string: "LOCKED"``. On the channel page, **Actions** > **Send test message** is disabled. The default channels are muted after installation. Unmute the channel, then send the test message again.
 
 None of the above solutions are fixing my problem
 -------------------------------------------------

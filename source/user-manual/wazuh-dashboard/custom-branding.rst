@@ -22,6 +22,8 @@ This section of the documentation covers the configuration of the following cust
 Custom logos on the Wazuh dashboard
 -----------------------------------
 
+Each logo and favicon URL must end in ``.png``, ``.svg``, or ``.gif``, and the Wazuh dashboard must be able to download it from its host without a redirect. Otherwise, the Wazuh dashboard keeps the default logo and logs ``<SETTING> config is invalid. Using default branding.`` for a wrong extension, or ``<SETTING> URL was not found or invalid. Using default branding.`` for a failed download. To read these messages, run ``journalctl -u wazuh-dashboard | grep -i branding``.
+
 .. _branding_loading_logos:
 
 Loading logos

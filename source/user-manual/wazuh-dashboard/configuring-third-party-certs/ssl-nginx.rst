@@ -3,8 +3,8 @@
 .. meta::
    :description: Install and configure the Let’s Encrypt SSL certificate using NGINX on a Wazuh dashboard by following step-by-step instructions.
 
-Configuring SSL certificates on the Wazuh dashboard using NGINX
-===============================================================
+Configuring SSL certificates on the Wazuh dashboard with NGINX
+==============================================================
 
 NGINX is an open source software for web serving, reverse proxying, caching, load balancing, and media streaming. It provides improved performance optimization during SSL decryption, better utilization, and complete end-to-end encryption of the Wazuh dashboard server. NGINX can be installed directly on the endpoint hosting the Wazuh dashboard or on a separate endpoint outside of the Wazuh cluster. However, for this use case, NGINX is installed on the Wazuh dashboard node.
 
