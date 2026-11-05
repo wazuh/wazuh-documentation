@@ -105,7 +105,7 @@ These fields identify the users, hosts, processes, files, network connections, a
 Why it matters
 --------------
 
-These fields are only in findings. They describe the detection rule that matched an event, its severity, and its mapping to MITRE ATT&CK and compliance standards. Use them to prioritize and investigate findings.
+These fields describe the detection rule that matched an event, its severity, and its mapping to MITRE ATT&CK and compliance standards. Use them to prioritize and investigate findings. The ``wazuh.rule.*``, ``event.doc_id``, and ``event.index`` fields are only in findings. Events also have ``wazuh.threat.enrichments.*`` and ``wazuh.event.id``.
 
 +-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
 | Field                                                                                   | Use it to                                                                                           |

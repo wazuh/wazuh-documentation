@@ -239,7 +239,7 @@ def entry(content):
 
 
 def build_table(rows):
-    table = nodes.table(classes=['colwidths-given'])
+    table = nodes.table(classes=['colwidths-given', 'wcs-fields'])
     tgroup = nodes.tgroup(cols=len(COLUMNS))
     table += tgroup
     for width in WIDTHS:
@@ -267,6 +267,54 @@ def build_table(rows):
     return table
 
 
+def name_list(argument):
+    ''' Field set names separated by spaces or commas. '''
+    names = [name for name in re.split(r'[\s,]+', argument or '') if name]
+    if not names:
+        raise ValueError('expected one or more field set names')
+    return names
+
+
+def letter_range(argument):
+    ''' A range of first letters, such as a-m. '''
+    match = re.fullmatch(r'\s*([a-z])\s*-\s*([a-z])\s*', argument or '')
+    if not match or match.group(1) > match.group(2):
+        raise ValueError('expected a range of first letters, such as a-m')
+    return match.group(1), match.group(2)
+
+
+def prefix_groups(set_name, rows, split_above=120, merge_below=4):
+    ''' Splits the rows of one field set by name prefix: wazuh.agent.*, wazuh.rule.*,
+        and so on. A group above split_above fields is split one level deeper, and
+        groups below merge_below fields join the top-level group of the field set. '''
+    def prefix(field, depth):
+        parts = field.split('.')
+        return '.'.join(parts[:depth]) if len(parts) > depth else None
+    counts = {}
+    for row in rows:
+        key = prefix(row['Field'], 2)
+        if key:
+            counts[key] = counts.get(key, 0) + 1
+    groups = {}
+    for row in rows:
+        key = prefix(row['Field'], 2) or set_name
+        if counts.get(key, 0) > split_above:
+            key = prefix(row['Field'], 3) or key
+        groups.setdefault(key, []).append(row)
+    top = []
+    result = []
+    for key in sorted(groups):
+        if key != set_name and len(groups[key]) < merge_below:
+            top.extend(groups[key])
+        elif key == set_name:
+            top = groups[key] + top
+        else:
+            result.append((key, groups[key]))
+    if top:
+        result.insert(0, (set_name, top))
+    return result
+
+
 def module_choice(argument):
     if argument not in MODULES:
         raise ValueError('"%s" is not one of the WCS modules: %s' % (argument, ', '.join(MODULES)))
@@ -283,6 +331,18 @@ class WCSFieldTables(SphinxDirective):
     option_spec = {
         'single-table': directives.flag,
         'exclude': module_choice,
+        # Only these field sets, or all but these, or those whose name starts with
+        # a letter in the range. The options can be combined.
+        'field-sets': name_list,
+        'exclude-field-sets': name_list,
+        'letters': letter_range,
+        # Splits each field set into one section per name prefix.
+        'group-by-prefix': directives.flag,
+        # Each table starts collapsed under its heading (theme accordions).
+        'collapsible': directives.flag,
+        # A table of the field sets with their description and field counts,
+        # instead of the field tables.
+        'summary': directives.flag,
     }
 
     def make_section(self, title):
@@ -299,6 +359,56 @@ class WCSFieldTables(SphinxDirective):
         with open(path, newline='', encoding='utf-8') as csv_file:
             return list(csv.DictReader(csv_file))
 
+    def body(self, section, children):
+        ''' Adds the description and table of a section, inside a collapsible
+            container when the collapsible option is set. '''
+        if 'collapsible' in self.options:
+            container = nodes.container(classes=['accordion-section'])
+            container.extend(children)
+            section += container
+        else:
+            section.extend(children)
+
+    def select_sets(self, sets):
+        names = sorted(sets)
+        if 'field-sets' in self.options:
+            wanted = self.options['field-sets']
+            for name in wanted:
+                if name not in sets:
+                    logger.warning('The %s field set is not in the module', name, location=self.get_location())
+            names = [name for name in names if name in wanted]
+        if 'exclude-field-sets' in self.options:
+            names = [name for name in names if name not in self.options['exclude-field-sets']]
+        if 'letters' in self.options:
+            first, last = self.options['letters']
+            names = [name for name in names if first <= name[0] <= last]
+        return names
+
+    def summary_table(self, sets, names, describe):
+        table = nodes.table(classes=['colwidths-given', 'wcs-fields-summary'])
+        tgroup = nodes.tgroup(cols=4)
+        table += tgroup
+        for width in [20, 60, 10, 10]:
+            tgroup += nodes.colspec(colwidth=width)
+        head = nodes.thead()
+        head_row = nodes.row()
+        for name in ['Field set', 'Description', 'Fields', 'Core fields']:
+            head_row += entry([nodes.Text(name)])
+        head += head_row
+        tgroup += head
+        body = nodes.tbody()
+        for name in names:
+            rows = sets[name]
+            core = sum(1 for row in rows if row['Level'] == 'core')
+            body_row = nodes.row()
+            body_row += entry([nodes.literal(name, name)])
+            body_row += entry(text_nodes(describe(name) or ''))
+            body_row += entry([nodes.Text(str(len(rows)))])
+            body_row += entry([nodes.Text(str(core))] if core else [])
+            body += body_row
+        tgroup += body
+        return table
+
     def run(self):
         module = module_choice(self.arguments[0]) if self.arguments else MAIN_MODULE
         rows = self.read_rows(module)
@@ -312,22 +422,54 @@ class WCSFieldTables(SphinxDirective):
             sets.setdefault(row['Field_Set'], []).append(row)
         ecs = ecs_set_descriptions(self.env.app)
         self.env.note_dependency(ecs_cache_path(self.env.app))
+
+        def describe(name):
+            return WCS_SET_DESCRIPTIONS.get(name) or ecs.get(ECS_SET_ALIASES.get(name, name))
+
+        names = self.select_sets(sets)
+        if 'summary' in self.options:
+            return [self.summary_table(sets, names, describe)]
         result = []
-        for name in sorted(sets):
-            section = self.make_section(name)
-            description = WCS_SET_DESCRIPTIONS.get(name) or ecs.get(ECS_SET_ALIASES.get(name, name))
-            if description:
-                section += nodes.paragraph('', '', nodes.Text(description))
-            else:
+        for name in names:
+            description = describe(name)
+            if not description:
                 logger.warning('No description for the %s field set', name)
-            section += build_table(sets[name])
-            result.append(section)
+            intro = [nodes.paragraph('', '', nodes.Text(description))] if description else []
+            if 'group-by-prefix' in self.options:
+                groups = prefix_groups(name, sets[name])
+                # A page about one field set lists its groups directly under the page title
+                parent = None if len(names) == 1 else self.make_section(name)
+                if parent is None:
+                    result.extend(intro)
+                else:
+                    parent.extend(intro)
+                for key, group_rows in groups:
+                    section = self.make_section(key + '.*')
+                    self.body(section, [build_table(group_rows)])
+                    if parent is None:
+                        result.append(section)
+                    else:
+                        parent += section
+                if parent is not None:
+                    result.append(parent)
+            else:
+                section = self.make_section(name)
+                self.body(section, intro + [build_table(sets[name])])
+                result.append(section)
         return result
+
+
+def add_filter_script(app, pagename, templatename, context, doctree):
+    ''' Adds the search and filter bar (source/_static/js/wcs-fields.js) only to
+        the pages that have WCS field tables. '''
+    if doctree and any('wcs-fields' in table['classes'] for table in doctree.findall(nodes.table)):
+        app.add_js_file('js/wcs-fields.js')
 
 
 def setup(app):
     app.add_config_value('wcs_fields_ref', '', 'env')
     app.add_directive('wcs-field-tables', WCSFieldTables)
+    app.connect('html-page-context', add_filter_script)
     app.connect('config-inited', set_ref)
     app.connect('builder-inited', download)
     return {'parallel_read_safe': True, 'parallel_write_safe': True}
