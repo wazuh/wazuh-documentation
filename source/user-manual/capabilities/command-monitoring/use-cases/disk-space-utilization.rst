@@ -71,110 +71,7 @@ Linux endpoint
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-Perform the steps below to create a custom decoder and rule to analyze the event received from the monitored Linux endpoint. If you haven't already done so, perform step 1 of the :ref:`Wazuh dashboard <command_monitoring_configuration_example_wazuh_dashboard>` section under Example configuration.
-
-#. Navigate to **Ruleset management** > **Normalization** > **Decoders**. Perform the following to create a root and child decoder.
-
-   -  Select the space **Draft**
-   -  Click **Actions** > **Create**, select the integration ``command-integration``, paste the root decoder below in the **YAML Editor**, and click **Create decoder**:
-
-      .. code-block:: yaml
-
-         name: "decoder/core-wazuh-message/0"
-         metadata:
-           author: "Wazuh, Inc."
-           date: "2026-06-10T19:32:11Z"
-           description: "Base decoder to process Wazuh message format, parses location part and enriches the events that comes from a Wazuh agent with the host information."
-           documentation: ""
-           modified: "2026-06-10T19:32:11Z"
-           references:
-           - "https://documentation.wazuh.com/"
-           supports: []
-           title: "Wazuh message decoder"
-         normalize:
-         - map:
-           - _tmp_json: "parse_json($event.original)"
-         enabled: true
-
-   -  Click **Actions** > **Create**, select the integration ``command-integration``, paste the child decoder below in the **YAML Editor**, and click **Create decoder**:
-
-      .. code-block:: yaml
-         :emphasize-lines: 37-39
-
-         ---
-         name: "decoder/wazuh-command-monitoring/0"
-         metadata:
-           author: "Wazuh, Inc."
-           date: "2026-07-12T11:14:25Z"
-           description: "Decoder for Wazuh 5.x wodle command execution events. The command wodle emits a structured JSON payload as event.original. The payload contains process metadata (name, path, command line, args, exit code) and the captured standard output under process.io.text. Legacy plain-text format (4.x) is handled by decoder/wazuh-wodle-legacy/0.\n"
-           documentation: ""
-           modified: "2026-07-12T12:06:23Z"
-           references:
-           - "https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/index.html"
-           - "https://github.com/wazuh/wazuh/issues/35634"
-           supports: []
-           title: "Wazuh Wodle decoder"
-         parents:
-         - "decoder/core-wazuh-message/0"
-         check: "string_equal($_tmp_json.event.module, wazuh-wodle-cmd)"
-         normalize:
-         - map:
-           - data_stream.dataset: "wazuh.wodle"
-           - data_stream.type: "logs"
-           - event.dataset: "wazuh.wodle"
-           - event.kind: "event"
-           - event.category: "array_append_unique(process)"
-           - event.type: "array_append_unique(start)"
-           - event.start: "$_tmp_json.event.start"
-           - process.io.text: "$_tmp_json.process.io.text"
-           - process.name: "$_tmp_json.process.name"
-           - process.command_line: "$_tmp_json.process.command_line"
-           - process.executable: "$_tmp_json.process.path"
-           - process.hash.sha256: "$_tmp_json.process.hash.sha256"
-         - check: "exists($process.hash.sha256)"
-           map:
-           - related.hash: "array_append($process.hash.sha256)"
-         - check: "exists($_tmp_json.process.args)"
-           map:
-           - process.args: "$_tmp_json.process.args"
-         - check: "exists($_tmp_json.tags)"
-           map:
-           - tags: "$_tmp_json.tags"
-         - check: "exists($_tmp_json.tags)"
-           map:
-           - tags: "array_append($_tmp_json.tags)"
-         - check: "$_tmp_json.process.exit_code == 0"
-           map:
-           - event.outcome: "success"
-         - check: "exists($_tmp_json.process.exit_code) AND NOT ($_tmp_json.process.exit_code\
-             \ == 0)"
-           map:
-           - event.outcome: "failure"
-         - check: "NOT exists($_tmp_json.process.exit_code)"
-           map:
-           - event.outcome: "unknown"
-         - map:
-           - _tmp_json: "delete()"
-         enabled: true
-         id: "a026d62c-b58b-4a8c-8945-dfd858c6b2e0"
-
-   .. thumbnail:: /images/manual/command-monitoring/create-decoders-disk.png
-      :title: Creating the root and child decoders
-      :alt: Creating the root and child decoders
-      :align: center
-      :width: 80%
-
-#. Navigate to **Ruleset management** > **Overview** and perform the following to attach the root decoder to the integration:
-
-   -  Click **Actions** > **Edit**
-   -  Confirm the status is **Enabled**
-   -  Select ``decoder/core-wazuh-message/0`` under **Root Decoder** and click **Save**.
-
-   .. thumbnail:: /images/manual/command-monitoring/attach-root-decoder.png
-      :title: Attaching the root decoder
-      :alt: Attaching the root decoder
-      :align: center
-      :width: 80%
+Perform the steps below to create a rule to analyze the event received from the monitored Linux endpoint. The default ``decoder/wazuh-wodle/0`` decoder decodes the command output, including its ``tags`` and ``process.io.text``. If you haven't already done so, perform step 1 of the :ref:`Wazuh dashboard <command_monitoring_configuration_example_wazuh_dashboard>` section under Example configuration.
 
 #. Navigate to **Ruleset management** > **Detection** > **Rules** and perform the following to create a detection rule.
 
@@ -218,19 +115,19 @@ Perform the steps below to create a custom decoder and rule to analyze the event
            nist_800_53:
              - AU-6
 
-#. Navigate to **Ruleset management** > **Overview**, select the space **Draft** and click **Actions** > **Promote** to promote the decoders and rule to the ``Test`` space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Draft** and click **Actions** > **Promote** to promote the rule to the ``Test`` space.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-draft-disk.png
-      :title: Promoting the decoders and rule to Test
-      :alt: Promoting the decoders and rule to Test
+      :title: Promoting the detection rule to Test
+      :alt: Promoting the detection rule to Test
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Overview**, select the space **Test** and click **Actions** > **Promote** to promote the decoders and rule to the ``Custom`` space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Test** and click **Actions** > **Promote** to promote the rule to the ``Custom`` space.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-test-disk.png
-      :title: Promoting the decoders and rule to Custom
-      :alt: Promoting the decoders and rule to Custom
+      :title: Promoting the detection rule to Custom
+      :alt: Promoting the detection rule to Custom
       :align: center
       :width: 80%
 
