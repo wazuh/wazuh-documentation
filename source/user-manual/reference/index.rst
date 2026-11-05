@@ -25,4 +25,5 @@ This part of the user manual covers the configuration files that Wazuh uses and 
        installation-utilities/index
        unattended-installation
        wazuh-common-schema
+       helper-functions
        statistics-files/index

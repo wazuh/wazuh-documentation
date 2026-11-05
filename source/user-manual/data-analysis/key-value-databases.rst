@@ -10,7 +10,7 @@ Key-Value Databases (KVDBs)
 
 Key-Value Databases (KVDBs) let the Wazuh normalization engine store reusable key-value maps that decoders and other assets can query during event processing. They are intended for lookup data that changes independently of the parsing logic, such as normalization tables, default field sets, blocklists, or reference tables.
 
-During event processing, decoders and rules can call KVDB helper functions to look up, match, or merge data from a named database. The database name is passed as an argument to the helper function. The lookup happens inline as part of the normalization or filtering stage of the processing pipeline.
+During event processing, decoders and rules can call KVDB :ref:`helper functions <reference_helper_functions>` to look up, match, or merge data from a named database. The database name is passed as an argument to the helper function. The lookup happens inline as part of the normalization or filtering stage of the processing pipeline.
 
 A KVDB is a named dictionary of **key** and **value** entries, where:
 

@@ -94,6 +94,8 @@ newUrls['5.0'] = [
   '/user-manual/reference/wazuh-common-schema/how-wazuh-uses-wcs-fields.html',
   '/user-manual/reference/wazuh-common-schema/key-wcs-fields.html',
   '/user-manual/reference/wazuh-common-schema/wcs-field-reference.html',
+  '/user-manual/reference/helper-functions.html',
+  '/user-manual/reference/helper-functions/helper-function-details.html',
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
   '/user-manual/agent/agent-management/remove-agents.html',
