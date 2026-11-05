@@ -87,7 +87,7 @@ Perform the following steps on the Wazuh dashboard to enable the docker integrat
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Detectors**, select the **docker** detector, then click **Actions** and select **Start detector**. Wait a few minutes before you test the configuration, because the Wazuh manager applies content changes at its next synchronization.
+#. Navigate to **Ruleset Management** > **Detection** > **Detectors**, select the **docker** detector, and start it if it isn't active. To do so, click **Actions** and select **Start detector**. Wait a few minutes before you test the configuration, because the Wazuh manager applies content changes at its next synchronization.
 
    .. thumbnail:: /images/poc/docker-detector-start.png
       :title: Start the docker detector
