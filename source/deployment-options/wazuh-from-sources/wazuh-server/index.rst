@@ -6,7 +6,7 @@
 Installing the Wazuh manager from sources
 =========================================
 
-The Wazuh manager is the core component of the Wazuh server that processes and analyzes security data from Wazuh agents and other sources. It includes the analysis engine for log processing, rule evaluation, and alert generation, along with services for the Wazuh agent enrollment and connection.
+The Wazuh manager is the core component of the Wazuh server that processes and analyzes security data from Wazuh agents and other sources. It normalizes and enriches this data and forwards it to the Wazuh indexer, which evaluates it against detection rules and generates findings. It also includes the services for the Wazuh agent enrollment and connection.
 
 This section covers installing dependencies, downloading and compiling the source code, running the installation wizard, and uninstalling the manager if needed.
 
@@ -56,7 +56,7 @@ Installing the Wazuh manager
 
 This section covers downloading the Wazuh source code, compiling it, and running the installation wizard.
 
-Install the Wazuh indexer from packages first, as the :doc:`Installation guide </installation-guide/index>` describes. The Wazuh manager needs its password and certificates to start.
+Install the Wazuh indexer from packages first with the :doc:`step-by-step method </installation-guide/wazuh-indexer/step-by-step>`. Its first node keeps the root CA key and publishes a client certificate for the Wazuh manager, ``manager-client.pem``, in ``/etc/wazuh-indexer/export``. A Wazuh indexer installed with the installation assistant doesn't publish it. In that case, use the certificates of ``wazuh-install-files.tar``, as a later step describes. The Wazuh manager needs its password and certificates to start.
 
 #. Download and extract the Wazuh source code:
 
@@ -72,7 +72,7 @@ Install the Wazuh indexer from packages first, as the :doc:`Installation guide <
       # make -C src clean
       # make -C src clean-deps
 
-#. Download the external dependencies and build the Wazuh manager. The build takes several minutes:
+#. Download the external dependencies and build the Wazuh manager. The build takes about 15 to 20 minutes on 4 CPU cores. It needs about 7 GB of free disk space, 4 GB for the source tree, and 2 GB for the installation. If the Wazuh indexer runs on this host, the host needs at least 8 GB of RAM, or the system can stop the Wazuh indexer during the build:
 
    .. code-block:: console
 
@@ -91,6 +91,12 @@ Install the Wazuh indexer from packages first, as the :doc:`Installation guide <
    .. code-block:: console
 
       # echo "WAZUH_INDEXER_MANAGER_PASSWORD=<WAZUH_INDEXER_MANAGER_PASSWORD>" >> /etc/wazuh-manager/local.env
+
+   Add the two Wazuh manager API passwords of the deployment so that the Wazuh dashboard can log in with the password it was given. They are in the ``credentials.env`` file that you created for the Wazuh indexer with the step-by-step method, or in ``wazuh-install-files/credentials.env`` of ``wazuh-install-files.tar`` with the installation assistant. Add them before you run ``install.sh``, which sets the API passwords only once. Replace ``<CREDENTIALS_FILE>`` with the path of the file:
+
+   .. code-block:: console
+
+      # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=' <CREDENTIALS_FILE> >> /etc/wazuh-manager/local.env
 
    If Wazuh agents reach this node through an address it doesn't have, such as a load balancer or a NAT address, add ``WAZUH_MANAGER_REMOTED_CERT_SANS``. Include this node's own address too, because the list replaces the addresses the installer discovers:
 
@@ -113,7 +119,7 @@ Install the Wazuh indexer from packages first, as the :doc:`Installation guide <
          2) agent
          Select an option [1-2]: 1
 
-#. If the Wazuh indexer runs on another host, copy ``ca.pem``, ``manager-client.pem``, and ``manager-client-key.pem`` from ``/etc/wazuh-indexer/export`` on a Wazuh indexer node. Then place them in ``/etc/wazuh-manager/certs``:
+#. If the Wazuh indexer runs on another host, copy ``ca.pem``, ``manager-client.pem``, and ``manager-client-key.pem`` from ``/etc/wazuh-indexer/export`` on the first Wazuh indexer node, the one that holds ``root-ca.key`` in ``/etc/wazuh-indexer/ca``. Then place them in ``/etc/wazuh-manager/certs``:
 
    .. code-block:: console
 
@@ -121,7 +127,17 @@ Install the Wazuh indexer from packages first, as the :doc:`Installation guide <
       # install -m 0640 -o root -g wazuh-manager manager-client.pem /etc/wazuh-manager/certs/indexer-connector.pem
       # install -m 0640 -o root -g wazuh-manager manager-client-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
 
-#. If the Wazuh indexer runs on another host, edit the ``<indexer>`` block in ``/etc/wazuh-manager/wazuh-manager.conf``. Replace ``127.0.0.1`` with the IP address of the Wazuh indexer:
+#. If you installed the Wazuh indexer with the installation assistant, on this host or on another one, place the certificates of this Wazuh manager node from ``wazuh-install-files.tar`` instead. Replace ``<MANAGER_NODE_NAME>`` with the name of this Wazuh manager node in ``config.yml``:
+
+   .. code-block:: console
+      :emphasize-lines: 3,4
+
+      # tar -xf wazuh-install-files.tar
+      # install -m 0640 -o root -g wazuh-manager wazuh-install-files/root-ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
+      # install -m 0640 -o root -g wazuh-manager wazuh-install-files/<MANAGER_NODE_NAME>.pem /etc/wazuh-manager/certs/indexer-connector.pem
+      # install -m 0640 -o root -g wazuh-manager wazuh-install-files/<MANAGER_NODE_NAME>-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
+
+#. Edit the ``<indexer>`` block in ``/etc/wazuh-manager/wazuh-manager.conf``. Replace ``127.0.0.1`` with the address of the Wazuh indexer node. This address is the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml`` on that node, or its IP address if the value is ``0.0.0.0``. Keep ``127.0.0.1`` only if the Wazuh indexer runs on this host and its ``network.host`` value is ``0.0.0.0``:
 
    .. code-block:: xml
       :emphasize-lines: 3
@@ -154,12 +170,31 @@ Install the Wazuh indexer from packages first, as the :doc:`Installation guide <
 
       # /var/wazuh-manager/bin/wazuh-manager-control status
 
+   Wait a few seconds after the start. Then check that the Wazuh manager reaches the Wazuh indexer:
+
+   .. code-block:: console
+
+      # grep -E 'indexer is reachable|no longer available' /var/wazuh-manager/logs/wazuh-manager.log
+
+   The last line of the output must be ``The indexer is reachable; inventory documents can be delivered.``
+
    If the Wazuh manager doesn't start, run ``journalctl -u wazuh-manager``. The start-up check lists each missing or invalid password and certificate. To check the files without starting the Wazuh manager, run ``/var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check``. It prints ``check: no problem found`` when there is none, but it doesn't check the indexer password.
+
+   You can delete the ``wazuh-|WAZUH_CURRENT_FROM_SOURCES|-|WAZUH_MANAGER_CURRENT_REV|`` source directory. The Wazuh manager doesn't need it after ``install.sh``.
 
 Installing other Wazuh components
 ---------------------------------
 
 After you install the Wazuh manager, install the Wazuh dashboard from packages, as the :doc:`Installation guide </installation-guide/index>` describes. The Wazuh dashboard isn't available for installation from sources.
+
+The Wazuh manager built from sources issues its API certificate from its own CA, ``/etc/wazuh-manager/export/ca.pem``. A Wazuh dashboard installed with the installation assistant trusts the root CA of ``wazuh-install-files.tar`` instead, so it can't connect to the Wazuh manager API. In that case, run these commands on the Wazuh dashboard host. If the Wazuh manager runs on another host, first copy its ``/etc/wazuh-manager/export/ca.pem`` file to the Wazuh dashboard host, and use that copy in the first command:
+
+.. code-block:: console
+
+   # install -m 0640 -o root -g wazuh-dashboard /etc/wazuh-manager/export/ca.pem /etc/wazuh-dashboard/certs/manager-ca.pem
+   # systemctl restart wazuh-dashboard
+
+Then check that **Dashboard management** > **Server API** shows the API as online.
 
 Uninstall
 ---------
