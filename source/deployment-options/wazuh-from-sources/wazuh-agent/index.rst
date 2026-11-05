@@ -156,7 +156,7 @@ This section covers downloading the Wazuh source code, compiling it, and running
             # make -C src clean
             # make -C src clean-deps
 
-      #. Download the external dependencies and build the Wazuh agent:
+      #. Download the external dependencies and build the Wazuh agent. The build takes about 3 minutes on 4 CPU cores and about 10 minutes on 2, and needs about 2 GB of free disk space:
 
          .. code-block:: console
 
@@ -191,11 +191,12 @@ This section covers downloading the Wazuh source code, compiling it, and running
 
             # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
 
-      #. Save the token that the command prints to a file on the endpoint, for example, ``/root/token``. Then enroll the Wazuh agent:
+      #. Save the token to a file on the endpoint, for example, ``/root/token``. The token is the long line that starts with ``eyJ``. The other lines describe it. Then enroll the Wazuh agent and delete the token file. The ``wazuh-agent-auth`` tool doesn't delete it, and anyone who has the token can enroll agents until it expires:
 
          .. code-block:: console
 
             # /var/ossec/bin/wazuh-agent-auth --token-file /root/token
+            # rm -f /root/token
 
       #. Start the Wazuh agent and enable it to start at boot:
 
@@ -211,6 +212,8 @@ This section covers downloading the Wazuh source code, compiling it, and running
 
             # TOKEN=$(curl -s --cacert /etc/wazuh-manager/export/ca.pem -u wazuh:<WAZUH_PASSWORD> -X POST "https://localhost:55000/security/user/authenticate?raw=true")
             # curl -s --cacert /etc/wazuh-manager/export/ca.pem -X GET "https://localhost:55000/agents?select=id,name,status,ip&pretty=true" -H "Authorization: Bearer $TOKEN"
+
+         You can delete the ``wazuh-|WAZUH_CURRENT_FROM_SOURCES|-|WAZUH_AGENT_CURRENT_REV|`` source directory. The Wazuh agent doesn't need it after ``install.sh``.
 
    .. group-tab:: Windows
 
@@ -332,11 +335,12 @@ This section covers downloading the Wazuh source code, compiling it, and running
 
             To install without prompts, set the variables described in ``etc/preloaded-vars.conf`` before you run ``install.sh``.
 
-      #. Save the token created on the Wazuh manager to a file, for example, ``/var/root/token``. Then enroll the Wazuh agent and start it:
+      #. Save the token created on the Wazuh manager to a file, for example, ``/var/root/token``. Then enroll the Wazuh agent, delete the token file, and start the Wazuh agent:
 
          .. code-block:: console
 
             # /Library/Ossec/bin/wazuh-agent-auth --token-file /var/root/token
+            # rm -f /var/root/token
             # /Library/Ossec/bin/wazuh-control start
 
 Next steps
@@ -399,6 +403,12 @@ Uninstall
 
             # userdel wazuh 2> /dev/null
             # groupdel wazuh 2> /dev/null
+
+         On systems with SELinux, also remove the policy module that ``install.sh`` loaded:
+
+         .. code-block:: console
+
+            # semodule -l | grep -qx wazuh && semodule -r wazuh
 
    .. group-tab:: Windows
 
