@@ -106,11 +106,11 @@ Windows
 
 .. |Windows7Plus_32_64| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.msi <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.msi>`__ (`sha512 <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.msi.sha512>`__)
 
-+------------------------------------------------------------------------------------+-------------------+----------------------+
-| Version                                                                            | Architecture      | Package              |
-+====================================================================================+===================+======================+
-| See :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`         | 64-bit (x86_64)   | |Windows7Plus_32_64| |
-+------------------------------------------------------------------------------------+-------------------+----------------------+
++------------------------------------------------------------------------------------+-----------------------------------------------------+----------------------+
+| Version                                                                            | Architecture                                        | Package              |
++====================================================================================+=====================================================+======================+
+| See :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`         | 32-bit (i686) installer for 64-bit (x86_64) Windows | |Windows7Plus_32_64| |
++------------------------------------------------------------------------------------+-----------------------------------------------------+----------------------+
 
 .. _packages_list_agent_macos:
 
