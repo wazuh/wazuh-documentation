@@ -106,6 +106,8 @@ newUrls['5.0'] = [
   '/user-manual/reference/wazuh-common-schema/wcs-field-reference/state-inventory.html',
   '/user-manual/reference/wazuh-common-schema/wcs-field-reference/state-sca.html',
   '/user-manual/reference/wazuh-common-schema/wcs-field-reference/state-vulnerabilities.html',
+  '/user-manual/reference/helper-functions.html',
+  '/user-manual/reference/helper-functions/helper-function-details.html',
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
   '/user-manual/agent/agent-management/remove-agents.html',
