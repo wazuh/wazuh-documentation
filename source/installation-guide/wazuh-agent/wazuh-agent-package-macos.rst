@@ -66,7 +66,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
                # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
-         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first alerts can take a few minutes to appear on a new deployment.
+         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first findings can take a few minutes to appear on a new deployment.
 
          The installation process is now complete, and the Wazuh agent is now successfully running on your macOS endpoint.
 
@@ -93,6 +93,6 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
                # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
-         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first alerts can take a few minutes to appear on a new deployment. The installation process is now complete, and the Wazuh agent is successfully running on your macOS endpoint.
+         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first findings can take a few minutes to appear on a new deployment. The installation process is now complete, and the Wazuh agent is successfully running on your macOS endpoint.
 
 By default, all agent files are stored in ``/Library/Ossec/`` after the installation.

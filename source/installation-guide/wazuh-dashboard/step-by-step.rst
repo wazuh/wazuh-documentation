@@ -57,7 +57,7 @@ Adding the Wazuh repository
 
          .. code-block:: console
 
-            # apt-get install -y gnupg apt-transport-https curl
+            # apt-get update && apt-get install -y gnupg apt-transport-https curl
 
       #. Install the GPG key:
 
