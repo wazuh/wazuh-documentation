@@ -33,21 +33,28 @@ Wazuh 5.0 supports Wazuh agent installation on the following operating systems:
 
 -  Linux:
 
-   -  RHEL / CentOS (AMD64): 6 and later
-   -  RHEL / CentOS (ARM64): 7 and later
-   -  AlmaLinux: 8 and later
-   -  Rocky Linux: 8 and later
-   -  Amazon Linux: 1 and later
-   -  Debian: 7 and later
-   -  Fedora: 41 and later
-   -  openSUSE Leap: 15
-   -  Oracle Linux: 6 and later
-   -  SUSE / SLES: 15
-   -  Ubuntu: 18.04 and later
+   -  AlmaLinux: 8, 9, 10
+   -  Amazon Linux: 2, 2023
+   -  CentOS: 7
+   -  CentOS Stream: 8, 9, 10
+   -  Debian: 10, 11, 12, 13
+   -  Fedora: 42, 43, 44, 45
+   -  openSUSE Leap: 15, 16
+   -  Oracle Linux: 7 (x86_64 only), 8, 9, 10
+   -  Red Hat Enterprise Linux: 7 (x86_64 only), 8, 9, 10
+   -  Rocky Linux: 8, 9, 10
+   -  SUSE Linux Enterprise Server: 15, 16
+   -  Ubuntu: 20.04, 22.04, 24.04, 26.04
 
--  macOS: 14 or later
--  Windows: 7 and later
--  Windows Server: 2008 R2 and later
+-  macOS: 15, 26 (Intel and Apple silicon), 27 (Apple silicon only)
+-  Windows: 10, 11 (x86_64)
+-  Windows Server: 2012 R2, 2016, 2019, 2022, 2025 (x86_64)
+
+Linux packages are available for x86_64 and aarch64 unless stated otherwise.
+
+.. note::
+
+   The Wazuh agent might also install on Red Hat Enterprise Linux 6, Red Hat Enterprise Linux 7 (aarch64), CentOS 6 and 8, Oracle Linux 6, Amazon Linux 1, Debian 7, 8, and 9, Windows 7 and 8, Windows 11 (ARM64), and Windows Server 2008 R2. Wazuh doesn't test these versions, and some capabilities might not work on them.
 
 .. note::
 

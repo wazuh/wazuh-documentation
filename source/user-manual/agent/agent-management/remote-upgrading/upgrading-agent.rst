@@ -179,6 +179,14 @@ Using the RESTful API
 
    The ``agents_list`` parameter in the :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` and :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` endpoints allows the value ``all``. When this value is set, an upgrade request will be sent to all Wazuh agents.
 
+   To upgrade with a WPK file you downloaded, use PUT /agents/upgrade_custom and set ``file_path`` to the full path of the file in ``/var/wazuh-manager/var/upgrade/``:
+
+   .. code-block:: console
+
+      # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/upgrade_custom?agents_list=<AGENT_ID>&file_path=/var/wazuh-manager/var/upgrade/<WPK_FILE>&pretty=true" -H "Authorization: Bearer $TOKEN"
+
+   With only the file name, the request fails with error 1824 (``The WPK file does not exist``).
+
    When upgrading more than 3000 Wazuh agents at the same time, it is highly recommended that the parameter ``wait_for_complete`` be set to true to avoid a possible API timeout.
 
    This recommendation is based on testing with a Wazuh manager on a server with a 2.5 GHz AMD EPYC 7000 series processor and 4 GiB memory. Using an agent list with 3000 agents or fewer on a system with similar or better specifications guarantees a response before the API timeout occurs.

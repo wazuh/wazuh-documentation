@@ -113,3 +113,16 @@ Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN of the Wazuh man
       "message": "All selected agents were deleted",
       "error": 0
    }
+
+.. _remove_disconnected_agents_automatically:
+
+Remove disconnected agents automatically
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Wazuh manager can remove Wazuh agents that stay disconnected longer than a retention period. To enable it, add the following line to ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` on the Wazuh manager master node. Replace ``<MINUTES>`` with the retention period in minutes. The default value, ``0``, disables it.
+
+.. code-block:: ini
+
+   wazuh_modules.manager_task_delete_old_agents=<MINUTES>
+
+Restart the Wazuh manager to apply the change. The Wazuh manager checks the retention period when it checks for disconnected Wazuh agents, at the ``agents_disconnection_time`` interval, so a Wazuh agent can be removed up to that interval after the retention period ends.
