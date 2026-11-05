@@ -48,7 +48,6 @@ The following block shows the default Syscollector configuration on a Wazuh agen
         <synchronization>
           <enabled>yes</enabled>
           <interval>5m</interval>
-          <max_eps>75</max_eps>
           <integrity_interval>24h</integrity_interval>
         </synchronization>
       </wodle>
@@ -74,10 +73,9 @@ Where:
 - ``<synchronization>`` contains the settings that control how the Wazuh agent synchronizes inventory data with the Wazuh manager.
 - ``<enabled>`` specifies whether synchronization is active. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<interval>`` specifies the time between synchronization operations. The default value is 5 minutes.
-- ``<max_eps>`` sets the maximum event reporting throughput. The default value is 75, which signifies 75 events per second. The allowed value is an integer between 0 and 1000000.
 - ``<integrity_interval>`` specifies the time between full integrity checks of the synchronized inventory data. The default value is 24 hours.
 
-On Windows endpoints, you can use the ``<hotfixes>`` option.
+On Windows endpoints, the ``<hotfixes>`` option enables or disables the collection of installed updates. The default value is yes.
 
 .. note::
 
@@ -162,7 +160,7 @@ By default, the connector points to the localhost and uses the certificates in `
 
       A ``green`` or ``yellow`` status means the connection works. A ``red`` status means some primary shards are unavailable, and the Wazuh manager stops sending data to that node until it recovers.
 
-      The Wazuh manager stores the Wazuh indexer password in its keystore during installation. If your Wazuh indexer nodes use a different password, for example after you change it, update the keystore and then restart the Wazuh manager:
+      The Wazuh manager connects to the Wazuh indexer as the ``wazuh-manager`` user and stores its password in the keystore during installation. After you change the ``wazuh-manager`` user password on the Wazuh indexer, update the keystore and restart the Wazuh manager:
 
       .. code-block:: console
 
