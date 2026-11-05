@@ -41,7 +41,7 @@ You can add any of the following settings to ``/etc/wazuh-manager/wazuh-manager-
 - `Authd`_
 - `Wazuh clusterd`_
 - `Wazuh database`_
-- `Wazuh modules`_
+- :ref:`Wazuh modules <internal_options_manager_wazuh_modules>`
 - `Vulnerability scanner`_
 - `Recurring manager tasks (wazuh_modules.manager_task_*)`_
 - `Wazuh DB`_
@@ -57,14 +57,14 @@ The ``analysisd.*`` internal options configure the Wazuh Engine (``wazuh-manager
 | **analysisd.debug**                                          | Controls the Engine log verbosity level.                                                     | 0               |
 +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
 | **analysisd.event_queue_size**                               | Maximum number of events waiting in the router input queue. Events can be dropped when this  | 131072          |
-|                                                              | queue is full.                                                                               |                 |
+|                                                              | queue is full. Minimum: 8192.                                                                |                 |
 +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
 | **analysisd.event_queue_eps**                                | Maximum event ingestion rate. A value of 0 means unlimited.                                  | 0               |
 +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
 | **analysisd.event_queue_max_bytes**                          | Maximum total byte size of events waiting in the router input queue. Events are dropped when | 32MB            |
 |                                                              | this quota is full. A value of 0 means unlimited.                                            |                 |
 +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.agent_metadata_cache_ttl**                       | Time-to-live, in seconds, for cached agent metadata.                                         | 300             |
+| **analysisd.agent_metadata_cache_ttl**                       | Time-to-live, in seconds, for cached agent metadata. Allowed range: 1 to 86400.              | 300             |
 +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
 | **analysisd.agent_metadata_cache_clean_interval**            | Interval, in seconds, between best-effort evictions of stale agent metadata cache entries.   | 60              |
 +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
@@ -127,68 +127,70 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 +==================================================+================================================================================================+==========================+======================================+
 | **remoted.debug**                                | Debug logging level for the remoted module.                                                    | 0                        | 0 (disabled), 1 (basic), 2 (verbose) |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.receive_chunk**                        | Network receive buffer size in bytes.                                                          | 4096                     | Positive integer                     |
+| **remoted.receive_chunk**                        | Network receive buffer size in bytes.                                                          | 4096                     | Integer from 1024 to 16384           |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.send_timeout_to_retry**                | Timeout, in seconds, before retrying a failed send operation.                                  | 1                        | Positive integer                     |
+| **remoted.send_timeout_to_retry**                | Timeout, in seconds, before retrying a failed send operation.                                  | 1                        | Integer from 1 to 60                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.worker_pool**                          | Number of worker threads used to process agent messages.                                       | 4                        | Positive integer                     |
+| **remoted.worker_pool**                          | Number of worker threads used to process agent messages.                                       | 4                        | Integer from 1 to 16                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.sender_pool**                          | Number of sender threads used to forward events to the Engine.                                 | 8                        | Positive integer                     |
+| **remoted.sender_pool**                          | Number of threads that deliver ``merged.mg`` to legacy (Wazuh 4.x) agents by push. Wazuh 5.0   | 8                        | Integer from 1 to 64                 |
+|                                                  | agents download it themselves.                                                                 |                          |                                      |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.control_msg_queue_size**               | Queue capacity for agent keepalive and control messages.                                       | 16384                    | Positive integer                     |
+| **remoted.control_msg_queue_size**               | Queue capacity for agent keepalive and control messages.                                       | 16384                    | Integer from 4096 to 1048576         |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.batch_events_capacity**                | Queue capacity for batching events before forwarding them to the Engine.                       | 131072                   | Positive integer                     |
+| **remoted.batch_events_capacity**                | Queue capacity for batching events before forwarding them to the Engine.                       | 131072                   | Integer from 0 to 1048576            |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.queue_max_bytes**                      | Maximum number of bytes held in the input message queue. A value of 0 disables the byte limit. | 67108864                 | 0 or integer from 1024 upward        |
+| **remoted.queue_max_bytes**                      | Maximum number of bytes held in the input message queue. A value of 0 disables the byte limit. | 67108864                 | 0, or integer from 1024 to           |
+|                                                  |                                                                                                |                          | 2147483647                           |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.batch_events_max_bytes**               | Maximum number of bytes held in the events queue before events are forwarded to the Engine. A  | 33554432                 | 0 or integer from 1024 upward        |
-|                                                  | value of 0 disables the byte limit.                                                            |                          |                                      |
+| **remoted.batch_events_max_bytes**               | Maximum number of bytes held in the events queue before events are forwarded to the Engine. A  | 33554432                 | 0, or integer from 1024 to           |
+|                                                  | value of 0 disables the byte limit.                                                            |                          | 2147483647                           |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.enrich_cache_expire_time**             | Agent metadata cache expiration time, in seconds.                                              | 300                      | Integer from 60 to 86400             |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.keyupdate_interval**                   | Interval, in seconds, for reloading agent key files.                                           | 10                       | Positive integer                     |
+| **remoted.keyupdate_interval**                   | Interval, in seconds, for reloading agent key files.                                           | 10                       | Integer from 1 to 3600               |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.rlimit_nofile**                        | Maximum number of file descriptors that the Remoted process can open.                          | 65536                    | Integer from 1024 to 1048576         |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.send_chunk**                           | Maximum number of bytes sent in a single write operation to an agent.                          | 4096                     | Positive integer                     |
+| **remoted.send_chunk**                           | Maximum number of bytes sent in a single write operation to an agent.                          | 4096                     | Integer from 512 to 16384            |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.buffer_relax**                         | Send-buffer flushing mode.                                                                     | 1                        | 0 (strict), 1 (relaxed), 2 (lazy)    |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.send_buffer_size**                     | Size, in bytes, of the send buffer for each agent connection.                                  | 131072                   | Positive integer                     |
+| **remoted.send_buffer_size**                     | Size, in bytes, of the send buffer for each agent connection.                                  | 131072                   | Integer from 65536 to 1048576        |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.recv_timeout**                         | Timeout, in seconds, for receiving data from agents.                                           | 1                        | Positive integer                     |
+| **remoted.recv_timeout**                         | Timeout, in seconds, for receiving data from agents.                                           | 1                        | Integer from 1 to 60                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.tcp_keepidle**                         | Time, in seconds, that a TCP connection remains idle before keepalive probes begin.            | 30                       | Positive integer                     |
+| **remoted.tcp_keepidle**                         | Time, in seconds, that a TCP connection remains idle before keepalive probes begin.            | 30                       | Integer from 1 to 7200               |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.tcp_keepintvl**                        | Interval, in seconds, between TCP keepalive probes.                                            | 10                       | Positive integer                     |
+| **remoted.tcp_keepintvl**                        | Interval, in seconds, between TCP keepalive probes.                                            | 10                       | Integer from 1 to 100                |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.tcp_keepcnt**                          | Number of unacknowledged TCP keepalive probes before the connection is considered unavailable. | 3                        | Positive integer                     |
+| **remoted.tcp_keepcnt**                          | Number of unacknowledged TCP keepalive probes before the connection is considered unavailable. | 3                        | Integer from 1 to 50                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.merge_shared**                         | Controls whether Remoted merges shared configuration files for agents.                         | 1                        | 0, 1                                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.pass_empty_keyfile**                   | Controls whether Remoted starts when the client.keys file is empty.                            | 1                        | 0, 1                                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.request_pool**                         | Size of the request pool used to handle agent communications.                                  | 1024                     | Positive integer                     |
+| **remoted.request_pool**                         | Size of the request pool used to handle agent communications.                                  | 1024                     | Integer from 1 to 4096               |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.request_timeout**                      | Timeout, in seconds, for agent request operations.                                             | 10                       | Positive integer                     |
+| **remoted.request_timeout**                      | Timeout, in seconds, for agent request operations.                                             | 10                       | Integer from 1 to 600                |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.response_timeout**                     | Timeout, in seconds, for manager responses to agent requests.                                  | 60                       | Positive integer                     |
+| **remoted.response_timeout**                     | Timeout, in seconds, for manager responses to agent requests.                                  | 60                       | Integer from 1 to 3600               |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.request_rto_sec**                      | Seconds component of the retransmission timeout for agent requests.                            | 1                        | Positive integer                     |
+| **remoted.request_rto_sec**                      | Seconds component of the retransmission timeout for agent requests.                            | 1                        | Integer from 0 to 60                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.request_rto_msec**                     | Milliseconds component of the retransmission timeout for agent requests.                       | 0                        | Integer from 0 to 999                |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.max_attempts**                         | Maximum number of attempts for failed agent communications.                                    | 4                        | Positive integer                     |
+| **remoted.max_attempts**                         | Maximum number of attempts for failed agent communications.                                    | 4                        | Integer from 1 to 16                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.shared_reload**                        | Interval, in seconds, for reloading shared configuration files.                                | 10                       | Positive integer                     |
+| **remoted.shared_reload**                        | Interval, in seconds, for reloading shared configuration files.                                | 10                       | Integer from 1 to 18000              |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.disk_storage**                         | Controls whether temporary shared configuration data is stored on disk.                        | 0                        | 0, 1                                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.verify_msg_id**                        | Controls whether Remoted verifies agent message identifier sequences.                          | 0                        | 0, 1                                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.batch_events_per_agent_capacity**      | Maximum number of events batched per agent before forwarding them to the Engine.               | 131072                   | Positive integer                     |
+| **remoted.batch_events_per_agent_capacity**      | Maximum number of events batched per agent before forwarding them to the Engine.               | 131072                   | Integer from 0 to 1048576            |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.recv_counter_flush**                   | Number of received messages after which receive counters are flushed to statistics.            | 128                      | Positive integer                     |
+| **remoted.recv_counter_flush**                   | Number of received messages after which receive counters are flushed to statistics.            | 128                      | Integer from 10 to 999999            |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.comp_average_printout**                | Number of processed events after which compression statistics are logged.                      | 19999                    | Integer from 10 to 999999            |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
@@ -261,9 +263,9 @@ The ``authd.*`` and ``auth.*`` internal options configure the Wazuh enrollment s
 +====================================================+================================================================================================+===============+======================================+
 | **authd.debug**                                    | Debug logging level for the authd daemon.                                                      | 0             | 0 (disabled), 1 (basic), 2 (verbose) |
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **auth.timeout_seconds**                           | Seconds component of the timeout for agent enrollment requests.                                | 1             | Integer                              |
+| **auth.timeout_seconds**                           | Seconds component of the timeout for agent enrollment requests.                                | 1             | Integer from 0 to 2147483647         |
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **auth.timeout_microseconds**                      | Microseconds component of the timeout for agent enrollment requests.                           | 0             | Integer                              |
+| **auth.timeout_microseconds**                      | Microseconds component of the timeout for agent enrollment requests.                           | 0             | Integer from 0 to 999999             |
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
 | **authd.max_agents**                               | Maximum number of agents that can be registered. A value of 0 means unlimited.                 | 0             | Non-negative integer                 |
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
@@ -303,6 +305,8 @@ The ``wazuh_database.*`` internal options configure the Database Sync module.
 +------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------+
 | wazuh_database.max_queued_events   | Maximum number of agent events queued before synchronization is triggered.                   | 0               | Integer from 0 to 2147483647  |
 +------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------+
+
+.. _internal_options_manager_wazuh_modules:
 
 Wazuh modules
 ^^^^^^^^^^^^^^
@@ -417,11 +421,12 @@ The following tables list the settings and their default values, which are set i
 - `Logcollector`_
 - `Rootcheck`_
 - :ref:`Security configuration assessment <internal_options_sca>`
+- :ref:`Wazuh modules <internal_options_agent_wazuh_modules>`
 
 Agent
 ^^^^^^
 
-The ``agent.*`` internal options configure the Wazuh agent daemon. The ``monitord.*`` options control agent log rotation.
+The ``agent.*`` internal options configure the Wazuh agent daemon. The ``monitord.*`` options control agent log rotation. The ``agent_info.*`` options bound the task registry of the agent-info module, ``wazuh.thread_stack_size`` sets the stack size of the agent's child threads, and ``windows.debug`` sets the debug level of the Windows agent.
 
 +------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
 | Setting                                  | Description                                                                                  | Default value   | Allowed values                                                    |
@@ -489,6 +494,15 @@ The ``agent.*`` internal options configure the Wazuh agent daemon. The ``monitor
 +------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
 | **monitord.rotate_log**                  | Controls whether automatic log rotation is enabled.                                          | 1               | 0 (disabled), 1 (enabled)                                         |
 +------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent_info.max_entries**               | Maximum number of entries in the agent-info task registry, which discards duplicate /control | 4096            | Integer from 1 to 1000000                                         |
+|                                          | tasks.                                                                                       |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent_info.ttl**                       | Time, in seconds, that an entry stays in the agent-info task registry.                       | 86400           | Integer from 1 to 31536000                                        |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **wazuh.thread_stack_size**              | Stack size, in KiB, of the child threads of the Wazuh agent daemons.                         | 8192            | Integer from 2048 to 65536                                        |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **windows.debug**                        | Debug logging level for the Windows agent.                                                   | 0               | 0 (disabled), 1 (basic), 2 (verbose)                              |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
 
 Execd
 ^^^^^^
@@ -522,13 +536,36 @@ Syscheck
 
 The ``syscheck.*`` internal options configure the File Integrity Monitoring module.
 
-+-------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
-| Setting                 | Description                                                              | Default value   | Allowed values                         |
-+=========================+==========================================================================+=================+========================================+
-| **syscheck.debug**      | Controls debug-level logging for the File Integrity Monitoring module.   | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
-+-------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
-| **syscheck.rt_delay**   | Delay, in milliseconds, before processing real-time events.              | 5               | Integer from 0 to 1000                 |
-+-------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
++--------------------------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| Setting                                    | Description                                                              | Default value   | Allowed values                         |
++============================================+==========================================================================+=================+========================================+
+| **syscheck.debug**                         | Controls debug-level logging for the File Integrity Monitoring module.   | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
++--------------------------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **syscheck.rt_delay**                      | Delay, in milliseconds, before processing real-time events.              | 5               | Integer from 0 to 1000                 |
++--------------------------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **syscheck.file_max_size**                 | Maximum file size, in MB, for calculating integrity hashes. 0 disables   | 1024            | Integer from 0 to 4095                 |
+|                                            | this limit.                                                              |                 |                                        |
++--------------------------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **syscheck.max_audit_entries**             | Maximum number of directories monitored with who-data on Linux.          | 256             | Integer from 1 to 4096                 |
++--------------------------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **syscheck.default_max_depth**             | Maximum recursion level allowed.                                         | 256             | Integer from 1 to 320                  |
++--------------------------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **syscheck.symlink_scan_interval**         | Interval, in seconds, between checks of the symbolic links set in the    | 600             | Integer from 1 to 2592000              |
+|                                            | directories option.                                                      |                 |                                        |
++--------------------------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **syscheck.max_fd_win_rt**                 | Maximum number of directories monitored in real time on Windows.         | 256             | Integer from 1 to 1024                 |
++--------------------------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **syscheck.sync_flush_batch_size**         | Maximum number of buffered FIM events before an immediate flush to the   | 100             | Integer from 1 to 100000               |
+|                                            | local persistent sync queue. Larger values reduce disk writes but put    |                 |                                        |
+|                                            | more data at risk on an abrupt shutdown.                                 |                 |                                        |
++--------------------------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **syscheck.sync_flush_interval_ms**        | Maximum time, in milliseconds, before a buffer of FIM events that isn't  | 500             | Integer from 50 to 3600000             |
+|                                            | full is flushed to the local persistent sync queue.                      |                 |                                        |
++--------------------------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **syscheck.sync_wal_autocheckpoint_pages** | WAL auto-checkpoint threshold of fim_sync.db, in SQLite pages of about 4 | 1000            | Integer from 100 to 1000000            |
+|                                            | KiB. Larger values mean less write-back, but a larger WAL and a longer   |                 |                                        |
+|                                            | recovery on reopen.                                                      |                 |                                        |
++--------------------------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
 
 Logcollector
 ^^^^^^^^^^^^^
@@ -607,3 +644,33 @@ The ``sca.*`` internal options configure the Security Configuration Assessment m
 +----------------------------+----------------------------------------------------------------------------------------------+-----------------+-----------------------------+
 | **sca.commands_timeout**   | Default timeout, in seconds, for commands executed during an SCA scan.                       | 30              | Integer from 1 to 300       |
 +----------------------------+----------------------------------------------------------------------------------------------+-----------------+-----------------------------+
+
+.. _internal_options_agent_wazuh_modules:
+
+Wazuh modules
+^^^^^^^^^^^^^^
+
+The ``wazuh_modules.*`` internal options configure the Wazuh modules daemon (``wazuh-modulesd``) of the Wazuh agent.
+
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| Setting                                  | Description                                                                                  | Default value   | Allowed values                                                    |
++==========================================+==============================================================================================+=================+===================================================================+
+| **wazuh_modules.debug**                  | Debug logging level for the Wazuh modules daemon.                                            | 0               | 0 (disabled), 1 (basic), 2 (verbose)                              |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **wazuh_modules.task_nice**              | Nice value for module tasks. A lower value means a higher priority.                          | 10              | Integer from -20 to 19                                            |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **wazuh_modules.max_eps**                | Maximum number of events per second that each module sends.                                  | 100             | Integer from 1 to 1000                                            |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **wazuh_modules.kill_timeout**           | Time, in seconds, that a module process has to quit, at shutdown or after a command times    | 10              | Integer from 0 to 3600                                            |
+|                                          | out, before it's killed. 0 kills it immediately.                                             |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **wazuh_modules.socket_timeout**         | Longest time, in seconds, that a local client of the modules request socket can wait between | 1               | Integer from 1 to 60                                              |
+|                                          | parts of its request, or before reading the reply, before the connection is dropped. Not     |                 |                                                                   |
+|                                          | used on Windows.                                                                             |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **wazuh_modules.rlimit_nofile**          | Maximum number of file descriptors that the Wazuh modules can open.                          | 8192            | Integer from 8192 to 1048576                                      |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **wazuh_modules.unmask_credentials**     | Shows the credentials set in ossec.conf (AWS keys, GitHub API token, Office 365 client       | 0               | 0 (masked), 1 (in clear)                                          |
+|                                          | secret, MS Graph secret value, Azure keys) in clear in the agent's configuration report,     |                 |                                                                   |
+|                                          | instead of \*\*\*\*\*.                                                                       |                 |                                                                   |
++------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+

@@ -307,13 +307,13 @@ When there is a conflict between options that modify the same attribute, the las
 
 .. code-block:: xml
 
-   <directories check_all="no" check_sha256="yes">/etc</directories>
+   <directories check_all="no" check_sha256sum="yes">/etc</directories>
 
-The configuration above, set the option ``check_sha256`` to YES.
+The configuration above, set the option ``check_sha256sum`` to YES.
 
 .. code-block:: xml
 
-   <directories check_sha256="yes" check_all="no">/etc</directories>
+   <directories check_sha256sum="yes" check_all="no">/etc</directories>
 
 Nevertheless, the second one disables the SHA-256 hash check.
 
@@ -951,7 +951,7 @@ windows_registry
 
 List of registry entries to be monitored. One entry per line. Multiple lines may be entered to include multiple registry entries.
 
-To scan paths matching a pattern, you can use the wildcard characters ``?`` and ``*``. For example ``HKEY_LOCAL_MACHINE\SOFTWARE\*``. FIM uses these wildcards during scheduled scan.
+To scan paths matching a pattern, you can use the wildcard characters ``?`` and ``*``. For example ``HKEY_LOCAL_MACHINE\SOFTWARE\*``. The Wazuh agent expands the wildcards when it loads its configuration. A key created later is monitored only after the Wazuh agent restarts, and its creation isn't reported.
 
 +----------------------+-------------------------------------------------------------------------+
 | **Default value**    | The default configuration may vary depending on the operating system.   |

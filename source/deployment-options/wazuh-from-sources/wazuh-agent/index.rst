@@ -131,6 +131,8 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
                   $ export PATH="/Applications/CMake.app/Contents/bin:$PATH"
 
+.. _installing_agent_from_sources:
+
 Installing the Wazuh agent
 --------------------------
 

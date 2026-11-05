@@ -123,11 +123,11 @@ timeout
 
 Timeout for each evaluation. In case the execution takes longer than the specified timeout, it stops.
 
-+----------------------+-------------------------------+
-| **Default value**    | 0                             |
-+----------------------+-------------------------------+
-| **Allowed values**   | A positive number (seconds)   |
-+----------------------+-------------------------------+
++----------------------+----------------------------------------+
+| **Default value**    | 3600                                   |
++----------------------+----------------------------------------+
+| **Allowed values**   | A positive number of seconds, from 1   |
++----------------------+----------------------------------------+
 
 log_analytics
 ^^^^^^^^^^^^^^

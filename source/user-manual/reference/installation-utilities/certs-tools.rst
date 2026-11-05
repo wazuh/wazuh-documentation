@@ -10,7 +10,7 @@ Wazuh certs tool
 
 The certs-tool is used by running the ``wazuh-certs-tool.sh`` script, as root, along with the ``config.yml`` configuration file. The certs tool generates the necessary certificates for the nodes specified in the configuration file.
 
-You can download the Wazuh certs tool here: `wazuh-certs-tool.sh <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh>`__.
+You can download the Wazuh certs tool here: `wazuh-certs-tool.sh <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh>`__. The downloaded file is named ``wazuh-certs-tool-<VERSION>-<REVISION>.sh``. Rename it to ``wazuh-certs-tool.sh`` before you run the commands on this page.
 
 Options list
 --------------

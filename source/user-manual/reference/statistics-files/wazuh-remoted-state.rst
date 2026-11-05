@@ -12,7 +12,7 @@ wazuh-remoted.state
 
    GET /cluster/{node_id}/daemons/stats?daemons_list=wazuh-manager-remoted
 
-The counters directly under ``metrics``, such as ``bytes``, ``messages`` and ``tcp_sessions``, count only the legacy TCP/UDP channel. That channel is disabled unless ``remote.legacy.enabled`` is set, and Wazuh 5.0 agents don't use it. Statistics of the HTTPS agent server, which Wazuh 5.0 agents use, are under ``metrics.http_server``, for example the responses sent per endpoint (``responses.stateless``, ``responses.stateful``). The sample below doesn't include ``http_server``.
+The counters directly under ``metrics``, such as ``bytes``, ``messages`` and ``tcp_sessions``, count only the legacy TCP/UDP channel. The installer and the Wazuh manager packages enable that channel (``<remote><legacy><enabled>yes</enabled>``). It's off only when ``<enabled>`` is set to ``no`` or the ``<legacy>`` block is removed. Wazuh 5.0 agents don't use it. Statistics of the HTTPS agent server, which Wazuh 5.0 agents use, are under ``metrics.http_server``, for example the responses sent per endpoint (``responses.stateless``, ``responses.stateful``). The sample below doesn't include ``http_server``.
 
 Sample response:
 

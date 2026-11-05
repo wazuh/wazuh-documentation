@@ -162,7 +162,7 @@ The resolver never replaces a password already in the keystore. After you change
 Verifying connectivity
 ------------------------
 
-Run the following command as root to verify connectivity to the Wazuh indexer. It uses the same CA certificate, client certificate, and ``wazuh-manager`` password, read from the keystore, as the Wazuh manager. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with a Wazuh indexer address from the output of ``/var/wazuh-manager/bin/wazuh-manager-conf get indexer.hosts``:
+Run the following command as root to verify connectivity to the Wazuh indexer. It uses the same CA certificate, client certificate, and ``wazuh-manager`` password, read from the keystore, as the Wazuh manager. Replace ``<WAZUH_INDEXER_ADDRESS>`` with a Wazuh indexer address from the output of ``/var/wazuh-manager/bin/wazuh-manager-conf get indexer.hosts``:
 
 .. code-block:: console
    :emphasize-lines: 5
@@ -171,6 +171,6 @@ Run the following command as root to verify connectivity to the Wazuh indexer. I
         --cert   /etc/wazuh-manager/certs/indexer-connector.pem \
         --key    /etc/wazuh-manager/certs/indexer-connector-key.pem \
         -u "wazuh-manager:$(/var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password -g)" \
-        https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/health
+        https://<WAZUH_INDEXER_ADDRESS>:9200/_cluster/health
 
 A successful response returns the Wazuh indexer cluster health information with a status such as ``green`` or ``yellow``.
