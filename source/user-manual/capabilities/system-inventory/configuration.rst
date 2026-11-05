@@ -75,7 +75,7 @@ Where:
 - ``<interval>`` specifies the time between synchronization operations. The default value is 5 minutes.
 - ``<integrity_interval>`` specifies the time between full integrity checks of the synchronized inventory data. The default value is 24 hours.
 
-On Windows endpoints, the ``<hotfixes>`` option enables or disables the collection of installed updates. The default value is yes.
+On Windows endpoints, the ``<hotfixes>`` option enables or disables the collection of installed updates. The default value is ``yes``.
 
 .. note::
 
