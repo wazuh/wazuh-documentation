@@ -23,7 +23,7 @@ You can configure the Linux Audit system to monitor specific events based on use
 
 - **System call rules**: These rules log specific programs’ system calls.
 
-Audit rules are specified interactively using the ``auditctl`` utility, but to make changes persistent, you need to add the audit rules to the ``/etc/audit/audit.rules`` file.
+The ``auditctl`` utility loads audit rules into the running system. These rules last until the audit daemon restarts or the endpoint reboots. To keep audit rules after a restart, add them to a file with the ``.rules`` extension in the ``/etc/audit/rules.d/`` directory, for example ``/etc/audit/rules.d/wazuh.rules``. Then run ``augenrules --load`` to merge these files into ``/etc/audit/audit.rules`` and load them. The audit daemon runs ``augenrules`` each time it starts, so keep your rules in ``/etc/audit/rules.d/``.
 
 .. note::
    You need root user privileges to run all the commands described below.

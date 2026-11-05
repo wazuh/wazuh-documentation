@@ -17,6 +17,7 @@ The IT Hygiene section organizes data into multiple categories:
 -  **Network**: Displays network configurations, interfaces, and traffic.
 -  **Identity**: Displays users and groups.
 -  **Services**: Displays services related information.
+-  **Findings**: Displays the findings that IT Hygiene rules generate when an inventory item is added, modified, or removed.
 
 To access the IT Hygiene section, navigate to **Security operations** > **IT Hygiene** on the Wazuh dashboard.
 
@@ -169,6 +170,11 @@ Displays top running services, total unique services, and a summary data table c
    :align: center
    :width: 80%
 
+Findings
+--------
+
+Lists the findings generated when the system inventory of a monitored endpoint changes. The data table shows the time, agent name, rule title, rule level, and event action of each finding. To see the rules and the fields you can search, go to :doc:`Syscollector information findings </user-manual/capabilities/system-inventory/syscollector-information-findings>`.
+
 Querying the inventory data
 ---------------------------
 
@@ -218,7 +224,7 @@ Follow these steps to access the Wazuh indexer API from the Wazuh dashboard.
       :align: center
       :width: 80%
 
-#. You can query the system inventory index to look up specific details, such as whether a particular package is installed on any monitored endpoints. For example, the following command checks the package inventory for the presence of the Wazuh agent package. On Windows endpoints the package registers as ``Wazuh Agent``, and on Linux endpoints as ``wazuh-agent``.
+#. You can query the system inventory index to look up specific details, such as whether a particular package is installed on any monitored endpoints. For example, the following command checks the package inventory for the Wazuh agent package on Windows endpoints, where the package registers as ``Wazuh Agent``. To check Linux endpoints, replace ``Wazuh Agent`` with ``wazuh-agent``.
 
    .. code-block:: none
 

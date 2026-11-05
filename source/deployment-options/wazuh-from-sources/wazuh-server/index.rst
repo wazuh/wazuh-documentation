@@ -72,7 +72,7 @@ Install the Wazuh indexer from packages first with the :doc:`step-by-step method
       # make -C src clean
       # make -C src clean-deps
 
-#. Download the external dependencies and build the Wazuh manager. The build takes about 15 to 20 minutes on 4 CPU cores. It needs about 7 GB of free disk space, 4 GB for the source tree, and 2 GB for the installation. If the Wazuh indexer runs on this host, the host needs at least 8 GB of RAM, or the system can stop the Wazuh indexer during the build:
+#. Download the external dependencies and build the Wazuh manager. The build takes about 15 to 20 minutes on 4 CPU cores. It needs at least 7 GB of free disk space. The source tree takes about 4 GB, and the installation about 2 GB. If the Wazuh indexer runs on this host, the host needs at least 8 GB of RAM, or the system can stop the Wazuh indexer during the build:
 
    .. code-block:: console
 
@@ -92,7 +92,7 @@ Install the Wazuh indexer from packages first with the :doc:`step-by-step method
 
       # echo "WAZUH_INDEXER_MANAGER_PASSWORD=<WAZUH_INDEXER_MANAGER_PASSWORD>" >> /etc/wazuh-manager/local.env
 
-   Add the two Wazuh manager API passwords of the deployment so that the Wazuh dashboard can log in with the password it was given. They are in the ``credentials.env`` file that you created for the Wazuh indexer with the step-by-step method, or in ``wazuh-install-files/credentials.env`` of ``wazuh-install-files.tar`` with the installation assistant. Add them before you run ``install.sh``, which sets the API passwords only once. Replace ``<CREDENTIALS_FILE>`` with the path of the file:
+   Add the two Wazuh manager API passwords of the deployment so that the Wazuh dashboard can log in with the password it was given. They are in the ``credentials.env`` file that you created for the Wazuh indexer with the step-by-step method, or in ``wazuh-install-files/credentials.env`` with the installation assistant. To use that file, first extract the archive in the current directory with ``tar -xf wazuh-install-files.tar``. Add the passwords before you run ``install.sh``, which sets the API passwords only once. Replace ``<CREDENTIALS_FILE>`` with the path of the file:
 
    .. code-block:: console
 
@@ -127,12 +127,11 @@ Install the Wazuh indexer from packages first with the :doc:`step-by-step method
       # install -m 0640 -o root -g wazuh-manager manager-client.pem /etc/wazuh-manager/certs/indexer-connector.pem
       # install -m 0640 -o root -g wazuh-manager manager-client-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
 
-#. If you installed the Wazuh indexer with the installation assistant, on this host or on another one, place the certificates of this Wazuh manager node from ``wazuh-install-files.tar`` instead. Replace ``<MANAGER_NODE_NAME>`` with the name of this Wazuh manager node in ``config.yml``:
+#. If you installed the Wazuh indexer with the installation assistant, on this host or on another one, place the certificates of this Wazuh manager node from the ``wazuh-install-files`` directory that you extracted to add the API passwords instead. Replace ``<MANAGER_NODE_NAME>`` with the name of this Wazuh manager node in ``config.yml``:
 
    .. code-block:: console
-      :emphasize-lines: 3,4
+      :emphasize-lines: 2,3
 
-      # tar -xf wazuh-install-files.tar
       # install -m 0640 -o root -g wazuh-manager wazuh-install-files/root-ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
       # install -m 0640 -o root -g wazuh-manager wazuh-install-files/<MANAGER_NODE_NAME>.pem /etc/wazuh-manager/certs/indexer-connector.pem
       # install -m 0640 -o root -g wazuh-manager wazuh-install-files/<MANAGER_NODE_NAME>-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem

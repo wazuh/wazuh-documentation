@@ -64,21 +64,15 @@ Ubuntu endpoint
 
    .. code-block:: console
 
-      # ifconfig
+      $ ip -br link
 
    The command output looks similar to this:
 
    .. code-block:: none
       :class: output
 
-      enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-              inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
-              inet6 fe80::9ba2:9de3:57ad:64e5  prefixlen 64  scopeid 0x20<link>
-              ether 08:00:27:14:65:bd  txqueuelen 1000  (Ethernet)
-              RX packets 6704315  bytes 1268472541 (1.1 GiB)
-              RX errors 0  dropped 0  overruns 0  frame 0
-              TX packets 4590192  bytes 569730548 (543.3 MiB)
-              TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+      lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP>
+      enp0s3           UP             08:00:27:14:65:bd <BROADCAST,MULTICAST,UP,LOWER_UP>
 
 #. Restart the Suricata service:
 
