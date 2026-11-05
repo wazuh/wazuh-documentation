@@ -163,7 +163,7 @@ The table below shows the location of the Wazuh agent ``local_internal_options.c
 +----------+--------------------------------------------------------------------+
 | Linux    | ``/var/ossec/etc/local_internal_options.conf``                     |
 +----------+--------------------------------------------------------------------+
-| macOS    | ``/Library/Ossec/local_internal_options.conf``                     |
+| macOS    | ``/Library/Ossec/etc/local_internal_options.conf``                 |
 +----------+--------------------------------------------------------------------+
 
 The configurations below show how to enable and disable remote command execution on Linux endpoints.

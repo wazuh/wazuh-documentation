@@ -71,7 +71,7 @@ The **Server management** menu contains pages for the Wazuh manager:
 -  **Logs**: The logs of the Wazuh manager cluster
 -  **Settings**: The Wazuh manager cluster configuration
 -  **Dev Tools**: A console to send requests to the Wazuh manager API
--  **Security**: Wazuh manager API users, roles, and policies
+-  **API access control**: Wazuh manager API users, roles, and policies
 
 .. thumbnail:: /images/getting-started/dashboard-server-management.png
    :title: Server management menu
@@ -147,7 +147,7 @@ You can monitor the status and statistics of the Wazuh manager cluster, and run 
    :align: center
    :width: 80%
 
-You can also send notifications to external services, such as Slack, Jira, PagerDuty, and Shuffle. The Wazuh indexer creates a default notification channel for each of these services when it starts for the first time. The channels start disabled with placeholder values, so you configure and enable them under **Explore** > **Notifications** > **Channels**. **Health Check** verifies that the default channels exist.
+You can also send notifications to external services, such as Slack, Jira, PagerDuty, and Shuffle. The Wazuh indexer creates a default notification channel for each of these services when it starts for the first time. The channels are muted by default and use placeholder values. Configure them and change their status from ``Muted`` under **Explore** > **Notifications** > **Channels**. **Health Check** verifies that the default channels exist.
 
 .. thumbnail:: /images/getting-started/dashboard-notification-channels.png
    :title: Notification channels

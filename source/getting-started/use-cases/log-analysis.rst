@@ -8,7 +8,7 @@ Log data analysis
 
 Log data analysis helps organizations detect security events, investigate suspicious activity, and understand what is happening across their infrastructure. Logs collected and analyzed from multiple systems give you visibility into authentication activity, application behavior, network events, configuration changes, and other security-relevant operations.
 
-The Wazuh :doc:`log data collection </user-manual/capabilities/log-data-collection/index>` capability centralizes logs from monitored endpoints, network devices, applications, cloud services, containers, and agentless sources. The Wazuh manager enriches and normalizes this telemetry into the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>` and forwards the processed events to the Wazuh indexer for analysis. Wazuh rules and decoders support :doc:`log data analysis </user-manual/data-analysis/index>`, threat detection, and response. Centralized logs enable security teams to search, correlate, and investigate security events from a single interface.
+The Wazuh :doc:`log data collection </user-manual/capabilities/log-data-collection/index>` capability centralizes logs from monitored endpoints, network devices, applications, cloud services, and containers. The Wazuh manager enriches and normalizes this telemetry into the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>` and forwards the processed events to the Wazuh indexer for analysis. Wazuh rules and decoders support :doc:`log data analysis </user-manual/data-analysis/index>`, threat detection, and response. Centralized logs enable security teams to search, correlate, and investigate security events from a single interface.
 
 Collecting and centralizing security logs
 -----------------------------------------
@@ -17,7 +17,7 @@ Security events originate from operating systems, applications, network devices,
 
 The :doc:`Logcollector module </user-manual/capabilities/log-data-collection/how-it-works>` collects log files on :ref:`Linux <how-to-collect-linuxlogs>`, :ref:`Windows <how-to-collect-windowslogs>`, and :ref:`macOS <how-to-collect-macoslogs>` operating systems. It also monitors Windows Event Channels, collects logs from the macOS Unified Logging System (ULS), and reads the systemd journal through the journald collector. The Wazuh agent forwards collected logs to the Wazuh manager. The Wazuh manager normalizes and processes the logs before forwarding them to the Wazuh indexer. The Wazuh indexer analyzes the logs and stores them in dedicated data streams for centralized analysis.
 
-Wazuh also collects logs from syslog-enabled devices, agentless monitored systems, cloud providers, and third-party applications. A new log source requires only a configuration change on the Wazuh agent or Wazuh manager, depending on the integration.
+Wazuh also collects logs from syslog-enabled devices through a Wazuh agent that reads them, from cloud providers, and from third-party applications. A new log source requires only a configuration change on the Wazuh agent or Wazuh manager, depending on the integration.
 
 The **Discover** section of the Wazuh dashboard centralizes security events collected from monitored endpoints, applications, network devices, and cloud services.
 
@@ -59,59 +59,113 @@ The Wazuh indexer stores generated findings in the ``wazuh-findings-v5*`` data s
    :align: center
    :width: 80%
 
-For example, the rule below is triggered when a security audit log or cloud audit trail is cleared. Additionally, rules enrich events with technique identifiers from the MITRE ATT&CK framework and map them to regulatory compliance controls.
+For example, the rule below is triggered when a security audit log, shell history, or cloud audit trail is cleared. Additionally, rules enrich events with technique identifiers from the MITRE ATT&CK framework and map them to regulatory compliance controls.
 
 .. code-block:: json
 
    {
-     "id": "c0260049-054d-4336-8ea9-2434be0c7c80",
-     "title": "Security Audit Log Cleared",
+     "id": "77a9994e-d0db-535f-876c-fefdf7913d38",
      "level": "high",
      "category": "configuration",
-     "description": "Detects when a security audit log or cloud audit trail is cleared. Log clearing is a common anti-forensics technique used by attackers to cover their tracks after a compromise.\n",
-     "author": "Wazuh, Inc.",
      "status": "stable",
-     "detection": "condition: selection\nselection:\n  event.action: security-log-cleared\n  event.category|contains: configuration\n",
-     "references": [
-       {
-         "value": "https://attack.mitre.org/techniques/T1070/"
+     "detection": {
+       "condition": "selection and not filter_windows_eventlog",
+       "filter_windows_eventlog": {
+         "event.code": [
+           "1102",
+           "104"
+         ],
+         "event.dataset": [
+           "security",
+           "system"
+         ]
+       },
+       "selection": {
+         "event.action": "security-log-cleared",
+         "event.category|contains": "configuration"
        }
-     ],
+     },
      "tags": [
        {
          "value": "attack.defense-evasion"
        },
        {
-         "value": "attack.t1070.001"
+         "value": "attack.t1070.003"
        }
      ],
      "false_positives": [
+       {
+         "value": "An interactive shell writing its history file at exit when the history file is under an audit write watch (bash appends ~/.bash_history on every exit)"
+       },
+       {
+         "value": "A shell configuration that empties the history file by design (HISTFILESIZE=0, a ~/.bash_logout that truncates it)"
+       },
+       {
+         "value": "Account deprovisioning or home directory cleanup that deletes or empties *_history files"
+       },
        {
          "value": "Authorised log management and archival procedures"
        }
      ],
      "log_source": {
        "category": "configuration",
-       "product": "wazuh-core"
+       "product": "wazuh-generic-1"
      },
-     "last_update_time": "2026-04-01",
      "metadata": {
        "author": "Wazuh, Inc.",
-       "compatibility": "Integration agnostic - matches any decoder that populates event.action.",
        "date": "2026-04-01",
-       "description": "Detects when a security audit log or cloud audit trail is cleared. Log clearing is a common anti-forensics technique used by attackers to cover their tracks after a compromise.\n",
-       "documentation": null,
-       "modified": "2026-04-01",
-       "module": null,
+       "description": "Detects when a security audit log, shell history, or cloud audit trail is cleared. Log clearing is a common anti-forensics technique used by attackers to cover their tracks after a compromise. On Linux this fires on bash/shell history truncation, which corresponds to Clear Command History, not Windows Event Log clearing.\n",
+       "documentation": "Blind spots: Windows Security 1102 (event.dataset security) and the System channel 104 (event.dataset system) are excluded by event.dataset plus event.code; the Windows rule c21c2a72 owns Windows event log clearing. The filter is a cross product of the two lists, so security with 104 and system with 1102 are also excluded; neither pair is written by any decoder at offset 1787. On Linux the only producer is decoder/auditd/0, which writes security-log-cleared when the delivered audit event (the agent joins SYSCALL, PATH and PROCTITLE records into one event) carries a file.name containing _history; a PATH record alone decodes as file-referenced. The default Wazuh audit rules record execve only, so a history truncation raises nothing unless an audit watch covers the history file. unset HISTFILE before exit writes no file and is never seen. history -c clears only the shell's memory; it is seen only when the shell later writes the history file at exit and a write watch covers that file, and that write is indistinguishable from an ordinary exit append. The decoder does not check the syscall or the access type: any audited access to a *_history file matches, including an ordinary append at shell exit. Cloud audit trail deletion does not decode to security-log-cleared at offset 1787 and is not covered, although the description names it.",
+       "modified": "2026-10-06",
        "references": [
-         "https://attack.mitre.org/techniques/T1070/"
+         "https://attack.mitre.org/techniques/T1070/003/"
        ],
-       "title": "Security Audit Log Cleared",
-       "versions": null
+       "title": "Security audit log cleared",
+       "supports": []
      },
      "enabled": true,
-     "mitre": "subtechnique:\n  - T1070.001\ntactic:\n  - TA0005\ntechnique:\n  - T1070\n",
-     "compliance": "cmmc:\n  - AU.L2-3.3.1\n  - AU.L2-3.3.2\n  - IR.L2-3.6.1\nfedramp:\n  - AU-6\n  - AU-9\n  - IR-4\ngdpr:\n  - '32'\n  - '33'\nhipaa:\n  - 164.308.a.1.ii.D\n  - 164.308.a.6\n  - 164.312.b\niso_27001:\n  - A.12.4.1\n  - A.12.4.2\n  - A.16.1.2\nnis2:\n  - 21.2.a\n  - 21.2.e\n  - '23'\nnist_800_171:\n  - 3.3.1\n  - 3.3.2\n  - 3.3.4\nnist_800_53:\n  - AU-6\n  - AU-9\n  - SI-4\npci_dss:\n  - 10.2.6\n  - '10.3'\n  - '11.4'\ntsc:\n  - CC7.2\n  - CC7.3\n  - A1.2\n",
+     "mitre": {
+       "subtechnique": {
+         "id": [
+           "T1070.003"
+         ],
+         "name": [
+           "Clear Command History"
+         ]
+       },
+       "tactic": {
+         "id": [
+           "TA0005"
+         ],
+         "name": [
+           "Stealth"
+         ]
+       },
+       "technique": {
+         "id": [
+           "T1070"
+         ],
+         "name": [
+           "Indicator Removal"
+         ]
+       }
+     },
+     "compliance": {
+       "fedramp": [
+         "AU-9"
+       ],
+       "gdpr": [
+         "Article 32",
+         "Article 33",
+         "Article 5"
+       ],
+       "nist_800_53": [
+         "AU-9"
+       ],
+       "pci_dss": [
+         "10.2.1.3"
+       ]
+     },
      "rule": "",
      "queries": [],
      "query_field_names": []
@@ -170,7 +224,7 @@ Wazuh also includes predefined dashboards for security monitoring, compliance, e
 
 Security teams can create custom dashboards to monitor organization-specific security metrics, key performance indicators (KPIs), and operational telemetry. Custom dashboards provide a centralized view of security events and support continuous monitoring across different environments.
 
-The **Threat Hunting** dashboard provides a real-time overview of security telemetry, including event trends, compliance summaries, severity distribution, and other security metrics.
+The **Threat Hunting** dashboard provides an overview of findings, including their levels over time, the most active agents, integrations, and rules, and the most frequent MITRE ATT&CK techniques. For compliance, see the **Regulatory Compliance** dashboard.
 
 .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/threat-hunting-dashboard.png
    :title: Threat Hunting dashboard showing event trends, compliance summaries, and severity distribution
