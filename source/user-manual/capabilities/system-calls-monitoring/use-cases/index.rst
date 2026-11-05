@@ -6,7 +6,7 @@
 Use cases
 =========
 
-The use cases described below are performed on an Ubuntu 24.04 endpoint that has a Wazuh agent installed and enrolled in a Wazuh manager. The first four use cases do not need custom rules; the Linux kernel emits the ``ANOM_ABEND``, ``ANOM_PROMISCUOUS``, ``DAEMON_END``, and ``DAEMON_START`` records they rely on automatically.
+The use cases described below are performed on an Ubuntu 24.04 endpoint that has a Wazuh agent installed and enrolled in a Wazuh manager. These use cases work without custom audit rules or custom detection rules. The Linux kernel emits the ``ANOM_ABEND`` and ``ANOM_PROMISCUOUS`` records, and the audit daemon writes the ``DAEMON_START`` and ``DAEMON_END`` records.
 
 .. toctree::
    :maxdepth: 1

@@ -34,6 +34,7 @@ Options
 - `process_priority`_
 - `registry_ignore`_
 - `scan_day`_
+- `scan_on_start`_
 - `scan_time`_
 - `skip_dev`_
 - `skip_nfs`_
@@ -555,6 +556,27 @@ Example:
 
    <scan_day>thursday</scan_day>
 
+scan_on_start
+^^^^^^^^^^^^^
+
+.. deprecated:: 5.0.0
+
+   This option has no effect in Wazuh 5.0. It is still accepted so configurations from Wazuh 4.x agents don't fail. The Wazuh agent logs this message at the INFO level when it finds it: ``The <scan_on_start> option is deprecated and no longer has any effect.`` FIM always runs a scan when the Wazuh agent starts, to create the baseline.
+
+Specifies if FIM runs a scan when the Wazuh agent starts.
+
++----------------------+-----------+
+| **Default value**    | yes       |
++----------------------+-----------+
+| **Allowed values**   | yes, no   |
++----------------------+-----------+
+
+Example:
+
+.. code-block:: xml
+
+   <scan_on_start>yes</scan_on_start>
+
 scan_time
 ^^^^^^^^^
 
@@ -770,7 +792,7 @@ The diff settings will be configured inside this tag.
 disk_quota
 ~~~~~~~~~~~
 
-This option can be used to limit the size of the ``queue/diff/local`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
+This option can be used to limit the size of the ``queue/diff/file`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
 
 ``enabled`` — Set the disk quota limit option to enabled or disabled.
 
@@ -780,7 +802,7 @@ This option can be used to limit the size of the ``queue/diff/local`` folder whe
 | **Allowed values**   | yes, no  |
 +----------------------+----------+
 
-``limit`` — Specifies the limit for the size of the ``queue/diff/local`` folder.
+``limit`` — Specifies the limit for the size of the ``queue/diff/file`` folder.
 
 +----------------------+--------------------------------------------+
 | **Default value**    | 1GB                                        |
