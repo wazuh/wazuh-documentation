@@ -109,7 +109,7 @@ Windows
 +------------------------------------------------------------------------------------+-------------------+----------------------+
 | Version                                                                            | Architecture      | Package              |
 +====================================================================================+===================+======================+
-| See :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`         | 32-bit and 64-bit | |Windows7Plus_32_64| |
+| See :doc:`Requirements </user-manual/agent/agent-enrollment/requirements>`         | 64-bit (x86_64)   | |Windows7Plus_32_64| |
 +------------------------------------------------------------------------------------+-------------------+----------------------+
 
 .. _packages_list_agent_macos:

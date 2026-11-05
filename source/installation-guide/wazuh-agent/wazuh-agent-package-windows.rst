@@ -84,7 +84,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
             You can also uninstall the agent and reinstall it with a valid token. After ``ERR_BAD_TOKEN``, the agent enrolls under the endpoint's host name. ``Select-String`` keeps showing the old failure lines above the new success line, because ``C:\Program Files (x86)\ossec-agent\ossec.log`` keeps them.
 
-         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first alerts can take a few minutes to appear on a new deployment. The installation process is now complete, and the Wazuh agent is successfully installed and configured.
+         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first findings can take a few minutes to appear on a new deployment. The installation process is now complete, and the Wazuh agent is successfully installed and configured.
 
       .. group-tab:: GUI
 
@@ -98,6 +98,6 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
                :title: Manage Enroll in the Windows agent GUI
                :alt: Manage Enroll in the Windows agent GUI
 
-         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first alerts can take a few minutes to appear on a new deployment. The installation process is now complete, and the Wazuh agent is successfully installed on your Windows endpoint.
+         In the Wazuh dashboard, **Agents management** > **Summary** lists the agent as **Active**. Its first findings can take a few minutes to appear on a new deployment. The installation process is now complete, and the Wazuh agent is successfully installed on your Windows endpoint.
 
 By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.

@@ -102,7 +102,7 @@ You can install the Wazuh manager as a single-node or multi-node cluster.
 
 -  Disk space requirements
 
-   The Wazuh manager no longer stores alerts from monitored endpoints. Instead, it stores the content and databases required by its server-side modules. The Vulnerability Scanner feed needs at least 15 GB of storage, so give a Wazuh manager at least 20 GB of disk space.
+   The Wazuh manager doesn't store the events or findings of monitored endpoints, which the Wazuh indexer stores. Instead, it stores the content and databases required by its server-side modules. The Vulnerability Scanner feed needs at least 15 GB of storage, so give a Wazuh manager at least 20 GB of disk space.
 
 .. _wazuh_manager_required_ports:
 
