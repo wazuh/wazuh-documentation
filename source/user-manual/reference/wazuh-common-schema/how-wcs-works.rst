@@ -18,10 +18,10 @@ WCS is organized in modules. Each module defines the data model of one type of i
 -  `Stateless modules <https://github.com/wazuh/wazuh-indexer-plugins/tree/|WCS_REF|/wcs/stateless>`__: Data streams that store events, findings, and metrics as they happen. The ``stateless/events/main`` module is the base of the events and findings data streams.
 -  `Stateful modules <https://github.com/wazuh/wazuh-indexer-plugins/tree/|WCS_REF|/wcs/stateful>`__: State indices that store the latest known state of each monitored endpoint, such as its monitored files, installed packages, and vulnerabilities.
 
-Each module lists its fields in two generated files in its ``docs`` folder:
+Each module lists its fields in generated files in its ``docs`` folder:
 
 -  ``fields.csv``: One row per field, with its field set, type, level, an example, and a short description. The :doc:`WCS field reference <wcs-field-reference>` shows these files as tables.
--  ``wcs_flat.yml``: The same fields with their full description.
+-  ``wcs_flat.yml``: The same fields with their full description. Only stateless modules have this file.
 
 Indices and data streams
 ------------------------

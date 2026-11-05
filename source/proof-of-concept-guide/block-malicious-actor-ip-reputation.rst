@@ -431,15 +431,19 @@ Active response
 
 #. Navigate to **Explore** > **Active Responses,** then click **Create active response**. Fill in the following parameters:
 
-   +-----------------+--------------------------------------------------------------+
-   | Field           | Value                                                        |
-   +=================+==============================================================+
-   | ``Name``        | ``block_traffic``                                            |
-   +-----------------+--------------------------------------------------------------+
-   | ``Description`` | ``Adds a referenced IP address to the firewall's blocklist`` |
-   +-----------------+--------------------------------------------------------------+
-   | ``Executable``  | ``block-ip``                                                 |
-   +-----------------+--------------------------------------------------------------+
+   +----------------------+--------------------------------------------------------------+
+   | Field                | Value                                                        |
+   +======================+==============================================================+
+   | ``Name``             | ``block_traffic``                                            |
+   +----------------------+--------------------------------------------------------------+
+   | ``Description``      | ``Adds a referenced IP address to the firewall's blocklist`` |
+   +----------------------+--------------------------------------------------------------+
+   | ``Executable``       | ``block-ip``                                                 |
+   +----------------------+--------------------------------------------------------------+
+   | ``Type``             | ``Stateful``                                                 |
+   +----------------------+--------------------------------------------------------------+
+   | ``Stateful timeout`` | ``60``                                                       |
+   +----------------------+--------------------------------------------------------------+
 
 #. Click **Create** to create the Active Response.
 
@@ -510,7 +514,7 @@ Access any of the web servers from the RHEL endpoint using the corresponding IP 
 
    $ curl http://<WEBSERVER_IP>
 
-The first connections from the attacker endpoint to the victim's web servers succeed. Within about two minutes, the Active Response monitor runs and the Wazuh Active Response module blocks any further connection from the attacker endpoint to the web servers.
+The first connections from the attacker endpoint to the victim's web servers succeed. Within about two minutes, the Active Response monitor runs and the Wazuh Active Response module blocks any further connection from the attacker endpoint to the web servers for 60 seconds.
 
 Visualize the findings
 -----------------------

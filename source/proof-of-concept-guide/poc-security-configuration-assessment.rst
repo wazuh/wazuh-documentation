@@ -216,7 +216,7 @@ You can visualize the SCA checks on the Wazuh dashboard. To see the SCA check re
 
 #. Navigate to **Endpoint security** > **Configuration Assessment**.
 
-#. Select the Ubuntu agent and inspect both the default ``CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0`` and ``Custom Web Server Hardening`` SCA policies.
+#. Select the Ubuntu agent and inspect both the default ``CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.`` and ``Custom Web Server Hardening`` SCA policies.
 
    .. thumbnail:: /images/poc/sca-checks-overview.png
       :title: SCA checks overview
@@ -228,7 +228,7 @@ You can visualize the SCA checks on the Wazuh dashboard. To see the SCA check re
 
 #. In the **Operator** field, select ``is``.
 
-#. In the **Values** field, select ``CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0``. Inspect the information under **Dashboard** and **Inventory**.
+#. In the **Values** field, select ``CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.``. Inspect the information under **Dashboard** and **Inventory**.
 
    .. thumbnail:: /images/poc/sca-cis-ubuntu-dashboard.png
       :title: CIS Ubuntu Linux 24.04 LTS Benchmark dashboard

@@ -73,7 +73,7 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
 
       $ sudo systemctl restart wazuh-agent
 
-Perform the following steps on the Wazuh dashboard to enable the docker integration.
+Perform the following steps on the Wazuh dashboard to enable the docker integration and its detector.
 
 #. Navigate to **Ruleset management** > **Overview**.
 
@@ -84,6 +84,14 @@ Perform the following steps on the Wazuh dashboard to enable the docker integrat
    .. thumbnail:: /images/poc/docker-integration-enable.png
       :title: Enable the docker integration
       :alt: Wazuh dashboard Ruleset management page for the docker integration with the Actions menu open and Enable highlighted
+      :align: center
+      :width: 80%
+
+#. Navigate to **Ruleset Management** > **Detection** > **Detectors**, select the **docker** detector, and start it if it isn't active. To do so, click **Actions** and select **Start detector**. Wait a few minutes before you test the configuration, because the Wazuh manager applies content changes at its next synchronization.
+
+   .. thumbnail:: /images/poc/docker-detector-start.png
+      :title: Start the docker detector
+      :alt: Wazuh dashboard Ruleset management page for the docker detector with the Actions menu open and Start detector highlighted
       :align: center
       :width: 80%
 
