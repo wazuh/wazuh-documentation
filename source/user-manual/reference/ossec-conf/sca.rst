@@ -23,7 +23,6 @@ Options
 -------
 
 Main options
-^^^^^^^^^^^^
 
 - `enabled`_
 - `skip_nfs`_
@@ -41,7 +40,6 @@ Main options
 +----------------------+-----------------------------+
 
 Scheduling options
-^^^^^^^^^^^^^^^^^^
 
 - `scan_on_start`_
 - `interval`_
