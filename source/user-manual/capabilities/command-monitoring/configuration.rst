@@ -342,7 +342,7 @@ Below is the full JSON data of the generated finding. The command output looks s
 
    {
      "_index": ".ds-wazuh-findings-v5-system-activity-000001",
-     "_id": "lDuHap8BpaK1MlnXo2hy",
+     "_id": "r080qwYB5tBJKNeondqWkw",
      "_score": null,
      "_source": {
        "wazuh": {
@@ -356,7 +356,7 @@ Below is the full JSON data of the generated finding. The command output looks s
          },
          "agent": {
            "host": {
-             "hostname": "Ubuntu2404",
+             "hostname": "Ubuntu24",
              "os": {
                "name": "Ubuntu",
                "type": "linux",
@@ -369,7 +369,7 @@ Below is the full JSON data of the generated finding. The command output looks s
            "groups": [
              "default"
            ],
-           "id": "002",
+           "id": "001",
            "version": "v5.0.0"
          },
          "integration": {
@@ -381,7 +381,6 @@ Below is the full JSON data of the generated finding. The command output looks s
            "category": "system-activity"
          },
          "rule": {
-           "sigma_id": "41ca4dd7-c9c2-47bd-8e07-4b905775a23e",
            "level": "informational",
            "mitre": {
              "technique": {
@@ -393,7 +392,7 @@ Below is the full JSON data of the generated finding. The command output looks s
                ]
              }
            },
-           "id": "41ca4dd7-c9c2-47bd-8e07-4b905775a23e",
+           "id": "36ec2b59-bfa1-4c1d-9502-1f03245aa380",
            "title": "Wazuh CM - The currently logged in user is root\n",
            "tags": [
              "informational",
@@ -402,26 +401,27 @@ Below is the full JSON data of the generated finding. The command output looks s
            "status": "experimental"
          },
          "event": {
-           "id": "154b6776-af25-46e5-b1a8-8af38c2c9ac2"
+           "id": "d767cd87-e8a1-496f-aef8-2af2bfa615a8"
          },
          "space": {
            "name": "standard"
          }
        },
        "process": {
-         "args": [],
          "io": {
            "text": "root\n"
          },
          "name": "whoami",
+         "exit_code": 0,
          "command_line": "whoami",
          "executable": "/usr/bin/whoami"
        },
-       "@timestamp": "2026-07-16T10:42:55.358Z",
+       "@timestamp": "2026-11-04T18:28:15.166681922Z",
        "event": {
-         "original": "{\"event\":{\"module\":\"wazuh-wodle-cmd\",\"start\":\"2026-07-16T10:42:53.789Z\"},\"tags\":[\"who-user\"],\"process\":{\"args\":[],\"name\":\"whoami\",\"path\":\"/usr/bin/whoami\",\"command_line\":\"whoami\",\"exit_code\":0,\"io\":{\"text\":\"root\\n\"}}}",
+         "original": "{\"event\":{\"module\":\"wazuh-wodle-cmd\",\"start\":\"2026-11-04T18:28:14.690Z\"},\"tags\":[\"who-user\"],\"process\":{\"args\":[],\"name\":\"whoami\",\"path\":\"/usr/bin/whoami\",\"command_line\":\"whoami\",\"exit_code\":0,\"io\":{\"text\":\"root\\n\"}}}",
          "kind": "event",
-         "start": "2026-07-16T10:42:53.789Z",
+         "start": "2026-11-04T18:28:14.690Z",
+         "action": "scheduled-task-executed",
          "index": ".ds-wazuh-events-v5-system-activity-000001",
          "category": [
            "process"
@@ -430,23 +430,26 @@ Below is the full JSON data of the generated finding. The command output looks s
            "start"
          ],
          "dataset": "wazuh.wodle",
-         "doc_id": "ijuFap8BpaK1MlnX9Gjt",
+         "doc_id": "OwDRp6EBL3TsyYQSy0BC",
          "outcome": "success"
        },
        "data_stream": {
          "type": "logs",
          "dataset": "wazuh.wodle"
-       }
+       },
+       "tags": [
+         "who-user"
+       ]
      },
      "fields": {
-       "event.start": [
-         "2026-07-16T10:42:53.789Z"
-       ],
        "@timestamp": [
-         "2026-07-16T10:42:55.358Z"
+         "2026-11-04T18:28:15.166681922Z"
+       ],
+       "event.start": [
+         "2026-11-04T18:28:14.690Z"
        ]
      },
      "sort": [
-       1784198575358
+       1793816895166681900
      ]
    }
