@@ -5,8 +5,8 @@
 
 .. _audit-configuration:
 
-Configuration
-=============
+Configuring Linux system call monitoring
+========================================
 
 The Linux Audit framework generates events for file access, file attribute changes, command execution, and monitored system calls. Audit rules use the ``-k`` argument to assign a descriptive key to each rule. The Linux Audit framework includes this key in matching audit events, allowing Wazuh to identify the activity associated with the generated event.
 
@@ -88,6 +88,6 @@ Monitored endpoint
 
       # systemctl restart wazuh-agent
 
-#. Optionally create audit rules for the files and system calls you want to monitor, using the ``auditctl`` command or the audit rules file.
+#. Optionally create audit rules for the files and system calls you want to monitor. Use the ``auditctl`` command for a test, or a ``.rules`` file in ``/etc/audit/rules.d/`` to keep the rules after a restart.
 
 The **Threat Hunting** module of the Wazuh dashboard displays Linux audit findings.
