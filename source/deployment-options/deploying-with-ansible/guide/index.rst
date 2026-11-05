@@ -156,6 +156,8 @@ Run the playbook
 
       # ansible-playbook wazuh-aio.yml -e "source=prerelease" -K
 
+   The ``-K`` option makes Ansible ask for the ``BECOME password``, which is the sudo password of ``<USERNAME>`` on the targets. Press **Enter** if ``<USERNAME>`` can use sudo without a password.
+
 #. Run the following commands on the all-in-one node to check that the services are active.
 
    -  Wazuh indexer:
@@ -574,6 +576,8 @@ The command output looks similar to this:
    pin: <CA_PIN>
    credential: yes
 
+If ``<WAZUH_MANAGER_ADDRESS>`` is an IP address, the command also prints ``WARNING: the token address '<WAZUH_MANAGER_ADDRESS>' is an IP address: the token stops working if the manager's address changes.`` The token still works.
+
 Copy the first line, ``<ENROLLMENT_TOKEN>``. The token is valid for 30 days and can be used to enroll several agents until it expires.
 
 Store the token with Ansible Vault on the Ansible control node. Replace ``<ENROLLMENT_TOKEN>`` with the token you copied. The commands save it, encrypted, in ``group_vars/agents/vault.yml`` next to the playbook, and Ansible loads it for the ``agents`` group:
@@ -584,6 +588,18 @@ Store the token with Ansible Vault on the Ansible control node. Replace ``<ENROL
    # cd /etc/ansible/roles/wazuh-ansible/
    # mkdir -p group_vars/agents
    # ansible-vault encrypt_string '<ENROLLMENT_TOKEN>' --name 'vault_wazuh_enrollment_token' >> group_vars/agents/vault.yml
+
+To replace the token later, for example when it expires, first delete the old ``vault_wazuh_enrollment_token`` entry from ``group_vars/agents/vault.yml``. The entry is the line with that name and the indented lines under it, for example:
+
+.. code-block:: yaml
+
+   vault_wazuh_enrollment_token: !vault |
+             $ANSIBLE_VAULT;1.1;AES256
+             <ENCRYPTED_DATA>
+
+If you don't delete it, the file holds two ``vault_wazuh_enrollment_token`` entries. The agent playbook then uses the last one and warns ``found a duplicate dict key`` on every run.
+
+To skip the deletion, run the ``ansible-vault encrypt_string`` command with ``>`` instead of ``>>``, which overwrites the file. Do this only if the file holds no other secret. For example, if you stored the Windows password in it, as :ref:`Prepare the playbook <ansible_agent_prepare>` describes, ``>`` deletes ``vault_wazuh_agent_windows_password`` too.
 
 .. note::
 
@@ -800,4 +816,4 @@ To remove the deployment, follow :doc:`Uninstalling the Wazuh central components
 
 In the clone on the Ansible control node, ``deployment-credentials`` holds the passwords of the deployment, and ``deployment-config-files`` holds its certificates. The root CA stays in the directory under ``/var/lib/wazuh-ansible/`` that the playbook prints. A later run from the same clone installs the deployment again with the same passwords and certificates. Remove those directories only if you do not deploy from that clone again.
 
-Wazuh agents enrolled with the removed deployment do not reconnect to a new one, even one deployed from the same clone. Remove the Wazuh agent from each endpoint, generate an enrollment token on the new deployment, and run the agent playbook again.
+Wazuh agents enrolled with the removed deployment do not reconnect to a new one, even one deployed from the same clone. :doc:`Remove the Wazuh agent </installation-guide/uninstalling-wazuh/agent>` from each endpoint, generate an enrollment token on the new deployment, and store it in place of the old one, as :ref:`Generate an enrollment token <ansible_agent_token>` describes. Then run the agent playbook again.
