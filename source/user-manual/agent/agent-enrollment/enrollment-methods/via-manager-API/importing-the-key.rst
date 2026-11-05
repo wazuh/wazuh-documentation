@@ -88,19 +88,19 @@ Windows
 
 Follow the steps below to import the client key to a Windows endpoint.
 
-#. From the Wazuh agent, launch the CMD or PowerShell as an administrator and import the client key. Replace ``<KEY>`` with the client key received from the Wazuh manager:
+#. From the Wazuh agent, launch the CMD or PowerShell as an administrator and import the client key. The following commands are for PowerShell. In CMD, run them without the leading ``&``. Replace ``<KEY>`` with the client key received from the Wazuh manager:
 
    For 64-bit systems:
 
    .. code-block:: powershell
 
-      > "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <KEY>
+      > & "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <KEY>
 
    For 32-bit systems:
 
    .. code-block:: powershell
 
-      > "C:\Program Files\ossec-agent\manage_agents.exe" -i <KEY>
+      > & "C:\Program Files\ossec-agent\manage_agents.exe" -i <KEY>
 
    The output should look like this:
 

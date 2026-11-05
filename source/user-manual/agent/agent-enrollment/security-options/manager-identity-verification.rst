@@ -24,7 +24,7 @@ You need a certificate authority to sign certificates for the Wazuh manager and 
 
    # openssl req -x509 -new -nodes -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
 
-The root certificate is created and saved as the ``rootCA.pem`` file.
+The root certificate is created and saved as the ``rootCA.pem`` file. The default validity is 30 days.
 
 Wazuh agents enrollment with token
 ----------------------------------
@@ -36,6 +36,8 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
    .. code-block:: console
 
       # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
+
+   If the address isn't in the SAN, the command fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``. Use an address that ``openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName`` lists, or reissue the Wazuh manager certificate with that address.
 
    The token is displayed only once. Store it securely, as no command retrieves it later. Tokens expire after 30 days by default. Use ``--ttl`` to change this.
 
@@ -178,20 +180,14 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
       Certificate request self-signature ok
       subject=C=US, CN=192.168.xxx.xxx
 
-#. Copy the newly signed certificate and key files to ``/etc/wazuh-manager/certs`` on the Wazuh manager, set their ownership and permissions, and copy ``rootCA.pem`` to ``/etc/wazuh-manager/certs/root-ca.pem``, the CA file the Wazuh agents receive:
+#. Copy the newly signed certificate and key files to ``/etc/wazuh-manager/certs`` on the Wazuh manager and set their ownership and permissions. Then add ``rootCA.pem`` to the CA bundle that the Wazuh agents receive with ``wazuh-manager-certs add``. Do not copy it over ``/etc/wazuh-manager/certs/root-ca.pem``, as the Wazuh manager doesn't start if that file loses its own CA:
 
    .. code-block:: console
 
       # cp sslmanager.cert sslmanager.key /etc/wazuh-manager/certs
       # chown root:wazuh-manager /etc/wazuh-manager/certs/sslmanager.cert /etc/wazuh-manager/certs/sslmanager.key
       # chmod 640 /etc/wazuh-manager/certs/sslmanager.cert /etc/wazuh-manager/certs/sslmanager.key
-      # cp rootCA.pem /etc/wazuh-manager/certs/root-ca.pem
-
-#. Restart the Wazuh manager to apply the changes made:
-
-   .. code-block:: console
-
-      # systemctl restart wazuh-manager
+      # /var/wazuh-manager/bin/wazuh-manager-certs add rootCA.pem
 
 #. Configure the new certificate on the Wazuh manager. Edit the ``<auth>`` section of the ``/etc/wazuh-manager/wazuh-manager.conf`` file:
 

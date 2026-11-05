@@ -32,7 +32,7 @@ You need a certificate authority to sign certificates for the Wazuh manager and 
 
       # openssl req -x509 -new -nodes -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
 
-The root certificate is created and saved as the ``rootCA.pem`` file.
+The root certificate is created and saved as the ``rootCA.pem`` file. The default validity is 30 days.
 
 Wazuh agent verification options
 --------------------------------
