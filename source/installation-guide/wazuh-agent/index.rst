@@ -111,11 +111,41 @@ Complete the following steps on the Wazuh manager master node to generate the en
 
       # openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
 
-   The list depends on how you installed the Wazuh manager. After an assisted installation, it holds the node name, its ``ip`` and ``dns`` values in ``config.yml``, and any address added with ``-as|--agent-san``. After a step-by-step installation, it holds the same values from the certificates tool's ``config.yml``, and any address added with ``-as``. After the :doc:`Quickstart </quickstart>`, it holds the server's host name, its fully qualified domain name, and its IP addresses. In that case, and on an all-in-one host installed step by step, it also holds ``localhost``, ``127.0.0.1``, and ``::1``. After an assisted installation, and on a Wazuh manager node that took its certificates from ``wazuh-certificates.tar``, it holds no loopback address. To enroll a Wazuh agent on that node, use the node's address from the list. A token for any other address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
+   The list depends on how you installed the Wazuh manager.
 
-#. Run the following command to create an enrollment token. Replace ``<WAZUH_MANAGER_ADDRESS>`` with an address from that list that the endpoints can resolve and reach. With an IP address, enrollment works, but the command prints a warning, because the token stops working if the Wazuh manager's IP address changes. Use a DNS name if agents must verify the Wazuh manager by name or its IP address can change.
+   -  An assisted installation that uses ``config.yml`` puts the node's ``ip`` and ``dns`` values from ``config.yml`` in the list, followed by any address added with ``-as|--agent-san`` and the node name. The output looks similar to this:
+
+      .. code-block:: none
+         :class: output
+
+         IP Address:192.168.33.155, DNS:wazuh-manager.lab.local, DNS:agents.lab.local, DNS:wazuh-1
+
+   -  A step-by-step installation puts the same values from the certificates tool's ``config.yml`` in the list, along with any address added with ``-as``. The output looks similar to this:
+
+      .. code-block:: none
+         :class: output
+
+         IP Address:192.168.33.142, DNS:wazuh.example.com, DNS:wazuh-1
+
+   -  The :doc:`Quickstart </quickstart>` puts the server's host name, its fully qualified domain name, and its IP addresses in the list. The Wazuh manager issues its certificate itself, so the list also holds ``localhost``, ``127.0.0.1``, and ``::1``. The same applies to an all-in-one host installed step by step. The output looks similar to this:
+
+      .. code-block:: none
+         :class: output
+
+         DNS:w50-qs, IP Address:192.168.33.146, DNS:localhost, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1
+
+   -  A Wazuh manager node that takes its certificates from ``wazuh-install-files.tar`` or ``wazuh-certificates.tar``, as in a distributed installation, has no loopback address in the list. The output looks similar to this:
+
+      .. code-block:: none
+         :class: output
+
+         IP Address:192.168.33.142, DNS:manager
+
+   To enroll a Wazuh agent on that node, use the node's address from the list. A token for any other address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
 
    If an address that agents use isn't in the list, add it to the Wazuh manager certificate first, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. Examples are a load balancer, a NAT address, or a public name.
+
+#. Run the following command to create an enrollment token. Replace ``<WAZUH_MANAGER_ADDRESS>`` with an address from that list that the endpoints can resolve and reach. With an IP address, enrollment works, but the command prints a warning, because the token stops working if the Wazuh manager's IP address changes. Use a DNS name if agents must verify the Wazuh manager by name or its IP address can change.
 
    .. code-block:: console
 

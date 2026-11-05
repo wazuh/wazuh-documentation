@@ -336,7 +336,7 @@ Configuring the Wazuh manager master node
    +-------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`nodes <reference_wazuh_manager_conf_cluster_nodes>`         | It is the address of the master node and can be either an IP or a DNS. This parameter must be specified in all nodes, including the master itself. |
    +-------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`hidden <reference_wazuh_manager_conf_cluster_hidden>`       | It hides this node in cluster listings. In this version, no component reads it, so it has no effect.                                               |
+   | :ref:`hidden <reference_wazuh_manager_conf_cluster_hidden>`       | Reserved for hiding this node in cluster listings. In this version, no component reads it, and setting it has no effect.                           |
    +-------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
 
 #. Restart the Wazuh manager.
