@@ -17,6 +17,10 @@ socket
 
 Configuration options for defining output sockets.
 
+.. note::
+
+   The Wazuh agent ignores ``<socket>`` blocks received through the centralized configuration (``agent.conf``) unless ``logcollector.remote_commands=1`` is set in the ``/var/ossec/etc/local_internal_options.conf`` file of the agent. It logs ``Remote sockets are not accepted from the manager`` for each ignored socket. Sockets defined in the local ``ossec.conf`` file aren't affected.
+
 Options
 -------
 

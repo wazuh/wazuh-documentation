@@ -29,6 +29,12 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 
     wazuh_command.remote_commands=1
 
+Logcollector commands and sockets have the same requirement. To accept ``command`` and ``full_command`` log sources, ``<socket>`` blocks, and socket targets from the shared configuration, add the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in the agent:
+
+.. code-block:: shell
+
+   logcollector.remote_commands=1
+
 Agent groups
 ------------
 

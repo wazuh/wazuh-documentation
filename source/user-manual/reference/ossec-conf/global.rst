@@ -174,10 +174,12 @@ email_log_source
 This selects the alert file to be read from.
 
 +--------------------+---------------------------+
-| **Default value**  | alerts.log                |
+| **Default value**  | alerts.json               |
 +--------------------+---------------------------+
 | **Allowed values** | alerts.log or alerts.json |
 +--------------------+---------------------------+
+
+The ``ossec.conf`` file installed with the Wazuh manager sets this option to ``alerts.log``.
 
 custom_alert_output
 ^^^^^^^^^^^^^^^^^^^

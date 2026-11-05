@@ -40,10 +40,18 @@ Run the following command to install the dependencies depending on your Python v
 
    .. group-tab:: Python 3.11–3.13
 
+      On Debian and Ubuntu, first install the ``typing_extensions`` package with ``--ignore-installed``. The newer copy is installed next to the one from the system package, which pip can't remove:
+
+      .. code-block:: console
+
+         $ sudo pip3 install --break-system-packages --ignore-installed typing_extensions
+
+      Then install the dependencies:
+
       .. code-block:: console
 
          $ sudo pip3 install --break-system-packages google-cloud-pubsub==2.7.1 "google-cloud-storage>=2.14.0" pytz==2020.1 setuptools==68.0.0
 
       .. note::
 
-         If you're using a virtual environment, remove the ``--break-system-packages`` parameter from the command above.
+         If you're using a virtual environment, remove the ``--break-system-packages`` parameter from the commands above.

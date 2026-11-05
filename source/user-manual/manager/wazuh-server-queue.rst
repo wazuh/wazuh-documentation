@@ -161,14 +161,7 @@ The ``queue_and`` queue resides in the :doc:`Wazuh analysis engine </user-manual
 How to configure the Wazuh analysis engine queue
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh analysis engine queue receives logs from Wazuh agents for analysis using the ``queue_and`` queue. All incoming log messages are categorized and queued in the following categories:
-
--  File integrity monitoring event decoder queue.
--  Syscollector event decoder queue.
--  Root check event decoder queue.
--  Host info event decoder queue.
--  Event decoder queue.
--  Windows event decoder queue.
+The Wazuh analysis engine receives logs from Wazuh agents for analysis using the ``queue_and`` queue. Incoming messages go to a decoder queue for their type: file integrity monitoring, Syscollector, rootcheck, SCA, host info, Windows events, database synchronization, upgrade, and other events. Decoded events then go to the rule matching queue, and the results go to the alerts, firewall, statistical, and archives queues.
 
 Each queue category has a set of threads responsible for its First In, First Out (FIFO) event management. The number of threads is individually configurable per event type through the ``/var/ossec/etc/internal_options.conf`` file on the Wazuh server.
 

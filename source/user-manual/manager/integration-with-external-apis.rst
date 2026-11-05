@@ -197,7 +197,7 @@ To set up this integration, do the following:
 
 #. Click on the ``Webhook`` node and rename it to ``Wazuh alerts``.
 
-   #. Copy and save the webhook URL to use it when configuring the Wazuh server. The webhook URL looks like ``https://shuffle.io/api/v1/hooks/<WEBHOOK>``.
+   #. Copy and save the webhook URL to use it when configuring the Wazuh server. The webhook URL looks like ``https://shuffler.io/api/v1/hooks/<WEBHOOK>``.
    #. Click on **Start** to run the webhook.
 
    .. thumbnail:: /images/manual/wazuh-server/shuffle-webhook-url.jpg
@@ -206,7 +206,7 @@ To set up this integration, do the following:
       :align: center
       :width: 80%
 
-#. Click on the **Change Me** node and configure it repeat Wazuh alerts
+#. Click on the **Change Me** node and configure it to repeat Wazuh alerts
 
    -  Ensure the action is **repeat back to me.**
    -  Enter the ``$exec`` in the **Code** section.

@@ -118,6 +118,19 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
       .. include:: /_templates/common/restart_dashboard.rst
 
+.. note::
+
+   The read-only user can't open some pages, which show a permission error or an empty list:
+
+   -  **Indexer management** > **Index Management** and **Snapshot Management**.
+   -  **Notifications**.
+   -  **Dashboard management** > **Reporting**.
+   -  **Server management** > **Security** and **Ruleset Test**, because of the Wazuh ``readonly`` role.
+
+   To give the user read access to Reporting, Notifications, and Snapshot Management, also map the user to the ``reports_read_access``, ``notifications_read_access``, and ``snapshot_management_read_access`` roles in **Indexer management** > **Security** > **Roles**. Index Management has no read-only role.
+
+   Don't map the user to the ``kibana_user`` role or the ``kibanauser`` backend role. They give write access to the Wazuh dashboard configuration, so the user could change settings such as **Dashboard management** > **Advanced settings**.
+
 Creating an internal user and mapping it to Wazuh
 -------------------------------------------------
 

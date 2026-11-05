@@ -90,9 +90,9 @@ Enables the Microsoft Graph module.
 only_future_events
 ^^^^^^^^^^^^^^^^^^
 
-Set it to **yes** to collect events generated since the Wazuh manager was started.
+Set it to **yes** to collect only events generated from the module start onward. The first scan starts ``time_delay`` before the module start, so it also collects events up to ``time_delay`` older than the start.
 
-By default, the Microsoft Graph module will only read logs from when the module was started onward.
+By default, the Microsoft Graph module only reads logs from the module start onward.
 
 +--------------------+-----------------------------+
 | **Default value**  | yes                         |
@@ -180,7 +180,7 @@ This block configures the credentials used for authenticating with the Microsoft
 - `api_auth\\secret_value`_
 - `api_auth\\api_type`_
 
-.. note:: In the case of an invalid configuration, a warning message will be generated in the log file.
+.. note:: If the credentials are invalid, the module logs a warning when it requests the access token. If the configuration block is malformed, for example an ``api_auth`` block without ``client_id``, ``wazuh-modulesd`` logs an error and stops with a configuration error.
 
 +----------------------------------------+----------------------------------------------+
 | Options                                | Allowed values                               |

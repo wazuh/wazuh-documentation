@@ -145,7 +145,7 @@ Download the utilities and configure the CDB list
 
    .. code-block:: console
 
-      $ sudo echo "<ATTACKER_IP>" >> /var/ossec/etc/lists/alienvault_reputation.ipset
+      $ echo "<ATTACKER_IP>" | sudo tee -a /var/ossec/etc/lists/alienvault_reputation.ipset
 
 #. Download a script to convert from the ``.ipset`` format to the ``.cdb`` list format:
 

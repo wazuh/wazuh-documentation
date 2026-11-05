@@ -111,6 +111,10 @@ Follow the next steps to configure the Wazuh module for Google Cloud Pub/Sub on 
 
    See the :doc:`gcp-pubsub </user-manual/reference/ossec-conf/gcp-pubsub>` section for more information on configuring the Wazuh module for Google Pub/Sub.
 
+   .. note::
+
+      The Wazuh module for Google Cloud Pub/Sub supports only one ``gcp-pubsub`` block per configuration file. To read more than one subscription, configure each one on a different Wazuh agent.
+
 #. Restart the Wazuh manager or agent service to apply the changes:
 
    .. tabs::
