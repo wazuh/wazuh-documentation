@@ -335,7 +335,7 @@ Click the **Inspect document details** button at the far left of the finding to 
    :align: center
    :width: 80%
 
-Below is the full JSON data of the generated finding. The command output looks similar to this:
+Below is the full JSON data of the generated finding.
 
 .. code-block:: json
    :class: output
