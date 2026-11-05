@@ -14,7 +14,7 @@ Each entry uses the following conventions:
 
 -  **Source**: ``value`` means a literal argument or a reference to a name in the asset ``definitions`` section. The engine replaces a definition reference with its value before it builds the helper. ``reference`` means a field of the event, written with ``$``.
 -  **Build failure**: The asset fails to build, and the engine does not load it.
--  **Run failure**: The helper fails for the current event. The stage that holds the call decides what happens next, as described in Failed helper behavior.
+-  **Run failure**: The helper fails for the current event. The stage that holds the call decides what happens next, as described in :ref:`Failed helper behavior <helper_functions_failed_behavior>`.
 -  **Map helpers**: For a Wazuh Common Schema (WCS) target field, the engine checks each result against the field type for every event. A result that does not fit is a run failure.
 
 The examples use temporary fields, whose names start with ``_``.

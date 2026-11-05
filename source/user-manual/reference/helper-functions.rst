@@ -127,6 +127,8 @@ Combine conditions with the ``AND``, ``OR``, and ``NOT`` operators, and group th
 
    check: ip_cidr_match($source.ip, '10.0.0.0', '8') OR ip_cidr_match($source.ip, '192.168.0.0', '16')
 
+.. _helper_functions_failed_behavior:
+
 Failed helper behavior
 ----------------------
 
