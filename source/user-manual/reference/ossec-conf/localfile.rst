@@ -541,7 +541,7 @@ The attributes below are optional.
 +-------------+-------------------------------------------------------------------+---------------------------------+-----------------+
 
 .. note::
-   This option only applies when the `log_format`_ is ``multi-line-regex``. The value of the ``timeout`` attribute cannot be bigger than the value of the `age`_ option.
+   This option only applies when the `log_format`_ is ``multi-line-regex``. If ``age`` isn't greater than the ``timeout`` attribute, logcollector logs ``...'age' cannot be less than 'timeout' in multiline_regex option. 'age' will be ignored.`` and ignores ``age``.
 
 The behavior of the match attribute is as follows
 

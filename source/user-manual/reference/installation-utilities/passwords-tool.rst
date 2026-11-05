@@ -10,7 +10,7 @@ Wazuh passwords tool
 
 The ``wazuh-passwords-tool.sh`` script changes the passwords of the Wazuh indexer and Wazuh manager API users. Run it as root on the host of the component that owns the user.
 
-You can download the Wazuh passwords tool here: `wazuh-passwords-tool.sh <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh>`__.
+You can download the Wazuh passwords tool here: `wazuh-passwords-tool.sh <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh>`__. The downloaded file is named ``wazuh-passwords-tool-<VERSION>-<REVISION>.sh``: rename it to ``wazuh-passwords-tool.sh`` before you run the commands on this page.
 
 Options list
 --------------

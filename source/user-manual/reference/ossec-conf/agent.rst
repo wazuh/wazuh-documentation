@@ -246,7 +246,7 @@ Sub options
 .. note::
    In Wazuh 5.0 the enrollment password is removed from the endpoint. A fresh installation never creates ``etc/authd.pass``, and ``WAZUH_REGISTRATION_PASSWORD`` is accepted but ignored. The package upgrade to 5.0 deletes an existing ``etc/authd.pass`` at the default path. A path you set explicitly in ``authorization_pass_path`` is never touched. Enroll agents with an enrollment token instead (``WAZUH_ENROLLMENT_TOKEN`` at installation time).
 
-After it enrolls with a Wazuh 5.0 manager, the agent stores a per-agent re-enrollment secret in ``etc/reenroll.secret`` (``reenroll.secret`` on Windows) and uses it to re-enroll when the Wazuh manager no longer knows its key. Agents enrolled before the upgrade to 5.0 don't have this secret. If such an agent is removed from the Wazuh manager, enroll it again with ``wazuh-agent-auth --force-enroll``.
+After it enrolls with a Wazuh 5.0 manager, the agent stores a per-agent re-enrollment secret in ``etc/reenroll.secret`` (``reenroll.secret`` on Windows) and uses it to re-enroll when its key stops working. The Wazuh manager keeps the secret with the agent's entry, so the secret doesn't bring back an agent that was removed from the Wazuh manager: the agent keeps retrying and logs ``Enrollment rejected by the manager: invalid_request: Invalid client authentication. Retrying.`` Agents enrolled before the upgrade to 5.0 don't have this secret either. To enroll a removed agent again, stop it, run ``wazuh-agent-auth --token-file <TOKEN_FILE> --force-enroll`` with a new enrollment token, and start it. It gets a new agent ID.
 
 Removed options
 ^^^^^^^^^^^^^^^^

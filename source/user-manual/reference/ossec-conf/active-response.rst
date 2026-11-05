@@ -22,6 +22,7 @@ Options
 
 - `disabled`_
 - `repeated_offenders`_
+- `allowlist`_
 
 disabled
 ^^^^^^^^
@@ -50,6 +51,19 @@ The timeout configured on the Wazuh manager applies to the first occurrence. The
 .. note::
    Configure this option directly in the agent's ``ossec.conf`` file. It cannot be distributed through ``agent.conf`` and is not supported on Windows agents.
 
+allowlist
+^^^^^^^^^
+
+Lists the IP addresses and networks that Active Response never blocks. Each ``<allowlist>`` element takes one IPv4 or IPv6 address, or a network in CIDR notation, for example ``10.0.0.0/8``. Repeat the element to add more entries.
+
+The Wazuh agent always excludes the loopback addresses (``127.0.0.0/8`` and ``::1``), the unspecified addresses (``0.0.0.0`` and ``::``) and the address of the Wazuh manager, whether or not they are listed. A value such as ``any``, a negated address such as ``!10.0.0.1``, or a host name is rejected: ``wazuh-execd`` logs ``(1235): Invalid value for element 'allowlist'`` and doesn't start.
+
++----------------------+---------------------------------------------------+
+| **Default value**    | n/a                                               |
++----------------------+---------------------------------------------------+
+| **Allowed values**   | IPv4 or IPv6 address, or network in CIDR notation |
++----------------------+---------------------------------------------------+
+
 Sample Configuration
 ---------------------
 
@@ -58,4 +72,5 @@ Sample Configuration
    <active-response>
      <disabled>no</disabled>
      <repeated_offenders>1,5,10</repeated_offenders>
+     <allowlist>10.0.0.0/8</allowlist>
    </active-response>

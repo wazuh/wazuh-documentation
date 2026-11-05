@@ -22,7 +22,8 @@ Commands
 +-------------------+----------------------------------------------------------------------------------------------+
 | stop              | Stops the Wazuh agent services.                                                              |
 +-------------------+----------------------------------------------------------------------------------------------+
-| restart           | Restarts the Wazuh agent services.                                                           |
+| restart           | Restarts the Wazuh agent services. On a Linux agent that systemd manages, this leaves the    |
+|                   | Wazuh agent stopped: use ``systemctl restart wazuh-agent`` instead.                          |
 +-------------------+----------------------------------------------------------------------------------------------+
 | reload            | Reloads the Wazuh agent configuration.                                                       |
 +-------------------+----------------------------------------------------------------------------------------------+

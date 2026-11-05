@@ -49,6 +49,8 @@ Before compiling Wazuh from sources, install the build tools for your operating 
          # dnf config-manager --set-enabled crb
          # dnf install libstdc++-static
 
+.. _installing_manager_from_sources:
+
 Installing the Wazuh manager
 ----------------------------
 

@@ -178,12 +178,12 @@ Master node
      <port>1516</port>
      <bind_addr>0.0.0.0</bind_addr>
      <nodes>
-       <node><MASTER_NODE_IP_ADDRESS></node>
+       <node><WAZUH_MASTER_ADDRESS></node>
      </nodes>
      <hidden>no</hidden>
    </cluster>
 
-Replace ``<MASTER_NODE_IP_ADDRESS>`` with the actual IP address of the master node.
+Replace ``<WAZUH_MASTER_ADDRESS>`` with the actual IP address of the master node.
 
 Worker node
 ^^^^^^^^^^^^
@@ -198,12 +198,12 @@ Worker node
      <port>1516</port>
      <bind_addr>0.0.0.0</bind_addr>
      <nodes>
-       <node><MASTER_NODE_IP_ADDRESS></node>
+       <node><WAZUH_MASTER_ADDRESS></node>
      </nodes>
      <hidden>no</hidden>
    </cluster>
 
-Replace ``<MASTER_NODE_IP_ADDRESS>`` with the actual IP address of the master node, and use a unique ``node_name`` for each worker.
+Replace ``<WAZUH_MASTER_ADDRESS>`` with the actual IP address of the master node, and use a unique ``node_name`` for each worker.
 
 Applying configuration changes
 --------------------------------

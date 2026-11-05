@@ -837,7 +837,9 @@ Usage example for CloudTrail fetched events:
 
    <discard_regex field="userIdentity.principalID">EXAMPLE6E4XEGITWATV6R</discard_regex>
 
-Usage example only for plain text logs:
+The ``field`` attribute is mandatory in ``<bucket>``: a ``<discard_regex>`` without it makes ``wazuh-modulesd`` stop with ``Required attribute 'field' is missing in 'discard_regex'``. Only the CloudWatch Logs ``<service>`` accepts it without ``field``.
+
+Usage example for CloudWatch Logs:
 
 .. code-block:: xml
 

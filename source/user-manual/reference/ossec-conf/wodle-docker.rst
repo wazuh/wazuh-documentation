@@ -63,7 +63,7 @@ run_on_start
 Run command immediately when service is started.
 
 +----------------------+-----------+
-| **Default value**    | yes       |
+| **Default value**    | no        |
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+

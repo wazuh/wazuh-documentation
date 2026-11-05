@@ -24,7 +24,7 @@ The following example shows the placement of the ``<agent>`` section:
    <ossec_config>
      <agent>
        <manager>
-         <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+         <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
        </manager>
      </agent>
    </ossec_config>
