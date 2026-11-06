@@ -15,6 +15,21 @@
 @import "../components/contact-side-tab";
 @import "../components/version-notice";
 
+// The notice stays in the page flow on the index and lines up with the cards.
+.index {
+  .no-latest-notice-wrapper,
+  .not-top .no-latest-notice-wrapper {
+    position: static;
+    right: auto;
+    left: auto;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
 .index {
   header .mobile-secondary-header {
     @include media-max(xl){
