@@ -23,7 +23,7 @@ Example: Set the level of a finding from a rule
 
 Decoders don't write findings fields. Wazuh creates a finding when an event matches a rule, and copies the rule's details into ``wazuh.rule.*``. ``wazuh.rule.level`` comes from the rule's ``level``. This rule matches the failed SSH logins that the ``system-auth`` integration decodes from the authentication log of a Linux endpoint.
 
-Create the rule in **Ruleset management** > **Detection** > **Rules**. ``logsource.product`` names the integration whose events the rule evaluates. The events come from a built-in integration, so add the rule to a custom integration whose title is the same as the built-in one, for example ``wazuh-fim``. Then promote it to the custom space and add it to a custom detector in **Ruleset management** > **Detection** > **Detectors**. The highlighted lines show where ``wazuh.rule.level`` is used and where it appears in the output.
+Create the rule in **Ruleset management** > **Detection** > **Rules**. The rule's ``logsource.product`` must match the title of the integration you create it in. The events come from the built-in ``system-auth`` integration, so create the rule in a custom integration titled ``system-auth``. Then promote it to the custom space and add it to a custom detector in **Ruleset management** > **Detection** > **Detectors**. The highlighted lines show where ``wazuh.rule.level`` is used and where it appears in the output.
 
 **Rule**
 
@@ -86,6 +86,8 @@ Create the rule in **Ruleset management** > **Detection** > **Rules**. ``logsour
 Fields
 ------
 
-.. wcs-field-tables:: stateless/events/findings
-   :single-table:
-   :exclude: stateless/events/main
+.. container:: accordion-section
+
+   .. wcs-field-tables:: stateless/events/findings
+      :single-table:
+      :exclude: stateless/events/main

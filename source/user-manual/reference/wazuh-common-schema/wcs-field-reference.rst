@@ -14,7 +14,7 @@ This section lists the fields of each WCS module. You can learn how the schema i
 -  :doc:`Findings fields <wcs-field-reference/findings-fields>`: The fields that findings add to the event fields, in the ``wazuh-findings-v5-*`` data streams.
 -  :doc:`State index fields <wcs-field-reference/state-index-fields>`: The fields of the ``wazuh-states-*`` indices, which store the latest known state of each endpoint.
 
-Each page starts with a worked example that follows one field through a decoder, a rule, or a query, and highlights where the field is used and where it appears in the output. Every page has a search and filter bar above its tables: search a field by name or description, or filter by type, level, or whether the field is indexed. Most queries and rules only need the ``core`` fields. Set **Level** to ``core`` to see only those.
+The field set pages, the *Findings fields* page, and the four state index pages each start with a worked example that follows one field through a decoder, a rule, or a query, and highlights where the field is used and where it appears in the output. Each of these pages has a search and filter bar above its tables: search a field by name or description, or filter by type, level, or whether the field is indexed. Most queries and rules only need the ``core`` fields. Set **Level** to ``core`` to see only those.
 
 Table columns
 -------------
