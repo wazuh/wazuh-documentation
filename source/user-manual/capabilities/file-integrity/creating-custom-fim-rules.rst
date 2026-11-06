@@ -37,8 +37,6 @@ The following table shows a subset of FIM event fields and their corresponding W
 +--------------------+-----------------------------------+---------------------------------------------+
 | ``agent.name``     | ``wazuh.agent.name``              | Name assigned to the agent.                 |
 +--------------------+-----------------------------------+---------------------------------------------+
-| ``agent.ip``       | ``wazuh.agent.host.ip``           | IP address of the agent host.               |
-+--------------------+-----------------------------------+---------------------------------------------+
 | ``agent.version``  | ``wazuh.agent.version``           | Version of the Wazuh agent.                 |
 +--------------------+-----------------------------------+---------------------------------------------+
 | ``agent.arch``     | ``wazuh.agent.host.architecture`` | Host system architecture.                   |
@@ -63,7 +61,7 @@ The following table shows a subset of FIM event fields and their corresponding W
 +--------------------+-----------------------------------+---------------------------------------------+
 | ``group``          | ``file.group``                    | Group name owning the file.                 |
 +--------------------+-----------------------------------+---------------------------------------------+
-| ``permissions``    | ``file.permissions``              | File permission bits.                       |
+| ``permissions``    | ``file.mode``                     | File permissions, for example rw-r--r--.    |
 +--------------------+-----------------------------------+---------------------------------------------+
 | ``attributes``     | ``file.attributes``               | File attributes (system‑dependent).         |
 +--------------------+-----------------------------------+---------------------------------------------+
@@ -75,9 +73,8 @@ The following table shows a subset of FIM event fields and their corresponding W
 +--------------------+-----------------------------------+---------------------------------------------+
 | ``sha256``         | ``file.hash.sha256``              | SHA‑256 hash of the file contents.          |
 +--------------------+-----------------------------------+---------------------------------------------+
-| ``timestamp``      | ``timestamp``                     | Timestamp when the FIM event was generated. |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``schema_version`` | ``wazuh.schema.version``          | Version of the Wazuh Common Schema.         |
+| ``created``        | ``event.created``                 | Time when the FIM module detected the       |
+|                    |                                   | change.                                     |
 +--------------------+-----------------------------------+---------------------------------------------+
 
 Custom FIM rules example
@@ -130,7 +127,7 @@ Create a custom rule
 
 Wazuh rules define the detection logic for identifying relevant security activity in normalized events. They describe what should be detected by specifying conditions on event fields. Make sure the space selector reads **Draft** and then follow these steps to create a custom rule.
 
-#. Go to **Ruleset management** → **Detection** → **Rules** → **Create**.
+#. Go to **Ruleset management** → **Detection** → **Rules**, and click **Create rule**.
 
 #. Select **YAML Editor**, choose the integration ``wazuh-fim-custom``, and paste the rule below:
 
@@ -279,7 +276,7 @@ Promoting your rule makes it available for use in production environments, where
      :align: center
      :width: 80%
 
-#. After promotion, the integration becomes active and is used by the Wazuh data analysis engine to process incoming FIM events and trigger findings when rule conditions are met.
+#. After promotion, the integration becomes active and is used by the Wazuh data analysis engine to process incoming FIM events and trigger findings when rule conditions are met. Promotion can take a few minutes to take effect. If the rule doesn't appear in the rule list of the detector, wait and reload the page.
 
 Create a detector
 """"""""""""""""""""
@@ -326,7 +323,7 @@ Perform the following steps to configure the Wazuh FIM module to monitor file de
 
       > mkdir C:\test
 
-#. Edit the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the Wazuh agent. Add the ``C:\test`` directory for monitoring:
+#. Edit the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the Wazuh agent. Add the ``C:\test`` directory for monitoring inside the ``<ossec_config>`` block:
 
    .. code-block:: xml
 
@@ -338,7 +335,7 @@ Perform the following steps to configure the Wazuh FIM module to monitor file de
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 Test the configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~

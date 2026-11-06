@@ -94,7 +94,7 @@ You can visualize the findings in the Wazuh dashboard. To do this, navigate to *
 
 .. note::
 
-   Findings might take up to the FIM synchronization interval (the ``<frequency>`` setting in the ``<syscheck>`` block of the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file) to appear in the dashboard.
+   Findings can take a few minutes to appear in the Wazuh dashboard. The FIM module reports changes in who-data directories as they happen, and the detector that generates the findings runs on a schedule.
 
 -  Windows and Ubuntu findings for the simulated events
 

@@ -226,11 +226,16 @@ In this use case, the Wazuh FIM module detects when a file in a monitored direct
 
       # systemctl restart wazuh-agent
 
-#. Create and delete the ``pin.txt`` file in the directory.
+#. Create the ``pin.txt`` file in the directory:
 
    .. code-block:: console
 
       # touch /root/pin_data/pin.txt
+
+#. Wait a few seconds, then delete the ``pin.txt`` file:
+
+   .. code-block:: console
+
       # rm /root/pin_data/pin.txt
 
 #. You can see a finding generated for the deleted file.
