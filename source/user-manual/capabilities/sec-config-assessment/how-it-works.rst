@@ -17,7 +17,7 @@ By default, the Wazuh agent runs scans for every policy (``.yaml`` or ``.yml`` f
 After each scan, the following happens:
 
 #. The Wazuh agent synchronizes the SCA results with the Wazuh manager.
-#. The Wazuh manager processes the scan results and sends the SCA state data to the Wazuh indexer where it is stored in the ``wazuh-states-sca-*`` index.
+#. The Wazuh manager processes the scan results and sends the SCA state data to the Wazuh indexer where it is stored in the ``wazuh-states-sca`` index.
 #. The Wazuh dashboard queries this index to provide centralized visibility into endpoint compliance status and security configuration findings.
 
 To optimize synchronization, the Wazuh agent tracks the current state of each SCA check and sends only the updates required to keep the manager synchronized. When no changes are detected between scans, the agent sends a scan summary instead of generating new SCA events.
@@ -45,7 +45,7 @@ The set of rules and the :ref:`check <sca_policy_file_checks_section>` result ag
 
 The Wazuh dashboard shows the **Overall score** of each SCA policy. The score is the percentage of applicable checks that passed. It equals the passed checks divided by the sum of passed and failed checks. Checks with the Not applicable result don't count toward the score. For example, 119 passed checks and 118 failed checks give a score of 50.211%.
 
-On the Wazuh dashboard, navigate to **Endpoint Security** > **Configuration assessment** to view the scan summaries for the Wazuh agents.
+On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** to view the scan summaries for the Wazuh agents.
 
 .. thumbnail:: /images/sca/configuration-assessment-dashboard.png
    :title: Configuration Assessment scan summary
@@ -53,7 +53,7 @@ On the Wazuh dashboard, navigate to **Endpoint Security** > **Configuration asse
    :align: center
    :width: 80%
 
-The **Inventory** tabs under the **Configurations Assessment** dashboard, provides the current SCA state for monitored endpoints. It displays the SCA policies evaluated on each endpoint and their individual checks, and the check result.
+The **Inventory** tab under the **Configuration Assessment** dashboard provides the current SCA state for monitored endpoints. It displays the SCA policies evaluated on each endpoint and their individual checks, and the check result.
 
 .. thumbnail:: /images/sca/sca-inventory.png
    :title: SCA inventory
@@ -61,7 +61,7 @@ The **Inventory** tabs under the **Configurations Assessment** dashboard, provid
    :align: center
    :width: 80%
 
-The **Findings** tabs under the **Configurations Assessment** dashboard, displays the SCA findings generated when the result of a check changes between scans.
+The **Findings** tab under the **Configuration Assessment** dashboard displays the SCA findings generated when the result of a check changes between scans.
 
 .. thumbnail:: /images/sca/sca-findings.png
    :title: SCA findings
@@ -69,18 +69,18 @@ The **Findings** tabs under the **Configurations Assessment** dashboard, display
    :align: center
    :width: 80%
 
-Example: Firewall check on an Ubuntu 22.04 endpoint
+Example: Firewall check on an Ubuntu 24.04 endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration assessment** > **Inventory** and select the Ubuntu 22.04 endpoint to view its SCA results. The policy name on the Wazuh dashboard is **CIS Ubuntu Linux 22.04 LTS Benchmark v2.0.0** and is stored in the ``/var/ossec/ruleset/sca/cis_ubuntu22-04.yml`` file. The highlighted result shows check ``28588``, which verifies that a default deny policy is configured for the IPv6 firewall.
+On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Ubuntu 24.04 endpoint to view its SCA results. The policy name on the Wazuh dashboard is **CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.** and is stored in the ``/var/ossec/ruleset/sca/cis_ubuntu24-04.yml`` file. The highlighted result shows check ``35622``, which verifies that the ufw service is enabled and active.
 
 .. thumbnail:: /images/sca/sca-scans-ubuntu-endpoint.png
-   :title: SCA scans for an Ubuntu 22.04 endpoint
-   :alt: SCA scans for an Ubuntu 22.04 endpoint
+   :title: SCA scans for an Ubuntu 24.04 endpoint
+   :alt: SCA scans for an Ubuntu 24.04 endpoint
    :align: center
    :width: 80%
 
-You can expand each scan result to display additional information. On the Wazuh dashboard, navigate to the **Endpoint security** > **Configuration assessment** > **Inventory**. Click on **Inspect details** to see more information on the scan result.
+You can expand each scan result to display additional information. On the Wazuh dashboard, navigate to the **Endpoint security** > **Configuration Assessment** > **Inventory**. Click on **Inspect details** to see more information on the scan result.
 
 .. thumbnail:: /images/sca/configuration-assessment-additional-information.png
    :title: Expanded SCA check result
@@ -88,165 +88,136 @@ You can expand each scan result to display additional information. On the Wazuh 
    :align: center
    :width: 80%
 
-The YAML definition for this SCA check for ``28588`` is shown below.
+The YAML definition for check ``35622`` is shown below.
 
 .. code-block:: yaml
 
-   - id: 28588
-     name: "Ensure ip6tables default deny firewall policy."
-     description: "A default deny all policy on connections ensures that any unconfigured network usage will be rejected. Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well."
-     rationale: "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage. Internal Only - General."
-     remediation: "IF IPv6 is enabled on your system: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP."
-     compliance:
-       cmmc: ["AC.L2-3.1.20", "CM.L2-3.4.7", "SC.L2-3.13.1", "SC.L2-3.13.6"]
-       fedramp: ["SC-7"]
-       gdpr: ["IV_32.1.a", "IV_32.1.b", "IV_32.1.c", "IV_32.1.d", "IV_32.2", "IV_32.3", "IV_32.4"]
-       hipaa: ["164.312(e)(1)", "164.312(b)"]
-       iso_27001: ["A.13.1.1", "A.13.1.2", "A.12.4.1"]
-       nis2: ["21.2.e", "21.2.i", "21.2.a"]
-       nist_800_171: ["3.1.20", "3.4.7", "3.13.1", "3.13.6"]
-       nist_800_53: ["SC-7"]
-       pci_dss: ["1.1", "1.3", "1.2", "1.4"]
-       tsc: ["CC6.6", "CC6.1", "CC6.2", "CC6.3", "CC6.4", "CC6.5", "CC6.7", "CC6.8", "CC7.1", "CC7.2", "CC7.3", "CC7.4", "CC7.5", "CC4.1", "CC4.2"]
-     mitre:
-       tactic:
-         id:
-           - "TA0001"
-           - "TA0011"
-         name:
-           - "Initial Access"
-           - "Command and Control"
-       technique:
-         id:
-           - "T1046"
-           - "T1090"
-           - "T1133"
-         name:
-           - "Network Service Discovery"
-           - "Proxy"
-           - "External Remote Services"
-       subtechnique:
-         id:
-           - "T1090.001"
-           - "T1090.002"
-           - "T1557.001"
-         name:
-           - "Internal Proxy"
-           - "External Proxy"
-           - "LLMNR/NBT-NS Poisoning and SMB Relay"
-     condition: all
-     rules:
-       - "c:ip6tables -L -> r:^Chain INPUT && r:policy DROP"
-       - "c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP"
-       - "c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP"
-   # 4.3.3.2 Ensure ip6tables loopback traffic is configured. (Automated)
-   - id: 28589
-     name: "Ensure ip6tables loopback traffic is configured."
-     description: "Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic to the loopback network (::1). Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well."
-     rationale: "Loopback traffic is generated between processes on machine and is typically critical to operation of the system. The loopback interface is the only place that loopback network (::1) traffic should be seen, all other interfaces should ignore traffic on this network as an anti-spoofing measure. Internal Only - General."
-     remediation: "Run the following commands to implement the loopback rules: # ip6tables -A INPUT -i lo -j ACCEPT # ip6tables -A OUTPUT -o lo -j ACCEPT # ip6tables -A INPUT -s ::1 -j DROP."
-     compliance:
-       cmmc: ["AC.L2-3.1.20", "CM.L2-3.4.7", "SC.L2-3.13.1", "SC.L2-3.13.6"]
-       fedramp: ["SC-7"]
-       gdpr: ["IV_32.1.a", "IV_32.1.b", "IV_32.1.c", "IV_32.1.d", "IV_32.2", "IV_32.3", "IV_32.4"]
-       hipaa: ["164.312(e)(1)", "164.312(b)"]
-       iso_27001: ["A.13.1.1", "A.13.1.2", "A.12.4.1"]
-       nis2: ["21.2.e", "21.2.i", "21.2.a"]
-       nist_800_171: ["3.1.20", "3.4.7", "3.13.1", "3.13.6"]
-       nist_800_53: ["SC-7"]
-       pci_dss: ["1.1", "1.3", "1.2", "1.4"]
-       tsc: ["CC6.6", "CC6.1", "CC6.2", "CC6.3", "CC6.4", "CC6.5", "CC6.7", "CC6.8", "CC7.1", "CC7.2", "CC7.3", "CC7.4", "CC7.5", "CC4.1", "CC4.2"]
-     mitre:
-       tactic:
-         id:
-           - "TA0001"
-           - "TA0011"
-         name:
-           - "Initial Access"
-           - "Command and Control"
-       technique:
-         id:
-           - "T1046"
-           - "T1090"
-           - "T1133"
-         name:
-           - "Network Service Discovery"
-           - "Proxy"
-           - "External Remote Services"
-       subtechnique:
-         id:
-           - "T1090.001"
-           - "T1090.002"
-           - "T1557.001"
-         name:
-           - "Internal Proxy"
-           - "External Proxy"
-           - "LLMNR/NBT-NS Poisoning and SMB Relay"
-     condition: all
-     rules:
-       - 'c:ip6tables -L INPUT -v -n -> r:.*ACCEPT.*all.*lo.*[*!+-].*::/0.*::/0'
-       - 'c:ip6tables -L INPUT -v -n -> r:.*DROP.*all.*[*!+-].*[*!+-].*::1.*::/0'
-       - 'c:ip6tables -L OUTPUT -v -n -> r:.*ACCEPT.*all.*[*!+-].*lo.*::/0.*::/0'
-   # 4.3.3.3 Ensure ip6tables outbound and established connections are configured. (Manual) - Not Implemented
-   # 4.3.3.4 Ensure ip6tables firewall rules exist for all open ports. (Automated) Not Implemented
+   - id: 35622
+     name: "Ensure ufw service is enabled."
+     description: "UncomplicatedFirewall (ufw) is a frontend for iptables. ufw provides a framework for managing netfilter, as well as a command-line and available graphical user interface for manipulating the firewall. Note: - When running ufw enable or starting ufw via its initscript, ufw will flush its chains. This is required so ufw can maintain a consistent state, but it may drop existing connections (eg ssh). ufw does support adding rules before enabling the firewall. - Run the following command before running ufw enable. # ufw allow proto tcp from any to any port 22 - The rules will still be flushed, but the ssh port will be open after enabling the firewall. Please note that once ufw is 'enabled', ufw will not flush the chains when adding or removing rules (but will when modifying a rule or changing the default policy) - By default, ufw will prompt when enabling the firewall while running under ssh. This can be disabled by using ufw --force enable."
+     rationale: "The ufw service must be enabled and running in order for ufw to protect the system."
+     impact: "Changing firewall settings while connected over network can result in being locked out of the system."
+     remediation: |
+       Run the following command to unmask the `ufw` daemon:
 
-Evaluating this check generates the following event:
+       ```
+       # systemctl unmask ufw.service
+       ```
+
+       Run the following command to enable and start the `ufw` daemon:
+
+       ```
+       # systemctl --now enable ufw.service active
+       ```
+
+       Run the following command to enable ufw:
+
+       ```
+       # ufw enable.
+       ```
+     references:
+       - 'http://manpages.ubuntu.com/manpages/precise/en/man8/ufw.8.html'
+     compliance:
+       cmmc: ["AC.L2-3.1.20", "CM.L2-3.4.7", "SC.L2-3.13.1", "SC.L2-3.13.6"]
+       fedramp: ["SC-7"]
+       gdpr: ["IV_32.1.a", "IV_32.1.b", "IV_32.1.c", "IV_32.1.d", "IV_32.2", "IV_32.3", "IV_32.4"]
+       hipaa: ["164.312.e.1", "164.312.b", "164.308.a.8"]
+       iso_27001: ["A.8.20", "A.8.21", "A.8.15"]
+       nis2: ["21.2.e", "21.2.i", "21.2.a"]
+       nist_800_171: ["3.1.20", "3.4.7", "3.13.1", "3.13.6"]
+       nist_800_53: ["SC-7"]
+       pci_dss: ["1.2.1", "1.4.1"]
+       tsc: ["CC6.6", "CC6.1", "CC6.2", "CC6.3", "CC6.4", "CC6.5", "CC6.7", "CC6.8", "CC7.1", "CC7.2", "CC7.3", "CC7.4", "CC7.5", "CC4.1", "CC4.2"]
+     mitre:
+       tactic:
+         id:
+           - "TA0001"
+           - "TA0003"
+           - "TA0007"
+           - "TA0011"
+         name:
+           - "Initial Access"
+           - "Persistence"
+           - "Discovery"
+           - "Command and Control"
+       technique:
+         id:
+           - "T1046"
+           - "T1090"
+           - "T1133"
+         name:
+           - "Network Service Discovery"
+           - "Proxy"
+           - "External Remote Services"
+       subtechnique:
+         id:
+           - "T1090.001"
+           - "T1090.002"
+         name:
+           - "Internal Proxy"
+           - "External Proxy"
+     condition: all
+     rules:
+       - "c:systemctl is-enabled ufw.service -> r:^enabled"
+       - "c:systemctl is-active ufw -> r:^active"
+       - 'c:ufw status -> r:Status:\s+active'
+
+Evaluating each check updates its state document in the ``wazuh-states-sca`` index. The following document is the state of check ``35624`` on the same endpoint, before the remediation:
 
 .. code-block:: json
 
    {
      "_index": "wazuh-states-sca",
-     "_id": "wazuh_003_b127c9987a3963a172ffef149db2fed2d1c64c13",
-     "_score": 0,
+     "_id": "wazuh_001_df2a260fa770213aae66425d556cabefcb127024",
+     "_score": 0.0,
      "_source": {
+       "checksum": {
+         "hash": {
+           "sha1": "177b0f068287c3476071f2d5b123c1830de3b1bf"
+         }
+       },
+       "wazuh": {
+         "cluster": {
+           "name": "wazuh"
+         },
+         "agent": {
+           "host": {
+             "hostname": "ip-10-89-1-225",
+             "os": {
+               "name": "Ubuntu",
+               "type": "linux",
+               "version": "24.04.5 LTS (Noble Numbat)",
+               "platform": "ubuntu"
+             },
+             "architecture": "x86_64"
+           },
+           "name": "Ubuntu24",
+           "groups": [
+             "default"
+           ],
+           "id": "001",
+           "version": "v5.0.0"
+         }
+       },
        "check": {
+         "result": "Failed",
+         "reason": "Rules not satisfied (condition 'all'):\nc:ufw status verbose -> r:^Default: && r:deny\\s+\\(incoming\\)|reject\\s+\\(incoming\\)\nc:ufw status verbose -> r:^Default: && r:deny\\s+\\(outgoing\\)|reject\\s+\\(outgoing\\)\nc:ufw status verbose -> r:^Default: && r:deny\\s+\\(routed\\)|reject\\s+\\(routed\\)",
+         "remediation": "Run the following commands to implement a default deny policy:\n\n```\n# ufw default deny incoming\n# ufw default deny outgoing\n# ufw default deny routed.\n```\n",
+         "condition": "all",
          "compliance": {
-           "cmmc": [
-             "AC.L2-3.1.20",
-             "CM.L2-3.4.7",
-             "SC.L2-3.13.1",
-             "SC.L2-3.13.6"
-           ],
-           "fedramp": [
-             "SC-7"
-           ],
-           "gdpr": [
-             "IV_32.1.a",
-             "IV_32.1.b",
-             "IV_32.1.c",
-             "IV_32.1.d",
-             "IV_32.2",
-             "IV_32.3",
-             "IV_32.4"
+           "iso_27001": [
+             "A.8.20",
+             "A.8.21",
+             "A.8.15"
            ],
            "hipaa": [
-             "164.312(e)(1)",
-             "164.312(b)"
-           ],
-           "iso_27001": [
-             "A.13.1.1",
-             "A.13.1.2",
-             "A.12.4.1"
-           ],
-           "nis2": [
-             "21.2.e",
-             "21.2.i",
-             "21.2.a"
-           ],
-           "nist_800_171": [
-             "3.1.20",
-             "3.4.7",
-             "3.13.1",
-             "3.13.6"
-           ],
-           "nist_800_53": [
-             "SC-7"
+             "164.312.e.1",
+             "164.312.b",
+             "164.308.a.8"
            ],
            "pci_dss": [
-             "1.1",
-             "1.3",
-             "1.2",
-             "1.4"
+             "1.2.1",
+             "1.4.1"
            ],
            "tsc": [
              "CC6.6",
@@ -264,126 +235,123 @@ Evaluating this check generates the following event:
              "CC7.5",
              "CC4.1",
              "CC4.2"
+           ],
+           "nis2": [
+             "21.2.e",
+             "21.2.i",
+             "21.2.a"
+           ],
+           "nist_800_171": [
+             "3.1.20",
+             "3.4.7",
+             "3.13.1",
+             "3.13.6"
+           ],
+           "fedramp": [
+             "SC-7"
+           ],
+           "nist_800_53": [
+             "SC-7"
+           ],
+           "cmmc": [
+             "AC.L2-3.1.20",
+             "CM.L2-3.4.7",
+             "SC.L2-3.13.1",
+             "SC.L2-3.13.6"
+           ],
+           "gdpr": [
+             "IV_32.1.a",
+             "IV_32.1.b",
+             "IV_32.1.c",
+             "IV_32.1.d",
+             "IV_32.2",
+             "IV_32.3",
+             "IV_32.4"
            ]
          },
-         "condition": "all",
-         "description": "A default deny all policy on connections ensures that any unconfigured network usage will be rejected. Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.",
-         "id": "28588",
+         "name": "Ensure ufw default deny firewall policy.",
+         "description": "A default deny policy on connections ensures that any unconfigured network usage will be rejected. Note: Any port or protocol without a explicit allow before the default deny will be blocked.",
          "mitre": {
            "subtechnique": {
-             "id": [
-               "T1090.001",
-               "T1090.002",
-               "T1557.001"
-             ],
              "name": [
                "Internal Proxy",
-               "External Proxy",
-               "LLMNR/NBT-NS Poisoning and SMB Relay"
-             ]
-           },
-           "tactic": {
-             "id": [
-               "TA0001",
-               "TA0011"
+               "External Proxy"
              ],
-             "name": [
-               "Initial Access",
-               "Command and Control"
+             "id": [
+               "T1090.001",
+               "T1090.002"
              ]
            },
            "technique": {
-             "id": [
-               "T1046",
-               "T1090",
-               "T1133"
-             ],
              "name": [
                "Network Service Discovery",
                "Proxy",
                "External Remote Services"
+             ],
+             "id": [
+               "T1046",
+               "T1090",
+               "T1133"
+             ]
+           },
+           "tactic": {
+             "name": [
+               "Initial Access",
+               "Persistence",
+               "Discovery",
+               "Command and Control"
+             ],
+             "id": [
+               "TA0001",
+               "TA0003",
+               "TA0007",
+               "TA0011"
              ]
            }
          },
-         "name": "Ensure ip6tables default deny firewall policy.",
-         "rationale": "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage. Internal Only - General.",
-         "remediation": "IF IPv6 is enabled on your system: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP.",
-         "result": "Failed",
          "rules": [
-           "[\"c:ip6tables -L -> r:^Chain INPUT && r:policy DROP\"",
-           "\"c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP\"",
-           "\"c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP\"]"
-         ]
-       },
-       "checksum": {
-         "hash": {
-           "sha1": "79b51b5eac2fe4e739a52b612826be1a428fd55c"
-         }
-       },
-       "policy": {
-         "description": "This document provides prescriptive guidance for establishing a secure configuration posture for Ubuntu Linux 22.04 LTS based on CIS benchmark for Ubuntu Linux 22.04 LTS.",
-         "file": "cis_ubuntu22-04.yml",
-         "id": "cis_ubuntu22-04",
-         "name": "CIS Ubuntu Linux 22.04 LTS Benchmark v2.0.0.",
-         "references": [
-           "[\"https://www.cisecurity.org/cis-benchmarks/\"]"
-         ]
+           "c:dpkg -s ufw -> r:Status: install ok installed",
+           "c:ufw status verbose -> r:^Default: && r:deny\\s+\\(incoming\\)|reject\\s+\\(incoming\\)",
+           "c:ufw status verbose -> r:^Default: && r:deny\\s+\\(outgoing\\)|reject\\s+\\(outgoing\\)",
+           "c:ufw status verbose -> r:^Default: && r:deny\\s+\\(routed\\)|reject\\s+\\(routed\\)"
+         ],
+         "id": "35624",
+         "rationale": "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to allow list acceptable usage than to deny list unacceptable usage."
        },
        "state": {
-         "document_version": 1,
-         "modified_at": "2026-07-11T15:53:19.503Z"
+         "document_version": 2,
+         "modified_at": "2026-11-05T13:04:09.874Z"
        },
-       "wazuh": {
-         "agent": {
-           "groups": [
-             "default"
-           ],
-           "host": {
-             "architecture": "x86_64",
-             "hostname": "server",
-             "os": {
-               "name": "Ubuntu",
-               "platform": "ubuntu",
-               "type": "linux",
-               "version": "22.04.3 LTS (Jammy Jellyfish)"
-             }
-           },
-           "id": "003",
-           "name": "Ubuntu",
-           "version": "v5.0.0"
-         },
-         "cluster": {
-           "name": "wazuh"
-         }
+       "policy": {
+         "file": "cis_ubuntu24-04.yml",
+         "references": [
+           "https://www.cisecurity.org/cis-benchmarks/"
+         ],
+         "name": "CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.",
+         "description": "This document provides prescriptive guidance for establishing a secure configuration posture for Ubuntu Linux 24.04 LTS based on CIS benchmark for Ubuntu Linux 24.04 LTS.",
+         "id": "cis_ubuntu24-04"
        }
-     },
-     "fields": {
-       "state.modified_at": [
-         "2026-07-11T15:53:19.503Z"
-       ]
      }
    }
 
 Remediation
 ~~~~~~~~~~~
 
-The scan result above is **Failed** because the rule didn't find ``Chain INPUT * policy DROP``, ``Chain FORWARD * policy DROP``, and ``Chain OUTPUT * policy DROP`` in the output of the command ``ip6tables -L``.
+The scan result above is **Failed** because ufw is inactive, so the output of the command ``ufw status`` is ``Status: inactive``. Check ``35622`` needs the ufw service to be enabled and active, and ``ufw status`` to show ``Status: active``.
 
 The steps below show how to apply the remediation that Wazuh suggests to harden the endpoint:
 
-#. Run the following recommended commands on the monitored endpoint to apply the firewall rules:
+#. Run the following commands on the monitored endpoint. They allow SSH, DNS, and the Wazuh agent connections to the Wazuh manager, then set the default deny policy and turn on ufw. Replace ``<WAZUH_MANAGER_IP>`` with the IP address of your Wazuh manager, and add an allow rule for any other connection the endpoint needs:
 
    .. code-block:: console
 
-      # ip6tables -P INPUT DROP
-      # ip6tables -P OUTPUT DROP
-      # ip6tables -P FORWARD DROP
-
-#. Save the firewall rules:
-
-   .. code-block:: console
-
-      # ip6tables-save > /etc/ip6tables.conf
+      # ufw allow in 22/tcp
+      # ufw allow out 53
+      # ufw allow out to <WAZUH_MANAGER_IP>
+      # ufw default deny incoming
+      # ufw default deny outgoing
+      # ufw default deny routed
+      # ufw --force enable
 
 #. Restart the Wazuh agent to trigger a new SCA scan:
 
@@ -391,18 +359,18 @@ The steps below show how to apply the remediation that Wazuh suggests to harden 
 
       # systemctl restart wazuh-agent
 
-The scan result for check ``28588`` changes to **Passed** as shown in the image below:
+The scan result for check ``35622`` changes to **Passed** at the next SCA synchronization, about 5 minutes after the restart, as shown in the image below:
 
 .. thumbnail:: /images/sca/configuration-assessment-scan-result.png
-   :title: Check 28588 passed after remediation
-   :alt: Check 28588 passed after remediation
+   :title: Check 35622 passed after remediation
+   :alt: Check 35622 passed after remediation
    :align: center
    :width: 80%
 
 Integrity mechanisms
 ---------------------
 
-Wazuh uses two integrity mechanisms to keep agent-side and server-side SCA states in synchronization. These mechanisms ensure the integrity of the policy files and the scan results.
+Wazuh uses two integrity mechanisms to keep the SCA states on the Wazuh agent and the Wazuh manager synchronized. These mechanisms ensure the integrity of the policy files and scan results.
 
 Integrity of policy files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -422,7 +390,7 @@ When the hash of a policy file changes, Wazuh performs the following recovery st
 Integrity of the scan results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To illustrate how Wazuh maintains the integrity of scan results, consider an example where the agent-side and server-side databases differ. This scenario can happen when there's a network issue.
+To illustrate how Wazuh maintains the integrity of scan results, consider an example where the Wazuh agent and Wazuh manager databases differ. This scenario can happen when there's a network issue.
 
 The table below shows an example of the SCA state stored in the Wazuh agent and Wazuh manager databases.
 
