@@ -109,7 +109,7 @@ You can install the Wazuh server as a single-node or multi-node cluster.
   | Network devices                                 | 0.5 |    0.2                      |
   +-------------------------------------------------+-----+-----------------------------+
 
-  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh server for 90 days of alerts is 6 GB. Adding 11 GB for the vulnerability detection database brings the total to 17 GB.
+  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh server for 90 days of alerts is 6 GB. Adding 11 GB for the vulnerability detection database brings the total to 17 GB. Because the Wazuh manager needs at least 20 GB of free space to unpack the database on its first start, give the volume that holds ``/var/ossec`` at least 20 GB.
 
   .. note::
 

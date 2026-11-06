@@ -429,7 +429,7 @@ You can learn more about the available configuration options in the :ref:`whodat
 Alert fields
 ............
 
-Who-data monitoring alerts generated using the eBPF mode preserve the same structure as the audit mode :ref:`alert fields <audit_mode_alert_fields>`.
+Who-data monitoring alerts generated using the eBPF mode preserve the same structure as the audit mode :ref:`alert fields <audit_mode_alert_fields>`. However, ``audit.process.name`` and ``audit.process.parent_name`` contain the short task name of the process (for example, ``bash``) instead of the absolute path of the executable (for example, ``/usr/bin/bash``). The name is limited to 15 characters. Rules or searches that match these fields by absolute path don't match eBPF mode alerts.
 
 Example: Monitoring changes in configuration files
 ..................................................

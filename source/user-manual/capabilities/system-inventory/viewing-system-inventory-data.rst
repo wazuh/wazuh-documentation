@@ -95,7 +95,7 @@ Displays running processes, process start times, and a summary data table contai
 Network
 -------
 
-Contains the **Addresses**, **Interfaces**, **Protocols**, **Services**, and **Traffic** tabs.
+Contains the **Addresses**, **Interfaces**, **Protocols**, **Listeners**, and **Traffic** tabs.
 
 -  The **Addresses** tab provides a detailed view of network types, unique network IP addresses, interface names, and a summary data table containing detailed network address information.
 
@@ -121,15 +121,15 @@ Contains the **Addresses**, **Interfaces**, **Protocols**, **Services**, and **T
       :align: center
       :width: 80%
 
--  The **Services** tab presents a detailed view of source ports, transport protocols, processes, and a summary data table for each endpoint.
+-  The **Listeners** tab presents a detailed view of source ports, transport protocols, processes, and a summary data table for each endpoint.
 
    .. thumbnail:: /images/manual/system-inventory/system-inventory-network-services-tab.png
-      :title: System inventory - Network Services tab
-      :alt: System inventory - Network Services tab
+      :title: System inventory - Network Listeners tab
+      :alt: System inventory - Network Listeners tab
       :align: center
       :width: 80%
 
--  The **Traffic** tab provides a detailed view of the network connections that have a remote port, including source ports, destination ports, transport protocols, processes, and a summary data table for each endpoint. Listening ports are in the **Services** tab.
+-  The **Traffic** tab provides a detailed view of the network connections that have a remote port, including source ports, destination ports, transport protocols, processes, and a summary data table for each endpoint. Listening ports are in the **Listeners** tab.
 
    .. thumbnail:: /images/manual/system-inventory/system-inventory-network-traffic-tab.png
       :title: System inventory - Network Traffic tab
