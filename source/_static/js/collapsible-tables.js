@@ -15,6 +15,7 @@
   // URL. Until the setup ends, only the table that the URL fragment points to
   // (#id) can open.
   var settingUp = true;
+  var afterSetup = [];
   document.addEventListener('show.bs.collapse', function (e) {
     if (!settingUp || !e.target.classList.contains('accordion-section')) { return; }
     var id = decodeURIComponent(window.location.hash.slice(1));
@@ -25,7 +26,7 @@
   function endSetup(tries) {
     var bodies = document.querySelectorAll('.accordion-section');
     var done = Array.prototype.every.call(bodies, function (b) { return /-accordion$/.test(b.id); });
-    if (done || tries > 40) { settingUp = false; } else { window.setTimeout(function () { endSetup(tries + 1); }, 50); }
+    if (done || tries > 40) { settingUp = false; afterSetup.forEach(function (fn) { fn(); }); } else { window.setTimeout(function () { endSetup(tries + 1); }, 50); }
   }
   ready(function () { window.setTimeout(function () { endSetup(0); }, 50); });
 
@@ -91,6 +92,21 @@
       });
       count.textContent = text ? shown + ' of ' + rows.length + ' ' + noun + ' match' : rows.length + ' ' + noun;
     }
+
+    // A link to a section by any of its anchors (a label such as
+    // helper_functions_filter, or a jump list) opens the table it leads to.
+    // accordions.js opens only the section whose own id is in the URL.
+    function openForHash() {
+      var id = decodeURIComponent(window.location.hash.slice(1));
+      var target = id && document.getElementById(id);
+      // A label before a heading is an empty element inside its section
+      var section = target && (target.tagName === 'SECTION' ? target : target.closest('section'));
+      for (; section; section = section.parentElement && section.parentElement.closest('section')) {
+        setOpen(section, true);
+      }
+    }
+    window.addEventListener('hashchange', openForHash);
+    if (settingUp) { afterSetup.push(openForHash); } else { openForHash(); }
 
     q.addEventListener('input', run);
     bar.querySelector('.ct-expand').addEventListener('click', function () {
