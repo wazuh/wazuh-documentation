@@ -90,9 +90,9 @@ The following example shows a document from the ``wazuh-states-vulnerabilities``
 Example: Detect high-severity vulnerabilities, then list the ones still open
 ----------------------------------------------------------------------------
 
-The Wazuh manager sends a vulnerability event each time it detects a vulnerability on an endpoint. ``vulnerability.severity`` is in that event and in the ``wazuh-states-vulnerabilities`` index. A rule flags each new High vulnerability, then a query lists the High vulnerabilities still open in a package, highest score first.
+After the first full scan of an endpoint, the Wazuh manager sends a vulnerability event each time it detects a new vulnerability. The first scan indexes what it finds without sending events, so the rule doesn't flag those vulnerabilities. ``vulnerability.severity`` is in that event and in the ``wazuh-states-vulnerabilities`` index. A rule flags each new High vulnerability, then a query lists the High vulnerabilities still open in a package, highest score first.
 
-Create the rule in **Ruleset management** > **Detection** > **Rules**. ``logsource.product`` names the integration whose events the rule evaluates. The events come from a built-in integration, so add the rule to a custom integration whose title is the same as the built-in one, for example ``wazuh-fim``. Then promote it to the custom space and add it to a custom detector in **Ruleset management** > **Detection** > **Detectors**. In the query, replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with your values. The highlighted lines show where ``vulnerability.severity`` is used and where it appears in the output.
+Create the rule in **Ruleset management** > **Detection** > **Rules**. The rule's ``logsource.product`` must match the title of the integration you create it in. The events come from the built-in ``wazuh-vd`` integration, so create the rule in a custom integration titled ``wazuh-vd``. Then promote it to the custom space and add it to a custom detector in **Ruleset management** > **Detection** > **Detectors**. In the query, replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with your values. The highlighted lines show where ``vulnerability.severity`` is used and where it appears in the output.
 
 **1. Rule on vulnerability events**
 
@@ -180,5 +180,7 @@ Create the rule in **Ruleset management** > **Detection** > **Rules**. ``logsour
 Fields
 ------
 
-.. wcs-field-tables:: stateful/vulnerabilities
-   :single-table:
+.. container:: accordion-section
+
+   .. wcs-field-tables:: stateful/vulnerabilities
+      :single-table:

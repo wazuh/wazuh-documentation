@@ -76,7 +76,7 @@ Example: Detect a file by its hash, then find every endpoint that has it
 
 WCS uses the same field names in events and in state indices. ``file.hash.sha256`` is in the FIM events that the Wazuh agent sends when a file changes, and in the ``wazuh-states-fim-files`` index that keeps the current state of each file. First a rule flags the hash in a FIM event, then a query finds every endpoint that still has the file. Replace the hash with one from your threat report.
 
-Create the rule in **Ruleset management** > **Detection** > **Rules**. ``logsource.product`` names the integration whose events the rule evaluates. The events come from a built-in integration, so add the rule to a custom integration whose title is the same as the built-in one, for example ``wazuh-fim``. Then promote it to the custom space and add it to a custom detector in **Ruleset management** > **Detection** > **Detectors**. In the query, replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with your values. The highlighted lines show where ``file.hash.sha256`` is used and where it appears in the output.
+Create the rule in **Ruleset management** > **Detection** > **Rules**. The rule's ``logsource.product`` must match the title of the integration you create it in. The events come from the built-in ``wazuh-fim`` integration, so create the rule in a custom integration titled ``wazuh-fim``. Then promote it to the custom space and add it to a custom detector in **Ruleset management** > **Detection** > **Detectors**. In the query, replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with your values. The highlighted lines show where ``file.hash.sha256`` is used and where it appears in the output.
 
 **1. Rule on FIM events**
 
@@ -166,23 +166,29 @@ Create the rule in **Ruleset management** > **Detection** > **Rules**. ``logsour
 ``wazuh-states-fim-files``
 --------------------------
 
-Monitored files.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/fim/files
-   :single-table:
+   Monitored files.
+
+   .. wcs-field-tables:: stateful/fim/files
+      :single-table:
 
 ``wazuh-states-fim-registry-keys``
 ----------------------------------
 
-Monitored Windows registry keys.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/fim/windows-registry-keys
-   :single-table:
+   Monitored Windows registry keys.
+
+   .. wcs-field-tables:: stateful/fim/windows-registry-keys
+      :single-table:
 
 ``wazuh-states-fim-registry-values``
 ------------------------------------
 
-Monitored Windows registry values.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/fim/windows-registry-values
-   :single-table:
+   Monitored Windows registry values.
+
+   .. wcs-field-tables:: stateful/fim/windows-registry-values
+      :single-table:

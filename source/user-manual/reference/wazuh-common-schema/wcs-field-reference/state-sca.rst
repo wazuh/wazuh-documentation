@@ -159,7 +159,7 @@ Example: Detect an SCA check that starts failing, then see where it fails
 
 The Wazuh agent sends an SCA event when the result of a check changes. ``check.result`` is in that event and in the ``wazuh-states-sca`` index. A rule flags checks that change to ``Failed``, then a query shows where the check fails now.
 
-Create the rule in **Ruleset management** > **Detection** > **Rules**. ``logsource.product`` names the integration whose events the rule evaluates. The events come from a built-in integration, so add the rule to a custom integration whose title is the same as the built-in one, for example ``wazuh-fim``. Then promote it to the custom space and add it to a custom detector in **Ruleset management** > **Detection** > **Detectors**. In the query, replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with your values. The highlighted lines show where ``check.result`` is used and where it appears in the output.
+Create the rule in **Ruleset management** > **Detection** > **Rules**. The rule's ``logsource.product`` must match the title of the integration you create it in. The events come from the built-in ``wazuh-sca`` integration, so create the rule in a custom integration titled ``wazuh-sca``. Then promote it to the custom space and add it to a custom detector in **Ruleset management** > **Detection** > **Detectors**. In the query, replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with your values. The highlighted lines show where ``check.result`` is used and where it appears in the output.
 
 **1. Rule on SCA events**
 
@@ -242,5 +242,7 @@ Create the rule in **Ruleset management** > **Detection** > **Rules**. ``logsour
 Fields
 ------
 
-.. wcs-field-tables:: stateful/sca
-   :single-table:
+.. container:: accordion-section
+
+   .. wcs-field-tables:: stateful/sca
+      :single-table:

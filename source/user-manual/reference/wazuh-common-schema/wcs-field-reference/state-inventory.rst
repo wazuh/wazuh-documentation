@@ -70,9 +70,9 @@ The following example shows a document from the ``wazuh-states-inventory-package
 Example: Detect a vulnerable package, then find every endpoint that has it installed
 ------------------------------------------------------------------------------------
 
-The inventory sends no events, but ``package.name`` is also in the vulnerability events of the Wazuh manager. A rule flags a new vulnerability in a package, then a query on the ``wazuh-states-inventory-packages`` index finds every endpoint where that package is installed, with its version.
+``package.name`` is also in the vulnerability events of the Wazuh manager. A rule flags a new vulnerability in a package, then a query on the ``wazuh-states-inventory-packages`` index finds every endpoint where that package is installed, with its version.
 
-Create the rule in **Ruleset management** > **Detection** > **Rules**. ``logsource.product`` names the integration whose events the rule evaluates. The events come from a built-in integration, so add the rule to a custom integration whose title is the same as the built-in one, for example ``wazuh-fim``. Then promote it to the custom space and add it to a custom detector in **Ruleset management** > **Detection** > **Detectors**. In the query, replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with your values. The highlighted lines show where ``package.name`` is used and where it appears in the output.
+Create the rule in **Ruleset management** > **Detection** > **Rules**. The rule's ``logsource.product`` must match the title of the integration you create it in. The events come from the built-in ``wazuh-vd`` integration, so create the rule in a custom integration titled ``wazuh-vd``. Then promote it to the custom space and add it to a custom detector in **Ruleset management** > **Detection** > **Detectors**. In the query, replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with your values. The highlighted lines show where ``package.name`` is used and where it appears in the output.
 
 **1. Rule on vulnerability events**
 
@@ -152,103 +152,129 @@ Create the rule in **Ruleset management** > **Detection** > **Rules**. ``logsour
 ``wazuh-states-inventory-browser-extensions``
 ---------------------------------------------
 
-Browser extensions installed in each browser profile.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/browser-extensions
-   :single-table:
+   Browser extensions installed in each browser profile.
+
+   .. wcs-field-tables:: stateful/inventory/browser-extensions
+      :single-table:
 
 ``wazuh-states-inventory-groups``
 ---------------------------------
 
-Operating system user groups.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/groups
-   :single-table:
+   Operating system user groups.
+
+   .. wcs-field-tables:: stateful/inventory/groups
+      :single-table:
 
 ``wazuh-states-inventory-hardware``
 -----------------------------------
 
-CPU, memory, and serial number of the endpoint.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/hardware
-   :single-table:
+   CPU, memory, and serial number of the endpoint.
+
+   .. wcs-field-tables:: stateful/inventory/hardware
+      :single-table:
 
 ``wazuh-states-inventory-hotfixes``
 -----------------------------------
 
-Installed Windows updates (hotfixes).
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/hotfixes
-   :single-table:
+   Installed Windows updates (hotfixes).
+
+   .. wcs-field-tables:: stateful/inventory/hotfixes
+      :single-table:
 
 ``wazuh-states-inventory-interfaces``
 -------------------------------------
 
-Network interfaces, with their state and traffic counters.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/interfaces
-   :single-table:
+   Network interfaces, with their state and traffic counters.
+
+   .. wcs-field-tables:: stateful/inventory/interfaces
+      :single-table:
 
 ``wazuh-states-inventory-networks``
 -----------------------------------
 
-IP addresses, netmasks, and broadcast addresses of the network interfaces.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/networks
-   :single-table:
+   IP addresses, netmasks, and broadcast addresses of the network interfaces.
+
+   .. wcs-field-tables:: stateful/inventory/networks
+      :single-table:
 
 ``wazuh-states-inventory-packages``
 -----------------------------------
 
-Installed packages and applications.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/packages
-   :single-table:
+   Installed packages and applications.
+
+   .. wcs-field-tables:: stateful/inventory/packages
+      :single-table:
 
 ``wazuh-states-inventory-ports``
 --------------------------------
 
-Open ports and the processes that use them.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/ports
-   :single-table:
+   Open ports and the processes that use them.
+
+   .. wcs-field-tables:: stateful/inventory/ports
+      :single-table:
 
 ``wazuh-states-inventory-processes``
 ------------------------------------
 
-Running processes.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/processes
-   :single-table:
+   Running processes.
+
+   .. wcs-field-tables:: stateful/inventory/processes
+      :single-table:
 
 ``wazuh-states-inventory-protocols``
 ------------------------------------
 
-Network protocol settings of the interfaces, such as DHCP and the gateway.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/protocols
-   :single-table:
+   Network protocol settings of the interfaces, such as DHCP and the gateway.
+
+   .. wcs-field-tables:: stateful/inventory/protocols
+      :single-table:
 
 ``wazuh-states-inventory-services``
 -----------------------------------
 
-System services.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/services
-   :single-table:
+   System services.
+
+   .. wcs-field-tables:: stateful/inventory/services
+      :single-table:
 
 ``wazuh-states-inventory-system``
 ---------------------------------
 
-Operating system and host details.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/system
-   :single-table:
+   Operating system and host details.
+
+   .. wcs-field-tables:: stateful/inventory/system
+      :single-table:
 
 ``wazuh-states-inventory-users``
 --------------------------------
 
-Operating system user accounts.
+.. container:: accordion-section
 
-.. wcs-field-tables:: stateful/inventory/users
-   :single-table:
+   Operating system user accounts.
+
+   .. wcs-field-tables:: stateful/inventory/users
+      :single-table:
