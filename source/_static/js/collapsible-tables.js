@@ -72,6 +72,10 @@
 
     var q = bar.querySelector('.ct-q'), count = bar.querySelector('.ct-count');
 
+    // Collapsed sections without a table: the search matches their text.
+    var textSections = Array.prototype.slice.call(document.querySelectorAll('section.collapsible-text'));
+    var allSections = tables.map(function (t) { return t.closest('section'); }).concat(textSections);
+
     // Theme accordions: a .accordion-section after the heading, opened with the "show" class.
     function setOpen(section, open) {
       var body = section.querySelector(':scope > .accordion-section');
@@ -95,6 +99,11 @@
         section.style.display = text && !any ? 'none' : '';
         if (text) { setOpen(section, any); }
       });
+      textSections.forEach(function (section) {
+        var ok = !text || section.textContent.toLowerCase().indexOf(text) > -1;
+        section.style.display = ok ? '' : 'none';
+        if (text) { setOpen(section, ok); }
+      });
       count.textContent = text ? shown + ' of ' + rows.length + ' ' + noun + ' match' : rows.length + ' ' + noun;
     }
 
@@ -115,10 +124,10 @@
 
     q.addEventListener('input', run);
     bar.querySelector('.ct-expand').addEventListener('click', function () {
-      tables.forEach(function (t) { setOpen(t.closest('section'), true); });
+      allSections.forEach(function (section) { setOpen(section, true); });
     });
     bar.querySelector('.ct-collapse').addEventListener('click', function () {
-      tables.forEach(function (t) { setOpen(t.closest('section'), false); });
+      allSections.forEach(function (section) { setOpen(section, false); });
     });
     run();
   });

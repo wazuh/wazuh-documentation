@@ -31,14 +31,7 @@ def wrap_sections(app, doctree):
     noun = doctree.get('collapsible-tables')
     if not noun:
         return
-    for section in list(doctree.findall(nodes.section)):
-        if isinstance(section.parent, nodes.document):
-            continue
-        tables = [child for child in section.children if isinstance(child, nodes.table)]
-        if not tables:
-            continue
-        for table in tables:
-            table['classes'].append('collapsible-table')
+    def collapse(section):
         # Subsections, such as the example that follows a table, go inside too
         body = list(section.children[1:])
         container = nodes.container(classes=['accordion-section'])
@@ -46,6 +39,20 @@ def wrap_sections(app, doctree):
             section.remove(child)
             container += child
         section.insert(1, container)
+
+    sections = [s for s in doctree.findall(nodes.section) if not isinstance(s.parent, nodes.document)]
+    with_tables = [s for s in sections if any(isinstance(c, nodes.table) for c in s.children)]
+    for section in with_tables:
+        for table in [c for c in section.children if isinstance(c, nodes.table)]:
+            table['classes'].append('collapsible-table')
+    # A section without a table next to sections with one collapses too, so the
+    # headings look alike. The search box matches its text.
+    siblings = [s for s in sections if s not in with_tables and s.parent in [t.parent for t in with_tables]
+                and not any(isinstance(c, nodes.section) for c in s.children)]
+    for section in siblings:
+        section['classes'].append('collapsible-text')
+    for section in with_tables + siblings:
+        collapse(section)
 
 
 def add_search_script(app, pagename, templatename, context, doctree):
