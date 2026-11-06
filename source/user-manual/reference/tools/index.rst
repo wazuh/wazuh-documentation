@@ -23,6 +23,9 @@ The following command-line tools are available in Wazuh 5.0. The ``agent_control
 +------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
 | :doc:`rbac_control <rbac-control>`                                           | Manages API role-based access control resources and the RBAC database.         | Wazuh manager          |
 +------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
+| :doc:`resolve-credentials <resolve-credentials>`                             | Sets up and checks the passwords, certificate authority and certificates of    | Wazuh dashboard        |
+|                                                                              | the Wazuh dashboard.                                                           |                        |
++------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
 | :doc:`verify-agent-conf <verify-agent-conf>`                                 | Validates the centralized agent configuration.                                 | Wazuh manager          |
 +------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
 | :doc:`wazuh-agent-auth <wazuh-agent-auth>`                                   | Enrolls a Wazuh agent with an enrollment token, enrolls it again, or refreshes | Wazuh agent            |
@@ -56,6 +59,7 @@ The following command-line tools are available in Wazuh 5.0. The ``agent_control
    cluster-control
    manage-agents
    rbac-control
+   resolve-credentials
    verify-agent-conf
    wazuh-agent-auth
    wazuh-control
