@@ -347,7 +347,8 @@ class WCSFieldTables(SphinxDirective):
 
     def make_section(self, title):
         section = nodes.section()
-        section += nodes.title(title, title)
+        # Field set names and prefixes are field names, so they show in code font.
+        section += nodes.title('', '', nodes.literal(title, title))
         section['names'].append(nodes.fully_normalize_name(title))
         section['ids'].append(nodes.make_id(title))
         self.state.document.note_implicit_target(section, section)
