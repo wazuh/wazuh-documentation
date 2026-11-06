@@ -6,7 +6,7 @@
 ``process`` field set
 =====================
 
-The ``process`` field set is the largest group of event fields, so its tables are grouped by name prefix, for example ``process.*`` for its top-level fields. Expand a table under its heading, or use the search and filter bar to find a field.
+The ``process`` field set is one of the three largest groups of event fields, so its tables are grouped by name prefix, for example ``process.*`` for its top-level fields. Expand a table under its heading, or use the search and filter bar to find a field.
 
 Example: Extract the command line of a started process
 ------------------------------------------------------

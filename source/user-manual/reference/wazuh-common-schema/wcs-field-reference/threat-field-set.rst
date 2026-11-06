@@ -6,7 +6,7 @@
 ``threat`` field set
 ====================
 
-The ``threat`` field set is the largest group of event fields, so its tables are grouped by name prefix, for example ``threat.*`` for its top-level fields. Expand a table under its heading, or use the search and filter bar to find a field.
+The ``threat`` field set is one of the three largest groups of event fields, so its tables are grouped by name prefix, for example ``threat.*`` for its top-level fields. Expand a table under its heading, or use the search and filter bar to find a field.
 
 Example: Map the MITRE ATT&CK technique of a security tool's alert
 ------------------------------------------------------------------

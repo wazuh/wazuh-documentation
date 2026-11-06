@@ -20,12 +20,6 @@ Each field set starts with a one-sentence description of the field set. ECS fiel
 
 The three largest field sets, ``wazuh``, ``threat``, and ``process``, have their own pages. The other field sets share two pages in alphabetical order.
 
-Field sets
-----------
-
-.. wcs-field-tables:: stateless/events/main
-   :summary:
-
 .. toctree::
    :maxdepth: 1
 
