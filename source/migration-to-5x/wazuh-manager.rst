@@ -43,7 +43,7 @@ The primary Wazuh manager configuration file has changed between Wazuh 4.x and W
 Configuration changes
 ------------------------
 
-Review the following changes before you recreate the Wazuh manager configuration. Wazuh 5.x uses ``<wazuh_config>`` as the root element of ``wazuh-manager.conf`` instead of ``<ossec_config>``.
+Review the following changes before you recreate the Wazuh manager configuration. Wazuh 5.x uses ``<wazuh_config>`` as the root element of ``wazuh-manager.conf`` instead of ``<ossec_config>``. The file must have exactly one ``<wazuh_config>`` root element, and each section can appear only once.
 
 .. _migration_unsupported_configuration_sections:
 
@@ -57,7 +57,10 @@ Wazuh 5.x removes, relocates, or changes the following Wazuh 4.x sections and op
 +=================================+==============================================================================================================================================================================================================================+
 | ``<alerts>``                    | Removed. Wazuh 5.x has no replacement for this section.                                                                                                                                                                      |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<active-response>``           | Active Response configurations are no longer defined in the Wazuh manager configuration. Recreate the required response actions through the Active Response page on the Wazuh dashboard.                                     |
+| ``<rule_test>``                 | Not supported. Remove it from the Wazuh 5.x configuration.                                                                                                                                                                   |
++---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``<active-response>``           | Active Response configurations are no longer defined in the Wazuh manager configuration. Recreate the required response actions through the Active Response page on the Wazuh dashboard. For more information, see           |
+|                                 | :doc:`Migrating active response scripts from Wazuh 4.x to Wazuh 5.x </user-manual/capabilities/active-response/migrating-active-response-scripts>`.                                                                          |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``<command>``                   | Commands are now configured through the Active Response page on the Wazuh dashboard.                                                                                                                                         |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -73,11 +76,12 @@ Wazuh 5.x removes, relocates, or changes the following Wazuh 4.x sections and op
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``<localfile>``                 | Log collection moved to the Wazuh agent.                                                                                                                                                                                     |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<global>``                    | Wazuh 5.x supports only ``<agents_disconnection_time>``. Other options, such as ``<jsonout_output>``, ``<alerts_log>``, ``<logall>``, ``<logall_json>``, ``<email_notification>``, and ``<update_check>``, aren't supported. |
+| ``<global>``                    | Wazuh 5.x supports only ``<agents_disconnection_time>``. Other options, such as ``<agents_disconnection_alert_time>``, ``<jsonout_output>``, ``<alerts_log>``, ``<logall>``, ``<logall_json>``, ``<email_notification>``,    |
+|                                 | and ``<update_check>``, aren't supported.                                                                                                                                                                                    |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Second ``<global>`` block       | Not supported. Wazuh 5.x accepts one ``<global>`` block, and ``<white_list>`` isn't a Wazuh 5.x option.                                                                                                                      |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<remote>``                    | Wazuh 5.x doesn't support ``<connection>``, ``<allowed-ips>``, or ``<denied-ips>``. Listener options, such as ``<port>``, ``<protocol>``, and ``<local_ip>``, go in a ``<legacy>`` block.                                    |
+| ``<remote>``                    | Wazuh 5.x doesn't support ``<connection>``, ``<allowed-ips>``, ``<denied-ips>``, or ``<queue_size>``. Listener options, such as ``<port>``, ``<protocol>``, and ``<local_ip>``, go in a ``<legacy>`` block.                  |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``<auth>``                      | Wazuh 5.x doesn't support ``<ssl_auto_negotiate>``. The ``<ciphers>`` option accepts only TLS 1.3 cipher suite names, such as ``TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256``.                |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -85,7 +89,7 @@ Wazuh 5.x removes, relocates, or changes the following Wazuh 4.x sections and op
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``<indexer>``                   | Wazuh 5.x doesn't support ``<enabled>``. The certificate paths point to the files in ``/etc/wazuh-manager/certs/``.                                                                                                          |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<cluster>``                   | Wazuh 5.x doesn't support ``<disabled>``. Every Wazuh 5.x manager runs as a cluster node.                                                                                                                                    |
+| ``<cluster>``                   | Wazuh 5.x doesn't support ``<disabled>``. Every Wazuh 5.x manager runs as a cluster node. Wazuh 5.x requires ``<key>``, and doesn't accept the Wazuh 4.x default key.                                                        |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Other configuration files
@@ -120,7 +124,7 @@ Perform the following steps to recreate the Wazuh manager configuration in the W
 
 #. Review and update any settings affected by changes in Wazuh 5.x, including renamed file paths and manager-side capabilities.
 
-#. Validate the recreated configuration. The command lists every option that Wazuh 5.x doesn't support, with its location in the file. Fix each reported error before you start the Wazuh manager:
+#. Validate the recreated configuration. The command reports the first option that Wazuh 5.x doesn't support, with its location in the file. Fix it and run the command again until it reports no errors before you start the Wazuh manager:
 
    .. code-block:: console
 

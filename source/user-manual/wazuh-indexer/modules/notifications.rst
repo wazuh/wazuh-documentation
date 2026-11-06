@@ -144,12 +144,12 @@ The following example shows a minimal ``/etc/wazuh-indexer/opensearch.yml`` conf
    opensearch.notifications.general.filter_by_backend_roles: false
 
 Core settings
-~~~~~~~~~~~~~
+-------------
 
 Core settings control how the Notifications module delivers messages and manages HTTP and email communications.
 
 Email settings
-""""""""""""""
+^^^^^^^^^^^^^^
 
 The following settings control email message size limits and email header validation.
 
@@ -162,7 +162,7 @@ The following settings control email message size limits and email header valida
 +---------------------------------------------------------------+---------------------------------------------------------------------+---------+------------------+
 
 HTTP connection settings
-""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 The following settings control HTTP communication used by Slack, Microsoft Teams, Chime, and custom webhook destinations.
 
@@ -189,7 +189,7 @@ The following settings control HTTP communication used by Slack, Microsoft Teams
 +-----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+--------------+---------------------------------------------+
 
 General core settings
-"""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^
 
 The following settings control supported channel types and general module behavior.
 
@@ -202,7 +202,7 @@ The following settings control supported channel types and general module behavi
 +--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+--------------+--------------------------+
 
 Module settings
-~~~~~~~~~~~~~~~
+---------------
 
 Module settings control the general behavior of the Notifications module.
 
@@ -217,7 +217,7 @@ Module settings control the general behavior of the Notifications module.
 +----------------------------------------------------------------+------------------------------------------------------------------------------------+---------+---------+
 
 Update dynamic settings
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 The following Notifications module settings support dynamic updates through the OpenSearch Cluster Settings API. Unlike static settings configured in the ``/etc/wazuh-indexer/opensearch.yml`` file, dynamic settings can be modified without restarting the Wazuh indexer.
 
@@ -267,7 +267,7 @@ Run the following command from a terminal on a host that can communicate with th
 The ``acknowledged`` value confirms that the Wazuh indexer successfully applied the requested settings. The updated values appear under the ``persistent`` section, indicating that they are stored as persistent cluster settings and remain in effect after the Wazuh indexer restarts.
 
 Email destination secure settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------
 
 Email notification channels require an email account configuration to send messages to recipients.
 
@@ -279,7 +279,7 @@ The Notifications module supports the following email delivery methods:
 Both SMTP and SES configurations require credentials to authenticate with the email service. To protect sensitive information, the Notifications module stores these credentials in the OpenSearch Keystore rather than plain-text configuration files.
 
 SMTP account credentials
-""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Perform the following steps to configure SMTP credentials for an email account named ``my_smtp_account``. Run the ``opensearch-keystore`` commands as the ``wazuh-indexer`` user, as shown below. If you run them as ``root``, the ``/etc/wazuh-indexer/opensearch.keystore`` file becomes owned by ``root`` and the Wazuh indexer fails to start.
 

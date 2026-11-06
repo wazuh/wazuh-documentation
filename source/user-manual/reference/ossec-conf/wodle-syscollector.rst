@@ -15,7 +15,7 @@ wodle name="syscollector"
       <wodle name="syscollector">
       </wodle>
 
-Configuration options of the Syscollector wodle for `system inventory <https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/system-inventory/index.html>`__.
+Configuration options of the Syscollector wodle for :doc:`system inventory </user-manual/capabilities/system-inventory/index>`.
 
 Options
 -------
@@ -58,8 +58,7 @@ Time between system scans.
 | **Default value**    | 1h                                                                                           |
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Allowed values**   | A positive number with a suffix character for the time unit. Use s for seconds, m for        |
-|                      | minutes, h for hours, and d for days. If the configured value is lower than 60 seconds, it   |
-|                      | automatically adjusts it to 60 seconds.                                                      |
+|                      | minutes, h for hours, and d for days.                                                        |
 +----------------------+----------------------------------------------------------------------------------------------+
 
 scan_on_start

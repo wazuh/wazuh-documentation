@@ -39,13 +39,13 @@ Wazuh manager cluster installation
 
    The output lists them, for example ``IP Address:<WAZUH_MANAGER_ADDRESS>, DNS:manager``. Make sure that every address your agents connect to is in this list.
 
-   If an address is missing, issue the agent listener certificates again on the host where you ran ``--generate-config-files``. That host keeps the root CA in the ``wazuh-ca`` directory and ``config.yml`` beside the installation assistant. Download the certificates tool to the same directory and run it with ``-wm``. Pass every address your agents use, not only the missing one, because the certificate holds only the ``-as`` values of that run:
+   If an address is missing, issue the agent listener certificates again on the host where you ran ``--generate-config-files``. That host keeps the root CA in the ``wazuh-ca`` directory and ``config.yml`` beside the installation assistant. If ``config.yml`` is gone, download the configuration template again and fill it in with the same node names and addresses, as in :ref:`Initial configuration <wazuh_indexer_assisted_initial_configuration>`. Download the certificates tool to the same directory and run it with ``-wm``. Pass every address your agents use, not only the missing one, because the certificate holds only the ``-as`` values of that run:
 
    .. code-block:: console
 
       # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
       # rm -rf wazuh-certificates
-      # bash wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -wm -as <ADDRESS> -as <OTHER_ADDRESS>
+      # bash wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -wm -as <ALTERNATE_ADDRESS> -as <OTHER_ALTERNATE_ADDRESS>
 
    The tool issues new certificates for every Wazuh manager node in ``config.yml``, signs them with the root CA in ``wazuh-ca``, and writes them to ``wazuh-certificates/``. It stops if that directory exists, so the first command removes it. You only need the agent listener pair. Copy ``<MANAGER_NODE_NAME>-remoted.pem`` and ``<MANAGER_NODE_NAME>-remoted-key.pem`` to each Wazuh manager node, replacing ``<MANAGER_NODE_NAME>`` with its name in ``config.yml``. Then, on that node, run:
 
@@ -60,12 +60,14 @@ Wazuh manager cluster installation
 
 Your Wazuh manager is now successfully installed.
 
+On the master node, the Wazuh manager log starts with ``WARNING: dashboard client pair not generated: /etc/wazuh-manager/ca has no key; provision it externally in /etc/wazuh-manager/export``. This is expected, because ``/etc/wazuh-manager/ca`` holds only the root CA certificate. Nothing uses that pair, and you don't need to do anything.
+
 To check the Wazuh manager API, run these commands on the master node. The API runs only on the master node. The first command prints the password of the ``wazuh`` API user, and the second asks for it:
 
 .. code-block:: console
 
    # sed -n 's/^WAZUH_MANAGER_API_PASSWORD=//p' /etc/wazuh-manager/export/credentials.env
-   # curl -k -u wazuh -X POST "https://localhost:55000/security/user/authenticate?raw=true"
+   # curl --cacert /etc/wazuh-manager/export/ca.pem -u wazuh -X POST "https://localhost:55000/security/user/authenticate?raw=true"
 
 The output is a token.
 

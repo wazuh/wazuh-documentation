@@ -8,7 +8,7 @@ Deployment on Kubernetes
 
 `Kubernetes <https://kubernetes.io/>`__ is an open source container orchestration engine. Containers are microservices packaged with their dependencies and configurations. Kubernetes runs across a cluster, automating deployment, scaling, and managing containerized applications. It simplifies the management of applications composed of multiple containers running across different servers by automating deployment, scaling, networking, and recovery.
 
-In this section, we provide an overview of the :doc:`Wazuh Kubernetes architecture <kubernetes-conf>`. It also describes how to deploy Wazuh central components on Amazon EKS and local Kubernetes clusters. We also include steps for enrolling and deploying a Wazuh agent on Kubernetes and how to :doc:`clean up <kubernetes-clean-up>` both clusters and volumes.
+In this section, we provide an overview of the :doc:`Wazuh Kubernetes architecture <kubernetes-conf>`. It also describes how to :doc:`deploy Wazuh central components on Amazon EKS and local Kubernetes clusters <kubernetes-deployment>`. We also include steps for :ref:`enrolling and deploying a Wazuh agent on Kubernetes <kubernetes-deploying-wazuh-agent>` and how to :doc:`clean up <kubernetes-clean-up>` both clusters and volumes.
 
 .. toctree::
    :maxdepth: 1

@@ -6,18 +6,18 @@
 Detecting an SQL injection attack
 =================================
 
-You can use Wazuh to detect SQL injection attacks in web server logs by analyzing patterns such as ``select``, ``union``, and other common SQL injection patterns. SQL injection is an attack in which a threat actor inserts malicious code into strings transmitted to a database server for parsing and execution. A successful SQL injection attack gives unauthorized access to confidential information contained in the database. In this use case, you simulate an SQL injection attack against an Ubuntu endpoint and detect it with Wazuh.
+You can use Wazuh to detect SQL injection attacks in web server logs by analyzing keywords such as ``select``, ``union``, and other common SQL injection patterns. SQL injection is an attack in which a threat actor inserts malicious code into strings transmitted to a database server for parsing and execution. A successful SQL injection attack gives unauthorized access to confidential information contained in the database. In this use case, you simulate an SQL injection attack against an Ubuntu endpoint and detect it with Wazuh.
 
 Infrastructure
 --------------
 
-+--------------+---------------------------------------------------------------+
-| Endpoint     | Description                                                   |
-+==============+===============================================================+
-| Ubuntu 24.04 | Victim endpoint running an Apache 2.4.54 web server or later. |
-+--------------+---------------------------------------------------------------+
-| RHEL 9.0     | Attacker endpoint that launches the SQL injection attack.     |
-+--------------+---------------------------------------------------------------+
++--------------+------------------------------------------------------------+
+| Endpoint     | Description                                                |
++==============+============================================================+
+| Ubuntu 24.04 | Victim endpoint running Apache web server 2.4.54 or later. |
++--------------+------------------------------------------------------------+
+| RHEL 9.0     | Attacker endpoint that launches the SQL injection attack.  |
++--------------+------------------------------------------------------------+
 
 Configuration
 -------------
@@ -60,7 +60,7 @@ Perform the following steps to install Apache and configure the Wazuh agent to m
 
       <ossec_config>
         <localfile>
-          <log_format>syslog</log_format>
+          <log_format>apache</log_format>
           <location>/var/log/apache2/access.log</location>
         </localfile>
       </ossec_config>
@@ -89,14 +89,14 @@ You can visualize the findings on the Wazuh dashboard. Perform the following:
 
 #. Go to **Threat intelligence** > **Threat Hunting** and select **Findings**.
 
-#. Click **+ Add filter**. Then filter by **event.dataset**.
+#. Click **+ Add filter**. Then filter by ``event.dataset``.
 
-#. In the **Operator** field, select **is**.
+#. In the **Operator** field, select ``is``.
 
-#. Input ``apache-access``.
+#. In the **Values** field, enter ``apache-access``.
 
-.. thumbnail:: /images/poc/sql-injection-findings.png
-   :title: SQL injection attack findings
-   :alt: Wazuh dashboard Events table filtered by rule ID 31106 showing successful web attack alerts with HTTP 200 responses
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/poc/sql-injection-findings.png
+      :title: SQL injection attack findings
+      :alt: Wazuh dashboard Threat Hunting Findings tab filtered by event.dataset apache-access showing the SQL injection finding
+      :align: center
+      :width: 80%

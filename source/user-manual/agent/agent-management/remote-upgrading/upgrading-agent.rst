@@ -30,7 +30,7 @@ Using the Wazuh dashboard
    -  To upgrade a single Wazuh agent, select **Upgrade** in the **Actions** column of that Wazuh agent, then confirm with **Upgrade**. If the Wazuh manager can't detect the package type, choose it in **Package type**. This action is only available for active Wazuh agents that are outdated.
    -  To upgrade several Wazuh agents, select them in the table, then click **More** > **Upgrade agents** and confirm with **Upgrade**.
 
-#. Review the **Upgrade status**. It lists the Wazuh agents for which an upgrade task was created and any errors, with a suggested remediation.
+#. Review the **Upgrade status**. **Agents queued for upgrade** lists the Wazuh agents for which an upgrade task was created. **Agents not queued for upgrade** lists the Wazuh agents that failed, with the error code and message. For example, error 1822 means that the WPK repository isn't reachable. When you upgrade a single Wazuh agent, the Wazuh dashboard shows a notification instead: "Upgrade request sent successfully", or "Could not upgrade agent" with the error.
 
 #. While the upgrade runs, the **Version** column shows **Upgrading**. The list refreshes once each Wazuh agent reports its new version.
 
@@ -105,11 +105,11 @@ To upgrade agents using the command line, use the :doc:`/var/wazuh-manager/bin/a
 Using the RESTful API
 ---------------------
 
-#. List all outdated Wazuh agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agent_controller.get_agent_outdated>`. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager:
+#. List all outdated Wazuh agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agent_controller.get_agent_outdated>`. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN of the Wazuh manager:
 
    .. code-block:: console
 
-      # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents/outdated?pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/outdated?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
    The command output looks similar to this:
 
@@ -150,11 +150,11 @@ Using the RESTful API
          "error": 0
       }
 
-#. Upgrade the Wazuh agent using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` (here, the Wazuh agent with ID 008). Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager:
+#. Upgrade the Wazuh agent using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` (here, the Wazuh agent with ID 008). Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN of the Wazuh manager:
 
    .. code-block:: console
 
-      # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/upgrade?agents_list=008&pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/upgrade?agents_list=008&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
    The command output looks similar to this:
 
@@ -179,6 +179,14 @@ Using the RESTful API
 
    The ``agents_list`` parameter in the :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` and :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` endpoints allows the value ``all``. When this value is set, an upgrade request will be sent to all Wazuh agents.
 
+   To upgrade with a WPK file you downloaded, use PUT /agents/upgrade_custom and set ``file_path`` to the full path of the file in ``/var/wazuh-manager/var/upgrade/``:
+
+   .. code-block:: console
+
+      # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/upgrade_custom?agents_list=<AGENT_ID>&file_path=/var/wazuh-manager/var/upgrade/<WPK_FILE>&pretty=true" -H "Authorization: Bearer $TOKEN"
+
+   With only the file name, the request fails with error 1824 (``The WPK file does not exist``).
+
    When upgrading more than 3000 Wazuh agents at the same time, it is highly recommended that the parameter ``wait_for_complete`` be set to true to avoid a possible API timeout.
 
    This recommendation is based on testing with a Wazuh manager on a server with a 2.5 GHz AMD EPYC 7000 series processor and 4 GiB memory. Using an agent list with 3000 agents or fewer on a system with similar or better specifications guarantees a response before the API timeout occurs.
@@ -187,7 +195,7 @@ Using the RESTful API
 
    .. code-block:: console
 
-      # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents?agents_list=008&pretty=true&select=version" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?agents_list=008&pretty=true&select=version" -H  "Authorization: Bearer $TOKEN"
 
    The command output looks similar to this:
 

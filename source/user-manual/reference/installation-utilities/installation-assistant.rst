@@ -24,7 +24,9 @@ Options list
 |                                                     | every Wazuh manager node. Repeat it for more than one. Must be used along with -a or -g.     |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -ap, --api-san <ip|dns>                             | Adds an extra address to the subject alternative name of the Wazuh manager API certificate   |
-|                                                     | of every Wazuh manager node. Repeat it for more than one. Must be used along with -a or -g.  |
+|                                                     | of every Wazuh manager node. Repeat it for more than one. With ``-a``, the Wazuh manager API |
+|                                                     | also listens on all network interfaces instead of only on the local host. Must be used along |
+|                                                     | with -a or -g.                                                                               |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -d [pre-release|local], --development               | Use development repositories. By default, it uses the pre-release package repository. If     |
 |                                                     | local is specified, it will use a local artifact_urls.yaml file located in the same          |

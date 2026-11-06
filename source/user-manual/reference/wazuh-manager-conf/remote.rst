@@ -337,7 +337,7 @@ Maximum accepted HTTP request body size.
 | **Default value**  | 10M (10 MiB)                                                                            |
 +--------------------+-----------------------------------------------------------------------------------------+
 | **Allowed values** | Size with an optional unit suffix: B, K, M or G (case-insensitive). A bare number is in |
-|                    | bytes.                                                                                  |
+|                    | bytes. From 1 byte to ``1G`` (1073741824 bytes).                                        |
 +--------------------+-----------------------------------------------------------------------------------------+
 
 enroll_rate_limit

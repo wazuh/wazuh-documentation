@@ -24,7 +24,7 @@ Table 1 (scan support per operating system):
 | OpenBSD          | Yes      | Yes | No       | Yes     | No    | No        | No       | No    | No     | No       | No                 |
 +------------------+----------+-----+----------+---------+-------+-----------+----------+-------+--------+----------+--------------------+
 
-The module detects multiple package formats depending on the operating system. The packages scan supports detection of `NPM (Node Package Manager) <https://www.npmjs.com/>`__ and `PyPI (Python Package Index) <https://pypi.org/>`__ packages on multiple operating systems, as the table below shows. The NPM and PyPI scan requires a C++ compiler supporting the `C++20 standard <https://en.cppreference.com/cpp/compiler_support/20>`__ (GCC 8+).
+The module detects multiple package formats depending on the operating system. The packages scan supports detection of `NPM (Node Package Manager) <https://www.npmjs.com/>`__ and `PyPI (Python Package Index) <https://pypi.org/>`__ packages on multiple operating systems, as the table below shows.
 
 .. note::
 

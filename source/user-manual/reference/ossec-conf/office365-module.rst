@@ -66,7 +66,7 @@ Specifies the interval between module executions.
 | **Default value**    | 1m                                                                                           |
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Allowed values**   | A positive number that should contain a suffix character indicating a time unit, such as, s  |
-|                      | (seconds), m (minutes), h (hours), d (days)                                                  |
+|                      | (seconds), m (minutes), h (hours), d (days). Maximum 1d                                      |
 +----------------------+----------------------------------------------------------------------------------------------+
 
 curl_max_size

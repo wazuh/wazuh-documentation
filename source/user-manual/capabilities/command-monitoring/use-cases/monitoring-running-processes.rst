@@ -6,7 +6,7 @@
 Monitoring running processes
 =============================
 
-In this use case, we configure the Command module locally to run a script that monitors running processes on a Windows endpoint. Then, we create custom decoders and a detection rule to generate findings whether a particular process is running.
+In this use case, we configure the Command module locally to run a script that monitors running processes on a Windows endpoint. Then, we create a detection rule to generate a finding when a particular process is running. The default ``decoder/wazuh-wodle/0`` decoder decodes the script output.
 
 Configuration
 --------------
@@ -66,7 +66,7 @@ Perform the following steps to configure the Command module to run a batch scrip
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-Perform the steps below to create a custom decoder and rule to analyze the event received from the monitored Windows endpoint. If you haven't already done so, perform step 1 of the :ref:`Wazuh dashboard <command_monitoring_configuration_example_wazuh_dashboard>` section under Example configuration.
+Perform the steps below to create a rule to analyze the event received from the monitored Windows endpoint. If you haven't already done so, perform step 1 of the :ref:`Wazuh dashboard <command_monitoring_configuration_example_wazuh_dashboard>` section under Example configuration.
 
 #. Navigate to **Ruleset management** > **Detection** > **Rules** and perform the following to create a detection rule.
 
@@ -129,7 +129,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
       -  **Select indexes/aliases**: wazuh-events-v5-system-activity (this must match the integration category you configured earlier, ``System Activity``)
       -  **Space**: Custom
       -  **Integration**: command-integration
-      -  **Run every**: 1 minute.
+      -  **Run every**: 2 minutes
 
    .. thumbnail:: /images/manual/command-monitoring/create-detector-process.png
       :title: Creating a detector

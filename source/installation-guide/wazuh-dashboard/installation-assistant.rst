@@ -29,7 +29,7 @@ Wazuh dashboard installation
 
    The default Wazuh web user interface port is 443, used by the Wazuh dashboard. To use another port after the installation, set ``server.port`` in ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` to the new port and restart the Wazuh dashboard service.
 
-   When the installation finishes, the assistant prints the address of the Wazuh dashboard, the username, and the command that shows the password:
+   When the installation finishes, the assistant prints the address of the Wazuh dashboard, the username, the command that shows the password, and how to enroll agents:
 
    The command output looks similar to this:
 
@@ -43,6 +43,10 @@ Wazuh dashboard installation
       INFO:     Password: to read it from wazuh-install-files.tar, run:
       INFO:         sudo tar -xOf wazuh-install-files.tar wazuh-install-files/credentials.env | grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' | cut -d= -f2-
       INFO: The passwords of the other users are in wazuh-install-files/credentials.env of wazuh-install-files.tar.
+      INFO: --- Next steps ---
+      INFO: To enroll agents, use Deploy new agent in the Wazuh dashboard, or create an enrollment token on the Wazuh manager (the master node in a cluster):
+      INFO:     sudo /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
+      INFO: For more information, see https://documentation.wazuh.com/5.0/installation-guide/wazuh-agent/index.html
       INFO: Installation finished.
 
    The assistant prints one URL for each address in the Wazuh dashboard certificate. Use the one your browser can reach.
@@ -69,14 +73,14 @@ Wazuh dashboard installation
    -  **Username:** ``admin``
    -  **Password:** the password from step 3
 
-   The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import ``root-ca.pem`` into the browser's certificate manager. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
+   The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import ``wazuh-install-files/root-ca.pem`` into the browser's certificate manager. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
 
 .. _wazuh_dashboard_assisted_securing_installation:
 
 Securing your Wazuh installation
 --------------------------------
 
-After every component is installed and running, each component stores the passwords it needs in its own keystore or database. No component reads the password files after the installation, and deleting them doesn't affect running or restarted components. ``wazuh-install-files.tar`` holds all five passwords. On each node, the installation assistant writes the passwords that node's components need to ``local.env`` in the component's directory, for example ``/etc/wazuh-indexer/local.env``. The Wazuh indexer and Wazuh manager also keep a copy in ``export/credentials.env``, and the ``wazuh-ca`` directory beside the installation assistant holds all five.
+After every component is installed and running, each component stores the passwords it needs in its own keystore or database. The components don't need the password files after the installation, and deleting them doesn't affect running or restarted components. If you keep them, keep them readable by root only. The components check them at every start and refuse to start if one has the wrong owner or permissions. ``wazuh-install-files.tar`` holds all five passwords. On each node, the installation assistant writes the passwords that node's components need to ``local.env`` in the component's directory, for example ``/etc/wazuh-indexer/local.env``. The Wazuh indexer and Wazuh manager also keep a copy in ``export/credentials.env``, and the ``wazuh-ca`` directory beside the installation assistant holds all five.
 
 #. Log in to the Wazuh dashboard. A successful login shows that the Wazuh dashboard reaches the Wazuh indexer. Then open the menu and go to **Dashboard management** > **Server API**. In the **API connection** card, the **Host** is the address of the Wazuh manager master node, and the **Status** is **Online**. This shows that the Wazuh dashboard reaches the Wazuh manager. If the **Status** is **Offline**, check that the ``wazuh-manager`` service runs on the master node and that the Wazuh dashboard host reaches port ``55000/TCP``. Also check that the Wazuh manager API certificate lists the address in the **Host** field. To list the addresses in the certificate, run this command on the master node:
 
@@ -92,11 +96,17 @@ After every component is installed and running, each component stores the passwo
 
       # tar -xOf wazuh-install-files.tar wazuh-install-files/credentials.env
 
-#. Remove the installation files and the copies of the passwords. On every node, run the following command from the directory where you ran the installation assistant:
+#. Remove the installation files and the copies of the passwords. On every node except the one where you ran ``--generate-config-files``, run the following command from the directory where you ran the installation assistant:
 
    .. code-block:: console
 
       # rm -rf ./wazuh-install-files.tar ./config.yml ./artifact_urls_|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yaml ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+
+   On the host where you ran ``--generate-config-files``, keep ``config.yml`` with the ``wazuh-ca`` directory. You need both to add nodes or issue certificates again. Run this command there instead:
+
+   .. code-block:: console
+
+      # rm -f ./wazuh-install-files.tar ./artifact_urls_|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yaml
 
    The passwords of each component stay in ``local.env`` and ``export/credentials.env`` in its configuration directory, readable by ``root`` only.
 

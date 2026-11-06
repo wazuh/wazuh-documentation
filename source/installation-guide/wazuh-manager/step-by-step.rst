@@ -37,7 +37,7 @@ Adding the Wazuh repository
 
          .. code-block:: console
 
-            # apt-get install -y gnupg apt-transport-https curl
+            # apt-get update && apt-get install -y gnupg apt-transport-https curl
 
       #. Install the GPG key:
 
@@ -94,13 +94,15 @@ Do this **before installing the package**. The package then uses these files and
 
 .. note::
 
-   If this host is the first Wazuh indexer node, the Wazuh manager package retrieves the Wazuh indexer password and certificates from ``/etc/wazuh-indexer/export`` during installation. Skip this section, but first place the two Wazuh manager API passwords. On the other Wazuh indexer nodes, follow this section in full. Run these commands in the directory that holds ``wazuh-certificates.tar``:
+   If this host is the first Wazuh indexer node, for example an all-in-one host, the Wazuh manager package retrieves the Wazuh indexer password and certificates from ``/etc/wazuh-indexer/export`` during installation. Skip this section, but first place the two Wazuh manager API passwords. Run these commands in the working directory that holds the ``credentials.env`` file you created in :ref:`Creating the passwords <wazuh_indexer_creating_passwords>`:
 
    .. code-block:: console
 
       # install -d -m 0750 /etc/wazuh-manager
       # install -m 0600 /dev/null /etc/wazuh-manager/local.env
-      # tar -xOf wazuh-certificates.tar ./credentials.env | grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=' > /etc/wazuh-manager/local.env
+      # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=' credentials.env > /etc/wazuh-manager/local.env
+
+   Without these two passwords, the Wazuh manager package generates its own, and the values in ``credentials.env`` don't work. On any other host, including a dedicated Wazuh manager node and the other Wazuh indexer nodes, follow this section in full.
 
    Make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
 
@@ -155,7 +157,9 @@ Installing the Wazuh manager
 
             # dnf -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-#. Place this node's certificates and the Wazuh indexer root CA. They are in the directory where you extracted ``wazuh-certificates.tar``. Skip this step on the first Wazuh indexer node:
+   Release candidate packages carry the version of the final release, ``|WAZUH_CURRENT|-|WAZUH_MANAGER_PKG_REV|``. Only their file names show the RC stage, for example ``wazuh-manager_|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|_|WAZUH_MANAGER_x64_DEB|.deb``, so ``dpkg -l`` and ``rpm -q`` show ``|WAZUH_CURRENT|-|WAZUH_MANAGER_PKG_REV|``.
+
+#. On a host without the Wazuh indexer, the installation prints MISSING lines for ``remoted.pem``, ``apid.pem``, ``indexer-ca.pem``, and ``indexer-connector.pem``, a WARNING about the dashboard client pair, and ``Credential resolution is incomplete``. This is expected, and you don't need to stage the root CA private key. Place this node's certificates and the Wazuh indexer root CA. They are in the directory where you extracted ``wazuh-certificates.tar``. Skip this step on the first Wazuh indexer node:
 
    .. code-block:: console
 
@@ -196,7 +200,7 @@ The agent listener certificate, ``/etc/wazuh-manager/certs/remoted.pem``, lists 
    .. code-block:: console
 
       # rm -rf /usr/share/wazuh-indexer/tools/wazuh-certificates
-      # WAZUH_CA_DIR=/etc/wazuh-indexer/ca bash /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh -wm -as <ADDRESS> -as <OTHER_ADDRESS>
+      # WAZUH_CA_DIR=/etc/wazuh-indexer/ca bash /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh -wm -as <ALTERNATE_ADDRESS> -as <OTHER_ALTERNATE_ADDRESS>
 
    The tool writes new certificates for every Wazuh manager node to ``/usr/share/wazuh-indexer/tools/wazuh-certificates``.
 

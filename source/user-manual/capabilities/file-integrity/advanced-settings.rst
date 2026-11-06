@@ -485,7 +485,7 @@ The configuration below enables who-data in eBPF mode to handle up to 50000 even
      <queue_size>50000</queue_size>
    </whodata>
 
-You can learn more about the available configuration options in the ``whodata`` reference section.
+You can learn more about the available configuration options in the :ref:`whodata <reference_ossec_syscheck_whodata>` reference section.
 
 Example: Monitoring changes in configuration files
 """"""""""""""""""""""""""""""""""""""""""""""""""""

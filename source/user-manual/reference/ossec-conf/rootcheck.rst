@@ -148,7 +148,7 @@ Enable or disable checking for anomalous file system objects.
 skip_nfs
 ^^^^^^^^
 
-Enable or disable scanning of network-mounted filesystems.
+Skips network-mounted file systems, such as NFS, during scans. Set it to ``no`` to scan them.
 
 +----------------------+-----------+
 | **Default value**    | yes       |

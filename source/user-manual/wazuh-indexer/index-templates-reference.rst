@@ -42,6 +42,8 @@ Event template retention
 
 Event data streams have short minimum ages for deletion because they primarily serve as an intermediate processing layer. Wazuh deletes a backing index only after it rolls over at 20 GB per primary shard or 200 million documents. A low-volume deployment that never reaches these limits keeps its events indefinitely.
 
+A rolled-over backing index is already past its minimum age, which counts from the index's creation. Wazuh deletes it at the next policy check, so right after a rollover the event history holds only the events indexed since then.
+
 +----------------------------------+--------------------------+
 | Data stream                      | Minimum age for deletion |
 +==================================+==========================+
@@ -203,7 +205,7 @@ The following example shows a simplified lifecycle policy:
    }
 
 Rollover conditions
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 A rollover creates a new backing index and redirects write operations to the new index. By default, Wazuh rolls over a data stream when either of the following limits is reached:
 

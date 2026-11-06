@@ -88,7 +88,7 @@ Visibility into running processes and services helps organizations identify soft
 
 The Wazuh agent collects information about running processes and services on monitored endpoints and synchronizes the data with the Wazuh indexer. The Wazuh dashboard centralizes this information, allowing security teams to review processes and services across their environment without inspecting endpoints individually.
 
-Security teams can use this inventory to identify unauthorized applications, investigate services configured to start automatically, and detect software that does not conform to the organization's approved software baseline. The process inventory provides details such as the process name, executable path, user, process identifier (PID), and start time. These details help analysts investigate suspicious processes and determine their potential impact on the endpoint.
+Security teams can use this inventory to identify unauthorized applications, investigate services configured to start automatically, and detect software that does not conform to the organization's approved software baseline. The process inventory provides details such as the process name, command line, process identifier (PID), parent PID, and start time. These details help analysts investigate suspicious processes and determine their potential impact on the endpoint.
 
 Wazuh detection rules match process and service activity that requires investigation, such as unauthorized services, malicious processes, or activity associated with persistence and privilege escalation.
 
@@ -100,11 +100,11 @@ The **Services** tab of the **IT Hygiene** section displays the services install
    :align: center
    :width: 80%
 
-The **Processes** tab of the **IT Hygiene** section shows the running processes collected from monitored endpoints. The process inventory includes details such as the executable path, user, process ID, and endpoint where each process is running.
+The **Processes** tab of the **IT Hygiene** section shows the running processes collected from monitored endpoints. The process inventory includes details such as the command line, process ID, parent process ID, and endpoint where each process is running.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/processes-tab.png
-   :title: Processes tab of the IT Hygiene section showing running processes with path, user, and process ID
-   :alt: Processes tab of the IT Hygiene section showing running processes with path, user, and process ID
+   :title: Processes tab of the IT Hygiene section showing running processes with command line, process ID, and parent process ID
+   :alt: Processes tab of the IT Hygiene section showing running processes with command line, process ID, and parent process ID
    :align: center
    :width: 80%
 
