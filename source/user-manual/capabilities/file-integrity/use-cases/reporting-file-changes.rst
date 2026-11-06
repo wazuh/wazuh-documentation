@@ -30,7 +30,7 @@ Perform the following steps to configure the FIM module to report changes made t
 
       # mkdir /appfolder
 
-#. Edit the ``/var/ossec/etc/ossec.conf`` configuration file and add the configuration below. This sets ``/appfolder`` for monitoring and makes an exception in reporting changes for ``/appfolder/private-file.conf`` using ``nodiff``:
+#. Edit the ``/var/ossec/etc/ossec.conf`` configuration file and add the configuration below inside the ``<ossec_config>`` block. This sets ``/appfolder`` for monitoring and makes an exception in reporting changes for ``/appfolder/private-file.conf`` using ``nodiff``:
 
    .. code-block:: xml
 

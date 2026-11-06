@@ -41,7 +41,7 @@ The screenshot below shows the built-in Auditd KVDBs on the Wazuh dashboard.
    :align: center
    :width: 80%
 
-After normalizing the event, the Wazuh manager evaluates it against the built-in Auditd detection rules. These rules detect authentication anomalies, privilege escalation attempts, abnormal process behavior, user account changes, audit subsystem events, SELinux events, and other security-relevant activities. Many of the built-in rules include MITRE ATT&CK mappings, false-positive guidance, and compliance mappings that help analysts investigate findings and meet regulatory requirements.
+After normalizing the event, the Wazuh indexer evaluates it against the built-in Auditd detection rules. These rules detect authentication anomalies, privilege escalation attempts, abnormal process behavior, user account changes, audit subsystem events, SELinux events, and other security-relevant activities. Many of the built-in rules include MITRE ATT&CK mappings, false-positive guidance, and compliance mappings that help analysts investigate findings and meet regulatory requirements.
 
 If your Linux Audit configuration uses custom audit keys, record types, or system call classifications that are not included in the built-in KVDBs, create or extend KVDB entries to normalize those events before evaluating them with custom detection rules. For more information, see the :doc:`Key-Value Databases </user-manual/data-analysis/key-value-databases>` documentation.
 
@@ -71,7 +71,7 @@ Monitored endpoint
             # dnf install -y audit
 
    .. note::
-      If the audit package is already present on the endpoint before installing the Wazuh agent, the actions below should not be performed. This configuration will be added by default.
+      If the audit package was already on the endpoint when you installed the Wazuh agent, the installation added the configuration in step 2. Skip steps 2 and 3.
 
 #. Add the configuration below to the Wazuh agent configuration ``/var/ossec/etc/ossec.conf`` file. This configures Wazuh to read the audit log file to process events the Linux Audit system detects:
 

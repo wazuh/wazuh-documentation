@@ -110,6 +110,15 @@ You need a host that meets the requirements above, internet access, and a user w
 
 The Wazuh packages create the certificate authorities, certificates, and Wazuh user passwords during installation. Store the passwords in a safe place. Keep the ``/etc/wazuh-indexer/export/credentials.env`` and ``/etc/wazuh-manager/export/credentials.env`` files, readable by root only. In ``/etc/wazuh-manager/export/credentials.env``, ``WAZUH_MANAGER_API_PASSWORD`` is the password of the ``wazuh`` user of the Wazuh manager API, and ``WAZUH_MANAGER_WUI_PASSWORD`` is the password of ``wazuh-internal-client``, the user of the Wazuh dashboard. The Wazuh components take their passwords from their keystores. At every start, they check these files and refuse to start if one has the wrong owner or permissions. The command in step 2 reads the admin password from ``/etc/wazuh-indexer/export/credentials.env``. To change a password, see :doc:`Password management </user-manual/user-administration/password-management>`.
 
+The Wazuh dashboard keeps the ``kibanaserver`` and ``wazuh-internal-client`` passwords in its keystore. After you change one of them, remove its keystore entry and restart the Wazuh dashboard. The Wazuh dashboard then reads the new password from ``/etc/wazuh-indexer/export/credentials.env`` or ``/etc/wazuh-manager/export/credentials.env``. For ``wazuh-internal-client``, run:
+
+.. code-block:: console
+
+   $ sudo /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore remove wazuh_core.hosts.default.password --allow-root
+   $ sudo systemctl restart wazuh-dashboard
+
+For ``kibanaserver``, remove ``opensearch.password`` instead.
+
 Each package keeps its certificate authority and the private key of that authority in its ``ca/`` directory: ``/etc/wazuh-indexer/ca``, ``/etc/wazuh-manager/ca``, and ``/etc/wazuh-dashboard/ca``. Back up these three directories in a safe place. You need them to renew certificates.
 
 To remove the Wazuh central components and all their data, run the Wazuh installation assistant using the option ``-u`` or ``--uninstall``. See :doc:`Uninstalling the Wazuh central components </installation-guide/uninstalling-wazuh/central-components>` for details.

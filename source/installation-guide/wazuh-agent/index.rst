@@ -120,21 +120,21 @@ Complete the following steps on the Wazuh manager master node to generate the en
 
          IP Address:192.168.33.155, DNS:wazuh-manager.lab.local, DNS:agents.lab.local, DNS:wazuh-1
 
-   -  A step-by-step installation puts the same values from the certificates tool's ``config.yml`` in the list, along with any address added with ``-as``. The output looks similar to this:
+   -  A step-by-step installation puts the addresses from ``WAZUH_MANAGER_REMOTED_CERT_SANS`` in the list or, without that setting, the server's host name and IP addresses. The list also holds ``localhost``, ``127.0.0.1``, and ``::1``. The output looks similar to this:
 
       .. code-block:: none
          :class: output
 
-         IP Address:192.168.33.142, DNS:wazuh.example.com, DNS:wazuh-1
+         IP Address:192.168.33.142, DNS:wazuh.example.com, DNS:localhost, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1
 
-   -  The :doc:`Quickstart </quickstart>` puts the server's host name, its fully qualified domain name, and its IP addresses in the list. The Wazuh manager issues its certificate itself, so the list also holds ``localhost``, ``127.0.0.1``, and ``::1``. The same applies to an all-in-one host installed step by step. The output looks similar to this:
+   -  The :doc:`Quickstart </quickstart>` puts the server's host name, its fully qualified domain name, and its IP addresses in the list. The Wazuh manager issues its certificate itself, so the list also holds ``localhost``, ``127.0.0.1``, and ``::1``. The output looks similar to this:
 
       .. code-block:: none
          :class: output
 
          DNS:w50-qs, IP Address:192.168.33.146, DNS:localhost, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1
 
-   -  A Wazuh manager node that takes its certificates from ``wazuh-install-files.tar`` or ``wazuh-certificates.tar``, as in a distributed installation, has no loopback address in the list. The output looks similar to this:
+   -  A Wazuh manager node that takes its certificates from ``wazuh-install-files.tar``, as in a distributed assisted installation, has no loopback address in the list. The output looks similar to this:
 
       .. code-block:: none
          :class: output
