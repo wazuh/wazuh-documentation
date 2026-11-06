@@ -21,7 +21,7 @@ The download takes up to about 2.5 GB of disk space on the system with Internet 
 Prerequisites
 -------------
 
--  Install ``curl``, ``tar``, ``openssl``, and ``gnupg`` on every offline host before the installation. On RPM systems, ``gnupg`` is ``gnupg2``. Also install the package that provides ``setcap``: ``libcap`` on RPM systems or ``libcap2-bin`` on DEB systems. For the step-by-step method on DEB systems, also install ``binutils``, which provides ``ar`` for the package signature check. The installation assistant stops with ``--offline-installation`` when ``gnupg`` is missing, because it checks the signature of every package.
+-  Install ``curl``, ``tar``, ``openssl``, and ``gnupg`` on every offline host before the installation. On RPM systems, ``gnupg`` is ``gnupg2``. For the assisted method, also install ``libcap`` on RPM systems or ``libcap2-bin`` on DEB systems, because the installation assistant checks for it. For the step-by-step method on DEB systems, also install ``binutils``, which provides ``ar`` for the package signature check. The installation assistant stops with ``--offline-installation`` when ``gnupg`` is missing, because it checks the signature of every package.
 -  The installation methods list the operating system packages they need, and ``wazuh-offline.tar.gz`` doesn't include them. For example, the assisted method requires ``gawk``, which isn't a required package on Debian and Ubuntu, so a minimal image can lack it. If a listed package is missing and you have no local package mirror, download it on a system with Internet access. That system must run the same operating system version. Copy it with the other files, and install it on the offline host:
 
    -  DEB: ``apt-get download`` downloads only the package you name, and ``dpkg -i`` fails when one of its dependencies is missing. To list the packages that the offline host lacks, run ``apt-get -s install <PACKAGE> | awk '/^Inst/ {print $2}'`` on the offline host. Download them with ``apt-get download <PACKAGES>`` on the system with Internet access. Copy them, then run ``dpkg -i *.deb`` in their directory on the offline host. If the offline host has no package lists, download the dependencies that ``dpkg -i`` names in its error too.
@@ -171,7 +171,7 @@ Run the Wazuh installation assistant on any Linux system with Internet access to
 
       To give another deployment its own root CA and passwords, run ``-g`` from another directory or with another ``WAZUH_CA_DIR``.
 
-   The ``wazuh-install-files.tar`` archive contains the private keys for all nodes and the five passwords in ``credentials.env``. Copy this file only to the Wazuh nodes that require it during installation, and remove it immediately after installation is complete.
+   The ``wazuh-install-files.tar`` archive contains the private keys for all nodes and the five passwords in ``credentials.env``. Copy this file only to the Wazuh nodes that require it during installation, and remove it immediately after installation is complete. A Wazuh dashboard node takes from it only its own certificate and key, ``root-ca.pem``, and the ``WAZUH_INDEXER_KIBANASERVER_PASSWORD`` and ``WAZUH_MANAGER_WUI_PASSWORD`` values.
 
 #. Copy the following files to the same directory on each host where you install Wazuh. For an all-in-one deployment, copy only the script and ``wazuh-offline.tar.gz``.
 

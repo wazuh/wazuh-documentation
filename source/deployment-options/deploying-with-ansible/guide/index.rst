@@ -368,7 +368,7 @@ Where:
       wi1 ansible_host=<WI1_PUBLIC_IP> private_ip=<WI1_PRIVATE_IP> ansible_user=ubuntu
       wi2 ansible_host=<WI2_PUBLIC_IP> private_ip=<WI2_PRIVATE_IP> ansible_user=admin
 
-Keep the host names ``wi1``, ``wi2``, ``wi3``, ``manager``, ``worker``, and ``dashboard``. The ``wazuh-distributed.yml`` playbook refers to each node by these names, and the Wazuh manager role reads the master node address from the host named ``manager``.
+Keep the host names ``wi1``, ``wi2``, ``wi3``, ``manager``, ``worker``, and ``dashboard``. The ``wazuh-distributed.yml`` playbook refers to each node by these names, and the Wazuh manager role reads the master node address from the host named ``manager``. The Wazuh dashboard connects to the Wazuh manager API through that address, so the address must be in the Wazuh manager API certificate. To add other addresses to that certificate, set ``api_san``.
 
 Run the playbook
 ~~~~~~~~~~~~~~~~
@@ -463,6 +463,18 @@ The playbook does not change passwords. After you change a password with the Waz
 .. code-block:: console
 
    # printf '%s' '<NEW_ADMIN_PASSWORD>' > /etc/ansible/roles/wazuh-ansible/deployment-credentials/WAZUH_INDEXER_ADMIN_PASSWORD
+
+After you change the ``kibanaserver`` or ``wazuh-internal-client`` password, update the Wazuh dashboard keystore on each Wazuh dashboard node, and restart the Wazuh dashboard. For example, for ``wazuh-internal-client``, replace ``<NEW_WUI_PASSWORD>`` with the new password and run:
+
+.. code-block:: console
+   :emphasize-lines: 3
+
+   # /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore remove wazuh_core.hosts.default.password --allow-root
+   # sed -i '/^WAZUH_MANAGER_WUI_PASSWORD=/d' /etc/wazuh-dashboard/local.env
+   # echo 'WAZUH_MANAGER_WUI_PASSWORD=<NEW_WUI_PASSWORD>' >> /etc/wazuh-dashboard/local.env
+   # systemctl restart wazuh-dashboard
+
+In an all-in-one deployment, skip the ``sed`` and ``echo`` commands. The Wazuh dashboard reads the new password from ``/etc/wazuh-manager/export/credentials.env``. For ``kibanaserver``, remove ``opensearch.password`` and set ``WAZUH_INDEXER_KIBANASERVER_PASSWORD`` instead.
 
 The files in ``deployment-credentials`` hold the passwords in plain text. Restrict access to them. To read a password, open the corresponding file for the Wazuh user. For example, run the following command to read the password of the ``wazuh`` user:
 

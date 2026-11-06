@@ -8,6 +8,8 @@ Troubleshooting
 
 This section highlights common installation or usage issues on the Wazuh dashboard and some basic steps to solve them.
 
+.. _wazuh_dashboard_does_not_start:
+
 Wazuh dashboard does not start
 ------------------------------
 
