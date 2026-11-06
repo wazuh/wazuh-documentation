@@ -10,7 +10,7 @@ Unattended installation
 
 The unattended installation saves time when installing Wazuh from source with the ``install.sh`` script. Instead of answering the installer prompts, you predefine the installation variables in the ``preloaded-vars.conf`` file, located in the ``etc/`` directory of the source tree, and ``install.sh`` reads it at startup. Uncomment the lines for the variables you want to automate and set their values. A variable that is not set takes its default value where one exists; otherwise the installer still asks for it.
 
-To run an unattended installation, edit ``etc/preloaded-vars.conf`` in the extracted source directory and then run the installer from that directory:
+To run an unattended installation, download and extract the Wazuh source code as described in :ref:`Installing the Wazuh manager from sources <installing_manager_from_sources>` or :ref:`Installing the Wazuh agent from sources <installing_agent_from_sources>`, edit ``etc/preloaded-vars.conf`` in the extracted source directory, and then run the installer from that directory:
 
 .. code-block:: console
 
@@ -95,13 +95,13 @@ The following variables apply to agent installations only and have no effect on 
 |                                 | a warning. If set to y, the service is repointed to USER_DIR.    |                              |                                          |
 +---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
 | ``USER_RESOLVE_CREDENTIALS``    | If set to n, the installer does not resolve any credential: no   | y                            | y, n                                     |
-|                                 | Server API password is seeded, no indexer credential is stored   |                              |                                          |
-|                                 | and no TLS certificate is issued, so the manager does not start  |                              |                                          |
-|                                 | until they are provisioned manually. Use it when the             |                              |                                          |
+|                                 | Wazuh manager API password is seeded, no indexer credential is   |                              |                                          |
+|                                 | stored and no TLS certificate is issued, so the manager does not |                              |                                          |
+|                                 | start until they are provisioned manually. Use it when the       |                              |                                          |
 |                                 | installation stages a tree that is copied elsewhere, such as a   |                              |                                          |
 |                                 | package build or a container image layer, so that generated      |                              |                                          |
 |                                 | credentials are not identical on every host. With the default,   |                              |                                          |
-|                                 | the installer issues the certificates and the Server API         |                              |                                          |
+|                                 | the installer issues the certificates and the Wazuh manager API  |                              |                                          |
 |                                 | password at installation time.                                   |                              |                                          |
 +---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
 | ``USER_CA_STORE``               | Custom location of the certificates used to verify incoming WPK  | n                            | n, or the path to an X509 certificate or |
@@ -217,8 +217,8 @@ The options most often changed at installation time are:
 |                                    | local connections.                                               |                                          |                    |
 +------------------------------------+------------------------------------------------------------------+------------------------------------------+--------------------+
 
-Every other option of the remote block can be set the same way, using WAZUH_REMOTE\_ followed by the section (HTTPS\_, LEGACY\_ or AGENTS\_) and the option name in capitals. See the remote section of the Wazuh manager configuration reference for all the options.
+Every other option of the remote block can be set the same way, using WAZUH_REMOTE\_ followed by the section (HTTPS\_, LEGACY\_ or AGENTS\_) and the option name in capitals. See the :doc:`remote section of the Wazuh manager configuration reference </user-manual/reference/wazuh-manager-conf/remote>` for all the options.
 
 .. note::
 
-   To automate deployments from DEB, RPM, Windows (MSI), and macOS packages instead of building from source, use the deployment variables of each package type. See the Wazuh agent installation guide.
+   To automate deployments from DEB, RPM, Windows (MSI), and macOS packages instead of building from source, use the deployment variables of each package type. See the :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>`.

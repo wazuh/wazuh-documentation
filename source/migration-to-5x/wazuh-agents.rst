@@ -18,14 +18,132 @@ You can migrate the following Wazuh agent components:
 Agent registration
 -------------------
 
-The Wazuh manager 4.x stores agent registrations in the ``/var/ossec/etc/client.keys`` file and the Wazuh manager database. To preserve existing Wazuh agent identities during the migration, migrate the agent registrations to the Wazuh 5.x manager before reconnecting the agents.
+The Wazuh manager 4.x stores agent registrations in the ``/var/ossec/etc/client.keys`` file and the Wazuh manager database. To preserve existing Wazuh agent identities during the migration, migrate the agent registrations to the Wazuh 5.x manager before reconnecting the agents. You can migrate them with the ``wazuh-migrate-identity.py`` migration tool or manually. Use the manual procedure to keep the registration dates and the exact group memberships.
+
+.. _migration_migrate_agent_registrations_tool:
+
+Migrate agent registrations with the migration tool
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``wazuh-migrate-identity.py`` tool migrates agent registrations and keys, custom agent groups and their ``agent.conf`` files, and, optionally, the enrollment password and the Wazuh manager API users, roles, and policies. It recreates them through the Wazuh 5.x manager API and verifies the result.
+
+The tool doesn't keep the agent registration dates. The registration date of each migrated agent is the time of the import. The tool also adds every migrated agent to the ``default`` group, and doesn't migrate files in a group folder other than ``agent.conf``. To keep registration dates and the exact group memberships, migrate the agent registrations manually instead.
+
+Run every command as ``root``. Don't enroll any agent on the Wazuh 5.x manager before the import, and don't point the Wazuh 4.x agents to the Wazuh 5.x manager until the import is complete.
+
+Wazuh 4.x manager
+~~~~~~~~~~~~~~~~~
+
+#. Download the ``wazuh-migrate-identity.py`` tool:
+
+   .. code-block:: console
+
+      # curl -fsSLO https://raw.githubusercontent.com/wazuh/wazuh/5.0.0/tools/migration/wazuh-migrate-identity.py
+      # chmod +x wazuh-migrate-identity.py
+
+#. Stop the Wazuh 4.x manager. The tool doesn't export the data while the Wazuh manager is running:
+
+   .. code-block:: console
+
+      # systemctl stop wazuh-manager
+
+#. Preview the export. Add ``--with-password`` to migrate the enrollment password, and ``--with-rbac`` to migrate the Wazuh manager API users, roles, and policies:
+
+   .. code-block:: console
+
+      # ./wazuh-migrate-identity.py export --with-password --with-rbac --dry-run /root/wazuh-4x-bundle
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+        agents   3
+        groups   2 (dbservers, webservers)
+
+      DRY RUN: nothing was written.
+      WARNING: group 'webservers' holds files other than agent.conf (blocked-ips). They are recorded but not migrated: 5.0 compiles whatever is in a group folder and pushes it to its agents, and a 4.x list or rootcheck file has no meaning there.
+
+   Review any warning about files in a group folder other than ``agent.conf``. The tool doesn't migrate them. Recreate the files you need on the Wazuh 5.x manager.
+
+   .. warning::
+
+      The ``--with-rbac`` option replaces the Wazuh 5.x manager API users, roles, and policies with the Wazuh 4.x ones, including the passwords of the ``wazuh`` and ``wazuh-internal-client`` users. Use it only to keep custom Wazuh manager API users, roles, or policies. If you use it, reset both passwords to the values in ``/etc/wazuh-manager/export/credentials.env`` after the import, as described in the Wazuh 5.x manager steps. Otherwise, the Wazuh dashboard can't connect to the Wazuh manager API.
+
+#. Export the Wazuh agent registrations:
+
+   .. code-block:: console
+
+      # ./wazuh-migrate-identity.py export --with-password --with-rbac /root/wazuh-4x-bundle
+
+#. Start the Wazuh 4.x manager:
+
+   .. code-block:: console
+
+      # systemctl start wazuh-manager
+
+#. Copy the ``/root/wazuh-4x-bundle/`` directory to the same path on the Wazuh 5.x manager using a secure method, such as ``scp``. The bundle contains agent keys and password hashes, and only ``root`` can read it. Run the copy as ``root`` or with ``sudo``.
+
+Wazuh 5.x manager
+~~~~~~~~~~~~~~~~~
+
+Perform the following steps with the Wazuh 5.x manager running.
+
+#. Download the ``wazuh-migrate-identity.py`` tool:
+
+   .. code-block:: console
+
+      # curl -fsSLO https://raw.githubusercontent.com/wazuh/wazuh/5.0.0/tools/migration/wazuh-migrate-identity.py
+      # chmod +x wazuh-migrate-identity.py
+
+#. Preview the import. Use the same options as for the export:
+
+   .. code-block:: console
+
+      # ./wazuh-migrate-identity.py import --with-password --with-rbac --dry-run /root/wazuh-4x-bundle
+
+#. Import the agent registrations:
+
+   .. code-block:: console
+
+      # ./wazuh-migrate-identity.py import --with-password --with-rbac /root/wazuh-4x-bundle
+
+#. If you used ``--with-rbac``, restart the Wazuh manager to apply the migrated Wazuh manager API users. After the restart, the ``wazuh`` and ``wazuh-internal-client`` users have their Wazuh 4.x passwords. The ``wazuh-internal-client`` user is the Wazuh 4.x ``wazuh-wui`` user, renamed. Set both users back to the passwords in ``/etc/wazuh-manager/export/credentials.env``. Otherwise, the Wazuh dashboard can't connect to the Wazuh manager API:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-manager
+      # C=/etc/wazuh-manager/export/credentials.env
+      # API=$(grep '^WAZUH_MANAGER_API_PASSWORD=' $C | cut -d= -f2-)
+      # WUI=$(grep '^WAZUH_MANAGER_WUI_PASSWORD=' $C | cut -d= -f2-)
+      # printf '{"wazuh": "%s", "wazuh-internal-client": "%s"}' "$API" "$WUI" | /var/wazuh-manager/bin/rbac_control change-password --passwords-file -
+
+#. Verify the migration. The output shows ``The target matches the bundle.`` when every agent and group is present:
+
+   .. code-block:: console
+
+      # ./wazuh-migrate-identity.py check /root/wazuh-4x-bundle
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+        api      password taken from /etc/wazuh-manager/export/credentials.env (WAZUH_MANAGER_API_PASSWORD)
+      agents    3 of 3 present
+      groups    2 of 2 present
+      rbac.db   schema version 1
+
+      The target matches the bundle.
+
+   The Wazuh agents appear as ``never_connected`` until they reconnect to the Wazuh 5.x manager. Continue with :ref:`Reconnect the Wazuh agents <migration_reconnect_wazuh_agents>`. After you validate the migration, delete the ``/root/wazuh-4x-bundle/`` directory from both Wazuh managers.
 
 .. _migration_migrate_agent_registrations:
 
-Migrate agent registrations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Migrate agent registrations manually
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps to migrate the Wazuh agent registrations from Wazuh 4.x to 5.x.
+Perform the following steps to migrate the Wazuh agent registrations from Wazuh 4.x to 5.x. Do this before you enroll any agent on the Wazuh 5.x manager. These steps replace the Wazuh 5.x ``client.keys`` file and any agent already registered with the same ID.
 
 Wazuh 4.x manager
 ~~~~~~~~~~~~~~~~~
@@ -58,7 +176,7 @@ Wazuh 4.x manager
 
       # systemctl start wazuh-manager
 
-#. Copy the ``/root/wazuh-4x-backup/`` directory to the same path on the Wazuh 5.x manager using a secure method, such as ``scp``. The backup files are readable only by ``root``, run the copy as ``root`` or with ``sudo``.
+#. Copy the ``/root/wazuh-4x-backup/`` directory to the same path on the Wazuh 5.x manager using a secure method, such as ``scp``. The backup files are readable only by ``root``. Run the copy as ``root`` or with ``sudo``.
 
 Wazuh 5.x manager
 ~~~~~~~~~~~~~~~~~
@@ -76,6 +194,10 @@ Wazuh 5.x manager
       # install -m 660 -o wazuh-manager -g wazuh-manager /root/wazuh-4x-backup/client.keys /etc/wazuh-manager/client.keys
 
 #. Copy the agent registrations and group memberships from the Wazuh 4.x database into the Wazuh 5.x database. Wazuh 5.x uses a different database schema, so you can't replace the database file:
+
+   .. note::
+
+      The command requires the ``sqlite3`` tool. If it isn't installed, install it: ``dnf install -y sqlite`` on RPM-based systems, or ``apt-get install -y sqlite3`` on Debian-based systems.
 
    .. code-block:: console
 
@@ -100,14 +222,12 @@ Wazuh 5.x manager
       SQL
       # chown wazuh-manager:wazuh-manager /var/wazuh-manager/queue/db/global.db
 
-   The command requires the ``sqlite3`` tool. If it isn't installed, install it, or run the same SQL statements with the Python interpreter included with the Wazuh manager, ``/var/wazuh-manager/framework/python/bin/python3``.
-
 #. Restore the custom agent groups:
 
    .. code-block:: console
 
       # tar -xzf /root/wazuh-4x-backup/groups.tar.gz -C /etc/wazuh-manager/
-      # chown -R wazuh-manager:wazuh-manager /etc/wazuh-manager/shared/*
+      # chown -R wazuh-manager:wazuh-manager /etc/wazuh-manager/shared/
 
    Review the restored ``agent.conf`` files and update or remove any settings that Wazuh 5.x doesn't support.
 
@@ -130,12 +250,22 @@ Wazuh 5.x manager
       # TOKEN=$(curl -sk -u wazuh:<PASSWORD> -X POST "https://localhost:55000/security/user/authenticate?raw=true")
       # curl -sk "https://localhost:55000/agents?select=id,name,group,dateAdd" -H "Authorization: Bearer $TOKEN"
 
-   Replace ``<PASSWORD>`` with the ``WAZUH_MANAGER_API_PASSWORD`` value from ``/etc/wazuh/credentials.env``. The agents appear as ``disconnected`` until they reconnect to the Wazuh 5.x manager.
+   Replace ``<PASSWORD>`` with the ``WAZUH_MANAGER_API_PASSWORD`` value from ``/etc/wazuh-manager/export/credentials.env``.
 
-Wazuh agent
-~~~~~~~~~~~
+   To print only the value, run ``grep '^WAZUH_MANAGER_API_PASSWORD=' /etc/wazuh-manager/export/credentials.env | cut -d= -f2-`` on the Wazuh 5.x manager.
 
-#. Update the manager address in the Wazuh agent configuration so that the Wazuh agent connects to the Wazuh 5.x manager. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the ``<address>`` setting in the ``<client><server>`` section.
+   The agents appear as ``disconnected`` until they reconnect to the Wazuh 5.x manager.
+
+   After you reconnect the agents and validate the migration, delete the ``/root/wazuh-4x-backup/`` directory from both Wazuh managers. It contains the agent keys.
+
+.. _migration_reconnect_wazuh_agents:
+
+Reconnect the Wazuh agents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Perform the following steps on each Wazuh agent after you migrate the agent registrations with the migration tool or manually.
+
+#. Update the manager address in the Wazuh agent configuration (``ossec.conf``) so that the Wazuh agent connects to the Wazuh 5.x manager. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the ``<address>`` setting in the ``<client><server>`` section.
 
    .. code-block:: xml
       :emphasize-lines: 3
@@ -173,9 +303,11 @@ Wazuh agent
       Although migrated Wazuh agents can continue communicating with the Wazuh 5.x manager, we recommend upgrading them to the corresponding Wazuh 5.x agent to ensure full compatibility and access to the latest features and improvements.
 
 Upgrade the migrated Wazuh agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Wazuh 5.x agents verify the Wazuh manager certificate. A package upgrade doesn't install the Wazuh manager root certificate on the agent, so the upgraded agent connects with TLS verification disabled. Perform the following steps on each Linux agent that you upgrade with a package.
+
+A Wazuh 5.x agent connects to one Wazuh manager address only. If the ``<client>`` block of a Wazuh 4.x agent lists several ``<server>`` addresses for failover, the upgraded agent connects only to the last one. Before the upgrade, keep one ``<server>`` address: a load balancer in front of the Wazuh manager nodes, or the node that the agent must use.
 
 #. Copy ``/etc/wazuh-manager/certs/root-ca.pem`` from the Wazuh 5.x manager to the agent. Then create the ``certs`` directory and install the file with the required ownership and permissions:
 
@@ -202,7 +334,7 @@ Wazuh 5.x agents verify the Wazuh manager certificate. A package upgrade doesn't
 
       # grep "TLS verification" /var/ossec/logs/ossec.log
 
-   If you already upgraded an agent without the root certificate, stop the agent and run ``/var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE> --certs-only``. Replace ``<TOKEN_FILE>`` with a file that contains an enrollment token generated on the Wazuh 5.x manager.
+   If you already upgraded an agent without the root certificate, stop the agent and run ``/var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE> --certs-only``. Replace ``<TOKEN_FILE>`` with a file that contains an enrollment token generated on the Wazuh 5.x manager. You can create the token in **Agents management** > **Enrollment tokens** > **Create token**.
 
    .. note::
 

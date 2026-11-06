@@ -33,6 +33,10 @@ Commands
 +-------------------+----------------------------------------------------------------------------------------------+
 | reload            | Restarts all Wazuh manager daemons except ``wazuh-manager-remoted``, which keeps running.    |
 +-------------------+----------------------------------------------------------------------------------------------+
+| check             | Runs the first three start checks (the configuration, the credentials, and each daemon's     |
+|                   | ``-t`` test) without starting or stopping any daemon. On success, it prints ``Configuration  |
+|                   | and credentials checks passed.``                                                             |
++-------------------+----------------------------------------------------------------------------------------------+
 | status            | Displays the status of the Wazuh manager services.                                           |
 +-------------------+----------------------------------------------------------------------------------------------+
 | info [-v -r -t]   | Displays information about the Wazuh manager installation. Specify only one option to        |

@@ -65,7 +65,7 @@ Descriptive name for the command.
 command
 ^^^^^^^
 
-Path and arguments of the command to be executed.
+Path and arguments of the command to be executed. A script that runs directly must be executable, for example after ``chmod +x /root/script.sh``.
 
 +----------------------+-----------------------------------------------------------+
 | **Default value**    | N/A                                                       |
@@ -98,7 +98,7 @@ Timeout for each command to wait for the end of the execution. Whether this para
 verify_md5
 ^^^^^^^^^^^
 
-Verify the MD5 sum of the binary or the script specified in the command option.
+Verify the MD5 sum of the file the command starts with. For ``<command>/bin/bash /root/script.sh</command>``, that file is ``/bin/bash``, not the script. To verify the script, run it directly, as in the example.
 
 +----------------------+----------------+
 | **Default value**    | n/a            |
@@ -109,7 +109,7 @@ Verify the MD5 sum of the binary or the script specified in the command option.
 verify_sha1
 ^^^^^^^^^^^^
 
-Verify the SHA1 sum of the binary or the script specified in the command option.
+Verify the SHA1 sum of the file the command starts with. For ``<command>/bin/bash /root/script.sh</command>``, that file is ``/bin/bash``, not the script. To verify the script, run it directly, as in the example.
 
 +----------------------+-----------------+
 | **Default value**    | n/a             |
@@ -120,7 +120,7 @@ Verify the SHA1 sum of the binary or the script specified in the command option.
 verify_sha256
 ^^^^^^^^^^^^^^
 
-Verify the SHA256 sum of the binary or the script specified in the command option.
+Verify the SHA256 sum of the file the command starts with. For ``<command>/bin/bash /root/script.sh</command>``, that file is ``/bin/bash``, not the script. To verify the script, run it directly, as in the example.
 
 +----------------------+-------------------+
 | **Default value**    | n/a               |
@@ -232,7 +232,7 @@ Example of configuration
    <wodle name="command">
      <disabled>no</disabled>
      <tag>test</tag>
-     <command>/bin/bash /root/script.sh</command>
+     <command>/root/script.sh</command>
      <interval>1d</interval>
      <ignore_output>no</ignore_output>
      <run_on_start>yes</run_on_start>

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how Wazuh monitors Docker container runtime events, inventory, vulnerabilities, and resource utilization, and centralizes container event logs.
+   :description: Learn how Wazuh monitors Docker container runtime events, inventory, and resource utilization, and centralizes container event logs.
 
 Container security
 ==================
@@ -41,13 +41,6 @@ The **Docker** section of the Wazuh dashboard shows the Docker events collected 
    :width: 80%
 
 You can also create dedicated dashboards to show these containers and images inventory information.
-
-Detecting vulnerabilities in container images
----------------------------------------------
-
-Wazuh detects known vulnerabilities affecting software installed inside container images and running containers. It correlates software inventory collected from containers with vulnerability intelligence from Wazuh Cyber Threat Intelligence (CTI).
-
-Security teams can identify vulnerable container images, review affected CVEs, prioritize remediation, and monitor vulnerability exposure across container workloads.
 
 Monitoring container resource utilization
 -----------------------------------------

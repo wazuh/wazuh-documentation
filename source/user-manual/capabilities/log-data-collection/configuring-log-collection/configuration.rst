@@ -116,7 +116,7 @@ The table below lists the most common sources you can monitor with the Wazuh age
 
 Table 3: Common Linux log sources the Wazuh agent monitors.
 
-Refer to the local configuration documentation for the full list of supported ``log_format`` values.
+Refer to the :ref:`local configuration documentation <reference_ossec_localfile_log_format>` for the full list of supported ``log_format`` values.
 
 .. _how-to-collect-macoslogs:
 

@@ -32,7 +32,7 @@ You need a certificate authority to sign certificates for the Wazuh manager and 
 
       # openssl req -x509 -new -nodes -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
 
-The root certificate is created and saved as the ``rootCA.pem`` file.
+The root certificate is created and saved as the ``rootCA.pem`` file. The default validity is 30 days.
 
 Wazuh agent verification options
 --------------------------------
@@ -145,7 +145,7 @@ Follow these steps to enroll a Linux/Unix endpoint by using certificates for age
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
           <ssl>
             <certificate>/var/ossec/etc/sslagent.cert</certificate>
@@ -162,7 +162,7 @@ Follow these steps to enroll a Linux/Unix endpoint by using certificates for age
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
             <agent_certificate_path>/<PATH_TO>/sslagent.cert</agent_certificate_path>
@@ -207,7 +207,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
           <ssl>
             <certificate>/<PATH_TO>/sslagent.cert</certificate>
@@ -224,7 +224,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
             <agent_certificate_path>/<PATH_TO>/sslagent.cert</agent_certificate_path>
@@ -275,7 +275,7 @@ Follow these steps to enroll a macOS endpoint by using certificates for Wazuh ag
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
           <ssl>
             <certificate>/<PATH_TO>/sslagent.cert</certificate>
@@ -292,7 +292,7 @@ Follow these steps to enroll a macOS endpoint by using certificates for Wazuh ag
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
             <agent_certificate_path>/<PATH_TO>/sslagent.cert</agent_certificate_path>

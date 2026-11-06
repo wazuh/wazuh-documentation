@@ -217,6 +217,8 @@ Path to the private key corresponding to ``ssl_manager_cert``.
 | **Allowed values**   | Absolute path to a PEM-encoded private key in /etc/wazuh-manager/certs                       |
 +----------------------+----------------------------------------------------------------------------------------------+
 
+.. _reference_wazuh_manager_conf_auth_force:
+
 force
 ^^^^^
 

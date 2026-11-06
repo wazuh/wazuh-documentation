@@ -79,6 +79,8 @@ You can authenticate the agent removal using any of the following methods:
 #. :ref:`Temporary authentication token <temporary_authentication_token>` (recommended): More secure as it avoids storing the Wazuh manager API username and password on the monitored endpoint.
 #. :ref:`Stored Wazuh manager API credentials <stored_wazuh_server_API_credentials>`: Requires storing the Wazuh manager API username and password on the monitored endpoint.
 
+After the Quickstart, and after an offline all-in-one installation with the installation assistant, the Wazuh manager API listens only on ``127.0.0.1`` and ``::1``, so the Wazuh agent can't reach it. Before you uninstall with validation, set ``host`` in ``/var/wazuh-manager/api/configuration/api.yaml`` on the Wazuh manager master node to an address the Wazuh agents can reach, for example ``host: ['0.0.0.0', '::']``, and run ``systemctl restart wazuh-manager``. Allow port 55000/TCP only from trusted endpoints.
+
 .. _temporary_authentication_token:
 
 Temporary authentication token
@@ -86,11 +88,11 @@ Temporary authentication token
 
 You need to generate an authentication token on a trusted administrator endpoint and then copy it to the monitored endpoint.
 
-#. Run the following command on any Linux endpoint to generate a temporary authentication token. Replace ``<WAZUH_MANAGER_API_USER>``, ``<WAZUH_MANAGER_API_PASSWORD>``, and ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager API username, password, and IP address, respectively:
+#. Run the following command on any Linux endpoint to generate a temporary authentication token. Replace ``<WAZUH_MANAGER_API_USER>``, ``<WAZUH_MANAGER_API_PASSWORD>``, and ``<WAZUH_MANAGER_ADDRESS>`` with your Wazuh manager API username, password, and IP address or FQDN, respectively:
 
    .. code-block:: console
 
-      # TOKEN=$(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+      # TOKEN=$(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
 
 #. View the generated authentication token:
 
@@ -107,10 +109,10 @@ You need to generate an authentication token on a trusted administrator endpoint
       #!/bin/sh
 
       export VALIDATION_TOKEN="<AUTHENTICATION_TOKEN>"
-      export VALIDATION_HOST="<WAZUH_MANAGER_IP_ADDRESS>:55000"
+      export VALIDATION_HOST="<WAZUH_MANAGER_ADDRESS>:55000"
       export VALIDATION_SSL_VERIFY="false"
 
-   Replace ``<AUTHENTICATION_TOKEN>`` with the authentication token you generated earlier, and ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address.
+   Replace ``<AUTHENTICATION_TOKEN>`` with the authentication token you generated earlier, and ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or FQDN.
 
 You can now proceed to :ref:`uninstall the Wazuh  agent <uninstalling_the_wazuh_agent>`.
 
@@ -128,10 +130,10 @@ Create the file ``/var/ossec/etc/uninstall_validation.env`` on the monitored end
    #!/bin/sh
 
    export VALIDATION_LOGIN="<WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD>"
-   export VALIDATION_HOST="<WAZUH_MANAGER_IP_ADDRESS>:55000"
+   export VALIDATION_HOST="<WAZUH_MANAGER_ADDRESS>:55000"
    export VALIDATION_SSL_VERIFY="false"
 
-Replace ``<WAZUH_MANAGER_API_USER>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with your Wazuh manager API username and password, respectively. Also, replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address.
+Replace ``<WAZUH_MANAGER_API_USER>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with your Wazuh manager API username and password, respectively. Also, replace ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or FQDN.
 
 You can now proceed to :ref:`uninstall the Wazuh  agent <uninstalling_the_wazuh_agent>`.
 
@@ -185,6 +187,12 @@ Perform the following steps on the endpoint you want to remove the agent from:
             # zypper remove wazuh-agent
 
          Some files are marked as configuration files. Due to this designation, the package manager does not remove these files from the filesystem. Delete the ``/var/ossec/`` folder to remove all files completely.
+
+   After removing the package, delete the validation file, as it contains the Wazuh manager API token or credentials:
+
+   .. code-block:: console
+
+      # rm -f /var/ossec/etc/uninstall_validation.env
 
 The Wazuh agent is now completely removed from your Linux endpoint.
 

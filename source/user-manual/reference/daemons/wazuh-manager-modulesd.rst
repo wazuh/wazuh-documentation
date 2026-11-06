@@ -30,3 +30,5 @@ For more information about the available manager modules and their configuration
 +-------------+---------------------------------------------------------------------------------+
 | -u <user>   | Specifies the user under which the daemon runs. The default is wazuh-manager.   |
 +-------------+---------------------------------------------------------------------------------+
+| -V          | Displays version information.                                                   |
++-------------+---------------------------------------------------------------------------------+

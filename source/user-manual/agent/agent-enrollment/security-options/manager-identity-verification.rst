@@ -24,7 +24,7 @@ You need a certificate authority to sign certificates for the Wazuh manager and 
 
    # openssl req -x509 -new -nodes -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
 
-The root certificate is created and saved as the ``rootCA.pem`` file.
+The root certificate is created and saved as the ``rootCA.pem`` file. The default validity is 30 days.
 
 Wazuh agents enrollment with token
 ----------------------------------
@@ -36,6 +36,8 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
    .. code-block:: console
 
       # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
+
+   If the address isn't in the SAN, the command fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``. Use an address that ``openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName`` lists, or reissue the Wazuh manager certificate with that address.
 
    The token is displayed only once. Store it securely, as no command retrieves it later. Tokens expire after 30 days by default. Use ``--ttl`` to change this.
 
@@ -79,7 +81,7 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
 
       # /var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE>
 
-   If the Wazuh agent already has a key, add ``--force-enroll``. The Wazuh agent is enrolled again and gets a new ID.
+   If the Wazuh agent already has a key, add ``--force-enroll``. The Wazuh agent is enrolled again and gets a new ID. The Wazuh manager replaces the existing Wazuh agent only as its ``<auth><force>`` settings allow. By default, the existing Wazuh agent must have been disconnected for more than 1 hour and registered more than 1 hour ago. Otherwise the Wazuh manager refuses the enrollment as a duplicate name or IP address (error 9008 or 9007), and ``wazuh-agent-auth`` exits with code 4.
 
 #. Start the Wazuh agent:
 
@@ -118,7 +120,7 @@ Wazuh manager configuration
 
 Generate an SSL certificate on the Wazuh manager signed by the certificate authority. The steps to generate an SSL certificate for the Wazuh manager are as follows:
 
-#. Create a certificate request configuration file ``req.conf`` on the Wazuh manager. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager where the Wazuh agents will be enrolled. The contents of the file can be as follows:
+#. Create a certificate request configuration file ``req.conf`` on the Wazuh manager. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager where the Wazuh agents will be enrolled. The contents of the file can be as follows:
 
    .. code-block:: ini
       :emphasize-lines: 7,14
@@ -129,14 +131,14 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
       prompt = no
       [req_distinguished_name]
       C = US
-      CN = <WAZUH_MANAGER_IP>
+      CN = <WAZUH_MANAGER_ADDRESS>
       [req_ext]
       subjectAltName = @alt_names
       basicConstraints = CA:FALSE
       [alt_names]
       DNS.1 = wazuh
       DNS.2 = wazuh.com
-      IP.1 = <WAZUH_MANAGER_IP>
+      IP.1 = <WAZUH_MANAGER_ADDRESS>
 
    Where:
 
@@ -144,6 +146,7 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
    -  ``CN`` is the common name on the certificate. This should be the IP address or FQDN of the Wazuh manager. This field is not optional.
    -  ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. It should be included to allow the enrollment of the Wazuh agents with a SAN certificate.
    -  ``DNS.1`` and ``DNS.2`` refer to the additional identities that the certificate should be valid for. In this case, the Wazuh manager DNS names are wazuh and wazuh.com.
+   -  ``IP.1`` is the IP address of the Wazuh manager. If ``<WAZUH_MANAGER_ADDRESS>`` is an FQDN, replace this line with ``DNS.3 = <WAZUH_MANAGER_ADDRESS>``.
 
 #. Create a certificate signing request (CSR) on the Wazuh manager with the following command. The CSR will be used to request a digital certificate from a Certificate Authority (CA):
 
@@ -177,20 +180,14 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
       Certificate request self-signature ok
       subject=C=US, CN=192.168.xxx.xxx
 
-#. Copy the newly signed certificate and key files to ``/etc/wazuh-manager/certs`` on the Wazuh manager, set their ownership and permissions, and copy ``rootCA.pem`` to ``/etc/wazuh-manager/certs/root-ca.pem``, the CA file the Wazuh agents receive:
+#. Copy the newly signed certificate and key files to ``/etc/wazuh-manager/certs`` on the Wazuh manager and set their ownership and permissions. Then add ``rootCA.pem`` to the CA bundle that the Wazuh agents receive with ``wazuh-manager-certs add``. Do not copy it over ``/etc/wazuh-manager/certs/root-ca.pem``, as the Wazuh manager doesn't start if that file loses its own CA:
 
    .. code-block:: console
 
       # cp sslmanager.cert sslmanager.key /etc/wazuh-manager/certs
       # chown root:wazuh-manager /etc/wazuh-manager/certs/sslmanager.cert /etc/wazuh-manager/certs/sslmanager.key
       # chmod 640 /etc/wazuh-manager/certs/sslmanager.cert /etc/wazuh-manager/certs/sslmanager.key
-      # cp rootCA.pem /etc/wazuh-manager/certs/root-ca.pem
-
-#. Restart the Wazuh manager to apply the changes made:
-
-   .. code-block:: console
-
-      # systemctl restart wazuh-manager
+      # /var/wazuh-manager/bin/wazuh-manager-certs add rootCA.pem
 
 #. Configure the new certificate on the Wazuh manager. Edit the ``<auth>`` section of the ``/etc/wazuh-manager/wazuh-manager.conf`` file:
 
@@ -237,7 +234,7 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
           <ssl>
             <certificate_authorities>/<PATH_TO>/rootCA.pem</certificate_authorities>
@@ -254,7 +251,7 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
             <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
@@ -298,7 +295,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
           <ssl>
             <certificate_authorities>C:\<PATH_TO>\rootCA.pem</certificate_authorities>
@@ -315,7 +312,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
             <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
@@ -365,7 +362,7 @@ Follow the steps below to enroll a macOS endpoint by using certificates to verif
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
           <ssl>
             <certificate_authorities>/<PATH_TO>/rootCA.pem</certificate_authorities>
@@ -382,7 +379,7 @@ Follow the steps below to enroll a macOS endpoint by using certificates to verif
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
             <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>

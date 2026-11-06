@@ -42,7 +42,7 @@ To download this report, click **Export Formatted** on the **IT Hygiene** page f
    :align: center
    :width: 80%
 
-To streamline the report to a specific endpoint, click **Explore agent** and select an endpoint. In the image below, we download the software inventory data for a Windows 11 endpoint.
+To streamline the report to a specific endpoint, click **Explore agent** and select an endpoint. In the image below, we download the software inventory data for a Windows Server 2022 endpoint.
 
 .. thumbnail:: /images/manual/system-inventory/explore-agent.jpg
    :title: Export Formatted - Explore agent

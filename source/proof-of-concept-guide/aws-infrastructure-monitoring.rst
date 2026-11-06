@@ -14,16 +14,16 @@ This use case shows how the Wazuh module for AWS (aws-s3) enables log data colle
 Infrastructure
 --------------
 
-+-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Cloud service     | Description                                                                                                                                                                                                          |
-+===================+======================================================================================================================================================================================================================+
-| Amazon CloudTrail | AWS CloudTrail, like all other supported AWS services, requires setting the |CLOUDTRAIL_POLICY| for user permissions and providing a valid authentication method. In this PoC, we use the |AWS_PROFILE_AUTH| method. |
-+-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Cloud service  | Description                                                                                                                                                                                                                |
++================+============================================================================================================================================================================================================================+
+| AWS CloudTrail | AWS CloudTrail, like all other supported AWS services, requires setting the |CLOUDTRAIL_POLICY| for user permissions and providing a valid authentication method. In this use case, you use the |AWS_PROFILE_AUTH| method. |
++----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
 
-Take the following steps to configure Wazuh to monitor Amazon CloudTrail services and identify security incidents.
+Take the following steps to configure Wazuh to monitor AWS CloudTrail and identify security incidents.
 
 CloudTrail
 ^^^^^^^^^^
@@ -34,7 +34,7 @@ CloudTrail
 
 #. Choose whether to create a new S3 bucket or specify an existing one to store CloudTrail logs. Note down the name of the S3 bucket used, as it is necessary to specify it in the Wazuh configuration.
 
-The image below shows how to create a new CloudTrail service and attach a new S3 bucket.
+The image below shows how to create a new trail and attach a new S3 bucket.
 
 .. thumbnail:: /images/poc/cloudtrail.gif
    :title: Creating a CloudTrail service
@@ -42,10 +42,31 @@ The image below shows how to create a new CloudTrail service and attach a new S3
    :align: center
    :width: 80%
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+#. Navigate to **Ruleset management** > **Overview**.
+
+#. Enter ``aws`` in the search box and select the **aws** integration.
+
+#. Click the **aws** integration name to open it, then click **Actions** and select **Enable**.
+
+   .. thumbnail:: /images/poc/aws-integration-enable.png
+      :title: Enable the aws integration
+      :alt: Wazuh dashboard Ruleset management page for the aws integration with the Actions menu open and Enable highlighted
+      :align: center
+      :width: 80%
+
 Wazuh agent
 ^^^^^^^^^^^
 
-#. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh agent. Add only the AWS buckets of interest. Read our guide on how to :doc:`configure AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
+#. Install the Python dependencies of the Wazuh module for AWS on the Ubuntu endpoint. The command below is for Python 3.12, the default on Ubuntu 24.04. For other Python versions, see :doc:`Install dependencies </cloud-security/amazon/services/prerequisites/dependencies>`:
+
+   .. code-block:: console
+
+      $ sudo pip3 install --break-system-packages boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
+
+#. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Ubuntu endpoint. Add only the AWS buckets of interest. Read our guide on how to :doc:`configure AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
 
    .. code-block:: xml
       :emphasize-lines: 8, 9
@@ -71,7 +92,7 @@ Wazuh agent
 Test the configuration
 ----------------------
 
-Once you configure CloudTrail, you can generate events by creating a new IAM user account using the IAM service. This generates an event that Wazuh processes. The Wazuh default ruleset parses AWS logs and generates findings automatically. The alerts appear as soon as Wazuh receives the logs from the AWS S3 bucket. You can also find additional :ref:`CloudTrail use cases <cloudtrail-use-cases>` in our documentation.
+Once you configure CloudTrail, you can generate events by creating a new IAM user account using the IAM service. This generates an event that Wazuh processes. The Wazuh default ruleset parses AWS logs and generates findings automatically. The findings appear as soon as Wazuh receives the logs from the AWS S3 bucket. You can also find additional :ref:`CloudTrail use cases <cloudtrail-use-cases>` in our documentation.
 
 Visualize the findings
 ----------------------
@@ -80,5 +101,6 @@ You can visualize the findings on the Wazuh dashboard. Go to **Cloud security** 
 
 .. thumbnail:: /images/poc/aws-findings.png
    :title: Visualize Amazon Web Services findings
+   :alt: Wazuh dashboard Amazon Web Services Findings tab listing AWS CloudTrail IAM user creation findings
    :align: center
    :width: 80%

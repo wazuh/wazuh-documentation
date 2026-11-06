@@ -122,11 +122,11 @@ Using the Wazuh manager API to create and manage groups programmatically is effe
 
    .. code-block:: console
 
-      # curl -k -X POST "https://<WAZUH_MANAGER_IP>:55000/groups?pretty=true" -H "Content-Type: application/json" -d '{"group_id": "Linux"}' -H  "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true')"
+      # curl -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/groups?pretty=true" -H "Content-Type: application/json" -d '{"group_id": "Linux"}' -H  "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true')"
 
    Replace:
 
-   -  The ``<WAZUH_MANAGER_IP>`` variable with the IP address of your Wazuh manager. In case you have a distributed deployment, use the IP address of the master node.
+   -  The ``<WAZUH_MANAGER_ADDRESS>`` variable with the IP address or FQDN of your Wazuh manager. In case you have a distributed deployment, use the address of the master node.
    -  The ``<WAZUH_MANAGER_API_USER>`` variable with your Wazuh manager API username.
    -  The ``<WAZUH_MANAGER_API_PASSWORD>`` variable with the password of your Wazuh manager API user.
 
@@ -163,7 +163,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       .. code-block:: console
 
-         # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/016/group/dbms?pretty=true" -H "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true')"
+         # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/016/group/dbms?pretty=true" -H "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true')"
 
       Output
 
@@ -203,7 +203,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
    .. code-block:: console
 
-      # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/groups/dbms/agents?pretty=true&select=id,name" -H "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true')"
+      # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/groups/dbms/agents?pretty=true&select=id,name" -H "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true')"
 
    Output
 
@@ -230,18 +230,14 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 #. After connecting to the Wazuh manager, each agent assigned to the group will receive the files contained in the ``/etc/wazuh-manager/shared/dbms/`` folder from the Wazuh manager, including the ``agent.conf`` file that was modified in the previous step. The length of time it takes for the Wazuh manager to push these files to the Wazuh agents depends on the size of the files, the number of agents in the group, and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding merged.mg file) on 100 Wazuh 4.x agents using UDP, less time if using TCP. Wazuh 5.0 agents always communicate over HTTPS (TCP), so this UDP/TCP distinction does not apply to them.
 
-#. Once a specific agent belongs to a group, it will not be automatically reassigned to this group even if it is re-enrolled under another name or ID. After re-enrollment, it will be added to the *default* group which is the default behavior. If you want the Wazuh agent to be automatically reassigned after re-enrollment, it must be explicitly configured by the user in the ``/var/ossec/etc/local_internal_options.conf`` file on the Wazuh agent by adding the option ``remoted.guess_agent_group=1`` (see section remoted in :doc:`internal options </user-manual/reference/internal-options>`).
-
-   When this option is added, on re-enrollment, the checksum of the ``merged.mg`` file sent by the Wazuh agent is compared with that of the other agents enrolled with the Wazuh manager.
+#. Once a Wazuh agent belongs to a group, it isn't reassigned to that group if it is re-enrolled under another name or ID. After re-enrollment, it belongs to the ``default`` group. Assign it to its groups again, or set them during enrollment with ``<enrollment><groups>`` or ``WAZUH_AGENT_GROUP``.
 
 merged.mg
 ^^^^^^^^^
 
 When a Wazuh agent is enrolled in the Wazuh manager for the first time, the Wazuh manager generates a ``merged.mg`` file based on the Wazuh agent's configuration and group membership. Whenever the Wazuh agent's configuration or group membership changes, the Wazuh manager updates the ``merged.mg`` file and sends it to the Wazuh agent.
 
-The ``merged.mg`` file plays a role in automatic re-assignment of agents to their original groups after re-enrollment (with the ``remoted.guess_agent_group=1`` option enabled). The checksum of the ``merged.mg`` file is used for comparison with other agents to determine the appropriate group.
-
-On the Wazuh manager, the file is located at ``/etc/wazuh-manager/shared/<GROUP_NAME>/merged.mg``.
+On the Wazuh manager, the file is located at ``/etc/wazuh-manager/shared/<GROUP_NAME>/merged.mg``. For Wazuh agents that belong to several groups, the Wazuh manager builds a combined file in ``/var/wazuh-manager/var/multigroups/<HASH>/merged.mg``.
 
 On the Wazuh agent, it is located at ``/var/ossec/etc/shared/merged.mg`` for Linux and ``C:\Program Files (x86)\ossec-agent\shared\merged.mg`` on Windows.
 
@@ -278,7 +274,7 @@ In this example, agent *012* has been added to the *webserver* and *apache* grou
 
 .. code-block:: console
 
-   # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/012/group/webserver?pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/012/group/webserver?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 Output
 
@@ -300,7 +296,7 @@ Output
 
 .. code-block:: console
 
-   # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/012/group/apache?pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/012/group/apache?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 Output
 
@@ -324,7 +320,7 @@ Following this, we can query for groups to which a Wazuh agent belongs using the
 
 .. code-block:: console
 
-   # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents?pretty=true&agents_list=012&select=group" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?pretty=true&agents_list=012&select=group" -H  "Authorization: Bearer $TOKEN"
 
 Output
 

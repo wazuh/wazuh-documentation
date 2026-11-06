@@ -26,7 +26,10 @@ Commands
 |                                                     | (``x509-sha256:<hex>``), and whether it signs the agent listener certificate on disk. Then   |
 |                                                     | shows the publication (generation) of the bundle and whether the Wazuh manager serves it.    |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
-| ``check``                                           | Validates the bundle without writing anything. Prints nothing when it's valid.               |
+| ``check``                                           | Validates the bundle without writing anything. Prints nothing when it's valid. On a fresh    |
+|                                                     | installation, ``check`` exits with 1 and reports ``no publication block (unpublished)``      |
+|                                                     | until you run ``stamp`` on the master node, or ``wazuh-manager-certs --from-master`` on a    |
+|                                                     | worker node. That is expected.                                                               |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | ``add <file>``                                      | Adds the CA certificates in ``<file>`` to the bundle.                                        |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+

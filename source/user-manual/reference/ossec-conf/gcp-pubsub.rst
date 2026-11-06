@@ -8,6 +8,8 @@
 gcp-pubsub
 ==========
 
+Prerequisite: the Google Cloud integration runs on a Wazuh agent and needs Python 3 and the Python packages listed in :doc:`Installing dependencies </cloud-security/gcp/prerequisites/dependencies>`.
+
 .. topic:: XML section name
 
    .. code-block:: xml
