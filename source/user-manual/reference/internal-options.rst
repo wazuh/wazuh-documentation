@@ -3,6 +3,8 @@
 .. meta::
   :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh managers and agents.
 
+.. collapsible-tables:: settings
+
 .. _reference_internal_options:
 
 Internal configuration
