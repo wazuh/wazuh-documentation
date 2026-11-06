@@ -35,7 +35,7 @@ Perform the following steps to configure the FIM module to monitor the ``/etc/ap
 
       # touch /etc/app.conf
 
-#. Edit the ``/var/ossec/etc/ossec.conf`` configuration file and add the configuration below:
+#. Edit the ``/var/ossec/etc/ossec.conf`` configuration file and add the configuration below inside the ``<ossec_config>`` block:
 
    .. code-block:: xml
 

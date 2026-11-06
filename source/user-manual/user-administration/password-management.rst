@@ -129,6 +129,8 @@ In a distributed deployment, run the Wazuh passwords tool on the correct node de
 -  To :ref:`change the password of a Wazuh indexer user <change_password_indexer_user>`, run the tool on **any Wazuh indexer node**.
 -  To :ref:`change the password of a Wazuh manager API user <change_password_api_user>`, run the tool on the **Wazuh manager master node**.
 
+.. _update_wazuh_dashboard_configuration:
+
 Update the Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
