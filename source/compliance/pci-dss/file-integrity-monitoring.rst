@@ -126,11 +126,13 @@ For this use case, configure Wazuh to detect changes to files in the ``/root/cre
 
    .. thumbnail:: /images/compliance/pci/fim-file-modified-finding-01.png
       :title: FIM file modified finding
+      :alt: File Integrity Monitoring Findings tab with a file modified finding on /root/credit_cards/cardholder_data.txt
       :align: center
       :width: 80%
 
    .. thumbnail:: /images/compliance/pci/fim-file-modified-finding-02.png
       :title: FIM file modified finding details
+      :alt: Document details of the file modified finding with the file path, process, and user highlighted
       :align: center
       :width: 80%
 
@@ -189,11 +191,13 @@ In this use case, configure the Wazuh FIM module to scan monitored files every h
 
    .. thumbnail:: /images/compliance/pci/fim-content-changes-finding-01.png
       :title: FIM content changes finding
+      :alt: File Integrity Monitoring Findings tab with a file modified finding on /root/debit_cards/cardholder_data.txt
       :align: center
       :width: 80%
 
    .. thumbnail:: /images/compliance/pci/fim-content-changes-finding-02.png
       :title: FIM content changes finding details
+      :alt: Document details of the content change finding with the changed content in event.original highlighted
       :align: center
       :width: 80%
 
@@ -242,6 +246,7 @@ In this use case, the Wazuh FIM module detects when a file in a monitored direct
 
    .. thumbnail:: /images/compliance/pci/fim-file-deleted-finding.png
       :title: FIM file deleted finding
+      :alt: File Integrity Monitoring Findings tab with file created and file deleted findings for /root/pin_data/pin.txt
       :align: center
       :width: 80%
 
