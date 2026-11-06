@@ -8,7 +8,9 @@ Wazuh manager services
 
 The Wazuh manager is composed of multiple services, each designed to perform a specific operational function within the Wazuh platform. These services work together to handle tasks such as securing and receiving Wazuh agent communications, managing cluster operations, and providing API access.
 
-Each Wazuh manager service has its own configuration block in the ``/etc/wazuh-manager/wazuh-manager.conf`` file.
+Each Wazuh manager service has its own configuration block in the ``/etc/wazuh-manager/wazuh-manager.conf`` file. The ``wazuh-manager-control`` script starts ``wazuh-manager-apid``, which serves the Wazuh manager API, only on the master node. It skips ``wazuh-manager-authd`` when the ``<disabled>`` option in the ``<auth>`` block is set to ``yes``.
+
+The ``wazuh-manager`` systemd unit confines every daemon without using a chroot. Daemons can write only to ``/var/wazuh-manager`` and ``/etc/wazuh-manager``. Each daemon also gets a private ``/tmp`` directory. A Wazuh manager installed under ``/home``, ``/root``, or ``/run/user`` cannot run.
 
 Agent enrollment service
 ------------------------
@@ -22,7 +24,7 @@ When a Wazuh agent starts, it contacts the Wazuh manager to begin enrollment. A 
 Enrollment tokens
 ^^^^^^^^^^^^^^^^^
 
-An enrollment token is a credential that a Wazuh 5.x agent presents during enrollment. It contains the Wazuh manager address, the certificate authority to trust, and an enrollment credential. By default, a token expires after 30 days and has no use limit. You create an enrollment token on the Wazuh manager using the token utility of the ``wazuh-manager-authd`` daemon. Specify the address that the Wazuh agent uses to connect to the Wazuh manager. The service validates the specified address against the Subject Alternative Names (SANs) in the Wazuh manager certificate. It rejects tokens that specify a name not included in the certificate.
+An enrollment token is a credential that a Wazuh 5.x agent presents during enrollment. It contains the Wazuh manager address, the certificate authority to trust, and an enrollment credential. By default, a token expires after 30 days and has no use limit. You create an enrollment token on the Wazuh manager using the ``wazuh-manager-authd --create-enrollment-token --address <ADDRESS>`` command, or with the ``/agents/enrollment-tokens`` endpoint of the Wazuh manager API. The same command lists, shows, revokes, and purges tokens with the ``--list-enrollment-tokens``, ``--show-token``, ``--revoke-enrollment-token``, and ``--purge-enrollment-tokens`` options. Specify the address that the Wazuh agent uses to connect to the Wazuh manager. The service validates the specified address against the Subject Alternative Names (SANs) in the Wazuh manager certificate. It rejects tokens that specify a name not included in the certificate.
 
 In a Wazuh manager cluster, the master node creates all enrollment tokens. It validates each address against its own certificate. A token for a worker node address is rejected unless the master certificate also includes that address.
 
@@ -63,7 +65,7 @@ Where:
 -  ``<purge>`` specifies whether the ``client.keys`` file keeps a record of removed Wazuh agents. When the value is ``no``, the file keeps each removed Wazuh agent as an entry marked as removed. When the value is ``yes``, the Wazuh manager removes the entry without leaving a trace. The installer sets the value to ``yes``, and the value is ``no`` when the option is absent. The possible values are ``yes`` and ``no``.
 -  ``<use_password>`` determines the use of shared password authentication. When the option is absent, the value is ``no``. The configuration that the installer generates sets it to ``yes``. When the value is ``no``, this option is disabled. When the value is set to ``yes``, a shared password is read from the ``/etc/wazuh-manager/authd.pass`` file.
 -  ``<ciphers>`` sets the TLS 1.3 cipher suites that the agent enrollment service accepts on port ``1515``. The default value is ``TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256``.
--  ``<ssl_agent_ca>`` specifies the path to the CA certificate used to verify clients. It can be referred to as a relative path under the Wazuh installation directory or a full path. The possible value is any valid path.
+-  ``<ssl_agent_ca>`` specifies the path to the CA certificate used to verify clients. Use an absolute path to a file in ``/etc/wazuh-manager/certs``.
 -  ``<ssl_verify_host>`` toggles source host verification on and off when a CA certificate is specified. The agent enrollment service checks that the agent certificate names the source address, first in its Subject Alternative Names and then in its Common Name field. The default value is ``no``. The allowed values are ``yes`` and ``no``.
 -  ``<ssl_manager_cert>`` specifies the path to the Wazuh manager SSL certificate. The default value is ``/etc/wazuh-manager/certs/remoted.pem``. The possible value is an absolute path to a file in ``/etc/wazuh-manager/certs``.
 -  ``<ssl_manager_key>`` specifies the path to the Wazuh manager SSL key. The default value is ``/etc/wazuh-manager/certs/remoted-key.pem``. The possible value is an absolute path to a file in ``/etc/wazuh-manager/certs``.

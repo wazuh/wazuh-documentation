@@ -100,7 +100,7 @@ The finding details show the compliance requirements mapped to the detected acti
 Monitoring security events
 --------------------------
 
-Wazuh collects and analyzes operating system, application, and security logs from monitored systems. It can also receive data from network devices and applications through supported integrations and syslog sources.
+Wazuh collects and analyzes operating system, application, and security logs from monitored systems. It can also receive data from network devices and applications through supported integrations or syslog sources. For example, a syslog relay can run on an endpoint where a Wazuh agent reads the messages. The Wazuh manager does not provide a syslog listener.
 
 Wazuh detection rules identify security events such as authentication failures, privilege changes, suspicious activity, system errors, and policy violations. These rules carry compliance mappings such as PCI DSS 10.x, HIPAA 164.312(b), and NIST SP 800-53 AU controls. Security teams can use the mappings to search for the security findings that relate to a specific requirement.
 

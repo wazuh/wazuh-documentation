@@ -241,7 +241,7 @@ A default Wazuh manager installation includes the two outputs shown in the table
      - Writes processed events to a local file on the Wazuh manager
      - Disabled
 
-The output stage operates as a broadcaster. It dispatches the processed event independently to every active output, allowing multiple destinations to receive the same processed event.
+The output stage operates as a broadcaster. It dispatches the processed event independently to every active output, allowing multiple destinations to receive the same processed event. The ``file-output-integrations.yml`` output writes each event to ``/var/wazuh-manager/logs/<SPACE>-wazuh-events-v5/<YEAR>/<MONTH>/wazuh-<SPACE>-wazuh-events-v5-<DAY>.json``, for example in the ``standard-wazuh-events-v5`` directory for the standard space. It compresses the files and keeps 90 files for each space.
 
 .. thumbnail:: /images/manual/wazuh-server/event-flow-on-output.png
    :title: Event flow on output

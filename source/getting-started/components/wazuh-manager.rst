@@ -13,7 +13,7 @@ The Wazuh manager uses the :doc:`Wazuh normalization engine </user-manual/manage
 Architecture
 ------------
 
-The Wazuh manager includes the normalization engine, Wazuh manager API, agent enrollment service, agent connection service, cluster daemon, indexer connector, and content manager. It runs on Linux across physical endpoints, virtual machines, containers, or cloud instances.
+The Wazuh manager includes the normalization engine, Wazuh manager API, agent enrollment service, agent connection service, cluster daemon, indexer connector, content manager, Wazuh DB, and modules daemon. It runs on Linux across physical endpoints, virtual machines, containers, or cloud instances.
 
 The diagram below shows the Wazuh manager architecture and its components.
 
@@ -30,7 +30,7 @@ The Wazuh manager components perform functions such as agent enrollment, agent i
 
 -  **Agent enrollment service:** Registers new Wazuh agents and provides each agent with a unique authentication key. Wazuh 5.x agents enroll through the HTTPS agent API with an enrollment token or the shared enrollment password. The default configuration requires the shared password. A TLS listener on port 1515 serves legacy Wazuh 4.x agents and supports certificate-based agent identity verification.
 
--  **Agent connection service:** Manages communication between Wazuh agents and the Wazuh manager through the HTTPS agent API. After enrollment, the service authenticates each request with a bearer token that the Wazuh agent signs with its key. It receives events and inventory data from Wazuh agents and delivers pending tasks, such as configuration updates and upgrades, when Wazuh agents request them.
+-  **Agent connection service:** Manages communication between Wazuh agents and the Wazuh manager through the HTTPS agent API. After enrollment, the service authenticates each request with a bearer token that the Wazuh agent signs with its key. The ``GET /``, ``GET /cacerts``, and ``POST /enroll`` endpoints don't require a bearer token. It receives events and inventory data from Wazuh agents and delivers pending tasks, such as configuration updates and upgrades, when Wazuh agents request them.
 
 -  **Normalization engine:** It transforms raw data received from Wazuh agents into standardized schema documents. It decodes and enriches this data with threat intelligence. The normalization engine includes a built-in standard policy that covers all supported log sources and integrations. Each incoming event travels through the following ordered stages inside a policy:
 
@@ -43,10 +43,14 @@ The Wazuh manager components perform functions such as agent enrollment, agent i
 
 -  **Content manager:** Downloads the vulnerability feed and makes it available to the vulnerability detection module, its only consumer. The Wazuh normalization engine synchronizes its own content with the Wazuh indexer.
 
--  **Wazuh manager API:** Provides a RESTful programmatic interface for interacting with the Wazuh manager. Administrators use it from the Wazuh dashboard or the command line to manage Wazuh agents, groups, and cluster nodes. It also enforces role-based access control (RBAC) and reports the status of Wazuh manager services.
+-  **Wazuh manager API:** Provides a RESTful programmatic interface for interacting with the Wazuh manager. Administrators use it from the Wazuh dashboard or the command line to manage Wazuh agents, groups, and cluster nodes. It also enforces role-based access control (RBAC) and reports the status of Wazuh manager services. Only the master node of a Wazuh manager cluster runs the Wazuh manager API.
 
 -  **Wazuh cluster daemon:** Enables horizontal scaling by linking multiple Wazuh manager nodes into a cluster. A load balancer in front of the cluster nodes provides high availability, fault tolerance, and load distribution.
 
 -  **Indexer connector:** Forwards events from the Wazuh normalization engine to the Wazuh indexer.
+
+-  **Wazuh DB:** Keeps the Wazuh agent records and agent state in SQLite databases on each node. The ``wazuh-manager-db`` daemon provides this service.
+
+-  **Modules daemon:** Runs the manager-side modules in the ``wazuh-manager-modulesd`` daemon. These modules include the vulnerability scanner, inventory synchronization, the task manager, and the keystore server.
 
 Visit the :doc:`Wazuh manager installation guide </installation-guide/wazuh-manager/index>` to learn how to install the Wazuh manager.
