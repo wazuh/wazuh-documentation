@@ -61,8 +61,13 @@
       '.collapsible-tables-search .ct-count{margin-left:auto;font-size:.9em;opacity:.75}';
     document.head.appendChild(style);
 
-    // The bar goes above the first section that has a table.
+    // The bar goes above the first top-level group of sections that has a table,
+    // since it searches every table on the page.
     var anchor = tables[0].closest('section');
+    while (anchor.parentElement && anchor.parentElement.closest('section') &&
+           anchor.parentElement.closest('section').parentElement.closest('section')) {
+      anchor = anchor.parentElement.closest('section');
+    }
     anchor.parentNode.insertBefore(bar, anchor);
 
     var q = bar.querySelector('.ct-q'), count = bar.querySelector('.ct-count');
