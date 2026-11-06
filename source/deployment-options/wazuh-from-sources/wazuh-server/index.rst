@@ -92,7 +92,7 @@ Install the Wazuh indexer from packages first with the :doc:`step-by-step method
 
       # echo "WAZUH_INDEXER_MANAGER_PASSWORD=<WAZUH_INDEXER_MANAGER_PASSWORD>" >> /etc/wazuh-manager/local.env
 
-   Add the two Wazuh manager API passwords of the deployment so that the Wazuh dashboard can log in with the password it was given. They are in the ``credentials.env`` file that you created for the Wazuh indexer with the step-by-step method, or in ``wazuh-install-files/credentials.env`` with the installation assistant. To use that file, first extract the archive in the current directory with ``tar -xf wazuh-install-files.tar``. Add the passwords before you run ``install.sh``, which sets the API passwords only once. Replace ``<CREDENTIALS_FILE>`` with the path of the file:
+   Add the two Wazuh manager API passwords of the deployment so that the Wazuh dashboard can log in with the password it was given. They are in the ``credentials.env`` file that you created for the Wazuh indexer with the step-by-step method, or in ``wazuh-install-files/credentials.env`` with the installation assistant. The installation assistant creates ``wazuh-install-files.tar`` in the same directory as its script, on the host where you ran it. Copy the file to the current directory on this host, ``wazuh-|WAZUH_CURRENT_FROM_SOURCES|-|WAZUH_MANAGER_CURRENT_REV|``, and extract it with ``tar -xf wazuh-install-files.tar``. Add the passwords before you run ``install.sh``, which sets the API passwords only once. Replace ``<CREDENTIALS_FILE>`` with the path of the file:
 
    .. code-block:: console
 
@@ -119,7 +119,7 @@ Install the Wazuh indexer from packages first with the :doc:`step-by-step method
          2) agent
          Select an option [1-2]: 1
 
-#. If the Wazuh indexer runs on another host, copy ``ca.pem``, ``manager-client.pem``, and ``manager-client-key.pem`` from ``/etc/wazuh-indexer/export`` on the first Wazuh indexer node, the one that holds ``root-ca.key`` in ``/etc/wazuh-indexer/ca``. Then place them in ``/etc/wazuh-manager/certs``:
+#. If the Wazuh indexer runs on another host, copy ``ca.pem``, ``manager-client.pem``, and ``manager-client-key.pem`` from ``/etc/wazuh-indexer/export`` on the first Wazuh indexer node, the one that holds ``root-ca.key`` in ``/etc/wazuh-indexer/ca``, to the current directory on this host. Then place them in ``/etc/wazuh-manager/certs``:
 
    .. code-block:: console
 
