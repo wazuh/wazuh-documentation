@@ -94,7 +94,7 @@ You can visualize the findings in the Wazuh dashboard. To do this, navigate to *
 
 .. note::
 
-   Findings can take a few minutes to appear in the Wazuh dashboard. The FIM module reports changes in who-data directories as they happen, and the detector that generates the findings runs on a schedule.
+   Findings appear in the dashboard a few minutes after each change. The Wazuh agents report real-time and who-data changes right away, and the ``wazuh-fim`` detector creates the findings on its next run, every minute in the default content.
 
 -  Windows and Ubuntu findings for the simulated events
 
