@@ -66,9 +66,10 @@ Ubuntu endpoint
 On the Wazuh dashboard, a finding shows that the ``subject_data.txt`` file was deleted.
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-del.png
-    :title: File deletion finding visualization
-    :align: center
-    :width: 80%
+   :title: File deletion finding visualization
+   :alt: Document details of the file deleted finding with the GDPR compliance field and rule title highlighted
+   :align: center
+   :width: 80%
 
 Chapter III, Article 18, Head 2
 ---------------------------------
@@ -85,8 +86,9 @@ Use case: Search for FIM events within a certain time frame
 Click the menu icon, then navigate to **Threat intelligence** > **Threat Hunting** and switch to the **Findings** tab. Confirm that no modification or deletion of restricted data occurred during a specific time interval. The **GDPR** dashboard also shows this information.
 
 .. thumbnail:: /images/compliance/gdpr/syscheck-no-alerts.png
-    :title: File modification finding visualization within specific time frame
-    :align: center
-    :width: 80%
+   :title: File modification finding visualization within specific time frame
+   :alt: GDPR Findings tab showing the file modification finding within a specific time range
+   :align: center
+   :width: 80%
 
 You can see a finding from the previous use case.
