@@ -135,7 +135,7 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
         </agent>
       </ossec_config>
@@ -148,7 +148,7 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
             ...
           </server>
         </client>
@@ -215,7 +215,7 @@ The Wazuh agent installation directory depends on the host's architecture.
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
         </agent>
       </ossec_config>
@@ -228,7 +228,7 @@ The Wazuh agent installation directory depends on the host's architecture.
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
             ...
           </server>
         </client>
@@ -306,7 +306,7 @@ Follow the steps below to enroll a macOS endpoint with password authentication:
       <ossec_config>
         <agent>
           <manager>
-            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+            <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
         </agent>
       </ossec_config>
@@ -319,7 +319,7 @@ Follow the steps below to enroll a macOS endpoint with password authentication:
       <ossec_config>
         <client>
           <server>
-            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            <address><WAZUH_MANAGER_ADDRESS></address>
             ...
           </server>
         </client>

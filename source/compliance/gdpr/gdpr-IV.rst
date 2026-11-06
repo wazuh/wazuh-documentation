@@ -15,7 +15,7 @@ Chapter IV, Article 24, Head 2
 
 This article requires that adequate technical and organizational measures be in place to assist in complying with data security and protection policies. Therefore, the entity responsible for processing and storing data must comply with these policies.
 
-The Wazuh :doc:`Security Configuration Assessment (SCA) </user-manual/capabilities/sec-config-assessment/index>` module performs configuration assessments to verify that endpoints comply with security policies, standards, and hardening guides. Refer to the SCA documentation for more information about configuring SCA checks.
+The Wazuh :doc:`Security Configuration Assessment (SCA) </user-manual/capabilities/sec-config-assessment/index>` module performs configuration assessments to verify that endpoints comply with security policies, standards, and hardening guides. Refer to the :doc:`SCA documentation </user-manual/capabilities/sec-config-assessment/index>` for more information about configuring SCA checks.
 
 Use case: Ensure that the shadow group is empty
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

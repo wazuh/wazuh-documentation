@@ -83,7 +83,7 @@ You can also deploy a new agent following the instructions in the Wazuh dashboar
    :title: Deploy new agent button
    :alt: Deploy new agent button
 
-Then follow the steps on the Wazuh dashboard to deploy a new agent.
+Then follow the steps on the Wazuh dashboard to deploy a new agent. The wizard also generates the enrollment token.
 
 .. thumbnail:: /images/installation/deploy-new-agent-from-ui-options.png
    :align: center
@@ -96,7 +96,7 @@ Then follow the steps on the Wazuh dashboard to deploy a new agent.
 Prerequisite
 ------------
 
-During enrollment, the Wazuh agent authenticates to the Wazuh manager using an enrollment token. The token tells the agent which Wazuh manager to trust and lets it enroll. Create the token on the Wazuh manager. In a cluster, create it on the master node. A worker node can't create it. The endpoint must reach the Wazuh manager on port 1517/TCP, which Wazuh 5.x agents use for enrollment and communication.
+During enrollment, the Wazuh agent authenticates to the Wazuh manager using an enrollment token. The token tells the agent which Wazuh manager to trust and lets it enroll. Create the token on the Wazuh manager. In a cluster, create it on the master node. A worker node can't create it. The agent connects only to the address of its token. To spread agents across the nodes of a cluster, use a token for a load balancer address, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. The endpoint must reach the Wazuh manager on port 1517/TCP, which Wazuh 5.x agents use for enrollment and communication.
 
 .. _generate_enrollment_token:
 
@@ -111,11 +111,41 @@ Complete the following steps on the Wazuh manager master node to generate the en
 
       # openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
 
-   The list depends on how you installed the Wazuh manager. After an assisted installation, it holds the node name, its ``ip`` and ``dns`` values in ``config.yml``, and any address added with ``-as|--agent-san``. After a step-by-step installation, it holds the same values from the certificates tool's ``config.yml``, and any address added with ``-as``. After the Quickstart, it holds the server's host name, its fully qualified domain name, and its IP addresses. In every case, it also holds ``localhost``, ``127.0.0.1``, and ``::1``. A token for any other address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
+   The list depends on how you installed the Wazuh manager.
 
-#. Run the following command to create an enrollment token. Replace ``<WAZUH_MANAGER_ADDRESS>`` with an address from that list that the endpoints can resolve and reach. With an IP address, enrollment works, but the Wazuh manager logs a warning. Use a DNS name if agents must verify the Wazuh manager by name or its IP address can change.
+   -  An assisted installation that uses ``config.yml`` puts the node's ``ip`` and ``dns`` values from ``config.yml`` in the list, followed by any address added with ``-as|--agent-san`` and the node name. The output looks similar to this:
+
+      .. code-block:: none
+         :class: output
+
+         IP Address:192.168.33.155, DNS:wazuh-manager.lab.local, DNS:agents.lab.local, DNS:wazuh-1
+
+   -  A step-by-step installation puts the same values from the certificates tool's ``config.yml`` in the list, along with any address added with ``-as``. The output looks similar to this:
+
+      .. code-block:: none
+         :class: output
+
+         IP Address:192.168.33.142, DNS:wazuh.example.com, DNS:wazuh-1
+
+   -  The :doc:`Quickstart </quickstart>` puts the server's host name, its fully qualified domain name, and its IP addresses in the list. The Wazuh manager issues its certificate itself, so the list also holds ``localhost``, ``127.0.0.1``, and ``::1``. The same applies to an all-in-one host installed step by step. The output looks similar to this:
+
+      .. code-block:: none
+         :class: output
+
+         DNS:w50-qs, IP Address:192.168.33.146, DNS:localhost, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1
+
+   -  A Wazuh manager node that takes its certificates from ``wazuh-install-files.tar`` or ``wazuh-certificates.tar``, as in a distributed installation, has no loopback address in the list. The output looks similar to this:
+
+      .. code-block:: none
+         :class: output
+
+         IP Address:192.168.33.142, DNS:manager
+
+   To enroll a Wazuh agent on that node, use the node's address from the list. A token for any other address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
 
    If an address that agents use isn't in the list, add it to the Wazuh manager certificate first, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. Examples are a load balancer, a NAT address, or a public name.
+
+#. Run the following command to create an enrollment token. Replace ``<WAZUH_MANAGER_ADDRESS>`` with an address from that list that the endpoints can resolve and reach. With an IP address, enrollment works, but the command prints a warning, because the token stops working if the Wazuh manager's IP address changes. Use a DNS name if agents must verify the Wazuh manager by name or its IP address can change.
 
    .. code-block:: console
 
@@ -132,10 +162,11 @@ Complete the following steps on the Wazuh manager master node to generate the en
       expires: 2026-11-01T02:49:26Z (1793501366)
       pin: 63c2cb7bd1******6cd8ea****02158
       credential: yes
+      WARNING: the token address '192.168.33.137' is an IP address: the token stops working if the manager's address changes. Use a DNS name if the manager's IP address can change.
 
-   The token is the long line starting with ``eyJ``. The ``id``, ``endpoint``, ``expires``, ``pin``, and ``credential`` lines describe the token. The command displays the token only once. By default, tokens are valid for 30 days and can enroll any number of agents. Treat the token like a password.
+   The token is the long line starting with ``eyJ``. The ``id``, ``endpoint``, ``expires``, ``pin``, and ``credential`` lines describe the token. For an IP address, a ``WARNING`` line follows them. The command displays the token only once. By default, tokens are valid for 30 days and can enroll any number of agents. Treat the token like a password.
 
-   To limit its validity or usage, add ``--ttl <DURATION>``, ``--max-uses <N>``, or both, for example ``--ttl 24h``.
+   To limit its validity or usage, add ``--ttl <DURATION>``, ``--max-uses <N>``, or both, for example ``--ttl 24h``. To recognize the token later, add ``--description '<TEXT>'``, for example ``--description 'Linux web servers'``. The output of ``--list-enrollment-tokens`` shows it in the ``DESCRIPTION`` column.
 
    To save the token to a file that only root can read, run the command this way instead. Only the token goes to the file.
 
@@ -174,7 +205,7 @@ If a Wazuh agent already has a key, ``wazuh-agent-auth`` refuses a new token wit
 
 If the Wazuh manager still lists the agent, remove it there first, as :doc:`Remove agents </user-manual/agent/agent-management/remove-agents>` describes. Otherwise, the Wazuh manager refuses the enrollment with ``Duplicate name``.
 
-To enroll the agent again, run these commands on the endpoint. Replace ``<ENROLLMENT_TOKEN>`` with a token from :ref:`Generate the enrollment token <generate_enrollment_token>`, and ``<TOKEN_FILE_PATH>`` with a file path, for example ``/root/wazuh-token`` or ``C:\wazuh-token.txt``.
+To enroll the agent again, run these commands on the endpoint. Replace ``<ENROLLMENT_TOKEN>`` with a token from :ref:`Generate the enrollment token <generate_enrollment_token>`, and ``<TOKEN_FILE_PATH>`` with a file path, for example ``/root/wazuh-token`` or ``C:\wazuh-token.txt``. On Linux and macOS, the command that creates the file waits for the token. Paste it, press Enter, and then press Ctrl+D.
 
 .. tabs::
 
@@ -184,7 +215,7 @@ To enroll the agent again, run these commands on the endpoint. Replace ``<ENROLL
          :emphasize-lines: 2,3,4
 
          # systemctl stop wazuh-agent
-         # (umask 077 && echo '<ENROLLMENT_TOKEN>' > <TOKEN_FILE_PATH>)
+         # (umask 077 && cat > <TOKEN_FILE_PATH>)
          # /var/ossec/bin/wazuh-agent-auth --force-enroll --token-file <TOKEN_FILE_PATH>
          # rm -f <TOKEN_FILE_PATH>
          # systemctl start wazuh-agent
@@ -195,7 +226,7 @@ To enroll the agent again, run these commands on the endpoint. Replace ``<ENROLL
          :emphasize-lines: 2,3,4
 
          # launchctl bootout system /Library/LaunchDaemons/com.wazuh.agent.plist
-         # (umask 077 && echo '<ENROLLMENT_TOKEN>' > <TOKEN_FILE_PATH>)
+         # (umask 077 && cat > <TOKEN_FILE_PATH>)
          # /Library/Ossec/bin/wazuh-agent-auth --force-enroll --token-file <TOKEN_FILE_PATH>
          # rm -f <TOKEN_FILE_PATH>
          # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
@@ -216,6 +247,8 @@ To enroll the agent again, run these commands on the endpoint. Replace ``<ENROLL
 On Windows, you can also use **Manage** > **Enroll** in the agent GUI. It asks you to confirm that the agent gets a new ID.
 
 The agent gets a new ID and the new CA, and keeps its name.
+
+In the first minute after the start, the agent log can show ``credential rejected (401); re-enrolling.`` and ``Manager unreachable``, and the agent can be listed as disconnected while the Wazuh manager node loads the new key. The agent enrolls again by itself and connects. If it's still disconnected after a minute, check the agent log: ``/var/ossec/logs/ossec.log`` on Linux, ``/Library/Ossec/logs/ossec.log`` on macOS, or ``C:\Program Files (x86)\ossec-agent\ossec.log`` on Windows.
 
 .. rst-class:: d-none
 

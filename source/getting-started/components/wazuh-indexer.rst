@@ -8,7 +8,7 @@ Wazuh indexer
 
 The Wazuh indexer is a highly scalable, full-text search and analytics engine. It serves as the central data store for the Wazuh platform. It indexes and stores security events, findings, vulnerability data, and system inventory. Purpose-built plugins provide access control, reporting, threat detection, and content management. Managed content includes rules, decoders, integrations, key-value databases (KVDBs), and indicators of compromise (IoCs). Near real-time search and analytics help security teams investigate threats, monitor compliance, and gain visibility into their infrastructure.
 
-The Wazuh indexer includes the Ruleset management plugin, which provides threat detection and analysis. The plugin uses threat detectors that apply Sigma-based rules to identify threats, anomalies, and suspicious activity in the monitored environment.
+The Wazuh indexer includes the Security Analytics module, which provides threat detection and analysis. Its detectors apply Sigma-based rules to identify threats, anomalies, and suspicious activity in the monitored environment. The Content Manager module manages the ruleset (rules, decoders, integrations, and KVDBs), synchronizes it from Wazuh CTI, and deploys it. You manage both from **Ruleset management** in the Wazuh dashboard.
 
 You can deploy the Wazuh indexer as a single-node instance for development and small environments. For production workloads that need high availability and horizontal scalability, deploy a multi-node cluster.
 

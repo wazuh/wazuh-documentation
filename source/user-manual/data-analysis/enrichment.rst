@@ -57,7 +57,7 @@ The discarded-events filter decides whether events that have been marked as "dis
 
 -  If discarded-events indexing is disabled and the event is marked as discarded, the pipeline stops at pre-enrichment, and the event is dropped. Otherwise, events proceed normally.
 
-This decision is implemented using a helper condition (see the `helper functions <https://github.com/wazuh/wazuh/blob/main/docs/ref/modules/engine/ref-helper-functions.md>`__ reference) so that the "discard or keep" semantics can be centrally enforced and consistently reused across policies.
+This decision is implemented using a helper condition (see the :ref:`helper functions <reference_helper_functions>` reference) so that the "discard or keep" semantics can be centrally enforced and consistently reused across policies.
 
 Cleanup of decoder temporary variables
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

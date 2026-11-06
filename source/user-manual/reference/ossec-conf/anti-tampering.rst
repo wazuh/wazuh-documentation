@@ -60,7 +60,9 @@ When package uninstallation protection is enabled, provide the Wazuh manager API
 | ``VALIDATION_HOST``         | Host and port where the Wazuh manager API is installed. Format: ``<HOST>:<PORT>``            | Required                                                           |
 +-----------------------------+----------------------------------------------------------------------------------------------+--------------------------------------------------------------------+
 
-You can create a file such as ``/$(WAZUH_DIR)/etc/uninstall_validation.env`` to export the environment variables. For example:
+After an all-in-one installation with the installation assistant, the Wazuh manager API listens only on ``127.0.0.1`` and ``::1``, so a Wazuh agent can't reach it. Before you uninstall with validation, set ``host`` in ``/var/wazuh-manager/api/configuration/api.yaml`` to an address the Wazuh agents can reach, and restart the Wazuh manager. See :doc:`API configuration </user-manual/api/configuration>`.
+
+You can create the ``/var/ossec/etc/uninstall_validation.env`` file to export the environment variables. Only the DEB and RPM packages read this file, so uninstallation validation doesn't apply to macOS or Windows agents. A Windows agent doesn't recognize the ``<anti_tampering>`` section and doesn't start if ``ossec.conf`` contains it. For example:
 
 .. code-block:: bash
 
@@ -75,5 +77,5 @@ Alternatively, use an existing API token instead of username and password creden
 
    #!/bin/sh
    export VALIDATION_TOKEN="<API_TOKEN>"
-   export VALIDATION_HOST="<WAZUH_MANAGER_IP>:55000"
+   export VALIDATION_HOST="<WAZUH_MANAGER_ADDRESS>:55000"
    export VALIDATION_SSL_VERIFY="true"

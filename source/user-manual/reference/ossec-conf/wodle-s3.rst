@@ -8,6 +8,8 @@
 wodle name="aws-s3"
 ======================
 
+Prerequisite: the Wazuh module for AWS runs on a Wazuh agent and needs Python 3 and the Python packages listed in :doc:`Install dependencies </cloud-security/amazon/services/prerequisites/dependencies>`.
+
 .. topic:: XML section name
 
    .. code-block:: xml
@@ -23,6 +25,7 @@ Options
 The options available to use inside the aws-s3 section are the following:
 
 - `disabled`_
+- `skip_on_error`_
 - `run_on_start`_
 - `interval`_
 - `day`_
@@ -39,7 +42,7 @@ Disables the AWS-S3 wodle.
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
-| **Mandatory**        | yes       |
+| **Mandatory**        | no        |
 +----------------------+-----------+
 
 skip_on_error
@@ -291,7 +294,7 @@ If defined, the path or prefix for the bucket.
 path_suffix
 ~~~~~~~~~~~~
 
-If defined, the suffix for the bucket. Only works with buckets that contain the folder named AWSLogs (Cloudtrail, VPC, and Macie).
+If defined, the suffix for the bucket. Only works with buckets that contain the folder named AWSLogs (CloudTrail, VPC, and Macie).
 
 +----------------------+--------------+
 | **Default value**    | N/A          |
@@ -560,7 +563,7 @@ discard_regex
 A regular expression to determine if an event must be discarded.
 
 - For inspector, it requires a mandatory field attribute which must be present in the fetched event. The regex is applied to the event field specified with this attribute.
-- For cloudwatchlogs, the field attribute is optional. You can omit it, for example, when monitoring Cloudwatch logs in JSON format and plain text.
+- For cloudwatchlogs, the field attribute is optional. You can omit it, for example, when monitoring CloudWatch logs in JSON format and plain text.
 
 +----------------------+----------------------------------+
 | **Default value**    | N/A                              |
@@ -828,13 +831,15 @@ Attributes:
 | Allowed values   | A str containing the full field name path   |
 +------------------+---------------------------------------------+
 
-Usage example for Cloudtrail fetched events:
+Usage example for CloudTrail fetched events:
 
 .. code-block:: xml
 
    <discard_regex field="userIdentity.principalID">EXAMPLE6E4XEGITWATV6R</discard_regex>
 
-Usage example only for plain text logs:
+The ``field`` attribute is mandatory in ``<bucket>``: a ``<discard_regex>`` without it makes ``wazuh-modulesd`` stop with ``Required attribute 'field' is missing in 'discard_regex'``. Only the CloudWatch Logs ``<service>`` accepts it without ``field``.
+
+Usage example for CloudWatch Logs:
 
 .. code-block:: xml
 

@@ -28,7 +28,12 @@ Options
 | --token-file <path> | Reads the enrollment token from ``<path>``. Use ``-`` to read it from standard input.     |
 +---------------------+-------------------------------------------------------------------------------------------+
 | --force-enroll      | Enrolls an agent that already has a key. The agent is registered again and receives a new |
-|                     | agent ID. Without this option, the tool refuses to enroll an agent that has a key in      |
+|                     | agent ID. The Wazuh manager replaces the existing agent only as its                       |
+|                     | :ref:`\<auth\>\<force\> <reference_wazuh_manager_conf_auth_force>` settings allow. By     |
+|                     | default, the existing agent must have been disconnected for more than 1 hour and          |
+|                     | registered more than 1 hour ago. Otherwise the Wazuh manager refuses the enrollment as a  |
+|                     | duplicate name or IP address (error 9008 or 9007), and the tool exits with code 4.        |
+|                     | Without this option, the tool refuses to enroll an agent that has a key in                |
 |                     | ``/var/ossec/etc/client.keys``, even if the agent was removed from the Wazuh manager.     |
 +---------------------+-------------------------------------------------------------------------------------------+
 | --certs-only        | Installs the Wazuh manager CA certificate as the agent trust anchor, and updates the      |

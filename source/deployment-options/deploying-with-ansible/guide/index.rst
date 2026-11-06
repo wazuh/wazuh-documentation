@@ -57,33 +57,14 @@ Access the wazuh-ansible directory
    .. code-block:: console
 
       # cd /etc/ansible/roles/wazuh-ansible/
-      # tree roles -d
+      # ls roles
 
    The command output looks similar to this:
 
    .. code-block:: none
       :class: output
 
-      roles
-      ├── package-urls
-      │   ├── defaults
-      │   └── tasks
-      ├── vars
-      ├── wazuh-agent
-      │   ├── defaults
-      │   └── tasks
-      ├── wazuh-credentials
-      │   ├── defaults
-      │   └── tasks
-      ├── wazuh-dashboard
-      │   ├── defaults
-      │   └── tasks
-      ├── wazuh-indexer
-      │   ├── defaults
-      │   └── tasks
-      └── wazuh-manager
-          ├── defaults
-          └── tasks
+      package-urls  vars  wazuh-agent  wazuh-credentials  wazuh-dashboard  wazuh-indexer  wazuh-manager
 
 #. Run the command below to see the preconfigured playbooks:
 
@@ -156,6 +137,10 @@ Run the playbook
 
       # ansible-playbook wazuh-aio.yml -e "source=prerelease" -K
 
+   The ``-e "source=prerelease"`` option installs the release candidate packages from the pre-release repository. Omit it to install a published release.
+
+   The ``-K`` option makes Ansible ask for the ``BECOME password``, which is the sudo password of ``<USERNAME>`` on the targets. Press **Enter** if ``<USERNAME>`` can use sudo without a password.
+
 #. Run the following commands on the all-in-one node to check that the services are active.
 
    -  Wazuh indexer:
@@ -210,33 +195,14 @@ Change to the directory where you cloned the Wazuh Ansible repository and list a
 .. code-block:: console
 
    # cd /etc/ansible/roles/wazuh-ansible/
-   # tree roles -d
+   # ls roles
 
 The command output looks similar to this:
 
 .. code-block:: none
    :class: output
 
-   roles
-   ├── package-urls
-   │   ├── defaults
-   │   └── tasks
-   ├── vars
-   ├── wazuh-agent
-   │   ├── defaults
-   │   └── tasks
-   ├── wazuh-credentials
-   │   ├── defaults
-   │   └── tasks
-   ├── wazuh-dashboard
-   │   ├── defaults
-   │   └── tasks
-   ├── wazuh-indexer
-   │   ├── defaults
-   │   └── tasks
-   └── wazuh-manager
-       ├── defaults
-       └── tasks
+   package-urls  vars  wazuh-agent  wazuh-credentials  wazuh-dashboard  wazuh-indexer  wazuh-manager
 
 You can see the preconfigured playbooks by running the command below:
 
@@ -277,9 +243,9 @@ The command output looks similar to this:
        - role: wazuh-indexer
      become: true
      vars:
-       # generate_certs: false                    # Set to false if you are using your own certificates
-       instances:
-         wi1:                                     # Must be same as inventory hostname
+       # Own CA: place root-ca.pem and root-ca.key in deployment-config-files/wazuh-ca/ before the first run
+       instances: &instances
+         wi1:                                    # Must be same as inventory hostname
            name: indexer
            ip: "{{ hostvars.wi1.private_ip }}"
            role: indexer
@@ -302,7 +268,7 @@ The command output looks similar to this:
            ip: "{{ hostvars.worker.private_ip }}"
            role: manager
            node_type: worker
-           # extra_ips: ["<worker-public-ip>"]   # optional, unique to this node
+           # extra_ips: ["<worker-public-ip>"]  # optional, unique to this node
          dashboard:
            name: dashboard
            ip: "{{ hostvars.dashboard.private_ip }}"
@@ -316,6 +282,7 @@ The command output looks similar to this:
      vars:
        node_type: "master"
        manager_node_name: "manager"
+       instances: *instances
        wazuh_indexer_hosts:
          - host: "{{ hostvars.wi1.private_ip }}"
            port: 9200
@@ -332,6 +299,7 @@ The command output looks similar to this:
      vars:
        node_type: "worker"
        manager_node_name: "manager-2"
+       instances: *instances
        wazuh_indexer_hosts:
          - host: "{{ hostvars.wi1.private_ip }}"
            port: 9200
@@ -411,6 +379,8 @@ Run the playbook
 
       # ansible-playbook wazuh-distributed.yml -e "source=prerelease" -K
 
+   The ``-e "source=prerelease"`` option installs the release candidate packages from the pre-release repository. Omit it to install a published release.
+
 #. Check the status of each service on the nodes that run it.
 
    -  Wazuh indexer:
@@ -448,22 +418,21 @@ Run the playbook
 Managing the Wazuh passwords
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh Ansible playbooks do not use default passwords. During the first run, the playbook generates a random password for each Wazuh user on the Ansible control node. Each password is stored in its own file in the ``/etc/ansible/roles/wazuh-ansible/deployment-credentials`` directory.
+The Wazuh Ansible playbooks do not use default passwords. The passwords of the deployment are kept on the Ansible control node, one file per Wazuh user, in the ``/etc/ansible/roles/wazuh-ansible/deployment-credentials`` directory. In a Wazuh cluster deployment, the playbook generates them during the first run. In an all-in-one deployment, the Wazuh packages generate them when they are installed, and the playbook copies them to that directory.
 
-
-+-----------------------------------------+-------------------+--------------------------------------------------------------+
-| File                                    | User              | Description                                                  |
-+=========================================+===================+==============================================================+
-| ``WAZUH_INDEXER_ADMIN_PASSWORD``        | ``admin``         | Wazuh dashboard login and Wazuh indexer API administration   |
-+-----------------------------------------+-------------------+--------------------------------------------------------------+
-| ``WAZUH_INDEXER_KIBANASERVER_PASSWORD`` | ``kibanaserver``  | Connection from the Wazuh dashboard to the Wazuh indexer     |
-+-----------------------------------------+-------------------+--------------------------------------------------------------+
-| ``WAZUH_INDEXER_MANAGER_PASSWORD``      | ``wazuh-manager`` | Wazuh indexer connector on the Wazuh manager                 |
-+-----------------------------------------+-------------------+--------------------------------------------------------------+
-| ``WAZUH_MANAGER_API_PASSWORD``          | ``wazuh``         | Wazuh manager API                                            |
-+-----------------------------------------+-------------------+--------------------------------------------------------------+
-| ``WAZUH_MANAGER_WUI_PASSWORD``          | ``wazuh-wui``     | Connection from the Wazuh dashboard to the Wazuh manager API |
-+-----------------------------------------+-------------------+--------------------------------------------------------------+
++-----------------------------------------+---------------------------+--------------------------------------------------------------+
+| File                                    | User                      | Description                                                  |
++=========================================+===========================+==============================================================+
+| ``WAZUH_INDEXER_ADMIN_PASSWORD``        | ``admin``                 | Wazuh dashboard login and Wazuh indexer API administration   |
++-----------------------------------------+---------------------------+--------------------------------------------------------------+
+| ``WAZUH_INDEXER_KIBANASERVER_PASSWORD`` | ``kibanaserver``          | Connection from the Wazuh dashboard to the Wazuh indexer     |
++-----------------------------------------+---------------------------+--------------------------------------------------------------+
+| ``WAZUH_INDEXER_MANAGER_PASSWORD``      | ``wazuh-manager``         | Wazuh indexer connector on the Wazuh manager                 |
++-----------------------------------------+---------------------------+--------------------------------------------------------------+
+| ``WAZUH_MANAGER_API_PASSWORD``          | ``wazuh``                 | Wazuh manager API                                            |
++-----------------------------------------+---------------------------+--------------------------------------------------------------+
+| ``WAZUH_MANAGER_WUI_PASSWORD``          | ``wazuh-internal-client`` | Connection from the Wazuh dashboard to the Wazuh manager API |
++-----------------------------------------+---------------------------+--------------------------------------------------------------+
 
 To use your own passwords instead of generated ones, set the ``wazuh_credentials_overrides`` variable on the first run. The playbook uses a supplied password only for a key that has no file in ``deployment-credentials`` yet. For example, store the passwords in a file encrypted with Ansible Vault:
 
@@ -487,13 +456,15 @@ Each password must have 12 to 64 characters from ``A-Z a-z 0-9 . , _ + : @ % ^ =
 
    # ansible-playbook wazuh-aio.yml -e "source=prerelease" -e @credentials-overrides.yml --ask-vault-pass -K
 
-The playbook does not change passwords. After you change a password with the Wazuh passwords tool, write the new value to the file of its key on the Ansible control node. Later runs of the playbook use ``admin`` and ``wazuh`` users to check the Wazuh indexer and Wazuh manager API, and stop if either password is rejected. If the tool generated the new password, read it from the ``# >>> wazuh generated`` block of ``/etc/wazuh/credentials.env`` on the host where you ran the tool. The same key also appears earlier in the file with its old value. For example, after you change the ``admin`` password, run:
+The ``-e "source=prerelease"`` option installs the release candidate packages from the pre-release repository. Omit it to install a published release.
+
+The playbook does not change passwords. After you change a password with the Wazuh passwords tool, write the new value to the file of its key on the Ansible control node. In a Wazuh cluster deployment, later runs of the playbook use the ``admin`` and ``wazuh`` users to check the Wazuh indexer and the Wazuh manager API, and stop if either password is rejected. In an all-in-one deployment, the next run copies the new passwords to ``deployment-credentials`` itself. If the tool generated the new password, read it from ``/etc/wazuh-indexer/export/credentials.env`` or ``/etc/wazuh-manager/export/credentials.env`` on the host where you ran the tool. For example, after you change the ``admin`` password, run:
 
 .. code-block:: console
 
    # printf '%s' '<NEW_ADMIN_PASSWORD>' > /etc/ansible/roles/wazuh-ansible/deployment-credentials/WAZUH_INDEXER_ADMIN_PASSWORD
 
-Then remove ``/etc/wazuh/credentials.env`` from the host where you ran the tool. The files in ``deployment-credentials`` hold the passwords in plain text. Restrict access to them. To read a password, open the corresponding file for the Wazuh user. For example, run the following command to read the password of the ``wazuh`` user:
+The files in ``deployment-credentials`` hold the passwords in plain text. Restrict access to them. To read a password, open the corresponding file for the Wazuh user. For example, run the following command to read the password of the ``wazuh`` user:
 
 .. code-block:: console
 
@@ -501,17 +472,9 @@ Then remove ``/etc/wazuh/credentials.env`` from the host where you ran the tool.
 
 .. note::
 
-   Later runs of the playbook from the same directory reuse these passwords. If you delete the ``/etc/ansible/roles/wazuh-ansible/deployment-credentials`` directory or run the playbook from another directory, the playbook stops with an error. To recover, replace the ``deployment-credentials`` directory with your backup, and run the playbook from the directory of the clone that installed the deployment.
+   Later runs of the playbook from the same directory reuse these passwords. In a Wazuh cluster deployment, a run from another directory stops with an error, because the hosts already hold the root CA of the first deployment. To recover, run the playbook from the directory of the clone that installed the deployment. If you lost that directory, restore its ``deployment-credentials`` and ``deployment-config-files`` directories from your backup first. In an all-in-one deployment, the playbook reads the passwords back from the host, so a run from another directory, or after you delete ``deployment-credentials``, completes and writes the passwords again.
 
-   The playbook writes the passwords of each component to ``/etc/wazuh/credentials.env`` on its host before it installs the package. The packages read the file only during installation, and later runs of the playbook do not need it. After you back up ``deployment-credentials``, remove the file from the Wazuh central component hosts. Run the following command on the Ansible control node:
-
-   .. code-block:: console
-
-      # ansible <HOSTS> -b -K -m ansible.builtin.file -a "path=/etc/wazuh/credentials.env state=absent"
-
-   Replace ``<HOSTS>`` with ``aio`` for the all-in-one deployment, or with ``wi_cluster:manager:worker:dashboard`` for the Wazuh cluster deployment.
-
-The playbook also generates the root CA and the certificates of the deployment on the Ansible control node during the first run. It keeps the certificates in ``/etc/ansible/roles/wazuh-ansible/deployment-config-files/wazuh-certificates``. It keeps the root CA and its private key in a directory under ``/var/lib/wazuh-ansible/``, which it prints on every run. Back up both directories.
+In a Wazuh cluster deployment, the playbook also creates the root CA of the deployment on the Ansible control node during the first run, and issues the certificates of every node from it. It keeps the root CA, its private key, and the certificates in ``/etc/ansible/roles/wazuh-ansible/deployment-config-files/wazuh-ca``. The private key never leaves the Ansible control node. To use your own root CA, place its ``root-ca.pem`` and ``root-ca.key`` files in that directory before the first run. In an all-in-one deployment, each Wazuh package creates its own root CA on the host. Back up the ``deployment-credentials`` and ``deployment-config-files`` directories.
 
 Each clone of the Wazuh Ansible repository holds one deployment. To deploy another environment, clone the repository into another directory and run the playbook from there. The passwords of that deployment are in the ``deployment-credentials`` directory of that clone, so read them there, not in ``/etc/ansible/roles/wazuh-ansible/``.
 
@@ -560,7 +523,7 @@ Run the following command on the Wazuh manager to generate an enrollment token. 
 
 .. note::
 
-   The Wazuh manager creates tokens only for addresses in the certificate it presents to agents. By default, the playbooks add only the ``private_ip`` value and the node name of each Wazuh manager node, for example ``manager``. To use another address, such as a public IP address, an FQDN, or a load balancer, add it before you deploy the central components. For an all-in-one deployment, use ``wazuh_manager_ips``. In a cluster, use ``extra_ips`` on the node's entry in ``instances``, or ``agent_san`` for an address every node shares. Set ``agent_san`` as a list in the ``vars`` of the Configure Wazuh Indexer cluster play in ``wazuh-distributed.yml``, next to ``instances``. For any other address, the command fails with ``address not in certificate SAN``.
+   The Wazuh manager creates tokens only for addresses in the certificate it presents to agents. By default, the certificate of each Wazuh manager node holds its node name, for example ``manager``, its host name, and its ``private_ip`` value. To use another address, such as a public IP address, an FQDN, or a load balancer, add it before you deploy the central components. For an all-in-one deployment, use ``wazuh_manager_ips``. In a cluster, use ``extra_ips`` on the node's entry in ``instances``, or ``agent_san`` for an address every node shares. Set ``agent_san`` as a list in the ``vars`` of both the Configure Wazuh Manager and the Configure Wazuh Worker plays in ``wazuh-distributed.yml``. In a cluster, generate the tokens for the ``agent_san`` address, because the master node creates tokens only for addresses in its own certificate. For any other address, the command fails with ``address not in certificate SAN``.
 
 The command output looks similar to this:
 
@@ -574,6 +537,8 @@ The command output looks similar to this:
    pin: <CA_PIN>
    credential: yes
 
+If ``<WAZUH_MANAGER_ADDRESS>`` is an IP address, the command also prints ``WARNING: the token address '<WAZUH_MANAGER_ADDRESS>' is an IP address: the token stops working if the manager's address changes.`` The token still works.
+
 Copy the first line, ``<ENROLLMENT_TOKEN>``. The token is valid for 30 days and can be used to enroll several agents until it expires.
 
 Store the token with Ansible Vault on the Ansible control node. Replace ``<ENROLLMENT_TOKEN>`` with the token you copied. The commands save it, encrypted, in ``group_vars/agents/vault.yml`` next to the playbook, and Ansible loads it for the ``agents`` group:
@@ -584,6 +549,18 @@ Store the token with Ansible Vault on the Ansible control node. Replace ``<ENROL
    # cd /etc/ansible/roles/wazuh-ansible/
    # mkdir -p group_vars/agents
    # ansible-vault encrypt_string '<ENROLLMENT_TOKEN>' --name 'vault_wazuh_enrollment_token' >> group_vars/agents/vault.yml
+
+To replace the token later, for example when it expires, first delete the old ``vault_wazuh_enrollment_token`` entry from ``group_vars/agents/vault.yml``. The entry is the line with that name and the indented lines under it, for example:
+
+.. code-block:: yaml
+
+   vault_wazuh_enrollment_token: !vault |
+             $ANSIBLE_VAULT;1.1;AES256
+             <ENCRYPTED_DATA>
+
+If you don't delete it, the file holds two ``vault_wazuh_enrollment_token`` entries. The agent playbook then uses the last one and warns ``found a duplicate dict key`` on every run.
+
+To skip the deletion, run the ``ansible-vault encrypt_string`` command with ``>`` instead of ``>>``, which overwrites the file. Do this only if the file holds no other secret. For example, if you stored the Windows password in it, as :ref:`Prepare the playbook <ansible_agent_prepare>` describes, ``>`` deletes ``vault_wazuh_agent_windows_password`` too.
 
 .. note::
 
@@ -599,33 +576,14 @@ Change to the directory where you cloned the Wazuh Ansible repository:
 .. code-block:: console
 
    # cd /etc/ansible/roles/wazuh-ansible/
-   # tree roles -d
+   # ls roles
 
 The command output looks similar to this:
 
 .. code-block:: none
    :class: output
 
-   roles
-   ├── package-urls
-   │   ├── defaults
-   │   └── tasks
-   ├── vars
-   ├── wazuh-agent
-   │   ├── defaults
-   │   └── tasks
-   ├── wazuh-credentials
-   │   ├── defaults
-   │   └── tasks
-   ├── wazuh-dashboard
-   │   ├── defaults
-   │   └── tasks
-   ├── wazuh-indexer
-   │   ├── defaults
-   │   └── tasks
-   └── wazuh-manager
-       ├── defaults
-       └── tasks
+   package-urls  vars  wazuh-agent  wazuh-credentials  wazuh-dashboard  wazuh-indexer  wazuh-manager
 
 You can see the preconfigured playbooks by running the command below:
 
@@ -777,6 +735,8 @@ Run the playbook
 
       # ansible-playbook wazuh-agent.yml -e "source=prerelease" --ask-vault-pass -K
 
+   The ``-e "source=prerelease"`` option installs the release candidate packages from the pre-release repository. Omit it to install a published release.
+
    .. note::
 
       The playbook passes ``wazuh_enrollment_token`` and ``wazuh_ssl_verification`` to the Wazuh agent installer only when it installs the agent. On an endpoint where the Wazuh agent is already installed, a new run skips the installation and applies neither value. If an agent did not enroll, for example because its token expired, the run fails at the Start and enable Wazuh Agent service task. Remove the Wazuh agent from the endpoint and run the playbook again.
@@ -796,8 +756,10 @@ Run the playbook
 Next steps
 ----------
 
-To remove the deployment, follow :doc:`Uninstalling the Wazuh central components </installation-guide/uninstalling-wazuh/central-components>` on each host of the deployment, including the last step, which removes ``/etc/wazuh``. Otherwise, a deployment from another clone stops at the Wazuh credentials role, because the host still holds the root CA of the old one.
+To remove the deployment, follow :doc:`Uninstalling the Wazuh central components </installation-guide/uninstalling-wazuh/central-components>` on each host of the deployment, and check that ``/etc/wazuh-indexer``, ``/etc/wazuh-manager``, and ``/etc/wazuh-dashboard`` are removed. Uninstalling a package can keep part of them. In a Wazuh cluster deployment, a deployment from another clone otherwise stops at the Wazuh credentials role, because the host still holds the root CA of the old one.
 
-In the clone on the Ansible control node, ``deployment-credentials`` holds the passwords of the deployment, and ``deployment-config-files`` holds its certificates. The root CA stays in the directory under ``/var/lib/wazuh-ansible/`` that the playbook prints. A later run from the same clone installs the deployment again with the same passwords and certificates. Remove those directories only if you do not deploy from that clone again.
+In the clone on the Ansible control node, ``deployment-credentials`` holds the passwords of the deployment. In a Wazuh cluster deployment, ``deployment-config-files/wazuh-ca`` holds its root CA, the CA private key, and the certificates. A later run from the same clone installs the deployment again with the same passwords and, in a Wazuh cluster deployment, the same root CA and certificates. In an all-in-one deployment, the Wazuh packages create new root CAs. Remove those directories only if you do not deploy from that clone again.
 
-Wazuh agents enrolled with the removed deployment do not reconnect to a new one, even one deployed from the same clone. Remove the Wazuh agent from each endpoint, generate an enrollment token on the new deployment, and run the agent playbook again.
+Wazuh agents enrolled with the removed deployment do not reconnect to a new one, even one deployed from the same clone. :doc:`Remove the Wazuh agent </installation-guide/uninstalling-wazuh/agent>` from each endpoint, generate an enrollment token on the new deployment, and store it in place of the old one, as :ref:`Generate an enrollment token <ansible_agent_token>` describes. Then run the agent playbook again.
+
+The playbooks don't upgrade a deployment. Between 5.x releases, upgrade each component as its documentation describes. You can't upgrade a Wazuh manager 4.x, or a 5.0.0 RC 1 or earlier pre-release, in place. Deploy Wazuh 5.0 on new hosts, and move your Wazuh agents and configuration as the :doc:`Migration guide </migration-to-5x/index>` describes.

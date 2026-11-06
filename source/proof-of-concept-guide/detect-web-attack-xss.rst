@@ -16,7 +16,7 @@ Infrastructure
 +==============+===================================================================================+
 | Ubuntu 24.04 | Victim endpoint running an Apache web server.                                     |
 +--------------+-----------------------------------------------------------------------------------+
-| RHEL 9.0     | This attacker endpoint sends a malicious HTTP request to the victim's web server. |
+| RHEL 9.0     | Attacker endpoint that sends a malicious HTTP request to the victim's web server. |
 +--------------+-----------------------------------------------------------------------------------+
 
 Configuration
@@ -52,10 +52,12 @@ Perform the following steps to install an Apache web server and monitor its logs
 
    .. code-block:: xml
 
-      <localfile>
-        <log_format>syslog</log_format>
-        <location>/var/log/apache2/access.log</location>
-      </localfile>
+      <ossec_config>
+        <localfile>
+          <log_format>apache</log_format>
+          <location>/var/log/apache2/access.log</location>
+        </localfile>
+      </ossec_config>
 
 #. Restart the Wazuh agent to apply the configuration changes:
 
@@ -66,7 +68,7 @@ Perform the following steps to install an Apache web server and monitor its logs
 Attack emulation
 ----------------
 
-We performed the following attack emulation from the RHEL 9.0 endpoint:
+Perform the following attack emulation from the RHEL endpoint.
 
 Replace ``<WEBSERVER_IP_ADDRESS>`` with the Ubuntu IP address and execute the following command from the attacker endpoint:
 
@@ -77,18 +79,20 @@ Replace ``<WEBSERVER_IP_ADDRESS>`` with the Ubuntu IP address and execute the fo
 Visualize the findings
 -----------------------
 
-You can visualize the findings in the Wazuh dashboard. To do this, go to the **Threat Hunting** module and add the filters below in the search bar to query the findings.
+You can visualize the findings in the Wazuh dashboard. To do this, go to **Threat intelligence** > **Threat Hunting**, select **Findings**, and add the filter below in the search bar to query the findings.
 
 -  ``event.dataset:apache-access``
 
    .. thumbnail:: /images/poc/xss-attack-findings.png
       :title: XSS attack findings
+      :alt: Wazuh dashboard Threat Hunting Findings tab filtered by event.dataset apache-access, showing the Cross site scripting string finding
       :align: center
       :width: 80%
 
-Expand the finding to see other information contained in the malicious payload, like the URL path and the respective query.
+Expand the finding to see other information contained in the malicious payload, such as the URL path and query.
 
 .. thumbnail:: /images/poc/xss-attack-finding-details.png
    :title: XSS attack finding details
+   :alt: Wazuh dashboard document details panel for the cross-site scripting finding showing the URL path and query of the malicious request
    :align: center
    :width: 80%

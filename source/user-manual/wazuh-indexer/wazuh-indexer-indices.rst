@@ -111,7 +111,7 @@ This provides a complete audit trail linking response actions to the events that
 Stateful indices
 ----------------
 
-Stateful indices store information that changes over time and reflects the current state of monitored endpoints.
+Stateful indices store information that changes over time and reflects the current state of monitored endpoints. The ``wazuh-states-*`` indices hold Wazuh global state data, which is collected from all monitored endpoints and gives a consolidated view of their current state.
 
 Unlike data streams, stateful information is continuously updated as the monitored environment changes.
 
@@ -160,6 +160,42 @@ The following stateful indices are available:
 +-----------------------------------------------+-----------------------------------------------------------------+
 | ``wazuh-states-inventory-browser-extensions`` | Browser extension inventory.                                    |
 +-----------------------------------------------+-----------------------------------------------------------------+
+
+The following Wazuh capabilities write global state data to the ``wazuh-states-*`` indices.
+
+System inventory (IT Hygiene)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+System Inventory provides visibility into the hardware, software, network, and operating system information of monitored endpoints. It collects information such as installed software packages, running processes, open ports, network interfaces, users, groups, services, browser extensions, operating system details, and hardware characteristics.
+
+Wazuh agents use the :doc:`Syscollector </user-manual/capabilities/system-inventory/index>` module to periodically collect inventory information from monitored endpoints. The collected data is sent to the Wazuh manager, where it is processed and synchronized to the Wazuh indexer. The inventory information is stored as global state data in dedicated ``wazuh-states-inventory-*`` indices and can be queried and visualized from the Wazuh dashboard.
+
+Vulnerability detection
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Vulnerability detection provides visibility into software vulnerabilities affecting monitored endpoints. It identifies vulnerable packages and applications by correlating endpoint inventory information with vulnerability data from the Wazuh Cyber Threat Intelligence (CTI) service. Security teams use the results to prioritize remediation and monitor their vulnerability posture.
+
+The Wazuh agent collects inventory data such as installed packages, operating system details, and hardware information from monitored endpoints. The collected data is sent to the Wazuh manager, where the ``wazuh-manager-remoted`` daemon publishes it to the Router ``inventory-states`` topic. The Inventory Sync module synchronizes the inventory state with the Wazuh indexer through the Indexer Connector and triggers the Vulnerability Scanner module.
+
+The Vulnerability Scanner retrieves CVE feeds from the Wazuh indexer through the Content Manager and Indexer Connector. It then correlates the vulnerability information with the inventory data collected from monitored endpoints to identify affected systems and software packages. Vulnerability state information is stored as global state data in the ``wazuh-states-vulnerabilities`` index and can be queried and visualized from the Wazuh dashboard.
+
+File integrity monitoring
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+File Integrity Monitoring (FIM) provides visibility into changes made to monitored files, directories, and Windows registry entries. It helps security teams detect unauthorized modifications, track configuration changes, and monitor critical system files for signs of compromise or policy violations.
+
+Wazuh agents continuously monitor configured files, directories, and registry entries on monitored endpoints. When a change is detected, the file integrity monitoring capability records information about the affected object, including its current state and relevant metadata. This information is synchronized to the Wazuh indexer and stored as Wazuh global state data.
+
+FIM data can be queried and visualized from the Wazuh dashboard, providing centralized visibility into the integrity and status of monitored files and registry objects across the environment.
+
+Security configuration assessment (SCA)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Security Configuration Assessment (SCA) provides visibility into the security and compliance posture of monitored endpoints. It evaluates endpoint configurations against predefined security policies and benchmarks, helping organizations identify misconfigurations, verify compliance requirements, and monitor adherence to security best practices.
+
+Wazuh agents perform SCA scans using policy files that contain security configuration checks. These checks evaluate files, directories, running processes, commands, and Windows registry settings against the defined policy requirements. The scan results are synchronized with the Wazuh manager and stored as Wazuh global state data in the Wazuh indexer.
+
+SCA data can be queried and visualized from the Wazuh dashboard, providing centralized visibility into compliance status and security configuration findings across monitored endpoints.
 
 Data stream lifecycle
 ---------------------
@@ -273,6 +309,8 @@ The ISM policy below keeps matching indices in the hot state while they receive 
        ]
      }
    }
+
+.. _wazuh_indexer_indices_enabling_unclassified_events_storage:
 
 Enabling unclassified events storage
 ------------------------------------

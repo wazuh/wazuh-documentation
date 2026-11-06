@@ -53,7 +53,7 @@ Identify endpoints with critical vulnerabilities in your environment and use the
 
    -  **Field**: ``package.name``
    -  **Operator**: ``is``
-   -  **Value**: ``openssl``. The name of the affected package.
+   -  **Value**: the name of a package with a Critical vulnerability on your endpoint, for example ``libbrotli1``.
 
    .. thumbnail:: /images/manual/system-inventory/it-hygiene-vulnerable-package.jpg
       :title: IT Hygiene - Vulnerable package
@@ -68,15 +68,9 @@ Use case 3: Detecting new software installations
 
 Identify new software installed across your fleet to catch potential unauthorized or shadow-IT applications shortly after they appear.
 
-#. Click the menu icon, then navigate to **Threat intelligence** > **Threat Hunting**.
+#. Click the menu icon, then navigate to **Security operations** > **IT Hygiene**.
 #. Switch to the **Findings** tab.
 #. Click **+ Add filter** and configure it as follows:
-
-   -  **Field**: ``wazuh.rule.title``
-   -  **Operator**: ``is``
-   -  **Value**: ``Wazuh IT Hygiene - Item created``
-
-#. Add a second filter:
 
    -  **Field**: ``event.action``
    -  **Operator**: ``is``

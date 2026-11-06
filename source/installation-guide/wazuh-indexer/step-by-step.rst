@@ -64,7 +64,7 @@ Adding the Wazuh repository
 
          .. code-block:: console
 
-            # apt-get install -y gnupg apt-transport-https curl
+            # apt-get update && apt-get install -y gnupg apt-transport-https curl
 
       #. Install the GPG key:
 
@@ -143,6 +143,8 @@ On the **first Wazuh indexer node** only, create the five deployment passwords b
       WAZUH_MANAGER_WUI_PASSWORD="$(wazuh_generate_password)"
       EOF
 
+#. ``WAZUH_MANAGER_API_PASSWORD`` is the password of the ``wazuh`` user of the Wazuh manager API, the one you use in API requests. ``WAZUH_MANAGER_WUI_PASSWORD`` is the password of ``wazuh-internal-client``, the user that the Wazuh dashboard uses.
+
 #. Copy the Wazuh indexer passwords from ``credentials.env`` to ``/etc/wazuh-indexer/local.env`` on this node. The following commands create the directory and file with the required permissions, then copy only the Wazuh indexer credentials:
 
    .. code-block:: console
@@ -185,6 +187,8 @@ Installing the Wazuh indexer
          .. code-block:: console
 
             # dnf -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
+
+   Release candidate packages carry the version of the final release, ``|WAZUH_CURRENT|-|WAZUH_INDEXER_PKG_REV|``. Only their file names show the RC stage, for example ``wazuh-indexer_|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_x64_DEB|.deb``, so ``dpkg -l`` and ``rpm -q`` show ``|WAZUH_CURRENT|-|WAZUH_INDEXER_PKG_REV|``.
 
 Checking the passwords
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -283,7 +287,7 @@ Generating the SSL certificates
 
       # WAZUH_CA_DIR=/etc/wazuh-indexer/ca bash /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh -A
 
-   To add another address that agents use to reach a Wazuh manager, add ``-as <ALTERNATE_ADDRESS>`` to the command, once per address. Examples are a public IP, a NAT address, or a load balancer. Pass every address in the same run, because the certificate holds only the ``-as`` values of that run.
+   To add another address that agents use to reach a Wazuh manager, add ``-as <ALTERNATE_ADDRESS>`` to the command. Examples are a public IP, a NAT address, a load balancer, or the address of each Wazuh manager worker node that agents will use. Each ``-as`` takes one address. To add several, repeat it, for example ``-as 203.0.113.10 -as wazuh.example.com``. Pass every address in the same run, because the certificate holds only the ``-as`` values of that run.
 
    .. note::
 
@@ -591,10 +595,10 @@ The command prints ``/etc/wazuh-indexer/certs/indexer.pem: OK``. If it prints ``
       SUCC: Expected 9 config types for node {"updated_config_types":["allowlist","tenants","rolesmapping","nodesdn","audit","roles","actiongroups","config","internalusers"],"updated_config_size":9,"message":null} is 9
       Done with success
 
-   The output includes the line ``Done with success``. The last ``SUCC`` line can end with ``due to: null``, and lines with ``java.nio.channels.ClosedSelectorException`` can follow ``Done with success``. Neither means that the initialization failed.
+   The output includes the line ``Done with success``. The last ``SUCC`` line can end with ``due to: null``. Lines with ``java.nio.channels.ClosedSelectorException``, or a line ending in ``httpclient-dispatch-2 ERROR null``, can follow ``Done with success``. None of these lines means that the initialization failed.
 
 Testing the cluster installation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------
 
 #. On the node where you ran ``indexer-security-init.sh``, run the following command to print the Wazuh indexer admin user password. Every Wazuh indexer node holds the same value.
 
@@ -606,7 +610,7 @@ Testing the cluster installation
 
    .. code-block:: console
 
-      # curl -k -u admin https://<WAZUH_INDEXER_ADDRESS>:9200
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200
 
    The output is similar to the following. The ``build_type`` value is ``rpm`` or ``deb``, depending on the package.
 
@@ -635,7 +639,7 @@ Testing the cluster installation
 
    .. code-block:: console
 
-      # curl -k -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cat/nodes?v
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cat/nodes?v
 
    The command produces output similar to the following:
 
@@ -649,7 +653,7 @@ Testing the cluster installation
 
    .. code-block:: console
 
-      # curl -k -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cluster/health?pretty
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin https://<WAZUH_INDEXER_ADDRESS>:9200/_cluster/health?pretty
 
    The output shows ``"status" : "green"`` and ``number_of_nodes`` equal to your number of Wazuh indexer nodes.
 

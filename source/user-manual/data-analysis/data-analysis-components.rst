@@ -25,6 +25,7 @@ The following sections describe the main components of the Wazuh Ruleset Managem
       events
       filters
       decoders
+      helper-functions
       key-value-databases
       enrichment
       rules

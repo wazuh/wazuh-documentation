@@ -25,6 +25,8 @@ Location of the agent.conf file
 
 Centralized configuration files are stored in the ``/etc/wazuh-manager/shared/`` directory on the Wazuh manager. Each agent group has its own subdirectory containing an ``agent.conf`` file.
 
+You can also edit the ``agent.conf`` file of a group in the Wazuh dashboard: go to **Agents management > Groups**, click **Edit group configuration** for the group, change the file, and click **Save**.
+
 .. code-block:: none
 
    /etc/wazuh-manager/shared/<GROUP_NAME>/agent.conf
@@ -52,7 +54,9 @@ agent.conf structure
 
 The ``agent.conf`` file uses the ``<agent_config>`` XML element to define the configuration distributed to Wazuh agents.
 
-Each ``<agent_config>`` block contains one or more supported configuration sections. You can define multiple ``<agent_config>`` blocks in the same file to apply different configurations based on agent attributes.
+Each ``<agent_config>`` block contains one or more supported configuration sections: ``localfile``, ``socket``, ``syscheck``, ``rootcheck``, ``sca``, ``wodle``, the cloud and Microsoft modules (``gcp-pubsub``, ``gcp-bucket``, ``github``, ``office365``, ``ms-graph``), ``active-response`` and ``anti_tampering``.
+
+You can define multiple ``<agent_config>`` blocks in the same file to apply different configurations based on agent attributes.
 
 .. code-block:: xml
 
@@ -62,6 +66,9 @@ Each ``<agent_config>`` block contains one or more supported configuration secti
        <log_format>syslog</log_format>
      </localfile>
    </agent_config>
+
+.. note::
+   In ``agent.conf``, the ``<agent>`` section only accepts ``<batch>``. The ``agent-upgrade`` and ``labels`` sections are ignored with a warning. Wazuh manager sections, such as ``remote``, are also ignored, with a warning such as ``remote configuration is only set in the manager``.
 
 Options
 ^^^^^^^^
@@ -81,7 +88,7 @@ name
 
 Applies the configuration only to agents with the specified name.
 
-**Allowed values**: Any regular expression that matches the agent name.
+**Allowed values**: A simple regular expression (sregex) that matches the agent name. The match is case-insensitive and not anchored: use ``^`` and ``$`` to match the whole name. Character classes such as ``[0-9]`` aren't supported. Use ``|`` to separate alternatives, for example ``name="web-01|web-02"``. See the sregex syntax.
 
 **Example**
 
@@ -99,9 +106,9 @@ os
 
 Applies the configuration only to agents running operating systems that match the specified pattern.
 
-The os attribute supports simple regular expressions.
+The ``os`` attribute supports simple regular expressions (sregex), case-insensitive and not anchored.
 
-**Allowed values**: Any regular expression that matches the agent OS information.
+**Allowed values**: A simple regular expression (sregex) that matches the agent OS information.
 
 **Example**
 
@@ -127,7 +134,7 @@ Applies the configuration only to agents that belong to the specified configurat
 
 Configuration profiles are defined locally on the agent using the ``<config-profile>`` setting - under ``<client>`` for Wazuh 4.x agents, or ``<agent>`` for Wazuh 5.0 agents, in the agent's ``/var/ossec/etc/ossec.conf`` file.
 
-**Allowed values**: Any regular expression that matches the agent profile.
+**Allowed values**: A simple regular expression (sregex) that matches the agent profile.
 
 **Example**
 
@@ -165,12 +172,12 @@ When the same setting is defined in multiple places, the following precedence ap
 #. ``agent.conf`` (centralized configuration from the Wazuh manager)
 #. ``ossec.conf`` (local configuration on the agent)
 
-If an agent belongs to multiple groups, the configurations from all groups are merged. In case of conflicts between groups, the configuration from the group with the lowest alphabetical order takes precedence.
+If an agent belongs to multiple groups, the configurations from all groups are merged. Groups are merged in the order they were assigned to the agent, not by group name. In case of conflicts, the value from the group assigned last takes precedence. ``GET /agents?select=group`` shows the order.
 
 Best practices
 ^^^^^^^^^^^^^^^
 
-- Use temporary filenames (for example, ``agent.conf.tmp``) while editing configuration files.
+- Edit a copy with a name that starts with a dot (for example, ``.agent.conf.tmp``). The Wazuh manager distributes every other file in the group directory, ``agent.conf.tmp`` included.
 - Validate configuration files before making them active.
 - Use agent groups to organize shared configuration.
 - Use attributes (``name``, ``os``, ``profile``) to target only the intended agents.
@@ -183,13 +190,13 @@ Create the configuration
 
 1. Create or edit the configuration file in the group directory on the Wazuh manager.
 
-   Use a temporary filename such as ``agent.conf.tmp`` during editing to prevent the Wazuh manager from distributing an incomplete or invalid configuration. For example, run these commands to create a configuration file for the ``default`` group.
+   Use a temporary filename that starts with a dot, such as ``.agent.conf.tmp``, during editing. The Wazuh manager doesn't distribute files whose names start with a dot, but it distributes any other file in the group directory, including ``agent.conf.tmp``. For example, run these commands to create a configuration file for the ``default`` group.
 
    .. code-block:: console
 
-      # touch /etc/wazuh-manager/shared/default/agent.conf.tmp
-      # chown wazuh-manager:wazuh-manager /etc/wazuh-manager/shared/default/agent.conf.tmp
-      # chmod 660 /etc/wazuh-manager/shared/default/agent.conf.tmp
+      # touch /etc/wazuh-manager/shared/default/.agent.conf.tmp
+      # chown wazuh-manager:wazuh-manager /etc/wazuh-manager/shared/default/.agent.conf.tmp
+      # chmod 660 /etc/wazuh-manager/shared/default/.agent.conf.tmp
 
 2. Define one or more configuration blocks. Use filters such as name, os, and profile to target specific agents:
 
@@ -224,7 +231,7 @@ Validate the configuration
 
    .. code-block:: console
 
-      # /var/wazuh-manager/bin/verify-agent-conf -f /etc/wazuh-manager/shared/default/agent.conf.tmp
+      # /var/wazuh-manager/bin/verify-agent-conf -f /etc/wazuh-manager/shared/default/.agent.conf.tmp
 
    The command output looks similar to this:
 
@@ -240,7 +247,7 @@ Apply the configuration
 
    .. code-block:: console
 
-      # mv /etc/wazuh-manager/shared/default/agent.conf.tmp /etc/wazuh-manager/shared/default/agent.conf
+      # mv /etc/wazuh-manager/shared/default/.agent.conf.tmp /etc/wazuh-manager/shared/default/agent.conf
 
    The Wazuh manager will automatically detect the new configuration and distribute it to all Wazuh agents in the ``default`` group.
 

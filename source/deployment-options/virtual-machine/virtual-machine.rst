@@ -49,24 +49,24 @@ The Wazuh VM is configured with these specifications by default:
 | |OVA_COMPONENT|  |       8        |      16      |     50       |
 +------------------+----------------+--------------+--------------+
 
-This default size matches the :doc:`Quickstart </quickstart>` guide recommendation for 26 to 100 Wazuh agents. For up to 25 agents, you can lower it to 4 CPU cores and 8 GB of RAM when you import the VM. You can adjust the hardware configuration based on the number of protected endpoints and indexed alert data.
+This default CPU and RAM match the :doc:`Quickstart </quickstart>` recommendation for 26 to 100 Wazuh agents. Its 50 GB disk matches the recommendation for up to 25 agents and 90 days of alerts. For more agents, extend the disk. For up to 25 agents, you can lower it to 4 CPU cores and 8 GB of RAM when you import the VM. You can adjust the hardware configuration based on the number of protected endpoints and indexed alert data.
 
 .. _vm_import_and_access:
 
 Import and access the virtual machine
 -------------------------------------
 
-#. Download the `wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova>`__ file. To check the download, run the following command and compare its output with the value in the `sha512 <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova.sha512>`__ file:
+#. Download the `wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova>`__ file. To check the download, save the `sha512 <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova.sha512>`__ file in the same directory and run the following command. The output must be ``wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova: OK``.
 
    .. code-block:: console
 
-      $ sha512sum wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova
+      $ sha512sum -c wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova.sha512
 
-#. Import the OVA into your virtualization platform. In VirtualBox, select **File** > **Import Appliance**, then select the ``wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova`` file. If your host can't spare 8 CPU cores and 16 GB of RAM, lower them before you click **Finish**. The VM also runs with 4 CPU cores and 8 GB of RAM. To import from a terminal instead, run:
+#. Import the OVA into your virtualization platform. In VirtualBox, select **File** > **Import Appliance**, then select the ``wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova`` file. If your host can't spare 8 CPU cores and 16 GB of RAM, lower them before you click **Finish**. The VM also runs with 4 CPU cores and 8 GB of RAM. To import from a terminal instead, run the following command. To lower the VM to 4 CPU cores and 8 GB of RAM, add ``--vsys 0 --cpus 4 --memory 8192`` to it:
 
    .. code-block:: console
 
-      $ VBoxManage import wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova --vsys 0 --cpus 4 --memory 8192
+      $ VBoxManage import wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova
 
 #. If you use VirtualBox, change two settings before you start the VM. Other graphics controllers can freeze the VM window, and without the UTC setting, the VM clock can jump by your time zone offset during the first start.
 
@@ -107,7 +107,7 @@ Import and access the virtual machine
 
       $ sudo systemctl status wazuh-starter
 
-   It has finished when the output shows ``status=0/SUCCESS``. After a later reboot, the command reports that the unit could not be found instead. If it shows ``failed``, the Wazuh dashboard doesn't start.
+   It shows ``Active: activating (start)`` while the first start runs. When the first start has finished, it removes its own unit, so the command reports ``Unit wazuh-starter.service could not be found.`` You also see this after any later reboot. If it shows ``failed``, the first start stopped with an error, and the Wazuh dashboard doesn't start. To see why, run ``sudo journalctl -u wazuh-starter``. A line such as ``httpclient-dispatch-4 ERROR null``, followed by a ``java.util.ConcurrentModificationException`` trace, can follow ``Done with success`` in the output. It doesn't mean that the first start failed.
 
 Access the Wazuh dashboard
 --------------------------
@@ -124,9 +124,23 @@ When the first start has finished, access the Wazuh dashboard in a web browser w
 -  User: ``admin``
 -  Password: the one the command above prints
 
-The Wazuh indexer and Wazuh dashboard passwords, including this one, are in ``/etc/wazuh-indexer/export/credentials.env``. The Wazuh manager API passwords, for the ``wazuh`` and ``wazuh-internal-client`` users, are in ``/etc/wazuh-manager/export/credentials.env``. Only root can read these files. Keep both files, because the Wazuh components read them. To change a password, use ``/usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh``.
+The Wazuh indexer and Wazuh dashboard passwords, including this one, are in ``/etc/wazuh-indexer/export/credentials.env``. The Wazuh manager API passwords are in ``/etc/wazuh-manager/export/credentials.env``. In this file, ``WAZUH_MANAGER_API_PASSWORD`` is the password of the ``wazuh`` user, and ``WAZUH_MANAGER_WUI_PASSWORD`` is the password of the ``wazuh-internal-client`` user. Only root can read these files. Keep both files, because the Wazuh components read them. To change a password, use ``/usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh``.
 
-Until you trust the VM's certificate authority, your web browser warns about the Wazuh dashboard certificate. To trust it, copy ``/etc/wazuh-dashboard/export/ca.pem`` from the VM and import it into your web browser or operating system as a trusted certificate authority.
+To print the password of the ``wazuh`` user, run the following command in the VM:
+
+.. code-block:: console
+
+   $ sudo grep '^WAZUH_MANAGER_API_PASSWORD=' /etc/wazuh-manager/export/credentials.env | cut -d= -f2-
+
+Until you trust the VM's certificate authority, your web browser warns about the Wazuh dashboard certificate. To trust it, copy ``/etc/wazuh-dashboard/export/ca.pem`` to your computer, then import it into your web browser or operating system as a trusted certificate authority.
+
+The file is readable by root only, so copy it over SSH with sudo. Run the following command on your computer. On Windows, run it in Command Prompt, because PowerShell can change the encoding of the file it writes:
+
+.. code-block:: console
+
+   $ ssh wazuh-user@<VM_IP_ADDRESS> sudo cat /etc/wazuh-dashboard/export/ca.pem > wazuh-dashboard-ca.pem
+
+Then import ``wazuh-dashboard-ca.pem`` into your web browser or operating system as a trusted certificate authority.
 
 Configuration files
 -------------------
@@ -138,7 +152,9 @@ All components in this virtual image are configured to work out of the box. Howe
 -  Wazuh dashboard: ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
 -  Wazuh agent: ``/var/ossec/etc/ossec.conf``
 
-The VM sets the Wazuh indexer heap to a quarter of its RAM at its first start. To change it later, for example, after you change the RAM of the VM, edit the ``-Xms`` and ``-Xmx`` values in ``/etc/wazuh-indexer/jvm.options``, then restart the Wazuh indexer. To keep your values after a reboot, also disable the service that sets the heap at boot by running ``systemctl disable updateIndexerHeap.service`` as root.
+Refer to the :doc:`User manual </user-manual/index>` section to learn more about configuring Wazuh components.
+
+The VM sets the Wazuh indexer heap to a quarter of its RAM at its first start. To change it later, for example, after you change the RAM of the VM, edit the ``-Xms`` and ``-Xmx`` values in ``/etc/wazuh-indexer/jvm.options``, then restart the Wazuh indexer. Your values are kept after a reboot because the VM sets the heap only at its first start.
 
 Network configuration
 ---------------------
@@ -172,7 +188,7 @@ The VM gets its addresses from DHCP. To give one of its network interfaces a sta
       Gateway=<GATEWAY_IP>
       DNS=<DNS_SERVER_IP>
 
-   This file applies only to that interface. The other interfaces keep using DHCP through ``/etc/systemd/network/20-eth0.network``. Keep that file unchanged, because it matches every Ethernet interface.
+   This file applies only to that interface. The other interfaces keep using DHCP through ``/etc/systemd/network/20-eth0.network``. Keep that file unchanged, because it matches every Ethernet interface. Keep the ``Gateway=`` and ``DNS=`` lines only if this interface is the VM's way to the Internet, as with the default single **Bridged Adapter**. On a network without a gateway, such as a VirtualBox host-only network, leave both lines out. Another interface already provides the default route and DNS, and a ``Gateway=`` line here adds a second default route that takes precedence.
 
 #. Apply the change. An SSH session to the old address disconnects, so reconnect to the new address:
 
@@ -262,6 +278,8 @@ Reissue both certificates from the VM's own certificate authority. Run the follo
       # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <NEW_ADDRESS>
 
 Afterwards, point the agents enrolled before the change to the new address.
+
+.. _vm_move_enrolled_agents:
 
 Move enrolled agents to the new address
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

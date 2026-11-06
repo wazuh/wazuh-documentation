@@ -18,6 +18,8 @@ This section focuses on:
 
 The Wazuh module for Azure requires dependencies and credentials to access your Microsoft Azure logs. Review the `Prerequisites`_ section before proceeding.
 
+.. _azure_platform_and_services_prerequisites:
+
 Prerequisites
 -------------
 
