@@ -290,12 +290,6 @@ The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph 
           }
       }
 
-The alert is seen on the Wazuh dashboard.
-
-.. thumbnail:: /images/cloud-security/ms-graph/alert-on-wazuh-dashboard.png
-   :align: center
-   :width: 80%
-
 Monitoring device management audit events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
