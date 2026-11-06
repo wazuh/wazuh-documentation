@@ -34,6 +34,7 @@ Options
 - `process_priority`_
 - `registry_ignore`_
 - `scan_day`_
+- `scan_on_start`_
 - `scan_time`_
 - `skip_dev`_
 - `skip_nfs`_
@@ -307,13 +308,13 @@ When there is a conflict between options that modify the same attribute, the las
 
 .. code-block:: xml
 
-   <directories check_all="no" check_sha256="yes">/etc</directories>
+   <directories check_all="no" check_sha256sum="yes">/etc</directories>
 
-The configuration above, set the option ``check_sha256`` to YES.
+The configuration above, set the option ``check_sha256sum`` to YES.
 
 .. code-block:: xml
 
-   <directories check_sha256="yes" check_all="no">/etc</directories>
+   <directories check_sha256sum="yes" check_all="no">/etc</directories>
 
 Nevertheless, the second one disables the SHA-256 hash check.
 
@@ -555,6 +556,27 @@ Example:
 
    <scan_day>thursday</scan_day>
 
+scan_on_start
+^^^^^^^^^^^^^
+
+.. deprecated:: 5.0.0
+
+   This option has no effect in Wazuh 5.0. It is still accepted so configurations from Wazuh 4.x agents don't fail. The Wazuh agent logs this message at the INFO level when it finds it: ``The <scan_on_start> option is deprecated and no longer has any effect.`` FIM always runs a scan when the Wazuh agent starts, to create the baseline.
+
+Specifies if FIM runs a scan when the Wazuh agent starts.
+
++----------------------+-----------+
+| **Default value**    | yes       |
++----------------------+-----------+
+| **Allowed values**   | yes, no   |
++----------------------+-----------+
+
+Example:
+
+.. code-block:: xml
+
+   <scan_on_start>yes</scan_on_start>
+
 scan_time
 ^^^^^^^^^
 
@@ -770,7 +792,7 @@ The diff settings will be configured inside this tag.
 disk_quota
 ~~~~~~~~~~~
 
-This option can be used to limit the size of the ``queue/diff/local`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
+This option can be used to limit the size of the ``queue/diff/file`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
 
 ``enabled`` — Set the disk quota limit option to enabled or disabled.
 
@@ -780,7 +802,7 @@ This option can be used to limit the size of the ``queue/diff/local`` folder whe
 | **Allowed values**   | yes, no  |
 +----------------------+----------+
 
-``limit`` — Specifies the limit for the size of the ``queue/diff/local`` folder.
+``limit`` — Specifies the limit for the size of the ``queue/diff/file`` folder.
 
 +----------------------+--------------------------------------------+
 | **Default value**    | 1GB                                        |
@@ -846,6 +868,8 @@ Attributes:
 +------------------+-----------------------------------------------------------------------------------+
 | Allowed values   | sregex                                                                            |
 +------------------+-----------------------------------------------------------------------------------+
+
+.. _reference_ossec_syscheck_whodata:
 
 whodata
 ^^^^^^^
@@ -949,7 +973,7 @@ windows_registry
 
 List of registry entries to be monitored. One entry per line. Multiple lines may be entered to include multiple registry entries.
 
-To scan paths matching a pattern, you can use the wildcard characters ``?`` and ``*``. For example ``HKEY_LOCAL_MACHINE\SOFTWARE\*``. FIM uses these wildcards during scheduled scan.
+To scan paths matching a pattern, you can use the wildcard characters ``?`` and ``*``. For example ``HKEY_LOCAL_MACHINE\SOFTWARE\*``. The Wazuh agent expands the wildcards when it loads its configuration. A key created later is monitored only after the Wazuh agent restarts, and its creation isn't reported.
 
 +----------------------+-------------------------------------------------------------------------+
 | **Default value**    | The default configuration may vary depending on the operating system.   |
@@ -1151,7 +1175,11 @@ Wazuh agent - Linux/Unix
      <!-- File types to ignore -->
      <ignore type="sregex">.log$|.swp$</ignore>
      <!-- Check the file, but never compute the diff -->
-     <nodiff>/etc/ssl/private.key</nodiff>
+     <nodiff type="sregex">^/etc/ssl/private/|^/etc/pki/tls/private/</nodiff>
+     <nodiff>/etc/shadow</nodiff>
+     <nodiff>/etc/shadow-</nodiff>
+     <nodiff>/etc/gshadow</nodiff>
+     <nodiff>/etc/gshadow-</nodiff>
      <skip_nfs>yes</skip_nfs>
      <skip_dev>yes</skip_dev>
      <skip_proc>yes</skip_proc>
@@ -1164,8 +1192,11 @@ Wazuh agent - Linux/Unix
      <synchronization>
        <enabled>yes</enabled>
        <interval>5m</interval>
+       <integrity_interval>24h</integrity_interval>
      </synchronization>
    </syscheck>
+
+This is the generic Linux/Unix template. On many distributions, such as Red Hat Enterprise Linux, Amazon Linux, Debian 12 and later, and Ubuntu 20.04 and later, the second directories line is ``<directories>/boot</directories>``.
 
 Wazuh agent - Windows
 

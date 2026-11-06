@@ -43,9 +43,10 @@ The Wazuh agent packages for Linux, macOS, and Windows read the same variables. 
 | ``WAZUH_KEEP_ALIVE_INTERVAL`` | Sets the interval, in seconds, between keep-alive messages to the Wazuh manager       | ``10``                               |
 |                               | (``<notify_time>``).                                                                  |                                      |
 +-------------------------------+---------------------------------------------------------------------------------------+--------------------------------------+
-| ``ENROLLMENT_DELAY``          | Sets the time, in seconds, the Wazuh agent waits after enrolling before               | ``20``                               |
-|                               | connecting (``<delay_after_enrollment>``). The minimum value is ``1``. The            |                                      |
-|                               | installer accepts ``0``, but the Wazuh agent then fails to start.                     |                                      |
+| ``ENROLLMENT_DELAY``          | Sets the time, in seconds, the Wazuh agent waits after enrolling before connecting    | ``20``                               |
+|                               | (``<delay_after_enrollment>``). The minimum value is ``1``. The installer accepts     |                                      |
+|                               | ``0``, but the Wazuh agent then can't enroll with ``wazuh-agent-auth`` or start       |                                      |
+|                               | (``Invalid value for element 'delay_after_enrollment': 0``).                          |                                      |
 +-------------------------------+---------------------------------------------------------------------------------------+--------------------------------------+
 
 .. note::

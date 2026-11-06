@@ -56,7 +56,7 @@ Where:
 
     - ``<policy>``: Specifies an individual SCA policy file. Set ``enabled="no"`` to disable a policy without removing it from the configuration.
 
-For a detailed description of the SCA configuration parameters, check the SCA reference.
+For a detailed description of the SCA configuration parameters, check the :doc:`SCA reference </user-manual/reference/ossec-conf/sca>`.
 
 .. _sca_enabling_and_disabling_policies:
 
@@ -121,7 +121,7 @@ Restart the Wazuh agent to apply the change:
 
       .. code-block:: pwsh-session
 
-         # Restart-Service -Name wazuh
+         > Restart-Service -Name wazuh
 
    .. group-tab:: macOS
 
@@ -132,7 +132,7 @@ Restart the Wazuh agent to apply the change:
 Managing SCA policies using centralized configuration
 -------------------------------------------------------
 
-As described in the centralized configuration section, the Wazuh manager can push files and configurations to connected Wazuh agents.
+As described in the :doc:`centralized configuration section </user-manual/reference/centralized-configuration>`, the Wazuh manager can push files and configurations to connected Wazuh agents.
 
 You can enable this feature to push policy files to Wazuh agents in defined groups. By default, every Wazuh agent belongs to the ``default`` group, which is used here as an example:
 

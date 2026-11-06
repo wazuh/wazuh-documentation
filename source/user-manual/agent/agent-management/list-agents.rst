@@ -31,7 +31,7 @@ The :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents
 
 .. code-block:: console
 
-   # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents?pretty=true&sort=-ip,name" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?pretty=true&sort=-ip,name" -H  "Authorization: Bearer $TOKEN"
 
 Output
 

@@ -21,10 +21,10 @@ The download takes up to about 2.5 GB of disk space on the system with Internet 
 Prerequisites
 -------------
 
--  Install ``curl``, ``tar``, ``openssl``, and ``gnupg`` on every offline host before the installation. On RPM systems, ``gnupg`` is ``gnupg2``. Also install the package that provides ``setcap``: ``libcap`` on RPM systems or ``libcap2-bin`` on DEB systems. The installation assistant stops with ``--offline-installation`` when ``gnupg`` is missing, because it checks the signature of every package.
+-  Install ``curl``, ``tar``, ``openssl``, and ``gnupg`` on every offline host before the installation. On RPM systems, ``gnupg`` is ``gnupg2``. Also install the package that provides ``setcap``: ``libcap`` on RPM systems or ``libcap2-bin`` on DEB systems. For the step-by-step method on DEB systems, also install ``binutils``, which provides ``ar`` for the package signature check. The installation assistant stops with ``--offline-installation`` when ``gnupg`` is missing, because it checks the signature of every package.
 -  The installation methods list the operating system packages they need, and ``wazuh-offline.tar.gz`` doesn't include them. For example, the assisted method requires ``gawk``, which isn't a required package on Debian and Ubuntu, so a minimal image can lack it. If a listed package is missing and you have no local package mirror, download it on a system with Internet access. That system must run the same operating system version. Copy it with the other files, and install it on the offline host:
 
-   -  DEB: run ``apt-get download <PACKAGE>``, which downloads only the package you name, then run ``dpkg -i <PACKAGE>_*.deb`` on the offline host.
+   -  DEB: ``apt-get download`` downloads only the package you name, and ``dpkg -i`` fails when one of its dependencies is missing. To list the packages that the offline host lacks, run ``apt-get -s install <PACKAGE> | awk '/^Inst/ {print $2}'`` on the offline host. Download them with ``apt-get download <PACKAGES>`` on the system with Internet access. Copy them, then run ``dpkg -i *.deb`` in their directory on the offline host. If the offline host has no package lists, download the dependencies that ``dpkg -i`` names in its error too.
    -  RPM: run ``dnf download --resolve --destdir <DIRECTORY> <PACKAGE>``, then run ``rpm -ivh <DIRECTORY>/*.rpm`` on the offline host to install every file it downloaded. ``--resolve`` skips dependencies already installed on the download system. Add ``--alldeps`` if that system has packages the offline host lacks.
 
 -  On the download system, the installation assistant needs ``curl``, ``gawk``, and ``openssl`` for the ``-g`` command. It also needs ``tar``, ``grep``, ``sed``, ``coreutils``, and ``procps``. If one is missing, the assistant names it and stops. Add the ``-id|--install-dependencies`` option to the ``-dw`` and ``-g`` commands to install the missing packages. The assistant removes them when it finishes.
@@ -194,6 +194,7 @@ After the Wazuh files are ready and copied to the specified hosts, install the W
 
 -  :doc:`Install Wazuh components using the assisted method <installation-assistant>`: the installation assistant installs and configures each component with one command. Use it unless you need to place every file and setting yourself.
 -  :doc:`Install Wazuh components step by step <step-by-step>`: install each package and configure the certificates and settings yourself.
+-  :doc:`Install Wazuh agents on hosts without Internet access <install-agents>`: install Wazuh agents on offline hosts.
 
 .. toctree::
    :hidden:
@@ -203,3 +204,4 @@ After the Wazuh files are ready and copied to the specified hosts, install the W
    step-by-step
    securing-installation
    running-offline
+   install-agents

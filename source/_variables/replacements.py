@@ -24,6 +24,7 @@ custom_replacements = {
     "|CTI_URL|" : "https://cti.wazuh.com/api/v1/catalog/contexts/vd_1.0.0/consumers/vd_4.8.0",
     # Set at build time by the wcs-fields extension (source/_exts/wcs-fields.py)
     "|WCS_FIELDS_PAGE_URL|" : "",
+    "|WCS_REF|" : "",
     #
     # === Environment
     "|PYTHON_CLOUD_CONTAINERS_MIN|": "3.8",
@@ -38,6 +39,8 @@ custom_replacements = {
     # --- Revision numbers for Wazuh manager package version
     # RPM and Deb manager package revisions
     "|WAZUH_MANAGER_CURRENT_REV|" : "rc2", # RPM and Deb
+    # Repository package revision, as in wazuh-manager=<release>-<revision>. Unlike *_CURRENT_REV (the stage in file names), the rc2 repositories publish revision 1.
+    "|WAZUH_MANAGER_PKG_REV|" : "1",
     # --- Architectures for Wazuh manager packages
     "|WAZUH_MANAGER_x64_RPM|" : "x86_64",
     "|WAZUH_MANAGER_x64_DEB|" : "amd64",
@@ -47,6 +50,8 @@ custom_replacements = {
     # --- Revision numbers for Wazuh agent package version
     # RPM and Deb agent package revisions
     "|WAZUH_AGENT_CURRENT_REV|" : "rc2", # RPM and Deb
+    # Repository package revision of the agent packages, as for |WAZUH_MANAGER_PKG_REV|.
+    "|WAZUH_AGENT_PKG_REV|" : "1",
     # --- Architectures for Wazuh agent packages
     "|WAZUH_AGENT_x64_RPM|" : "x86_64",
     "|WAZUH_AGENT_x64_DEB|" : "amd64",
@@ -56,6 +61,8 @@ custom_replacements = {
     #
     # === Wazuh indexer version revisions
     "|WAZUH_INDEXER_CURRENT_REV|" : "rc2", # RPM and Deb
+    # Repository package revision, as in wazuh-indexer=<release>-<revision>. Unlike *_CURRENT_REV (the stage in file names), the rc2 repositories publish revision 1.
+    "|WAZUH_INDEXER_PKG_REV|" : "1",
     #"|WAZUH_INDEXER_CURRENT_REV_DEB|" :
     # --- Architectures for Wazuh indexer packages
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
@@ -65,6 +72,8 @@ custom_replacements = {
     #
     # === Wazuh dashboard version revisions
     "|WAZUH_DASHBOARD_CURRENT_REV|" : "rc2", # RPM and Deb
+    # Repository package revision, as in wazuh-dashboard=<release>-<revision>. Unlike *_CURRENT_REV (the stage in file names), the rc2 repositories publish revision 1.
+    "|WAZUH_DASHBOARD_PKG_REV|" : "1",
     # --- Architectures for Wazuh dashboard packages
     "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
     "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
@@ -195,12 +204,12 @@ if is_latest_release:
     custom_replacements["|FILEBEAT_LATEST_APT_PKG_INSTALL|"] = ''
     custom_replacements["|FILEBEAT_LATEST_YUM_PKG_INSTALL|"] = ''
 else:
-    custom_replacements["|WAZUH_INDEXER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_INDEXER_CURRENT_REV|"]
-    custom_replacements["|WAZUH_MANAGER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_MANAGER_CURRENT_REV|"]
-    custom_replacements["|WAZUH_DASHBOARD_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_DASHBOARD_CURRENT_REV|"]
-    custom_replacements["|WAZUH_INDEXER_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_INDEXER_CURRENT_REV|"]
-    custom_replacements["|WAZUH_MANAGER_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_MANAGER_CURRENT_REV|"]
-    custom_replacements["|WAZUH_DASHBOARD_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_DASHBOARD_CURRENT_REV|"]
+    custom_replacements["|WAZUH_INDEXER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_INDEXER_PKG_REV|"]
+    custom_replacements["|WAZUH_MANAGER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_MANAGER_PKG_REV|"]
+    custom_replacements["|WAZUH_DASHBOARD_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_DASHBOARD_PKG_REV|"]
+    custom_replacements["|WAZUH_INDEXER_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_INDEXER_PKG_REV|"]
+    custom_replacements["|WAZUH_MANAGER_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_MANAGER_PKG_REV|"]
+    custom_replacements["|WAZUH_DASHBOARD_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_DASHBOARD_PKG_REV|"]
     custom_replacements["|FILEBEAT_LATEST_APT_PKG_INSTALL|"] = '=' + custom_replacements["|FILEBEAT_LATEST_APT_PKG_INSTALL|"] + '-' + custom_replacements["|FILEBEAT_CURRENT_REV|"]
     custom_replacements["|FILEBEAT_LATEST_YUM_PKG_INSTALL|"] = '-' + custom_replacements["|FILEBEAT_LATEST_YUM_PKG_INSTALL|"] + '-' + custom_replacements["|FILEBEAT_CURRENT_REV|"]
 

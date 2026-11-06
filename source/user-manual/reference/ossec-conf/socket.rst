@@ -57,7 +57,7 @@ mode
 UNIX socket communication protocol.
 
 +----------------------+------------+
-| **Default value**    | tcp        |
+| **Default value**    | udp        |
 +----------------------+------------+
 | **Allowed values**   | tcp, udp   |
 +----------------------+------------+

@@ -11,6 +11,8 @@ With this method, you edit the Wazuh agent configuration file so that the Wazuh 
 -  The Wazuh manager IP address or fully qualified domain name (FQDN), set in the Wazuh agent configuration file.
 -  The enrollment password, stored in the ``authd.pass`` file of the Wazuh agent. Password authentication is enabled on the Wazuh manager by default, so the Wazuh manager rejects enrollment requests that don't include the password.
 
+Install the Wazuh agent without ``WAZUH_ENROLLMENT_TOKEN`` first, as described in :doc:`Installing without a token </user-manual/agent/agent-enrollment/deployment-variables/installing-without-token>`.
+
 To also verify the identity of the Wazuh manager, configure the certificate authority (CA) that signs the Wazuh manager certificate. Otherwise, the Wazuh agent connects with TLS verification disabled.
 
 .. note::

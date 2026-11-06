@@ -40,7 +40,7 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/vars/mai
      - The release stage of the current version (e.g., ``alpha``, ``beta``, ``rc``, ``stable``). The ``package-urls`` role uses it to build the pre-release URL of the artifact URL definitions file.
    * - ``local_configs_path``
      - ``{{ playbook_dir }}/deployment-config-files``
-     - Path on the control node to the directory that holds the deployment configuration files, such as ``config.yml``, the certificates, and the cluster key. The Wazuh indexer role creates it when it generates the certificates. The Wazuh manager and Wazuh dashboard roles stop if it does not exist. If you set ``generate_certs`` to ``false``, create it and place your certificates in its ``wazuh-certificates`` subdirectory before you run a playbook.
+     - Path on the control node to the directory that holds the deployment configuration files: the cluster key and, in a Wazuh cluster deployment, the root CA of the deployment and the certificates issued from it, in its ``wazuh-ca`` subdirectory. The Wazuh credentials role creates it. The Wazuh manager and Wazuh dashboard roles stop if it does not exist.
    * - ``urls_file``
      - ``artifact_urls.yaml``
      - This is the filename of the artifact URLs YAML file that is downloaded by the ``package-urls`` role and subsequently loaded by all other roles to resolve package download URLs.
@@ -85,9 +85,9 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/wazuh-cr
    * - ``wazuh_credentials_overrides``
      - ``{}``
      - Passwords to use instead of generated ones, keyed by ``WAZUH_INDEXER_ADMIN_PASSWORD``, ``WAZUH_INDEXER_KIBANASERVER_PASSWORD``, ``WAZUH_INDEXER_MANAGER_PASSWORD``, ``WAZUH_MANAGER_API_PASSWORD``, or ``WAZUH_MANAGER_WUI_PASSWORD``. Each value must have 12 to 64 characters from ``A-Z a-z 0-9 . , _ + : @ % ^ = ~ -``, with at least one uppercase letter, one lowercase letter, one digit, and one of those symbols. The role uses a value only for a key that has no file in ``wazuh_credentials_path`` yet.
-   * - ``wazuh_certificate_max_wait``
-     - ``300``
-     - Maximum number of seconds a host waits for a certificate issued on the Ansible control node to become valid, when the host clock is behind the control node. Beyond it, the run stops and asks you to synchronize the clocks.
+   * - ``wazuh_ca_path``
+     - ``{{ local_configs_path }}/wazuh-ca``
+     - Directory on the Ansible control node where the root CA of a Wazuh cluster deployment is kept: ``root-ca.pem`` and its private key, ``root-ca.key``. The role creates them during the first run if they are not there and never replaces them, so you can place your own root CA there before the first run. It also holds the certificates issued from the root CA, those of each host in ``issued/<INVENTORY_HOST>/``. Back up this directory. It is the only record of the root CA and its private key, which never leaves the Ansible control node. Not used in an all-in-one deployment.
 
 Wazuh indexer
 -------------
@@ -104,13 +104,9 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/wazuh-in
    * - ``single_node``
      - ``false``
      - When set to ``true``, it configures the Wazuh indexer as a single-node cluster. It is set to ``false`` for multi-node deployments.
-   * - ``generate_certs``
-     - ``true``
-     - When set to ``true``, the role generates the root CA and the certificates of every node in ``instances`` with the Wazuh certificates tool. It does so once, on the Ansible control node, and later runs reuse them. Set to ``false`` to use your own certificates. Place them in ``deployment-config-files/wazuh-certificates/`` in the playbook directory, with the file names the Wazuh certificates tool uses:
-
-       -  ``root-ca.pem``, ``admin.pem``, and ``admin-key.pem``;
-       -  ``<NAME>.pem`` and ``<NAME>-key.pem`` for each node in ``instances``;
-       -  ``<NAME>-remoted.pem`` and ``<NAME>-remoted-key.pem`` for each Wazuh manager node.
+   * - ``wazuh_indexer_security_init_force``
+     - ``false``
+     - When set to ``true``, the run loads the security configuration files of the first Wazuh indexer node of the play into the cluster again with ``indexer-security-init.sh``, even if the cluster already has one. This replaces the internal users, roles, role mappings, and passwords of the cluster with those of the files. By default, the role loads the configuration only on a new cluster, when no node of the play has it. If no node reports it and one of them was installed by an earlier run, the run stops instead. After a first run that stopped before the upload, run the playbook again with this variable set to ``true``.
    * - ``instances``
      - .. code-block:: yaml
 
@@ -131,36 +127,9 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/wazuh-in
    * - ``wazuh_indexer_package_name``
      - ``wazuh-indexer-{{ wazuh_full_version }}-{{ wazuh_package_revision }}``
      - This is the base filename of the Wazuh indexer package to download and install.
-   * - ``wazuh_manager_ips``
-     - ``[]``
-     - Additional IP addresses, such as a public IP address, to add to the Wazuh manager certificates in an all-in-one deployment. Use it only with ``single_node: true``, as in the all-in-one deployment: the role stops if it is set for a multi-node cluster. In a cluster, set ``extra_ips`` on the Wazuh manager entry in ``instances`` instead. The value is a list. See the examples after this table.
-   * - ``agent_san``
-     - ``[]``
-     - IP addresses or DNS names to add to the agent listener certificate (``remoted.pem``) of every Wazuh manager node. Use it for an address the whole cluster shares, such as a load balancer. Set it in the ``vars`` of the play that runs the ``wazuh-indexer`` role, before the first run, because the certificates are generated once. See the examples after this table.
-   * - ``wazuh_certs_ca_dir``
-     - ``/var/lib/wazuh-ansible/<ID>/ca``, where ``<ID>`` is the first 12 characters of the SHA-256 hash of ``local_configs_path``
-     - Directory on the Ansible control node where the Wazuh certificates tool keeps the root CA of the deployment and its private key. Every directory in the path must be owned by root and not writable by other users. The playbook prints this directory on every run. Back it up.
    * - ``wazuh_indexer_heap_size``
      - Empty
      - JVM heap size of the Wazuh indexer, with a unit, for example ``4g``. When empty, the role uses a quarter of the host memory with ``single_node: true``, where other components share the host, and half of it otherwise.
-
-For example, to add a public IP address to the Wazuh manager certificates of an all-in-one deployment, add ``wazuh_manager_ips`` to the ``vars`` section of the play in ``wazuh-aio.yml``. Keep the two-space indentation of that section:
-
-.. code-block:: yaml
-   :emphasize-lines: 4
-
-   vars:
-     single_node: true
-     wazuh_manager_ips:
-       - "<AIO_PUBLIC_IP>"
-
-For an address the whole cluster shares, add ``agent_san`` to the ``vars`` of the Configure Wazuh Indexer cluster play in ``wazuh-distributed.yml``, next to ``instances``. Keep the two-space indentation of that section:
-
-.. code-block:: yaml
-   :emphasize-lines: 2
-
-   vars:
-     agent_san: ["<SHARED_ADDRESS>"]
 
 Wazuh manager
 -------------
@@ -199,6 +168,38 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/wazuh-ma
    * - ``wazuh_manager_install_path``
      - ``/var/wazuh-manager/``
      - This is the filesystem path where the Wazuh manager is installed on the target node.
+   * - ``wazuh_manager_conf_dir``
+     - ``/etc/wazuh-manager``
+     - Directory on the target node where the Wazuh manager reads its configuration, such as ``wazuh-manager.conf`` and the certs directory.
+   * - ``wazuh_manager_ips``
+     - ``[]``
+     - Additional IP addresses, such as a public IP address, to add to the agent listener (``remoted.pem``) and Wazuh manager API (``apid.pem``) certificates in an all-in-one deployment. Use it only with ``single_node: true``, as in the all-in-one deployment: the role stops if it is set for a multi-node cluster. In a cluster, set ``extra_ips`` on the Wazuh manager entry in ``instances`` instead. The value is a list. See the examples after this table.
+   * - ``agent_san``
+     - ``[]``
+     - IP addresses or DNS names to add to the agent listener certificate (``remoted.pem``) of every Wazuh manager node, such as a load balancer or a DNS name the whole cluster shares. In a cluster, the master node creates enrollment tokens only for addresses in its own certificate, so agents enroll through one of these addresses. Set it in the vars of every play that runs the ``wazuh-manager`` role, before the first run. See the examples after this table.
+   * - ``api_san``
+     - ``[]``
+     - IP addresses or DNS names to add to the Wazuh manager API certificate (``apid.pem``) of every Wazuh manager node, such as a published name or a load balancer in front of the Wazuh manager API.
+
+For example, to add a public IP address to the Wazuh manager certificates of an all-in-one deployment, add ``wazuh_manager_ips`` to the ``vars`` section of the play in ``wazuh-aio.yml``. Keep the two-space indentation of that section:
+
+.. code-block:: yaml
+   :emphasize-lines: 4
+
+   vars:
+     single_node: true
+     wazuh_manager_ips:
+       - "<AIO_PUBLIC_IP>"
+
+For an address the whole cluster shares, add ``agent_san`` to the ``vars`` of both the Configure Wazuh Manager and the Configure Wazuh Worker plays in ``wazuh-distributed.yml``. Keep the two-space indentation of that section:
+
+.. code-block:: yaml
+   :emphasize-lines: 2
+
+   vars:
+     agent_san: ["<SHARED_ADDRESS>"]
+
+Then generate the enrollment tokens of the Wazuh agents for that address on the master node.
 
 Wazuh dashboard
 ---------------

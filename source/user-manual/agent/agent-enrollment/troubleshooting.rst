@@ -33,24 +33,23 @@ The default ports on the Wazuh manager depend on the agent version:
 
 -  **Wazuh 5.0 agents**: 1517/TCP (HTTPS) - used for both enrollment and agent communication.
 -  **Wazuh 4.x agents**: 1515/TCP for enrollment and 1514/TCP for agent communication.
--  55000/TCP for enrollment via Wazuh manager API (both agent versions).
+-  55000/TCP only if you enroll agents through the Wazuh manager API, or for agents with anti-tampering that remove themselves. Wazuh 5.x agents enroll and connect on 1517/TCP.
 
-On Linux and macOS systems (with netcat installed) open a terminal and run the following commands. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager IP address or fully qualified domain name (FQDN).
+On Linux and macOS systems (with netcat installed) open a terminal and run the following commands. Replace ``<WAZUH_MANAGER_ADDRESS>`` with your Wazuh manager IP address or fully qualified domain name (FQDN).
 
 For a Wazuh 5.0 agent:
 
 .. code-block:: console
 
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1517
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 55000
+   # nc -zv <WAZUH_MANAGER_ADDRESS> 1517
 
 For a Wazuh 4.x agent:
 
 .. code-block:: console
 
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1514
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1515
-   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 55000
+   # nc -zv <WAZUH_MANAGER_ADDRESS> 1514
+   # nc -zv <WAZUH_MANAGER_ADDRESS> 1515
+   # nc -zv <WAZUH_MANAGER_ADDRESS> 55000
 
 If there is connectivity, the output should be a connection success message:
 
@@ -59,17 +58,16 @@ For a Wazuh 5.0 agent:
 .. code-block:: none
    :class: output
 
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> 1517 port [tcp/*] succeeded!
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> 55000 port [tcp/*] succeeded!
+   Connection to <WAZUH_MANAGER_ADDRESS> 1517 port [tcp/*] succeeded!
 
 For a Wazuh 4.x agent:
 
 .. code-block:: none
    :class: output
 
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> 1514 port [tcp/*] succeeded!
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> 1515 port [tcp/*] succeeded!
-   Connection to <WAZUH_MANAGER_IP_ADDRESS> 55000 port [tcp/*] succeeded!
+   Connection to <WAZUH_MANAGER_ADDRESS> 1514 port [tcp/*] succeeded!
+   Connection to <WAZUH_MANAGER_ADDRESS> 1515 port [tcp/*] succeeded!
+   Connection to <WAZUH_MANAGER_ADDRESS> 55000 port [tcp/*] succeeded!
 
 On Windows, open a PowerShell terminal and run the following commands:
 
@@ -77,16 +75,15 @@ For a Wazuh 5.0 agent:
 
 .. code-block:: pwsh-session
 
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1517)
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 55000)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 1517)
 
 For a Wazuh 4.x agent:
 
 .. code-block:: pwsh-session
 
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1514)
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1515)
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 55000)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 1514)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 1515)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 55000)
 
 If there is connectivity, there is no output. Otherwise, an error is shown:
 
@@ -131,7 +128,7 @@ macOS         ``/Library/Ossec/etc/client.keys``
 Windows       ``"C:\Program Files (x86)\ossec-agent\client.keys"``
 ============= ====================================================
 
-Also, verify that each agent has a unique agent key stored in the Wazuh manager ``/etc/wazuh-manager/client.keys`` file. Duplicate keys can arise if you previously deleted agents with the highest IDs or copied the ``client.keys`` file between agents.
+Also, verify that each agent has a unique client key stored in the Wazuh manager ``/etc/wazuh-manager/client.keys`` file. Duplicate keys can arise if you previously deleted agents with the highest IDs or copied the ``client.keys`` file between agents.
 
 Invalid agent name for enrollment
 ---------------------------------
@@ -149,14 +146,14 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
 
    2026/10/27 22:41:24 wazuh-agentd: ERROR: Enrollment rejected by the manager: duplicate agent. Duplicate name
 
-**Wazuh manager log**:
+**Wazuh manager log** (Wazuh 4.x agents only; for Wazuh 5.0 agents, the Wazuh manager logs nothing):
 
 .. code-block:: none
    :class: output
 
    2026/10/27 22:41:23 wazuh-manager-authd: WARNING: Duplicate name '<AGENT_NAME>', rejecting enrollment. Agent '<ID>' can't be replaced since it is not disconnected.
 
-**Resolution**: Ensure the Wazuh agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<client><enrollment><agent_name>`` section of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
+**Resolution**: Ensure the Wazuh agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<agent><enrollment><agent_name>`` section (Wazuh 5.0 agents) or ``<client><enrollment><agent_name>`` section (Wazuh 4.x agents) of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
 
 -  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
 -  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
@@ -165,13 +162,13 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
 .. code-block:: xml
    :emphasize-lines: 4
 
-   <client>
+   <agent>
         ...
         <enrollment>
             <agent_name>EXAMPLE_NAME</agent_name>
             ...
         </enrollment>
-    </client>
+    </agent>
 
 Unable to read CA certificate file
 ----------------------------------
@@ -184,10 +181,11 @@ The Wazuh agent may not be able to authenticate with the Wazuh manager if the ro
 
 .. code-block:: none
 
-   2026/07/06 12:37:28 wazuh-manager-authd: ERROR: Unable to read CA certificate file "/etc/wazuh-manager/rootCA.pem"
-   2026/07/06 12:37:28 wazuh-manager-authd: ERROR: SSL error. Exiting.
+   wazuh-manager-control: ERROR: (1244): Invalid configuration at '/auth/ssl_agent_ca': file not found: /etc/wazuh-manager/rootCA.pem (issued by the credential resolver at installation, or provisioned externally, e.g. with wazuh-certs-tool).
 
-**Resolution**: Ensure the certificate authority file is in the location specified in the ``<ssl_agent_ca>`` section of the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file.
+The same error names ``/remote/https/ca`` when the file set in ``<remote><https><ca>`` is missing. In both cases, the Wazuh manager doesn't start.
+
+**Resolution**: Ensure the certificate authority file exists at the path set in ``<auth><ssl_agent_ca>`` and ``<remote><https><ca>`` in the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file, then restart the Wazuh manager.
 
 **Location**: Wazuh agent log file
 
@@ -210,6 +208,23 @@ You can find the ``ossec.conf`` file at the following locations:
 -  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
 -  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
 -  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
+
+The Wazuh agent can't verify the Wazuh manager certificate
+-----------------------------------------------------------
+
+The Wazuh agent doesn't connect if the CA it trusts didn't sign the Wazuh manager certificate, for example after you replace the Wazuh manager certificate.
+
+**Location**: Wazuh agent log file
+
+Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
+
+**Error log**:
+
+.. code-block:: none
+
+   wazuh-agentd:https-client: WARNING: Could not verify the manager's certificate at 'https://<WAZUH_MANAGER_ADDRESS>:1517/wazuh-manager/control': (60) SSL peer certificate or SSH remote key was not OK: SSL certificate OpenSSL verify result: unable to get local issuer certificate (20)
+
+**Resolution**: Set ``<ssl><certificate_authorities>`` in the Wazuh agent configuration file (``ossec.conf``) to the CA that signs the Wazuh manager certificate, or add that CA to the Wazuh manager CA bundle with ``wazuh-manager-certs add`` so that it's published to the Wazuh agents.
 
 Unable to read the client certificate or key
 --------------------------------------------
@@ -261,5 +276,5 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
 **Resolution**:
 
 #. Ensure the same password is used by the Wazuh manager and the Wazuh agent
-#. Ensure that the ``authd.pass`` password file is in the ``/etc/wazuh-manager/`` directory of the Wazuh manager and has the right permission. The file permissions should be set to 640, and the group should be ``wazuh-manager`` (``root:wazuh-manager`` or ``wazuh-manager:wazuh-manager``).
+#. Ensure that the ``authd.pass`` password file is in the ``/etc/wazuh-manager/`` directory of the Wazuh manager and that the ``wazuh-manager`` group can read it: ``640`` with ``root:wazuh-manager`` if you created it, or ``660`` with ``wazuh-manager:wazuh-manager`` if the Wazuh manager generated it.
 #. If password authentication is not needed, it should be disabled in the ``<auth>`` section of the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file.

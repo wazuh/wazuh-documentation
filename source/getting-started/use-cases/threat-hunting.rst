@@ -30,13 +30,13 @@ The finding details show IOC enrichment from Wazuh CTI, including the matched in
 Hunting across security telemetry and logs
 ------------------------------------------
 
-Effective threat hunting depends on collecting and searching security telemetry from across the environment. Wazuh centralizes logs from monitored endpoints, network devices, applications, cloud services, and agentless sources, giving security teams a single place to investigate suspicious activity.
+Effective threat hunting depends on collecting and searching security telemetry from across the environment. Wazuh centralizes logs from monitored endpoints, network devices, applications, cloud services, and systems that send their logs to monitored endpoints. This gives security teams a single place to investigate suspicious activity.
 
-Wazuh stores collected telemetry in dedicated data streams for security events, endpoint inventory, vulnerability findings, file integrity state, and other security data. This organized storage model allows security teams to hunt across historical and current telemetry without inspecting individual endpoints.
+Wazuh stores security events and findings in dedicated data streams, and the current state of endpoint inventory, vulnerabilities, and file integrity in dedicated indices. This organized storage model allows security teams to hunt across historical and current telemetry without inspecting individual endpoints.
 
 .. thumbnail:: /images/getting-started/use-cases/threat-hunting/wazuh-data-streams.png
-   :title: Wazuh data streams for security events, inventory, vulnerability findings, and file integrity state
-   :alt: Wazuh data streams for security events, inventory, vulnerability findings, and file integrity state
+   :title: Wazuh index patterns for security events, inventory, vulnerability findings, and file integrity state
+   :alt: Wazuh index patterns for security events, inventory, vulnerability findings, and file integrity state
    :align: center
    :width: 80%
 
@@ -72,7 +72,7 @@ The :doc:`Rootcheck module </proof-of-concept-guide/poc-detect-hidden-process>` 
 Hunting for unauthorized file and configuration changes
 -------------------------------------------------------
 
-Wazuh File Integrity Monitoring (FIM) helps security teams proactively hunt for unauthorized changes to critical files, directories, and Windows registry keys that attackers commonly modify to establish persistence. The FIM module monitors these locations in real time and records file additions, modifications, deletions, permission changes, and registry changes.
+Wazuh File Integrity Monitoring (FIM) helps security teams proactively hunt for unauthorized changes to critical files, directories, and Windows registry keys that attackers commonly modify to establish persistence. The FIM module records file additions, modifications, deletions, permission changes, and registry changes in these locations. It monitors them in real time when you enable the ``realtime`` or ``whodata`` attribute for them. By default, it scans monitored directories every 12 hours.
 
 Attackers often establish persistence by modifying startup locations such as the Windows Run and RunOnce registry keys, scheduled tasks, cron entries, and startup folders. They can also modify web-accessible directories to deploy web shells. Wazuh monitors these locations and synchronizes the current file and registry state across monitored endpoints.
 

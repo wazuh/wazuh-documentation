@@ -16,14 +16,17 @@ The ``ossec.conf`` file is the main local configuration file for the Wazuh agent
 
 The file uses XML syntax. All configuration sections must be defined within the top-level ``<ossec_config>`` element. It is recommended to back up this file before making changes to it. A configuration error may prevent Wazuh services from starting up.
 
-The following example shows the placement of the ``<client>`` section:
+The following example shows the placement of the ``<agent>`` section:
 
 .. code-block:: xml
+   :emphasize-lines: 4
 
    <ossec_config>
-     <client>
-       <!-- Client configuration options -->
-     </client>
+     <agent>
+       <manager>
+         <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
+       </manager>
+     </agent>
    </ossec_config>
 
 You can define multiple ``<ossec_config>`` elements in the file. When the same option is defined more than once, a later definition may override an earlier one.
@@ -43,7 +46,8 @@ Use ``ossec.conf`` to configure an individual agent locally. To distribute suppo
 | :doc:`anti_tampering <anti-tampering>`                  | Requires Wazuh manager validation before uninstalling the agent package on supported Linux   |
 |                                                         | systems.                                                                                     |
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| :doc:`client <client>`                                  | Configures the agent connection, reconnection, enrollment, and communication settings.       |
+| :doc:`client <client>`                                  | Wazuh 4.x section. A Wazuh 5.0 agent reads only the ``<server>`` address and                 |
+|                                                         | ``<enrollment>`` from it, as a fallback. Use agent instead.                                  |
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | :doc:`github <github-module>`                           | Collects GitHub organization audit events.                                                   |
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+

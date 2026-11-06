@@ -69,11 +69,11 @@ The following Wazuh dashboard image shows the results of the policy based on the
    :align: center
    :width: 80%
 
-The following images show the description, rationale, and remediation steps for SCA check ``28653`` in the CIS Benchmark policy for Ubuntu Linux 22.04 LTS.
+The following images show check ``28653`` of the CIS Benchmark policy for Ubuntu Linux 22.04 LTS in the **Inventory** tab, then its description, rationale, and remediation steps in the check details.
 
 .. thumbnail:: /images/getting-started/use-cases/sca/sca-check-28653-description.png
-   :title: Description and rationale of SCA check 28653 in the CIS Ubuntu Linux 22.04 LTS policy
-   :alt: Description and rationale of SCA check 28653 in the CIS Ubuntu Linux 22.04 LTS policy
+   :title: SCA check 28653 in the Inventory tab
+   :alt: SCA check 28653 in the Inventory tab
    :align: center
    :width: 80%
 
@@ -118,17 +118,17 @@ SCA checks can include compliance metadata that maps them to requirements in sup
 
 SCA results provide evidence of the security configuration of each monitored endpoint. Security teams can review check results, compliance mappings, scores, and generated reports to assess their configuration posture and track changes after remediation.
 
-The two images below show the check description and its remediation guidance.
+The two images below show the failed check in the **Inventory** tab and its mapped compliance requirements.
 
 .. thumbnail:: /images/getting-started/use-cases/sca/sca-check-compliance-mapping.png
-   :title: SCA check description with its mapped compliance requirements
-   :alt: SCA check description with its mapped compliance requirements
+   :title: Failed SCA check in the Inventory tab
+   :alt: Failed SCA check in the Inventory tab
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/getting-started/use-cases/sca/sca-check-remediation-guidance.png
-   :title: Remediation guidance for an SCA check that maps to regulatory compliance requirements
-   :alt: Remediation guidance for an SCA check that maps to regulatory compliance requirements
+   :title: SCA check details with the mapped compliance requirements
+   :alt: SCA check details with the mapped compliance requirements
    :align: center
    :width: 80%
 

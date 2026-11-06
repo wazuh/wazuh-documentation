@@ -6,7 +6,7 @@
 Proof of Concept guide
 ======================
 
-In this section of the documentation, we provide a set of use cases to explore different Wazuh capabilities. We describe how Wazuh can be configured for threat prevention, detection, and response. Each use case represents a real-world scenario that users can deploy using specific configurations.
+In this section of the documentation, we provide a set of use cases to explore different Wazuh capabilities. We describe how to configure Wazuh for threat prevention, detection, and response. Each use case represents a real-world scenario that users can deploy using specific configurations.
 
 Preparing your lab environment
 ------------------------------
@@ -16,12 +16,13 @@ The Wazuh platform consists of two main parts:
 -  Security agents: Lightweight software deployed on the endpoints you want to monitor.
 -  Central components (Wazuh manager, indexer, and dashboard): These components collect, analyze, and visualize data from agents.
 
-We recommend using virtual machines for your lab. Take a snapshot of the environment immediately after the initial setup. This allows you to quickly restore a clean state before starting each new use case, preventing previous tests from interfering with new ones.
+We recommend using virtual machines for your lab. Take a snapshot of the environment immediately after the initial setup. The snapshot lets you quickly restore a clean state before starting each new use case, preventing previous tests from interfering with new ones.
 
 The diagram below shows the recommended lab architecture for testing the use cases in this guide.
 
 .. thumbnail:: /images/poc/poc-lab-env-arch.png
    :title: Wazuh lab environment architecture
+   :alt: Diagram of the lab architecture: Linux and Windows endpoints with Wazuh agents connected to the Wazuh manager, API, dashboard, and indexer
    :align: center
    :width: 80%
 
@@ -31,7 +32,7 @@ Wazuh central components
 For the use cases in this guide, all Wazuh central components (manager, indexer, and dashboard) run on a single system. A single-node deployment is sufficient and recommended for a small-scale lab environment. To install the Wazuh central components on a single endpoint, use one of the following options:
 
 -  The :doc:`Quickstart guide </quickstart>`: Using this guide, you can install all the components on the same system in approximately 5 minutes.
--  Our :doc:`preconfigured virtual machine </deployment-options/virtual-machine/virtual-machine>`: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. You can import it to VirtualBox or other OVA-compatible virtualization systems.
+-  Our :doc:`preconfigured virtual machine </deployment-options/virtual-machine/virtual-machine>`: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. You can import it into VirtualBox or other OVA-compatible virtualization systems.
 
 Monitored endpoints
 ^^^^^^^^^^^^^^^^^^^
@@ -61,9 +62,9 @@ Use cases
    poc-security-configuration-assessment
    monitoring-docker
    detect-web-attack-sql-injection
-   detect-web-attack-xss
    aws-infrastructure-monitoring
    network-ids-integration
+   detect-web-attack-xss
    poc-detect-hidden-process
    block-malicious-actor-ip-reputation
 

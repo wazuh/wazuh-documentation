@@ -22,7 +22,7 @@ Requirements
 
 -  Docker Engine with the Docker Buildx plugin. The build script runs ``docker buildx bake``. Run ``docker buildx version`` to check that the plugin is installed.
 -  Git, curl, and jq. Without jq, the script prints ``jq: command not found`` and then stops with ``curl: (22) The requested URL returned error: 403``.
--  Internet access to GitHub, Docker Hub, the Amazon Linux 2023 package repositories, the Wazuh package repository, and `packages.wazuh.com <http://packages.wazuh.com>`__ for the Wazuh signing key.
+-  Internet access to GitHub, Docker Hub, the Amazon Linux 2023 package repositories, the Wazuh package repository, and `packages.wazuh.com <https://packages.wazuh.com/key/GPG-KEY-WAZUH>`__ for the Wazuh signing key.
 -  Free disk space: at least 20 GB. The build uses about 13 GB, and that space stays in use after the build: about 5 GB for the four images, and the rest for the build cache.
 
 Building the images
@@ -80,6 +80,7 @@ Run the commands below as root, or as a user in the ``docker`` group.
           -a, --artifact-urls <file>   [Optional] Use this artifact URLs file instead of downloading the one for the requested version.
           -d, --dev-stage <ref>        [Optional] Set the pre-release stage suffix (e.g. beta1, rc2). Not used by default.
           --dev                        [Optional] Mark as a development build: appends the commit ref to the image tag. Controlled by inputs.dev in the workflow.
+          --release                    [Optional] Final release build: use the production artifact URLs file without checking the GitHub release. Not valid with --dev, -d or -a.
           -refs, --references <refs>   [Optional] [Only with --dev] JSON array of commit refs for components (indexer, manager, dashboard, agent) in order. Defaults to 'latest'.
           -rg, --registry <reg>        [Optional] Set the Docker registry to push the images.
           -c, --component <comp>       [Optional] Build only this component: 'wazuh-indexer', 'wazuh-manager', 'wazuh-dashboard' or 'wazuh-agent'. By default, all four.
@@ -95,4 +96,4 @@ Run the commands below as root, or as a user in the ``docker`` group.
 Next steps
 ----------
 
-To deploy the images you built, follow the :doc:`Wazuh Docker deployment <wazuh-container>` from the same clone. Images built with ``-d |WAZUH_CURRENT_DOCKER_REV|`` already carry the tags in the ``docker-compose.yml`` files, so the deployment uses them without a download. If you built them without ``-d |WAZUH_CURRENT_DOCKER_REV|``, first change the tag in every ``image:`` line to ``|WAZUH_CURRENT_DOCKER|``. These lines are in ``wazuh-docker/single-node/docker-compose.yml``, ``wazuh-docker/multi-node/docker-compose.yml``, and ``wazuh-docker/wazuh-agent/docker-compose.yml``.
+To deploy the images you built, follow the :doc:`Wazuh Docker deployment <wazuh-container>` from the same clone. If this Docker host already runs a Wazuh Docker deployment, don't create a second one from this clone, because its ``single-node`` and ``multi-node`` directories use the same volume names. Either set the image tags of your existing deployment to the ones you built, or stop the other stack and first set another project name in the deployment directory, for example, with ``echo COMPOSE_PROJECT_NAME=wazuh-custom > .env``. Both stacks publish the same ports, so they can't run at the same time. Images built with ``-d |WAZUH_CURRENT_DOCKER_REV|`` already carry the tags in the ``docker-compose.yml`` files, so the deployment uses them without a download. If you built them without ``-d |WAZUH_CURRENT_DOCKER_REV|``, first change the tag in every ``image:`` line to ``|WAZUH_CURRENT_DOCKER|``. These lines are in ``wazuh-docker/single-node/docker-compose.yml``, ``wazuh-docker/multi-node/docker-compose.yml``, and ``wazuh-docker/wazuh-agent/docker-compose.yml``.

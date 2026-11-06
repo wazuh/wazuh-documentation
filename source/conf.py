@@ -115,7 +115,6 @@ exclude_patterns = [
     'getting-started/use-cases/malware-detection.rst',
     'getting-started/use-cases/posture-management.rst',
     'deployment-options/amazon-machine-images/**',
-    'deployment-options/wazuh-from-sources/**',
     'deployment-options/deploying-with-puppet/**',
     'user-manual/capabilities/agentless-monitoring/**',
     'user-manual/capabilities/log-data-collection/journald.rst',

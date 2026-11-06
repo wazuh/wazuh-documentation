@@ -39,7 +39,7 @@ The following configuration locations are commonly reviewed during the migration
 +====================================================+============================================================================================================================+
 | ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` | Wazuh manager API connections, branding, health checks, and dashboard configuration                                        |
 +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------+
-| **Dashboard Management** > **Advanced Settings**   | Tenant-specific dashboard settings, including request timeout, enrollment DNS, CSV export limits, and update notifications |
+| **Dashboards Management** > **Advanced Settings**  | Tenant-specific dashboard settings, including request timeout, enrollment DNS, CSV export limits, and update notifications |
 +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------+
 
 By default, you manage **Advanced Settings** per tenant through the Wazuh dashboard. You can also configure them globally using ``uiSettings.overrides`` in ``opensearch_dashboards.yml``.
@@ -76,7 +76,7 @@ Perform the following steps to recreate the Wazuh dashboard configuration in Waz
 
 #. Review the Wazuh dashboard 4.x configuration file ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` and identify any settings that differ from the default values.
 
-#. Edit the Wazuh dashboard 5.x configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` to recreate the supported Wazuh manager API configuration. Use the URL, port, and ``run_as`` values from the Wazuh 4.x deployment. Keep the ``wazuh-internal-client`` user, which replaces ``wazuh-wui`` in Wazuh 5.x. Leave out the ``password`` setting, because the Wazuh dashboard reads the password from its keystore:
+#. Edit the Wazuh dashboard 5.x configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` to recreate the supported Wazuh manager API configuration. Set the URL to the Wazuh 5.x manager address. In an all-in-one deployment, use ``https://127.0.0.1``, because the Wazuh manager API listens only on the loopback address. Use the port and ``run_as`` values from the Wazuh 4.x deployment. Keep the ``wazuh-internal-client`` user, which replaces ``wazuh-wui`` in Wazuh 5.x. Leave out the ``password`` setting, because the Wazuh dashboard reads the password from its keystore:
 
    .. code-block:: yaml
       :emphasize-lines: 3, 4
@@ -88,7 +88,7 @@ Perform the following steps to recreate the Wazuh dashboard configuration in Waz
           username: wazuh-internal-client
           run_as: true
 
-#. Navigate to **Dashboard Management** > **Advanced Settings** on the Wazuh dashboard to reconfigure advanced settings. Recreate any customized settings from the Wazuh 4.x deployment. Review the following settings:
+#. Navigate to **Dashboards Management** > **Advanced Settings** on the Wazuh dashboard to reconfigure advanced settings. Recreate any customized settings from the Wazuh 4.x deployment. Review the following settings:
 
    +----------------------------+-------------------------------------------------------------------------------------------------------------+
    | Setting                    | Description                                                                                                 |
@@ -108,7 +108,7 @@ Perform the following steps to recreate the Wazuh dashboard configuration in Waz
 
       # systemctl restart wazuh-dashboard
 
-#. Verify that the Wazuh manager API connection succeeds. Navigate to **Dashboard Management** > **Health Check**.
+#. Verify that the Wazuh manager API connection succeeds. Navigate to **Dashboard management** > **Health Check**.
 
 .. _migration_custom_dashboards_and_visualization:
 
@@ -142,13 +142,13 @@ Migrate custom dashboards and visualizations
 
 Perform the following steps to recreate custom dashboards and visualizations in the Wazuh 5.x deployment.
 
-#. Export the custom saved objects from the Wazuh dashboard 4.x deployment. Click the **☰** menu and navigate to **Dashboard Management** > **Saved objects**. Select the objects to export and click **Export**.
+#. Export the custom saved objects from the Wazuh dashboard 4.x deployment. Click the **☰** menu and navigate to **Dashboards Management** > **Saved objects**. Select the objects to export and click **Export**.
 
    .. note::
 
       Disable **Include related objects** before exporting the saved objects. Otherwise, the export includes the Wazuh 4.x ``wazuh-alerts-*`` index pattern, and the imported panels display no data.
 
-#. Import the exported saved objects into the new deployment. Click the **☰** menu and navigate to **Dashboard Management** > **Saved objects**. Click **Import** and select the exported ``.ndjson`` file.
+#. Import the exported saved objects into the new deployment. Click the **☰** menu and navigate to **Dashboards Management** > **Saved objects**. Click **Import** and select the exported ``.ndjson`` file.
 
    .. note::
 
@@ -182,7 +182,7 @@ Perform the following steps to recreate custom dashboards and visualizations in 
 
 #. After you complete the migration, verify that dashboards and visualizations display data correctly:
 
-   -  Navigate to **☰** Menu > **Dashboard Management** > **Saved objects** and verify that the expected objects are present.
+   -  Navigate to **☰** Menu > **Dashboards Management** > **Saved objects** and verify that the expected objects are present.
    -  Open each migrated dashboard and confirm that all panels load correctly.
    -  Verify that visualizations return data from the expected index patterns.
    -  Confirm that all filters, aggregations, and searches use valid Wazuh 5.x field names.

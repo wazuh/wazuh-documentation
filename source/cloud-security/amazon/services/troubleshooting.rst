@@ -3,8 +3,8 @@
 .. meta::
    :description: This section is intended to assist in troubleshooting issues.
 
-Troubleshooting
-===============
+Troubleshooting the Wazuh module for AWS
+========================================
 
 Use the following information to troubleshoot issues with the Wazuh module for AWS.
 

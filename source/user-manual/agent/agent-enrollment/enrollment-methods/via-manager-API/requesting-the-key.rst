@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to request the Wazuh agent key from the Wazuh manager API for different operating systems in this section of the documentation.
+   :description: Learn how to request the client key from the Wazuh manager API for different operating systems in this section of the documentation.
 
 Request the client key
 ======================
 
-You can obtain the Wazuh agent key from the Wazuh dashboard or by sending a request to the Wazuh manager API. The default API port is 55000/TCP.
+You can obtain the client key from the Wazuh dashboard or by sending a request to the Wazuh manager API. The default API port is 55000/TCP.
 
-To obtain the Wazuh agent key from the Wazuh dashboard, follow these steps:
+To obtain the client key from the Wazuh dashboard, follow these steps:
 
 #. On the Wazuh dashboard, click the upper-left menu icon, then go to **Server management** > **Dev Tools.**
 
@@ -18,7 +18,7 @@ To obtain the Wazuh agent key from the Wazuh dashboard, follow these steps:
       :align: center
       :width: 80%
 
-#. Send a **POST** request to the ``/agents`` endpoint. Replace ``<WAZUH_AGENT_NAME>`` with the name of the new Wazuh agent.
+#. Send a **POST** request to the ``/agents`` endpoint. Replace ``<AGENT_NAME>`` with the name of the new Wazuh agent.
 
    .. thumbnail:: /images/manual/agent/api-post-agents.png
       :title: POST /agents request
@@ -26,9 +26,15 @@ To obtain the Wazuh agent key from the Wazuh dashboard, follow these steps:
       :align: center
       :width: 80%
 
-Alternatively, request the Wazuh agent key from any endpoint that has connectivity to the Wazuh manager API. The endpoint that sends the enrollment request must reach the Wazuh manager on the configured API port.
+Alternatively, request the client key from any endpoint that has connectivity to the Wazuh manager API. The endpoint that sends the enrollment request must reach the Wazuh manager on the configured API port.
 
-The following sections show how to request the Wazuh agent key on different operating systems:
+.. note::
+
+   After the :ref:`Quickstart <quickstart_opening_manager_api>`, and after an offline all-in-one installation with the installation assistant, the Wazuh manager API listens only on ``127.0.0.1`` and ``::1``.
+
+   To reach it from other endpoints, set ``host: ['0.0.0.0', '::']`` in ``/var/wazuh-manager/api/configuration/api.yaml`` on the Wazuh manager master node and run ``systemctl restart wazuh-manager``. Allow port 55000/TCP only from trusted endpoints.
+
+The following sections show how to request the client key on different operating systems:
 
 .. contents::
    :local:
@@ -42,11 +48,11 @@ The following sections show how to request the Wazuh agent key on different oper
 Linux/Unix and macOS
 --------------------
 
-#. Generate a JSON Web Token (JWT) to authenticate to the Wazuh manager API. Replace ``<USER>`` and ``<PASSWORD>`` with the Wazuh manager API credentials, and ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
+#. Generate a JSON Web Token (JWT) to authenticate to the Wazuh manager API. Replace ``<USER>`` and ``<PASSWORD>`` with the Wazuh manager API credentials, and ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
 
    .. code-block:: console
 
-      # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+      # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
 
    Confirm that the command generated the token successfully:
 
@@ -65,11 +71,11 @@ Linux/Unix and macOS
 
       You can :doc:`reset the password </user-manual/user-administration/password-management>` for the Wazuh manager API user if you forget it.
 
-#. Request the client key and agent ID. Replace ``<WAZUH_AGENT_NAME>`` with the Wazuh agent name:
+#. Request the client key and agent ID. Replace ``<AGENT_NAME>`` with the Wazuh agent name:
 
    .. code-block:: console
 
-      # curl -k -X POST -d '{"name":"<WAZUH_AGENT_NAME>"}' "https://<WAZUH_MANAGER_IP>:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN"
+      # curl -k -X POST -d '{"name":"<AGENT_NAME>"}' "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN"
 
    The output includes the client key and agent ID:
 
@@ -123,11 +129,11 @@ Follow these steps to send a Wazuh agent enrollment request from a Windows endpo
 
       > $base64AuthInfo=[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "<WAZUH_MANAGER_API_USERNAME>", "<WAZUH_MANAGER_API_PASSWORD>")))
 
-#. Request a JSON Web Token (JWT). Replace ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
+#. Request a JSON Web Token (JWT). Replace ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
 
    .. code-block:: powershell
 
-      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate | Select-Object -Expand Content
+      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate | Select-Object -Expand Content
 
    Output
 
@@ -148,19 +154,19 @@ Follow these steps to send a Wazuh agent enrollment request from a Windows endpo
 
          > $TOKEN = "<TOKEN_GENERATED>"
 
-   #.  Replace ``<WAZUH_AGENT_NAME>`` with the desired Wazuh agent name:
+   #.  Replace ``<AGENT_NAME>`` with the desired Wazuh agent name:
 
       .. code-block:: powershell
 
-         > $AgentName = @{"name"="<WAZUH_AGENT_NAME>"} | ConvertTo-Json
+         > $AgentName = @{"name"="<AGENT_NAME>"} | ConvertTo-Json
 
    These environment variables will be used in subsequent requests made to the Wazuh manager.
 
-#. Request the client key and agent ID. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager.
+#. Request the client key and agent ID. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager.
 
    .. code-block:: powershell
 
-      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Bearer {0}" -f $TOKEN)} -Method POST -ContentType "application/json" -Uri https://<WAZUH_MANAGER_IP>:55000/agents -Body $AgentName
+      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Bearer {0}" -f $TOKEN)} -Method POST -ContentType "application/json" -Uri https://<WAZUH_MANAGER_ADDRESS>:55000/agents -Body $AgentName
 
    The output looks like this:
 
