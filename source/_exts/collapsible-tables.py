@@ -1,4 +1,5 @@
 from docutils import nodes
+from docutils.parsers.rst import directives
 from sphinx.util.docutils import SphinxDirective
 
 # Reference pages made of several headings that each hold one long table. The
@@ -9,18 +10,26 @@ from sphinx.util.docutils import SphinxDirective
 #
 #    .. collapsible-tables:: settings
 #
+# With the sections option there are no tables to search: every section that has no
+# subsections collapses, and the search box matches the text of each one.
+#
+#    .. collapsible-tables:: helper functions
+#       :sections:
+#
 # The argument is the plural noun the search box uses for the rows, for example
 # "settings" or "helper functions".
 
 
 class CollapsibleTables(SphinxDirective):
     required_arguments = 1
+    option_spec = {'sections': directives.flag}
     final_argument_whitespace = True
     has_content = False
 
     def run(self):
         # Read by wrap_sections() once the page is parsed
         self.state.document['collapsible-tables'] = self.arguments[0].strip()
+        self.state.document['collapsible-sections'] = 'sections' in self.options
         return []
 
 
@@ -41,13 +50,20 @@ def wrap_sections(app, doctree):
         section.insert(1, container)
 
     sections = [s for s in doctree.findall(nodes.section) if not isinstance(s.parent, nodes.document)]
+    if doctree.get('collapsible-sections'):
+        leaves = [s for s in sections if not any(isinstance(c, nodes.section) for c in s.children)]
+        for section in leaves:
+            section['classes'].append('collapsible-text')
+            collapse(section)
+        return
     with_tables = [s for s in sections if any(isinstance(c, nodes.table) for c in s.children)]
     for section in with_tables:
         for table in [c for c in section.children if isinstance(c, nodes.table)]:
             table['classes'].append('collapsible-table')
     # A section without a table next to sections with one collapses too, so the
     # headings look alike. The search box matches its text.
-    siblings = [s for s in sections if s not in with_tables and s.parent in [t.parent for t in with_tables]
+    parents = [t.parent for t in with_tables]
+    siblings = [s for s in sections if s not in with_tables and s.parent in parents
                 and not any(isinstance(c, nodes.section) for c in s.children)]
     for section in siblings:
         section['classes'].append('collapsible-text')

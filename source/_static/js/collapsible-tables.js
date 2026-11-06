@@ -32,7 +32,11 @@
 
   ready(function () {
     var tables = Array.prototype.slice.call(document.querySelectorAll('table.collapsible-table'));
-    if (!tables.length) { return; }
+    // Collapsed sections without a table: the search matches their text. On a
+    // page with no tables, each one is an item to search for.
+    var textSections = Array.prototype.slice.call(document.querySelectorAll('section.collapsible-text'));
+    if (!tables.length && !textSections.length) { return; }
+    var byText = !tables.length;
     var meta = document.querySelector('meta[name="collapsible-tables-noun"]');
     var noun = meta ? meta.getAttribute('content') : 'rows';
 
@@ -43,10 +47,11 @@
       });
     });
 
+    var total = byText ? textSections.length : rows.length;
     var bar = document.createElement('div');
     bar.className = 'collapsible-tables-search';
     bar.innerHTML =
-      '<input type="search" class="ct-q" aria-label="Search ' + noun + '" placeholder="Search ' + rows.length + ' ' + noun + '">' +
+      '<input type="search" class="ct-q" aria-label="Search ' + noun + '" placeholder="Search ' + total + ' ' + noun + '">' +
       '<button type="button" class="ct-expand">Expand all</button>' +
       '<button type="button" class="ct-collapse">Collapse all</button>' +
       '<span class="ct-count" aria-live="polite"></span>';
@@ -61,9 +66,11 @@
       '.collapsible-tables-search .ct-count{margin-left:auto;font-size:.9em;opacity:.75}';
     document.head.appendChild(style);
 
+    var allSections = tables.map(function (t) { return t.closest('section'); }).concat(textSections);
+
     // The bar goes above the first top-level group of sections that has a table,
     // since it searches every table on the page.
-    var anchor = tables[0].closest('section');
+    var anchor = allSections[0];
     while (anchor.parentElement && anchor.parentElement.closest('section') &&
            anchor.parentElement.closest('section').parentElement.closest('section')) {
       anchor = anchor.parentElement.closest('section');
@@ -71,10 +78,6 @@
     anchor.parentNode.insertBefore(bar, anchor);
 
     var q = bar.querySelector('.ct-q'), count = bar.querySelector('.ct-count');
-
-    // Collapsed sections without a table: the search matches their text.
-    var textSections = Array.prototype.slice.call(document.querySelectorAll('section.collapsible-text'));
-    var allSections = tables.map(function (t) { return t.closest('section'); }).concat(textSections);
 
     // Theme accordions: a .accordion-section after the heading, opened with the "show" class.
     function setOpen(section, open) {
@@ -99,12 +102,25 @@
         section.style.display = text && !any ? 'none' : '';
         if (text) { setOpen(section, any); }
       });
+      var matched = 0;
       textSections.forEach(function (section) {
         var ok = !text || section.textContent.toLowerCase().indexOf(text) > -1;
         section.style.display = ok ? '' : 'none';
         if (text) { setOpen(section, ok); }
+        if (ok) { matched++; }
       });
-      count.textContent = text ? shown + ' of ' + rows.length + ' ' + noun + ' match' : rows.length + ' ' + noun;
+      // A group of sections with no match left hides with its heading and text
+      var groups = [];
+      allSections.forEach(function (section) {
+        var group = section.parentElement && section.parentElement.closest('section');
+        if (group && groups.indexOf(group) < 0 && group.parentElement.closest('section')) { groups.push(group); }
+      });
+      groups.forEach(function (group) {
+        var any = allSections.some(function (s) { return group.contains(s) && s.style.display !== 'none'; });
+        group.style.display = text && !any ? 'none' : '';
+      });
+      if (byText) { shown = matched; }
+      count.textContent = text ? shown + ' of ' + total + ' ' + noun + ' match' : total + ' ' + noun;
     }
 
     // A link to a section by any of its anchors (a label such as
