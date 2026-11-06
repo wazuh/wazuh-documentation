@@ -39,10 +39,9 @@ def wrap_sections(app, doctree):
             continue
         for table in tables:
             table['classes'].append('collapsible-table')
-        # Subsections stay outside the container, after it
-        body = [child for child in section.children[1:] if not isinstance(child, nodes.section)]
+        # Subsections, such as the example that follows a table, go inside too
+        body = list(section.children[1:])
         container = nodes.container(classes=['accordion-section'])
-        container['collapsible-noun'] = noun
         for child in body:
             section.remove(child)
             container += child
