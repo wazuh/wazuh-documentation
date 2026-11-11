@@ -28,20 +28,20 @@
   The layout follows the width of the bar itself (container queries), not the
   screen, so the bar fits any column:
   - Narrow (phones): the search box, the dropdowns and the buttons each take a
-    full row. The dropdowns share their row in equal columns, and so do the
-    buttons.
+    full row. The dropdowns fill their row and wrap when they don't fit, and
+    the buttons share their row in equal columns.
   - From 36rem: the search box takes the first row; the dropdowns and the
     buttons share the second one.
-  - From 38rem: everything fits on one line, with icon-only buttons.
-  - From 52rem: the buttons show their text too.
+  - From 44rem: everything fits on one line, with icon-only buttons.
+  - From 56rem: the buttons show their text too.
 
-  Each dropdown shows its label above the selected value, inside the box, and
-  the whole box opens the dropdown.
+  Each dropdown is as wide as its longest option (or its label, if wider), so
+  the selected value never gets cut off. Its label shows above the selected
+  value, inside the box, and the whole box opens the dropdown.
 ----------------------------------------------------------------------------- */
 
 $table-filter-height: 46px;
 $table-filter-gap: 8px;
-$table-filter-select-width: 7rem;
 $table-filter-padding: 10px;
 $table-filter-chevron-space: 28px;
 
@@ -105,7 +105,7 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
     transform: translateY(-50%);
   }
 
-  @container (min-width: 38rem) {
+  @container (min-width: 44rem) {
     flex: 1 1 9.5rem;
   }
 }
@@ -142,34 +142,40 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
 /* Dropdowns --------------------------------------------------------------- */
 
 .table-filter-selects {
-  display: grid;
+  display: flex;
   flex: 1 1 100%;
-  grid-auto-columns: minmax(0, 1fr);
-  grid-auto-flow: column;
+  flex-wrap: wrap;
   gap: $table-filter-gap;
 
   @container (min-width: 36rem) {
-    display: flex;
     flex: none;
+    flex-wrap: nowrap;
   }
 }
 
+// The label text and the select share one grid cell, so the box takes the
+// width of the wider of the two. A select is as wide as its longest option.
 .table-filter-select {
-  position: relative;
-  display: block;
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: minmax(0, 1fr);
   min-width: 0;
   margin: 0;
   overflow: hidden;
   cursor: pointer;
 
+  > * {
+    grid-area: 1 / 1;
+  }
+
   @container (min-width: 36rem) {
     flex: none;
-    width: $table-filter-select-width;
   }
 
   select {
     display: block;
     width: 100%;
+    min-width: 0;
     height: 100%;
     padding: 19px $table-filter-chevron-space 3px $table-filter-padding;
     overflow: hidden;
@@ -191,11 +197,11 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
 
 // The label sits over the top of the select, so a click on it opens the select.
 .table-filter-label {
-  position: absolute;
-  top: 4px;
-  right: $table-filter-chevron-space;
-  left: $table-filter-padding;
+  position: relative;
   z-index: 1;
+  align-self: start;
+  min-width: 0;
+  margin: 4px $table-filter-chevron-space 0 $table-filter-padding;
   overflow: hidden;
   font-size: 12px;
   font-weight: 600;
@@ -257,7 +263,7 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
     width: 40px;
     padding: 0;
   }
-  @container (min-width: 52rem) {
+  @container (min-width: 56rem) {
     width: auto;
     padding: 0 12px;
   }
@@ -273,7 +279,7 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
 
 // The text stays readable by screen readers when only the icon shows.
 .table-filter-btn-text {
-  @container (min-width: 36rem) and (max-width: 51.99rem) {
+  @container (min-width: 36rem) and (max-width: 55.99rem) {
     position: absolute;
     width: 1px;
     height: 1px;
