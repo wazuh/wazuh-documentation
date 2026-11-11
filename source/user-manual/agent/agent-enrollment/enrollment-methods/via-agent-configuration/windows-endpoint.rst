@@ -8,12 +8,12 @@ Windows
 
 Follow these steps to configure a Windows endpoint for enrollment via the agent configuration method.
 
-The Wazuh agent installation directory depends on the architecture of the endpoint:
+The Wazuh agent is a 32-bit application, so its installation directory depends on the architecture of the Windows operating system:
 
--  ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
--  ``C:\Program Files\ossec-agent`` for 32-bit systems.
+-  ``C:\Program Files (x86)\ossec-agent`` on 64-bit Windows.
+-  ``C:\Program Files\ossec-agent`` on 32-bit Windows.
 
-#. Using an administrator account, modify the Wazuh agent configuration file ``ossec.conf`` in the installation directory. For this guide, we are assuming a 64-bit architecture. Hence, ``C:\Program Files (x86)\ossec-agent\ossec.conf``
+#. Using an administrator account, modify the Wazuh agent configuration file ``ossec.conf`` in the installation directory. This guide assumes 64-bit Windows, so the file is ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
    -  Include the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or FQDN:
 
