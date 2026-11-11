@@ -15,9 +15,11 @@ Infrastructure
 --------------
 
 +----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Cloud service  | Description                                                                                                                                                                                                                |
+| Component      | Description                                                                                                                                                                                                                |
 +================+============================================================================================================================================================================================================================+
 | AWS CloudTrail | AWS CloudTrail, like all other supported AWS services, requires setting the |CLOUDTRAIL_POLICY| for user permissions and providing a valid authentication method. In this use case, you use the |AWS_PROFILE_AUTH| method. |
++----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Ubuntu 24.04   | The Wazuh agent on this endpoint collects the AWS CloudTrail logs from the S3 bucket.                                                                                                                                      |
 +----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
@@ -92,7 +94,7 @@ Wazuh agent
 Test the configuration
 ----------------------
 
-Once you configure CloudTrail, you can generate events by creating a new IAM user account using the IAM service. This generates an event that Wazuh processes. The Wazuh default ruleset parses AWS logs and generates findings automatically. The findings appear as soon as Wazuh receives the logs from the AWS S3 bucket. You can also find additional :ref:`CloudTrail use cases <cloudtrail-use-cases>` in our documentation.
+Once you configure CloudTrail, you can generate events by creating a new IAM user account using the IAM service. This generates an event that Wazuh processes. The Wazuh default ruleset parses AWS logs and generates findings automatically. The findings appear after the module's next run, every ``<interval>`` (30m in this example). To test sooner, set ``<interval>`` to 5m. You can also find additional :ref:`CloudTrail use cases <cloudtrail-use-cases>` in our documentation.
 
 Visualize the findings
 ----------------------

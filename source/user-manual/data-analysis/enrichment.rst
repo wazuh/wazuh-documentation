@@ -77,11 +77,11 @@ Enrichment
 
 Once pre-enrichment completes and the event has been validated, the normalization engine enters the enrichment stage. At this point, the event is already normalized, schema-compliant, and annotated with its space, so enrichment can focus purely on adding contextual data without affecting pipeline control flow.
 
-Enrichments are defined in the policy document as an ordered array, and each configured enrichment is evaluated sequentially for every event. Typical enrichments in Wazuh 5.0 include:
+Enrichments are defined in the policy document as an ordered array, and each configured enrichment is evaluated sequentially for every event. You choose them in the settings of the space, as shown at the end of this section. The available enrichments are:
 
 -  Geo enrichment (geo/ASN lookups)
 
--  IOC enrichment (threat intelligence / CTI matching)
+-  IOC enrichment (threat intelligence / CTI matching): one for each indicator type in the Wazuh CTI feed, such as IP addresses, domain names, URLs, and file hashes. The space settings list every type the feed provides
 
 Unlike pre-enrichment, the enrichment stage does not decide whether an event should continue in the pipeline. It only adds context when lookups or matches succeed. Events continue even if no enrichment applies.
 
@@ -178,7 +178,7 @@ This model makes IOC enrichment an augmenting step: the event continues to outpu
    :align: center
    :width: 80%
 
-You can specify the enrichment data source from the settings within your Space.
+To choose the enrichments that a space applies, open the settings of the space:
 
 .. thumbnail:: /images/manual/data-analysis/security-analytics-space-enrichment-settings.png
    :title: Space enrichment data source settings

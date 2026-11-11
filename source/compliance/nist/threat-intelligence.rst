@@ -26,7 +26,7 @@ Use cases
 Review MITRE ATT&CK techniques in your environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh helps meet the PM-16 Threat awareness program requirement by providing the MITRE ATT&CK module for threat information sharing. Review the MITRE ATT&CK techniques and see the events associated with those techniques in your environment. To perform this review, follow the steps below:
+Wazuh helps meet the RA-10 Threat hunting requirement by providing the MITRE ATT&CK module for threat hunting. Review the MITRE ATT&CK techniques and see the events associated with those techniques in your environment. To perform this review, follow the steps below:
 
 #. Click the upper-left menu icon (**☰**) and go to **Threat intelligence** > **MITRE ATT&CK**.
 
@@ -34,9 +34,9 @@ Wazuh helps meet the PM-16 Threat awareness program requirement by providing the
 
 #. Select any technique to display its details and the associated events in your environment.
 
-   .. thumbnail:: /images/compliance/nist/mitre-attack-dashboard.png
-      :title: MITRE ATT&CK Dashboard tab
-      :alt: MITRE ATT&CK Dashboard tab
+   .. thumbnail:: /images/compliance/nist/mitre-attack-technique-details.png
+      :title: MITRE ATT&CK technique details
+      :alt: MITRE ATT&CK technique details
       :align: center
       :width: 80%
 
@@ -45,7 +45,7 @@ You can proceed to review the events for possible malicious activity.
 Review intelligence on threat actors
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh helps meet the RA-10 Threat hunting requirement by providing a threat intelligence platform for threat hunters.
+Wazuh helps meet the PM-16 Threat awareness program requirement by providing a threat intelligence platform for threat awareness.
 
 In this scenario, you review intelligence from MITRE about multiple threat actors, techniques, mitigations, and tools. Wazuh provides this information in the Intelligence section of the MITRE ATT&CK module. This review helps support the NIST PM-16 Threat awareness program control and keeps security administrators informed about threats. Follow the steps below to perform this review:
 
@@ -63,8 +63,8 @@ In this scenario, you review intelligence from MITRE about multiple threat actor
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/compliance/nist/mitre-attack-framework.png
-      :title: MITRE ATT&CK Framework tab
-      :alt: MITRE ATT&CK Framework tab
+   .. thumbnail:: /images/compliance/nist/mitre-attack-group-details.png
+      :title: MITRE ATT&CK group details
+      :alt: MITRE ATT&CK group details
       :align: center
       :width: 80%

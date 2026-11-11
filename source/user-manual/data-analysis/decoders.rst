@@ -128,7 +128,7 @@ In the above example, we use:
 
 -  Direct references, such as ``$_json.src_ip``.
 
--  Map helpers like ``to_int()`` to change strings to integers.
+-  Map helpers like ``to_int()`` to convert a number, such as a float, to an integer. To convert a string, such as a port parsed from text, use ``parse_long()``.
 
 Conditional normalize blocks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -183,9 +183,9 @@ The following decoder YAML parses the key-value fields from the log and maps the
          - event.type: "connection"
 
          - source.ip: $_kv.src
-         - source.port: to_int($_kv.src_port)
+         - source.port: parse_long($_kv.src_port)
          - destination.ip: $_kv.dst
-         - destination.port: to_int($_kv.dst_port)
+         - destination.port: parse_long($_kv.dst_port)
          - network.transport: downcase($_kv.proto)
 
      - check:
@@ -206,6 +206,6 @@ In the above example:
 
 -  ``starts_with``, ``contains``, and ``string_equal`` from Filter helpers.
 
--  ``to_int`` and ``downcase`` from Map helpers to convert types/normalize casing.
+-  ``parse_long``, a transformation helper, to convert the port strings to integers, and ``downcase``, a map helper, to normalize casing.
 
 -  Scratch fields, ``_kv_text`` and ``_kv``, as temporary storage, later removed by the pre-enrichment cleanup.
