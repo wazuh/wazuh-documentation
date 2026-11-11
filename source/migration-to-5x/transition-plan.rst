@@ -8,6 +8,10 @@ Migration planning
 
 Before migrating to Wazuh 5.x, review the supported migration scenarios, limitations, and prerequisites. This helps you determine which components and data you can migrate or recreate and prepare the Wazuh 5.x environment for the migration. Keep the existing Wazuh 4.x environment running until you complete and validate the migration to Wazuh 5.x.
 
+.. note::
+
+   This guide covers package-based Wazuh deployments, all-in-one and distributed. A Wazuh 4.x virtual machine (OVA) is an all-in-one installation, so the all-in-one steps apply to it. The steps use package commands and host paths, so they don't apply as written to Docker or Kubernetes deployments of Wazuh 4.x.
+
 Supported migration
 --------------------
 
@@ -62,6 +66,12 @@ Wazuh 5.x introduces architectural and configuration changes that prevent some W
 
 -  Wazuh 5.x doesn't support frequency or threshold rules. Each matching event produces its own finding. Repeated events, such as a burst of failed SSH logins, don't escalate to a higher-level finding as rules 5712 and 5763 did in Wazuh 4.x. Correlation across events is planned for a later minor release.
 
+-  Wazuh 4.x agents can connect to a Wazuh 5.x manager, but they send only log events and findings. They do not send FIM, SCA, system inventory, or vulnerability detection data. As a result, their data does not appear in the corresponding dashboards until you upgrade the agents to Wazuh 5.x. Plan the agent upgrade as part of the migration.
+
+-  A Wazuh 5.x agent connects to one Wazuh manager address only. If a Wazuh 4.x agent lists several ``<server>`` addresses for failover, the upgraded agent connects only to the last one.
+
+-  You cannot recreate previously generated PDF reports or report branding settings in Wazuh 5.x. Download the Wazuh 4.x reports you need before you retire the Wazuh 4.x deployment.
+
 Prerequisites
 -------------
 
@@ -76,3 +86,9 @@ Before migrating to Wazuh 5.x, complete the following prerequisites:
 #. Provision a shared server for index data migration. The source Wazuh 4.x and destination Wazuh 5.x indexer clusters must be able to access the shared server used to store the index snapshots. Ensure that the server has sufficient storage capacity for the data you plan to migrate.
 
 #. Back up your existing Wazuh 4.x deployment before starting the migration to preserve the current configuration and data.
+
+#. Plan to stop the Wazuh 4.x manager while exporting agent data, as both agent registration procedures require it to be stopped.
+
+#. Don't enroll any Wazuh agent on the Wazuh 5.x manager, and keep the Wazuh 4.x agents connected to the Wazuh 4.x manager, until you import the agent registrations and verify the import. An agent that enrolls before the import can conflict with a migrated agent ID.
+
+#. If the Wazuh 5.x deployment has several Wazuh manager nodes, set up a load balancer in front of them, or choose the node that each agent must use, before you upgrade any Wazuh agent.
