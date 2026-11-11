@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Documented that `logcollector.remote_commands` also controls the sockets and socket targets that Wazuh agents receive through centralized configuration, in the *Internal configuration*, *localfile*, *socket*, and *Centralized configuration* reference documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
 - Updated the macOS ULS log tool style description in the *Log data collection* documentation to cover the `--style ndjson` format used on macOS 10.15 and later. ([#10567](https://github.com/wazuh/wazuh-documentation/pull/10567))
 - Updated the `wazuh-certs-generator` image version to 0.0.5 in the *Deployment on Docker* and *Upgrading Wazuh Docker* documentation. ([#10588](https://github.com/wazuh/wazuh-documentation/pull/10588))
+- **Post-release**: Updated the *Wazuh agent* installation documentation for Windows to list Windows Server 2025 and to add the commands that download the installer. ([#10681](https://github.com/wazuh/wazuh-documentation/pull/10681))
 
 ### Fixed
 
@@ -35,6 +36,10 @@ All notable changes to this project will be documented in this file.
 - Replaced the "here" link text with descriptive link text in the *Via agent configuration* enrollment documentation. ([#10605](https://github.com/wazuh/wazuh-documentation/pull/10605))
 - **Post-release**: Fixed the breadcrumbs home link, which had no accessible name for screen readers, and the missing styling of the development notice on the documentation home page. ([#10660](https://github.com/wazuh/wazuh-documentation/pull/10660))
 - **Post-release**: Corrected the who-data setup, the Windows rules, integration, and active response, and the YARA attack emulation steps in the *File integrity monitoring*, *Detecting and removing malware using VirusTotal integration*, and *Detecting malware using YARA integration* proofs of concept, and the Windows agent service name in the *Proof of Concept guide*. ([#10693](https://github.com/wazuh/wazuh-documentation/pull/10693))
+- **Post-release**: Renamed the sample title of the vulnerability inventory data in the *How it works* page of the *Vulnerability detection* documentation. ([#10692](https://github.com/wazuh/wazuh-documentation/pull/10692))
+- **Post-release**: Added the `PATH` export to the CMake installation step for CentOS 6/7 and an Amazon Linux 2 tab to the Yum steps of the *Installing the Wazuh agent from sources* documentation. ([#10683](https://github.com/wazuh/wazuh-documentation/pull/10683))
+- **Post-release**: Corrected the cluster name in the expected output of the cluster test in the *Installing the Wazuh indexer using the assisted installation method* documentation. ([#10682](https://github.com/wazuh/wazuh-documentation/pull/10682))
+- **Post-release**: Removed the leading `.\` from the PowerShell command in the *Deploying Wazuh agents on Windows endpoints* installation documentation, so it matches the CMD command. ([#10684](https://github.com/wazuh/wazuh-documentation/pull/10684))
 
 ## [v4.14.9]
 

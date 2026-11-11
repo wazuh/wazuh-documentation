@@ -68,6 +68,25 @@ Before compiling Wazuh from sources, you need to install the required build tool
                         # cd cmake-3.18.3 && ./bootstrap --no-system-curl
                         # make -j$(nproc) && make install
                         # cd .. && rm -rf cmake-*
+                        # export PATH=/usr/local/bin:$PATH
+
+                  .. tab:: Amazon Linux 2
+
+                     .. code-block:: console
+
+                        # yum update -y
+                        # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool openssl-devel wget bzip2 procps -y
+                        # curl -OL https://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
+
+                     CMake 3.18 installation
+
+                     .. code-block:: console
+
+                        # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+                        # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+                        # make -j$(nproc) && make install
+                        # cd .. && rm -rf cmake-*
+                        # export PATH=/usr/local/bin:$PATH
 
                   .. tab:: CentOS 8
 
