@@ -38,10 +38,10 @@ PingOne Configuration
    #. Proceed to the **Choose Application Type** section, and select  **SAML Application** > **Configure**.
 
       .. thumbnail:: /images/single-sign-on/pingone/01-proceed-to-the-choose-application-type-section.png
-         :title: Proceed to the Choose Application Type section
-         :alt: PingOne Add Application pane with the SAML Application type selected and the Configure button
-         :align: center
-         :width: 80%
+          :title: Proceed to the Choose Application Type section
+          :alt: PingOne Add Application pane with the SAML Application type selected and the Configure button
+          :align: center
+          :width: 80%
 
    #. Select **Manually Enter** on the **SAML Configuration** section and add the following configuration, replacing ``<WAZUH_DASHBOARD_URL>`` with the corresponding value:
 
@@ -49,10 +49,10 @@ PingOne Configuration
       - Entity ID: ``wazuh-saml``
 
       .. thumbnail:: /images/single-sign-on/pingone/02-select-manually-enter-on-the-provide-app-metadata.png
-         :title: Select Manually Enter on the Provide App Metadata
-         :alt: PingOne Add Application wizard, Provide App Metadata with the Manually Enter option
-         :align: center
-         :width: 80%
+          :title: Select Manually Enter on the Provide App Metadata
+          :alt: PingOne Add Application wizard, Provide App Metadata with the Manually Enter option
+          :align: center
+          :width: 80%
 
    #. On the **Configuration** tab, click on the edit icon and add the following information:
 
@@ -70,20 +70,20 @@ PingOne Configuration
          Upload the ``certificate.pem`` file as the **VERIFICATION CERTIFICATE** in PingOne. The full path of the ``private.key`` will be used later in the Wazuh indexer configuration file ``/etc/wazuh-indexer/opensearch-security/config.yml`` as the ``sp.signature_private_key_filepath`` parameter. This is necessary as all the logout requests must be signed.
 
       .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png
-         :title: On the Configuration tab
-         :alt: PingOne SAML application Edit Configuration pane with the SLO endpoint and Save button
-         :align: center
-         :width: 80%
+          :title: On the Configuration tab
+          :alt: PingOne SAML application Edit Configuration pane with the SLO endpoint and Save button
+          :align: center
+          :width: 80%
 
    #. Click on the **Attribute Mappings** tab,  select the edit icon, click on **Add** and insert the following configuration:
 
       ``Roles`` = ``Group Names``
 
       .. thumbnail:: /images/single-sign-on/pingone/04-click-on-the-attribute-mappings-tab.png
-         :title: Click on the Attribute Mappings tab
-         :alt: PingOne Edit Attribute Mappings pane with the Roles attribute mapped to Group Names
-         :align: center
-         :width: 80%
+          :title: Click on the Attribute Mappings tab
+          :alt: PingOne Edit Attribute Mappings pane with the Roles attribute mapped to Group Names
+          :align: center
+          :width: 80%
 
       The ``Roles`` attribute will be used later as the ``roles_key`` in the Wazuh indexer configuration file.
 
@@ -94,34 +94,34 @@ PingOne Configuration
    #. Navigate to **Directory** > **Groups**, and click on the **+** sign. Select the name of the **Group**, in this case, ``wazuh-admins``.
 
       .. thumbnail:: /images/single-sign-on/pingone/05-navigate-to-identities-groups.png
-         :title: Navigate to Identities > Groups
-         :alt: PingOne Directory > Groups page, Add Group pane with the wazuh-admins group name
-         :align: center
-         :width: 80%
+          :title: Navigate to Identities > Groups
+          :alt: PingOne Directory > Groups page, Add Group pane with the wazuh-admins group name
+          :align: center
+          :width: 80%
 
    #. To assign users, open the created **Group**, go to the **Users** tab and select **Add Individually**. Add all the members that must log in to the Wazuh dashboard, and click on **Save** when done.
 
       .. thumbnail:: /images/single-sign-on/pingone/06-assign-users.png
-         :title: Assign users
-         :alt: PingOne group page, Users tab with the Add Individually button
-         :align: center
-         :width: 80%
+          :title: Assign users
+          :alt: PingOne group page, Users tab with the Add Individually button
+          :align: center
+          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/pingone/07-assign-users.png
-         :title: Assign users
-         :alt: PingOne Edit Users pane with users selected for the wazuh-admins group and the Save button
-         :align: center
-         :width: 80%
+          :title: Assign users
+          :alt: PingOne Edit Users pane with users selected for the wazuh-admins group and the Save button
+          :align: center
+          :width: 80%
 
 #. Activate the application and note the necessary parameters.
 
    #. Navigate to **Application** > **Applications**, and enable the application.
 
       .. thumbnail:: /images/single-sign-on/pingone/08-navigate-to-connections.png
-         :title: Navigate to Connections
-         :alt: PingOne Applications page with the wazuh-sso application and its enable toggle
-         :align: center
-         :width: 80%
+          :title: Navigate to Connections
+          :alt: PingOne Applications page with the wazuh-sso application and its enable toggle
+          :align: center
+          :width: 80%
 
    #. Take note of the following parameters from the overview page of the application, this will be used in the next step:
 
@@ -129,10 +129,10 @@ PingOne Configuration
       - **IDP METADATA URL**: It’ll be in the form "\https://auth.pingone.com/..."
 
       .. thumbnail:: /images/single-sign-on/pingone/09-take-note-of-parameters.png
-         :title: Take note of parameters from the configuration page
-         :alt: PingOne SAML application, Overview tab with the Issuer ID and IDP Metadata URL
-         :align: center
-         :width: 80%
+          :title: Take note of parameters from the configuration page
+          :alt: PingOne SAML application, Overview tab with the Issuer ID and IDP Metadata URL
+          :align: center
+          :width: 80%
 
 .. _indexer_configuration_pingone_admin:
 

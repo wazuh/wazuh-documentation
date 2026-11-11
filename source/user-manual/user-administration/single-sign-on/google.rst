@@ -121,10 +121,10 @@ Google Workspace Configuration
    #. Add a value to the **Department** field, in this example, we add ``Wazuh_access``, click on **SAVE**. This value will be used in the ``role_mapping`` file configuration.
 
       .. thumbnail:: /images/single-sign-on/google/10-add-a-value-to-the-department-field.png
-         :title:  Add a value to the Department field
-         :alt: Google Admin console, Employee information form with Wazuh_access in the Department field
-         :align: center
-         :width: 80%
+        :title:  Add a value to the Department field
+        :alt: Google Admin console, Employee information form with Wazuh_access in the Department field
+        :align: center
+        :width: 80%
 
 .. _indexer_configuration_google_admin:
 
@@ -439,10 +439,10 @@ Google Workspace configuration
    #. Add a value to the **Department** field, in this example, we add ``wazuh-readonly``, click on **SAVE**. This value will be used in the ``role_mapping`` file configuration.
 
       .. thumbnail:: /images/single-sign-on/google/10-add-a-value-to-the-department-field-RO.png
-         :title:  Add a value to the Department field
-         :alt: Google Admin console, Employee information form with wazuh-readonly in the Department field
-         :align: center
-         :width: 80%
+        :title:  Add a value to the Department field
+        :alt: Google Admin console, Employee information form with wazuh-readonly in the Department field
+        :align: center
+        :width: 80%
 
 .. _indexer_configuration_google_ro:
 

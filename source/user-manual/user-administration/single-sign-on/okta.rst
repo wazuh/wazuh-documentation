@@ -36,24 +36,24 @@ Okta Configuration
    #. From your Okta admin console page, navigate to **Directory** > **People**.
 
       .. thumbnail:: /images/single-sign-on/okta/01-navigate-to-directory-people.png
-         :title: Navigate to Directory - People
-         :alt: Okta admin console, Directory > People page
-         :align: center
-         :width: 80%
+          :title: Navigate to Directory - People
+          :alt: Okta admin console, Directory > People page
+          :align: center
+          :width: 80%
 
    #. From the **People** section, select **Add Person**, fill in the details of the new user, and click **Save** as seen in the following screenshots.
 
       .. thumbnail:: /images/single-sign-on/okta/02-select-add-person.png
-         :title: Select add person
-         :alt: Okta admin console, People page with the Add person button
-         :align: center
-         :width: 80%
+          :title: Select add person
+          :alt: Okta admin console, People page with the Add person button
+          :align: center
+          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/okta/03-click-save.png
-         :title: Click save
-         :alt: Okta Add Person dialog with the Save button
-         :align: center
-         :width: 80%
+          :title: Click save
+          :alt: Okta Add Person dialog with the Save button
+          :align: center
+          :width: 80%
 
 #. Create a new group. Navigate to **Directory** > **Groups** and add a group.
 
@@ -392,24 +392,24 @@ Okta configuration
    #. From your Okta admin console page, navigate to **Directory** > **People**.
 
       .. thumbnail:: /images/single-sign-on/okta/01-navigate-to-directory-people.png
-         :title: Navigate to Directory - People
-         :alt: Okta admin console, Directory > People page
-         :align: center
-         :width: 80%
+          :title: Navigate to Directory - People
+          :alt: Okta admin console, Directory > People page
+          :align: center
+          :width: 80%
 
    #. From the **People** section, select **Add Person**, fill in the details of the new user, and click **Save** as seen in the following screenshots.
 
       .. thumbnail:: /images/single-sign-on/okta/02-select-add-person.png
-         :title: Select add person
-         :alt: Okta admin console, People page with the Add person button
-         :align: center
-         :width: 80%
+          :title: Select add person
+          :alt: Okta admin console, People page with the Add person button
+          :align: center
+          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/okta/03-click-save.png
-         :title: Click save
-         :alt: Okta Add Person dialog with the Save button
-         :align: center
-         :width: 80%
+          :title: Click save
+          :alt: Okta Add Person dialog with the Save button
+          :align: center
+          :width: 80%
 
 #. Create a new group. Navigate to **Directory** > **Groups** and add a group.
 
