@@ -34,6 +34,7 @@ All notable changes to this project will be documented in this file.
 - Corrected the disk space requirement in the *Wazuh server installation* documentation and the process name fields of eBPF who-data alerts in the *File integrity monitoring* documentation. ([#10587](https://github.com/wazuh/wazuh-documentation/pull/10587))
 - Replaced the "here" link text with descriptive link text in the *Via agent configuration* enrollment documentation. ([#10605](https://github.com/wazuh/wazuh-documentation/pull/10605))
 - **Post-release**: Fixed the breadcrumbs home link, which had no accessible name for screen readers, and the missing styling of the development notice on the documentation home page. ([#10660](https://github.com/wazuh/wazuh-documentation/pull/10660))
+- **Post-release**: Corrected the allowed values of the `name`, `os`, and `profile` filters, the temporary file name, the reload description, the keepalive interval and the sample log, and added the limits for group files in the *Centralized configuration (agent.conf)* reference, and corrected the `config-profile` description in the *client* reference. ([#10686](https://github.com/wazuh/wazuh-documentation/pull/10686))
 
 ## [v4.14.9]
 
