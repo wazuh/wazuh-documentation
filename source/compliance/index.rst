@@ -8,7 +8,9 @@ Regulatory compliance
 
 Wazuh helps implement compliance requirements for regulatory compliance support and visibility. This is done by providing automation, improved security controls, log analysis, and incident response.
 
-The default Wazuh ruleset supports the PCI DSS, HIPAA, NIST 800-53, TSC, and GDPR frameworks and standards. Wazuh rules and decoders are used to detect attacks, system errors, security misconfigurations, and policy violations. In addition to the default compliance frameworks and standards provided by Wazuh, it is possible to monitor for custom compliance standards by adding the compliance identifier to the ruleset.
+The default Wazuh ruleset maps rules to PCI DSS, GDPR, HIPAA, NIST 800-53, NIST 800-171, TSC, CMMC, FedRAMP, ISO 27001, and NIS2. The Wazuh dashboard shows each framework under **Security operations** > **Regulatory Compliance**, with **Dashboard**, **Controls**, and **Findings** tabs. The guides in this section cover PCI DSS, GDPR, HIPAA, NIST 800-53, and TSC.
+
+Wazuh rules and decoders detect attacks, system errors, security misconfigurations, and policy violations. You can also monitor custom compliance standards by adding a compliance identifier to a rule. See :ref:`Compliance <data_analysis_rules_compliance>` for the supported keys.
 
 .. note::
 

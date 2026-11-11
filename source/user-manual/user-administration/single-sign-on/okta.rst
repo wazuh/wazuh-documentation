@@ -26,130 +26,137 @@ Follow these steps to integrate Okta IdP with Wazuh for single sign-on and grant
 
 .. _configuration_okta_admin:
 
-Okta Configuration
+Okta configuration
 ^^^^^^^^^^^^^^^^^^
 
-#. Create an account on Okta. Request a free trial if you don't have a paid license.
+#. Create an account on Okta. If you don't have an Okta org, you can sign up for the free Okta Integrator Free Plan.
 
-#. Create a new user.
+#. Create a new user:
 
-   #. From your okta admin console page, navigate to **Directory** > **People**.
+   #. From your Okta admin console page, navigate to **Directory** > **People**.
 
-      .. thumbnail:: /images/single-sign-on/okta/01-navigate-to-directory-people.png
-          :title: Navigate to Directory - People
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/okta/01-directory-people-page.png
+         :title: Navigate to Directory - People
+         :align: center
+         :width: 80%
 
-   #. From the **People** section, select **Add Person**, fill in the details of the new user, and click **Save** as seen in the following screenshots.
+   #. From the **People** section, select **Add person**, fill in the details of the new user, and click **Save** as seen in the following screenshots.
 
-      .. thumbnail:: /images/single-sign-on/okta/02-select-add-person.png
-          :title: Select add person
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/okta/02-add-person-form.png
+         :title: Select add person
+         :align: center
+         :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/okta/03-click-save.png
-          :title: Click save
-          :align: center
-          :width: 80%
+#. Create a new group.
 
-#. Create a new group. Navigate to **Directory** > **Groups** and add a group.
+   Navigate to **Directory** > **Groups** and click **Add group**.
 
-     .. thumbnail:: /images/single-sign-on/okta/04-navigate-to-directory-groups.png
-        :title: Navigate to directory groups
-        :align: center
-        :width: 80%
+   .. thumbnail:: /images/single-sign-on/okta/03-groups-page-add-group.png
+      :title: Navigate to directory groups
+      :align: center
+      :width: 80%
 
-    Create a new group using any name. In our case, we name it ``wazuh-admins``. This name will be used as our ``backend_roles`` for Wazuh role mapping.
+   .. thumbnail:: /images/single-sign-on/okta/04-add-group-wazuh-admins.png
+      :title: Add group dialog
+      :align: center
+      :width: 80%
 
-#. Add the new user to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Assign People** and add the user to the group created.
+   Create a new group using any name. In our case, we name it ``wazuh-admins``. This name will be used as our ``backend_roles`` for Wazuh role mapping.
 
+#. Add the new user to the new group.
 
-     .. thumbnail:: /images/single-sign-on/okta/05-navigate-to-directory-groups.png
-        :title: Navigate to Directory - Groups - <YOUR_GROUP>
-        :align: center
-        :width: 80%
+   Navigate to **Directory** > **Groups** and select your group. Click **Assign people**, click **+** next to the user, and click **Done**.
+
+   .. thumbnail:: /images/single-sign-on/okta/05-assign-people-wazuh-admins.png
+      :title: Assign people to the group
+      :align: center
+      :width: 80%
 
 #. Create a new app. Configure the SAML settings while you create the app.
 
-   #. Navigate to the **Applications** section in Okta. Select **Create App Integration**.
+   #. Navigate to **Applications and Resources** > **Applications** and click **Create App Integration**.
 
-      .. thumbnail:: /images/single-sign-on/okta/06-navigate-to-applications-section.png
+      .. thumbnail:: /images/single-sign-on/okta/06-applications-page.png
          :title: Navigate to the Applications section in Okta
          :align: center
          :width: 80%
 
    #. In the **Create a new application integration** window, select **SAML 2.0** and click **Next**.
 
-      .. thumbnail:: /images/single-sign-on/okta/07-create-new-application.png
+      .. thumbnail:: /images/single-sign-on/okta/07-create-app-saml-selected.png
          :title: Create a new application integration
          :align: center
          :width: 80%
 
-   #. Assign a name to the application and click on **Next**. In our case, we assign the name ``wazuh-sso-app``.
+   #. Assign a name to the application and click **Next**, in our case, we assign the name ``wazuh-sso-app``:
 
-      .. thumbnail:: /images/single-sign-on/okta/08-assign-name.png
+      .. thumbnail:: /images/single-sign-on/okta/08-saml-general-settings-app-name.png
          :title: Assign a name to the application
          :align: center
          :width: 80%
 
-   #. In the **Configure SAML** menu, you’ll find the **SAML Settings** section, modify the following parameters:
+   #. In the **Configure SAML** menu, you'll find the **SAML Settings** section, modify the following parameters:
 
-      - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
-      - **Audience URI (SP Entity ID)**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
-      - **Other Requestable SSO URLs**: click on **Show Advanced Settings** to access this option. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
+      -  **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
+      -  **Audience URI (SP Entity ID)**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
+      -  **Other Requestable SSO URLs**: click **Show Advanced Settings**, then click **Add Another** under **Other Requestable SSO URLs**. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding URL. Leave **Index** empty.
 
       You can leave the rest of the values as default.
 
-      .. thumbnail:: /images/single-sign-on/okta/09-saml-settings-section.png
+      .. thumbnail:: /images/single-sign-on/okta/09-saml-settings-sso-url-audience.png
          :title: SAML settings section
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/okta/09b-other-requestable-sso-urls.png
+      .. thumbnail:: /images/single-sign-on/okta/10-advanced-settings-requestable-sso-urls.png
          :title: Other Requestable SSO URLs
          :align: center
          :width: 80%
 
-   #. In the **Group Attribute Statements** section put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex** and type ``.*``.
+   #. Click **Next**. On the **Feedback** page, select **This is an internal app that we have created** and click **Finish**.
 
-      .. thumbnail:: /images/single-sign-on/okta/10-group-attribute-statements-section.png
+      .. thumbnail:: /images/single-sign-on/okta/11-feedback-step-internal-app.png
+         :title: Feedback step
+         :align: center
+         :width: 80%
+
+   #. On the **Sign On** tab of the new app, go to **Attribute statements**, click **Show legacy configuration**, and click **Edit**. In the **Group attribute statements** section, put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex**, type ``.*``, and click **Save**.
+
+      .. thumbnail:: /images/single-sign-on/okta/12-group-attribute-statements-roles.png
          :title: Group Attribute Statements section
          :align: center
          :width: 80%
 
-   #. Proceed by clicking next and on the feedback page, select the options seen in the screenshot below. Click on **Finish** and proceed to the next step.
+#. Add the new app to the new group.
 
-      .. thumbnail:: /images/single-sign-on/okta/11-click-on-finish.png
-         :title: Click on Finish and proceed to the next step
-         :align: center
-         :width: 80%
+   Navigate to **Directory** > **Groups** and select your group. Click on **Applications**, and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
 
-#. Add the new app to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
-
-   .. thumbnail:: /images/single-sign-on/okta/12-navigate-to-directory-groups.png
-      :title: Navigate to Directory - Groups - <YOUR_GROUP>
-      :align: center
-      :width: 80%
-
-   .. thumbnail:: /images/single-sign-on/okta/13-select-assign-applications.png
+   .. thumbnail:: /images/single-sign-on/okta/13-group-applications-tab-assign.png
       :title: Select Assign Applications
       :align: center
       :width: 80%
 
-#. Note the necessary parameters from the SAML settings of the new app. The parameters already obtained during the integration are:
+   .. thumbnail:: /images/single-sign-on/okta/14-assign-applications-wazuh-admins.png
+      :title: Assign the app to the group
+      :align: center
+      :width: 80%
+
+#. Note the necessary parameters from the SAML settings of the new app.
+
+   The parameters already obtained during the integration are:
 
    -  ``sp.entity_id``: ``wazuh-saml``
    -  ``roles_key``: ``Roles``
    -  ``kibana_url``: ``https://<WAZUH_DASHBOARD_URL>``
    -  ``backend_roles``: ``wazuh-admins``
 
-   To obtain the remaining parameters, navigate to **Applications** > **Applications**, select your app and click **Sign On**.
+   To obtain the remaining parameters, navigate to **Applications and Resources** > **Applications**, select your app, and open the **Sign On** tab.
 
-   Under **SAML Signing Certificates**, select **View IdP metadata** of the active certificate. This will open in a new tab. Copy the URL as this will be the ``idp.metadata_url``.
+   Under **Metadata details**, copy the **Metadata URL**. This is the ``idp.metadata_url``.
 
-   Now, on the same page, click on  **View SAML setup instructions**. Copy the **Identity Provider Issuer URL**, it will be the ``idp.entity_id``.
+   Click **More details** and copy the **Issuer** value. This is the ``idp.entity_id``.
 
-   .. thumbnail:: /images/single-sign-on/okta/14-needed-to-configure-wazuh-sso-app.png
+   .. thumbnail:: /images/single-sign-on/okta/15-sign-on-metadata-details.png
       :title: View SAML setup instructions
       :align: center
       :width: 80%
@@ -177,9 +184,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
-
-   - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
+   -  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
@@ -217,12 +223,12 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-      - ``idp.metadata_url``
-      - ``idp.entity_id``
-      - ``sp.entity_id``
-      - ``kibana_url``
-      - ``roles_key``
-      - ``exchange_key``
+   -  ``idp.metadata_url``
+   -  ``idp.entity_id``
+   -  ``sp.entity_id``
+   -  ``kibana_url``
+   -  ``roles_key``
+   -  ``exchange_key``
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file.
 
@@ -257,18 +263,18 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Configure the ``roles_mapping.yml`` file to map the Okta group to the appropriate Wazuh indexer role, in our case, we map it to the ``all_access`` role:
 
-      .. code-block:: console
-         :emphasize-lines: 8
+   .. code-block:: console
+      :emphasize-lines: 8
 
-         all_access:
-           hosts: []
-           users: []
-           reserved: false
-           hidden: false
-           backend_roles:
-           - "admin"
-           - "<GROUP_NAME>"
-           description: "Maps admin to all_access"
+      all_access:
+        hosts: []
+        users: []
+        reserved: false
+        hidden: false
+        backend_roles:
+        - "admin"
+        - "<GROUP_NAME>"
+        description: "Maps admin to all_access"
 
    Replace ``<GROUP_NAME>`` with the name you gave to your group in Step 3, in our case, this is ``wazuh-admins``.
 
@@ -306,7 +312,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -319,11 +325,10 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-   .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+   .. thumbnail:: /images/single-sign-on/okta/16-wazuh-role-mapping-page.png
       :title: Wazuh role mapping
-      :alt: Wazuh role mapping
       :align: center
       :width: 80%
 
@@ -337,13 +342,14 @@ Wazuh dashboard configuration
       -  **Value**: Assign the name you gave to your group in Step 3 of Okta configuration, in our case, this is ``wazuh-admins``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*.
 
-      .. thumbnail:: /images/single-sign-on/okta/Wazuh-role-mapping.png
+      .. thumbnail:: /images/single-sign-on/okta/17-create-wazuh-role-mapping-admin.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 
@@ -359,7 +365,7 @@ Wazuh dashboard configuration
 
 #. Test the configuration.
 
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Okta account.
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Okta account. Okta might ask the user to set up an additional security method, such as Okta Verify or a passkey, at the first login.
 
 Setup Okta single sign-on with read-only role
 ---------------------------------------------
@@ -372,130 +378,137 @@ Follow these steps to integrate Okta IdP with Wazuh for single sign-on and grant
 
 .. _configuration_okta_ro:
 
-Okta configuration
+Okta Configuration
 ^^^^^^^^^^^^^^^^^^
 
-#. Create an account on Okta. Request a free trial if you don't have a paid license.
+#. Create an account on Okta. If you don't have an Okta org, you can sign up for the free Okta Integrator Free Plan.
 
-#. Create a new user.
+#. Create a new user:
 
-   #. From your okta admin console page, navigate to **Directory** > **People**.
+   #. From your Okta admin console page, navigate to **Directory** > **People**.
 
-      .. thumbnail:: /images/single-sign-on/okta/01-navigate-to-directory-people.png
-          :title: Navigate to Directory - People
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/okta/18-directory-people-page-readonly.png
+         :title: Navigate to Directory - People
+         :align: center
+         :width: 80%
 
-   #. From the **People** section, select **Add Person**, fill in the details of the new user, and click **Save** as seen in the following screenshots.
+   #. From the **People** section, select **Add person**, fill in the details of the new user, and click **Save** as seen in the following screenshots.
 
-      .. thumbnail:: /images/single-sign-on/okta/02-select-add-person.png
-          :title: Select add person
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/okta/19-add-person-readonly-user.png
+         :title: Add read-only user
+         :align: center
+         :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/okta/03-click-save.png
-          :title: Click save
-          :align: center
-          :width: 80%
+#. Create a new group.
 
-#. Create a new group. Navigate to **Directory** > **Groups** and add a group.
+   Navigate to **Directory** > **Groups** and click **Add group**.
 
-     .. thumbnail:: /images/single-sign-on/okta/read-only/04-navigate-to-directory-groups-RO.png
-        :title: Navigate to directory groups
-        :align: center
-        :width: 80%
+   .. thumbnail:: /images/single-sign-on/okta/03-groups-page-add-group.png
+      :title: Navigate to directory groups
+      :align: center
+      :width: 80%
 
-    Create a new group using any name. In our case, we name it ``wazuh-readonly``. This name will be used as our ``backend_roles``  for Wazuh role mapping.
+   .. thumbnail:: /images/single-sign-on/okta/20-add-group-dialog-readonly-group.png
+      :title: Add group dialog
+      :align: center
+      :width: 80%
 
-#. Add the new user to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Assign People** and add the user to the group created.
+   Create a new group using any name. In our case, we name it ``wazuh-readonly``. This name will be used as our ``backend_roles`` for Wazuh role mapping.
 
+#. Add the new user to the new group.
 
-     .. thumbnail:: /images/single-sign-on/okta/read-only/05-navigate-to-directory-groups-RO.png
-        :title: Navigate to Directory - Groups - <YOUR_GROUP>
-        :align: center
-        :width: 80%
+   Navigate to **Directory** > **Groups** and select your group. Click **Assign people**, click **+** next to the user, and click **Done**.
 
-#. Create a new app. Configure the SAML settings while you create the app.
+   .. thumbnail:: /images/single-sign-on/okta/21-assign-people-wazuh-readonly.png
+      :title: Assign people to the group
+      :align: center
+      :width: 80%
 
-   #. Navigate to the **Applications** section in Okta. Select **Create App Integration**.
+#. Create a new app. Configure the SAML settings while you create the app. If you already created the app while setting up the administrator role, skip this step and assign the same app to the read-only group in step 6.
 
-      .. thumbnail:: /images/single-sign-on/okta/06-navigate-to-applications-section.png
+   #. Navigate to **Applications and Resources** > **Applications** and click **Create App Integration**.
+
+      .. thumbnail:: /images/single-sign-on/okta/06-applications-page.png
          :title: Navigate to the Applications section in Okta
          :align: center
          :width: 80%
 
    #. In the **Create a new application integration** window, select **SAML 2.0** and click **Next**.
 
-      .. thumbnail:: /images/single-sign-on/okta/07-create-new-application.png
+      .. thumbnail:: /images/single-sign-on/okta/07-create-app-saml-selected.png
          :title: Create a new application integration
          :align: center
          :width: 80%
 
-   #. Assign a name to the application, in our case, we assign the name ``wazuh-sso-app``.
+   #. Assign a name to the application, in our case, we assign the name ``wazuh-sso-app``:
 
-      .. thumbnail:: /images/single-sign-on/okta/08-assign-name.png
+      .. thumbnail:: /images/single-sign-on/okta/08-saml-general-settings-app-name.png
          :title: Assign a name to the application
          :align: center
          :width: 80%
 
-   #. In the **Configure SAML** menu, you’ll find the **SAML Settings** section, modify the following parameters:
+   #. In the **Configure SAML** menu, you'll find the **SAML Settings** section, modify the following parameters:
 
-      - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
-      - **Audience URI (SP Entity ID)**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
-      - **Other Requestable SSO URLs**: click on **Show Advanced Settings** to access this option. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
+      -  **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
+      -  **Audience URI (SP Entity ID)**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
+      -  **Other Requestable SSO URLs**: click **Show Advanced Settings**, then click **Add Another** under **Other Requestable SSO URLs**. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding URL. Leave **Index** empty.
 
       You can leave the rest of the values as default.
 
-      .. thumbnail:: /images/single-sign-on/okta/09-saml-settings-section.png
+      .. thumbnail:: /images/single-sign-on/okta/09-saml-settings-sso-url-audience.png
          :title: SAML settings section
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/okta/09b-other-requestable-sso-urls.png
+      .. thumbnail:: /images/single-sign-on/okta/10-advanced-settings-requestable-sso-urls.png
          :title: Other Requestable SSO URLs
          :align: center
          :width: 80%
 
-   #. In the **Group Attribute Statements** section, put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex** and type ``.*``.
+   #. Click **Next**. On the **Feedback** page, select **This is an internal app that we have created** and click **Finish**.
 
-      .. thumbnail:: /images/single-sign-on/okta/10-group-attribute-statements-section.png
+      .. thumbnail:: /images/single-sign-on/okta/11-feedback-step-internal-app.png
+         :title: Feedback step
+         :align: center
+         :width: 80%
+
+   #. On the **Sign On** tab of the new app, go to **Attribute statements**, click **Show legacy configuration**, and click **Edit**. In the **Group attribute statements** section, put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex**, type ``.*``, and click **Save**.
+
+      .. thumbnail:: /images/single-sign-on/okta/12-group-attribute-statements-roles.png
          :title: Group Attribute Statements section
          :align: center
          :width: 80%
 
-   #. Proceed by clicking next and on the feedback page, select the options seen in the screenshot below. Click on **Finish** and proceed to the next step.
+#. Add the new app to the new group.
 
-      .. thumbnail:: /images/single-sign-on/okta/11-click-on-finish.png
-         :title: Click on Finish and proceed to the next step
-         :align: center
-         :width: 80%
+   Navigate to **Directory** > **Groups** and select your group. Click on **Applications**, and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
 
-#. Add the new app to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
-
-   .. thumbnail:: /images/single-sign-on/okta/read-only/12-navigate-to-directory-groups-RO.png
-      :title: Navigate to Directory - Groups - <YOUR_GROUP>
-      :align: center
-      :width: 80%
-
-   .. thumbnail:: /images/single-sign-on/okta/13-select-assign-applications.png
+   .. thumbnail:: /images/single-sign-on/okta/22-group-applications-tab-readonly.png
       :title: Select Assign Applications
       :align: center
       :width: 80%
 
-#. Note the necessary parameters from the SAML settings of the new app. The parameters already obtained during the integration are:
+   .. thumbnail:: /images/single-sign-on/okta/23-assign-applications-dialog-readonly.png
+      :title: Assign the app to the group
+      :align: center
+      :width: 80%
+
+#. Note the necessary parameters from the SAML settings of the new app.
+
+   The parameters already obtained during the integration are:
 
    -  ``sp.entity_id``: ``wazuh-saml``
    -  ``roles_key``: ``Roles``
    -  ``kibana_url``: ``https://<WAZUH_DASHBOARD_URL>``
    -  ``backend_roles``: ``wazuh-readonly``
 
-   To obtain the remaining parameters, navigate to **Applications** > **Applications**, select your app and click **Sign On**.
+   To obtain the remaining parameters, navigate to **Applications and Resources** > **Applications**, select your app, and open the **Sign On** tab.
 
-   Under **SAML Signing Certificates**, select **View IdP metadata** of the active certificate. This will open in a new tab. Copy the URL as this will be the ``idp.metadata_url``.
+   Under **Metadata details**, copy the **Metadata URL**. This is the ``idp.metadata_url``.
 
-   Now, on the same page, click on  **View SAML setup instructions**. Copy the **Identity Provider Issuer URL**, it will be the ``idp.entity_id``.
+   Click **More details** and copy the **Issuer** value. This is the ``idp.entity_id``.
 
-   .. thumbnail:: /images/single-sign-on/okta/15-needed-to-configure-wazuh-sso-app.png
+   .. thumbnail:: /images/single-sign-on/okta/15-sign-on-metadata-details.png
       :title: View SAML setup instructions
       :align: center
       :width: 80%
@@ -523,9 +536,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
-
-   - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
+   -  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
@@ -563,12 +575,12 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-      - ``idp.metadata_url``
-      - ``idp.entity_id``
-      - ``sp.entity_id``
-      - ``kibana_url``
-      - ``roles_key``
-      - ``exchange_key``
+   -  ``idp.metadata_url``
+   -  ``idp.entity_id``
+   -  ``sp.entity_id``
+   -  ``kibana_url``
+   -  ``roles_key``
+   -  ``exchange_key``
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file.
 
@@ -604,24 +616,26 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create a new role mapping for the backend role. Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
+#. Create a new role mapping for the backend role.
+
+   Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
       -  **Cluster permissions**: ``cluster_composite_ops_ro``
       -  **Index**: ``*``
       -  **Index permissions**: ``read``
+
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
-   #. Under **Backend roles**, add the name of the read-only group  you created  in Okta and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
+   #. Under **Backend roles**, add the name of the read-only group you created in Okta and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
-      :emphasize-lines: 6
 
       wazuh_core.hosts:
         default:
@@ -631,13 +645,12 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-   .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
-      :title: Wazuh role mapping
-      :alt: Wazuh role mapping
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/okta/16-wazuh-role-mapping-page.png
+         :title: Wazuh role mapping
+         :align: center
+         :width: 80%
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
 
@@ -649,13 +662,14 @@ Wazuh dashboard configuration
       -  **Value**: Assign the name you gave to your group in Step 3 of Okta configuration, in our case, this is ``wazuh-readonly``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
 
-      .. thumbnail:: /images/single-sign-on/okta/read-only/Wazuh-role-mapping-RO.png
+      .. thumbnail:: /images/single-sign-on/okta/24-create-wazuh-role-mapping-readonly.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 
@@ -671,4 +685,4 @@ Wazuh dashboard configuration
 
 #. Test the configuration.
 
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Okta account.
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Okta account. Okta might ask the user to set up an additional security method, such as Okta Verify or a passkey, at the first login.

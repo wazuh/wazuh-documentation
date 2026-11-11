@@ -124,7 +124,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
    .. code-block:: yaml
 
       ---
-      name: "decoder/core-wazuh-message/0"
+      name: "decoder/test-wazuh-message/0"
       metadata:
         author: "Wazuh, Inc."
         date: "2026-06-16T10:01:28Z"
@@ -150,9 +150,9 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
 
    This will be the root decoder, **where**:
 
-   -  ``name: "decoder/core-wazuh-message/0"`` - Logical identifier of the decoder asset; it is what gets recorded in ``wazuh.integration.decoders`` when this decoder accepts an event.
+   -  ``name: "decoder/test-wazuh-message/0"`` - Logical identifier of the decoder asset; it is what gets recorded in ``wazuh.integration.decoders`` when this decoder accepts an event.
 
-   -  ``id: "c8d31738-281e-4183-a5f3-fd02dea3bc25"`` - Stable UUID used by the content system (CMSync, policies, indexer) to uniquely track this decoder version, independent of its human-readable name.
+   -  ``id: "c8d31738-281e-4183-a5f3-fd02dea3bc25"`` - Stable UUID used by the content system (CMSync, policies, indexer) to uniquely track this decoder version, independent of its human-readable name. When you create a decoder, Wazuh assigns it a new random UUID and replaces any ``id`` you write. Use the ``name`` to refer to the decoder.
 
    -  ``enabled: true`` - Marks the decoder as active in the operational graph; if set to ``false``, the decoder is present in content but skipped during policy graph construction, so it never evaluates events.
 
@@ -196,7 +196,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
         supports: []
         title: "AWS Route53 Resolver Query Logs JSON decoder."
       parents:
-      - "decoder/core-wazuh-message/0"
+      - "decoder/test-wazuh-message/0"
       definitions:
         netiana_map:
           icmp: "1"
@@ -311,9 +311,9 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Overview** > **Actions** > **Edit**, confirm the status is **Enabled**, select ``decoder/core-wazuh-message/0`` as the **Root decoder** and click **Save**.
+#. Navigate to **Ruleset management** > **Overview** > **Actions** > **Edit**, confirm the status is **Enabled**, select ``decoder/test-wazuh-message/0`` as the **Root decoder** and click **Save**.
 
-#. Navigate to **Ruleset management** > **Overview** > **Actions** and click on **Promote**. Ensure to promote the decoders and KVDB created.
+#. Navigate to **Ruleset management** > **Overview** > **Actions** and click on **Promote**. Review the list of changes, which includes the decoders and the KVDB you created, and confirm the promotion. Promotion moves all the changes in the space together.
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-promote-test-integration.png
       :title: Promote the test integration
