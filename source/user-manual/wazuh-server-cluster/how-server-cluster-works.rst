@@ -1,29 +1,89 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh server cluster follows a master-worker architecture. Learn how the Wazuh server cluster works in this section of the documentation.
+   :description: Learn how the wazuh-manager-clusterd daemon connects the nodes of a Wazuh manager cluster, which tasks it runs, and how to check the cluster.
 
 How the Wazuh server cluster works
 ==================================
 
-The Wazuh server cluster is managed by the ``wazuh-clusterd`` daemon, which communicates with all the Wazuh server nodes following a master-worker architecture. Refer to the section for more information about its use. For more information, see the :doc:`Daemons </user-manual/reference/daemons/index>` section.
+The ``wazuh-manager-clusterd`` daemon runs on every node and connects the nodes in a master-worker architecture. Each worker node opens the connection to the master node address set in the ``<nodes>`` option, and the master node answers and sends data over that connection. Each worker-master connection is independent: if a worker node becomes unavailable, the other worker nodes keep their connection and synchronization.
 
-The image below shows the communications between a worker and a master node. Each worker-master communication is independent of the others since workers are the ones who start the communication with the master. If a worker's connection is interrupted or a worker node becomes unavailable, it does not affect the connectivity or synchronization of other workers in the cluster.
+The cluster traffic is encrypted with keys derived from the cluster ``<key>`` for each connection. See :doc:`Security requirements </user-manual/wazuh-server-cluster/security-requirements>`.
 
-.. thumbnail:: /images/manual/wazuh-server/server-cluster-diagram.png
-   :title: Wazuh server cluster diagram
-   :alt: Wazuh server cluster diagram
-   :align: center
-   :width: 80%
+The master node refuses a worker node in these cases. The worker node logs ``Could not connect to master: <ERROR>`` in its cluster log:
 
-There are different independent threads running, and each one is framed in the image:
++-----------+-----------------------------------------------------------------------------------+
+| Error     | Cause                                                                             |
++===========+===================================================================================+
+| ``3060``  | The worker node name has characters other than letters, digits, ``_`` and ``-``.  |
++-----------+-----------------------------------------------------------------------------------+
+| ``3028``  | A worker node with the same name is already connected.                            |
++-----------+-----------------------------------------------------------------------------------+
+| ``3029``  | The worker node has the same name as the master node.                             |
++-----------+-----------------------------------------------------------------------------------+
+| ``3030``  | The cluster ``<name>`` is different.                                              |
++-----------+-----------------------------------------------------------------------------------+
+| ``3031``  | The Wazuh version is different.                                                   |
++-----------+-----------------------------------------------------------------------------------+
 
--  **Keep-alive thread:** Responsible for sending keep-alive messages to the master in frequent intervals. It is necessary to keep the connection open between master and worker nodes, since the cluster uses permanent connections.
--  **Agent info thread:** Responsible for sending OS information, labels configured, and the :ref:`status of the Wazuh agents <agent-connection-states>` that are reporting to that node. The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master from storing unnecessary information. For example, this situation is very common when an agent is removed, but the master hasn't notified the worker nodes yet.
--  **Agent groups send thread:** Responsible for sending information of Wazuh agent group assignments to worker nodes. This information is calculated in the master when an agent connects for the first time.
--  **Local agent-groups thread:** This thread runs on the master node and retrieves updated agent-groups information from the database at regular intervals. The data is cached so that it does not need to be requested separately for each worker connection before being synchronized with worker nodes.
--  **Integrity thread:** Responsible for synchronizing files in the Wazuh server cluster, from the master node to the worker nodes. These files include the Wazuh agent keys file, :doc:`user defined rules, decoders </user-manual/ruleset/index>`, :ref:`custom SCA policies <sca_creating_custom_policies>`, :doc:`CDB lists </user-manual/ruleset/cdb-list>` and :doc:`group files </user-manual/agent/agent-management/grouping-agents>`.
--  **Local integrity thread:** This thread runs on the master node and periodically calculates file integrity using the MD5 checksum and modification time. The results are cached to avoid recalculating integrity data for each worker connection.
+When the cluster ``<key>`` is different, the master node can't decrypt the messages of the worker node. It logs error ``3025``, ``Could not decrypt message``, and closes the connection. The worker node logs ``The master closed the connection`` and, after three attempts in a row, a warning that asks you to check the cluster key. A worker node that loses its connection tries again every 10 seconds.
 
-All cluster logs are written in the ``/var/ossec/logs/cluster.log`` file of a default Wazuh installation.
+Periodic tasks
+--------------
 
+The following tasks run at fixed intervals:
+
++---------------------------------+---------+----------+----------------------------------------------------------------------------------+
+| Task                            | Node    | Interval | Description                                                                      |
++=================================+=========+==========+==================================================================================+
+| Keep-alive                      | Worker  | 60 s     | Sends a keep-alive message to the master node. After two failed attempts in a    |
+|                                 |         |          | row, the worker node disconnects.                                                |
++---------------------------------+---------+----------+----------------------------------------------------------------------------------+
+| Keep-alive check                | Master  | 60 s     | Closes the connection of a worker node that has sent no keep-alive message for   |
+|                                 |         |          | 120 seconds.                                                                     |
++---------------------------------+---------+----------+----------------------------------------------------------------------------------+
+| Integrity                       | Worker  | 9 s      | Sends the checksums of its synchronized files to the master node, which sends    |
+|                                 |         |          | back the missing and different files and the list of extra files to delete.      |
++---------------------------------+---------+----------+----------------------------------------------------------------------------------+
+| Local integrity                 | Master  | 8 s      | Calculates the BLAKE2b hash and modification time of its synchronized files, so  |
+|                                 |         |          | it doesn't repeat this for each worker node.                                     |
++---------------------------------+---------+----------+----------------------------------------------------------------------------------+
+| Agent information               | Worker  | 10 s     | Sends the status, keep-alive and metadata of its Wazuh agents to the master      |
+|                                 |         |          | node.                                                                            |
++---------------------------------+---------+----------+----------------------------------------------------------------------------------+
+| Agent groups                    | Master  | 10 s     | Sends the new agent group assignments to every connected worker node. The task   |
+|                                 |         |          | starts 30 seconds after the master node.                                         |
++---------------------------------+---------+----------+----------------------------------------------------------------------------------+
+
+Local processes, such as ``cluster_control`` and the Wazuh manager API, reach the cluster through the ``/var/wazuh-manager/queue/sockets/cluster-internal.sock`` socket.
+
+Cluster logs
+------------
+
+``wazuh-manager-clusterd`` writes its logs to ``/var/wazuh-manager/logs/cluster.log``. It rotates the file at midnight into ``/var/wazuh-manager/logs/cluster/<YEAR>/<MONTH>/cluster.log-<DAY>.gz``.
+
+To increase the log level, set ``wazuh_clusterd.debug`` in ``/etc/wazuh-manager/wazuh-manager-internal-options.conf``, or run ``wazuh-manager-control enable debug``. See :ref:`Internal configuration <reference_internal_options>`.
+
+Checking the cluster
+--------------------
+
+Run ``cluster_control`` on any node:
+
+.. code-block:: console
+
+   # /var/wazuh-manager/bin/cluster_control -l
+
+The command lists the connected nodes, with their name, type, version, and address:
+
+.. code-block:: none
+   :class: output
+
+   NAME          TYPE    VERSION  ADDRESS
+   master-node   master  5.0.0    10.0.0.3
+   worker-node1  worker  5.0.0    10.0.0.4
+
+Other options:
+
+-  ``-a`` lists the Wazuh agents with their ID, name, IP address, status, and version. Add ``-fs`` with ``active``, ``disconnected``, ``never_connected``, or ``pending`` to filter them.
+-  ``-i`` shows the last synchronizations of each worker node. ``-i more`` shows a detailed report of every node.
+-  ``-fn <NODE_NAME>`` limits ``-l`` or ``-i`` to the named nodes.

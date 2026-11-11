@@ -1,161 +1,93 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh uses certificates to establish trust and confidentiality between its central components. Learn how to deploy certificates for Wazuh central components.
+   :description: Learn how the nodes of a Wazuh manager cluster get their certificates from one CA, and how to stage your own certificates.
 
 Certificates deployment
 =======================
 
-Wazuh uses certificates to establish trust and confidentiality between its central components: Filebeat, the Wazuh indexer, and the Wazuh dashboard. Certificates are deployed during Wazuh central components installation or scaling. The required certificates are:
+Each node of a Wazuh manager cluster uses the following certificates, in ``/etc/wazuh-manager/certs/``:
 
--  **Root CA certificate**: The root CA (Certificate Authority) certificate acts as the foundation of trust for a security ecosystem. It is used to authenticate all Wazuh server nodes in the system and to sign other certificates, thereby establishing a chain of trust.
--  **Node certificates**:  Node certificates uniquely identify each Wazuh server node within the Wazuh cluster. They are used to encrypt and authenticate communications between the Wazuh server nodes.
+-  ``remoted.pem`` and ``remoted-key.pem``: the agent listener certificate, which Wazuh agents verify on ports 1517 and 1515.
+-  ``apid.pem`` and ``apid-key.pem``: the Wazuh manager API certificate. Only the master node runs the Wazuh manager API.
+-  ``root-ca.pem``: the CA bundle the node serves to the Wazuh agents.
+-  ``indexer-ca.pem``, ``indexer-connector.pem`` and ``indexer-connector-key.pem``: the Wazuh indexer CA, and the client certificate this node presents to the Wazuh indexer. The Wazuh indexer CA issues this certificate for each node.
 
-Each node certificate must include either the Wazuh server node's IP address or its DNS name. This is important for the verification process during communications, ensuring that the data is indeed being sent to and received from trusted nodes. These certificates, signed by the root CA, ensure that any communication between the Wazuh server nodes is trusted and verified through this certificate authority.
+The cluster doesn't synchronize these files. Each node gets its own at installation.
 
-.. note::
+One CA for every node
+---------------------
 
-   The admin certificate is specific to the Wazuh indexer cluster.  For more details, refer to the :doc:`documentation </user-manual/wazuh-indexer-cluster/certificate-deployment>`.
+The Wazuh manager package issues the agent listener and Wazuh manager API certificates from the Wazuh manager CA in ``/etc/wazuh-manager/ca/``. When that directory is empty, the package creates a new CA, which only that node uses. A Wazuh agent trusts one CA, so a node with a CA of its own presents a certificate that agents of the other nodes don't trust.
 
-You can deploy certificates using two methods:
+To give every node certificates from one CA, install the master node first. Then copy its ``/etc/wazuh-manager/ca/root-ca.pem`` and ``root-ca.key`` to each worker node before you install the package there, as described in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`.
 
--  :ref:`Using the  wazuh-certs-tool.sh script <using_wazuh_certs_tool>`
--  `Using custom certificates`_
+The agent listener certificate of each node must include the addresses Wazuh agents use to reach it. Behind a load balancer, include the load balancer name or address too. Set them in ``WAZUH_MANAGER_REMOTED_CERT_SANS`` in ``/etc/wazuh-manager/local.env`` before you install the node. See :ref:`Subject alternative names <wazuh_manager_credentials_sans>`.
 
-.. _using_wazuh_certs_tool:
+Check a node's agent listener certificate:
 
-Using the ``wazuh-certs-tool.sh`` script (default method)
----------------------------------------------------------
+.. code-block:: console
 
-The ``wazuh-certs-tool.sh`` script simplifies certificate generation for Wazuh central components and generates all required certificates for installation. You need to create or edit the configuration file ``config.yml``. This file references node details, such as node types and IP addresses or DNS names, used to generate certificates for each node specified in it. A template could be downloaded from our `repository <https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config.yml>`__. These certificates are created with the following additional information:
+   # openssl verify -CAfile /etc/wazuh-manager/certs/root-ca.pem /etc/wazuh-manager/certs/remoted.pem
+   # openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
 
--  ``C``: US
--  ``L``: California
--  ``O``: Wazuh
--  ``OU``: Wazuh
--  ``CN``: Name of the node
+The first command prints ``/etc/wazuh-manager/certs/remoted.pem: OK``. The second lists the addresses in the certificate. Run them on every node, and compare the CA of each node:
 
-.. _generating_wazuh_server_certificates:
+.. code-block:: console
 
-Generating Wazuh server certificates
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   # openssl x509 -in /etc/wazuh-manager/ca/root-ca.pem -noout -fingerprint -sha256
 
-Follow the steps below to create Wazuh server certificates using the ``wazuh-certs-tool.sh`` script:
+Every node must print the same fingerprint.
 
-#. Run the command below to download the `wazuh-certs-tool.sh <https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh>`__ script in your installation directory:
+Recovering a node that created its own CA
+-----------------------------------------
 
-   .. code-block:: console
+If a worker node was installed without the master node's CA, it created its own. Replace it with the master node's CA and issue the node's certificates again:
 
-      # wget https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh
-
-#. Create a ``config.yml`` file with the following content. We specify only the details regarding the Wazuh server nodes as we are focusing on creating certificates for the Wazuh server. These certificates will be used to integrate the Wazuh server with Filebeat for secure data transmission.
-
-   .. code-block:: yaml
-
-      nodes:
-        # Wazuh server nodes
-        # If there is more than one Wazuh server
-        # node, each one must have a node_type
-        server:
-          - name: wazuh-1
-            ip: "<WAZUH_MANAGER_IP>"
-          #  node_type: master
-          #- name: wazuh-2
-          #  ip: "<WAZUH_MANAGER_IP>"
-          #  node_type: worker
-          #- name: wazuh-3
-          #  ip: "<WAZUH_MANAGER_IP>"
-          #  node_type: worker
-
-   Where:
-
-   -  ``name`` represents a unique Wazuh server  node name. You can choose any.
-   -  ``ip`` represents the IP address or DNS name of the Wazuh server node.
-   -  ``node type`` represents the node type to configure. Two types are available, master and worker. You can only have one master node per cluster.
-   -  ``<WAZUH_MANAGER_IP>`` represents the IP address of Wazuh manager nodes (master/worker)
-
-#. Run the script to create the Wazuh server certificates:
+#. Stop the Wazuh manager on the worker node:
 
    .. code-block:: console
 
-      # bash wazuh-certs-tool.sh -A
+      # systemctl stop wazuh-manager
 
-   After deploying the certificates, a directory ``wazuh-certificates`` will be created in the installation directory with the following content:
-
-   .. code-block:: none
-
-      wazuh-certificates/
-      ├── admin-key.pem
-      ├── admin.pem
-      ├── root-ca.key
-      ├── root-ca.pem
-      ├── server-key.pem
-      └── server.pem
-
-   The files in this directory are as follows:
-
-   -  ``root-ca.pem`` and ``root-ca.key``: These files represent the root Certificate Authority (CA). The ``.pem`` file contains the public certificate, while the ``.key`` file holds the private key used for signing other certificates.
-
-      .. note::
-
-         If you are deploying a complete Wazuh infrastructure and deploying certificates for the first time, you need to securely save the root CA certificate. This will be used to create and sign certificates for the Wazuh indexer and Wazuh dashboard nodes.
-
-   -  ``admin.pem`` and ``admin-key.pem``: These files contain the public and private keys used by the Wazuh indexer to perform management and security-related tasks such as initializing the Wazuh indexer cluster, creating and managing users and roles.
-   -  ``server.pem`` and ``server-key.pem``: The ``server.pem`` file contains the public key, which is used by Filebeat to verify the authenticity of the Wazuh server during communication. Conversely, the ``server-key.pem`` file holds the private key, which is kept securely on the Wazuh server and used to authenticate itself to Filebeat.
-
-      In a clustered environment comprising two or more Wazuh server nodes, a unique pair of public and private keys is generated for each node. These keys are specific to the Wazuh server node and are identified by the names defined in the ``name`` field of the ``config.yml`` file. These key pairs must then be transferred to their corresponding nodes.
-
-#. Once the certificates are created, you need to rename and move the Wazuh server certificate to the appropriate Wazuh server nodes, respectively. You need to place them in the default directory ``/etc/filebeat/certs/`` as referenced in the file ``/etc/filebeat/filebeat.yml``. You should create the directory if it doesn’t exist.
+#. Remove the node's certificates, its CA bundle, and its CA, including the marker of the CA it created:
 
    .. code-block:: console
 
-      # mv /path/to/server-key.pem /etc/filebeat/certs/filebeat-key.pem
-      # mv /path/to/server.pem /etc/filebeat/certs/filebeat.pem
+      # rm -f /etc/wazuh-manager/certs/remoted.pem /etc/wazuh-manager/certs/remoted-key.pem
+      # rm -f /etc/wazuh-manager/certs/apid.pem /etc/wazuh-manager/certs/apid-key.pem
+      # rm -f /etc/wazuh-manager/certs/root-ca.pem
+      # rm -f /etc/wazuh-manager/ca/root-ca.pem /etc/wazuh-manager/ca/root-ca.key /etc/wazuh-manager/ca/.wazuh-manager-bootstrap-ca
 
-Generating Wazuh server certificates using the pre-existing root CA
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Wazuh also gives the ability to create and sign the admin and node(s) certificates using a pre-existing root CA. It avoids recreating certificates for all Wazuh server nodes.
-
-.. note::
-
-   You need to use a pre-existing root CA to create Wazuh server certificates:
-
-   -  If you already have a root CA, after generating certificates for the :doc:`Wazuh indexer </user-manual/wazuh-indexer-cluster/certificate-deployment>` or :doc:`Wazuh dashboard </user-manual/wazuh-dashboard/certificates>` nodes.
-   -  If you need to reinstall a Wazuh server node or add a new node to your Wazuh server cluster.
-
-#. Create a :ref:`config.yml <generating_wazuh_server_certificates>` file. You must specify the details for only the Wazuh server node(s) you want to create certificates for, depending on the cases described in the note above.
-
-#. Run the command below to create Wazuh server certificates from the ``config.yml`` file using the pre-existing root CA keys:
+#. Place the master node's CA in ``/etc/wazuh-manager/ca/``, as described in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`, and issue the certificates again:
 
    .. code-block:: console
 
-      # bash wazuh-certs-tool.sh -ws /path/to/root-ca.pem /path/to/root-ca.key
+      # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install
 
-   Where:
+   The command also writes the CA bundle for the Wazuh agents, ``/etc/wazuh-manager/certs/root-ca.pem``, as a copy of the master node's CA.
 
-   -  The flag ``-ws`` indicates we are creating Wazuh server certificates.
-   -  The file ``/path/to/root-ca.pem`` contains the root CA certificate.
-   -  The file ``/path/to/root-ca.key`` contains the root CA key.
-
-   After deploying the certificates, a directory ``wazuh-certificates`` will be created in the directory the command was run with content similar to the one below:
-
-   .. code-block:: none
-
-      wazuh-certificates/
-      ├── admin-key.pem
-      ├── admin.pem
-      ├── server-key.pem
-      └── server.pem
-
-#. Once the certificates are created, you need to rename and move the Wazuh server certificate to the appropriate Wazuh server nodes, respectively. You need to place them in the default directory ``/etc/filebeat/certs/`` as referenced in the file ``/etc/filebeat/filebeat.yml``. You should create the directory if it doesn’t exist.
+#. If you changed the master node's bundle with ``wazuh-manager-certs``, for example during a CA rotation, get it on this node. Skip this step otherwise: the command refuses a bundle the master node never published:
 
    .. code-block:: console
 
-      # mv /path/to/server-key.pem /etc/filebeat/certs/filebeat-key.pem
-      # mv /path/to/server.pem /etc/filebeat/certs/filebeat.pem
+      # /var/wazuh-manager/bin/wazuh-manager-certs --from-master
 
-Using custom certificates
--------------------------
+#. Start the Wazuh manager:
 
-Custom certificates can be created using tools like OpenSSL. You must create the root CA, node, and admin certificates described above.
+   .. code-block:: console
+
+      # systemctl start wazuh-manager
+
+Using your own PKI
+------------------
+
+To use certificates from your own CA, stage them on every node instead:
+
+-  The CA certificate as ``/etc/wazuh-manager/ca/root-ca.pem``. Add its key, ``root-ca.key``, only if you want the package to issue the node's certificates.
+-  The agent listener and Wazuh manager API certificates and their keys in ``/etc/wazuh-manager/certs/``, with owner ``root:wazuh-manager`` and mode ``0640``.
+-  The CA bundle for the Wazuh agents as ``/etc/wazuh-manager/certs/root-ca.pem``.
+
+Stage the CA before you install the package, and the files in ``certs/`` after you install it and before the first start. See :doc:`Credentials and certificates </user-manual/manager/credentials>` for the requirements of each file.
+
+To replace the CA of a running cluster, follow :ref:`Rotating the CA <wazuh_manager_certs>`.

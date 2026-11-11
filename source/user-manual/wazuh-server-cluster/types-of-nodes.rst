@@ -1,46 +1,46 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The node types define the tasks of each node within the Wazuh server cluster. Learn more in this section of the documentation.
+   :description: Learn about the master and worker nodes of a Wazuh manager cluster and the tasks of each.
 
 Types of nodes in a Wazuh server cluster
 ========================================
 
-There are two types of nodes in the Wazuh server cluster:
+There are two types of nodes in the Wazuh server cluster, set with the :ref:`node_type <reference_wazuh_manager_conf_cluster_node_type>` option:
 
 -  Master node
 -  Worker node
 
-The node types define the tasks of each node within the Wazuh server cluster and establish a hierarchy to determine which node's information takes precedence during :doc:`data synchronizations </user-manual/wazuh-server-cluster/data-synchronization>`. A Wazuh server cluster can only have one master node. During synchronizations, data from the master node always takes precedence over that from worker nodes. This ensures uniformity and consistency within the cluster.
+A Wazuh server cluster has only one master node. During :doc:`data synchronization </user-manual/wazuh-server-cluster/data-synchronization>`, data from the master node always takes precedence over data from worker nodes, which keeps the cluster consistent.
 
 .. note::
 
-   Configuration changes to ``/var/ossec/etc/ossec.conf`` file on the master node are not automatically synchronized to the worker nodes. Manually replicate the configuration and restart the nodes to apply the changes.
+   The cluster doesn't synchronize ``/etc/wazuh-manager/wazuh-manager.conf``. Apply a configuration change on each node, and restart that node.
 
 .. _server-cluster-master-node:
 
 Master node
 -----------
 
-The master node centralizes and coordinates worker nodes, ensuring the critical and required data is consistent across all nodes. It provides the centralization of the following:
+The master node coordinates the cluster. It does the following:
 
--  Receiving and managing agent registration and deletion requests.
--  Creating shared configuration groups.
--  Updating custom rules, decoders, SCA policies, and CDB lists.
+-  Creates the identities of the Wazuh agents. A worker node forwards the enrollment requests it receives to the master node.
+-  Creates enrollment tokens.
+-  Runs the Wazuh manager API. ``wazuh-manager-control`` starts ``wazuh-manager-apid`` only on the master node, so agent deletion, group management, and every other API operation go through it.
+-  Accepts the connections of the worker nodes on the cluster port, ``1516`` by default.
 
-The Wazuh agent registration details, shared configuration, CDB list, custom SCA policies, custom decoders, and rules are synchronized from the master to the workers, ensuring that all Wazuh server nodes have the same configuration and rulesets. During synchronization, every version of these files on the worker node is overwritten with the files from the master node.
+If the master node is down, the connected Wazuh agents keep sending events to the worker nodes, but enrollment and group changes stop.
 
 .. _server-cluster-worker-node:
 
 Worker node
 -----------
 
-A worker node executes data processing tasks and supports the master node by performing the following functions:
+A worker node does the following:
 
--  Redirecting Wazuh agent enrollment requests to the master node.
--  Synchronizing Wazuh agent registration details, shared configuration, CDB list, custom SCA policies, custom decoders, and rules from the master node.
--  Receiving and processing events from Wazuh agents.
--  Sending the Wazuh agent status update to the master node.
+-  Forwards Wazuh agent enrollment requests to the master node.
+-  Gets the synchronized files from the master node.
+-  Receives and processes events from Wazuh agents.
+-  Sends the status of its Wazuh agents to the master node.
 
-During synchronization, if any of the ``cluster-synchronized`` files on a worker node, such as agent keys, shared configuration, agent group assignments, custom rules, decoders, SCA policies, or CDB lists, are modified locally on the worker, those files are overwritten with the master node's versions in the next synchronization cycle.
-
+If a synchronized file is changed on a worker node, the next synchronization replaces it with the master node's version.
