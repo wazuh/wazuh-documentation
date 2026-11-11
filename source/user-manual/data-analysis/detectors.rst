@@ -33,7 +33,7 @@ Follow the steps below to create a custom detector:
       :align: center
       :width: 80%
 
-#. Select the indices you want the detector to monitor, a **Space** (in our case Custom), and an **Integration**. You can include or exclude which rules the detector covers.
+#. Select the indices you want the detector to monitor, a **Space** (in our case Custom), and an **Integration**. You can include or exclude which rules the detector covers. The **Integration** list shows only the integrations in the selected space. To use an integration you created with the Custom space, promote it to the custom space first.
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-create-detectors-2.png
       :title: Configure the detector
