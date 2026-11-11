@@ -34,6 +34,7 @@ All notable changes to this project will be documented in this file.
 - Corrected the disk space requirement in the *Wazuh server installation* documentation and the process name fields of eBPF who-data alerts in the *File integrity monitoring* documentation. ([#10587](https://github.com/wazuh/wazuh-documentation/pull/10587))
 - Replaced the "here" link text with descriptive link text in the *Via agent configuration* enrollment documentation. ([#10605](https://github.com/wazuh/wazuh-documentation/pull/10605))
 - **Post-release**: Fixed the breadcrumbs home link, which had no accessible name for screen readers, and the missing styling of the development notice on the documentation home page. ([#10660](https://github.com/wazuh/wazuh-documentation/pull/10660))
+- **Post-release**: Corrected the who-data setup, the Windows rules, integration, and active response, and the YARA attack emulation steps in the *File integrity monitoring*, *Detecting and removing malware using VirusTotal integration*, and *Detecting malware using YARA integration* proofs of concept, and the Windows agent service name in the *Proof of Concept guide*. ([#10693](https://github.com/wazuh/wazuh-documentation/pull/10693))
 
 ## [v4.14.9]
 
