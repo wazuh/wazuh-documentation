@@ -260,7 +260,7 @@ URL path prefix every HTTPS endpoint is served under (for example, with ``/wazuh
 dual_stack
 ^^^^^^^^^^
 
-Whether an IPv6 ``bind_addr`` also accepts IPv4 clients on the same socket.
+Whether an IPv6 ``bind_addr`` also accepts IPv4 clients on the same socket. The option applies only to an IPv6 ``bind_addr``. With an IPv4 ``bind_addr``, ``yes`` has no effect and the Wazuh manager logs a warning. ``no`` is the same as leaving the option out, and logs no warning.
 
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Default value**    | no (force IPv6-only)                                                                         |
@@ -322,11 +322,14 @@ Client-certificate verification strictness.
 ciphers
 ^^^^^^^
 
-TLS 1.3 ciphersuite override for the HTTPS listener (``SSL_CTX_set_ciphersuites()`` naming scheme, for example ``TLS_AES_256_GCM_SHA384``). The listener requires TLS 1.3 as its minimum protocol version.
+TLS 1.3 ciphersuite override for the HTTPS listener (``SSL_CTX_set_ciphersuites()`` naming scheme, for example ``TLS_AES_256_GCM_SHA384``). The listener requires TLS 1.3 as its minimum protocol version. Any other suite name fails the configuration validation, and the Wazuh manager doesn't start.
 
-+-------------------+----------------------------------------------------------------------------+
-| **Default value** | TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256 |
-+-------------------+----------------------------------------------------------------------------+
++--------------------+--------------------------------------------------------------------------------+
+| **Default value**  | TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256     |
++--------------------+--------------------------------------------------------------------------------+
+| **Allowed values** | Colon-separated combination of TLS_AES_128_GCM_SHA256, TLS_AES_256_GCM_SHA384, |
+|                    | TLS_CHACHA20_POLY1305_SHA256, TLS_AES_128_CCM_SHA256, TLS_AES_128_CCM_8_SHA256 |
++--------------------+--------------------------------------------------------------------------------+
 
 max_body_size
 ^^^^^^^^^^^^^

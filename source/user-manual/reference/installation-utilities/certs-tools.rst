@@ -49,8 +49,11 @@ Options list
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -wi, --wazuh-indexer-certificates                                                   | Creates the Wazuh indexer certificates.                                                      |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -wm, --wazuh-manager-certificates                                                   | Creates the Wazuh manager certificates: the Wazuh indexer client pair (<name>.pem), the      |
-|                                                                                     | agent listener pair (<name>-remoted.pem) and the Wazuh manager API pair (<name>-apid.pem).   |
+| -wm, --wazuh-manager-certificates                                                   | Creates the Wazuh manager certificates, signed by the root CA: the Wazuh indexer client pair |
+|                                                                                     | (<name>.pem), which the Wazuh manager uses to connect to the Wazuh indexer, and the agent    |
+|                                                                                     | listener (<name>-remoted.pem) and Wazuh manager API (<name>-apid.pem) pairs. The listener    |
+|                                                                                     | and API pairs are optional. When none are in place at installation, the Wazuh manager issues |
+|                                                                                     | its own pairs with its own CA.                                                               |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -tmp, --cert_tmp_path </path/to/tmp_dir>                                            | Uses this directory to create the certificates, instead of a new one with a random name in   |
 |                                                                                     | /tmp. The directory must not exist, or must be an empty directory owned by root. Must be     |

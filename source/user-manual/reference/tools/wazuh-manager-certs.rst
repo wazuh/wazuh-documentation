@@ -66,6 +66,8 @@ Options
 -  No certificate in the result signs the agent listener certificate.
 -  ``add``: a certificate is already in the bundle, isn't a CA, or is expired or not valid yet.
 
+``--master`` and ``--port`` are accepted only with ``--from-master``. Otherwise, the tool prints a usage error and exits with 1. If a worker node can't reach the master node, copy the master's bundle over this node's bundle, keep its owner and mode (``root:wazuh-manager``, ``0640``), and run ``wazuh-manager-certs check``. Don't use ``add`` on a worker node, which refuses it.
+
 Exit status: ``0`` when the command succeeds, ``1`` when the bundle or a certificate is refused (the reason is on standard error), and ``2`` when the tool can't read the configuration, the bundle or the certificate, isn't run as root, or a write fails.
 
 Examples
@@ -83,3 +85,44 @@ The command output looks similar to this:
    :class: output
 
    added 1 certificate(s); published generation 1789840000
+
+Rotating the CA
+---------------
+
+Use this order to replace the CA that signs the agent listener certificate without interrupting the Wazuh agents. The Wazuh manager reloads the bundle when it changes, so only step 4 needs a restart.
+
+#. On the master node, add the new CA to the bundle. The bundle then carries both CAs, and the old one still signs the listener certificate:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-certs add /root/new-root-ca.pem
+
+#. On each worker node, get the new bundle:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-certs --from-master
+
+#. Wait until the Wazuh agents download the new bundle. Make the wait longer than the longest time a Wazuh agent can stay disconnected in your environment. An agent that is offline the whole time doesn't get the new CA.
+
+#. On every node, replace the Wazuh manager CA and its server certificates, then restart the Wazuh manager:
+
+   #. Place the new CA as ``/etc/wazuh-manager/ca/root-ca.pem``. Replace ``/etc/wazuh-manager/ca/root-ca.key`` with the key of the new CA, or remove it. The old key next to the new CA is refused.
+   #. Replace ``/etc/wazuh-manager/certs/remoted.pem`` and ``/etc/wazuh-manager/certs/apid.pem``, with their keys, by pairs signed by the new CA. The Wazuh manager doesn't issue them again.
+   #. Check the new files, then restart the Wazuh manager:
+
+      .. code-block:: console
+
+         # /var/wazuh-manager/bin/wazuh-manager-control check && systemctl restart wazuh-manager
+
+   ``wazuh-manager-control reload`` doesn't restart ``wazuh-manager-remoted``, so it doesn't load the new listener certificate.
+
+#. After step 4 is done on every node, remove the old CA from the bundle on the master node. Use the identity that ``inspect`` shows for it:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-certs remove x509-sha256:<OLD_CA_IDENTITY>
+
+   Then run ``wazuh-manager-certs --from-master`` again on each worker node.
+
+A node that still has the old CA in ``/etc/wazuh-manager/ca/`` after the old CA leaves the bundle refuses its next start with ``does not contain /etc/wazuh-manager/ca/root-ca.pem``.

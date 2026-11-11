@@ -104,7 +104,7 @@ Wazuh manager configuration
          <ssl_agent_ca>/etc/wazuh-manager/rootCA.pem</ssl_agent_ca>
       </auth>
 
-   For Wazuh 5.0 agents, set the CA in the ``<https>`` block of the ``<remote>`` section. Wazuh 5.0 agents without a certificate signed by this CA are then refused. Keep ``<ssl_agent_ca>`` for Wazuh 4.x agents (port 1515):
+   ``<ssl_agent_ca>`` applies only to Wazuh 4.x agents, which enroll on port 1515. Wazuh 5.0 agents enroll and connect on port 1517. For them, set the CA and the ``<verification_mode>`` option in the ``<https>`` block of the ``<remote>`` section:
 
    .. code-block:: xml
 
@@ -112,8 +112,15 @@ Wazuh manager configuration
          ...
          <https>
            <ca>/etc/wazuh-manager/rootCA.pem</ca>
+           <verification_mode>certificate</verification_mode>
          </https>
       </remote>
+
+   These settings apply to all the traffic on port 1517, not only to enrollment. Every Wazuh 5.0 agent then needs a certificate signed by this CA, or the Wazuh manager refuses its connection. With ``full``, the address the agent connects from must also be an IP entry in the subject alternative name of its certificate. See :ref:`reference_wazuh_manager_conf_remote` for the allowed values.
+
+   .. note::
+
+      With ``<verification_mode>`` set to ``certificate`` or ``full``, the Wazuh manager rejects remote upgrades to Wazuh 5.0.0 or later unless the upgrade request sets ``force_upgrade``.
 
 #. Restart the Wazuh manager service to apply the changes:
 
