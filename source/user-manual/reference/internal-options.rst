@@ -3,6 +3,8 @@
 .. meta::
   :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh managers and agents.
 
+.. collapsible-tables:: settings
+
 .. _reference_internal_options:
 
 Internal configuration
@@ -35,16 +37,6 @@ The ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file allows you t
 In Wazuh 5.0, the default values for manager internal options are compiled into the manager binaries. The ``wazuh-manager-internal-options.conf`` file ships with comments only and should contain only the options that you want to override.
 
 You can add any of the following settings to ``/etc/wazuh-manager/wazuh-manager-internal-options.conf``. Edit the file and restart the Wazuh manager service for changes to take effect.
-
-- `Analysisd`_
-- `Remoted`_
-- `Authd`_
-- `Wazuh clusterd`_
-- `Wazuh database`_
-- :ref:`Wazuh modules <internal_options_manager_wazuh_modules>`
-- `Vulnerability scanner`_
-- `Recurring manager tasks (wazuh_modules.manager_task_*)`_
-- `Wazuh DB`_
 
 Analysisd
 ^^^^^^^^^^
@@ -413,15 +405,6 @@ The Wazuh agent uses the ``/var/ossec/etc/internal_options.conf`` file for its d
 To override an internal setting, add the option to ``/var/ossec/etc/local_internal_options.conf``. This file preserves custom settings when the Wazuh agent is upgraded.
 
 The following tables list the settings and their default values, which are set in ``/var/ossec/etc/internal_options.conf``. To change a setting, add it to ``/var/ossec/etc/local_internal_options.conf`` and restart the Wazuh agent service.
-
-- `Agent`_
-- `Execd`_
-- `Wazuh command`_
-- `Syscheck`_
-- `Logcollector`_
-- `Rootcheck`_
-- :ref:`Security configuration assessment <internal_options_sca>`
-- :ref:`Wazuh modules <internal_options_agent_wazuh_modules>`
 
 Agent
 ^^^^^^

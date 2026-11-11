@@ -8,11 +8,12 @@ Use cases
 
 The Wazuh FIM module monitors directories to detect file changes, additions, and deletions, making it useful for monitoring important files on endpoints. Use it for change management, regulatory compliance, and detecting cyberattacks. Below are examples:
 
-    .. toctree::
-        :maxdepth: 1
+.. toctree::
+   :maxdepth: 1
 
-        detecting-malware-persistence-technique
-        detecting-account-manipulation
-        monitoring-files-at-specific-intervals
-        reporting-file-changes
-        monitoring-configuration-changes
+   detecting-malware-persistence-technique
+   detecting-account-manipulation
+   monitoring-files-at-specific-intervals
+   reporting-file-changes
+   monitoring-configuration-changes
+   Detect malware persistence in Windows Registry </user-manual/capabilities/file-integrity/windows-registry-monitoring>

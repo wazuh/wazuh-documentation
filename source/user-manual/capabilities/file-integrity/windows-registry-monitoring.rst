@@ -19,9 +19,9 @@ The Wazuh File Integrity Monitoring (FIM) module runs on the Wazuh agent, monito
 
 The FIM module stores checksums and other attributes of monitored Windows Registry entries in a dedicated database on the endpoint. During scans, it compares current values against previously stored ones to identify changes, then reports them to the Wazuh manager, which processes and forwards them to the Wazuh indexer. If an event matches a detection rule, Wazuh generates a security finding.
 
-The FIM module maintains dedicated databases on both the monitored endpoint and the Wazuh manager. The agent uses a local SQLite database to store the current state of monitored Windows Registry entries, located at ``C:\Program Files (x86)\ossec-agent\queue\fim\db`` on Windows.
+The Wazuh agent uses a local SQLite database to store the current state of monitored Windows Registry entries, located at ``C:\Program Files (x86)\ossec-agent\queue\fim\db`` on Windows.
 
-The Wazuh manager keeps a synchronized copy of each agent's FIM database. The ``wazuh-db`` daemon manages a separate database per registered agent, identified by agent ID and stored in ``/var/wazuh-manager/queue/db``. During synchronization, the Wazuh agent sends updated Windows Registry metadata, such as checksums and attribute changes, to its database on the manager, ensuring FIM-related API queries return accurate, up-to-date information.
+The Wazuh agent also synchronizes the current state of the monitored Windows Registry entries with the Wazuh manager, which stores it in the ``wazuh-states-fim-registry-keys`` and ``wazuh-states-fim-registry-values`` indices of the Wazuh indexer.
 
 .. thumbnail:: /images/manual/fim/registry-how-it-works.png
   :title: Registry how it works
@@ -62,7 +62,7 @@ The following example shows how to configure different attribute checks for moni
 -  Disable the recording of hashes (MD5, SHA-1, and SHA-256) of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey2`` registry key.
 -  Disable the recording of the modification time of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey3`` registry key.
 
-#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
+#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the following settings inside the ``<ossec_config>`` block:
 
    .. code-block:: xml
 
@@ -91,7 +91,7 @@ You can configure the maximum recursion level allowed for a Windows Registry ent
 
 Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` to 3.
 
-#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the configuration below:
+#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the configuration below inside the ``<ossec_config>`` block:
 
    .. code-block:: xml
 
@@ -105,7 +105,7 @@ Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM
 
       > Restart-Service -Name WazuhSvc
 
-When using the following registry structure and ``recursion_level="3"``, FIM generates findings for all registry subkeys or values up to ``HKEY_LOCAL_MACHINE\SYSTEM\Setup\level_1\level_2\level_3\`` but not for any registry subkeys or values deeper than ``level_3``.
+When using the following registry structure and ``recursion_level="3"``, FIM generates findings for the keys down to ``level_3``, which include ``Subkey_0``, ``Subkey_1``, and ``Subkey_2``, and for the values they contain. It doesn't generate findings for ``Subkey_3``, ``level_4``, or any key below them, because they are four levels below ``HKEY_LOCAL_MACHINE\SYSTEM\Setup``.
 
 .. code-block:: none
 
@@ -138,11 +138,11 @@ To report the exact content changed in a Windows Registry value, you can configu
 -  ``REG_DWORD``
 -  ``REG_DWORD_BIG_ENDIAN``
 
-You must use the ``report_changes`` option with caution. Wazuh copies every single monitored file to a ``C:\Program Files (x86)\ossec-agent\queue\diff\registry``, and this increases storage usage.
+You must use the ``report_changes`` option with caution. Wazuh copies the data of every monitored registry value to the ``C:\Program Files (x86)\ossec-agent\queue\diff\registry`` folder, and this increases storage usage.
 
 Follow these steps to configure the FIM module to report changes made to ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` key.
 
-#. Open Registry Editor and create a subkey named ``Custom Key`` under the ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` registry key.
+#. Open Registry Editor, create a subkey named ``Custom Key`` under the ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` registry key, and add a string value named ``FIM`` with the data ``cmd``.
 
    .. thumbnail:: /images/manual/fim/create-custom-key.png
       :title: Create custom key
@@ -150,7 +150,7 @@ Follow these steps to configure the FIM module to report changes made to ``HKEY_
       :align: center
       :width: 80%
 
-#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the configuration below:
+#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the configuration below inside the ``<ossec_config>`` block:
 
    .. code-block:: xml
 
@@ -169,7 +169,7 @@ Follow these steps to configure the FIM module to report changes made to ``HKEY_
 
       > Restart-Service -Name WazuhSvc
 
-#. Modify the ``Custom Key`` subkey and add a new string value ``FIM`` and data ``cmd``.
+#. Change the data of the ``FIM`` string value in the ``Custom Key`` subkey from ``cmd`` to ``powershell``. FIM reports the content of changed values only, not of new values.
 
    .. thumbnail:: /images/manual/fim/modify-custom-key.png
       :title: Add new string value and data
@@ -202,7 +202,7 @@ You can configure the FIM module to ignore certain Windows Registry keys with th
 
 Follow these steps to configure the FIM module to ignore the ``HKEY_LOCAL_MACHINE\Security\Policy`` and any Windows Registry entry that matches the simple regex pattern ``\Enum$`` from FIM results.
 
-#. Add this configuration to the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the Wazuh agent:
+#. Add this configuration to the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the Wazuh agent inside the ``<ossec_config>`` block:
 
    .. code-block:: xml
 

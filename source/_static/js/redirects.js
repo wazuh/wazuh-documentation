@@ -179,6 +179,7 @@ newUrls['5.0'] = [
   '/user-manual/reference/tools/wazuh-agent-auth.html',
   '/user-manual/reference/tools/wazuh-manager-conf.html',
   '/user-manual/reference/tools/wazuh-manager-certs.html',
+  '/user-manual/reference/tools/resolve-credentials.html',
   '/user-manual/reference/tools/wazuh-manager-resolve-credentials.html',
   '/user-manual/reference/tools/wazuh-manager-service-control.html',
   '/user-manual/reference/installation-utilities/index.html',

@@ -81,6 +81,8 @@ The Wazuh dashboard package opens no port. To open 443/TCP on a host with ``fire
 
 Use another port number if you changed ``server.port``. The Wazuh dashboard supports only systemd.
 
+A Wazuh dashboard on its own host needs these files before you install its package: the ``WAZUH_INDEXER_KIBANASERVER_PASSWORD`` and ``WAZUH_MANAGER_WUI_PASSWORD`` passwords, the CA certificate that issued the Wazuh indexer certificates, and the CA certificate that issued the Wazuh manager API certificate of the master node. Both installation methods describe how to place them. The Wazuh dashboard reaches the Wazuh manager API only through an address in that certificate, ``apid.pem``.
+
 Recommended operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -14,7 +14,7 @@ The SCA module is configured in the Wazuh agent configuration file under the ``<
 - Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
 - macOS: ``/Library/Ossec/etc/ossec.conf``.
 
-The following example shows the SCA configuration with the available configuration options. You can modify these options to customize how the Wazuh agent performs security configuration assessments.
+The following example shows the SCA configuration with the available configuration options. You can modify these options to customize how the Wazuh agent performs security configuration assessments. Place the ``<sca>`` block inside the ``<ossec_config>`` block of the file.
 
 .. code-block:: xml
 
@@ -23,7 +23,7 @@ The following example shows the SCA configuration with the available configurati
      <enabled>yes</enabled>
      <scan_on_start>yes</scan_on_start>
      <interval>12h</interval>
-     <max_eps>100</max_eps>
+     <max_eps>50</max_eps>
      <!-- SCA policies -->
      <policies>
        <policy>/var/ossec/etc/shared/cis_debian10.yml</policy>
@@ -34,21 +34,21 @@ The following example shows the SCA configuration with the available configurati
      <synchronization>
        <enabled>yes</enabled>
        <interval>5m</interval>
-       <integrity_interval>1h</integrity_interval>
+       <integrity_interval>24h</integrity_interval>
      </synchronization>
    </sca>
 
 Where:
 
-- ``<enabled>``: Enables or disables the Wazuh SCA module.
-- ``<scan_on_start>``: Runs an SCA scan immediately after the Wazuh agent starts.
-- ``<interval>``: Specifies how often the Wazuh agent performs SCA scans.
-- ``<max_eps>``: Limits the maximum number of SCA events per second that the Wazuh agent can generate.
+- ``<enabled>``: Enables or disables the Wazuh SCA module. The default value is yes.
+- ``<scan_on_start>``: Runs an SCA scan immediately after the Wazuh agent starts. The default value is yes.
+- ``<interval>``: Specifies how often the Wazuh agent performs SCA scans. The value is a number followed by s, m, h, or d. The default value is 1d, and the installed Wazuh agent configuration file sets 12h.
+- ``<max_eps>``: Limits the maximum number of SCA events per second that the Wazuh agent can generate. The default value is 50.
 - ``<synchronization>``: Configures how the Wazuh agent synchronizes SCA state with the Wazuh manager.
 
   - ``<enabled>``: Enables or disables SCA state synchronization between the Wazuh agent and the Wazuh manager. The default value is ``yes``.
-  - ``<interval>``: Defines how often the Wazuh agent initiates the synchronization process with the Wazuh manager to synchronize SCA state data.
-  - ``<integrity_interval>``: Specifies how often the Wazuh agent checks that its synchronized SCA results match the state in the Wazuh indexer. On a mismatch, the Wazuh agent starts a full resend (recovery) of its SCA state.
+  - ``<interval>``: Defines how often the Wazuh agent initiates the synchronization process with the Wazuh manager to synchronize SCA state data. The default value is 5m.
+  - ``<integrity_interval>``: Specifies how often the Wazuh agent checks that its synchronized SCA results match the state in the Wazuh indexer. On a mismatch, the Wazuh agent starts a full resend (recovery) of its SCA state. The default value is 24h. Set it to 0 to turn off this check.
 
 - Optional
 
@@ -75,7 +75,7 @@ By default, the Wazuh agent scans every policy (``.yaml`` or ``.yml`` file) in i
 
 There are two ways to disable policies on the Wazuh agent. The simplest method is to rename the policy file with an extension other than ``.yaml`` or ``.yml``.
 
-Alternatively, disable a policy in the Wazuh agent ``ossec.conf`` file by setting the ``enabled`` attribute to ``no``.
+Alternatively, disable a policy in the Wazuh agent ``ossec.conf`` file by setting the ``enabled`` attribute to ``no``. Add the ``<sca>`` block below inside the ``<ossec_config>`` block of the file.
 
 To disable a policy included with the Wazuh agent, specify its path relative to the Wazuh installation directory:
 
@@ -107,7 +107,7 @@ For a policy distributed through centralized configuration, use its path in the 
 
 You can also specify an absolute path to the policy file.
 
-Restart the Wazuh agent to apply the change:
+Restart the Wazuh agent to apply the change. If the ``<sca>`` block is outside the ``<ossec_config>`` block, the Wazuh agent fails to start and logs ``Invalid element in the configuration: 'sca'``.
 
 .. tabs::
 
@@ -128,6 +128,8 @@ Restart the Wazuh agent to apply the change:
       .. code-block:: console
 
          # /Library/Ossec/bin/wazuh-control restart
+
+After the restart, the Wazuh agent deletes the results of the disabled policy from the Wazuh indexer, so the policy leaves the **Inventory** tab.
 
 Managing SCA policies using centralized configuration
 -------------------------------------------------------
@@ -198,7 +200,7 @@ You can enable this feature to push policy files to Wazuh agents in defined grou
         </sca>
       </agent_config>
 
-   The Wazuh agent saves all files pushed from the Wazuh server in the ``etc/shared/`` directory on Linux and macOS endpoints and in the ``shared\`` directory on Windows endpoints, regardless of the group they belong to. We specify the relative file path of the policy because the installation directory differs between operating systems.
+   The Wazuh agent saves all files pushed from the Wazuh manager in the ``etc/shared/`` directory on Linux and macOS endpoints and in the ``shared\`` directory on Windows endpoints, regardless of the group they belong to. We specify the relative file path of the policy because the installation directory differs between operating systems.
 
 The new ``<sca>`` block in the Wazuh manager ``/etc/wazuh-manager/shared/default/agent.conf`` file merges with the ``<sca>`` block on the Wazuh agent side, and Wazuh adds the new configuration.
 
@@ -251,7 +253,7 @@ An SCA policy looks like the following:
        - https://www.ssh.com/ssh/
 
    requirements:
-     title: "Check that the SSH service and password-related files are present on the system"
+     name: "Check that the SSH service and password-related files are present on the system"
      description: "Requirements for running the SCA scan against the Unix based systems policy."
      condition: any
      rules:
@@ -265,19 +267,19 @@ An SCA policy looks like the following:
 
    checks:
      - id: 3000
-       title: "SSH Hardening: Port should not be 22"
+       name: "SSH Hardening: Port should not be 22"
        description: "The ssh daemon should not be listening on port 22 (the default value) for incoming connections."
        rationale: "Changing the default port you may reduce the number of successful attacks from zombie bots, an attacker or bot doing port-scanning can quickly identify your SSH port."
        remediation: "Change the Port option value in the sshd_config file."
        compliance:
-         - pci_dss: ["2.2.4"]
-         - nist_800_53: ["CM.1"]
+         pci_dss: ["2.2.4"]
+         nist_800_53: ["CM.1"]
        condition: all
        rules:
          - 'f:$sshd_file -> !r:^# && r:Port && !r:\s*\t*22$'
 
      - id: 3001
-       title: "SSH Hardening: Protocol should be set to 2"
+       name: "SSH Hardening: Protocol should be set to 2"
 
 .. note::
    If the ``requirements`` aren't satisfied for a specific policy file, the scan for that file won't start.
@@ -290,21 +292,21 @@ The policy section defines the metadata for the SCA policy, including its identi
 .. _sca_policy_file_policy_section:
 .. table:: Policy section
 
-   +--------------------+----------------+-------------------+-------------------------------+------------------------+
-   | Field              | Mandatory      | Type              | Allowed values                | Description            |
-   +====================+================+===================+===============================+========================+
-   | id                 | Yes            | String            | Any string                    | Policy ID              |
-   +--------------------+----------------+-------------------+-------------------------------+------------------------+
-   | file               | Yes            | String            | Any string                    | Policy filename        |
-   +--------------------+----------------+-------------------+-------------------------------+------------------------+
-   | name               | Yes            | String            | Any string                    | Policy title           |
-   +--------------------+----------------+-------------------+-------------------------------+------------------------+
-   | description        | Yes            | String            | Any string                    | Brief description      |
-   +--------------------+----------------+-------------------+-------------------------------+------------------------+
-   | references         | No             | Array of strings  | Any string (empty by default) | Links to references    |
-   +--------------------+----------------+-------------------+-------------------------------+------------------------+
-   | regex_type         | No             | String            | "osregex" (default), "pcre2"  | Policy regex engine    |
-   +--------------------+----------------+-------------------+-------------------------------+------------------------+
+   +--------------------+----------------+-------------------+----------------------------------+------------------------+
+   | Field              | Mandatory      | Type              | Allowed values                   | Description            |
+   +====================+================+===================+==================================+========================+
+   | id                 | Yes            | String            | Any string                       | Policy ID              |
+   +--------------------+----------------+-------------------+----------------------------------+------------------------+
+   | file               | Yes            | String            | Any string                       | Policy filename        |
+   +--------------------+----------------+-------------------+----------------------------------+------------------------+
+   | name               | Yes            | String            | Any string                       | Policy title           |
+   +--------------------+----------------+-------------------+----------------------------------+------------------------+
+   | description        | Yes            | String            | Any string                       | Brief description      |
+   +--------------------+----------------+-------------------+----------------------------------+------------------------+
+   | references         | No             | Array of strings  | Any string (empty by default)    | Links to references    |
+   +--------------------+----------------+-------------------+----------------------------------+------------------------+
+   | regex_type         | No             | String            | Ignored. Rules always use PCRE2. | Policy regex engine    |
+   +--------------------+----------------+-------------------+----------------------------------+------------------------+
 
 Requirement section
 ^^^^^^^^^^^^^^^^^^^^
@@ -317,11 +319,11 @@ Requirements determine whether a policy should run on an endpoint before any che
    +--------------------+----------------+-------------------+------------------------+
    | Field              | Mandatory      | Type              | Allowed values         |
    +====================+================+===================+========================+
-   | title              | Yes            | String            | Any string             |
+   | name               | Yes            | String            | Any string             |
    +--------------------+----------------+-------------------+------------------------+
    | description        | Yes            | String            | Any string             |
    +--------------------+----------------+-------------------+------------------------+
-   | condition          | Yes            | String            | Any string             |
+   | condition          | Yes            | String            | all, any, none         |
    +--------------------+----------------+-------------------+------------------------+
    | rules              | Yes            | Array of strings  | Any string             |
    +--------------------+----------------+-------------------+------------------------+
@@ -368,7 +370,7 @@ The checks section contains the security checks performed during policy evaluati
    +=============+===========+============================+====================+
    |      id     |    Yes    |           Numeric          | Any integer number |
    +-------------+-----------+----------------------------+--------------------+
-   |    title    |    Yes    |           String           |     Any string     |
+   |     name    |    Yes    |           String           |     Any string     |
    +-------------+-----------+----------------------------+--------------------+
    | description |     No    |           String           |     Any string     |
    +-------------+-----------+----------------------------+--------------------+
@@ -376,7 +378,17 @@ The checks section contains the security checks performed during policy evaluati
    +-------------+-----------+----------------------------+--------------------+
    | remediation |     No    |           String           |     Any string     |
    +-------------+-----------+----------------------------+--------------------+
-   |  compliance |     No    | Array of arrays of strings |     Any string     |
+   |  compliance |     No    |           Object           | cmmc, fedramp,     |
+   |             |           |                            | gdpr, hipaa,       |
+   |             |           |                            | iso_27001, nis2,   |
+   |             |           |                            | nist_800_171,      |
+   |             |           |                            | nist_800_53,       |
+   |             |           |                            | pci_dss, tsc       |
+   +-------------+-----------+----------------------------+--------------------+
+   |    mitre    |     No    |           Object           | tactic, technique, |
+   |             |           |                            | subtechnique (each |
+   |             |           |                            | with id and name   |
+   |             |           |                            | arrays)            |
    +-------------+-----------+----------------------------+--------------------+
    |  references |     No    |      Array of strings      |     Any string     |
    +-------------+-----------+----------------------------+--------------------+
@@ -384,7 +396,8 @@ The checks section contains the security checks performed during policy evaluati
    +-------------+-----------+----------------------------+--------------------+
    |    rules    |    Yes    |      Array of strings      |     Any string     |
    +-------------+-----------+----------------------------+--------------------+
-   | regex_type  |    No     |           String           |"pcre2" or "osregex"|
+   | regex_type  |    No     |           String           | Ignored. Rules     |
+   |             |           |                            | always use PCRE2.  |
    +-------------+-----------+----------------------------+--------------------+
 
 Check evaluation is governed by its rule result aggregation strategy, as set in its ``condition`` field, and the results of
@@ -393,7 +406,8 @@ the evaluation of its rules.
 .. note::
 
    -  The ``id`` field under the ``policy`` and ``checks`` sections must be unique across policy files.
-   -  If you set a ``regex_type``, it overrides the regex engine type defined in the policy.
+   -  The ``regex_type`` field is ignored. The Wazuh agent evaluates every rule with PCRE2.
+   -  A check can use ``title`` instead of ``name``. The SCA module stores the value as ``name``.
 
 Condition
 ~~~~~~~~~
@@ -613,8 +627,8 @@ The following sections cover each rule type, illustrating them with several exam
 
 .. rubric:: Composite rules
 
-- Check if there is a line that does not begin with ``#`` and contains ``Port 22``: ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
-- Check if there is no line that does not begin with ``#`` and contains ``Port 22``: ``not f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
+- Check if there is a line that does not begin with ``#`` and contains ``Port 22``: ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\s+22``
+- Check if there is no line that does not begin with ``#`` and contains ``Port 22``: ``not f:/etc/ssh/sshd_config -> !r:^# && r:Port\s+22``
 
 .. rubric:: Other examples
 
@@ -622,7 +636,7 @@ The following sections cover each rule type, illustrating them with several exam
 - Check if a file exists: ``f:/proc/sys/net/ipv4/ip_forward``
 - Check if a process is running: ``p:avahi-daemon``
 - Check value of registry: ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0``
-- Check if a directory contains files: ``d:/home -> ^.mysql_history$``
+- Check if a directory contains files: ``d:/home/<USER> -> r:^\.mysql_history$``
 - Check if a directory exists: ``d:/etc/mysql``
 - Check the running configuration of sshd for the maximum authentication tries allowed: ``c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$``
 - Check if root is the only account with UID 0: ``f:/etc/passwd -> !r:^# && !r:^root: && r:^\w+:\w+:0:``

@@ -14,7 +14,7 @@ Use the ``<directories>`` option to specify the files and directories the FIM mo
 
 This example configures the FIM module to monitor a file and directory. Replace ``<FILEPATH_OF_MONITORED_FILE>`` and ``<FILEPATH_OF_MONITORED_DIRECTORY>`` with your own file paths.
 
-#. Add the following settings to the Wazuh agent configuration file, replacing the ``<directories>`` values with your own file paths:
+#. Add the following settings inside the ``<ossec_config>`` block of the Wazuh agent configuration file, replacing the ``<directories>`` values with your own file paths:
 
    -  Linux: ``/var/ossec/etc/ossec.conf``
    -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
@@ -31,7 +31,7 @@ This example configures the FIM module to monitor a file and directory. Replace 
 #. Restart the Wazuh agent to apply any configuration change:
 
    -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
+   -  Windows: ``Restart-Service -Name WazuhSvc``
    -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
 .. note::

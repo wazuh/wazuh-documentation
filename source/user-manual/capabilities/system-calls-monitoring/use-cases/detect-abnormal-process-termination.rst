@@ -19,7 +19,7 @@ Run the following command to intentionally trigger a segmentation fault:
 
 The command terminates the Python process with a segmentation fault, causing the Linux Audit subsystem to generate an ``ANOM_ABEND`` audit event.
 
-Navigate to **Threat Intelligence > Threat Hunting > Findings** on the Wazuh dashboard to view the generated finding:
+Navigate to **Threat intelligence > Threat Hunting > Findings** on the Wazuh dashboard to view the generated finding:
 
 .. thumbnail:: /images/manual/system-calls-monitoring/process-ended-abnormally-finding.png
    :title: Process ended abnormally finding

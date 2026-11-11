@@ -26,7 +26,7 @@ Configuration
 
 Perform the following steps to configure the FIM module to monitor SSH key modification.
 
-#. Edit the ``/var/ossec/etc/ossec.conf`` configuration file and add ``authorized_keys`` for monitoring:
+#. Edit the ``/var/ossec/etc/ossec.conf`` configuration file and add ``authorized_keys`` for monitoring inside the ``<ossec_config>`` block:
 
    .. code-block:: xml
 
@@ -43,19 +43,19 @@ Perform the following steps to configure the FIM module to monitor SSH key modif
 Test the configuration
 -----------------------
 
-Run the following commands on the CentOS 9 endpoint and ensure you are in the user's home directory.
+Log in to the CentOS Stream 9 endpoint as the user whose ``authorized_keys`` file you change, not as root, and run the following commands from the user's home directory. The configuration monitors ``/home/*/.ssh/authorized_keys``, so a change to the ``/root/.ssh/authorized_keys`` file of the root user doesn't generate a finding.
 
-#. Generate an SSH key pair for user authentication and save it as ``.ssh/test_key`` using the following command:
-
-   .. code-block:: console
-
-      # ssh-keygen -f .ssh/test_key
-
-#. Run the following command on the CentOS endpoint to create the ``.ssh`` directory with the correct permissions. It then appends your ``test_key.pub`` public key to the user's ``authorized_keys`` file:
+#. Create the ``.ssh`` directory with the correct permissions, then generate an SSH key pair for user authentication and save it as ``.ssh/test_key``:
 
    .. code-block:: console
 
-      # mkdir -m 700 -p ~/.ssh && cat ~/.ssh/test_key.pub >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys
+      $ mkdir -m 700 -p ~/.ssh && ssh-keygen -f ~/.ssh/test_key
+
+#. Run the following command to append your ``test_key.pub`` public key to the ``authorized_keys`` file of the user:
+
+   .. code-block:: console
+
+      $ cat ~/.ssh/test_key.pub >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys
 
 Visualize the finding
 ----------------------

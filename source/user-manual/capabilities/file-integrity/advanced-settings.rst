@@ -54,11 +54,10 @@ Install the audit daemon if you do not already have it on your endpoint.
 
       # apt-get install auditd
 
-   For audit version 3.1.1 and later, install the audispd-af_unix plugin and restart the audit service:
+   For audit version 3.1.1 and later, the ``auditd`` package includes the ``audisp-af_unix`` plugin. Restart the audit service:
 
    .. code-block:: console
 
-      # apt-get install audispd-plugins
       # service auditd restart
 
 In most systems, auditd includes a default rule that stops the processing of subsequent audit rules. This setting prevents the reporting of any who-data information. Follow these steps to verify that auditing is not disabled. For more information, visit the `manual <https://man7.org/linux/man-pages/man8/auditctl.8.html#DISABLED_BY_DEFAULT>`__ for auditctl.
@@ -518,11 +517,11 @@ Perform the steps below to monitor changes made to the ``/etc/ssh/sshd_config`` 
 
 .. rubric:: Test the configuration
 
-While logged in as the root user, append a new line of text to the ``/etc/ssh/sshd_config`` file on the Ubuntu endpoint:
+While logged in as the root user, append a comment line to the ``/etc/ssh/sshd_config`` file on the Ubuntu endpoint. A comment line keeps the file valid for the SSH server:
 
 .. code-block:: console
 
-   # echo "eBPF test" >> /etc/ssh/sshd_config
+   # echo "# eBPF test" >> /etc/ssh/sshd_config
 
 .. rubric:: Visualize the finding
 
@@ -534,7 +533,7 @@ Navigate to **Endpoint security → File Integrity Monitoring** → **Findings**
   :align: center
   :width: 80%
 
-Expand the finding to view more information. In the finding fields below, you can see that the user root added a config to the ``/etc/ssh/sshd_config`` file using the bash terminal program.
+Expand the finding to view more information. In the finding fields below, you can see that the user root added a config to the ``/etc/ssh/sshd_config`` file using the bash terminal program. When you finish the test, remove the line with ``sed -i '/^# eBPF test$/d' /etc/ssh/sshd_config``.
 
 .. thumbnail:: /images/manual/fim/expand-the-finding.png
   :title: Expand the finding
@@ -810,19 +809,19 @@ Example: Monitor changes in a text file on Windows
 
 Perform the following steps to configure the FIM module to monitor changes to a text file and collect information about the user and process responsible for the changes.
 
-#. Edit the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the ``Documents`` directory for FIM monitoring. The configuration enables who-data monitoring for changes to monitored files:
+#. Edit the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the ``Documents`` directory for FIM monitoring inside the ``<ossec_config>`` block. Replace ``<USER_NAME>`` with the name of the user whose Documents folder you monitor. Monitoring ``C:\Users\*\Documents`` also matches system profiles that the Wazuh agent can't audit, which fills the Wazuh agent log with ``Access is denied`` warnings. The configuration enables who-data monitoring for changes to monitored files:
 
    .. code-block:: xml
 
       <syscheck>
-        <directories check_all="yes" whodata="yes">C:\Users\*\Documents</directories>
+        <directories check_all="yes" whodata="yes">C:\Users\<USER_NAME>\Documents</directories>
       </syscheck>
 
 #. Restart the Wazuh agent using PowerShell to apply the changes:
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 Test the configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1190,7 +1189,7 @@ You can configure the maximum recursion level allowed for a specific directory b
 
 The following configuration example sets the ``recursion_level`` of the monitored directory to 3. Replace ``<FILEPATH_OF_MONITORED_DIRECTORY>`` with your own file paths.
 
-#. Add the following settings to the Wazuh agent configuration file:
+#. Add the following settings inside the ``<ossec_config>`` block of the Wazuh agent configuration file:
 
    -  Linux: ``/var/ossec/etc/ossec.conf``
    -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
@@ -1205,7 +1204,7 @@ The following configuration example sets the ``recursion_level`` of the monitore
 #. Restart the Wazuh agent to apply any configuration change:
 
    -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
+   -  Windows: ``Restart-Service -Name WazuhSvc``
    -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
 If you have the following directory structure and the above setting with ``recursion_level="3"``, FIM then generates findings for ``file_3.txt`` and all files up to ``<FILEPATH_OF_MONITORED_DIRECTORY>/level_1/level_2/level_3/``, but not for any files in the directory deeper than ``level_3``.
@@ -1240,7 +1239,7 @@ You need to edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration fil
 
 In the configuration example below, the FIM module on the Wazuh agent is set to run with the minimum process priority:
 
-#. Add the following settings to the Wazuh agent configuration file:
+#. Add the following settings inside the ``<ossec_config>`` block of the Wazuh agent configuration file:
 
    -  Linux: ``/var/ossec/etc/ossec.conf``
    -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
@@ -1255,12 +1254,12 @@ In the configuration example below, the FIM module on the Wazuh agent is set to 
 #. Restart the Wazuh agent to apply any configuration change:
 
    -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
+   -  Windows: ``Restart-Service -Name WazuhSvc``
    -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
 Setting the ``process_priority`` value lower than the default gives the FIM module higher priority, more CPU resources, and makes it run faster. In the configuration example below, the FIM module has the maximum process priority.
 
-#. Add the following settings to the Wazuh agent configuration file:
+#. Add the following settings inside the ``<ossec_config>`` block of the Wazuh agent configuration file:
 
    -  Linux: ``/var/ossec/etc/ossec.conf``
    -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
@@ -1275,64 +1274,22 @@ Setting the ``process_priority`` value lower than the default gives the FIM modu
 #. Restart the Wazuh agent to apply any configuration change:
 
    -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
+   -  Windows: ``Restart-Service -Name WazuhSvc``
    -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
 Database storage
 -------------------
 
-Wazuh uses a SQLite database to store information about FIM events, such as the creation, modification, and deletion of regular files. When the Wazuh agent starts, the FIM module performs a first scan and generates the agent's database. By default, Wazuh saves this database to disk at ``/var/ossec/queue/fim/db``.
+Wazuh uses a SQLite database to store information about FIM events, such as the creation, modification, and deletion of regular files. When the Wazuh agent starts, the FIM module performs a first scan and generates the agent's database. The Wazuh agent saves this database to disk at ``/var/ossec/queue/fim/db``.
 
-You can configure the database storage options by using the ``database`` attribute. The allowed values for the database option are ``disk`` and ``memory``. These storage options are available on Windows, macOS, and Linux operating systems.
-
-In the configuration example below, we set the database location to memory.
-
-#. Add the following settings to the Wazuh agent configuration file:
-
-   -  Linux: ``/var/ossec/etc/ossec.conf``
-   -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
-   -  macOS: ``/Library/Ossec/etc/ossec.conf``
-
-   .. code-block:: xml
-
-      <syscheck>
-        <database>memory</database>
-      </syscheck>
-
-#. Restart the Wazuh agent to apply any configuration change:
-
-   -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
-   -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
-
-In the configuration example below, we set the database location to disk.
-
-#. Add the following settings to the Wazuh agent configuration file:
-
-   -  Linux: ``/var/ossec/etc/ossec.conf``
-   -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
-   -  macOS: ``/Library/Ossec/etc/ossec.conf``
-
-   .. code-block:: xml
-
-      <syscheck>
-        <database>disk</database>
-      </syscheck>
-
-#. Restart the Wazuh agent to apply any configuration change:
-
-   -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
-   -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
-
-The main advantage of using an in-memory database is the performance, as reading and writing operations are faster than performing them on disk. The corresponding disadvantage is that the memory must be sufficient to store the data.
+The location is fixed. The ``database`` option of earlier versions is deprecated and has no effect. The Wazuh agent logs a warning when it finds it: ``The <database> option is deprecated and no longer has any effect.``
 
 Synchronization
 -------------------
 
-The FIM module keeps the Wazuh agent and manager databases synchronized, ensuring the manager has an up-to-date inventory of monitored files. The agent periodically synchronizes with the manager, transmitting local FIM database changes and validating consistency through scheduled integrity checks. If a sync attempt fails due to a timeout or temporary connectivity issue, the agent automatically retries before marking it failed.
+The FIM module keeps the FIM state indices in the Wazuh indexer synchronized with the local database of the Wazuh agent, so the inventory of monitored files stays up to date. The agent periodically synchronizes with the manager, transmitting local FIM database changes and validating consistency through scheduled integrity checks. If a sync attempt fails due to a timeout or temporary connectivity issue, the agent automatically retries before marking it failed.
 
-At startup, the Wazuh agent rebuilds its local FIM database, scans to establish the current state of monitored files, and synchronizes the resulting inventory with the manager. Directories monitored in ``realtime`` or ``whodata`` mode report changes as they occur, while directories monitored in scheduled mode are synchronized after the corresponding scan completes. If the Wazuh agent is offline, file changes are not reported immediately; once connectivity is restored, subsequent synchronization and integrity validation reconcile the Wazuh agent and manager databases to ensure they remain consistent.
+At startup, the Wazuh agent rebuilds its local FIM database, scans to establish the current state of monitored files, and synchronizes the resulting inventory with the manager. Directories monitored in ``realtime`` or ``whodata`` mode report changes as they occur, while directories monitored in scheduled mode are synchronized after the corresponding scan completes. If the Wazuh agent is offline, file changes are not reported immediately; once connectivity is restored, subsequent synchronization and integrity validation reconcile the local database of the Wazuh agent and the FIM state indices to keep them consistent.
 
 You can see below the default ``synchronization`` setting on the ``/var/ossec/etc/ossec.conf`` configuration file:
 
@@ -1342,8 +1299,6 @@ You can see below the default ``synchronization`` setting on the ``/var/ossec/et
      <synchronization>
        <enabled>yes</enabled>
        <interval>5m</interval>
-       <response_timeout>60</response_timeout>
-       <max_eps>75</max_eps>
        <integrity_interval>24h</integrity_interval>
      </synchronization>
    </syscheck>
@@ -1356,10 +1311,6 @@ The table below explains the supported attributes of the synchronization option:
 | ``enabled``            | ``yes``           | yes, no                                                              | Enable or disable FIM synchronization.                                                                                                                                                                                                                                                |
 +------------------------+-------------------+----------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``interval``           | ``5m``            | Any number greater than or equal to 1. Allowed suffixes (s, m, h, d) | Specifies how often the agent initiates a sync with the manager.                                                                                                                                                                                                                      |
-+------------------------+-------------------+----------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``response_timeout``   | ``60``            | Any number greater than or equal to 1. Allowed suffixes (s, m, h, d) | Specifies the maximum number of seconds the agent will wait for a manager response before treating the synchronization attempt as failed. Setting this value too low may trigger premature retries, while setting it too high may delay timely detection of synchronization failures. |
-+------------------------+-------------------+----------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``max_eps``            | ``75``            | Integer number between 0 and 1000000. 0 means unlimited.             | Sets the maximum synchronization messages per second.                                                                                                                                                                                                                                 |
 +------------------------+-------------------+----------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``integrity_interval`` | ``24h``           | Any number greater than or equal to 1. Allowed suffixes (s, m, h, d) | Specifies how often the agent performs a full integrity validation by comparing checksums with the manager.                                                                                                                                                                           |
 +------------------------+-------------------+----------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

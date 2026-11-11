@@ -3,6 +3,8 @@
 .. meta::
    :description: Look up the filter, map, and transformation helper functions of the Wazuh normalization engine. Each table lists the helper signature, argument types and sources, expected target field type, and behavior, with an example.
 
+.. collapsible-tables:: helper functions
+
 .. _reference_helper_functions:
 .. _helper_functions_reference_tables:
 

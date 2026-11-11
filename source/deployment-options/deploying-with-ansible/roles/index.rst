@@ -93,16 +93,22 @@ This role installs and configures the Wazuh dashboard on the target node. It sup
 The role performs the following tasks:
 
 -  **Import variables:** Loads shared variables from ``/etc/ansible/roles/wazuh-ansible/roles/vars/main.yml`` and ``/etc/ansible/roles/wazuh-ansible/roles/vars/artifact_urls.yaml``.
--  **Install dependencies:** Checks that the ``local_configs_path`` directory exists on the Ansible control node, installs the required system packages, and downloads the ``.rpm`` or ``.deb`` package, using the ``dependencies.yml`` task file. On Debian-based systems, it also restarts the services that ``needrestart`` reports, including SSH.
+-  **Install dependencies:** Checks that the ``local_configs_path`` directory exists on the Ansible control node, installs ``libcap`` on RHEL-based systems or ``tar``, ``curl``, and ``libcap2-bin`` on Debian-based systems, which the Wazuh dashboard package itself doesn't need, and downloads the ``.rpm`` or ``.deb`` package, using the ``dependencies.yml`` task file. On Debian-based systems, it also restarts the services that ``needrestart`` reports, including SSH.
 -  **Provide credentials:** Runs the ``wazuh-credentials`` role and writes the Wazuh dashboard passwords and the names of its certificate to ``/etc/wazuh-dashboard/local.env`` on the node before the package is installed.
--  **Stage certificates:** In a Wazuh cluster deployment, copies the dashboard certificate, and the root CA certificate as ``indexer-ca.pem`` and ``manager-ca.pem``, to ``/etc/wazuh-dashboard/certs`` before the package is installed. In an all-in-one deployment, the package creates its certificate and imports the root CAs of the Wazuh indexer and Wazuh manager from the host.
+-  **Stage certificates:** In a Wazuh cluster deployment, copies the dashboard certificate, and the root CA certificate as ``indexer-ca.pem`` and ``manager-ca.pem``, to ``/etc/wazuh-dashboard/certs`` with mode ``0640`` before the package is installed. In an all-in-one deployment, the package creates its certificate and imports the root CAs of the Wazuh indexer and Wazuh manager from the host, so the playbook installs the Wazuh manager first. The package checks ``local.env`` and these files at every start, not only at installation.
 -  **Install package (RHEL):** Installs the ``.rpm`` package using ``dnf``.
 -  **Install package (Debian):** Installs the ``.deb`` package using ``apt``.
 -  **Reload systemd:** Reloads the ``systemd`` daemon after installation.
 -  **Configure OpenSearch hosts:** Updates ``opensearch_dashboards.yml`` with Wazuh indexer cluster nodes.
--  **Configure manager URL:** Configures the Wazuh manager URL in ``opensearch_dashboards.yml``.
+-  **Configure manager URL:** Configures the Wazuh manager URL in ``opensearch_dashboards.yml``. The address must be in the Wazuh manager API certificate of the master node. The role leaves ``opensearch.ssl.certificateAuthorities`` and ``wazuh_core.hosts.default.ca`` as the package ships them.
+-  **Check the CAs:** Stops the run if ``opensearch_dashboards.yml`` doesn't verify the Wazuh indexer with ``certs/indexer-ca.pem`` and the Wazuh manager API with ``certs/manager-ca.pem``.
 -  **Start service:** Enables and restarts the Wazuh dashboard service.
--  **Verify service:** Waits until the Wazuh dashboard login page returns HTTP 200.
+-  **Verify service:** Waits until the Wazuh dashboard login page returns HTTP 200. It doesn't check the Wazuh manager API connection. To check it, run the following command on the Wazuh dashboard host. Replace ``<CA_FILE>`` with ``/etc/wazuh-dashboard/export/ca.pem`` in an all-in-one deployment, or with ``/etc/wazuh-dashboard/certs/indexer-ca.pem``, the root CA of the deployment, in a Wazuh cluster deployment. The command asks for the ``admin`` password. Its output includes the name of the Wazuh manager master node, for example ``"node":"master-node"``:
+
+   .. code-block:: console
+
+      # curl --cacert <CA_FILE> -u admin -H 'osd-xsrf: true' -H 'Content-Type: application/json' -X POST https://<WAZUH_DASHBOARD_ADDRESS>/api/check-api -d '{"id":"default"}'
+
 -  **Remove installation files:** Deletes the package download directory on the target node.
 
 Wazuh agent
