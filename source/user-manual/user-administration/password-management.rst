@@ -85,7 +85,7 @@ To read a new password, run the following command on the host where you ran the 
 Change the password for a Wazuh indexer user
 ---------------------------------------------
 
-Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``. To change the password for a Wazuh indexer user, run the script with the ``-u`` option and pass the new password to the ``-p`` option through standard input. Passwords for Wazuh indexer users and Wazuh manager API users must contain 12 to 64 characters, using only ``A``-``Z``, ``a``-``z``, ``0``-``9``, and the symbols ``. , _ + : @ % ^ = ~ -``. They must include at least one uppercase letter, one lowercase letter, one number, and one of the previously mentioned symbols.
+Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``. To change the password for a Wazuh indexer user, run the script with the ``-u`` option and pass the new password to the ``-p`` option through standard input. Passwords for Wazuh indexer users and Wazuh manager API users must contain 12 to 64 characters, using only ``A``-``Z``, ``a``-``z``, ``0``-``9``, and the symbols ``. , _ + : @ % ^ = ~ -``. They must include at least one uppercase letter, one lowercase letter, one number, and one of the previously mentioned symbols. This rule applies to the passwords you set with the tool or at installation. When you change a Wazuh manager API password with ``rbac_control`` or the Wazuh manager API, the Wazuh manager API accepts a wider set: 12 to 64 printable ASCII characters with at least one letter and one number.
 
 .. code-block:: console
 
