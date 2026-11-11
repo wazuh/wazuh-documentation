@@ -127,7 +127,7 @@ Create a custom rule
 
 Wazuh rules define the detection logic for identifying relevant security activity in normalized events. They describe what should be detected by specifying conditions on event fields. Make sure the space selector reads **Draft** and then follow these steps to create a custom rule.
 
-#. Go to **Ruleset management** → **Detection** → **Rules**, and click **Create rule**.
+#. Go to **Ruleset management** → **Detection** → **Rules**, and click **Actions** → **Create**.
 
 #. Select **YAML Editor**, choose the integration ``wazuh-fim-custom``, and paste the rule below:
 

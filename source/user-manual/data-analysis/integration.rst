@@ -53,5 +53,10 @@ Each integration must be assigned a category. The available categories are descr
 +-------------------+--------------------------------------------------------------+
 | Other             | Events that do not fit any of the above categories           |
 +-------------------+--------------------------------------------------------------+
+| Unclassified      | Catch-all category for events that no other integration      |
+|                   | classifies. These events are stored in the                   |
+|                   | ``wazuh-events-v5-unclassified`` data stream only when       |
+|                   | unclassified event indexing is enabled for the space         |
++-------------------+--------------------------------------------------------------+
 
 The category assigned to an integration is applied to all events decoded by that integration's decoders. This value is stored in the ``wazuh.integration.category`` field for every processed event and used during the output stage to route events to the appropriate data stream, such as ``wazuh-events-v5-cloud-services``.
