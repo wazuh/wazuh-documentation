@@ -22,7 +22,7 @@ The Wazuh manager package issues the agent listener and Wazuh manager API certif
 
 To give every node certificates from one CA, install the master node first. Then copy its ``/etc/wazuh-manager/ca/root-ca.pem`` and ``root-ca.key`` to each worker node before you install the package there, as described in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`.
 
-The agent listener certificate of each node must include the addresses Wazuh agents use to reach it. Behind a load balancer, include the load balancer name or address too. Set them in ``WAZUH_MANAGER_REMOTED_CERT_SANS`` in ``/etc/wazuh-manager/local.env`` before you install the node. See :ref:`Subject alternative names <wazuh_manager_credentials_sans>`.
+The agent listener certificate of each node must include the addresses Wazuh agents use to reach it. Behind a load balancer, include the load balancer name or address too. Set them in ``WAZUH_MANAGER_REMOTED_CERT_SANS`` in ``/etc/wazuh-manager/local.env`` before you install the node. See :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`.
 
 Check a node's agent listener certificate:
 
@@ -88,6 +88,4 @@ To use certificates from your own CA, stage them on every node instead:
 -  The agent listener and Wazuh manager API certificates and their keys in ``/etc/wazuh-manager/certs/``, with owner ``root:wazuh-manager`` and mode ``0640``.
 -  The CA bundle for the Wazuh agents as ``/etc/wazuh-manager/certs/root-ca.pem``.
 
-Stage the CA before you install the package, and the files in ``certs/`` after you install it and before the first start. See :doc:`Credentials and certificates </user-manual/manager/credentials>` for the requirements of each file.
-
-To replace the CA of a running cluster, follow :ref:`Rotating the CA <wazuh_manager_certs>`.
+Stage the CA before you install the package, and the files in ``certs/`` after you install it and before the first start. Each certificate needs subject alternative names, and ``serverAuth`` if it restricts its extended key usage. Run ``/var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check`` to check the files before you start the Wazuh manager.
