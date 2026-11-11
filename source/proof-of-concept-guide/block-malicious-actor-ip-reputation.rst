@@ -115,7 +115,7 @@ Perform the following steps to install and configure an Apache web server and a 
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^

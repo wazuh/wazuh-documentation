@@ -9,19 +9,22 @@ Distributed deployment
 Certificates creation and deployment
 ------------------------------------
 
-Use the pre-existing root CA to generate the certificate for the new node, so the certificates of the existing nodes remain valid. Perform the steps below on the host that holds ``root-ca.key`` in ``/etc/wazuh/ca``, where the original certificates were created.
+Use the root CA of the deployment to issue the certificate for the new node, so the certificates of the existing nodes remain valid. Perform the steps below on the host that holds the root CA private key, ``root-ca.key``. In an assisted installation, it's in the ``wazuh-ca`` directory beside the installation assistant, on the host where you ran ``--generate-config-files``. In a step-by-step installation, it's in ``/etc/wazuh-indexer/ca`` on the first Wazuh indexer node.
 
 .. note::
 
-   If the pre-existing root CA keys have been deleted or you can't access them, create new certificates for all nodes instead. Reference every node of your deployment in ``/root/config.yml``. Run ``bash wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A``, and redeploy the certificates on every existing node before continuing, as shown in the :ref:`All-in-one deployment > Certificates creation <all_in_one_certificates_creation_and_deployment>` subsection.
+   If the root CA private key has been deleted or you can't access it, the existing nodes can't trust a certificate issued for the new node.
 
-#. Create a ``config.yml`` file in the ``/root`` directory to add the new Wazuh indexer node:
+   Restore the CA directory from your backup before you continue.
+
+#. Create a working directory for the new certificates, and a ``config.yml`` file in it. Use a new directory so that the ``config.yml`` and ``wazuh-certificates`` of the original installation are kept:
 
    .. code-block:: console
 
-      # touch /root/config.yml
+      # mkdir -p /root/new-indexer-node && cd /root/new-indexer-node
+      # touch config.yml
 
-#. Edit the ``/root/config.yml`` file to include only the node name and IP address of the new node:
+#. Edit the ``config.yml`` file to include only the node name and IP address of the new node:
 
    .. code-block:: yaml
       :emphasize-lines: 4,5
@@ -32,7 +35,7 @@ Use the pre-existing root CA to generate the certificate for the new node, so th
           - name: <NEW_WAZUH_INDEXER_NODE_NAME>
             ip: "<NEW_WAZUH_INDEXER_IP>"
 
-#. Extract the certificate archive to obtain the existing certificates.
+#. Copy the certificate archive of the deployment to this directory, and extract it to obtain the existing certificates.
 
    -  If the certificate archive is ``wazuh-certificates.tar``, use this command:
 
@@ -46,13 +49,13 @@ Use the pre-existing root CA to generate the certificate for the new node, so th
 
          # tar -xf ./wazuh-install-files.tar
 
-#. Download and run the certificates tool to create the certificate for the new indexer node using the pre-existing root CA, which the tool reads from ``/etc/wazuh/ca``. The tool refuses to run when a ``wazuh-certificates`` directory already exists beside it, which is the case on the node where the original certificates were created. Rename any existing directory first so that the original certificates are kept.
+#. Download the certificates tool to this directory and run it to create the certificate for the new Wazuh indexer node. The tool reads ``config.yml`` from its own directory, and signs the certificate with the root CA in the directory set in ``WAZUH_CA_DIR``. Replace ``<CA_DIRECTORY>`` with the absolute path of the directory that holds ``root-ca.key``, for example, ``/etc/wazuh-indexer/ca``. Without this variable, the tool creates a new root CA, and the certificate of the new node doesn't chain to the root CA of the cluster.
 
    .. code-block:: console
+      :emphasize-lines: 2
 
       # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
-      # [ -d wazuh-certificates ] && mv wazuh-certificates wazuh-certificates.$(date +%Y%m%d%H%M%S).bak
-      # bash wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A
+      # WAZUH_CA_DIR=<CA_DIRECTORY> bash wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A
 
 #. Copy the newly created certificates to the ``wazuh-install-files`` folder, making sure not to replace the existing admin certificates:
 
@@ -60,21 +63,22 @@ Use the pre-existing root CA to generate the certificate for the new node, so th
 
       # cp wazuh-certificates/<NEW_WAZUH_INDEXER_NODE_NAME>* wazuh-install-files
 
-#. Compress the certificates that the new node requires, taken from the complete set assembled in ``wazuh-install-files``, and copy the archive to the new Wazuh indexer node. You can use the ``scp`` utility to copy the compressed file securely:
+#. Compress the certificates that the new node requires and the passwords, taken from the complete set assembled in ``wazuh-install-files``, and copy the archive to the new Wazuh indexer node. You can use the ``scp`` utility to copy the archive securely:
 
    .. code-block:: console
 
-      # tar -cvf ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar -C ./wazuh-install-files/ ./<NEW_WAZUH_INDEXER_NODE_NAME>.pem ./<NEW_WAZUH_INDEXER_NODE_NAME>-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
+      # tar -cvf ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar -C ./wazuh-install-files/ ./<NEW_WAZUH_INDEXER_NODE_NAME>.pem ./<NEW_WAZUH_INDEXER_NODE_NAME>-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem ./credentials.env
+      # chmod 600 ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar
       # scp ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar <TARGET_USERNAME>@<TARGET_IP>:
 
    .. note::
 
-      The new archive is named after the new node so that the original ``wazuh-certificates.tar`` is not overwritten. The root CA key, ``root-ca.key``, stays in ``/etc/wazuh/ca`` and is required to sign the certificate of every node added later. Keep a backup of ``/etc/wazuh/ca`` in secure storage.
+      The new archive is named after the new node so that the original archive is not overwritten. It holds the private key of the new node and the Wazuh indexer passwords, so remove it from both hosts after the new node is installed. The root CA private key, ``root-ca.key``, isn't in any archive. It stays in its CA directory. Keep a backup of that directory in secure storage. You need it to issue the certificate of every node added later.
 
 Configuring existing components to connect with the new node
 ------------------------------------------------------------
 
-#. Edit the configuration file at ``/etc/wazuh-indexer/opensearch.yml`` on all existing Wazuh indexer nodes. Add the ``<NEW_WAZUH_INDEXER_IP>`` to the ``discovery.seed_hosts`` block, and the ``<NEW_WAZUH_INDEXER_NODE_NAME>`` to ``CN`` in ``plugins.security.nodes_dn`` block.
+#. Edit the configuration file at ``/etc/wazuh-indexer/opensearch.yml`` on all existing Wazuh indexer nodes. Add ``<NEW_WAZUH_INDEXER_IP>`` to the ``discovery.seed_hosts`` block, and the distinguished name of the new node to the ``plugins.security.nodes_dn`` block. Keep the entries that are already there, shown as ``<EXISTING_WAZUH_INDEXER_DN>``:
 
    .. code-block:: yaml
       :emphasize-lines: 1,2,6,9,10,13,14
@@ -91,7 +95,7 @@ Configuring existing components to connect with the new node
         - "<NEW_WAZUH_INDEXER_IP>"
 
       plugins.security.nodes_dn:
-        - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+        - "<EXISTING_WAZUH_INDEXER_DN>"
         - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<NEW_WAZUH_INDEXER_NODE_NAME>"
 
    .. note::

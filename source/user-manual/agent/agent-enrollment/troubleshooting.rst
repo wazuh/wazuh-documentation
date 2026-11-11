@@ -170,6 +170,8 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
         </enrollment>
     </agent>
 
+.. _enrollment_token_refused_address_not_in_certificate_san:
+
 Enrollment token refused: address not in certificate SAN
 --------------------------------------------------------
 

@@ -36,7 +36,7 @@ PCI DSS requirement 2.2.4
 
 PCI DSS requirement 2.2.4 mandates keeping only necessary services, protocols, daemons, and functions enabled and removing unnecessary functionality. The :doc:`Syscollector <system-inventory>` and SCA modules support the requirement by identifying unnecessary processes, services, and configurations that can increase the attack surface.
 
-For this use case, the SCA module runs the check **35608 - Ensure ip forwarding is disabled** from the `cis_ubuntu24-04 <https://github.com/wazuh/wazuh/blob/5.0.0/ruleset/sca/ubuntu/cis_ubuntu24-04.yml>`__ SCA policy file on an Ubuntu 24.04 endpoint. This check maps to PCI DSS requirement 2.2.4. IP forwarding is unnecessary functionality on an endpoint that does not route traffic, and the SCA scan reports whether it is disabled.
+For this use case, the SCA module runs the check **35608 - Ensure ip forwarding is disabled** from the `cis_ubuntu24-04 <https://github.com/wazuh/wazuh/blob/5.0.0/ruleset/sca/ubuntu/cis_ubuntu24-04.yml>`__ SCA policy file on an Ubuntu 24.04 endpoint. IP forwarding is unnecessary functionality on an endpoint that does not route traffic, and the SCA scan reports whether it is disabled.
 
 .. thumbnail:: /images/compliance/pci/sca-ip-forwarding-disabled-01.png
    :title: SCA check for ip forwarding disabled
@@ -53,18 +53,18 @@ For this use case, the SCA module runs the check **35608 - Ensure ip forwarding 
 PCI DSS requirement 8.3.6
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-PCI DSS requirement 8.3.6 mandates that passwords and passphrases used as authentication factors meet a minimum level of strength. Password history enforcement strengthens password-based authentication by preventing users from reusing recent credentials, making it harder for attackers to regain access with previously compromised passwords.
+PCI DSS requirement 8.3.6 mandates that passwords used as authentication factors meet a minimum level of complexity. Passwords must be at least 12 characters long and contain both numeric and alphabetic characters. Longer passwords are harder to guess or crack with brute-force attacks.
 
-The SCA module runs check **35687 - Ensure password history remember is configured** from the `cis_ubuntu24-04 <https://github.com/wazuh/wazuh/blob/5.0.0/ruleset/sca/ubuntu/cis_ubuntu24-04.yml>`__ SCA policy file on an Ubuntu 24.04 endpoint. It checks that the ``pam_pwhistory`` module is configured with a remember value of at least 24 in ``/etc/pam.d/common-password`` as specified by the CIS Benchmark for Ubuntu Linux 24.04 LTS. This check maps to PCI DSS requirements 8.3.5 and 8.3.6. When an SCA scan runs, the check identifies whether the endpoint meets this configured password history baseline.
+The SCA module runs check **35680 - Ensure minimum password length is configured** from the `cis_ubuntu24-04 <https://github.com/wazuh/wazuh/blob/5.0.0/ruleset/sca/ubuntu/cis_ubuntu24-04.yml>`__ SCA policy file on the endpoint. It checks that the minlen option is set to 14 or more in ``/etc/security/pwquality.conf`` as specified by the CIS Benchmark for Ubuntu Linux 24.04 LTS. When an SCA scan runs, the check identifies whether the endpoint meets this configured password length baseline. The check result is Not applicable until the ``libpam-pwquality`` package is installed, because the package creates the ``/etc/security/pwquality.conf`` file.
 
-.. thumbnail:: /images/compliance/pci/sca-password-history-remember-01.png
-   :title: SCA check for password history remember configured
-   :alt: Configuration Assessment Inventory tab with check 35687, Ensure password history remember is configured, failed
+.. thumbnail:: /images/compliance/pci/sca-minimum-password-length-01.png
+   :title: SCA check for minimum password length configured
+   :alt: Configuration Assessment Inventory tab with check 35680, Ensure minimum password length is configured, failed
    :align: center
    :width: 80%
 
-.. thumbnail:: /images/compliance/pci/sca-password-history-remember-02.png
-   :title: SCA check details for password history remember configured
-   :alt: Details panel of SCA check 35687 showing its PCI DSS and other compliance mappings
+.. thumbnail:: /images/compliance/pci/sca-minimum-password-length-02.png
+   :title: SCA check details for minimum password length configured
+   :alt: Details panel of SCA check 35680 showing its PCI DSS and other compliance mappings
    :align: center
    :width: 80%

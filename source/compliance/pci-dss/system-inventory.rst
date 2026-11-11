@@ -40,10 +40,10 @@ Click the upper-left menu icon **☰** to open the options, and go to **Security
 PCI DSS dashboard
 ~~~~~~~~~~~~~~~~~~
 
-Syscollector data doesn't generate findings for requirement 2.2.4. The PCI DSS dashboard shows the findings for requirement 2.2.4 from SCA checks, such as check 35608 in :doc:`Configuration assessment <configuration-assessment>`. To review them, click the menu icon, navigate to **Security operations** > **Regulatory Compliance** > **PCI DSS**, then click the **Controls** tab and select **Requirement 2**. The following image shows the SCA findings for requirement 2.2.4:
+Click the menu icon, navigate to **Security operations** > **Regulatory Compliance** > **PCI DSS**, then click the **Controls** tab and select **Requirement 2** to review findings related to PCI DSS requirement 2.2.4. These findings come from SCA checks that map to this requirement, such as check 35608 in :doc:`Configuration assessment <configuration-assessment>`, not from Syscollector. The following image shows the corresponding PCI DSS finding in the Wazuh dashboard:
 
 .. thumbnail:: /images/compliance/pci/pci-dss-dashboard-requirement-2-2-4.png
    :title: PCI DSS dashboard finding for requirement 2.2.4
-   :alt: PCI DSS Controls tab with Requirement 2 selected and the 2.2.4 requirement card
+   :alt: Requirement 2.2.4 details in the PCI DSS Controls tab with its recent SCA findings
    :align: center
    :width: 80%
