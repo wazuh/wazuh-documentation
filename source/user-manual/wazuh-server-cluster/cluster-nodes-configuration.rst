@@ -1,103 +1,100 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to configure the master and worker nodes of a Wazuh manager cluster in the cluster block of wazuh-manager.conf.
+   :description: Learn how to configure a Wazuh server cluster with a master node and a single worker node in this section of the documentation.
 
 Wazuh cluster nodes configuration
 =================================
 
-The ``<cluster>`` block of ``/etc/wazuh-manager/wazuh-manager.conf`` configures each node. The block is required: the Wazuh manager doesn't start without it. The package writes a single-node block on every node, with ``node_type`` set to ``master``, a random key, and ``127.0.0.1`` as ``bind_addr`` and node address. Edit that block instead of adding a second one.
+There can only be one master node in a cluster, while all other Wazuh servers are the worker nodes. For both node types, the configuration file ``/var/ossec/etc/ossec.conf`` contains the cluster configuration values.
 
-The cluster doesn't synchronize ``wazuh-manager.conf``, so edit it on each node. To deploy a new cluster, follow the :ref:`cluster configuration <wazuh_server_master_node>` steps of the installation guide. To add a node to an existing cluster, see :doc:`Adding new Wazuh server nodes </user-manual/wazuh-server-cluster/adding-new-server-nodes/index>`.
+The following section shows how to configure a cluster with a master node and a single worker node configuration example.
+
+.. note::
+
+   Configuration changes to the ``/var/ossec/etc/ossec.conf`` file on the master node is not automatically synchronized to the worker nodes. Manually replicate the configuration and restart the nodes to apply the changes.
 
 Master node
 -----------
 
-#. Create the cluster key on the master node and keep the output. The key must be the same on every node:
+Before configuring the cluster, generate a unique 32-character hexadecimal key. This key must be the same on all nodes (master and workers) in the cluster. We generate a unique key with the command ``openssl rand -hex 16``.
 
-   .. code-block:: console
-
-      # openssl rand -hex 16
-
-#. Edit the ``<cluster>`` block of ``/etc/wazuh-manager/wazuh-manager.conf``:
+#. Set the following configuration in the ``<cluster>`` block of ``/var/ossec/etc/ossec.conf`` on the Wazuh server master node:
 
    .. code-block:: xml
 
       <cluster>
-        <name>wazuh</name>
-        <node_name>master-node</node_name>
-        <node_type>master</node_type>
-        <key><CLUSTER_KEY></key>
-        <port>1516</port>
-        <bind_addr><MASTER_NODE_ADDRESS></bind_addr>
-        <nodes>
-          <node><MASTER_NODE_ADDRESS></node>
-        </nodes>
-        <hidden>no</hidden>
+          <name>wazuh</name>
+          <node_name>master-node</node_name>
+          <key>756c70a151ad0b73b20e9f8cd37fe24c</key>
+          <node_type>master</node_type>
+          <port>1516</port>
+          <bind_addr>0.0.0.0</bind_addr>
+          <nodes>
+              <node><MASTER_NODE_IP_ADDRESS></node>
+          </nodes>
+          <hidden>no</hidden>
+          <disabled>no</disabled>
       </cluster>
 
    Where:
 
-   -  ``<name>`` is the name of the cluster. Use only letters, digits, ``_`` and ``-``, and the same name on every node.
-   -  ``<node_name>`` is the name of this node. Each node needs a unique name, with only letters, digits, ``_`` and ``-``.
-   -  ``<node_type>`` is ``master`` or ``worker``. A cluster has exactly one master node.
-   -  ``<key>`` is the 32-character key you created. Use letters and digits only.
-   -  ``<port>`` is the cluster port, from ``1025`` to ``65534``. It must differ from the other Wazuh manager listener ports.
-   -  ``<bind_addr>`` is the address where the master node listens for worker nodes. Worker nodes ignore it. With the default, ``127.0.0.1``, the master node accepts only local connections. Use an address on the management network rather than ``0.0.0.0`` on a host whose other interfaces face Wazuh agents or users.
-   -  ``<node>`` is the address of the master node, an IP address or a DNS name. Set it on every node, the master node included. ``localhost``, ``0.0.0.0`` and ``127.0.1.1`` are refused.
-   -  ``<hidden>`` has no effect in Wazuh 5.0. Keep the default, ``no``.
+   -  ``<name>`` is the name that will be assigned to the cluster.
+   -  ``<node_name>`` is the name of the current Wazuh server node.
+   -  ``<key>`` is a unique 32-character key generated before configuring the cluster and must be the same on all cluster nodes.
+   -  ``<node_type>`` sets the Wazuh server node type to either ``master`` or ``worker``.
+   -  ``<port>`` is the destination port for cluster communication.
+   -  ``<bind_addr>`` is the IP address where the Wazuh server node is listening to (0.0.0.0 or any IP address).
+   -  ``<node>`` specifies the address of the master node within the ``<nodes>`` block, and this must be specified in all Wazuh server nodes, including the master node itself. The address can be either an IP address or a DNS.
+   -  ``<hidden>`` toggles whether or not to show information about the cluster that generated an alert.
+   -  ``<disabled>`` indicates whether the Wazuh server is enabled or not in the cluster.
 
-   See the :doc:`cluster </user-manual/reference/wazuh-manager-conf/cluster>` reference for every option.
+   You can learn more about the available configuration options in the :doc:`cluster </user-manual/reference/ossec-conf/cluster>` reference guide.
 
-#. Check the configuration, then restart the Wazuh manager:
+#. Restart the master node to apply the configuration changes:
 
    .. code-block:: console
 
-      # /var/wazuh-manager/bin/wazuh-manager-control check
       # systemctl restart wazuh-manager
 
 Worker node
 -----------
 
-#. Edit the ``<cluster>`` block of ``/etc/wazuh-manager/wazuh-manager.conf``. Set a unique ``<node_name>``, ``worker`` as ``<node_type>``, and the cluster key of the master node, which is different from the random key the package wrote on this node:
+#. Set the following configuration in the ``<cluster>`` block of ``/var/ossec/etc/ossec.conf`` on the Wazuh server worker node.
 
    .. code-block:: xml
 
       <cluster>
         <name>wazuh</name>
-        <node_name>worker-node1</node_name>
+        <node_name>worker01-node</node_name>
+        <key>756c70a151ad0b73b20e9f8cd37fe24c</key>
         <node_type>worker</node_type>
-        <key><CLUSTER_KEY></key>
         <port>1516</port>
         <bind_addr>0.0.0.0</bind_addr>
         <nodes>
-          <node><MASTER_NODE_ADDRESS></node>
+            <node><MASTER_NODE_IP_ADDRESS></node>
         </nodes>
         <hidden>no</hidden>
+        <disabled>no</disabled>
       </cluster>
 
-#. Check the configuration, then restart the Wazuh manager:
+#. Restart the worker node to apply the configuration changes:
 
    .. code-block:: console
 
-      # /var/wazuh-manager/bin/wazuh-manager-control check
       # systemctl restart wazuh-manager
 
-#. Check that the node joined the cluster:
+#. Execute the following command to check that everything worked as expected:
 
    .. code-block:: console
 
-      # /var/wazuh-manager/bin/cluster_control -l
+      # /var/ossec/bin/cluster_control -l
 
-   The command returns output similar to the following:
+   The command returns output similar to the following example:
 
    .. code-block:: none
       :class: output
 
-      NAME          TYPE    VERSION  ADDRESS
-      master-node   master  5.0.0    10.0.0.3
-      worker-node1  worker  5.0.0    10.0.0.4
-
-   If the worker node isn't listed, check ``/var/wazuh-manager/logs/cluster.log`` on the worker node and the master node. See :doc:`How the Wazuh server cluster works </user-manual/wazuh-server-cluster/how-server-cluster-works>` for the refusal errors.
-
-The Wazuh manager API runs only on the master node, so port 55000 doesn't answer on a worker node.
+      NAME     TYPE    VERSION  ADDRESS
+      wazuh-1  master  4.14.2   10.0.0.9
+      wazuh-2  worker  4.14.2   10.0.0.10

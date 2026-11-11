@@ -133,6 +133,7 @@ exclude_patterns = [
     'user-manual/wazuh-indexer/re-indexing.rst',
     'user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints.rst',
     'user-manual/wazuh-indexer-cluster/index-lifecycle-management.rst',
+    'user-manual/wazuh-server-cluster/**',
     'cloud-security/gcp/posture-management.rst',
     'proof-of-concept-guide/detect-unauthorized-processes-netcat.rst',
     'proof-of-concept-guide/poc-detect-trojan.rst',

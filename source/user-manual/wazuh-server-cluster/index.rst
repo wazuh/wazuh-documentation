@@ -1,14 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn about the Wazuh manager cluster, how its nodes work together, and how to add nodes and balance Wazuh agent connections.
+   :description: The Wazuh server cluster is made up of multiple Wazuh server nodes in a distributed environment. Learn more in this section of the documentation.
 
 Wazuh server cluster
 ====================
 
-The Wazuh server cluster consists of multiple Wazuh manager nodes: one master node and any number of worker nodes. This deployment strategy provides horizontal scalability and improves performance. In an environment with many endpoints to monitor, combine it with a :doc:`load balancer </user-manual/wazuh-server-cluster/load-balancers>`, so Wazuh agents reach the cluster through one address and their connections are distributed across the nodes.
-
-Every Wazuh 5.0 manager is a cluster node, even when it runs alone: a single Wazuh manager is a master node with no worker nodes.
+The Wazuh server cluster consists of multiple Wazuh server nodes in a distributed environment. This deployment strategy helps to provide horizontal scalability, high availability, and improved performance. In an environment with many endpoints to monitor, you can combine this deployment strategy with :ref:`network load balancer <connecting_with_load_balancer>` to distribute Wazuh agent connections effectively across multiple nodes. This approach enables the Wazuh server to manage a large number of Wazuh agents more efficiently and ensure high availability.
 
 .. topic:: Content
 
