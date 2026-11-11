@@ -26,7 +26,7 @@ Dashboard
 
 Displays a consolidated view of the system inventory data across multiple or selected monitored endpoints. It visualizes key metrics such as operating system families, package types, endpoints by total memory, installed packages, running processes, operating systems, host CPUs, destination ports, source ports, and process start times.
 
-.. thumbnail:: /images/manual/system-inventory/system-inventory-dashboard.jpg
+.. thumbnail:: /images/manual/system-inventory/system-inventory-dashboard.png
    :title: System inventory dashboard
    :alt: System inventory dashboard
    :align: center
@@ -39,7 +39,7 @@ Provides a detailed breakdown of the operating systems and hardware in your envi
 
 -  The **OS** tab provides an operating system and hardware information breakdown across all monitored endpoints.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-system-os-tab.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-system-os-tab.png
       :title: System inventory - System OS
       :alt: System inventory - System OS
       :align: center
@@ -47,7 +47,7 @@ Provides a detailed breakdown of the operating systems and hardware in your envi
 
 -  The **Hardware** tab displays top CPU models, CPU cores, the most used memory, and a summary data table.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-system-hardware-tab.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-system-hardware-tab.png
       :title: System inventory - System Hardware
       :alt: System inventory - System Hardware
       :align: center
@@ -60,7 +60,7 @@ Contains an overview of software packages, Windows KBs, and browser extensions o
 
 -  The **Packages** tab displays package data, including top software vendors, the number of unique packages, the types of packages, and a summary data table.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-software-packages-tab.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-software-packages-tab.png
       :title: System inventory - Software Packages
       :alt: System inventory - Software Packages
       :align: center
@@ -68,7 +68,7 @@ Contains an overview of software packages, Windows KBs, and browser extensions o
 
 -  The **Windows KBs** tab displays the Windows Knowledge Base data, including the most and least common Knowledge Bases.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-software-windows-kbs-tab.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-software-windows-kbs-tab.png
       :title: System inventory - Software Windows KBs
       :alt: System inventory - Software Windows KBs
       :align: center
@@ -76,7 +76,7 @@ Contains an overview of software packages, Windows KBs, and browser extensions o
 
 -  The **Browser extensions** tab displays top browsers and packages, and a summary data table containing the browser and extension details.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-browser-extension.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-browser-extension.png
       :title: System inventory - Browser extensions
       :alt: System inventory - Browser extensions
       :align: center
@@ -87,7 +87,7 @@ Processes
 
 Displays running processes, process start times, and a summary data table containing process details for the monitored endpoints.
 
-.. thumbnail:: /images/manual/system-inventory/system-inventory-processes.jpg
+.. thumbnail:: /images/manual/system-inventory/system-inventory-processes.png
    :title: System inventory - Processes
    :alt: System inventory - Processes
    :align: center
@@ -100,7 +100,7 @@ Contains the **Addresses**, **Interfaces**, **Protocols**, **Listeners,** and **
 
 -  The **Addresses** tab provides a detailed view of network types, top IP addresses, top interface names, and a summary data table containing detailed network address information.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-addresses-tab.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-addresses-tab.png
       :title: System inventory - Network Addresses
       :alt: System inventory - Network Addresses
       :align: center
@@ -108,7 +108,7 @@ Contains the **Addresses**, **Interfaces**, **Protocols**, **Listeners,** and **
 
 -  The **Interfaces** tab offers a detailed view of network interfaces, displaying the average packet loss rate, interface states, interface types, and a summary data table of interface-level details, including the MTU and MAC address.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-interfaces-tab.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-interfaces-tab.png
       :title: System inventory - Network Interfaces
       :alt: System inventory - Network Interfaces
       :align: center
@@ -116,7 +116,7 @@ Contains the **Addresses**, **Interfaces**, **Protocols**, **Listeners,** and **
 
 -  The **Protocols** tab offers a detailed view of network types, network metrics, and DHCP status, and a summary table with more protocol-level details, including the gateway and routing metric per interface.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-protocols-tab.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-protocols-tab.png
       :title: System inventory - Network Protocols
       :alt: System inventory - Network Protocols
       :align: center
@@ -124,7 +124,7 @@ Contains the **Addresses**, **Interfaces**, **Protocols**, **Listeners,** and **
 
 -  The **Listeners** tab presents a detailed view of the ports on each endpoint that are open and awaiting connections, with the top source ports, transport protocols, the processes listening on them, and a summary data table.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-listeners-tab.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-listeners-tab.png
       :title: System inventory - Network Listeners
       :alt: System inventory - Network Listeners
       :align: center
@@ -132,7 +132,7 @@ Contains the **Addresses**, **Interfaces**, **Protocols**, **Listeners,** and **
 
 -  The **Traffic** tab provides a detailed view of the active network connections on each endpoint, with the top destination ports, transport protocols, the processes that own the connections, and a summary data table listing the source and destination address and port of each connection.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-traffic-tab.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-traffic-tab.png
       :title: System inventory - Network Traffic
       :alt: System inventory - Network Traffic
       :align: center
@@ -145,7 +145,7 @@ Provides a detailed breakdown of the users and groups in your environment.
 
 -  The **Users** tab displays user account information, including top users, user groups, user shells, and a summary data table.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-identity-users-tab.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-identity-users-tab.png
       :title: System inventory - Identity Users
       :alt: System inventory - Identity Users
       :align: center
@@ -153,7 +153,7 @@ Provides a detailed breakdown of the users and groups in your environment.
 
 -  The **Groups** tab displays information about the user account groups, including top groups, the number of unique groups, and a summary data table.
 
-   .. thumbnail:: /images/manual/system-inventory/system-inventory-identity-groups-tab.jpg
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-identity-groups-tab.png
       :title: System inventory - Identity Groups
       :alt: System inventory - Identity Groups
       :align: center
@@ -164,7 +164,7 @@ Services
 
 Displays top running services, total unique services, and a summary data table containing service details for the monitored endpoints.
 
-.. thumbnail:: /images/manual/system-inventory/system-inventory-services.jpg
+.. thumbnail:: /images/manual/system-inventory/system-inventory-services.png
    :title: System inventory - Services
    :alt: System inventory - Services
    :align: center
@@ -192,7 +192,7 @@ Follow these steps to access the Wazuh indexer API from the Wazuh dashboard.
 
 #. On the Wazuh dashboard, click the menu icon in the upper-left corner and navigate to **Indexer management** > **Dev Tools**.
 
-   .. thumbnail:: /images/manual/system-inventory/dev-tools.jpg
+   .. thumbnail:: /images/manual/system-inventory/dev-tools.png
       :title: Indexer management > Dev Tools
       :alt: Indexer management > Dev Tools
       :align: center
@@ -206,7 +206,7 @@ Follow these steps to access the Wazuh indexer API from the Wazuh dashboard.
 
    The command retrieves information about the system inventory indices.
 
-   .. thumbnail:: /images/manual/system-inventory/get-states-inventory-indices.jpg
+   .. thumbnail:: /images/manual/system-inventory/get-states-inventory-indices.png
       :title: Get inventory indices
       :alt: Get inventory indices
       :align: center
@@ -218,7 +218,7 @@ Follow these steps to access the Wazuh indexer API from the Wazuh dashboard.
 
       GET /wazuh-states-inventory-packages/_search?pretty
 
-   .. thumbnail:: /images/manual/system-inventory/get-inventory-packages.jpg
+   .. thumbnail:: /images/manual/system-inventory/get-inventory-packages.png
       :title: Get inventory packages
       :alt: Get inventory packages
       :align: center
@@ -237,7 +237,7 @@ Follow these steps to access the Wazuh indexer API from the Wazuh dashboard.
         }
       }
 
-   .. thumbnail:: /images/manual/system-inventory/look-up-inventory-packages.jpg
+   .. thumbnail:: /images/manual/system-inventory/look-up-inventory-packages.png
       :title: Look up inventory packages
       :alt: Look up inventory packages
       :align: center
@@ -267,7 +267,7 @@ Follow these steps to access the Wazuh indexer API from the Wazuh dashboard.
         }
       }
 
-   .. thumbnail:: /images/manual/system-inventory/look-up-inventory-packages-on-endpoint.jpg
+   .. thumbnail:: /images/manual/system-inventory/look-up-inventory-packages-on-endpoint.png
       :title: Look up inventory packages on endpoint
       :alt: Look up inventory packages on endpoint
       :align: center
