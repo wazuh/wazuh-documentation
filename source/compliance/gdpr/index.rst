@@ -26,7 +26,7 @@ To view the GDPR related data on the Wazuh dashboard:
       :align: center
       :width: 80%
 
-#. Switch to the **Controls** tab to view the GDPR requirements breakdown.
+#. Switch to the **Controls** tab to view the GDPR requirements breakdown. The **Controls** tab groups requirements by article. For example, a finding tagged ``II_5.1.f`` appears under Article 5.
 
    .. thumbnail:: /images/compliance/gdpr/gdpr-controls.png
       :title: GDPR Controls
@@ -51,6 +51,8 @@ Wazuh includes default rules and decoders that detect attacks, system errors, se
        - II_5.1.f
        - IV_32.1.a
        - IV_33.1
+
+To create a custom rule and put it into production, see :ref:`Create a custom rule <data_analysis_create_custom_rule>`.
 
 The `Wazuh for GDPR white paper (PDF) <https://wazuh.com/resources/Wazuh_GDPR_White_Paper.pdf>`__ explains how Wazuh modules help with GDPR compliance. This document does not cover the formal GDPR requirements, because they fall outside its technical scope.
 
