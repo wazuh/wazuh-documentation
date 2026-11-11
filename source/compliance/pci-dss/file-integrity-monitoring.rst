@@ -201,7 +201,7 @@ In this use case, configure the Wazuh FIM module to scan monitored files every h
       :align: center
       :width: 80%
 
-In the expanded finding, you can see the changes made in ``content_changes``, the file modified, and the PCI DSS requirement met. It also includes the differences in the file checksum, the modification time, and other details.
+In the expanded finding, you can see the changes made in ``file.diff``, the file modified, and the PCI DSS requirement met. It also includes the differences in the file checksum, the modification time, and other details.
 
 .. _pci_dss_fim_detect_creation_deletion:
 
