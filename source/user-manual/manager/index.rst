@@ -29,5 +29,6 @@ For installation and configuration steps, refer to the :doc:`Wazuh manager insta
       wazuh-normalization-engine
       wazuh-indexer-connector
       wazuh-manager-services
+      credentials
       logging
       reference
