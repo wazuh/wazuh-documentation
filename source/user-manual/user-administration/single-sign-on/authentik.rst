@@ -33,20 +33,18 @@ authentik configuration
 #. Create a new user.
 
    #. Navigate to **Directory** > **Users** and click **New User**.
-   #. Set the **Username**, **Display Name** and **Email address** of the user.
-   #. Leave the other options as default and click **Create User**.
+   #. Select **Internal User**, then set the **Username**, **Display Name** and **Email Address** of the user.
+   #. Leave the other options as default and click **Create**.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-create-user.png
+      .. thumbnail:: /images/single-sign-on/authentik/01-create-user-form.png
          :title: Create user
-         :alt: Create user
          :align: center
          :width: 80%
 
    #. Select the newly created user, click **Set password** to assign a password to the user.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-set-password.png
+      .. thumbnail:: /images/single-sign-on/authentik/02-set-user-password.png
          :title: Set password
-         :alt: Set password
          :align: center
          :width: 80%
 
@@ -55,36 +53,32 @@ authentik configuration
    #. Navigate to **Directory** > **Groups** and click **New Group**
    #. Set a name for the group (for example, ``wazuh-administrators``) and click **Create Group**.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-new-group.png
+      .. thumbnail:: /images/single-sign-on/authentik/03-create-group.png
          :title: Create Group
-         :alt: Create Group
          :align: center
          :width: 80%
 
    #. Click the name of the newly created group and navigate to the **Users** tab.
    #. Click **Add existing user**, select the previously created user, confirm the selection and click **Assign**.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-add-existing-user.png
+      .. thumbnail:: /images/single-sign-on/authentik/04-add-existing-user.png
          :title: Assign user to group - Step 1
-         :alt: Assign user to group - Step 1
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-select-existing-user.png
+      .. thumbnail:: /images/single-sign-on/authentik/05-select-existing-user.png
          :title: Assign user to group - Step 2
-         :alt: Assign user to group - Step 2
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-assign-additional-user.png
+      .. thumbnail:: /images/single-sign-on/authentik/06-assign-additional-user.png
          :title: Assign user to group - Step 3
-         :alt: Assign user to group - Step 3
          :align: center
          :width: 80%
 
 #. Create a property mapping in authentik.
 
-   Navigate to **Customization** > **Property Mappings** and click **Create**. Create a **SAML Provider Property Mapping** with the following settings:
+   Navigate to **Customization** > **Property Mappings** and click **New Property Mapping**. Select **SAML Provider Property Mapping** and configure the following settings:
 
    #. **Name**: Choose a descriptive name
    #. **SAML Attribute Name**: Roles
@@ -94,66 +88,75 @@ authentik configuration
       .. code-block:: python3
 
          if ak_is_group_member(request.user, name="<ADMIN_GROUP_NAME>"):
-             yield "wazuh-admins"
+            yield "wazuh-admins"
 
-   #. Click **Finish**.
+   #. Click **Create**.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-property-mapping.png
+      .. thumbnail:: /images/single-sign-on/authentik/07-property-mapping-admin.png
          :title: Property Mapping Configuration
-         :alt: Property Mapping Configuration
          :align: center
          :width: 80%
 
-#. Navigate to **Applications** > **Applications** and click **Create with Provider** to create an application and provider pair.
+#. Navigate to **Applications** > **Applications** and click **New Application** > **with New Provider** to create an application and provider pair.
 
    #. **Application**: Provide a descriptive **Application Name** (for example, ``Wazuh``) and use the following required configuration. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value.
 
       -  **Slug**: Provide a name or accept the auto-provided name.
       -  **Policy engine mode**: ``ANY``.
-      -  **Launch URL**: ``https://<WAZUH_DASHBOARD_URL>``
+      -  **Launch URL** (under **UI Settings**): ``https://<WAZUH_DASHBOARD_URL>``
       -  Leave other values as default and click **Next** to proceed to the next step.
 
    #. **Choose a Provider type**: Select **SAML Provider** as the provider type.
-   #. **Configure Provider**: Provide a name or accept the auto-provided name. Leave the authorization flow as default, and add the following required configurations. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value.
+   #. **Configure Provider**: Provide a name or accept the auto-provided name. Select an authorization flow, for example, ``default-provider-authorization-explicit-consent``, and add the following required configurations. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value.
 
       -  **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      -  **Issuer**: ``wazuh-saml``
       -  **Audience**: ``wazuh-saml``
-      -  Under **Advanced protocol settings**:
+      -  Expand **Advanced protocol settings** and configure the following:
 
          -  **Property Mappings**: add the Property Mapping you created in the previous section.
-         -  **NameID Property Mapping**: select a property mapping that will be used for Wazuh usernames (for example, ``authentik default SAML Mapping: Name`` or ``authentik default SAML Mapping: Email``). Leave other values as default and click **Next** to proceed to the next step.
+         -  **NameID Property Mapping**: select ``authentik default SAML Mapping: Username``. Wazuh uses this value as the username.
+         -  **EntityID/Issuer override**: ``wazuh-saml``. Leave other values as default and click **Next** to proceed to the next step.
 
    #. **Configure Bindings**: Leave as default and click **Next** to proceed to the next step.
-   #. **Review and Submit Application**: Review the configuration and click **Submit.**
+   #. **Review and Submit Application**: Review the configuration and click **Create Application**, then click **Finish**.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-application-setup.png
+      .. thumbnail:: /images/single-sign-on/authentik/08-application-setup-step-1.png
          :title: Application Setup - Step 1
-         :alt: Application Setup - Step 1
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-application-setup2.png
+      .. thumbnail:: /images/single-sign-on/authentik/09-application-setup-step-2.png
          :title: Application Setup - Step 2
-         :alt: Application Setup - Step 2
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-application-setup3.png
+      .. thumbnail:: /images/single-sign-on/authentik/10-application-setup-step-3.png
          :title: Application Setup - Step 3
-         :alt: Application Setup - Step 3
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-application-setup4.png
+      .. thumbnail:: /images/single-sign-on/authentik/11-application-setup-step-4.png
          :title: Application Setup - Step 4
-         :alt: Application Setup - Step 4
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-application-setup5.png
+      .. thumbnail:: /images/single-sign-on/authentik/12-application-setup-step-5.png
          :title: Application Setup - Step 5
-         :alt: Application Setup - Step 5
+         :align: center
+         :width: 80%
+
+      .. thumbnail:: /images/single-sign-on/authentik/13-application-setup-step-6.png
+         :title: Application Setup - Step 6
+         :align: center
+         :width: 80%
+
+      .. thumbnail:: /images/single-sign-on/authentik/14-application-setup-step-7.png
+         :title: Application Setup - Step 7
+         :align: center
+         :width: 80%
+
+      .. thumbnail:: /images/single-sign-on/authentik/15-application-setup-step-8.png
+         :title: Application Setup - Step 8
          :align: center
          :width: 80%
 
@@ -162,9 +165,8 @@ authentik configuration
    #. Navigate to **Applications** > **Providers** and click on the name of the provider that you created in the previous section (for example, ``Provider for Wazuh``).
    #. Under **Related objects** > **Metadata**, click on **Download**. Save the file as ``wazuh_authentik_meta.xml``. This downloaded file is your SAML Metadata file and it will be required in the next section.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-download-metadata.png
+      .. thumbnail:: /images/single-sign-on/authentik/16-download-provider-metadata.png
          :title: Download Metadata
-         :alt: Download Metadata
          :align: center
          :width: 80%
 
@@ -189,15 +191,16 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
-#. Place the ``wazuh_authentik_meta.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+#. Place the ``wazuh_authentik_meta.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to root:wazuh-indexer and the permissions to 640 using the following commands:
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/wazuh_authentik_meta.xml
+      # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/wazuh_authentik_meta.xml
+      # chmod 640 /etc/wazuh-indexer/opensearch-security/wazuh_authentik_meta.xml
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
+   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and set the ``challenge`` flag to ``false``.
    -  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
@@ -234,7 +237,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
               authentication_backend:
                 type: noop
 
-   Ensure to change the following parameters to their corresponding value:
+   Ensure to change the following parameters to their corresponding value
 
    -  ``idp.metadata_file``
    -  ``idp.entity_id``
@@ -249,7 +252,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses ``localhost``, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -296,7 +299,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses ``localhost``, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -324,7 +327,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -337,31 +340,31 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** → **Security**, and then **Roles mapping** to open the page
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page
 
-   .. thumbnail:: /images/single-sign-on/authentik/wazuh-navigate-roles-mapping.gif
-      :title: Navigate to Server Management - Roles Mapping
-      :alt: Navigate to Server Management - Roles Mapping
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/authentik/17-wazuh-navigate-roles-mapping.png
+         :title: Navigate to Server Management - Roles Mapping
+         :align: center
+         :width: 80%
 
-#. Click **Create Role mapping** and complete the empty fields with the following parameters:
+   #. Click **Create Role mapping** and complete the empty fields with the following parameters:
 
-   -  **Role mapping name**: Assign a name to the role mapping.
-   -  **Roles**: Select ``administrator``.
-   -  **Custom rules**: Click **Add new rule** to expand this field.
-   -  **User field**: ``backend_roles``
-   -  **Search operation**: ``FIND``
-   -  **Value**: Assign the yield value configured in the authentik property mapping configuration. In our case, this is ``wazuh-admins``.
-   -  Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*.
+      -  **Role mapping name**: Assign a name to the role mapping.
+      -  **Roles**: Select ``administrator``.
+      -  **Custom rules**: Click **Add new rule** to expand this field.
+      -  **User field:** ``backend_roles``
+      -  **Search operation:** ``FIND``
+      -  **Value:** Assign the yield value configured in the authentik property mapping configuration. In our case, this is ``wazuh-admins``.
+      -  Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*. If another identity provider already maps this backend role, the Wazuh dashboard rejects the new role mapping with error ``4005`` because the rule already exists. The existing role mapping also applies to authentik users.
 
-   .. thumbnail:: /images/single-sign-on/authentik/wazuh-create-role-mapping-admin.png
-      :title: Create Wazuh role mapping
-      :alt: Create Wazuh role mapping
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/authentik/18-wazuh-create-role-mapping-admin.png
+         :title: Create Wazuh role mapping
+         :align: center
+         :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: yaml
 
@@ -375,9 +378,7 @@ Wazuh dashboard configuration
 
       # systemctl restart wazuh-dashboard
 
-#. Test the configuration.
-
-   To test the configuration, go to your Wazuh dashboard URL and log in with your authentik account.
+#. To test the configuration, go to your Wazuh dashboard URL and log in with your authentik account.
 
 Setup authentik single sign-on with read-only role
 --------------------------------------------------
@@ -397,20 +398,18 @@ authentik configuration
 #. Create a new user
 
    #. Navigate to **Directory** > **Users** and click **New User**.
-   #. Set the **Username**, **Display Name** and **Email address** of the user.
-   #. Leave the other options as default and click **Create User**.
+   #. Select **Internal User**, then set the **Username**, **Display Name** and **Email Address** of the user.
+   #. Leave the other options as default and click **Create**.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-create-user-ro.png
+      .. thumbnail:: /images/single-sign-on/authentik/19-create-user-form-readonly.png
          :title: Create user
-         :alt: Create user
          :align: center
          :width: 80%
 
    #. Select the newly created user, click **Set password** to assign a password to the user.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-set-password.png
+      .. thumbnail:: /images/single-sign-on/authentik/20-set-user-password-readonly.png
          :title: Set password
-         :alt: Set password
          :align: center
          :width: 80%
 
@@ -419,117 +418,122 @@ authentik configuration
    #. Navigate to **Directory** > **Groups** and click **New Group**
    #. Set a name for the group (for example, ``wazuh-ro-group``) and click **Create Group**.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-new-group-ro.png
+      .. thumbnail:: /images/single-sign-on/authentik/21-create-group-readonly.png
          :title: Create Group
-         :alt: Create Group
          :align: center
          :width: 80%
 
    #. Click the name of the newly created group and navigate to the **Users** tab.
    #. Click **Add existing user**, select the previously created user, confirm the selection and click **Assign**.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-add-existing-user-ro.png
+      .. thumbnail:: /images/single-sign-on/authentik/22-add-existing-user-readonly.png
          :title: Assign user to group - Step 1
-         :alt: Assign user to group - Step 1
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-select-existing-user-ro.png
+      .. thumbnail:: /images/single-sign-on/authentik/23-select-existing-user-readonly.png
          :title: Assign user to group - Step 2
-         :alt: Assign user to group - Step 2
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-assign-additional-user-ro.png
+      .. thumbnail:: /images/single-sign-on/authentik/24-assign-additional-user-readonly.png
          :title: Assign user to group - Step 3
-         :alt: Assign user to group - Step 3
          :align: center
          :width: 80%
 
 #. Create a property mapping in authentik
 
-   Navigate to **Customization** > **Property Mappings** and click **Create**. Create a **SAML Provider Property Mapping** with the following settings. If you have previously configured authentik with Wazuh administrator role, update the existing **SAML Provider Property Mapping** setting:
+   Navigate to **Customization** > **Property Mappings** and click **New Property Mapping**. Select **SAML Provider Property Mapping** and configure the following settings. If you have previously configured authentik with Wazuh administrator role, edit the existing **SAML Provider Property Mapping** instead:
 
    #. **Name**: Choose a descriptive name
    #. **SAML Attribute Name**: Roles
    #. **Friendly Name**: Leave blank.
-   #. **Expression**: If you have previously configured authentik with Wazuh administrator role, add the expression below and update the property mapping. The yield value (``wazuh-readonly``) will be used later as the backend role in the Wazuh indexer configuration.
+   #. **Expression**: If you have previously configured authentik with Wazuh administrator role, add the expression below and click **Save Changes**. The yield value (``wazuh-readonly``) will be used later as the backend role in the Wazuh indexer configuration.
 
       .. code-block:: python3
 
          if ak_is_group_member(request.user, name="<ADMIN_GROUP_NAME>"):
-             yield "wazuh-admins"
+            yield "wazuh-admins"
          elif ak_is_group_member(request.user, name="<READONLY_GROUP_NAME>"):
-             yield "wazuh-readonly"
+            yield "wazuh-readonly"
 
-      If you are setting up authentik with Wazuh read-only role only, add the expression below and click **Finish**. The yield value (``wazuh-readonly``) will be used later as the backend role in the Wazuh indexer configuration.
+      If you are setting up authentik with Wazuh read-only role only, add the expression below and click **Create**. The yield value (``wazuh-readonly``) will be used later as the backend role in the Wazuh indexer configuration.
 
       .. code-block:: python3
 
          if ak_is_group_member(request.user, name="<READONLY_GROUP_NAME>"):
-             yield "wazuh-readonly"
+            yield "wazuh-readonly"
 
-      Where:
+      Where
 
       -  ``<ADMIN_GROUP_NAME>`` is the group name of the administrator users.
       -  ``<READONLY_GROUP_NAME>`` is the group name of the read-only users.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-property-mapping-ro.png
+      .. thumbnail:: /images/single-sign-on/authentik/25-property-mapping-readonly.png
          :title: Property Mapping Configuration
-         :alt: Property Mapping Configuration
          :align: center
          :width: 80%
 
-#. Navigate to **Applications** > **Applications** and click **Create with Provider** to create an application and provider pair. Skip this step if you have previously configured authentik with Wazuh administrator role.
+#. Navigate to **Applications** > **Applications** and click **New Application** > **with New Provider** to create an application and provider pair. Skip this step if you have previously configured authentik with Wazuh administrator role.
 
    #. **Application**: Provide a descriptive **Application Name** (for example, ``Wazuh``) and use the following required configuration. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value.
 
       -  **Slug**: Provide a name or accept the auto-provided name.
       -  **Policy engine mode**: ``ANY``.
-      -  **Launch URL**: ``https://<WAZUH_DASHBOARD_URL>``
+      -  **Launch URL** (under **UI Settings**): ``https://<WAZUH_DASHBOARD_URL>``
       -  Leave other values as default and click **Next** to proceed to the next step.
 
    #. **Choose a Provider type**: Select SAML Provider as the provider type.
-   #. **Configure Provider**: Provide a name or accept the auto-provided name. Leave the authorization flow as default, and add the following required configurations. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value.
+   #. **Configure Provider**: Provide a name or accept the auto-provided name. Select an authorization flow, for example, ``default-provider-authorization-explicit-consent``, and add the following required configurations. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value.
 
       -  **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      -  **Issuer**: ``wazuh-saml``
       -  **Audience**: ``wazuh-saml``
-      -  Under **Advanced protocol settings**:
+      -  Expand **Advanced protocol settings** and configure the following:
 
          -  **Property Mappings**: add the Property Mapping you created in the previous section.
-         -  **NameID Property Mapping**: select a property mapping that will be used for Wazuh usernames (for example, ``authentik default SAML Mapping: Name`` or ``authentik default SAML Mapping: Email``). Leave other values as default and click **Next** to proceed to the next step.
+         -  **NameID Property Mapping**: select ``authentik default SAML Mapping: Username``. Wazuh uses this value as the username.
+         -  **EntityID/Issuer override**: ``wazuh-saml``. Leave other values as default and click **Next** to proceed to the next step.
 
    #. **Configure Bindings**: Leave as default and click **Next** to proceed to the next step.
-   #. **Review and Submit Application**: Review the configuration and click **Submit.**
+   #. **Review and Submit Application**: Review the configuration and click **Create Application**, then click **Finish**.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-application-setup.png
+      .. thumbnail:: /images/single-sign-on/authentik/08-application-setup-step-1.png
          :title: Application Setup - Step 1
-         :alt: Application Setup - Step 1
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-application-setup2.png
+      .. thumbnail:: /images/single-sign-on/authentik/09-application-setup-step-2.png
          :title: Application Setup - Step 2
-         :alt: Application Setup - Step 2
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-application-setup3.png
+      .. thumbnail:: /images/single-sign-on/authentik/10-application-setup-step-3.png
          :title: Application Setup - Step 3
-         :alt: Application Setup - Step 3
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-application-setup4.png
+      .. thumbnail:: /images/single-sign-on/authentik/11-application-setup-step-4.png
          :title: Application Setup - Step 4
-         :alt: Application Setup - Step 4
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-application-setup5.png
+      .. thumbnail:: /images/single-sign-on/authentik/12-application-setup-step-5.png
          :title: Application Setup - Step 5
-         :alt: Application Setup - Step 5
+         :align: center
+         :width: 80%
+
+      .. thumbnail:: /images/single-sign-on/authentik/13-application-setup-step-6.png
+         :title: Application Setup - Step 6
+         :align: center
+         :width: 80%
+
+      .. thumbnail:: /images/single-sign-on/authentik/14-application-setup-step-7.png
+         :title: Application Setup - Step 7
+         :align: center
+         :width: 80%
+
+      .. thumbnail:: /images/single-sign-on/authentik/15-application-setup-step-8.png
+         :title: Application Setup - Step 8
          :align: center
          :width: 80%
 
@@ -538,9 +542,8 @@ authentik configuration
    #. Navigate to **Applications** > **Providers** and click on the name of the provider that you created in the previous section (for example, ``Provider for Wazuh``).
    #. Under **Related objects** > **Metadata**, click on **Download**. Save the file as ``wazuh_authentik_meta.xml``. This downloaded file is your SAML Metadata file and it will be required in the next section.
 
-      .. thumbnail:: /images/single-sign-on/authentik/authentik-download-metadata.png
+      .. thumbnail:: /images/single-sign-on/authentik/16-download-provider-metadata.png
          :title: Download Metadata
-         :alt: Download Metadata
          :align: center
          :width: 80%
 
@@ -565,15 +568,16 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
-#. Place the ``wazuh_authentik_meta.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+#. Place the ``wazuh_authentik_meta.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to root:wazuh-indexer and the permissions to 640 using the following commands:
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/wazuh_authentik_meta.xml
+      # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/wazuh_authentik_meta.xml
+      # chmod 640 /etc/wazuh-indexer/opensearch-security/wazuh_authentik_meta.xml
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
+   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and set the ``challenge`` flag to ``false``.
    -  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
@@ -610,7 +614,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
               authentication_backend:
                 type: noop
 
-   Ensure to change the following parameters to their corresponding value:
+   Ensure to change the following parameters to their corresponding value
 
    -  ``idp.metadata_file``
    -  ``idp.entity_id``
@@ -625,7 +629,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses ``localhost``, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -658,7 +662,7 @@ Wazuh dashboard configuration
    Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** → **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
@@ -670,7 +674,7 @@ Wazuh dashboard configuration
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the yield value in authentik configuration and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -683,11 +687,10 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** → **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-      .. thumbnail:: /images/single-sign-on/authentik/wazuh-navigate-roles-mapping.gif
+      .. thumbnail:: /images/single-sign-on/authentik/17-wazuh-navigate-roles-mapping.png
          :title: Navigate to Server Management - Roles Mapping
-         :alt: Navigate to Server Management - Roles Mapping
          :align: center
          :width: 80%
 
@@ -696,18 +699,19 @@ Wazuh dashboard configuration
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``readonly``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field**: ``backend_roles``
-      -  **Search operation**: ``FIND``
-      -  **Value**: Assign the yield value configured in the authentik property mapping configuration. In our case, this is ``wazuh-readonly``.
-      -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
+      -  **User field:** ``backend_roles``
+      -  **Search operation:** ``FIND``
+      -  **Value:** Assign the yield value configured in the authentik property mapping configuration. In our case, this is ``wazuh-readonly``.
+      -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*. If another identity provider already maps this backend role, the Wazuh dashboard rejects the new role mapping with error ``4005`` because the rule already exists. The existing role mapping also applies to authentik users.
 
-      .. thumbnail:: /images/single-sign-on/authentik/wazuh-create-role-mapping-ro.png
+      .. thumbnail:: /images/single-sign-on/authentik/26-wazuh-create-role-mapping-readonly.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: yaml
 
@@ -719,8 +723,6 @@ Wazuh dashboard configuration
 
    .. code-block:: console
 
-      # systemctl restart wazuh-dashboard
+      systemctl restart wazuh-dashboard
 
-#. Test the configuration.
-
-   To test the configuration, go to your Wazuh dashboard URL and log in with your authentik account.
+#. To test the configuration, go to your Wazuh dashboard URL and log in with your authentik account.

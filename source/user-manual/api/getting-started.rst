@@ -50,8 +50,7 @@ You can interact with the Wazuh manager API through the built-in API console in 
 
 #. In the **API Console**:
 
-   -  Select HTTP method (GET, POST, PUT, or DELETE).
-   -  Enter the endpoint, such as ``/cluster/nodes`` or ``/cluster/<NODE_NAME>/info``.
+   -  Type the HTTP method (GET, POST, PUT, or DELETE) followed by the endpoint, such as ``GET /cluster/nodes`` or ``GET /cluster/<NODE_NAME>/info``.
    -  Add any query parameters, such as ``?pretty=true``.
    -  Click **Play**.
 

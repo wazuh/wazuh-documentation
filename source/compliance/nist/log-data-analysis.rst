@@ -19,35 +19,42 @@ The above NIST 800-53 controls require you to monitor system activities in your 
 Use case
 --------
 
-Detect failed authentication on Windows endpoints
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Detect Credential Manager credential listing on Windows endpoints
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh detects failed logon attempts on a monitored Windows endpoint, which is the observation of access patterns that SI-4 System monitoring requires. In this scenario, Wazuh detects failed logon attempts on a monitored Windows 11 endpoint.
+Wazuh detects the listing of credentials stored in Windows Credential Manager, which is the observation of suspicious activity that SI-4 System monitoring requires. Attackers list these credentials to find passwords they can reuse. In this scenario, Wazuh detects the ``vaultcmd /list`` command on a monitored Windows 11 endpoint.
 
 .. note::
 
-   Remote Desktop hosting is not available on every Windows edition. Confirm the endpoint's edition supports it before you continue.
+   The detection rule reads Windows Security event 4688, which Windows records only when process creation auditing is on. The first step turns it on and adds the command line to the event.
 
-#. Select **Start > Settings > System > Remote Desktop**, and turn on **Remote Desktop** to enable RDP on the Windows 11 endpoint.
+#. Run the following commands in PowerShell as an administrator to audit process creation and include the command line in event 4688:
 
-#. Open the Remote Desktop Connection application from another Windows endpoint on the same network.
+   .. code-block:: ps1con
 
-#. Perform five failed logon attempts against the monitored Windows endpoint.
+      > auditpol /set /subcategory:"Process Creation" /success:enable
+      > reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit" /v ProcessCreationIncludeCmdLine_Enabled /t REG_DWORD /d 1 /f
+
+#. Run the following command to list the vaults in Windows Credential Manager:
+
+   .. code-block:: ps1con
+
+      > vaultcmd /list
 
 #. Click the upper-left menu icon (**☰**) and go to **Threat intelligence** > **Threat Hunting**, then click the **Findings** tab.
 
-   .. thumbnail:: /images/compliance/nist/failed-authentication-findings.png
-      :title: Failed authentication findings
-      :alt: Failed authentication findings
+   .. thumbnail:: /images/compliance/nist/credential-manager-findings.png
+      :title: Credential Manager findings
+      :alt: Credential Manager findings
       :align: center
       :width: 80%
 
-#. Expand one of the failed authentication findings.
+#. Expand the **Windows Credential Manager credentials listed or dumped** finding.
 
-   Each failed attempt produces a **Failed authentication attempt** finding. The finding shows the target username in ``user.name``, the source IP address in ``source.ip``, and the Windows event ID 4625.
+   The finding shows the command in ``process.command_line``, the user in ``user.name``, and the Windows event ID 4688.
 
-   .. thumbnail:: /images/compliance/nist/failed-authentication-finding-details.png
-      :title: Failed authentication finding details
-      :alt: Failed authentication finding details
+   .. thumbnail:: /images/compliance/nist/credential-manager-finding-details.png
+      :title: Credential Manager finding details
+      :alt: Credential Manager finding details
       :align: center
       :width: 80%

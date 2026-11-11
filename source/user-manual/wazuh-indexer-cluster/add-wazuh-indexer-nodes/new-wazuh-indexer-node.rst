@@ -29,6 +29,24 @@ Once the certificates have been created and copied to the new Wazuh indexer node
 
             # apt-get install debconf adduser procps curl
 
+#. Place the passwords, the root CA certificate, and the certificates of this node before you install the package. Run the following commands in the directory that holds the archive you copied to this node. Replace ``<NEW_WAZUH_INDEXER_NODE_NAME>`` with the name of the new node in ``config.yml``. The package then uses these files and generates nothing:
+
+   .. code-block:: console
+      :emphasize-lines: 1
+
+      # NODE_NAME=<NEW_WAZUH_INDEXER_NODE_NAME>
+      # mkdir wazuh-certificates
+      # tar -xf ./wazuh-certificates-$NODE_NAME.tar -C wazuh-certificates
+      # install -d -m 0750 /etc/wazuh-indexer /etc/wazuh-indexer/ca /etc/wazuh-indexer/certs
+      # install -m 0644 wazuh-certificates/root-ca.pem /etc/wazuh-indexer/ca/root-ca.pem
+      # install -m 0600 /dev/null /etc/wazuh-indexer/local.env
+      # grep '^WAZUH_INDEXER_' wazuh-certificates/credentials.env > /etc/wazuh-indexer/local.env
+      # install -m 0400 wazuh-certificates/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
+      # install -m 0400 wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
+      # install -m 0400 wazuh-certificates/admin.pem /etc/wazuh-indexer/certs/admin.pem
+      # install -m 0400 wazuh-certificates/admin-key.pem /etc/wazuh-indexer/certs/admin-key.pem
+      # rm -rf wazuh-certificates
+
 #. Add the Wazuh repository to the new Wazuh indexer node:
 
    .. tabs::
@@ -58,7 +76,7 @@ Once the certificates have been created and copied to the new Wazuh indexer node
             # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list
             # apt-get update
 
-#. Install the Wazuh indexer package:
+#. Install the Wazuh indexer package. It uses the passwords and certificates you placed. If no other Wazuh components will be installed on this node, remove the archive afterwards with ``rm -f ./wazuh-certificates-*.tar``:
 
    .. tabs::
 
@@ -73,49 +91,6 @@ Once the certificates have been created and copied to the new Wazuh indexer node
          .. code-block:: console
 
             # apt-get -y install wazuh-indexer
-
-Deploying the certificates with the deployment script
------------------------------------------------------
-
-Certificate deployment involves a fixed sequence of extraction, renaming, and permission commands. To automate the process and avoid mistakes, create a ``deploy-certificates.sh`` script on the new node, in the directory where the certificates archive was copied to. Copy the script content from step 5 in the :ref:`Certificates creation and deployment <all_in_one_certificates_creation_and_deployment>` section of All-in-one deployment. The script is the same for both deployment scenarios.
-
-Run the script, passing the name of the new node as defined in ``/root/config.yml``. This deploys the SSL certificates to encrypt communications between the Wazuh central components:
-
-.. tabs::
-
-   .. group-tab:: All-in-one deployment
-
-      .. code-block:: console
-
-         # bash ./deploy-certificates.sh -i <NEW_WAZUH_INDEXER_NODE_NAME> -t ./wazuh-certificates.tar
-
-   .. group-tab:: Distributed deployment
-
-      .. code-block:: console
-
-         # bash ./deploy-certificates.sh -i <NEW_WAZUH_INDEXER_NODE_NAME> -t ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar
-
-The script confirms the deployment and produces the following certificate layout:
-
-+------------------------------+-------------+-------------------+
-| File                         | Permissions | Owner             |
-+==============================+=============+===================+
-| ``/etc/wazuh-indexer/certs`` | ``500``     | ``wazuh-indexer`` |
-+------------------------------+-------------+-------------------+
-| ``indexer.pem``              | ``400``     | ``wazuh-indexer`` |
-+------------------------------+-------------+-------------------+
-| ``indexer-key.pem``          | ``400``     | ``wazuh-indexer`` |
-+------------------------------+-------------+-------------------+
-| ``admin.pem``                | ``400``     | ``wazuh-indexer`` |
-+------------------------------+-------------+-------------------+
-| ``admin-key.pem``            | ``400``     | ``wazuh-indexer`` |
-+------------------------------+-------------+-------------------+
-| ``root-ca.pem``              | ``400``     | ``wazuh-indexer`` |
-+------------------------------+-------------+-------------------+
-
-.. note::
-
-   Save a copy in a safe storage location for potential future use and scalability. If no other Wazuh components are going to be installed on this node, remove the ``wazuh-certificates.tar`` file by running ``rm -f ./wazuh-certificates*.tar``.
 
 Configuring the new Wazuh indexer node
 --------------------------------------
@@ -134,13 +109,14 @@ Edit ``/etc/wazuh-indexer/opensearch.yml`` on the new node. Use the same ``clust
      - "<EXISTING_WAZUH_INDEXER_IP>"
      - "<NEW_WAZUH_INDEXER_IP>"
    plugins.security.nodes_dn:
-     - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+     - "<EXISTING_WAZUH_INDEXER_DN>"
      - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=<NEW_WAZUH_INDEXER_NODE_NAME>"
 
 Replace the following values:
 
--  ``<NEW_WAZUH_INDEXER_NODE_NAME>`` and ``<NEW_WAZUH_INDEXER_IP>`` with the name and IP address of the new node, as defined in ``/root/config.yml``.
+-  ``<NEW_WAZUH_INDEXER_NODE_NAME>`` and ``<NEW_WAZUH_INDEXER_IP>`` with the name and IP address of the new node, as defined in ``config.yml``.
 -  ``<EXISTING_WAZUH_INDEXER_NODE_NAME>`` and ``<EXISTING_WAZUH_INDEXER_IP>`` with the name and IP address of an existing node.
+-  ``<EXISTING_WAZUH_INDEXER_DN>`` with the distinguished name of the existing node, exactly as it appears in ``plugins.security.nodes_dn`` on that node.
 
 In a distributed deployment with several existing nodes, list every existing node under ``discovery.seed_hosts`` and ``plugins.security.nodes_dn``, exactly as they appear on the existing nodes.
 
@@ -162,7 +138,7 @@ Apply the :ref:`Wazuh indexer cluster tuning <wazuh_indexer_cluster_tuning>` set
 Cluster initialization
 ----------------------
 
-A new node joins the cluster through ``discovery.seed_hosts`` and ``plugins.security.nodes_dn`` alone. You do not need to initialize the security configuration again when a node is added, whether the node uses the existing root CA or a new one. Run ``indexer-security-init.sh`` only when the security configuration was never initialized on this cluster, or when you changed the files in ``/etc/wazuh-indexer/opensearch-security/`` and want to load them.
+A new node joins the cluster through ``discovery.seed_hosts`` and ``plugins.security.nodes_dn`` alone. You do not need to initialize the security configuration again when a node is added. Run ``indexer-security-init.sh`` only when the security configuration was never initialized on this cluster, or when you changed the files in ``/etc/wazuh-indexer/opensearch-security/`` and want to load them.
 
 .. warning::
 
