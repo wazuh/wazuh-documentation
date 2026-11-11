@@ -107,7 +107,10 @@ Installing the Wazuh agent
 
 The Wazuh agent is a single, lightweight monitoring software. It is a multi-platform component that you can deploy to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the monitored endpoint by collecting critical system and application records, inventory data, and detecting potential anomalies.
 
-Before you install a Wazuh agent, create an enrollment token on the Wazuh manager, as described in :ref:`Generate the enrollment token <generate_enrollment_token>`. Then select your endpoint operating system below and follow the installation steps.
+You can install a Wazuh agent in two ways:
+
+-  From the Wazuh dashboard: Use **Deploy new agent**, as described in :ref:`Installing from the Wazuh dashboard <agent_installing_from_dashboard>`. The wizard automatically generates the enrollment token.
+-  From the command line: First, create an enrollment token on the Wazuh manager, as described in :ref:`Installing from the command line <agent-installation-requirements>`. Then select your endpoint operating system below and follow the installation steps.
 
 .. raw:: html
 

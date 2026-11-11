@@ -162,7 +162,7 @@ The YAML definition for check ``35622`` is shown below.
        - "c:systemctl is-active ufw -> r:^active"
        - 'c:ufw status -> r:Status:\s+active'
 
-Evaluating each check updates its state document in the ``wazuh-states-sca`` index. The following document is the state of check ``35624`` on the same endpoint, before the remediation:
+Evaluating each check updates its state document in the ``wazuh-states-sca`` index. The following document is the state of check ``35624`` (Ensure ufw default deny firewall policy), another ufw check of the same policy, on the same endpoint, before the remediation:
 
 .. code-block:: json
 
@@ -337,7 +337,7 @@ Evaluating each check updates its state document in the ``wazuh-states-sca`` ind
 Remediation
 ~~~~~~~~~~~
 
-The scan result above is **Failed** because ufw is inactive, so the output of the command ``ufw status`` is ``Status: inactive``. Check ``35622`` needs the ufw service to be enabled and active, and ``ufw status`` to show ``Status: active``.
+On this endpoint, check ``35622`` is **Failed** because ufw is inactive, so the output of the command ``ufw status`` is ``Status: inactive``. Check ``35622`` needs the ufw service to be enabled and active, and ``ufw status`` to show ``Status: active``.
 
 The steps below show how to apply the remediation that Wazuh suggests to harden the endpoint:
 

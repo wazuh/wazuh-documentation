@@ -62,27 +62,35 @@
       return rows.map(function (r) { return r[key]; }).filter(function (v, i, a) { return v && a.indexOf(v) === i; }).sort();
     }
 
-    var bar = document.createElement('div');
-    bar.className = 'wcs-fields-filter';
-    bar.innerHTML =
-      '<input type="search" class="wcs-q" placeholder="Search ' + rows.length + ' fields by name or description">' +
-      '<label>Type <select class="wcs-type">' + options(unique('type')) + '</select></label>' +
-      '<label>Level <select class="wcs-level">' + options(['core', 'extended', 'custom'], { core: 'core (most used)', custom: 'custom (WCS)' }) + '</select></label>' +
-      '<label>Indexed <select class="wcs-indexed">' + options(['true', 'false']) + '</select></label>' +
-      '<button type="button" class="wcs-expand">Expand all</button>' +
-      '<button type="button" class="wcs-collapse">Collapse all</button>' +
-      '<span class="wcs-count"></span>';
+    function select(label, cls, opts) {
+      return '<label class="table-filter-select"><span class="table-filter-label">' + label + '</span>' +
+        '<select class="' + cls + '">' + opts + '</select></label>';
+    }
+    function button(label, cls) {
+      return '<button type="button" class="table-filter-btn ' + cls + '" title="' + label + '">' +
+        '<span class="table-filter-btn-text">' + label + '</span></button>';
+    }
 
-    var style = document.createElement('style');
-    style.textContent =
-      '.wcs-fields-filter{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0;margin:12px 0;border-bottom:1px solid rgba(128,128,128,.35)}' +
-      // Form controls follow the theme's light or dark mode, not the browser's
-      '.light-theme .wcs-fields-filter{color-scheme:light}' +
-      '.dark-theme .wcs-fields-filter{color-scheme:dark}' +
-      '.wcs-fields-filter input{flex:1;min-width:220px;padding:6px 10px}' +
-      '.wcs-fields-filter label{margin:0;font-size:.9em}' +
-      '.wcs-fields-filter .wcs-count{margin-left:auto;font-size:.9em;opacity:.75}';
-    document.head.appendChild(style);
+    // The theme styles the bar (wazuh_doc_theme_v3: components/_table-filter.scss).
+    var bar = document.createElement('div');
+    bar.className = 'table-filter wcs-fields-filter';
+    bar.setAttribute('role', 'search');
+    bar.setAttribute('aria-label', 'Search and filter fields');
+    bar.innerHTML =
+      '<div class="table-filter-search">' +
+        '<input type="search" class="table-filter-input wcs-q" placeholder="Search ' + rows.length + ' fields"' +
+        ' title="Search by field name or description" aria-label="Search fields by name or description">' +
+        '<span class="table-filter-count wcs-count" aria-live="polite"></span>' +
+      '</div>' +
+      '<div class="table-filter-selects">' +
+        select('Type', 'wcs-type', options(unique('type'))) +
+        select('Level', 'wcs-level', options(['core', 'extended', 'custom'], { core: 'core (most used)', custom: 'custom (WCS)' })) +
+        select('Indexed', 'wcs-indexed', options(['true', 'false'])) +
+      '</div>' +
+      '<div class="table-filter-actions">' +
+        button('Expand all', 'table-filter-expand wcs-expand') +
+        button('Collapse all', 'table-filter-collapse wcs-collapse') +
+      '</div>';
 
     // The bar goes above the first field table section on the page.
     var first = tables[0];
@@ -119,7 +127,10 @@
         section.style.display = active && !any ? 'none' : '';
         if (active) { setOpen(section, any); }
       });
-      count.textContent = active ? shown + ' of ' + rows.length + ' fields match' : rows.length + ' fields';
+      // The placeholder gives the total until a filter is set; then the count
+      // takes over and the placeholder gets shorter to leave it room.
+      count.innerHTML = active ? shown + ' of ' + rows.length + '<span class="visually-hidden"> fields match</span>' : '';
+      q.placeholder = active ? 'Search' : 'Search ' + rows.length + ' fields';
     }
 
     [q].forEach(function (el) { el.addEventListener('input', run); });
