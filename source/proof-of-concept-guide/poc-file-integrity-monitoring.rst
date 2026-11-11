@@ -81,6 +81,8 @@ As an alternative to local configurations on the Wazuh agents, you can :doc:`cen
 Test the configuration
 ----------------------
 
+On the Ubuntu endpoint, run the following steps as root, for example with ``sudo``, because the monitored directory is ``/root``.
+
 #. Create a text file in the monitored directory, then wait for 5 seconds.
 
 #. Add content to the text file and save it. Then wait for 5 seconds.
