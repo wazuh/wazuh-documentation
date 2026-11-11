@@ -46,9 +46,11 @@ The CA files ``rootCA.pem`` and ``rootCA.key`` are then used to sign ``sslagent.
 The Wazuh manager verifies the certificate presented by the Wazuh agent during Wazuh agent enrollment, using the root certificate. Wazuh provides two Wazuh agent verification options:
 
 -  Wazuh agent verification without host validation: The certificates for the Wazuh agents are issued without specifying their hostname or IP address.
--  Wazuh agent verification with host validation: The certificates for the Wazuh agents are issued with their IP address or hostname specified as the common name.
+-  Wazuh agent verification with host validation: The certificates for the Wazuh agents are issued with their IP address as a subject alternative name (SAN). The Wazuh manager accepts each certificate only from the address it names.
 
-The difference between these validation methods is that the certificate in the former method can be reused on multiple agents, while the certificate created in the latter can only be used on the Wazuh agent whose IP address or hostname was specified during certificate generation.
+The difference between these validation methods is that the certificate in the former method can be reused on multiple agents, while the certificate created in the latter can only be used on the Wazuh agent whose IP address was specified during certificate generation.
+
+Host validation is off by default. Turn it on in the Wazuh manager configuration, as step 5 shows: ``<verification_mode>full</verification_mode>`` for Wazuh 5.0 agents, and ``<ssl_verify_host>yes</ssl_verify_host>`` for Wazuh 4.x agents. Wazuh 5.0 agents must have their IP address as an IP entry in the SAN, because the common name isn't checked. Wazuh 4.x agents can have it in the SAN or as the common name.
 
 Wazuh manager configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -78,6 +80,12 @@ Wazuh manager configuration
 
       # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
+   For Wazuh agent verification with host validation, add the IP address of the Wazuh agent to the certificate as a subject alternative name (SAN):
+
+   .. code-block:: console
+
+      # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial -extfile <(printf "subjectAltName=IP:<WAZUH_AGENT_IP_ADDRESS>")
+
    Where:
 
    -  ``sslagent.csr`` is the CSR to be submitted to the certificate authority.
@@ -104,6 +112,8 @@ Wazuh manager configuration
          <ssl_agent_ca>/etc/wazuh-manager/rootCA.pem</ssl_agent_ca>
       </auth>
 
+   For Wazuh agent verification with host validation, also add ``<ssl_verify_host>yes</ssl_verify_host>`` to the ``<auth>`` section.
+
    For Wazuh 5.0 agents, set the CA in the ``<https>`` block of the ``<remote>`` section. Wazuh 5.0 agents without a certificate signed by this CA are then refused. Keep ``<ssl_agent_ca>`` for Wazuh 4.x agents (port 1515):
 
    .. code-block:: xml
@@ -114,6 +124,8 @@ Wazuh manager configuration
            <ca>/etc/wazuh-manager/rootCA.pem</ca>
          </https>
       </remote>
+
+   For Wazuh agent verification with host validation, also add ``<verification_mode>full</verification_mode>`` to the ``<https>`` block. The Wazuh manager then refuses, with HTTP 403, a Wazuh 5.0 agent whose certificate doesn't list the address it connects from. Behind a load balancer or proxy that terminates TLS, that address is the proxy's.
 
 #. Restart the Wazuh manager service to apply the changes:
 
