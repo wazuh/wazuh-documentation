@@ -36,6 +36,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/01-go-to-user-management-and-click-on-users.png
          :title: Go to User Management and click on Users
+         :alt: JumpCloud Users page with the Users menu open and Manual User Creation highlighted
          :align: center
          :width: 80%
 
@@ -45,6 +46,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/02-go-to-user-management-user-groups.png
          :title: Go to User Management - User Groups
+         :alt: JumpCloud admin console, User Management > User Groups page
          :align: center
          :width: 80%
 
@@ -54,6 +56,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/03-go-to-users-tab.png
          :title: Go to the Users tab and select the newly created user
+         :alt: JumpCloud user group, Users tab with the newly created user selected
          :align: center
          :width: 80%
 
@@ -63,11 +66,13 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
          :title: Add new SSO application
+         :alt: JumpCloud SSO Applications page with the Get Started button to add the first application
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/05-select-custom-app.png
          :title: Select custom application
+         :alt: JumpCloud Create New Application Integration page with the Custom Application tile highlighted
          :align: center
          :width: 80%
 
@@ -113,21 +118,24 @@ Jumpcloud Configuration
       -  Leave the rest of the options as their default values and click **Save**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/10-complete-the-sso-tab.png
-          :title: Complete the SSO tab
-          :align: center
-          :width: 80%
+         :title: Complete the SSO tab
+         :alt: JumpCloud custom application, SSO tab with the IdP Entity ID, SP Entity ID, and ACS URL fields
+         :align: center
+         :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/11-complete-the-sso-tab.png
-          :title: Complete the SSO tab
-          :align: center
-          :width: 80%
+         :title: Complete the SSO tab
+         :alt: JumpCloud custom application, SSO tab with the Sign Assertion, Declare Redirect Endpoint, and group attribute options
+         :align: center
+         :width: 80%
 
    #. On the **User Groups** tab, select the **Group** created previously and click **save**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/14-on-the-user-groups-tab.png
-          :title: On the User Groups tab, select the Group created previously
-          :align: center
-          :width: 80%
+         :title: On the User Groups tab, select the Group created previously
+         :alt: JumpCloud custom application, User Groups tab with the previously created group selected
+         :align: center
+         :width: 80%
 
 #. Note the necessary parameters from the SAML settings of the new app.
 
@@ -142,7 +150,8 @@ Jumpcloud Configuration
    To obtain the remaining parameter, open the recently created application, go to the **SSO** tab and copy the Metadata URL.
 
    .. thumbnail:: /images/single-sign-on/jumpcloud/15-go-to-the-sso-tab.png
-      :title: Go to the SSO tab and select Export Metadata
+      :title: Go to the SSO tab and copy the Metadata URL
+      :alt: JumpCloud SAML2.0 app, SSO tab with the Export Metadata and Copy Metadata URL buttons
       :align: center
       :width: 80%
 
@@ -369,6 +378,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/01-go-to-user-management-and-click-on-users.png
          :title: Go to User Management and click on Users
+         :alt: JumpCloud Users page with the Users menu open and Manual User Creation highlighted
          :align: center
          :width: 80%
 
@@ -377,32 +387,36 @@ Jumpcloud Configuration
    #. Go to **User Management** > **User Groups** > **(+)** and give a name to the group. In our case, this is ``wazuh-readonly``.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/02-go-to-user-management-user-groups.png
-          :title: Go to User Management - User Groups
-          :align: center
-          :width: 80%
+         :title: Go to User Management - User Groups
+         :alt: JumpCloud admin console, User Management > User Groups page
+         :align: center
+         :width: 80%
 
       The group name will be used as the ``backend_roles`` for Wazuh role mapping.
 
    #. In the selected **User Groups**,  go to the **Users** tab, select the newly created user and click **Save group**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/03-go-to-users-tab-ro.png
-          :title: Go to the Users tab and select the newly created user
-          :align: center
-          :width: 80%
+         :title: Go to the Users tab and select the newly created user
+         :alt: JumpCloud read-only user group, Users tab with the newly created user selected
+         :align: center
+         :width: 80%
 
 #. Create a new app. Configure the SAML settings while you create the app.
 
    #. Under **Access**, go to **SSO Applications** > **Get Started** and select **Custom Application**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
-          :title: Add new SSO application
-          :align: center
-          :width: 80%
+         :title: Add new SSO application
+         :alt: JumpCloud SSO Applications page with the Get Started button to add the first application
+         :align: center
+         :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/05-select-custom-app.png
-          :title: Select custom application
-          :align: center
-          :width: 80%
+         :title: Select custom application
+         :alt: JumpCloud Create New Application Integration page with the Custom Application tile highlighted
+         :align: center
+         :width: 80%
 
    #. Complete the **Create New Application Integration** page with the appropriate information.
 
@@ -412,28 +426,28 @@ Jumpcloud Configuration
       #. Click **Configure Application** on the **Review page**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/06-select-application.png
-          :title: Custom application selected
-          :alt: Custom application selected
-          :align: center
-          :width: 80%
+         :title: Custom application selected
+         :alt: Custom application selected
+         :align: center
+         :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/07-select-manage-sso.png
-          :title: Configure SSO options
-          :alt: Configure SSO options
-          :align: center
-          :width: 80%
+         :title: Configure SSO options
+         :alt: Configure SSO options
+         :align: center
+         :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/08-enter-general-info.png
-          :title: Enter general info
-          :alt: Enter general info
-          :align: center
-          :width: 80%
+         :title: Enter general info
+         :alt: Enter general info
+         :align: center
+         :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/09-go-to-review.png
-          :title: Confirm new application integration
-          :alt: Confirm new application integration
-          :align: center
-          :width: 80%
+         :title: Confirm new application integration
+         :alt: Confirm new application integration
+         :align: center
+         :width: 80%
 
    #. Complete the SSO tab with the appropriate information.
 
@@ -446,21 +460,24 @@ Jumpcloud Configuration
       - Leave the rest of the options as their default values and click **Save**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/10-complete-the-sso-tab.png
-          :title: Complete the SSO tab
-          :align: center
-          :width: 80%
+         :title: Complete the SSO tab
+         :alt: JumpCloud custom application, SSO tab with the IdP Entity ID, SP Entity ID, and ACS URL fields
+         :align: center
+         :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/11-complete-the-sso-tab.png
-          :title: Complete the SSO tab
-          :align: center
-          :width: 80%
+         :title: Complete the SSO tab
+         :alt: JumpCloud custom application, SSO tab with the Sign Assertion, Declare Redirect Endpoint, and group attribute options
+         :align: center
+         :width: 80%
 
    #. On the **User Groups** tab, select the **Group** created previously and click **Save**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/09-on-the-user-groups-tab-RO.png
-          :title: On the User Groups tab, select the Group created previously
-          :align: center
-          :width: 80%
+         :title: On the User Groups tab, select the Group created previously
+         :alt: JumpCloud custom application, User Groups tab with the read-only group selected
+         :align: center
+         :width: 80%
 
 #. Note the necessary parameters from the SAML settings of the new app.
 
@@ -475,7 +492,8 @@ Jumpcloud Configuration
    To obtain the remaining parameter, open the recently created application, go to the **SSO** tab and copy the Metadata URL.
 
    .. thumbnail:: /images/single-sign-on/jumpcloud/15-go-to-the-sso-tab.png
-      :title: Go to the SSO tab and select Export Metadata
+      :title: Go to the SSO tab and copy the Metadata URL
+      :alt: JumpCloud SAML2.0 app, SSO tab with the Export Metadata and Copy Metadata URL buttons
       :align: center
       :width: 80%
 
