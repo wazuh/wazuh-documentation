@@ -43,71 +43,165 @@ Analysisd
 
 The ``analysisd.*`` internal options configure the Wazuh Engine (``wazuh-manager-analysisd``), which processes, enriches, and evaluates events before forwarding them to configured outputs.
 
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| Setting                                                      | Description                                                                                  | Default value   |
-+==============================================================+==============================================================================================+=================+
-| **analysisd.debug**                                          | Controls the Engine log verbosity level.                                                     | 0               |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.event_queue_size**                               | Maximum number of events waiting in the router input queue. Events can be dropped when this  | 131072          |
-|                                                              | queue is full. Minimum: 8192.                                                                |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.event_queue_eps**                                | Maximum event ingestion rate. A value of 0 means unlimited.                                  | 0               |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.event_queue_max_bytes**                          | Maximum total byte size of events waiting in the router input queue. Events are dropped when | 32MB            |
-|                                                              | this quota is full. A value of 0 means unlimited.                                            |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.agent_metadata_cache_ttl**                       | Time-to-live, in seconds, for cached agent metadata. Allowed range: 1 to 86400.              | 300             |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.agent_metadata_cache_clean_interval**            | Interval, in seconds, between best-effort evictions of stale agent metadata cache entries.   | 60              |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.indexer_queue_max_bytes**                        | Maximum number of bytes of events waiting in the indexer output queue. Events can be dropped | 64MB            |
-|                                                              | when this queue is full.                                                                     |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.indexer_bulk_max_bytes**                         | Maximum byte size of the bulk payload accumulated before a _bulk request is dispatched to    | 8MB             |
-|                                                              | the Wazuh indexer. When the buffered data reaches this threshold, a batch is flushed.        |                 |
-|                                                              | Allowed range: 64KB to 100MB.                                                                |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.indexer_flush_interval**                         | Interval, in seconds, between periodic flushes of the asynchronous indexer bulk buffer.      | 20              |
-|                                                              | Allowed range: 1 to 3600.                                                                    |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.indexer_logger_queue_size**                      | Maximum number of _bulk responses and their payloads that can wait in the indexer            | 8               |
-|                                                              | error-logger queue. When the queue is full, error details are dropped and a warning is       |                 |
-|                                                              | logged. Allowed range: 1 to 1024.                                                            |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.indexer_logger_threads**                         | Number of worker threads that parse _bulk error responses to log per-item failures. Allowed  | 1               |
-|                                                              | range: 1 to 16.                                                                              |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.indexer_max_retry_delay**                        | Maximum exponential-backoff delay, in seconds, between retries of a failed _bulk request.    | 15              |
-|                                                              | Allowed range: 1 to 3600.                                                                    |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.remote_conf_sync_interval**                      | Interval, in seconds, between remote Engine configuration synchronization cycles.            | 120             |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.remote_conf_indexer_connector_max_retries**      | Maximum retry attempts for remote configuration requests to the Wazuh indexer.               | 3               |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.remote_conf_indexer_connector_retry_interval**   | Interval, in seconds, between retry attempts for remote configuration synchronization.       | 5               |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.cm_sync_interval**                               | Interval, in seconds, between content synchronization cycles from the Wazuh indexer.         | 120             |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.cmsync_indexer_connector_sync_batch_size**       | Maximum number of content documents requested per Wazuh indexer page during content          | 100             |
-|                                                              | synchronization.                                                                             |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.cmsync_indexer_connector_max_retries**           | Maximum retry attempts for content synchronization requests to the Wazuh indexer.            | 3               |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.cmsync_indexer_connector_retry_interval**        | Interval, in seconds, between retry attempts for content synchronization.                    | 5               |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.ioc_sync_interval**                              | Interval, in seconds, between IoC database synchronization cycles. A value of 0 disables IoC | 360             |
-|                                                              | synchronization.                                                                             |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.ioc_indexer_connector_max_retries**              | Maximum retry attempts for IoC synchronization requests to the Wazuh indexer.                | 3               |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.ioc_indexer_connector_retry_interval**           | Interval, in seconds, between retry attempts for IoC synchronization.                        | 5               |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.ioc_indexer_connector_sync_batch_size**          | Maximum number of IoC documents streamed per Wazuh indexer page while synchronizing IoC      | 1000            |
-|                                                              | databases.                                                                                   |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
-| **analysisd.geo_sync_interval**                              | Interval, in seconds, between GeoIP database synchronization cycles. A value of 0 disables   | 360             |
-|                                                              | GeoIP synchronization.                                                                       |                 |
-+--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| Setting                                                      | Description                                                                                  | Default value                                              |
++==============================================================+==============================================================================================+============================================================+
+| **analysisd.debug**                                          | Engine log level: 0 (info), 1 (debug), 2 or higher (trace). The -d option overrides it.      | 0                                                          |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.event_queue_size**                               | Maximum number of events waiting in the router input queue. Events can be dropped when this  | 131072                                                     |
+|                                                              | queue is full. Minimum: 8192.                                                                |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.event_queue_eps**                                | Maximum event ingestion rate. A value of 0 means unlimited.                                  | 0                                                          |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.event_queue_max_bytes**                          | Maximum total byte size of events waiting in the router input queue. Events are dropped when | 32MB                                                       |
+|                                                              | this quota is full. A value of 0 means unlimited.                                            |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.agent_metadata_cache_ttl**                       | Time-to-live, in seconds, for cached agent metadata. Allowed range: 1 to 86400.              | 300                                                        |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.agent_metadata_cache_clean_interval**            | Interval, in seconds, between best-effort evictions of stale agent metadata cache entries.   | 60                                                         |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.indexer_queue_max_bytes**                        | Maximum number of bytes of events waiting in the indexer output queue. Events can be dropped | 64MB                                                       |
+|                                                              | when this queue is full.                                                                     |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.indexer_bulk_max_bytes**                         | Maximum byte size of the bulk payload accumulated before a _bulk request is dispatched to    | 8MB                                                        |
+|                                                              | the Wazuh indexer. When the buffered data reaches this threshold, a batch is flushed.        |                                                            |
+|                                                              | Allowed range: 64KB to 100MB.                                                                |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.indexer_flush_interval**                         | Interval, in seconds, between periodic flushes of the asynchronous indexer bulk buffer.      | 20                                                         |
+|                                                              | Allowed range: 1 to 3600.                                                                    |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.indexer_logger_queue_size**                      | Maximum number of _bulk responses and their payloads that can wait in the indexer            | 8                                                          |
+|                                                              | error-logger queue. When the queue is full, error details are dropped and a warning is       |                                                            |
+|                                                              | logged. Allowed range: 1 to 1024.                                                            |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.indexer_logger_threads**                         | Number of worker threads that parse _bulk error responses to log per-item failures. Allowed  | 1                                                          |
+|                                                              | range: 1 to 16.                                                                              |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.indexer_max_retry_delay**                        | Maximum exponential-backoff delay, in seconds, between retries of a failed _bulk request.    | 15                                                         |
+|                                                              | Allowed range: 1 to 3600.                                                                    |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.remote_conf_sync_interval**                      | Interval, in seconds, between remote Engine configuration synchronization cycles.            | 120                                                        |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.remote_conf_indexer_connector_max_retries**      | Maximum retry attempts for remote configuration requests to the Wazuh indexer.               | 3                                                          |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.remote_conf_indexer_connector_retry_interval**   | Interval, in seconds, between retry attempts for remote configuration synchronization.       | 5                                                          |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.cm_sync_interval**                               | Interval, in seconds, between content synchronization cycles from the Wazuh indexer.         | 120                                                        |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.cmsync_indexer_connector_sync_batch_size**       | Maximum number of content documents requested per Wazuh indexer page during content          | 100                                                        |
+|                                                              | synchronization.                                                                             |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.cmsync_indexer_connector_max_retries**           | Maximum retry attempts for content synchronization requests to the Wazuh indexer.            | 3                                                          |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.cmsync_indexer_connector_retry_interval**        | Interval, in seconds, between retry attempts for content synchronization.                    | 5                                                          |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.ioc_sync_interval**                              | Interval, in seconds, between IoC database synchronization cycles. A value of 0 disables IoC | 360                                                        |
+|                                                              | synchronization.                                                                             |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.ioc_indexer_connector_max_retries**              | Maximum retry attempts for IoC synchronization requests to the Wazuh indexer.                | 3                                                          |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.ioc_indexer_connector_retry_interval**           | Interval, in seconds, between retry attempts for IoC synchronization.                        | 5                                                          |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.ioc_indexer_connector_sync_batch_size**          | Maximum number of IoC documents streamed per Wazuh indexer page while synchronizing IoC      | 1000                                                       |
+|                                                              | databases.                                                                                   |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.geo_sync_interval**                              | Interval, in seconds, between GeoIP database synchronization cycles. A value of 0 disables   | 360                                                        |
+|                                                              | GeoIP synchronization.                                                                       |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.orchestrator_threads**                           | Number of orchestrator worker threads. A value of 0 uses one thread per CPU core. Allowed    | 0                                                          |
+|                                                              | range: 0 to 128.                                                                             |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.indexer_request_timeout**                        | Maximum time, in seconds, of one data request to the Wazuh indexer. A timed-out bulk request | 60                                                         |
+|                                                              | is retried. A value of 0 disables the limit. Allowed range: 0 to 3600.                       |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.indexer_monitoring_interval**                    | Interval, in seconds, between the checks that mark each Wazuh indexer host as available or   | 10                                                         |
+|                                                              | unavailable. Allowed range: 1 to 3600.                                                       |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.cm_sync_retry_interval**                         | Seconds until the next content synchronization while a space has no route and its policy is  | 30                                                         |
+|                                                              | enabled. It replaces analysisd.cm_sync_interval until every space is loaded, and is capped   |                                                            |
+|                                                              | at it. A value of 0 disables the early retry. Allowed range: 0 to 3600.                      |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.geo_download_timeout**                           | Timeout, in milliseconds, of the GeoIP database download.                                    | 60000                                                      |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.tzdb_path**                                      | Directory of the local IANA time zone database.                                              | /var/wazuh-manager/data/tzdb                               |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.tzdb_auto_update**                               | Whether the engine downloads time zone database updates.                                     | false                                                      |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.tzdb_force_version_update**                      | Time zone database version to install instead of the detected one. Empty means none.         | ""                                                         |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.streamlog_base_path**                            | Base directory of the events and dumper stream log files.                                    | /var/wazuh-manager/logs/                                   |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.streamlog_compress**                             | Whether rotated stream log files are compressed.                                             | true                                                       |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.streamlog_compression_level**                    | Compression level of rotated stream log files. Allowed range: 1 to 9, also when              | 5                                                          |
+|                                                              | analysisd.streamlog_compress is false.                                                       |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.streamlog_events_pattern**                       | File name pattern of the events stream log, relative to analysisd.streamlog_base_path.       | ${YYYY}/${MMM}/wazuh-${name}-${DD}                         |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.streamlog_events_max_size**                      | Maximum size, in bytes, of one events stream log file before rotation. A value of 0 disables | 0                                                          |
+|                                                              | size-based rotation. A value below 1048576 is raised to 1048576.                             |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.streamlog_events_buffer_size**                   | Capacity, in messages, of the write queue of the events stream log. A value of 0 means the   | 1048576                                                    |
+|                                                              | default.                                                                                     |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.streamlog_dumper_pattern**                       | File name pattern of the dumper stream log, relative to analysisd.streamlog_base_path.       | ${YYYY}/${MMM}/wazuh-${name}-${DD}                         |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.streamlog_dumper_max_size**                      | Maximum size, in bytes, of one dumper stream log file before rotation. A value of 0 disables | 0                                                          |
+|                                                              | size-based rotation. A value below 1048576 is raised to 1048576.                             |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.streamlog_dumper_buffer_size**                   | Capacity, in messages, of the write queue of the dumper stream log. A value of 0 means the   | 1048576                                                    |
+|                                                              | default.                                                                                     |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.streamlog_max_files**                            | Maximum number of rotated files kept in each stream log directory before the oldest is       | 90                                                         |
+|                                                              | deleted.                                                                                     |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.streamlog_max_accumulated_size**                 | Maximum total size, in bytes, of the rotated files in each stream log directory.             | 21474836480 (20 GB)                                        |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.dumper_enabled**                                 | Whether the event dumper, which writes every incoming event to the dumper stream log, is     | false                                                      |
+|                                                              | active at start.                                                                             |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.server_api_timeout**                             | Timeout, in milliseconds, of a test run of the engine API. Allowed range: 1 to 2147483647.   | 5000                                                       |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.server_api_payload_max_bytes**                   | Maximum request payload size, in bytes, of the engine API. A value of 0 means unlimited.     | 0                                                          |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.api_resource_payload_max_bytes**                 | Maximum payload size, in bytes, of a resource sent to the engine API.                        | 50000                                                      |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.api_resource_kvdb_payload_max_bytes**            | Maximum payload size, in bytes, of a KVDB resource sent to the engine API.                   | 100000                                                     |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.server_enable_event_processing**                 | Whether the engine processes events. With false, the Wazuh manager starts but processes no   | true                                                       |
+|                                                              | events, and synchronizes no content.                                                         |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.store_path**                                     | Directory of the compiled policy store.                                                      | /var/wazuh-manager/data/store                              |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.output_path**                                    | Directory of the default output definitions.                                                 | /etc/wazuh-manager/outputs/                                |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.cm_ruleset_path**                                | Directory of the ruleset synchronized from the Wazuh indexer.                                | /var/wazuh-manager/data/ruleset                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.kvdb_ioc_path**                                  | Directory of the IoC key-value databases.                                                    | /var/wazuh-manager/data/kvdb-ioc                           |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.kvdb_ioc_input_path**                            | The only directory the POST /content/ioc/update API request reads IoC files from. The        | /var/wazuh-manager/data/ioc-input                          |
+|                                                              | installation doesn't create it, so the request is refused until you create it, readable by   |                                                            |
+|                                                              | the wazuh-manager user. The Wazuh manager gets its IoC data from the Wazuh indexer.          |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.geo_db_path**                                    | Directory of the downloaded GeoIP database. Read only while GeoIP synchronization is         | /var/wazuh-manager/data/mmdb                               |
+|                                                              | enabled.                                                                                     |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.geo_manifest_url**                               | URL of the GeoIP database manifest used to check for updates:                                | See description                                            |
+|                                                              | https://api.pre.cloud.wazuh.com/maxmind_geoip/manifest.json.                                 |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.pid_path**                                       | Directory of the engine PID file. Don't change it: wazuh-manager-control looks for the PID   | /var/wazuh-manager/var/run/                                |
+|                                                              | file only in the default directory, and the start fails without it.                          |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.server_api_socket**                              | Socket of the engine API. Don't change it: wazuh-manager-control and the Wazuh manager API   | /var/wazuh-manager/queue/sockets/engine-api-http.sock      |
+|                                                              | use the default path.                                                                        |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| **analysisd.server_enriched_events_socket**                  | Socket that receives the events to process. Don't change it: wazuh-manager-remoted and the   | /var/wazuh-manager/queue/sockets/engine-ingest-http.sock   |
+|                                                              | vulnerability scanner use the default path.                                                  |                                                            |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
+
+.. note::
+
+   The ``analysisd.*`` values must match their type: ``true`` or ``false`` for a boolean, and decimal digits for an integer. A value of the wrong type, or outside its allowed range, stops ``wazuh-manager-analysisd``. ``wazuh-manager-analysisd -t``, which ``wazuh-manager-control`` runs before every ``start``, ``restart``, ``reload`` and ``check``, applies the same checks, so the Wazuh manager refuses the change before it stops any daemon. An unknown ``analysisd.*`` key has no effect.
 
 Remoted
 ^^^^^^^^^^^^^^^^^^^
@@ -244,6 +338,105 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.authd_worker_threads**                 | Concurrent connections remoted keeps to authd for enrollment.                                  | 8                        | Integer from 1 to 32                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.legacy_task_polling_interval**         | Interval, in seconds, between the polls of the pending tasks of the connected agents older     | 900                      | Integer from 300 to 86400            |
+|                                                  | than 5.0.0. Remoted delivers their remote_upgrade (WPK) tasks over the legacy connection. Keep |                          |                                      |
+|                                                  | it well below task-manager.task_ttl.                                                           |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.unauthenticated_timeout**              | Seconds a legacy TCP connection can stay open without sending a message that decrypts with a   | 60                       | Integer from 10 to 3600              |
+|                                                  | registered agent key. Remoted closes it after that time.                                       |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.unauthenticated_max**                  | Maximum number of legacy TCP connections open at once without authenticating. Remoted closes a | 16384                    | Integer from 64 to 1048576           |
+|                                                  | new connection that arrives at the limit. Keep it well below remoted.rlimit_nofile.            |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.max_handshakes_per_source**            | Maximum connections from one address that can be in the TLS handshake at once. Remoted closes  | 32                       | Integer from 0 to 65536              |
+|                                                  | one more from that address when it accepts it. A value of 0 disables the limit.                |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.max_requests_per_agent**               | Maximum requests one agent can have open at once on the authenticated routes. Remoted answers  | 6                        | Integer from 1 to 65536              |
+|                                                  | one more with HTTP 503. An agent opens up to 5 requests in normal operation.                   |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.max_inflight_bytes_per_agent**         | Maximum bytes of decoded request bodies one agent can hold at once across its open requests. A | 0                        | Integer from 0 to 1073741824         |
+|                                                  | value of 0 means half of remoted.max_inflight_bytes. A value below                             |                          |                                      |
+|                                                  | remoted.auth_max_decoded_body_size is raised to it.                                            |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.auth_max_decoded_body_size**           | Maximum size, in bytes, of an authenticated request body after zstd decompression. Remoted     | 33554432 (32 MiB)        | Integer from 1048576 to 1073741824   |
+|                                                  | answers a larger body with HTTP 413. A value below remoted.auth_max_body_size is raised to it. |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.downstream_stateful_retry_after**      | Value, in seconds, of the Retry-After header of the HTTP 503 answer sent when                  | 20                       | Integer from 0 to 3600               |
+|                                                  | remoted.downstream_stateful_response_timeout elapses. A value of 0 sends no header.            |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.downstream_io_threads**                | Number of threads of the client that forwards agent requests to local services. A value of 0   | 0                        | Integer from 0 to 256                |
+|                                                  | uses the CPU count.                                                                            |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.downstream_post_process_threads**      | Number of threads that build the reply once a local service answers. A value of 0 uses the CPU | 0                        | Integer from 0 to 256                |
+|                                                  | count.                                                                                         |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.downstream_max_response_body_size**    | Maximum size, in bytes, of the answer of a local service.                                      | 10485760 (10 MiB)        | Integer from 1048576 to 67108864     |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.control_keepalive_throttle**           | Minimum seconds between two wazuh-db keepalive writes for the same agent. Keep it below half   | 60                       | Integer from 1 to 3600               |
+|                                                  | of agents_disconnection_time.                                                                  |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.control_groups_refresh_interval**      | Seconds between refreshes of the cached group list used to answer agent control requests.      | 1                        | Integer from 1 to 3600               |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.control_wdb_request_connections**      | Number of wazuh-db connections used to answer agent control requests.                          | 4                        | Integer from 1 to 64                 |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.control_wdb_roundtrip_deadline**       | Milliseconds a wazuh-db request can take, from when it is queued until its answer, before      | 5000                     | Integer from 100 to 30000            |
+|                                                  | remoted gives up.                                                                              |                          |                                      |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.control_wdb_max_queue_size**           | Maximum number of queued wazuh-db requests.                                                    | 10000                    | Integer from 100 to 1000000          |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.control_tm_concurrency**               | Maximum number of task manager requests in progress at once.                                   | 4                        | Integer from 1 to 64                 |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.control_tm_deadline**                  | Milliseconds one task manager request can take.                                                | 2000                     | Integer from 100 to 30000            |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.control_tm_max_queue_size**            | Maximum number of queued task manager requests.                                                | 10000                    | Integer from 100 to 1000000          |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.vd_scan_read_timeout**                 | Seconds to wait for the vulnerability scanner to accept an on-demand scan request.             | 5                        | Integer from 1 to 300                |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+| **remoted.vd_scan_write_timeout**                | Seconds to wait while sending an on-demand scan request to the vulnerability scanner.          | 5                        | Integer from 1 to 300                |
++--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
+
+Agent module limits
+^^^^^^^^^^^^^^^^^^^
+
+Remoted also reads the ``fim.*_limit``, ``syscollector.*_limit`` and ``sca.checks_limit`` internal options. They are the inventory limits the Wazuh manager sends to every Wazuh 5.0 agent, which applies them. Remoted reads them when it starts. Set the same values on every cluster node.
+
++----------------------------------------------+-----------------+--------------------------------+
+| Setting                                      | Default value   | Allowed values                 |
++==============================================+=================+================================+
+| **fim.file_limit**                           | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **fim.registry_key_limit**                   | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **fim.registry_value_limit**                 | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.hotfixes_limit**              | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.packages_limit**              | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.processes_limit**             | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.ports_limit**                 | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.network_iface_limit**         | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.network_protocol_limit**      | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.network_address_limit**       | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.hardware_limit**              | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.os_info_limit**               | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.users_limit**                 | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.groups_limit**                | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.services_limit**              | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **syscollector.browser_extensions_limit**    | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
+| **sca.checks_limit**                         | 30000           | Integer from 0 to 2147483647   |
++----------------------------------------------+-----------------+--------------------------------+
 
 Authd
 ^^^^^^
@@ -277,7 +470,12 @@ The ``wazuh_clusterd.*`` internal options configure the Wazuh cluster daemon.
 +----------------------------+-----------------------------------------------------+-----------------+----------------------------------------+
 | Setting                    | Description                                         | Default value   | Allowed values                         |
 +============================+=====================================================+=================+========================================+
-| **wazuh_clusterd.debug**   | Debug logging level for the Wazuh cluster daemon.   | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
+| **wazuh_clusterd.debug**   | Debug logging level for the Wazuh cluster daemon. A | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
+|                            | value other than 0 overrides the -d option of       |                 |                                        |
+|                            | wazuh-manager-clusterd. When it is absent or 0, the |                 |                                        |
+|                            | -d level applies. Any other value stops             |                 |                                        |
+|                            | wazuh-manager-clusterd, and wazuh-manager-control   |                 |                                        |
+|                            | refuses to start the Wazuh manager.                 |                 |                                        |
 +----------------------------+-----------------------------------------------------+-----------------+----------------------------------------+
 
 Wazuh database
@@ -303,65 +501,274 @@ The ``wazuh_database.*`` internal options configure the Database Sync module.
 Wazuh modules
 ^^^^^^^^^^^^^^
 
-The Inventory Sync Server module reads its tuning parameters from the ``wazuh_modules.inventory_sync_server_*`` internal options.
+These internal options apply to every module of ``wazuh-manager-modulesd``. ``wazuh.thread_stack_size`` also applies to ``wazuh-manager-remoted``. A value out of range stops the daemon at start.
+
++------------------------------------+----------------------------------------------------------------------+---------------+------------------+
+| Setting                            | Description                                                          | Default value | Allowed values   |
++====================================+======================================================================+===============+==================+
+| **wazuh_modules.debug**            | Debug level of wazuh-manager-modulesd. The -d option overrides it.   | 0             | 0 to 2           |
++------------------------------------+----------------------------------------------------------------------+---------------+------------------+
+| **wazuh_modules.rlimit_nofile**    | File descriptor limit of wazuh-manager-modulesd.                     | 65536         | 8192 to 1048576  |
++------------------------------------+----------------------------------------------------------------------+---------------+------------------+
+| **wazuh_modules.socket_timeout**   | Maximum time, in seconds, a local client of the                      | 1             | 1 to 60          |
+|                                    | wazuh-manager-modulesd socket can wait between two parts of its      |               |                  |
+|                                    | request, or before reading the reply.                                |               |                  |
++------------------------------------+----------------------------------------------------------------------+---------------+------------------+
+| **wazuh_modules.max_eps**          | Events per second of the agent modules. The manager reads and checks | 100           | 1 to 1000        |
+|                                    | it, but no manager module uses it.                                   |               |                  |
++------------------------------------+----------------------------------------------------------------------+---------------+------------------+
+| **wazuh_modules.task_nice**        | Nice value of the programs a module runs. No manager module runs     | 10            | -20 to 19        |
+|                                    | one.                                                                 |               |                  |
++------------------------------------+----------------------------------------------------------------------+---------------+------------------+
+| **wazuh_modules.kill_timeout**     | Seconds a child process of a module has to exit at shutdown. No      | 10            | 0 to 3600        |
+|                                    | manager module starts one.                                           |               |                  |
++------------------------------------+----------------------------------------------------------------------+---------------+------------------+
+| **wazuh.thread_stack_size**        | Stack size, in KiB, of the threads of wazuh-manager-remoted and      | 8192          | 2048 to 65536    |
+|                                    | wazuh-manager-modulesd. The daemons read it when they create a       |               |                  |
+|                                    | thread, so wazuh-manager-control check doesn't catch a value out of  |               |                  |
+|                                    | range. That value stops the daemon at start.                         |               |                  |
++------------------------------------+----------------------------------------------------------------------+---------------+------------------+
+
+Inventory sync server
+^^^^^^^^^^^^^^^^^^^^^
+
+The ``wazuh_modules.inventory_sync_server_*`` internal options configure the Inventory Sync Server module, which receives the inventory and state data of the Wazuh agents and writes it to the Wazuh indexer.
+
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| Setting                                                                          | Description                                                | Default value        | Allowed values           |
++==================================================================================+============================================================+======================+==========================+
+| **wazuh_modules.inventory_sync_server_io_threads**                               | Threads that serve the agent synchronization requests. A   | 0                    | 0 to 128                 |
+|                                                                                  | value of 0 uses the CPU count.                             |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_concurrent_accepts**                       | Connection accept operations kept in progress.             | 2                    | 0 to 64                  |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_buffer_size**                              | Read buffer of each connection, in bytes.                  | 8192                 | 0 to 1048576             |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_max_body_size**                            | Maximum request body size, in bytes. A larger request is   | 0                    | 0 to 536870912           |
+|                                                                                  | answered with HTTP 413. A value of 0 sets no limit of its  |                      |                          |
+|                                                                                  | own.                                                       |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_max_url_size**                             | Maximum request URL size, in bytes. A longer one is        | 2048                 | 0 to 65536               |
+|                                                                                  | answered with HTTP 414.                                    |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_max_header_name_size**                     | Maximum header name size, in bytes. A longer one is        | 256                  | 0 to 65536               |
+|                                                                                  | answered with HTTP 431.                                    |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_max_header_value_size**                    | Maximum header value size, in bytes. A longer one is       | 8192                 | 0 to 1048576             |
+|                                                                                  | answered with HTTP 431.                                    |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_header_timeout**                           | Seconds from the connection to a complete request header.  | 10                   | 0 to 3600                |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_body_timeout**                             | Seconds from the header to a complete request body.        | 30                   | 0 to 3600                |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_response_timeout**                         | Seconds from the start of the processing to a delivered    | 300                  | 0 to 3600                |
+|                                                                                  | response.                                                  |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_write_timeout**                            | Seconds allowed to write one response.                     | 10                   | 0 to 3600                |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_drain_timeout**                            | Seconds the module waits at shutdown for requests in       | 2                    | 0 to 10                  |
+|                                                                                  | progress before it closes their connections.               |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_max_parallel_connections**                 | Maximum simultaneous connections. One more is answered     | 1024                 | 0 to 65536               |
+|                                                                                  | with HTTP 503 and closed.                                  |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_max_inflight_bytes**                       | Maximum total bytes of request payloads in progress. More  | 268435456 (256 MiB)  | 0, or 1 to 2147483647    |
+|                                                                                  | is answered with HTTP 503. A value of 0 means unlimited.   |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_reserved_control_connections**             | Connections kept for control requests, which data requests | 64                   | 0 to 256                 |
+|                                                                                  | can't use. At most a quarter of max_parallel_connections.  |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_control_max_body_bytes**                   | Maximum body size, in bytes, of a control request. A       | 65536                | 0 to 1048576             |
+|                                                                                  | larger one is answered with HTTP 413.                      |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_control_max_sessions**                     | Maximum concurrent control sessions. One more is answered  | 256                  | 0 to 1024                |
+|                                                                                  | with HTTP 503.                                             |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_sync_workers**                             | Workers that apply the accepted synchronization sessions.  | 0                    | 0 to 64                  |
+|                                                                                  | A value of 0 uses half the CPU count, minimum 1.           |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_sync_queue_bytes**                         | Maximum bytes of sessions accepted but not applied yet.    | 67108864 (64 MiB)    | 1048576 to 1073741824    |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_vd_feed_retry_after_seconds**              | Value, in seconds, of the Retry-After header of the HTTP   | 10                   | 10 to 1800               |
+|                                                                                  | 503 answer sent while the vulnerability feed isn't ready.  |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_vd_workers**                               | Workers that run vulnerability detection scans. A value of | 0                    | 0 to 64                  |
+|                                                                                  | 0 uses half the CPU count, minimum 1.                      |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_vd_scan_queue_slots**                      | Sessions and on-demand scans that can wait for a           | 0                    | 0 to 256                 |
+|                                                                                  | vulnerability detection worker. A value of 0 means twice   |                      |                          |
+|                                                                                  | vd_workers.                                                |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_max_sessions_per_agent**                   | Sessions one agent can have accepted and not answered yet. | 2                    | 1 to 1024                |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_session_query_batch_size**                 | Page size of the Wazuh indexer searches that verify the    | 0                    | 0, or 100 to 10000       |
+|                                                                                  | checksums of an agent. A value of 0 means 1000.            |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_sync_max_bulk_size**               | Request payload bytes after which a worker sends its batch | 10485760 (10 MiB)    | 4096 to 104857600        |
+|                                                                                  | to the Wazuh indexer.                                      |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_sync_connector_max_bulk_size**     | Maximum size, in bytes, of one bulk request of the         | 10485760 (10 MiB)    | 4096 to 104857600        |
+|                                                                                  | synchronization connector.                                 |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_sync_flush_interval_seconds**      | Has no effect. The module sends each batch when it is      | 20                   | 1 to 3600                |
+|                                                                                  | complete.                                                  |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_sync_max_retry_delay_seconds**     | Maximum delay, in seconds, between retries of a failed     | 15                   | 1 to 3600                |
+|                                                                                  | synchronization request.                                   |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_sync_request_timeout_seconds**     | Timeout, in seconds, of one synchronization request.       | 60                   | 1 to 3600                |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_sync_max_retry_attempts**          | Maximum retries of a failed synchronization request. A     | 5                    | 0 to 1000                |
+|                                                                                  | value of 0 removes the limit.                              |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_sync_max_retry_duration_seconds**  | Maximum time, in seconds, spent retrying a failed          | 15                   | 0 to 3600                |
+|                                                                                  | synchronization request. A value of 0 removes the limit.   |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_async_bulk_max_bytes**             | Maximum size, in bytes, of one bulk request of the         | 4194304 (4 MiB)      | 4096 to 104857600        |
+|                                                                                  | asynchronous connector.                                    |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_async_flush_interval_seconds**     | Interval, in seconds, between flushes of the asynchronous  | 20                   | 1 to 3600                |
+|                                                                                  | connector.                                                 |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_async_max_retry_delay_seconds**    | Maximum delay, in seconds, between retries of a failed     | 15                   | 1 to 3600                |
+|                                                                                  | asynchronous request.                                      |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_async_logger_queue_size**          | Bulk error responses that can wait to be logged.           | 8                    | 1 to 65536               |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_async_logger_threads**             | Threads that log bulk error responses.                     | 1                    | 1 to 64                  |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_async_request_timeout_seconds**    | Timeout, in seconds, of one asynchronous request.          | 60                   | 1 to 3600                |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_async_max_queue_bytes**            | Maximum bytes waiting in the asynchronous queue. A value   | 67108864 (64 MiB)    | 0, or 1 to 2147483647    |
+|                                                                                  | of 0 means unlimited.                                      |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
+| **wazuh_modules.inventory_sync_server_indexer_monitoring_interval_seconds**      | Interval, in seconds, between the checks of the Wazuh      | 10                   | 1 to 3600                |
+|                                                                                  | indexer hosts.                                             |                      |                          |
++----------------------------------------------------------------------------------+------------------------------------------------------------+----------------------+--------------------------+
 
 Vulnerability scanner
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``wazuh_modules.*`` and ``vulnerability-detection.*`` internal options configure the Vulnerability Scanner module.
 
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| Setting                                          | Description                                                                        | Default value | Allowed values                       |
-+==================================================+====================================================================================+===============+======================================+
-| **wazuh_modules.indexer_bulk_size_bytes**        | Indexer bulk-size threshold, in bytes, that triggers a synchronous flush.          | 10485760      | Integer from 4096 to 104857600       |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **wazuh_modules.indexer_flush_interval**         | Interval, in seconds, between periodic Indexer Connector flushes.                  | 20            | Integer from 1 to 3600               |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **vulnerability-detection.translation_lru_size** | LRU cache size for OS/package to CPE translation lookups.                          | 2048          | 1 to 100000                          |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **vulnerability-detection.osdata_lru_size**      | LRU cache size for OS data lookups.                                                | 1000          | 1 to 100000                          |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **vulnerability-detection.remediation_lru_size** | LRU cache size for remediation lookups.                                            | 2048          | 1 to 100000                          |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **vulnerability-detection.scan_workers**         | Concurrent vulnerability scan slots (0 = half the host's cores, minimum 1).        | 0             | 0 to 64                              |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **vulnerability-detection.disable_scan_manager** | Disable vulnerability scanning of the manager node itself.                         | 1 (disabled)  | 0 (enabled) or 1 (disabled)          |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **vulnerability-detection.report_queue_size**    | Capacity of the internal report queue, in reports.                                 | 262144        | 0 to 2147483647                      |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **wazuh_modules.manager_task_max_pending_scans** | Pending on-demand (POST /scan/vd) scan tasks allowed before admission answers 503. | 64            |                                      |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **wazuh_modules.manager_task_vd_scan_timeout**   | Seconds the dispatcher allows one scan before abandoning and re-queueing it.       | 300           |                                      |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **wazuh_modules.manager_task_create_timeout**    | Seconds admission allows for recording the scan task.                              | 2             |                                      |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
++--------------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
+| Setting                                                | Description                                                                        | Default value | Allowed values                       |
++========================================================+====================================================================================+===============+======================================+
+| **wazuh_modules.indexer_bulk_size_bytes**              | Indexer bulk-size threshold, in bytes, that triggers a synchronous flush.          | 10485760      | Integer from 4096 to 104857600       |
++--------------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
+| **wazuh_modules.indexer_flush_interval**               | Interval, in seconds, between periodic Indexer Connector flushes.                  | 20            | Integer from 1 to 3600               |
++--------------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
+| **vulnerability-detection.translation_lru_size**       | LRU cache size for OS/package to CPE translation lookups.                          | 2048          | 1 to 100000                          |
++--------------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
+| **vulnerability-detection.scan_workers**               | Concurrent vulnerability scan slots (0 = half the host's cores, minimum 1).        | 0             | 0 to 64                              |
++--------------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
+| **wazuh_modules.manager_task_max_pending_scans**       | Pending on-demand (POST /scan/vd) scan tasks allowed before admission answers 503. | 64            | 0 (unlimited) to 1000000             |
++--------------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
+| **wazuh_modules.manager_task_vd_scan_timeout**         | Seconds the dispatcher allows one scan before abandoning and re-queueing it.       | 300           | 1 to 3600 (seconds)                  |
++--------------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
+| **wazuh_modules.manager_task_create_timeout**          | Seconds admission allows for recording the scan task.                              | 2             | 1 to 60 (seconds)                    |
++--------------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
+| **wazuh_modules.indexer_max_retry_attempts**           | Maximum retries of a failed Wazuh indexer request. A value of 0 removes the limit. | 5             | Integer from 0 to 1000               |
++--------------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
+| **wazuh_modules.indexer_max_retry_duration_seconds**   | Maximum time, in seconds, spent retrying a failed Wazuh indexer request. A value   | 15            | Integer from 0 to 3600               |
+|                                                        | of 0 removes the limit.                                                            |               |                                      |
++--------------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
 
 Recurring manager tasks (wazuh_modules.manager_task_*)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The manager's recurring jobs - log rotation and agent-disconnection/retention monitoring - are configured through the ``wazuh_modules.manager_task_*`` namespace.
+The ``wazuh_modules.manager_task_*`` internal options configure the task manager and its recurring tasks, such as log rotation and the agent disconnection and retention sweeps. The ``wazuh_modules.upgrade_*`` options configure the agent upgrades it runs. ``wazuh-manager-modulesd`` reads them when it starts, and a value out of range stops it.
 
-+----------------------------------------------------+-------------------------------------------------------------+---------------+
-| Setting                                            | Description                                                 | Default value |
-+====================================================+=============================================================+===============+
-| **wazuh_modules.manager_task_monitor_agents**      | Whether the retention sweep runs and disconnections are     | 1             |
-|                                                    | logged.                                                     |               |
-+----------------------------------------------------+-------------------------------------------------------------+---------------+
-| **wazuh_modules.manager_task_log_rotate**          | Whether either kind of log rotation happens.                | 1             |
-+----------------------------------------------------+-------------------------------------------------------------+---------------+
-| **wazuh_modules.manager_task_log_day_wait**        | Offset from local midnight for daily rotation, in seconds.  | 10            |
-+----------------------------------------------------+-------------------------------------------------------------+---------------+
-| **wazuh_modules.manager_task_log_compress**        | Whether rotated logs are gzipped.                           | 1             |
-+----------------------------------------------------+-------------------------------------------------------------+---------------+
-| **wazuh_modules.manager_task_log_keep_days**       | How long rotated logs are kept.                             | 31            |
-+----------------------------------------------------+-------------------------------------------------------------+---------------+
-| **wazuh_modules.manager_task_log_size_rotate**     | Threshold for size-based rotation.                          | 512 MB        |
-+----------------------------------------------------+-------------------------------------------------------------+---------------+
-| **wazuh_modules.manager_task_log_daily_rotations** | Rotated slots per day per file.                             | 12            |
-+----------------------------------------------------+-------------------------------------------------------------+---------------+
-| **wazuh_modules.manager_task_delete_old_agents**   | Retention window in minutes for long-disconnected agents (0 | 0             |
-|                                                    | = disabled).                                                |               |
-+----------------------------------------------------+-------------------------------------------------------------+---------------+
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| Setting                                                    | Description                                                  | Default value      | Allowed values   |
++============================================================+==============================================================+====================+==================+
+| **wazuh_modules.manager_task_monitor_agents**              | Whether the disconnection sweep runs. The retention sweep    | 1                  | 0 or 1           |
+|                                                            | depends on wazuh_modules.manager_task_delete_old_agents.     |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_delete_old_agents**           | Retention window, in minutes, for long-disconnected agents,  | 0                  | 0 to 9600        |
+|                                                            | on top of agents_disconnection_time. A value of 0 disables   |                    |                  |
+|                                                            | it.                                                          |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_delete_old_batch**            | Agents the retention sweep examines per attempt.             | 200                | 1 to 100000      |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_delete_old_budget**           | Seconds a retention sweep attempt can run.                   | 30                 | 1 to 3600        |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_disconnect_log_max**          | Agents the disconnection sweep names in the log per run. A   | 200                | 0 to 1000000     |
+|                                                            | value of 0 names none.                                       |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_log_rotate**                  | Whether log rotation happens. A value of 0 disables both the | 1                  | 0 or 1           |
+|                                                            | daily and the size-based rotation.                           |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_log_day_wait**                | Offset from local midnight, in seconds, of the daily         | 10                 | 1 to 600         |
+|                                                            | rotation.                                                    |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_log_compress**                | Whether rotated logs are compressed with gzip.               | 1                  | 0 or 1           |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_log_keep_days**               | Days rotated logs are kept. A value of 0 keeps none.         | 31                 | 0 to 500         |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_log_size_rotate**             | Size, in MB, that triggers a rotation. A value of 0 disables | 512                | 0 to 4096        |
+|                                                            | size-based rotation and keeps the daily one.                 |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_log_daily_rotations**         | Rotated files per day per log file.                          | 12                 | 1 to 256         |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_max_attempts**                | Attempts before a task becomes dead_letter, for task types   | 8                  | 1 to 1000        |
+|                                                            | that have a limit.                                           |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_max_defer**                   | Consecutive deferrals before a task becomes dead_letter.     | 48                 | 1 to 10000       |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_backoff_base**                | First retry delay, in seconds. It doubles on each retry.     | 30                 | 1 to 3600        |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_backoff_cap**                 | Maximum retry and deferral delay, in seconds.                | 900                | 1 to 86400       |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_defer_base**                  | First deferral delay, in seconds.                            | 5                  | 1 to 3600        |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_poll_interval**               | Maximum time, in seconds, the scheduler sleeps between       | 60                 | 1 to 3600        |
+|                                                            | checks.                                                      |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_sweep_interval**              | Interval, in seconds, between the checks for tasks whose     | 60                 | 1 to 3600        |
+|                                                            | worker stopped.                                              |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_claim_grace**                 | Seconds before a claimed task can be reclaimed.              | 30                 | 1 to 3600        |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_wdb_timeout**                 | Timeout, in seconds, of each agent removal request the       | 10                 | 1 to 600         |
+|                                                            | retention sweep sends to wazuh-manager-authd.                |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_delete_timeout**              | Timeout, in seconds, of one agent deletion task. It must be  | 600                | 1 to 7200        |
+|                                                            | greater than wazuh_modules.manager_task_vd_scan_timeout.     |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_retention_days**              | Days completed, failed and superseded tasks are kept.        | 7                  | 1 to 3650        |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_dead_letter_retention_days**  | Days dead_letter tasks are kept.                             | 30                 | 1 to 3650        |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_history_per_schedule**        | Finished runs kept per schedule.                             | 20                 | 1 to 100000      |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_max_rows**                    | Maximum number of tasks kept. The oldest finished tasks are  | 100000             | 1 to 100000000   |
+|                                                            | removed first.                                               |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_executor_threads**            | Threads that run manager tasks.                              | CPU count, from 2  | 1 to 64          |
+|                                                            |                                                              | to 8               |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.manager_task_io_threads**                  | Threads that serve the task manager socket.                  | 2                  | 1 to 64          |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.upgrade_workers**                          | Agent upgrade batches that run at once.                      | Half the CPU       | 1 to 16          |
+|                                                            |                                                              | count, from 1 to 4 |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.upgrade_queue_depth**                      | Upgrade batches queued before a new request is refused.      | 8                  | 1 to 1000        |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.upgrade_batch_deadline**                   | Seconds one upgrade batch can take before its remaining      | 180                | 10 to 3600       |
+|                                                            | agents fail.                                                 |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.upgrade_max_agents**                       | Maximum number of agents in one upgrade request.             | 500                | 1 to 100000      |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.upgrade_download_attempts**                | Attempts to download a WPK package.                          | 3                  | 1 to 10          |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.upgrade_download_timeout**                 | Timeout, in milliseconds, of one WPK download attempt.       | 45000              | 1000 to 600000   |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.upgrade_max_concurrent_downloads**         | WPK downloads in progress at once.                           | 2                  | 1 to 32          |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
+| **wazuh_modules.upgrade_versions_ttl**                     | Seconds the versions file of a WPK repository is cached. A   | 300                | 0 to 86400       |
+|                                                            | value of 0 downloads it every time.                          |                    |                  |
++------------------------------------------------------------+--------------------------------------------------------------+--------------------+------------------+
 
 .. note::
    ``agents_disconnection_time`` (in ``<global>``) is shared with remoted and still governs how often the disconnection sweep runs and how long an agent must be silent - it is not a ``monitord.*``/``wazuh_modules.*`` internal option. Renamed-key warning: if you had any of these set under the old ``monitord.*`` names in ``wazuh-manager-internal-options.conf`` from an earlier build, rename them - an override under the old name is silently ignored rather than erroring.

@@ -44,7 +44,8 @@ The following table summarizes the Wazuh data and configurations that you can mi
 |                                          | and the exact group memberships.                                                           |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
 | |agent_groups_ref|                       | Migrated with the agent registrations, including group configuration and agent             |
-|                                          | assignments. The migration tool migrates only the ``agent.conf`` file of each group.       |
+|                                          | assignments. The ``wazuh-migrate-identity.py`` migration tool migrates only the            |
+|                                          | ``agent.conf`` file of each group.                                                         |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
 
 Limitations
@@ -68,6 +69,13 @@ Prerequisites
 Before migrating to Wazuh 5.x, complete the following prerequisites:
 
 #. Deploy a new Wazuh 5.x environment that matches your deployment architecture. Do not reuse or upgrade an existing Wazuh 4.x deployment in place. Refer to the :doc:`Wazuh installation guide </installation-guide/index>` for your deployment.
+
+   Install the Wazuh 5.x manager on a host that doesn't have a Wazuh 4.x manager. The package refuses such a host:
+
+   .. code-block:: none
+      :class: output
+
+      ERROR: A Wazuh manager older than 5.0 is installed on this host: Wazuh manager 5.x can neither upgrade it nor be installed beside it.
 
 #. Ensure that the existing deployment runs Wazuh 4.4.0 or later. Index data migration to Wazuh 5.x requires Wazuh 4.4.0 or later due to snapshot compatibility requirements. If the deployment was upgraded from an earlier version, indices created before the upgrade to Wazuh 4.4.0 can't be restored.
 
