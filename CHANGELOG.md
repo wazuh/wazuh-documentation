@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added the `analysisd.rule_tree_memory_warning` and `analysisd.rule_tree_memory_limit` internal options and a section on the rule tree memory thresholds to the *Internal configuration* reference documentation. ([#10397](https://github.com/wazuh/wazuh-documentation/pull/10397))
+- **Post-release**: Added the *Using the Wazuh dashboard* method to the *Upgrading the Wazuh agent* documentation, and a paragraph on the automatic removal of disconnected agents with the `monitord.delete_old_agents` internal option to the *Removing agents* documentation. ([#10694](https://github.com/wazuh/wazuh-documentation/pull/10694))
 
 ### Changed
 
@@ -34,6 +35,9 @@ All notable changes to this project will be documented in this file.
 - Corrected the disk space requirement in the *Wazuh server installation* documentation and the process name fields of eBPF who-data alerts in the *File integrity monitoring* documentation. ([#10587](https://github.com/wazuh/wazuh-documentation/pull/10587))
 - Replaced the "here" link text with descriptive link text in the *Via agent configuration* enrollment documentation. ([#10605](https://github.com/wazuh/wazuh-documentation/pull/10605))
 - **Post-release**: Fixed the breadcrumbs home link, which had no accessible name for screen readers, and the missing styling of the development notice on the documentation home page. ([#10660](https://github.com/wazuh/wazuh-documentation/pull/10660))
+- **Post-release**: Clarified the Windows agent installation paths in the *Via agent configuration*, *Using password authentication*, *Wazuh manager identity verification*, *Wazuh agent identity verification*, and *Installing a custom WPK* documentation, and corrected the key and certificate paths and the package name in the *Deployment variables* documentation for macOS and Windows. ([#10694](https://github.com/wazuh/wazuh-documentation/pull/10694))
+- **Post-release**: Corrected the `generate_wpk_package.sh` usage and the manual Linux steps in the *Creating a custom WPK* documentation, and linked the *Agent upgrade module* documentation to its configuration reference. ([#10694](https://github.com/wazuh/wazuh-documentation/pull/10694))
+- **Post-release**: Updated the menu screenshot in the *Wazuh agent connection* documentation, and corrected the menu paths and figures in the *MITRE ATT&CK framework* documentation. ([#10694](https://github.com/wazuh/wazuh-documentation/pull/10694))
 
 ## [v4.14.9]
 
