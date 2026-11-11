@@ -63,8 +63,8 @@ Follow the steps below to upgrade a Wazuh agent using a custom WPK file in a WPK
       -  macOS endpoint - ``/Library/Ossec/etc/wpk_root.pem``
       -  Windows endpoints:
 
-         -  ``C:\Program Files (x86)\ossec-agent\wpk_root.pem`` for 64-bit systems
-         -  ``C:\Program Files\ossec-agent\wpk_root.pem`` for 32-bit systems.
+         -  On a 64-bit Windows operating system: ``C:\Program Files (x86)\ossec-agent\wpk_root.pem``
+         -  On a 32-bit Windows operating system: ``C:\Program Files\ossec-agent\wpk_root.pem``
 
 #. Initiate the upgrade by running this command on the Wazuh server:
 
