@@ -18,7 +18,7 @@ Learn about Wazuh manager identity verification steps in the sections below:
 Prerequisites
 -------------
 
-You need a certificate authority to sign certificates for the Wazuh manager and Wazuh agents. In the absence of an already configured certificate authority, run the following command on the Wazuh manager to use it as the certificate authority:
+The Wazuh manager creates its own CA at installation and signs its certificates with it. Wazuh agents can verify the Wazuh manager with this CA, ``/etc/wazuh-manager/certs/root-ca.pem``, or with an enrollment token, as described in the next section. You need another certificate authority only to sign the Wazuh manager certificate with your own CA, as in :ref:`the procedure below <manager-identity-validation>`. To create one, run the following command:
 
 .. code-block:: console
 
@@ -144,7 +144,7 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
 
    -  ``C`` is the country where the organization making this request is domiciled.
    -  ``CN`` is the common name on the certificate. This should be the IP address or FQDN of the Wazuh manager. This field is not optional.
-   -  ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. It should be included to allow the enrollment of the Wazuh agents with a SAN certificate.
+   -  ``subjectAltName`` lists the names and addresses of the Wazuh manager. It's required: the Wazuh manager doesn't start with a certificate that has no subject alternative names. If you add an ``extendedKeyUsage`` line, include ``serverAuth``.
    -  ``DNS.1`` and ``DNS.2`` refer to the additional identities that the certificate should be valid for. In this case, the Wazuh manager DNS names are wazuh and wazuh.com.
    -  ``IP.1`` is the IP address of the Wazuh manager. If ``<WAZUH_MANAGER_ADDRESS>`` is an FQDN, replace this line with ``DNS.3 = <WAZUH_MANAGER_ADDRESS>``.
 

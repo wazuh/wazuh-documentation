@@ -185,7 +185,9 @@ Using the RESTful API
 
       # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/upgrade_custom?agents_list=<AGENT_ID>&file_path=/var/wazuh-manager/var/upgrade/<WPK_FILE>&pretty=true" -H "Authorization: Bearer $TOKEN"
 
-   With only the file name, the request fails with error 1824 (``The WPK file does not exist``).
+   With only the file name, the Wazuh agent is listed in ``failed_items`` with error 1824 (``The WPK file does not exist``).
+
+   The ``PUT /agents/upgrade`` and ``PUT /agents/upgrade_custom`` requests report each Wazuh agent the Wazuh manager refuses, with errors 1817 to 1826 and 1828, in ``failed_items``. The other Wazuh agents of the request are still upgraded. Only an error of the whole request or node fails the request.
 
    When upgrading more than 3000 Wazuh agents at the same time, it is highly recommended that the parameter ``wait_for_complete`` be set to true to avoid a possible API timeout.
 

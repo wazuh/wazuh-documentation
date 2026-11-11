@@ -104,7 +104,7 @@ Wazuh 5.x also changes the internal options, Wazuh manager API, and cluster conf
 +------------------------------------------------+----------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``/var/ossec/api/configuration/api.yaml``      | ``/var/wazuh-manager/api/configuration/api.yaml``              | Wazuh 5.x doesn't support ``https.ssl_protocol``, ``experimental_features``, or ``upload_configuration.integrations``. The default certificate names change to ``apid.pem``, ``apid-key.pem``, and ``root-ca.pem``.                                        |
 +------------------------------------------------+----------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``cluster.json``                               | ``cluster.json``                                               | Use the Wazuh 5.x file as the base. Reapply only the interval values that you changed.                                                                                                                                                                     |
+| ``cluster.json``                               | ``cluster.json``                                               | In Wazuh 4.x, ``/var/ossec/framework/wazuh/core/cluster/cluster.json``. In Wazuh 5.x, ``/var/wazuh-manager/framework/wazuh/core/cluster/cluster.json``. Use the Wazuh 5.x file as the base. Reapply only the interval values that you changed.             |
 +------------------------------------------------+----------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Recreate Wazuh manager configuration
@@ -129,6 +129,12 @@ Perform the following steps to recreate the Wazuh manager configuration in the W
    .. code-block:: console
 
       # /var/wazuh-manager/bin/wazuh-manager-conf -f /etc/wazuh-manager/wazuh-manager.conf validate
+
+#. Check the configuration and the credentials. The Wazuh manager doesn't start without the Wazuh indexer CA and client certificate in ``/etc/wazuh-manager/certs/`` and the Wazuh indexer password in its keystore, which the :ref:`installation <wazuh_manager_deploying_certificates>` sets up. The command reports each missing item:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-control check
 
 #. Save the updated configuration and start the Wazuh 5.x manager service:
 
