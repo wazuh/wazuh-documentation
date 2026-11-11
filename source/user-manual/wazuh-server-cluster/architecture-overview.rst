@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh cluster setup allows for horizontal scalability and enhances the performance of the Wazuh servers. Learn more in this section of the documentation.
+   :description: Learn about the architecture of a Wazuh manager cluster, with a master node, worker nodes, and a load balancer for the Wazuh agents.
 
 Architecture overview
 =====================
@@ -14,6 +14,6 @@ The following diagram shows a typical Wazuh server cluster architecture:
    :align: center
    :width: 80%
 
-In this architecture, there are multiple Wazuh server nodes consisting of a :ref:`master node <server-cluster-master-node>` and :ref:`worker nodes <server-cluster-worker-node>`. The Wazuh agents are configured to report to the server nodes in the cluster. This setup allows for horizontal scalability, high availability, and enhances the performance of the Wazuh servers.
+The cluster has one :ref:`master node <server-cluster-master-node>` and one or more :ref:`worker nodes <server-cluster-worker-node>`. Every node serves the same Wazuh agent API on port 1517, so Wazuh agents can report to any node. The master node also creates the agent identities and runs the Wazuh manager API. Each node sends its data to the Wazuh indexer.
 
-
+A Wazuh 5.0 agent connects to a single address. To distribute the agents across the nodes and keep them connected when a node fails, point them to a :doc:`load balancer </user-manual/wazuh-server-cluster/load-balancers>` in front of the nodes.
