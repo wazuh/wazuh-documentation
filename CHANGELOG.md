@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 - Corrected the disk space requirement in the *Wazuh server installation* documentation and the process name fields of eBPF who-data alerts in the *File integrity monitoring* documentation. ([#10587](https://github.com/wazuh/wazuh-documentation/pull/10587))
 - Replaced the "here" link text with descriptive link text in the *Via agent configuration* enrollment documentation. ([#10605](https://github.com/wazuh/wazuh-documentation/pull/10605))
 - **Post-release**: Fixed the breadcrumbs home link, which had no accessible name for screen readers, and the missing styling of the development notice on the documentation home page. ([#10660](https://github.com/wazuh/wazuh-documentation/pull/10660))
+- **Post-release**: Removed the leading `.\` from the PowerShell command in the *Deploying Wazuh agents on Windows endpoints* installation documentation, so it matches the CMD command. ([#10684](https://github.com/wazuh/wazuh-documentation/pull/10684))
 
 ## [v4.14.9]
 
