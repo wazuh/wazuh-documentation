@@ -41,6 +41,7 @@ Microsoft Entra ID Configuration
 
    .. thumbnail:: /images/single-sign-on/azure-active-directory/01-go-to-azure-active-directory.png
       :title: Create an app in Microsoft Entra ID
+      :alt: Microsoft Entra ID Create your own application pane with the app name and non-gallery option
       :align: center
       :width: 80%
 
@@ -50,6 +51,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/02-click-on-app-registrations.png
          :title: Click on App registrations
+         :alt: Microsoft Entra ID, App registrations page with the New registration button
          :align: center
          :width: 80%
 
@@ -57,6 +59,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/03-select-your-new-apps.png
          :title: Select your new app
+         :alt: Microsoft Entra ID app, App roles page with the Create app role button
          :align: center
          :width: 80%
 
@@ -70,6 +73,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/04-add-a-new-role.png
          :title: Add a new role to your application's Manifest
+         :alt: Microsoft Entra ID Create app role pane with the Wazuh admin role name, value and Apply button
          :align: center
          :width: 80%
 
@@ -81,6 +85,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/05-assign-a-user-to-the-app.png
          :title: Assign a user to the app
+         :alt: Microsoft Entra ID enterprise application, Users and groups page with the Add user/group button
          :align: center
          :width: 80%
 
@@ -88,6 +93,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/06-click-on-add-user-group.png
          :title: Click on Add user/group
+         :alt: Microsoft Entra ID Add Assignment page with the Wazuh admin role selected and the Assign button
          :align: center
          :width: 80%
 
@@ -97,21 +103,25 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/07-configure-single-sign-on.png
          :title: Configure Single sign-on
+         :alt: Microsoft Entra ID enterprise application Overview with the Set up single sign on tile
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/08-set-up-single-sign-on-SAML.png
          :title: Set up single sign-on > SAML
+         :alt: Microsoft Entra ID Single sign-on page with the SAML method selected
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/09-set-up-single-sign-on-SAML.png
          :title: Set up single sign-on > SAML
+         :alt: Microsoft Entra ID SAML-based sign-on page, Basic SAML Configuration and Attributes & Claims sections
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/10-set-up-single-sign-on-SAML.png
          :title: Set up single sign-on > SAML
+         :alt: Microsoft Entra ID SAML-based sign-on page, SAML Certificates and Set up section with the Login URL
          :align: center
          :width: 80%
 
@@ -119,6 +129,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/11-click-edit-and-set-wazuh-saml.png
          :title: Click edit and set wazuh-saml
+         :alt: Microsoft Entra ID Basic SAML Configuration edited with the wazuh-saml identifier
          :align: center
          :width: 80%
 
@@ -126,6 +137,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/12-click-edit-and-select-add-new-claim.png
          :title: Click edit and select Add new claim
+         :alt: Microsoft Entra ID Manage claim page with the Roles claim and the user.assignedroles source attribute
          :align: center
          :width: 80%
 
@@ -362,6 +374,7 @@ Microsoft Entra ID Configuration
 
    .. thumbnail:: /images/single-sign-on/azure-active-directory/01-go-to-azure-active-directory.png
       :title: Create an app in Microsoft Entra ID
+      :alt: Microsoft Entra ID Create your own application pane with the app name and non-gallery option
       :align: center
       :width: 80%
 
@@ -371,6 +384,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/02-click-on-app-registrations-RO.png
          :title: Click on App registrations
+         :alt: Microsoft Entra ID, App registrations page with the New registration button
          :align: center
          :width: 80%
 
@@ -378,6 +392,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/03-select-your-new-apps.png
          :title: Select your new app
+         :alt: Microsoft Entra ID app, App roles page with the Create app role button
          :align: center
          :width: 80%
 
@@ -390,6 +405,7 @@ Microsoft Entra ID Configuration
       -  **Do you want to enable this app role**: Click on the checkmark to enable the role.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/04-create-app-roles-RO.png
+         :alt: Microsoft Entra ID app, App roles page with the Create app role pane for the Wazuh read-only role
 
    #. Click **Apply** to save the changes and proceed to the next step.
 
@@ -399,6 +415,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/05-assign-a-user-to-the-app-RO.png
          :title: Assign a user to the app
+         :alt: Microsoft Entra ID enterprise application, Users and groups page with the Add user/group button
          :align: center
          :width: 80%
 
@@ -406,6 +423,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/06-click-on-add-user-group-RO.png
          :title: Click on Add user/group
+         :alt: Microsoft Entra ID Add Assignment page with the Wazuh read-only role selected and the Assign button
          :align: center
          :width: 80%
 
@@ -415,21 +433,25 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/07-configure-single-sign-on-RO.png
          :title: Configure Single sign-on
+         :alt: Microsoft Entra ID enterprise application Overview with the Set up single sign on tile
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/08-set-up-single-sign-on-SAML-RO.png
          :title: Set up single sign-on > SAML
+         :alt: Microsoft Entra ID Single sign-on page with the SAML method selected
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/09-set-up-single-sign-on-SAML-RO.png
          :title: Set up single sign-on > SAML
+         :alt: Microsoft Entra ID SAML-based sign-on page, Basic SAML Configuration and Attributes & Claims sections
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/10-set-up-single-sign-on-SAML-RO.png
          :title: Set up single sign-on > SAML
+         :alt: Microsoft Entra ID SAML-based sign-on page, SAML Certificates and Set up section with the Login URL
          :align: center
          :width: 80%
 
@@ -437,6 +459,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/11-click-edit-and-set-wazuh-saml-RO.png
          :title: Click edit and set wazuh-saml
+         :alt: Microsoft Entra ID Basic SAML Configuration edited with the wazuh-saml identifier
          :align: center
          :width: 80%
 
@@ -444,6 +467,7 @@ Microsoft Entra ID Configuration
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/12-click-edit-and-select-add-new-claim.png
          :title: Click edit and select Add new claim
+         :alt: Microsoft Entra ID Manage claim page with the Roles claim and the user.assignedroles source attribute
          :align: center
          :width: 80%
 

@@ -36,6 +36,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/01-go-to-user-management-and-click-on-users.png
          :title: Go to User Management and click on Users
+         :alt: JumpCloud Users page with the Users menu open and Manual User Creation highlighted
          :align: center
          :width: 80%
 
@@ -45,6 +46,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/02-go-to-user-management-user-groups.png
          :title: Go to User Management - User Groups
+         :alt: JumpCloud admin console, User Management > User Groups page
          :align: center
          :width: 80%
 
@@ -54,6 +56,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/03-go-to-users-tab.png
          :title: Go to the Users tab and select the newly created user
+         :alt: JumpCloud user group, Users tab with the newly created user selected
          :align: center
          :width: 80%
 
@@ -63,11 +66,13 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
          :title: Add new SSO application
+         :alt: JumpCloud SSO Applications page with the Get Started button to add the first application
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/05-select-custom-app.png
          :title: Select custom application
+         :alt: JumpCloud Create New Application Integration page with the Custom Application tile highlighted
          :align: center
          :width: 80%
 
@@ -114,11 +119,13 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/10-complete-the-sso-tab.png
           :title: Complete the SSO tab
+          :alt: JumpCloud custom application, SSO tab with the IdP Entity ID, SP Entity ID, and ACS URL fields
           :align: center
           :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/11-complete-the-sso-tab.png
           :title: Complete the SSO tab
+          :alt: JumpCloud custom application, SSO tab with the Sign Assertion, Declare Redirect Endpoint, and group attribute options
           :align: center
           :width: 80%
 
@@ -126,6 +133,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/14-on-the-user-groups-tab.png
           :title: On the User Groups tab, select the Group created previously
+          :alt: JumpCloud custom application, User Groups tab with the previously created group selected
           :align: center
           :width: 80%
 
@@ -142,7 +150,8 @@ Jumpcloud Configuration
    To obtain the remaining parameter, open the recently created application, go to the **SSO** tab and copy the Metadata URL.
 
    .. thumbnail:: /images/single-sign-on/jumpcloud/15-go-to-the-sso-tab.png
-      :title: Go to the SSO tab and select Export Metadata
+      :title: Go to the SSO tab and copy the Metadata URL
+      :alt: JumpCloud SAML2.0 app, SSO tab with the Export Metadata and Copy Metadata URL buttons
       :align: center
       :width: 80%
 
@@ -369,6 +378,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/01-go-to-user-management-and-click-on-users.png
          :title: Go to User Management and click on Users
+         :alt: JumpCloud Users page with the Users menu open and Manual User Creation highlighted
          :align: center
          :width: 80%
 
@@ -378,6 +388,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/02-go-to-user-management-user-groups.png
           :title: Go to User Management - User Groups
+          :alt: JumpCloud admin console, User Management > User Groups page
           :align: center
           :width: 80%
 
@@ -387,6 +398,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/03-go-to-users-tab-ro.png
           :title: Go to the Users tab and select the newly created user
+          :alt: JumpCloud read-only user group, Users tab with the newly created user selected
           :align: center
           :width: 80%
 
@@ -396,11 +408,13 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
           :title: Add new SSO application
+          :alt: JumpCloud SSO Applications page with the Get Started button to add the first application
           :align: center
           :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/05-select-custom-app.png
           :title: Select custom application
+          :alt: JumpCloud Create New Application Integration page with the Custom Application tile highlighted
           :align: center
           :width: 80%
 
@@ -447,11 +461,13 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/10-complete-the-sso-tab.png
           :title: Complete the SSO tab
+          :alt: JumpCloud custom application, SSO tab with the IdP Entity ID, SP Entity ID, and ACS URL fields
           :align: center
           :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/11-complete-the-sso-tab.png
           :title: Complete the SSO tab
+          :alt: JumpCloud custom application, SSO tab with the Sign Assertion, Declare Redirect Endpoint, and group attribute options
           :align: center
           :width: 80%
 
@@ -459,6 +475,7 @@ Jumpcloud Configuration
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/09-on-the-user-groups-tab-RO.png
           :title: On the User Groups tab, select the Group created previously
+          :alt: JumpCloud custom application, User Groups tab with the read-only group selected
           :align: center
           :width: 80%
 
@@ -475,7 +492,8 @@ Jumpcloud Configuration
    To obtain the remaining parameter, open the recently created application, go to the **SSO** tab and copy the Metadata URL.
 
    .. thumbnail:: /images/single-sign-on/jumpcloud/15-go-to-the-sso-tab.png
-      :title: Go to the SSO tab and select Export Metadata
+      :title: Go to the SSO tab and copy the Metadata URL
+      :alt: JumpCloud SAML2.0 app, SSO tab with the Export Metadata and Copy Metadata URL buttons
       :align: center
       :width: 80%
 

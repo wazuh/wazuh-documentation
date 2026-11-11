@@ -37,6 +37,7 @@ OneLogin Configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-to-onelogin-web-console.png
          :title: Log in to OneLogin web console
+         :alt: OneLogin web console, Users page with the New User button
          :align: center
          :width: 80%
 
@@ -44,13 +45,15 @@ OneLogin Configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/02-complete-the-mandatory-fields.png
          :title: Complete the mandatory fields
+         :alt: OneLogin New User form with the mandatory fields filled in
          :align: center
          :width: 80%
 
    #. Select the user, navigate to **More Actions** and click on **Change Password** to assign a password to the user.
 
       .. thumbnail:: /images/single-sign-on/onelogin/03-click-on-save-user.png
-         :title: Click on Save User
+         :title: Select More Actions and click Change Password
+         :alt: OneLogin user page with the More Actions menu open and Change Password highlighted
          :align: center
          :width: 80%
 
@@ -60,6 +63,7 @@ OneLogin Configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/04-create-a-new-app.png
          :title: Create a new app using the SAML Custom Connector (Advanced)
+         :alt: OneLogin Applications page with the Add App button
          :align: center
          :width: 80%
 
@@ -80,12 +84,14 @@ OneLogin Configuration
       The configuration must be similar to the highlighted blue rectangles:
 
       .. thumbnail:: /images/single-sign-on/onelogin/05-search-for-saml-custom-connector.png
-         :title: Search for SAML Custom Connector (Advanced) application
+         :title: Configure the SAML Custom Connector (Advanced) application
+         :alt: OneLogin SAML Custom Connector (Advanced), Configuration tab with the Audience, Recipient and ACS URL fields
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/onelogin/06-search-for-saml-custom-connector.png
-         :title: Search for SAML Custom Connector (Advanced) application
+         :title: Configure the SAML Custom Connector (Advanced) application
+         :alt: OneLogin SAML Custom Connector (Advanced), Configuration tab with SAML initiator, nameID format and signature element
          :align: center
          :width: 80%
 
@@ -93,6 +99,7 @@ OneLogin Configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/07-go-to-the-parameters-tab.png
          :title: Go to the Parameters tab
+         :alt: OneLogin app, Parameters tab with the Add parameter button
          :align: center
          :width: 80%
 
@@ -100,6 +107,7 @@ OneLogin Configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/08-we-named-the-new-parameter-as-roles.png
          :title: We named the new parameter as Roles
+         :alt: OneLogin Edit Field Roles dialog with Department as the value and Include in SAML assertion selected
          :align: center
          :width: 80%
 
@@ -111,6 +119,7 @@ OneLogin Configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/09-add-the-created-user-to-the-new-app.png
          :title: Add the created user to the new app
+         :alt: OneLogin Edit Wazuh login dialog with Allow the user to sign in selected and the Roles field
          :align: center
          :width: 80%
 
@@ -120,6 +129,7 @@ OneLogin Configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/10-click-on-more-actions.png
          :title: Click on More Actions and then select SAML Metadata
+         :alt: OneLogin app, More Actions menu with the SAML Metadata option
          :align: center
          :width: 80%
 
@@ -128,7 +138,8 @@ OneLogin Configuration
    #. The **Issuer URL** will be the ``idp.entity_id`` in the Wazuh indexer security configuration.
 
       .. thumbnail:: /images/single-sign-on/onelogin/11-save-the-file-as-xml.png
-         :title: Save the file as XML
+         :title: Copy the Issuer URL
+         :alt: OneLogin SAML Custom Connector (Advanced), SSO tab with the Issuer URL field highlighted
          :align: center
          :width: 80%
 
@@ -136,6 +147,7 @@ OneLogin Configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/12-the-Audience-entityid.png
          :title: The Audience (EntityID) will be the sp.entity_id in  the Wazuh indexer security configuration
+         :alt: OneLogin app, Configuration tab with the Audience (EntityID) field
          :align: center
          :width: 80%
 
@@ -375,6 +387,7 @@ OneLogin configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-to-onelogin-web-console.png
          :title: Log in to OneLogin web console
+         :alt: OneLogin web console, Users page with the New User button
          :align: center
          :width: 80%
 
@@ -382,13 +395,15 @@ OneLogin configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/02-complete-the-mandatory-fields-RO.png
          :title: Complete the mandatory fields
+         :alt: OneLogin New User form with the mandatory fields filled in for the read-only user
          :align: center
          :width: 80%
 
    #. Select the user, navigate to **More Actions** and click on **Change Password** to assign a password to the user.
 
       .. thumbnail:: /images/single-sign-on/onelogin/03-click-on-save-user-RO.png
-         :title: Click on Save User
+         :title: Select More Actions and click Change Password
+         :alt: OneLogin read-only user page with the More Actions menu open and Change Password highlighted
          :align: center
          :width: 80%
 
@@ -398,6 +413,7 @@ OneLogin configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/04-create-a-new-app.png
          :title: Create a new app using the SAML Custom Connector (Advanced)
+         :alt: OneLogin Applications page with the Add App button
          :align: center
          :width: 80%
 
@@ -418,12 +434,14 @@ OneLogin configuration
       The configuration must be similar to the highlighted blue rectangles:
 
       .. thumbnail:: /images/single-sign-on/onelogin/05-search-for-saml-custom-connector.png
-         :title: Search for SAML Custom Connector (Advanced) application
+         :title: Configure the SAML Custom Connector (Advanced) application
+         :alt: OneLogin SAML Custom Connector (Advanced), Configuration tab with the Audience, Recipient and ACS URL fields
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/onelogin/06-search-for-saml-custom-connector.png
-         :title: Search for SAML Custom Connector (Advanced) application
+         :title: Configure the SAML Custom Connector (Advanced) application
+         :alt: OneLogin SAML Custom Connector (Advanced), Configuration tab with SAML initiator, nameID format and signature element
          :align: center
          :width: 80%
 
@@ -431,6 +449,7 @@ OneLogin configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/07-go-to-the-parameters-tab.png
          :title: Go to the Parameters tab
+         :alt: OneLogin app, Parameters tab with the Add parameter button
          :align: center
          :width: 80%
 
@@ -438,6 +457,7 @@ OneLogin configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/08-we-named-the-new-parameter-as-roles.png
          :title: We named the new parameter as Roles
+         :alt: OneLogin Edit Field Roles dialog with Department as the value and Include in SAML assertion selected
          :align: center
          :width: 80%
 
@@ -449,6 +469,7 @@ OneLogin configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/09-add-the-created-user-to-the-new-app.png
          :title: Add the created user to the new app
+         :alt: OneLogin Edit Wazuh login dialog with Allow the user to sign in selected and the Roles field
          :align: center
          :width: 80%
 
@@ -458,6 +479,7 @@ OneLogin configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/10-click-on-more-actions.png
          :title: Click on More Actions and then select SAML Metadata
+         :alt: OneLogin app, More Actions menu with the SAML Metadata option
          :align: center
          :width: 80%
 
@@ -466,7 +488,8 @@ OneLogin configuration
    #. The **Issuer URL** will be the ``idp.entity_id`` in the Wazuh indexer security configuration.
 
       .. thumbnail:: /images/single-sign-on/onelogin/11-save-the-file-as-xml.png
-         :title: Save the file as XML
+         :title: Copy the Issuer URL
+         :alt: OneLogin SAML Custom Connector (Advanced), SSO tab with the Issuer URL field highlighted
          :align: center
          :width: 80%
 
@@ -474,6 +497,7 @@ OneLogin configuration
 
       .. thumbnail:: /images/single-sign-on/onelogin/12-the-Audience-entityid.png
          :title: The Audience (EntityID) will be the sp.entity_id in  the Wazuh indexer security configuration
+         :alt: OneLogin app, Configuration tab with the Audience (EntityID) field
          :align: center
          :width: 80%
 

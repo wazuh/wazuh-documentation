@@ -129,6 +129,8 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    To give the user read access to Reporting, Notifications, and Snapshot Management, also map the user to the ``reports_read_access``, ``notifications_read_access``, and ``snapshot_management_read_access`` roles in **Indexer management** > **Security** > **Roles**. Index Management has no read-only role.
 
+   Reporting loads for this user only after the reports indices exist. The read roles can't create them, so a user with write access, for example ``admin``, must open **Dashboard management** > **Reporting** once first.
+
    Don't map the user to the ``kibana_user`` role or the ``kibanauser`` backend role. They give write access to the Wazuh dashboard configuration, so the user could change settings such as **Dashboard management** > **Advanced settings**.
 
 Creating an internal user and mapping it to Wazuh
@@ -328,6 +330,10 @@ Follow these steps to create an internal user, create a custom role and map it t
 
 You have now created an internal user and assigned it reading permissions over the Wazuh alerts and Wazuh monitoring documents from the authorized agents group.
 
+.. note::
+
+   The document level security of this example covers the ``wazuh-alerts*`` and ``wazuh-monitoring*`` indices only. The ``wazuh-states-*`` indices have no agent group field to filter on, so this user can still see the vulnerability and inventory data of every agent, for example in the **Vulnerability Detection** and **IT Hygiene** dashboards.
+
 Mapping with Wazuh
 ^^^^^^^^^^^^^^^^^^
 
@@ -349,6 +355,9 @@ To map the user with Wazuh, follow these steps:
           :width: 100%
 
 #. Click **Create policy** to complete the action.
+
+   The ``agent:group`` resource covers actions on the agents of the group, such as ``agent:read``, ``agent:restart``, and ``agent:upgrade``. To let the user list the group and its agents, create another policy with the ``group:read`` action on the ``group:id`` resource, for example ``Team_A``. To let the user move agents to other groups, also allow ``agent:modify_group`` on ``agent:group`` and ``group:modify_assignments`` on the ``group:id`` resource of each group the user can assign agents to. Add these policies to the role in the next step.
+
 #. Click **Roles** to open the tab, click **Create Role**, and fill in the empty fields with the requested information.
 
       - **Role name**: Assign a name to the new role.
@@ -382,7 +391,7 @@ To map the user with Wazuh, follow these steps:
 
    .. include:: /_templates/common/restart_dashboard.rst
 
-You have now created a new internal user and mapped it to manage a Wazuh agents' group. Authenticate with the new user and open the Wazuh dashboard, see that only ``Team_A`` agents' alerts and information are displayed.
+You have now created a new internal user and mapped it to manage a Wazuh agents' group. Log in to the Wazuh dashboard with the new user and check that only the ``Team_A`` alerts and agents are displayed.
 
 
 .. thumbnail:: /images/manual/user-administration/rbac/team_A-agents.png

@@ -1,16 +1,47 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: A Wazuh agent can be upgraded remotely using the command line and through the Wazuh server API. Learn more in this section of the documentation.
+   :description: A Wazuh agent can be upgraded remotely using the Wazuh dashboard, the command line, and the Wazuh server API. Learn more in this section of the documentation.
 
 Upgrading the Wazuh agent
 =========================
 
-A Wazuh agent can be upgraded remotely using the command line and through the Wazuh server API.
+A Wazuh agent can be upgraded remotely using the Wazuh dashboard, the command line, or the Wazuh server API.
 
 .. note::
 
    It is recommended to use the Wazuh server API to upgrade agents if running a Wazuh cluster.
+
+Using the Wazuh dashboard
+-------------------------
+
+Since Wazuh 4.9.0, you can upgrade Wazuh agents from the Wazuh dashboard.
+
+#. Click the upper-left menu icon and navigate to **Agents management** > **Summary**. A red dot after the version marks each Wazuh agent that runs an older version than the Wazuh manager. Hover over it to see the **Outdated** label.
+
+   .. thumbnail:: /images/manual/managing-agents/upgrade-agent-dashboard-outdated.png
+      :title: Outdated Wazuh agent in the Wazuh dashboard
+      :alt: Outdated Wazuh agent in the Wazuh dashboard
+      :align: center
+      :width: 80%
+
+#. Select the Wazuh agents to upgrade, then click **More** > **Upgrade agents**. The **Upgrade agents** dialog shows the number of selected agents. Click **Upgrade**. To upgrade a single Wazuh agent, you can also click the **...** icon in the **Actions** column of its row and select **Upgrade**. This option is available only for active, outdated Wazuh agents.
+
+   .. thumbnail:: /images/manual/managing-agents/upgrade-agent-dashboard-more-menu.png
+      :title: More menu with the Upgrade agents option
+      :alt: More menu with the Upgrade agents option
+      :align: center
+      :width: 80%
+
+#. Check the upgrade result. The dialog lists the upgrade tasks it created. Click **Close**. The **Upgrade tasks** panel above the list shows how many tasks are in progress and done, and **Task details** lists each task with its status and any error. Click **Refresh** to see the new version of each upgraded Wazuh agent.
+
+   .. thumbnail:: /images/manual/managing-agents/upgrade-agent-dashboard-tasks.png
+      :title: Upgraded Wazuh agent and Upgrade tasks panel
+      :alt: Upgraded Wazuh agent and Upgrade tasks panel
+      :align: center
+      :width: 80%
+
+The Wazuh dashboard user must have the ``agent:upgrade`` permission to upgrade Wazuh agents.
 
 Using the command line
 ----------------------
