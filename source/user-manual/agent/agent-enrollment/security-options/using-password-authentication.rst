@@ -175,10 +175,10 @@ Windows
 
 Follow these steps to enroll a Windows endpoint with password authentication:
 
-The Wazuh agent installation directory depends on the host's architecture.
+The Wazuh agent is a 32-bit application. Its installation directory depends on the Windows operating system architecture:
 
--  ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
--  ``C:\Program Files\ossec-agent`` for 32-bit systems.
+-  On a 64-bit Windows operating system, Windows installs the Wazuh agent in ``C:\Program Files (x86)\ossec-agent``
+-  On a 32-bit Windows operating system, Windows installs the Wazuh agent in ``C:\Program Files\ossec-agent``
 
 #. Launch PowerShell as an administrator.
 

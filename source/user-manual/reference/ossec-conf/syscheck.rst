@@ -69,9 +69,6 @@ Example
 
    <alert_new_files>yes</alert_new_files>
 
-.. note::
-   This setting is applied in the manager configuration, but it only takes effect on agents with versions lower than 3.12.
-
 allow_remote_prefilter_cmd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -126,6 +123,8 @@ There is a limit of 64 directories, comma-separated, that can be written in one 
 
 Wildcard characters (``?`` and ``*``) can be used to monitor paths that fulfill the given pattern. These wildcards will be reloaded every time a scheduled scan is run.
 
+Environment variables are expanded when the Wazuh agent loads its configuration. On Windows use the ``%VARIABLE%`` form, and on Linux and macOS the ``$VARIABLE`` form. The variable must be set in the Wazuh agent service environment.
+
 +----------------------+--------------------------------------------+
 | **Default value**    | /etc,/usr/bin,/usr/sbin,/bin,/sbin         |
 +----------------------+--------------------------------------------+
@@ -136,7 +135,7 @@ On macOS agents, the default value is ``/private/etc,/usr/bin,/usr/sbin,/bin,/sb
 
 Attributes
 
-``realtime`` — This will enable real-time/continuous monitoring on Linux (using the inotify system calls) and Windows systems. Real time only works with directories, not individual files.
+``realtime`` — This will enable real-time/continuous monitoring on Linux (using the inotify system calls), macOS and Windows systems. Real time only works with directories, not individual files.
 
 +------------------+-----------+
 | Default value    | no        |
@@ -810,6 +809,8 @@ This option can be used to limit the size of the ``queue/diff/file`` folder wher
 | **Allowed values**   | Any positive number followed by KB/MB/GB   |
 +----------------------+--------------------------------------------+
 
+If this limit is smaller than the ``file_size`` limit, the Wazuh agent uses the ``file_size`` limit instead.
+
 file_size
 ~~~~~~~~~~
 
@@ -878,6 +879,8 @@ The whodata options will be configured inside this tag.
 
 .. code-block:: xml
 
+   <directories whodata="yes">/etc</directories>
+   <directories whodata="yes">/home/user/documents</directories>
    <!-- Whodata options -->
    <whodata>
      <provider>audit</provider>
@@ -1273,7 +1276,7 @@ Wazuh agent - Windows
      </synchronization>
    </syscheck>
 
-Wazuh agent - MacOS X
+Wazuh agent - macOS
 
 .. code-block:: xml
 

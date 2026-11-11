@@ -20,6 +20,12 @@ Windows endpoint
 
 #. Download and install 7-Zip. We used the `7z1900-x64.exe <https://www.7-zip.org/a/7z1900-x64.exe>`__ installer for this use case.
 
+#. Restart the Wazuh agent to trigger a new inventory scan, then wait a few minutes. Otherwise, the package will appear after the next inventory scan, which runs hourly by default. Run the following command in PowerShell as an administrator:
+
+   .. code-block:: ps1con
+
+      > Restart-Service -Name WazuhSvc
+
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
@@ -57,4 +63,4 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-Wazuh contributes to the **CC8.1** requirement by maintaining an accurate, up-to-date record of the software installed on each monitored agent, along with the vulnerabilities it contains. This information is vital for understanding the overall system configuration, tracking licenses, and ensuring compliance. This information allows organizations to prioritize patching or mitigating vulnerable packages, reducing the risk of exploitation.
+Wazuh contributes to the **CC8.1** requirement by maintaining an accurate, up-to-date record of the software installed on each monitored agent. This information is vital for understanding the overall system configuration, tracking licenses, and ensuring compliance. The vulnerability finding for the package maps to CC7.1 and helps organizations prioritize patching or mitigating vulnerable packages, reducing the risk of exploitation.

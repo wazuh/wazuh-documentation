@@ -80,6 +80,8 @@ removedUrls['x.y'] = [
 /* Pages added in 5.0 */
 
 newUrls['5.0'] = [
+  '/compliance/tsc/common-criteria/cc6.8.html',
+  '/compliance/tsc/common-criteria/cc7.2.html',
   '/compliance/hipaa/164.308.a.1.ii.a.html',
   '/compliance/hipaa/164.308.a.5.ii.b.html',
   '/compliance/hipaa/164.308.a.6.ii.html',
@@ -461,6 +463,21 @@ redirections.push(
   },
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/tsc/common-criteria/cc2.1.html',
+    '5.0': '/compliance/tsc/common-criteria/cc7.2.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/tsc/common-criteria/cc3.1.html',
+    '5.0': '/compliance/tsc/common-criteria/cc6.8.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/tsc/additional-criteria/pi1.4.html',
+    '5.0': '/compliance/tsc/common-criteria/cc7.2.html#use-case-detecting-file-changes-using-the-wazuh-file-integrity-monitoring-capability',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/cloud-security/gcp/supported-services/use-cases.html',
     '5.0': '/cloud-security/gcp/pubsub.html#creating-a-log-sink-on-google-cloud',
   },
@@ -695,6 +712,9 @@ removedUrls['5.0'] = [
   '/compliance/hipaa/file-integrity-monitoring.html',
   '/compliance/hipaa/vulnerability-detection.html',
   '/compliance/hipaa/active-response.html',
+  '/compliance/tsc/common-criteria/cc2.1.html',
+  '/compliance/tsc/common-criteria/cc3.1.html',
+  '/compliance/tsc/additional-criteria/pi1.4.html',
   '/user-manual/capabilities/active-response/additional-information.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
   '/user-manual/capabilities/active-response/ar-use-cases/restarting-wazuh-agent.html',
