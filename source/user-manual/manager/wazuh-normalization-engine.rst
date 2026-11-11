@@ -419,7 +419,7 @@ The following sample logs illustrate the transformation process:
        "category": [
          "network"
        ],
-       "start": "2021-12-11T22:46:26.000Z",
+       "start": "2025-12-11T22:22:22.000Z",
        "type": [
          "protocol"
        ],
@@ -447,9 +447,9 @@ The following sample logs illustrate the transformation process:
            "class": "IN"
          },
          {
-           "Rdata": "2a02:cf40:add:4444:9191:a9a9:aaaa:cccc",
-           "Type": "AAAA",
-           "Class": "IN"
+           "data": "2a02:cf40:add:4444:9191:a9a9:aaaa:cccc",
+           "type": "AAAA",
+           "class": "IN"
          }
        ]
      },
