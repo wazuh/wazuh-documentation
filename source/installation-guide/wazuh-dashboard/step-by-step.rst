@@ -110,7 +110,7 @@ Adding the Wazuh repository
 Deploying certificates and passwords
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Do this **before installing the package**. The package then uses these files and passwords instead of generating its own.
+Do this **before installing the package**. The package then uses these passwords and CA certificates instead of generating its own, and issues this node's certificate.
 
 .. note::
 
@@ -118,31 +118,40 @@ Do this **before installing the package**. The package then uses these files and
 
    Make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
 
-#. Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same one used in the ``config.yml`` file to create the certificates. In our case, the node name is ``dashboard``. Then place the passwords, this node's certificates, the Wazuh indexer root CA, and the Wazuh manager CA:
+#. Extract the archive, and place the passwords, the Wazuh indexer root CA, and the Wazuh manager CA. The archive's ``root-ca.pem`` is the Wazuh indexer root CA, the same certificate as ``/etc/wazuh-indexer/export/ca.pem`` on the first Wazuh indexer node:
 
    .. code-block:: console
-      :emphasize-lines: 1
 
-      # NODE_NAME=<DASHBOARD_NODE_NAME>
       # umask 022
       # mkdir wazuh-certificates
       # tar -xf wazuh-certificates.tar -C wazuh-certificates
       # install -d -m 0750 /etc/wazuh-dashboard /etc/wazuh-dashboard/certs
       # install -m 0600 /dev/null /etc/wazuh-dashboard/local.env
       # grep -E '^(WAZUH_INDEXER_KIBANASERVER_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=' wazuh-certificates/credentials.env > /etc/wazuh-dashboard/local.env
-      # install -m 0640 wazuh-certificates/$NODE_NAME.pem /etc/wazuh-dashboard/certs/dashboard.pem
-      # install -m 0640 wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
       # install -m 0640 wazuh-certificates/root-ca.pem /etc/wazuh-dashboard/certs/indexer-ca.pem
-      # install -m 0640 wazuh-certificates/root-ca.pem /etc/wazuh-dashboard/certs/manager-ca.pem
       # rm -rf wazuh-certificates
 
-   The Wazuh dashboard uses ``manager-ca.pem`` to verify the Wazuh manager API. The Wazuh manager master node took its certificates from the same archive, so the archive's root CA verifies it. If the master node is the first Wazuh indexer node, the Wazuh manager package issued its own certificates instead. In that case, replace ``manager-ca.pem`` with the master node's ``/etc/wazuh-manager/export/ca.pem``. Only ``root`` can read that file. Run ``sudo cat /etc/wazuh-manager/export/ca.pem`` on the master node, save the output as ``manager-ca.pem`` in the working directory of this node, and run:
+   The Wazuh dashboard uses ``manager-ca.pem`` to verify the Wazuh manager API. It's the root CA of the Wazuh manager master node, ``/etc/wazuh-manager/export/ca.pem`` on that node. Only ``root`` can read that file. Run the following command on the master node, and save the output as ``manager-ca.pem`` in the working directory of this node:
+
+   .. code-block:: console
+
+      # cat /etc/wazuh-manager/export/ca.pem
+
+   Then run this command on this node:
 
    .. code-block:: console
 
       # install -m 0640 manager-ca.pem /etc/wazuh-dashboard/certs/manager-ca.pem
 
    The ``wazuh-dashboard`` user does not exist yet. When the package is installed, it keeps these files and gives them their owner.
+
+#. Optional: set the addresses that browsers use to reach this node. Without this setting, the package puts the host name and the IP addresses of this host in the certificate. Your list replaces them. Separate the entries with commas, and write ``IP:`` before an address and ``DNS:`` before a name:
+
+   .. code-block:: console
+
+      # echo 'WAZUH_DASHBOARD_CERT_SANS=IP:<WAZUH_DASHBOARD_ADDRESS>,DNS:<WAZUH_DASHBOARD_NAME>' >> /etc/wazuh-dashboard/local.env
+
+   The package always adds ``localhost``, ``127.0.0.1``, and ``::1``. It issues the certificate from a root CA that it creates in ``/etc/wazuh-dashboard/ca``, and publishes that CA as ``/etc/wazuh-dashboard/export/ca.pem`` for the browsers.
 
 #. **Recommended action**: If no other Wazuh components will be installed on this node, remove the ``wazuh-certificates.tar`` file.
 
@@ -223,6 +232,13 @@ Configuring the Wazuh dashboard
              run_as: true
              ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
+      On a host with firewalld, open port 443/TCP for the browsers:
+
+      .. code-block:: console
+
+         # firewall-cmd --permanent --add-port=443/tcp
+         # firewall-cmd --reload
+
       .. note::
 
          Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and make sure the necessary ports are open.
@@ -252,15 +268,7 @@ Starting the Wazuh dashboard service
 
             # systemctl status wazuh-dashboard
 
-   If the service fails to start, run ``journalctl -u wazuh-dashboard``. A ``MISSING WAZUH_INDEXER_KIBANASERVER_PASSWORD`` or ``MISSING WAZUH_MANAGER_WUI_PASSWORD`` line means that the password isn't in ``/etc/wazuh-dashboard/local.env``. A ``MISSING /etc/wazuh-dashboard/certs/indexer-ca.pem`` line means that the CA isn't there. An ``UNSAFE`` line means that a file or directory has the wrong owner or mode. Don't change the owner of ``/etc/wazuh-dashboard/certs`` to ``wazuh-dashboard``. To repair it, run:
-
-   .. code-block:: console
-
-      # chown -R root:wazuh-dashboard /etc/wazuh-dashboard/certs
-      # chmod 0750 /etc/wazuh-dashboard/certs
-      # chmod 0640 /etc/wazuh-dashboard/certs/*.pem
-
-   Repeat :ref:`Deploying certificates and passwords <wazuh_dashboard_deploying_certificates>` if a file is missing. Then run ``systemctl reset-failed wazuh-dashboard``, because the service stops after three failed starts, and start the service again.
+   If the service fails to start, see :ref:`Troubleshooting Wazuh dashboard installation and startup <wazuh_dashboard_troubleshooting_install>`.
 
 #. Get the ``admin`` password. On the Wazuh indexer node where you ran ``indexer-security-init.sh``, run the following command:
 
@@ -274,7 +282,43 @@ Starting the Wazuh dashboard service
    -  **Username:** ``admin``
    -  **Password:** the password from step 3
 
-   The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import the CA that issued the certificate into the browser's certificate manager. If you followed :ref:`Deploying certificates and passwords <wazuh_dashboard_deploying_certificates>`, it's the root CA of ``wazuh-certificates.tar``, also at ``/etc/wazuh-dashboard/certs/indexer-ca.pem``. If you skipped that section, the Wazuh dashboard package issued the certificate, and its CA is ``/etc/wazuh-dashboard/export/ca.pem``. Only ``root`` can read these files. Run ``sudo cat`` with the file's path on this host, and save the output as ``ca.pem`` on the computer that runs the browser. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
+   The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import the CA that issued the certificate into the browser's certificate manager. The Wazuh dashboard package issued the certificate, and its CA is ``/etc/wazuh-dashboard/export/ca.pem``. Only ``root`` can read this file. To copy it, run the following command on this host:
+
+   .. code-block:: console
+
+      # cat /etc/wazuh-dashboard/export/ca.pem
+
+   Save the output as ``ca.pem`` on the computer that runs the browser. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
+
+.. _wazuh_dashboard_troubleshooting_install:
+
+Troubleshooting Wazuh dashboard installation and startup
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If the Wazuh dashboard service fails to start, run the following command to see the cause:
+
+.. code-block:: console
+
+   # journalctl -u wazuh-dashboard -n 50
+
+-  A ``MISSING WAZUH_INDEXER_KIBANASERVER_PASSWORD`` or ``MISSING WAZUH_MANAGER_WUI_PASSWORD`` line means that the password isn't in ``/etc/wazuh-dashboard/local.env``.
+
+-  A ``MISSING /etc/wazuh-dashboard/certs/indexer-ca.pem`` line means that the CA isn't there. An ``UNSAFE`` line means that a file or directory has the wrong owner or mode.
+
+For the other messages, see :ref:`Wazuh dashboard does not start <wazuh_dashboard_does_not_start>`. Don't change the owner of ``/etc/wazuh-dashboard/certs`` to ``wazuh-dashboard``. To repair it, run:
+
+.. code-block:: console
+
+   # chown -R root:wazuh-dashboard /etc/wazuh-dashboard/certs
+   # chmod 0750 /etc/wazuh-dashboard/certs
+   # chmod 0640 /etc/wazuh-dashboard/certs/*.pem
+
+Repeat :ref:`Deploying certificates and passwords <wazuh_dashboard_deploying_certificates>` if a file is missing. The service stops after three failed starts. After you fix the cause, run the following commands to reset the count and start the service again:
+
+.. code-block:: console
+
+   # systemctl reset-failed wazuh-dashboard
+   # systemctl start wazuh-dashboard
 
 .. _wazuh_dashboard_securing_installation:
 
@@ -289,7 +333,20 @@ Once every component is installed and running, each component stores the passwor
 
       # openssl x509 -in /etc/wazuh-manager/certs/apid.pem -noout -ext subjectAltName
 
-   Also check that ``/etc/wazuh-dashboard/certs/manager-ca.pem`` exists on the Wazuh dashboard host, and run ``journalctl -u wazuh-dashboard -n 50`` to see the cause. Then click **Refresh**.
+   Also check that ``/etc/wazuh-dashboard/certs/manager-ca.pem`` exists on the Wazuh dashboard host. To see the cause, run the following command on that host, then click **Refresh**:
+
+   .. code-block:: console
+
+      # journalctl -u wazuh-dashboard -n 50
+
+   You can also check both connections on the Wazuh dashboard host. Each command asks for the ``admin`` password:
+
+   .. code-block:: console
+
+      # curl --cacert /etc/wazuh-dashboard/export/ca.pem -u admin https://localhost/api/status
+      # curl --cacert /etc/wazuh-dashboard/export/ca.pem -u admin -H 'osd-xsrf: true' -H 'Content-Type: application/json' -X POST https://localhost/api/check-api -d '{"id":"default"}'
+
+   The first output includes ``"state":"green"``. The second includes the name of the Wazuh manager master node, for example ``"node":"master-node"``.
 
 #. Securely store the five passwords. The ``credentials.env`` file in the working directory of the first Wazuh indexer node holds all five.
 
@@ -299,17 +356,23 @@ Once every component is installed and running, each component stores the passwor
 
       # rm -f ./credentials.env ./wazuh-certificates.tar
 
-#. Only the first Wazuh indexer node must hold the root CA private key, in ``/etc/wazuh-indexer/ca``. Back up this directory securely: you need the key to add nodes or renew certificates. A Wazuh manager or Wazuh dashboard package that issued its own certificates, for example on an all-in-one host, also keeps a root CA private key. It's in ``/etc/wazuh-manager/ca`` or ``/etc/wazuh-dashboard/ca``. Back it up too. Run the following command on every node to check:
+#. On each Wazuh dashboard node, remove the two passwords from ``/etc/wazuh-dashboard/local.env``. The Wazuh dashboard keeps them in its keystore. Keep ``WAZUH_DASHBOARD_CERT_SANS`` if you set it. Skip this step on a host without that file, such as an all-in-one host:
 
    .. code-block:: console
 
-      # ls -A /etc/wazuh-indexer/ca /etc/wazuh-manager/ca 2>/dev/null
+      # sed -i -E '/^(WAZUH_INDEXER_KIBANASERVER_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=/d' /etc/wazuh-dashboard/local.env
 
-   If the command lists ``root-ca.key`` on any other node, remove the key there. Never run this on the first Wazuh indexer node or on a host where a package issued its own certificates. Those hosts must keep their keys:
+#. Only the first Wazuh indexer node must hold the Wazuh indexer root CA private key, in ``/etc/wazuh-indexer/ca``. Back up this directory securely: you need the key to add nodes or renew certificates. Every Wazuh manager node and every Wazuh dashboard node also keeps the root CA private key of its package, in ``/etc/wazuh-manager/ca`` or ``/etc/wazuh-dashboard/ca``. Back them up too. Keep each ``/etc/wazuh-manager/ca`` directory owned by ``root:root``, back it up with its node, and never copy it to a Wazuh dashboard node. With the Wazuh dashboard CA, a new certificate is trusted by the browsers that already imported ``export/ca.pem``, and removing the RPM package deletes it. Run the following command on every Wazuh indexer node to check:
 
    .. code-block:: console
 
-      # rm -f /etc/wazuh-indexer/ca/root-ca.key /etc/wazuh-manager/ca/root-ca.key /etc/wazuh-manager/ca/root-ca.srl
+      # ls -A /etc/wazuh-indexer/ca 2>/dev/null
+
+   If the command lists ``root-ca.key`` on a Wazuh indexer node other than the first one, remove the key there. Never run this on the first Wazuh indexer node:
+
+   .. code-block:: console
+
+      # rm -f /etc/wazuh-indexer/ca/root-ca.key
 
 Editing ``local.env`` after installation doesn't change any password. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation.
 

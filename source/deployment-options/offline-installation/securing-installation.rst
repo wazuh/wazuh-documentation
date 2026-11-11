@@ -33,9 +33,13 @@ You have now installed and configured all the Wazuh central components. Each pac
 
    With the step-by-step method, this also removes the ``credentials.env`` file that you created in the working directory.
 
-   Keep the ``local.env`` and ``export/credentials.env`` files of the packages, readable by root only. The Wazuh passwords tool updates both. The components check them at every start and refuse to start if one has the wrong owner or permissions.
+   Keep the ``local.env`` and ``export/credentials.env`` files of the Wazuh indexer and Wazuh manager, readable by root only. The Wazuh passwords tool updates both. The components check them at every start and refuse to start if one has the wrong owner or permissions. On each Wazuh dashboard node, remove the two passwords from ``/etc/wazuh-dashboard/local.env``, because the Wazuh dashboard keeps them in its keystore. Skip this on an all-in-one host, which has no such file:
 
-#. Only the system where you ran ``-g`` holds the root CA private key, in its ``wazuh-ca`` directory. Keep a backup of that directory, and remove it from that system when you no longer need to add nodes or renew certificates there. In a distributed deployment, ``/etc/wazuh-indexer/ca`` and ``/etc/wazuh-manager/ca`` on the installed nodes must not hold ``root-ca.key``. An all-in-one deployment has no ``wazuh-ca`` directory. Each package created its own root CA and keeps its ``root-ca.key`` in ``/etc/wazuh-indexer/ca``, ``/etc/wazuh-manager/ca``, and ``/etc/wazuh-dashboard/ca``. Back up these three directories instead. Run the following command to list the files in the ca directories of the node:
+   .. code-block:: console
+
+      # sed -i -E '/^(WAZUH_INDEXER_KIBANASERVER_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=/d' /etc/wazuh-dashboard/local.env
+
+#. Only the system where you ran ``-g`` holds the root CA private key, in its ``wazuh-ca`` directory. Keep a backup of that directory, and remove it from that system when you no longer need to add nodes or renew certificates there. In a distributed deployment, ``/etc/wazuh-indexer/ca`` on the installed nodes must not hold ``root-ca.key``. Neither must ``/etc/wazuh-manager/ca`` after an assisted installation. After a step-by-step installation, every Wazuh manager node keeps the root CA private key of the Wazuh manager cluster in ``/etc/wazuh-manager/ca``. Keep that directory owned by ``root:root``, back it up with its node, and never copy it to a Wazuh dashboard node. An all-in-one deployment has no ``wazuh-ca`` directory. Each package created its own root CA and keeps its ``root-ca.key`` in ``/etc/wazuh-indexer/ca``, ``/etc/wazuh-manager/ca``, and ``/etc/wazuh-dashboard/ca``. Back up these three directories instead. Run the following command to list the files in the ca directories of the node:
 
    .. code-block:: console
 
@@ -81,7 +85,7 @@ The Wazuh indexer users are ``admin``, ``kibanaserver``, and ``wazuh-manager``.
    | ``wazuh-manager`` | ``WAZUH_INDEXER_MANAGER_PASSWORD``      | Every Wazuh manager node   |
    +-------------------+-----------------------------------------+----------------------------+
 
-#. After changing the ``wazuh-manager`` password, run these commands on each Wazuh manager node on a different host from the one where you ran the tool. Replace ``<WAZUH_INDEXER_MANAGER_PASSWORD>`` with the new password. Until you do, the node can't write to the Wazuh indexer and logs ``Unauthorized - Check indexer credentials``.
+#. After changing the ``wazuh-manager`` password, run these commands on each Wazuh manager node on a different host from the one where you ran the tool. Replace ``<WAZUH_INDEXER_MANAGER_PASSWORD>`` with the new password. Until you do, the node can't write to the Wazuh indexer and logs ``Unauthorized - Check indexer credentials``. Run the keystore commands even if you also edit ``local.env``. The Wazuh manager takes this password from ``local.env`` only when its keystore holds none, so editing ``local.env`` alone doesn't change the password it uses.
 
    .. code-block:: console
 

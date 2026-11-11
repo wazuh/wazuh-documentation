@@ -141,7 +141,7 @@ You can install the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one hos
 
 The :doc:`Quickstart </quickstart>` is the fastest way to install them on one host. With the installation assistant, follow the assisted installation sections of the Wazuh indexer, Wazuh manager, and Wazuh dashboard on that host, in that order. :ref:`Initial configuration <wazuh_indexer_assisted_initial_configuration>` says which ``config.yml`` values to use and which step to skip for an all-in-one installation.
 
-With the step-by-step method, follow their step-by-step sections on that host, in the same order. Each section says which steps to skip when the components share a host.
+With the step-by-step method, follow their step-by-step sections on that host, in the same order. Each section says which steps to skip when the components share a host. The install order doesn't matter on one host, but the Wazuh dashboard refuses to start until the Wazuh indexer and the Wazuh manager are installed. It then takes its passwords and CA certificates from them, and its ``url``, ``https://localhost``, is in the Wazuh manager API certificate. If the Wazuh dashboard already failed to start, run ``systemctl reset-failed wazuh-dashboard`` and start it again.
 
 .. toctree::
    :hidden:

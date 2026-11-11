@@ -22,6 +22,7 @@ To view the GDPR related data on the Wazuh dashboard:
 
    .. thumbnail:: /images/compliance/gdpr/gdpr-dashboard.png
       :title: GDPR Dashboard
+      :alt: GDPR Dashboard tab with the top agents by event count and the GDPR requirements charts
       :align: center
       :width: 80%
 
@@ -29,6 +30,7 @@ To view the GDPR related data on the Wazuh dashboard:
 
    .. thumbnail:: /images/compliance/gdpr/gdpr-controls.png
       :title: GDPR Controls
+      :alt: GDPR Controls tab listing GDPR requirements with their finding counts
       :align: center
       :width: 80%
 
@@ -36,6 +38,7 @@ To view the GDPR related data on the Wazuh dashboard:
 
    .. thumbnail:: /images/compliance/gdpr/gdpr-findings.png
       :title: GDPR Findings
+      :alt: GDPR Findings tab listing findings mapped to GDPR requirements
       :align: center
       :width: 80%
 

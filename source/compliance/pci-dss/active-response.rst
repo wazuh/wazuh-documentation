@@ -28,5 +28,6 @@ In the example below, the Wazuh Active Response module automatically blocks a ma
 
 .. thumbnail:: /images/compliance/pci/active-response-blocked-ip-finding.png
    :title: Active response blocked IP finding
+   :alt: Threat Hunting findings for a malicious HTTP connection and the active response that blocked the source IP
    :align: center
    :width: 80%

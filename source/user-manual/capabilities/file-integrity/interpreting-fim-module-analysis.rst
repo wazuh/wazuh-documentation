@@ -17,9 +17,9 @@ The Wazuh dashboard displays FIM events whenever a monitored file is added, modi
 Dashboard
 ---------
 
-The **Dashboard** section shows an overview of FIM events across your environment, covering all monitored agents or a single endpoint you select.
+The **Dashboard** tab summarizes the current state of the files that the FIM module monitors, for all monitored endpoints or a single endpoint you select.
 
-The image below shows an overview of FIM events for all monitored endpoints.
+The image below shows the **Dashboard** tab for all monitored endpoints.
 
 .. thumbnail:: /images/manual/fim/dashboard.png
   :title: Dashboard
@@ -27,7 +27,7 @@ The image below shows an overview of FIM events for all monitored endpoints.
   :align: center
   :width: 80%
 
-The image below shows an overview of FIM events for an Ubuntu endpoint.
+The image below shows the **Dashboard** tab for an Ubuntu endpoint.
 
 .. thumbnail:: /images/manual/fim/fim-overview.png
    :title: Overview of FIM scan results

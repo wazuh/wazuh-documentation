@@ -25,14 +25,16 @@ In this use case, Wazuh runs an SCA check to determine whether any users are ass
 The following image shows the result of the SCA check on the Wazuh dashboard.
 
 .. thumbnail:: /images/compliance/gdpr/SCA-35774-no-alerts.png
-    :title: Filtering SCA 35774 check finding
-    :align: center
-    :width: 80%
+   :title: Filtering SCA 35774 check finding
+   :alt: Configuration Assessment Inventory tab filtered to check 35774, Ensure shadow group is empty, passed on all endpoints
+   :align: center
+   :width: 80%
 
 .. thumbnail:: /images/compliance/gdpr/SCA-35774-full-info.png
-    :title: SCA 35774 check finding full information
-    :align: center
-    :width: 80%
+   :title: SCA 35774 check finding full information
+   :alt: Details panel of SCA check 35774 with its rationale, remediation, rules, and policy
+   :align: center
+   :width: 80%
 
 Chapter IV, Article 28, Head 3 (c)
 ------------------------------------
@@ -110,9 +112,10 @@ Ubuntu endpoint
 The following image shows the change made to the file.
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-mod-who.png
-    :title: Changed attributes finding visualization
-    :align: center
-    :width: 80%
+   :title: Changed attributes finding visualization
+   :alt: Document details of a FIM finding with the changed attributes in event.original highlighted
+   :align: center
+   :width: 80%
 
 Chapter IV, Article 30, Head 1 (g)
 ------------------------------------
@@ -142,25 +145,28 @@ Wazuh dashboard
 #. Click **Save**.
 
    .. thumbnail:: /images/compliance/gdpr/index-unclassified-events-settings.png
-       :title: Store all logs generated from an endpoint
-       :align: center
-       :width: 80%
+      :title: Store all logs generated from an endpoint
+      :alt: Edit Standard space panel with Index unclassified events turned on
+      :align: center
+      :width: 80%
 
 #. View these events on the dashboard by navigating to **Explore** > **Discover**.
 
 #. Change the **Index patterns** to ``wazuh-events-v5-unclassified*``.
 
    .. thumbnail:: /images/compliance/gdpr/unclassified-events-discover.png
-       :title: Unclassified events under Discover
-       :align: center
-       :width: 80%
+      :title: Unclassified events under Discover
+      :alt: Discover filtered to the wazuh-events-v5-unclassified data stream with unclassified events
+      :align: center
+      :width: 80%
 
 #. Change the **Index patterns** accordingly to view other events of interest.
 
    .. thumbnail:: /images/compliance/gdpr/events-discover.png
-       :title: Events under Discover
-       :align: center
-       :width: 80%
+      :title: Events under Discover
+      :alt: Discover showing events from the wazuh-events-v5 data streams
+      :align: center
+      :width: 80%
 
 Chapter IV, Article 32, Head 2
 --------------------------------
@@ -185,14 +191,16 @@ To generate a finding, attempt an SSH login with an invalid username on the moni
 When an invalid login attempt is detected, you can see the following finding on the Wazuh dashboard.
 
 .. thumbnail:: /images/compliance/gdpr/invalid-ssh-login-attempt1.png
-    :title: Invalid SSH login attempts findings
-    :align: center
-    :width: 80%
+   :title: Invalid SSH login attempts findings
+   :alt: GDPR Findings tab listing failed authentication attempt findings for an invalid SSH user
+   :align: center
+   :width: 80%
 
 .. thumbnail:: /images/compliance/gdpr/invalid-ssh-login-attempt2.png
-    :title: Invalid SSH login attempts finding visualization - more information
-    :align: center
-    :width: 80%
+   :title: Invalid SSH login attempts finding visualization - more information
+   :alt: Document details of an invalid SSH login finding with the original log and message highlighted
+   :align: center
+   :width: 80%
 
 Chapter IV, Article 33, Head 1
 --------------------------------
@@ -232,9 +240,10 @@ The SMTP sender defines the mail server that sends the notifications.
 #. Click **Create**.
 
    .. thumbnail:: /images/compliance/gdpr/configure-smtp-sender.png
-       :title: Configure the SMTP sender
-       :align: center
-       :width: 80%
+      :title: Configure the SMTP sender
+      :alt: Create SMTP sender page with the sender name, email address, host, and port
+      :align: center
+      :width: 80%
 
    .. note::
 
@@ -274,9 +283,10 @@ The recipient group defines who receives the email notifications.
 #. Click **Create**.
 
    .. thumbnail:: /images/compliance/gdpr/configure-recipient-group.png
-       :title: Configure the recipient group
-       :align: center
-       :width: 80%
+      :title: Configure the recipient group
+      :alt: Create recipient group page with the group name GDPR-notification and a recipient email
+      :align: center
+      :width: 80%
 
    .. note::
 
@@ -308,9 +318,10 @@ The email channel binds the sender and the recipients. The alerting monitor send
 #. Click **Create**.
 
    .. thumbnail:: /images/compliance/gdpr/configure-email-channel.png
-       :title: Configure the email channel
-       :align: center
-       :width: 80%
+      :title: Configure the email channel
+      :alt: Create channel page with an Email channel using the SMTP sender and the GDPR-notification recipient group
+      :align: center
+      :width: 80%
 
 The **Sender type** field offers two options:
 
@@ -386,9 +397,10 @@ The alerting monitor watches your findings for failed authentication attempts. W
 #. Click **Create**.
 
    .. thumbnail:: /images/compliance/gdpr/create-alerting-monitor.gif
-       :title: Create the alerting monitor
-       :align: center
-       :width: 80%
+      :title: Create the alerting monitor
+      :alt: failed-authentication-email alerting monitor overview with its trigger and alert history
+      :align: center
+      :width: 80%
 
 The **Monitor type** field offers these options:
 
@@ -444,16 +456,18 @@ Verify that Wazuh sends the email when a failed authentication occurs.
 The data protection officer receives an email similar to the following:
 
 .. thumbnail:: /images/compliance/gdpr/sample-email-alert-notification.png
-    :title: Sample email alert notification
-    :align: center
-    :width: 80%
+   :title: Sample email alert notification
+   :alt: Sample email alert notification sent for a failed authentication attempt
+   :align: center
+   :width: 80%
 
 The email identifies the trigger, the severity, the monitor, and the detection window. To view more details, such as the source IP address, the recipient opens the finding on the Wazuh dashboard.
 
 .. thumbnail:: /images/compliance/gdpr/email-notification-dashboard-findings.png
-    :title: Email notification dashboard findings
-    :align: center
-    :width: 80%
+   :title: Email notification dashboard findings
+   :alt: Threat Hunting Findings tab listing the failed authentication attempt findings that triggered email notifications
+   :align: center
+   :width: 80%
 
 Chapter IV, Article 35, Head 1
 --------------------------------
@@ -507,9 +521,10 @@ Ubuntu endpoint
 A medium severity finding on the Wazuh dashboard shows that a file was modified in the monitored directory.
 
 .. thumbnail:: /images/compliance/gdpr/file-modification-medium-finding.png
-    :title: File modification medium finding visualization
-    :align: center
-    :width: 80%
+   :title: File modification medium finding visualization
+   :alt: GDPR Findings tab with a medium level Wazuh FIM file modified finding highlighted
+   :align: center
+   :width: 80%
 
 Wazuh dashboard
 ~~~~~~~~~~~~~~~
@@ -556,9 +571,10 @@ The two decoders that need to exist in your custom space are ``decoder/core-wazu
 #. Switch to **Test** in **Space** and repeat step 16 to promote the decoders from **Test** space to **Custom**.
 
    .. thumbnail:: /images/compliance/gdpr/create-decoders-integration.gif
-       :title: Create decoders and integration
-       :align: center
-       :width: 80%
+      :title: Create decoders and integration
+      :alt: Ruleset management Decoders page in the Custom space with the custom Wazuh File Integrity Monitoring decoder
+      :align: center
+      :width: 80%
 
    .. note::
 
@@ -602,9 +618,10 @@ The file modification rule already exists out of the box. To change the severity
 #. Switch to **Test** in **Space** and repeat step 15 to promote the rule from **Test** space to **Custom**.
 
    .. thumbnail:: /images/compliance/gdpr/create-custom-rule.gif
-       :title: Create custom rule
-       :align: center
-       :width: 80%
+      :title: Create custom rule
+      :alt: Ruleset management Rules page in the Custom space with the critical Wazuh FIM file modified rule
+      :align: center
+      :width: 80%
 
 Create detector
 """"""""""""""""
@@ -628,9 +645,10 @@ To generate a finding on the Wazuh dashboard, a corresponding detector must exis
 #. Click **Create detector**.
 
    .. thumbnail:: /images/compliance/gdpr/create-detector.gif
-       :title: Create detector
-       :align: center
-       :width: 80%
+      :title: Create detector
+      :alt: fim-custom detector details with its data source, schedule, and the active custom FIM rule
+      :align: center
+      :width: 80%
 
 Ubuntu endpoint
 ~~~~~~~~~~~~~~~
@@ -645,9 +663,10 @@ Create the file ``sensitive_data.txt`` in the ``/customers/personal_data`` direc
 A critical finding shows that a sensitive file was modified in the monitored directory.
 
 .. thumbnail:: /images/compliance/gdpr/file-modification-critical-finding.png
-    :title: File modification critical finding visualization
-    :align: center
-    :width: 80%
+   :title: File modification critical finding visualization
+   :alt: GDPR Findings tab with a critical Wazuh FIM file modified finding from the custom rule
+   :align: center
+   :width: 80%
 
 Chapter IV, Article 35, Head 7 (d)
 ------------------------------------

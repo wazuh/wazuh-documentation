@@ -6,7 +6,7 @@
 Agent upgrade module - How it works
 ===================================
 
-This section describes how the agent upgrade module works.The agent upgrade module is responsible for remotely carrying out the agent upgrade process.
+This section describes how the agent upgrade module works.The agent upgrade module is responsible for remotely carrying out the agent upgrade process. To configure it, see the :doc:`agent-upgrade </user-manual/reference/ossec-conf/agent-upgrade>` section of :doc:`Local configuration (ossec.conf) </user-manual/reference/ossec-conf/index>` in the Reference.
 
 -  On the Wazuh manager side, it validates, downloads, and/or sends the WPK files to the Wazuh agents.
 -  On the Wazuh agent side, it processes the received commands and notifies the Wazuh manager after an upgrade process has been accomplished.
