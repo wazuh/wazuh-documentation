@@ -93,6 +93,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added the `analysisd.rule_tree_memory_warning` and `analysisd.rule_tree_memory_limit` internal options and a section on the rule tree memory thresholds to the *Internal configuration* reference documentation. ([#10397](https://github.com/wazuh/wazuh-documentation/pull/10397))
+- **Post-release**: Added the *Using the Wazuh dashboard* method to the *Upgrading the Wazuh agent* documentation, and a paragraph on the automatic removal of disconnected agents with the `monitord.delete_old_agents` internal option to the *Removing agents* documentation. ([#10694](https://github.com/wazuh/wazuh-documentation/pull/10694))
 
 ### Changed
 
@@ -100,6 +101,7 @@ All notable changes to this project will be documented in this file.
 - Documented that `logcollector.remote_commands` also controls the sockets and socket targets that Wazuh agents receive through centralized configuration, in the *Internal configuration*, *localfile*, *socket*, and *Centralized configuration* reference documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
 - Updated the macOS ULS log tool style description in the *Log data collection* documentation to cover the `--style ndjson` format used on macOS 10.15 and later. ([#10567](https://github.com/wazuh/wazuh-documentation/pull/10567))
 - Updated the `wazuh-certs-generator` image version to 0.0.5 in the *Deployment on Docker* and *Upgrading Wazuh Docker* documentation. ([#10588](https://github.com/wazuh/wazuh-documentation/pull/10588))
+- **Post-release**: Updated the *Wazuh agent* installation documentation for Windows to list Windows Server 2025 and to add the commands that download the installer. ([#10681](https://github.com/wazuh/wazuh-documentation/pull/10681))
 
 ### Fixed
 
@@ -121,6 +123,16 @@ All notable changes to this project will be documented in this file.
 - Corrected the disk space requirement in the *Wazuh server installation* documentation and the process name fields of eBPF who-data alerts in the *File integrity monitoring* documentation. ([#10587](https://github.com/wazuh/wazuh-documentation/pull/10587))
 - Replaced the "here" link text with descriptive link text in the *Via agent configuration* enrollment documentation. ([#10605](https://github.com/wazuh/wazuh-documentation/pull/10605))
 - **Post-release**: Fixed the breadcrumbs home link, which had no accessible name for screen readers, and the missing styling of the development notice on the documentation home page. ([#10660](https://github.com/wazuh/wazuh-documentation/pull/10660))
+- **Post-release**: Clarified the Windows agent installation paths in the *Via agent configuration*, *Using password authentication*, *Wazuh manager identity verification*, *Wazuh agent identity verification*, and *Installing a custom WPK* documentation, and corrected the key and certificate paths and the package name in the *Deployment variables* documentation for macOS and Windows. ([#10694](https://github.com/wazuh/wazuh-documentation/pull/10694))
+- **Post-release**: Corrected the `generate_wpk_package.sh` usage and the manual Linux steps in the *Creating a custom WPK* documentation, and linked the *Agent upgrade module* documentation to its configuration reference. ([#10694](https://github.com/wazuh/wazuh-documentation/pull/10694))
+- **Post-release**: Updated the menu screenshot in the *Wazuh agent connection* documentation, and corrected the menu paths and figures in the *MITRE ATT&CK framework* documentation. ([#10694](https://github.com/wazuh/wazuh-documentation/pull/10694))
+- **Post-release**: Corrected the allowed values of the `name`, `os`, and `profile` filters, the temporary file name, the reload description, the keepalive interval and the sample log, and added the limits for group files in the *Centralized configuration (agent.conf)* reference, and corrected the `config-profile` description in the *client* reference. ([#10686](https://github.com/wazuh/wazuh-documentation/pull/10686))
+- **Post-release**: Added the Reporting prerequisite for a read-only user, the document level security limits and the group policy actions for the agent group use case to the *Wazuh RBAC* documentation, and the step that deletes the built-in role list mapper to the *Keycloak* documentation. Corrected product names and image titles, replaced two screenshots, added two, and added alt text to the screenshots in the *Single sign-on* documentation. ([#10695](https://github.com/wazuh/wazuh-documentation/pull/10695))
+- **Post-release**: Corrected the who-data setup, the Windows rules, integration, and active response, and the YARA attack emulation steps in the *File integrity monitoring*, *Detecting and removing malware using VirusTotal integration*, and *Detecting malware using YARA integration* proofs of concept, and the Windows agent service name in the *Proof of Concept guide*. ([#10693](https://github.com/wazuh/wazuh-documentation/pull/10693))
+- **Post-release**: Renamed the sample title of the vulnerability inventory data in the *How it works* page of the *Vulnerability detection* documentation. ([#10692](https://github.com/wazuh/wazuh-documentation/pull/10692))
+- **Post-release**: Added the `PATH` export to the CMake installation step for CentOS 6/7 and an Amazon Linux 2 tab to the Yum steps of the *Installing the Wazuh agent from sources* documentation. ([#10683](https://github.com/wazuh/wazuh-documentation/pull/10683))
+- **Post-release**: Corrected the cluster name in the expected output of the cluster test in the *Installing the Wazuh indexer using the assisted installation method* documentation. ([#10682](https://github.com/wazuh/wazuh-documentation/pull/10682))
+- **Post-release**: Removed the leading `.\` from the PowerShell command in the *Deploying Wazuh agents on Windows endpoints* installation documentation, so it matches the CMD command. ([#10684](https://github.com/wazuh/wazuh-documentation/pull/10684))
 
 ## [v4.14.9]
 
