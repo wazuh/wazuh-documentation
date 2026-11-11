@@ -23,9 +23,9 @@ The following example configures the FIM module to monitor a directory in real t
 
 .. note::
 
-   When configuring a file or directory for real-time monitoring, it must exist before restarting the Wazuh agent. If the specified path does not exist, the FIM module ignores it until a subsequent agent restart detects the file or directory. The FIM module does not support monitoring UNC network paths or mapped network drives on Windows. Only local file system paths are supported. This restriction applies to all monitoring modes (realtime, scheduled, and whodata) on Windows.
+   When configuring a file or directory for real-time monitoring, create it before you restart the Wazuh agent. If the path doesn't exist yet, the FIM module adds it at the next scheduled scan and monitors it in real time from then on. The FIM module does not support monitoring UNC network paths or mapped network drives on Windows. Only local file system paths are supported. This restriction applies to all monitoring modes (realtime, scheduled, and whodata) on Windows.
 
-#. Add the following settings to the Wazuh agent configuration file:
+#. Add the following settings inside the ``<ossec_config>`` block of the Wazuh agent configuration file:
 
    -  Linux: ``/var/ossec/etc/ossec.conf``
    -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
@@ -40,7 +40,7 @@ The following example configures the FIM module to monitor a directory in real t
 #. Restart the Wazuh agent to apply any configuration change:
 
    -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
+   -  Windows: ``Restart-Service -Name WazuhSvc``
 
 .. _record_file_attributes:
 
@@ -98,7 +98,7 @@ In contrast, the following configuration disables all attribute checks, includin
 
 The following example shows how to disable SHA-1 hash calculation for a monitored file. Replace ``<FILEPATH_OF_MONITORED_FILE>`` with your own file path.
 
-#. Add the following settings to the Wazuh agent configuration file:
+#. Add the following settings inside the ``<ossec_config>`` block of the Wazuh agent configuration file:
 
    -  Linux: ``/var/ossec/etc/ossec.conf``
    -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
@@ -114,7 +114,7 @@ The following example shows how to disable SHA-1 hash calculation for a monitore
 #. Restart the Wazuh agent to apply any configuration change:
 
    -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
+   -  Windows: ``Restart-Service -Name WazuhSvc``
    -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
 .. note::
@@ -145,14 +145,14 @@ By default, the FIM module runs scans every 12 hours (43200 seconds). The follow
 #. Restart the Wazuh agent to apply any configuration change:
 
    -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
+   -  Windows: ``Restart-Service -Name WazuhSvc``
    -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
 You can also schedule scans using the ``scan_time`` and the ``scan_day`` options to run FIM scans outside business hours.
 
 The configuration example below shows you how to run the scans of the specified directories every *Saturday* at *10 pm*.
 
-#. Add the following settings to the Wazuh agent configuration file:
+#. Add the following settings inside the ``<ossec_config>`` block of the Wazuh agent configuration file:
 
    -  Linux: ``/var/ossec/etc/ossec.conf``
    -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
@@ -168,7 +168,7 @@ The configuration example below shows you how to run the scans of the specified 
 #. Restart the Wazuh agent to apply any configuration change:
 
    -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
+   -  Windows: ``Restart-Service -Name WazuhSvc``
    -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
 .. _report_changes_in_file_values:
@@ -184,9 +184,9 @@ Use the ``report_changes`` option with caution, as enabling it copies every moni
 -  ``/Library/Ossec/queue/diff/*`` on macOS.
 -  ``C:\Program Files (x86)\ossec-agent\queue\diff\file\*`` on Windows.
 
-The following configuration sets up the FIM module to report file changes. Replace ``<FILEPATH_OF_MONITORED_FILE>`` with your own file path.
+The Wazuh agent clears these copies when it restarts, so the first change to each monitored file after a restart shows ``Unable to calculate diff due to no previous data stored for this file.`` instead of the changed content. Later changes show the content. The following configuration sets up the FIM module to report file changes. Replace ``<FILEPATH_OF_MONITORED_FILE>`` with your own file path.
 
-#. Add the following settings to the Wazuh agent configuration file:
+#. Add the following settings inside the ``<ossec_config>`` block of the Wazuh agent configuration file:
 
    -  Linux: ``/var/ossec/etc/ossec.conf``
    -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
@@ -202,14 +202,14 @@ The following configuration sets up the FIM module to report file changes. Repla
 #. Restart the Wazuh agent to apply the configuration changes:
 
    -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
+   -  Windows: ``Restart-Service -Name WazuhSvc``
    -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
 In the configuration example below, you can see how to use the ``report_changes`` option for all files in the ``<FILEPATH_OF_MONITORED_DIRECTORY>`` directory. You can prevent the FIM module from reporting the exact content changes to the ``<FILEPATH_OF_MONITORED_DIRECTORY>/private.txt`` file. Replace ``<FILEPATH_OF_MONITORED_DIRECTORY>`` with your own file path.
 
 When using the ``report_changes`` option, you can use the ``nodiff`` option to create an exception. This option allows a finding to be created for file modifications, but it prevents the Wazuh FIM module from reporting the exact content changed in a text file. Using the ``nodiff`` option avoids data leakage that might occur by sending the file content changes through findings.
 
-#. Add the following settings to the Wazuh agent configuration file:
+#. Add the following settings inside the ``<ossec_config>`` block of the Wazuh agent configuration file:
 
    -  Linux: ``/var/ossec/etc/ossec.conf``
    -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
@@ -226,7 +226,7 @@ When using the ``report_changes`` option, you can use the ``nodiff`` option to c
 #. Restart the Wazuh agent to apply the configuration changes:
 
    -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
+   -  Windows: ``Restart-Service -Name WazuhSvc``
    -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
 Adding exclusions
@@ -236,7 +236,7 @@ Configure the FIM module to ignore findings for specific files or directories us
 
 The following example shows how to configure the FIM module to ignore a specific file path and files with the ``.log`` and ``.tmp`` extensions using a regular expression. Replace ``<FILEPATH_OF_MONITORED_FILE>`` with your own file paths.
 
-#. Add the following settings to the Wazuh agent configuration file:
+#. Add the following settings inside the ``<ossec_config>`` block of the Wazuh agent configuration file:
 
    -  Linux: ``/var/ossec/etc/ossec.conf``
    -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
@@ -253,5 +253,5 @@ The following example shows how to configure the FIM module to ignore a specific
 #. Restart the Wazuh agent to apply any configuration change:
 
    -  Linux: ``systemctl restart wazuh-agent``
-   -  Windows: ``Restart-Service -Name wazuh``
+   -  Windows: ``Restart-Service -Name WazuhSvc``
    -  macOS: ``/Library/Ossec/bin/wazuh-control restart``

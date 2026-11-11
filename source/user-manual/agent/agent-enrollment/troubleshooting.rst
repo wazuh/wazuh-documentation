@@ -170,6 +170,43 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
         </enrollment>
     </agent>
 
+Enrollment token refused: address not in certificate SAN
+--------------------------------------------------------
+
+The Wazuh manager creates an enrollment token only for an address that is a subject alternative name (SAN) of its agent listener certificate, ``/etc/wazuh-manager/certs/remoted.pem``. Wazuh agents verify the Wazuh manager against these names, so a token for any other address would fail when the Wazuh agent connects. This happens when the address is, for example, a public or NAT address, a load balancer, a DNS name that isn't in the certificate, or an IP address that changed after the certificate was issued.
+
+**Location**: the output of the command, the Wazuh manager API response, or the Wazuh dashboard notification that creates the token.
+
+**Error log**:
+
+The ``wazuh-manager-authd --create-enrollment-token`` command:
+
+.. code-block:: none
+   :class: output
+
+   ERROR 9025: Enrollment token refused: address not in certificate SAN
+
+The Wazuh manager API, ``POST /agents/enrollment-tokens``: error ``1768``, "Enrollment token refused", with the detail ``address not in certificate SAN``.
+
+The Wazuh dashboard:
+
+.. code-block:: none
+   :class: output
+
+   API error: ERR_BAD_REQUEST - Enrollment token refused: address not in certificate SAN
+
+**Resolution**: List the addresses that the certificate allows. On the Wazuh manager master node, run:
+
+.. code-block:: console
+
+   # openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
+
+Or query the Wazuh manager API with ``GET /cluster/<NODE_ID>/daemons/remoted/tls`` and read ``listener.sans`` in the response.
+
+Create the token for an address in that list. A DNS name must match a DNS entry, and an IP address must match an IP Address entry. If the IP address of the Wazuh manager can change, use a DNS name.
+
+If the Wazuh agents must use an address that isn't in the list, issue the agent listener certificate again with that address. List every address the Wazuh agents use in the same run, because the new certificate replaces the old one. See :ref:`Agent connection address <wazuh_manager_agent_connection_address>` for the installation guide methods, :ref:`Reissue the Wazuh manager certificates <vm_reissue_manager_certificates>` for the virtual machine, and the ``--agent-san`` option in :doc:`Wazuh Docker deployment </deployment-options/docker/wazuh-container>`. Then create the token again.
+
 Unable to read CA certificate file
 ----------------------------------
 

@@ -3,6 +3,9 @@
 .. meta::
    :description: Find the details of the Wazuh normalization engine helper functions that need more than a table row: accepted argument values, failure conditions, and worked examples for filter, map, and transformation helpers.
 
+.. collapsible-tables:: helper functions
+   :sections:
+
 .. _reference_helper_function_details:
 
 Helper function details

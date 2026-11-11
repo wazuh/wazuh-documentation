@@ -127,7 +127,7 @@ By default, the connector points to the localhost and uses the certificates in `
 
    .. code-block:: console
 
-      # curl -k -u <WAZUH_INDEXER_USERNAME> -XGET https://<INDEXER_IP_ADDRESS>:9200/_cluster/health?pretty
+      # curl --cacert /etc/wazuh-manager/certs/indexer-ca.pem -u <WAZUH_INDEXER_USERNAME> -XGET https://<INDEXER_IP_ADDRESS>:9200/_cluster/health?pretty
 
    Replace ``<INDEXER_IP_ADDRESS>`` with the address in the ``<host>`` entry of the ``<indexer>`` section.
 

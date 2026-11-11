@@ -208,7 +208,7 @@ Install and configure the Wazuh manager on each manager node. Before installing 
       -  libc6 (2.18 or later)
       -  passwd
 
-#. Place the passwords, the root CA certificate, and the certificates of this node before installing the package. Replace ``<MANAGER_NODE_NAME>`` with the name of the node as defined in ``config.yml``, for example, ``manager``.
+#. Place the passwords before installing the package. Replace ``<MANAGER_NODE_NAME>`` with the name of the node as defined in ``config.yml``, for example, ``manager``.
 
    .. code-block:: console
 
@@ -216,23 +216,39 @@ Install and configure the Wazuh manager on each manager node. Before installing 
 
    .. code-block:: console
 
-      # install -d -m 0750 -o root -g root /etc/wazuh-manager /etc/wazuh-manager/certs
-      # install -d -m 0700 -o root -g root /etc/wazuh-manager/ca
-      # install -m 0644 wazuh-install-files/root-ca.pem /etc/wazuh-manager/ca/root-ca.pem
+      # install -d -m 0750 -o root -g root /etc/wazuh-manager
       # install -m 0600 /dev/null /etc/wazuh-manager/local.env
       # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD|WAZUH_INDEXER_MANAGER_PASSWORD)=' wazuh-install-files/credentials.env > /etc/wazuh-manager/local.env
-      # install -m 0640 wazuh-install-files/root-ca.pem /etc/wazuh-manager/certs/root-ca.pem
-      # install -m 0640 wazuh-install-files/root-ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
-      # install -m 0640 wazuh-install-files/$NODE_NAME.pem /etc/wazuh-manager/certs/indexer-connector.pem
-      # install -m 0640 wazuh-install-files/$NODE_NAME-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
-      # install -m 0640 wazuh-install-files/$NODE_NAME-remoted.pem /etc/wazuh-manager/certs/remoted.pem
-      # install -m 0640 wazuh-install-files/$NODE_NAME-remoted-key.pem /etc/wazuh-manager/certs/remoted-key.pem
-      # install -m 0640 wazuh-install-files/$NODE_NAME-apid.pem /etc/wazuh-manager/certs/apid.pem
-      # install -m 0640 wazuh-install-files/$NODE_NAME-apid-key.pem /etc/wazuh-manager/certs/apid-key.pem
 
-   The root CA of the deployment also signed the Wazuh indexer certificates, so it is placed as ``indexer-ca.pem`` too. ``remoted.pem`` is the agent listener certificate, served on port 1517 and reused by enrollment on port 1515. ``apid.pem`` is the Wazuh manager API certificate. Without either pair, the Wazuh manager doesn't start.
+#. Optional: set the addresses that Wazuh agents use to reach this node. Without this setting, the package puts the node's host name and IP addresses in its agent listener certificate. Your list replaces them, so include this node's own address and any load balancer, NAT address, or public name that agents use. Separate the entries with commas, and write ``IP:`` before an address and ``DNS:`` before a name:
 
-#. Install the Wazuh manager package. The package uses the files you placed instead of issuing its own, and gives the ``remoted`` and ``apid`` pairs their owner.
+   .. code-block:: console
+
+      # echo 'WAZUH_MANAGER_REMOTED_CERT_SANS=IP:<WAZUH_MANAGER_ADDRESS>,DNS:<LOAD_BALANCER_NAME>' >> /etc/wazuh-manager/local.env
+
+   The package always adds ``localhost``, ``127.0.0.1``, and ``::1``. For the Wazuh manager API certificate, set ``WAZUH_MANAGER_APID_CERT_SANS`` the same way. The address in the ``url`` setting of the Wazuh dashboard must be in that certificate.
+
+#. On each worker node of a Wazuh manager cluster, place the master node's root CA. Install the master node first. Every node then issues its certificates from the same root CA, so the Wazuh agents trust every node. Skip this step on the master node and on a single Wazuh manager. On the master node, pack the root CA and its private key:
+
+   .. code-block:: console
+
+      # tar -cf manager-ca.tar -C /etc/wazuh-manager/ca root-ca.pem root-ca.key
+      # chmod 600 manager-ca.tar
+
+   Copy ``manager-ca.tar`` to the working directory of the worker node, and run these commands there:
+
+   .. code-block:: console
+
+      # install -d -m 0700 /etc/wazuh-manager/ca
+      # tar -xf manager-ca.tar -C /etc/wazuh-manager/ca
+      # chown root:root /etc/wazuh-manager/ca/root-ca.pem /etc/wazuh-manager/ca/root-ca.key
+      # chmod 0644 /etc/wazuh-manager/ca/root-ca.pem
+      # chmod 0400 /etc/wazuh-manager/ca/root-ca.key
+      # rm -f manager-ca.tar
+
+   The file holds the root CA private key. Remove it from the master node too when every worker node has its copy. To add a Wazuh manager node to the cluster later, repeat this step on the new node before you install its package. Don't issue its certificates with the ``-wm`` option of the certificates tool. The tool signs them with the root CA of the archive, which isn't the root CA of this Wazuh manager cluster. Procedures that add a Wazuh manager node with the certificates tool apply only to assisted installations.
+
+#. Install the Wazuh manager package. The package uses the passwords you placed, and issues this node's agent listener and Wazuh manager API certificates.
 
    .. tabs::
 
@@ -248,13 +264,21 @@ Install and configure the Wazuh manager on each manager node. Before installing 
 
             # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-manager*.deb
 
-#. Check the credentials. On RPM systems, the installation prints ``UNSAFE /etc/wazuh-manager/certs/<FILE>.pem: group is root, not wazuh-manager`` for the files you placed. The package fixes the owner at the end of the installation, and nothing needs to be done. The check must end with ``no problem found``. In a distributed deployment, it also warns that the dashboard client pair was not generated, which is expected:
+#. Place the Wazuh indexer root CA and this node's client certificate for the Wazuh indexer. The installation printed ``MISSING`` lines for them, which is expected. Skip this step on a host with the Wazuh indexer:
+
+   .. code-block:: console
+
+      # install -m 0640 -o root -g wazuh-manager wazuh-install-files/root-ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
+      # install -m 0640 -o root -g wazuh-manager wazuh-install-files/$NODE_NAME.pem /etc/wazuh-manager/certs/indexer-connector.pem
+      # install -m 0640 -o root -g wazuh-manager wazuh-install-files/$NODE_NAME-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
+
+#. Check the credentials. The check must end with ``no problem found``:
 
    .. code-block:: console
 
       # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check -H /var/wazuh-manager
 
-#. Check that the agent listener certificate comes from the deployment's root CA. Agents reject a Wazuh manager node whose certificate fails this check:
+#. Check that the agent listener certificate comes from this node's root CA, the master node's root CA in a cluster. Agents reject a Wazuh manager node whose certificate fails this check:
 
    .. code-block:: console
 
@@ -275,11 +299,25 @@ Install and configure the Wazuh manager on each manager node. Before installing 
 
 #. Enable and start the Wazuh manager service, first on the master node and then on the worker nodes. A fresh installation doesn't start the service by itself.
 
-   .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl daemon-reload
+            # systemctl enable wazuh-manager
+            # systemctl start wazuh-manager
 
 #. Run the following commands to verify that the Wazuh manager status is active and that it reaches the Wazuh indexer:
 
-   .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl status wazuh-manager
 
    .. code-block:: console
 
@@ -341,7 +379,13 @@ Configuring the Wazuh manager master node
 
 #. Restart the Wazuh manager.
 
-   .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl restart wazuh-manager
 
    Repeat these configuration steps for every Wazuh manager worker node in your cluster, with ``<node_type>worker</node_type>``, a unique ``<node_name>``, the same ``<key>``, and ``<WAZUH_MASTER_ADDRESS>`` in ``<nodes>``.
 
@@ -371,25 +415,7 @@ Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
 Installing the Wazuh dashboard
 ------------------------------
 
-Install and configure the Wazuh dashboard node. Before installing it, install the following dependencies, if missing:
-
-.. tabs::
-
-   .. group-tab:: RPM
-
-      -  diffutils
-      -  libcap
-      -  openssl
-      -  shadow-utils
-      -  util-linux
-
-   .. group-tab:: DEB
-
-      -  curl
-      -  diffutils
-      -  libcap2-bin
-      -  openssl
-      -  tar
+Install and configure the Wazuh dashboard node.
 
 #. Place the passwords, the root CA certificate, and the certificate of this node before installing the package. Replace ``<DASHBOARD_NODE_NAME>`` with the name of the node as defined in ``config.yml``, for example, ``dashboard``.
 
@@ -405,9 +431,18 @@ Install and configure the Wazuh dashboard node. Before installing it, install th
       # install -m 0640 wazuh-install-files/$NODE_NAME.pem /etc/wazuh-dashboard/certs/dashboard.pem
       # install -m 0640 wazuh-install-files/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
       # install -m 0640 wazuh-install-files/root-ca.pem /etc/wazuh-dashboard/certs/indexer-ca.pem
-      # install -m 0640 wazuh-install-files/root-ca.pem /etc/wazuh-dashboard/certs/manager-ca.pem
 
-   The root CA of the deployment signed the Wazuh indexer and the Wazuh manager certificates, so it is placed as ``indexer-ca.pem`` and ``manager-ca.pem``.
+   The root CA of the deployment signed the Wazuh indexer certificates, so it is placed as ``indexer-ca.pem``. The Wazuh dashboard verifies the Wazuh manager API with ``manager-ca.pem``, the root CA of the Wazuh manager master node. Only ``root`` can read that file. Run the following command on the master node, and save the output as ``manager-ca.pem`` in the working directory of this node:
+
+   .. code-block:: console
+
+      # cat /etc/wazuh-manager/export/ca.pem
+
+   Then run this command on this node:
+
+   .. code-block:: console
+
+      # install -m 0640 manager-ca.pem /etc/wazuh-dashboard/certs/manager-ca.pem
 
 #. Install the Wazuh dashboard package.
 
@@ -452,18 +487,61 @@ Install and configure the Wazuh dashboard node. Before installing it, install th
    -  ``opensearch.hosts``: The URLs of the Wazuh indexer nodes. Set this value to the Wazuh indexer node addresses, even when all components share the same host. The addresses of the nodes are separated by commas.
    -  ``wazuh_core.hosts``: The Wazuh manager API that the dashboard queries. ``url`` must point to the Wazuh manager API on the master node, the only node that runs it. Use one of the addresses in the master node's ``apid.pem`` certificate. Don't set a ``password``. The package stored the ``wazuh-internal-client`` password in the Wazuh dashboard keystore, and the keystore value takes precedence over a password in this file. Leave ``run_as`` and ``ca`` as the package wrote them.
 
-#. Enable and start the Wazuh dashboard service.
+#. Enable and start the Wazuh dashboard service. The package neither enables nor starts it.
 
-   .. include:: /_templates/installations/dashboard/enable_dashboard.rst
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl daemon-reload
+            # systemctl enable wazuh-dashboard
+            # systemctl start wazuh-dashboard
+
+   On a host with firewalld, open port 443/TCP for the browsers:
+
+   .. code-block:: console
+
+      # firewall-cmd --permanent --add-port=443/tcp
+      # firewall-cmd --reload
 
 #. Run the following command to verify the Wazuh dashboard service is active.
 
-   .. include:: /_templates/installations/wazuh/common/check_wazuh_dashboard.rst
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl status wazuh-dashboard
+
+   If the service fails to start, run the following command to see the cause:
+
+   .. code-block:: console
+
+      # journalctl -u wazuh-dashboard -n 50
+
+   A ``MISSING`` line names a password or file that isn't in place. An ``UNSAFE`` line names a file or directory with the wrong owner or mode. The service stops after three failed starts. After you fix the cause, run the following commands to reset the count and start the service again:
+
+   .. code-block:: console
+
+      # systemctl reset-failed wazuh-dashboard
+      # systemctl start wazuh-dashboard
 
 #. Access the Wazuh web interface.
 
    -  **URL**: ``https://<WAZUH_DASHBOARD_ADDRESS>``
    -  **Username**: ``admin``
-   -  **Password**: the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``wazuh-install-files/credentials.env``.
+   -  **Password**: the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh-indexer/export/credentials.env`` on the first Wazuh indexer node.
 
    When you first access the Wazuh dashboard, your browser displays a warning that a trusted authority didn't issue the certificate. You can add an exception in the browser's advanced options. For better security, import the deployment's root CA into the browser's certificate manager instead. It's ``wazuh-install-files/root-ca.pem``, the same file as ``/etc/wazuh-dashboard/certs/indexer-ca.pem``. You can also configure a certificate from a trusted authority. The certificate names only the Wazuh dashboard addresses in ``config.yml``. To reach the dashboard by another address or DNS name without the warning, add it to the dashboard node's ``ip`` or ``dns`` list in ``config.yml``. Do this before you run ``-g``.
+
+   To check both connections from the Wazuh dashboard host, run the following commands. Replace ``<WAZUH_DASHBOARD_ADDRESS>`` with the address of this node in ``config.yml``. The certificate of this node comes from the deployment's root CA, which the Wazuh dashboard also keeps as ``indexer-ca.pem``. Each command asks for the ``admin`` password:
+
+   .. code-block:: console
+
+      # curl --cacert /etc/wazuh-dashboard/certs/indexer-ca.pem -u admin https://<WAZUH_DASHBOARD_ADDRESS>/api/status
+      # curl --cacert /etc/wazuh-dashboard/certs/indexer-ca.pem -u admin -H 'osd-xsrf: true' -H 'Content-Type: application/json' -X POST https://<WAZUH_DASHBOARD_ADDRESS>/api/check-api -d '{"id":"default"}'
+
+   The first output includes ``"state":"green"``. The second includes the name of the Wazuh manager master node, for example ``"node":"master-node"``.

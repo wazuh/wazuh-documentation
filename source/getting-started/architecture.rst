@@ -74,14 +74,18 @@ Wazuh dashboard - Wazuh manager
 
 The Wazuh dashboard queries the Wazuh manager API to retrieve information and perform management operations. It displays configuration and status information about the :doc:`Wazuh manager <components/wazuh-manager>` and enrolled :doc:`Wazuh agents <components/wazuh-agent>`. It also performs operations such as agent enrollment, group assignment, and remote upgrades. The Wazuh manager API listens on port ``55000/TCP`` by default and exposes a REST interface over HTTPS. Only the master node runs the Wazuh manager API.
 
-The Wazuh manager API uses JSON Web Tokens (JWTs) for authentication. The Wazuh dashboard sends the API username and password to the ``POST /security/user/authenticate`` endpoint, which returns a signed JWT. The dashboard includes the token in the ``Authorization`` header of subsequent API requests. Tokens expire after 900 seconds by default.
+The Wazuh manager API uses JSON Web Tokens (JWTs) for authentication. The Wazuh dashboard sends the API username and password to the ``POST /security/user/authenticate`` endpoint, which returns a signed JWT. The dashboard includes this token in the ``Authorization`` header of subsequent API requests. Tokens expire after 900 seconds by default.
+
+The Wazuh dashboard authenticates as the ``wazuh-internal-client`` user with ``run_as`` enabled. This allows the Wazuh manager API to apply the RBAC roles of the user logged in to the Wazuh dashboard.
+
+The Wazuh dashboard verifies the Wazuh manager API certificate using the Wazuh manager CA at ``/etc/wazuh-dashboard/certs/manager-ca.pem``. This file is a copy of ``/etc/wazuh-manager/export/ca.pem`` from the master node. The API address configured in the Wazuh dashboard must match a name or IP address in the Wazuh manager API certificate. If the Wazuh manager CA is missing, the Wazuh dashboard can still start and display Wazuh indexer data, but it cannot connect to the Wazuh manager API.
 
 Role-Based Access Control (RBAC) authorizes each authenticated request based on the user's assigned permissions. RBAC supports permissions for specific resources and actions and operates in allowlist mode by default. In this mode, the API denies actions that the user's roles don't explicitly permit. In a Wazuh manager cluster, the Distributed API (DAPI) layer coordinates API requests across cluster nodes.
 
 Wazuh dashboard - Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh dashboard queries the Wazuh indexer to retrieve indexed security data for its visualizations, tables, and findings. It sends search, aggregation, and management requests to the Wazuh indexer REST API over HTTPS on port ``9200/TCP`` by default. The Wazuh indexer processes each request and returns the matching documents, which the Wazuh dashboard renders. This communication is encrypted with TLS and authenticated with Wazuh indexer credentials.
+The Wazuh dashboard queries the Wazuh indexer to retrieve indexed security data for its visualizations, tables, and findings. It sends search, aggregation, and management requests to the Wazuh indexer REST API over HTTPS on port ``9200/TCP`` by default. The Wazuh indexer processes each request and returns the matching documents, which the Wazuh dashboard renders. This communication is encrypted with TLS and authenticated with Wazuh indexer credentials. The Wazuh dashboard connects to the Wazuh indexer as the ``kibanaserver`` user and verifies its certificate using the Wazuh indexer CA at ``/etc/wazuh-dashboard/certs/indexer-ca.pem``. The Wazuh dashboard cannot start if this CA file is missing.
 
 .. _default_ports:
 

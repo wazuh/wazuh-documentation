@@ -24,7 +24,7 @@ PCI DSS requirement 2.2.4
 
 PCI DSS requirement 2.2.4 mandates keeping only necessary services, protocols, daemons, and functions enabled and removing unnecessary functionality. The Syscollector and :doc:`SCA <configuration-assessment>` modules support the requirement by identifying unnecessary processes, services, and configurations that can increase the attack surface.
 
-The Wazuh Syscollector module collects information about running processes on monitored endpoints. You can use this information to identify unnecessary processes and determine whether they are required for an endpoint's operation. The Wazuh Syscollector module is enabled with all available scans by default in all compatible systems. You can view system inventory information in the **IT Hygiene** and **PCI DSS** dashboards on the Wazuh dashboard.
+The Wazuh Syscollector module collects information about running processes on monitored endpoints. You can use this information to identify unnecessary processes and determine whether they are required for an endpoint's operation. The Wazuh Syscollector module is enabled with all available scans by default in all compatible systems. You can view this information in the **IT Hygiene** dashboard on the Wazuh dashboard.
 
 IT Hygiene dashboard
 ~~~~~~~~~~~~~~~~~~~~~
@@ -33,15 +33,17 @@ Click the upper-left menu icon **☰** to open the options, and go to **Security
 
 .. thumbnail:: /images/compliance/pci/it-hygiene-dashboard.png
    :title: IT Hygiene dashboard
+   :alt: IT Hygiene dashboard with operating systems, packages, processes, ports, and hardware across endpoints
    :align: center
    :width: 80%
 
 PCI DSS dashboard
 ~~~~~~~~~~~~~~~~~~
 
-Click the menu icon, then navigate to **Security operations** > **Regulatory Compliance** > **PCI DSS**, then click the **Controls** tab to review findings related to PCI DSS requirement 2.2.4. The following image shows the corresponding PCI DSS finding in the Wazuh dashboard:
+Syscollector data doesn't generate PCI DSS findings. The PCI DSS dashboard shows the findings for requirement 2.2.4 from SCA checks, such as check 35608 in :doc:`Configuration assessment <configuration-assessment>`. To review them, click the menu icon, navigate to **Security operations** > **Regulatory Compliance** > **PCI DSS**, then click the **Controls** tab and select **Requirement 2**. The following image shows the SCA findings for requirement 2.2.4:
 
 .. thumbnail:: /images/compliance/pci/pci-dss-dashboard-requirement-2-2-4.png
    :title: PCI DSS dashboard finding for requirement 2.2.4
+   :alt: PCI DSS Controls tab with Requirement 2 selected and the 2.2.4 requirement card
    :align: center
    :width: 80%

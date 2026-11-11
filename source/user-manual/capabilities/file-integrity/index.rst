@@ -10,14 +10,14 @@ File integrity monitoring
 
 File Integrity Monitoring (FIM) is a security process that monitors system, application, and sensitive data files, then reports any integrity changes. It helps organizations detect unauthorized changes to critical files and reduce the risk of data theft or compromise.
 
-The Wazuh FIM module monitors files and directories for creation, modification, and deletion events. It establishes a baseline by saving each file's checksum and attributes, then detects changes through scheduled or real-time scans. When a file diverges from its baseline, the FIM module generates a finding.
+The Wazuh FIM module monitors files and directories for creation, modification, and deletion events. It establishes a baseline by saving each file's checksum and attributes, then detects changes through scheduled or real-time scans. When a file diverges from its baseline, the FIM module reports the change, and Wazuh generates a finding when the change matches a detection rule.
 
 The Wazuh FIM module supports several security and operational use cases, including:
 
 .. rubric:: Change management
     :class: h2
 
-The Wazuh FIM module helps verify that change management processes work as intended. It records what changed, when, and who or what caused it, helping teams flag unauthorized configuration changes and confirm approved updates were implemented correctly.
+The Wazuh FIM module helps verify that change management processes work as intended. It records what changed and when and, with who-data monitoring, who or what caused it, helping teams flag unauthorized configuration changes and confirm approved updates were implemented correctly.
 
 .. rubric:: Threat detection and response
     :class: h2

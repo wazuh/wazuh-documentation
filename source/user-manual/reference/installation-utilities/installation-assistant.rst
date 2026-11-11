@@ -49,7 +49,11 @@ Options list
 | -id, --install-dependencies                         | Installs the necessary dependencies for the installation automatically.                      |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -o, --overwrite                                     | Overwrites previously installed components. This will erase all the existing configuration   |
-|                                                     | and data.                                                                                    |
+|                                                     | and data. On a Wazuh dashboard host, this removes ``/etc/wazuh-dashboard``, including the    |
+|                                                     | Wazuh dashboard CA in ``ca/`` and the keystore. With ``-a``, the reinstalled Wazuh dashboard |
+|                                                     | creates a new CA, so browsers must trust the new ``/etc/wazuh-dashboard/export/ca.pem``.     |
+|                                                     | With ``-wd``, the assistant places the pair from ``wazuh-install-files.tar`` again, so       |
+|                                                     | browsers keep trusting ``root-ca.pem``.                                                      |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -of, --offline-installation                         | Performs an offline installation. This option must be used with -a, -wm, -s, -wi, or -wd.    |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
@@ -62,6 +66,16 @@ Options list
 | -V, --version                                       | Shows the version of the script and Wazuh packages.                                          |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -wd, --wazuh-dashboard <dashboard-node-name>        | Install and configure Wazuh dashboard, used for distributed deployments.                     |
+|                                                     | ``<dashboard-node-name>`` is the name of a dashboard node in ``config.yml``, and             |
+|                                                     | ``wazuh-install-files.tar`` must be in the same directory as the script. Before it installs  |
+|                                                     | the package, the assistant writes ``WAZUH_INDEXER_KIBANASERVER_PASSWORD`` and                |
+|                                                     | ``WAZUH_MANAGER_WUI_PASSWORD`` from the tar file to ``/etc/wazuh-dashboard/local.env``. It   |
+|                                                     | also places the node's certificate pair as ``certs/dashboard.pem`` and                       |
+|                                                     | ``certs/dashboard-key.pem``, and the tar's ``root-ca.pem`` as ``certs/indexer-ca.pem`` and   |
+|                                                     | ``certs/manager-ca.pem``. It stops if one of these files already exists with different       |
+|                                                     | content. After the installation, it points ``opensearch.hosts`` to the Wazuh indexer nodes   |
+|                                                     | and ``wazuh_core.hosts.default.url`` to the Wazuh manager master node. Browsers trust        |
+|                                                     | ``root-ca.pem`` from ``wazuh-install-files.tar``.                                            |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -wi, --wazuh-indexer <indexer-node-name>            | Install and configure Wazuh indexer, used for distributed deployments.                       |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+

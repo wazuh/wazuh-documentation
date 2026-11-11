@@ -3,8 +3,8 @@
 .. meta::
    :description: Learn how the Wazuh Security Configuration Assessment (SCA) module helps meet PCI DSS configuration assessment requirements.
 
-Configuration assessment
-=========================
+Configuration assessment for PCI DSS
+=====================================
 
 The Wazuh Security Configuration Assessment (SCA) module determines the state of hardening and configuration policies on agents. SCA performs scans to discover exposures or misconfigurations in monitored endpoints. Those scans assess the hosts' configurations using policy files that contain rules to be tested against the hosts' actual configurations.
 
@@ -40,11 +40,13 @@ For this use case, the SCA module runs the check **35608 - Ensure ip forwarding 
 
 .. thumbnail:: /images/compliance/pci/sca-ip-forwarding-disabled-01.png
    :title: SCA check for ip forwarding disabled
+   :alt: Configuration Assessment Inventory tab with check 35608, Ensure ip forwarding is disabled, passed
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/compliance/pci/sca-ip-forwarding-disabled-02.png
    :title: SCA check details for ip forwarding disabled
+   :alt: Details panel of SCA check 35608 showing its PCI DSS and other compliance mappings
    :align: center
    :width: 80%
 
@@ -57,10 +59,12 @@ The SCA module runs check **35687 - Ensure password history remember is configur
 
 .. thumbnail:: /images/compliance/pci/sca-password-history-remember-01.png
    :title: SCA check for password history remember configured
+   :alt: Configuration Assessment Inventory tab with check 35687, Ensure password history remember is configured, failed
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/compliance/pci/sca-password-history-remember-02.png
    :title: SCA check details for password history remember configured
+   :alt: Details panel of SCA check 35687 showing its PCI DSS and other compliance mappings
    :align: center
    :width: 80%
