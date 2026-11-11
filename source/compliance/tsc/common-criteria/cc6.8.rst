@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh supports the TSC common criteria CC3.1 by providing centralized security telemetry for vulnerabilities, threats, and incident records.
+   :description: Wazuh helps meet the TSC common criteria CC6.8 requirement by detecting malicious files on monitored endpoints using its threat intelligence IoC database.
 
-Common Criteria 3.1 (COSO Principle 6)
-========================================
+Common criteria 6.8
+=====================
 
-The TSC **common criteria** **CC3.1**: The principle states, “*The entity specifies objectives with sufficient clarity to enable the identification and assessment of risks relating to objectives*”. In a SOC 2 service‑organization context, this means the entity defines clear, measurable objectives for its systems and services, such as protecting data, maintaining availability, and ensuring processing integrity, so it can systematically identify and assess risks that could prevent those objectives from being met. In practice, the entity should have processes in place to regularly evaluate how well its controls address those risks, identify and remediate deficiencies, and adjust controls as needed to ensure that the objectives are achieved.
+The TSC common criteria CC6.8 states, “The entity implements controls to prevent or detect and act upon the introduction of unauthorized or malicious software to meet the entity's objectives.” This means the entity should be able to detect malicious software on its systems and act on it.
 
-CC3.1 requires the entity to define objectives clearly enough to identify and assess the risks that could prevent those objectives from being achieved. Wazuh can support this risk-management process by providing centralized security telemetry for vulnerabilities, threats, and incident records. Security personnel can view this telemetry in the Wazuh dashboard, allowing them to identify, assess, prioritize, and track risks affecting in-scope systems and services.
+Wazuh helps meet the CC6.8 requirement by detecting malicious files on monitored endpoints. Wazuh matches file hashes against its threat intelligence IoC database and raises a finding when it finds a match. Security personnel can view these findings in the Wazuh dashboard.
 
 Use case: Detecting a malicious file download on a monitored Ubuntu endpoint
 --------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-#. Select the finding.
+#. Select the Malicious hash detected finding.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/threat-hunting-findings-list.png
       :title: Threat Hunting findings list
