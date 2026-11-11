@@ -70,7 +70,7 @@ Take the following steps to configure the Wazuh agent to monitor file system cha
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
    .. note::
 
