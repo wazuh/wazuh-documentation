@@ -27,55 +27,19 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
    * - Cloud security
      -
 
-Before you install a Wazuh agent, create an enrollment token on the Wazuh manager, as described in **Prerequisite** below. Then select your operating system and follow the instructions.
+You can install a Wazuh agent in two ways:
 
-.. raw:: html
-
-  <div class="link-boxes-group layout-6">
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-linux.html">
-        <p class="link-boxes-label">Linux</p>
-
-.. image:: /images/installation/linux.png
-      :alt: Linux penguin mascot logo
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-windows.html">
-        <p class="link-boxes-label">Windows</p>
-
-.. image:: /images/installation/windows-logo.png
-      :alt: Windows logo
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-macos.html">
-        <p class="link-boxes-label">macOS</p>
-
-.. image:: /images/installation/macOS-logo.png
-      :alt: macOS Apple logo
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-  </div>
-
-
-In a large environment with many servers or endpoints, automation tools such as SCCM or :doc:`Ansible </deployment-options/deploying-with-ansible/guide/index>` can make the deployment easier.
+-  From the Wazuh dashboard: Use **Deploy new agent**, as described in :ref:`Installing from the Wazuh dashboard <agent_installing_from_dashboard>`. The wizard automatically generates the enrollment token.
+-  From the command line: Create an enrollment token on the Wazuh manager, then install the Wazuh agent for your operating system, as described in :ref:`Installing from the command line <agent-installation-requirements>`.
 
 .. note:: The Wazuh agent is compatible with a Wazuh manager of the same version or later.
 
-You can also deploy a new agent following the instructions in the Wazuh dashboard. Go to **Agents management** > **Summary** and click **Deploy new agent**.
+.. _agent_installing_from_dashboard:
+
+Installing from the Wazuh dashboard
+-----------------------------------
+
+Go to **Agents management** > **Summary** and click **Deploy new agent**.
 
 .. thumbnail:: /images/installation/deploy-new-agent-from-ui.png
    :align: center
@@ -83,7 +47,7 @@ You can also deploy a new agent following the instructions in the Wazuh dashboar
    :title: Deploy new agent button
    :alt: Deploy new agent button
 
-Then follow the steps on the Wazuh dashboard to deploy a new agent. The wizard also generates the enrollment token.
+Then follow the steps on the Wazuh dashboard. The wizard creates the enrollment token for you. Enter a Wazuh manager address that the Wazuh agents can reach and that is in the agent listener certificate of the Wazuh manager, as :ref:`Generate the enrollment token <generate_enrollment_token>` describes. For any other address, the Wazuh dashboard shows ``API error: ERR_BAD_REQUEST - Enrollment token refused: address not in certificate SAN``. To fix it, see :ref:`Enrollment token refused: address not in certificate SAN <enrollment_token_refused_address_not_in_certificate_san>`.
 
 .. thumbnail:: /images/installation/deploy-new-agent-from-ui-options.png
    :align: center
@@ -93,10 +57,10 @@ Then follow the steps on the Wazuh dashboard to deploy a new agent. The wizard a
 
 .. _agent-installation-requirements:
 
-Prerequisite
-------------
+Installing from the command line
+--------------------------------
 
-During enrollment, the Wazuh agent authenticates to the Wazuh manager using an enrollment token. The token tells the agent which Wazuh manager to trust and lets it enroll. Create the token on the Wazuh manager. In a cluster, create it on the master node. A worker node can't create it. The agent connects only to the address of its token. To spread agents across the nodes of a cluster, use a token for a load balancer address, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. The endpoint must reach the Wazuh manager on port 1517/TCP, which Wazuh 5.x agents use for enrollment and communication.
+To install a Wazuh agent from the command line, first generate an enrollment token on the Wazuh manager, then install the Wazuh agent on the endpoint. During enrollment, the Wazuh agent authenticates to the Wazuh manager using an enrollment token. The token tells the agent which Wazuh manager to trust and lets it enroll. Create the token on the Wazuh manager. In a cluster, create it on the master node. A worker node can't create it. The agent connects only to the address of its token. To spread agents across the nodes of a cluster, use a token for a load balancer address, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. The endpoint must reach the Wazuh manager on port 1517/TCP, which Wazuh 5.x agents use for enrollment and communication.
 
 .. _generate_enrollment_token:
 
@@ -195,6 +159,54 @@ Complete the following steps on the Wazuh manager master node to generate the en
 .. note::
 
    To enroll a Wazuh agent that already has a key, for example, after you move it to another Wazuh manager, see :ref:`Re-enrolling a Wazuh agent <reenrolling_wazuh_agent>`.
+
+Install the Wazuh agent
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Select your operating system and follow the instructions.
+
+.. raw:: html
+
+   <div class="link-boxes-group layout-6">
+   <div class="link-boxes-item">
+   <a class="link-boxes-link" href="./wazuh-agent-package-linux.html">
+   <p class="link-boxes-label">Linux</p>
+
+.. image:: /images/installation/linux.png
+   :alt: Linux penguin mascot logo
+   :align: center
+
+.. raw:: html
+
+   </a>
+   </div>
+   <div class="link-boxes-item">
+   <a class="link-boxes-link" href="./wazuh-agent-package-windows.html">
+   <p class="link-boxes-label">Windows</p>
+
+.. image:: /images/installation/windows-logo.png
+   :alt: Windows logo
+   :align: center
+
+.. raw:: html
+
+   </a>
+   </div>
+   <div class="link-boxes-item">
+   <a class="link-boxes-link" href="./wazuh-agent-package-macos.html">
+   <p class="link-boxes-label">macOS</p>
+
+.. image:: /images/installation/macOS-logo.png
+   :alt: macOS Apple logo
+   :align: center
+
+.. raw:: html
+
+   </a>
+   </div>
+   </div>
+
+In a large environment with many servers or endpoints, automation tools such as SCCM or :doc:`Ansible </deployment-options/deploying-with-ansible/guide/index>` can make the deployment easier.
 
 .. _reenrolling_wazuh_agent:
 

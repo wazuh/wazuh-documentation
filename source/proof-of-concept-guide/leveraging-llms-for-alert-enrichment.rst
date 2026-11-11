@@ -422,7 +422,7 @@ Perform the following steps to install Python, YARA, and download YARA rules.
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 Wazuh server
 ------------

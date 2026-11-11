@@ -223,7 +223,10 @@ The Wazuh manager API clients must then use this host's name or IP address, or a
 Next steps
 ----------
 
-Next, deploy Wazuh agents. Each agent enrolls with a token that you create on this server for the address agents connect to. The assistant printed the command that creates it, under Next steps in its summary. Create the token first, as described in :ref:`Generate the enrollment token <generate_enrollment_token>`. Then follow the instructions for your operating system below. You can also go to **Agents management** > **Summary** > **Deploy new agent** in the Wazuh dashboard. Its wizard generates the token too. The Wazuh manager doesn't monitor the server it runs on. To monitor this server too, deploy a Wazuh agent on it with a token for this server's own address.
+Next, deploy Wazuh agents on the endpoints you want to monitor. The Wazuh manager doesn't monitor the server it runs on. To monitor this server too, deploy a Wazuh agent on it with a token for this server's own address. You can deploy Wazuh agents in two ways:
+
+-  From the Wazuh dashboard: Use **Deploy new agent**, as described in :ref:`Installing from the Wazuh dashboard <agent_installing_from_dashboard>`. The wizard automatically generates the enrollment token.
+-  From the command line: First, create an enrollment token on the Wazuh manager, as described in :ref:`Installing from the command line <agent-installation-requirements>`. The assistant printed the command to create it under Next steps in its summary. Then select your endpoint operating system below and follow the installation steps.
 
 .. raw:: html
 

@@ -70,7 +70,7 @@ Take the following steps to configure the Wazuh agent to monitor file system cha
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
    .. note::
 
@@ -80,6 +80,8 @@ As an alternative to local configurations on the Wazuh agents, you can :doc:`cen
 
 Test the configuration
 ----------------------
+
+On the Ubuntu endpoint, run the following steps as root, for example with ``sudo``, because the monitored directory is ``/root``.
 
 #. Create a text file in the monitored directory, then wait for 5 seconds.
 

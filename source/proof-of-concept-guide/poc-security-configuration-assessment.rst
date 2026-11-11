@@ -42,7 +42,6 @@ Default SCA policy
           <enabled>yes</enabled>
           <interval>5m</interval>
           <integrity_interval>24h</integrity_interval>
-          <max_eps>75</max_eps>
         </synchronization>
       </sca>
 
@@ -228,7 +227,7 @@ You can visualize the SCA checks on the Wazuh dashboard. To see the SCA check re
 
 #. In the **Operator** field, select ``is``.
 
-#. In the **Values** field, select ``CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.``. Inspect the information under **Dashboard** and **Inventory**.
+#. In the **Value** field, select ``CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.``. Inspect the information under **Dashboard** and **Inventory**.
 
    .. thumbnail:: /images/poc/sca-cis-ubuntu-dashboard.png
       :title: CIS Ubuntu Linux 24.04 LTS Benchmark dashboard
@@ -246,7 +245,7 @@ You can visualize the SCA checks on the Wazuh dashboard. To see the SCA check re
 
 #. In the **Operator** field, select ``is``.
 
-#. In the **Values** field, select ``Custom Web Server Hardening``. Inspect the information under **Dashboard** and **Inventory**.
+#. In the **Value** field, select ``Custom Web Server Hardening``. Inspect the information under **Dashboard** and **Inventory**.
 
    .. thumbnail:: /images/poc/sca-custom-policy-dashboard.png
       :title: Custom Web Server Hardening dashboard

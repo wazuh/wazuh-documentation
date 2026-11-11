@@ -44,9 +44,9 @@ Examples of resources are "agent 001", "agents in group default", and "node of a
 
 **Effect** can only be "allow" or "deny", depending on the effective permission to be applied.
 
-Secret values have actions of their own, so permission to read or change a configuration does not reveal them. Without ``cluster:read_secrets`` on the answering node, ``GET /cluster/local/config``, the ``GET /cluster/{node_id}/configuration`` endpoints, ``GET /groups/{group_id}/configuration``, and ``GET /groups/{group_id}/files/{file_name}`` show the enrollment password, the cluster key, and other credential values as ``\*\*\*\*\*``. ``PUT /cluster/{node_id}/configuration`` also requires ``cluster:read_secrets`` to set a new cluster key or change the indexer section.
+Secret values have actions of their own, so permission to read or change a configuration does not reveal them. Without ``cluster:read_secrets`` on the answering node, ``GET /cluster/local/config``, the ``GET /cluster/{node_id}/configuration`` endpoints, ``GET /groups/{group_id}/configuration``, and ``GET /groups/{group_id}/files/{file_name}`` show the enrollment password, the cluster key, and other credential values as ``*****``. ``PUT /cluster/{node_id}/configuration`` also requires ``cluster:read_secrets`` to set a new cluster key or change the indexer section.
 
-``GET /agents/{agent_id}/key`` returns the key of an agent only to a user with ``agent:read_secrets`` on that agent, and ``agent:read`` does not grant it. The default ``secrets_read`` policy grants ``cluster:read_secrets`` on ``node:id:*`` and ``agent:read_secrets`` on ``agent:id:*``, and only the administrator role includes it.
+``GET /agents/{agent_id}/key`` returns the key of an agent only to a user with ``agent:read_secrets`` on that agent, and ``agent:read`` does not grant it. Two default policies grant these actions: ``secrets_read_nodes`` grants ``cluster:read_secrets`` on ``node:id:*``, and ``secrets_read_agents`` grants ``agent:read_secrets`` on ``agent:id:*``. Only the ``administrator`` role includes them.
 
 .. note::
 

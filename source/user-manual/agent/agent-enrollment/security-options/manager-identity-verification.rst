@@ -278,10 +278,10 @@ Windows
 
 Follow these steps to enroll a Windows endpoint by using certificates to verify the Wazuh manager identity:
 
-The Wazuh agent installation directory depends on the architecture of the host.
+The Wazuh agent is a 32-bit application. Its installation directory depends on the Windows operating system architecture:
 
--  ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
--  ``C:\Program Files\ossec-agent`` for 32-bit systems.
+-  On a 64-bit Windows operating system, Windows installs the Wazuh agent in ``C:\Program Files (x86)\ossec-agent``
+-  On a 32-bit Windows operating system, Windows installs the Wazuh agent in ``C:\Program Files\ossec-agent``
 
 #. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
 
