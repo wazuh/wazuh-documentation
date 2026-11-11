@@ -6,7 +6,7 @@
 Deploying Wazuh agents on Windows endpoints
 ===========================================
 
-The Wazuh agent runs on the endpoint you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel. You can deploy the Wazuh agent on Windows systems ranging from Windows XP to the latest versions, including Windows 11 and Windows Server 2022.
+The Wazuh agent runs on the endpoint you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel. You can deploy the Wazuh agent on Windows systems ranging from Windows XP to the latest versions, including Windows 11 and Windows Server 2025.
 
 .. note:: You must have administrator privileges to perform the installation.
 
@@ -18,18 +18,20 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
       .. group-tab:: CLI
 
-         #. Choose one of the command shell alternatives to deploy the Wazuh agent on your endpoint. Run the command below and replace the ``WAZUH_MANAGER`` value with your Wazuh manager IP address or hostname. Ensure the downloaded Wazuh agent installation file is in your working directory.
+         #. Choose one of the command shell alternatives to deploy the Wazuh agent on your endpoint. Run the commands below to download the Wazuh agent installer and install it. Replace the ``WAZUH_MANAGER`` value with your Wazuh manager IP address or hostname.
 
             -  Using CMD:
 
                .. code-block:: doscon
 
+                  > curl.exe -so wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
                   > msiexec.exe /i wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
 
             -  Using PowerShell:
 
                .. code-block:: ps1con
 
+                  > Invoke-WebRequest -Uri https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi -OutFile wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
                   > msiexec.exe /i wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
 
             For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Windows </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-windows>` section.
