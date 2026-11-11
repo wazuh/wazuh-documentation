@@ -77,11 +77,13 @@ Ubuntu endpoint
 On the Wazuh dashboard, a finding shows the modification of the ``subject_data.txt`` file. The finding is tagged with ``II_5.1.f``.
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-mod.png
-    :title: File modification finding visualization
-    :align: center
-    :width: 80%
+   :title: File modification finding visualization
+   :alt: GDPR Findings tab filtered to a Wazuh FIM file modified finding on /root/personal_data/subject_data.txt
+   :align: center
+   :width: 80%
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-mod-details.png
-    :title: File modification finding - more details
-    :align: center
-    :width: 80%
+   :title: File modification finding - more details
+   :alt: Document details of the file modified finding with the GDPR compliance field and rule title highlighted
+   :align: center
+   :width: 80%

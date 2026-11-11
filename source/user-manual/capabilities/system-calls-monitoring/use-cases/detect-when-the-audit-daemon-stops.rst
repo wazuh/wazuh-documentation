@@ -25,7 +25,7 @@ Perform the following actions to test the configuration:
 
       # systemctl status auditd
 
-Navigate to **Threat Intelligence > Threat Hunting > Findings** on the Wazuh dashboard to view the generated finding:
+Navigate to **Threat intelligence > Threat Hunting > Findings** on the Wazuh dashboard to view the generated finding:
 
 .. thumbnail:: /images/manual/system-calls-monitoring/audit-daemon-stopped-finding.png
    :title: Audit daemon stopped finding

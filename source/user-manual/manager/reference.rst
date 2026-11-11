@@ -34,7 +34,7 @@ Daemons
      - The Wazuh agent enrollment service owns all enrollment logic. It receives enrollment requests through the HTTPS ``POST /enroll`` endpoint and, for legacy Wazuh 4.x agents, through TLS port ``1515``.
    * - Wazuh manager API
      - ``wazuh-manager-apid``
-     - REST API (Python/Starlette, HTTPS) with JWT auth and RBAC
+     - REST API (Python/Starlette, HTTPS) with JWT auth and RBAC. Runs only on the master node
    * - Modulesd
      - ``wazuh-manager-modulesd``
      - Hosts manager-side modules: vulnerability scanner, inventory sync server, keystore server, task manager (which also serves agent upgrades), database, and control (restart/reload)
@@ -157,4 +157,8 @@ The Wazuh manager provides a set of command-line interface (CLI) tools for manag
    * - ``rbac_control``
      - Seed the RBAC database, change the passwords of the default Wazuh manager API users, or reset the RBAC database
    * - ``wazuh-manager-conf``
-     - Validates the Wazuh manager configuration. Run ``wazuh-manager-conf validate`` to check the ``/etc/wazuh-manager/wazuh-manager.conf`` file before restarting the Wazuh manager.
+     - Validates and retrieves the Wazuh manager configuration. Run ``wazuh-manager-conf validate`` to check ``/etc/wazuh-manager/wazuh-manager.conf`` before restarting the Wazuh manager. Run ``wazuh-manager-conf get <OPTION>`` to print a specific option, such as ``cluster.key``, or ``wazuh-manager-conf dump`` to print the entire configuration.
+   * - ``wazuh-manager-resolve-credentials``
+     - Resolves, issues, and validates Wazuh manager credentials and certificates. The package runs this command during installation, upgrades, and every startup. Use the ``--check`` option to perform a read-only check.
+   * - ``wazuh-manager-certs``
+     - Manages the CA bundle that Wazuh agents trust, stored in ``/etc/wazuh-manager/certs/root-ca.pem``. On a worker node, use the ``--from-master`` option to download the bundle from the master node.

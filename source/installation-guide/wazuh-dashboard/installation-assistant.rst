@@ -27,7 +27,16 @@ Wazuh dashboard installation
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --wazuh-dashboard dashboard -id -d pre-release
 
+   The assistant places this node's two passwords in ``/etc/wazuh-dashboard/local.env``, and its certificate and key in ``/etc/wazuh-dashboard/certs``. It also places the root CA certificate of ``wazuh-install-files.tar`` there as ``indexer-ca.pem`` and ``manager-ca.pem``. The Wazuh dashboard package then issues no certificate of its own.
+
    The default Wazuh web user interface port is 443, used by the Wazuh dashboard. To use another port after the installation, set ``server.port`` in ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` to the new port and restart the Wazuh dashboard service.
+
+   The Wazuh dashboard package opens no port. To open 443/TCP on a host with ``firewalld``, run:
+
+   .. code-block:: console
+
+      # firewall-cmd --permanent --add-port=443/tcp
+      # firewall-cmd --reload
 
    When the installation finishes, the assistant prints the address of the Wazuh dashboard, the username, the command that shows the password, and how to enroll agents:
 
@@ -88,7 +97,11 @@ After every component is installed and running, each component stores the passwo
 
       # openssl x509 -in /etc/wazuh-manager/certs/apid.pem -noout -ext subjectAltName
 
-   Also check that ``/etc/wazuh-dashboard/certs/manager-ca.pem`` exists on the Wazuh dashboard host, and run ``journalctl -u wazuh-dashboard -n 50`` to see the cause. Then click **Refresh**.
+   Also check that ``/etc/wazuh-dashboard/certs/manager-ca.pem`` exists on the Wazuh dashboard host. To see the cause, run the following command on that host, then click **Refresh**:
+
+   .. code-block:: console
+
+      # journalctl -u wazuh-dashboard -n 50
 
 #. Store the five passwords in a safe place. The ``credentials.env`` file in ``wazuh-install-files.tar`` holds all five. Run the following command to show them:
 
@@ -108,7 +121,13 @@ After every component is installed and running, each component stores the passwo
 
       # rm -f ./wazuh-install-files.tar ./artifact_urls_|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yaml
 
-   The passwords of each component stay in ``local.env`` and ``export/credentials.env`` in its configuration directory, readable by ``root`` only.
+   The passwords of the Wazuh indexer and Wazuh manager stay in ``local.env`` and ``export/credentials.env`` in their configuration directories, readable by ``root`` only.
+
+#. On each Wazuh dashboard node, remove the two passwords from ``/etc/wazuh-dashboard/local.env``. The Wazuh dashboard keeps them in its keystore. Skip this step on an all-in-one host, which has no such file:
+
+   .. code-block:: console
+
+      # sed -i -E '/^(WAZUH_INDEXER_KIBANASERVER_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=/d' /etc/wazuh-dashboard/local.env
 
 #. Only the host where you ran ``--generate-config-files`` keeps the root CA private key, in the ``wazuh-ca`` directory beside the installation assistant. Back up the whole directory securely: its ``root-ca.key`` and ``credentials.env`` are what you need to add nodes or renew certificates later. After you change a password on another host, update ``wazuh-ca/credentials.env`` too. To add a node, don't run ``--generate-config-files`` again: it creates a new cluster key. On every node, the components hold only ``root-ca.pem``. Run the following command to check:
 
@@ -122,7 +141,7 @@ After every component is installed and running, each component stores the passwo
 
       # rm -f /etc/wazuh-indexer/ca/root-ca.key /etc/wazuh-manager/ca/root-ca.key /etc/wazuh-manager/ca/root-ca.srl
 
-Editing ``local.env`` after installation doesn't change any password. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation.
+Editing ``local.env`` after installation doesn't change any password. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation. In a distributed deployment, after you change the ``kibanaserver`` or ``wazuh-internal-client`` password, also update the keystore of each Wazuh dashboard node where you didn't run the Wazuh passwords tool, as described in :ref:`Update the Wazuh dashboard configuration <update_wazuh_dashboard_configuration>`.
 
 Disable Wazuh updates
 ---------------------

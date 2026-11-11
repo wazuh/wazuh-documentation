@@ -43,7 +43,6 @@ In this use case, we show how to use the Wazuh Syscollector module to collect sy
         <synchronization>
           <enabled>yes</enabled>
           <interval>5m</interval>
-          <max_eps>75</max_eps>
           <integrity_interval>24h</integrity_interval>
         </synchronization>
       </wodle>

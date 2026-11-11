@@ -70,7 +70,7 @@ Take the following steps to configure the Wazuh agent to monitor file system cha
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
    .. note::
 
@@ -94,7 +94,7 @@ You can visualize the findings in the Wazuh dashboard. To do this, navigate to *
 
 .. note::
 
-   Findings might take up to the FIM synchronization interval (the ``<frequency>`` setting in the ``<syscheck>`` block of the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file) to appear in the dashboard.
+   Findings appear in the dashboard a few minutes after each change. The Wazuh agents report real-time and who-data changes right away, and the ``wazuh-fim`` detector creates the findings on its next run, every minute in the default content.
 
 -  Windows and Ubuntu findings for the simulated events
 

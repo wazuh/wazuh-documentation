@@ -49,16 +49,19 @@ This rule triggers a finding when a non-existent user tries to log in to a syste
 
 .. thumbnail:: /images/compliance/pci/failed-authentication-attempt-finding-01.png
    :title: Failed authentication attempt finding
+   :alt: Threat Hunting Findings tab listing failed authentication attempt findings from one source IP
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/compliance/pci/failed-authentication-attempt-finding-02.png
    :title: Failed authentication attempt finding details
+   :alt: Document details of a failed authentication finding with the event action, message, source IP, and user highlighted
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/compliance/pci/failed-authentication-attempt-finding-03.png
    :title: Failed authentication attempt finding details expanded
+   :alt: Document details of a failed authentication finding with its PCI DSS compliance mapping highlighted
    :align: center
    :width: 80%
 
@@ -69,16 +72,19 @@ This rule triggers a finding when a user successfully logs in to a system via SS
 
 .. thumbnail:: /images/compliance/pci/successful-user-authentication-finding-01.png
    :title: Successful user authentication finding
+   :alt: Threat Hunting Findings tab with a successful user authentication finding
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/compliance/pci/successful-user-authentication-finding-02.png
    :title: Successful user authentication finding details
+   :alt: Document details of a successful authentication finding with the event action, message, source IP, and user highlighted
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/compliance/pci/successful-user-authentication-finding-03.png
    :title: Successful user authentication finding details expanded
+   :alt: Document details of a successful authentication finding with its PCI DSS compliance mapping highlighted
    :align: center
    :width: 80%
 
@@ -104,6 +110,7 @@ This rule triggers a finding after the detection engine analyzes the system logs
 
 .. thumbnail:: /images/compliance/pci/system-service-installed-finding.png
    :title: System service installed finding
+   :alt: Document details of a system service installed finding from a Windows endpoint
    :align: center
    :width: 80%
 
@@ -114,6 +121,7 @@ This rule triggers a finding when the detection engine analyzes logs indicating 
 
 .. thumbnail:: /images/compliance/pci/sql-injection-strings-in-uri-finding.png
    :title: SQL injection strings in URI finding
+   :alt: Document details of an Apache access finding with SQL injection strings in the URL
    :align: center
    :width: 80%
 
@@ -135,6 +143,7 @@ Unclassified event indexing is configured per :doc:`space </user-manual/data-ana
 
    .. thumbnail:: /images/compliance/pci/security-analytics-edit-space.png
       :title: Edit a space in Ruleset management
+      :alt: Ruleset management Overview with the Draft space selected and the Actions menu open on Edit
       :align: center
       :width: 80%
 
@@ -142,5 +151,6 @@ Unclassified event indexing is configured per :doc:`space </user-manual/data-ana
 
    .. thumbnail:: /images/compliance/pci/index-unclassified-events-toggle.png
       :title: Index unclassified events toggle
+      :alt: Edit Draft space panel with Index unclassified events turned on
       :align: center
       :width: 80%

@@ -22,6 +22,8 @@ The table below describes the log files and their storage location on the Wazuh 
      - Stores all Wazuh manager logs in JSON.
    * - ``/var/wazuh-manager/logs/api.log``
      - Stores the Wazuh manager API logs in plaintext.
+   * - ``/var/wazuh-manager/logs/api.json``
+     - Stores the Wazuh manager API logs in JSON.
    * - ``/var/wazuh-manager/logs/cluster.log``
      - Stores all Wazuh cluster logs in plaintext.
 
@@ -41,14 +43,23 @@ The following ``<logging>`` block represents the default logging configuration i
      ...
    </wazuh_config>
 
-Where ``<log_format>`` specifies the format of internal logs (JSON or plaintext). The default value is ``plain`` for plaintext logs. The allowed value is any of the following formats, including ``plain``, ``json``, and ``plain,json``.
+Where:
+
+-  The ``<log_format>`` specifies the format of internal logs (JSON or plaintext). The default value is ``plain`` for plaintext logs. The allowed value is any of the following formats, including ``plain``, ``json``, and ``plain,json``.
+-  The ``<logging>`` block configures logs written by Wazuh manager daemons and the Wazuh normalization engine, including ``wazuh-manager.log`` and ``wazuh-manager.json``. It does not affect Wazuh manager API logs.
 
 Log compression and rotation
 ----------------------------
 
 Log files can quickly accumulate and consume significant disk space on the Wazuh manager endpoint. To prevent this behavior, the Wazuh manager compresses logs during its rotation process, helping to manage disk usage efficiently and maintain system performance.
 
-The Wazuh manager rotates the ``wazuh-manager.log`` and ``wazuh-manager.json`` files daily, shortly after midnight, and whenever one of them exceeds 512 MB. These rotated files are compressed with ``gzip`` by default and kept for 31 days. The Wazuh manager stores them in the ``/var/wazuh-manager/logs/wazuh/<YEAR>/<MONTH>/`` directory as ``wazuh-<DAY>.log.gz`` and ``wazuh-<DAY>.json.gz``. The Wazuh manager API and cluster daemons rotate the ``api.log`` and ``cluster.log`` files daily at midnight. During rotation, each daemon creates a new log file with the original filename and continues writing to it. Each daemon stores the compressed ``api.log`` and ``cluster.log`` files in nested directories in the format ``.../<FILENAME>/<YEAR>/<MONTH>/``, where:
+The Wazuh manager rotates ``wazuh-manager.log`` and ``wazuh-manager.json`` daily, shortly after midnight, and whenever either file exceeds 512 MB. By default, it compresses rotated files with ``gzip`` and retains them for 31 days. The files are stored in ``/var/wazuh-manager/logs/wazuh/<YEAR>/<MONTH>/`` with the names ``wazuh-<DAY>.log.gz`` and ``wazuh-<DAY>.json.gz``. If a file rotates more than once in a day, the Wazuh manager appends a ``-<NNN>`` counter to each additional filename.
+
+The Wazuh manager API and cluster daemons rotate ``api.log`` and ``cluster.log`` daily at midnight. Each daemon creates a new file with the original filename and continues writing to it. The Wazuh manager does not delete the rotated ``api.log`` and ``cluster.log`` files.
+
+The Wazuh manager API can also rotate ``api.log`` based on file size. Configure this behavior with the ``logs.max_size`` option in ``/var/wazuh-manager/api/configuration/api.yaml``.
+
+Each daemon stores the compressed ``api.log`` and ``cluster.log`` files in nested directories in the format ``.../<FILENAME>/<YEAR>/<MONTH>/``, where:
 
 -  The ``<FILENAME>`` indicates the name of the original log file.
 -  The ``<YEAR>`` indicates the current year.
@@ -73,6 +84,6 @@ The command output looks similar to this:
 
 The Wazuh manager appends the suffix ``-<DAY_OF_THE_MONTH>`` to the original filename as the output shows (``cluster.log-01.gz``).
 
-The ``wazuh_modules.manager_task_log_*`` internal options in the ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file control the rotation schedule, size threshold, compression, daily rotation slots, and retention period.
+The ``wazuh_modules.manager_task_log_*`` internal options in the ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file control the rotation schedule, size threshold, compression, daily rotation slots, and retention period of the ``wazuh-manager.log`` and ``wazuh-manager.json`` files.
 
 You can configure the removal of compressed files after a specified period to suit your needs. You can move them to log management systems, backup servers, or cloud-based storage devices for longer-term retention.

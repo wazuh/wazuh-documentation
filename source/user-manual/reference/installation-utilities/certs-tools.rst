@@ -38,7 +38,14 @@ Options list
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -v, --verbose                                                                       | Enables verbose mode.                                                                        |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -wd, --wazuh-dashboard-certificates                                                 | Creates the Wazuh dashboard certificates.                                                    |
+| -wd, --wazuh-dashboard-certificates                                                 | Creates the Wazuh dashboard certificates for the dashboard nodes in ``config.yml``. It's     |
+|                                                                                     | optional: when no pair is in place, the Wazuh dashboard package issues its own certificate,  |
+|                                                                                     | and browsers trust ``/etc/wazuh-dashboard/export/ca.pem``. To use this pair instead, copy it |
+|                                                                                     | to ``/etc/wazuh-dashboard/certs/dashboard.pem`` and ``dashboard-key.pem`` (owner             |
+|                                                                                     | ``root:wazuh-dashboard``, mode ``0640``) before you install the Wazuh dashboard. Browsers    |
+|                                                                                     | then trust ``root-ca.pem``. This pair only secures browser connections. The Wazuh dashboard  |
+|                                                                                     | verifies the Wazuh indexer with ``certs/indexer-ca.pem`` and the Wazuh manager API with      |
+|                                                                                     | ``certs/manager-ca.pem``.                                                                    |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -wi, --wazuh-indexer-certificates                                                   | Creates the Wazuh indexer certificates.                                                      |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+

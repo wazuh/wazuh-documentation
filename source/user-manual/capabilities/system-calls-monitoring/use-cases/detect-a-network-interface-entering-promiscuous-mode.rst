@@ -29,7 +29,7 @@ Perform the following actions to test the configuration:
 
 The command enables promiscuous mode on the specified network interface, causing the Linux Audit subsystem to generate an ``ANOM_PROMISCUOUS`` audit event.
 
-Navigate to **Threat Intelligence > Threat Hunting > Findings** on the Wazuh dashboard to view the generated finding:
+Navigate to **Threat intelligence > Threat Hunting > Findings** on the Wazuh dashboard to view the generated finding:
 
 .. thumbnail:: /images/manual/system-calls-monitoring/network-interface-promiscuous-mode-finding.png
    :title: Network interface entered promiscuous mode finding
