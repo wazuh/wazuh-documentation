@@ -200,6 +200,8 @@ Run the following command on a Wazuh indexer node to print the Wazuh indexer adm
 
    The output is similar to the following. The ``build_type`` value is ``deb`` or ``rpm``, depending on the package.
 
+   .. note:: The cluster_name value is ``wazuh-cluster`` for all-in-one deployments and ``wazuh-indexer-cluster`` for distributed deployments installed using the installation assistant.
+
    .. code-block:: none
       :class: output
 
