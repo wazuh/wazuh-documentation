@@ -42,7 +42,7 @@ Inventory
 
 This section displays an inventory of all files the FIM module has indexed, including each file's path, modification date, owner, UID, and size.
 
-The image below shows the file inventory of a CentOS Stream 9 endpoint.
+The image below shows the file inventory of an Ubuntu endpoint.
 
 .. thumbnail:: /images/manual/fim/inventory.png
   :title: Inventory
