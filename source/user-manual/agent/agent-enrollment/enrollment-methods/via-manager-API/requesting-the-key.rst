@@ -45,7 +45,7 @@ The following sections show how to request the client key on different operating
 
    The Wazuh manager API administrator user is ``wazuh``. Its password is generated during installation and stored as ``WAZUH_MANAGER_API_PASSWORD`` in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager master node. To read it, run ``grep WAZUH_MANAGER_API_PASSWORD /etc/wazuh-manager/export/credentials.env`` as root. A password changed later isn't written to that file, which keeps the previous value. To change it, see :doc:`Password management </user-manual/user-administration/password-management>`.
 
-To verify the Wazuh manager API certificate, copy ``/etc/wazuh-manager/export/ca.pem`` from the Wazuh manager master node to the endpoint, for example as ``/root/wazuh-manager-ca.pem``. The address you connect to must be in the certificate, see :ref:`wazuh_manager_credentials_sans`.
+To verify the Wazuh manager API certificate, copy ``/etc/wazuh-manager/export/ca.pem`` from the Wazuh manager master node to the endpoint, for example as ``/root/wazuh-manager-ca.pem``. The address you connect to must be one of the certificate's subject alternative names.
 
 Linux/Unix and macOS
 --------------------
