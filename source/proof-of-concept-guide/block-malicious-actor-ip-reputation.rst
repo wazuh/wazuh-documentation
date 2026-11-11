@@ -119,7 +119,7 @@ Perform the steps below to configure the Wazuh agent to monitor Apache web serve
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 Wazuh server
 ^^^^^^^^^^^^

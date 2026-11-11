@@ -137,7 +137,7 @@ Options
 config-profile
 ^^^^^^^^^^^^^^
 
-Specifies the ``agent.conf`` profile(s) to be used by the agent.
+Specifies the ``agent.conf`` profile(s) to be used by the agent. The Linux agent packages add a ``<config-profile>`` setting with profiles for the operating system, for example ``amzn, amzn2023`` on Amazon Linux 2023 or ``rhel, rhel9, rhel9.7`` on RHEL 9.7. The ``profile`` attribute of ``agent.conf`` matches against this whole comma-separated list.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | n/a                                                                  |

@@ -39,6 +39,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/01-proceed-to-the-choose-application-type-section.png
           :title: Proceed to the Choose Application Type section
+          :alt: PingOne Add Application pane with the SAML Application type selected and the Configure button
           :align: center
           :width: 80%
 
@@ -49,6 +50,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/02-select-manually-enter-on-the-provide-app-metadata.png
           :title: Select Manually Enter on the Provide App Metadata
+          :alt: PingOne Add Application wizard, Provide App Metadata with the Manually Enter option
           :align: center
           :width: 80%
 
@@ -69,6 +71,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png
           :title: On the Configuration tab
+          :alt: PingOne SAML application Edit Configuration pane with the SLO endpoint and Save button
           :align: center
           :width: 80%
 
@@ -78,6 +81,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/04-click-on-the-attribute-mappings-tab.png
           :title: Click on the Attribute Mappings tab
+          :alt: PingOne Edit Attribute Mappings pane with the Roles attribute mapped to Group Names
           :align: center
           :width: 80%
 
@@ -91,6 +95,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/05-navigate-to-identities-groups.png
           :title: Navigate to Identities > Groups
+          :alt: PingOne Directory > Groups page, Add Group pane with the wazuh-admins group name
           :align: center
           :width: 80%
 
@@ -98,11 +103,13 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/06-assign-users.png
           :title: Assign users
+          :alt: PingOne group page, Users tab with the Add Individually button
           :align: center
           :width: 80%
 
       .. thumbnail:: /images/single-sign-on/pingone/07-assign-users.png
           :title: Assign users
+          :alt: PingOne Edit Users pane with users selected for the wazuh-admins group and the Save button
           :align: center
           :width: 80%
 
@@ -112,6 +119,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/08-navigate-to-connections.png
           :title: Navigate to Connections
+          :alt: PingOne Applications page with the wazuh-sso application and its enable toggle
           :align: center
           :width: 80%
 
@@ -122,6 +130,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/09-take-note-of-parameters.png
           :title: Take note of parameters from the configuration page
+          :alt: PingOne SAML application, Overview tab with the Issuer ID and IDP Metadata URL
           :align: center
           :width: 80%
 
@@ -333,7 +342,7 @@ Wazuh dashboard configuration
 
       # systemctl restart wazuh-dashboard
 
-#. Test the configuration. To test the configuration, go to your Wazuh dashboard URL and log in with your Ping One account.
+#. Test the configuration. To test the configuration, go to your Wazuh dashboard URL and log in with your PingOne account.
 
 Setup PingOne single sign-on with read-only role
 ------------------------------------------------
@@ -359,6 +368,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/01-proceed-to-the-choose-application-type-section.png
          :title: Proceed to the Choose Application Type section
+         :alt: PingOne Add Application pane with the SAML Application type selected and the Configure button
          :align: center
          :width: 80%
 
@@ -369,6 +379,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/02-select-manually-enter-on-the-provide-app-metadata.png
          :title: Select Manually Enter on the Provide App Metadata
+         :alt: PingOne Add Application wizard, Provide App Metadata with the Manually Enter option
          :align: center
          :width: 80%
 
@@ -389,6 +400,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png
          :title: On the Configuration tab
+         :alt: PingOne SAML application Edit Configuration pane with the SLO endpoint and Save button
          :align: center
          :width: 80%
 
@@ -398,6 +410,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/04-click-on-the-attribute-mappings-tab.png
          :title: Click on the Attribute Mappings tab
+         :alt: PingOne Edit Attribute Mappings pane with the Roles attribute mapped to Group Names
          :align: center
          :width: 80%
 
@@ -411,6 +424,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/05-navigate-to-identities-groups-ro.png
          :title: Navigate to Identities > Groups
+         :alt: PingOne Directory > Groups page, Add Group pane with the wazuh-readonly group name
          :align: center
          :width: 80%
 
@@ -418,11 +432,13 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/06-assign-users.png
          :title: Assign users
+         :alt: PingOne group page, Users tab with the Add Individually button
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/pingone/07-assign-users-ro.png
          :title: Assign users
+         :alt: PingOne Edit Users pane with users selected for the wazuh-readonly group and the Save button
          :align: center
          :width: 80%
 
@@ -432,6 +448,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/08-navigate-to-connections.png
          :title: Navigate to Connections
+         :alt: PingOne Applications page with the wazuh-sso application and its enable toggle
          :align: center
          :width: 80%
 
@@ -442,6 +459,7 @@ PingOne Configuration
 
       .. thumbnail:: /images/single-sign-on/pingone/09-take-note-of-parameters.png
          :title: Take note of parameters from the configuration page
+         :alt: PingOne SAML application, Overview tab with the Issuer ID and IDP Metadata URL
          :align: center
          :width: 80%
 
@@ -627,4 +645,4 @@ Wazuh dashboard configuration
 
       # systemctl restart wazuh-dashboard
 
-#. Test the configuration. To test the configuration, go to your Wazuh dashboard URL and log in with your Ping One account.
+#. Test the configuration. To test the configuration, go to your Wazuh dashboard URL and log in with your PingOne account.

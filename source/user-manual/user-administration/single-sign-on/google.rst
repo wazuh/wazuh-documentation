@@ -38,6 +38,7 @@ Google Workspace Configuration
 
       .. thumbnail:: /images/single-sign-on/google/01-go-to-apps.png
          :title: Go to Apps > Website and mobile apps
+         :alt: Google Admin console, Add custom SAML app, App details step with the Wazuh app name and Continue button
          :align: center
          :width: 80%
 
@@ -48,6 +49,7 @@ Google Workspace Configuration
 
       .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
          :title: Take note of the parameters
+         :alt: Google Identity Provider details page with the Entity ID and the Download metadata button
          :align: center
          :width: 80%
 
@@ -58,6 +60,7 @@ Google Workspace Configuration
 
       .. thumbnail:: /images/single-sign-on/google/03-select-continue-and-configure.png
          :title: Select CONTINUE and configure
+         :alt: Google Workspace custom SAML app, Service provider details with the ACS URL and Entity ID fields
          :align: center
          :width: 80%
 
@@ -69,6 +72,7 @@ Google Workspace Configuration
 
       .. thumbnail:: /images/single-sign-on/google/04-click-on-add-mapping.png
          :title: Click on ADD MAPPING under Employee details
+         :alt: Google Workspace custom SAML app, Attribute mapping page with Department mapped to the Roles app attribute
          :align: center
          :width: 80%
 
@@ -78,6 +82,7 @@ Google Workspace Configuration
 
       .. thumbnail:: /images/single-sign-on/google/05-turn-on-access-for-everyone.png
          :title: Turn ON access for everyone
+         :alt: Google Admin console, custom SAML app page with the User access section
          :align: center
          :width: 80%
 
@@ -85,6 +90,7 @@ Google Workspace Configuration
 
       .. thumbnail:: /images/single-sign-on/google/06-select-on-for-everyone.png
          :title: Select ON for everyone and click SAVE
+         :alt: Google Admin console, Wazuh app Service status page with ON for everyone selected and the Save button
          :align: center
          :width: 80%
 
@@ -94,6 +100,7 @@ Google Workspace Configuration
 
       .. thumbnail:: /images/single-sign-on/google/07-define-the-attribute-for-users.png
          :title: Define the attribute for users
+         :alt: Google Admin console, Directory > Users page with the list of users
          :align: center
          :width: 80%
 
@@ -101,11 +108,13 @@ Google Workspace Configuration
 
       .. thumbnail:: /images/single-sign-on/google/08-select-a-user.png
          :title: Select a user
+         :alt: Google Admin console, user page with the User information section
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/google/09-edit-employee-information.png
          :title: Edit Employee information
+         :alt: Google Admin console, user information with the Employee information section in edit mode
          :align: center
          :width: 80%
 
@@ -113,6 +122,7 @@ Google Workspace Configuration
 
       .. thumbnail:: /images/single-sign-on/google/10-add-a-value-to-the-department-field.png
         :title:  Add a value to the Department field
+        :alt: Google Admin console, Employee information form with Wazuh_access in the Department field
         :align: center
         :width: 80%
 
@@ -346,6 +356,7 @@ Google Workspace configuration
 
       .. thumbnail:: /images/single-sign-on/google/01-go-to-apps.png
          :title: Go to Apps > Website and mobile apps
+         :alt: Google Admin console, Add custom SAML app, App details step with the Wazuh app name and Continue button
          :align: center
          :width: 80%
 
@@ -356,6 +367,7 @@ Google Workspace configuration
 
       .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
          :title: Take note of the parameters
+         :alt: Google Identity Provider details page with the Entity ID and the Download metadata button
          :align: center
          :width: 80%
 
@@ -366,6 +378,7 @@ Google Workspace configuration
 
       .. thumbnail:: /images/single-sign-on/google/03-select-continue-and-configure.png
          :title: Select CONTINUE and configure
+         :alt: Google Workspace custom SAML app, Service provider details with the ACS URL and Entity ID fields
          :align: center
          :width: 80%
 
@@ -377,6 +390,7 @@ Google Workspace configuration
 
       .. thumbnail:: /images/single-sign-on/google/04-click-on-add-mapping.png
          :title: Click on ADD MAPPING under Employee details
+         :alt: Google Workspace custom SAML app, Attribute mapping page with Department mapped to the Roles app attribute
          :align: center
          :width: 80%
 
@@ -386,6 +400,7 @@ Google Workspace configuration
 
       .. thumbnail:: /images/single-sign-on/google/05-turn-on-access-for-everyone.png
          :title: Turn ON access for everyone
+         :alt: Google Admin console, custom SAML app page with the User access section
          :align: center
          :width: 80%
 
@@ -393,6 +408,7 @@ Google Workspace configuration
 
       .. thumbnail:: /images/single-sign-on/google/06-select-on-for-everyone.png
          :title: Select ON for everyone and click SAVE
+         :alt: Google Admin console, Wazuh app Service status page with ON for everyone selected and the Save button
          :align: center
          :width: 80%
 
@@ -402,6 +418,7 @@ Google Workspace configuration
 
       .. thumbnail:: /images/single-sign-on/google/07-define-the-attribute-for-users.png
          :title: Define the attribute for users
+         :alt: Google Admin console, Directory > Users page with the list of users
          :align: center
          :width: 80%
 
@@ -409,18 +426,21 @@ Google Workspace configuration
 
       .. thumbnail:: /images/single-sign-on/google/08-select-a-user.png
          :title: Select a user
+         :alt: Google Admin console, user page with the User information section
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/google/09-edit-employee-information.png
          :title: Edit Employee information
+         :alt: Google Admin console, user information with the Employee information section in edit mode
          :align: center
          :width: 80%
 
    #. Add a value to the **Department** field, in this example, we add ``wazuh-readonly``, click on **SAVE**. This value will be used in the ``role_mapping`` file configuration.
 
-      .. thumbnail:: /images/single-sign-on/google/10-add-a-value-to-the-department-field.png
+      .. thumbnail:: /images/single-sign-on/google/10-add-a-value-to-the-department-field-RO.png
         :title:  Add a value to the Department field
+        :alt: Google Admin console, Employee information form with wazuh-readonly in the Department field
         :align: center
         :width: 80%
 
