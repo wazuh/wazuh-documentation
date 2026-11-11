@@ -33,10 +33,11 @@ Okta Configuration
 
 #. Create a new user.
 
-   #. From your okta admin console page, navigate to **Directory** > **People**.
+   #. From your Okta admin console page, navigate to **Directory** > **People**.
 
       .. thumbnail:: /images/single-sign-on/okta/01-navigate-to-directory-people.png
           :title: Navigate to Directory - People
+          :alt: Okta admin console, Directory > People page
           :align: center
           :width: 80%
 
@@ -44,11 +45,13 @@ Okta Configuration
 
       .. thumbnail:: /images/single-sign-on/okta/02-select-add-person.png
           :title: Select add person
+          :alt: Okta admin console, People page with the Add person button
           :align: center
           :width: 80%
 
       .. thumbnail:: /images/single-sign-on/okta/03-click-save.png
           :title: Click save
+          :alt: Okta Add Person dialog with the Save button
           :align: center
           :width: 80%
 
@@ -56,6 +59,7 @@ Okta Configuration
 
      .. thumbnail:: /images/single-sign-on/okta/04-navigate-to-directory-groups.png
         :title: Navigate to directory groups
+        :alt: Okta admin console, Directory > Groups page with the Add group button
         :align: center
         :width: 80%
 
@@ -66,6 +70,7 @@ Okta Configuration
 
      .. thumbnail:: /images/single-sign-on/okta/05-navigate-to-directory-groups.png
         :title: Navigate to Directory - Groups - <YOUR_GROUP>
+        :alt: Okta group page, People tab with the Assign people option for the new group
         :align: center
         :width: 80%
 
@@ -75,6 +80,7 @@ Okta Configuration
 
       .. thumbnail:: /images/single-sign-on/okta/06-navigate-to-applications-section.png
          :title: Navigate to the Applications section in Okta
+         :alt: Okta admin console, Applications > Applications page
          :align: center
          :width: 80%
 
@@ -82,6 +88,7 @@ Okta Configuration
 
       .. thumbnail:: /images/single-sign-on/okta/07-create-new-application.png
          :title: Create a new application integration
+         :alt: Okta Create a new app integration dialog with SAML 2.0 selected
          :align: center
          :width: 80%
 
@@ -89,6 +96,7 @@ Okta Configuration
 
       .. thumbnail:: /images/single-sign-on/okta/08-assign-name.png
          :title: Assign a name to the application
+         :alt: Okta Create SAML Integration wizard, General Settings with the app name field
          :align: center
          :width: 80%
 
@@ -102,11 +110,13 @@ Okta Configuration
 
       .. thumbnail:: /images/single-sign-on/okta/09-saml-settings-section.png
          :title: SAML settings section
+         :alt: Okta Create SAML Integration wizard, SAML Settings with the Single sign-on URL and Audience URI
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/okta/09b-other-requestable-sso-urls.png
          :title: Other Requestable SSO URLs
+         :alt: Okta SAML Settings, Show Advanced Settings with the Other Requestable SSO URLs field
          :align: center
          :width: 80%
 
@@ -114,6 +124,7 @@ Okta Configuration
 
       .. thumbnail:: /images/single-sign-on/okta/10-group-attribute-statements-section.png
          :title: Group Attribute Statements section
+         :alt: Okta SAML Settings, Group Attribute Statements section with the Roles attribute and filter
          :align: center
          :width: 80%
 
@@ -121,6 +132,7 @@ Okta Configuration
 
       .. thumbnail:: /images/single-sign-on/okta/11-click-on-finish.png
          :title: Click on Finish and proceed to the next step
+         :alt: Okta SAML integration wizard, Feedback step with the Finish button
          :align: center
          :width: 80%
 
@@ -128,11 +140,13 @@ Okta Configuration
 
    .. thumbnail:: /images/single-sign-on/okta/12-navigate-to-directory-groups.png
       :title: Navigate to Directory - Groups - <YOUR_GROUP>
+      :alt: Okta group page, Applications tab with the Assign applications button
       :align: center
       :width: 80%
 
    .. thumbnail:: /images/single-sign-on/okta/13-select-assign-applications.png
       :title: Select Assign Applications
+      :alt: Okta Assign Applications dialog with the Assign button next to the Wazuh app
       :align: center
       :width: 80%
 
@@ -151,6 +165,7 @@ Okta Configuration
 
    .. thumbnail:: /images/single-sign-on/okta/14-needed-to-configure-wazuh-sso-app.png
       :title: View SAML setup instructions
+      :alt: Okta SAML setup instructions page with the Identity Provider Issuer and X.509 certificate
       :align: center
       :width: 80%
 
@@ -374,10 +389,11 @@ Okta configuration
 
 #. Create a new user.
 
-   #. From your okta admin console page, navigate to **Directory** > **People**.
+   #. From your Okta admin console page, navigate to **Directory** > **People**.
 
       .. thumbnail:: /images/single-sign-on/okta/01-navigate-to-directory-people.png
           :title: Navigate to Directory - People
+          :alt: Okta admin console, Directory > People page
           :align: center
           :width: 80%
 
@@ -385,11 +401,13 @@ Okta configuration
 
       .. thumbnail:: /images/single-sign-on/okta/02-select-add-person.png
           :title: Select add person
+          :alt: Okta admin console, People page with the Add person button
           :align: center
           :width: 80%
 
       .. thumbnail:: /images/single-sign-on/okta/03-click-save.png
           :title: Click save
+          :alt: Okta Add Person dialog with the Save button
           :align: center
           :width: 80%
 
@@ -397,6 +415,7 @@ Okta configuration
 
      .. thumbnail:: /images/single-sign-on/okta/read-only/04-navigate-to-directory-groups-RO.png
         :title: Navigate to directory groups
+        :alt: Okta admin console, Directory > Groups page with the Add group button
         :align: center
         :width: 80%
 
@@ -407,6 +426,7 @@ Okta configuration
 
      .. thumbnail:: /images/single-sign-on/okta/read-only/05-navigate-to-directory-groups-RO.png
         :title: Navigate to Directory - Groups - <YOUR_GROUP>
+        :alt: Okta read-only group page, People tab with the Assign people option
         :align: center
         :width: 80%
 
@@ -416,6 +436,7 @@ Okta configuration
 
       .. thumbnail:: /images/single-sign-on/okta/06-navigate-to-applications-section.png
          :title: Navigate to the Applications section in Okta
+         :alt: Okta admin console, Applications > Applications page
          :align: center
          :width: 80%
 
@@ -423,6 +444,7 @@ Okta configuration
 
       .. thumbnail:: /images/single-sign-on/okta/07-create-new-application.png
          :title: Create a new application integration
+         :alt: Okta Create a new app integration dialog with SAML 2.0 selected
          :align: center
          :width: 80%
 
@@ -430,6 +452,7 @@ Okta configuration
 
       .. thumbnail:: /images/single-sign-on/okta/08-assign-name.png
          :title: Assign a name to the application
+         :alt: Okta Create SAML Integration wizard, General Settings with the app name field
          :align: center
          :width: 80%
 
@@ -443,11 +466,13 @@ Okta configuration
 
       .. thumbnail:: /images/single-sign-on/okta/09-saml-settings-section.png
          :title: SAML settings section
+         :alt: Okta Create SAML Integration wizard, SAML Settings with the Single sign-on URL and Audience URI
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/okta/09b-other-requestable-sso-urls.png
          :title: Other Requestable SSO URLs
+         :alt: Okta SAML Settings, Show Advanced Settings with the Other Requestable SSO URLs field
          :align: center
          :width: 80%
 
@@ -455,6 +480,7 @@ Okta configuration
 
       .. thumbnail:: /images/single-sign-on/okta/10-group-attribute-statements-section.png
          :title: Group Attribute Statements section
+         :alt: Okta SAML Settings, Group Attribute Statements section with the Roles attribute and filter
          :align: center
          :width: 80%
 
@@ -462,6 +488,7 @@ Okta configuration
 
       .. thumbnail:: /images/single-sign-on/okta/11-click-on-finish.png
          :title: Click on Finish and proceed to the next step
+         :alt: Okta SAML integration wizard, Feedback step with the Finish button
          :align: center
          :width: 80%
 
@@ -469,11 +496,13 @@ Okta configuration
 
    .. thumbnail:: /images/single-sign-on/okta/read-only/12-navigate-to-directory-groups-RO.png
       :title: Navigate to Directory - Groups - <YOUR_GROUP>
+      :alt: Okta read-only group page, Applications tab with the Assign applications button
       :align: center
       :width: 80%
 
    .. thumbnail:: /images/single-sign-on/okta/13-select-assign-applications.png
       :title: Select Assign Applications
+      :alt: Okta Assign Applications dialog with the Assign button next to the Wazuh app
       :align: center
       :width: 80%
 
@@ -492,6 +521,7 @@ Okta configuration
 
    .. thumbnail:: /images/single-sign-on/okta/15-needed-to-configure-wazuh-sso-app.png
       :title: View SAML setup instructions
+      :alt: Okta SAML setup instructions page with the Identity Provider Issuer and X.509 certificate
       :align: center
       :width: 80%
 

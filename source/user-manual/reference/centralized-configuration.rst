@@ -117,21 +117,27 @@ The ``agent.conf`` may exist in each group folder at ``/var/ossec/etc/shared``.
 
 For example, for the ``group1`` group, it is in ``/var/ossec/etc/shared/group1``.  Each of these files should be readable by the ``wazuh`` user.
 
+Limits for group files: the manager ignores a file whose path under ``/var/ossec/etc/shared/`` is longer than 224 characters (200 before 4.14.10). From 4.14.10, Windows agents skip files whose names contain ``:``, ``<``, ``>``, ``"``, ``|``, ``?`` or ``*``, end with a dot or a space, are device names such as ``CON`` or ``NUL``, or look like 8.3 short names, and log ``invalid entry name``. The Wazuh server API rejects a group configuration file larger than 10 MiB with HTTP 413. The manager builds each ``merged.mg`` file in memory, so very large group files need about twice their size in free memory.
+
 Options
 -------
 
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **name**    | Assigns the block to agents with specific names.                                                                                                                  |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any regular expression that matches the agent name.                                                       |
+|             | Allowed values                                        | An :ref:`sregex (OS_Match) <sregex_os_match_syntax>` pattern that matches the agent name. The match is    |
+|             |                                                       | case-insensitive and isn't anchored unless the pattern uses ``^`` or ``$``.                               |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 | **os**      | Assigns the block to agents on specific operating systems.                                                                                                        |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any regular expression that matches the agent OS information.                                             |
+|             | Allowed values                                        | An :ref:`sregex (OS_Match) <sregex_os_match_syntax>` pattern that matches the agent OS information. The   |
+|             |                                                       | match is case-insensitive and isn't anchored unless the pattern uses ``^`` or ``$``.                      |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| **profile** | Assigns the block to agents with specific profiles as defined in :ref:`client configuration <reference_ossec_client_config_profile>`.                             |
+| **profile** | Assigns the block to agents with specific profiles as defined in :ref:`client configuration <reference_ossec_client_config_profile>`. Linux agent packages set a  |
+|             | profile list for the operating system, for example ``amzn, amzn2023`` on Amazon Linux 2023, and the filter matches against the whole list.                        |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any regular expression that matches the agent profile.                                                    |
+|             | Allowed values                                        | An :ref:`sregex (OS_Match) <sregex_os_match_syntax>` pattern that matches the agent profile list. The     |
+|             |                                                       | match is case-insensitive and isn't anchored unless the pattern uses ``^`` or ``$``.                      |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 
 .. topic:: Example
@@ -180,13 +186,13 @@ Creating and validating the configuration
 
 #. Create or edit the configuration file in the group directory.
 
-   Use a temporary filename such as ``agent.conf.tmp`` during editing to prevent the manager from distributing an incomplete or invalid configuration. For example, run these commands for the ``default`` group.
+   Use a temporary file name that starts with a dot, such as ``.agent.conf.tmp``, while you edit. The manager doesn't distribute files whose names start with a dot, so agents don't receive an incomplete configuration. For example, run these commands for the ``default`` group.
 
    .. code-block:: console
 
-      # touch /var/ossec/etc/shared/default/agent.conf.tmp
-      # chown wazuh:wazuh /var/ossec/etc/shared/default/agent.conf.tmp
-      # chmod 660 /var/ossec/etc/shared/default/agent.conf.tmp
+      # touch /var/ossec/etc/shared/default/.agent.conf.tmp
+      # chown wazuh:wazuh /var/ossec/etc/shared/default/.agent.conf.tmp
+      # chmod 660 /var/ossec/etc/shared/default/.agent.conf.tmp
 
 #. Define one or more configuration blocks. Use filters such as ``name``, ``os``, and ``profile`` to target specific agents:
 
@@ -221,7 +227,7 @@ Creating and validating the configuration
 
    .. code-block:: console
 
-      # /var/ossec/bin/verify-agent-conf -f /var/ossec/etc/shared/default/agent.conf.tmp
+      # /var/ossec/bin/verify-agent-conf -f /var/ossec/etc/shared/default/.agent.conf.tmp
 
    Fix any issues before continuing.
 
@@ -229,7 +235,7 @@ Creating and validating the configuration
 
    .. code-block:: console
 
-      # mv /var/ossec/etc/shared/default/agent.conf.tmp /var/ossec/etc/shared/default/agent.conf
+      # mv /var/ossec/etc/shared/default/.agent.conf.tmp /var/ossec/etc/shared/default/agent.conf
 
 The manager will automatically detect the new configuration and distribute it to all agents in the group.
 
@@ -240,16 +246,16 @@ The manager will automatically detect the new configuration and distribute it to
 Confirming that the configuration was applied
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Agents automatically reload the configuration after receiving it. The agent maintains its connection to the manager, since the ``agentd`` daemon is not restarted.
+Agents automatically reload the configuration after receiving it. On Linux, ``wazuh-agentd`` keeps its connection to the manager while the other agent daemons restart. On Windows, the whole agent service restarts, so the agent shows as disconnected for a few seconds.
 
-With every agent keepalive (10 seconds default), the agent sends the checksum of its ``merged.mg`` file to the manager. If the checksums differ, the manager pushes the updated file to the agent. The agent applies the new configuration immediately after receiving it. No manual restart is required, regardless of the :ref:`auto_restart <client_auto_restart>` setting.
+With every agent keepalive (:ref:`notify_time <notify_time>`, 20 seconds by default), the agent sends the checksum of its ``merged.mg`` file to the manager. If the checksums differ, the manager pushes the updated file to the agent. The agent applies the new configuration immediately after receiving it. No manual restart is required, regardless of the :ref:`auto_restart <client_auto_restart>` setting.
 
-If the configuration is successfully applied, the agent log includes entries similar to the following:
+If the configuration is successfully applied, the agent log includes entries similar to the following. On Linux, the other agent daemons restart between the first two lines. On Windows, the log shows ``Received exit signal. Starting exit process.`` and the agent service starts again instead of the ``agentd`` reload:
 
 .. code-block:: none
 
    2025/07/11 08:42:24 wazuh-agentd: INFO: Agent is reloading due to shared configuration changes.
-   2025/07/11 08:42:34 wazuh-agentd: INFO: SIGNAL [(30)-(User defined signal 1: 30)] Received. Reload agentd.
+   2025/07/11 08:42:34 wazuh-agentd: INFO: SIGNAL [(10)-(User defined signal 1)] Received. Reload agentd.
    2025/07/11 08:42:34 wazuh-agentd: INFO: Buffer agent.conf updated, enable: 1 size: 30000
    2025/07/11 08:42:34 wazuh-agentd: INFO: Client buffer resized from 20000 to 30000 elements.
 

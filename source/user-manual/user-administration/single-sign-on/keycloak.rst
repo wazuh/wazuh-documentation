@@ -33,6 +33,7 @@ Keycloak Configuration
 
    .. thumbnail:: /images/single-sign-on/keycloak/01-create-a-new-realm.png
       :title: Create a new realm
+      :alt: Keycloak admin console, Create realm form with the Wazuh realm name
       :align: center
       :width: 80%
 
@@ -45,6 +46,7 @@ Keycloak Configuration
 
    .. thumbnail:: /images/single-sign-on/keycloak/02-create-a-new-client.png
       :title: Create a new client
+      :alt: Keycloak admin console, Create client form with SAML client type and the wazuh-saml client ID
       :align: center
       :width: 80%
 
@@ -72,16 +74,19 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/03-configure-client-settings.png
          :title: Configure client settings
+         :alt: Keycloak client Settings tab with the general and access settings for wazuh-saml
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/keycloak/05-configure-client-settings.png
          :title: Configure client settings
+         :alt: Keycloak client Settings tab with the SAML capabilities options
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/keycloak/06-configure-client-settings.png
          :title: Configure client settings
+         :alt: Keycloak client Settings tab with Canonicalization method EXCLUSIVE and Front channel logout turned on
          :align: center
          :width: 80%
 
@@ -93,6 +98,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/07-client-signature-required.png
          :title: Client signature required
+         :alt: Keycloak client Keys tab with Client signature required turned off
          :align: center
          :width: 80%
 
@@ -103,6 +109,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/08-fine-grain-saml-endpoint-configuration.png
          :title: Fine Grain SAML Endpoint Configuration
+         :alt: Keycloak client Advanced tab, Fine Grain SAML Endpoint Configuration with the service URLs
          :align: center
          :width: 80%
 
@@ -114,6 +121,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/09-create-a-new-role.png
          :title: Create a new role
+         :alt: Keycloak Create role form with the wazuh-admins role name
          :align: center
          :width: 80%
 
@@ -125,6 +133,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/10-create-a-new-user.png
          :title: Create a new user
+         :alt: Keycloak Create user form with the user details
          :align: center
          :width: 80%
 
@@ -134,6 +143,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/11-set-password.png
          :title: Set password
+         :alt: Keycloak user Credentials tab with the Set password dialog
          :align: center
          :width: 80%
 
@@ -145,6 +155,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/12-create-a-new-group.png
          :title: Create a new group
+         :alt: Keycloak Groups page with the Create group button and the Wazuh-admins group listed
          :align: center
          :width: 80%
 
@@ -152,6 +163,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/13-add-member.png
          :title: Add member
+         :alt: Keycloak Add member dialog for the Wazuh-admins group with a user selected and the Add button
          :align: center
          :width: 80%
 
@@ -159,15 +171,25 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/14-assign-role.png
          :title: Assign role
+         :alt: Keycloak Assign Realm roles dialog for Wazuh-admins with the wazuh-admins role selected
          :align: center
          :width: 80%
 
 #. Configure protocol mapper.
 
-   #. Navigate to **Client scopes** > **role_list** > **Mappers** > **Add mapper** > **By configuration**.
+   #. Navigate to **Client scopes** > **role_list** > **Mappers**. Click the ⋮ icon on the **role list** row and select **Delete**. Keycloak sends the roles through only one Role list mapper per client, so the built-in mapper can replace the one you add next.
+
+      .. thumbnail:: /images/single-sign-on/keycloak/15a-delete-role-list-mapper.png
+         :title: Delete the built-in role list mapper
+         :alt: Keycloak admin console, role_list client scope Mappers tab with the Delete option for the built-in role list mapper
+         :align: center
+         :width: 80%
+
+   #. Navigate to **Client scopes** > **role_list** > **Mappers** > **Configure a new mapper**.
 
       .. thumbnail:: /images/single-sign-on/keycloak/15-configure-a-new-mapper.png
          :title: Configure a new mapper
+         :alt: Keycloak role_list client scope, Mappers tab with no mappers and the Configure a new mapper button
          :align: center
          :width: 80%
 
@@ -175,6 +197,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/16-select-role-list.png
          :title: Select Role list
+         :alt: Keycloak mapper type list with Role list selected
          :align: center
          :width: 80%
 
@@ -188,6 +211,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/17-complete-the-add-mapper-section.png
          :title: Complete the Add mapper section
+         :alt: Keycloak Add mapper form for the Role list mapper with the Roles attribute name
          :align: center
          :width: 80%
 
@@ -210,6 +234,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/18-download-adapter-config.png
          :title: Download adaptor config
+         :alt: Keycloak Download adaptor configs dialog with the mod-auth-mellon format option and Download button
          :align: center
          :width: 80%
 
@@ -219,6 +244,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/19-the-exchange_key-parameter.png
          :title: The exchange_key parameter
+         :alt: SAML identity provider metadata XML with the entityID attribute highlighted
          :align: center
          :width: 80%
 
@@ -449,6 +475,7 @@ Keycloak Configuration
 
    .. thumbnail:: /images/single-sign-on/keycloak/01-create-a-new-realm.png
       :title: Create a new realm
+      :alt: Keycloak admin console, Create realm form with the Wazuh realm name
       :align: center
       :width: 80%
 
@@ -461,6 +488,7 @@ Keycloak Configuration
 
    .. thumbnail:: /images/single-sign-on/keycloak/02-create-a-new-client.png
       :title: Create a new client
+      :alt: Keycloak admin console, Create client form with SAML client type and the wazuh-saml client ID
       :align: center
       :width: 80%
 
@@ -488,16 +516,19 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/03-configure-client-settings.png
          :title: Configure client settings
+         :alt: Keycloak client Settings tab with the general and access settings for wazuh-saml
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/keycloak/05-configure-client-settings.png
          :title: Configure client settings
+         :alt: Keycloak client Settings tab with the SAML capabilities options
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/keycloak/06-configure-client-settings.png
          :title: Configure client settings
+         :alt: Keycloak client Settings tab with Canonicalization method EXCLUSIVE and Front channel logout turned on
          :align: center
          :width: 80%
 
@@ -509,6 +540,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/07-client-signature-required.png
          :title: Client signature required
+         :alt: Keycloak client Keys tab with Client signature required turned off
          :align: center
          :width: 80%
 
@@ -519,6 +551,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/08-fine-grain-saml-endpoint-configuration.png
          :title: Fine Grain SAML Endpoint Configuration
+         :alt: Keycloak client Advanced tab, Fine Grain SAML Endpoint Configuration with the service URLs
          :align: center
          :width: 80%
 
@@ -530,6 +563,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/09-create-a-new-role-RO.png
          :title: Create a new role
+         :alt: Keycloak Create role form with the wazuh-readonly role name
          :align: center
          :width: 80%
 
@@ -541,6 +575,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/10-create-a-new-user.png
          :title: Create a new user
+         :alt: Keycloak Create user form with the user details
          :align: center
          :width: 80%
 
@@ -550,6 +585,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/11-set-password.png
          :title: Set password
+         :alt: Keycloak user Credentials tab with the Set password dialog
          :align: center
          :width: 80%
 
@@ -561,6 +597,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/12-create-a-new-group-RO.png
          :title: Create a new group
+         :alt: Keycloak Groups page with the Create group button and the Wazuh read only group highlighted
          :align: center
          :width: 80%
 
@@ -568,6 +605,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/13-add-member-RO.png
          :title: Add member
+         :alt: Keycloak Add member dialog for the Wazuh read only group with a user selected and the Add button
          :align: center
          :width: 80%
 
@@ -575,15 +613,25 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/14-assign-role-RO.png
          :title: Assign role
+         :alt: Keycloak Assign Realm roles dialog for Wazuh read only with the wazuh-readonly role selected
          :align: center
          :width: 80%
 
 #. Configure protocol mapper.
 
-   #. Navigate to **Client scopes** > **role_list** > **Mappers** > **Add mapper** > **By configuration**.
+   #. Navigate to **Client scopes** > **role_list** > **Mappers**. Click the ⋮ icon on the **role list** row and select **Delete**. Keycloak sends the roles through only one Role list mapper per client, so the built-in mapper can replace the one you add next.
+
+      .. thumbnail:: /images/single-sign-on/keycloak/15a-delete-role-list-mapper.png
+         :title: Delete the built-in role list mapper
+         :alt: Keycloak admin console, role_list client scope Mappers tab with the Delete option for the built-in role list mapper
+         :align: center
+         :width: 80%
+
+   #. Navigate to **Client scopes** > **role_list** > **Mappers** > **Configure a new mapper**.
 
       .. thumbnail:: /images/single-sign-on/keycloak/15-configure-a-new-mapper.png
          :title: Configure a new mapper
+         :alt: Keycloak role_list client scope, Mappers tab with no mappers and the Configure a new mapper button
          :align: center
          :width: 80%
 
@@ -591,6 +639,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/16-select-role-list.png
          :title: Select Role list
+         :alt: Keycloak mapper type list with Role list selected
          :align: center
          :width: 80%
 
@@ -604,6 +653,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/17-complete-the-add-mapper-section.png
          :title: Complete the Add mapper section
+         :alt: Keycloak Add mapper form for the Role list mapper with the Roles attribute name
          :align: center
          :width: 80%
 
@@ -626,6 +676,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/18-download-adapter-config.png
          :title: Download adaptor config
+         :alt: Keycloak Download adaptor configs dialog with the mod-auth-mellon format option and Download button
          :align: center
          :width: 80%
 
@@ -635,6 +686,7 @@ Keycloak Configuration
 
       .. thumbnail:: /images/single-sign-on/keycloak/19-the-exchange_key-parameter.png
          :title: The exchange_key parameter
+         :alt: SAML identity provider metadata XML with the entityID attribute highlighted
          :align: center
          :width: 80%
 
