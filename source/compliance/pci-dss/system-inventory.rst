@@ -40,7 +40,7 @@ Click the upper-left menu icon **☰** to open the options, and go to **Security
 PCI DSS dashboard
 ~~~~~~~~~~~~~~~~~~
 
-Click the menu icon, navigate to **Security operations** > **Regulatory Compliance** > **PCI DSS**, then click the **Controls** tab to review findings related to PCI DSS requirement 2.2.4. These findings come from SCA checks that map to this requirement, such as check 35608, not from Syscollector. The following image shows the corresponding PCI DSS finding in the Wazuh dashboard:
+Click the menu icon, navigate to **Security operations** > **Regulatory Compliance** > **PCI DSS**, then click the **Controls** tab and select **Requirement 2** to review findings related to PCI DSS requirement 2.2.4. These findings come from SCA checks that map to this requirement, such as check 35608 in :doc:`Configuration assessment <configuration-assessment>`, not from Syscollector. The following image shows the corresponding PCI DSS finding in the Wazuh dashboard:
 
 .. thumbnail:: /images/compliance/pci/pci-dss-dashboard-requirement-2-2-4.png
    :title: PCI DSS dashboard finding for requirement 2.2.4
