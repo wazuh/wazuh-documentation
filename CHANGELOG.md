@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Documented that `logcollector.remote_commands` also controls the sockets and socket targets that Wazuh agents receive through centralized configuration, in the *Internal configuration*, *localfile*, *socket*, and *Centralized configuration* reference documentation. ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
 - Updated the macOS ULS log tool style description in the *Log data collection* documentation to cover the `--style ndjson` format used on macOS 10.15 and later. ([#10567](https://github.com/wazuh/wazuh-documentation/pull/10567))
 - Updated the `wazuh-certs-generator` image version to 0.0.5 in the *Deployment on Docker* and *Upgrading Wazuh Docker* documentation. ([#10588](https://github.com/wazuh/wazuh-documentation/pull/10588))
+- **Post-release**: Updated the *Wazuh agent* installation documentation for Windows to list Windows Server 2025 and to add the commands that download the installer. ([#10681](https://github.com/wazuh/wazuh-documentation/pull/10681))
 
 ### Fixed
 
