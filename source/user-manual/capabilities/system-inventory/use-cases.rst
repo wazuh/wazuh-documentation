@@ -20,7 +20,7 @@ Monitor memory usage across all endpoints to assess system performance and find 
    -  **Field**: ``host.memory.free``
    -  **Operator**: ``exists``
 
-   .. thumbnail:: /images/manual/system-inventory/use-case-resource-monitoring.jpg
+   .. thumbnail:: /images/manual/system-inventory/use-case-resource-monitoring.png
       :title: Use case 1: Resource monitoring
       :alt: Use case 1: Resource monitoring
       :align: center
@@ -41,7 +41,7 @@ Identify endpoints with critical vulnerabilities in your environment and use the
 
    The filtered view lists the vulnerable packages and the endpoints where they are installed.
 
-   .. thumbnail:: /images/manual/system-inventory/use-case-2-vulnerability-management.jpg
+   .. thumbnail:: /images/manual/system-inventory/use-case-2-vulnerability-management.png
       :title: Use case 2: Vulnerability management
       :alt: Use case 2: Vulnerability management
       :align: center
@@ -55,7 +55,7 @@ Identify endpoints with critical vulnerabilities in your environment and use the
    -  **Operator**: ``is``
    -  **Value**: the name of a package with a Critical vulnerability on your endpoint, for example ``libbrotli1``.
 
-   .. thumbnail:: /images/manual/system-inventory/it-hygiene-vulnerable-package.jpg
+   .. thumbnail:: /images/manual/system-inventory/it-hygiene-vulnerable-package.png
       :title: IT Hygiene - Vulnerable package
       :alt: IT Hygiene - Vulnerable package
       :align: center
@@ -107,7 +107,7 @@ Review user accounts for unexpected privileged group membership.
 
    The filtered view shows every account which is a member of the ``Administrators`` group.
 
-   .. thumbnail:: /images/manual/system-inventory/use-case-4-privileged-group-membership.jpg
+   .. thumbnail:: /images/manual/system-inventory/use-case-4-privileged-group-membership.png
       :title: Privileged group membership
       :alt: Privileged group membership
       :align: center
@@ -128,7 +128,7 @@ Find endpoints with unexpected listening services to reduce your attack surface.
 
    The filtered view shows every listening socket bound to all network interfaces, rather than only localhost, across your fleet. Sockets bound this way are reachable from other machines on the network and deserve closer review.
 
-   .. thumbnail:: /images/manual/system-inventory/use-case-5-listening-services.jpg
+   .. thumbnail:: /images/manual/system-inventory/use-case-5-listening-services.png
       :title: Listening services bound to all interfaces
       :alt: Listening services bound to all interfaces
       :align: center
