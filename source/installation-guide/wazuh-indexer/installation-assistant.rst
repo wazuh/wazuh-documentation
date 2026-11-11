@@ -138,7 +138,7 @@ Verify that the Wazuh indexer installed correctly and the Wazuh indexer cluster 
 
       {
         "name" : "node-1",
-        "cluster_name" : "wazuh-cluster",
+        "cluster_name" : "wazuh-indexer-cluster",
         "cluster_uuid" : "095jEW-oRJSFKLz5wmo5PA",
         "version" : {
           "number" : "7.10.2",
