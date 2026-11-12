@@ -48,23 +48,26 @@
     });
 
     var total = byText ? textSections.length : rows.length;
-    var bar = document.createElement('div');
-    bar.className = 'collapsible-tables-search';
-    bar.innerHTML =
-      '<input type="search" class="ct-q" aria-label="Search ' + noun + '" placeholder="Search ' + total + ' ' + noun + '">' +
-      '<button type="button" class="ct-expand">Expand all</button>' +
-      '<button type="button" class="ct-collapse">Collapse all</button>' +
-      '<span class="ct-count" aria-live="polite"></span>';
+    function button(label, cls) {
+      return '<button type="button" class="table-filter-btn ' + cls + '" title="' + label + '">' +
+        '<span class="table-filter-btn-text">' + label + '</span></button>';
+    }
 
-    var style = document.createElement('style');
-    style.textContent =
-      '.collapsible-tables-search{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0;margin:12px 0;border-bottom:1px solid rgba(128,128,128,.35)}' +
-      // Form controls follow the theme's light or dark mode, not the browser's
-      '.light-theme .collapsible-tables-search{color-scheme:light}' +
-      '.dark-theme .collapsible-tables-search{color-scheme:dark}' +
-      '.collapsible-tables-search input{flex:1;min-width:220px;padding:6px 10px}' +
-      '.collapsible-tables-search .ct-count{margin-left:auto;font-size:.9em;opacity:.75}';
-    document.head.appendChild(style);
+    // The theme styles the bar (wazuh_doc_theme_v3: components/_table-filter.scss).
+    var bar = document.createElement('div');
+    bar.className = 'table-filter collapsible-tables-search';
+    bar.setAttribute('role', 'search');
+    bar.setAttribute('aria-label', 'Search ' + noun);
+    bar.innerHTML =
+      '<div class="table-filter-search">' +
+        '<input type="search" class="table-filter-input ct-q" placeholder="Search ' + total + ' ' + noun + '"' +
+        ' aria-label="Search ' + noun + '">' +
+        '<span class="table-filter-count ct-count" aria-live="polite"></span>' +
+      '</div>' +
+      '<div class="table-filter-actions">' +
+        button('Expand all', 'table-filter-expand ct-expand') +
+        button('Collapse all', 'table-filter-collapse ct-collapse') +
+      '</div>';
 
     var allSections = tables.map(function (t) { return t.closest('section'); }).concat(textSections);
 
@@ -120,7 +123,10 @@
         group.style.display = text && !any ? 'none' : '';
       });
       if (byText) { shown = matched; }
-      count.textContent = text ? shown + ' of ' + total + ' ' + noun + ' match' : total + ' ' + noun;
+      // The placeholder gives the total until a search is typed; then the count
+      // takes over and the placeholder gets shorter to leave it room.
+      count.innerHTML = text ? shown + ' of ' + total + '<span class="visually-hidden"> ' + noun + ' match</span>' : '';
+      q.placeholder = text ? 'Search' : 'Search ' + total + ' ' + noun;
     }
 
     // A link to a section by any of its anchors (a label such as
