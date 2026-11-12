@@ -50,7 +50,7 @@ Wazuh manager
 -  `#40540 <https://github.com/wazuh/wazuh/pull/40540>`__ Fixed ``wazuh-execd`` keeping every repeated offender for the life of the process, so its memory grew with each new source that triggered an active response.
 -  `#40579 <https://github.com/wazuh/wazuh/pull/40579>`__ Fixed the ``azure-logs`` configuration reported by the Server API leaving out the requests and containers of each source.
 -  `#40579 <https://github.com/wazuh/wazuh/pull/40579>`__ Fixed a memory leak in ``wazuh-modulesd`` each time the ``azure-logs`` configuration was requested.
--  `#41158 <https://github.com/wazuh/wazuh/pull/41158>`__ Fixed ``wazuh-modulesd`` wodles, such as ``azure-logs``, hanging when osquery or docker-listener started at the same time.
+-  `#41158 <https://github.com/wazuh/wazuh/pull/41158>`__ Fixed ``wazuh-modulesd`` wodles, such as ``azure-logs``, hanging when ``osquery`` or ``docker-listener`` started at the same time.
 -  `#40489 <https://github.com/wazuh/wazuh/pull/40489>`__ Fixed the vulnerability scanner reporting no OS vulnerabilities for Windows 10 agents older than 20H2, which have no display version.
 -  `#40538 <https://github.com/wazuh/wazuh/pull/40538>`__ Fixed the Azure Log Analytics integration never collecting the records ingested after a run with a ``TimeGenerated`` older than the newest record processed.
 -  `#40538 <https://github.com/wazuh/wazuh/pull/40538>`__ Fixed the Azure Log Analytics integration skipping new records for up to a day after reading a record with a ``TimeGenerated`` ahead of the current time.
@@ -93,7 +93,7 @@ Wazuh agent
 -  `#41045 <https://github.com/wazuh/wazuh/pull/41045>`__ Hardened agent PID file and Auditd plugin socket creation.
 -  `#40529 <https://github.com/wazuh/wazuh/pull/40529>`__ Fixed ``wazuh-execd`` keeping a local request connection open when the request could not be read, and not terminating a request of the maximum size.
 -  `#41164 <https://github.com/wazuh/wazuh/pull/41164>`__ Fixed active response IP handling and rule scope on AIX and Windows.
--  `#39812 <https://github.com/wazuh/wazuh/pull/39812>`__ Fixed FIM ``<diff>`` options parsing, whodata event loss, audit socket leak and bookmark double fclose.
+-  `#39812 <https://github.com/wazuh/wazuh/pull/39812>`__ Fixed FIM ``<diff>`` options parsing, whodata event loss, audit socket leak and bookmark double ``fclose``.
 -  `#40826 <https://github.com/wazuh/wazuh/pull/40826>`__ Fixed ``wazuh-logcollector`` dropping a later line after an oversized ``json`` or ``multi-line`` line.
 -  `#41202 <https://github.com/wazuh/wazuh/pull/41202>`__ Fixed ``wazuh-logcollector`` dropping a line after an oversized Windows ``syslog`` or UTF-16 line.
 -  `#40974 <https://github.com/wazuh/wazuh/pull/40974>`__ Fixed ``wazuh-logcollector`` misaligning every later ``multi-line`` event of a file when a read reached ``logcollector.max_lines`` inside an event or a line with NUL bytes was dropped.
@@ -127,7 +127,7 @@ Wazuh dashboard
 -  `#9414 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/9414>`__ Fixed the validation of visualization images in module reports.
 -  `#9552 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/9552>`__ Fixed the scheduled jobs, such as the statistics and monitoring collection, occasionally skipping a run.
 -  `#9547 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/9547>`__ Fixed the Server API token not being revoked when logging out from a page outside the apps of wazuh plugin.
--  `#9570 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/9570>`__ Fixed the inventories (IT Hygiene, including Users and Groups, and FIM) exporting rows that ignored the search bar query in Export Formatted.
+-  `#9570 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/9570>`__ Fixed the inventories (**IT Hygiene**, including **Users** and **Groups**, and **FIM**) exporting rows that ignored the search bar query in **Export Formatted**.
 -  `#9607 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/9607>`__ Fixed the app being replaced by the "Something went wrong." screen or the health check when a group request or the Server API check timed out.
 -  `#9625 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9625>`__ Fixed the "CBD List" typo in the success toasts of the CDB list editor.
 
