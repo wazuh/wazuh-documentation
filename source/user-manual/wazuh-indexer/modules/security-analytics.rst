@@ -8,7 +8,7 @@ Security Analytics module
 
 The Security Analytics module is a component of the Wazuh indexer that evaluates incoming events against :doc:`Wazuh Sigma rules </user-manual/wazuh-indexer/wazuh-sigma-rules>` to generate findings.
 
-It generates findings when events match Sigma rules and correlates related findings across detectors. The module runs within the Wazuh indexer and provides the detection engine used by Security Analytics.
+It generates findings when events match Sigma rules and correlates related findings across detectors. The module runs within the Wazuh indexer and provides the detection engine used by Security Analytics. In the Wazuh dashboard, this module appears as Ruleset Management, its user-facing name. Security Analytics is its internal name, which is why its settings use the ``plugins.security_analytics`` prefix, its API uses ``/_plugins/_security_analytics/``, and its raw indices use ``.opensearch-sap-*``.
 
 Detectors
 ---------
@@ -25,7 +25,7 @@ A detector evaluates events against a set of Sigma rules for a specific log cate
 
 .. warning::
 
-   Requests that violate either constraint are rejected with ``400 Bad Request``. Both constraints apply to detector creation and update operations.
+   Requests that violate either constraint are rejected with ``400 Bad Request``. Both constraints apply to detector creation and update operations. These constraints don't apply to the standard detectors that the Content Manager creates from CTI content. A standard detector accepts only a change to ``enabled`` and can't be deleted. Any other change, and any ``DELETE`` request, returns ``400 Bad Request``.
 
 Findings
 --------
