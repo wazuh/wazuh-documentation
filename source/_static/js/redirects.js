@@ -700,10 +700,10 @@ removedUrls['5.0'] = [
   '/user-manual/wazuh-indexer-cluster/index-lifecycle-management.html',
   '/user-manual/wazuh-indexer/re-indexing.html',
   '/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints.html',
+  // End of 4.14 pages with no 5.0 page yet.
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html',
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
   '/user-manual/wazuh-server-cluster/types-of-nodes.html',
-  // End of 4.14 pages with no 5.0 page yet.
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/labels.html',
   '/cloud-security/azure/ms-graph-api-setup.html',
