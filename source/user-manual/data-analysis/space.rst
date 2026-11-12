@@ -8,7 +8,7 @@
 Space
 =====
 
-A space is the logical storage location where Wazuh keeps its detection content. Detection content defines how events are parsed, enriched, and evaluated. It includes decoders, KVDBs, detectors, rules, and other enrichment information. Wazuh provides four spaces: draft, test, custom, and standard. The standard space contains the official Wazuh detection content. The custom space contains the user-created detection content. This separation ensures that the Wazuh standard policy remains independent from the user-defined policy, keeping both processing pipelines isolated.
+A space is the logical storage location where Wazuh keeps its detection content. Detection content defines how events are parsed, enriched, and evaluated. It includes decoders, KVDBs, rules, and other enrichment information. Wazuh provides four spaces: draft, test, custom, and standard. The standard space contains the official Wazuh detection content. The custom space contains the user-created detection content. This separation ensures that the Wazuh standard policy remains independent from the user-defined policy, keeping both processing pipelines isolated.
 
 The draft, test, and custom spaces hold your custom content, but you create and edit content only in the draft space. The test and custom spaces are read-only: their content changes only when you promote content into them, as described in the promotion workflow below.
 
@@ -71,7 +71,7 @@ The test and custom spaces are read-only, so you can't delete content from them 
    :align: center
    :width: 80%
 
-#. In the draft space, delete the integration, decoder, KVDB, filter, or rule. To remove all your custom content at once, go to **Ruleset management** > **Overview** and click **Actions** > **Clear space**. This removes all integrations, rules, decoders, KVDBs, and filters from the draft space and unsets its root decoder. It doesn't affect detectors.
+#. In the draft space, delete the integration, decoder, KVDB, filter, or rule. To remove all your custom content at once, go to **Ruleset Management** > **Overview** and click **Actions** > **Clear space**. This removes all integrations, rules, decoders, KVDBs, and filters from the draft space and unsets its root decoder. It doesn't affect detectors.
 
    .. thumbnail:: /images/manual/data-analysis/space-clear-draft-space.jpg
       :title: Clear the draft space
@@ -79,7 +79,7 @@ The test and custom spaces are read-only, so you can't delete content from them 
       :align: center
       :width: 80%
 
-#. Go to **Ruleset management** > **Overview** and click **Actions** > **Promote**. The Promote page lists the deleted content as ``(remove)``. Promote the content from draft to test.
+#. Go to **Ruleset Management** > **Overview** and click **Actions** > **Promote**. The Promote page lists the deleted content as ``(remove)``. Promote the content from draft to test.
 
    .. thumbnail:: /images/manual/data-analysis/space-promote-removed-content.jpg
       :title: Promote page listing removed content
