@@ -46,6 +46,22 @@
   }
 }
 
+// Accordion titles are a step smaller than regular headings, so a long list
+// of collapsed sections reads as a list rather than as page headings.
+h2.accordion-title {
+  font-size: 22px;
+  @include media-max(xl){
+    font-size: 20px;
+  }
+}
+
+h3.accordion-title {
+  font-size: 20px;
+  @include media-max(xl){
+    font-size: 18px;
+  }
+}
+
 
 /* Light theme -------------------------------------------------------------- */
 
