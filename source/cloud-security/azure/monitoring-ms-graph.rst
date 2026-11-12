@@ -27,6 +27,7 @@ The Wazuh Microsoft Graph API dashboard visualizes data from these services.
 This section provides instructions for monitoring your organization's Microsoft Graph API resources and relationships using the Wazuh module for Microsoft Graph.
 
 .. thumbnail:: /images/cloud-security/ms-graph/ms-graph-dashboard.png
+   :alt: Microsoft Graph API dashboard in the Wazuh dashboard, with event charts by category, operation, and source IP
    :align: center
    :width: 80%
 
@@ -53,18 +54,21 @@ Register your app
 #. Register an application to authenticate with the Microsoft identity platform endpoint.
 
    .. thumbnail:: /images/cloud-security/ms-graph/new-app-registration.png
+      :alt: New registration option on the Microsoft Entra ID App registrations page in the Azure portal
       :align: center
       :width: 80%
 
 #. Fill in the name of your app, choose the desired **account type**, and click on the **Register** button:
 
    .. thumbnail:: /images/cloud-security/ms-graph/register-application.png
+      :alt: Register an application form in the Azure portal, with app name, supported account types, and Register button
       :align: center
       :width: 80%
 
    The app is now registered; you can view its information in the **Overview** section. Make sure to note down the ``client_id`` and ``tenant_id`` information:
 
    .. thumbnail:: /images/cloud-security/ms-graph/note-down-information.png
+      :alt: App Overview page in the Azure portal, with the Application (client) ID and Directory (tenant) ID highlighted
       :align: center
       :width: 80%
 
@@ -77,12 +81,14 @@ Certificates & secrets
    -  Add a client secret to generate the secret value and secret ID.
 
       .. thumbnail:: /images/cloud-security/ms-graph/add-new-client-secret.png
+         :alt: Add a client secret panel on the app Certificates & secrets page in the Azure portal
          :align: center
          :width: 80%
 
 #. Copy and save the ``secret_value`` information:
 
    .. thumbnail:: /images/cloud-security/ms-graph/save-secret.png
+      :alt: Client secret Value column highlighted on the Certificates & secrets page in the Azure portal
       :align: center
       :width: 80%
 
@@ -100,6 +106,7 @@ To configure the application permissions, go to the **API permissions** page and
 #. Select **the Microsoft Graph API,** then click **Application permissions**.
 
    .. thumbnail:: /images/cloud-security/ms-graph/select-api-permissions.png
+      :alt: Request API permissions panel in the Azure portal, with Microsoft Graph Application permissions selected
       :align: center
       :width: 80%
 
@@ -109,12 +116,14 @@ To configure the application permissions, go to the **API permissions** page and
    -  ``SecurityIncident.Read.All``: This permission is required to read security incident data, including associated events/alerts from the ``/security/incidents`` API on your tenant.
 
    .. thumbnail:: /images/cloud-security/ms-graph/add-api-permissions.png
+      :alt: SecurityAlert.Read.All and SecurityIncident.Read.All selected in the Request API permissions panel in the Azure portal
       :align: center
       :width: 80%
 
 #. Use an admin user to **Grant admin consent** for the tenant.
 
    .. thumbnail:: /images/cloud-security/ms-graph/grant-admin-consent.png
+      :alt: Grant admin consent for Default Directory button on the app API permissions page in the Azure portal
       :align: center
       :width: 80%
 
@@ -265,9 +274,11 @@ The command output looks similar to this:
 The Wazuh Microsoft Graph integration retrieves this alert via the ``security/alerts_v2`` relationship. Wazuh decodes the event and evaluates it against the built-in Microsoft Graph detection rules. When a match is found, Wazuh generates a finding similar to the following:
 
 .. thumbnail:: /images/cloud-security/ms-graph/ms-graph-finding-malicious-email.png
+   :alt: Microsoft Graph API Findings tab in the Wazuh dashboard, showing the malicious email detection finding
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/cloud-security/ms-graph/ms-graph-finding-malicious-email-details.png
+   :alt: Document Details flyout in the Wazuh dashboard for the Microsoft Graph malicious email finding
    :align: center
    :width: 80%
