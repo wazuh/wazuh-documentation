@@ -22,14 +22,14 @@ You need a certificate authority to sign certificates for the Wazuh manager and 
 
 .. code-block:: console
 
-   # openssl req -x509 -new -nodes -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
+   # openssl req -x509 -new -nodes -days 3650 -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
 
-The root certificate is created and saved as the ``rootCA.pem`` file. The default validity is 30 days.
+The root certificate is created and saved as the ``rootCA.pem`` file. It is valid for 3650 days (10 years). The CA must stay valid longer than the certificates it signs, which last 365 days.
 
-Wazuh agents enrollment with token
-----------------------------------
+Wazuh agent enrollment with a token
+-----------------------------------
 
-Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment token. The token carries the Wazuh manager address, the enrollment credential, and a pin of the certificate authority (CA) that signs the Wazuh manager certificate. During enrollment, the Wazuh agent installs that CA as its trust anchor and verifies the Wazuh manager certificate against it, including the hostname. You don't need to copy a CA file to the endpoint or edit the ``ossec.conf`` file.
+Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment token, a string that you create on the Wazuh manager in step 1. The token carries the Wazuh manager address, the enrollment credential, and a pin of the certificate authority (CA) that signs the Wazuh manager certificate. The pin identifies that CA, so the Wazuh agent accepts no other. During enrollment, the Wazuh agent installs that CA as its trust anchor, the CA it trusts from then on, and verifies the Wazuh manager certificate against it, including the hostname. You don't need to copy a CA file to the endpoint or edit the ``ossec.conf`` file.
 
 #. Create a token on the Wazuh manager for the address the Wazuh agents connect to. In a cluster, run this command on the master node. The address must be included in the subject alternative names (SAN) of the Wazuh manager certificate:
 
@@ -47,7 +47,7 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
 
       # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS> --embed-ca
 
-#. Install the Wazuh agent with the token.
+#. On each endpoint, install the Wazuh agent with the token.
 
    Replace ``<TOKEN>`` with the token you created:
 
@@ -61,6 +61,7 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
 
       .. code-block:: console
 
+         # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
          # WAZUH_ENROLLMENT_TOKEN='<TOKEN>' rpm -ivh wazuh-agent-*.rpm
 
    -  macOS endpoints:
@@ -104,14 +105,14 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
 
       # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
-The Wazuh agent saves the CA as its trust anchor in ``etc/certs/root-ca.pem`` (``certs\root-ca.pem`` on Windows) and verifies the Wazuh manager certificate on every connection, without any ``<ssl>`` configuration.
+The Wazuh agent saves the CA as its trust anchor in ``/var/ossec/etc/certs/root-ca.pem`` (``C:\Program Files (x86)\ossec-agent\certs\root-ca.pem`` on Windows, ``/Library/Ossec/etc/certs/root-ca.pem`` on macOS) and verifies the Wazuh manager certificate on every connection, without any ``<ssl>`` configuration.
 
 To use your own certificate authority instead, follow the steps in the sections below.
 
 .. _manager-identity-validation:
 
-Wazuh manager identity validation
----------------------------------
+Wazuh manager identity verification with your own CA
+----------------------------------------------------
 
 In this process, the Wazuh manager generates an SSL certificate using the Certificate Authority (CA). Subsequently, during the agent enrollment, the Wazuh agent verifies the Wazuh manager certificate using the root certificate of the CA.
 
@@ -315,7 +316,7 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
             <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
-            <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
+            <server_ca_path>C:\<PATH_TO>\rootCA.pem</server_ca_path>
           </enrollment>
         </client>
       </ossec_config>

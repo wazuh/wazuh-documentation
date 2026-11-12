@@ -8,7 +8,7 @@ Wazuh agent identity verification
 
 This method uses SSL certificates to verify that a Wazuh agent is authorized to enroll in the Wazuh manager. The Wazuh manager and Wazuh agent verification are independent of each other. However, it is possible to use a combination of both.
 
-Learn about Wazuh agent identity verification steps in the sections below
+Learn about Wazuh agent identity verification steps in the sections below.
 
 .. contents::
    :local:
@@ -30,9 +30,9 @@ You need a certificate authority to sign certificates for the Wazuh manager and 
 
    .. code-block:: console
 
-      # openssl req -x509 -new -nodes -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
+      # openssl req -x509 -new -nodes -days 3650 -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
 
-The root certificate is created and saved as the ``rootCA.pem`` file. The default validity is 30 days.
+The root certificate is created and saved as the ``rootCA.pem`` file. It is valid for 3650 days (10 years). The CA must stay valid longer than the certificates it signs, which last 365 days.
 
 Wazuh agent verification options
 --------------------------------
@@ -67,7 +67,7 @@ Wazuh manager configuration
 
       .. code-block:: console
 
-         # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<agent_IP>'
+         # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<WAZUH_AGENT_IP_ADDRESS>'
 
    Where:
 
@@ -177,8 +177,8 @@ Follow these steps to enroll a Linux/Unix endpoint by using certificates for age
             <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
-            <agent_certificate_path>/<PATH_TO>/sslagent.cert</agent_certificate_path>
-            <agent_key_path>/<PATH_TO>/sslagent.key</agent_key_path>
+            <agent_certificate_path>/var/ossec/etc/sslagent.cert</agent_certificate_path>
+            <agent_key_path>/var/ossec/etc/sslagent.key</agent_key_path>
           </enrollment>
         </client>
       </ossec_config>
