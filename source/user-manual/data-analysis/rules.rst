@@ -26,8 +26,8 @@ The following table lists all supported top-level fields in a Wazuh Sigma rule. 
 |                    |           |            | assigns a new random UUID when you create the rule and |
 |                    |           |            | replaces the value you write                           |
 +--------------------+-----------+------------+--------------------------------------------------------+
-| ``status``         | String    | Yes        | Rule maturity status: ``experimental``, ``test``, or   |
-|                    |           |            | ``stable``                                             |
+| ``status``         | String    | Yes        | Rule maturity status: ``experimental``, ``test``,      |
+|                    |           |            | ``stable``, ``deprecated``, or ``unsupported``         |
 +--------------------+-----------+------------+--------------------------------------------------------+
 | ``level``          | String    | Yes        | Finding severity: ``informational``, ``low``,          |
 |                    |           |            | ``medium``, ``high``, or ``critical``                  |
