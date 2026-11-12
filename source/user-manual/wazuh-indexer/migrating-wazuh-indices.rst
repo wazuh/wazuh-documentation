@@ -46,7 +46,7 @@ Perform the following configuration on the source and destination Wazuh indexer 
    .. code-block:: yaml
       :emphasize-lines: 19
 
-      network.host: "127.0.0.1"
+      network.host: "127.0.0.1"
       node.name: "node-1"
       cluster.initial_cluster_manager_nodes:
       - "node-1"
@@ -391,7 +391,7 @@ Perform the following steps on the source and destination Wazuh indexer nodes to
    .. code-block:: yaml
       :emphasize-lines: 19
 
-      network.host: "127.0.0.1"
+      network.host: "127.0.0.1"
       node.name: "node-1"
       cluster.initial_cluster_manager_nodes:
       - "node-1"

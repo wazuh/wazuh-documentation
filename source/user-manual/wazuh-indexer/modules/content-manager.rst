@@ -99,7 +99,7 @@ User-created content is stored in the Draft space and can be promoted through th
 Content validation
 ^^^^^^^^^^^^^^^^^^
 
-Before content is promoted, the Content Manager module validates the configuration with the Wazuh Engine that ships with the Wazuh indexer. The Wazuh indexer starts this Engine as a child process and reaches it through the /usr/share/wazuh-indexer/engine/sockets/engine-api-http.sock socket. Validation helps identify:
+Before content is promoted, the Content Manager module validates the configuration with the Wazuh Engine that ships with the Wazuh indexer. The Wazuh indexer starts this Engine as a child process and reaches it through the ``/usr/share/wazuh-indexer/engine/sockets/engine-api-http.sock`` socket. Validation helps identify:
 
 -  Syntax errors
 -  Invalid references
