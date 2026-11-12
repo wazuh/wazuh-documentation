@@ -434,7 +434,7 @@ An index can end in a failed state if its ISM run is interrupted, for example by
 
 #. Go to **Indexer management** > **Index Management** > **Policy managed indexes** and turn on **Show data stream indexes**.
 #. Look for indices with a failed status. The info column shows the reason.
-#. Remove the policy from each failed index. On **Policy managed indexes**, select the index and click **Remove policy**. click **Remove** to confirm.
+#. Remove the policy from each failed index. On **Policy managed indexes**, select the index and click **Remove policy**. Click **Remove** to confirm.
 #. Go to **Indexer management** > **Index Management** > **Indexes** and turn on **Show data stream indexes**.
 #. Select the index and click **Actions** > **Apply policy**.
 #. Select the policy the index must run and click **Apply**.
