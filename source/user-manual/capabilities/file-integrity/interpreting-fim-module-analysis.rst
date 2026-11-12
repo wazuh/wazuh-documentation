@@ -22,10 +22,10 @@ The **Dashboard** tab summarizes the current state of the files that the FIM mod
 The image below shows the **Dashboard** tab for all monitored endpoints.
 
 .. thumbnail:: /images/manual/fim/dashboard.png
-  :title: Dashboard
-  :alt: Dashboard
-  :align: center
-  :width: 80%
+   :title: Dashboard
+   :alt: FIM Dashboard tab for all monitored endpoints, with top agents, OS platforms, file owners, and recently modified files
+   :align: center
+   :width: 80%
 
 The image below shows the **Dashboard** tab for an Ubuntu endpoint.
 
@@ -45,10 +45,10 @@ This section displays an inventory of all files the FIM module has indexed, incl
 The image below shows the file inventory of an Ubuntu endpoint.
 
 .. thumbnail:: /images/manual/fim/inventory.png
-  :title: Inventory
-  :alt: Inventory
-  :align: center
-  :width: 80%
+   :title: Inventory
+   :alt: FIM Inventory Files tab for an Ubuntu endpoint, listing file path, modification time, owner, UID, and size
+   :align: center
+   :width: 80%
 
 Click a file entry to view its attributes and other details. The image below shows the details for the ``/etc/resolv.conf`` file.
 
@@ -67,7 +67,7 @@ This section displays the Wazuh FIM findings. A finding is generated when a FIM 
 
 .. thumbnail:: /images/manual/fim/findings.png
    :title: Findings
-   :alt: Findings
+   :alt: FIM Findings tab with a histogram and a table of file created and modified events for an Ubuntu endpoint
    :align: center
    :width: 80%
 

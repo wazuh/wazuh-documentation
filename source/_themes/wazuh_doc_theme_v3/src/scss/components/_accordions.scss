@@ -20,6 +20,9 @@
   @include media-max(xl){
     display: inline-block;
     height: auto;
+    // Room for the background of code in the title, which reaches below the
+    // line and would otherwise cover the underline.
+    padding-bottom: 6px;
   }
 
   &::before {
@@ -44,6 +47,27 @@
       transform: rotateZ(-90deg);
     }
   }
+}
+
+// Accordion titles share one size and weight, whatever their heading level, so
+// the pages with collapsible sections look alike, and a long list of collapsed
+// sections reads as a list of entries rather than as page headings.
+.accordion-title {
+  font-size: 18px;
+  font-weight: 500;
+
+  // Code in a title, such as a field set name, matches the words around it
+  code {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+}
+
+// Headings inside a collapsible section, such as an example below a table,
+// stay below the section's own title.
+.accordion-section :is(h2, h3, h4, h5, h6):not(.accordion-title) {
+  font-size: 16px;
+  font-weight: 500;
 }
 
 
