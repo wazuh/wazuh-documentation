@@ -20,11 +20,11 @@ The example used throughout is based on Apache HTTP Server error logs. A few con
 
 -  **Detector.** A scheduled job that applies selected rules to incoming events and generates findings.
 
--  **Finding.** A security record is created when an event matches a rule. This was previously called alert in Wazuh 4.x.
+-  **Finding.** A finding is a security record that is created when an event matches a rule. This was previously called alert in Wazuh 4.x.
 
 .. note::
 
-   Security analytics organizes content into a three-stage pipeline: Draft, Test, and Custom. Content is created in Draft, validated in Test, and promoted to Custom for production use. Each stage serves as a controlled step in the promotion flow, ensuring changes are validated before affecting live data. Use the space selector in the top-right corner to confirm you are working in the correct stage.
+   Security analytics organizes content into three spaces: draft, test, and custom. Content is created in Draft, validated in Test, and promoted to Custom for production use. Each space serves as a controlled step in the promotion flow, ensuring changes are validated before affecting live data. Use the space selector in the top-right corner to confirm you are working in the correct space.
 
 You will complete the following steps in order:
 
@@ -55,7 +55,7 @@ Custom Wazuh security policies are managed through an integration on the Ruleset
 
 Make sure the space selector reads **Draft** and follow these steps to create a custom integration.
 
-#. Go to **Ruleset management** > **Overview** > **Integrations** > **Actions** > **Create**.
+#. Go to **Ruleset Management** > **Overview** > **Integrations** > **Actions** > **Create**.
 
    .. thumbnail:: /images/manual/data-analysis/security-analytics-create-custom-integration.png
       :title: Create a custom integration
@@ -85,6 +85,8 @@ Make sure the space selector reads **Draft** and follow these steps to create a 
       :align: center
       :width: 80%
 
+.. _data_analysis_create_custom_decoders:
+
 Create custom decoders
 ----------------------
 
@@ -92,7 +94,7 @@ Configure two decoders: a root decoder that processes all incoming events before
 
 Make sure the space selector reads **Draft** and follow the steps below to create custom decoders using the **Ruleset Management** dashboard.
 
-#. Go to **Ruleset management** > **Normalization** > **Decoders** > **Actions** > **Create**.
+#. Go to **Ruleset Management** > **Normalization** > **Decoders** > **Actions** > **Create**.
 
 #. Select the integration you created (``custom-integration``), then use the two decoders below.
 
@@ -117,7 +119,7 @@ Make sure the space selector reads **Draft** and follow the steps below to creat
         - _tmp_json: "parse_json($event.original)"
       enabled: true
 
-   The ``decoder/core-wazuh-message/0`` is a root decoder that parses the raw event as JSON and stores the result in a temporary field for child decoders to use. Other decoders inherit from it to handle specific log sources.
+   The ``decoder/core-wazuh-message/0`` is a root decoder that parses the raw event as JSON and stores the result in a temporary field for child decoders to use. Other decoders inherit from it to handle specific log sources. The Apache error log isn't JSON, so ``parse_json`` doesn't produce a value for these events. A failed ``map`` operation doesn't make the decoder reject the event, so the event still reaches the child decoder. This decoder belongs to your custom content and is separate from the decoder with the same name in the standard space.
 
    **Child decoder**
 
@@ -170,7 +172,7 @@ Make sure the space selector reads **Draft** and follow the steps below to creat
         - source.ip: "not_exists()"
       enabled: true
 
-   The ``decoder/apache-error/0`` decoder inherits from the base decoder and processes Apache HTTP Server error logs. It parses the raw log to extract fields like timestamp, log level, and client address, then classifies the event as an error or informational based on the log level.
+   The ``decoder/apache-error/0`` decoder inherits from the base decoder and processes Apache HTTP Server error logs. It parses the raw log to extract fields like timestamp, log level, and client address, then classifies the event as an error or informational based on the log level. In the ``check`` conditions, ``\\)`` escapes the closing parenthesis of the regular expression: YAML turns ``\\`` into ``\``, and the helper parser needs ``\)`` so that it doesn't read the parenthesis as the end of the helper call.
 
 #. Once both decoders are saved, they appear together in the decoders list.
 
@@ -187,7 +189,7 @@ The integration must be enabled and configured with a root decoder before any ad
 
 Make sure the space selector reads **Draft** and follow these steps to assign a root decoder to the integration.
 
-#. Go to **Ruleset management** > **Overview** > **Actions** > **Edit**.
+#. Go to **Ruleset Management** > **Overview** > **Actions** > **Edit**.
 
 #. Confirm the status is **Enabled**, and assign the ``decoder/core-wazuh-message/0`` as the root decoder. Click **Save** to apply the configuration.
 
@@ -206,7 +208,7 @@ Rules are used to identify patterns in normalized events and determine when spec
 
 Make sure the space selector reads **Draft** and follow these steps to create a rule that flags Apache error events classified as failures.
 
-#. Go to **Ruleset management** > **Detection** > **Rules** > **Create**.
+#. Go to **Ruleset Management** > **Detection** > **Rules** > **Create**.
 
 #. Select **YAML Editor**, choose the **custom-integration** integration and paste the rule:
 
@@ -287,7 +289,7 @@ In the draft space, you create and refine your integrations, decoders, and rules
 
 Make sure the space selector reads **Draft**, and follow these steps to promote the content from draft to test.
 
-#. Go to **Ruleset management** > **Overview**, and click **Actions** > **Promote**
+#. Go to **Ruleset Management** > **Overview**, and click **Actions** > **Promote**
 
    .. thumbnail:: /images/manual/data-analysis/security-analytics-promotion.png
       :title: Promote the content
@@ -295,7 +297,7 @@ Make sure the space selector reads **Draft**, and follow these steps to promote 
       :align: center
       :width: 80%
 
-#. Type the confirmation message when prompted, and click **Promote**.
+#. Type ``promote`` to confirm, and click **Promote**.
 
    .. thumbnail:: /images/manual/data-analysis/security-analytics-promotion-confirmation.png
       :title: Promotion confirmation
@@ -324,7 +326,7 @@ After promoting the integration to the test space, use **Log test** to validate 
 
 Make sure the space selector reads **Test**, and follow these steps to validate with **Log test**.
 
-#. Go to **Ruleset management** > **Log test**.
+#. Go to **Ruleset Management** > **Log test**.
 
 #. Paste the sample Apache log line below into the **Log event** field to see how it is decoded and matched.
 
@@ -418,9 +420,9 @@ After validating your integrations, decoders, and rules in the test space using 
 
 Make sure the space selector reads **Test**, then follow these steps to promote the content.
 
-#. Go to **Ruleset management** > **Overview**.
+#. Go to **Ruleset Management** > **Overview**.
 
-#. Click **Actions** > **Promote**, type the confirmation message, and click **Promote**.
+#. Click **Actions** > **Promote**, type ``promote`` to confirm, and click **Promote**.
 
    .. thumbnail:: /images/manual/data-analysis/security-analytics-apache-promotion.png
       :title: Promote the Apache integration
@@ -440,6 +442,8 @@ Make sure the space selector reads **Test**, then follow these steps to promote 
 
       The Wazuh manager loads the custom space on a polling cycle. Events sent within about 2 minutes of the promotion are processed only by the standard policy and don't generate the custom finding.
 
+.. _data_analysis_create_detector:
+
 Create a detector
 -----------------
 
@@ -447,7 +451,7 @@ A detector is the scheduled job that executes your rule. It scans indexed events
 
 Follow these steps to create a detector.
 
-#. Go to **Ruleset management** > **Detection** > **Detectors** > **Create detector**.
+#. Go to **Ruleset Management** > **Detection** > **Detectors** > **Create detector**.
 
    .. thumbnail:: /images/manual/data-analysis/security-analytics-detectors-list.png
       :title: Detectors list
@@ -467,7 +471,7 @@ Follow these steps to create a detector.
 
    -  **Selected rules**: Apache Failure Detection
 
-   -  **Run every**: 2 minutes.
+   -  **Run every**: 2 minutes
 
    .. thumbnail:: /images/manual/data-analysis/security-analytics-create-custom-detectors.png
       :title: Create a custom detector
@@ -494,7 +498,7 @@ Configure the Wazuh agent to collect the Apache error log
 
 The detector only generates findings from events that reach the Wazuh manager. Configure the Wazuh agent on the monitored endpoint to collect the Apache error log.
 
-#. Append the following configuration to the ``/var/ossec/etc/ossec.conf`` file on the monitored endpoint:
+#. Append the following configuration to the ``/var/ossec/etc/ossec.conf`` file on the monitored endpoint. The location shown is the Apache error log on Debian and Ubuntu. On Red Hat Enterprise Linux and CentOS Stream, use ``/var/log/httpd/error_log`` instead:
 
    .. code-block:: xml
 
@@ -604,12 +608,22 @@ A single finding contains the complete enriched record, including the matched ru
              ]
            },
            "mitre": {
-             "technique": [
-               "T1190"
-             ],
-             "tactic": [
-               "TA0001"
-             ]
+             "technique": {
+               "id": [
+                 "T1190"
+               ],
+               "name": [
+                 "Exploit Public-Facing Application"
+               ]
+             },
+             "tactic": {
+               "id": [
+                 "TA0001"
+               ],
+               "name": [
+                 "Initial Access"
+               ]
+             }
            },
            "id": "d78bd034-8838-4f85-b471-5e8c9a0daf18",
            "title": "Apache Failure Detection",
