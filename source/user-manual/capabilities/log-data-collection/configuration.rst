@@ -285,11 +285,16 @@ The Wazuh agent installs the following default configuration to collect logs fro
       # /usr/libexec/PlistBuddy -c "Add :ProcessType string Interactive" /Library/LaunchDaemons/com.wazuh.agent.plist
       # plutil -lint /Library/LaunchDaemons/com.wazuh.agent.plist
 
-   Then stop the Wazuh agent service, wait a few seconds for it to stop, and start it again:
+   Then stop the Wazuh agent service:
 
    .. code-block:: console
 
       # launchctl bootout system/com.wazuh.agent
+
+   Wait a few seconds for it to stop, and start it again:
+
+   .. code-block:: console
+
       # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
    This setting applies to the whole Wazuh agent service, including FIM, SCA, and rootcheck scans. Installing or upgrading the Wazuh agent, including remote upgrades, overwrites this file, so you need to set the key again after each upgrade.
