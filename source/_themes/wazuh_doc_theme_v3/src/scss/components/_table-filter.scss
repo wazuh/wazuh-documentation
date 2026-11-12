@@ -13,6 +13,9 @@
       <label class="table-filter-select">
         <span class="table-filter-label">Type</span>
         <select>...</select>
+        <span class="table-filter-sizer" aria-hidden="true">
+          <span>All</span><span>Option 1</span>...
+        </span>
       </label>
     </div>
     <div class="table-filter-actions">
@@ -25,28 +28,37 @@
     </div>
   </div>
 
-  The layout follows the width of the bar itself (container queries), not the
-  screen, so the bar fits any column:
-  - Narrow (phones): the search box, the dropdowns and the buttons each take a
-    full row. The dropdowns fill their row and wrap when they don't fit, and
-    the buttons share their row in equal columns.
+  Below 992px of screen width (lg), the search box and each dropdown take a
+  full row, and the buttons share the last row in equal columns. From 992px,
+  the layout follows the width of the bar itself (container queries), so the
+  bar fits any column:
+  - Narrow: the same rows as below 992px.
   - From 36rem: the search box takes the first row; the dropdowns and the
     buttons share the second one.
   - From 44rem: everything fits on one line, with icon-only buttons.
   - From 56rem: the buttons show their text too.
 
   Each dropdown is as wide as its longest option (or its label, if wider), so
-  the selected value never gets cut off. Its label shows above the selected
+  the selected value never gets cut off. The hidden sizer must repeat the text
+  of every option for this, because a styled select is only as wide as its
+  selected option. Its label shows above the selected
   value, inside the box, and the whole box opens the dropdown.
+
+  All the text in the bar uses the site's font, size and weight, the open list
+  of a dropdown too (where the browser supports styling it), and the dropdown
+  arrow is drawn like the arrows of the buttons.
 ----------------------------------------------------------------------------- */
 
 $table-filter-height: 46px;
 $table-filter-gap: 8px;
 $table-filter-padding: 10px;
-$table-filter-chevron-space: 28px;
+$table-filter-chevron-space: 36px;
+// The dropdown arrow draws at the size of the left menu's arrows (10.5px wide).
+$table-filter-arrow-size: 21px;
 
 // Icons drawn with the text color (mask), so they follow the button state.
 $table-filter-icon-expand: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 15 5 5 5-5M7 9l5-5 5 5'/%3E%3C/svg%3E");
+$table-filter-icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 9.5 5 5 5-5'/%3E%3C/svg%3E");
 $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 20 5-5 5 5M7 4l5 5 5-5'/%3E%3C/svg%3E");
 
 .table-filter {
@@ -55,16 +67,19 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
   gap: $table-filter-gap;
   align-items: stretch;
   margin: 1.5rem 0 1.25rem;
-  font-size: 15px;
-  line-height: 18px;
+  font-size: 16px; // Same as the body text
+  font-weight: 500;
+  line-height: 19px;
   container-type: inline-size;
 
   input,
   select,
+  option,
   button {
     margin: 0;
     font-family: inherit;
     font-size: inherit;
+    font-weight: inherit;
     line-height: inherit;
   }
 }
@@ -105,8 +120,10 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
     transform: translateY(-50%);
   }
 
-  @container (min-width: 44rem) {
-    flex: 1 1 9.5rem;
+  @include media-min(lg) {
+    @container (min-width: 44rem) {
+      flex: 1 1 9.5rem;
+    }
   }
 }
 
@@ -147,29 +164,52 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
   flex-wrap: wrap;
   gap: $table-filter-gap;
 
-  @container (min-width: 36rem) {
-    flex: none;
-    flex-wrap: nowrap;
+  @include media-min(lg) {
+    @container (min-width: 36rem) {
+      flex: none;
+      flex-wrap: nowrap;
+    }
   }
 }
 
-// The label text and the select share one grid cell, so the box takes the
-// width of the wider of the two. A select is as wide as its longest option.
+// The label, the select and the sizer share one grid cell, so the box takes the
+// width of the widest of them: the label or the longest option.
 .table-filter-select {
+  position: relative;
   display: grid;
-  flex: 1 1 auto;
+  flex: 1 1 100%;
   grid-template-columns: minmax(0, 1fr);
   min-width: 0;
   margin: 0;
   overflow: hidden;
   cursor: pointer;
 
-  > * {
+  > *,
+  &::after {
     grid-area: 1 / 1;
   }
 
-  @container (min-width: 36rem) {
-    flex: none;
+  // Down arrow, drawn like the icons of the buttons
+  &::after {
+    z-index: 1;
+    align-self: center;
+    justify-self: end;
+    width: $table-filter-arrow-size;
+    height: $table-filter-arrow-size;
+    margin-right: 5px;
+    pointer-events: none;
+    content: "";
+    background-color: currentcolor;
+    mask-image: $table-filter-icon-chevron;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: $table-filter-arrow-size $table-filter-arrow-size;
+  }
+
+  @include media-min(lg) {
+    @container (min-width: 36rem) {
+      flex: none;
+    }
   }
 
   select {
@@ -181,11 +221,9 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: inherit;
     cursor: pointer;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-position: right $table-filter-padding center;
-    background-size: 10px 6px;
+    background: transparent;
     border: none;
     border-radius: calc(#{$rounded-corners} - 2px);
     appearance: none;
@@ -193,6 +231,52 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
       outline: none;
     }
   }
+}
+
+// Browsers that support customizable selects show the open list with the
+// site's font and colors instead of the system ones.
+@supports (appearance: base-select) {
+  .table-filter-select {
+    select,
+    ::picker(select) {
+      appearance: base-select;
+    }
+
+    select::picker-icon {
+      display: none;
+    }
+
+    ::picker(select) {
+      box-sizing: border-box;
+      min-width: anchor-size(width);
+      padding: 4px;
+      margin-top: 4px;
+      border: 2px solid;
+      border-radius: $rounded-corners;
+    }
+
+    option {
+      gap: 8px;
+      padding: 8px 10px;
+      white-space: nowrap;
+      cursor: pointer;
+      border-radius: calc(#{$rounded-corners} - 4px);
+      &::checkmark {
+        display: none;
+      }
+    }
+  }
+}
+
+// Invisible, zero height: it only gives the box its width
+.table-filter-sizer {
+  display: flex;
+  flex-direction: column;
+  height: 0;
+  padding: 0 $table-filter-chevron-space 0 $table-filter-padding;
+  overflow: hidden;
+  white-space: nowrap;
+  visibility: hidden;
 }
 
 // The label sits over the top of the select, so a click on it opens the select.
@@ -204,7 +288,6 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
   margin: 4px $table-filter-chevron-space 0 $table-filter-padding;
   overflow: hidden;
   font-size: 12px;
-  font-weight: 600;
   line-height: 14px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -218,9 +301,11 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
   flex: 1 1 100%;
   overflow: hidden;
 
-  @container (min-width: 36rem) {
-    flex: none;
-    margin-left: auto;
+  @include media-min(lg) {
+    @container (min-width: 36rem) {
+      flex: none;
+      margin-left: auto;
+    }
   }
 }
 
@@ -258,14 +343,18 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
     outline: none;
   }
 
-  @container (min-width: 36rem) {
-    flex: none;
-    width: 40px;
-    padding: 0;
+  @include media-min(lg) {
+    @container (min-width: 36rem) {
+      flex: none;
+      width: 40px;
+      padding: 0;
+    }
   }
-  @container (min-width: 56rem) {
-    width: auto;
-    padding: 0 12px;
+  @include media-min(lg) {
+    @container (min-width: 56rem) {
+      width: auto;
+      padding: 0 12px;
+    }
   }
 }
 
@@ -279,16 +368,18 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
 
 // The text stays readable by screen readers when only the icon shows.
 .table-filter-btn-text {
-  @container (min-width: 36rem) and (max-width: 55.99rem) {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  @include media-min(lg) {
+    @container (min-width: 36rem) and (max-width: 55.99rem) {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
   }
 }
 
@@ -330,12 +421,29 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
     color: $light-color-shaded-text;
   }
 
-  .table-filter-select select {
-    color: $light-color-main-text;
-    background-image: url("#{$ico-path}svg-icons.svg#menu-chevron-default-lt");
+  .table-filter-select {
+    &::after {
+      background-color: $light-color-primary;
+    }
+    select {
+      color: $light-color-main-text;
+    }
     option {
       color: $light-color-main-text;
       background-color: $light-color-base-space;
+    }
+    ::picker(select) {
+      color: $light-color-main-text;
+      background-color: $light-color-base-space;
+      border-color: $light-color-border-details;
+    }
+    option:hover,
+    option:focus-visible {
+      background-color: $light-color-highlight-background;
+      outline: none;
+    }
+    option:checked {
+      color: $light-color-primary;
     }
   }
 
@@ -393,12 +501,29 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
     color: $dark-color-shaded-text-lighter;
   }
 
-  .table-filter-select select {
-    color: $dark-color-main-text;
-    background-image: url("#{$ico-path}svg-icons.svg#menu-chevron-default-dt");
+  .table-filter-select {
+    &::after {
+      background-color: $dark-color-primary;
+    }
+    select {
+      color: $dark-color-main-text;
+    }
     option {
       color: $dark-color-main-text;
       background-color: $dark-color-sidebar-space;
+    }
+    ::picker(select) {
+      color: $dark-color-main-text;
+      background-color: $dark-color-sidebar-space;
+      border-color: $dark-color-shaded-text;
+    }
+    option:hover,
+    option:focus-visible {
+      background-color: $dark-color-base-space;
+      outline: none;
+    }
+    option:checked {
+      color: $dark-color-primary;
     }
   }
 
