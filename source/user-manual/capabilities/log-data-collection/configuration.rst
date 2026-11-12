@@ -278,21 +278,21 @@ The Wazuh agent installs the following default configuration to collect logs fro
 
 .. note::
 
-   When launchd starts the Wazuh agent, macOS applies light resource limits to it by default, which throttle its CPU usage and I/O bandwidth. On endpoints under sustained high CPU load, the ``log`` tool that the Wazuh agent runs might not keep up, and macOS might discard ULS events without reporting it. To remove these limits, add the following keys inside the ``<dict>`` element of ``/Library/LaunchDaemons/com.wazuh.agent.plist``:
-
-   .. code-block:: xml
-
-      <key>ProcessType</key>
-      <string>Interactive</string>
-
-   Then reload the Wazuh agent service:
+   When launchd starts the Wazuh agent, macOS applies light resource limits to it by default, which throttle its CPU usage and I/O bandwidth. On endpoints under sustained high CPU load, the ``log`` tool that the Wazuh agent runs might not keep up, and macOS might discard ULS events before the Wazuh agent reads them. To remove these limits, set the ``ProcessType`` key of the Wazuh agent service to ``Interactive`` and check the file:
 
    .. code-block:: console
 
-      # launchctl bootout system /Library/LaunchDaemons/com.wazuh.agent.plist
+      # /usr/libexec/PlistBuddy -c "Add :ProcessType string Interactive" /Library/LaunchDaemons/com.wazuh.agent.plist
+      # plutil -lint /Library/LaunchDaemons/com.wazuh.agent.plist
+
+   Then stop the Wazuh agent service, wait a few seconds for it to stop, and start it again:
+
+   .. code-block:: console
+
+      # launchctl bootout system/com.wazuh.agent
       # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
-   This setting applies to all Wazuh agent processes. Installing or upgrading the Wazuh agent overwrites this file, so you need to add the keys again after each upgrade.
+   This setting applies to the whole Wazuh agent service, including FIM, SCA, and rootcheck scans. Installing or upgrading the Wazuh agent, including remote upgrades, overwrites this file, so you need to set the key again after each upgrade.
 
 To filter the system logs, it's necessary, but not mandatory, to use the ``<query>`` label. This label allows setting different filtering options such as:
 
