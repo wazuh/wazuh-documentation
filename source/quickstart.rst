@@ -10,7 +10,7 @@ Wazuh is a security platform that provides unified XDR and SIEM protection for e
 
 Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`__, the `GNU Affero General Public License, version 3 <https://www.gnu.org/licenses/agpl-3.0.en.html>`__, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`__.
 
-This quickstart shows how to install the Wazuh central components on the same host using the installation assistant, a script that downloads, installs, and configures them. You can check our :doc:`Installation guide </installation-guide/index>` for more details and other installation options.
+This quickstart shows how to install the Wazuh central components on one host using the installation assistant, a script that downloads, installs, and configures them. You can check our :doc:`Installation guide </installation-guide/index>` for more details and other installation options.
 
 .. _installation_requirements:
 
@@ -54,16 +54,18 @@ Installing Wazuh
 
 You need a host that meets the requirements above, internet access, and a user with sudo privileges. The installation takes about 5 to 10 minutes.
 
-#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard. In the command, ``-a`` installs all the central components on this host, and ``-id`` installs missing operating system dependencies without asking. The ``-d pre-release`` option downloads the release candidate packages.
+#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard.
 
    .. note::
 
       -  Allow incoming traffic on ports ``443/TCP`` and ``1517/TCP``, and on ``1514/TCP`` and ``1515/TCP`` for Wazuh 4.x agents, including in your cloud security group. See :ref:`Required ports <default_ports>`.
-      -  If agents connect through an FQDN, a load balancer, or a public IP address, add it with ``-as <ADDRESS>``, for example, ``-as wazuh.example.com``. Otherwise, agents can't enroll through it.
+      -  If agents connect through an FQDN, a load balancer, or a public IP address, add that address with ``-as <ADDRESS>``, for example, ``-as wazuh.example.com``. Otherwise, agents can't enroll through it.
 
    .. code-block:: console
 
       $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release
+
+   In the command, ``-a`` installs all the central components on this host, and ``-id`` installs missing operating system dependencies without asking. With ``-d pre-release``, the assistant downloads the release candidate packages.
 
    When the installation finishes, the assistant prints a summary. It shows one Wazuh dashboard URL for each IP address of the host, the username, the password, and the command to read the password again. The password appears only when the assistant runs in an interactive terminal. If you redirect its output, for example to a file or a cloud-init log, the summary shows only the command to read it:
 
@@ -83,7 +85,7 @@ You need a host that meets the requirements above, internet access, and a user w
 
    .. note::
 
-      On a cloud instance, open the dashboard at its public IP address or DNS name, not the private address the summary might show. The browser warns about the certificate the first time, because Wazuh uses its own certificate authority: add an exception, or :doc:`use a trusted certificate </user-manual/wazuh-dashboard/certificates>`.
+      On a cloud instance, open the dashboard at its public IP address or DNS name, not the private address the summary might show. The browser warns about the certificate the first time, because Wazuh uses its own certificate authority: add an exception, or :doc:`use a trusted certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>`.
 
 #. Open the Wazuh dashboard at ``https://<WAZUH_DASHBOARD_ADDRESS>`` in a browser. Replace ``<WAZUH_DASHBOARD_ADDRESS>`` with an address of this host that your browser can reach, such as one of the URLs the assistant printed.
 
@@ -99,7 +101,7 @@ Each package keeps its certificate authority and the private key of that authori
 Next steps
 ----------
 
-Now that your Wazuh installation is ready, you can start deploying the Wazuh agent. You can use it to protect laptops, desktops, servers, cloud instances, containers, or virtual machines. The Wazuh manager doesn't monitor the server it runs on, so deploy an agent on it too if you want it monitored.
+Now that your Wazuh installation is ready, you can start deploying the Wazuh agent. You can use it to protect laptops, desktops, servers, cloud instances, containers, or virtual machines. The Wazuh manager doesn't monitor the server it runs on, so deploy an agent to that server too if you want it monitored.
 
 Complete these steps to add your first agent from the Wazuh dashboard.
 
