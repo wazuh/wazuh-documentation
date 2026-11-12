@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.11]
 
-- Support for Wazuh 4.14.11
+### Added
+
+- Added a note on the launchd resource limits that can make the Wazuh agent miss macOS ULS events under high CPU load, and how to remove them, to the *Log data collection* documentation. ([#10717](https://github.com/wazuh/wazuh-documentation/pull/10717))
 
 ## [v4.14.10]
 
