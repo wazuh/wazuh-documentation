@@ -54,7 +54,7 @@ Installing Wazuh
 
 You need a host that meets the requirements above, internet access, and a user with sudo privileges. The installation takes about 5 to 10 minutes.
 
-#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard.
+#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard. In the command, ``-a`` installs all the central components on this host, and ``-id`` installs missing operating system dependencies without asking. The ``-d pre-release`` option downloads the release candidate packages.
 
    .. note::
 
@@ -93,6 +93,8 @@ You need a host that meets the requirements above, internet access, and a user w
    -  Password: the admin password from the summary
 
    To change a password, see :doc:`Password management </user-manual/user-administration/password-management>`.
+
+Each package keeps its certificate authority and the private key of that authority in its ``ca/`` directory: ``/etc/wazuh-indexer/ca``, ``/etc/wazuh-manager/ca``, and ``/etc/wazuh-dashboard/ca``. Back up these three directories in a safe place. You need them to renew certificates.
 
 Next steps
 ----------
