@@ -62,9 +62,14 @@
       return rows.map(function (r) { return r[key]; }).filter(function (v, i, a) { return v && a.indexOf(v) === i; }).sort();
     }
 
+    // The hidden sizer lists every option, so the box is as wide as the longest one.
     function select(label, cls, opts) {
+      var sizer = (opts.match(/>[^<]*<\/option>/g) || []).map(function (o) {
+        return '<span>' + o.slice(1, -9) + '</span>';
+      }).join('');
       return '<label class="table-filter-select"><span class="table-filter-label">' + label + '</span>' +
-        '<select class="' + cls + '">' + opts + '</select></label>';
+        '<select class="' + cls + '">' + opts + '</select>' +
+        '<span class="table-filter-sizer" aria-hidden="true">' + sizer + '</span></label>';
     }
     function button(label, cls) {
       return '<button type="button" class="table-filter-btn ' + cls + '" title="' + label + '">' +
