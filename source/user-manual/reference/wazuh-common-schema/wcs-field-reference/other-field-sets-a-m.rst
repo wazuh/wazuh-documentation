@@ -13,7 +13,7 @@ Example: Extract the domain name of a DNS query
 
 ``dns.question.name`` holds the domain name that a client asked a DNS server to resolve. This decoder extracts it from the query log of a DNS server.
 
-The decoder is a child of the root decoder of your integration, ``decoder/core-wazuh-message/0``, as in :ref:`Create a security analytics detection workflow <data_analysis_detection_workflow>`. Create it in **Ruleset management** > **Normalization** > **Decoders**, then check the output in **Log test**. The highlighted lines show where ``dns.question.name`` is used and where it appears in the output.
+The decoder is a child of the root decoder of the space, ``decoder/core-wazuh-message/0``, as in :ref:`Create a security analytics detection workflow <data_analysis_detection_workflow>`. Create it in **Ruleset management** > **Normalization** > **Decoders**, then check the output in **Log test**. The highlighted lines show where ``dns.question.name`` is used and where it appears in the output.
 
 **Sample log**
 

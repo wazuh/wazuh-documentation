@@ -10,6 +10,8 @@ Rules
 
 Wazuh rules define the detection logic used to identify relevant security activity in normalized events. They describe what should be detected by specifying conditions on event fields. Rules are written in `Sigma <https://sigmahq.io/>`__ format with Wazuh-specific extensions for metadata, MITRE ATT&CK mapping, compliance mapping, and dynamic placeholders. To create a rule and test it, see :ref:`Create a custom rule <data_analysis_create_custom_rule>`. A rule produces findings only after a detector includes it, as described in :ref:`Create a detector <data_analysis_create_detector>`.
 
+To remove a rule that's already in the test or custom space, see :ref:`Removing promoted content <data_analysis_removing_promoted_content>`.
+
 Top-level fields
 ----------------
 
