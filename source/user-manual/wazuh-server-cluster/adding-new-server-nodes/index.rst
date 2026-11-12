@@ -265,7 +265,7 @@ Complete the first step on the existing node and the rest on the new node, in th
 
    -  The ``cluster_control -l`` output shows the version only, without the package revision.
 
-#. Add the same Wazuh repository that you used for the existing node, as in the :ref:`Wazuh manager installation guide <wazuh_manager_adding_the_repository>`. 
+#. Add the same Wazuh repository that you used for the existing node, as in the :ref:`Wazuh manager installation guide <wazuh_manager_adding_the_repository>`.
 #. Extract the archive:
 
    .. code-block:: console
@@ -622,7 +622,7 @@ Complete the first step on the master node and the rest on the new node, in the 
 
    -  The ``cluster_control -l`` output shows the version only, without the package revision.
 
-#. Add the same Wazuh repository that you used for the master node, as in the :ref:`Wazuh manager installation guide <wazuh_manager_adding_the_repository>`. 
+#. Add the Wazuh repository, as in the :ref:`Wazuh manager installation guide <wazuh_manager_adding_the_repository>`. A node installed with the installation assistant has no repository to reuse, because the assistant downloads the package directly.
 #. Set the name of the new node, as you wrote it in ``config.yml``:
 
    .. code-block:: console

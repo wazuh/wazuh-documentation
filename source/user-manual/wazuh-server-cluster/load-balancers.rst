@@ -430,7 +430,7 @@ An agent upgraded from Wazuh 4.x keeps its identity and doesn't enroll again. It
 Verify the load balancer
 ------------------------
 
-Check the load balancer, then test each node directly at its own address. The responses don't identify the serving node, so a successful check through the load balancer doesn't confirm that every node works. 
+Check the load balancer, then test each node directly at its own address. The responses don't identify the serving node, so a successful check through the load balancer doesn't confirm that every node works.
 
 #. Request the health endpoint through the load balancer:
 

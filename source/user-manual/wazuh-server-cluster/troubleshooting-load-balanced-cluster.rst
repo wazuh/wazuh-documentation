@@ -306,7 +306,7 @@ When an error message does not give enough detail, raise the debug level to ``2`
 
 #. Add the following line to ``/etc/wazuh-manager/wazuh-manager-internal-options.conf``:
 
-   .. code-block:: none
+   .. code-block:: ini
 
       wazuh_clusterd.debug=2
 
