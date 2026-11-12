@@ -224,6 +224,7 @@ newUrls['5.0'] = [
   '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/new-wazuh-indexer-node.html',
   '/user-manual/wazuh-indexer-cluster/removing-a-wazuh-indexer-node.html',
   '/user-manual/wazuh-indexer-cluster/troubleshooting.html',
+  '/user-manual/wazuh-server-cluster/troubleshooting-load-balanced-cluster.html',
   '/getting-started/components/wazuh-manager.html',
   '/installation-guide/wazuh-manager/index.html',
   '/installation-guide/wazuh-manager/installation-assistant.html',
@@ -540,6 +541,21 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/installation-guide/wazuh-server/step-by-step.html',
     '5.0': '/installation-guide/wazuh-manager/step-by-step.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-server-cluster/types-of-nodes.html',
+    '5.0': '/user-manual/wazuh-server-cluster/architecture-overview.html#types-of-nodes',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html',
+    '5.0': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html#add-a-wazuh-manager-node-to-all-in-one-deployments',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
+    '5.0': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html#add-a-wazuh-manager-node-to-distributed-deployments',
   }
 );
 
@@ -686,16 +702,6 @@ removedUrls['5.0'] = [
   '/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints.html',
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html',
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
-  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
-  '/user-manual/wazuh-server-cluster/agent-connections.html',
-  '/user-manual/wazuh-server-cluster/architecture-overview.html',
-  '/user-manual/wazuh-server-cluster/certificates-deployment.html',
-  '/user-manual/wazuh-server-cluster/cluster-nodes-configuration.html',
-  '/user-manual/wazuh-server-cluster/data-synchronization.html',
-  '/user-manual/wazuh-server-cluster/how-server-cluster-works.html',
-  '/user-manual/wazuh-server-cluster/index.html',
-  '/user-manual/wazuh-server-cluster/load-balancers.html',
-  '/user-manual/wazuh-server-cluster/security-requirements.html',
   '/user-manual/wazuh-server-cluster/types-of-nodes.html',
   // End of 4.14 pages with no 5.0 page yet.
   '/user-manual/reference/ossec-conf/client-buffer.html',
