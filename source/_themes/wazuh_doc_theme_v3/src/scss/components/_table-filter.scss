@@ -2,13 +2,18 @@
   Component: Table filter
 
   Search and filter bar for reference pages with large tables, such as the
-  WCS field reference. Every part except the search box is optional:
+  WCS field reference. Every part except the search box is optional, and so is
+  the label above the search box (without it, use the .table-filter-search box
+  alone in place of the .table-filter-field label):
 
   <div class="table-filter" role="search">
-    <div class="table-filter-search">
-      <input type="search" class="table-filter-input" placeholder="Search 88 fields">
-      <span class="table-filter-count" aria-live="polite"></span>
-    </div>
+    <label class="table-filter-field">
+      <span class="table-filter-label">Search</span>
+      <span class="table-filter-search">
+        <input type="search" class="table-filter-input" placeholder="Search 88 fields">
+        <span class="table-filter-count" aria-live="polite"></span>
+      </span>
+    </label>
     <div class="table-filter-selects">
       <label class="table-filter-select">
         <span class="table-filter-label">Type</span>
@@ -41,8 +46,10 @@
   Each dropdown is as wide as its longest option (or its label, if wider), so
   the selected value never gets cut off. The hidden sizer must repeat the text
   of every option for this, because a styled select is only as wide as its
-  selected option. Its label shows above the selected
-  value, inside the box, and the whole box opens the dropdown.
+  selected option.
+
+  Each label shows above its box, and the boxes and the buttons line up along
+  their bottom edge, so a bar can mix controls with and without a label.
 
   All the text in the bar uses the site's font, size and weight, the open list
   of a dropdown too (where the browser supports styling it), and the dropdown
@@ -65,7 +72,7 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
   display: flex;
   flex-wrap: wrap;
   gap: $table-filter-gap;
-  align-items: stretch;
+  align-items: flex-end;
   margin: 1.5rem 0 1.25rem;
   font-size: 16px; // Same as the body text
   font-weight: 500;
@@ -86,7 +93,7 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
 
 /* Shared look: the bordered, rounded box of the site's search box */
 .table-filter-search,
-.table-filter-select,
+.table-filter-select select,
 .table-filter-actions {
   box-sizing: border-box;
   height: $table-filter-height;
@@ -95,14 +102,43 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
   transition: border-color .15s;
 }
 
+// Label on top of its control
+.table-filter-label {
+  display: block;
+  min-width: 0;
+  margin-bottom: 6px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Search box -------------------------------------------------------------- */
+
+// .table-filter-field holds the label and the search box.
+.table-filter-search,
+.table-filter-field {
+  flex: 1 1 100%;
+  min-width: 0;
+
+  @include media-min(lg) {
+    @container (min-width: 44rem) {
+      flex: 1 1 9.5rem;
+    }
+  }
+}
+
+.table-filter-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+}
 
 .table-filter-search {
   position: relative;
   display: flex;
-  flex: 1 1 100%;
   align-items: center;
-  min-width: 0;
   overflow: hidden;
 
   // Search icon
@@ -118,12 +154,6 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
     background-position: center;
     background-size: 22px 22px;
     transform: translateY(-50%);
-  }
-
-  @include media-min(lg) {
-    @container (min-width: 44rem) {
-      flex: 1 1 9.5rem;
-    }
   }
 }
 
@@ -172,21 +202,23 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
   }
 }
 
-// The label, the select and the sizer share one grid cell, so the box takes the
-// width of the widest of them: the label or the longest option.
+// The label takes the first row. The select, the sizer and the arrow share the
+// second one, and the column takes the width of the widest of them: the label
+// or the longest option.
 .table-filter-select {
   position: relative;
   display: grid;
   flex: 1 1 100%;
+  grid-template-rows: auto $table-filter-height;
   grid-template-columns: minmax(0, 1fr);
   min-width: 0;
   margin: 0;
-  overflow: hidden;
   cursor: pointer;
 
-  > *,
+  > select,
+  > .table-filter-sizer,
   &::after {
-    grid-area: 1 / 1;
+    grid-area: 2 / 1;
   }
 
   // Down arrow, drawn like the icons of the buttons
@@ -196,7 +228,7 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
     justify-self: end;
     width: $table-filter-arrow-size;
     height: $table-filter-arrow-size;
-    margin-right: 5px;
+    margin-right: 7px;
     pointer-events: none;
     content: "";
     background-color: currentcolor;
@@ -216,16 +248,14 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
     display: block;
     width: 100%;
     min-width: 0;
-    height: 100%;
-    padding: 19px $table-filter-chevron-space 3px $table-filter-padding;
+    // Centers the value: (46px - 2 × 2px borders - 19px line) / 2
+    padding: 11px $table-filter-chevron-space 11px $table-filter-padding;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     color: inherit;
     cursor: pointer;
     background: transparent;
-    border: none;
-    border-radius: calc(#{$rounded-corners} - 2px);
     appearance: none;
     &:focus {
       outline: none;
@@ -268,30 +298,17 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
   }
 }
 
-// Invisible, zero height: it only gives the box its width
+// Invisible, zero height: it only gives the box its width (its padding
+// includes the 2px borders of the select).
 .table-filter-sizer {
   display: flex;
   flex-direction: column;
+  align-self: start;
   height: 0;
-  padding: 0 $table-filter-chevron-space 0 $table-filter-padding;
+  padding: 0 calc(#{$table-filter-chevron-space} + 2px) 0 calc(#{$table-filter-padding} + 2px);
   overflow: hidden;
   white-space: nowrap;
   visibility: hidden;
-}
-
-// The label sits over the top of the select, so a click on it opens the select.
-.table-filter-label {
-  position: relative;
-  z-index: 1;
-  align-self: start;
-  min-width: 0;
-  margin: 4px $table-filter-chevron-space 0 $table-filter-padding;
-  overflow: hidden;
-  font-size: 12px;
-  line-height: 14px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  pointer-events: none;
 }
 
 /* Expand all and Collapse all buttons ------------------------------------- */
@@ -391,7 +408,7 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
   }
 
   .table-filter-search,
-  .table-filter-select,
+  .table-filter-select select,
   .table-filter-actions {
     color: $light-color-main-text;
     background-color: $light-color-base-space;
@@ -471,7 +488,7 @@ $table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
   }
 
   .table-filter-search,
-  .table-filter-select,
+  .table-filter-select select,
   .table-filter-actions {
     color: $dark-color-main-text;
     background-color: $dark-color-sidebar-space;
