@@ -60,11 +60,11 @@
     bar.setAttribute('aria-label', 'Search ' + noun);
     bar.innerHTML =
       '<label class="table-filter-field"><span class="table-filter-label">Search</span>' +
-        '<div class="table-filter-search">' +
+        '<span class="table-filter-search">' +
           '<input type="search" class="table-filter-input ct-q" placeholder="Search ' + total + ' ' + noun + '"' +
           ' aria-label="Search ' + noun + '">' +
           '<span class="table-filter-count ct-count" aria-live="polite"></span>' +
-        '</div>' +
+        '</span>' +
       '</label>' +
       '<div class="table-filter-actions">' +
         button('Expand all', 'table-filter-expand ct-expand') +
