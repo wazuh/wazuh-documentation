@@ -30,7 +30,7 @@ Alternatively, request the client key from any endpoint that has connectivity to
 
 .. note::
 
-   After the :ref:`Quickstart <quickstart_opening_manager_api>`, and after an offline all-in-one installation with the installation assistant, the Wazuh manager API listens only on ``127.0.0.1`` and ``::1``.
+   After the :doc:`Quickstart </quickstart>`, and after an offline all-in-one installation with the installation assistant, the Wazuh manager API listens only on ``127.0.0.1`` and ``::1``.
 
    To reach it from other endpoints, set ``host: ['0.0.0.0', '::']`` in ``/var/wazuh-manager/api/configuration/api.yaml`` on the Wazuh manager master node and run ``systemctl restart wazuh-manager``. Allow port 55000/TCP only from trusted endpoints.
 
