@@ -445,7 +445,7 @@ Complete each step on every host that it names before you start the next one.
 
 #. Make the other components that verify the Wazuh manager nodes trust the new CA too. Keep the old CA in each file, because the nodes switch to the new CA one at a time. First, copy the new CA file from step 1 to each of these endpoints as ``/root/new-root-ca.pem``.
 
-   **Wazuh agent with its own** **``<certificate_authorities>``** **file:** The agent doesn't receive the bundle. Append the new CA to the file that ``<certificate_authorities>`` names.
+   **Wazuh agent with its own** ``<certificate_authorities>`` **file:** The agent doesn't receive the bundle. Append the new CA to the file that ``<certificate_authorities>`` names.
 
    **Wazuh dashboard:** Append the new CA to the CA file of each Wazuh dashboard, and restart it. The Wazuh dashboard reads this file only at start:
 

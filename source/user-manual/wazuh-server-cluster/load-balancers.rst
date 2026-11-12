@@ -67,9 +67,9 @@ These rules come from the agent protocol, so they apply to NGINX, HAProxy, a clo
 -  **Allow 10 MiB request bodies.** Set the proxy limit at or above ``<remote><https><max_body_size>``, 10 MiB by default. NGINX defaults to 1 MB. A Wazuh manager node closes the connection on a larger body instead of answering 413.
 -  **Wait more than 30 seconds for an answer.** The Wazuh manager gives each request 30 seconds. A shorter proxy timeout cuts off requests in progress.
 -  **Keep idle backend connections under 10 seconds.** The Wazuh manager closes an idle connection after 10 seconds. A request on a closed connection fails with ``502``.
--  **Check health with** **``GET /wazuh-manager/``****.** Each node answers ``200`` without authentication.
+-  **Check health with** ``GET /wazuh-manager/``\ **.** Each node answers ``200`` without authentication.
 -  **Retry only undelivered requests.** Retries on responses can deliver the same events to two nodes. Never retry ``400``, ``401``, or ``413``.
--  **Register agents with the address** **``any``****.** The Wazuh manager sees the address of the load balancer, not of the agent, and ignores ``X-Forwarded-For``.
+-  **Register agents with the address** ``any``\ **.** The Wazuh manager sees the address of the load balancer, not of the agent, and ignores ``X-Forwarded-For``.
 
 .. note::
 
@@ -106,9 +106,29 @@ Issue the certificates with one of these methods:
 
 -  Replace ``<ROOT_CA_DIRECTORY>`` with the directory of the root CA. Install each ``<NAME>-remoted.pem`` and ``<NAME>-remoted-key.pem`` pair on its node as ``/etc/wazuh-manager/certs/remoted.pem`` and ``remoted-key.pem``, with owner ``root:wazuh-manager`` and mode ``0640``. Then restart the Wazuh manager on that node.
 -  **Certificates tool, termination**: Declare the load balancer in the ``load_balancer`` section of ``/usr/share/wazuh-indexer/tools/config.yml``. Remove or fill in every entry that still holds a placeholder address. On the endpoint that holds the root CA, run the tool with ``-lb`` and ``WAZUH_CA_DIR`` set, as in the passthrough command. To issue the node certificates in the same run, add ``-lb`` to the ``-wm`` command. The tool stops if a ``wazuh-certificates`` directory from an earlier run exists, so move or remove that directory first. The tool writes the pair as ``<NAME>.pem`` and ``<NAME>-key.pem``.
--  ``nodes``**``:``**   ``manager``**``:``**     **``-``** ``name``**``:``** ``manager-1``       ``ip``**``:``** ``"10.0.0.21"``       ``node_type``**``:``** ``master``     **``-``** ``name``**``:``** ``manager-2``       ``ip``**``:``** ``"10.0.0.22"``       ``node_type``**``:``** ``worker``   ``load_balancer``**``:``**     **``-``** ``name``**``:``** ``lb``       ``dns``**``:``**         **``-``** ``"<AGENT_FACING_NAME>"``       ``ip``**``:``**         **``-``** ``"<AGENT_FACING_ADDRESS>"``
+
+   .. code-block:: yaml
+
+      nodes:
+        manager:
+          - name: manager-1
+            ip: "10.0.0.21"
+            node_type: master
+          - name: manager-2
+            ip: "10.0.0.22"
+            node_type: worker
+        load_balancer:
+          - name: lb
+            dns:
+              - "<AGENT_FACING_NAME>"
+            ip:
+              - "<AGENT_FACING_ADDRESS>"
+
 -  **Wazuh manager package, passthrough**: Before you install each node, set ``WAZUH_MANAGER_REMOTED_CERT_SANS`` in ``/etc/wazuh-manager/local.env``. The value replaces address discovery, so list the names and addresses of the node too.
--  ``WAZUH_MANAGER_REMOTED_CERT_SANS='DNS:<AGENT_FACING_NAME>,DNS:manager-1,IP:10.0.0.21'``
+
+   .. code-block:: ini
+
+      WAZUH_MANAGER_REMOTED_CERT_SANS='DNS:<AGENT_FACING_NAME>,DNS:manager-1,IP:10.0.0.21'
 
 Replace ``<AGENT_FACING_NAME>`` and ``<AGENT_FACING_ADDRESS>`` with the name and IP address that agents use to connect to the load balancer.
 

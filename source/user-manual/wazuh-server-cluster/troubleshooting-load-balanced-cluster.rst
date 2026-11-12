@@ -112,7 +112,10 @@ This symptom is expected only for a short time around a group change.
 #. Check that the error affects configuration downloads only, because Wazuh agent upgrade package (WPK) downloads aren't gated this way.
 #. On the node that refuses, check the download counters.
 
-   -  ``# curl -s --unix-socket /var/wazuh-manager/queue/sockets/remote-admin-http.sock http://localhost/metrics | jq -r '.metrics[] | select(.name | test("^remoted[.]download[.]")) | "\(.name) \(.value)"'``
+   .. code-block:: console
+
+      # curl -s --unix-socket /var/wazuh-manager/queue/sockets/remote-admin-http.sock http://localhost/metrics | jq -r '.metrics[] | select(.name | test("^remoted[.]download[.]")) | "\(.name) \(.value)"'
+
    -  ``The remoted.download.denied counter`` increases while the node refuses.
 
 #. Wait one or two rounds of 10 seconds after the group change.
@@ -157,7 +160,10 @@ A ``413`` from the Wazuh manager is a working control, not a fault. Act only whe
 
 #. Check the counter on the node.
 
-   -  ``# curl -s --unix-socket /var/wazuh-manager/queue/sockets/remote-admin-http.sock http://localhost/metrics | jq -r '.metrics[] | select(.name | test("body_too_large|stateless[.]responses[.]413")) | "\(.name) \(.value)"'``
+   .. code-block:: console
+
+      # curl -s --unix-socket /var/wazuh-manager/queue/sockets/remote-admin-http.sock http://localhost/metrics | jq -r '.metrics[] | select(.name | test("body_too_large|stateless[.]responses[.]413")) | "\(.name) \(.value)"'
+
    -  The ``body_too_large`` counter increases. The ``remoted.http.stateless.responses.413`` counter stays at zero, because authentication answers before the route runs.
 
 #. If the error is frequent, lower ``<agent><batch><size>`` on the agents.
@@ -207,7 +213,10 @@ A ``503`` is often transient. The response body tells the causes apart.
 #. If ``dependency_unavailable`` persists on one node, follow the steps for a degraded node.
 #. For back-pressure, check the pipeline counters on the node.
 
-   -  ``# curl -s --unix-socket /var/wazuh-manager/queue/sockets/remote-admin-http.sock http://localhost/metrics | jq -r '.metrics[] | select(.name | test("forwarder|budget[.]rejected")) | "\(.name) \(.value)"'``
+   .. code-block:: console
+
+      # curl -s --unix-socket /var/wazuh-manager/queue/sockets/remote-admin-http.sock http://localhost/metrics | jq -r '.metrics[] | select(.name | test("forwarder|budget[.]rejected")) | "\(.name) \(.value)"'
+
    -  A sustained ``503`` from one node means its pipeline is degraded.
 
 .. _wazuh_manager_cluster_agents_get_tls_errors_with_no_http_status:
