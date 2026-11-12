@@ -8,7 +8,7 @@
 Helper functions
 ================
 
-Helper functions are built-in operations of the :doc:`Wazuh normalization engine </user-manual/manager/wazuh-normalization-engine>`. You use them in decoders and filters to evaluate event fields, compute values, and transform events. The engine provides 128 helper functions across three categories: :ref:`filter <helper_functions_filter>`, :ref:`map <helper_functions_map>`, and :ref:`transformation <helper_functions_transformation>`.
+Helper functions are built-in operations of the :doc:`Wazuh normalization engine </user-manual/manager/wazuh-normalization-engine>`. You use them in decoders and filters to evaluate event fields, compute values, and transform events. The engine provides 129 helper functions across three categories: :ref:`filter <helper_functions_filter>`, :ref:`map <helper_functions_map>`, and :ref:`transformation <helper_functions_transformation>`.
 
 How helper functions work
 -------------------------
@@ -41,7 +41,7 @@ The following table compares the three helper categories.
 
 The normalization engine validates helper categories when building an asset. Using a filter helper in a ``map`` operation, or a map or transformation helper in a ``check`` operation, causes the asset build to fail.
 
-In output assets, map and transformation helpers can write only to fields listed in the outputs section of the allowed-fields schema document. By default, this document lists no fields for outputs. If a map or transformation helper writes to an unlisted field, the asset build fails unless the target is the event root (``.``). The ``discard_events``, ``erase_custom_fields``, and ``sanitize_fields`` helpers don't have this restriction.
+In output assets, map and transformation helpers can write only to fields listed under the ``output`` key of the allowed-fields schema document. By default, this key lists no fields. If a map or transformation helper writes to an unlisted field, the asset build fails unless the target is the event root (``.``). The ``discard_events``, ``erase_custom_fields``, and ``sanitize_fields`` helpers don't have this restriction.
 
 Filter assets accept only a ``check`` stage. Therefore, they cannot contain map or transformation helpers.
 
