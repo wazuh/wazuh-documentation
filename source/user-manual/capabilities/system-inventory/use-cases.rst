@@ -6,19 +6,21 @@
 Use cases
 =========
 
-The following use cases show practical applications of visualizing system inventory data for security operations on the Wazuh dashboard.
+The following use cases show practical applications of visualizing system inventory data for security operations on the Wazuh dashboard. They need Wazuh agents enrolled with the Syscollector module enabled, which is the default. The inventory fills after the first scan, which runs when the Wazuh agent starts.
 
 Use case 1: Resource monitoring
 --------------------------------
 
 Monitor memory usage across all endpoints to assess system performance and find devices with low available memory.
 
-#. Click the menu icon, then navigate to **Security operations** > **IT Hygiene**.
+#. Click the menu (☰), then navigate to **Security operations** > **IT Hygiene**.
 #. Select the **System** tab and then **Hardware**.
 #. Click **+ Add filter** and configure it as follows:
 
    -  **Field**: ``host.memory.free``
-   -  **Operator**: ``exists``
+   -  **Operator**: is between
+   -  Start of the range: ``0``, end of the range: ``7516192768`` (7 GiB). Use your own threshold for low memory.
+   -  The filtered view lists the endpoints with less than 7 GiB of free memory.
 
    .. thumbnail:: /images/manual/system-inventory/use-case-resource-monitoring.png
       :title: Use case 1: Resource monitoring
@@ -31,7 +33,7 @@ Use case 2: Vulnerability management
 
 Identify endpoints with critical vulnerabilities in your environment and use the system inventory to locate every endpoint running the affected software.
 
-#. Click the menu icon, then navigate to **Threat intelligence** > **Vulnerability Detection**.
+#. Click the menu (☰), then navigate to **Threat intelligence** > **Vulnerability Detection**.
 #. Switch to the **Inventory** tab.
 #. Click **+ Add filter** and configure it as follows:
 
@@ -47,7 +49,7 @@ Identify endpoints with critical vulnerabilities in your environment and use the
       :align: center
       :width: 80%
 
-#. Note the name of an affected package. Click the menu icon, then navigate to **Security operations** > **IT Hygiene**.
+#. Note the name of an affected package. Click the menu (☰), then navigate to **Security operations** > **IT Hygiene**.
 #. Select the **Software** tab and then **Packages**.
 #. Click **+ Add filter** and configure it as follows:
 
@@ -68,7 +70,7 @@ Use case 3: Detecting new software installations
 
 Identify new software installed across your fleet to catch potential unauthorized or shadow-IT applications shortly after they appear.
 
-#. Click the menu icon, then navigate to **Security operations** > **IT Hygiene**.
+#. Click the menu (☰), then navigate to **Security operations** > **IT Hygiene**.
 #. Switch to the **Findings** tab.
 #. Click **+ Add filter** and configure it as follows:
 
@@ -97,7 +99,7 @@ Use case 4: Auditing privileged account hygiene
 
 Review user accounts for unexpected privileged group membership.
 
-#. Click the menu icon, then navigate to **Security operations** > **IT Hygiene**.
+#. Click the menu (☰), then navigate to **Security operations** > **IT Hygiene**.
 #. Select the **Identity** tab and then **Groups**.
 #. Click **+ Add filter** and configure it as follows:
 
@@ -118,7 +120,7 @@ Use case 5: Reviewing open ports and attack surface
 
 Find endpoints with unexpected listening services to reduce your attack surface.
 
-#. Click the menu icon, then navigate to **Security operations** > **IT Hygiene**.
+#. Click the menu (☰), then navigate to **Security operations** > **IT Hygiene**.
 #. Select the **Network** tab and then **Listeners**.
 #. Click **+ Add filter** and configure it as follows:
 

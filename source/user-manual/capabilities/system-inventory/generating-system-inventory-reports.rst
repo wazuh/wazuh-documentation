@@ -13,7 +13,7 @@ IT Hygiene report
 
 You can export a summary of the properties collected by the Wazuh Syscollector module for a specific endpoint or all monitored endpoints. The report is generated in PDF format. To download the IT Hygiene report:
 
--  Click **Generate Report** in the **Dashboard** section of the **IT Hygiene** page.
+-  To report on one endpoint, first click **Explore agent** and select the endpoint. Then click **Generate Report** in the **Dashboard** section of the **IT Hygiene** page.
 
    .. thumbnail:: /images/manual/system-inventory/generate-report.png
       :title: IT Hygiene report
