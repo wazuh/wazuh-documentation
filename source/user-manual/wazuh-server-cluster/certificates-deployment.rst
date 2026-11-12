@@ -571,5 +571,5 @@ Complete each step on every host that it names before you start the next one.
       # /var/wazuh-manager/bin/wazuh-manager-authd --list-enrollment-tokens
       # /var/wazuh-manager/bin/wazuh-manager-authd --revoke-enrollment-token "<TOKEN_ID>"
 
-Replace ``<ADDRESS>`` with the address that agents connect to, and ``<TOKEN_ID>`` with the value in the ``ID`` column for each old token.
+   Replace ``<ADDRESS>`` with the address that agents connect to, and ``<TOKEN_ID>`` with the value in the ``ID`` column for each old token.
 

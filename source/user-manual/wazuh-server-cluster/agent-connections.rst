@@ -64,7 +64,7 @@ To set the node address by hand, complete these steps on each Wazuh agent.
 
       # /var/wazuh-manager/bin/cluster_control -a
 
-The output lists the agent with the active status.
+   The output lists the agent with the active status.
 
 Wazuh agents 4.x
 ----------------

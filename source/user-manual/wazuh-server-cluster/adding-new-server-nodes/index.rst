@@ -457,7 +457,7 @@ Confirm that the new node joined the cluster and writes to the Wazuh indexer.
 Next steps
 ^^^^^^^^^^
 
-Put both nodes behind a `load balancer <https://docs.google.com/document/u/0/d/1mDL4DJPkg-gqVvkYlyNpwczBxOI_-2UpRH7kx7HWl4k/edit>`__, so agents keep reporting when one node fails.
+Put both nodes behind a :ref:`load balancer <wazuh_manager_cluster_load_balancers_for_the_wazuh_manager_cluster>`, so agents keep reporting when one node fails.
 
 .. _wazuh_manager_cluster_add_a_wazuh_manager_node_to_distributed_deployments:
 
@@ -743,7 +743,7 @@ Complete the first step on the master node and the rest on the new node, in the 
 
       # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check -H /var/wazuh-manager
 
-The command ends with ``check: no problem found (1 warnings)``. The warning reports that the dashboard client pair wasn't generated, because ``/etc/wazuh-manager/ca`` holds no CA key. It doesn't stop the node from starting or joining the cluster. When ``/etc/wazuh-manager/ca`` holds ``root-ca.key``, as in the step-by-step variant, it ends with ``check: no problem found``.
+   The command ends with ``check: no problem found (1 warnings)``. The warning reports that the dashboard client pair wasn't generated, because ``/etc/wazuh-manager/ca`` holds no CA key. It doesn't stop the node from starting or joining the cluster. When ``/etc/wazuh-manager/ca`` holds ``root-ca.key``, as in the step-by-step variant, it ends with ``check: no problem found``.
 
 .. _wazuh_manager_cluster_configure_the_new_node_as_a_worker_2:
 

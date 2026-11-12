@@ -98,16 +98,17 @@ If the master node of a step-by-step deployment holds ``root-ca.key`` in ``/etc/
 
 Issue the certificates with one of these methods:
 
-**Certificates tool, passthrough**: Add the agent-facing address to the agent listener certificate of every node with ``--agent-san``. Run the tool on the endpoint that holds the root CA. The ``-wm`` option signs with the existing root CA in ``WAZUH_CA_DIR``, while ``-A`` and ``-ca`` create a new one where none exists. List every Wazuh manager node in ``/usr/share/wazuh-indexer/tools/config.yml``. Remove the indexer and dashboard entries with placeholder addresses, or replace the placeholders with your node addresses. The tool stops at the first placeholder.
+-  **Certificates tool, passthrough**: Add the agent-facing address to the agent listener certificate of every node with ``--agent-san``. Run the tool on the endpoint that holds the root CA. The ``-wm`` option signs with the existing root CA in ``WAZUH_CA_DIR``, while ``-A`` and ``-ca`` create a new one where none exists. List every Wazuh manager node in ``/usr/share/wazuh-indexer/tools/config.yml``. Remove the indexer and dashboard entries with placeholder addresses, or replace the placeholders with your node addresses. The tool stops at the first placeholder.
 
-.. code-block:: console
+   .. code-block:: console
 
-   # WAZUH_CA_DIR="<ROOT_CA_DIRECTORY>" bash /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh -wm --agent-san "<AGENT_FACING_ADDRESS>"
+      # WAZUH_CA_DIR="<ROOT_CA_DIRECTORY>" bash /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh -wm --agent-san "<AGENT_FACING_ADDRESS>"
 
--  Replace ``<ROOT_CA_DIRECTORY>`` with the directory of the root CA. Install each ``<NAME>-remoted.pem`` and ``<NAME>-remoted-key.pem`` pair on its node as ``/etc/wazuh-manager/certs/remoted.pem`` and ``remoted-key.pem``, with owner ``root:wazuh-manager`` and mode ``0640``. Then restart the Wazuh manager on that node.
+   -  Replace ``<ROOT_CA_DIRECTORY>`` with the directory of the root CA. Install each ``<NAME>-remoted.pem`` and ``<NAME>-remoted-key.pem`` pair on its node as ``/etc/wazuh-manager/certs/remoted.pem`` and ``remoted-key.pem``, with owner ``root:wazuh-manager`` and mode ``0640``. Then restart the Wazuh manager on that node.
 -  **Certificates tool, termination**: Declare the load balancer in the ``load_balancer`` section of ``/usr/share/wazuh-indexer/tools/config.yml``. Remove or fill in every entry that still holds a placeholder address. On the endpoint that holds the root CA, run the tool with ``-lb`` and ``WAZUH_CA_DIR`` set, as in the passthrough command. To issue the node certificates in the same run, add ``-lb`` to the ``-wm`` command. The tool stops if a ``wazuh-certificates`` directory from an earlier run exists, so move or remove that directory first. The tool writes the pair as ``<NAME>.pem`` and ``<NAME>-key.pem``.
 
    .. code-block:: yaml
+      :emphasize-lines: 9-14
 
       nodes:
         manager:
@@ -249,7 +250,7 @@ Save these ``upstream`` and ``server`` blocks as a new file, ``/etc/nginx/conf.d
    -  ``keepalive_timeout 5s`` keeps idle backend connections under the 10-second limit of the Wazuh manager.
    -  ``proxy_read_timeout 60s`` waits longer than the 30-second request budget of the Wazuh manager.
 
-#. Check the configuration for syntax errors:
+2. Check the configuration for syntax errors:
 
    .. code-block:: console
 
@@ -342,7 +343,7 @@ Then add this configuration below the timeouts:
    -  Don't add ``send-proxy`` or ``send-proxy-v2`` to a ``server`` line.
    -  ``http-reuse never`` opens a new connection to the node for each request. The Wazuh manager closes an idle connection after 10 seconds, so a reused connection can fail with ``502``.
 
-#. Check the configuration for errors:
+2. Check the configuration for errors:
 
    .. code-block:: console
 
