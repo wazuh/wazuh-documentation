@@ -24,11 +24,11 @@ The Reporting module supports email notifications for report delivery. To config
 #. Select **Email** as the channel type.
 #. Check **SMTP sender** as the sender type.
 #. Click **Create SMTP sender**.
-#. Enter a name (for example, *wazuh*).
+#. Enter a name (for example, *wazuh*). The Wazuh indexer reads the credentials of this sender from the keystore keys ``opensearch.notifications.core.email.wazuh.username`` and ``opensearch.notifications.core.email.wazuh.password``. Add them as described in :ref:`SMTP account credentials <wazuh_indexer_notifications_smtp_credentials>` before you send a test message.
 #. Enter an email address.
 #. In **Host**, type your SMTP server domain name (for example, *smtp.gmail.com*).
 #. In Port, type ``465`` (adapt this to your SMTP server settings).
-#. Select **None** as the encryption method or your preferred encryption method.
+#. Select **SSL/TLS** as the encryption method. Port 465 uses SSL/TLS. If your SMTP server uses port 587, select **STARTTLS** instead.
 #. Click **Create**.
 #. Click **Create recipient group**.
 #. Enter a name (for example, *email-notifications-recipient-group*).
@@ -72,8 +72,8 @@ Generate and download a report
 After creating a report definition, you can generate a report immediately or allow it to be generated automatically according to its configured schedule.
 
 #. Navigate to **Explore** > **Reporting**.
-#. In the **Report definitions** section, locate the report definition.
-#. Click **Generate report**.
+#. In the **Report definitions** section, click the name of the report definition.
+#. Click **Generate report**. The report opens in a new browser tab and downloads when it's ready, which can take a minute or two.
 
 The **Generate report** option is available only for **On demand** report definitions. Report definitions configured with a scheduled trigger are generated automatically.
 
@@ -123,3 +123,18 @@ Several predefined roles are available to manage these permissions:
 +-----------------------------------+----------------------+
 | ``reports_full_access``           | 1 to 9               |
 +-----------------------------------+----------------------+
+
+Configuration
+-------------
+
+The following settings limit report definitions and report generation. All of them are dynamic. You can set them in ``/etc/wazuh-indexer/opensearch.yml``, where they apply when the Wazuh indexer starts, or change them at runtime with the cluster settings API. The defaults of the ``opensearch.reports.general.*`` settings are loaded from ``/etc/wazuh-indexer/wazuh-indexer-reports-scheduler/reports-scheduler.yml``.
+
++-------------------------------------------------------+---------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Setting                                               | Type    | Default   | Description                                                                                                                                                     |
++=======================================================+=========+===========+=================================================================================================================================================================+
+| ``plugins.reports.max_report_definitions``            | Integer | ``50``    | Maximum number of report definitions. A create request over the limit is rejected with 400 Bad Request. Lowering the limit doesn't affect existing definitions. |
++-------------------------------------------------------+---------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``opensearch.reports.general.operationTimeoutMs``     | Long    | ``60000`` | Timeout, in milliseconds, of report generation operations. Minimum 100.                                                                                         |
++-------------------------------------------------------+---------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``opensearch.reports.general.defaultItemsQueryCount`` | Integer | ``100``   | Default number of items fetched per query when building report data. Minimum 10.                                                                                |
++-------------------------------------------------------+---------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+

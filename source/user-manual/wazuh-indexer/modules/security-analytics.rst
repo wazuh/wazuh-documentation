@@ -32,25 +32,25 @@ Findings
 
 A finding is generated when a monitored event matches a Sigma detection rule. The Security Analytics module creates one finding for each matching event.
 
-A raw finding contains references to the matching event and detector, but does not include the event payload or Sigma rule metadata.
+A raw finding contains references to the matching event and detector, but does not include the event payload or Sigma rule metadata. Raw findings are stored only when ``plugins.alerting.alert_finding_enabled`` is ``true`` (default ``false``). With the default settings, the ``wazuh-findings-v5-*`` indices hold the only copy of each finding. For the same reason, ``GET /_plugins/_security_analytics/findings/_search``, which searches only the raw findings indices, returns no results with the default settings. Query ``wazuh-findings-v5-*`` instead.
 
 The following fields are included in a raw finding:
 
-+---------------------+---------------------------------------------------------------+
-| Field               | Description                                                   |
-+=====================+===============================================================+
-| ``id``              | Unique finding identifier.                                    |
-+---------------------+---------------------------------------------------------------+
-| ``detector_id``     | Identifier of the detector that generated the finding.        |
-+---------------------+---------------------------------------------------------------+
-| ``related_doc_ids`` | Identifiers of the source documents that triggered the match. |
-+---------------------+---------------------------------------------------------------+
-| ``queries``         | Sigma rule or rules that matched the event.                   |
-+---------------------+---------------------------------------------------------------+
-| ``index``           | Source index containing the triggering event.                 |
-+---------------------+---------------------------------------------------------------+
-| ``timestamp``       | The time when the finding was created.                        |
-+---------------------+---------------------------------------------------------------+
++---------------------+-------------------------------------------------------------------------------------------------------------------+
+| Field               | Description                                                                                                       |
++=====================+===================================================================================================================+
+| ``id``              | Unique finding identifier.                                                                                        |
++---------------------+-------------------------------------------------------------------------------------------------------------------+
+| ``monitor_id``      | Identifier of the detector's monitor. The Security Analytics findings API returns the detector as ``detectorId``. |
++---------------------+-------------------------------------------------------------------------------------------------------------------+
+| ``related_doc_ids`` | Identifiers of the source documents that triggered the match.                                                     |
++---------------------+-------------------------------------------------------------------------------------------------------------------+
+| ``queries``         | Sigma rule or rules that matched the event.                                                                       |
++---------------------+-------------------------------------------------------------------------------------------------------------------+
+| ``index``           | Source index containing the triggering event.                                                                     |
++---------------------+-------------------------------------------------------------------------------------------------------------------+
+| ``timestamp``       | The time when the finding was created.                                                                            |
++---------------------+-------------------------------------------------------------------------------------------------------------------+
 
 To provide a complete alert context in the Wazuh dashboard, the Security Analytics module enriches each raw finding with additional information.
 
@@ -149,6 +149,10 @@ Settings reference
 | ``enriched_findings_index_enabled``                        | Boolean | ``true``  | Toggle the enriched findings pipeline.                                                                                                     |
 +------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
 | ``enriched_findings_max_in_flight``                        | Integer | ``5``     | Maximum number of concurrent enrichment chains. Valid range: 1-10.                                                                         |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``enriched_findings_max_pending_retries``                  | Integer | ``10000`` | Maximum number of findings waiting to be retried.                                                                                          |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``enriched_findings_max_retries``                          | Integer | ``5``     | Maximum number of retries for a failed enrichment.                                                                                         |
 +------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
 | ``enriched_findings_rule_cache_max_size``                  | Integer | ``10000`` | Maximum number of rule metadata entries cached in memory. Static: set it in ``/etc/wazuh-indexer/opensearch.yml``. Minimum 0.              |
 +------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
@@ -252,11 +256,11 @@ Detector behavior
 Updating a setting at runtime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the ``curl`` examples on this page, replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the credentials of a Wazuh indexer user that has the permissions the request needs, such as ``admin``. The ``admin`` password is the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh-indexer/export/credentials.env`` of a Wazuh indexer node, or in the ``credentials.env`` file of ``wazuh-install-files.tar``. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node.
+In the ``curl`` examples on this page, replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the credentials of a Wazuh indexer user that has the permissions the request needs, such as ``admin``. The ``admin`` password is the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh-indexer/export/credentials.env`` of a Wazuh indexer node, or in the ``credentials.env`` file of ``wazuh-install-files.tar``.
 
-Almost every Security Analytics setting is dynamic. To change one without restarting the node, use the Cluster Settings API:
+Almost every Security Analytics setting is dynamic. To change one without restarting the node, use the Cluster Settings API. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node:
 
-.. code-block:: none
+.. code-block:: bash
 
    curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X PUT "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings" \
      -H 'Content-Type: application/json' -d '{
@@ -292,6 +296,8 @@ Case management provides the following capabilities:
 -  Tags for classification and filtering.
 -  User attribution for case updates.
 -  Creation and modification timestamps.
+
+.. _wazuh_indexer_security_analytics_case_fields:
 
 Case fields
 ^^^^^^^^^^^
@@ -382,7 +388,7 @@ The request body contains one or more findings to update.
      ]
    }
 
-All fields within the case object are optional. Updates are applied as partial updates and only the supplied fields are modified. The ``comments`` array replaces the stored comments. To add a comment, send the existing comments with the new one. A request can update up to 10 findings by default, set by ``plugins.security_analytics.max_case_management_bulk_size``.
+Set ``_index`` to the backing index that stores the finding, as returned in the ``_index`` field of a search hit, for example ``.ds-wazuh-findings-v5-security-000001``. The data stream name, such as ``wazuh-findings-v5-security``, isn't accepted: that finding fails with ``400`` inside a ``207`` response. All fields within the ``case`` object are optional. Updates are applied as partial updates and only the supplied fields are modified. The ``comments`` array replaces the stored comments. To add a comment, send the existing comments with the new one. A request can update up to 10 findings by default, set by ``plugins.security_analytics.max_case_management_bulk_size``. Setting it to ``0`` disables the endpoint. The endpoint stores ``status``, ``severity``, and ``priority`` in lowercase and ``tlp`` in uppercase, so ``"status": "ACKNOWLEDGED"`` is stored as ``acknowledged``. It rejects any other value, and any key in ``case`` that isn't listed in :ref:`Case fields <wazuh_indexer_security_analytics_case_fields>`.
 
 .. note::
 
@@ -391,15 +397,15 @@ All fields within the case object are optional. Updates are applied as partial u
 Response codes
 ^^^^^^^^^^^^^^
 
-+-------------+---------------------------------------------------------------------------------------------------+
-| Status code | Description                                                                                       |
-+=============+===================================================================================================+
-| ``200``     | Finding updated successfully.                                                                     |
-+-------------+---------------------------------------------------------------------------------------------------+
-| ``207``     | Partial success. Some findings were updated while others failed.                                  |
-+-------------+---------------------------------------------------------------------------------------------------+
-| ``400``     | Invalid request, missing required fields, empty findings array, or maximum update limit exceeded. |
-+-------------+---------------------------------------------------------------------------------------------------+
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Status code | Description                                                                                                                                                                                                             |
++=============+=========================================================================================================================================================================================================================+
+| ``200``     | Finding updated successfully.                                                                                                                                                                                           |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``207``     | Partial success. Some findings were updated while others failed, for example because a finding wasn't found or ``_index`` names the data stream instead of its backing index.                                           |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``400``     | Invalid request, missing required fields, empty findings array, or maximum update limit exceeded, an unknown or invalid ``case`` field, or case management turned off (``max_case_management_bulk_size`` set to ``0``). |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Investigation workflow
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -416,7 +422,7 @@ Case management operations are typically performed through the Wazuh dashboard, 
 Querying findings by status
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can filter findings using the ``wazuh.case.status`` field.
+You can filter findings using the ``wazuh.case.status`` field. Keyword matching is case-sensitive and the update endpoint stores the status in lowercase, so query it in lowercase.
 
 The following example returns all acknowledged findings. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node.
 
