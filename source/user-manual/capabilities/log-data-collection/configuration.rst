@@ -276,6 +276,24 @@ The Wazuh agent installs the following default configuration to collect logs fro
 
 .. note:: You can only have one configuration block with ``log_format`` set as ``macos``. If you add more blocks, only the last one will be used.
 
+.. note::
+
+   When launchd starts the Wazuh agent, macOS applies light resource limits to it by default, which throttle its CPU usage and I/O bandwidth. On endpoints under sustained high CPU load, the ``log`` tool that the Wazuh agent runs might not keep up, and macOS might discard ULS events without reporting it. To remove these limits, add the following keys inside the ``<dict>`` element of ``/Library/LaunchDaemons/com.wazuh.agent.plist``:
+
+   .. code-block:: xml
+
+      <key>ProcessType</key>
+      <string>Interactive</string>
+
+   Then reload the Wazuh agent service:
+
+   .. code-block:: console
+
+      # launchctl bootout system /Library/LaunchDaemons/com.wazuh.agent.plist
+      # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
+
+   This setting applies to all Wazuh agent processes. Installing or upgrading the Wazuh agent overwrites this file, so you need to add the keys again after each upgrade.
+
 To filter the system logs, it's necessary, but not mandatory, to use the ``<query>`` label. This label allows setting different filtering options such as:
 
 - ``type``: Specifies the type of logs collected. The values of ``types`` are ``activity``, ``log``, and ``trace``. You can combine multiple values.
