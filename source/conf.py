@@ -119,7 +119,6 @@ exclude_patterns = [
     'deployment-options/deploying-with-puppet/**',
     'user-manual/capabilities/agentless-monitoring/**',
     'user-manual/capabilities/log-data-collection/journald.rst',
-    'user-manual/capabilities/malware-detection/**',
     'user-manual/agent/agent-management/remote-upgrading/index.rst',
     'user-manual/agent/agent-management/remote-upgrading/agent-upgrade-module.rst',
     'user-manual/agent/agent-management/remote-upgrading/wpk-files/**',

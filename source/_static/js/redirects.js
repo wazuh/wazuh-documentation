@@ -231,6 +231,17 @@ newUrls['5.0'] = [
   '/deployment-options/offline-installation/securing-installation.html',
   '/deployment-options/offline-installation/running-offline.html',
   '/deployment-options/offline-installation/install-agents.html',
+  '/user-manual/capabilities/malware-detection/how-it-works.html',
+  '/user-manual/capabilities/malware-detection/threat-detection-ruleset.html',
+  '/user-manual/capabilities/malware-detection/threat-intelligence.html',
+  '/user-manual/capabilities/malware-detection/rootkit-detection.html',
+  '/user-manual/capabilities/malware-detection/fim-threat-intelligence.html',
+  '/user-manual/capabilities/malware-detection/use-cases/index.html',
+  '/user-manual/capabilities/malware-detection/use-cases/dns-queries-malicious-domains.html',
+  '/user-manual/capabilities/malware-detection/use-cases/custom-hash-blocklist.html',
+  '/user-manual/capabilities/malware-detection/use-cases/critical-file-changes.html',
+  '/user-manual/capabilities/malware-detection/use-cases/powershell-malware-activity.html',
+  '/user-manual/capabilities/malware-detection/use-cases/reverse-shells-persistence.html',
 ];
 
 /* Redirections 4.14—5.0  */
@@ -540,6 +551,36 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/installation-guide/wazuh-server/step-by-step.html',
     '5.0': '/installation-guide/wazuh-manager/step-by-step.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/clam-av-logs-collection.html',
+    '5.0': '/user-manual/capabilities/malware-detection/threat-detection-ruleset.html#clamav',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/win-defender-logs-collection.html',
+    '5.0': '/user-manual/capabilities/malware-detection/threat-detection-ruleset.html#microsoft-defender',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
+    '5.0': '/user-manual/capabilities/malware-detection/rootkit-detection.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/custom-rules-malware-ioc.html',
+    '5.0': '/user-manual/capabilities/malware-detection/threat-detection-ruleset.html#custom-integrations',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence.html',
+    '5.0': '/user-manual/capabilities/malware-detection/use-cases/custom-hash-blocklist.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/fim-threat-detection-rules.html',
+    '5.0': '/user-manual/capabilities/malware-detection/fim-threat-intelligence.html',
   }
 );
 
@@ -657,7 +698,6 @@ removedUrls['5.0'] = [
   '/user-manual/capabilities/malware-detection/custom-rules-malware-ioc.html',
   '/user-manual/capabilities/malware-detection/fim-threat-detection-rules.html',
   '/user-manual/capabilities/malware-detection/fim-yara.html',
-  '/user-manual/capabilities/malware-detection/index.html',
   '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
   '/user-manual/capabilities/malware-detection/virus-total-integration.html',
   '/user-manual/capabilities/malware-detection/win-defender-logs-collection.html',
