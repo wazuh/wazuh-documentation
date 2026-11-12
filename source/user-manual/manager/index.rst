@@ -28,6 +28,8 @@ For installation and configuration steps, refer to the :doc:`Wazuh manager insta
       wazuh-manager-architecture
       wazuh-normalization-engine
       wazuh-indexer-connector
+      credentials
       wazuh-manager-services
+      service-sandbox
       logging
       reference
