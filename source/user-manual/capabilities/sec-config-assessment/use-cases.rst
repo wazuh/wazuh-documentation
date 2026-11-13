@@ -118,7 +118,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 
       # systemctl restart wazuh-agent
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Ubuntu endpoint to view the custom SCA check result. Check 10000 shows Failed, because the file contains the phrase. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Ubuntu endpoint to view the custom SCA check result. Check 10000 shows **Failed**, because the file contains the phrase. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/ubuntu-sca-check-results.png
      :title: Ubuntu results of the custom SCA check
@@ -206,7 +206,7 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
       > Restart-Service -Name wazuh
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Windows endpoint to view the custom SCA check result. Check 10001 shows Failed, because the file contains the phrase. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Windows endpoint to view the custom SCA check result. Check 10001 shows **Failed**, because the file contains the phrase. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/windows-sca-check-results.png
      :title: Windows results of the custom SCA check
@@ -296,7 +296,7 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
 
       # /Library/Ossec/bin/wazuh-control restart
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the macOS endpoint to view the custom SCA check result. Check 10002 shows Failed, because the file contains the phrase. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the macOS endpoint to view the custom SCA check result. Check 10002 shows **Failed**, because the file contains the phrase. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/macos-sca-check-results.png
      :title: macOS results of the custom SCA check
@@ -398,7 +398,7 @@ The following steps show how to configure the Wazuh SCA module to detect running
 
       # systemctl restart wazuh-agent
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Ubuntu endpoint to view the custom SCA check result. Check 10003 shows Failed while netcat is running. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Ubuntu endpoint to view the custom SCA check result. Check 10003 shows **Failed** while netcat is running. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/ubuntu-sca-use-case.png
      :title: Detecting a running process on Ubuntu
@@ -479,7 +479,7 @@ Standard users rarely run PowerShell. Threat actors may take advantage of the li
       > NET STOP Wazuh
       > NET START Wazuh
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Windows endpoint to view the custom SCA check result. Check 10004 shows Failed while the PowerShell process is running. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Windows endpoint to view the custom SCA check result. Check 10004 shows **Failed** while the PowerShell process is running. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/windows-sca-use-case.png
      :title: Detecting a running process on Windows
@@ -556,7 +556,7 @@ The following steps show how to configure the Wazuh SCA module to detect running
 
       # /Library/Ossec/bin/wazuh-control restart
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the macOS endpoint to view the custom SCA check result. Check 10005 shows Failed while netcat is running. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the macOS endpoint to view the custom SCA check result. Check 10005 shows **Failed** while netcat is running. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/macos-sca-use-case.png
      :title: Detecting a running process on macOS
