@@ -158,7 +158,7 @@ Authenticate with a Python script
 
 You can authenticate to the Wazuh manager API and obtain a JWT using a Python script. The following script ``wazuh_api_authenticator.py``, gets the token and uses it to retrieve basic Wazuh manager API information and Wazuh agent status summary.
 
-#. Copy the following script into a file named ``wazuh_api_authenticator.py``,
+#. Copy the following script into a file named ``wazuh_api_authenticator.py``.
 
    .. code-block:: python3
       :emphasize-lines: 13,15,16
@@ -195,7 +195,7 @@ You can authenticate to the Wazuh manager API and obtain a JWT using a Python sc
       requests_headers = {'Content-Type': 'application/json',
                           'Authorization': f'Bearer {token}'}
 
-      print("\n- API calls with TOKEN environment variable ...\n")
+      print("\n- API calls with the token ...\n")
 
       print("Getting API information:")
 
@@ -215,7 +215,7 @@ You can authenticate to the Wazuh manager API and obtain a JWT using a Python sc
    -  ``<WAZUH_API_PASSWORD>`` with your Wazuh manager API password.
    -  ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager IP address.
 
-#. Install the Python ``requests`` module if it doesn't exist:
+#. Install the Python ``requests`` module if it doesn't exist. On Debian and Ubuntu, run:
 
    .. code-block:: console
 
@@ -245,7 +245,7 @@ You can authenticate to the Wazuh manager API and obtain a JWT using a Python sc
 
       eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNzkwMTY5MjEwLCJuYmZfbXMiOjE3OTAxNjkyMTAwMTksImV4cCI6MTc5MDE3MDExMCwic3ViIjoid2F6dWgiLCJydW5fYXMiOmZhbHNlLCJyYmFjX3JvbGVzIjpbMV0sInJiYWNfbW9kZSI6IndoaXRlIn0.AcFXKKtz39b6mIyYSufP2w_BBVjWrBycvfA3gE4EYKwN7nZkOhG5DJlnHXSwpvOc7jcvAQP_vOgrCR9QsBCvUTAdAfHemlEDBU4tpZbnRv7Gamn4CN-Z4qEr8lPriROzYe4S4Z-jkYO37Hj_4NirGQPeenL23IbWnzzgYJ8wc8kdki1H
 
-      - API calls with TOKEN environment variable ...
+      - API calls with the token ...
 
       Getting API information:
       {

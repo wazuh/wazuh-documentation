@@ -6,7 +6,7 @@
 User manual
 ===========
 
-Welcome to the Wazuh user manual. Use it as your reference library once your basic Wazuh installation is ready. In this section, you will find content on topics such as Wazuh server administration, Wazuh agent enrollment, Wazuh capabilities, and many others that are listed below.
+Welcome to the Wazuh user manual. Use it as your reference library once your basic Wazuh installation is ready. In this section, you will find content on topics such as Wazuh manager administration, Wazuh agent enrollment, Wazuh capabilities, and many others that are listed below.
 
 .. topic:: Contents
 
@@ -15,6 +15,7 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
       :titlesonly:
 
       manager/index
+      wazuh-server-cluster/index
       api/index
       wazuh-indexer/index
       wazuh-indexer-cluster/index
@@ -27,5 +28,4 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
       reference/index
 
 ..
-      wazuh-server-cluster/index
       ruleset/index

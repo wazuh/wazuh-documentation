@@ -22,7 +22,7 @@ You can use helper functions in two stages:
 -  ``check``: Evaluates conditions on the event. It runs at the top level of decoders and filters, inside ``normalize`` blocks, and in the ``first_of`` branches of outputs.
 -  ``map``: Sets or modifies event fields. It runs inside the ``normalize`` blocks of a decoder.
 
-The ``parse|<FIELD>`` stage uses parser expressions, not helper functions. To parse a field within a ``map`` operation, use a ``parse_*`` transformation helper.
+The ``parse|<FIELD>`` stage uses :ref:`parser expressions <data_analysis_parser_expressions>`, not helper functions. To parse a field within a ``map`` operation, use a ``parse_*`` transformation helper.
 
 The following table compares the three helper categories.
 
@@ -44,6 +44,8 @@ The normalization engine validates helper categories when building an asset. Usi
 In output assets, map and transformation helpers can write only to fields listed under the ``output`` key of the allowed-fields schema document. By default, this key lists no fields. If a map or transformation helper writes to an unlisted field, the asset build fails unless the target is the event root (``.``). The ``discard_events``, ``erase_custom_fields``, and ``sanitize_fields`` helpers don't have this restriction.
 
 Filter assets accept only a ``check`` stage. Therefore, they cannot contain map or transformation helpers.
+
+.. _data_analysis_helper_call_syntax:
 
 Helper call syntax
 ------------------
@@ -70,7 +72,7 @@ The rules are applied in the following order:
 #. **Quoted string**: Text between single quotes, such as ``'192.168.0.0'``. Escape a single quote or a backslash with ``\``.
 #. **Reference**: A field path that starts with ``$``, such as ``$source.ip``. The engine reads the value of that field when it processes each event.
 #. **JSON value**: A number, boolean, ``null``, array, object, or double-quoted string, such as ``24``, ``true``, or ``{"key": "value"}``.
-#. **Raw string**: Any other text. Escape ``$``, ``,``, ``)``, ``\``, and spaces with ``\``.
+#. **Raw string**: Any other text. Escape ``$``, ``'``, ``,``, ``)``, ``\``, and spaces with ``\``.
 
 A reference to a name in the asset ``definitions`` section resolves to the typed value defined there, not to an event field.
 
@@ -105,6 +107,8 @@ A plain value or field reference does not require a helper. In a ``check`` opera
          - source.ip: $_json.src_ip
 
 To set a string that starts with ``$`` as a literal value, escape the first character: ``\$``.
+
+.. _data_analysis_helpers_conditional_expressions:
 
 Helpers in conditional expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

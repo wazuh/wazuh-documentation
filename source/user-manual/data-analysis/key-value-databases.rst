@@ -84,9 +84,9 @@ Example
 Creating a KVDB
 ^^^^^^^^^^^^^^^
 
-The following example demonstrates how to set up a KVDB on the Wazuh dashboard. In this example, we create a KVDB and use it to enrich an event when the source IP address matches a known entry.
+The following example demonstrates how to set up a KVDB on the Wazuh dashboard. In this example, we create a KVDB and use it to enrich an event when the source IP address matches a known entry. The KVDB, the decoder, and the rule must belong to an integration in the draft space. If you don't have one yet, create it first as described in :doc:`Integration </user-manual/data-analysis/integration>`.
 
-#. Navigate to **Ruleset management** > **Normalization** > **KVDBs**. Make sure you are in the **Draft** space, click on **Actions**, and select **Create**.
+#. Navigate to **Ruleset Management** > **Normalization** > **KVDBs**. Make sure you are in the **Draft** space, click on **Actions**, and select **Create**.
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-kvdb.png
       :title: Create a KVDB
@@ -111,7 +111,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
 
    Click on **Create KVDB**.
 
-#. Navigate to **Ruleset management** > **Normalization** > **Decoders** > **Actions** and click on **Create**.
+#. Navigate to **Ruleset Management** > **Normalization** > **Decoders** > **Actions** and click on **Create**.
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-create-decoder-menu.png
       :title: Create a decoder
@@ -128,8 +128,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
       metadata:
         author: "Wazuh, Inc."
         date: "2026-06-16T10:01:28Z"
-        description: "Base decoder to process Wazuh message format, parses location part\
-          \ and enriches the events that comes from a Wazuh agent with the host information."
+        description: "Root decoder that parses the raw event as JSON into a temporary field."
         documentation: ""
         modified: "2026-06-16T10:01:28Z"
         references:
@@ -148,13 +147,13 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
       :align: center
       :width: 80%
 
-   This will be the root decoder, **where**:
+   This is the root decoder. In this decoder:
 
    -  ``name: "decoder/test-wazuh-message/0"`` - Logical identifier of the decoder asset; it is what gets recorded in ``wazuh.integration.decoders`` when this decoder accepts an event.
 
-   -  ``id: "c8d31738-281e-4183-a5f3-fd02dea3bc25"`` - Stable UUID used by the content system (CMSync, policies, indexer) to uniquely track this decoder version, independent of its human-readable name. When you create a decoder, Wazuh assigns it a new random UUID and replaces any ``id`` you write. Use the ``name`` to refer to the decoder.
+   -  ``id: "c8d31738-281e-4183-a5f3-fd02dea3bc25"`` - Stable UUID used by the content system (the content manager, the space policies, and the Wazuh indexer) to uniquely track this decoder version, independent of its human-readable name. When you create a decoder, Wazuh assigns it a new random UUID and replaces any ``id`` you write. Use the ``name`` to refer to the decoder.
 
-   -  ``enabled: true`` - Marks the decoder as active in the operational graph; if set to ``false``, the decoder is present in content but skipped during policy graph construction, so it never evaluates events.
+   -  ``enabled: true`` - Marks the decoder as active; if set to ``false``, the decoder stays in the content but is skipped, so it never evaluates events.
 
    -  ``metadata.author: "Wazuh, Inc."`` - Informational field indicating who created or maintains the decoder asset; it has no impact on runtime behavior.
 
@@ -164,7 +163,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
 
    -  ``metadata.description`` - Human-readable summary describing the decoder's purpose: here, that it parses the Wazuh message format's location part and enriches agent-originated events with host information. This text is purely descriptive.
 
-   -  ``metadata.documentation`` - Optional field intended to hold a URL or extended text with detailed docs for the asset; empty in your snippet, so it contributes nothing at runtime.
+   -  ``metadata.documentation`` - Optional field intended to hold a URL or extended text with detailed docs for the asset; empty here, so it contributes nothing at runtime.
 
    -  ``metadata.references`` - List of external references (here, Wazuh documentation URL) associated with the decoder, again only for human/contextual use.
 
@@ -311,9 +310,9 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Overview** > **Actions** > **Edit**, confirm the status is **Enabled**, select ``decoder/test-wazuh-message/0`` as the **Root decoder** and click **Save**.
+#. Navigate to **Ruleset Management** > **Overview** > **Actions** > **Edit**, confirm the status is **Enabled**, select ``decoder/test-wazuh-message/0`` as the **Root decoder** and click **Save**.
 
-#. Navigate to **Ruleset management** > **Overview** > **Actions** and click on **Promote**. Review the list of changes, which includes the decoders and the KVDB you created, and confirm the promotion. Promotion moves all the changes in the space together.
+#. Navigate to **Ruleset Management** > **Overview** > **Actions** and click on **Promote**. Review the list of changes, which includes the decoders and the KVDB you created, and confirm the promotion. Promotion moves all the changes in the space together.
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-promote-test-integration.png
       :title: Promote the test integration
@@ -324,7 +323,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
 Log test
 ^^^^^^^^
 
-#. Navigate to **Ruleset management** > **Log test** and test the following sample log. Make sure you are in the test space.
+#. Navigate to **Ruleset Management** > **Log test** and test the following sample log. Make sure you are in the test space.
 
    **Raw log**:
 

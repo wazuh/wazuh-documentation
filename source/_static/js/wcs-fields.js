@@ -82,11 +82,13 @@
     bar.setAttribute('role', 'search');
     bar.setAttribute('aria-label', 'Search and filter fields');
     bar.innerHTML =
-      '<div class="table-filter-search">' +
-        '<input type="search" class="table-filter-input wcs-q" placeholder="Search ' + rows.length + ' fields"' +
-        ' title="Search by field name or description" aria-label="Search fields by name or description">' +
-        '<span class="table-filter-count wcs-count" aria-live="polite"></span>' +
-      '</div>' +
+      '<label class="table-filter-field"><span class="table-filter-label">Search</span>' +
+        '<span class="table-filter-search">' +
+          '<input type="search" class="table-filter-input wcs-q" placeholder="Search ' + rows.length + ' fields"' +
+          ' title="Search by field name or description" aria-label="Search fields by name or description">' +
+          '<span class="table-filter-count wcs-count" aria-live="polite"></span>' +
+        '</span>' +
+      '</label>' +
       '<div class="table-filter-selects">' +
         select('Type', 'wcs-type', options(unique('type'))) +
         select('Level', 'wcs-level', options(['core', 'extended', 'custom'], { core: 'core (most used)', custom: 'custom (WCS)' })) +

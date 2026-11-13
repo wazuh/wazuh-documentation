@@ -8,7 +8,9 @@
 Rules
 =====
 
-Wazuh rules define the detection logic used to identify relevant security activity in normalized events. They describe what should be detected by specifying conditions on event fields. Rules are written in `Sigma <https://sigmahq.io/>`__ format with Wazuh-specific extensions for metadata, MITRE ATT&CK mapping, compliance mapping, and dynamic placeholders.
+Wazuh rules define the detection logic used to identify relevant security activity in normalized events. They describe what should be detected by specifying conditions on event fields. Rules are written in `Sigma <https://sigmahq.io/>`__ format with Wazuh-specific extensions for metadata, MITRE ATT&CK mapping, compliance mapping, and dynamic placeholders. To create a rule and test it, see :ref:`Create a custom rule <data_analysis_create_custom_rule>`. A rule produces findings only after a detector includes it, as described in :ref:`Create a detector <data_analysis_create_detector>`.
+
+To remove a rule that's already in the test or custom space, see :ref:`Removing promoted content <data_analysis_removing_promoted_content>`.
 
 Top-level fields
 ----------------
@@ -24,10 +26,10 @@ The following table lists all supported top-level fields in a Wazuh Sigma rule. 
 |                    |           |            | assigns a new random UUID when you create the rule and |
 |                    |           |            | replaces the value you write                           |
 +--------------------+-----------+------------+--------------------------------------------------------+
-| ``status``         | String    | Yes        | Rule maturity status: ``experimental``, ``test``, or   |
-|                    |           |            | ``stable``                                             |
+| ``status``         | String    | Yes        | Rule maturity status: ``experimental``, ``test``,      |
+|                    |           |            | ``stable``, ``deprecated``, or ``unsupported``         |
 +--------------------+-----------+------------+--------------------------------------------------------+
-| ``level``          | String    | Yes        | Findings severity: ``informational``, ``low``,         |
+| ``level``          | String    | Yes        | Finding severity: ``informational``, ``low``,          |
 |                    |           |            | ``medium``, ``high``, or ``critical``                  |
 +--------------------+-----------+------------+--------------------------------------------------------+
 | ``detection``      | Object    | Yes        | Detection logic: selections, keywords, and conditions  |
@@ -644,9 +646,9 @@ When this rule matches an event where ``wazuh.agent.id = "001"`` and ``wazuh.age
      "title": "Apache segmentation fault in agent 001",
      "tags": ["attack.impact", "attack.t1499.004", "web-prod-01"],
      "mitre": {
-       "tactic": ["TA0040"],
-       "technique": ["T1499"],
-       "subtechnique": ["T1499.004"]
+       "tactic": { "id": ["TA0040"], "name": ["Impact"] },
+       "technique": { "id": ["T1499"], "name": ["Endpoint Denial of Service"] },
+       "subtechnique": { "id": ["T1499.004"], "name": ["Application or System Exploitation"] }
      },
      "compliance": {
        "pci_dss": ["6.2", "11.4"]

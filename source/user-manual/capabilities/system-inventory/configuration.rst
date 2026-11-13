@@ -22,7 +22,7 @@ The Syscollector module is enabled by default on all endpoints where the Wazuh a
 - ``C:\Program Files (x86)\ossec-agent\ossec.conf`` for Windows endpoints.
 - ``/Library/Ossec/etc/ossec.conf`` for macOS endpoints.
 
-You can also use the centralized configuration file to make changes to the Wazuh Syscollector module across multiple monitored endpoints that belong to the same agent group. For example, the ``default`` group uses the configuration file, which you can find at ``/etc/wazuh-manager/shared/default/agent.conf`` on the Wazuh manager. Settings applied with the centralized configuration take precedence over the local Wazuh agent configuration.
+You can also use the centralized configuration file to make changes to the Wazuh Syscollector module across multiple monitored endpoints that belong to the same agent group. For example, the ``default`` group uses the ``agent.conf`` centralized configuration file at ``/etc/wazuh-manager/shared/default/agent.conf`` on the Wazuh manager. Settings applied with the centralized configuration take precedence over the local Wazuh agent configuration.
 
 The following block shows the default Syscollector configuration on a Wazuh agent:
 
@@ -54,11 +54,11 @@ The following block shows the default Syscollector configuration on a Wazuh agen
 
 Where:
 
-- ``<disabled>`` specifies whether the Wazuh Syscollector module is enabled or not. The default value is ``no``. The allowed values are ``yes`` and ``no``.
+- ``<disabled>`` specifies whether the Wazuh Syscollector module is enabled or not. The default value is ``no``, which means the module is enabled. The allowed values are ``yes`` and ``no``.
 
 .. _interval_syscollector:
 
-- ``<interval>`` specifies the time between system scans. The default value is 1 hour. The allowed value is a positive number with a suffix character indicating a time unit, such as ``s`` (seconds), ``m`` (minutes), ``h`` (hours), and ``d`` (days).
+- ``<interval>`` specifies the time between system scans. The default value is ``1h`` (one hour). The allowed value is a positive number with a suffix character indicating a time unit, such as ``s`` (seconds), ``m`` (minutes), ``h`` (hours), and ``d`` (days).
 - ``<scan_on_start>`` specifies whether the module runs a scan immediately when the Wazuh agent service starts. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<hardware>`` enables or disables the hardware information collection. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<os>`` enables or disables the operating system scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
@@ -72,8 +72,8 @@ Where:
 - ``<browser_extensions>`` enables or disables the scanning for browser extensions. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<synchronization>`` contains the settings that control how the Wazuh agent synchronizes inventory data with the Wazuh manager.
 - ``<enabled>`` specifies whether synchronization is active. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
-- ``<interval>`` specifies the time between synchronization operations. The default value is 5 minutes.
-- ``<integrity_interval>`` specifies the time between full integrity checks of the synchronized inventory data. The default value is 24 hours.
+- ``<interval>`` specifies the time between synchronization operations. The default value is ``5m`` (five minutes).
+- ``<integrity_interval>`` specifies the time between full integrity checks of the synchronized inventory data. The default value is ``24h`` (24 hours).
 
 On Windows endpoints, the ``<hotfixes>`` option enables or disables the collection of installed updates. The default value is ``yes``.
 
@@ -84,11 +84,11 @@ On Windows endpoints, the ``<hotfixes>`` option enables or disables the collecti
 Wazuh manager configuration
 ---------------------------
 
-The ``inventory_sync_server`` module on the Wazuh manager processes the collected system inventory data and forwards it to the Wazuh indexer using the :doc:`indexer connector </user-manual/manager/wazuh-indexer-connector>` setting. The indexer connector setting is present by default in the ``/etc/wazuh-manager/wazuh-manager.conf`` file of the Wazuh manager.
+The Wazuh manager processes the collected system inventory data and forwards it to the Wazuh indexer. The ``<indexer>`` block inside the ``<wazuh_config>`` element of the ``/etc/wazuh-manager/wazuh-manager.conf`` file configures this connection. The block is present by default.
 
 By default, the connector points to the localhost and uses the certificates in ``/etc/wazuh-manager/certs/`` on the Wazuh manager. This default works for an all-in-one deployment, where the Wazuh manager and the Wazuh indexer run on the same host. In a distributed deployment, where the indexer runs on separate nodes, you must update the connector configuration to point to your indexer nodes. Follow the steps below to update it.
 
-#. Locate the indexer connector configuration block in the ``/etc/wazuh-manager/wazuh-manager.conf`` file on the Wazuh manager. By default, it points to the local host:
+#. Locate the ``<indexer>`` block in the ``/etc/wazuh-manager/wazuh-manager.conf`` file on the Wazuh manager. By default, it points to the local host:
 
    .. code-block:: xml
 

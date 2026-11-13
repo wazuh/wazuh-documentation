@@ -272,5 +272,6 @@ The normalized event matches the built-in ruleset management rule created and ge
 You can view the finding on the Wazuh dashboard by navigating to **Cloud security \> Microsoft Graph API**:
 
 .. thumbnail:: /images/cloud-security/azure/ms-intune/ms-intune-managed-device-finding.png
+   :alt: Microsoft Graph API Findings tab in the Wazuh dashboard, listing Intune managed device findings
    :align: center
    :width: 80%

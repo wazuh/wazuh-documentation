@@ -12,6 +12,10 @@ This guide walks you through creating a custom Wazuh security analytics policy. 
 
 The example used throughout is based on Apache HTTP Server error logs. A few concepts make the rest of this guide easier to follow.
 
+.. note::
+
+   Wazuh already decodes Apache HTTP Server error logs with the ``apache-http`` integration in the Standard space. This guide uses the same log source to keep the example simple, so each Apache error line is indexed twice: once by ``custom-integration`` and once by ``apache-http``.
+
 -  **Integration.** A logical grouping of decoders, rules, and optional key-value databases (KVDBs) that belong to the same log source or product. Every decoder must belong to exactly one integration.
 
 -  **Decoder.** Parses raw, unstructured log lines into a structured format that follows the Wazuh Common Schema, so the analysis engine can work with consistent fields.
@@ -20,11 +24,11 @@ The example used throughout is based on Apache HTTP Server error logs. A few con
 
 -  **Detector.** A scheduled job that applies selected rules to incoming events and generates findings.
 
--  **Finding.** A security record is created when an event matches a rule. This was previously called alert in Wazuh 4.x.
+-  **Finding.** A finding is a security record that is created when an event matches a rule. This was previously called alert in Wazuh 4.x.
 
 .. note::
 
-   Security analytics organizes content into a three-stage pipeline: Draft, Test, and Custom. Content is created in Draft, validated in Test, and promoted to Custom for production use. Each stage serves as a controlled step in the promotion flow, ensuring changes are validated before affecting live data. Use the space selector in the top-right corner to confirm you are working in the correct stage.
+   Security analytics organizes content into three spaces: draft, test, and custom. Content is created in Draft, validated in Test, and promoted to Custom for production use. Each space serves as a controlled step in the promotion flow, ensuring changes are validated before affecting live data. Use the space selector in the top-right corner to confirm you are working in the correct space.
 
 You will complete the following steps in order:
 
@@ -32,7 +36,7 @@ You will complete the following steps in order:
 
 -  `Create custom decoders`_
 
--  `Attach the root decoder to the integration <Attach the root decoder to an integration_>`_
+-  `Set the root decoder of the space`_
 
 -  `Create a custom rule`_
 
@@ -46,6 +50,8 @@ You will complete the following steps in order:
 
 -  `Configure the Wazuh agent to collect the Apache error log`_
 
+-  `Generate a test event`_
+
 -  `View findings on the Wazuh dashboard`_
 
 Create a custom integration
@@ -55,9 +61,9 @@ Custom Wazuh security policies are managed through an integration on the Ruleset
 
 Make sure the space selector reads **Draft** and follow these steps to create a custom integration.
 
-#. Go to **Ruleset management** > **Overview** > **Integrations** > **Actions** > **Create**.
+#. Go to **Ruleset Management** > **Overview** > **Integrations** > **Actions** > **Create**.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-create-custom-integration.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-create-custom-integration.jpg
       :title: Create a custom integration
       :alt: Create a custom integration
       :align: center
@@ -71,7 +77,9 @@ Make sure the space selector reads **Draft** and follow these steps to create a 
 
    -  **Author**: Security Team
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-confirm-custom-integration.png
+   The **Mode** field reads ``user-managed``. Integrations you create are always user-managed. In the Standard space, the Wazuh core integrations are ``protected`` and can't be edited or disabled, while the other standard integrations are ``user-managed`` and can be enabled or disabled.
+
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-confirm-custom-integration.jpg
       :title: Confirm the custom integration
       :alt: Confirm the custom integration
       :align: center
@@ -79,11 +87,13 @@ Make sure the space selector reads **Draft** and follow these steps to create a 
 
 #. After creating the integration, it will appear in the integrations list.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-custom-integration-list.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-custom-integration-list.jpg
       :title: Custom integration list
       :alt: Custom integration list
       :align: center
       :width: 80%
+
+.. _data_analysis_create_custom_decoders:
 
 Create custom decoders
 ----------------------
@@ -92,9 +102,15 @@ Configure two decoders: a root decoder that processes all incoming events before
 
 Make sure the space selector reads **Draft** and follow the steps below to create custom decoders using the **Ruleset Management** dashboard.
 
-#. Go to **Ruleset management** > **Normalization** > **Decoders** > **Actions** > **Create**.
+#. Go to **Ruleset Management** > **Normalization** > **Decoders** > **Actions** > **Create**.
 
-#. Select the integration you created (``custom-integration``), then use the two decoders below.
+#. Select **YAML Editor**, select the integration you created (``custom-integration``), paste the root decoder below, and click **Create decoder**. Repeat for the child decoder. Use the YAML Editor: the parse patterns below are YAML strings folded with ``\``, and the Visual Editor rejects them.
+
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-create-decoder-yaml-editor.jpg
+      :title: Create a decoder in the YAML Editor
+      :alt: Create a decoder in the YAML Editor
+      :align: center
+      :width: 80%
 
    **Root decoder**
 
@@ -117,7 +133,7 @@ Make sure the space selector reads **Draft** and follow the steps below to creat
         - _tmp_json: "parse_json($event.original)"
       enabled: true
 
-   The ``decoder/core-wazuh-message/0`` is a root decoder that parses the raw event as JSON and stores the result in a temporary field for child decoders to use. Other decoders inherit from it to handle specific log sources.
+   The ``decoder/core-wazuh-message/0`` is a root decoder that parses the raw event as JSON and stores the result in a temporary field for child decoders to use. Other decoders inherit from it to handle specific log sources. The Apache error log isn't JSON, so ``parse_json`` doesn't produce a value for these events. A failed ``map`` operation doesn't make the decoder reject the event, so the event still reaches the child decoder. This decoder belongs to your custom content and is separate from the decoder with the same name in the standard space.
 
    **Child decoder**
 
@@ -170,28 +186,28 @@ Make sure the space selector reads **Draft** and follow the steps below to creat
         - source.ip: "not_exists()"
       enabled: true
 
-   The ``decoder/apache-error/0`` decoder inherits from the base decoder and processes Apache HTTP Server error logs. It parses the raw log to extract fields like timestamp, log level, and client address, then classifies the event as an error or informational based on the log level.
+   The ``decoder/apache-error/0`` decoder inherits from the base decoder and processes Apache HTTP Server error logs. It parses the raw log to extract fields like timestamp, log level, and client address, then classifies the event as an error or informational based on the log level. In the ``check`` conditions, ``\\)`` escapes the closing parenthesis of the regular expression: YAML turns ``\\`` into ``\``, and the helper parser needs ``\)`` so that it doesn't read the parenthesis as the end of the helper call.
 
 #. Once both decoders are saved, they appear together in the decoders list.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-decoders-list.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-decoders-list.jpg
       :title: Decoders list
       :alt: Decoders list
       :align: center
       :width: 80%
 
-Attach the root decoder to an integration
------------------------------------------
+Set the root decoder of the space
+---------------------------------
 
-The integration must be enabled and configured with a root decoder before any additional decoders can be attached. The root decoder serves as the entry point for parsing events from the selected log source and ensures that all related decoders are properly chained and executed within the integration's processing flow.
+Each space has one root decoder, the entry point for parsing every event in that space. All the integrations in the space share it, and a promotion needs it. You can't delete a decoder while it's set as the root decoder.
 
-Make sure the space selector reads **Draft** and follow these steps to assign a root decoder to the integration.
+Make sure the space selector reads **Draft** and follow these steps to set the root decoder of the space.
 
-#. Go to **Ruleset management** > **Overview** > **Actions** > **Edit**.
+#. Go to **Ruleset Management** > **Overview** > **Actions** > **Edit**.
 
-#. Confirm the status is **Enabled**, and assign the ``decoder/core-wazuh-message/0`` as the root decoder. Click **Save** to apply the configuration.
+#. In **Edit Draft**, confirm the status is **Enabled**, select ``decoder/core-wazuh-message/0`` under **Root decoder**, and click **Save**.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-select-root-decoder.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-select-root-decoder.jpg
       :title: Select the root decoder
       :alt: Select the root decoder
       :align: center
@@ -206,9 +222,9 @@ Rules are used to identify patterns in normalized events and determine when spec
 
 Make sure the space selector reads **Draft** and follow these steps to create a rule that flags Apache error events classified as failures.
 
-#. Go to **Ruleset management** > **Detection** > **Rules** > **Create**.
+#. Go to **Ruleset Management** > **Detection** > **Rules** > **Actions** > **Create**.
 
-#. Select **YAML Editor**, choose the **custom-integration** integration and paste the rule:
+#. Select **YAML Editor**, choose the ``custom-integration`` integration and paste the rule:
 
    .. code-block:: yaml
 
@@ -266,7 +282,7 @@ Make sure the space selector reads **Draft** and follow these steps to create a 
 
 #. Click **Create rule** to complete the rule creation process.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-create-rule.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-create-rule.jpg
       :title: Create a rule
       :alt: Create a rule
       :align: center
@@ -274,7 +290,7 @@ Make sure the space selector reads **Draft** and follow these steps to create a 
 
 #. Once the rule is created, it will appear in the **Rules** list.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-rule-list.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-rule-list.jpg
       :title: Rules list
       :alt: Rules list
       :align: center
@@ -287,23 +303,23 @@ In the draft space, you create and refine your integrations, decoders, and rules
 
 Make sure the space selector reads **Draft**, and follow these steps to promote the content from draft to test.
 
-#. Go to **Ruleset management** > **Overview**, and click **Actions** > **Promote**
+#. Go to **Ruleset Management** > **Overview**, and click **Actions** > **Promote**.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-promotion.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-promotion.jpg
       :title: Promote the content
       :alt: Promote the content
       :align: center
       :width: 80%
 
-#. Type the confirmation message when prompted, and click **Promote**.
+#. Type ``promote`` to confirm, and click **Promote**.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-promotion-confirmation.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-promotion-confirmation.jpg
       :title: Promotion confirmation
       :alt: Promotion confirmation
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-promoted.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-promoted.jpg
       :title: Content promoted
       :alt: Content promoted
       :align: center
@@ -311,7 +327,7 @@ Make sure the space selector reads **Draft**, and follow these steps to promote 
 
 #. After promotion, the integration appears in the **Test** space.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-promoted-list.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-promoted-list.jpg
       :title: Promoted integration in the Test space
       :alt: Promoted integration in the Test space
       :align: center
@@ -322,9 +338,11 @@ Validate the content with a log test
 
 After promoting the integration to the test space, use **Log test** to validate how incoming events are decoded, normalized, and matched against your rules. This helps confirm that the integration behaves as expected before moving to production.
 
-Make sure the space selector reads **Test**, and follow these steps to validate with **Log test**.
+Follow these steps to validate with **Log test**.
 
-#. Go to **Ruleset management** > **Log test**.
+#. Go to **Ruleset Management** > **Log test**, and select **Test** in the space selector. Log test opens on the **Standard** space.
+
+#. Under **Detection**, select ``custom-integration`` in **Integration**. Without it, Log test skips detection.
 
 #. Paste the sample Apache log line below into the **Log event** field to see how it is decoded and matched.
 
@@ -336,13 +354,13 @@ Make sure the space selector reads **Test**, and follow these steps to validate 
 
    When decoding succeeds, the **Normalization** section of the **Test Result** shows the decoded event, and the **Detection** section shows the custom rule that matched it.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-logtest-normalization.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-logtest-normalization.jpg
       :title: Log test normalization result
       :alt: Log test normalization result
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-logtest-detection.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-logtest-detection.jpg
       :title: Log test detection result
       :alt: Log test detection result
       :align: center
@@ -418,17 +436,17 @@ After validating your integrations, decoders, and rules in the test space using 
 
 Make sure the space selector reads **Test**, then follow these steps to promote the content.
 
-#. Go to **Ruleset management** > **Overview**.
+#. Go to **Ruleset Management** > **Overview**.
 
-#. Click **Actions** > **Promote**, type the confirmation message, and click **Promote**.
+#. Click **Actions** > **Promote**, type ``promote`` to confirm, and click **Promote**.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-apache-promotion.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-apache-promotion.jpg
       :title: Promote the Apache integration
       :alt: Promote the Apache integration
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-apache-promotion-confirmation.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-apache-promotion-confirmation.jpg
       :title: Apache promotion confirmation
       :alt: Apache promotion confirmation
       :align: center
@@ -440,6 +458,8 @@ Make sure the space selector reads **Test**, then follow these steps to promote 
 
       The Wazuh manager loads the custom space on a polling cycle. Events sent within about 2 minutes of the promotion are processed only by the standard policy and don't generate the custom finding.
 
+.. _data_analysis_create_detector:
+
 Create a detector
 -----------------
 
@@ -447,9 +467,9 @@ A detector is the scheduled job that executes your rule. It scans indexed events
 
 Follow these steps to create a detector.
 
-#. Go to **Ruleset management** > **Detection** > **Detectors** > **Create detector**.
+#. Go to **Ruleset Management** > **Detection** > **Detectors** > **Create detector**.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-detectors-list.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-detectors-list.jpg
       :title: Detectors list
       :alt: Detectors list
       :align: center
@@ -459,7 +479,7 @@ Follow these steps to create a detector.
 
    -  **Name**: wazuh-apache-detector
 
-   -  **Select indexes/aliases**: wazuh-events-v5-system-activity (this must match the integration category you configured earlier)
+   -  **Data source** > **Select indexes/aliases**: ``wazuh-events-v5-system-activity``. Wazuh indexes events in ``wazuh-events-v5-<category>``, using the category of the integration that decoded them. The categories are ``access-management``, ``applications``, ``cloud-services``, ``network-activity``, ``system-activity``, ``security``, ``other`` and ``unclassified``.
 
    -  **Space**: Custom
 
@@ -467,15 +487,15 @@ Follow these steps to create a detector.
 
    -  **Selected rules**: Apache Failure Detection
 
-   -  **Run every**: 2 minutes.
+   -  **Run every**: 2 minutes
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-create-custom-detectors.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-create-custom-detectors.jpg
       :title: Create a custom detector
       :alt: Create a custom detector
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-confirm-custom-detectors.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-confirm-custom-detectors.jpg
       :title: Confirm the custom detector
       :alt: Confirm the custom detector
       :align: center
@@ -483,7 +503,7 @@ Follow these steps to create a detector.
 
    Once the detector is created, it appears in the **Detectors** list.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-lists-custom-detectors.png
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-lists-custom-detectors.jpg
       :title: Custom detectors list
       :alt: Custom detectors list
       :align: center
@@ -492,9 +512,9 @@ Follow these steps to create a detector.
 Configure the Wazuh agent to collect the Apache error log
 ---------------------------------------------------------
 
-The detector only generates findings from events that reach the Wazuh manager. Configure the Wazuh agent on the monitored endpoint to collect the Apache error log.
+The detector only generates findings from events that reach the Wazuh manager. Perform these steps on a Linux endpoint with Apache HTTP Server and the Wazuh agent installed.
 
-#. Append the following configuration to the ``/var/ossec/etc/ossec.conf`` file on the monitored endpoint:
+#. Append the following configuration to the ``/var/ossec/etc/ossec.conf`` file on the monitored endpoint. The location shown is the Apache error log on Debian and Ubuntu. On Red Hat Enterprise Linux and CentOS Stream, use ``/var/log/httpd/error_log`` instead:
 
    .. code-block:: xml
 
@@ -509,6 +529,17 @@ The detector only generates findings from events that reach the Wazuh manager. C
 
    .. include:: /_templates/common/restart_agent.rst
 
+Generate a test event
+---------------------
+
+A healthy Apache HTTP Server writes only ``notice`` lines to the error log, which the rule doesn't match. Append the sample log line to the Apache error log on the monitored endpoint to generate an event:
+
+.. code-block:: console
+
+   # echo '[Wed Jun 10 12:40:55.444444 2026] [rewrite:error] [pid 1239:tid 140123456794] [client 203.0.113.50:34567] AH00670: Options FollowSymLinks and SymLinksIfOwnerMatch are both off, so the RewriteRule directive is also forbidden' >> /var/log/apache2/error.log
+
+The finding appears after the detector's next run, about 2 minutes later.
+
 View findings on the Wazuh dashboard
 ------------------------------------
 
@@ -518,7 +549,7 @@ A finding is a security record generated when an event matches a detection rule 
 
 #. In the image below, you see the findings generated from the events.
 
-   .. thumbnail:: /images/manual/data-analysis/wazuh-dashboard-findings.png
+   .. thumbnail:: /images/manual/data-analysis/wazuh-dashboard-findings.jpg
       :title: Findings on the Wazuh dashboard
       :alt: Findings on the Wazuh dashboard
       :align: center
@@ -526,7 +557,7 @@ A finding is a security record generated when an event matches a detection rule 
 
 #. Expand the finding to see more information about the event.
 
-   .. thumbnail:: /images/manual/data-analysis/wazuh-dashboard-expand-findings.png
+   .. thumbnail:: /images/manual/data-analysis/wazuh-dashboard-expand-findings.jpg
       :title: Expanded finding on the Wazuh dashboard
       :alt: Expanded finding on the Wazuh dashboard
       :align: center
@@ -604,12 +635,22 @@ A single finding contains the complete enriched record, including the matched ru
              ]
            },
            "mitre": {
-             "technique": [
-               "T1190"
-             ],
-             "tactic": [
-               "TA0001"
-             ]
+             "technique": {
+               "id": [
+                 "T1190"
+               ],
+               "name": [
+                 "Exploit Public-Facing Application"
+               ]
+             },
+             "tactic": {
+               "id": [
+                 "TA0001"
+               ],
+               "name": [
+                 "Initial Access"
+               ]
+             }
            },
            "id": "d78bd034-8838-4f85-b471-5e8c9a0daf18",
            "title": "Apache Failure Detection",
