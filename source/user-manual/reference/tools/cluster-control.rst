@@ -24,8 +24,9 @@ Options
 +------------------------------------------------------------+---------------------------------------------------------+
 | -fn [<node> ...], --filter-node [<node> ...]               | Filters the results by one or more node names.          |
 +------------------------------------------------------------+---------------------------------------------------------+
-| -fs [<status> ...], --filter-agent-status [<status> ...]   | Filters the agent list by one or more agent statuses.   |
-|                                                            | Valid only with ``-a``.                                 |
+| -fs [<status> ...], --filter-agent-status [<status> ...]   | Filters the agent list by one or more agent statuses:   |
+|                                                            | ``active``, ``disconnected``, ``never_connected``, or   |
+|                                                            | ``pending``. Valid only with ``-a``.                    |
 +------------------------------------------------------------+---------------------------------------------------------+
 | -h, --help                                                 | Displays the help message and exits.                    |
 +------------------------------------------------------------+---------------------------------------------------------+

@@ -14,6 +14,8 @@ The tool is located at ``/var/ossec/bin/wazuh-agent-auth`` on Linux and macOS Wa
 
 The tool reads the token from a file or from standard input, never from the command line, because a command line is visible to other processes and is saved in the shell history. The tool never modifies or deletes the token file.
 
+Create the token on the Wazuh manager master node, as described in :ref:`Generate the enrollment token <generate_enrollment_token>`, and save it to a file on the Wazuh agent. Run the tool on the Wazuh agent.
+
 .. note::
    Stop the Wazuh agent before you run this tool, and start it again afterwards. The tool refuses to run while ``wazuh-agentd`` is running, and the Wazuh agent loads its identity only at startup.
 
@@ -72,6 +74,8 @@ Exit codes
 
 Examples
 --------
+
+Run the following commands on the Wazuh agent. ``/root/token`` is the file where you saved the enrollment token.
 
 Decode a token:
 
