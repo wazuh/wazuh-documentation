@@ -8,7 +8,7 @@
 Helper functions
 ================
 
-Helper functions are built-in operations of the :doc:`Wazuh normalization engine </user-manual/manager/wazuh-normalization-engine>`. You use them in decoders and filters to evaluate event fields, compute values, and transform events. The engine provides 128 helper functions across three categories: :ref:`filter <helper_functions_filter>`, :ref:`map <helper_functions_map>`, and :ref:`transformation <helper_functions_transformation>`.
+Helper functions are built-in operations of the :doc:`Wazuh normalization engine </user-manual/manager/wazuh-normalization-engine>`. You use them in decoders and filters to evaluate event fields, compute values, and transform events. The engine provides 129 helper functions across three categories: :ref:`filter <helper_functions_filter>`, :ref:`map <helper_functions_map>`, and :ref:`transformation <helper_functions_transformation>`.
 
 How helper functions work
 -------------------------

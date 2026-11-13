@@ -381,7 +381,7 @@ The check passes. The string ``ye pcre2`` fails the check.
 Map helper details
 ------------------
 
-These map helpers build objects from arrays, convert dates and numbers, look up locations, and compute network values. Each one writes its result to the target field and replaces any existing value.
+These map helpers build objects from arrays, convert dates and numbers, decode hexadecimal strings, extract text with regular expressions, look up locations, and compute network values. Each one writes its result to the target field and replaces any existing value.
 
 .. _helper_function_array_extract_key_obj:
 
@@ -567,6 +567,64 @@ Output event:
      "_date": "2024-05-17T12:10:58-03:00",
      "_target_field": 1715958658.0
    }
+
+.. _helper_function_decode_base16:
+
+``decode_base16``
+^^^^^^^^^^^^^^^^^
+
+Decodes hexadecimal digits into text. Without a mode, the helper decodes one string into ASCII text. With the ``quoted`` mode, it decodes the raw argument values of auditd ``EXECVE`` records, such as the array that :ref:`regex_extract_all <helper_function_regex_extract_all>` returns.
+
++----------+-----------------+------------------+-----------------------------------------------------------------------+
+| Argument | Type            | Source           | Accepted values                                                       |
++==========+=================+==================+=======================================================================+
+| ``hex``  | String or array | Reference        | Without a mode, a string with an even number of hexadecimal digits,   |
+|          |                 |                  | uppercase or lowercase, whose bytes are ASCII, ``00`` to ``7F``. With |
+|          |                 |                  | ``quoted``, a string or an array of values.                           |
++----------+-----------------+------------------+-----------------------------------------------------------------------+
+| ``mode`` | String          | Value (optional) | ``quoted``.                                                           |
++----------+-----------------+------------------+-----------------------------------------------------------------------+
+
+Behavior:
+
+-  Without a mode, run failure: the referenced field is missing or is not a string, which includes an array.
+-  Without a mode, run failure: the string has an odd number of digits or a character that is not a hexadecimal digit, or a decoded byte is above 7F.
+-  With quoted, decodes each value by its quoting. auditd writes an argument between double quotes unless it contains a double quote, a space, a control character, or a non-ASCII byte. It then writes the bytes as uppercase hexadecimal digits without quotes.
+-  With quoted, a value between double quotes loses the quotes and stays text, so "10" and "1234" return 10 and 1234.
+-  With quoted, an unquoted value of uppercase hexadecimal digits that decodes to valid UTF-8 is decoded, so 636166C3A9 returns café.
+-  With quoted, any other value stays unchanged, such as lowercase hexadecimal digits, digits that do not decode to valid UTF-8, or an array element that is not a string.
+-  With quoted, returns a string for a string reference and an array, in the same order, for an array reference. An empty array returns an empty array.
+-  With quoted, run failure: only when the referenced field is missing or is neither a string nor an array.
+-  Expects a WCS string field, such as process.args, as the target. For a keyword target, an array element that is not a string fails the type check, so the helper fails.
+-  Build failure: a value as hex, a WCS hex reference to a non-string field, or fewer than one or more than two arguments.
+-  Build failure: a reference as mode, or a mode value other than quoted.
+
+Example, with the auditd ``EXECVE`` arguments that the :ref:`regex_extract_all <helper_function_regex_extract_all>` example returns:
+
+.. code-block:: yaml
+
+   normalize:
+     - map:
+         - _target_field: decode_base16($_args, 'quoted')
+
+Input event:
+
+.. code-block:: json
+
+   {
+     "_args": ["\"/usr/bin/sudo\"", "\"grep\"", "6B65793D226172742D7465737422", "\"/var/log/audit/audit.log\""]
+   }
+
+Output event:
+
+.. code-block:: json
+
+   {
+     "_args": ["\"/usr/bin/sudo\"", "\"grep\"", "6B65793D226172742D7465737422", "\"/var/log/audit/audit.log\""],
+     "_target_field": ["/usr/bin/sudo", "grep", "key=\"art-test\"", "/var/log/audit/audit.log"]
+   }
+
+Without the mode, ``decode_base16($_hex)`` returns ``Hello`` for ``"_hex": "48656C6C6F"`` and fails for an array.
 
 .. _helper_function_float_calculate:
 
@@ -873,6 +931,57 @@ Output event:
    {
      "_message": "bye pcre2",
      "_target_field": "bye pcre2"
+   }
+
+.. _helper_function_regex_extract_all:
+
+``regex_extract_all``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns an array with the text that the first capture group of an RE2 regular expression captures in every match. Unlike :ref:`regex_extract <helper_function_regex_extract>`, the helper keeps matching after the first match.
+
++------------------+--------+-----------+------------------------------------------------------------------------------+
+| Argument         | Type   | Source    | Accepted values                                                              |
++==================+========+===========+==============================================================================+
+| ``fieldToMatch`` | String | Reference | A string field.                                                              |
++------------------+--------+-----------+------------------------------------------------------------------------------+
+| ``regex``        | String | Value     | A valid RE2 regular expression with at least one capture group, ``( )``. The |
+|                  |        |           | helper keeps only the first group.                                           |
++------------------+--------+-----------+------------------------------------------------------------------------------+
+
+Behavior:
+
+-  Matches the expression from left to right as many times as it can, without overlapping matches. The array holds the captured texts in match order, without changes.
+-  Ignores every group after the first one. An optional first group that does not take part in a match adds an empty string.
+-  An expression that can match an empty string, such as (x*), adds an empty string at each position where it matches nothing.
+-  Run failure: the referenced field is missing or not a string, or the expression does not match.
+-  Expects a WCS string field, such as process.args, as the target.
+-  Build failure: a value as fieldToMatch, a WCS reference to a non-string field, or not exactly two arguments.
+-  Build failure: a reference or a non-string as regex, an invalid RE2 expression, or an expression without a capture group.
+
+Example, with the arguments of an auditd ``EXECVE`` record. Quoted values keep their quotes, so :ref:`decode_base16 <helper_function_decode_base16>` with the ``quoted`` mode can tell text from hexadecimal digits. The expression doesn't match arguments that auditd splits into chunks, ``aN_len=`` and ``aN[i]=``.
+
+.. code-block:: yaml
+
+   normalize:
+     - map:
+         - _target_field: regex_extract_all($_message, '(?:^|\\s)a\\d+=(\\S+)')
+
+Input event:
+
+.. code-block:: json
+
+   {
+     "_message": "type=EXECVE msg=audit(1730000000.123:42): argc=4 a0=\"/usr/bin/sudo\" a1=\"grep\" a2=6B65793D226172742D7465737422 a3=\"/var/log/audit/audit.log\""
+   }
+
+Output event:
+
+.. code-block:: json
+
+   {
+     "_message": "type=EXECVE msg=audit(1730000000.123:42): argc=4 a0=\"/usr/bin/sudo\" a1=\"grep\" a2=6B65793D226172742D7465737422 a3=\"/var/log/audit/audit.log\"",
+     "_target_field": ["\"/usr/bin/sudo\"", "\"grep\"", "6B65793D226172742D7465737422", "\"/var/log/audit/audit.log\""]
    }
 
 .. _helper_function_to_int:
