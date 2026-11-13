@@ -100,15 +100,16 @@ To upgrade agents using the command line, use the :doc:`/var/wazuh-manager/bin/a
 
       All agents are updated.
 
-   If the Wazuh agent is still listed after the delivery interval, 15 minutes by default, check the Wazuh agent log for errors. For a Wazuh agent earlier than 5.0, ``/var/wazuh-manager/logs/wazuh-manager.log`` shows a ``legacy_task_delivery`` line when the Wazuh manager delivers the task.
+   If the Wazuh agent is still listed after the delivery interval (``remoted.legacy_task_polling_interval``, 15 minutes by default), check the Wazuh agent log for errors. For a Wazuh agent earlier than 5.0, ``/var/wazuh-manager/logs/wazuh-manager.log`` shows a ``legacy_task_delivery`` line when the Wazuh manager delivers the task.
 
 Using the RESTful API
 ---------------------
 
-#. List all outdated Wazuh agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agent_controller.get_agent_outdated>`. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN of the Wazuh manager:
+#. List all outdated Wazuh agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agent_controller.get_agent_outdated>`. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN of the Wazuh manager. The first command stores a Wazuh manager API token in ``TOKEN``. Replace ``<WAZUH_MANAGER_API_USER>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with your Wazuh manager API credentials. The token expires after 900 seconds (15 minutes) by default, so get a new one if a request returns 401:
 
    .. code-block:: console
 
+      # TOKEN=$(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
       # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/outdated?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
    The command output looks similar to this:
@@ -218,4 +219,4 @@ Using the RESTful API
         "error": 0
       }
 
-   If the version doesn't change after the delivery interval, 15 minutes by default, check the Wazuh agent log for errors. For a Wazuh agent earlier than 5.0, ``/var/wazuh-manager/logs/wazuh-manager.log`` shows a ``legacy_task_delivery`` line when the Wazuh manager delivers the task.
+   If the version doesn't change after the delivery interval (``remoted.legacy_task_polling_interval``, 15 minutes by default), check the Wazuh agent log for errors. For a Wazuh agent earlier than 5.0, ``/var/wazuh-manager/logs/wazuh-manager.log`` shows a ``legacy_task_delivery`` line when the Wazuh manager delivers the task.

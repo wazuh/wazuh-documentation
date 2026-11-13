@@ -13,7 +13,7 @@ The module is installed as part of the Wazuh indexer and exposes a REST API unde
 The Content Manager module:
 
 -  Synchronizes content from the Wazuh Cyber Threat Intelligence (CTI) service.
--  Manages Sigma rules, decoders, integrations, KVDBs, and security policies.
+-  Manages Sigma rules, decoders, integrations, KVDBs, filters, and security policies.
 -  Validates content before deployment.
 -  Promotes content between development stages.
 -  Synchronizes Security Analytics detectors and rules.
@@ -59,6 +59,9 @@ The Content Manager module automatically synchronizes content from the Wazuh CTI
 -  Integrations
 -  KVDBs
 -  Policies
+-  Filters
+-  Indicators of Compromise (IoC)
+-  Common Vulnerabilities and Exposures (CVE) data
 
 By default, synchronization runs every 60 minutes. The ``plugins.content_manager.catalog.sync_interval`` setting changes the interval.
 
@@ -89,19 +92,24 @@ The Content Manager module also provides APIs for creating, updating, and deleti
 -  Integrations
 -  KVDBs
 -  Policies
+-  Filters
 
 User-created content is stored in the Draft space and can be promoted through the standard content workflow.
 
 Content validation
 ^^^^^^^^^^^^^^^^^^
 
-Before content is promoted, the Content Manager module validates the configuration against the Wazuh manager. Validation helps identify:
+Before content is promoted, the Content Manager module validates the configuration with the Wazuh Engine that ships with the Wazuh indexer. The Wazuh indexer starts this Engine as a child process and reaches it through the ``/usr/share/wazuh-indexer/engine/sockets/engine-api-http.sock`` socket. Validation helps identify:
 
 -  Syntax errors
 -  Invalid references
 -  Configuration inconsistencies
 
-Content that fails validation cannot be promoted.
+Content that fails validation cannot be promoted. The following validation errors are common:
+
+-  ``Missing root decoder``: the space still holds decoders or KVDBs, which always belong to an integration, but its policy has no root decoder. Delete them, or set a new root decoder, and promote the space again.
+-  ``Cannot reach the Wazuh Engine: its API socket is not available``: the Wazuh Engine that ships with the Wazuh indexer isn't running, so its socket, ``/usr/share/wazuh-indexer/engine/sockets/engine-api-http.sock``, doesn't exist. The Wazuh indexer doesn't restart the Engine if it stops. Check ``/var/log/wazuh-indexer/wazuh-engine.log`` for the cause, then restart the Wazuh indexer.
+-  ``Failed to communicate with the Engine``: the socket exists, but the Wazuh indexer can't use it, for example because its permissions changed. The socket must belong to the ``wazuh-indexer`` user with mode ``660`` (``srw-rw----``).
 
 Log test
 ^^^^^^^^
@@ -149,31 +157,34 @@ Configuration
 
 The Content Manager module settings are configured in the ``/etc/wazuh-indexer/opensearch.yml`` file using the ``plugins.content_manager`` prefix. Changes take effect after you restart the Wazuh indexer. You can also change the settings marked dynamic at runtime through the Cluster Settings API.
 
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| Setting                        | Type    | Default  | Description                                                                                                                                 |
-+================================+=========+==========+=============================================================================================================================================+
-| ``catalog.sync_interval``      | Integer | ``60``   | Interval, in minutes, between scheduled CTI synchronizations. Valid range: 10-1440. Dynamic.                                                |
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| ``catalog.update_on_start``    | Boolean | ``true`` | Synchronizes content when the Wazuh indexer starts.                                                                                         |
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| ``catalog.update_on_schedule`` | Boolean | ``true`` | Runs the scheduled CTI synchronization. When ``false``, no content is downloaded on a schedule. Dynamic.                                    |
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| ``catalog.update_on_demand``   | Boolean | ``true`` | Allows on-demand updates through ``POST /_plugins/_content_manager/update``. When ``false``, the endpoint returns ``403`` for every caller. |
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| ``catalog.create_detectors``   | Boolean | ``true`` | Creates Security Analytics detectors from Wazuh CTI integrations during synchronization.                                                    |
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| ``telemetry.enabled``          | Boolean | ``true`` | Sends the daily telemetry ping. It does not turn off update notifications in the Wazuh dashboard. Dynamic.                                  |
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| ``max_integrations``           | Integer | ``100``  | Maximum number of user-created integrations in the Draft space. Minimum 0. Dynamic.                                                         |
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| ``max_decoders``               | Integer | ``200``  | Maximum number of user-created decoders in the Draft space. Minimum 0. Dynamic.                                                             |
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| ``max_rules``                  | Integer | ``200``  | Maximum number of user-created Sigma rules in the Draft space. Minimum 0. Dynamic.                                                          |
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| ``max_kvdbs``                  | Integer | ``100``  | Maximum number of user-created KVDBs in the Draft space. Minimum 0. Dynamic.                                                                |
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| ``max_filters``                | Integer | ``100``  | Maximum number of user-created filters in each space. Minimum 0. Dynamic.                                                                   |
-+--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Setting                           | Type    | Default  | Description                                                                                                                                 |
++===================================+=========+==========+=============================================================================================================================================+
+| ``catalog.sync_interval``         | Integer | ``60``   | Interval, in minutes, between scheduled CTI synchronizations. Valid range: 10-1440. Dynamic.                                                |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``catalog.update_on_start``       | Boolean | ``true`` | Synchronizes content when the Wazuh indexer starts.                                                                                         |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``catalog.update_on_schedule``    | Boolean | ``true`` | Runs the scheduled CTI synchronization. When ``false``, no content is downloaded on a schedule. Dynamic.                                    |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``catalog.update_on_demand``      | Boolean | ``true`` | Allows on-demand updates through ``POST /_plugins/_content_manager/update``. When ``false``, the endpoint returns ``403`` for every caller. |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``catalog.create_detectors``      | Boolean | ``true`` | Creates Security Analytics detectors from Wazuh CTI integrations during synchronization.                                                    |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``telemetry.enabled``             | Boolean | ``true`` | Sends the daily telemetry ping. It does not turn off update notifications in the Wazuh dashboard. Dynamic.                                  |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_integrations``              | Integer | ``100``  | Maximum number of user-created integrations in the Draft space. Minimum 0. Dynamic.                                                         |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_decoders``                  | Integer | ``200``  | Maximum number of user-created decoders in the Draft space. Minimum 0. Dynamic.                                                             |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_rules``                     | Integer | ``200``  | Maximum number of user-created Sigma rules in the Draft space. Minimum 0. Dynamic.                                                          |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_kvdbs``                     | Integer | ``100``  | Maximum number of user-created KVDBs in the Draft space. Minimum 0. Dynamic.                                                                |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_filters``                   | Integer | ``100``  | Maximum number of user-created filters in each space. Minimum 0. Dynamic.                                                                   |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``catalog.policy_update.enabled`` | Boolean | ``true`` | Allows policy updates through ``PUT /_plugins/_content_manager/policy/{space}``. When ``false``, the endpoint returns ``403`` for every     |
+|                                   |         |          | caller.                                                                                                                                     |
++-----------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
 A create request that would exceed a ``max_*`` limit is rejected with ``400 Bad Request``.
 
@@ -191,3 +202,9 @@ The Content Manager API is available under ``/_plugins/_content_manager/`` on th
 -  Content validation
 
 For a complete list of endpoints, see the :doc:`Wazuh indexer API reference </user-manual/indexer-api/reference>` documentation.
+
+.. note::
+
+   The on-demand update endpoint, ``/_plugins/_content_manager/update``, and the policy update endpoint, ``/_plugins/_content_manager/policy/{space}``, require the ``cluster:admin/content_manager/update/trigger`` and ``cluster:admin/content_manager/policy/update`` permissions. No default role holds them, so out of the box only users with the ``all_access`` role, such as admin, can call them.
+
+   To delegate them, create a role that grants these permissions. The policy update also reads and writes the Content Manager indices with the caller's permissions, so that role also needs the ``cluster_composite_ops`` cluster permission and ``read`` and ``index`` on ``wazuh-threatintel-*``. The on-demand update needs only its own permission. You can also turn each endpoint off with ``plugins.content_manager.catalog.update_on_demand`` or ``plugins.content_manager.catalog.policy_update.enabled``. A turned-off endpoint returns 403 Forbidden for every caller, including admin.

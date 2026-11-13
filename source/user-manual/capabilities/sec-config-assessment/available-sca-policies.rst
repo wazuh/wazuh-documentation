@@ -8,7 +8,7 @@
 Available SCA policies
 =======================
 
-The table below shows the SCA policies pre-installed with Wazuh out of the box. The Wazuh agent installs only the policy file that applies to the endpoint's operating system or software:
+The table below shows the SCA policies pre-installed with Wazuh out of the box. The Wazuh agent installs only the policy file for the endpoint's operating system. The application policies, such as those for Apache, MySQL, Microsoft SQL Server, and web vulnerabilities, aren't installed by default. To use one, add its policy file to the endpoint as a custom policy:
 
 .. table:: Available SCA policies
    :widths: auto
@@ -33,11 +33,11 @@ The table below shows the SCA policies pre-installed with Wazuh out of the box. 
    +----------------------------------+-------------------------------------------------------------+----------------------------------+
    | ``cis_win2025``                  | CIS Microsoft Windows Server 2025 Benchmark v1.0.0          | Windows Server 2025              |
    +----------------------------------+-------------------------------------------------------------+----------------------------------+
-   | ``cis_alma_linux_8``             | CIS Alma Linux 8 Benchmark v2.0.0                           | Alma Linux 8                     |
+   | ``cis_alma_linux_8``             | CIS Alma Linux 8 Benchmark v2.0.0                           | AlmaLinux 8                      |
    +----------------------------------+-------------------------------------------------------------+----------------------------------+
-   | ``cis_alma_linux_9``             | CIS AlmaLinux 9 Benchmark v1.0.0                            | Alma Linux 9                     |
+   | ``cis_alma_linux_9``             | CIS AlmaLinux 9 Benchmark v1.0.0                            | AlmaLinux 9                      |
    +----------------------------------+-------------------------------------------------------------+----------------------------------+
-   | ``cis_alma_linux_10``            | CIS AlmaLinux 10 Benchmark                                  | Alma Linux 10                    |
+   | ``cis_alma_linux_10``            | CIS AlmaLinux 10 Benchmark                                  | AlmaLinux 10                     |
    +----------------------------------+-------------------------------------------------------------+----------------------------------+
    | ``cis_rocky_linux_8``            | CIS Rocky Linux 8 Benchmark v1.0.0                          | Rocky Linux 8                    |
    +----------------------------------+-------------------------------------------------------------+----------------------------------+
@@ -131,7 +131,7 @@ The table below shows the SCA policies pre-installed with Wazuh out of the box. 
    +----------------------------------+-------------------------------------------------------------+----------------------------------+
    | ``cis_apple_macOS_26.x``         | CIS Apple macOS 26.0 Tahoe Benchmark v1.0.0                 | macOS 26.x (Tahoe)               |
    +----------------------------------+-------------------------------------------------------------+----------------------------------+
-   | ``web_vulnerabilities``          | System audit for web-related vulnerabilities                | N/A                              |
+   | ``web_vulnerabilities``          | System audit for web-related vulnerabilities                | Web servers with PHP             |
    +----------------------------------+-------------------------------------------------------------+----------------------------------+
    | ``cis_apache_24``                | CIS Apache HTTP Server 2.4 Benchmark v1.5.0                 | Apache configuration files       |
    +----------------------------------+-------------------------------------------------------------+----------------------------------+

@@ -11,6 +11,7 @@ Microsoft Azure Log Analytics
 The Microsoft Azure Log Analytics service helps you analyze and search Azure activity logs across all your Azure subscriptions, providing information about operations performed on your subscription resources.
 
 .. thumbnail:: /images/cloud-security/azure/log-analytics-activity-send.png
+   :alt: Diagram of Azure Activity Log data flowing to Azure Log Analytics, Event Hubs, Power BI, and Azure Storage
    :align: center
    :width: 80%
 
@@ -32,12 +33,14 @@ Navigate to the Microsoft Entra ID panel in the Microsoft Azure portal to create
 #. Select the **App registrations** option from the **Microsoft Entra ID** panel. Then, select **New registration**.
 
    .. thumbnail:: /images/cloud-security/azure/new-app-registration.png
+      :alt: New registration button highlighted on the Microsoft Entra ID App registrations page in the Azure portal
       :align: center
       :width: 80%
 
 #. Define the user-facing display name for the application and select **Register**.
 
    .. thumbnail:: /images/cloud-security/azure/register-an-application.png
+      :alt: Register an application form in the Azure portal, with the display name field and Register button highlighted
       :align: center
       :width: 80%
 
@@ -47,36 +50,42 @@ Grant permissions to the application
 #. Select **All applications** from **App registration** and refresh it to view your list of applications. In our case, our application's display name is **LogAnalyticsApp**.
 
    .. thumbnail:: /images/cloud-security/azure/application-display-name.png
+      :alt: App registrations All applications tab in the Azure portal, listing the LogAnalyticsApp application
       :align: center
       :width: 80%
 
 #. Go to the **Overview** section and save the **Application (client) ID** for later authentication.
 
    .. thumbnail:: /images/cloud-security/azure/save-application-ID.png
+      :alt: LogAnalyticsApp Overview page in the Azure portal, showing the Application (client) ID in the Essentials section
       :align: center
       :width: 80%
 
 #. Go to the **API permissions** section and click on **Add a permission**.
 
    .. thumbnail:: /images/cloud-security/azure/add-api-permission.png
+      :alt: Add a permission button highlighted on the LogAnalyticsApp API permissions page in the Azure portal
       :align: center
       :width: 80%
 
 #. Search for the **Log Analytics API**.
 
    .. thumbnail:: /images/cloud-security/azure/search-log-analytics-api.png
+      :alt: Request API permissions panel in the Azure portal, with Log Analytics API in the APIs my organization uses results
       :align: center
       :width: 80%
 
 #. Select the **Data.Read** permission and click **Add permissions**.
 
    .. thumbnail:: /images/cloud-security/azure/select-read-log-analytics.png
+      :alt: Request API permissions panel for Log Analytics API in the Azure portal, with Data.Read application permission selected
       :align: center
       :width: 80%
 
 #. Use an admin user to **Grant admin consent** for the tenant.
 
    .. thumbnail:: /images/cloud-security/azure/grant-admin-consent.png
+      :alt: Grant admin consent button highlighted on the LogAnalyticsApp API permissions page in the Azure portal
       :align: center
       :width: 80%
 
@@ -86,30 +95,35 @@ Grant the application access to the Azure Log Analytics API
 #. Access **Log Analytics workspaces** and create a new workspace or choose an existing one.
 
    .. thumbnail:: /images/cloud-security/azure/create-log-analytics-workspace.png
+      :alt: Create button highlighted on the Log Analytics workspaces list in the Azure portal
       :align: center
       :width: 80%
 
 #. Copy the ``Workspace ID`` value from the **Overview** section.
 
    .. thumbnail:: /images/cloud-security/azure/copy-workspace-ID.png
+      :alt: Log Analytics workspace Overview page in the Azure portal, with the Workspace ID field highlighted
       :align: center
       :width: 80%
 
 #. Go to the **Access control (IAM)** section, click **Add**, and select **Add role assignment** to add the required role to the application.
 
    .. thumbnail:: /images/cloud-security/azure/add-role-assignment.png
+      :alt: Add menu highlighted on the Log Analytics workspace Access control (IAM) page in the Azure portal
       :align: center
       :width: 80%
 
 #. Select the **Log Analytics Reader** role from the **Job functions role** tab.
 
    .. thumbnail:: /images/cloud-security/azure/select-reader-role.png
+      :alt: Add role assignment Role tab in the Azure portal, listing Log Analytics roles under Job function roles
       :align: center
       :width: 80%
 
 #. Select **User, group, or service principal** from the **Members** tab. Click **Select members** and find the App registration created previously.
 
    .. thumbnail:: /images/cloud-security/azure/select-members.png
+      :alt: Add role assignment Members tab in the Azure portal, with User, group, or service principal and the app selected
       :align: center
       :width: 80%
 
@@ -124,12 +138,14 @@ Create a diagnostic setting to collect logs and send them to the Azure Log Analy
 #. Click on **Add diagnostic setting**.
 
    .. thumbnail:: /images/cloud-security/azure/add-diagnostic-setting.png
+      :alt: Add diagnostic setting link highlighted on the Microsoft Entra ID Diagnostic settings page in the Azure portal
       :align: center
       :width: 80%
 
 #. Choose the log categories you want to collect from under **Categories**. Select the **Send to Log Analytics workspace** option under **Destination details**. Select the **Log Analytics Workspace** you created in the previous steps.
 
    .. thumbnail:: /images/cloud-security/azure/choose-categories.png
+      :alt: Diagnostic setting page in the Azure portal, with log categories selected and Send to Log Analytics workspace enabled
       :align: center
       :width: 80%
 
@@ -200,18 +216,21 @@ Follow the steps outlined below to create a user on Microsoft Entra ID:
 #. Click on **New User**.
 
    .. thumbnail:: /images/cloud-security/azure/click-new-user.png
+      :alt: New user menu highlighted on the Microsoft Entra ID All users page in the Azure portal
       :align: center
       :width: 80%
 
 #. Select **Create new user**.
 
    .. thumbnail:: /images/cloud-security/azure/create-new-user.png
+      :alt: Create new user option highlighted in the New user menu on the Users page in the Azure portal
       :align: center
       :width: 80%
 
 #. Provide the necessary details for the user you want to create, and then click **Create** to complete the creation.
 
    .. thumbnail:: /images/cloud-security/azure/create-new-user2.png
+      :alt: Create new user Review + create tab in the Azure portal, with the user details and the Create button highlighted
       :align: center
       :width: 80%
 
@@ -221,9 +240,11 @@ Visualizing the findings on the Wazuh dashboard
 Once set up, you can check the results in the **Wazuh dashboard**.
 
 .. thumbnail:: /images/cloud-security/azure/results-in-wazuh-dashboard.png
+   :alt: Threat Hunting Findings tab in the Wazuh dashboard, showing Azure alerts including the new user creation event
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/cloud-security/azure/results-in-wazuh-dashboard-details.png
+   :alt: Document Details flyout in the Wazuh dashboard for the Azure Add user event, showing cloud and event fields
    :align: center
    :width: 80%

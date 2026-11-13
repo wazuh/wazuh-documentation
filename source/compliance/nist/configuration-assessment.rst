@@ -24,7 +24,7 @@ Use case
 Check the default deny firewall policy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh helps meet the CM-6 Configuration settings requirement by checking endpoint compliance with the CIS configuration benchmark. In this scenario, Wazuh runs default SCA checks to determine the default firewall deny policy status on an Ubuntu 24.04 LTS endpoint.
+Wazuh helps meet the SC-7 Boundary protection requirement by checking endpoint compliance with the CIS configuration benchmark. In this scenario, Wazuh runs default SCA checks to determine the default firewall deny policy status on an Ubuntu 24.04 LTS endpoint.
 
 #. Restart the Wazuh agent to trigger a new SCA scan:
 

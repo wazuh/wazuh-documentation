@@ -40,7 +40,7 @@ const versions = [
 
 betaVersions.push(
   /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
-  ['5.0 (RC 2)', '5.0-rc', '/index.html']
+  ['5.0 (RC 3)', '5.0-rc', '/index.html']
 );
 
 /* Data structure for every release
@@ -80,6 +80,8 @@ removedUrls['x.y'] = [
 /* Pages added in 5.0 */
 
 newUrls['5.0'] = [
+  '/compliance/tsc/common-criteria/cc6.8.html',
+  '/compliance/tsc/common-criteria/cc7.2.html',
   '/compliance/hipaa/164.308.a.1.ii.a.html',
   '/compliance/hipaa/164.308.a.5.ii.b.html',
   '/compliance/hipaa/164.308.a.6.ii.html',
@@ -87,7 +89,7 @@ newUrls['5.0'] = [
   '/compliance/hipaa/164.312.a.2.iii.html',
   '/compliance/hipaa/164.312.b.html',
   '/compliance/hipaa/164.312.c.2.html',
-  '/compliance/hipaa/164.312.d.html',
+  '/compliance/hipaa/164.308.a.5.ii.c.html',
   '/user-manual/reference/ossec-conf/agent.html',
   '/user-manual/reference/wazuh-common-schema.html',
   '/user-manual/reference/wazuh-common-schema/how-wcs-works.html',
@@ -119,7 +121,9 @@ newUrls['5.0'] = [
   '/user-manual/manager/wazuh-manager-architecture.html',
   '/user-manual/manager/wazuh-normalization-engine.html',
   '/user-manual/manager/wazuh-indexer-connector.html',
+  '/user-manual/manager/credentials.html',
   '/user-manual/manager/wazuh-manager-services.html',
+  '/user-manual/manager/service-sandbox.html',
   '/user-manual/manager/logging.html',
   '/user-manual/manager/reference.html',
   '/user-manual/data-analysis/index.html',
@@ -179,6 +183,7 @@ newUrls['5.0'] = [
   '/user-manual/reference/tools/wazuh-agent-auth.html',
   '/user-manual/reference/tools/wazuh-manager-conf.html',
   '/user-manual/reference/tools/wazuh-manager-certs.html',
+  '/user-manual/reference/tools/enrollment-tokens.html',
   '/user-manual/reference/tools/resolve-credentials.html',
   '/user-manual/reference/tools/wazuh-manager-resolve-credentials.html',
   '/user-manual/reference/tools/wazuh-manager-service-control.html',
@@ -222,6 +227,7 @@ newUrls['5.0'] = [
   '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/new-wazuh-indexer-node.html',
   '/user-manual/wazuh-indexer-cluster/removing-a-wazuh-indexer-node.html',
   '/user-manual/wazuh-indexer-cluster/troubleshooting.html',
+  '/user-manual/wazuh-server-cluster/troubleshooting-load-balanced-cluster.html',
   '/getting-started/components/wazuh-manager.html',
   '/installation-guide/wazuh-manager/index.html',
   '/installation-guide/wazuh-manager/installation-assistant.html',
@@ -229,6 +235,17 @@ newUrls['5.0'] = [
   '/deployment-options/offline-installation/securing-installation.html',
   '/deployment-options/offline-installation/running-offline.html',
   '/deployment-options/offline-installation/install-agents.html',
+  '/user-manual/capabilities/malware-detection/how-it-works.html',
+  '/user-manual/capabilities/malware-detection/threat-detection-ruleset.html',
+  '/user-manual/capabilities/malware-detection/threat-intelligence.html',
+  '/user-manual/capabilities/malware-detection/rootkit-detection.html',
+  '/user-manual/capabilities/malware-detection/fim-threat-intelligence.html',
+  '/user-manual/capabilities/malware-detection/use-cases/index.html',
+  '/user-manual/capabilities/malware-detection/use-cases/dns-queries-malicious-domains.html',
+  '/user-manual/capabilities/malware-detection/use-cases/custom-hash-blocklist.html',
+  '/user-manual/capabilities/malware-detection/use-cases/critical-file-changes.html',
+  '/user-manual/capabilities/malware-detection/use-cases/powershell-malware-activity.html',
+  '/user-manual/capabilities/malware-detection/use-cases/reverse-shells-persistence.html',
 ];
 
 /* Redirections 4.14—5.0  */
@@ -461,6 +478,21 @@ redirections.push(
   },
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/tsc/common-criteria/cc2.1.html',
+    '5.0': '/compliance/tsc/common-criteria/cc7.2.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/tsc/common-criteria/cc3.1.html',
+    '5.0': '/compliance/tsc/common-criteria/cc6.8.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/tsc/additional-criteria/pi1.4.html',
+    '5.0': '/compliance/tsc/common-criteria/cc7.2.html#use-case-detecting-file-changes-using-the-wazuh-file-integrity-monitoring-capability',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/cloud-security/gcp/supported-services/use-cases.html',
     '5.0': '/cloud-security/gcp/pubsub.html#creating-a-log-sink-on-google-cloud',
   },
@@ -523,6 +555,51 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/installation-guide/wazuh-server/step-by-step.html',
     '5.0': '/installation-guide/wazuh-manager/step-by-step.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/clam-av-logs-collection.html',
+    '5.0': '/user-manual/capabilities/malware-detection/threat-detection-ruleset.html#clamav',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/win-defender-logs-collection.html',
+    '5.0': '/user-manual/capabilities/malware-detection/threat-detection-ruleset.html#microsoft-defender',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
+    '5.0': '/user-manual/capabilities/malware-detection/rootkit-detection.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/custom-rules-malware-ioc.html',
+    '5.0': '/user-manual/capabilities/malware-detection/threat-detection-ruleset.html#custom-integrations',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence.html',
+    '5.0': '/user-manual/capabilities/malware-detection/use-cases/custom-hash-blocklist.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/malware-detection/fim-threat-detection-rules.html',
+    '5.0': '/user-manual/capabilities/malware-detection/fim-threat-intelligence.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-server-cluster/types-of-nodes.html',
+    '5.0': '/user-manual/wazuh-server-cluster/architecture-overview.html#types-of-nodes',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html',
+    '5.0': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html#add-a-wazuh-manager-node-to-all-in-one-deployments',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
+    '5.0': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html#add-a-wazuh-manager-node-to-distributed-deployments',
   }
 );
 
@@ -640,7 +717,6 @@ removedUrls['5.0'] = [
   '/user-manual/capabilities/malware-detection/custom-rules-malware-ioc.html',
   '/user-manual/capabilities/malware-detection/fim-threat-detection-rules.html',
   '/user-manual/capabilities/malware-detection/fim-yara.html',
-  '/user-manual/capabilities/malware-detection/index.html',
   '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
   '/user-manual/capabilities/malware-detection/virus-total-integration.html',
   '/user-manual/capabilities/malware-detection/win-defender-logs-collection.html',
@@ -667,20 +743,10 @@ removedUrls['5.0'] = [
   '/user-manual/wazuh-indexer-cluster/index-lifecycle-management.html',
   '/user-manual/wazuh-indexer/re-indexing.html',
   '/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints.html',
+  // End of 4.14 pages with no 5.0 page yet.
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html',
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
-  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
-  '/user-manual/wazuh-server-cluster/agent-connections.html',
-  '/user-manual/wazuh-server-cluster/architecture-overview.html',
-  '/user-manual/wazuh-server-cluster/certificates-deployment.html',
-  '/user-manual/wazuh-server-cluster/cluster-nodes-configuration.html',
-  '/user-manual/wazuh-server-cluster/data-synchronization.html',
-  '/user-manual/wazuh-server-cluster/how-server-cluster-works.html',
-  '/user-manual/wazuh-server-cluster/index.html',
-  '/user-manual/wazuh-server-cluster/load-balancers.html',
-  '/user-manual/wazuh-server-cluster/security-requirements.html',
   '/user-manual/wazuh-server-cluster/types-of-nodes.html',
-  // End of 4.14 pages with no 5.0 page yet.
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/labels.html',
   '/cloud-security/azure/ms-graph-api-setup.html',
@@ -695,6 +761,9 @@ removedUrls['5.0'] = [
   '/compliance/hipaa/file-integrity-monitoring.html',
   '/compliance/hipaa/vulnerability-detection.html',
   '/compliance/hipaa/active-response.html',
+  '/compliance/tsc/common-criteria/cc2.1.html',
+  '/compliance/tsc/common-criteria/cc3.1.html',
+  '/compliance/tsc/additional-criteria/pi1.4.html',
   '/user-manual/capabilities/active-response/additional-information.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
   '/user-manual/capabilities/active-response/ar-use-cases/restarting-wazuh-agent.html',

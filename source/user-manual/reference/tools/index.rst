@@ -19,6 +19,9 @@ The following command-line tools are available in Wazuh 5.0. The ``agent_control
 +------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
 | :doc:`cluster_control <cluster-control>`                                     | Manages and retrieves information about the Wazuh manager cluster.             | Wazuh manager          |
 +------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
+| :doc:`enrollment-tokens <enrollment-tokens>`                                 | Creates, lists, revokes, purges and decodes enrollment tokens with             | Wazuh manager          |
+|                                                                              | ``wazuh-manager-authd``.                                                       |                        |
++------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
 | :doc:`manage_agents <manage-agents>`                                         | Imports a client key on a Wazuh agent with ``-i <KEY>``.                       | Wazuh agent            |
 +------------------------------------------------------------------------------+--------------------------------------------------------------------------------+------------------------+
 | :doc:`rbac_control <rbac-control>`                                           | Manages API role-based access control resources and the RBAC database.         | Wazuh manager          |
@@ -57,6 +60,7 @@ The following command-line tools are available in Wazuh 5.0. The ``agent_control
    agent-groups
    agent-upgrade
    cluster-control
+   enrollment-tokens
    manage-agents
    rbac-control
    resolve-credentials

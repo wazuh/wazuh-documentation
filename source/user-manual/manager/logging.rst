@@ -84,6 +84,41 @@ The command output looks similar to this:
 
 The Wazuh manager appends the suffix ``-<DAY_OF_THE_MONTH>`` to the original filename as the output shows (``cluster.log-01.gz``).
 
-The ``wazuh_modules.manager_task_log_*`` internal options in the ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file control the rotation schedule, size threshold, compression, daily rotation slots, and retention period of the ``wazuh-manager.log`` and ``wazuh-manager.json`` files.
+The ``wazuh_modules.manager_task_log_*`` internal options in the ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file control the rotation schedule, size threshold, compression, daily rotation slots, and retention period of the ``wazuh-manager.log`` and ``wazuh-manager.json`` files. The Wazuh manager reads these options when it starts, so restart the Wazuh manager after you change them. For example, add ``wazuh_modules.manager_task_log_keep_days=7`` to keep rotated files for 7 days.
+
+The following table lists the options, their default values, and their allowed values.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 10 15 40
+
+   * - Option
+     - Default
+     - Allowed values
+     - Description
+   * - ``wazuh_modules.manager_task_log_rotate``
+     - 1
+     - 0 - 1
+     - Turns log rotation on (1) or off (0). 0 turns off both the daily and the size-based rotation.
+   * - ``wazuh_modules.manager_task_log_size_rotate``
+     - 512
+     - 0 - 4096
+     - Size, in MB, at which a log file is rotated. 0 turns off size-based rotation and keeps the daily rotation.
+   * - ``wazuh_modules.manager_task_log_compress``
+     - 1
+     - 0 - 1
+     - Compresses rotated files with gzip (1) or keeps them uncompressed (0).
+   * - ``wazuh_modules.manager_task_log_daily_rotations``
+     - 12
+     - 1 - 256
+     - Maximum number of rotated files per day for each log file.
+   * - ``wazuh_modules.manager_task_log_day_wait``
+     - 10
+     - 1 - 600
+     - Seconds after local midnight at which the daily rotation runs.
+   * - ``wazuh_modules.manager_task_log_keep_days``
+     - 31
+     - 0 - 500
+     - Number of days to keep rotated files. 0 keeps none.
 
 You can configure the removal of compressed files after a specified period to suit your needs. You can move them to log management systems, backup servers, or cloud-based storage devices for longer-term retention.

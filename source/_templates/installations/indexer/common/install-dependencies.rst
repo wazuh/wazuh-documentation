@@ -8,7 +8,7 @@
 
          .. code-block:: console
 
-            # apt-get install -y debconf adduser procps diffutils iproute2 openssl
+            # apt-get update && apt-get install -y debconf adduser procps diffutils iproute2 openssl
 
       .. group-tab:: Yum
 

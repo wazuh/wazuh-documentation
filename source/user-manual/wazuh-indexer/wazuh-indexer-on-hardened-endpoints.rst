@@ -1,62 +1,107 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Configure the Wazuh indexer on hardened Linux endpoints by relocating its temp directory to resolve noexec issues in /tmp.
+   :description: Learn how the Wazuh indexer packages handle the temporary directory on hardened endpoints with noexec mounts, and how to avoid needrestart restarts.
 
-Wazuh indexer configuration on hardened endpoints
-=================================================
+Wazuh indexer on hardened endpoints
+===================================
 
-Wazuh indexer uses the Java Native Access (JNA) library for executing some platform-dependent native code. On Linux, the native code backing these libraries is extracted at runtime into a temporary directory and then mapped into executable pages in the indexer's address space. This requires the underlying files not to be on a filesystem mounted with the noexec option.
+Hardened Linux hosts often mount ``/tmp`` with the ``noexec`` option, and Debian-based hosts run ``needrestart`` after package operations. This section describes how the Wazuh indexer packages handle both, and what to configure when you change the defaults.
 
-By default, the Wazuh indexer will create its temporary directory within /tmp. However, some hardened Linux installations mount /tmp with the noexec option by default. This prevents JNA from working correctly.
+Temporary directory
+-------------------
 
-Ensuring executable permissions in the Wazuh indexer temp directory
--------------------------------------------------------------------
+At startup, the Wazuh indexer extracts native libraries, such as the Java Native Access (JNA) library and the FIPS cryptography provider, into a temporary directory and maps them as executable code. The Wazuh indexer packages set this directory to ``/var/lib/wazuh-indexer/tmp`` with the ``OPENSEARCH_TMPDIR`` variable in the service environment file:
 
-To resolve this problem, either remove the ``noexec`` option from your ``/tmp`` filesystem or configure the Wazuh indexer to use a different location. Follow the steps below to change the temporary directory of the Wazuh indexer by setting the ``$OPENSEARCH_TMPDIR`` environment variable.
+-  Debian-based systems: ``/etc/default/wazuh-indexer``
+-  RPM-based systems: ``/etc/sysconfig/wazuh-indexer``
 
-.. note::
+The package creates the directory during installation, owned by the ``wazuh-indexer`` user. The Wazuh indexer doesn't use ``/tmp`` for these libraries, so hosts that mount ``/tmp`` with ``noexec`` need no additional configuration.
 
-   You need root user privileges to run all the commands described below.
+The filesystem that holds ``/var/lib/wazuh-indexer/tmp`` must not be mounted with ``noexec``. Otherwise, the Wazuh indexer fails to start, and ``/var/log/wazuh-indexer/wazuh-cluster.log`` shows an error similar to the following:
 
-#. Create the temporary directory and set the appropriate permissions.
+.. code-block:: none
+
+   Caused by: java.lang.UnsatisfiedLinkError: /var/lib/wazuh-indexer/tmp/bc-fips-jni_12552204897534/libbc-probe.so: /var/lib/wazuh-indexer/tmp/bc-fips-jni_12552204897534/libbc-probe.so: failed to map segment from shared object
+
+Changing the temporary directory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If the filesystem that holds ``/var/lib/wazuh-indexer`` must be mounted with ``noexec``, point the Wazuh indexer to a directory on a filesystem without ``noexec``. Run the following commands as root on each affected Wazuh indexer node. Replace ``<TMP_DIR>`` with the new directory, for example, ``/opt/wazuh-indexer-tmp``.
+
+#. Create the directory:
 
    .. code-block:: console
 
-      # mkdir /var/lib/wazuh-indexer/tmp
-      # chown wazuh-indexer:wazuh-indexer /var/lib/wazuh-indexer/tmp
+      # install -d -o wazuh-indexer -g wazuh-indexer -m 750 <TMP_DIR>
 
-#. Add ``Environment=OPENSEARCH_TMPDIR=/var/lib/wazuh-indexer/tmp`` to the ``/lib/systemd/system/wazuh-indexer.service`` file, which is the systemd configuration file of the Wazuh indexer. The configuration file should be similar to the following:
+   The directory must be owned by ``wazuh-indexer``. Otherwise, the Wazuh indexer fails to start with an ``AccessDeniedException`` error.
+
+#. Set the new directory in the service environment file, ``/etc/default/wazuh-indexer`` on Debian-based systems or ``/etc/sysconfig/wazuh-indexer`` on RPM-based systems:
 
    .. code-block:: ini
 
-      [Service]
-      Type=notify
-      RuntimeDirectory=wazuh-indexer
-      PrivateTmp=true
-      Environment=OPENSEARCH_HOME=/usr/share/wazuh-indexer
-      Environment=OPENSEARCH_TMPDIR=/var/lib/wazuh-indexer/tmp
-      Environment=OPENSEARCH_PATH_CONF=/etc/wazuh-indexer
-      Environment=PID_DIR=/run/wazuh-indexer
-      Environment=OPENSEARCH_SD_NOTIFY=true
-      EnvironmentFile=-/etc/default/wazuh-indexer
+      OPENSEARCH_TMPDIR=<TMP_DIR>
 
-#. Restart the Wazuh indexer service to apply the changes.
+   Don't set the variable in the systemd unit file. The unit file belongs to the package and is replaced on upgrades.
+
+#. Restart the Wazuh indexer:
 
    .. code-block:: console
 
       # systemctl restart wazuh-indexer
 
-Handling unwanted Wazuh indexer restarts on Ubuntu
---------------------------------------------------
+#. Verify that the Wazuh indexer uses the new directory:
 
-Modifying the Java temporary directory for the Wazuh indexer on some Ubuntu endpoints causes ``needrestart`` to detect normal Java operations in the directory as library changes. As a result, ``needrestart`` incorrectly flags the Wazuh indexer service as using outdated libraries and either prompts for a restart or automatically restarts the Wazuh indexer service. This occurs even when system package updates are unrelated to the Wazuh indexer. A workaround is to exclude the Wazuh indexer service from ``needrestart`` checks with the command below.
+   .. code-block:: console
+
+      # tr '\0' '\n' < /proc/$(systemctl show -p MainPID --value wazuh-indexer)/cmdline | grep java.io.tmpdir
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      -Djava.io.tmpdir=/opt/wazuh-indexer-tmp
+
+On Debian-based systems, also add a ``needrestart`` rule for the new directory, as described in :ref:`Using a custom temporary directory <wazuh_indexer_hardened_custom_tmpdir>`.
+
+Service restarts by needrestart
+-------------------------------
+
+On Debian and Ubuntu, ``needrestart`` runs after every ``apt`` operation and restarts the services it considers to be running outdated code. On Ubuntu 24.04 and later, it restarts them without asking for confirmation. The Wazuh indexer deletes the native libraries from its temporary directory right after loading them, so ``needrestart`` would consider it outdated and restart it after every ``apt`` operation, even one unrelated to the Wazuh indexer.
+
+To prevent this, the Wazuh indexer DEB package installs ``/etc/needrestart/conf.d/wazuh-indexer.conf``. This file tells ``needrestart`` to ignore the libraries mapped from the default temporary directory:
+
+.. code-block:: perl
+
+   push(@{$nrconf{blacklist_mappings}}, qr(^/var/lib/wazuh-indexer/tmp/));
+
+``needrestart`` keeps every other check on the Wazuh indexer service, so an update of a system library that the Wazuh indexer uses, such as ``libc``, still restarts it. The file is a configuration file of the package: upgrades keep local changes to it, removing the package keeps it, and purging the package deletes it. RPM-based systems don't use ``needrestart`` and aren't affected.
+
+.. warning::
+
+   Don't exclude the Wazuh indexer service from ``needrestart`` with ``$nrconf{blacklist_rc}``. This setting also prevents legitimate restarts, such as after a ``libc`` update.
+
+.. _wazuh_indexer_hardened_custom_tmpdir:
+
+Using a custom temporary directory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The rule above names the default temporary directory. If you change ``OPENSEARCH_TMPDIR``, ``needrestart`` restarts the Wazuh indexer after every ``apt`` operation again. To prevent this, add a rule for the new directory in a separate file, so the package configuration file stays unchanged. Replace ``<TMP_DIR>`` with the directory set in ``OPENSEARCH_TMPDIR``:
 
 .. code-block:: console
 
-   # echo '$nrconf{blacklist_rc} = [ qr(^wazuh-indexer) ];' > "/etc/needrestart/conf.d/wazuh-indexer.conf"
+   # echo 'push(@{$nrconf{blacklist_mappings}}, qr(^<TMP_DIR>/));' > /etc/needrestart/conf.d/wazuh-indexer-tmpdir.conf
 
-.. note::
+Verify that ``needrestart`` no longer lists the Wazuh indexer service:
 
-   This setting will make ``needrestart`` always ignore the Wazuh indexer service, even in cases where a restart would be legitimate. Therefore, users may choose to apply it at their discretion and risk.
+.. code-block:: console
 
+   # needrestart -b
+
+The output must not contain the following line:
+
+.. code-block:: none
+
+   NEEDRESTART-SVC: wazuh-indexer.service

@@ -62,9 +62,14 @@
       return rows.map(function (r) { return r[key]; }).filter(function (v, i, a) { return v && a.indexOf(v) === i; }).sort();
     }
 
+    // The hidden sizer lists every option, so the box is as wide as the longest one.
     function select(label, cls, opts) {
+      var sizer = (opts.match(/>[^<]*<\/option>/g) || []).map(function (o) {
+        return '<span>' + o.slice(1, -9) + '</span>';
+      }).join('');
       return '<label class="table-filter-select"><span class="table-filter-label">' + label + '</span>' +
-        '<select class="' + cls + '">' + opts + '</select></label>';
+        '<select class="' + cls + '">' + opts + '</select>' +
+        '<span class="table-filter-sizer" aria-hidden="true">' + sizer + '</span></label>';
     }
     function button(label, cls) {
       return '<button type="button" class="table-filter-btn ' + cls + '" title="' + label + '">' +
@@ -77,11 +82,13 @@
     bar.setAttribute('role', 'search');
     bar.setAttribute('aria-label', 'Search and filter fields');
     bar.innerHTML =
-      '<div class="table-filter-search">' +
-        '<input type="search" class="table-filter-input wcs-q" placeholder="Search ' + rows.length + ' fields"' +
-        ' title="Search by field name or description" aria-label="Search fields by name or description">' +
-        '<span class="table-filter-count wcs-count" aria-live="polite"></span>' +
-      '</div>' +
+      '<label class="table-filter-field"><span class="table-filter-label">Search</span>' +
+        '<span class="table-filter-search">' +
+          '<input type="search" class="table-filter-input wcs-q" placeholder="Search ' + rows.length + ' fields"' +
+          ' title="Search by field name or description" aria-label="Search fields by name or description">' +
+          '<span class="table-filter-count wcs-count" aria-live="polite"></span>' +
+        '</span>' +
+      '</label>' +
       '<div class="table-filter-selects">' +
         select('Type', 'wcs-type', options(unique('type'))) +
         select('Level', 'wcs-level', options(['core', 'extended', 'custom'], { core: 'core (most used)', custom: 'custom (WCS)' })) +
