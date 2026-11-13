@@ -14,7 +14,7 @@ After enrollment, the Wazuh agent collects security information from the monitor
 
 .. note::
 
-   When you follow the :ref:`installation guide <installing_the_wazuh_agent>`, we recommend that you use environment variables to configure the Wazuh agent automatically. This method allows the Wazuh agent to enroll with the Wazuh manager and connect to it.
+   When you follow the :ref:`installation guide <installing_the_wazuh_agent>`, we recommend that you use :doc:`deployment variables <deployment-variables/index>` to configure the Wazuh agent automatically. This method allows the Wazuh agent to enroll with the Wazuh manager and connect to it.
 
 Learn about the different enrollment options and the information required for Wazuh agent enrollment in these sections.
 
