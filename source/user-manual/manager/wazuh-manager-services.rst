@@ -73,7 +73,7 @@ Where:
 -  ``<ssl_manager_key>`` specifies the path to the Wazuh manager SSL key. The default value is ``/etc/wazuh-manager/certs/remoted-key.pem``. The possible value is an absolute path to a file in ``/etc/wazuh-manager/certs``.
 -  ``<ipv6>`` sets whether the agent enrollment service listens on IPv6. The default value is ``no``. The allowed values are ``yes`` and ``no``.
 -  ``<force>`` sets when the Wazuh manager replaces an existing Wazuh agent that enrolls again with the same name or IP address. See :ref:`force <reference_wazuh_manager_conf_auth_force>` for its options and defaults.
--  ``<remote_enrollment>`` sets whether Wazuh agents can enroll through the HTTPS listener on port ``1517``. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
+-  ``<remote_enrollment>`` sets whether Wazuh agents can enroll through the HTTPS listener on port ``1517`` and on port ``1515``. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 -  ``<legacy_enrollment>`` sets whether Wazuh 4.x agents can enroll on port ``1515``. When the option is absent, it follows ``<remote><legacy><enabled>``. The ``<port>`` listener opens only while legacy enrollment is active.
 
 For all the options, see :ref:`auth <reference_wazuh_manager_conf_auth>`.
