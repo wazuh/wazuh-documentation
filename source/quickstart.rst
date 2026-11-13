@@ -8,7 +8,7 @@ Quickstart
 
 Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of a single universal agent and three central components: the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard. For more information, check the :doc:`Getting started </getting-started/index>` documentation.
 
-Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`__, the `GNU Affero General Public License, version 3 <https://www.gnu.org/licenses/agpl-3.0.en.html>`__, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`__.
+Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`__ (GPLv2), the `GNU Affero General Public License, version 3 <https://www.gnu.org/licenses/agpl-3.0.en.html>`__ (AGPLv3), and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`__ (ALv2).
 
 This quickstart shows how to install the Wazuh central components on one host using the installation assistant, a script that downloads, installs, and configures them. You can check our :doc:`Installation guide </installation-guide/index>` for more details and other installation options.
 
@@ -95,8 +95,6 @@ You need a host that meets the requirements above, internet access, and a user w
    -  Password: the admin password from the summary
 
    To change a password, see :doc:`Password management </user-manual/user-administration/password-management>`.
-
-Each package keeps its certificate authority and the private key of that authority in its ``ca/`` directory: ``/etc/wazuh-indexer/ca``, ``/etc/wazuh-manager/ca``, and ``/etc/wazuh-dashboard/ca``. Back up these three directories in a safe place. You need them to renew certificates.
 
 Next steps
 ----------
