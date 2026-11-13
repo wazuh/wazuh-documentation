@@ -131,7 +131,7 @@ Decoders
 
 #. Create an integration with the title ``custom_http`` using the **Create integration** button if you haven't created one before. Select **Network Activity** as the **Category** and set a preferred name as the **Author**.
 
-#. Enter the decoder below and click the **Create decoder** button.
+#. Switch to the YAML editor, then enter the decoder below and click the **Create decoder** button. This decoder is a copy of the Wazuh message root decoder, ``decoder/core-wazuh-message/0``. Each space needs its own root decoder, and you select this one for the ``custom_http`` integration in a later step.
 
    .. code-block:: yaml
 
@@ -152,7 +152,7 @@ Decoders
         - _tmp_json: "parse_json($event.original)"
       enabled: true
 
-#. Select the **Draft** space, then select **Actions** > **Create**. Select the ``custom_http`` integration, then enter the decoder below and click the **Create decoder** button.
+#. Select the **Draft** space, then select **Actions** > **Create**. Switch to the YAML editor, select the ``custom_http`` integration, then enter the decoder below and click the **Create decoder** button.
 
    .. code-block:: yaml
 
@@ -217,7 +217,7 @@ Decoders
         - network.forwarded_ip: "$_client_ip.0"
         - tls.version_protocol: "$_tls.0"
         - tls.cipher: "$tls.cipher"
-        - threat.indicator.description: "kvdb_get('malicious_IPs', $source.ip)"
+        - threat.indicator.description: "kvdb_lookup('malicious_IPs', $source.ip)"
         parse|_http_request:
         - "<http.request.method> <url.original> HTTP/<http.version>"
       - check:
@@ -228,10 +228,10 @@ Decoders
         - _tls_1: "regex_not_match(\\\\d+\\\\.\\\\d+)"
         map:
         - tls.version: "concat_any($_tls_1, '.0')"
-      - check: "int_less($http.response.status_code, 400)"
+      - check: "number_lt($http.response.status_code, 400)"
         map:
         - event.outcome: "success"
-      - check: "int_greater_or_equal($http.response.status_code, 400)"
+      - check: "number_gte($http.response.status_code, 400)"
         map:
         - event.outcome: "failure"
       - check:
@@ -245,7 +245,7 @@ Decoders
         - url.domain: "$destination.domain"
       enabled: true
 
-#. Select the **Draft** space, then select **Actions** > **Create**. Select the ``custom_http`` integration, then enter the decoder below and click the **Create decoder** button.
+#. Select the **Draft** space, then select **Actions** > **Create**. Switch to the YAML editor, select the ``custom_http`` integration, then enter the decoder below and click the **Create decoder** button.
 
    .. code-block:: yaml
 
@@ -407,7 +407,7 @@ Rules
 
 #. Navigate to **Ruleset management** > **Overview,** then click **Actions** > **Promote.** Type the confirmation message when prompted, and click **Promote**. This promotes the created assets from the **Draft** user space to the **Test** user space.
 
-#. Select the **Test** space, then click **Actions** > **Promote.** Type the confirmation message when prompted, and click **Promote**. This promotes the created assets from the **Test** user space to the **Custom** user space.
+#. Select the **Test** space, then click **Actions** > **Promote.** Type the confirmation message when prompted, and click **Promote**. This promotes the created assets from the **Test** user space to the **Custom** user space. Wait a few minutes for the changes to apply before you test them.
 
 Detector
 ~~~~~~~~
@@ -443,6 +443,8 @@ Active response
    | ``Type``             | ``Stateful``                                                 |
    +----------------------+--------------------------------------------------------------+
    | ``Stateful timeout`` | ``60``                                                       |
+   +----------------------+--------------------------------------------------------------+
+   | ``Location``         | ``Local``                                                    |
    +----------------------+--------------------------------------------------------------+
 
 #. Click **Create** to create the Active Response.

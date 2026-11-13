@@ -15,6 +15,15 @@ The indexer connector transports data in the following flows:
 
 The indexer connector establishes TLS-secured connections to the Wazuh indexer. It supports mutual TLS authentication using a client certificate and private key. The connector also authenticates with a username and password, which it reads from the Wazuh keystore rather than from the configuration file. The credential resolver stores the ``wazuh-manager`` username and the ``WAZUH_INDEXER_MANAGER_PASSWORD`` value in the keystore. When the Wazuh indexer runs on the same endpoint, the resolver also imports the Wazuh indexer CA and client certificate pair from ``/etc/wazuh-indexer/export/``. Without these credentials, the Wazuh manager cannot start, and ``wazuh-manager-control`` prints ``Unresolved credentials. Exiting``.
 
+To change these credentials, run the following commands as root:
+
+-  ``/var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k username -v <USERNAME>``
+-  ``/var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password -vp <PASSWORD_FILE>``
+
+where ``<PASSWORD_FILE>`` is a file whose first line is the password.
+
+Then restart the Wazuh manager. The credential resolver doesn't replace a password that is already in the keystore.
+
 .. warning::
 
    The indexer connector uses in-memory buffering. It discards buffered documents when the Wazuh manager stops or restarts. Ensure that the Wazuh indexer cluster can handle the expected data volume and event rate rather than relying on the Wazuh manager to absorb sustained indexing delays.

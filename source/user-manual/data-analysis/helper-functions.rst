@@ -8,7 +8,7 @@
 Helper functions
 ================
 
-Helper functions are built-in operations of the :doc:`Wazuh normalization engine </user-manual/manager/wazuh-normalization-engine>`. You use them in decoders and filters to evaluate event fields, compute values, and transform events. The engine provides 128 helper functions across three categories: :ref:`filter <helper_functions_filter>`, :ref:`map <helper_functions_map>`, and :ref:`transformation <helper_functions_transformation>`.
+Helper functions are built-in operations of the :doc:`Wazuh normalization engine </user-manual/manager/wazuh-normalization-engine>`. You use them in decoders and filters to evaluate event fields, compute values, and transform events. The engine provides 120 helper functions in two categories: :ref:`check <helper_functions_check>` and :ref:`map <helper_functions_map_value>`.
 
 How helper functions work
 -------------------------
@@ -22,28 +22,28 @@ You can use helper functions in two stages:
 -  ``check``: Evaluates conditions on the event. It runs at the top level of decoders and filters, inside ``normalize`` blocks, and in the ``first_of`` branches of outputs.
 -  ``map``: Sets or modifies event fields. It runs inside the ``normalize`` blocks of a decoder.
 
-The ``parse|<FIELD>`` stage uses parser expressions, not helper functions. To parse a field within a ``map`` operation, use a ``parse_*`` transformation helper.
+The ``parse|<FIELD>`` stage uses :ref:`parser expressions <data_analysis_parser_expressions>`, not helper functions. To parse a field within a ``map`` operation, use a ``parse_*`` map helper.
 
-The following table compares the three helper categories.
+The following table compares the two helper categories.
 
-+----------------+-----------+----------------------------------------+----------------------------------+
-| Category       | Stage     | Effect on the target field             | When the helper fails            |
-+================+===========+========================================+==================================+
-| Filter         | ``check`` | Reads the field and doesn't change the | The condition fails.             |
-|                |           | event.                                 |                                  |
-+----------------+-----------+----------------------------------------+----------------------------------+
-| Map            | ``map``   | Writes the value that the helper       | The target field doesn't change. |
-|                |           | returns.                               |                                  |
-+----------------+-----------+----------------------------------------+----------------------------------+
-| Transformation | ``map``   | Changes the field in place, or changes | The target field doesn't change. |
-|                |           | the event.                             |                                  |
-+----------------+-----------+----------------------------------------+----------------------------------+
++----------+-----------+--------------------------------+----------------------------------+
+| Category | Stage     | Effect on the target field     | When the helper fails            |
++==========+===========+================================+==================================+
+| Check    | ``check`` | Reads the field and doesn't    | The condition fails.             |
+|          |           | change the event.              |                                  |
++----------+-----------+--------------------------------+----------------------------------+
+| Map      | ``map``   | Writes the value that the      | The target field doesn't change. |
+|          |           | helper returns, or changes the |                                  |
+|          |           | field in place or the event.   |                                  |
++----------+-----------+--------------------------------+----------------------------------+
 
-The normalization engine validates helper categories when building an asset. Using a filter helper in a ``map`` operation, or a map or transformation helper in a ``check`` operation, causes the asset build to fail.
+The normalization engine validates helper categories when building an asset. Using a check helper in a ``map`` operation, or a map helper in a ``check`` operation, causes the asset build to fail.
 
-In output assets, map and transformation helpers can write only to fields listed in the outputs section of the allowed-fields schema document. By default, this document lists no fields for outputs. If a map or transformation helper writes to an unlisted field, the asset build fails unless the target is the event root (``.``). The ``discard_events``, ``erase_custom_fields``, and ``sanitize_fields`` helpers don't have this restriction.
+In output assets, map helpers can write only to fields listed under the ``output`` key of the allowed-fields schema document. By default, this key lists no fields. If a map helper writes to an unlisted field, the asset build fails unless the target is the event root (``.``). The ``discard_event``, ``delete_custom_fields``, and ``snake_case_keys`` helpers don't have this restriction.
 
-Filter assets accept only a ``check`` stage. Therefore, they cannot contain map or transformation helpers.
+Filter assets accept only a ``check`` stage. Therefore, they cannot contain map helpers.
+
+.. _data_analysis_helper_call_syntax:
 
 Helper call syntax
 ------------------
@@ -81,9 +81,9 @@ Target field types
 
 When the target is a WCS field, the engine checks its type against the expected target type in the reference tables when building the asset. A mismatch causes the build to fail. The engine skips this check for the ``any`` type and types marked ``(no build check)``.
 
-Map helpers also reject values that do not match the WCS field type when processing an event. The following transformation helpers perform the same check: the four ``array_append`` helpers, ``get_key_in``, ``kvdb_get``, ``kvdb_get_array``, ``kvdb_get_merge``, ``kvdb_get_merge_recursive``, ``merge_key_in``, and ``merge_recursive_key_in``.
+Map helpers also reject values that do not match the WCS field type when processing an event. Among the map helpers that modify the event, the following perform the same check: the four ``array_append`` helpers, ``lookup``, ``lookup_merge``, ``kvdb_lookup``, ``kvdb_lookup_append``, and ``kvdb_lookup_merge``.
 
-The ``rename`` helper does not validate the value it moves. Filter helpers do not validate values against the schema. They evaluate the values they read and pass or fail accordingly.
+The ``rename`` helper does not validate the value it moves. Check helpers do not validate values against the schema. They evaluate the values they read and pass or fail accordingly.
 
 Temporary fields and the event root (``.``) accept any type.
 
@@ -106,16 +106,18 @@ A plain value or field reference does not require a helper. In a ``check`` opera
 
 To set a string that starts with ``$`` as a literal value, escape the first character: ``\$``.
 
+.. _data_analysis_helpers_conditional_expressions:
+
 Helpers in conditional expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A ``check`` stage can also be a single conditional expression string. In this form, the first argument of a filter helper specifies the target field as a reference.
+A ``check`` stage can also be a single conditional expression string. In this form, the first argument of a check helper specifies the target field as a reference.
 
 .. code-block:: yaml
 
-   check: ip_cidr_match($source.ip, '192.168.0.0', '24')
+   check: in_cidr($source.ip, '192.168.0.0/24')
 
-The comparison operators ``==``, ``!=``, ``<``, ``<=``, ``>``, and ``>=`` are short forms of filter helpers. The left side must be a reference. The ``==`` operator uses the built-in comparison, and its right side can be a value or a reference. The other operators use the ``string_*`` or ``number_*`` helper that matches the value type, such as ``number_greater`` for ``>`` with a number. Their right side must be a literal string or number, not a reference.
+The comparison operators ``==``, ``!=``, ``<``, ``<=``, ``>``, and ``>=`` are short forms of check helpers. The left side must be a reference. The ``==`` operator uses the built-in comparison, and its right side can be a value or a reference. The other operators use the ``string_*`` or ``number_*`` helper that matches the value type, such as ``number_gt`` for ``>`` with a number. Their right side must be a literal string or number, not a reference.
 
 .. code-block:: yaml
 
@@ -125,7 +127,7 @@ Combine conditions with the ``AND``, ``OR``, and ``NOT`` operators, and group th
 
 .. code-block:: yaml
 
-   check: ip_cidr_match($source.ip, '10.0.0.0', '8') OR ip_cidr_match($source.ip, '192.168.0.0', '16')
+   check: in_cidr($source.ip, '10.0.0.0/8') OR in_cidr($source.ip, '192.168.0.0/16')
 
 .. _helper_functions_failed_behavior:
 
@@ -140,8 +142,6 @@ A failed helper call has the following effect in each stage:
 -  ``check`` **inside a** ``normalize`` **block**: If a condition fails, the engine skips the block and runs the next one. The decoder still accepts the event.
 -  ``map``: The engine runs each operation in order. If an operation fails, the engine leaves its target field unchanged and continues with the next operation. A ``map`` operation never causes the decoder to reject the event.
 
-A helper fails if a referenced field does not exist, a value has the wrong type, or a lookup returns no match. Helpers whose description says they skip missing references, such as ``concat_any`` and ``array_append_any``, don't fail on a missing reference.
+A helper fails if a referenced field does not exist, a value has the wrong type, or a lookup returns no match. Helpers whose description says they skip missing references, such as ``concat_any`` and ``array_append_any``, don't fail on a missing reference. ``concat_any`` fails when every reference is missing, and ``array_append_any`` fails when it appends nothing.
 
 Other errors prevent the asset from building. These include an unknown helper name, an incorrect number of arguments, a helper from the wrong category, or a target type mismatch.
-
-For the arguments, target field types, and behavior of every helper, see :ref:`reference_helper_functions`.

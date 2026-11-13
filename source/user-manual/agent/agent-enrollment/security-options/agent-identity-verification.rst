@@ -8,7 +8,7 @@ Wazuh agent identity verification
 
 This method uses SSL certificates to verify that a Wazuh agent is authorized to enroll in the Wazuh manager. The Wazuh manager and Wazuh agent verification are independent of each other. However, it is possible to use a combination of both.
 
-Learn about Wazuh agent identity verification steps in the sections below
+Learn about Wazuh agent identity verification steps in the sections below.
 
 .. contents::
    :local:
@@ -30,9 +30,9 @@ You need a certificate authority to sign certificates for the Wazuh manager and 
 
    .. code-block:: console
 
-      # openssl req -x509 -new -nodes -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
+      # openssl req -x509 -new -nodes -days 3650 -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
 
-The root certificate is created and saved as the ``rootCA.pem`` file. The default validity is 30 days.
+The root certificate is created and saved as the ``rootCA.pem`` file. It is valid for 3650 days (10 years). The CA must stay valid longer than the certificates it signs, which last 365 days.
 
 Wazuh agent verification options
 --------------------------------
@@ -46,9 +46,11 @@ The CA files ``rootCA.pem`` and ``rootCA.key`` are then used to sign ``sslagent.
 The Wazuh manager verifies the certificate presented by the Wazuh agent during Wazuh agent enrollment, using the root certificate. Wazuh provides two Wazuh agent verification options:
 
 -  Wazuh agent verification without host validation: The certificates for the Wazuh agents are issued without specifying their hostname or IP address.
--  Wazuh agent verification with host validation: The certificates for the Wazuh agents are issued with their IP address or hostname specified as the common name.
+-  Wazuh agent verification with host validation: The certificates for the Wazuh agents are issued with their IP address as a subject alternative name (SAN). The Wazuh manager accepts each certificate only from the address it names.
 
-The difference between these validation methods is that the certificate in the former method can be reused on multiple agents, while the certificate created in the latter can only be used on the Wazuh agent whose IP address or hostname was specified during certificate generation.
+The difference between these validation methods is that the certificate in the former method can be reused on multiple agents, while the certificate created in the latter can only be used on the Wazuh agent whose IP address was specified during certificate generation.
+
+Host validation is off by default. Turn it on in the Wazuh manager configuration, as step 5 shows: ``<verification_mode>full</verification_mode>`` for Wazuh 5.0 agents, and ``<ssl_verify_host>yes</ssl_verify_host>`` for Wazuh 4.x agents. Wazuh 5.0 agents must have their IP address as an IP entry in the SAN, because the common name isn't checked. Wazuh 4.x agents can have it in the SAN or as the common name.
 
 Wazuh manager configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -65,7 +67,7 @@ Wazuh manager configuration
 
       .. code-block:: console
 
-         # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<agent_IP>'
+         # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<WAZUH_AGENT_IP_ADDRESS>'
 
    Where:
 
@@ -77,6 +79,12 @@ Wazuh manager configuration
    .. code-block:: console
 
       # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
+
+   For Wazuh agent verification with host validation, add the IP address of the Wazuh agent to the certificate as a subject alternative name (SAN):
+
+   .. code-block:: console
+
+      # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial -extfile <(printf "subjectAltName=IP:<WAZUH_AGENT_IP_ADDRESS>")
 
    Where:
 
@@ -104,6 +112,8 @@ Wazuh manager configuration
          <ssl_agent_ca>/etc/wazuh-manager/rootCA.pem</ssl_agent_ca>
       </auth>
 
+   For Wazuh agent verification with host validation, also add ``<ssl_verify_host>yes</ssl_verify_host>`` to the ``<auth>`` section.
+
    For Wazuh 5.0 agents, set the CA in the ``<https>`` block of the ``<remote>`` section. Wazuh 5.0 agents without a certificate signed by this CA are then refused. Keep ``<ssl_agent_ca>`` for Wazuh 4.x agents (port 1515):
 
    .. code-block:: xml
@@ -114,6 +124,8 @@ Wazuh manager configuration
            <ca>/etc/wazuh-manager/rootCA.pem</ca>
          </https>
       </remote>
+
+   For Wazuh agent verification with host validation, also add ``<verification_mode>full</verification_mode>`` to the ``<https>`` block. The Wazuh manager then refuses, with HTTP 403, a Wazuh 5.0 agent whose certificate doesn't list the address it connects from. Behind a load balancer or proxy that terminates TLS, that address is the proxy's.
 
 #. Restart the Wazuh manager service to apply the changes:
 
@@ -165,8 +177,8 @@ Follow these steps to enroll a Linux/Unix endpoint by using certificates for age
             <address><WAZUH_MANAGER_ADDRESS></address>
           </server>
           <enrollment>
-            <agent_certificate_path>/<PATH_TO>/sslagent.cert</agent_certificate_path>
-            <agent_key_path>/<PATH_TO>/sslagent.key</agent_key_path>
+            <agent_certificate_path>/var/ossec/etc/sslagent.cert</agent_certificate_path>
+            <agent_key_path>/var/ossec/etc/sslagent.key</agent_key_path>
           </enrollment>
         </client>
       </ossec_config>
@@ -190,10 +202,10 @@ Windows
 
 Follow these steps to enroll a Windows endpoint by using certificates for the Wazuh agent verification:
 
-The Wazuh agent installation directory depends on the architecture of the host.
+The Wazuh agent is a 32-bit application. Its installation directory depends on the Windows operating system architecture:
 
--  ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
--  ``C:\Program Files\ossec-agent`` for 32-bit systems.
+-  On a 64-bit Windows operating system, Windows installs the Wazuh agent in ``C:\Program Files (x86)\ossec-agent``
+-  On a 32-bit Windows operating system, Windows installs the Wazuh agent in ``C:\Program Files\ossec-agent``
 
 #. Ensure that the signed SSL certificate and key files (``sslagent.cert`` and ``sslagent.key``) have been copied to the endpoint.
 

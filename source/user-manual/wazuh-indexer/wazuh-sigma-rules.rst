@@ -86,7 +86,7 @@ The following example shows a complete Sigma rule, using all supported blocks:
      gdpr:
        - Art. 32
 
-Replace ``<INTEGRATION_TITLE>`` with the title of the Draft space integration that you create the rule in. The ``logsource.product`` value must match that title exactly. It decides which detector evaluates the rule. The Content Manager module rejects a rule whose ``logsource.product`` does not match, with 400 Bad Request.
+Replace ``<INTEGRATION_TITLE>`` with the title of the Draft space integration that you create the rule in. The ``logsource.product`` value must match that title exactly. It decides which detector evaluates the rule. The Content Manager module rejects a rule whose ``logsource.product`` does not match, with 400 Bad Request. To create a rule, see :doc:`Data analysis </user-manual/data-analysis/index>`.
 
 Required fields
 ---------------
@@ -114,23 +114,23 @@ Optional fields
 
 In addition to the required fields, Sigma rules support several optional fields that provide additional context, threat intelligence mappings, and compliance information.
 
-+--------------------+---------+--------------------------------------------------------------------------------------------------+
-| Field              | Type    | Description                                                                                      |
-+====================+=========+==================================================================================================+
-| ``id``             | String  | Unique rule identifier.                                                                          |
-+--------------------+---------+--------------------------------------------------------------------------------------------------+
-| ``sigma_id``       | String  | Original Sigma rule identifier. Preserved when importing rules from external Sigma repositories. |
-+--------------------+---------+--------------------------------------------------------------------------------------------------+
-| ``enabled``        | Boolean | Enables or disables the rule. Disabled rules are not evaluated by detectors.                     |
-+--------------------+---------+--------------------------------------------------------------------------------------------------+
-| ``tags``           | Array   | Categorization tags used for grouping, filtering, and threat classification.                     |
-+--------------------+---------+--------------------------------------------------------------------------------------------------+
-| ``falsepositives`` | Array   | Known sources of legitimate activity that may trigger the rule.                                  |
-+--------------------+---------+--------------------------------------------------------------------------------------------------+
-| ``mitre``          | Object  | Maps the rule to MITRE ATT&CK tactics, techniques, and sub-techniques.                           |
-+--------------------+---------+--------------------------------------------------------------------------------------------------+
-| ``compliance``     | Object  | Maps the rule to the supported compliance frameworks and controls.                               |
-+--------------------+---------+--------------------------------------------------------------------------------------------------+
++--------------------+---------+---------------------------------------------------------------------------------------------------------------------+
+| Field              | Type    | Description                                                                                                         |
++====================+=========+=====================================================================================================================+
+| ``id``             | String  | Unique rule identifier. The Content Manager assigns it when the rule is created; a value in the request is ignored. |
++--------------------+---------+---------------------------------------------------------------------------------------------------------------------+
+| ``sigma_id``       | String  | Original Sigma rule identifier. Preserved when importing rules from external Sigma repositories.                    |
++--------------------+---------+---------------------------------------------------------------------------------------------------------------------+
+| ``enabled``        | Boolean | Enables or disables the rule. Disabled rules are not evaluated by detectors.                                        |
++--------------------+---------+---------------------------------------------------------------------------------------------------------------------+
+| ``tags``           | Array   | Categorization tags used for grouping, filtering, and threat classification.                                        |
++--------------------+---------+---------------------------------------------------------------------------------------------------------------------+
+| ``falsepositives`` | Array   | Known sources of legitimate activity that may trigger the rule.                                                     |
++--------------------+---------+---------------------------------------------------------------------------------------------------------------------+
+| ``mitre``          | Object  | Maps the rule to MITRE ATT&CK tactics, techniques, and sub-techniques.                                              |
++--------------------+---------+---------------------------------------------------------------------------------------------------------------------+
+| ``compliance``     | Object  | Maps the rule to the supported compliance frameworks and controls.                                                  |
++--------------------+---------+---------------------------------------------------------------------------------------------------------------------+
 
 Detection logic
 ---------------

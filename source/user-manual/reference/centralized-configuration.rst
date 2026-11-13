@@ -172,6 +172,8 @@ When the same setting is defined in multiple places, the following precedence ap
 #. ``agent.conf`` (centralized configuration from the Wazuh manager)
 #. ``ossec.conf`` (local configuration on the agent)
 
+When both files set the same option, a single-value option such as ``<frequency>`` takes the ``agent.conf`` value, and a repeatable option such as ``<directories>`` or an SCA ``<policy>`` adds the ``agent.conf`` entries to the local ones.
+
 If an agent belongs to multiple groups, the configurations from all groups are merged. Groups are merged in the order they were assigned to the agent, not by group name. In case of conflicts, the value from the group assigned last takes precedence. ``GET /agents?select=group`` shows the order.
 
 Best practices

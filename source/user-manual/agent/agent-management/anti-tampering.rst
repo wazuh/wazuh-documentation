@@ -100,7 +100,7 @@ You need to generate an authentication token on a trusted administrator endpoint
 
       # echo $TOKEN
 
-   Copy the token, as you will use it to authenticate when removing agents. You can reuse the same token for multiple agents.
+   Copy the token, as you will use it to authenticate when removing agents. You can reuse the same token for multiple agents until it expires, 900 seconds (15 minutes) after you generate it by default. Generate it right before you uninstall the Wazuh agents.
 
 #. Create the file ``/var/ossec/etc/uninstall_validation.env`` on the monitored endpoint you want to remove the Wazuh agent from and add the following content to it:
 
@@ -114,7 +114,7 @@ You need to generate an authentication token on a trusted administrator endpoint
 
    Replace ``<AUTHENTICATION_TOKEN>`` with the authentication token you generated earlier, and ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or FQDN.
 
-You can now proceed to :ref:`uninstall the Wazuh  agent <uninstalling_the_wazuh_agent>`.
+You can now proceed to :ref:`uninstall the Wazuh agent <uninstalling_the_wazuh_agent>`.
 
 .. _stored_wazuh_server_API_credentials:
 
@@ -135,7 +135,7 @@ Create the file ``/var/ossec/etc/uninstall_validation.env`` on the monitored end
 
 Replace ``<WAZUH_MANAGER_API_USER>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with your Wazuh manager API username and password, respectively. Also, replace ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or FQDN.
 
-You can now proceed to :ref:`uninstall the Wazuh  agent <uninstalling_the_wazuh_agent>`.
+You can now proceed to :ref:`uninstall the Wazuh agent <uninstalling_the_wazuh_agent>`.
 
 .. _uninstalling_the_wazuh_agent:
 

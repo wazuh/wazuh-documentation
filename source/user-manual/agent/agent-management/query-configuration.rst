@@ -6,7 +6,7 @@
 Query the Wazuh agent configuration
 ===================================
 
-You can query the actual configuration of a Wazuh agent or the Wazuh manager on demand. Navigate to the **Server management** > **Settings** in the Wazuh dashboard. From here, you will be able to fetch the active configuration for the Wazuh manager in real-time. The image below shows details about the Wazuh manager configuration.
+You can query the actual configuration of a Wazuh agent or the Wazuh manager on demand. Navigate to **Server management** > **Settings** in the Wazuh dashboard. From here, you will be able to fetch the active configuration for the Wazuh manager in real-time. The image below shows details about the Wazuh manager configuration.
 
 .. thumbnail:: /images/manual/agent/query-manager-configuration.png
    :title: Query the Wazuh manager configuration

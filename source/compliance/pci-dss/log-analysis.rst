@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how the Wazuh Logcollector module and unclassified event storage help meet PCI DSS log data analysis requirements.
+   :description: Learn how the Wazuh Logcollector module, custom retention policies, and unclassified event storage help meet PCI DSS log data analysis requirements.
 
 Log data analysis
 ==================
@@ -16,17 +16,17 @@ The Logcollector module helps to meet the following PCI DSS requirement:
 
 To help meet this requirement, the Wazuh agent uses the Logcollector module to collect endpoint logs or receive syslog messages from network and other syslog-enabled devices. The Wazuh manager normalization engine decodes the logs to extract the relevant fields, then forwards the normalized events to the Wazuh indexer. The detection engine in the Wazuh indexer evaluates them against the ruleset and triggers a finding when an event matches a rule. Refer to :ref:`rules <data_analysis_rules_compliance>` for more information.
 
-Wazuh also logs events that do not trigger a finding using the storage of unclassified events feature and the Wazuh indexer's long-term storage. To store events that no rule matched, see :ref:`enabling unclassified events storage <pci_dss_unclassified_events>`.
+Wazuh indexes decoded events whether or not they trigger a finding. To also keep the events that no integration decodes, see :ref:`enabling unclassified events storage <pci_dss_unclassified_events>`.
 
 Use cases
 ---------
 
 Below are PCI DSS requirements that the Wazuh Logcollector module can meet.
 
-PCI DSS requirement 10.2.2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PCI DSS requirement 10.2.1.4
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-PCI DSS requirement 10.2.2 mandates that audit logs record the following details for each auditable event:
+PCI DSS requirement 10.2.1.4 mandates that audit logs capture invalid logical access attempts. Requirement 10.2.2 mandates that audit logs record the following details for each auditable event:
 
 -  User identification
 
@@ -40,12 +40,12 @@ PCI DSS requirement 10.2.2 mandates that audit logs record the following details
 
 -  Identity or name of affected data, system component, resource, or service (for example, name and protocol)
 
-The following Wazuh rules help achieve this requirement:
+The following Wazuh rule helps achieve this requirement:
 
 Failed authentication attempt
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This rule triggers a finding when a non-existent user tries to log in to a system via SSH. The generated finding contains the information required by PCI DSS requirement 10.2.2. The screenshot below shows the finding generated on the dashboard.
+This rule triggers a finding when a non-existent user tries to log in to a system via SSH. The generated finding contains the information listed above. On Ubuntu, a second rule, Failed authentication attempt, also triggers for the same login. The screenshot below shows the finding generated on the dashboard.
 
 .. thumbnail:: /images/compliance/pci/failed-authentication-attempt-finding-01.png
    :title: Failed authentication attempt finding
@@ -65,43 +65,12 @@ This rule triggers a finding when a non-existent user tries to log in to a syste
    :align: center
    :width: 80%
 
-Successful user authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PCI DSS requirement 10.2.1.7
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This rule triggers a finding when a user successfully logs in to a system via SSH. The generated finding contains the information required by PCI DSS requirement 10.2.2. The screenshot below shows the finding generated on the dashboard.
+PCI DSS requirement 10.2.1.7 mandates that audit logs capture the creation and deletion of system-level objects.
 
-.. thumbnail:: /images/compliance/pci/successful-user-authentication-finding-01.png
-   :title: Successful user authentication finding
-   :alt: Threat Hunting Findings tab with a successful user authentication finding
-   :align: center
-   :width: 80%
-
-.. thumbnail:: /images/compliance/pci/successful-user-authentication-finding-02.png
-   :title: Successful user authentication finding details
-   :alt: Document details of a successful authentication finding with the event action, message, source IP, and user highlighted
-   :align: center
-   :width: 80%
-
-.. thumbnail:: /images/compliance/pci/successful-user-authentication-finding-03.png
-   :title: Successful user authentication finding details expanded
-   :alt: Document details of a successful authentication finding with its PCI DSS compliance mapping highlighted
-   :align: center
-   :width: 80%
-
-PCI DSS requirement 10.4.1
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-PCI DSS requirement 10.4.1 mandates that the following audit logs be reviewed at least once daily:
-
--  All security events
-
--  Logs of all system components that store, process, or transmit cardholder data (CHD) and/or sensitive authentication data (SAD)
-
--  Logs of all critical system components
-
--  Logs of all servers and system components that perform security functions (for example, network security controls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), and authentication servers)
-
-This requirement mandates that logs are analyzed for indicators of compromise at least once daily. The following Wazuh rules help to meet this requirement:
+The following Wazuh rule helps achieve this requirement:
 
 System service installed
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -114,36 +83,74 @@ This rule triggers a finding after the detection engine analyzes the system logs
    :align: center
    :width: 80%
 
-SQL injection strings in URI
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This rule triggers a finding when the detection engine analyzes logs indicating a SQL injection attack from a WAF or web application. In the finding, you can see the full event log, event type, HTTP request method, and other information.
-
-.. thumbnail:: /images/compliance/pci/sql-injection-strings-in-uri-finding.png
-   :title: SQL injection strings in URI finding
-   :alt: Document details of an Apache access finding with SQL injection strings in the URL
-   :align: center
-   :width: 80%
-
 PCI DSS requirement 10.5.1
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-PCI DSS requirement 10.5.1 mandates that you retain audit log history for at least 12 months, with the most recent 3 months immediately available for analysis. You can meet this requirement by enabling storage of unclassified events and configuring data stream lifecycle management.
+PCI DSS requirement 10.5.1 mandates that you retain audit log history for at least 12 months, with the most recent 3 months immediately available for analysis. To meet it, keep events and findings for at least 365 days with custom retention policies, and turn on the storage of unclassified events so that Wazuh also keeps the events that no integration decodes.
+
+By default, Wazuh deletes an events backing index once it has rolled over and is older than 1 hour, and a findings backing index once it has rolled over and is older than 90 days. See :ref:`Data stream lifecycle <wazuh_indexer_indices_data_stream_lifecycle>` for the defaults. Don't edit the default policies. Wazuh rewrites them when the Wazuh indexer cluster restarts or is upgraded.
+
+Keep events and findings for at least 12 months
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Run the following steps on a Wazuh indexer node to create custom retention policies for events and findings. The commands use ``jq``.
+
+#. Copy the default events policy. In the copy, set the minimum age for deletion to 365 days and the template priority to 1, so that new event indices use it:
+
+   .. code-block:: bash
+      :emphasize-lines: 1
+
+      curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> \
+        'https://localhost:9200/_plugins/_ism/policies/stream-events-policy' \
+        | jq '{policy: (.policy
+            | del(.policy_id, .last_updated_time, .schema_version, .error_notification)
+            | .description = "Custom events policy: keeps events for at least 365 days."
+            | .states[0].transitions[0].conditions.min_index_age = "365d"
+            | .ism_template[].priority = 1)}' > custom-events-policy.json
+
+#. Store the copy as ``custom-events-policy``:
+
+   .. code-block:: console
+      :emphasize-lines: 1
+
+      # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X PUT \
+        'https://localhost:9200/_plugins/_ism/policies/custom-events-policy' \
+        -H 'Content-Type: application/json' -d @custom-events-policy.json
+
+#. Move the existing events indices to ``custom-events-policy``:
+
+   .. code-block:: console
+      :emphasize-lines: 1
+
+      # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X POST \
+        'https://localhost:9200/_plugins/_ism/change_policy/.ds-wazuh-events-v5-*' \
+        -H 'Content-Type: application/json' -d '{"policy_id": "custom-events-policy"}'
+
+#. Check that every events index uses ``custom-events-policy``. The change applies at the next ISM run, every 5 minutes by default, and can take two runs or more. Don't restart the Wazuh indexer cluster until every index shows ``custom-events-policy`` and a step name:
+
+   .. code-block:: console
+      :emphasize-lines: 1
+
+      # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> \
+        'https://localhost:9200/_plugins/_ism/explain/.ds-wazuh-events-v5-*' \
+        | jq -r 'to_entries[] | select(.value | type == "object") | [.key, .value.policy_id, (.value.step.name // "pending")] | @tsv'
+
+#. Repeat steps 1 to 4 for findings. Use ``stream-findings-policy``, ``custom-findings-policy``, and ``.ds-wazuh-findings-v5-*`` instead of the events values.
 
 .. _pci_dss_unclassified_events:
 
 Enable the storage of unclassified events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Unclassified event indexing keeps events that no rule matched, while data stream lifecycle management controls how long these events remain available for review. Together, these features allow you to retain up to 12 months of log history for investigation and analysis.
+Wazuh indexes decoded events in ``wazuh-events-v5-<category>`` whether or not a rule matches. An event is unclassified when the decoder that matched it belongs to an integration in the **Unclassified** category, such as ``wazuh-core``. Wazuh drops these events unless you turn on **Index unclassified events**.
 
-Unclassified event indexing is configured per :doc:`space </user-manual/data-analysis/space>`. When enabled for the relevant space, events that cannot be decoded or classified are stored in the ``wazuh-events-v5-unclassified`` index.
+Unclassified event indexing is configured per :doc:`space </user-manual/data-analysis/space>`. When it's turned on, Wazuh stores unclassified events in the :ref:`wazuh-events-v5-unclassified <wazuh_indexer_indices_data_streams>` index. The Wazuh agents' events are processed in the **Standard** space by default.
 
-#. Navigate to **Ruleset management** > **Overview**, select the space you want to enable unclassified events for, select the **Actions** drop-down menu, and select **Edit**.
+#. Navigate to **Ruleset management** > **Overview**. Select **Standard** in **Space**, then select **Actions** > **Edit**.
 
    .. thumbnail:: /images/compliance/pci/security-analytics-edit-space.png
       :title: Edit a space in Ruleset management
-      :alt: Ruleset management Overview with the Draft space selected and the Actions menu open on Edit
+      :alt: Ruleset management Overview with the Standard space selected and the Actions menu open on Edit
       :align: center
       :width: 80%
 
@@ -151,6 +158,6 @@ Unclassified event indexing is configured per :doc:`space </user-manual/data-ana
 
    .. thumbnail:: /images/compliance/pci/index-unclassified-events-toggle.png
       :title: Index unclassified events toggle
-      :alt: Edit Draft space panel with Index unclassified events turned on
+      :alt: Edit Standard space panel with Index unclassified events turned on
       :align: center
       :width: 80%

@@ -10,11 +10,11 @@ The Wazuh File Integrity Monitoring (FIM) module monitors an endpoint filesystem
 
 The Wazuh File Integrity Monitoring module assists you in meeting the following NIST 800-53 controls:
 
--  **SC-28 Protection of information at rest:** "*Information at rest refers to the state of information when it is not in process or in transit and is located on system components. Such components include internal or external hard disk drives, storage area network devices, or databases. However, the focus of protecting information at rest is not on the type of storage device or frequency of access but rather on the state of the information. Information at rest addresses the confidentiality and integrity of information and covers user information and system information. System-related information that requires protection includes configurations or rule sets for firewalls, intrusion detection and prevention systems, filtering routers, and authentication information. Organizations may employ different mechanisms to achieve confidentiality and integrity protections, including the use of cryptographic mechanisms and file share scanning. Integrity protection can be achieved, for example, by implementing write-once-read-many (WORM) technologies. When adequate protection of information at rest cannot otherwise be achieved, organizations may employ other controls, including frequent scanning to identify malicious code at rest and secure offline storage in lieu of online storage.*"
+-  **CM-6 Configuration settings:** "*Configuration settings are the parameters that can be changed in the hardware, software, or firmware components of the system that affect the security and privacy posture or functionality of the system. Information technology products for which configuration settings can be defined include mainframe computers, servers, workstations, operating systems, mobile devices, input/output devices, protocols, and applications. Parameters that impact the security posture of systems include registry settings; account, file, or directory permission settings; and settings for functions, protocols, ports, services, and remote connections.*"
 
--  **CM-3 Configuration change control:** "*Configuration change control for organizational systems involves the systematic proposal, justification, implementation, testing, review, and disposition of system changes, including system upgrades and modifications. Configuration change control includes changes to baseline configurations, configuration items of systems, operational procedures, configuration settings for system components, remediate vulnerabilities, and unscheduled or unauthorized changes. Processes for managing configuration changes to systems include Configuration Control Boards or Change Advisory Boards that review and approve proposed changes. For changes that impact privacy risk, the senior agency official for privacy updates privacy impact assessments and system of records notices. For new systems or major upgrades, organizations consider including representatives from the development organizations on the Configuration Control Boards or Change Advisory Boards. Auditing of changes includes activities before and after changes are made to systems and the auditing activities required to implement such changes. See also SA-10.*"
+-  **SI-4 System monitoring:** "*System monitoring includes external and internal monitoring. External monitoring includes the observation of events occurring at external interfaces to the system. Internal monitoring includes the observation of events occurring within the system. Organizations monitor systems by observing audit activities in real-time or by observing other system aspects such as access patterns, characteristics of access, and other actions. The monitoring objectives guide and inform the determination of the events. System monitoring capabilities are achieved through a variety of tools and techniques, including intrusion detection and prevention systems, malicious code protection software, scanning tools, audit record monitoring software, and network monitoring software.*"
 
-These NIST 800-53 controls require you to protect information at rest and monitor configuration changes in your infrastructure. The Wazuh FIM module helps you monitor the creation, modification, and deletion of files, directories, and Windows registry keys. This helps you meet the NIST 800-53 controls that require monitoring changes to files and folders.
+These NIST 800-53 controls require you to maintain secure configuration settings and monitor system changes in your infrastructure. The Wazuh FIM module helps you monitor the creation, modification, and deletion of files, directories, and Windows registry keys. This helps you meet the NIST 800-53 controls that require monitoring changes to files and folders.
 
 Use cases
 ---------
@@ -22,7 +22,7 @@ Use cases
 Detect SSH configuration changes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh helps meet the SC-28 Protection of information at rest requirement by providing file integrity monitoring on specified files and paths.
+Wazuh helps meet the CM-6 Configuration settings requirement by providing file integrity monitoring on specified files and paths.
 
 In this scenario, the Wazuh FIM monitors the SSH configuration file ``/etc/ssh/sshd_config`` on an Ubuntu 24.04 endpoint to detect changes in the SSH configuration. Monitor the SSH configuration file for changes using the steps below:
 
@@ -65,7 +65,7 @@ In this scenario, the Wazuh FIM monitors the SSH configuration file ``/etc/ssh/s
 Detect change actors to UFW rules using who-data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh helps meet CM-3 Configuration change control by monitoring system configuration changes and providing additional audit data on triggered events.
+Wazuh helps meet SI-4 System monitoring by detecting system configuration changes and providing additional audit data on triggered events.
 
 In this scenario, the Wazuh FIM monitors the Uncomplicated Firewall (UFW) rule files in the ``/etc/ufw/`` directory on an Ubuntu 24.04 endpoint. Using who-data, you can get more information like the user, program, or process that made changes to a monitored file or folder. Perform the steps below to monitor and detect changes to the UFW rule files:
 

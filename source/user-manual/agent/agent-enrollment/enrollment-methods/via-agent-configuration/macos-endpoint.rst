@@ -10,7 +10,7 @@ Follow these steps to enroll a macOS endpoint through the Wazuh agent configurat
 
 #. Launch the terminal, obtain root access, edit the Wazuh agent configuration file ``/Library/Ossec/etc/ossec.conf``, and make the following changes:
 
-   #. Add the Wazuh manager IP address or fully qualified domain name (FQDN). For Wazuh 5.0 agents, replace the ``MANAGER_IP`` placeholder that the package writes in ``<endpoint>``. The setting depends on the Wazuh agent version:
+   #. Add the Wazuh manager IP address or fully qualified domain name (FQDN). For Wazuh 5.0 agents, replace the ``MANAGER_IP`` placeholder that the package writes in ``<endpoint>``. Set ``<WAZUH_MANAGER_ADDRESS>`` to the IP address or FQDN only. The Wazuh agent adds the default port, ``1517``, and path, ``wazuh-manager``. The setting depends on the Wazuh agent version:
 
       **Wazuh 5.0 agents**:
 
@@ -43,7 +43,7 @@ Follow these steps to enroll a macOS endpoint through the Wazuh agent configurat
 
       .. note::
 
-         (4.x only) If you have a Wazuh manager cluster, you can add multiple ``<server>`` sections that point to the worker nodes. Refer to `pointing agents to the cluster (Failover mode) <https://documentation.wazuh.com/current/user-manual/manager/configuring-cluster/advanced-settings.html#pointing-agents-to-the-cluster-failover-mode>`__ for more information.
+         (4.x only) If you have a Wazuh manager cluster, you can add multiple ``<server>`` sections that point to the worker nodes. Refer to `pointing agents to the cluster (Failover mode) <https://documentation.wazuh.com/4.14/user-manual/wazuh-server-cluster/agent-connections.html#connecting-wazuh-agents-to-the-wazuh-cluster-failover-mode>`__ for more information.
 
    #. Store the enrollment password in ``/Library/Ossec/etc/authd.pass``. For the steps and the required file permissions, see the :doc:`Enroll Wazuh agents with password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>` section.
 
