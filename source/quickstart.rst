@@ -1,16 +1,16 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the Wazuh installation assistant. 
+   :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the Wazuh installation assistant.
 
 Quickstart
 ==========
 
 Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of a single universal agent and three central components: the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard. For more information, check the :doc:`Getting started </getting-started/index>` documentation.
 
-Wazuh is a free and open source platform. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `GNU Affero General Public License version 3 <https://www.gnu.org/licenses/agpl-3.0.en.html>`_ (AGPLv3).
+Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`__ (GPLv2), the `GNU Affero General Public License, version 3 <https://www.gnu.org/licenses/agpl-3.0.en.html>`__ (AGPLv3), and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`__ (ALv2).
 
-This quickstart installs the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard on one host with the installation assistant, a script that downloads, installs, and configures them. For other installation options, see the :doc:`Installation guide </installation-guide/index>`.
+This quickstart shows you how to install the Wazuh manager, Wazuh indexer, and Wazuh dashboard on a single endpoint using the :doc:`installation assistant </user-manual/reference/installation-utilities/installation-assistant>`. For other installation options, see the :doc:`Installation guide </installation-guide/index>`.
 
 .. _installation_requirements:
 
@@ -20,66 +20,66 @@ Requirements
 Hardware
 ^^^^^^^^
 
-Hardware requirements highly depend on the number of protected endpoints and cloud workloads. This number can help estimate how much data will be analyzed and how many security findings will be stored and indexed.
+Hardware requirements highly depend on the number of protected endpoints and cloud workloads. This number helps determine how much data Wazuh analyzes and the number of findings the Wazuh indexer stores.
 
-Following this quickstart implies deploying the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard on the same endpoint. This is usually enough for monitoring up to 100 endpoints and for 90 days of queryable/indexed findings. The table below shows the recommended hardware for a quickstart deployment:
+This quickstart deploys the Wazuh manager, Wazuh indexer, and Wazuh dashboard on the same endpoint. This deployment is usually enough to monitor up to 100 endpoints and keep 90 days of findings. The following table lists the recommended hardware for a quickstart deployment.
 
 .. table::
    :align: center
 
-   +-------------+---------+---------+-----------------------+
-   | **Agents**  | **CPU** | **RAM** | **Storage (90 days)** |
-   +=============+=========+=========+=======================+
-   | **1-25**    | 4 vCPU  | 8 GB    | 50 GB                 |
-   +-------------+---------+---------+-----------------------+
-   | **26-50**   | 8 vCPU  | 16 GB   | 100 GB                |
-   +-------------+---------+---------+-----------------------+
-   | **51-100**  | 8 vCPU  | 16 GB   | 200 GB                |
-   +-------------+---------+---------+-----------------------+
+   +------------+---------+---------+-----------------------+
+   | **Agents** | **CPU** | **RAM** | **Storage (90 days)** |
+   +============+=========+=========+=======================+
+   | 1–25       | 4 vCPU  | 8 GB    | 50 GB                 |
+   +------------+---------+---------+-----------------------+
+   | 26–50      | 8 vCPU  | 16 GB   | 100 GB                |
+   +------------+---------+---------+-----------------------+
+   | 51–100     | 8 vCPU  | 16 GB   | 200 GB                |
+   +------------+---------+---------+-----------------------+
 
-
-For larger environments, we recommend a distributed deployment. Multi-node cluster configuration is available for the Wazuh manager and for the Wazuh indexer, providing high availability and load balancing.
+For larger environments, we recommend a :doc:`distributed deployment </installation-guide/index>`. Multi-node cluster configuration is available for the Wazuh manager and for the Wazuh indexer, providing high availability and load balancing.
 
 Operating system
 ^^^^^^^^^^^^^^^^
 
-The Wazuh central components require a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture). Wazuh recommends the following operating system versions:
+The Wazuh central components require a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture). We recommend the following operating system versions.
 
-.. include:: /_templates/installations/wazuh/recommended-operating-systems.rst
+.. table::
+   :align: center
+
+   +--------------------------+--------------------------+
+   | **Operating system**     | **Recommended versions** |
+   +==========================+==========================+
+   | Amazon Linux             | 2023                     |
+   +--------------------------+--------------------------+
+   | Ubuntu                   | 24.04 LTS, 26.04 LTS     |
+   +--------------------------+--------------------------+
+   | Red Hat Enterprise Linux | 9, 10                    |
+   +--------------------------+--------------------------+
 
 .. _quickstart_installing_wazuh:
 
 Installing Wazuh
 ----------------
 
-You need a host that meets the requirements above, internet access, and a user with sudo privileges. The installation takes about 5 to 10 minutes.
+You need an endpoint that meets the requirements above, internet access, and a user with sudo privileges. The installation takes about 5 to 10 minutes.
 
-#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard. In the command, ``-a`` installs all the central components on this host, ``-id`` installs missing operating system dependencies without asking, and ``-d pre-release`` downloads the release candidate packages.
+#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard.
 
-   If agents or Wazuh manager API clients will reach this server through another address, such as its public IP address, a DNS name, or a load balancer, see :ref:`Connecting through another address <quickstart_connecting_another_address>` before you install.
+   .. note::
 
-   Run the following command. The assistant adds this server's hostname and IP addresses to the certificate that agents check.
+      -  Allow incoming traffic on ports ``443/TCP`` and ``1517/TCP``. For Wazuh 4.x agents, also allow traffic on ``1514/TCP`` and ``1515/TCP``. Apply these rules to your cloud security group and to any active endpoint firewall as well. See :ref:`Required ports <default_ports>`.
+      -  If agents connect through an FQDN, load balancer, or public IP address, add that address with ``-as <ADDRESS>``, for example, ``-as wazuh.example.com``. Repeat ``-as`` for each extra address. Otherwise, agents cannot enroll through that address.
 
    .. code-block:: console
 
       $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release
 
-   .. note::
-
-      If firewalld or UFW is active, the assistant warns about it and lists the ports to open, for example, ``WARNING: The system has UFW enabled. Please ensure that traffic is allowed on these ports: 1515, 1517, 1514, 443.`` Allow incoming traffic on the following ports. This lets Wazuh agents and users reach the Wazuh central components:
-
-      -  **1517/TCP**: Wazuh 5.x agent enrollment and connection.
-      -  **443/TCP**: Wazuh dashboard web interface.
-      -  **1514/TCP and 1515/TCP**: only needed if Wazuh 4.x agents connect to this deployment. A Wazuh 4.x agent that enrolls for the first time also needs this server's enrollment password. Read it with ``sudo cat /etc/wazuh-manager/authd.pass`` and pass it as ``WAZUH_REGISTRATION_PASSWORD`` when you install the agent, or write it to ``/var/ossec/etc/authd.pass`` on the agent and restart it.
-
-      For example, with firewalld, run ``sudo firewall-cmd --permanent --add-port=443/tcp --add-port=1517/tcp && sudo firewall-cmd --reload``. With UFW, run ``sudo ufw allow 443/tcp && sudo ufw allow 1517/tcp``.
-
-      If you use another firewall or a cloud security group, allow these ports there too. See :ref:`required ports <default_ports>` for the full list of default ports.
-
-   When the installation finishes, the assistant prints a summary. It shows one Wazuh dashboard URL for each IP address of the host, the username, and the password. It also shows the command to read the password again and how to enroll agents:
+   When the installation finishes, the assistant prints a summary. It shows one Wazuh dashboard URL for each IP address of the endpoint, the username, the password, and the command to read the password again. The assistant displays the password only when it runs in an interactive terminal. If you redirect its output, for example, to a file or cloud-init log, the summary displays only the password retrieval command:
 
    .. code-block:: none
       :class: output
+      :emphasize-lines: 3,5
 
       INFO: Wazuh dashboard web application initialized.
       INFO: --- Summary ---
@@ -89,182 +89,31 @@ You need a host that meets the requirements above, internet access, and a user w
       INFO:     To read the password again, run:
       INFO:         sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
       INFO: The passwords of the other users are in /etc/wazuh-indexer/export/credentials.env and /etc/wazuh-manager/export/credentials.env.
-      INFO: --- Next steps ---
-      INFO: To enroll agents, use Deploy new agent in the Wazuh dashboard, or create an enrollment token on this server:
-      INFO:     sudo /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
-      INFO: For more information, see https://documentation.wazuh.com/5.0/installation-guide/wazuh-agent/index.html
-      INFO: Installation finished.
+      ...
 
-#. The summary shows the password only when the assistant runs in an interactive terminal. If you redirect its output, for example to a file or a cloud-init log, the summary shows only the command to read it. The assistant never writes the password to ``/var/log/wazuh-install.log``. To show the ``admin`` password again, run:
+   .. note::
 
-   .. code-block:: console
+      On a cloud instance, open the Wazuh dashboard at its public IP address or DNS name, not the private address the summary might show. The browser warns about the certificate the first time, because Wazuh creates its own certificate authority. Add an exception in the browser, or :doc:`configure a certificate from a trusted authority </user-manual/wazuh-dashboard/configuring-third-party-certs/index>`.
 
-      $ sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
+#. Open the Wazuh dashboard at ``https://<WAZUH_DASHBOARD_ADDRESS>`` in a browser. Replace ``<WAZUH_DASHBOARD_ADDRESS>`` with an address of this endpoint that your browser can reach, such as one of the URLs the assistant printed.
 
-#. Open the Wazuh dashboard at ``https://<WAZUH_DASHBOARD_ADDRESS>`` in a browser. Replace ``<WAZUH_DASHBOARD_ADDRESS>`` with an address of this host that your browser can reach, such as one of the URLs the assistant printed. On a cloud instance, the assistant might print only the instance's private address. Use its public IP address or DNS name instead. Log in with the following credentials:
+   Log in with the following credentials:
 
-   -  **Username:** ``admin``
-   -  **Password:** the ``admin`` password from step 2
+   -  **Username**: ``admin``
+   -  **Password**: The admin password from the summary
 
-   The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import the Wazuh dashboard CA, ``/etc/wazuh-dashboard/export/ca.pem``, into the browser's certificate manager. Only ``root`` can read it. Run ``sudo cat /etc/wazuh-dashboard/export/ca.pem`` on this host, and save the output as ``ca.pem`` on the computer that runs the browser. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
-
-The Wazuh packages create the certificate authorities, certificates, and Wazuh user passwords during installation. Store the passwords in a safe place. Keep the ``/etc/wazuh-indexer/export/credentials.env`` and ``/etc/wazuh-manager/export/credentials.env`` files, readable by root only. In ``/etc/wazuh-manager/export/credentials.env``, ``WAZUH_MANAGER_API_PASSWORD`` is the password of the ``wazuh`` user of the Wazuh manager API, and ``WAZUH_MANAGER_WUI_PASSWORD`` is the password of ``wazuh-internal-client``, the user of the Wazuh dashboard. The Wazuh components take their passwords from their keystores. At every start, they check these files and refuse to start if one has the wrong owner or permissions. The command in step 2 reads the admin password from ``/etc/wazuh-indexer/export/credentials.env``. To change a password, see :doc:`Password management </user-manual/user-administration/password-management>`.
-
-The Wazuh dashboard keeps the ``kibanaserver`` and ``wazuh-internal-client`` passwords in its keystore. After you change one of them, remove its keystore entry and restart the Wazuh dashboard. The Wazuh dashboard then reads the new password from ``/etc/wazuh-indexer/export/credentials.env`` or ``/etc/wazuh-manager/export/credentials.env``. For ``wazuh-internal-client``, run:
-
-.. code-block:: console
-
-   $ sudo /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore remove wazuh_core.hosts.default.password --allow-root
-   $ sudo systemctl restart wazuh-dashboard
-
-For ``kibanaserver``, remove ``opensearch.password`` instead.
-
-Each package keeps its certificate authority and the private key of that authority in its ``ca/`` directory: ``/etc/wazuh-indexer/ca``, ``/etc/wazuh-manager/ca``, and ``/etc/wazuh-dashboard/ca``. Back up these three directories in a safe place. You need them to renew certificates.
-
-To remove the Wazuh central components and all their data, run the Wazuh installation assistant using the option ``-u`` or ``--uninstall``. See :doc:`Uninstalling the Wazuh central components </installation-guide/uninstalling-wazuh/central-components>` for details.
-
-.. _quickstart_connecting_another_address:
-
-Connecting through another address
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The assistant adds this server's hostname and IP addresses to the certificates that Wazuh agents and Wazuh manager API clients check. If they reach this server through another address, such as its public IP address, a NAT address, a DNS name, or a load balancer, add that address to the certificates. Otherwise, creating an enrollment token for that address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``. The address you use to open the Wazuh dashboard in a browser doesn't affect this choice.
-
-Adding the address during the installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Run one of the following commands instead of the default installation command:
-
--  **Alternative address:** If agents connect through an address this server can't detect, such as a public IP address, a NAT address, a DNS name, or a load balancer, add it with ``-as|--agent-san <ALTERNATE_ADDRESS>``. Repeat ``-as`` for each address, for example, ``-as 203.0.113.10 -as wazuh.example.com``.
-
-   .. code-block:: console
-
-      $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -as <ALTERNATE_ADDRESS>
-
--  **Manager API access:** If scripts or a Wazuh dashboard on other hosts will call the Wazuh manager API through an address this server can't detect, such as a public IP address or DNS name, add ``-ap|--api-san <MANAGER_API_ADDRESS>``. Replace ``<MANAGER_API_ADDRESS>`` with that address. With ``-ap``, the assistant leaves the API listening on all network interfaces and adds this address to its certificate. Without ``-ap``, the API listens only on this host, as :ref:`Opening the Wazuh manager API to other hosts <quickstart_opening_manager_api>` describes. Repeat ``-ap`` for each address, for example, ``-ap 203.0.113.20 -ap api.example.com``. You can combine ``-as`` and ``-ap``.
-
-   .. code-block:: console
-
-      $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -ap <MANAGER_API_ADDRESS>
-
-Adding the address after the installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The Wazuh manager reissues the certificates from its own certificate authority, so agents enrolled before the change keep trusting it. Run the following steps on this server:
-
-#. Stop the Wazuh manager and check that none of its processes are still running:
-
-   .. code-block:: console
-
-      $ sudo systemctl stop wazuh-manager
-      $ sudo /var/wazuh-manager/bin/wazuh-manager-control status
-
-   If any line ends in ``is running...``, run ``sudo /var/wazuh-manager/bin/wazuh-manager-control stop``.
-
-#. List the current addresses of the agent listener certificate. For a Wazuh manager API address, use ``/etc/wazuh-manager/certs/apid.pem`` instead:
-
-   .. code-block:: console
-
-      $ sudo openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
-
-#. Create ``/etc/wazuh-manager/local.env`` with the following line, or change the line if the file already has it. Replace ``<HOSTNAME>`` and ``<SERVER_IP_ADDRESS>`` with the addresses from the previous step, and ``<NEW_ADDRESS>`` with the new address:
-
-   .. code-block:: ini
-
-      WAZUH_MANAGER_REMOTED_CERT_SANS=DNS:<HOSTNAME>,IP:<SERVER_IP_ADDRESS>,IP:<NEW_ADDRESS>
-
-   List every address from the previous step except ``localhost``, ``127.0.0.1``, and ``::1``, which are always added. The list replaces the addresses the Wazuh manager finds on its own. Write ``IP Address:`` entries as ``IP:``, use ``DNS:`` for a name, and separate the entries with commas. For a Wazuh manager API address, set ``WAZUH_MANAGER_APID_CERT_SANS`` the same way. Then restrict the file to root:
-
-   .. code-block:: console
-
-      $ sudo chown root:root /etc/wazuh-manager/local.env
-      $ sudo chmod 600 /etc/wazuh-manager/local.env
-
-#. Move the agent listener certificate pair to a backup directory. A pair left in place keeps its old addresses:
-
-   .. code-block:: console
-
-      $ sudo mkdir -p /root/wazuh-certs-backup
-      $ sudo mv /etc/wazuh-manager/certs/remoted.pem /etc/wazuh-manager/certs/remoted-key.pem /root/wazuh-certs-backup/
-
-   For a Wazuh manager API address, move ``/etc/wazuh-manager/certs/apid.pem`` and ``/etc/wazuh-manager/certs/apid-key.pem`` too.
-
-#. Issue the new certificates and publish the certificate authority bundle to the agents:
-
-   .. code-block:: console
-
-      $ sudo /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install
-      $ sudo /var/wazuh-manager/bin/wazuh-manager-certs stamp
-
-   The output includes a line that starts with ``resolve-credentials: /etc/wazuh-manager/certs/remoted.pem: issued;`` and lists the new address. If that line is missing, the certificate wasn't issued. Move the files in ``/root/wazuh-certs-backup/`` back to ``/etc/wazuh-manager/certs/`` and start the Wazuh manager.
-
-#. Start the Wazuh manager and create an enrollment token for the new address to confirm the change:
-
-   .. code-block:: console
-
-      $ sudo systemctl start wazuh-manager
-      $ sudo /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <NEW_ADDRESS>
-
-Agents enrolled before the change keep connecting to their old address. To point them to the new one, follow :ref:`Move enrolled agents to the new address <vm_move_enrolled_agents>` in the Virtual machine (VM) documentation. For a Wazuh manager API address, also follow :ref:`Opening the Wazuh manager API to other hosts <quickstart_opening_manager_api>`.
-
-.. _quickstart_opening_manager_api:
-
-Opening the Wazuh manager API to other hosts
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-By default, the assistant makes the Wazuh manager API listen only on this host (``127.0.0.1`` and ``::1``). With the ``-ap`` option, the assistant already makes it listen on all network interfaces. Otherwise, if scripts or a Wazuh dashboard on other hosts need to access the Wazuh manager API, set ``host: ['0.0.0.0', '::']`` in ``/var/wazuh-manager/api/configuration/api.yaml`` to allow external connections. Then run the following command to restart the Wazuh manager:
-
-.. code-block:: console
-
-   $ sudo systemctl restart wazuh-manager
-
-The Wazuh manager API clients must then use this host's name or IP address, or an address you added to the Wazuh manager API certificate.
+   For information about where passwords are saved and how to change them, see :doc:`Password management </user-manual/user-administration/password-management>`.
 
 Next steps
 ----------
 
-Next, deploy Wazuh agents on the endpoints you want to monitor. The Wazuh manager doesn't monitor the server it runs on. To monitor this server too, deploy a Wazuh agent on it with a token for this server's own address. You can deploy Wazuh agents in two ways:
+Now that your Wazuh installation is ready, you can start deploying Wazuh agents to protect laptops, desktops, servers, cloud instances, containers, and virtual machines. The Wazuh manager doesn't monitor the endpoint it runs on. To monitor that endpoint, deploy a Wazuh agent on it as well.
 
--  From the Wazuh dashboard: Use **Deploy new agent**, as described in :ref:`Installing from the Wazuh dashboard <agent_installing_from_dashboard>`. The wizard automatically generates the enrollment token.
--  From the command line: First, create an enrollment token on the Wazuh manager, as described in :ref:`Installing from the command line <agent-installation-requirements>`. The assistant printed the command to create it under Next steps in its summary. Then select your endpoint operating system below and follow the installation steps.
+Complete these steps in the Wazuh dashboard to add your first agent.
 
-.. raw:: html
+#. Go to **Agents management** > **Summary**, click **Deploy new agent**, and select the package for your endpoint.
+#. Enter the address the endpoint uses to reach the Wazuh manager, such as an address configured with ``-as``, then click **Generate token**.
+#. Run the installation and start commands on the endpoint where you want to install the Wazuh agent.
+#. Check that **Agents management** > **Summary** lists the agent as **Active**.
 
-  <div class="link-boxes-group layout-6">
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="installation-guide/wazuh-agent/wazuh-agent-package-linux.html">
-        <p class="link-boxes-label">Linux</p>
-
-.. image:: /images/installation/linux.png
-      :align: center
-      :alt: Tux, the Linux penguin mascot logo
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="installation-guide/wazuh-agent/wazuh-agent-package-windows.html">
-        <p class="link-boxes-label">Windows</p>
-
-.. image:: /images/installation/windows-logo.png
-      :align: center
-      :alt: Windows logo
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="installation-guide/wazuh-agent/wazuh-agent-package-macos.html">
-        <p class="link-boxes-label">macOS</p>
-
-.. image:: /images/installation/macOS-logo.png
-      :align: center
-      :alt: Apple logo representing macOS
-
-.. raw:: html
-
-      </a>
-    </div>
-  </div>
+For more options, see :doc:`Deploying Wazuh agents </installation-guide/wazuh-agent/index>`.
