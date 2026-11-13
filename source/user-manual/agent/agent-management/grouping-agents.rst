@@ -46,7 +46,7 @@ To create agent groups from the Wazuh dashboard:
 The agent_groups tool
 ^^^^^^^^^^^^^^^^^^^^^
 
-The ``agent_groups`` tool offers the ability to create and manage Wazuh agent groups directly from the command line.  The tool is used as follows to create a Wazuh agent group:
+The ``agent_groups`` tool offers the ability to create and manage Wazuh agent groups directly from the command line. The tool is used as follows to create a Wazuh agent group:
 
 .. note::
 
@@ -58,11 +58,11 @@ The ``agent_groups`` tool offers the ability to create and manage Wazuh agent gr
 
 Where:
 
--  The flag ``-a`` ``-g`` adds a group.
+-  The ``-a`` and ``-g`` flags add a group.
 -  The ``<GROUP_NAME>`` indicates a unique group name. Replace ``<GROUP_NAME>`` with the name of the group you want to create.
 -  The flag ``-q`` triggers the silent or no confirmation mode.
 
-Run the following commands on the Wazuh manager to create the agent groups ``Windows``, ``macOS``, and  ``Linux``:
+Run the following commands on the Wazuh manager to create the agent groups ``Windows``, ``macOS``, and ``Linux``:
 
 .. code-block:: console
 
@@ -103,7 +103,7 @@ The Wazuh manager API
 
 Using the Wazuh manager API to create and manage groups programmatically is effective for automating group management tasks. Perform the steps below to create agent groups using the Wazuh manager API:
 
-#. On the Wazuh dashboard, navigate to **Server management,** and select **Dev Tools**.
+#. On the Wazuh dashboard, navigate to **Server management** and select **Dev Tools**.
 #. Run the queries below to create the agent groups ``Windows``, ``macOS``, and ``Linux``:
 
    .. code-block:: none
@@ -118,11 +118,12 @@ Using the Wazuh manager API to create and manage groups programmatically is effe
       :align: center
       :width: 80%
 
-#. You can also use the command line interface to create agent groups via the Wazuh manager API. The equivalent command to run from the console with root user privileges to create the ``Linux`` group would be:
+#. You can also use the command line interface to create agent groups via the Wazuh manager API. The equivalent command to run from the console with root user privileges to create the ``Linux`` group would be as follows. The first command stores a Wazuh manager API token in ``TOKEN``, which the rest of this page uses. It expires after 900 seconds (15 minutes) by default:
 
    .. code-block:: console
 
-      # curl -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/groups?pretty=true" -H "Content-Type: application/json" -d '{"group_id": "Linux"}' -H  "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true')"
+      # TOKEN=$(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
+      # curl -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/groups?pretty=true" -H "Content-Type: application/json" -d '{"group_id": "Linux"}' -H  "Authorization: Bearer $TOKEN"
 
    Replace:
 
@@ -149,21 +150,22 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 #. Once a Wazuh agent has been added and connected to the Wazuh manager, assign it to a group using the ``/var/wazuh-manager/bin/agent_groups`` tool or the Wazuh manager API. Below are examples of how to assign a Wazuh agent with ID ``016`` to the group ``dbms`` using these methods:
 
-   #. Using the ``/var/wazuh-manager/bin/agent_groups``  tool on the Wazuh manager:
-
-      .. code-block:: console
-
-         # /var/wazuh-manager/bin/agent_groups -a -i 016 -g dbms
+   #. Using the ``/var/wazuh-manager/bin/agent_groups`` tool on the Wazuh manager:
 
       .. note::
 
          The group must be created and configured before assigning agents. You can create agent groups using the :doc:`/var/wazuh-manager/bin/agent_groups </user-manual/reference/tools/agent-groups>` tool. The group name can only contain upper/lower case letters, numbers, dots, underscores, and hyphens.
 
+      .. code-block:: console
+
+         # /var/wazuh-manager/bin/agent_groups -a -g dbms -q
+         # /var/wazuh-manager/bin/agent_groups -a -i 016 -g dbms
+
    #. Using the Wazuh manager API endpoint :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>`:
 
       .. code-block:: console
 
-         # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/016/group/dbms?pretty=true" -H "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true')"
+         # curl -k -X PUT "https://<WAZUH_MANAGER_ADDRESS>:55000/agents/016/group/dbms?pretty=true" -H "Authorization: Bearer $TOKEN"
 
       Output
 
@@ -203,7 +205,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
    .. code-block:: console
 
-      # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/groups/dbms/agents?pretty=true&select=id,name" -H "Authorization: Bearer $(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true')"
+      # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/groups/dbms/agents?pretty=true&select=id,name" -H "Authorization: Bearer $TOKEN"
 
    Output
 
@@ -253,7 +255,7 @@ The following activities can be carried out when managing multiple Wazuh agent g
 -  :ref:`Make changes to group assignment <make-changes-to-group-assignment>`
 -  :ref:`Shared files behavior <shared-files-behavior>`
 
-The ``/var/wazuh-manager/bin/agent_groups`` tool and the Wazuh manager API  help to manage agent groups by listing them and allowing them to assign/change/unassign groups to Wazuh agents. We explore two use cases managing multiple groups over existing Wazuh agents.
+The ``/var/wazuh-manager/bin/agent_groups`` tool and the Wazuh manager API help to manage agent groups by listing them and allowing them to assign/change/unassign groups to Wazuh agents. We explore two use cases managing multiple groups over existing Wazuh agents.
 
 .. _assign-multiple-groups-to-a-wazuh-agent:
 
@@ -270,7 +272,7 @@ There are two methods to assign a Wazuh agent to one or more groups:
 Using the Wazuh manager API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this example, agent *012* has been added to the *webserver* and *apache* groups using the **Wazuh manager API** endpoint :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>`:
+In this example, agent *012* has been added to the *webserver* and *apache* groups using the **Wazuh manager API** endpoint :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>`. Set ``TOKEN`` first, as shown in :ref:`The Wazuh manager API <the-wazuh-manager-api>`:
 
 .. code-block:: console
 
@@ -316,7 +318,7 @@ Output
       "error": 0
    }
 
-Following this, we can query for groups to which a Wazuh agent belongs using the **Wazuh manager API** endpoint ``GET /agents <operation/api.controllers.agent_controller.get_agents>``:
+Following this, we can query for groups to which a Wazuh agent belongs using the **Wazuh manager API** endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>`:
 
 .. code-block:: console
 
@@ -398,7 +400,6 @@ Output
 .. code-block:: none
    :class: output
 
-   root@manager:/var/wazuh-manager/bin# /var/wazuh-manager/bin/agent_groups -l -g webserver
    2 agent(s) in group 'webserver':
      ID: 012  Name: Ubuntu.
      ID: 016  Name: CentOS.

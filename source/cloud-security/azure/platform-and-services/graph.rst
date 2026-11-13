@@ -43,18 +43,21 @@ This section explains how to create an application that uses the Microsoft Graph
 #. In the **Microsoft Entra ID** panel, select **App registrations**. Then, select **New registration**.
 
    .. thumbnail:: /images/cloud-security/azure/new-app-registration.png
+      :alt: New registration option on the Microsoft Entra ID App registrations page in the Azure portal
       :align: center
       :width: 80%
 
 #. Give the app a descriptive name, select the appropriate **account type**, and click **Register**.
 
    .. thumbnail:: /images/cloud-security/azure/register-application.png
+      :alt: Register an application form in the Azure portal, with app name, supported account types, and Register button
       :align: center
       :width: 80%
 
    The app is now registered.
 
    .. thumbnail:: /images/cloud-security/azure/app-registrations.png
+      :alt: App registrations list in the Azure portal, showing the newly registered application
       :align: center
       :width: 80%
 
@@ -64,30 +67,35 @@ Grant permissions to the application
 #. Click on the application, go to the **Overview** section, and save the **Application (client) ID** for later authentication.
 
    .. thumbnail:: /images/cloud-security/azure/save-application-ID2.png
+      :alt: Application Overview page in the Azure portal, with the Application (client) ID highlighted
       :align: center
       :width: 80%
 
 #. Select the **Add a permission** option in the **API permissions** section.
 
    .. thumbnail:: /images/cloud-security/azure/add-api-permission2.png
+      :alt: Add a permission option highlighted on the application API permissions page in the Azure portal
       :align: center
       :width: 80%
 
 #. Search for "**Microsoft Graph**" and select the API.
 
    .. thumbnail:: /images/cloud-security/azure/select-microsoft-graph-api.png
+      :alt: Request API permissions panel in the Azure portal, with Microsoft Graph selected under Microsoft APIs
       :align: center
       :width: 80%
 
 #. Select the permissions in **Application permissions** that align with your infrastructure. In this case, the ``AuditLog.Read.All`` permissions are granted. Then, click **Add permissions**.
 
    .. thumbnail:: /images/cloud-security/azure/add-api-permissions.png
+      :alt: Microsoft Graph application permissions in the Azure portal, with AuditLog.Read.All selected
       :align: center
       :width: 80%
 
 #. Use an admin user to **Grant admin consent** for the tenant.
 
    .. thumbnail:: /images/cloud-security/azure/grant-admin-consent2.png
+      :alt: Grant admin consent highlighted on the API permissions page in the Azure portal, with permissions granted
       :align: center
       :width: 80%
 
@@ -99,12 +107,14 @@ To use the Microsoft Graph API to retrieve logs, we must generate an application
 #. Select **Certificates & secrets**, then select **New client secret** to generate a key.
 
    .. thumbnail:: /images/cloud-security/azure/new-client-secret2.png
+      :alt: New client secret option highlighted on the Certificates & secrets page in the Azure portal
       :align: center
       :width: 80%
 
 #. Give an appropriate description, set a preferred duration for the key, and then click **Add**.
 
    .. thumbnail:: /images/cloud-security/azure/add-client-secret2.png
+      :alt: Add a client secret panel in the Azure portal, with description, expiry duration, and the Add button
       :align: center
       :width: 80%
 
@@ -115,6 +125,7 @@ To use the Microsoft Graph API to retrieve logs, we must generate an application
       Copy the key before exiting this page, as it is displayed once. If you do not copy it before exiting the page, you must generate a new key.
 
    .. thumbnail:: /images/cloud-security/azure/copy-client-secret3.png
+      :alt: Client secrets list in the Azure portal, with the new secret value highlighted for copying
       :align: center
       :width: 80%
 
@@ -181,6 +192,7 @@ Monitor Microsoft Entra ID
 Wazuh can monitor the Microsoft Entra ID (ME-ID) service using the activity reports provided by the `Microsoft Graph REST API <https://docs.microsoft.com/en-us/graph/overview>`__. Microsoft Graph API can perform read operations on directory data and objects in Microsoft Entra ID applications.
 
 .. thumbnail:: /images/cloud-security/azure/microsoft-entra-ID.png
+   :alt: Diagram of the Wazuh agent monitoring Microsoft Entra ID, synced with Active Directory through Azure AD Connect
    :align: center
    :width: 80%
 
@@ -194,6 +206,7 @@ Create a new user in Azure. A successful user creation activity produces a log e
 #. Navigate to **Users** \> **All users**, select **New user** \> **Create new user**.
 
    .. thumbnail:: /images/cloud-security/azure/click-new-user.png
+      :alt: New user menu on the Microsoft Entra ID All users page in the Azure portal
       :align: center
       :width: 80%
 
@@ -202,15 +215,18 @@ Create a new user in Azure. A successful user creation activity produces a log e
    You can check the result of the successful user creation in the **Audit logs** section of **Microsoft Entra ID**.
 
    .. thumbnail:: /images/cloud-security/azure/user-creation-result.png
+      :alt: Microsoft Entra ID Audit logs in the Azure portal, showing successful Add user activity entries
       :align: center
       :width: 80%
 
    The results are available in the **Threat Hunting** tab of the Wazuh dashboard.
 
    .. thumbnail:: /images/cloud-security/azure/ms-graph-results-in-wazuh-dashboard1.png
+      :alt: Threat Hunting Findings tab in the Wazuh dashboard, listing Azure user account creation findings
       :align: center
       :width: 80%
 
    .. thumbnail:: /images/cloud-security/azure/ms-graph-results-in-wazuh-dashboard2.png
+      :alt: Document Details flyout in the Wazuh dashboard, showing the fields of the Azure user creation finding
       :align: center
       :width: 80%

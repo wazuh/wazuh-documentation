@@ -8,13 +8,15 @@
 Enrichment
 ==========
 
-The security enrichment stage in the Wazuh 5.0 data analysis engine runs after decoding and before post-filtering, augmenting normalized events with contextual information such as geo/ASN attributes and threat intelligence matches. Enrichment is strictly schema-driven: only fields defined in the Wazuh Common Schema (WCS) are considered, ensuring additional context remains indexable and consistent.
+The security enrichment stage in the Wazuh 5.0 data analysis engine runs after decoding and before post-filtering, augmenting normalized events with contextual information such as geolocation and autonomous system number (ASN) attributes and threat intelligence matches. Enrichment is strictly schema-driven: only fields defined in the Wazuh Common Schema (WCS) are considered, ensuring additional context remains indexable and consistent.
 
 Security enrichment is implemented as two consecutive pipeline stages inside each policy:
 
 -  Pre-enrichment: control and preparation.
 
--  Enrichment: context providers (geo, IOC, etc.).
+-  Enrichment: context providers, such as geolocation and indicators of compromise (IOC).
+
+.. _data_analysis_pre_enrichment:
 
 Pre-enrichment
 --------------
@@ -46,12 +48,12 @@ Conceptually, pre-enrichment ensures that every event is annotated with the foll
      }
    }
 
-This field is later used by outputs and analytics to slice data per content space and identify which security policy pipeline produced a specific document.
+This field is later used by outputs and analytics to slice data per content space and identify which security policy pipeline produced a specific document. Log test results show ``test``, because Log test runs the content of the test space.
 
 Discarded events filter
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The discarded-events filter decides whether events that have been marked as "discarded" during decoding or filtering are allowed to continue into enrichment and outputs. The behavior is controlled at the policy level:
+The discarded-events filter decides whether events that have been marked as "discarded" during decoding or filtering are allowed to continue into enrichment and outputs. Decoders and filters mark an event as discarded with the ``discard_events`` helper. The **Index discarded events** setting of the space controls this behavior. To change it, go to **Ruleset Management** > **Overview**, select the draft or standard space, and click **Actions** > **Edit**:
 
 -  If discarded-events indexing is enabled, discarded events still traverse the remainder of the pipeline and can be indexed for observability and troubleshooting.
 
@@ -81,7 +83,7 @@ Enrichments are defined in the policy document as an ordered array, and each con
 
 -  Geo enrichment (geo/ASN lookups)
 
--  IOC enrichment (threat intelligence / CTI matching): one for each indicator type in the Wazuh CTI feed, such as IP addresses, domain names, URLs, and file hashes. The space settings list every type the feed provides
+-  IOC enrichment (threat intelligence / CTI matching): one for each indicator type in the Wazuh CTI feed, such as IP addresses, domain names, URLs, and file hashes. The space settings list every type the feed provides.
 
 Unlike pre-enrichment, the enrichment stage does not decide whether an event should continue in the pipeline. It only adds context when lookups or matches succeed. Events continue even if no enrichment applies.
 
