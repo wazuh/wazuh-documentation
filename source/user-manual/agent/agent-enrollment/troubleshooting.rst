@@ -33,7 +33,7 @@ The default ports on the Wazuh manager depend on the agent version:
 
 -  **Wazuh 5.0 agents**: 1517/TCP (HTTPS) - used for both enrollment and agent communication.
 -  **Wazuh 4.x agents**: 1515/TCP for enrollment and 1514/TCP for agent communication.
--  55000/TCP only if you enroll agents through the Wazuh manager API, or for agents with anti-tampering that remove themselves. Wazuh 5.x agents enroll and connect on 1517/TCP.
+-  55000/TCP only if you enroll agents through the Wazuh manager API, or for agents with anti-tampering that remove themselves.
 
 On Linux and macOS systems (with netcat installed) open a terminal and run the following commands. Replace ``<WAZUH_MANAGER_ADDRESS>`` with your Wazuh manager IP address or fully qualified domain name (FQDN).
 
@@ -49,7 +49,8 @@ For a Wazuh 4.x agent:
 
    # nc -zv <WAZUH_MANAGER_ADDRESS> 1514
    # nc -zv <WAZUH_MANAGER_ADDRESS> 1515
-   # nc -zv <WAZUH_MANAGER_ADDRESS> 55000
+
+If you enroll through the Wazuh manager API, also run ``nc -zv <WAZUH_MANAGER_ADDRESS> 55000``, whatever the Wazuh agent version.
 
 If there is connectivity, the output should be a connection success message:
 
@@ -67,7 +68,6 @@ For a Wazuh 4.x agent:
 
    Connection to <WAZUH_MANAGER_ADDRESS> 1514 port [tcp/*] succeeded!
    Connection to <WAZUH_MANAGER_ADDRESS> 1515 port [tcp/*] succeeded!
-   Connection to <WAZUH_MANAGER_ADDRESS> 55000 port [tcp/*] succeeded!
 
 On Windows, open a PowerShell terminal and run the following commands:
 
@@ -83,7 +83,8 @@ For a Wazuh 4.x agent:
 
    > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 1514)
    > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 1515)
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 55000)
+
+If you enroll through the Wazuh manager API, also run ``(new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 55000)``, whatever the Wazuh agent version.
 
 If there is connectivity, there is no output. Otherwise, an error is shown:
 
@@ -208,7 +209,7 @@ Or query the Wazuh manager API with ``GET /cluster/<NODE_ID>/daemons/remoted/tls
 
 Create the token for an address in that list. A DNS name must match a DNS entry, and an IP address must match an IP Address entry. If the IP address of the Wazuh manager can change, use a DNS name.
 
-If the Wazuh agents must use an address that isn't in the list, issue the agent listener certificate again with that address. List every address the Wazuh agents use in the same run, because the new certificate replaces the old one. See :ref:`Agent connection address <wazuh_manager_agent_connection_address>` for the installation guide methods, :ref:`Reissue the Wazuh manager certificates <vm_reissue_manager_certificates>` for the virtual machine, and the ``--agent-san`` option in :doc:`Wazuh Docker deployment </deployment-options/docker/wazuh-container>`. Then create the token again.
+If the Wazuh agents must use an address that isn't in the list, issue the agent listener certificate again with that address. List every address the Wazuh agents use in the same run, because the new certificate replaces the old one. See :ref:`Agent connection address <wazuh_manager_agent_connection_address>` for the installation guide methods, :ref:`Reissue the Wazuh manager certificates <vm_reissue_manager_certificates>` for the virtual machine, the ``--agent-san`` option in :doc:`Wazuh Docker deployment </deployment-options/docker/wazuh-container>` and :doc:`Kubernetes deployment </deployment-options/deploying-with-kubernetes/kubernetes-deployment>`, and the ``extra_ips`` option in :ref:`Deployment with Ansible <ansible_agent_token>`. Then create the token again.
 
 Unable to read CA certificate file
 ----------------------------------
@@ -317,4 +318,4 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
 
 #. Ensure the same password is used by the Wazuh manager and the Wazuh agent
 #. Ensure that the ``authd.pass`` password file is in the ``/etc/wazuh-manager/`` directory of the Wazuh manager and that the ``wazuh-manager`` group can read it: ``640`` with ``root:wazuh-manager`` if you created it, or ``660`` with ``wazuh-manager:wazuh-manager`` if the Wazuh manager generated it.
-#. If password authentication is not needed, it should be disabled in the ``<auth>`` section of the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file.
+#. If password authentication is not needed, set ``<use_password>no</use_password>`` in the ``<auth>`` section of the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file, and restart the Wazuh manager.

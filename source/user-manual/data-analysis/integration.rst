@@ -12,7 +12,7 @@ An integration is a logical grouping of decoders, KVDBs, and rules that belong t
 
 Follow these steps to create an integration:
 
-#. Navigate to the **Ruleset management** > **Overview** page and ensure you are in the draft space.
+#. Navigate to the **Ruleset Management** > **Overview** page and ensure you are in the draft space.
 
 #. Click the **Actions** drop-down under **Integrations** and select **Create**.
 

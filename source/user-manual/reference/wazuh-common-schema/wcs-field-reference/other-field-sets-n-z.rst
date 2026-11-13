@@ -13,7 +13,7 @@ Example: Map the domain of a URL from a web proxy log
 
 ``url.domain`` holds the domain part of a URL. This decoder parses the URL with the ``uri`` parser into a temporary field, then maps the domain into ``url.domain``.
 
-The decoder is a child of the root decoder of your integration, ``decoder/core-wazuh-message/0``, as in :ref:`Create a security analytics detection workflow <data_analysis_detection_workflow>`. Create it in **Ruleset management** > **Normalization** > **Decoders**, then check the output in **Log test**. The highlighted lines show where ``url.domain`` is used and where it appears in the output.
+The decoder is a child of the root decoder of the space, ``decoder/core-wazuh-message/0``, as in :ref:`Create a security analytics detection workflow <data_analysis_detection_workflow>`. Create it in **Ruleset management** > **Normalization** > **Decoders**, then check the output in **Log test**. The highlighted lines show where ``url.domain`` is used and where it appears in the output.
 
 **Sample log**
 
