@@ -28,6 +28,30 @@ $(document).ready(function() {
   }
 });
 
+/* Let long code names in the local-toc, such as process.code_signature.*, wrap
+   after a dot or an underscore instead of in the middle of a word */
+$('#local-toc code').each(function() {
+  const walker = document.createTreeWalker(this, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+  textNodes.forEach(function(node) {
+    const parts = node.nodeValue.match(/[^._]*[._]|[^._]+$/g) || [];
+    if (parts.length < 2) {
+      return;
+    }
+    const fragment = document.createDocumentFragment();
+    parts.forEach(function(part, index) {
+      if (index > 0) {
+        fragment.appendChild(document.createElement('wbr'));
+      }
+      fragment.appendChild(document.createTextNode(part));
+    });
+    node.parentNode.replaceChild(fragment, node);
+  });
+});
+
 /* Expand accordion functionality for the local-toc */
 $('#local-toc .nav-link').on('click', function(e) {
   const anchor = $(e.target).attr('href');
