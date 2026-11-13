@@ -100,20 +100,20 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
 
       # echo "<CUSTOM_PASSWORD>" > /var/ossec/etc/authd.pass
 
-   #. Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. You can configure the permissions and ownership by running the commands below:
+   Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. You can configure the permissions and ownership by running the commands below:
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # chmod 640 /var/ossec/etc/authd.pass
-         # chown root:wazuh /var/ossec/etc/authd.pass
-         # ls -l /var/ossec/etc/authd.pass
+      # chmod 640 /var/ossec/etc/authd.pass
+      # chown root:wazuh /var/ossec/etc/authd.pass
+      # ls -l /var/ossec/etc/authd.pass
 
-      The output below shows the recommended file owner and permissions.
+   The output below shows the recommended file owner and permissions.
 
-      .. code-block:: none
-         :class: output
+   .. code-block:: none
+      :class: output
 
-         -rw-r-----. 1 root wazuh   33 Jul 10 16:39 authd.pass
+      -rw-r-----. 1 root wazuh   33 Jul 10 16:39 authd.pass
 
 #. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``/var/ossec/etc/authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file. For Wazuh 4.x agents, use ``<client>`` instead of ``<agent>``.
 
@@ -279,19 +279,19 @@ Follow the steps below to enroll a macOS endpoint with password authentication:
 
       # echo "<CUSTOM_PASSWORD>" > /Library/Ossec/etc/authd.pass
 
-   #. Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. Configure the permissions and ownership by running the commands below:
+   Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. Configure the permissions and ownership by running the commands below:
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # chmod 640 /Library/Ossec/etc/authd.pass
-         # chown root:wazuh /Library/Ossec/etc/authd.pass
+      # chmod 640 /Library/Ossec/etc/authd.pass
+      # chown root:wazuh /Library/Ossec/etc/authd.pass
 
-      The output below shows the recommended file owner and permissions:
+   The output below shows the recommended file owner and permissions:
 
-      .. code-block:: none
-         :class: output
+   .. code-block:: none
+      :class: output
 
-         -rw-r-----  1 root  wazuh  33 Jul 09 20:26 /Library/Ossec/etc/authd.pass
+      -rw-r-----  1 root  wazuh  33 Jul 09 20:26 /Library/Ossec/etc/authd.pass
 
 #. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``/Library/Ossec/etc/authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file. For Wazuh 4.x agents, use ``<client>`` instead of ``<agent>``.
 
