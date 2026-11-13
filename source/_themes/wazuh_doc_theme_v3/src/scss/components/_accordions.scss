@@ -12,21 +12,15 @@
 }
 
 .accordion-title {
-  display: flex;
-  align-items: center;
+  // Text flow rather than flex, so a space between code and the words around
+  // it stays.
+  display: inline-block;
   width: 100%;
-  height: 1.5em;
   border-bottom: 2px solid;
-  @include media-max(xl){
-    display: inline-block;
-    height: auto;
-    // Room for the background of code in the title, which reaches below the
-    // line and would otherwise cover the underline.
-    padding-bottom: 6px;
-  }
 
   &::before {
     display: inline-block;
+    vertical-align: middle;
     width: 20px;
     height: 20px;
     margin-right: 10px;
@@ -55,12 +49,6 @@
 .accordion-title {
   font-size: 18px;
   font-weight: 500;
-
-  // Code in a title, such as a field set name, matches the words around it
-  code {
-    font-size: inherit;
-    font-weight: inherit;
-  }
 }
 
 // Headings inside a collapsible section, such as an example below a table,
