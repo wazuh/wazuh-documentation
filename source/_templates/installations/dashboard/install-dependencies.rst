@@ -8,7 +8,7 @@
 
          .. code-block:: console
 
-            # apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
+            # apt-get update && apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
 
       .. group-tab:: Yum
 
