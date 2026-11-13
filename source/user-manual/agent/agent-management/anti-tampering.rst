@@ -81,6 +81,40 @@ You can authenticate the agent removal using any of the following methods:
 
 After the Quickstart, and after an offline all-in-one installation with the installation assistant, the Wazuh manager API listens only on ``127.0.0.1`` and ``::1``, so the Wazuh agent can't reach it. Before you uninstall with validation, set ``host`` in ``/var/wazuh-manager/api/configuration/api.yaml`` on the Wazuh manager master node to an address the Wazuh agents can reach, for example ``host: ['0.0.0.0', '::']``, and run ``systemctl restart wazuh-manager``. Allow port 55000/TCP only from trusted endpoints.
 
+The uninstall reads ``/var/ossec/etc/uninstall_validation.env`` only if it is a regular file, not a link, owned by ``root``, and only ``root`` can write it. Otherwise it logs the following line and uses the ``VALIDATION_*`` environment variables instead. Both methods below set the owner and permissions after creating the file.
+
+.. code-block:: none
+   :class: output
+
+   WARNING: /var/ossec/etc/uninstall_validation.env is not a regular file owned by root and writable only by it; ignoring it and using environment variables.
+
+With ``VALIDATION_SSL_VERIFY="true"``, or when the variable isn't set, the Wazuh agent checks the Wazuh manager API certificate against the system trust store of the endpoint before it sends the token or the credentials. ``VALIDATION_HOST`` must use a name or IP address in the Wazuh manager API certificate. To add the Wazuh manager CA to that store, copy ``/etc/wazuh-manager/export/ca.pem`` from the Wazuh manager master node to the endpoint, then run the commands for its distribution:
+
+-  Debian-based endpoints:
+
+   .. code-block:: console
+
+      # cp ca.pem /usr/local/share/ca-certificates/wazuh-manager-ca.crt
+      # update-ca-certificates
+
+-  Red Hat-based endpoints:
+
+   .. code-block:: console
+
+      # cp ca.pem /etc/pki/ca-trust/source/anchors/wazuh-manager-ca.pem
+      # update-ca-trust
+
+-  SUSE endpoints:
+
+   .. code-block:: console
+
+      # cp ca.pem /etc/pki/trust/anchors/wazuh-manager-ca.pem
+      # update-ca-certificates
+
+.. warning::
+
+   ``VALIDATION_SSL_VERIFY="false"`` skips the check, so the token or the credentials go to any host that answers at ``VALIDATION_HOST``. Use it only for tests.
+
 .. _temporary_authentication_token:
 
 Temporary authentication token
@@ -110,9 +144,16 @@ You need to generate an authentication token on a trusted administrator endpoint
 
       export VALIDATION_TOKEN="<AUTHENTICATION_TOKEN>"
       export VALIDATION_HOST="<WAZUH_MANAGER_ADDRESS>:55000"
-      export VALIDATION_SSL_VERIFY="false"
+      export VALIDATION_SSL_VERIFY="true"
 
    Replace ``<AUTHENTICATION_TOKEN>`` with the authentication token you generated earlier, and ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or FQDN.
+
+#. Make ``root`` the owner and the only user who can write the file:
+
+   .. code-block:: console
+
+      # chown root:root /var/ossec/etc/uninstall_validation.env
+      # chmod 600 /var/ossec/etc/uninstall_validation.env
 
 You can now proceed to :ref:`uninstall the Wazuh agent <uninstalling_the_wazuh_agent>`.
 
@@ -131,9 +172,16 @@ Create the file ``/var/ossec/etc/uninstall_validation.env`` on the monitored end
 
    export VALIDATION_LOGIN="<WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD>"
    export VALIDATION_HOST="<WAZUH_MANAGER_ADDRESS>:55000"
-   export VALIDATION_SSL_VERIFY="false"
+   export VALIDATION_SSL_VERIFY="true"
 
 Replace ``<WAZUH_MANAGER_API_USER>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with your Wazuh manager API username and password, respectively. Also, replace ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or FQDN.
+
+Then make ``root`` the owner and the only user who can write the file:
+
+.. code-block:: console
+
+   # chown root:root /var/ossec/etc/uninstall_validation.env
+   # chmod 600 /var/ossec/etc/uninstall_validation.env
 
 You can now proceed to :ref:`uninstall the Wazuh agent <uninstalling_the_wazuh_agent>`.
 
@@ -204,7 +252,7 @@ If you encounter issues while uninstalling the Wazuh agent, review the following
 Error: Validation host not provided
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The uninstallation process cannot proceed because the required validation host information is missing. This typically occurs when the uninstallation validation environment file (``/var/ossec/etc/uninstall_validation.env``) is not set up.
+The uninstallation process cannot proceed because the required validation host information is missing. This typically occurs when the uninstallation validation environment file (``/var/ossec/etc/uninstall_validation.env``) is not set up, or when the uninstall ignores it.
 
 Log output from failed removal of the Wazuh agent:
 
@@ -214,6 +262,19 @@ Log output from failed removal of the Wazuh agent:
    ERROR: Validation host not provided. Uninstallation cannot be continued.
 
 To resolve this, ensure that the required environment file ``/var/ossec/etc/uninstall_validation.env`` is created and properly configured before attempting the removal.
+
+If the log shows the following line instead of the ``INFO`` line, the file exists but the uninstall ignored it:
+
+.. code-block:: none
+
+   WARNING: /var/ossec/etc/uninstall_validation.env is not a regular file owned by root and writable only by it; ignoring it and using environment variables.
+
+Replace a link with the file itself, and make ``root`` the owner and the only user who can write it:
+
+.. code-block:: console
+
+   # chown root:root /var/ossec/etc/uninstall_validation.env
+   # chmod 600 /var/ossec/etc/uninstall_validation.env
 
 Error: Uninstallation not authorized
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
