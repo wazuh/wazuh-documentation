@@ -134,7 +134,7 @@ The table below lists the shared libraries provided by the Wazuh manager, their 
 CLI tools
 ---------
 
-The Wazuh manager provides a set of command-line interface (CLI) tools for managing, monitoring, and troubleshooting its components. The table below lists the available CLI tools and their purposes within the Wazuh manager.
+The Wazuh manager provides a set of command-line interface (CLI) tools for managing, monitoring, and troubleshooting its components. The table below lists the available CLI tools and their purposes within the Wazuh manager. The CLI tools are in ``/var/wazuh-manager/bin``, which is not included in the ``PATH`` environment variable. Run them as root using their full paths. For example: ``/var/wazuh-manager/bin/wazuh-manager-conf validate``.
 
 .. list-table::
    :header-rows: 1
@@ -157,8 +157,12 @@ The Wazuh manager provides a set of command-line interface (CLI) tools for manag
    * - ``rbac_control``
      - Seed the RBAC database, change the passwords of the default Wazuh manager API users, or reset the RBAC database
    * - ``wazuh-manager-conf``
-     - Validates and retrieves the Wazuh manager configuration. Run ``wazuh-manager-conf validate`` to check ``/etc/wazuh-manager/wazuh-manager.conf`` before restarting the Wazuh manager. Run ``wazuh-manager-conf get <OPTION>`` to print a specific option, such as ``cluster.key``, or ``wazuh-manager-conf dump`` to print the entire configuration.
+     - Validates and retrieves the Wazuh manager configuration. Run ``/var/wazuh-manager/bin/wazuh-manager-conf validate`` to check ``/etc/wazuh-manager/wazuh-manager.conf`` before restarting the Wazuh manager. It prints nothing when the file is valid. Run ``wazuh-manager-conf get <OPTION>`` to print a specific option, such as ``cluster.key``, or ``wazuh-manager-conf dump`` to print the entire configuration.
    * - ``wazuh-manager-resolve-credentials``
      - Resolves, issues, and validates Wazuh manager credentials and certificates. The package runs this command during installation, upgrades, and every startup. Use the ``--check`` option to perform a read-only check.
    * - ``wazuh-manager-certs``
      - Manages the CA bundle that Wazuh agents trust, stored in ``/etc/wazuh-manager/certs/root-ca.pem``. On a worker node, use the ``--from-master`` option to download the bundle from the master node.
+   * - ``wazuh-manager-authd``
+     - Creates and manages enrollment tokens on the master node. Run ``wazuh-manager-authd --create-enrollment-token --address <ADDRESS>`` to create a token. Use the ``--list-enrollment-tokens``, ``--show-token``, ``--revoke-enrollment-token``, and ``--purge-enrollment-tokens`` options to list, show, revoke, and delete tokens.
+   * - ``wazuh-manager-service-control``
+     - Restarts or reloads the Wazuh manager service. Run ``/var/wazuh-manager/bin/wazuh-manager-service-control restart`` or ``/var/wazuh-manager/bin/wazuh-manager-service-control reload``. A reload keeps Wazuh agent connections active.

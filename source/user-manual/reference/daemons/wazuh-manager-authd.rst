@@ -61,7 +61,7 @@ For more information about agent enrollment and the available authentication met
 Enrollment token commands
 -------------------------
 
-The ``wazuh-manager-authd`` executable also manages enrollment tokens. Except for ``--show-token``, which decodes a token locally, these commands connect to the running daemon, so the agent enrollment service must be running. Create and revoke tokens only on the master node. Each invocation accepts only one of ``--create-enrollment-token``, ``--list-enrollment-tokens``, ``--revoke-enrollment-token``, ``--purge-enrollment-tokens``, or ``--show-token``.
+The ``wazuh-manager-authd`` executable also manages enrollment tokens. Except for ``--show-token``, which decodes a token locally, these commands connect to the running daemon, so the agent enrollment service must be running. Create and revoke tokens only on the master node. Each invocation accepts only one of ``--create-enrollment-token``, ``--list-enrollment-tokens``, ``--revoke-enrollment-token``, ``--purge-enrollment-tokens``, or ``--show-token``. For the options, output, limits, errors and the Wazuh manager API equivalents of these commands, see :doc:`Enrollment token command-line options and API equivalents </user-manual/reference/tools/enrollment-tokens>`.
 
 +--------------------------------+----------------------------------------------------------------------------------------------+
 | Option                         | Description                                                                                  |

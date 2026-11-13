@@ -35,8 +35,8 @@ Options list
 | --skip-signature-check                              | Install packages that are not signed with the Wazuh key. Only for development packages, must |
 |                                                     | be used along with -d.                                                                       |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -dw, --download-wazuh <deb|rpm>                     | Download all the packages necessary for offline installation. Type of packages to download   |
-|                                                     | for offline installation (rpm, deb)                                                          |
+| -dw, --download-wazuh <deb|rpm>                     | Download all the packages necessary for offline installation. Allowed package types:         |
+|                                                     | ``deb``, ``rpm``.                                                                            |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -da, --download-arch <amd64|arm64|x86_64|aarch64>   | Define the architecture of the packages to download for offline installation.                |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
@@ -57,7 +57,9 @@ Options list
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -of, --offline-installation                         | Performs an offline installation. This option must be used with -a, -wm, -s, -wi, or -wd.    |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -s, --start-cluster                                 | Initializes Wazuh indexer cluster security settings.                                         |
+| -s, --start-cluster                                 | Initializes the Wazuh indexer cluster security settings. Run it once, on one Wazuh indexer   |
+|                                                     | node, after the Wazuh indexer service is running on all the Wazuh indexer nodes in           |
+|                                                     | ``config.yml``.                                                                              |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -u, --uninstall                                     | Uninstalls all Wazuh components. This will erase all the existing configuration and data.    |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
@@ -94,13 +96,13 @@ If you want to use Wazuh pre-release packages instead of the official ones, simp
 
 .. code-block:: console
 
-   # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --all-in-one --development pre-release
+   # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --all-in-one --development pre-release
 
 Or the short form:
 
 .. code-block:: console
 
-   # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -d pre-release
+   # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -d pre-release
 
 Use development packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -128,13 +130,13 @@ Then, to use these development packages in the installation, simply add the ``-d
 
 .. code-block:: console
 
-   # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --all-in-one --development local
+   # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --all-in-one --development local
 
 Or the short form:
 
 .. code-block:: console
 
-   # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -d local
+   # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -d local
 
 This command will automatically detect the ``artifact_urls.yaml`` file in the same path as the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` script and will use the URLs specified in it to download the necessary packages for the installation.
 
@@ -147,4 +149,4 @@ Packages in the nightly, pre-release and production repositories are signed. Dev
 
 .. code-block:: console
 
-   # sudo bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -d local --skip-signature-check
+   # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -d local --skip-signature-check

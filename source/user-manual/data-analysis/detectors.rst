@@ -12,6 +12,8 @@ Detectors evaluate normalized events against a defined set of rules to identify 
 
 Detectors fall outside the space promotion logic because they can only be under the custom or standard space. Wazuh includes several built-in detectors that run predefined rule sets out of the box at configured intervals, enabling organizations to begin monitoring for common threats immediately. Users can also create and customize their own detectors, defining detection logic and execution schedules to meet their security, operational, and compliance requirements.
 
+Wazuh provides one standard detector for each integration, created from the CTI content. Standard detectors have no alerting triggers: they record findings, but they don't raise alerts or call notification channels. You can stop and start a standard detector, but you can't change its other settings or delete it.
+
 .. thumbnail:: /images/manual/data-analysis/ruleset-management-detectors.png
    :title: Detectors
    :alt: Detectors
@@ -23,7 +25,7 @@ Creating custom detectors
 
 Follow the steps below to create a custom detector:
 
-#. Navigate to **Ruleset management** > **Detection** > **Detectors** and click on **Create Detector**.
+#. Navigate to **Ruleset Management** > **Detection** > **Detectors** and click on **Create detector**.
 
 #. Enter a name for the detector and select a data source.
 
@@ -33,7 +35,7 @@ Follow the steps below to create a custom detector:
       :align: center
       :width: 80%
 
-#. Select the indices you want the detector to monitor, a **Space** (in our case Custom), and an **Integration**. You can include or exclude which rules the detector covers.
+#. Select the indices you want the detector to monitor, a **Space** (in our case Custom), and an **Integration**. You can include or exclude which rules the detector covers. The **Integration** list shows only the integrations in the selected space. To use an integration you created with the Custom space, promote it to the custom space first. In the indices, select the ``wazuh-events-v5-<category>`` index that matches the integration's category, for example ``wazuh-events-v5-system-activity``.
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-create-detectors-2.png
       :title: Configure the detector
@@ -41,7 +43,7 @@ Follow the steps below to create a custom detector:
       :align: center
       :width: 80%
 
-   The detector schedule specifies the frequency you prefer your detector to execute.
+   In **Detector schedule**, set **Run every** to how often the detector runs, in minutes, hours, or days. The default is every 1 minute.
 
 #. Click on **Create detector** to save the detector.
 
@@ -56,15 +58,21 @@ Disabling or tuning a Standard rule
 
 Standard content is read-only because Wazuh continuously syncs it from the CTI feed (see :doc:`Space <space>`), so you cannot edit or disable a Standard rule directly. To stop it from generating findings, exclude it through a detector instead.
 
+You can also stop or start a standard detector with the Wazuh indexer API. Send ``PUT /_plugins/_security_analytics/detectors/<DETECTOR_ID>`` with the detector body and change only ``enabled``. Any other change, and any ``DELETE`` request, returns ``400 Bad Request``. Write ``last_update_time`` and ``enabled_time`` as epoch milliseconds: a ``GET`` request returns them as ISO 8601 strings, and sending them back unchanged fails with ``Malformed detector request body``. The request needs the ``cluster:admin/opensearch/securityanalytics/detector/write`` permission, which only the ``all_access`` role has by default.
+
 To silence a specific Standard rule:
 
-#. Go to **Ruleset management** > **Detection** > **Rules**, set the space selector to **Standard**, and open the rule you want to silence. Note its Integration field, content in the standard space can have more than one similarly named integration (for example, ``windows`` and ``windows-rules``), so confirm you have the right one before proceeding.
+#. Go to **Ruleset Management** > **Detection** > **Rules**, set the space selector to **Standard**, and open the rule you want to silence. Note its Integration field, content in the standard space can have more than one similarly named integration (for example, ``windows`` and ``windows-rules``), so confirm you have the right one before proceeding.
 
-#. Go to **Ruleset management** > **Detection** > **Detectors**, apply a filter for content in the standard space, and open the detector that covers that integration.
+#. Go to **Ruleset Management** > **Detection** > **Detectors**, apply a filter for content in the standard space, and open the detector that covers that integration.
 
 #. From the detector's **Actions** menu, select **Stop detector**.
 
-#. Back on the **Detectors** page, click **Create Detector**.
+   .. warning::
+
+      A stopped detector produces no findings, and the events indexed while it's stopped are never evaluated later. Starting it again resumes detection only from that moment, so create the replacement detector right after you stop the original.
+
+#. Back on the **Detectors** page, click **Create detector**.
 
 #. Configure the new detector using the same indices and integration as the one you stopped.
 
@@ -77,7 +85,7 @@ Example: Silencing a rule that is generating false positives
 
 Suppose the standard ``windows`` integration's "Event log cleared via command line" rule is generating false positives in your environment. You cannot disable it, so you replace the detector that runs it:
 
-#. Go to **Ruleset management** > **Detection** > **Detectors** and set the space selector to **Standard**. Search and select the ``windows`` detector, then select **Stop detector** from its **Actions** menu.
+#. Go to **Ruleset Management** > **Detection** > **Detectors** and set the space selector to **Standard**. Search and select the ``windows`` detector, then select **Stop detector** from its **Actions** menu.
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-stop-detector.png
       :title: Stop the Standard detector
@@ -93,7 +101,7 @@ Suppose the standard ``windows`` integration's "Event log cleared via command li
       :align: center
       :width: 80%
 
-#. Click **Create Detector** and configure a new detector on the same index and integration. This example uses the following parameters:
+#. Click **Create detector** and configure a new detector on the same index and integration. This example uses the following parameters:
 
    -  Name: windows-Custom
    -  Data source (index): wazuh-events-v5-system-activity

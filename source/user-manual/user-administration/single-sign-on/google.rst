@@ -29,14 +29,16 @@ Follow these steps to integrate Google Workspace IdP with Wazuh for single sign-
 Google Workspace Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create an account in Google Workspace. A Google Workspace account is required for this configuration. Request a free trial if you don't have a paid license.
+#. Create an account in Google Workspace.
+
+   A Google Workspace account is required for this configuration. Request a free trial if you don't have a paid license.
 
 #. Go to https://admin.google.com/ac/apps/unified and sign in with your Google Admin account.
 #. Create an app with **Add custom SAML app**.
 
    #. Go to **Apps** > **Web and mobile apps** > **Add App**, then **Add custom SAML app**. Enter an **App name** and click **CONTINUE**.
 
-      .. thumbnail:: /images/single-sign-on/google/01-go-to-apps.png
+      .. thumbnail:: /images/single-sign-on/google/01-go-to-apps-web-mobile-apps.png
          :title: Go to Apps > Website and mobile apps
          :align: center
          :width: 80%
@@ -46,7 +48,7 @@ Google Workspace Configuration
       -  **Entity ID**: This will be used later as the ``idp.entity_id``
       -  Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
 
-      .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
+      .. thumbnail:: /images/single-sign-on/google/02-take-note-of-parameters.png
          :title: Take note of the parameters
          :align: center
          :width: 80%
@@ -67,7 +69,7 @@ Google Workspace Configuration
 
       Google doesn't support sending the Group membership attribute as part of the SAML Assertion (as the other Identity Providers do), so in this example, we are going to use **Department** as the attribute whose value will be used as our ``roles_key`` in the Wazuh indexer configuration. In this case the value for the **Department** attribute will be stored as ``Roles``.
 
-      .. thumbnail:: /images/single-sign-on/google/04-click-on-add-mapping.png
+      .. thumbnail:: /images/single-sign-on/google/04-click-add-mapping-employee-details.png
          :title: Click on ADD MAPPING under Employee details
          :align: center
          :width: 80%
@@ -83,7 +85,7 @@ Google Workspace Configuration
 
    #. Select **ON for everyone** and click **SAVE**.
 
-      .. thumbnail:: /images/single-sign-on/google/06-select-on-for-everyone.png
+      .. thumbnail:: /images/single-sign-on/google/06-select-on-for-everyone-save.png
          :title: Select ON for everyone and click SAVE
          :align: center
          :width: 80%
@@ -92,12 +94,12 @@ Google Workspace Configuration
 
    #. Go to **Directory** then **Users**.
 
-      .. thumbnail:: /images/single-sign-on/google/07-define-the-attribute-for-users.png
+      .. thumbnail:: /images/single-sign-on/google/07-define-attribute-for-users.png
          :title: Define the attribute for users
          :align: center
          :width: 80%
 
-   #. Select a user,  go to **User information**, then edit **Employee information**.
+   #. Select a user, go to **User information**, then edit **Employee information**.
 
       .. thumbnail:: /images/single-sign-on/google/08-select-a-user.png
          :title: Select a user
@@ -111,10 +113,10 @@ Google Workspace Configuration
 
    #. Add a value to the **Department** field, in this example, we add ``Wazuh_access``, click on **SAVE**. This value will be used in the ``role_mapping`` file configuration.
 
-      .. thumbnail:: /images/single-sign-on/google/10-add-a-value-to-the-department-field.png
-        :title:  Add a value to the Department field
-        :align: center
-        :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/10-add-value-department-field.png
+         :title: Add a value to the Department field
+         :align: center
+         :width: 80%
 
 .. _indexer_configuration_google_admin:
 
@@ -137,17 +139,17 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
-#. Place the ``Google_Metadata.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+#. Place the ``Google_Metadata.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to root:wazuh-indexer and the permissions to 640 using the following commands:
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/Google_Metadata.xml
+      # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/Google_Metadata.xml
+      # chmod 640 /etc/wazuh-indexer/opensearch-security/Google_Metadata.xml
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
-
-   - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
+   -  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
@@ -185,12 +187,12 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-   - ``idp.metadata_file``
-   - ``idp.entity_id``
-   - ``sp.entity_id``
-   - ``kibana_url``
-   - ``roles_key``
-   - ``exchange_key``
+   -  ``idp.metadata_file``
+   -  ``idp.entity_id``
+   -  ``sp.entity_id``
+   -  ``kibana_url``
+   -  ``roles_key``
+   -  ``exchange_key``
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file.
 
@@ -273,7 +275,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -286,11 +288,10 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-   .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+   .. thumbnail:: /images/single-sign-on/google/11-wazuh-role-mapping.gif
       :title: Wazuh role mapping
-      :alt: Wazuh role mapping
       :align: center
       :width: 80%
 
@@ -299,18 +300,19 @@ Wazuh dashboard configuration
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``administrator``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field**: ``backend_roles``
-      -  **Search operation**: ``FIND``
-      -  **Value**: Assign the ``Department`` field value that was obtained in Google IdP, in our case, this is ``Wazuh_access``.
-      -  Click **Save role mapping** to save and map the backend role with Wazuh as administrator.
+      -  **User field:** ``backend_roles``
+      -  **Search operation:** ``FIND``
+      -  **Value:** Assign the ``Department`` field value that was obtained in Google IdP, in our case, this is ``Wazuh_access``.
+      -  Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*.
 
-      .. thumbnail:: /images/single-sign-on/google/Wazuh-role-mapping.png
+      .. thumbnail:: /images/single-sign-on/google/12-create-wazuh-role-mapping.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 
@@ -339,17 +341,19 @@ Follow these steps to integrate Google Workspace IdP with Wazuh for single sign-
 
 .. _configuration_google_ro:
 
-Google Workspace configuration
+Google Workspace Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create an account in Google Workspace. A Google Workspace account is required for this configuration. Request a free trial if you don't have a paid license.
+#. Create an account in Google Workspace.
+
+   A Google Workspace account is required for this configuration. Request a free trial if you don't have a paid license.
 
 #. Go to https://admin.google.com/ac/apps/unified and sign in with your Google Admin account.
 #. Create an app with **Add custom SAML app**.
 
    #. Go to **Apps** > **Web and mobile apps** > **Add App**, then **Add custom SAML app**. Enter an **App name** and click **CONTINUE**.
 
-      .. thumbnail:: /images/single-sign-on/google/01-go-to-apps.png
+      .. thumbnail:: /images/single-sign-on/google/01-go-to-apps-web-mobile-apps.png
          :title: Go to Apps > Website and mobile apps
          :align: center
          :width: 80%
@@ -359,7 +363,7 @@ Google Workspace configuration
       -  **Entity ID**: This will be used later as the ``idp.entity_id``
       -  Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
 
-      .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
+      .. thumbnail:: /images/single-sign-on/google/02-take-note-of-parameters.png
          :title: Take note of the parameters
          :align: center
          :width: 80%
@@ -380,7 +384,7 @@ Google Workspace configuration
 
       Google doesn't support sending the Group membership attribute as part of the SAML Assertion (as the other Identity Providers do), so in this example, we are going to use **Department** as the attribute whose value will be used as our ``roles_key`` in the Wazuh indexer configuration. In this case the value for the **Department** attribute will be stored as ``Roles``.
 
-      .. thumbnail:: /images/single-sign-on/google/04-click-on-add-mapping.png
+      .. thumbnail:: /images/single-sign-on/google/04-click-add-mapping-employee-details.png
          :title: Click on ADD MAPPING under Employee details
          :align: center
          :width: 80%
@@ -396,7 +400,7 @@ Google Workspace configuration
 
    #. Select **ON for everyone** and click **SAVE**.
 
-      .. thumbnail:: /images/single-sign-on/google/06-select-on-for-everyone.png
+      .. thumbnail:: /images/single-sign-on/google/06-select-on-for-everyone-save.png
          :title: Select ON for everyone and click SAVE
          :align: center
          :width: 80%
@@ -405,12 +409,12 @@ Google Workspace configuration
 
    #. Go to **Directory** then **Users**.
 
-      .. thumbnail:: /images/single-sign-on/google/07-define-the-attribute-for-users.png
+      .. thumbnail:: /images/single-sign-on/google/07-define-attribute-for-users.png
          :title: Define the attribute for users
          :align: center
          :width: 80%
 
-   #. Select a user,  go to **User information**, then edit **Employee information**.
+   #. Select a user, go to **User information**, then edit **Employee information**.
 
       .. thumbnail:: /images/single-sign-on/google/08-select-a-user.png
          :title: Select a user
@@ -424,10 +428,10 @@ Google Workspace configuration
 
    #. Add a value to the **Department** field, in this example, we add ``wazuh-readonly``, click on **SAVE**. This value will be used as the backend role in the Wazuh dashboard configuration.
 
-      .. thumbnail:: /images/single-sign-on/google/10-add-a-value-to-the-department-field.png
-        :title:  Add a value to the Department field
-        :align: center
-        :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/13-add-value-department-field.png
+         :title: Add a value to the Department field
+         :align: center
+         :width: 80%
 
 .. _indexer_configuration_google_ro:
 
@@ -450,17 +454,17 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
-#. Place the ``Google_Metadata.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+#. Place the ``Google_Metadata.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to root:wazuh-indexer and the permissions to 640 using the following commands:
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/Google_Metadata.xml
+      # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/Google_Metadata.xml
+      # chmod 640 /etc/wazuh-indexer/opensearch-security/Google_Metadata.xml
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
-
-   - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
+   -  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
@@ -498,12 +502,12 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-   - ``idp.metadata_file``
-   - ``idp.entity_id``
-   - ``sp.entity_id``
-   - ``kibana_url``
-   - ``roles_key``
-   - ``exchange_key``
+   -  ``idp.metadata_file``
+   -  ``idp.entity_id``
+   -  ``sp.entity_id``
+   -  ``kibana_url``
+   -  ``roles_key``
+   -  ``exchange_key``
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file.
 
@@ -544,18 +548,19 @@ Wazuh dashboard configuration
    Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
       -  **Cluster permissions**: ``cluster_composite_ops_ro``
       -  **Index**: ``*``
       -  **Index permissions**: ``read``
+
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the value of the **Department** field you created in Google Workspace and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -568,31 +573,31 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-   .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
-      :title: Wazuh role mapping
-      :alt: Wazuh role mapping
-      :align: center
-      :width: 80%
-
-   #. Click **Create Role mapping** and complete the empty fields with the following parameters:
-
-      - **Role mapping name**: Assign a name to the role mapping.
-      - **Roles**: Select ``readonly``.
-      - **Custom rules**: Click **Add new rule** to expand this field.
-      - **User field**: ``backend_roles``
-      - **Search operation**: ``FIND``
-      - **Value**: Assign the value of the **Department** field you created in Google Workspace. In our case, the backend role is ``wazuh-readonly``.
-      - Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
-
-      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping-RO.png
-         :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
+      .. thumbnail:: /images/single-sign-on/google/11-wazuh-role-mapping.gif
+         :title: Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+   #. Click **Create Role mapping** and complete the empty fields with the following parameters:
+
+      -  **Role mapping name**: Assign a name to the role mapping.
+      -  **Roles**: Select ``readonly``.
+      -  **Custom rules**: Click **Add new rule** to expand this field.
+      -  **User field:** ``backend_roles``
+      -  **Search operation:** ``FIND``
+      -  **Value:** Assign the value of the **Department** field you created in Google Workspace. In our case, the backend role is ``wazuh-readonly``.
+      -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
+
+      .. thumbnail:: /images/single-sign-on/google/14-create-wazuh-role-mapping.png
+         :title: Create Wazuh role mapping
+         :align: center
+         :width: 80%
+
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 

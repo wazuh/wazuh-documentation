@@ -57,7 +57,7 @@ Wazuh generates findings when the system inventory of a monitored endpoint chang
 |                                                                                |                                                                                                                                   |               | | Techniques T1685 - Disable or Modify Tools                                              |                                                                                                                     |
 +--------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+---------------+-------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
 
-.. thumbnail:: /images/manual/system-inventory/wazuh-it-hygiene-rules.jpg
+.. thumbnail:: /images/manual/system-inventory/wazuh-it-hygiene-rules.png
    :title: Wazuh IT Hygiene - Rules
    :alt: Wazuh IT Hygiene - Rules
    :align: center
@@ -65,7 +65,7 @@ Wazuh generates findings when the system inventory of a monitored endpoint chang
 
 The Wazuh dashboard shows findings in the **Findings** tab of **Security operations** > **IT Hygiene**, and in **Threat intelligence** > **Threat Hunting**. Each finding includes the rule metadata, MITRE ATT&CK technique, and regulatory compliance mappings.
 
-.. thumbnail:: /images/manual/system-inventory/wazuh-it-hygiene-findings.jpg
+.. thumbnail:: /images/manual/system-inventory/wazuh-it-hygiene-findings.png
    :title: Wazuh IT Hygiene - Findings
    :alt: Wazuh IT Hygiene - Findings
    :align: center
