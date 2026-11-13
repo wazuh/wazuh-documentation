@@ -35,7 +35,7 @@ The decoder is a child of the root decoder of the space, ``decoder/core-wazuh-me
    parents:
      - decoder/core-wazuh-message/0
    check:
-     - wazuh.protocol.location: string_equal("/var/log/payments/api.log")
+     - wazuh.protocol.location: string_eq("/var/log/payments/api.log")
    parse|event.original:
      - "<event.start/ISO8601Z> <log.level> <message>"
    normalize:

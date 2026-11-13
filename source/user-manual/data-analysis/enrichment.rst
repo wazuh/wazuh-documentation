@@ -53,7 +53,7 @@ This field is later used by outputs and analytics to slice data per content spac
 Discarded events filter
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The discarded-events filter decides whether events that have been marked as "discarded" during decoding or filtering are allowed to continue into enrichment and outputs. Decoders and filters mark an event as discarded with the ``discard_events`` helper. The **Index discarded events** setting of the space controls this behavior. To change it, go to **Ruleset Management** > **Overview**, select the draft or standard space, and click **Actions** > **Edit**:
+The discarded-events filter decides whether events that have been marked as "discarded" during decoding or filtering are allowed to continue into enrichment and outputs. Decoders and filters mark an event as discarded with the ``discard_event`` helper. The **Index discarded events** setting of the space controls this behavior. To change it, go to **Ruleset Management** > **Overview**, select the draft or standard space, and click **Actions** > **Edit**:
 
 -  If discarded-events indexing is enabled, discarded events still traverse the remainder of the pipeline and can be indexed for observability and troubleshooting.
 

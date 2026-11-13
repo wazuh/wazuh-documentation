@@ -217,7 +217,7 @@ Decoders
         - network.forwarded_ip: "$_client_ip.0"
         - tls.version_protocol: "$_tls.0"
         - tls.cipher: "$tls.cipher"
-        - threat.indicator.description: "kvdb_get('malicious_IPs', $source.ip)"
+        - threat.indicator.description: "kvdb_lookup('malicious_IPs', $source.ip)"
         parse|_http_request:
         - "<http.request.method> <url.original> HTTP/<http.version>"
       - check:
@@ -228,10 +228,10 @@ Decoders
         - _tls_1: "regex_not_match(\\\\d+\\\\.\\\\d+)"
         map:
         - tls.version: "concat_any($_tls_1, '.0')"
-      - check: "int_less($http.response.status_code, 400)"
+      - check: "number_lt($http.response.status_code, 400)"
         map:
         - event.outcome: "success"
-      - check: "int_greater_or_equal($http.response.status_code, 400)"
+      - check: "number_gte($http.response.status_code, 400)"
         map:
         - event.outcome: "failure"
       - check:
