@@ -19,7 +19,7 @@ Usage
 
 .. code-block:: none
 
-   manage_agents -[Vhj] [-i id]
+   manage_agents [-Vhj] [-i <key>]
 
 Options
 -------
