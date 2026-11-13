@@ -41,8 +41,6 @@ The following table compares the three helper categories.
 
 The normalization engine validates helper categories when building an asset. Using a filter helper in a ``map`` operation, or a map or transformation helper in a ``check`` operation, causes the asset build to fail.
 
-In output assets, map and transformation helpers can write only to fields listed under the ``output`` key of the allowed-fields schema document. By default, this key lists no fields. If a map or transformation helper writes to an unlisted field, the asset build fails unless the target is the event root (``.``). The ``discard_events``, ``erase_custom_fields``, and ``sanitize_fields`` helpers don't have this restriction.
-
 Filter assets accept only a ``check`` stage. Therefore, they cannot contain map or transformation helpers.
 
 .. _data_analysis_helper_call_syntax:
