@@ -63,7 +63,7 @@ macOS
 
 .. note::
 
-   Direct upgrades to Wazuh agent |WAZUH_CURRENT| are not supported from Wazuh agent 4.14.0 or earlier. Upgrade the Wazuh agent to 4.14.1 or a later 4.14.x release first, and then to |WAZUH_CURRENT|.
+   Direct upgrades to Wazuh agent |WAZUH_CURRENT| are supported from Wazuh agent 4.14.0 or later. Upgrade earlier Wazuh agents to a 4.14.x release first, and then to |WAZUH_CURRENT|. Otherwise the upgrade request returns error ``1819``.
 
 Upgrade the Wazuh agent using a WPK file
 -----------------------------------------
