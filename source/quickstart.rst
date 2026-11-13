@@ -69,7 +69,7 @@ You need an endpoint that meets the requirements above, internet access, and a u
    .. note::
 
       -  Allow incoming traffic on ports ``443/TCP`` and ``1517/TCP``. For Wazuh 4.x agents, also allow traffic on ``1514/TCP`` and ``1515/TCP``. Apply these rules to your cloud security group and to any active endpoint firewall as well. See :ref:`Required ports <default_ports>`.
-      -  If agents connect through an FQDN, load balancer, or public IP address, add that address with ``-as <ADDRESS>``, for example, ``-as wazuh.example.com``. Repeat ``-as`` for each extra address. Otherwise, agents cannot enroll through that address.
+      -  If :ref:`agents connect through another address <wazuh_manager_agent_connection_address>`, such as an FQDN, load balancer, or public IP address, add it with ``-as <ADDRESS>``, for example, ``-as wazuh.example.com``. Repeat ``-as`` for each extra address. Otherwise, agents cannot enroll through that address.
 
    .. code-block:: console
 
