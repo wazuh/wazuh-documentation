@@ -46,7 +46,7 @@ You can check the :ref:`status <agent-connection-states>` of a Wazuh agent by se
 
    GET /agents?agents_list=<WAZUH_AGENT_ID>
 
-Output
+The output looks like this:
 
 .. code-block:: json
    :class: output
@@ -91,10 +91,10 @@ Output
 Reading the local wazuh-agentd.state file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can read the ``/var/ossec/var/run/wazuh-agentd.state`` file found in the endpoint to check the status of the connection. The Wazuh agent keeps reporting its connection status in this file as follows:
+You can read the ``/var/ossec/var/run/wazuh-agentd.state`` file (``C:\Program Files (x86)\ossec-agent\wazuh-agent.state`` on Windows) found in the endpoint to check the status of the connection. The Wazuh agent keeps reporting its connection status in this file as follows:
 
 -  ``pending``: Waiting for acknowledgement from the Wazuh manager about the connection established.
--  ``disconnected``: No acknowledgement signal received in the last 60 seconds or lost connection.
+-  ``disconnected``: No acknowledgement signal received in the last 60 seconds or lost connection. This is the Wazuh agent's own view. The Wazuh manager marks it as disconnected only after ``agents_disconnection_time``, 15 minutes by default. See :ref:`Agent connection states <agent-connection-states>`.
 -  ``connected``: The Wazuh agent connected to the Wazuh manager in the last 10 seconds.
 
 To check the current status and verify the connection of the Wazuh agent to the Wazuh manager, run the following command on the endpoint:
@@ -107,7 +107,7 @@ To check the current status and verify the connection of the Wazuh agent to the 
 
          $ sudo grep ^status /var/ossec/var/run/wazuh-agentd.state
 
-      Output
+      The output looks like this:
 
       .. code-block:: none
          :class: output
@@ -120,7 +120,7 @@ To check the current status and verify the connection of the Wazuh agent to the 
 
          > Select-String -Path 'C:\Program Files (x86)\ossec-agent\wazuh-agent.state' -Pattern "^status"
 
-      Output
+      The output looks like this:
 
       .. code-block:: none
          :class: output
@@ -133,7 +133,7 @@ To check the current status and verify the connection of the Wazuh agent to the 
 
          # sudo grep ^status /Library/Ossec/var/run/wazuh-agentd.state
 
-      Output
+      The output looks like this:
 
       .. code-block:: none
          :class: output

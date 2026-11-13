@@ -10,7 +10,7 @@ wazuh-manager-remoted
 
 The ``wazuh-manager-remoted`` executable runs the Wazuh manager agent connection service.
 
-The agent connection service establishes and maintains secure communication with Wazuh agents. It receives events from connected agents, decrypts and enriches them with connection metadata, and forwards them to the Wazuh Normalization Engine for processing.
+The agent connection service establishes and maintains secure communication with Wazuh agents. It receives events from connected agents, decrypts and enriches them with connection metadata, and forwards them to the Wazuh normalization engine for processing.
 
 By default, the service listens for Wazuh 5.x agent connections over HTTPS on port 1517. It also listens on the legacy TCP port 1514 for Wazuh 4.x agents.
 

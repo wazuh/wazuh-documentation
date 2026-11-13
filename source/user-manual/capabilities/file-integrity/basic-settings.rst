@@ -15,7 +15,7 @@ This section covers the common FIM configuration options used for file integrity
 Real-time monitoring
 ---------------------
 
-The ``realtime`` option enables real-time monitoring of file changes in configured directories on Windows and Linux endpoints.
+The ``realtime`` option enables real-time monitoring of file changes in configured directories on Windows, Linux, and macOS endpoints.
 
 To enable real-time monitoring, set the ``realtime`` option of the ``directories`` option to ``yes``. The allowed values for the ``realtime`` option are ``yes`` and ``no``. Real-time detection pauses during scheduled FIM scans and resumes once they finish.
 

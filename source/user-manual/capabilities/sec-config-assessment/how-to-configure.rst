@@ -202,7 +202,7 @@ You can enable this feature to push policy files to Wazuh agents in defined grou
 
    The Wazuh agent saves all files pushed from the Wazuh manager in the ``etc/shared/`` directory on Linux and macOS endpoints and in the ``shared\`` directory on Windows endpoints, regardless of the group they belong to. We specify the relative file path of the policy because the installation directory differs between operating systems.
 
-The new ``<sca>`` block in the Wazuh manager ``/etc/wazuh-manager/shared/default/agent.conf`` file merges with the ``<sca>`` block on the Wazuh agent side, and Wazuh adds the new configuration.
+The new ``<sca>`` block in the Wazuh manager ``/etc/wazuh-manager/shared/default/agent.conf`` file merges with the ``<sca>`` block on the Wazuh agent side, and Wazuh adds the new configuration. Restart the Wazuh agent after you edit ``local_internal_options.conf``, because the Wazuh agent reads it only when it starts. To confirm that the policy arrived, check that the policy file is in the ``etc/shared`` directory on the endpoint and that the policy appears in **Endpoint security** > **Configuration Assessment** > **Inventory** after the next SCA synchronization.
 
 .. _sca_creating_custom_policies:
 
@@ -311,7 +311,7 @@ The policy section defines the metadata for the SCA policy, including its identi
 Requirement section
 ^^^^^^^^^^^^^^^^^^^^
 
-Requirements determine whether a policy should run on an endpoint before any checks are evaluated. If the requirements are not met, the policy is skipped. The **requirements** section specifies the conditions that determine whether a policy should run on an endpoint. Use this section to restrict policy execution based on factors such as the operating system, installed packages, or other system characteristics.
+Requirements determine whether a policy should run on an endpoint before any checks are evaluated. If the requirements are not met, the policy is skipped. Use this section to restrict policy execution based on factors such as the operating system, installed packages, or other system characteristics.
 
 .. _sca_policy_file_requirements_section:
 .. table:: Requirements section

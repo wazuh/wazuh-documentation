@@ -1,21 +1,39 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh server cluster is made up of multiple Wazuh server nodes in a distributed environment. Learn more in this section of the documentation.
+   :description: Learn how the Wazuh manager cluster distributes Wazuh agent connections and event processing across master and worker nodes.
 
-Wazuh server cluster
-====================
+Wazuh manager cluster
+=====================
 
-The Wazuh server cluster consists of multiple Wazuh server nodes in a distributed environment. This deployment strategy helps to provide horizontal scalability, high availability, and improved performance. In an environment with many endpoints to monitor, you can combine this deployment strategy with :ref:`network load balancer <connecting_with_load_balancer>` to distribute Wazuh agent connections effectively across multiple nodes. This approach enables the Wazuh server to manage a large number of Wazuh agents more efficiently and ensure high availability.
+The Wazuh manager cluster runs multiple Wazuh manager nodes as a single service. It distributes Wazuh agent connections and event processing across nodes, allowing the deployment to scale horizontally as you add endpoints.
 
-.. topic:: Content
+Every Wazuh manager is a cluster node, even in a single-node deployment. A standalone Wazuh manager consists of one master node with no worker nodes. To scale the deployment, add worker nodes that connect to the master node.
+
+You can combine the cluster with a network :ref:`load balancer <wazuh_manager_cluster_load_balancers_for_the_wazuh_manager_cluster>`. The load balancer provides a single address for the Wazuh agents and distributes their connections across the cluster nodes.
+
+Cluster at a glance
+-------------------
+
+The cluster follows a set of rules that shape how you plan, secure, and scale it. The following sections explain each rule in detail.
+
+-  A cluster has exactly one master node and any number of worker nodes.
+-  The ``wazuh-manager-clusterd`` daemon runs on every node. Worker nodes connect to the master node on port ``1516`` by default.
+-  The master node replicates agent keys, enrollment credentials, and group configuration to worker nodes.
+-  Every node accepts Wazuh agent connections on HTTPS port ``1517``.
+-  Only the master node creates agent identities and runs the Wazuh manager API.
+-  Each node maintains its own configuration file and TLS certificates. The cluster does not replicate these files.
+
+
+.. topic:: Contents
+
+   The following pages explain the cluster, then show how to configure, scale, and connect it.
 
    .. toctree::
       :titlesonly:
 
       architecture-overview
       security-requirements
-      types-of-nodes
       how-server-cluster-works
       cluster-nodes-configuration
       data-synchronization
@@ -23,3 +41,5 @@ The Wazuh server cluster consists of multiple Wazuh server nodes in a distribute
       adding-new-server-nodes/index
       agent-connections
       load-balancers
+      troubleshooting-load-balanced-cluster
+

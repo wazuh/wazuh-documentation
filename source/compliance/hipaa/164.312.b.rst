@@ -36,10 +36,10 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-#. Navigate to the **Findings** section and click on a finding to view details. In this example, the image shows the details of an authentication finding.
+#. Navigate to the **Findings** section and click on a finding to view details. In this example, the image shows the details of a Sudo command executed finding, which maps to HIPAA § 164.312(b).
 
-   .. thumbnail:: /images/compliance/hipaa/threat-hunting-authentication-finding-details.png
-      :title: Threat Hunting finding details - authentication
-      :alt: Threat Hunting finding details - authentication
+   .. thumbnail:: /images/compliance/hipaa/threat-hunting-sudo-finding-details.png
+      :title: Threat Hunting finding details - Sudo command executed
+      :alt: Threat Hunting finding details - Sudo command executed
       :align: center
       :width: 80%

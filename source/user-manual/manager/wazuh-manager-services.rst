@@ -12,6 +12,8 @@ Each Wazuh manager service has its own configuration block in the ``/etc/wazuh-m
 
 The ``wazuh-manager`` systemd unit confines every daemon without using a chroot. Daemons can write only to ``/var/wazuh-manager`` and ``/etc/wazuh-manager``. Each daemon also gets a private ``/tmp`` directory. A Wazuh manager installed under ``/home``, ``/root``, or ``/run/user`` cannot run.
 
+.. _agent_enrollment_service:
+
 Agent enrollment service
 ------------------------
 

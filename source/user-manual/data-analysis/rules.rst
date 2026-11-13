@@ -8,7 +8,9 @@
 Rules
 =====
 
-Wazuh rules define the detection logic used to identify relevant security activity in normalized events. They describe what should be detected by specifying conditions on event fields. Rules are written in `Sigma <https://sigmahq.io/>`__ format with Wazuh-specific extensions for metadata, MITRE ATT&CK mapping, compliance mapping, and dynamic placeholders.
+Wazuh rules define the detection logic used to identify relevant security activity in normalized events. They describe what should be detected by specifying conditions on event fields. Rules are written in `Sigma <https://sigmahq.io/>`__ format with Wazuh-specific extensions for metadata, MITRE ATT&CK mapping, compliance mapping, and dynamic placeholders. To create a rule and test it, see :ref:`Create a custom rule <data_analysis_create_custom_rule>`. A rule produces findings only after a detector includes it, as described in :ref:`Create a detector <data_analysis_create_detector>`.
+
+To remove a rule that's already in the test or custom space, see :ref:`Removing promoted content <data_analysis_removing_promoted_content>`.
 
 Top-level fields
 ----------------
@@ -20,12 +22,14 @@ The following table lists all supported top-level fields in a Wazuh Sigma rule. 
 +--------------------+-----------+------------+--------------------------------------------------------+
 | Field              | Type      | Required   | Description                                            |
 +====================+===========+============+========================================================+
-| ``id``             | String    | Yes        | Globally unique rule identifier (UUIDv4 recommended)   |
+| ``id``             | String    | Yes        | Globally unique rule identifier (UUIDv4). Wazuh        |
+|                    |           |            | assigns a new random UUID when you create the rule and |
+|                    |           |            | replaces the value you write                           |
 +--------------------+-----------+------------+--------------------------------------------------------+
-| ``status``         | String    | Yes        | Rule maturity status: ``experimental``, ``test``, or   |
-|                    |           |            | ``stable``                                             |
+| ``status``         | String    | Yes        | Rule maturity status: ``experimental``, ``test``,      |
+|                    |           |            | ``stable``, ``deprecated``, or ``unsupported``         |
 +--------------------+-----------+------------+--------------------------------------------------------+
-| ``level``          | String    | Yes        | Findings severity: ``informational``, ``low``,         |
+| ``level``          | String    | Yes        | Finding severity: ``informational``, ``low``,          |
 |                    |           |            | ``medium``, ``high``, or ``critical``                  |
 +--------------------+-----------+------------+--------------------------------------------------------+
 | ``detection``      | Object    | Yes        | Detection logic: selections, keywords, and conditions  |
@@ -81,10 +85,18 @@ The following example demonstrates a complete Wazuh detection rule using all sup
      - Application bugs
    mitre:
      tactic:
-       - TA0001
+       id:
+         - TA0001
+       name:
+         - Initial Access
      technique:
-       - T1190
-     subtechnique: []
+       id:
+         - T1190
+       name:
+         - Exploit Public-Facing Application
+     subtechnique:
+       id: []
+       name: []
    compliance:
      pci_dss:
        - "6.5.1"
@@ -447,21 +459,35 @@ The ``metadata`` block captures authorship, lifecycle, and descriptive informati
 MITRE ATT&CK
 ------------
 
-The ``mitre`` block maps a rule to MITRE ATT&CK tactics, techniques, and subtechniques. Each field is an array of ID strings:
+The ``mitre`` block maps a rule to MITRE ATT&CK tactics, techniques, and subtechniques. Each of tactic, technique, and subtechnique is an object with two arrays, ``id`` and ``name``, given in matching order:
 
-+------------------+----------------------------------------------------+-------------------------------+
-| Field            | Description                                        | Example                       |
-+==================+====================================================+===============================+
-| ``tactic``       | MITRE ATT&CK tactic IDs. An array of one or more   | ``tactic: - TA0002``          |
-|                  | tactic identifiers.                                |                               |
-+------------------+----------------------------------------------------+-------------------------------+
-| ``technique``    | MITRE ATT&CK technique IDs. An array of one or     | ``technique: - T1059``        |
-|                  | more technique identifiers.                        |                               |
-+------------------+----------------------------------------------------+-------------------------------+
-| ``subtechnique`` | MITRE ATT&CK subtechnique IDs. An array of one or  | ``subtechnique: - T1059.001`` |
-|                  | more subtechnique identifiers. Use an empty array  |                               |
-|                  | ``[]`` if no subtechnique applies.                 |                               |
-+------------------+----------------------------------------------------+-------------------------------+
++------------------+--------------------------------------------------------+--------------------------------------------+
+| Field            | Description                                            | Example                                    |
++==================+========================================================+============================================+
+| ``tactic``       | An object with two arrays: ``id`` (one or more tactic  | .. code-block:: yaml                       |
+|                  | identifiers) and ``name`` (the matching tactic name    |                                            |
+|                  | for each ID, same order).                              |    tactic:                                 |
+|                  |                                                        |      id:                                   |
+|                  |                                                        |        - TA0002                            |
+|                  |                                                        |      name:                                 |
+|                  |                                                        |        - Execution                         |
++------------------+--------------------------------------------------------+--------------------------------------------+
+| ``technique``    | An object with two arrays: ``id`` (one or more         | .. code-block:: yaml                       |
+|                  | technique identifiers) and ``name`` (the matching      |                                            |
+|                  | technique name for each ID, same order).               |    technique:                              |
+|                  |                                                        |      id:                                   |
+|                  |                                                        |        - T1059                             |
+|                  |                                                        |      name:                                 |
+|                  |                                                        |        - Command and Scripting Interpreter |
++------------------+--------------------------------------------------------+--------------------------------------------+
+| ``subtechnique`` | An object with the same ``id`` and ``name`` arrays as  | .. code-block:: yaml                       |
+|                  | tactic and technique. Use empty arrays for both if no  |                                            |
+|                  | subtechnique applies.                                  |    subtechnique:                           |
+|                  |                                                        |      id:                                   |
+|                  |                                                        |        - T1059.001                         |
+|                  |                                                        |      name:                                 |
+|                  |                                                        |        - PowerShell                        |
++------------------+--------------------------------------------------------+--------------------------------------------+
 
 .. _data_analysis_rules_compliance:
 
@@ -561,6 +587,8 @@ Interpolation is applied only to the following fields of the enriched finding's 
 
 -  ``mitre.tactic``, ``mitre.technique``, ``mitre.subtechnique``
 
+-  ``mitre.tactic.id``, ``mitre.tactic.name``, ``mitre.technique.id``, ``mitre.technique.name``, ``mitre.subtechnique.id``, ``mitre.subtechnique.name``
+
 -  ``compliance.*`` (every framework sub-array)
 
 In the ``detection`` block, neither ``selection`` nor ``condition`` is ever interpolated.
@@ -591,11 +619,20 @@ Example
      description: Segmentation faults raised by an Apache worker process.
    mitre:
      tactic:
-       - TA0040
+       id:
+         - TA0040
+       name:
+         - Impact
      technique:
-       - T1499
+       id:
+         - T1499
+       name:
+         - Endpoint Denial of Service
      subtechnique:
-       - T1499.004
+       id:
+         - T1499.004
+       name:
+         - Application or System Exploitation
    compliance:
      pci_dss:
        - "6.2"
@@ -609,9 +646,9 @@ When this rule matches an event where ``wazuh.agent.id = "001"`` and ``wazuh.age
      "title": "Apache segmentation fault in agent 001",
      "tags": ["attack.impact", "attack.t1499.004", "web-prod-01"],
      "mitre": {
-       "tactic": ["TA0040"],
-       "technique": ["T1499"],
-       "subtechnique": ["T1499.004"]
+       "tactic": { "id": ["TA0040"], "name": ["Impact"] },
+       "technique": { "id": ["T1499"], "name": ["Endpoint Denial of Service"] },
+       "subtechnique": { "id": ["T1499.004"], "name": ["Application or System Exploitation"] }
      },
      "compliance": {
        "pci_dss": ["6.2", "11.4"]

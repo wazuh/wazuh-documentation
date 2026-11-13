@@ -127,7 +127,7 @@ Create a custom rule
 
 Wazuh rules define the detection logic for identifying relevant security activity in normalized events. They describe what should be detected by specifying conditions on event fields. Make sure the space selector reads **Draft** and then follow these steps to create a custom rule.
 
-#. Go to **Ruleset management** → **Detection** → **Rules**, and click **Create rule**.
+#. Go to **Ruleset management** → **Detection** → **Rules**, and click **Actions** → **Create**.
 
 #. Select **YAML Editor**, choose the integration ``wazuh-fim-custom``, and paste the rule below:
 
@@ -152,7 +152,7 @@ Wazuh rules define the detection logic for identifying relevant security activit
         selection:
           event.action: deleted
       metadata:
-        title: Wazuh FIM - Monitored file deleted by {{user.name}} with {{process.name}}
+        title: Wazuh FIM - Monitored file deleted by {{process.real_user.name}} with {{process.name}}
         author: Wazuh, Inc.
         description: >-
           Detects file deletion events reported by Wazuh File Integrity Monitoring
@@ -297,7 +297,7 @@ A detector is the scheduled job that executes your rule. It scans indexed events
    -  **Select indexes/aliases**: ``wazuh-events-v5-system-activity`` (this must match the integration category you configured earlier)
    -  **Space**: Custom
    -  **Integration**: ``wazuh-fim-custom``
-   -  **Selected rules**: ``Wazuh FIM - Monitored file deleted by {{user.name}} with {{process.name}}``
+   -  **Selected rules**: ``Wazuh FIM - Monitored file deleted by {{process.real_user.name}} with {{process.name}}``
    -  **Run every**: ``1 Minutes``
 
    .. thumbnail:: /images/manual/fim/create-detector-1.png

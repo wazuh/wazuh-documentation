@@ -35,11 +35,11 @@ The Key column on the table below is the canonical identifier used everywhere: i
 +-------------------+-----------------------+--------------------------------------------------------------------+
 | System Activity   | ``system-activity``   | ``linux``, ``windows``, ``macos``, ``auditd``                      |
 +-------------------+-----------------------+--------------------------------------------------------------------+
-| Other             | ``other``             | ``others_application``, ``others_apt``, ``others_web``             |
+| Other             | ``other``             | ``mysql``, ``postgresql``, ``mongodb``                             |
 +-------------------+-----------------------+--------------------------------------------------------------------+
 | Unclassified      | ``unclassified``      | Events that couldn't be categorized                                |
 +-------------------+-----------------------+--------------------------------------------------------------------+
 
 .. note::
 
-   ``unclassified`` is a catch-all for events that could not be assigned to any other category. It is managed automatically by the pipeline and is not to be used as a target category when creating new integrations or rules.
+   ``unclassified`` is a catch-all for events that could not be assigned to any other category. It is managed automatically by the pipeline. Don't use it as the category of new integrations or rules, even though the API accepts it.
