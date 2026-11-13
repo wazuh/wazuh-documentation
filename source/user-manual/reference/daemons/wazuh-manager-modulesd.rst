@@ -12,7 +12,7 @@ The ``wazuh-manager-modulesd`` executable runs the Wazuh manager module manager 
 
 The module manager service loads, manages, and coordinates the execution of Wazuh manager modules. These modules extend the functionality of the Wazuh manager by providing additional capabilities and background services.
 
-For more information about the available manager modules and their configuration, see the :ref:`Wazuh manager <normalization_engine_modules>` section of the User Manual.
+For more information about the available manager modules, see the :ref:`Daemons <wazuh_manager_daemons>` section of the Wazuh manager reference.
 
 +-------------+---------------------------------------------------------------------------------+
 | Option      | Description                                                                     |
