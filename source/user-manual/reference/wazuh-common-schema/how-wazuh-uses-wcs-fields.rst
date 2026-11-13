@@ -77,12 +77,12 @@ The ``event`` object describes what happened, as the log source reports it. Deco
 Following a log through its documents
 -------------------------------------
 
-A single log can produce several documents: the raw event, the normalized event, and one finding for every rule it matches. All of them have the same ``wazuh.event.id``, a UUID that the engine generates once for every log. Run the following command to find all the documents of a log:
+A single log can produce several documents: the raw event, the normalized event, and one finding for every rule it matches. All of them have the same ``wazuh.event.id``, a UUID that the engine generates once for every log. The raw event exists only when raw event indexing is enabled. With the default configuration, the command below returns the normalized event and its findings, but no document from ``wazuh-events-raw-v5``. Run the following command to find all the documents of a log:
 
 .. code-block:: console
    :emphasize-lines: 1,3
 
-   # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X GET "https://<WAZUH_INDEXER_IP>:9200/wazuh-events-raw-v5,wazuh-events-v5-*,wazuh-findings-v5-*/_search?pretty" \
+   # curl -sk -u <USERNAME>:<PASSWORD> -X GET "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/wazuh-events-raw-v5,wazuh-events-v5-*,wazuh-findings-v5-*/_search?pretty" \
    -H 'Content-Type: application/json' \
    -d '{"_source": ["@timestamp", "wazuh.event.id", "wazuh.integration.name", "event.category", "wazuh.rule.title"], "query": {"term": {"wazuh.event.id": "<WAZUH_EVENT_ID>"}}}'
 

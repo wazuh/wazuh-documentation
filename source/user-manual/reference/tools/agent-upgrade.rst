@@ -10,7 +10,7 @@ agent_upgrade
 
 The ``agent_upgrade`` tool remotely upgrades Wazuh agents.
 
-Use this tool to upgrade one or more Wazuh agents to a newer version, list outdated agents, or install a custom WPK package.
+Use this tool to upgrade one or more Wazuh agents to a newer version, list outdated agents, or install a custom Wazuh signed package (WPK).
 
 Options
 -------
