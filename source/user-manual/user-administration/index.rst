@@ -10,7 +10,7 @@ Wazuh lets you control who can access the platform and what they can do. This gu
 
 Password management uses the Wazuh passwords tool to change the passwords of Wazuh indexer users and Wazuh manager API users.
 
-RBAC explains how to create Wazuh indexer users, also known as internal users, assign them roles, and map them to the Wazuh manager API. You can create an admin user, a read-only user, or a custom user.
+RBAC explains how to create Wazuh indexer users, also known as internal users, assign them roles, and map them to the Wazuh manager API. You can create an admin user, a read-only user, or a custom user, and limit a user to one agent group.
 
 Single sign-on connects Wazuh to your existing identity provider so users authenticate once to gain access. This guide includes instructions for Okta, Microsoft Entra ID, PingOne, Google Workspace, JumpCloud, OneLogin, Keycloak, and authentik.
 

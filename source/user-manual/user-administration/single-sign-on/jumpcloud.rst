@@ -15,8 +15,8 @@ Learn how to create administrator and read-only roles on JumpCloud and map them 
    :depth: 1
    :backlinks: none
 
-Setup JumpCloud single sign-on with administrator role
-------------------------------------------------------
+Set up JumpCloud single sign-on with administrator role
+-------------------------------------------------------
 
 Follow these steps to integrate JumpCloud IdP with Wazuh for single sign-on and grant administrator role to the authenticated JumpCloud users on the Wazuh platform:
 
@@ -26,7 +26,7 @@ Follow these steps to integrate JumpCloud IdP with Wazuh for single sign-on and 
 
 .. _configuration_jumpcloud_admin:
 
-JumpCloud Configuration
+JumpCloud configuration
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Create an account in JumpCloud. Request a free trial if you don't have a paid license.
@@ -149,17 +149,18 @@ Wazuh indexer configuration
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
-#. Backup the existing Wazuh indexer security configuration files:
+#. Back up the Wazuh indexer security configuration files, then export the configuration that the Wazuh indexer is using. The export overwrites these files with the active configuration, including changes made in the Wazuh dashboard:
 
    .. code-block:: console
 
+      # cp -a /etc/wazuh-indexer/opensearch-security /root/opensearch-security-backup-$(date +%Y%m%d%H%M%S)
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
 
 #. Generate a 64-character long random key using the following command.
 
    .. code-block:: console
 
-      openssl rand -hex 32
+      # openssl rand -hex 32
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
@@ -219,7 +220,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag sets the address of the Wazuh indexer node. On an all-in-one deployment, the Wazuh indexer listens on ``127.0.0.1``, so keep ``localhost``. On a distributed deployment, replace ``localhost`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml``.
 
    The command output must be similar to the following:
 
@@ -266,7 +267,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag sets the address of the Wazuh indexer node. On an all-in-one deployment, the Wazuh indexer listens on ``127.0.0.1``, so keep ``localhost``. On a distributed deployment, replace ``localhost`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml``.
 
    The command output must be similar to the following:
 
@@ -301,7 +302,7 @@ Wazuh dashboard configuration
 
       wazuh_core.hosts:
         default:
-          url: https://127.0.0.1
+          url: https://localhost
           port: 55000
           username: wazuh-internal-client
           run_as: true
@@ -319,7 +320,7 @@ Wazuh dashboard configuration
       - **Role mapping name**: Assign a name to the role mapping.
       - **Roles**: Select ``administrator``.
       - **Custom rules**: Click **Add new rule** to expand this field.
-      - **User field:** ``backend_roles``
+      - **Auth context field:** ``backend_roles``
       - **Search operation:** ``FIND``
       - **Value:** Assign the name of the JumpCloud user group. In our case, this is ``wazuh-admins``.
       - Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*.
@@ -349,8 +350,8 @@ Wazuh dashboard configuration
 
    To test the configuration, go to your Wazuh dashboard URL and log in with your JumpCloud account.
 
-Setup JumpCloud single sign-on with read-only role
---------------------------------------------------
+Set up JumpCloud single sign-on with read-only role
+---------------------------------------------------
 
 Follow these steps to integrate JumpCloud IdP with Wazuh for single sign-on and grant read-only role to the authenticated JumpCloud users on the Wazuh platform:
 
@@ -360,7 +361,7 @@ Follow these steps to integrate JumpCloud IdP with Wazuh for single sign-on and 
 
 .. _configuration_jumpcloud_ro:
 
-JumpCloud Configuration
+JumpCloud configuration
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Create an account in JumpCloud. Request a free trial if you don't have a paid license.
@@ -483,17 +484,18 @@ Wazuh indexer configuration
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
-#. Backup the existing Wazuh indexer security configuration files:
+#. Back up the Wazuh indexer security configuration files, then export the configuration that the Wazuh indexer is using. The export overwrites these files with the active configuration, including changes made in the Wazuh dashboard:
 
    .. code-block:: console
 
+      # cp -a /etc/wazuh-indexer/opensearch-security /root/opensearch-security-backup-$(date +%Y%m%d%H%M%S)
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
 
 #. Generate a 64-character long random key using the following command.
 
    .. code-block:: console
 
-      openssl rand -hex 32
+      # openssl rand -hex 32
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
@@ -553,7 +555,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag sets the address of the Wazuh indexer node. On an all-in-one deployment, the Wazuh indexer listens on ``127.0.0.1``, so keep ``localhost``. On a distributed deployment, replace ``localhost`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml``.
 
    The command output must be similar to the following:
 
@@ -604,7 +606,7 @@ Wazuh dashboard configuration
 
       wazuh_core.hosts:
         default:
-          url: https://127.0.0.1
+          url: https://localhost
           port: 55000
           username: wazuh-internal-client
           run_as: true
@@ -622,7 +624,7 @@ Wazuh dashboard configuration
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``readonly``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field:** ``backend_roles``
+      -  **Auth context field:** ``backend_roles``
       -  **Search operation:** ``FIND``
       -  **Value:** Assign the name of the group you created in JumpCloud. In our case, the backend role is ``wazuh-readonly``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
