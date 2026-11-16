@@ -70,7 +70,7 @@ The rules are applied in the following order:
 #. **Quoted string**: Text between single quotes, such as ``'192.168.0.0'``. Escape a single quote or a backslash with ``\``.
 #. **Reference**: A field path that starts with ``$``, such as ``$source.ip``. The engine reads the value of that field when it processes each event.
 #. **JSON value**: A number, boolean, ``null``, array, object, or double-quoted string, such as ``24``, ``true``, or ``{"key": "value"}``.
-#. **Raw string**: Any other text. Escape ``$``, ``'``, ``,``, ``)``, ``\``, and spaces with ``\``.
+#. **Raw string**: Any other text. Escape ``$``, ``,``, ``)``, ``\``, and spaces with ``\``.
 
 A reference to a name in the asset ``definitions`` section resolves to the typed value defined there, not to an event field.
 
