@@ -31,11 +31,10 @@ Follow the steps below to create the Wazuh server package:
 
    .. note::
 
-      Use the following architecture equivalences:
+      The script accepts only the ``amd64`` and ``arm64`` architectures. They are equivalent to:
 
       -  amd64 -> x86_64
       -  arm64 -> aarch64
-      -  armhf -> armv7hl
 
    .. tabs::
 

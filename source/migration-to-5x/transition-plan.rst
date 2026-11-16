@@ -34,8 +34,9 @@ The following table summarizes the Wazuh data and configurations that you can mi
 |                                                                                             | agent IDs and authentication keys. Only the manual procedure keeps the registration dates  |
 |                                                                                             | and the exact group memberships.                                                           |
 +---------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+
-| :ref:`Agent groups <migration_migrate_agent_registrations>`                                 | Migrated with the agent registrations, including group configuration. The migration tool   |
-|                                                                                             | migrates only the ``agent.conf`` file of each group.                                       |
+| :ref:`Agent groups <migration_migrate_agent_registrations>`                                 | Migrated with the agent registrations, including group configuration. The                  |
+|                                                                                             | ``wazuh-migrate-identity.py`` migration tool migrates only the ``agent.conf`` file of each |
+|                                                                                             | group.                                                                                     |
 +---------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+
 
 Limitations
@@ -65,6 +66,13 @@ Prerequisites
 Before migrating to Wazuh 5.x, complete the following prerequisites:
 
 -  Deploy a new Wazuh 5.x environment that matches your deployment architecture. Don't reuse or upgrade an existing Wazuh 4.x deployment in place. Refer to the :doc:`Wazuh installation guide </installation-guide/index>` for your deployment. On Kubernetes, don't apply the Wazuh 5.x manifests to the ``wazuh`` namespace of a running Wazuh 4.x deployment. They use the same object names and replace the Wazuh 4.x components.
+
+   Install the Wazuh 5.x manager on a host that doesn't have a Wazuh 4.x manager. The package refuses such a host:
+
+   .. code-block:: none
+      :class: output
+
+      ERROR: A Wazuh manager older than 5.0 is installed on this host: Wazuh manager 5.x can neither upgrade it nor be installed beside it.
 
 -  Verify network connectivity between the Wazuh 4.x and Wazuh 5.x environments. The migration uses SSH (TCP 22) between the Wazuh 4.x and Wazuh 5.x managers. The Wazuh 4.x agents connect to the Wazuh 5.x manager, or its load balancer, on TCP 1514 and 1515, and on TCP 1517 after you upgrade them. In a distributed deployment, the Wazuh dashboard connects to the Wazuh manager API on TCP 55000.
 

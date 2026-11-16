@@ -149,6 +149,12 @@ Perform the following steps to recreate the Wazuh manager configuration in the W
 
       # /var/wazuh-manager/bin/wazuh-manager-conf -f /etc/wazuh-manager/wazuh-manager.conf validate
 
+#. Check the configuration and the credentials. The Wazuh manager doesn't start without the Wazuh indexer CA and client certificate in ``/etc/wazuh-manager/certs/`` and the Wazuh indexer password in its keystore, which the :ref:`installation <wazuh_manager_deploying_certificates>` sets up. The command reports each missing item:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-control check
+
 #. Start the Wazuh 5.x manager service:
 
    .. code-block:: console
