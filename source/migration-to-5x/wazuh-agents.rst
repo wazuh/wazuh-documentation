@@ -65,6 +65,37 @@ Prerequisites
 -  The ``wazuh-migrate-identity.py`` tool supports exports from Wazuh 4.13.0 or later. For an older Wazuh 4.x manager, add ``--force`` to the export command and run the check command after import.
 -  The Wazuh 5.x manager requires an enrollment password of at least 16 bytes. If the Wazuh 4.x password is shorter, either set a longer password on the Wazuh 4.x manager and its agents before exporting, or omit ``--with-password``.
 
+The tool isn't installed with the Wazuh manager. You download it from the Wazuh source repository in the steps below. It has three commands, each taking the bundle directory as its argument: ``export`` runs on the stopped Wazuh 4.x manager, and ``import`` and ``check`` run on the running Wazuh 5.x manager. Its options are:
+
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+| Option                        | Commands               | Description                                                                            |
++===============================+========================+========================================================================================+
+| ``--source-dir <DIR>``        | ``export``             | Wazuh 4.x installation directory. The default is ``/var/ossec``.                       |
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+| ``--with-password``           | ``export``, ``import`` | Includes the enrollment password, ``authd.pass``.                                      |
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+| ``--with-rbac``               | ``export``, ``import`` | Includes the Wazuh manager API users, roles, and policies.                             |
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+| ``--dry-run``                 | ``export``, ``import`` | Reports what would happen and changes nothing.                                         |
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+| ``--force``                   | ``export``, ``import`` | Continues past the safety checks.                                                      |
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+| ``--target-dir <DIR>``        | ``import``, ``check``  | Wazuh 5.x installation directory. The default is ``/var/wazuh-manager``.               |
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+| ``--target-conf-dir <DIR>``   | ``import``, ``check``  | Wazuh 5.x configuration directory. The default is ``/etc/wazuh-manager``.              |
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+| ``--api-url <URL>``           | ``import``, ``check``  | Wazuh manager API URL. The default is ``https://localhost:55000``.                     |
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+| ``--api-user <USER>``         | ``import``, ``check``  | Wazuh manager API user. The default is ``wazuh``.                                      |
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+| ``--api-password-file <FILE>``| ``import``, ``check``  | File with the API password, or ``-`` for the standard input. Without it, the tool      |
+|                               |                        | reads the ``WAZUH_API_PASSWORD`` environment variable.                                 |
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+| ``--api-ca <FILE>``           | ``import``, ``check``  | CA certificate that verifies the Wazuh manager API. Required when ``--api-url`` isn't  |
+|                               |                        | a loopback address. On loopback, the default is                                        |
+|                               |                        | ``/etc/wazuh-manager/certs/root-ca.pem``.                                              |
++-------------------------------+------------------------+----------------------------------------------------------------------------------------+
+
 Wazuh 4.x manager
 ~~~~~~~~~~~~~~~~~
 
