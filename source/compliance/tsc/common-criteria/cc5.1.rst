@@ -22,7 +22,7 @@ In this case, we use the SCA module to evaluate a monitored Windows 11 endpoint 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-#. Navigate to the **Configuration Assessment** module from the Wazuh dashboard.
+#. Open the menu (**☰**) and go to **Endpoint security** > **Configuration Assessment**.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/overview-configuration-assessment-card.png
       :title: Wazuh Overview dashboard - Configuration Assessment
@@ -36,7 +36,7 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-#. Navigate to the **Inventory** section and filter by a specific policy.
+#. Switch to the **Inventory** tab and filter by the CIS Microsoft Windows 11 Enterprise Benchmark policy.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/configuration-assessment-inventory-ubuntu-policy.png
       :title: Configuration Assessment inventory filtered by policy

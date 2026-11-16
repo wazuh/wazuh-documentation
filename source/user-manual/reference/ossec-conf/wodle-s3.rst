@@ -176,7 +176,7 @@ The available types are: ``cloudtrail``, ``guardduty``, ``vpcflow``, ``config``,
 +-----------------------+---------------------------------------------------------------------------------------------+-----------------------------------------------------------------+
 | path_suffix           | Suffix for S3 bucket key                                                                    | Optional                                                        |
 +-----------------------+---------------------------------------------------------------------------------------------+-----------------------------------------------------------------+
-| only_logs_after       | Date (YYYY-MMM-DDD, for example 2018-AUG-21)                                                | Optional                                                        |
+| only_logs_after       | Date (YYYY-MMM-DD, for example 2018-AUG-21)                                                 | Optional                                                        |
 +-----------------------+---------------------------------------------------------------------------------------------+-----------------------------------------------------------------+
 | regions               | Comma-separated list of AWS regions                                                         | Optional (only works with CloudTrail buckets)                   |
 +-----------------------+---------------------------------------------------------------------------------------------+-----------------------------------------------------------------+
@@ -340,7 +340,7 @@ Name of AWS organization. Only works with CloudTrail buckets.
 discard_regex
 ~~~~~~~~~~~~~~~
 
-A regular expression to determine if an event must be discarded. It requires a mandatory field attribute. If the field is present in the event log, the regex is applied to it. For example, ``userIdentity.principalID`` for the following AWS CloudTrail log example:
+A regular expression to determine if an event must be discarded. It requires a mandatory field attribute. If the field is present in the event log, the regex is applied to it. For example, ``userIdentity.principalId`` for the following AWS CloudTrail log example:
 
 .. code-block:: json
 
@@ -408,7 +408,7 @@ Usage example for the cloudtrail bucket type:
 
 .. code-block:: xml
 
-   <discard_regex field="userIdentity.principalID">EXAMPLE6E4XEGITWATV6R</discard_regex>
+   <discard_regex field="userIdentity.principalId">EXAMPLE6E4XEGITWATV6R</discard_regex>
 
 remove_from_bucket
 ~~~~~~~~~~~~~~~~~~~~
@@ -767,7 +767,7 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 discard_regex
 ~~~~~~~~~~~~~~~
 
-A regular expression to determine if an event must be discarded. JSON and CSV logs require a mandatory field attribute. If the field is present in the event log, the regex is applied to it. For example, ``userIdentity.principalID`` for the following AWS CloudTrail log example:
+A regular expression to determine if an event must be discarded. JSON and CSV logs require a mandatory field attribute. If the field is present in the event log, the regex is applied to it. For example, ``userIdentity.principalId`` for the following AWS CloudTrail log example:
 
 .. code-block:: json
 
@@ -835,7 +835,7 @@ Usage example for CloudTrail fetched events:
 
 .. code-block:: xml
 
-   <discard_regex field="userIdentity.principalID">EXAMPLE6E4XEGITWATV6R</discard_regex>
+   <discard_regex field="userIdentity.principalId">EXAMPLE6E4XEGITWATV6R</discard_regex>
 
 The ``field`` attribute is mandatory in ``<bucket>``: a ``<discard_regex>`` without it makes ``wazuh-modulesd`` stop with ``Required attribute 'field' is missing in 'discard_regex'``. Only the CloudWatch Logs ``<service>`` accepts it without ``field``.
 

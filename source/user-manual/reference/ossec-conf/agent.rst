@@ -33,6 +33,7 @@ Options
 - `force_reconnect_interval`_
 - `crypto_method`_
 - `enrollment`_
+- `batch`_
 
 manager
 ^^^^^^^
@@ -120,14 +121,15 @@ notify_time
 
 Specifies the interval, in seconds, between agent keepalive messages sent to the Wazuh manager. Lower values propagate centrally distributed configuration updates more quickly but increase the load on the Wazuh manager when many agents are connected.
 
-+--------------------+-----------------------------+
-| **Default value**  | 10                          |
-+--------------------+-----------------------------+
-| **Allowed values** | A positive number (seconds) |
-+--------------------+-----------------------------+
++--------------------+--------------------------------------------------+
+| **Default value**  | 10                                               |
++--------------------+--------------------------------------------------+
+| **Allowed values** | 0 or a positive number (seconds). 0 uses the     |
+|                    | default value.                                   |
++--------------------+--------------------------------------------------+
 
 .. note::
-   Set this value lower than the agent disconnection time configured on the Wazuh manager. This ensures that the agent sends a keepalive before the manager marks it as disconnected.
+   Set this value lower than the :ref:`agents_disconnection_time <reference_manager_agents_disconnection_time>` option of the Wazuh manager, 15 minutes by default. This ensures that the agent sends a keepalive before the manager marks it as disconnected.
 
 time-reconnect
 ^^^^^^^^^^^^^^^
@@ -205,13 +207,9 @@ force_reconnect_interval
 crypto_method
 ^^^^^^^^^^^^^^
 
-DEPRECATED: This option is parsed but ignored. Encryption method is hard-coded to AES.
+.. deprecated:: 5.0.0
 
-+----------------------+---------------------------------------------------+
-| **Status**           | Deprecated (kept for backward compatibility)      |
-+----------------------+---------------------------------------------------+
-| **Behavior**         | Always uses AES regardless of configured value    |
-+----------------------+---------------------------------------------------+
+   This option has no effect in Wazuh 5.0. The Wazuh agent always uses AES. The option is still accepted so configurations from Wazuh 4.x agents don't fail, and the Wazuh agent logs an INFO message when it finds it.
 
 .. _reference_ossec_agent_enrollment:
 
@@ -233,14 +231,17 @@ Sub options
 +-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
 | **authorization_pass_path** | Path to file containing enrollment authorization password.   | ``etc/authd.pass`` | Valid file path                          |
 +-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
-| **agent_address**           | Agent's IP address to use for enrollment (overrides          | Auto-detected      | Valid IPv4 or IPv6 address               |
-|                             | auto-detected address).                                      |                    |                                          |
+| **agent_address**           | IP address to register for the agent. When it's not set, the | Not set            | Valid IPv4 or IPv6 address               |
+|                             | Wazuh manager registers ``any``, or the source IP address of |                    |                                          |
+|                             | the request when its ``<auth><use_source_ip>`` option is     |                    |                                          |
+|                             | ``yes``. Can't be combined with ``use_source_ip``.           |                    |                                          |
 +-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
 | **delay_after_enrollment**  | Delay in seconds after successful enrollment before starting | 20                 | Positive integer (seconds) from 1 upward |
 |                             | normal agent operations.                                     |                    |                                          |
 +-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
-| **use_source_ip**           | Use agent's source IP address for enrollment instead of      | no                 | yes, no                                  |
-|                             | configured address.                                          |                    |                                          |
+| **use_source_ip**           | Registers the agent with the source IP address of its        | no                 | yes, no                                  |
+|                             | enrollment request. Can't be combined with                   |                    |                                          |
+|                             | ``agent_address``.                                           |                    |                                          |
 +-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
 
 .. note::
@@ -251,7 +252,7 @@ After it enrolls with a Wazuh 5.0 manager, the agent stores a per-agent re-enrol
 Removed options
 ^^^^^^^^^^^^^^^^
 
-**The following options are no longer read, they are silently ignored with an INFO log line if present:** ``manager_address``, ``port``, ``interface_index`` (superseded by ``<agent><manager>`` - a link-local IPv6 manager's zone id now lives inside ``<endpoint>`` itself, e.g. ``[fe80::1%eth0]:1517``), ``ssl_cipher``, ``server_ca_path``, ``agent_certificate_path``, ``agent_key_path`` (superseded by ``<agent><ssl>``).
+The following options are no longer read. The Wazuh agent ignores them and logs an INFO message for each one: ``manager_address``, ``port``, ``interface_index`` (superseded by ``<agent><manager>`` - a link-local IPv6 manager's zone id now lives inside ``<endpoint>`` itself, e.g. ``[fe80::1%eth0]:1517``), ``ssl_cipher``, ``server_ca_path``, ``agent_certificate_path``, ``agent_key_path`` (superseded by ``<agent><ssl>``), and ``auto_method`` (enrollment always negotiates TLS 1.3).
 
 Sample configuration
 ---------------------
@@ -269,7 +270,6 @@ Sample configuration
        <enabled>yes</enabled>
        <agent_name>agent</agent_name>
        <groups>Group1</groups>
-       <authorization_pass_path>/path/to/agent.pass</authorization_pass_path>
        <delay_after_enrollment>20</delay_after_enrollment>
      </enrollment>
    </agent>

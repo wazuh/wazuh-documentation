@@ -46,6 +46,8 @@ The Wazuh dashboard verifies the Wazuh manager API certificate with ``/etc/wazuh
 
 Replace ``<WAZUH_MANAGER_HOST>`` with the host in the ``url`` setting. If it is an IP address, use ``-verify_ip`` instead of ``-verify_hostname``. ``Verify return code: 0 (ok)`` means that both checks pass. A hostname mismatch or IP address mismatch means that the host is not in the certificate. A self-signed certificate in certificate chain error means that ``manager-ca.pem`` is not the CA of this Wazuh manager. No output means that the connection failed. Check that the host is in the host setting of ``/var/wazuh-manager/api/configuration/api.yaml``.
 
+.. _dashboard_troubleshooting_password_change:
+
 Unauthorized errors after a password change
 -------------------------------------------
 
@@ -90,12 +92,12 @@ This issue means that your Wazuh manager API might be unavailable. Check the sta
 
    # systemctl status wazuh-manager
 
-If the Wazuh manager API is running, run these commands on the Wazuh dashboard host. On an all-in-one deployment from the installation assistant, use ``localhost`` as ``<WAZUH_MANAGER_IP_ADDRESS>``, because the Wazuh manager API listens on ``127.0.0.1`` and ``::1`` only. Use the wazuh user and the ``WAZUH_MANAGER_API_PASSWORD`` value in ``/etc/wazuh-manager/export/credentials.env``: If a command fails with a certificate error, see :ref:`dashboard_troubleshooting_manager_api_certificate`.
+If the Wazuh manager API is running, run these commands on the Wazuh dashboard host. On an all-in-one deployment from the installation assistant, use ``localhost`` as ``<WAZUH_MANAGER_ADDRESS>``, because the Wazuh manager API listens on ``127.0.0.1`` and ``::1`` only. Use the wazuh user and the ``WAZUH_MANAGER_API_PASSWORD`` value in ``/etc/wazuh-manager/export/credentials.env``. If a command fails with a certificate error, see :ref:`dashboard_troubleshooting_manager_api_certificate`. Run these commands:
 
 .. code-block:: console
 
-   # TOKEN=$(curl -u <WAZUH_API_USERNAME>:<WAZUH_API_PASSWORD> --cacert /etc/wazuh-dashboard/certs/manager-ca.pem -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
-   # curl --cacert /etc/wazuh-dashboard/certs/manager-ca.pem -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
+   # TOKEN=$(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> --cacert /etc/wazuh-dashboard/certs/manager-ca.pem -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
+   # curl --cacert /etc/wazuh-dashboard/certs/manager-ca.pem -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
 
 The command returns output similar to the following example:
 
@@ -122,16 +124,16 @@ Output if the Wazuh manager API is down:
 
    curl: (7) Failed to connect to 127.0.0.1 port 55000 after 0 ms: Couldn't connect to server
 
-The same error appears when ``<WAZUH_MANAGER_IP_ADDRESS>`` is outside the host setting in ``/var/wazuh-manager/api/configuration/api.yaml``. If the Wazuh manager API is unavailable, restart the Wazuh manager and confirm that the API is running.
+The same error appears when ``<WAZUH_MANAGER_ADDRESS>`` is outside the host setting in ``/var/wazuh-manager/api/configuration/api.yaml``. If the Wazuh manager API is unavailable, restart the Wazuh manager and confirm that the API is running.
 
 .. code-block:: console
 
    # systemctl restart wazuh-manager
 
-No alerts on the Wazuh dashboard error
---------------------------------------
+No findings on the Wazuh dashboard
+----------------------------------
 
-The first step is to check if there are alerts in the Wazuh indexer. On an all-in-one deployment from the installation assistant, use ``localhost`` as ``<WAZUH_INDEXER_IP>``:
+In Wazuh 5.0, alerts are called findings. The first step is to check if there are findings in the Wazuh indexer. On an all-in-one deployment from the installation assistant, use ``localhost`` as ``<WAZUH_INDEXER_IP>``:
 
 .. code-block:: console
 
@@ -182,7 +184,7 @@ The command output looks similar to this:
    green open .ds-wazuh-events-v5-other-000001               RIN87mGdQlWYs6yMTHcx-g 1 0      0   0    624b    624b
    green open .ds-wazuh-findings-v5-network-activity-000001  bqtm0coXQqWXBxKRjyFflA 1 0      0   0    624b    624b
 
-The Wazuh indexer stores alerts in the ``.ds-wazuh-findings-v5-*`` indices, which exist from installation. If the seventh column, ``docs.count``, is 0 for each of them, the Wazuh indexer stores no alerts.
+The Wazuh indexer stores findings in the ``.ds-wazuh-findings-v5-*`` indices, which exist from installation. If the seventh column, ``docs.count``, is 0 for each of them, the Wazuh indexer stores no findings.
 
 .. note::
 
@@ -191,9 +193,9 @@ The Wazuh indexer stores alerts in the ``.ds-wazuh-findings-v5-*`` indices, whic
 Could not connect to API with ID error
 --------------------------------------
 
-The error “Could not connect to API with id: ``default``: 3003 - Missing param: API USERNAME” means that the default entry of ``wazuh_core.hosts`` in ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` has no username. Edit that block in place and set ``username: wazuh-internal-client``. Keep one wazuh_core.hosts key, because the Wazuh dashboard rejects a second one.
+The error “Could not connect to API with id: ``default``: 3003 - Missing param: API USERNAME” means that the default entry of ``wazuh_core.hosts`` in ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` has no username. Edit that block in place and set ``username: wazuh-internal-client``. Keep one ``wazuh_core.hosts`` key, because the Wazuh dashboard rejects a second one.
 
-The example has no password for the ``default`` host. The Wazuh manager sets the ``wazuh-internal-client`` password at installation, from ``WAZUH_MANAGER_WUI_PASSWORD`` or a generated value. The Wazuh dashboard keeps it in its keystore as ``wazuh_core.hosts.default.password``. Keep it there: a password written in ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` overrides the keystore. For example:
+The example has no password for the ``default`` host. The Wazuh manager sets the ``wazuh-internal-client`` password at installation, from ``WAZUH_MANAGER_WUI_PASSWORD`` or a generated value. The Wazuh dashboard keeps it in its keystore as ``wazuh_core.hosts.default.password``. Keep it there, and keep the password out of ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. The keystore entry takes precedence over a password in that file. For example:
 
 .. code-block:: yaml
 
@@ -241,7 +243,13 @@ The Wazuh dashboard initializes saved objects with their index definitions when 
 
    .. note:: If the index contains data but has missing objects, the Wazuh dashboard will migrate the data to a new index with the missing objects added.
 
-If the restart does not solve the problem, we can execute this process manually:
+If the restart does not solve the problem, rebuild the index manually. This process deletes the dashboards, visualizations, and index patterns saved in that index. Export them first, while the Wazuh dashboard is running. Replace ``<WAZUH_INDEXER_ADMIN_PASSWORD>`` with the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh-indexer/export/credentials.env``:
+
+.. code-block:: console
+
+   # curl --cacert /etc/wazuh-dashboard/export/ca.pem -u admin:<WAZUH_INDEXER_ADMIN_PASSWORD> -X POST "https://localhost/api/saved_objects/_export" -H "osd-xsrf: true" -H "Content-Type: application/json" -d '{"type": ["config", "index-pattern", "visualization", "dashboard", "search", "query"]}' -o /root/saved-objects-backup.ndjson
+
+The command saves the objects in ``/root/saved-objects-backup.ndjson``. After step 5, import any object that the Wazuh dashboard does not recreate with the following command:
 
 #. Stop the Wazuh dashboard service.
 
@@ -275,9 +283,7 @@ If the restart does not solve the problem, we can execute this process manually:
         }
       }
 
-   In the output, we can see the field mapping for the ``type`` field in the ``.kibana_1`` index. The mapping shows that the ``type`` field is configured as ``keyword``, which is the expected result.
-
-   These errors happened because there was no template that specified the appropriate field mappings at the time the saved object data was indexed. To solve the errors, we need to remove the index and rebuild it.
+   In this output, the ``type`` field of the ``.kibana_1`` index is a ``keyword``, which is the correct mapping. An index whose ``type`` field has another mapping, such as ``text``, has the wrong mapping. This happens when the Wazuh dashboard indexed saved objects before the template that sets the field mappings existed. To fix it, delete that index and let the Wazuh dashboard rebuild it.
 
 #. Delete the index or indices that store the saved objects with the wrong field mapping. Replace ``<INDEX_NAMES>`` with their names, separated by commas, for example ``.kibana_1``.
 
@@ -293,6 +299,10 @@ If the restart does not solve the problem, we can execute this process manually:
 #. Restart the Wazuh dashboard service.
 
    .. include:: /_templates/common/restart_dashboard.rst
+
+   .. code-block:: console
+
+      # curl --cacert /etc/wazuh-dashboard/export/ca.pem -u admin:<WAZUH_INDEXER_ADMIN_PASSWORD> -X POST "https://localhost/api/saved_objects/_import?overwrite=true" -H "osd-xsrf: true" --form file=@/root/saved-objects-backup.ndjson
 
 .. note::
 
@@ -315,13 +325,11 @@ In the **Edit** form of a muted notification channel, **Send test message** fail
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
-We have a welcoming community that can help you with most of the problems you might have regarding Wazuh deployment and usage https://wazuh.com/community.
+We have a welcoming community that can help you with most of the problems you might have regarding Wazuh deployment and usage. See the `Wazuh community <https://wazuh.com/community>`__.
 
 Also, you can contact us by opening issues in our GitHub repositories under the `organization <https://github.com/wazuh>`__.
 
-In case you encounter errors during your deployment, we will be interested in the log files for your deployment. You can check them out on each component:
-
-Check the following log files:
+If you encounter errors during your deployment, we are interested in its log files. Check the following log files on each component:
 
 -  Wazuh indexer:
 

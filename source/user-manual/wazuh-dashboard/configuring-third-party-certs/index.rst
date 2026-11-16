@@ -10,7 +10,7 @@ Wazuh supports the use of third-party SSL/TLS certificates for securing access t
 
 By default, the Wazuh dashboard serves a certificate that it issues from its own certificate authority (CA) during the :doc:`Wazuh dashboard installation </installation-guide/wazuh-dashboard/step-by-step>`, unless you deploy your own certificate before installing it.
 
-You can use third-party certificates instead of self-signed ones in the Wazuh dashboard. This guide includes instructions for creating and configuring Let's Encrypt certificates. Let's Encrypt is a nonprofit Certificate Authority (CA) providing free SSL/TLS certificates to millions of websites.
+You can use third-party certificates instead of self-signed ones in the Wazuh dashboard. This guide includes instructions for creating and configuring Let's Encrypt certificates. Let's Encrypt is a nonprofit Certificate Authority (CA) providing free SSL/TLS certificates to millions of websites. To use a certificate from your organization's own certificate authority, see :ref:`dashboard_certificate_elsewhere`.
 
 To generate this type of certificate, you need a fully qualified domain name (FQDN). Let's Encrypt verifies if you have control over the domain.
 

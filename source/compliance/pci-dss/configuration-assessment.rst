@@ -24,7 +24,7 @@ To achieve the above requirements, SCA runs assessment checks. These checks dete
 
 -  National Institute of Standards and Technology (NIST)
 
-Out of the box, Wazuh includes CIS baselines for a wide range of operating systems and applications. These operating systems include Debian, macOS, Red Hat, and Windows operating systems. For more information, see a :doc:`list of the available SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>`. You can create other baselines for other systems or applications as well. Find more details on configuring SCA checks in the :doc:`SCA documentation section </user-manual/capabilities/sec-config-assessment/index>`.
+Out of the box, Wazuh includes CIS baselines for a wide range of operating systems and applications. These include Debian, Ubuntu, macOS, Red Hat, and Windows. For more information, see a :doc:`list of the available SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>`. You can create other baselines for other systems or applications as well. Find more details on configuring SCA checks in the :doc:`SCA documentation section </user-manual/capabilities/sec-config-assessment/index>`.
 
 Use cases
 ---------
@@ -37,6 +37,8 @@ PCI DSS requirement 2.2.4
 PCI DSS requirement 2.2.4 mandates keeping only necessary services, protocols, daemons, and functions enabled and removing unnecessary functionality. The :doc:`Syscollector <system-inventory>` and SCA modules support the requirement by identifying unnecessary processes, services, and configurations that can increase the attack surface.
 
 For this use case, the SCA module runs the check **35608 - Ensure ip forwarding is disabled** from the `cis_ubuntu24-04 <https://github.com/wazuh/wazuh/blob/5.0.0/ruleset/sca/ubuntu/cis_ubuntu24-04.yml>`__ SCA policy file on an Ubuntu 24.04 endpoint. IP forwarding is unnecessary functionality on an endpoint that does not route traffic, and the SCA scan reports whether it is disabled.
+
+To view the check result, restart the Wazuh agent to trigger a new SCA scan with ``systemctl restart wazuh-agent``. Open the menu (**☰**) and go to **Endpoint security** > **Configuration Assessment**. Click **Explore agent**, select the Ubuntu 24.04 endpoint, and click the **Inventory** tab. Click **Add filter**, add a filter for ``check.id`` is ``35608``, and click **Save**.
 
 .. thumbnail:: /images/compliance/pci/sca-ip-forwarding-disabled-01.png
    :title: SCA check for ip forwarding disabled
@@ -56,6 +58,8 @@ PCI DSS requirement 8.3.6
 PCI DSS requirement 8.3.6 mandates that passwords used as authentication factors meet a minimum level of complexity. Passwords must be at least 12 characters long and contain both numeric and alphabetic characters. Longer passwords are harder to guess or crack with brute-force attacks.
 
 The SCA module runs check **35680 - Ensure minimum password length is configured** from the `cis_ubuntu24-04 <https://github.com/wazuh/wazuh/blob/5.0.0/ruleset/sca/ubuntu/cis_ubuntu24-04.yml>`__ SCA policy file on the endpoint. It checks that the minlen option is set to 14 or more in ``/etc/security/pwquality.conf`` as specified by the CIS Benchmark for Ubuntu Linux 24.04 LTS. When an SCA scan runs, the check identifies whether the endpoint meets this configured password length baseline. The check result is Not applicable until the ``libpam-pwquality`` package is installed, because the package creates the ``/etc/security/pwquality.conf`` file.
+
+To view the check result, restart the Wazuh agent to trigger a new SCA scan with ``systemctl restart wazuh-agent``. Open the menu (**☰**) and go to **Endpoint security** > **Configuration Assessment**. Click **Explore agent**, select the Ubuntu 24.04 endpoint, and click the **Inventory** tab. Click **Add filter**, add a filter for ``check.id`` is ``35680``, and click **Save**.
 
 .. thumbnail:: /images/compliance/pci/sca-minimum-password-length-01.png
    :title: SCA check for minimum password length configured

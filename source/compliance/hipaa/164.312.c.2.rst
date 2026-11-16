@@ -8,7 +8,7 @@ HIPAA § 164.312(c)(2) - Mechanism to authenticate electronic protected health i
 
 The HIPAA § 164.312(c)(2) requirement states, "*Implement electronic mechanisms to corroborate that electronic protected health information has not been altered or destroyed in an unauthorized manner.*"
 
-This requirement specifies monitoring files and directories containing healthcare data. The Wazuh FIM module meets this requirement by monitoring healthcare files and generating findings on modification or deletion. See the Wazuh :doc:`FIM documentation </user-manual/capabilities/file-integrity/index>` for details on configuring file integrity monitoring.
+This requirement specifies monitoring files and directories containing healthcare data. The Wazuh FIM module helps meet this requirement by monitoring healthcare files and generating findings on modification or deletion. See the Wazuh :doc:`FIM documentation </user-manual/capabilities/file-integrity/index>` for details on configuring file integrity monitoring.
 
 Use cases: Detect file changes and deletion
 -----------------------------------------------
@@ -69,7 +69,7 @@ In this use case, the Wazuh agent detects changes made to the ``patient_data.txt
 Detect file deletion
 ^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, you configure the Wazuh agent to detect file deletion in a monitored directory. Perform the following steps on the Ubuntu endpoint to configure the FIM module to monitor the ``/root/health_records`` directory.
+In this use case, you configure the Wazuh agent to detect file deletion in a monitored directory. Perform the following steps on the Ubuntu endpoint to configure the FIM module to monitor the ``/root/health_records`` directory. This use case uses a separate directory, so you can run it independently of the previous use case. If you completed the previous use case, the ``syscheck`` block monitors both directories.
 
 #. Create the ``health_records`` directory in the ``/root`` directory if it is not present:
 

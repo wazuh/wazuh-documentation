@@ -20,7 +20,7 @@ In the use case, the Wazuh SCA module runs check ``41646`` on an Ubuntu 26.04 en
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-#. Click **Configuration Assessment** from the Wazuh **Overview** dashboard:
+#. Navigate to **Endpoint security** > **Configuration Assessment**:
 
    .. thumbnail:: /images/compliance/hipaa/configuration-assessment-overview.png
       :title: Wazuh Overview dashboard - Configuration Assessment
@@ -42,13 +42,22 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-#. The check fails because ``ClientAliveInterval`` and ``ClientAliveCountMax`` are not configured. Expand the finding to see the check name, description, rationale, compliance mapping, and other information.
+#. The check fails because ``ClientAliveInterval`` and ``ClientAliveCountMax`` are not configured. Expand the check to see the check name, description, rationale, compliance mapping, and other information.
 
    .. thumbnail:: /images/compliance/hipaa/sca-finding-41646-failed-details.png
       :title: SCA check 41646 - Failed finding details
       :alt: SCA check 41646 - Failed finding details
       :align: center
       :width: 80%
+
+Ubuntu endpoint
+^^^^^^^^^^^^^^^^
+
+4. Switch to the root user:
+
+   .. code-block:: console
+
+      $ sudo su
 
 #. Configure the ``ClientAliveInterval`` and ``ClientAliveCountMax`` options in the ``/etc/ssh/sshd_config`` file. In this example, the SSH server sends a probe every 15 seconds and disconnects the client after three consecutive unanswered probes.
 
@@ -57,13 +66,17 @@ Wazuh dashboard
       ClientAliveInterval 15
       ClientAliveCountMax 3
 
-#. Restart the Wazuh agent to force a new SCA scan:
+#. Reload the SSH service to apply the changes, and restart the Wazuh agent to force a new SCA scan:
 
    .. code-block:: console
 
+      # systemctl reload ssh
       # systemctl restart wazuh-agent
 
-#. Go to the **Findings** tab and apply the ``check.id: 41646`` filter.
+Wazuh dashboard
+^^^^^^^^^^^^^^^^
+
+7. Go to the **Findings** tab and apply the ``check.id: 41646`` filter.
 
    .. thumbnail:: /images/compliance/hipaa/sca-finding-41646-passed.png
       :title: SCA check 41646 - Passed finding
