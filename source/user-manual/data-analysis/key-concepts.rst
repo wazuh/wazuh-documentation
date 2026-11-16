@@ -30,7 +30,7 @@ The following terms are used across the Wazuh 5.0 data analysis documentation:
 
 -  **KVDB**: Key-value database: a named set of key-value pairs that decoders and rules look up to match or enrich events. See :ref:`Key-Value Databases (KVDBs) <data_analysis_kvdb>`.
 
--  **Event**: A normalized event: the WCS document that the normalization engine produces from a raw log and indexes in ``wazuh-events-v5-<category>``.
+-  **Event**: A normalized event: the WCS document that the normalization engine produces from a raw log and indexes in ``wazuh-events-v5-<category>``. See :ref:`Events <data_analysis_events>`.
 
 -  **Unclassified event**: An event that no decoder of the policy accepts. Wazuh indexes it only when the **Index unclassified events** setting of the space is on.
 
@@ -42,7 +42,7 @@ The following terms are used across the Wazuh 5.0 data analysis documentation:
 
 -  **Finding**: The record a detector creates when an event matches a rule, stored in ``wazuh-findings-v5-<category>``. See :ref:`Findings <data_analysis_findings>`.
 
--  **Content Manager**: The Wazuh indexer plugin that stores all detection content, synchronizes the standard content from Wazuh CTI, provides the API for custom content, and runs promotions.
+-  **Content Manager**: The Wazuh indexer plugin that stores all detection content, synchronizes the standard content from Wazuh CTI, provides the API for custom content, and runs promotions. See :ref:`Content management <data_analysis_content_management>`.
 
 -  **Content synchronization (CMSync)**: The Wazuh manager service that pulls the policy and content of each space from the Wazuh indexer and loads them into the normalization engine.
 
