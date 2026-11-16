@@ -18,7 +18,7 @@ The Wazuh data analysis engine decodes logs, triggers rules, and generates findi
 
 #. **Rule matching and findings visualization**: On the indexer, the detection engine evaluates normalized events against :doc:`Sigma-compatible Wazuh detection rules </user-manual/data-analysis/rules>` at configured intervals and generates findings on each scheduled run. Each finding includes event and rule metadata for visualization and investigation in the Wazuh dashboard.
 
-You can manage Wazuh data analysis policies from Ruleset Management on the Wazuh dashboard, where you create and configure decoders, KVDBs, detectors, and detection rules. To access it, click the menu icon **☰** on the Wazuh dashboard and go to **Ruleset Management** > **Overview**.
+You can manage Wazuh data analysis :ref:`policies <data_analysis_key_concepts>` from Ruleset Management on the Wazuh dashboard, where you create and configure decoders, KVDBs, detectors, and detection rules. To access it, click the menu icon **☰** on the Wazuh dashboard and go to **Ruleset Management** > **Overview**.
 
 .. thumbnail:: /images/manual/data-analysis/ruleset-management-overview.png
    :title: Ruleset Management overview
@@ -31,5 +31,6 @@ You can manage Wazuh data analysis policies from Ruleset Management on the Wazuh
    .. toctree::
       :maxdepth: 2
 
+      key-concepts
       data-analysis-components
       detection-workflow

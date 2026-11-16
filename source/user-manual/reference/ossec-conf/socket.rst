@@ -73,7 +73,7 @@ The prefix is placed before the message.
 | **Allowed values**   | Any string   |
 +----------------------+--------------+
 
-Default configuration
+Sample configuration
 ------------------------
 
 .. code-block:: xml

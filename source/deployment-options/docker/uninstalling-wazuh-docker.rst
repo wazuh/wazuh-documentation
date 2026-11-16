@@ -51,6 +51,8 @@ You need root user privileges to run the commands below. If you use Docker as a 
 
       # rm -rf wazuh-certificates/ wazuh-certificates-tool.log config.yml wazuh-certs-tool.sh config/*/certs
 
+   To deploy the stack again from the kept volumes, follow the Prepare the certificates steps of the :ref:`single-node stack <multi-node-certificates>` or the :ref:`multi-node stack <multi-node-certificates>`. Run the steps from the same directory, so that the script reuses ``wazuh-ca/``, and pass the same ``--agent-san`` addresses as before. Skip Create the credentials, because the files in ``config/credentials/`` still match the passwords in the volumes. Then run ``docker compose up -d``.
+
 #. Optional: remove the root CA. The certificate creation tool keeps the root CA and its private key in ``wazuh-ca/``, in the directory of your stack. The steps above keep this directory, and the next run of the script from this directory reuses it. Remove it only if you deleted the volumes in step 2 and no other Wazuh deployment uses this root CA. If you set ``WAZUH_CA_DIR`` when you created the certificates, remove that directory instead:
 
    .. code-block:: console
@@ -63,7 +65,7 @@ You need root user privileges to run the commands below. If you use Docker as a 
 
       # docker image rm wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV| wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV| wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|
 
-   A multi-node deployment also uses the ``nginx:stable`` image. Add it to the command unless another container on this host uses it. If you upgraded the deployment, use the tags in ``wazuh-docker/single-node/docker-compose.yml`` or ``wazuh-docker/multi-node/docker-compose.yml``. If you built the images yourself, also remove the build cache, which the build leaves on the Docker host, with ``docker builder prune -a``.
+   A multi-node deployment also uses the ``nginx:stable`` image. Add it to the command unless another container on this host uses it. If you built the images yourself, also remove the build cache, which the build leaves on the Docker host, with ``docker builder prune -a``.
 
 #. Run the following command to confirm that the deployment's containers are removed:
 

@@ -15,7 +15,7 @@ agent-upgrade
       <agent-upgrade>
       </agent-upgrade>
 
-The ``<agent-upgrade>`` section configures the remote upgrade behavior of the Wazuh agent. It controls whether the agent accepts remote upgrade requests, how it retries upgrade notifications, and how it validates signed WPK packages. Define this section only when you need to override the default settings.
+The ``<agent-upgrade>`` section configures the remote upgrade behavior of the Wazuh agent. It controls whether the agent accepts remote upgrade requests, how it retries upgrade notifications, and how it validates Wazuh signed package (WPK) files. Define this section only when you need to override the default settings. See :ref:`upgrade_agents_remotely`.
 
 Options
 -------
@@ -51,11 +51,11 @@ Configures CA certificate validation for WPK packages.
 
 ``ca_store`` — Path to a CA certificate file used to verify the WPK signature. The tag can be repeated to accept multiple CAs. Only effective when ``ca_verification`` is enabled.
 
-+----------------------+-----------------------------+
-| **Default value**    | etc/wpk_root.pem            |
-+----------------------+-----------------------------+
-| **Allowed values**   | Valid absolute paths        |
-+----------------------+-----------------------------+
++----------------------+---------------------------------------------------------------------------+
+| **Default value**    | etc/wpk_root.pem                                                          |
++----------------------+---------------------------------------------------------------------------+
+| **Allowed values**   | Absolute path, or path relative to the Wazuh agent installation directory |
++----------------------+---------------------------------------------------------------------------+
 
 Deprecated options
 ^^^^^^^^^^^^^^^^^^^
