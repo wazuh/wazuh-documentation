@@ -162,6 +162,33 @@ Navigate to **Endpoint security** > **Configuration Assessment** on the Wazuh da
    :title: Security Configuration Assessment on the Wazuh dashboard
    :alt: Security Configuration Assessment on the Wazuh dashboard
 
+Searching findings and events with DQL
+--------------------------------------
+
+The search bars of **Discover** and of the **Dashboard** and **Findings** tabs of each module, such as **Threat Hunting**, use Dashboards Query Language (DQL). WQL is available on the pages listed in :ref:`dashboard_wql`.
+
+A DQL query is a field name, a colon, and a value. Combine conditions with ``and``, ``or``, and ``not``, and use ``*`` as a wildcard. For example, the following query in **Threat intelligence** > **Threat Hunting** > **Findings** shows the findings of one Wazuh agent:
+
+.. code-block:: none
+
+   wazuh.agent.name: "Ubuntu24"
+
+.. thumbnail:: /images/wazuh-dashboard/global-queries/dql-findings.png
+   :align: center
+   :width: 80%
+   :title: DQL query in Threat Hunting Findings
+   :alt: Threat intelligence > Threat Hunting > Findings with the query wazuh.agent.name: "Ubuntu24" in the search bar and the matching findings
+
+The following query shows the findings of every Wazuh agent whose name starts with Windows:
+
+.. code-block:: none
+
+   wazuh.agent.name: Windows*
+
+For the full syntax, see `Dashboards Query Language <https://docs.opensearch.org/latest/dashboards/dql/>`__ in the OpenSearch documentation.
+
+.. _dashboard_wql:
+
 Filtering data using Wazuh Query Language (WQL)
 -----------------------------------------------
 
@@ -414,13 +441,13 @@ Generate a token to be used to interact with the API:
 
 .. code-block:: console
 
-   # TOKEN=$(curl -u <WAZUH_API_USERNAME>:<WAZUH_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+   # TOKEN=$(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
 
 Replace:
 
--  ``<WAZUH_API_USERNAME>`` with your Wazuh manager API user. After installation, it is ``wazuh``.
--  ``<WAZUH_API_PASSWORD>`` with your Wazuh manager API password. The installation stores it as ``WAZUH_MANAGER_API_PASSWORD`` in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager.
--  ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager IP address. On an all-in-one deployment from the installation assistant, run the commands on the Wazuh manager host and use ``localhost``. The Wazuh manager API listens on ``127.0.0.1`` and ``::1`` only, as the host setting in ``/var/wazuh-manager/api/configuration/api.yaml`` shows.
+-  ``<WAZUH_MANAGER_API_USER>`` with your Wazuh manager API user. After installation, it is ``wazuh``.
+-  ``<WAZUH_MANAGER_API_PASSWORD>`` with your Wazuh manager API password. The installation stores it as ``WAZUH_MANAGER_API_PASSWORD`` in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager.
+-  ``<WAZUH_MANAGER_ADDRESS>`` with your Wazuh manager IP address. On an all-in-one deployment from the installation assistant, run the commands on the Wazuh manager host and use ``localhost``. The Wazuh manager API listens on ``127.0.0.1`` and ``::1`` only, as the host setting in ``/var/wazuh-manager/api/configuration/api.yaml`` shows.
 
 For example, the following query filters Ubuntu endpoints with a major version higher than 18. The ``q`` parameter of the Wazuh manager API uses a semicolon (``;``) for ``and``, and a comma (``,``) for ``or``.
 
@@ -428,7 +455,7 @@ We encode the value of the parameter ``q`` with the ``--data-urlencode`` flag:
 
 .. code-block:: console
 
-   # curl -G --data-urlencode "q=os.name=ubuntu;os.major>18" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,version,os.major" -H  "Authorization: Bearer $TOKEN"
+   # curl -G --data-urlencode "q=os.name=ubuntu;os.major>18" -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,version,os.major" -H  "Authorization: Bearer $TOKEN"
 
 The command output looks similar to this:
 
@@ -460,7 +487,7 @@ The following query uses the comma (``,``) separator for *or* and the like as (`
 
 .. code-block:: console
 
-   # curl -G --data-urlencode "q=os.name~centos,os.name~windows" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H  "Authorization: Bearer $TOKEN"
+   # curl -G --data-urlencode "q=os.name~centos,os.name~windows" -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H  "Authorization: Bearer $TOKEN"
 
 The command output looks similar to this:
 

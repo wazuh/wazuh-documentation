@@ -251,6 +251,10 @@ Follow the next steps to configure the Wazuh module for Google Cloud Pub/Sub on 
    -  ``<subscription_name>``: is the subscription name created for this topic, and ``<YOUR_SUBSCRIPTION_ID>`` is your subscription ID.
    -  ``<credentials_file>``: is the path to the Google Cloud credentials file. ``<AUTHENTICATION_FILE_NAME>`` is the name of the Google Cloud credentials file. Ensure the JSON extension is present after the file. If you do not have credentials, follow the steps in the :ref:`configuring Google Cloud credentials <gcp_creating_credentials_file>` section.
 
+   .. note::
+
+      The Wazuh module for Google Cloud Pub/Sub supports only one ``gcp-pubsub`` block per configuration file. To read more than one subscription, configure each one on a different Wazuh agent.
+
 #. Restart the Wazuh agent service to apply the changes:
 
    .. code-block:: console

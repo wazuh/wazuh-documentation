@@ -152,3 +152,63 @@ A Wazuh agent connects to one address only: the address of its enrollment token,
 
    Assisted installation <installation-assistant>
    Step-by-step installation <step-by-step>
+
+Adding the address after the installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These steps are for an all-in-one server installed with the :doc:`Quickstart </quickstart>`. The Wazuh manager reissues the certificates from its own certificate authority, so agents enrolled before the change keep trusting it. Run the following steps on this server:
+
+#. Stop the Wazuh manager and check that none of its processes are still running:
+
+   .. code-block:: console
+
+      $ sudo systemctl stop wazuh-manager
+      $ sudo /var/wazuh-manager/bin/wazuh-manager-control status
+
+   If any line ends in ``is running...``, run ``sudo /var/wazuh-manager/bin/wazuh-manager-control stop``.
+
+#. List the current addresses of the agent listener certificate. For a Wazuh manager API address, use ``/etc/wazuh-manager/certs/apid.pem`` instead:
+
+   .. code-block:: console
+
+      $ sudo openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
+
+#. Create ``/etc/wazuh-manager/local.env`` with the following line, or change the line if the file already has it. Replace ``<HOSTNAME>`` and ``<SERVER_IP_ADDRESS>`` with the addresses from the previous step, and ``<NEW_ADDRESS>`` with the new address:
+
+   .. code-block:: ini
+
+      WAZUH_MANAGER_REMOTED_CERT_SANS=DNS:<HOSTNAME>,IP:<SERVER_IP_ADDRESS>,IP:<NEW_ADDRESS>
+
+   List every address from the previous step except ``localhost``, ``127.0.0.1``, and ``::1``, which are always added. The list replaces the addresses the Wazuh manager finds on its own. Write ``IP Address:`` entries as ``IP:``, use ``DNS:`` for a name, and separate the entries with commas. For a Wazuh manager API address, set ``WAZUH_MANAGER_APID_CERT_SANS`` the same way. Then restrict the file to root:
+
+   .. code-block:: console
+
+      $ sudo chown root:root /etc/wazuh-manager/local.env
+      $ sudo chmod 600 /etc/wazuh-manager/local.env
+
+#. Move the agent listener certificate pair to a backup directory. A pair left in place keeps its old addresses:
+
+   .. code-block:: console
+
+      $ sudo mkdir -p /root/wazuh-certs-backup
+      $ sudo mv /etc/wazuh-manager/certs/remoted.pem /etc/wazuh-manager/certs/remoted-key.pem /root/wazuh-certs-backup/
+
+   For a Wazuh manager API address, move ``/etc/wazuh-manager/certs/apid.pem`` and ``/etc/wazuh-manager/certs/apid-key.pem`` too.
+
+#. Issue the new certificates and publish the certificate authority bundle to the agents:
+
+   .. code-block:: console
+
+      $ sudo /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install
+      $ sudo /var/wazuh-manager/bin/wazuh-manager-certs stamp
+
+   The output includes a line that starts with ``resolve-credentials: /etc/wazuh-manager/certs/remoted.pem: issued;`` and lists the new address. If that line is missing, the certificate wasn't issued. Move the files in ``/root/wazuh-certs-backup/`` back to ``/etc/wazuh-manager/certs/`` and start the Wazuh manager.
+
+#. Start the Wazuh manager and create an enrollment token for the new address to confirm the change:
+
+   .. code-block:: console
+
+      $ sudo systemctl start wazuh-manager
+      $ sudo /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <NEW_ADDRESS>
+
+Agents enrolled before the change keep connecting to their old address. To point them to the new one, follow :ref:`Move enrolled agents to the new address <vm_move_enrolled_agents>` in the Virtual machine (VM) documentation. For a Wazuh manager API address, also set ``host: ['0.0.0.0', '::']`` in the :ref:`Wazuh manager API configuration file <api_configuration_wazuh_manager_api_configuration_file>` and restart the Wazuh manager.

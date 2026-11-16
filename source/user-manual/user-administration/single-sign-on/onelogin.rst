@@ -35,21 +35,21 @@ OneLogin Configuration
 
    #. Log in to **OneLogin** web console, select **Administration** > **Users** > **New User**.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-to-onelogin-web-console.png
+      .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-web-console.png
          :title: Log in to OneLogin web console
          :align: center
          :width: 80%
 
    #. Complete the mandatory fields, and assign a value in the **Department** field and click on **Save User**. In our case, this is ``wazuh-admins``. This field will be used later in the Wazuh indexer configuration as the backend role.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/02-complete-the-mandatory-fields.png
+      .. thumbnail:: /images/single-sign-on/onelogin/02-complete-mandatory-fields.png
          :title: Complete the mandatory fields
          :align: center
          :width: 80%
 
    #. Select the user, navigate to **More Actions** and click on **Change Password** to assign a password to the user.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/03-click-on-save-user.png
+      .. thumbnail:: /images/single-sign-on/onelogin/03-change-user-password.png
          :title: Click on Save User
          :align: center
          :width: 80%
@@ -58,7 +58,7 @@ OneLogin Configuration
 
    #. Go to **Applications** tab > **Applications** and then click on **Add app**.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/04-create-a-new-app.png
+      .. thumbnail:: /images/single-sign-on/onelogin/04-add-new-app.png
          :title: Create a new app using the SAML Custom Connector (Advanced)
          :align: center
          :width: 80%
@@ -79,26 +79,26 @@ OneLogin Configuration
 
       The configuration must be similar to the highlighted blue rectangles:
 
-      .. thumbnail:: /images/single-sign-on/onelogin/05-search-for-saml-custom-connector.png
+      .. thumbnail:: /images/single-sign-on/onelogin/05-saml-connector-audience-recipient-acs.png
          :title: Search for SAML Custom Connector (Advanced) application
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/onelogin/06-search-for-saml-custom-connector.png
+      .. thumbnail:: /images/single-sign-on/onelogin/06-saml-connector-initiator-nameid.png
          :title: Search for SAML Custom Connector (Advanced) application
          :align: center
          :width: 80%
 
    #. Go to the **Parameters** tab and click on **+** to add a new parameter to the app:
 
-      .. thumbnail:: /images/single-sign-on/onelogin/07-go-to-the-parameters-tab.png
+      .. thumbnail:: /images/single-sign-on/onelogin/07-parameters-tab.png
          :title: Go to the Parameters tab
          :align: center
          :width: 80%
 
-   #. Edit the parameter details. In our own case, we named the new parameter as **Roles**, then we selected the value **Department** and marked the  **Include in SAML assertion** checkbox. The rest of the app configuration is left as default.
+   #. Edit the parameter details. In our own case, we named the new parameter as **Roles**, then we selected the value **Department** and marked the **Include in SAML assertion** checkbox. The rest of the app configuration is left as default.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/08-we-named-the-new-parameter-as-roles.png
+      .. thumbnail:: /images/single-sign-on/onelogin/08-roles-parameter.png
          :title: We named the new parameter as Roles
          :align: center
          :width: 80%
@@ -107,18 +107,18 @@ OneLogin Configuration
 
 #. Add the created user to the new app.
 
-   #. Go to **Users** and select the created user. Go to **Applications** and click on **+**, select the **Allow the user to sign in** checkbox, and click on **Save**.
+   #. Go to **Users** and select the created user. Go to **Applications** and click on **+**, select the **Allow the user to sign in** checkbox, and click on **Save**:
 
-      .. thumbnail:: /images/single-sign-on/onelogin/09-add-the-created-user-to-the-new-app.png
+      .. thumbnail:: /images/single-sign-on/onelogin/09-add-user-to-app.png
          :title: Add the created user to the new app
          :align: center
          :width: 80%
 
 #. Get the required parameters from the application.
 
-   #. Go to **Applications** >  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
+   #. Go to **Applications** > **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/10-click-on-more-actions.png
+      .. thumbnail:: /images/single-sign-on/onelogin/10-saml-metadata.png
          :title: Click on More Actions and then select SAML Metadata
          :align: center
          :width: 80%
@@ -127,15 +127,15 @@ OneLogin Configuration
 
    #. The **Issuer URL** will be the ``idp.entity_id`` in the Wazuh indexer security configuration.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/11-save-the-file-as-xml.png
+      .. thumbnail:: /images/single-sign-on/onelogin/11-issuer-url.png
          :title: Save the file as XML
          :align: center
          :width: 80%
 
    #. The **Audience (EntityID)** will be the ``sp.entity_id`` in the Wazuh indexer configuration.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/12-the-Audience-entityid.png
-         :title: The Audience (EntityID) will be the sp.entity_id in  the Wazuh indexer security configuration
+      .. thumbnail:: /images/single-sign-on/onelogin/12-audience-entity-id.png
+         :title: The Audience (EntityID) will be the sp.entity_id in the Wazuh indexer security configuration
          :align: center
          :width: 80%
 
@@ -163,11 +163,12 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
-#. Place the ``onelogin_metadata.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+#. Place the ``onelogin_metadata.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to root:wazuh-indexer and the permissions to 640 using the following commands:
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/onelogin_metadata.xml
+      # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/onelogin_metadata.xml
+      # chmod 640 /etc/wazuh-indexer/opensearch-security/onelogin_metadata.xml
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
@@ -301,7 +302,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -314,11 +315,10 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+      .. thumbnail:: /images/single-sign-on/onelogin/13-wazuh-role-mapping.gif
          :title: Wazuh role mapping
-         :alt: Wazuh role mapping
          :align: center
          :width: 80%
 
@@ -327,18 +327,19 @@ Wazuh dashboard configuration
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``administrator``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field**: ``backend_roles``
-      -  **Search operation**: ``FIND``
-      -  **Value**: Assign the value of the Department field in OneLogin configuration. In our case, this is ``wazuh-admins``.
+      -  **User field:** ``backend_roles``
+      -  **Search operation:** ``FIND``
+      -  **Value:** Assign the value of the ``Department`` field in OneLogin configuration. In our case, this is ``wazuh-admins``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/Wazuh-role-mapping.png
+      .. thumbnail:: /images/single-sign-on/onelogin/14-create-wazuh-role-mapping.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 
@@ -367,7 +368,7 @@ Follow these steps to integrate OneLogin  IdP with Wazuh for single sign-on and 
 
 .. _configuration_onelogin_ro:
 
-OneLogin configuration
+OneLogin Configuration
 ^^^^^^^^^^^^^^^^^^^^^^
 
 #. Create an account in OneLogin. Request a free trial if you don't have a paid license.
@@ -376,21 +377,21 @@ OneLogin configuration
 
    #. Log in to **OneLogin** web console, select **Administration** > **Users** > **New User**.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-to-onelogin-web-console.png
+      .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-web-console.png
          :title: Log in to OneLogin web console
          :align: center
          :width: 80%
 
    #. Complete the mandatory fields, and assign a value in the **Department** field and click on **Save User**. In our case, this is ``wazuh-readonly``. This field will be used later in the Wazuh indexer configuration as the backend role.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/02-complete-the-mandatory-fields-RO.png
+      .. thumbnail:: /images/single-sign-on/onelogin/15-complete-mandatory-fields-read-only.png
          :title: Complete the mandatory fields
          :align: center
          :width: 80%
 
    #. Select the user, navigate to **More Actions** and click on **Change Password** to assign a password to the user.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/03-click-on-save-user-RO.png
+      .. thumbnail:: /images/single-sign-on/onelogin/16-change-password-read-only.png
          :title: Click on Save User
          :align: center
          :width: 80%
@@ -399,7 +400,7 @@ OneLogin configuration
 
    #. Go to **Applications** tab > **Applications** and then click on **Add app**.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/04-create-a-new-app.png
+      .. thumbnail:: /images/single-sign-on/onelogin/04-add-new-app.png
          :title: Create a new app using the SAML Custom Connector (Advanced)
          :align: center
          :width: 80%
@@ -410,7 +411,7 @@ OneLogin configuration
       - **Recipient**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - **ACS (Consumer) URL Validator**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - **ACS (Consumer) URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      - **Login URL**: ``https://<WAZUH_DASHBOARD_URL>/``
+      - **Login URL**: ``https://<WAZUH_DASHBOARD_URL>``
       - **SAML initiator**: ``Service Provider``
       - **SAML nameID format**: ``Unspecified``
       - **SAML issuer type**: ``Specific``
@@ -420,26 +421,26 @@ OneLogin configuration
 
       The configuration must be similar to the highlighted blue rectangles:
 
-      .. thumbnail:: /images/single-sign-on/onelogin/05-search-for-saml-custom-connector.png
+      .. thumbnail:: /images/single-sign-on/onelogin/05-saml-connector-audience-recipient-acs.png
          :title: Search for SAML Custom Connector (Advanced) application
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/onelogin/06-search-for-saml-custom-connector.png
+      .. thumbnail:: /images/single-sign-on/onelogin/06-saml-connector-initiator-nameid.png
          :title: Search for SAML Custom Connector (Advanced) application
          :align: center
          :width: 80%
 
    #. Go to the **Parameters** tab and click on **+** to add a new parameter to the app:
 
-      .. thumbnail:: /images/single-sign-on/onelogin/07-go-to-the-parameters-tab.png
+      .. thumbnail:: /images/single-sign-on/onelogin/07-parameters-tab.png
          :title: Go to the Parameters tab
          :align: center
          :width: 80%
 
-   #. Edit the parameter details. In our own case, we named the new parameter as **Roles**, then we selected the value **Department** and marked the  **Include in SAML assertion** checkbox. The rest of the app configuration is left as default.
+   #. Edit the parameter details. In our own case, we named the new parameter as **Roles**, then we selected the value **Department** and marked the **Include in SAML assertion** checkbox. The rest of the app configuration is left as default.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/08-we-named-the-new-parameter-as-roles.png
+      .. thumbnail:: /images/single-sign-on/onelogin/08-roles-parameter.png
          :title: We named the new parameter as Roles
          :align: center
          :width: 80%
@@ -448,18 +449,18 @@ OneLogin configuration
 
 #. Add the created user to the new app.
 
-   #. Go to **Users** and select the created user. Go to **Applications** and click on **+**, select the **Allow the user to sign in** checkbox, and click on **Save**.
+   #. Go to **Users** and select the created user. Go to **Applications** and click on **+**, select the **Allow the user to sign in** checkbox, and click on **Save**:
 
-      .. thumbnail:: /images/single-sign-on/onelogin/09-add-the-created-user-to-the-new-app.png
+      .. thumbnail:: /images/single-sign-on/onelogin/17-add-user-to-app-read-only.png
          :title: Add the created user to the new app
          :align: center
          :width: 80%
 
 #. Get the required parameters from the application.
 
-   #. Go to **Applications** >  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
+   #. Go to **Applications** > **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/10-click-on-more-actions.png
+      .. thumbnail:: /images/single-sign-on/onelogin/10-saml-metadata.png
          :title: Click on More Actions and then select SAML Metadata
          :align: center
          :width: 80%
@@ -468,15 +469,15 @@ OneLogin configuration
 
    #. The **Issuer URL** will be the ``idp.entity_id`` in the Wazuh indexer security configuration.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/11-save-the-file-as-xml.png
+      .. thumbnail:: /images/single-sign-on/onelogin/11-issuer-url.png
          :title: Save the file as XML
          :align: center
          :width: 80%
 
    #. The **Audience (EntityID)** will be the ``sp.entity_id`` in the Wazuh indexer configuration.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/12-the-Audience-entityid.png
-         :title: The Audience (EntityID) will be the sp.entity_id in  the Wazuh indexer security configuration
+      .. thumbnail:: /images/single-sign-on/onelogin/18-audience-entity-id-read-only.png
+         :title: The Audience (EntityID) will be the sp.entity_id in the Wazuh indexer security configuration
          :align: center
          :width: 80%
 
@@ -503,11 +504,12 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
-#. Place the ``onelogin_metadata.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+#. Place the ``onelogin_metadata.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to root:wazuh-indexer and the permissions to 640 using the following commands:
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/onelogin_metadata.xml
+      # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/onelogin_metadata.xml
+      # chmod 640 /etc/wazuh-indexer/opensearch-security/onelogin_metadata.xml
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
@@ -545,7 +547,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     entity_id: wazuh-saml
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: 'b1d6dd32753374557dcf92e241......'
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
             # ... other existing auth domains ...
@@ -593,21 +595,23 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create a new role mapping for the backend role. Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
+#. Create a new role mapping for the backend role.
+
+   Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
-      - **Name**: Assign a name to the role.
-      - **Cluster permissions**: ``cluster_composite_ops_ro``
-      - **Index**: ``*``
-      - **Index permissions**: ``read``
+      -  **Name**: Assign a name to the role.
+      -  **Cluster permissions**: ``cluster_composite_ops_ro``
+      -  **Index**: ``*``
+      -  **Index permissions**: ``read``
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
-   #. Under **Backend roles**, add the value of the **Department** field in OneLogin configuration and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
+   #. Under **Backend roles**, add the value of the ``Department`` field in OneLogin configuration and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -620,11 +624,10 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+      .. thumbnail:: /images/single-sign-on/onelogin/13-wazuh-role-mapping.gif
          :title: Wazuh role mapping
-         :alt: Wazuh role mapping
          :align: center
          :width: 80%
 
@@ -633,18 +636,19 @@ Wazuh dashboard configuration
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``readonly``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field**: ``backend_roles``
-      -  **Search operation**: ``FIND``
-      -  **Value**: Assign the value of the **Department** field in OneLogin configuration. In our case, the backend role is ``wazuh-readonly``.
+      -  **User field:** ``backend_roles``
+      -  **Search operation:** ``FIND``
+      -  **Value:** Assign the value of the ``Department`` field in OneLogin configuration. In our case, the backend role is ``wazuh-readonly``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/Wazuh-role-mapping-RO.png
+      .. thumbnail:: /images/single-sign-on/onelogin/19-create-wazuh-role-mapping-read-only.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 

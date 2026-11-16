@@ -8,7 +8,11 @@
 wazuh-logcollector.state
 ========================
 
-The statistics file for ``wazuh-logcollector`` is located at ``/var/ossec/var/run/wazuh-logcollector.state``.
+The statistics file for ``wazuh-logcollector`` is located at:
+
+-  Linux: ``/var/ossec/var/run/wazuh-logcollector.state``
+-  Windows: ``C:\Program Files (x86)\ossec-agent\wazuh-logcollector.state``
+-  macOS: ``/Library/Ossec/var/run/wazuh-logcollector.state``
 
 It can be helpful to identify and measure whether Wazuh is collecting and sending logs consistently.
 

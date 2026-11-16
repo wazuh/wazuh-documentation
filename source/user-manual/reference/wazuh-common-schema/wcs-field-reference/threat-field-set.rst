@@ -13,7 +13,7 @@ Example: Map the MITRE ATT&CK technique of a security tool's alert
 
 ``threat.technique.id`` holds the MITRE ATT&CK technique that the log source reports. This decoder reads it from the ``technique_id`` key of a JSON alert. The field is an array, so the decoder fills it with ``array_append()``.
 
-The decoder is a child of the root decoder of your integration, ``decoder/core-wazuh-message/0``, as in :ref:`Create a security analytics detection workflow <data_analysis_detection_workflow>`. Create it in **Ruleset management** > **Normalization** > **Decoders**, then check the output in **Log test**. The highlighted lines show where ``threat.technique.id`` is used and where it appears in the output.
+The decoder is a child of the root decoder of the space, ``decoder/core-wazuh-message/0``, as in :ref:`Create a security analytics detection workflow <data_analysis_detection_workflow>`. Create it in **Ruleset management** > **Normalization** > **Decoders**, then check the output in **Log test**. The highlighted lines show where ``threat.technique.id`` is used and where it appears in the output.
 
 **Sample log**
 

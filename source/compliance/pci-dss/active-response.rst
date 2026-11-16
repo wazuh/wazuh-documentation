@@ -24,7 +24,7 @@ PCI DSS requirement 11.5
 
 PCI DSS requirement 11.5 mandates that you detect and respond to network intrusions and unexpected file changes. You can configure scripts to run when specific actions occur, enabling a response to these intrusions. Wazuh comes with preconfigured active response scripts. Refer to the :doc:`default active response scripts </user-manual/capabilities/active-response/default-active-response-scripts>` section to access these scripts.
 
-In the example below, the Wazuh Active Response module automatically blocks a malicious IP address when it matches one in the reputation database. A blocked IP address prevents the attacker from accessing web resources on the monitored Apache web server. See :doc:`Blocking a known malicious actor </proof-of-concept-guide/block-malicious-actor-ip-reputation>` for more information.
+In the example below, the Wazuh Active Response module automatically blocks a malicious IP address when it matches one in the reputation database. A blocked IP address prevents the attacker from accessing web resources on the monitored Apache web server. See :doc:`Blocking a known malicious actor </proof-of-concept-guide/block-malicious-actor-ip-reputation>` for more information. The custom rules in this example have no ``compliance`` mapping. To list their findings under PCI DSS requirement 11.5.1 in the **Controls** tab, add the value "11.5.1" to the ``pci_dss`` list under the ``compliance`` field of each rule, as in the example at the beginning of :ref:`Using Wazuh for PCI DSS compliance <pci_dss>`.
 
 .. thumbnail:: /images/compliance/pci/active-response-blocked-ip-finding.png
    :title: Active response blocked IP finding

@@ -6,13 +6,13 @@
 Active response
 ===============
 
-The Wazuh Active Response module performs autonomous actions on endpoints to mitigate security threats. Wazuh can execute scripts automatically when specific alerting conditions are met. These scripts execute actions, such as a firewall block or drop, and account lockout.
+The Wazuh Active Response module performs autonomous actions on endpoints to mitigate security threats. Wazuh can execute scripts automatically when it generates specific findings. These scripts execute actions, such as a firewall block or drop, and account lockout.
 
 The Wazuh Active Response module assists in meeting the following NIST 800-53 controls:
 
--  **AC-7 Unsuccessful logon attempts:** "*The need to limit unsuccessful logon attempts and take subsequent action when the maximum number of attempts is exceeded applies regardless of whether the logon occurs via a local or network connection. Due to the potential for denial of service, automatic lockouts initiated by systems are usually temporary and automatically released after a predetermined, organization-defined time period. If a delay algorithm is selected, organizations may employ different algorithms for different components of the system based on the capabilities of those components. Responses to unsuccessful logon attempts may be implemented at the operating system and the application levels. Organization-defined actions that may be taken when the number of allowed consecutive invalid logon attempts is exceeded include prompting the user to answer a secret question in addition to the username and password, invoking a lockdown mode with limited user capabilities (instead of full lockout), allowing users to only logon from specified Internet Protocol (IP) addresses, requiring a CAPTCHA to prevent automated attacks, or applying user profiles such as location, time of day, IP address, device, or Media Access Control (MAC) address. If automatic system lockout or execution of a delay algorithm is not implemented in support of the availability objective, organizations consider a combination of other actions to help prevent brute force attacks. In addition to the above, organizations can prompt users to respond to a secret question before the number of allowed unsuccessful logon attempts is exceeded. Automatically unlocking an account after a specified period of time is generally not permitted. However, exceptions may be required based on operational mission or need.*"
+-  **IR-4 Incident handling:** "*Organizations recognize that incident response capabilities are dependent on the capabilities of organizational systems and the mission and business processes being supported by those systems. Organizations consider incident response as part of the definition, design, and development of mission and business processes and systems. Incident-related information can be obtained from a variety of sources, including audit monitoring, physical access monitoring, and network monitoring; user or administrator reports; and reported supply chain events. An effective incident handling capability includes coordination among many organizational entities (e.g., mission or business owners, system owners, authorizing officials, human resources offices, physical security offices, personnel security offices, legal departments, risk executive [function], operations personnel, procurement offices). Suspected security incidents include the receipt of suspicious email communications that can contain malicious code. Suspected supply chain incidents include the insertion of counterfeit hardware or malicious code into organizational systems or system components. For federal agencies, an incident that involves personally identifiable information is considered a breach. A breach results in unauthorized disclosure, the loss of control, unauthorized acquisition, compromise, or a similar occurrence where a person other than an authorized user accesses or potentially accesses personally identifiable information or an authorized user accesses or potentially accesses such information for other than authorized purposes.*"
 
--  **SC-5 Denial-of-service protection:** "*Denial-of-service events may occur due to a variety of internal and external causes, such as an attack by an adversary or a lack of planning to support organizational needs with respect to capacity and bandwidth. Such attacks can occur across a wide range of network protocols (e.g., IPv4, IPv6). A variety of technologies are available to limit or eliminate the origination and effects of denial-of-service events. For example, boundary protection devices can filter certain types of packets to protect system components on internal networks from being directly affected by or the source of denial-of-service attacks. Employing increased network capacity and bandwidth combined with service redundancy also reduces the susceptibility to denial-of-service events.*"
+-  **SI-4 System monitoring:** "*System monitoring includes external and internal monitoring. External monitoring includes the observation of events occurring at external interfaces to the system. Internal monitoring includes the observation of events occurring within the system. Organizations monitor systems by observing audit activities in real-time or by observing other system aspects such as access patterns, characteristics of access, and other actions. The monitoring objectives guide and inform the determination of the events. System monitoring capabilities are achieved through a variety of tools and techniques, including intrusion detection and prevention systems, malicious code protection software, scanning tools, audit record monitoring software, and network monitoring software.*"
 
 The Wazuh Active Response module assists in meeting the above controls by responding to malicious sources. Wazuh includes out-of-the-box active response commands that drop traffic from a malicious IP address or disable a user account that is a victim of brute forcing.
 
@@ -22,7 +22,7 @@ Use case
 Block web attacks with Active Response
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh detects web-based attacks by analyzing web server logs, then automatically responds by blocking the attacking source.
+Wazuh helps meet the IR-4 Incident handling and SI-4 System monitoring requirements by detecting web-based attacks through web server log analysis and automatically blocking the attacking source.
 
 In this scenario, we initiate a Cross-Site Scripting (XSS) attack from a host with HTTP access to a monitored Ubuntu 24.04 endpoint. Active response automatically blocks an attacker's IP address after detecting an XSS attack. You can then track the findings for these events and actions on the Wazuh dashboard.
 
@@ -76,7 +76,7 @@ Follow these steps to configure an active response that blocks the source IP add
 
 #. From the Wazuh dashboard main menu, navigate to **Explore** > **Active Responses**.
 
-#. Click **Create active response** and complete the configuration form with the following details.
+#. Click **Create active response** and complete the configuration form with the following details. The ``block-ip`` executable is an out-of-the-box script that adds firewall rules to drop traffic from the source IP address of the finding. The **Local** location runs the script on the endpoint that generated the finding. The **Stateless** type runs the script once and never reverts it, so the block lasts until you remove the firewall rules. A **Stateful** active response reverts its action after a timeout. See :doc:`Active response </user-manual/capabilities/active-response/index>` for more details.
 
    +----------------+-------------------+
    | **Field**      | **Value**         |
@@ -102,7 +102,7 @@ Follow these steps to configure an active response that blocks the source IP add
 
 #. Switch to the **Monitors** tab, then click **Create Monitor**.
 
-   Fill in the following parameters.
+   Fill in the following parameters. The **Active Response monitor** type runs the active response that you select in the **Actions** subsection when the trigger condition is met. The value ``b04f7630-f428-5209-89f6-d640238bceac`` is the ID of the ``Cross site scripting strings`` rule. You can find rule IDs in **Ruleset Management** > **Rules**.
 
    +-----------------------------+-----------------------------------------------------------+
    | **Field**                   | **Value**                                                 |
@@ -121,7 +121,11 @@ Follow these steps to configure an active response that blocks the source IP add
    +-----------------------------+-----------------------------------------------------------+
    | **Query name**              | ``web_attack_ar_query``                                   |
    +-----------------------------+-----------------------------------------------------------+
-   | **Field**                   | ``wazuh.rule.id is b04f7630-f428-5209-89f6-d640238bceac`` |
+   | **Field**                   | ``wazuh.rule.id``                                         |
+   +-----------------------------+-----------------------------------------------------------+
+   | **Operator**                | ``is``                                                    |
+   +-----------------------------+-----------------------------------------------------------+
+   | **Value**                   | ``b04f7630-f428-5209-89f6-d640238bceac``                  |
    +-----------------------------+-----------------------------------------------------------+
 
    .. thumbnail:: /images/compliance/nist/create-active-response-monitor.png
@@ -192,6 +196,8 @@ Perform the following steps from another endpoint.
 
       curl: (28) Failed to connect to <WEBSERVER_IP_ADDRESS> port 80 after 134781 ms: Couldn't connect to server
 
+   On the Ubuntu endpoint, run ``sudo iptables -S INPUT | grep <ATTACKER_IP>`` to check the block. Replace ``<ATTACKER_IP>`` with the IP address of the attacker endpoint. The output shows the ``DROP`` rule that the ``block-ip`` active response added to the ``INPUT`` chain.
+
 Visualize the findings
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -212,3 +218,10 @@ The ``block-ip`` active response triggers to block the attacker IP. Navigate to 
    :alt: Triggered active response in Incident Response
    :align: center
    :width: 80%
+
+After you finish this use case, remove the firewall rules on the Ubuntu endpoint so that the attacker endpoint can connect again. The active response type is **Stateless**, so the ``block-ip`` active response never removes them:
+
+.. code-block:: console
+
+   $ sudo iptables -D INPUT -s <ATTACKER_IP> -j DROP
+   $ sudo iptables -D FORWARD -s <ATTACKER_IP> -j DROP

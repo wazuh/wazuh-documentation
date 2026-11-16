@@ -44,7 +44,7 @@ The examples use an authentication token. To get your token, replace ``<USER>:<P
 
    # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
 
-After an installation from packages or with the installation assistant, use the ``wazuh`` user. Its password is the ``WAZUH_MANAGER_API_PASSWORD`` value in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager master node, unless you changed it later with ``rbac_control``. To print it, run this command:
+After an installation from packages or with the installation assistant, use the ``wazuh`` user. Its password is the ``WAZUH_MANAGER_API_PASSWORD`` value in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager master node, unless you changed it later with ``rbac_control`` (see :doc:`Password management </user-manual/user-administration/password-management>`). To print it, run this command:
 
 .. code-block:: console
 

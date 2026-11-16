@@ -12,6 +12,7 @@ This section shows detailed explanation of the Wazuh capabilities and their conf
    :maxdepth: 2
 
    file-integrity/index
+   malware-detection/index
    sec-config-assessment/index
    active-response/index
    log-data-collection/index
@@ -22,5 +23,4 @@ This section shows detailed explanation of the Wazuh capabilities and their conf
    system-calls-monitoring/index
 
 ..
-   malware-detection/index
    agentless-monitoring/index

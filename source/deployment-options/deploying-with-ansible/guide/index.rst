@@ -486,9 +486,33 @@ The files in ``deployment-credentials`` hold the passwords in plain text. Restri
 
    Later runs of the playbook from the same directory reuse these passwords. In a Wazuh cluster deployment, a run from another directory stops with an error, because the hosts already hold the root CA of the first deployment. To recover, run the playbook from the directory of the clone that installed the deployment. If you lost that directory, restore its ``deployment-credentials`` and ``deployment-config-files`` directories from your backup first. In an all-in-one deployment, the playbook reads the passwords back from the host, so a run from another directory, or after you delete ``deployment-credentials``, completes and writes the passwords again.
 
-In a Wazuh cluster deployment, the playbook also creates the root CA of the deployment on the Ansible control node during the first run, and issues the certificates of every node from it. It keeps the root CA, its private key, and the certificates in ``/etc/ansible/roles/wazuh-ansible/deployment-config-files/wazuh-ca``. The private key never leaves the Ansible control node. To use your own root CA, place its ``root-ca.pem`` and ``root-ca.key`` files in that directory before the first run. In an all-in-one deployment, each Wazuh package creates its own root CA on the host. Back up the ``deployment-credentials`` and ``deployment-config-files`` directories.
+The playbook handles the passwords, the root CA, and the certificates differently in each deployment type:
+
++---------------+----------------------------------------------------+------------------------------------------------------------------------+
+|               | All-in-one deployment                              | Wazuh cluster deployment                                               |
++===============+====================================================+========================================================================+
+| Passwords     | The Wazuh packages generate them when they are     | The playbook generates them once on the Ansible control node, keeps    |
+|               | installed, except the ones you supply. The         | them in ``deployment-credentials``, and writes them to                 |
+|               | playbook copies them to                            | ``/etc/<PACKAGE>/local.env`` on each host before the package is        |
+|               | ``deployment-credentials``.                        | installed.                                                             |
++---------------+----------------------------------------------------+------------------------------------------------------------------------+
+| Root CA       | Each Wazuh package creates its own root CA on the  | The playbook creates one root CA for the whole deployment, once, on    |
+|               | host, in ``/etc/<PACKAGE>/ca``.                    | the Ansible control node, in ``deployment-config-files/wazuh-ca``. Its |
+|               |                                                    | private key never leaves the Ansible control node. The hosts receive   |
+|               |                                                    | only ``root-ca.pem``.                                                  |
++---------------+----------------------------------------------------+------------------------------------------------------------------------+
+| Certificates  | Each Wazuh package issues its own certificates on  | The playbook issues them on the Ansible control node from the root CA  |
+|               | the host.                                          | of the deployment, and places them on each host before the package is  |
+|               |                                                    | installed. The packages use them and issue none.                       |
++---------------+----------------------------------------------------+------------------------------------------------------------------------+
+
+To use your own root CA in a Wazuh cluster deployment, place its ``root-ca.pem`` and ``root-ca.key`` files in ``/etc/ansible/roles/wazuh-ansible/deployment-config-files/wazuh-ca`` before the first run. Back up the ``deployment-credentials`` and ``deployment-config-files`` directories.
 
 Each clone of the Wazuh Ansible repository holds one deployment. To deploy another environment, clone the repository into another directory and run the playbook from there. The passwords of that deployment are in the ``deployment-credentials`` directory of that clone, so read them there, not in ``/etc/ansible/roles/wazuh-ansible/``.
+
+Running the playbook again from the same directory keeps the passwords, the root CA, and the certificates. It leaves the installed Wazuh packages as they are and doesn't write ``local.env`` again. It restarts a service only when its configuration changes.
+
+To add a Wazuh indexer node to a Wazuh cluster deployment, add the node to the inventory and to the ``wi_cluster`` group, and add it to ``instances``, ``wazuh_indexer_hosts``, and ``indexer_cluster_nodes`` in the playbook. Then run the playbook again for the whole inventory, without ``--limit``. The playbook issues the certificates of the new node from the root CA of the deployment and keeps the certificates of the existing nodes. It adds the new node to the configuration of the Wazuh manager and Wazuh dashboard, and restarts those services.
 
 To change the passwords, see :doc:`Password management </user-manual/user-administration/password-management>`.
 

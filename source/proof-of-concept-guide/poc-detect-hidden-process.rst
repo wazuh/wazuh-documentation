@@ -110,7 +110,7 @@ Perform the following steps on the monitored Ubuntu 24.04 endpoint:
    .. code-block:: none
       :class: output
 
-      diamorphine            13155  0
+      diamorphine            16384  0
 
    The first lsmod command returns no output, and the second one shows the Diamorphine module. In the case of Diamorphine, any kill signal ``63`` sent to any process, whether it exists or not, toggles the Diamorphine kernel module to hide or unhide.
 

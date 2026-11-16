@@ -73,13 +73,13 @@ Change all the passwords of the users installed on the host:
 
 .. code-block:: console
 
-   # sudo bash wazuh-passwords-tool.sh -a
+   # bash wazuh-passwords-tool.sh -a
 
 Change the ``admin`` password to one saved in a file:
 
 .. code-block:: console
 
-   # sudo bash wazuh-passwords-tool.sh -u admin -p < /root/new-admin-password.txt
+   # bash wazuh-passwords-tool.sh -u admin -p < /root/new-admin-password.txt
 
 The command output looks similar to this:
 
@@ -93,4 +93,4 @@ Read the new password in the file of the owner, for example:
 
 .. code-block:: console
 
-   # sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-
+   # grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh-indexer/export/credentials.env | cut -d= -f2-

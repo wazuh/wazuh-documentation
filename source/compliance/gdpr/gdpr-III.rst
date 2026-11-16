@@ -8,69 +8,6 @@ GDPR III, Rights of the data subject
 
 In this chapter, the GDPR sets out individuals' rights regarding the management of their personal data by third parties.
 
-Chapter III, Article 17, Head 1
----------------------------------
-
-**Right to erasure (right to be forgotten), Head 1**: *“The data subject shall have the right to obtain from the controller the erasure of personal data concerning him or her without undue delay, and the controller shall have the obligation to erase personal data without undue delay.”*
-
-The Wazuh FIM module helps meet this requirement. It monitors the files and folders that contain personal data, and it generates a finding when a modification or deletion occurs. A file deletion finding shows that the personal data of an individual was deleted in response to their request. Erasure requests also cover copies held elsewhere.
-
-Use case: Detect file deletion
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-In this use case, you configure the Wazuh agent on an Ubuntu 24.04 endpoint to detect file deletion in the ``/root/personal_data`` directory. You then delete a file to trigger a finding.
-
-Ubuntu endpoint
-~~~~~~~~~~~~~~~
-
-#. Switch to the ``root`` user:
-
-   .. code-block:: console
-
-      $ sudo su
-
-#. Create the directory ``personal_data`` in the ``/root`` directory:
-
-   .. code-block:: console
-
-      # mkdir /root/personal_data
-
-#. Create the file ``subject_data.txt`` in the ``/root/personal_data`` directory and include some content:
-
-   .. code-block:: console
-
-      # touch /root/personal_data/subject_data.txt
-      # echo "User01= user03_ID" >> /root/personal_data/subject_data.txt
-
-#. Add the highlighted configuration to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:
-
-   .. code-block:: xml
-      :emphasize-lines: 2
-
-      <syscheck>
-        <directories check_all="yes" realtime="yes">/root/personal_data</directories>
-      </syscheck>
-
-#. Restart the Wazuh agent to apply the changes:
-
-   .. code-block:: console
-
-      # systemctl restart wazuh-agent
-
-#. Delete the file ``subject_data.txt``:
-
-   .. code-block:: console
-
-      # rm /root/personal_data/subject_data.txt
-
-On the Wazuh dashboard, a finding shows that the ``subject_data.txt`` file was deleted.
-
-.. thumbnail:: /images/compliance/gdpr/fim-file-del.png
-   :title: File deletion finding visualization
-   :alt: Document details of the file deleted finding with the GDPR compliance field and rule title highlighted
-   :align: center
-   :width: 80%
-
 Chapter III, Article 18, Head 2
 ---------------------------------
 
@@ -83,7 +20,7 @@ With the FIM module and the Wazuh dashboard, you can perform searches to confirm
 Use case: Search for FIM events within a certain time frame
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Click the menu icon, then navigate to **Threat intelligence** > **Threat Hunting** and switch to the **Findings** tab. Confirm that no modification or deletion of restricted data occurred during a specific time interval. The **GDPR** dashboard also shows this information.
+To confirm that no modification or deletion of restricted data occurred during a specific time interval, navigate to **Threat intelligence** > **Threat Hunting** > **Findings** tab on the Wazuh dashboard. Set the time range to the restriction period and filter for the restricted file, for example ``file.path`` is ``/root/personal_data/subject_data.txt``. If no finding appears, no one modified or deleted the file during that period. The **GDPR** dashboard also shows this information.
 
 .. thumbnail:: /images/compliance/gdpr/syscheck-no-alerts.png
    :title: File modification finding visualization within specific time frame
@@ -91,4 +28,4 @@ Click the menu icon, then navigate to **Threat intelligence** > **Threat Hunting
    :align: center
    :width: 80%
 
-You can see a finding from the previous use case.
+In the image, the selected time range includes the **Detect file changes** use case in GDPR II, so one file modification finding appears for ``subject_data.txt``.

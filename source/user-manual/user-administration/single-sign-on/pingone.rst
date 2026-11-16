@@ -33,24 +33,24 @@ PingOne Configuration
 #. Go to `PingOne <https://admin.pingone.com/>`_ and sign in with your Ping Identity account.
 #. Create an application.
 
-   #. Navigate to **Applications** > **Applications** > **Add Application** and give it a name. In our case, the name is ``wazuh-sso``.
+   #. Navigate to **Applications** > **Applications** > **Add Application** and give it a name. In our case, the name is **wazuh-sso**.
 
    #. Proceed to the **Choose Application Type** section, select **SAML Application** > **Configure**.
 
-      .. thumbnail:: /images/single-sign-on/pingone/01-proceed-to-the-choose-application-type-section.png
-          :title: Proceed to the Choose Application Type section
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/pingone/01-proceed-choose-application-type-section.png
+         :title: Proceed to the Choose Application Type section
+         :align: center
+         :width: 80%
 
    #. Select **Manually Enter** on the **SAML Configuration** section and add the following configuration, replacing ``<WAZUH_DASHBOARD_URL>`` with the corresponding value:
 
-      - ACS URLs: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      - Entity ID: ``wazuh-saml``
+      -  ACS URLs: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
+      -  Entity ID: ``wazuh-saml``
 
-      .. thumbnail:: /images/single-sign-on/pingone/02-select-manually-enter-on-the-provide-app-metadata.png
-          :title: Select Manually Enter on the Provide App Metadata
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/pingone/02-select-manually-enter-provide-app-metadata.png
+         :title: Select Manually Enter on the Provide App Metadata
+         :align: center
+         :width: 80%
 
    #. On the **Configuration** tab, click on the edit icon and add the following information:
 
@@ -59,27 +59,27 @@ PingOne Configuration
       -  ASSERTION VALIDITY DURATION: ``3600`` (for 1 hour token validity)
       -  VERIFICATION CERTIFICATE: Upload a certificate containing a public key that is associated with a private key to be used for signing. If you do not have a certificate signed by a trusted Certificate Authority, you may use a self-signed certificate.
 
-         Run the command below on the Wazuh indexer instance to generate a new unencrypted 2048‑bit RSA private key and a self‑signed certificate valid for 365 days.
+      Run the command below on the Wazuh indexer instance to generate a new unencrypted 2048‑bit RSA private key and a self‑signed certificate valid for 365 days.
 
-         .. code-block:: console
+      .. code-block:: console
 
-            # openssl req -x509 -newkey rsa:2048 -keyout private.key -out certificate.pem -days 365 -nodes
+         # openssl req -x509 -newkey rsa:2048 -keyout private.key -out certificate.pem -days 365 -nodes
 
-         Upload the ``certificate.pem`` file as the **VERIFICATION CERTIFICATE** in PingOne. The full path of the ``private.key`` will be used later in the Wazuh indexer configuration file ``/etc/wazuh-indexer/opensearch-security/config.yml`` as the ``sp.signature_private_key_filepath`` parameter. This is necessary as all the logout requests must be signed.
+      Upload the ``certificate.pem`` file as the **VERIFICATION CERTIFICATE** in PingOne. The full path of the ``private.key`` will be used later in the Wazuh indexer configuration file ``/etc/wazuh-indexer/opensearch-security/config.yml`` as the ``sp.signature_private_key_filepath`` parameter. This is necessary as all the logout requests must be signed.
 
       .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png
-          :title: On the Configuration tab
-          :align: center
-          :width: 80%
+         :title: On the Configuration tab
+         :align: center
+         :width: 80%
 
-   #. Click on the **Attribute Mappings** tab,  select the edit icon, click on **Add** and insert the following configuration:
+   #. Click on the **Attribute Mappings** tab, select the edit icon, click on **Add** and insert the following configuration:
 
       ``Roles`` = ``Group Names``
 
-      .. thumbnail:: /images/single-sign-on/pingone/04-click-on-the-attribute-mappings-tab.png
-          :title: Click on the Attribute Mappings tab
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/pingone/04-click-attribute-mappings-tab.png
+         :title: Click on the Attribute Mappings tab
+         :align: center
+         :width: 80%
 
       The ``Roles`` attribute will be used later as the ``roles_key`` in the Wazuh indexer configuration file.
 
@@ -89,41 +89,41 @@ PingOne Configuration
 
    #. Navigate to **Directory** > **Groups**, and click on the **+** sign. Select the name of the **Group**, in this case, ``wazuh-admins``.
 
-      .. thumbnail:: /images/single-sign-on/pingone/05-navigate-to-identities-groups.png
-          :title: Navigate to Identities > Groups
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/pingone/05-navigate-identities-groups.png
+         :title: Navigate to Identities > Groups
+         :align: center
+         :width: 80%
 
    #. To assign users, open the created **Group**, go to the **Users** tab and select **Add Individually**. Add all the members that must log in to the Wazuh dashboard, and click on **Save** when done.
 
-      .. thumbnail:: /images/single-sign-on/pingone/06-assign-users.png
-          :title: Assign users
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/pingone/06-assign-users-group-page.png
+         :title: Assign users
+         :align: center
+         :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/pingone/07-assign-users.png
-          :title: Assign users
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/pingone/07-assign-users-edit-users.png
+         :title: Assign users
+         :align: center
+         :width: 80%
 
 #. Activate the application and note the necessary parameters.
 
    #. Navigate to **Application** > **Applications** and enable the application.
 
       .. thumbnail:: /images/single-sign-on/pingone/08-navigate-to-connections.png
-          :title: Navigate to Connections
-          :align: center
-          :width: 80%
+         :title: Navigate to Connections
+         :align: center
+         :width: 80%
 
    #. Take note of the following parameters from the overview page of the application, this will be used in the next step:
 
-      - **ISSUER ID**: It'll be in the form "\https://auth.pingone.com/..."
-      - **IDP METADATA URL**: It’ll be in the form "\https://auth.pingone.com/..."
+      -  **ISSUER ID**: It'll be in the form "\https://auth.pingone.com/...."
+      -  **IDP METADATA URL**: It'll be in the form "\https://auth.pingone.com/...."
 
       .. thumbnail:: /images/single-sign-on/pingone/09-take-note-of-parameters.png
-          :title: Take note of parameters from the configuration page
-          :align: center
-          :width: 80%
+         :title: Take note of parameters from the configuration page
+         :align: center
+         :width: 80%
 
 .. _indexer_configuration_pingone_admin:
 
@@ -142,21 +142,21 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    .. code-block:: console
 
-      openssl rand -hex 32
+      # openssl rand -hex 32
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
-#. Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command. Replace ``<PRIVATE_KEY>`` with your private key:
+#. Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to root:wazuh-indexer and the permissions to 640 using the following commands. Replace ``<PRIVATE_KEY>`` with your private key:
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/<PRIVATE_KEY>
+      # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/<PRIVATE_KEY>
+      # chmod 640 /etc/wazuh-indexer/opensearch-security/<PRIVATE_KEY>
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
-
-   - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
+   -  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28,29,30
@@ -196,13 +196,13 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-   - ``idp.metadata_url``
-   - ``idp.entity_id``
-   - ``sp.entity_id``
-   - ``sp.signature_private_key_filepath``
-   - ``kibana_url``
-   - ``roles_key``
-   - ``exchange_key``
+   -  ``idp.metadata_url``
+   -  ``idp.entity_id``
+   -  ``sp.entity_id``
+   -  ``sp.signature_private_key_filepath``
+   -  ``kibana_url``
+   -  ``roles_key``
+   -  ``exchange_key``
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file.
 
@@ -235,7 +235,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
 
-   Map the Group (``wazuh-admins``) that is in PingOne to the ``all_access`` role in Wazuh indexer:
+   Map the Group (wazuh-admins) that is in PingOne to the ``all_access`` role in the Wazuh indexer:
 
    .. code-block:: console
       :emphasize-lines: 7
@@ -285,7 +285,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -298,31 +298,31 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-   .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+   .. thumbnail:: /images/single-sign-on/pingone/10-wazuh-role-mapping.gif
       :title: Wazuh role mapping
-      :alt: Wazuh role mapping
       :align: center
       :width: 80%
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
 
-      - **Role mapping name**: Assign a name to the role mapping.
-      - **Roles**: Select ``administrator``.
-      - **Custom rules**: Click **Add new rule** to expand this field.
-      - **User field**: ``backend_roles``
-      - **Search operation**: ``FIND``
-      - **Value**: Assign the group name in PingOne configuration, in our case, this is ``wazuh-admins``.
+      -  **Role mapping name**: Assign a name to the role mapping.
+      -  **Roles**: Select ``administrator``.
+      -  **Custom rules**: Click **Add new rule** to expand this field.
+      -  **User field:** ``backend_roles``
+      -  **Search operation:** ``FIND``
+      -  **Value:** Assign the group name in PingOne configuration, in our case, this is ``wazuh-admins``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*.
 
-      .. thumbnail:: /images/single-sign-on/pingone/Wazuh-role-mapping.png
+      .. thumbnail:: /images/single-sign-on/pingone/11-create-wazuh-role-mapping.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 
@@ -338,7 +338,7 @@ Wazuh dashboard configuration
 
 #. Test the configuration.
 
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Ping One account.
+   To test the configuration, go to your Wazuh dashboard URL and log in with your PingOne account.
 
 Setup PingOne single sign-on with read-only role
 ------------------------------------------------
@@ -351,38 +351,38 @@ Follow these steps to integrate PingOne IdP with Wazuh for single sign-on and gr
 
 .. _configuration_pingone_ro:
 
-PingOne Configuration
+PingOne configuration
 ^^^^^^^^^^^^^^^^^^^^^
 
 #. Create an account in Ping Identity. Request a free trial if you don't have a paid license.
 #. Go to `PingOne <https://admin.pingone.com/>`_ and sign in with your Ping Identity account.
 #. Create an application.
 
-   #. Navigate to **Applications** > **Applications** > **Add Application** and give it a name. In our case, the name is ``wazuh-sso``.
+   #. Navigate to **Applications** > **Applications** > **Add Application** and give it a name. In our case, the name is **wazuh-sso**.
 
    #. Proceed to the **Choose Application Type** section, select **SAML Application** > **Configure**.
 
-      .. thumbnail:: /images/single-sign-on/pingone/01-proceed-to-the-choose-application-type-section.png
+      .. thumbnail:: /images/single-sign-on/pingone/01-proceed-choose-application-type-section.png
          :title: Proceed to the Choose Application Type section
          :align: center
          :width: 80%
 
    #. Select **Manually Enter** on the **SAML Configuration** section and add the following configuration, replacing ``<WAZUH_DASHBOARD_URL>`` with the corresponding value:
 
-      - ACS URLs: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      - Entity ID: ``wazuh-saml``
+      -  ACS URLs: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
+      -  Entity ID: ``wazuh-saml``
 
-      .. thumbnail:: /images/single-sign-on/pingone/02-select-manually-enter-on-the-provide-app-metadata.png
+      .. thumbnail:: /images/single-sign-on/pingone/02-select-manually-enter-provide-app-metadata.png
          :title: Select Manually Enter on the Provide App Metadata
          :align: center
          :width: 80%
 
    #. On the **Configuration** tab, click on the edit icon and add the following information:
 
-      - SLO ENDPOINT: ``https://<WAZUH_DASHBOARD_URL>/``
-      - SLO BINDING: ``HTTP Redirect``
-      - ASSERTION VALIDITY DURATION: ``3600`` (for 1 hour token validity)
-      - VERIFICATION CERTIFICATE: Upload a certificate containing a public key that is associated with a private key to be used for signing. If you do not have a certificate signed by a trusted Certificate Authority, you may use a self-signed certificate.
+      -  SLO ENDPOINT: ``https://<WAZUH_DASHBOARD_URL>/``
+      -  SLO BINDING: ``HTTP Redirect``
+      -  ASSERTION VALIDITY DURATION: ``3600`` (for 1 hour token validity)
+      -  VERIFICATION CERTIFICATE: Upload a certificate containing a public key that is associated with a private key to be used for signing. If you do not have a certificate signed by a trusted Certificate Authority, you may use a self-signed certificate.
 
       Run the command below on the Wazuh indexer instance to generate a new unencrypted 2048‑bit RSA private key and a self‑signed certificate valid for 365 days.
 
@@ -390,18 +390,18 @@ PingOne Configuration
 
          # openssl req -x509 -newkey rsa:2048 -keyout private.key -out certificate.pem -days 365 -nodes
 
-      Upload the ``certificate.pem`` file as the **VERIFICATION CERTIFICATE** in PingOne. The full path of the  ``private.key`` will be used later in the Wazuh indexer configuration file ``/etc/wazuh-indexer/opensearch-security/config.yml`` as the ``sp.signature_private_key_filepath`` parameter. This is necessary as all the logout requests must be signed.
+      Upload the ``certificate.pem`` file as the **VERIFICATION CERTIFICATE** in PingOne. The full path of the ``private.key`` will be used later in the Wazuh indexer configuration file ``/etc/wazuh-indexer/opensearch-security/config.yml`` as the ``sp.signature_private_key_filepath`` parameter. This is necessary as all the logout requests must be signed.
 
       .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png
          :title: On the Configuration tab
          :align: center
          :width: 80%
 
-   #. Click on the **Attribute Mappings** tab,  select the edit icon, click on **Add** and insert the following configuration:
+   #. Click on the **Attribute Mappings** tab, select the edit icon, click on **Add** and insert the following configuration:
 
       ``Roles`` = ``Group Names``
 
-      .. thumbnail:: /images/single-sign-on/pingone/04-click-on-the-attribute-mappings-tab.png
+      .. thumbnail:: /images/single-sign-on/pingone/04-click-attribute-mappings-tab.png
          :title: Click on the Attribute Mappings tab
          :align: center
          :width: 80%
@@ -414,19 +414,19 @@ PingOne Configuration
 
    #. Navigate to **Directory** > **Groups**, and click on the **+** sign. Select the name of the **Group**, in this case, ``wazuh-readonly``.
 
-      .. thumbnail:: /images/single-sign-on/pingone/05-navigate-to-identities-groups-ro.png
+      .. thumbnail:: /images/single-sign-on/pingone/12-navigate-identities-groups.png
          :title: Navigate to Identities > Groups
          :align: center
          :width: 80%
 
    #. To assign users, open the created **Group**, go to the **Users** tab and select **Add Individually**. Add all the members that must log in to the Wazuh dashboard, and click on **Save** when done.
 
-      .. thumbnail:: /images/single-sign-on/pingone/06-assign-users.png
+      .. thumbnail:: /images/single-sign-on/pingone/06-assign-users-group-page.png
          :title: Assign users
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/pingone/07-assign-users-ro.png
+      .. thumbnail:: /images/single-sign-on/pingone/13-assign-users-edit-users.png
          :title: Assign users
          :align: center
          :width: 80%
@@ -442,8 +442,8 @@ PingOne Configuration
 
    #. Take note of the following parameters from the overview page of the application, this will be used in the next step:
 
-      -  **ISSUER ID**: It'll be in the form "\https://auth.pingone.com/..."
-      -  **IDP METADATA URL**: It’ll be in the form "\https://auth.pingone.com/..."
+      -  **ISSUER ID**: It'll be in the form "\https://auth.pingone.com/...."
+      -  **IDP METADATA URL**: It'll be in the form "\https://auth.pingone.com/...."
 
       .. thumbnail:: /images/single-sign-on/pingone/09-take-note-of-parameters.png
          :title: Take note of parameters from the configuration page
@@ -471,17 +471,17 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
-#. Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command. Replace ``<PRIVATE_KEY>`` with your private key:
+#. Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to root:wazuh-indexer and the permissions to 640 using the following commands. Replace ``<PRIVATE_KEY>`` with your private key:
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/<PRIVATE_KEY>
+      # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/<PRIVATE_KEY>
+      # chmod 640 /etc/wazuh-indexer/opensearch-security/<PRIVATE_KEY>
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
-
-   - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
+   -  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28,29,30
@@ -521,13 +521,13 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-   - ``idp.metadata_url``
-   - ``idp.entity_id``
-   - ``sp.entity_id``
-   - ``sp.signature_private_key_filepath``
-   - ``kibana_url``
-   - ``roles_key``
-   - ``exchange_key``
+   -  ``idp.metadata_url``
+   -  ``idp.entity_id``
+   -  ``sp.entity_id``
+   -  ``sp.signature_private_key_filepath``
+   -  ``kibana_url``
+   -  ``roles_key``
+   -  ``exchange_key``
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file.
 
@@ -568,19 +568,19 @@ Wazuh dashboard configuration
    Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
       -  **Cluster permissions**: ``cluster_composite_ops_ro``
-      -  Index: ``*``
-      -  Index permissions: ``read``
+      -  **Index**: ``*``
+      -  **Index permissions**: ``read``
 
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the name of the group you created in PingOne and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -593,11 +593,10 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+      .. thumbnail:: /images/single-sign-on/pingone/10-wazuh-role-mapping.gif
          :title: Wazuh role mapping
-         :alt: Wazuh role mapping
          :align: center
          :width: 80%
 
@@ -606,18 +605,19 @@ Wazuh dashboard configuration
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``readonly``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field**: ``backend_roles``
-      -  **Search operation**: ``FIND``
-      -  **Value**: Assign the group name in PingOne configuration, in our case, this is ``wazuh-readonly``.
+      -  **User field:** ``backend_roles``
+      -  **Search operation:** ``FIND``
+      -  **Value:** Assign the group name in PingOne configuration, in our case, this is ``wazuh-readonly``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
 
-      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping-RO.png
+      .. thumbnail:: /images/single-sign-on/pingone/14-create-wazuh-role-mapping.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 
@@ -633,4 +633,4 @@ Wazuh dashboard configuration
 
 #. Test the configuration.
 
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Ping One account.
+   To test the configuration, go to your Wazuh dashboard URL and log in with your PingOne account.

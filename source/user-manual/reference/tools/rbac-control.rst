@@ -12,6 +12,8 @@ The ``rbac_control`` tool manages the Wazuh role-based access control (RBAC) dat
 
 Use this tool to change the passwords of the default RBAC users, create and seed the RBAC database, or restore the RBAC database to its default state.
 
+The default RBAC users are ``wazuh``, the superuser of the Wazuh manager API, and ``wazuh-internal-client``, the account the Wazuh dashboard uses to call the Wazuh manager API. ``wazuh-internal-client`` isn't a Wazuh dashboard login.
+
 On a worker node, ``change-password`` and ``factory-reset`` are forwarded to the master node. Neither command updates ``/etc/wazuh-manager/export/credentials.env``: after a change, the file keeps the previous passwords.
 
 Commands

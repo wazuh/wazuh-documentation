@@ -27,9 +27,11 @@ You can list and view basic information about all enrolled agents by navigating 
 List agents using the Wazuh manager API
 ---------------------------------------
 
-The :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` request returns a list of available Wazuh agents.
+The :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` request returns a list of available Wazuh agents. The first command stores a Wazuh manager API token in ``TOKEN``. Replace ``<WAZUH_MANAGER_API_USER>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with your Wazuh manager API credentials. The token expires after 900 seconds (15 minutes) by default, so get a new one if a request returns 401:
 
 .. code-block:: console
+
+   # TOKEN=$(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
 
    # curl -k -X GET "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?pretty=true&sort=-ip,name" -H  "Authorization: Bearer $TOKEN"
 

@@ -1,0 +1,45 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+   :description: Wazuh helps meet the HIPAA § 164.308(a)(5)(ii)(C) log-in monitoring requirement by monitoring SSH authentication activity with log data analysis.
+
+HIPAA § 164.308(a)(5)(ii)(C) - Log-in monitoring
+====================================================
+
+The HIPAA § 164.308(a)(5)(ii)(C) requirement states, "*Procedures for monitoring log-in attempts and reporting discrepancies.*"
+
+This requirement mandates monitoring log-in attempts to systems that contain electronic protected health information and reporting discrepancies.
+
+Wazuh helps meet this requirement through its log data analysis capability. The Logcollector module, which runs on the Wazuh agent, collects events from monitored endpoints and applications. The Wazuh agents forward these events to the Wazuh manager, where the normalization engine processes them. The Wazuh manager then sends the normalized data to the Wazuh indexer. The Wazuh indexer matches the normalized data against configured detection rules and indexes the resulting events. This process enables organizations to monitor authentication activity and identify suspicious or unauthorized access attempts.
+
+Use case: SSH authentication
+-------------------------------
+
+In this use case, Wazuh monitors SSH authentication activity on an Ubuntu 26.04 endpoint and generates findings for successful and failed authentication.
+
+Ubuntu endpoint
+^^^^^^^^^^^^^^^^
+
+#. From a different host, attempt an SSH login to the monitored Ubuntu endpoint with valid credentials. Replace ``<USERNAME>`` with an existing user on the endpoint and ``<ENDPOINT_IP>`` with the IP address of the Ubuntu endpoint:
+
+   .. code-block:: console
+
+      $ ssh <USERNAME>@<ENDPOINT_IP>
+
+#. From the same host, run the SSH login again and enter an incorrect password to generate a finding for the failed attempt.
+
+#. Navigate to **Threat intelligence** > **Threat Hunting** > **Findings** to see the findings on the Wazuh dashboard:
+
+   .. thumbnail:: /images/compliance/hipaa/ssh-authentication-finding.png
+      :title: Threat Hunting findings - SSH authentication
+      :alt: Threat Hunting findings - SSH authentication
+      :align: center
+      :width: 80%
+
+   The finding includes the username, timestamp, and authentication status (success or failure).
+
+   .. thumbnail:: /images/compliance/hipaa/ssh-authentication-finding-details.png
+      :title: Threat Hunting finding details - SSH authentication
+      :alt: Threat Hunting finding details - SSH authentication
+      :align: center
+      :width: 80%

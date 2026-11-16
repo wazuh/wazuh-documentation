@@ -41,7 +41,7 @@ This dashboard shows configuration assessment results, compliance status, failed
    :title: Configuration Assessment
    :alt: Configuration Assessment
 
-Malware detection
+Malware Detection
 ~~~~~~~~~~~~~~~~~
 
 This dashboard shows malware detection events, threat intelligence matches, malicious file activity, and other indicators of compromise detected on monitored endpoints.
@@ -52,7 +52,7 @@ This dashboard shows malware detection events, threat intelligence matches, mali
    :title: Malware detection
    :alt: Malware detection
 
-File integrity monitoring
+File Integrity Monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This dashboard shows file activity over time, monitored file inventory, and events related to changes in monitored files and directories.
@@ -66,7 +66,7 @@ This dashboard shows file activity over time, monitored file inventory, and even
 Threat intelligence
 ^^^^^^^^^^^^^^^^^^^
 
-This section of the Wazuh dashboard provides dashboards for threat intelligence capabilities, including threat hunting, MITRE ATT\&CK analysis, vulnerability detection, and case management. The **Case Management** dashboard shows investigation cases by status, severity, and priority on its **Cases** tab.
+This section of the Wazuh dashboard provides dashboards for threat intelligence capabilities, including threat hunting, MITRE ATT\&CK analysis, vulnerability detection, and case management. The **CTI Explorer** and **CTI Feed** pages show the content that Wazuh CTI delivers and its synchronization state.
 
 Threat Hunting
 ~~~~~~~~~~~~~~
@@ -79,7 +79,7 @@ This dashboard provides visibility into security events and suspicious activity 
    :title: Threat Hunting
    :alt: Threat Hunting
 
-Vulnerability detection
+Vulnerability Detection
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 This dashboard shows detected vulnerabilities, affected endpoints, severity levels, and remediation-related information across monitored systems.
@@ -89,6 +89,11 @@ This dashboard shows detected vulnerabilities, affected endpoints, severity leve
    :width: 80%
    :title: Vulnerability detection
    :alt: Vulnerability detection
+
+Case Management
+~~~~~~~~~~~~~~~
+
+This dashboard shows investigation cases by status, severity, and priority on its **Cases** tab.
 
 MITRE ATT\&CK
 ~~~~~~~~~~~~~
@@ -100,6 +105,38 @@ This dashboard maps detected security events and techniques to the MITRE ATT\&CK
    :width: 80%
    :title: MITRE ATT&CK
    :alt: MITRE ATT&CK
+
+CTI Feed
+~~~~~~~~
+
+This page shows your Wazuh CTI subscription, the synchronization state of the ruleset, indicators of compromise, and vulnerability feeds, and the content delivered. Click **Check for updates** to request a synchronization.
+
+**CTI Feed** is always in the menu. The **Subscription** panel shows the registration state, such as **Not registered**, and a **Register** button. When ``wazuh_check_updates.ctiRegistrationUiEnabled`` is ``true`` in ``/etc/wazuh-dashboard/opensearch_dashboards.yml``, the Wazuh dashboard also shows a bar that invites users to register. Its default value is ``false``.
+
+.. thumbnail:: /images/wazuh-dashboard/navigating/threat-intelligence-cti-feed.png
+   :align: center
+   :width: 80%
+   :title: CTI Feed
+   :alt: Threat intelligence > CTI Feed page with the Subscription panel showing Not registered and a Register button, the Feed sync panel, and the Feed content counts
+
+CTI Explorer
+~~~~~~~~~~~~
+
+This page shows the threat intelligence content that Wazuh CTI delivers to the Wazuh indexer. The **Overview** tab shows counts of indicator of compromise (IOC) records, providers, and CVE records, plus the number of rules, decoders, integrations, and KVDBs. The **IOCs** tab breaks down the IOC catalog by malware family, tag, provider, and type. The **Vulnerabilities** tab lists the CVE records.
+
+.. thumbnail:: /images/wazuh-dashboard/navigating/threat-intelligence-cti-explorer.png
+   :align: center
+   :width: 80%
+   :title: CTI Explorer
+   :alt: Threat intelligence > CTI Explorer Overview tab with the Check input and the IOC, provider, and CVE counts
+
+To check one value, type a domain, URL, IP address, ``host:port``, file hash, or CVE ID, and click **Check**. A match means that the value is in the feed. To find the events that match an IOC, click **Hunt in Threat Hunting** in the result. For a CVE, the result offers **Open the record** and **Full advisory on cti.wazuh.com**.
+
+.. thumbnail:: /images/wazuh-dashboard/navigating/threat-intelligence-cti-explorer-check.png
+   :align: center
+   :width: 80%
+   :title: CTI Explorer check result
+   :alt: Threat intelligence > CTI Explorer with a CVE ID typed in the Check input and the matching record in the result
 
 Security operations
 ^^^^^^^^^^^^^^^^^^^
@@ -117,7 +154,7 @@ This dashboard shows IT hygiene data, including system inventory information, in
    :title: IT Hygiene
    :alt: IT Hygiene
 
-Regulatory compliance
+Regulatory Compliance
 ~~~~~~~~~~~~~~~~~~~~~
 
 This dashboard shows compliance monitoring data mapped to regulatory frameworks: PCI DSS, CMMC, FedRAMP, GDPR, HIPAA, ISO 27001, NIS2, NIST 800-53, NIST 800-171, and TSC.
@@ -128,7 +165,7 @@ This dashboard shows compliance monitoring data mapped to regulatory frameworks:
    :title: Regulatory compliance
    :alt: Regulatory compliance
 
-Incident response
+Incident Response
 ~~~~~~~~~~~~~~~~~
 
 This dashboard shows incident response activity, including the actions that active response scripts perform on monitored endpoints. The image below shows the **Responses** tab with the responses recorded after an active response script ran on a monitored endpoint.
@@ -425,7 +462,7 @@ This section allows users to send queries using the Wazuh indexer API. It can be
 Settings
 ~~~~~~~~
 
-This section allows you to enable or disable indexing of raw events into the ``wazuh-events-raw-v5`` indices. The ``wazuh-events-raw-v5*`` index stores all events received from the Wazuh manager regardless of whether they trigger an alert. In Wazuh 4.x, similar data was stored in the ``wazuh-archives-*`` indices.
+This section allows you to enable or disable indexing of raw events into the ``wazuh-events-raw-v5`` indices. These indices store all events received from the Wazuh manager regardless of whether they trigger an alert. In Wazuh 4.x, similar data was stored in the ``wazuh-archives-*`` indices.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/settings-indexer.png
    :align: center

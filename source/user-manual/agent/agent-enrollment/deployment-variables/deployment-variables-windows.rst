@@ -9,7 +9,6 @@ Deployment variables for Windows
 Pass the variables as properties to the MSI package, then start the Wazuh agent. The installer doesn't start it. Replace ``<WAZUH_AGENT_MSI>`` with the file name of the package you downloaded. For more variables, such as ``WAZUH_AGENT_GROUP``, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>` table.
 
 .. code-block:: pwsh-session
-   :emphasize-lines: 1
 
    > (Start-Process msiexec.exe -ArgumentList '/i "<WAZUH_AGENT_MSI>" /q WAZUH_ENROLLMENT_TOKEN="<TOKEN>" WAZUH_AGENT_NAME="windows-server-01"' -Wait -PassThru).ExitCode
    > Start-Service -Name wazuh

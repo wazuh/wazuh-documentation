@@ -66,6 +66,12 @@ The following example changes the password using cURL:
 
       # TOKEN=$(curl -s -u wazuh:<WAZUH_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
 
+#. List the users to confirm the user IDs of ``wazuh-internal-client`` and ``wazuh``:
+
+   .. code-block:: console
+
+      # curl -s -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/users?pretty=true" -H "Authorization: Bearer $TOKEN"
+
 #. Change the ``wazuh-internal-client`` password (user ID 2) first and the ``wazuh`` password (user ID 1) last, replacing ``<NEW_WAZUH_INTERNAL_CLIENT_PASSWORD>`` and ``<NEW_WAZUH_PASSWORD>`` with the new passwords:
 
    .. code-block:: console

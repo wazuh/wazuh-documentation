@@ -34,28 +34,30 @@ Microsoft Entra ID Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Go to `Microsoft Azure Portal <https://portal.azure.com/>`__, sign up or sign in if you already have an Azure Portal account.
-#. Create an app in **Microsoft Entra ID**.
 
-   #. Go to **Microsoft Entra ID** > **Enterprise applications** > **New application** and **Create your own application**.
+#. Create an app in **Microsoft Entra ID**:
+
+   #. Go to **Microsoft Entra ID** > **Enterprise applications** > **New application** and **create your own application**:
+
    #. Select **Integrate any other application you don't find in the gallery**. Give a name to your application and click **Add**. In our case, we name this application ``wazuh-sso``.
 
-   .. thumbnail:: /images/single-sign-on/azure-active-directory/01-go-to-azure-active-directory.png
-      :title: Create an app in Microsoft Entra ID
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/01-create-app-own-application.png
+         :title: Create an app in Microsoft Entra ID
+         :align: center
+         :width: 80%
 
 #. Create a role for your application.
 
-   #. Go back to **Microsoft Entra ID** and click on **App registrations**.
+   #. Go back to **Microsoft Entra ID** and click on **App registrations**:
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/02-click-on-app-registrations.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/02-app-registrations-page.png
          :title: Click on App registrations
          :align: center
          :width: 80%
 
    #. Select your new app under **All applications** and click **App roles** > **Create app role**.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/03-select-your-new-apps.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/03-app-roles-create-app-role.png
          :title: Select your new app
          :align: center
          :width: 80%
@@ -63,12 +65,12 @@ Microsoft Entra ID Configuration
    #. Add the following details to your app role:
 
       -  **Display name**: This can be any value that you want. In our case this is ``Wazuh_role``.
-      -  **Allowed member types**: Select **Users/Groups**.
+      -  **Allowed member types**: Select ``Users/Groups``.
       -  **Value**: defines the name of the role. In this case ``Wazuh_role``, which will be the backend role for Wazuh role mapping.
       -  **Description**: This can be any value that you want. In our case this is ``Wazuh Admin Role``.
       -  **Do you want to enable this app role**: Click on the checkmark to enable the role.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/04-add-a-new-role.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/04-create-app-role-admin.png
          :title: Add a new role to your application's Manifest
          :align: center
          :width: 80%
@@ -77,59 +79,61 @@ Microsoft Entra ID Configuration
 
 #. Assign a user to the app.
 
-   #. In **Microsoft Entra ID**, go to **Enterprise applications**, select your application and then click on **Assign users and groups** (or **Users and Groups** in the panel to the left).
+   #. In **Microsoft Entra ID**, go to **Enterprise applications** > select your application and then click on **Assign users and groups** (or **Users and Groups** in the panel to the left):
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/05-assign-a-user-to-the-app.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/05-users-and-groups-add-user.png
          :title: Assign a user to the app
          :align: center
          :width: 80%
 
-   #. Go to **Add user/group**, assign a **user** and select the role we created in **App roles**. Click on Assign to save the configuration.
+   #. Go to **Add user/group**, assign a **user** and select the role we created in **App roles**. Click on **Assign** to save the configuration.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/06-click-on-add-user-group.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/06-add-assignment-admin-role.png
          :title: Click on Add user/group
          :align: center
          :width: 80%
 
 #. Configure Single sign-on.
 
-   #. Go to **Enterprise applications**, select your application and then click on **Set up single sign-on > SAML**.
+   #. Go to **Enterprise applications**, select your application and then click on **Set up single sign on** > **SAML**
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/07-configure-single-sign-on.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/07-enterprise-app-overview-sso.png
          :title: Configure Single sign-on
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/08-set-up-single-sign-on-SAML.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/08-single-sign-on-saml-method.png
          :title: Set up single sign-on > SAML
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/09-set-up-single-sign-on-SAML.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/09-saml-sign-on-basic-config.png
          :title: Set up single sign-on > SAML
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/10-set-up-single-sign-on-SAML.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/10-saml-certificates-set-up-section.png
          :title: Set up single sign-on > SAML
          :align: center
          :width: 80%
 
-   #. In option 1, under  **Basic SAML Configuration**, click **edit** and set ``wazuh-saml`` as **Identifier (Entity ID)**, ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` as **Reply URL (Assertion Consumer Service URL)**, and ``https://<WAZUH_DASHBOARD_URL>`` as **Sign on URL (Optional)**. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value. Save and proceed to the next step.
+   #. In option 1, under **Basic SAML Configuration**, click **edit** and set ``wazuh-saml`` as **Identifier (Entity ID)**, ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` as **Reply URL (Assertion Consumer Service URL)**, and ``https://<WAZUH_DASHBOARD_URL>`` as **Sign on URL (Optional)**. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value. Save and proceed to the next step.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/11-click-edit-and-set-wazuh-saml.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/11-basic-saml-configuration-edited.png
          :title: Click edit and set wazuh-saml
          :align: center
          :width: 80%
 
    #. In option 2 under **Attributes & Claims**, click **edit** and select **Add new claim**. Select **Roles** as the name and **user.assignedroles** as **Source attribute**. This claim will be mapped with ``roles_key`` on the Wazuh indexer configuration.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/12-click-edit-and-select-add-new-claim.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/12-manage-claim-roles.png
          :title: Click edit and select Add new claim
          :align: center
          :width: 80%
 
-#. Note the necessary parameters. In the **Enterprise applications** menu, select your application and then click on **Single sign-on**. Note some parameters that will be used in the Wazuh indexer configuration.
+#. Note the necessary parameters.
+
+   In the **Enterprise applications** menu, select your application and then click on **Single sign-on**. Note some parameters that will be used in the Wazuh indexer configuration.
 
    -  In option 3 **SAML Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
    -  In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID Identifier** will be our ``idp.entity_id``.
@@ -157,9 +161,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
-
-   - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
+   -  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
@@ -197,12 +200,12 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-   - ``idp.metadata_url``
-   - ``idp.entity_id``
-   - ``sp.entity_id``
-   - ``kibana_url``
-   - ``roles_key``
-   - ``exchange_key``
+   -  ``idp.metadata_url``
+   -  ``idp.entity_id``
+   -  ``sp.entity_id``
+   -  ``kibana_url``
+   -  ``roles_key``
+   -  ``exchange_key``
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file.
 
@@ -227,7 +230,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Number of nodes: 1
       Number of data nodes: 1
       .opendistro_security index already exists, so we do not need to create one.
-      Populate config from /home/wazuh-user
+      Populate config from /home/wazuh
       Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml
          SUCC: Configuration for 'config' created or updated
       SUCC: Expected 1 config types for node {"updated_config_types":["config"],"updated_config_size":1,"message":null} is 1 (["config"]) due to: null
@@ -285,7 +288,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -298,31 +301,31 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-   .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+   .. thumbnail:: /images/single-sign-on/azure-active-directory/13-wazuh-role-mapping-page.gif
       :title: Wazuh role mapping
-      :alt: Wazuh role mapping
       :align: center
       :width: 80%
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
 
-      - **Role mapping name**: Assign a name to the role mapping.
-      - **Roles**: Select ``administrator``.
-      - **Custom rules**: Click **Add new rule** to expand this field.
-      - **User field**: ``backend_roles``
-      - **Search operation**: ``FIND``
-      - **Value**: Assign the backend role from the Microsoft Entra ID configuration, in our case, this is ``Wazuh_role``.
-      - Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*.
+      -  **Role mapping name**: Assign a name to the role mapping.
+      -  **Roles**: Select ``administrator``.
+      -  **Custom rules**: Click **Add new rule** to expand this field.
+      -  **User field**: ``backend_roles``
+      -  **Search operation**: ``FIND``
+      -  **Value**: Assign the backend role from the Microsoft Entra ID configuration, in our case, this is ``Wazuh_role``.
+      -  Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/Wazuh-role-mapping.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/14-create-wazuh-role-mapping-admin.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 
@@ -358,30 +361,31 @@ Follow these steps to integrate Microsoft Entra ID IdP with Wazuh for single sig
 Microsoft Entra ID Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Go to `Microsoft Azure Portal <https://portal.azure.com/>`_, sign up or sign in if you already have an Azure Portal account.
-#. Create an app in **Microsoft Entra ID**.
+#. Go to `Microsoft Azure Portal <https://portal.azure.com/>`__, sign up or sign in if you already have an Azure Portal account.
 
-   #. Go to **Microsoft Entra ID** > **Enterprise applications** > **New application** and **Create your own application**.
+#. Create an app in **Microsoft Entra ID**:
+
+   #. Go to **Microsoft Entra ID** > **Enterprise applications** > **New application** and **create your own application**:
 
    #. Select **Integrate any other application you don't find in the gallery**. Give a name to your application and click **Add**. In our case, we name this application ``wazuh-sso``.
 
-   .. thumbnail:: /images/single-sign-on/azure-active-directory/01-go-to-azure-active-directory.png
-      :title: Create an app in Microsoft Entra ID
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/15-create-app-own-application-readonly.png
+         :title: Create an app in Microsoft Entra ID
+         :align: center
+         :width: 80%
 
 #. Create a role for your application.
 
-   #. Go back to **Microsoft Entra ID** and click on **App registrations**.
+   #. Go back to **Microsoft Entra ID** and click on **App registrations**:
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/02-click-on-app-registrations-RO.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/16-app-registrations-page-readonly.png
          :title: Click on App registrations
          :align: center
          :width: 80%
 
    #. Select your new app under **All applications** and click **App roles** > **Create app role**.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/03-select-your-new-apps.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/03-app-roles-create-app-role.png
          :title: Select your new app
          :align: center
          :width: 80%
@@ -394,69 +398,73 @@ Microsoft Entra ID Configuration
       -  **Description**: This can be any value that you want. In our case this is ``Wazuh Read Only Role``.
       -  **Do you want to enable this app role**: Click on the checkmark to enable the role.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/04-create-app-roles-RO.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/17-create-app-role-readonly.png
+         :title: Create app role
+         :align: center
+         :width: 80%
 
    #. Click **Apply** to save the changes and proceed to the next step.
 
 #. Assign a user to the app.
 
-   #. In **Microsoft Entra ID**, go to **Enterprise applications**, select your application and then click on **Assign users and groups** (or **Users and Groups** in the panel to the left).
+   #. In **Microsoft Entra ID**, go to **Enterprise applications** > select your application and then click on **Assign users and groups** (or **Users and Groups** in the panel to the left):
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/05-assign-a-user-to-the-app-RO.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/18-users-and-groups-add-user-readonly.png
          :title: Assign a user to the app
          :align: center
          :width: 80%
 
    #. Go to **Add user/group**, assign a **user** and select the role we created in **App roles**. Click on **Assign** to save the configuration.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/06-click-on-add-user-group-RO.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/19-add-assignment-readonly-role.png
          :title: Click on Add user/group
          :align: center
          :width: 80%
 
 #. Configure Single sign-on.
 
-   #. Go to **Enterprise applications**, select your application and then click on **Set up single sign-on > SAML**.
+   #. Go to **Enterprise applications**, select your application and then click on **Set up single sign on** > **SAML**
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/07-configure-single-sign-on-RO.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/20-enterprise-app-overview-sso-readonly.png
          :title: Configure Single sign-on
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/08-set-up-single-sign-on-SAML-RO.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/21-single-sign-on-saml-method-readonly.png
          :title: Set up single sign-on > SAML
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/09-set-up-single-sign-on-SAML-RO.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/22-saml-sign-on-basic-config-readonly.png
          :title: Set up single sign-on > SAML
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/10-set-up-single-sign-on-SAML-RO.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/23-saml-certificates-set-up-readonly.png
          :title: Set up single sign-on > SAML
          :align: center
          :width: 80%
 
-   #. In option 1, under  **Basic SAML Configuration**, click **edit** and set ``wazuh-saml`` as **Identifier (Entity ID)**, ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` as **Reply URL (Assertion Consumer Service URL)**, and ``https://<WAZUH_DASHBOARD_URL>`` as **Sign on URL (Optional)**. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value. Save and proceed to the next step.
+   #. In option 1, under **Basic SAML Configuration**, click **edit** and set ``wazuh-saml`` as **Identifier (Entity ID)**, ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` as **Reply URL (Assertion Consumer Service URL)**, and ``https://<WAZUH_DASHBOARD_URL>`` as **Sign on URL (Optional)**. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value. Save and proceed to the next step.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/11-click-edit-and-set-wazuh-saml-RO.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/11-basic-saml-configuration-edited.png
          :title: Click edit and set wazuh-saml
          :align: center
          :width: 80%
 
    #. In option 2 under **Attributes & Claims**, click **edit** and select **Add new claim**. Select **Roles** as the name and **user.assignedroles** as **Source attribute**. This claim will be mapped with ``roles_key`` on the Wazuh indexer configuration.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/12-click-edit-and-select-add-new-claim.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/12-manage-claim-roles.png
          :title: Click edit and select Add new claim
          :align: center
          :width: 80%
 
-#. Note the necessary parameters. In the **Enterprise applications** menu, select your application and then click on **Single sign-on**. Note some parameters that will be used in the Wazuh indexer configuration.
+#. Note the necessary parameters.
 
-   - In option 3 **SAML Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
+   In the **Enterprise applications** menu, select your application and then click on **Single sign-on**. Note some parameters that will be used in the Wazuh indexer configuration.
 
-   - In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID Identifier** will be our ``idp.entity_id``.
+   -  In option 3 **SAML Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
+   -  In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID Identifier** will be our ``idp.entity_id``.
 
 .. _indexer_configuration_entra_id_ro:
 
@@ -481,9 +489,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
-
-   - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+   -  Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
+   -  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
@@ -521,12 +528,12 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-   - ``idp.metadata_url``
-   - ``idp.entity_id``
-   - ``sp.entity_id``
-   - ``kibana_url``
-   - ``roles_key``
-   - ``exchange_key``
+   -  ``idp.metadata_url``
+   -  ``idp.entity_id``
+   -  ``sp.entity_id``
+   -  ``kibana_url``
+   -  ``roles_key``
+   -  ``exchange_key``
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file.
 
@@ -562,21 +569,24 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create a new role mapping for the backend role. Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
+#. Create a new role mapping for the backend role.
+
+   Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
       -  **Cluster permissions**: ``cluster_composite_ops_ro``
       -  **Index**: ``*``
       -  **Index permissions**: ``read``
+
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the value attribute of the app role you created in Microsoft Entra ID and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -589,31 +599,31 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/13-wazuh-role-mapping-page.gif
          :title: Wazuh role mapping
-         :alt: Wazuh role mapping
          :align: center
          :width: 80%
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
 
-      - **Role mapping name**: Assign a name to the role mapping.
-      - **Roles**: Select ``readonly``.
-      - **Custom rules**: Click **Add new rule** to expand this field.
-      - **User field**: ``backend_roles``
-      - **Search operation**: ``FIND``
-      - **Value**: Assign the value attribute of the app role you created  in Microsoft Entra ID, in our case, this is ``wazuh-readonly``.
+      -  **Role mapping name**: Assign a name to the role mapping.
+      -  **Roles**: Select ``readonly``.
+      -  **Custom rules**: Click **Add new rule** to expand this field.
+      -  **User field**: ``backend_roles``
+      -  **Search operation**: ``FIND``
+      -  **Value**: Assign the value attribute of the app role you created in Microsoft Entra ID, in our case, this is ``wazuh-readonly``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/Wazuh-role-mapping-RO.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/24-create-wazuh-role-mapping-readonly.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 

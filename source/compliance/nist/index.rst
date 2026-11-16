@@ -24,7 +24,7 @@ Wazuh includes default rules and decoders for detecting security incidents, syst
        - IA-5
        - AU-6
 
-Refer to the :doc:`Rules </user-manual/data-analysis/rules>` section for more information.
+Refer to the :doc:`Rules </user-manual/data-analysis/rules>` section for more information. To create a custom rule and put it into production, see :ref:`Create a custom rule <data_analysis_create_custom_rule>`.
 
 .. note::
 

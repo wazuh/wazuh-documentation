@@ -185,7 +185,7 @@ File example:
 log_analytics\\tenantdomain
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A tenant is simply a dedicated instance of Microsoft Entra ID (ME-ID). The Azure Log Analytics API uses the Microsoft Entra ID authentication scheme.
+Domain of the Microsoft Entra ID tenant, for example ``wazuh.onmicrosoft.com``. It is shown as **Primary domain** on the **Overview** page of Microsoft Entra ID in the Azure portal. The Azure Log Analytics API uses the Microsoft Entra ID authentication scheme.
 
 +----------------------+--------------+
 | **Default value**    | N/A          |
@@ -296,7 +296,7 @@ Example of log_analytics configuration
 graph
 ^^^^^
 
-This block configures the integration with Azure Active Directory Graph REST API.
+This block configures the integration with the Microsoft Graph API.
 
 - `graph\\application_id`_
 - `graph\\application_key`_
@@ -307,7 +307,7 @@ This block configures the integration with Azure Active Directory Graph REST API
 graph\\application_id
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Identifier of the application that we will use for the authentication and to be able to use the Azure Active Directory Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
+Identifier of the application that we will use for the authentication and to be able to use the Microsoft Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +----------------------+--------------+
 | **Default value**    | N/A          |
@@ -318,7 +318,7 @@ Identifier of the application that we will use for the authentication and to be 
 graph\\application_key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Key to the application we will use for authentication and to be able to use the Azure Active Directory Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
+Key to the application we will use for authentication and to be able to use the Microsoft Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +----------------------+--------------+
 | **Default value**    | N/A          |
@@ -329,7 +329,7 @@ Key to the application we will use for authentication and to be able to use the 
 graph\\auth_path
 ~~~~~~~~~~~~~~~~~~~~
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the Azure Active Directory Graph API. Incompatible with the ``application_id`` and ``application_key`` options.
+Path of the file that contains the application identifier and the application key for authentication in order to use the Microsoft Graph API. Incompatible with the ``application_id`` and ``application_key`` options.
 
 +----------------------+-------------+
 | **Default value**    | N/A         |
@@ -340,7 +340,7 @@ Path of the file that contains the application identifier and the application ke
 graph\\tenantdomain
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-A tenant is simply a dedicated instance of Microsoft Entra ID (ME-ID) because it uses the Microsoft Entra ID authentication scheme.
+Domain of the Microsoft Entra ID tenant, for example ``wazuh.onmicrosoft.com``. It is shown as **Primary domain** on the **Overview** page of Microsoft Entra ID in the Azure portal. The Microsoft Graph API uses the Microsoft Entra ID authentication scheme.
 
 +----------------------+--------------+
 | **Default value**    | N/A          |

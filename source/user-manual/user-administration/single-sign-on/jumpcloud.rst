@@ -34,7 +34,7 @@ JumpCloud Configuration
 
    #. Go to **User Management**, click on **Users** > **+ Users** >  **Manual User Creation**, fill in the user information, activate the user and click on **Save user**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/01-go-to-user-management-and-click-on-users.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/01-go-user-management-users.png
          :title: Go to User Management and click on Users
          :align: center
          :width: 80%
@@ -43,7 +43,7 @@ JumpCloud Configuration
 
    #. Go to **User Management** > **User Groups** > **(+)** and give a name to the group. In our case, this is ``wazuh-admins``.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/02-go-to-user-management-user-groups.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/02-user-groups-page.png
          :title: Go to User Management - User Groups
          :align: center
          :width: 80%
@@ -52,7 +52,7 @@ JumpCloud Configuration
 
    #. In the selected **User Groups**,  go to the **Users** tab, select the newly created user and click **Save Group**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/03-go-to-users-tab.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/03-users-tab-select-user.png
          :title: Go to the Users tab and select the newly created user
          :align: center
          :width: 80%
@@ -61,12 +61,12 @@ JumpCloud Configuration
 
    #. Under **Access**, go to **SSO Applications** > **Get Started** and select **Custom Application**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/04-add-sso-application.png
          :title: Add new SSO application
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/05-select-custom-app.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/05-select-custom-application.png
          :title: Select custom application
          :align: center
          :width: 80%
@@ -76,29 +76,25 @@ JumpCloud Configuration
       -  Click **Next** on the **Select Application** page.
       -  Check the **Manage Single Sign-On (SSO)** and **Configure SSO with SAML** options on the **Select Options** page. Click **Next** to proceed to the next step.
       -  Assign a **Display Label** to the application, and click the **Show this application in User Portal** checkbox on the **Enter General Info** page. Click **Save Application** to apply the settings.
-      -  Click **Configure Application** on the Review page.
+      -  Click **Configure Application** on the **Review** page.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/06-select-application.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/06-custom-application-selected.png
          :title: Custom application selected
-         :alt: Custom application selected
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/07-select-manage-sso.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/07-configure-sso-options.png
          :title: Configure SSO options
-         :alt: Configure SSO options
          :align: center
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/08-enter-general-info.png
          :title: Enter general info
-         :alt: Enter general info
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/09-go-to-review.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/09-confirm-application-integration.png
          :title: Confirm new application integration
-         :alt: Confirm new application integration
          :align: center
          :width: 80%
 
@@ -107,27 +103,27 @@ JumpCloud Configuration
       -  **IdP Entity ID**: ``wazuh`` (this will be the ``idp.entity_id`` in our Wazuh indexer configuration).
       -  **SP Entity ID**: ``wazuh-saml`` (this will be the ``sp.entity_id`` in our Wazuh indexer configuration).
       -  **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      -  Check **Assertion** under **Sign**.
+      -  Check **Assertion** under **Sign.**
       -  Check **Declare Redirect Endpoint**.
       -  Check **include group attribute** and add **Roles** as the attribute. This will be used later in the Wazuh indexer configuration file.
       -  Leave the rest of the options as their default values and click **Save**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/10-complete-the-sso-tab.png
-          :title: Complete the SSO tab
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/10-sso-tab-entity-ids-acs.png
+         :title: Complete the SSO tab
+         :align: center
+         :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/11-complete-the-sso-tab.png
-          :title: Complete the SSO tab
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/11-sso-tab-sign-assertion-group.png
+         :title: Complete the SSO tab
+         :align: center
+         :width: 80%
 
    #. On the **User Groups** tab, select the **Group** created previously and click **Save**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/14-on-the-user-groups-tab.png
-          :title: On the User Groups tab, select the Group created previously
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/12-user-groups-tab-select-group.png
+         :title: On the User Groups tab, select the Group created previously
+         :align: center
+         :width: 80%
 
 #. Note the necessary parameters from the SAML settings of the new app.
 
@@ -141,7 +137,7 @@ JumpCloud Configuration
 
    To obtain the remaining parameter, open the recently created application, go to the **SSO** tab and copy the Metadata URL.
 
-   .. thumbnail:: /images/single-sign-on/jumpcloud/15-go-to-the-sso-tab.png
+   .. thumbnail:: /images/single-sign-on/jumpcloud/13-export-metadata.png
       :title: Go to the SSO tab and select Export Metadata
       :align: center
       :width: 80%
@@ -298,7 +294,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -311,11 +307,10 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+      .. thumbnail:: /images/single-sign-on/jumpcloud/14-wazuh-role-mapping.gif
          :title: Wazuh role mapping
-         :alt: Wazuh role mapping
          :align: center
          :width: 80%
 
@@ -324,18 +319,19 @@ Wazuh dashboard configuration
       - **Role mapping name**: Assign a name to the role mapping.
       - **Roles**: Select ``administrator``.
       - **Custom rules**: Click **Add new rule** to expand this field.
-      - **User field**: ``backend_roles``
-      - **Search operation**: ``FIND``
-      - **Value**: Assign the name of the JumpCloud user group. In our case, this is ``wazuh-admins``.
-      - Click **Save role mapping** to save and map the backend role with Wazuh as administrator.
+      - **User field:** ``backend_roles``
+      - **Search operation:** ``FIND``
+      - **Value:** Assign the name of the JumpCloud user group. In our case, this is ``wazuh-admins``.
+      - Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/Wazuh-role-mapping.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/15-create-wazuh-role-mapping.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 
@@ -372,7 +368,7 @@ JumpCloud Configuration
 
    #. Go to **User Management**, click on **Users** > **+ Users** >  **Manual User Creation**, fill in the user information, activate the user and click on **Save user**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/01-go-to-user-management-and-click-on-users.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/01-go-user-management-users.png
          :title: Go to User Management and click on Users
          :align: center
          :width: 80%
@@ -381,91 +377,87 @@ JumpCloud Configuration
 
    #. Go to **User Management** > **User Groups** > **(+)** and give a name to the group. In our case, this is ``wazuh-readonly``.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/02-go-to-user-management-user-groups.png
-          :title: Go to User Management - User Groups
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/02-user-groups-page.png
+         :title: Go to User Management - User Groups
+         :align: center
+         :width: 80%
 
       The group name will be used as the ``backend_roles`` for Wazuh role mapping.
 
    #. In the selected **User Groups**,  go to the **Users** tab, select the newly created user and click **Save Group**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/03-go-to-users-tab-ro.png
-          :title: Go to the Users tab and select the newly created user
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/16-users-tab-select-user-read-only.png
+         :title: Go to the Users tab and select the newly created user
+         :align: center
+         :width: 80%
 
 #. Create a new app. Configure the SAML settings while you create the app.
 
    #. Under **Access**, go to **SSO Applications** > **Get Started** and select **Custom Application**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
-          :title: Add new SSO application
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/04-add-sso-application.png
+         :title: Add new SSO application
+         :align: center
+         :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/05-select-custom-app.png
-          :title: Select custom application
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/05-select-custom-application.png
+         :title: Select custom application
+         :align: center
+         :width: 80%
 
    #. Complete the **Create New Application Integration** page with the appropriate information.
 
-      #. Click **Next** on the **Select Application** page.
-      #. Check the **Manage Single Sign-On (SSO)** and **Configure SSO with SAML** options on the **Select Options** page. Click **Next** to proceed to the next step.
-      #. Assign a **Display Label** to the application, and click the **Show this application in User Portal** checkbox on the **Enter General Info** page. Click **Save Application** to apply the settings.
-      #. Click **Configure Application** on the **Review page**.
+      -  Click **Next** on the **Select Application** page.
+      -  Check the **Manage Single Sign-On (SSO)** and **Configure SSO with SAML** options on the **Select Options** page. Click **Next** to proceed to the next step.
+      -  Assign a **Display Label** to the application, and click the **Show this application in User Portal** checkbox on the **Enter General Info** page. Click **Save Application** to apply the settings.
+      -  Click **Configure Application** on the **Review** page.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/06-select-application.png
-          :title: Custom application selected
-          :alt: Custom application selected
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/06-custom-application-selected.png
+         :title: Custom application selected
+         :align: center
+         :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/07-select-manage-sso.png
-          :title: Configure SSO options
-          :alt: Configure SSO options
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/07-configure-sso-options.png
+         :title: Configure SSO options
+         :align: center
+         :width: 80%
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/08-enter-general-info.png
-          :title: Enter general info
-          :alt: Enter general info
-          :align: center
-          :width: 80%
+         :title: Enter general info
+         :align: center
+         :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/09-go-to-review.png
-          :title: Confirm new application integration
-          :alt: Confirm new application integration
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/09-confirm-application-integration.png
+         :title: Confirm new application integration
+         :align: center
+         :width: 80%
 
    #. Complete the SSO tab with the appropriate information.
 
       - **IdP Entity ID**: ``wazuh`` (this will be the ``idp.entity_id`` in our Wazuh indexer configuration).
       - **SP Entity ID**: ``wazuh-saml`` (this will be the ``sp.entity_id`` in our Wazuh indexer configuration).
       - **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      - Check **Assertion** under **Sign**.
+      - Check **Assertion** under **Sign.**
       - Check **Declare Redirect Endpoint**.
       - Check **include group attribute** and add **Roles** as the attribute. This will be used later in the Wazuh indexer configuration file.
       - Leave the rest of the options as their default values and click **Save**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/10-complete-the-sso-tab.png
-          :title: Complete the SSO tab
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/10-sso-tab-entity-ids-acs.png
+         :title: Complete the SSO tab
+         :align: center
+         :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/11-complete-the-sso-tab.png
-          :title: Complete the SSO tab
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/11-sso-tab-sign-assertion-group.png
+         :title: Complete the SSO tab
+         :align: center
+         :width: 80%
 
    #. On the **User Groups** tab, select the **Group** created previously and click **Save**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/09-on-the-user-groups-tab-RO.png
-          :title: On the User Groups tab, select the Group created previously
-          :align: center
-          :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/17-user-groups-tab-read-only-group.png
+         :title: On the User Groups tab, select the Group created previously
+         :align: center
+         :width: 80%
 
 #. Note the necessary parameters from the SAML settings of the new app.
 
@@ -479,7 +471,7 @@ JumpCloud Configuration
 
    To obtain the remaining parameter, open the recently created application, go to the **SSO** tab and copy the Metadata URL.
 
-   .. thumbnail:: /images/single-sign-on/jumpcloud/15-go-to-the-sso-tab.png
+   .. thumbnail:: /images/single-sign-on/jumpcloud/13-export-metadata.png
       :title: Go to the SSO tab and select Export Metadata
       :align: center
       :width: 80%
@@ -589,10 +581,12 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create a new role mapping for the backend role. Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
+#. Create a new role mapping for the backend role.
+
+   Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
@@ -601,9 +595,9 @@ Wazuh dashboard configuration
       -  **Index permissions**: ``read``
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
-   #. Under **Backend roles**, add the name of the group you created in JumpCloud  and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
+   #. Under **Backend roles**, add the name of the group you created in JumpCloud and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -616,31 +610,31 @@ Wazuh dashboard configuration
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-   .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
-      :title: Wazuh role mapping
-      :alt: Wazuh role mapping
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/jumpcloud/14-wazuh-role-mapping.gif
+         :title: Wazuh role mapping
+         :align: center
+         :width: 80%
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
 
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``readonly``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field**: ``backend_roles``
-      -  **Search operation**: ``FIND``
-      -  **Value**: Assign the name of the group you created in JumpCloud. In our case, the backend role is ``wazuh-readonly``.
+      -  **User field:** ``backend_roles``
+      -  **Search operation:** ``FIND``
+      -  **Value:** Assign the name of the group you created in JumpCloud. In our case, the backend role is ``wazuh-readonly``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
 
-      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping-RO.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/18-create-wazuh-role-mapping-read-only.png
          :title: Create Wazuh role mapping
-         :alt: Create Wazuh role mapping
          :align: center
          :width: 80%
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console
 

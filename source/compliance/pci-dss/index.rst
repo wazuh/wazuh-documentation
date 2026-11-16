@@ -18,7 +18,7 @@ Wazuh helps you meet PCI DSS compliance by performing log data analysis, configu
 
 To view the PCI DSS-related data on the Wazuh dashboard:
 
-#. Click the menu icon, then navigate to **Security operations** > **Regulatory Compliance** > **PCI DSS**.
+#. Open the menu (**☰**) and go to **Security operations** > **Regulatory Compliance**, then click **PCI DSS**.
 
    .. thumbnail:: /images/compliance/pci/overview-regulatory-compliance-pci-dss.png
       :title: Wazuh Overview dashboard
@@ -58,6 +58,8 @@ Wazuh has standard policies that include decoders, Key-Value Databases (KVDBs), 
      pci_dss:
        - "2.2.1"
        - "6.3.3"
+
+To create a custom rule and put it into production, see :ref:`Create a custom rule <data_analysis_create_custom_rule>`.
 
 The `Wazuh for PCI DSS V4.0 Guide (PDF) <https://wazuh.com/resources/WAZUH-PCI_DSS-V4.0-guide-V2.0.pdf>`__ explains how Wazuh capabilities and modules assist with meeting PCI DSS 4.0 requirements.
 

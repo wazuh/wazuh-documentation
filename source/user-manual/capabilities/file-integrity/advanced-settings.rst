@@ -809,7 +809,7 @@ Example: Monitor changes in a text file on Windows
 
 Perform the following steps to configure the FIM module to monitor changes to a text file and collect information about the user and process responsible for the changes.
 
-#. Edit the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the ``Documents`` directory for FIM monitoring inside the ``<ossec_config>`` block. Replace ``<USER_NAME>`` with the name of the user whose Documents folder you monitor. Monitoring ``C:\Users\*\Documents`` also matches system profiles that the Wazuh agent can't audit, which fills the Wazuh agent log with ``Access is denied`` warnings. The configuration enables who-data monitoring for changes to monitored files:
+#. Edit the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the ``Documents`` directory for FIM monitoring inside the ``<ossec_config>`` block. Replace ``<USER_NAME>`` with the name of the user whose Documents folder you monitor. Monitoring ``C:\Users\*\Documents`` also matches system profiles that the Wazuh agent can't audit, which fills the Wazuh agent log with ``Access is denied`` warnings. With a single user's folder, the Wazuh agent still logs a few of these warnings when it starts, for the My Music, My Pictures, and My Videos links inside Documents. You can ignore them. The configuration enables who-data monitoring for changes to monitored files:
 
    .. code-block:: xml
 
@@ -840,7 +840,7 @@ Navigate to **Endpoint security → File Integrity Monitoring → Findings** on 
   :align: center
   :width: 80%
 
-Expand the finding to view all the information. In the finding fields below, you can see that the ``admin`` user modified the ``audit_docu.txt`` file using the Notepad text editor.
+Expand the finding to view all the information. In the finding fields below, you can see that the ``test`` user modified the ``audit_docu.txt`` file using the Notepad text editor.
 
 .. thumbnail:: /images/manual/fim/windows-whodata-finding-expanded.png
   :title: Windows whodata finding expanded
