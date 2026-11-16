@@ -22,7 +22,7 @@ Use case
 Detect Credential Manager credential listing on Windows endpoints
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh detects the listing of credentials stored in Windows Credential Manager, which is the observation of suspicious activity that SI-4 System monitoring requires. Attackers list these credentials to find passwords they can reuse. In this scenario, Wazuh detects the ``vaultcmd /list`` command on a monitored Windows 11 endpoint.
+SI-4 System monitoring requires you to observe suspicious activity on your systems. Wazuh helps meet this control by detecting the listing of credentials stored in Windows Credential Manager. Attackers list these credentials to find passwords they can reuse. In this scenario, Wazuh detects the ``vaultcmd /list`` command on a monitored Windows 11 endpoint.
 
 .. note::
 

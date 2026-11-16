@@ -18,7 +18,7 @@ Wazuh helps you meet PCI DSS compliance by performing log data analysis, configu
 
 To view the PCI DSS-related data on the Wazuh dashboard:
 
-#. Click the menu icon, then navigate to **Security operations** > **Regulatory Compliance** > **PCI DSS**.
+#. Open the menu (**☰**) and go to **Security operations** > **Regulatory Compliance**, then click **PCI DSS**.
 
    .. thumbnail:: /images/compliance/pci/overview-regulatory-compliance-pci-dss.png
       :title: Wazuh Overview dashboard

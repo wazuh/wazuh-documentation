@@ -12,7 +12,7 @@ The Wazuh Syscollector module helps to meet the following PCI DSS requirement:
 
 -  **Requirement 2 - Apply Secure Configurations to All System Components**: This requirement mandates applying secure configurations to system components to reduce exposure to vendor defaults commonly exploited by malicious individuals. Default passwords and settings are widely known and easily obtained. Secure configurations such as changing default credentials, removing unnecessary software and accounts, and disabling unused services reduce the available attack surface.
 
-The Wazuh Syscollector module satisfies this requirement by maintaining an inventory of endpoint configurations. It discovers active processes, system daemons, hardware specifications, operating system details, network settings, and running services. Additionally, it audits installed browser extensions, user accounts, and local groups. This centralized inventory grants organizations complete visibility into PCI DSS-relevant assets, active network ports, and running software. It enables administrators to systematically identify and remove unauthorized services or default configurations.
+The Wazuh Syscollector module helps meet this requirement by maintaining an inventory of endpoint configurations. It discovers active processes, system daemons, hardware specifications, operating system details, network settings, and running services. Additionally, it audits installed browser extensions, user accounts, and local groups. This centralized inventory grants organizations complete visibility into PCI DSS-relevant assets, active network ports, and running software. It enables administrators to systematically identify and remove unauthorized services or default configurations.
 
 Use case
 --------
