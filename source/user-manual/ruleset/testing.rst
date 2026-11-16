@@ -22,6 +22,10 @@ With ``/var/ossec/bin/wazuh-logtest``, you can:
 
 It also has a ``firedtimes`` counter which keeps track of all the matching occurrences of the rules and maintains these counters throughout the duration of the session.
 
+.. note::
+
+   ``/var/ossec/bin/wazuh-logtest`` doesn't decode Windows events collected with the ``eventchannel`` log format. The Wazuh analysis engine processes these events with the built-in ``windows_eventchannel`` decoder, which ``/var/ossec/bin/wazuh-logtest`` doesn't run. As a result, a Windows event pasted into ``/var/ossec/bin/wazuh-logtest`` doesn't match rule ``60000`` or its child rules, even if the same event generates the expected alert on the Wazuh server. To test rules for these events, see :ref:`testing_windows_eventchannel_logs`.
+
 Configuration
 -------------
 
@@ -148,6 +152,37 @@ If you paste the log six more times, you can see that rule id ``5710`` "sshd: At
    	pci_dss: '["11.4","10.2.4","10.2.5"]'
    	tsc: '["CC6.1","CC6.8","CC7.2","CC7.3"]'
    **Alert to be generated.
+
+.. _testing_windows_eventchannel_logs:
+
+Testing rules for Windows event channel logs
+--------------------------------------------
+
+To test rules for Windows events with ``/var/ossec/bin/wazuh-logtest``, temporarily change the base Windows rule ``60000`` so that it matches events decoded as JSON.
+
+.. warning::
+
+   Make this change only for testing and don't restart the Wazuh manager while it's in place. If the Wazuh manager restarts with this change, it stops generating alerts for Windows events received from Wazuh agents until you revert the change and restart the Wazuh manager.
+
+#. Get the Windows event that you want to test in JSON format. For example, :ref:`enable archiving <archiving_event_logs>` and copy the ``full_log`` value of the event from the ``/var/ossec/logs/archives/archives.json`` file. The event must be on a single line.
+
+#. Edit rule ``60000`` in the ``/var/ossec/ruleset/rules/0575-win-base_rules.xml`` file. Comment out the ``<category>`` and ``<decoded_as>`` options and add ``<decoded_as>json</decoded_as>``:
+
+   .. code-block:: xml
+      :emphasize-lines: 2-4
+
+      <rule id="60000" level="0">
+        <!-- <category>ossec</category> -->
+        <!-- <decoded_as>windows_eventchannel</decoded_as> -->
+        <decoded_as>json</decoded_as>
+        <field name="win.system.providerName">\.+</field>
+        <options>no_full_log</options>
+        <description>Group of windows rules.</description>
+      </rule>
+
+#. Run ``/var/ossec/bin/wazuh-logtest`` and paste the event. You don't need to restart the Wazuh manager because each new ``/var/ossec/bin/wazuh-logtest`` session loads the rules from the ruleset files. The event now matches rule ``60000`` and its child rules, including your custom rules.
+
+#. Revert rule ``60000`` to its original content when you finish testing.
 
 Using the Wazuh server API
 --------------------------
