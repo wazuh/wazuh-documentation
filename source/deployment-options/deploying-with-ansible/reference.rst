@@ -48,7 +48,7 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/vars/mai
 Package-urls
 ------------
 
-These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/package-urls/defaults/main.yml`` and control where the artifact URL definitions file is retrieved.
+These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/package-urls/defaults/main.yml`` and control where the artifact URL definitions file is retrieved, and how each Wazuh package is verified before it is installed.
 
 .. list-table::
    :header-rows: 1
@@ -66,6 +66,24 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/package-
    * - ``package_urls_file_uri_prerelease``
      - ``packages-staging.xdrsiem.wazuh.info/pre-release/{{ wazuh_major_version }}/artifact-urls/artifact_urls_{{ wazuh_full_version }}-{{ wazuh_stage }}.yaml``
      - The URL of the artifact URL definitions file, without the ``https://`` prefix, that the role downloads when ``source`` is ``prerelease``.
+   * - ``wazuh_gpg_key_url``
+     - ``https://packages.wazuh.com/key/GPG-KEY-WAZUH``
+     - The URL of the Wazuh GPG key. Before a Linux target node installs a Wazuh package, the role downloads this key to the node and checks that the package is signed with it. For nodes without internet access, set it to a mirror or to a ``file://`` path on the target node.
+   * - ``wazuh_gpg_key_fingerprints``
+     - ``["0DCFCA5547B19D2A6099506096B3EE5F29111145"]``
+     - The list of accepted fingerprints of the Wazuh GPG key. The role trusts the downloaded key only if it holds a single primary key whose fingerprint is in this list.
+   * - ``wazuh_skip_package_signature_check``
+     - ``false``
+     - Set to ``true`` to install Wazuh packages without checking their signature. Use it only for unsigned development packages. When the value is ``false``, the run stops if a package is not signed by Wazuh.
+   * - ``wazuh_windows_signer_name``
+     - ``Wazuh, Inc``
+     - The signer name that the Authenticode signature of the Wazuh agent MSI package must carry. Windows must also trust the signature.
+   * - ``wazuh_windows_signer_eku``
+     - Empty
+     - An optional extended key usage (EKU) OID that the signer certificate of the Wazuh agent MSI package must also carry. An empty value skips this check.
+   * - ``wazuh_macos_signer_team_id``
+     - ``KLZK8P68R5``
+     - The Apple team ID that the Developer ID Installer signature of the Wazuh agent PKG package must carry.
 
 Wazuh credentials
 -----------------
@@ -106,7 +124,13 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/wazuh-in
      - When set to ``true``, it configures the Wazuh indexer as a single-node cluster. It is set to ``false`` for multi-node deployments.
    * - ``wazuh_indexer_security_init_force``
      - ``false``
-     - When set to ``true``, the run loads the security configuration files of the first Wazuh indexer node of the play into the cluster again with ``indexer-security-init.sh``, even if the cluster already has one. This replaces the internal users, roles, role mappings, and passwords of the cluster with those of the files. By default, the role loads the configuration only on a new cluster, when no node of the play has it. If no node reports it and one of them was installed by an earlier run, the run stops instead. After a first run that stopped before the upload, run the playbook again with this variable set to ``true``.
+     - When set to ``true``, the run loads the security configuration files of the first Wazuh indexer node of the play into the cluster again with ``indexer-security-init.sh``, even if the cluster already has one. This replaces the internal users, roles, role mappings, and passwords of the cluster with those of the files. By default, the role loads the configuration only on a new cluster. In a Wazuh cluster deployment, that is when the cluster has no security index. In an all-in-one deployment, that is when the node doesn't report the configuration loaded, and the run stops instead if the node was installed by an earlier run. After an all-in-one first run that stopped before the upload, run the playbook again with this variable set to ``true``.
+   * - ``wazuh_indexer_security_init_timeout``
+     - ``600``
+     - The number of seconds that ``indexer-security-init.sh`` can run before the role stops it and the run fails. Without a limit, the script waits indefinitely for a cluster with a cluster manager, for example when the other Wazuh indexer nodes reject this node.
+   * - ``wazuh_indexer_api_retries``
+     - ``24``
+     - The number of attempts, 5 seconds apart, of each wait on the Wazuh indexer API: for the cluster manager and the security index before the security initialization, and for a healthy cluster after it.
    * - ``instances``
      - .. code-block:: yaml
 
