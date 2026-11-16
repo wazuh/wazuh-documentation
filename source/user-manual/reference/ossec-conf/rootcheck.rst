@@ -68,6 +68,8 @@ Attributes:
 | Allowed values   | sregex                                                     |
 +------------------+------------------------------------------------------------+
 
+An sregex is a simple pattern in the OS_Match syntax: plain text where ``^`` matches the start, ``$`` matches the end, ``|`` separates alternatives and ``!`` negates the expression.
+
 frequency
 ^^^^^^^^^
 
@@ -148,13 +150,16 @@ Enable or disable checking for anomalous file system objects.
 skip_nfs
 ^^^^^^^^
 
-Skips network-mounted file systems, such as NFS, during scans. Set it to ``no`` to scan them.
+Skips network-mounted file systems, such as NFS, during scans. Set it to ``yes`` to skip them.
 
 +----------------------+-----------+
-| **Default value**    | yes       |
+| **Default value**    | no        |
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
+
+.. note::
+   The default ``ossec.conf`` file of the Wazuh agent sets ``<skip_nfs>yes</skip_nfs>``. If you remove the option, the Wazuh agent scans network-mounted file systems.
 
 scanall
 ^^^^^^^
