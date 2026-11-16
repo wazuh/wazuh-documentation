@@ -228,7 +228,7 @@ newUrls['5.0'] = [
   '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/new-wazuh-indexer-node.html',
   '/user-manual/wazuh-indexer-cluster/removing-a-wazuh-indexer-node.html',
   '/user-manual/wazuh-indexer-cluster/troubleshooting.html',
-  '/user-manual/wazuh-server-cluster/troubleshooting-load-balanced-cluster.html',
+  '/user-manual/wazuh-server-cluster/troubleshooting.html',
   '/getting-started/components/wazuh-manager.html',
   '/installation-guide/wazuh-manager/index.html',
   '/installation-guide/wazuh-manager/installation-assistant.html',
@@ -586,21 +586,6 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/capabilities/malware-detection/fim-threat-detection-rules.html',
     '5.0': '/user-manual/capabilities/malware-detection/fim-threat-intelligence.html',
-  },
-  {
-    'target': ['4.14=>5.0', '5.0=>4.14'],
-    '4.14': '/user-manual/wazuh-server-cluster/types-of-nodes.html',
-    '5.0': '/user-manual/wazuh-server-cluster/architecture-overview.html#types-of-nodes',
-  },
-  {
-    'target': ['4.14=>5.0', '5.0=>4.14'],
-    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html',
-    '5.0': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html#add-a-wazuh-manager-node-to-all-in-one-deployments',
-  },
-  {
-    'target': ['4.14=>5.0', '5.0=>4.14'],
-    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
-    '5.0': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html#add-a-wazuh-manager-node-to-distributed-deployments',
   }
 );
 
@@ -745,9 +730,6 @@ removedUrls['5.0'] = [
   '/user-manual/wazuh-indexer/re-indexing.html',
   '/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints.html',
   // End of 4.14 pages with no 5.0 page yet.
-  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html',
-  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
-  '/user-manual/wazuh-server-cluster/types-of-nodes.html',
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/labels.html',
   '/cloud-security/azure/ms-graph-api-setup.html',
