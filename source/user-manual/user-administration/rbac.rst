@@ -184,7 +184,7 @@ Follow these steps to let an internal user see only the Wazuh agents of one grou
 
    .. thumbnail:: /images/manual/user-administration/rbac/new-policy-agent-group.png
       :title: New policy form
-      :alt: New policy form with the agent:read action and the agent:group resource
+      :alt: New policy form with empty Policy name, Action, Resource, Resource identifier and Select an effect fields
       :align: center
       :width: 80%
 
@@ -203,7 +203,7 @@ Follow these steps to let an internal user see only the Wazuh agents of one grou
 
    .. thumbnail:: /images/manual/user-administration/rbac/agents-management-summary-restricted.png
       :title: Agents management summary restricted to one agent group
-      :alt: Agents management summary listing only the agents of one group
+      :alt: Agents management summary listing a single agent, Ubuntu24
       :align: center
       :width: 80%
 
