@@ -24,7 +24,7 @@ The example used throughout is based on Apache HTTP Server error logs. A few con
 
 -  **Detector.** A scheduled job that applies selected rules to incoming events and generates findings.
 
--  **Finding.** A finding is a security record that is created when an event matches a rule. This was previously called alert in Wazuh 4.x.
+-  **Finding.** A finding is a security record that is created when an event matches a rule.
 
 .. note::
 
