@@ -17,7 +17,7 @@ Troubleshooting
    * - The service fails to start, and the log reports that the maximum number of virtual memory areas is too low.
      - Increase the kernel setting with ``sysctl -w vm.max_map_count=262144`` and persist it in ``/etc/sysctl.conf``.
    * - A node does not join the cluster, and the logs show TLS handshake or authentication errors between nodes.
-     - Verify that ``plugins.security.nodes_dn`` on every node contains the exact Distinguished Name of every node certificate, and that the files in ``/etc/wazuh-indexer/certs`` are owned by ``wazuh-indexer`` with permissions ``400``.
+     - Verify that ``plugins.security.nodes_dn`` on every node contains the exact Distinguished Name of every node certificate, and that the files in ``/etc/wazuh-indexer/certs`` are owned by ``root:wazuh-indexer`` with permissions ``640``, except ``admin.pem`` and ``admin-key.pem``, which are ``root:root`` with permissions ``600``. The service refuses a certificate pair owned by the ``wazuh-indexer`` user.
    * - The cluster does not form, and the logs report that the cluster manager was not discovered.
      - Check that ``discovery.seed_hosts`` lists the correct addresses on every node, that port ``9300`` is open between the nodes, and that ``cluster.initial_cluster_manager_nodes`` was consistent across all nodes at the first bootstrap.
    * - The cluster health is yellow.
@@ -25,8 +25,8 @@ Troubleshooting
 
        Review ``GET _cat/shards/wazuh-*?v`` to find the unassigned shards.
 
-       Run ``GET _cluster/allocation/explain?pretty`` for the reason, and confirm that all nodes are running and below the disk usage watermarks.
+       Run ``GET _cluster/allocation/explain?pretty`` for the reason, and confirm that all nodes are running and below the disk usage watermarks. If the explanation says that the shard exceeded the maximum number of retries, retry the allocation with ``POST _cluster/reroute?retry_failed=true``.
    * - The cluster health is red.
      - One or more primary shards are unassigned, and part of the data is unavailable. Check for stopped nodes and verify the available disk space on each node, since the disk usage watermarks stop shard allocation on almost-full nodes.
    * - The Wazuh indexer credentials were lost.
-     - Run the :doc:`Wazuh passwords tool </user-manual/user-administration/password-management>` on any Wazuh indexer node to set a new password, for example, ``printf '%s\n' '<NEW_PASSWORD>' | bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u admin -p``. Changing the ``admin`` password needs no update on the other Wazuh components.
+     - Run the :doc:`Wazuh passwords tool </user-manual/user-administration/password-management>` on any Wazuh indexer node to set a new password, for example, ``printf '%s\n' '<NEW_PASSWORD>' | /usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh -u admin -p``. Changing the ``admin`` password needs no update on the other Wazuh components.
