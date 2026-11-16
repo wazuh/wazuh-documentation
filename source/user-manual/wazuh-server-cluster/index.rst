@@ -33,6 +33,7 @@ The cluster follows a set of rules that shape how you plan, secure, and scale it
       :titlesonly:
 
       architecture-overview
+      types-of-nodes
       security-requirements
       how-server-cluster-works
       cluster-nodes-configuration
@@ -41,5 +42,5 @@ The cluster follows a set of rules that shape how you plan, secure, and scale it
       adding-new-server-nodes/index
       agent-connections
       load-balancers
-      troubleshooting-load-balanced-cluster
+      troubleshooting
 

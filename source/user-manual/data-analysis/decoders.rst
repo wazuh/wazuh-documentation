@@ -31,7 +31,7 @@ A decoder is an asset that takes a raw event and normalizes it into the Wazuh Co
 
 Each decoder defines the:
 
--  ``check`` stage: Boolean conditions that decide whether the decoder applies to the event. Write the conditions as a list, such as ``- _json.action: string_equal("ALLOW")``, or as one conditional expression string, such as ``"$dns.response_code == NOERROR"``. Both forms appear in the examples in this document.
+-  ``check`` stage: Boolean conditions that decide whether the decoder applies to the event. Write the conditions as a list, such as ``- _json.action: string_eq("ALLOW")``, or as one conditional expression string, such as ``"$dns.response_code == NOERROR"``. Both forms appear in the examples in this document.
 
 -  ``parse|<field>`` stage: An ordered list of parser patterns that the normalization engine tries against the value of ``<field>``. :ref:`Parser expressions <data_analysis_parser_expressions>` describes their syntax.
 
@@ -62,7 +62,7 @@ Most decoders start from ``event.original`` for raw log text or JSON, or some fi
 
 -  ``parse_json()`` for JSON logs.
 
--  ``parse_key_value()`` for ``k=v`` style logs.
+-  ``parse_kv()`` for ``k=v`` style logs.
 
 -  ``parse_csv()`` or ``parse_dsv()`` for delimited logs.
 
@@ -87,7 +87,7 @@ At :ref:`pre-enrichment <data_analysis_pre_enrichment>`, there is a mandatory cl
 Adding a check stage to target the right events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ``check`` stage is used to target the right events. It uses filter helpers such as ``contains()`` and ``starts_with()`` to determine whether the decoder should process the event.
+The ``check`` stage is used to target the right events. It uses check helpers such as ``contains()`` and ``starts_with()`` to determine whether the decoder should process the event.
 
 **Example:**
 
@@ -101,7 +101,7 @@ The ``check`` stage is used to target the right events. It uses filter helpers s
      - map:
          - _json: parse_json($event.original)
 
-The above example shows that ``check`` lines use a filter helper (``contains``, ``starts_with``). Both conditions must evaluate to true for the decoder to accept the event.
+The above example shows that ``check`` lines use check helpers (``contains``, ``starts_with``). Both conditions must evaluate to true for the decoder to accept the event.
 
 Normalizing parsed data into WCS fields
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -139,16 +139,16 @@ A ``normalize`` array can have multiple blocks, each with its own ``check`` and 
 
    normalize:
      - check:
-         - _json.action: string_equal("ALLOW")
+         - _json.action: string_eq("ALLOW")
        map:
          - event.outcome: "success"
 
      - check:
-         - _json.action: string_equal("DENY")
+         - _json.action: string_eq("DENY")
        map:
          - event.outcome: "failure"
 
-Here, ``string_equal`` is a filter helper used as a condition inside ``normalize``.
+Here, ``string_eq`` is a check helper used as a condition inside ``normalize``.
 
 **Practical example**
 
@@ -177,7 +177,7 @@ The following decoder YAML parses the key-value fields from the log and maps the
 
    normalize:
      - map:
-         - _kv: parse_key_value($_kv_text, '=', ' ', "'", '\\')
+         - _kv: parse_kv($_kv_text, '=', ' ', "'", '\\')
          - event.kind: "event"
          - event.category: "network"
          - event.type: "connection"
@@ -186,15 +186,15 @@ The following decoder YAML parses the key-value fields from the log and maps the
          - source.port: parse_long($_kv.src_port)
          - destination.ip: $_kv.dst
          - destination.port: parse_long($_kv.dst_port)
-         - network.transport: downcase($_kv.proto)
+         - network.transport: lowercase($_kv.proto)
 
      - check:
-         - _kv.action: string_equal("ALLOW")
+         - _kv.action: string_eq("ALLOW")
        map:
          - event.outcome: "success"
 
      - check:
-         - _kv.action: string_equal("DENY")
+         - _kv.action: string_eq("DENY")
        map:
          - event.outcome: "failure"
 
@@ -202,11 +202,11 @@ In the above example:
 
 -  ``parse|event.original`` is a parser stage that uses the pattern ``FW: conn <_kv_text>`` to capture the ``key=value`` text in the temporary field ``_kv_text``.
 
--  ``parse_key_value`` is a transformation helper that splits the log's ``k=v`` pairs. In this context, "``k=v`` pairs" means the key=value fragments inside the log line, like ``src=10.0.0.5``, ``src_port=34567``, ``dst=192.168.1.10``, etc.
+-  ``parse_kv`` is a map helper that splits the log's ``k=v`` pairs. In this context, "``k=v`` pairs" means the key=value fragments inside the log line, like ``src=10.0.0.5``, ``src_port=34567``, ``dst=192.168.1.10``, etc.
 
--  ``starts_with``, ``contains``, and ``string_equal`` are filter helpers.
+-  ``starts_with``, ``contains``, and ``string_eq`` are check helpers.
 
--  ``parse_long`` is a transformation helper that converts the port strings to integers, and ``downcase`` is a map helper that normalizes casing.
+-  ``parse_long`` is a map helper that converts the port strings to integers, and ``lowercase`` is a map helper that normalizes casing.
 
 -  Scratch fields, ``_kv_text`` and ``_kv`` are temporary storage that is removed by the pre-enrichment cleanup.
 

@@ -15,7 +15,7 @@ syscheck
       <syscheck>
       </syscheck>
 
-Configuration options for file integrity monitoring:
+Configuration options for file integrity monitoring.
 
 Options
 -------
@@ -143,7 +143,7 @@ Attributes
 | Allowed values   | yes, no   |
 +------------------+-----------+
 
-``whodata`` — This will enable who-data monitoring on Linux and Windows systems.
+``whodata`` — This will enable who-data monitoring on Linux and Windows systems. Who-data records who changed a monitored file: the user and the program or process responsible. See :ref:`who-data-monitoring`.
 
 +------------------+-----------+
 | Default value    | no        |
@@ -159,13 +159,13 @@ Attributes
 | Allowed values   | yes, no   |
 +------------------+-----------+
 
-``diff_size_limit`` — Limit the maximum size of the file which will report diff information with report_changes enabled. Files bigger than this value will not report diff information.
+``diff_size_limit`` — Limit the maximum size of the file which will report diff information with report_changes enabled, for this directory. Files bigger than this value will not report diff information. If not set, the ``<file_size><limit>`` value of the :ref:`diff <reference_ossec_syscheck_diff>` option applies. Both limits apply only while ``<file_size><enabled>`` is ``yes``.
 
-+------------------+--------------------------------------------+
-| Default value    | 50MB                                       |
-+------------------+--------------------------------------------+
-| Allowed values   | Any positive number followed by KB/MB/GB   |
-+------------------+--------------------------------------------+
++------------------+----------------------------------------------+
+| Default value    | Value of ``<diff><file_size><limit>`` (50MB) |
++------------------+----------------------------------------------+
+| Allowed values   | Any positive number followed by KB/MB/GB     |
++------------------+----------------------------------------------+
 
 ``check_all`` — It modifies the value of all attributes with the prefix ``check_``.
 
@@ -231,7 +231,7 @@ Attributes
 | Allowed values   | yes, no   |
 +------------------+-----------+
 
-``check_perm`` — Check the permission of the files/directories. On Windows, a list of denied and allowed permissions will be given for each user or group since version 3.8.0. Only works on NTFS partitions on Windows systems.
+``check_perm`` — Check the permission of the files/directories. On Windows, a list of denied and allowed permissions will be given for each user or group. Only works on NTFS partitions on Windows systems.
 
 +------------------+-----------+
 | Default value    | yes       |
@@ -279,6 +279,8 @@ Attributes
 | Allowed value   | sregex   |
 +-----------------+----------+
 
+An sregex is a simple pattern in the OS_Match syntax: plain text where ``^`` matches the start, ``$`` matches the end, ``|`` separates alternatives and ``!`` negates the expression.
+
 ``tags`` — Add tags to alerts for monitored directories.
 
 +------------------+---------------------------------+
@@ -309,7 +311,7 @@ When there is a conflict between options that modify the same attribute, the las
 
    <directories check_all="no" check_sha256sum="yes">/etc</directories>
 
-The configuration above, set the option ``check_sha256sum`` to YES.
+The configuration above sets the option ``check_sha256sum`` to ``yes``.
 
 .. code-block:: xml
 
@@ -526,7 +528,7 @@ Attributes:
 +------------------+----------------------------------------------------------------+
 
 +------------------+-----------------------------------------------------------------------------------+
-| type             | This is a simple regex pattern to filter out files so alerts are not generated.   |
+| type             | Treats the entry as an sregex pattern. Matching registry entries are ignored.     |
 +------------------+-----------------------------------------------------------------------------------+
 | Allowed values   | sregex                                                                            |
 +------------------+-----------------------------------------------------------------------------------+
@@ -846,7 +848,7 @@ List of files to not compute the diff (one entry per line). It could be used for
 Attributes:
 
 +------------------+-----------------------------------------------------------------------------------+
-| type             | This is a simple regex pattern to filter out files so alerts are not generated.   |
+| type             | Treats the entry as an sregex pattern. No diff is computed for matching files.    |
 +------------------+-----------------------------------------------------------------------------------+
 | Allowed values   | sregex                                                                            |
 +------------------+-----------------------------------------------------------------------------------+
@@ -865,7 +867,7 @@ List of values to not compute the diff (one entry per line).
 Attributes:
 
 +------------------+-----------------------------------------------------------------------------------+
-| type             | This is a simple regex pattern to filter out files so alerts are not generated.   |
+| type             | Treats the entry as an sregex pattern. No diff is computed for matching values.   |
 +------------------+-----------------------------------------------------------------------------------+
 | Allowed values   | sregex                                                                            |
 +------------------+-----------------------------------------------------------------------------------+
@@ -1008,13 +1010,13 @@ Attributes:
 | Allowed values   | yes, no   |
 +------------------+-----------+
 
-``diff_size_limit`` — Limit the maximum size of the value which will report diff information with report_changes enabled. Values bigger than this size will not report diff information.
+``diff_size_limit`` — Limit the maximum size of the value which will report diff information with report_changes enabled, for this registry entry. Values bigger than this size will not report diff information. If not set, the ``<file_size><limit>`` value of the :ref:`diff <reference_ossec_syscheck_diff>` option applies. Both limits apply only while ``<file_size><enabled>`` is ``yes``.
 
-+------------------+--------------------------------------------+
-| Default value    | 50MB                                       |
-+------------------+--------------------------------------------+
-| Allowed values   | Any positive number followed by KB/MB/GB   |
-+------------------+--------------------------------------------+
++------------------+----------------------------------------------+
+| Default value    | Value of ``<diff><file_size><limit>`` (50MB) |
++------------------+----------------------------------------------+
+| Allowed values   | Any positive number followed by KB/MB/GB     |
++------------------+----------------------------------------------+
 
 ``check_all`` — It modifies the value of all attributes with the prefix ``check_``.
 

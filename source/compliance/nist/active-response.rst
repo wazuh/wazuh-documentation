@@ -6,7 +6,7 @@
 Active response
 ===============
 
-The Wazuh Active Response module performs autonomous actions on endpoints to mitigate security threats. Wazuh can execute scripts automatically when specific alerting conditions are met. These scripts execute actions, such as a firewall block or drop, and account lockout.
+The Wazuh Active Response module performs autonomous actions on endpoints to mitigate security threats. Wazuh can execute scripts automatically when it generates specific findings. These scripts execute actions, such as a firewall block or drop, and account lockout.
 
 The Wazuh Active Response module assists in meeting the following NIST 800-53 controls:
 
@@ -76,7 +76,7 @@ Follow these steps to configure an active response that blocks the source IP add
 
 #. From the Wazuh dashboard main menu, navigate to **Explore** > **Active Responses**.
 
-#. Click **Create active response** and complete the configuration form with the following details.
+#. Click **Create active response** and complete the configuration form with the following details. The ``block-ip`` executable is an out-of-the-box script that adds firewall rules to drop traffic from the source IP address of the finding. The **Local** location runs the script on the endpoint that generated the finding. The **Stateless** type runs the script once and never reverts it, so the block lasts until you remove the firewall rules. A **Stateful** active response reverts its action after a timeout. See :doc:`Active response </user-manual/capabilities/active-response/index>` for more details.
 
    +----------------+-------------------+
    | **Field**      | **Value**         |
@@ -102,7 +102,7 @@ Follow these steps to configure an active response that blocks the source IP add
 
 #. Switch to the **Monitors** tab, then click **Create Monitor**.
 
-   Fill in the following parameters.
+   Fill in the following parameters. The **Active Response monitor** type runs the active response that you select in the **Actions** subsection when the trigger condition is met. The value ``b04f7630-f428-5209-89f6-d640238bceac`` is the ID of the ``Cross site scripting strings`` rule. You can find rule IDs in **Ruleset Management** > **Rules**.
 
    +-----------------------------+-----------------------------------------------------------+
    | **Field**                   | **Value**                                                 |
@@ -121,7 +121,11 @@ Follow these steps to configure an active response that blocks the source IP add
    +-----------------------------+-----------------------------------------------------------+
    | **Query name**              | ``web_attack_ar_query``                                   |
    +-----------------------------+-----------------------------------------------------------+
-   | **Field**                   | ``wazuh.rule.id is b04f7630-f428-5209-89f6-d640238bceac`` |
+   | **Field**                   | ``wazuh.rule.id``                                         |
+   +-----------------------------+-----------------------------------------------------------+
+   | **Operator**                | ``is``                                                    |
+   +-----------------------------+-----------------------------------------------------------+
+   | **Value**                   | ``b04f7630-f428-5209-89f6-d640238bceac``                  |
    +-----------------------------+-----------------------------------------------------------+
 
    .. thumbnail:: /images/compliance/nist/create-active-response-monitor.png
@@ -192,6 +196,8 @@ Perform the following steps from another endpoint.
 
       curl: (28) Failed to connect to <WEBSERVER_IP_ADDRESS> port 80 after 134781 ms: Couldn't connect to server
 
+   On the Ubuntu endpoint, run ``sudo iptables -S INPUT | grep <ATTACKER_IP>`` to check the block. Replace ``<ATTACKER_IP>`` with the IP address of the attacker endpoint. The output shows the ``DROP`` rule that the ``block-ip`` active response added to the ``INPUT`` chain.
+
 Visualize the findings
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -212,3 +218,10 @@ The ``block-ip`` active response triggers to block the attacker IP. Navigate to 
    :alt: Triggered active response in Incident Response
    :align: center
    :width: 80%
+
+After you finish this use case, remove the firewall rules on the Ubuntu endpoint so that the attacker endpoint can connect again. The active response type is **Stateless**, so the ``block-ip`` active response never removes them:
+
+.. code-block:: console
+
+   $ sudo iptables -D INPUT -s <ATTACKER_IP> -j DROP
+   $ sudo iptables -D FORWARD -s <ATTACKER_IP> -j DROP

@@ -20,13 +20,13 @@ Event templates define the mappings and settings applied to event data streams. 
 -  Lifecycle policy assignment.
 -  Index settings.
 
-The following example shows a simplified event template:
+The following example shows a simplified event template for the security category. The Setup module generates one event template per category, such as ``wazuh-events-v5-security-template``, and each template matches one data stream:
 
 .. code-block:: json
 
    {
      "index_patterns": [
-       "wazuh-events-v5-*"
+       "wazuh-events-v5-security*"
      ],
      "priority": 1,
      "data_stream": {},
@@ -40,19 +40,17 @@ The following example shows a simplified event template:
 Event template retention
 ------------------------
 
-Event data streams have short minimum ages for deletion because they primarily serve as an intermediate processing layer. Wazuh deletes a backing index only after it rolls over at 20 GB per primary shard or 200 million documents. A low-volume deployment that never reaches these limits keeps its events indefinitely.
+Event data streams have short minimum ages for deletion because they primarily serve as an intermediate processing layer. Wazuh deletes a backing index only after it rolls over at 20 GB per primary shard or 200 million documents, and the minimum age for deletion has passed since that rollover. A low-volume deployment that never reaches these limits keeps its events indefinitely.
 
-A rolled-over backing index is already past its minimum age, which counts from the index's creation. Wazuh deletes it at the next policy check, so right after a rollover the event history holds only the events indexed since then.
-
-+----------------------------------+--------------------------+
-| Data stream                      | Minimum age for deletion |
-+==================================+==========================+
-| ``wazuh-events-raw-v5``          | 10 minutes               |
-+----------------------------------+--------------------------+
-| ``wazuh-events-v5-*``            | 1 hour                   |
-+----------------------------------+--------------------------+
-| ``wazuh-events-v5-unclassified`` | 1 hour                   |
-+----------------------------------+--------------------------+
++----------------------------------+----------------------------+
+| Data stream                      | Minimum age for deletion   |
++==================================+============================+
+| ``wazuh-events-raw-v5``          | 4 hours after the rollover |
++----------------------------------+----------------------------+
+| ``wazuh-events-v5-*``            | 1 day after the rollover   |
++----------------------------------+----------------------------+
+| ``wazuh-events-v5-unclassified`` | 1 day after the rollover   |
++----------------------------------+----------------------------+
 
 Specialized templates
 ---------------------
@@ -62,7 +60,7 @@ Some workloads require dedicated templates because their mappings or lifecycle r
 Findings template
 ^^^^^^^^^^^^^^^^^
 
-The findings template manages Security Analytics findings stored in ``wazuh-findings-v5-*``.
+The findings template manages Security Analytics findings stored in ``wazuh-findings-v5-*``. The Setup module creates one findings template per category, such as ``wazuh-findings-v5-security-template``. The following example shows that template, simplified.
 
 The template applies a dedicated lifecycle policy optimized for investigation and threat hunting workflows.
 
@@ -72,7 +70,7 @@ The template applies a dedicated lifecycle policy optimized for investigation an
 
    {
      "index_patterns": [
-       "wazuh-findings-v5-*"
+       "wazuh-findings-v5-security*"
      ],
      "priority": 1,
      "data_stream": {},
@@ -85,11 +83,11 @@ The template applies a dedicated lifecycle policy optimized for investigation an
 
 **Minimum age for deletion:**
 
-+-------------------------+--------------------------+
-| Data stream             | Minimum age for deletion |
-+=========================+==========================+
-| ``wazuh-findings-v5-*`` | 90 days                  |
-+-------------------------+--------------------------+
++-------------------------+----------------------------+
+| Data stream             | Minimum age for deletion   |
++=========================+============================+
+| ``wazuh-findings-v5-*`` | 90 days after the rollover |
++-------------------------+----------------------------+
 
 Active response template
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -117,11 +115,11 @@ The template applies a dedicated lifecycle policy because active response reques
 
 **Minimum age for deletion:**
 
-+----------------------------+--------------------------+
-| Data stream                | Minimum age for deletion |
-+============================+==========================+
-| ``wazuh-active-responses`` | 3 days                   |
-+----------------------------+--------------------------+
++----------------------------+---------------------------+
+| Data stream                | Minimum age for deletion  |
++============================+===========================+
+| ``wazuh-active-responses`` | 3 days after the rollover |
++----------------------------+---------------------------+
 
 Metrics templates
 ^^^^^^^^^^^^^^^^^
@@ -132,15 +130,15 @@ Metrics templates manage operational metrics generated by Wazuh components. The 
 -  ``wazuh-metrics-comms-v4``
 -  ``wazuh-metrics-normalization``
 
-Metrics templates use dedicated mappings optimized for metric aggregation and visualization.
+Metrics templates use dedicated mappings optimized for metric aggregation and visualization. Metrics templates use the ``stream-metrics-policy`` ISM policy.
 
 **Minimum age for deletion:**
 
-+---------------------+--------------------------+
-| Data stream         | Minimum age for deletion |
-+=====================+==========================+
-| ``wazuh-metrics-*`` | 30 days                  |
-+---------------------+--------------------------+
++---------------------+----------------------------+
+| Data stream         | Minimum age for deletion   |
++=====================+============================+
+| ``wazuh-metrics-*`` | 30 days after the rollover |
++---------------------+----------------------------+
 
 .. _index_state_management:
 
@@ -156,7 +154,7 @@ The Wazuh indexer uses Index State Management (ISM) policies to automate rollove
 Policy lifecycle
 ^^^^^^^^^^^^^^^^
 
-All Wazuh stream policies follow the same lifecycle:
+All Wazuh default policies follow the same two-state lifecycle, ``hot`` then ``delete``. The AI assistant sessions and security audit log policies also add a ``min_index_age`` condition to the rollover, so their indices roll over daily and every 30 days respectively. The other policies delete an index once the deletion age has passed since the index rolled over, using the ``min_rollover_age`` condition. The AI assistant sessions and security audit log policies count the deletion age from the creation of the index, using ``min_index_age``.
 
 .. thumbnail:: /images/manual/wazuh-indexer/index-template-policy-lifecycle.png
    :title: Index State Management policy lifecycle
@@ -187,7 +185,7 @@ The following example shows a simplified lifecycle policy:
              {
                "state_name": "delete",
                "conditions": {
-                 "min_index_age": "90d"
+                 "min_rollover_age": "90d"
                }
              }
            ]
@@ -230,7 +228,7 @@ Example rollover sequence:
 Template priorities
 -------------------
 
-Template priority determines which template is applied when multiple templates match the same index pattern. The following priorities are used by default:
+Template priority determines which template is applied when multiple templates match the same index pattern. Every Wazuh-managed index template uses priority 1, and each one matches a single data stream or index. This includes the templates in the following table, where events and findings have one template per category, and the templates for the stateful indices (``wazuh-states-*``), the Content Manager content (``wazuh-threatintel-*``), and internal indices such as ``.wazuh-settings``. See :ref:`Verifying deployed templates <index_templates_reference_verifying_deployed_templates>` to list them.
 
 +------------------+----------+
 | Template         | Priority |
@@ -250,16 +248,16 @@ Templates with higher priorities override templates with lower priorities.
 
 .. note::
 
-   Custom templates intended to override Wazuh-managed templates should use a higher priority value.
+   This priority applies to index templates. ISM policies have a separate priority in their ``ism_template`` section: the Wazuh default policies use ``0``, and a custom policy with a higher value takes precedence for new indices. To change retention, create a custom ISM policy instead of a custom index template. See :ref:`Creating a custom retention policy <wazuh_indexer_indices_creating_custom_retention_policy>`.
 
 Template generation workflow
 ----------------------------
 
 During startup, the Setup module automatically deploys the templates and policies required by the Wazuh indexer. The deployment process consists of the following steps:
 
+#. Create or update ISM policies. This step overwrites any change made to the default policies.
 #. Load packaged template definitions.
 #. Create or update index templates.
-#. Create or update ISM policies.
 #. Create required data streams.
 #. Apply mappings and lifecycle settings.
 
@@ -271,10 +269,12 @@ The following workflow illustrates the process:
    :align: center
    :width: 80%
 
+.. _index_templates_reference_verifying_deployed_templates:
+
 Verifying deployed templates
 ----------------------------
 
-List all deployed templates:
+List the templates whose names start with ``wazuh-``. To list every index template, including the ``wazuh-states-*`` and internal templates, run ``GET _cat/templates?v&s=name``:
 
 .. code-block:: none
 

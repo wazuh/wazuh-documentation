@@ -18,6 +18,10 @@ Using a local repository
 
 In this method, you set up a repository for storing snapshots on the source and destination Wazuh indexer nodes. Then, we copy the snapshots taken on the source Wazuh indexer to the destination Wazuh indexer and restore the snapshots to complete the Wazuh index migration.
 
+.. note::
+
+   This method works only when the source and destination Wazuh indexer clusters each have a single node. On a multi-node cluster, every node must read and write the same repository location. Use the method in :ref:`Using a shared file system (NFS) <migrating_wazuh_indices_nfs>` instead.
+
 Create snapshot directory
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -35,12 +39,12 @@ Perform the following configuration on the source and destination Wazuh indexer 
 
       # chown wazuh-indexer:wazuh-indexer /mnt/snapshots
 
-#. Add the configuration: ``path.repo: /mnt/snapshots`` to the ``/etc/wazuh-indexer/opensearch.yml`` file to specify the repository path:
+#. Add the configuration: ``path.repo: /mnt/snapshots`` to the ``/etc/wazuh-indexer/opensearch.yml`` file to specify the repository path. The Wazuh indexer already sets ``path.repo`` to ``/var/lib/wazuh-indexer/backup``. Add ``/mnt/snapshots`` to that line instead of adding a second ``path.repo`` line, because a second line stops the Wazuh indexer from starting with a ``Duplicate field 'path.repo'`` error:
 
    **Example:**
 
    .. code-block:: yaml
-      :emphasize-lines: 15
+      :emphasize-lines: 19
 
       network.host: "127.0.0.1"
       node.name: "node-1"
@@ -56,7 +60,11 @@ Perform the following configuration on the source and destination Wazuh indexer 
       node.max_local_storage_nodes: "3"
       path.data: /var/lib/wazuh-indexer
       path.logs: /var/log/wazuh-indexer
-      path.repo: /mnt/snapshots
+      # Default location for filesystem snapshot repositories, so one can be registered with no further
+      # configuration. This is only a default: change or extend the list to keep backups elsewhere, for
+      # example on a mounted volume. It applies to fs and url repositories; s3, azure and hdfs do not
+      # use it. The directory ships empty.
+      path.repo: ["/var/lib/wazuh-indexer/backup", "/mnt/snapshots"]
 
       plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/indexer.pem
       plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/indexer-key.pem
@@ -65,6 +73,33 @@ Perform the following configuration on the source and destination Wazuh indexer 
       plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/indexer-key.pem
       plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
       plugins.security.ssl.http.enabled: true
+      # AEAD suites only
+      plugins.security.ssl.http.enabled_ciphers:
+      - "TLS_AES_128_GCM_SHA256"
+      - "TLS_AES_256_GCM_SHA384"
+      - "TLS_CHACHA20_POLY1305_SHA256"
+      - "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+      - "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256"
+      - "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+      plugins.security.ssl.transport.enabled_ciphers:
+      - "TLS_AES_128_GCM_SHA256"
+      - "TLS_AES_256_GCM_SHA384"
+      - "TLS_CHACHA20_POLY1305_SHA256"
+      - "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+      - "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256"
+      - "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
       transport.ssl.enforce_hostname_verification: true
       transport.ssl.resolve_hostname: false
 
@@ -80,6 +115,10 @@ Perform the following configuration on the source and destination Wazuh indexer 
       - "all_access"
       - "security_rest_api_access"
 
+      # Store audit events in the security-auditlogs data stream
+      plugins.security.audit.type: internal_opensearch_data_stream
+      plugins.security.audit.config.data_stream.name: security-auditlogs
+
       plugins.security.system_indices.enabled: true
       plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-reports-*", ".opensearch-notifications-*", ".replication-metadata-store", ".wazuh-internal-state"]
       cluster.default_number_of_replicas: 0
@@ -88,6 +127,7 @@ Perform the following configuration on the source and destination Wazuh indexer 
       # Resilience under heap pressure (small heaps, e.g. 2 GB): shed work — reject (429)
       # and cancel runaway searches instead of letting the JVM heap exhaust and crash.
       search_backpressure.mode: enforced                    # actually cancel heavy search tasks (default only logs)
+      search_backpressure.search_shard_task.heap_percent_threshold: 0.04  # a shard task is a cancellation candidate from 4% of the heap (default 0.5%, ~10 MB on 2 GB), above the manager's inventory sync batches
       indices.breaker.total.use_real_memory: true           # account real heap used, not just reserved bytes
       indices.breaker.total.limit: 80%                      # trip early (default 95%); leaves headroom for Lucene flush/merge
       indexing_pressure.memory.limit: 10%                   # cap in-flight indexing bytes; reject excess bulk
@@ -118,7 +158,7 @@ Perform the following steps on the source and destination Wazuh dashboards to co
 #. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Repositories**, and select **+ Create repository** to create a new snapshot repository.
 #. Enter a repository name, select the repository type **Shared file system**, enter the repository location ``/mnt/snapshots``, and select **Add** to register the new repository.
 
-   .. thumbnail:: /images/manual/wazuh-indexer/create-snapshot-repository.gif
+   .. thumbnail:: /images/manual/wazuh-indexer/create-snapshot-repository.png
       :title: Create snapshot repository
       :alt: Create snapshot repository
       :align: center
@@ -131,7 +171,7 @@ Perform the following steps on the source Wazuh dashboard to take a snapshot:
 
 #. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Snapshots**.
 #. Select **+ Take snapshot**, and enter a Snapshot name.
-#. Click **Select or input indexes or index patterns**, and select or type a source index pattern. For example, ``wazuh-findings*``.
+#. Click **Select or input indexes or index patterns**, and type ``wazuh-findings``. Wait for the list to load, then select the ``wazuh-findings*`` entry from the list. Don't select **Add wazuh-findings\*** as a custom option, because the Wazuh dashboard doesn't send custom options. If no index or pattern is selected when you select **Add**, the snapshot includes every index in the cluster. After the snapshot completes, open it on the **Snapshots** page and check that it lists only the ``.ds-wazuh-findings-v5-*`` indices.
 #. Select the earlier created repository to store the snapshots.
 #. **Optional**: Select **Advanced options** and check the **Include cluster state in snapshots** and **Ignore unavailable indices** option.
 
@@ -211,7 +251,7 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
       :align: center
       :width: 80%
 
-#. Specify your preferred restore option to **Restore all indices in the snapshot** or **Restore specific indices**. Select your preferred option for renaming the indices, and select all that applies under **Advanced options**.
+#. Specify your preferred restore option to **Restore all indices in the snapshot** or **Restore specific indices**. Select your preferred option for renaming the indices, and select all that applies under **Advanced options**. If the snapshot includes the cluster state, clear **Restore cluster state from snapshots**. It's selected by default, and the restore then fails with a ``security_exception`` (403).
 
    .. thumbnail:: /images/manual/wazuh-indexer/restore-snapshot-advanced-options.png
       :title: Restore snapshot advanced options
@@ -220,6 +260,27 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
       :width: 80%
 
 #. Click **Restore snapshot** to complete the migration process.
+
+.. note::
+
+   The destination Wazuh indexer already has its own ``wazuh-findings-v5-*`` data streams, because the Setup module creates them at startup. The Wazuh dashboard can only restore them as renamed, hidden, plain indices (for example ``restored_.ds-wazuh-findings-v5-other-000001``), even when you select **Do not rename**. These indices don't match the ``wazuh-findings*`` index pattern. To restore the findings as data streams under their original names, use **Indexer management** > **Dev Tools** on the destination node. The first request deletes any findings already stored on the destination:
+
+   .. code-block:: none
+
+      DELETE _data_stream/wazuh-findings-v5-*
+
+   Run the second request to restore the findings.
+
+   .. code-block:: none
+      :emphasize-lines: 1
+
+      POST _snapshot/<REPOSITORY_NAME>/<SNAPSHOT_NAME>/_restore
+      {
+        "indices": "wazuh-findings-v5-*",
+        "include_global_state": false
+      }
+
+   Replace ``<REPOSITORY_NAME>`` and ``<SNAPSHOT_NAME>`` with their respective values.
 
 .. _migrating_wazuh_indices_nfs:
 
@@ -323,26 +384,32 @@ Perform the following steps on the source and destination Wazuh indexer nodes to
 
       # chown wazuh-indexer:wazuh-indexer /mnt/snapshots
 
-#. Add the configuration: ``path.repo: /mnt/snapshots`` to the ``/etc/wazuh-indexer/opensearch.yml`` file to specify the repository path:
+#. Add the configuration: ``path.repo: /mnt/snapshots`` to the ``/etc/wazuh-indexer/opensearch.yml`` file to specify the repository path. The Wazuh indexer already sets ``path.repo`` to ``/var/lib/wazuh-indexer/backup``. Add ``/mnt/snapshots`` to that line instead of adding a second ``path.repo`` line, because a second line stops the Wazuh indexer from starting with a ``Duplicate field 'path.repo'`` error. Edit only that line, as in the following example. Don't replace the rest of the file, because it contains this node's name, certificate DNs, and audit settings:
 
    **Example:**
 
    .. code-block:: yaml
-      :emphasize-lines: 13
+      :emphasize-lines: 19
 
-      network.host: 127.0.0.1
-      node.name: indexer
+      network.host: "127.0.0.1"
+      node.name: "node-1"
       cluster.initial_cluster_manager_nodes:
-      - "indexer"
-
+      - "node-1"
+      #- "node-2"
+      #- "node-3"
       cluster.name: "wazuh-cluster"
-      discovery.seed_hosts:
-        - "127.0.0.1"
-
+      #discovery.seed_hosts:
+      #  - "node-1-ip"
+      #  - "node-2-ip"
+      #  - "node-3-ip"
       node.max_local_storage_nodes: "3"
       path.data: /var/lib/wazuh-indexer
       path.logs: /var/log/wazuh-indexer
-      path.repo: /mnt/snapshots
+      # Default location for filesystem snapshot repositories, so one can be registered with no further
+      # configuration. This is only a default: change or extend the list to keep backups elsewhere, for
+      # example on a mounted volume. It applies to fs and url repositories; s3, azure and hdfs do not
+      # use it. The directory ships empty.
+      path.repo: ["/var/lib/wazuh-indexer/backup", "/mnt/snapshots"]
 
       plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/indexer.pem
       plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/indexer-key.pem
@@ -351,19 +418,51 @@ Perform the following steps on the source and destination Wazuh indexer nodes to
       plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/indexer-key.pem
       plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
       plugins.security.ssl.http.enabled: true
+      # AEAD suites only
+      plugins.security.ssl.http.enabled_ciphers:
+      - "TLS_AES_128_GCM_SHA256"
+      - "TLS_AES_256_GCM_SHA384"
+      - "TLS_CHACHA20_POLY1305_SHA256"
+      - "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+      - "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256"
+      - "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+      plugins.security.ssl.transport.enabled_ciphers:
+      - "TLS_AES_128_GCM_SHA256"
+      - "TLS_AES_256_GCM_SHA384"
+      - "TLS_CHACHA20_POLY1305_SHA256"
+      - "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+      - "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256"
+      - "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+      - "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+      - "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
       transport.ssl.enforce_hostname_verification: true
       transport.ssl.resolve_hostname: false
 
+      # Filled in by resolve-credentials.sh with the DN of the admin certificate.
       plugins.security.authcz.admin_dn:
-      - "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=admin"
       plugins.security.check_snapshot_restore_write_privileges: true
       plugins.security.enable_snapshot_restore_privilege: true
+      # Filled in by resolve-credentials.sh with the DN of this node's own certificate.
       plugins.security.nodes_dn:
-      - "CN=indexer,OU=Wazuh,O=Wazuh,L=California,C=US"
-
+      - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=wazuh-VirtualBox"
       plugins.security.restapi.roles_enabled:
       - "all_access"
       - "security_rest_api_access"
+
+      # Store audit events in the security-auditlogs data stream
+      plugins.security.audit.type: internal_opensearch_data_stream
+      plugins.security.audit.config.data_stream.name: security-auditlogs
 
       plugins.security.system_indices.enabled: true
       plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-reports-*", ".opensearch-notifications-*", ".replication-metadata-store", ".wazuh-internal-state"]
@@ -373,12 +472,16 @@ Perform the following steps on the source and destination Wazuh indexer nodes to
       # Resilience under heap pressure (small heaps, e.g. 2 GB): shed work — reject (429)
       # and cancel runaway searches instead of letting the JVM heap exhaust and crash.
       search_backpressure.mode: enforced                    # actually cancel heavy search tasks (default only logs)
+      search_backpressure.search_shard_task.heap_percent_threshold: 0.04  # a shard task is a cancellation candidate from 4% of the heap (default 0.5%, ~10 MB on 2 GB), above the manager's inventory sync batches
       indices.breaker.total.use_real_memory: true           # account real heap used, not just reserved bytes
       indices.breaker.total.limit: 80%                      # trip early (default 95%); leaves headroom for Lucene flush/merge
       indexing_pressure.memory.limit: 10%                   # cap in-flight indexing bytes; reject excess bulk
 
       # Use no replicas by default on ISM internal indices
       plugins.index_state_management.history.number_of_replicas: 0
+
+      # Default max scroll context keep alive
+      search.max_keep_alive: "4h"
 
 #. Restart the Wazuh indexer to apply the configuration changes:
 
@@ -400,7 +503,7 @@ Perform the following steps on the source and destination Wazuh dashboards to co
 #. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Repositories**, and select **+ Create repository** to create a new snapshot repository.
 #. Enter a repository name, select the repository type **Shared file system**, enter the repository location ``/mnt/snapshots``, and select **Add** to register the new repository.
 
-   .. thumbnail:: /images/manual/wazuh-indexer/create-snapshot-repository.gif
+   .. thumbnail:: /images/manual/wazuh-indexer/create-snapshot-repository.png
       :title: Create snapshot repository
       :alt: Create snapshot repository
       :align: center
@@ -413,7 +516,7 @@ Perform the following steps on the source Wazuh dashboard to take a snapshot:
 
 #. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Snapshots**.
 #. Select **+ Take snapshot**, and enter a Snapshot name.
-#. Click **Select or input indexes or index patterns**, and select or type a source index pattern. For example, ``wazuh-findings*``.
+#. Click **Select or input indexes or index patterns**, and type ``wazuh-findings``. Wait for the list to load, then select the ``wazuh-findings*`` entry from the list. Don't select **Add wazuh-findings\*** as a custom option, because the Wazuh dashboard doesn't send custom options. If no index or pattern is selected when you select **Add**, the snapshot includes every index in the cluster. After the snapshot completes, open it on the **Snapshots** page and check that it lists only the ``.ds-wazuh-findings-v5-*`` indices.
 #. Select the earlier created repository to store the snapshots.
 #. **Optional**: Select **Advanced options** and check the **Include cluster state in snapshots** and **Ignore unavailable indices** option.
 
@@ -451,7 +554,7 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
       :align: center
       :width: 80%
 
-#. Specify your preferred restore option to **Restore all indices in the snapshot** or **Restore specific indices**. Select your preferred option for renaming the indices, and select all that applies under **Advanced options**.
+#. Specify your preferred restore option to **Restore all indices in the snapshot** or **Restore specific indices**. Select your preferred option for renaming the indices, and select all that applies under **Advanced options**. If the snapshot includes the cluster state, clear **Restore cluster state from snapshots**. It's selected by default, and the restore then fails with a ``security_exception`` (403).
 
    .. thumbnail:: /images/manual/wazuh-indexer/restore-snapshot-advanced-options.png
       :title: Restore snapshot advanced options
@@ -460,3 +563,24 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
       :width: 80%
 
 #. Click **Restore snapshot** to complete the migration process.
+
+.. note::
+
+   The destination Wazuh indexer already has its own ``wazuh-findings-v5-*`` data streams, because the Setup module creates them at startup. The Wazuh dashboard can only restore them as renamed, hidden, plain indices (for example ``restored_.ds-wazuh-findings-v5-other-000001``), even when you select **Do not rename**. These indices don't match the ``wazuh-findings*`` index pattern. To restore the findings as data streams under their original names, use **Indexer management** > **Dev Tools** on the destination node. The first request deletes any findings already stored on the destination:
+
+   .. code-block:: none
+
+      DELETE _data_stream/wazuh-findings-v5-*
+
+   Run the second request to restore the findings.
+
+   .. code-block:: none
+      :emphasize-lines: 1
+
+      POST _snapshot/<REPOSITORY_NAME>/<SNAPSHOT_NAME>/_restore
+      {
+        "indices": "wazuh-findings-v5-*",
+        "include_global_state": false
+      }
+
+   Replace ``<REPOSITORY_NAME>`` and ``<SNAPSHOT_NAME>`` with their respective values.

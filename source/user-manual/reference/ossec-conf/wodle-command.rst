@@ -87,7 +87,7 @@ Ignore the command output when executed.
 timeout
 ^^^^^^^
 
-Timeout for each command to wait for the end of the execution. Whether this parameter is set to 0, it will wait indefinitely for the end of the process. However, if the timeout is other than 0, the execution will finish if it expires.
+Timeout for each command to wait for the end of the execution. If this parameter is set to 0, it will wait indefinitely for the end of the process. However, if the timeout is other than 0, the execution will finish if it expires.
 
 +----------------------+-------------------------------+
 | **Default value**    | n/a                           |
