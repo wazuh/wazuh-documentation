@@ -30,5 +30,6 @@ The following sections provide an overview of the Wazuh dashboard, covering topi
    wazuh-dashboard-configurations
    global-queries
    certificates
+   credentials
    custom-branding
    troubleshooting
