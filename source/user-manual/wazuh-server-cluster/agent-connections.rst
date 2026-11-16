@@ -1,89 +1,80 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to configure the Wazuh agent to report to the Wazuh server cluster in this section of the documentation.
+   :description: Learn how Wazuh agents connect to the nodes of a Wazuh manager cluster, directly or through a load balancer.
 
 Wazuh agent connections
 =======================
 
-The Wazuh agents’ configuration must be modified to report to the Wazuh server cluster. We configure the Wazuh agent to report to the Wazuh server cluster by editing the ``<client></client>`` block in the agent’s configuration file ``/var/ossec/etc/ossec.conf``.
+Wazuh agents 5.x connect to the Wazuh manager cluster over the HTTPS agent API on port ``1517``. Any node accepts them, so you choose one address for the agents and let the cluster handle the rest.
 
-There are two methods to handle the Wazuh agent connection to the Wazuh server cluster nodes, including:
+Each Wazuh agent 5.x has exactly one manager endpoint, set in the ``<agent><manager><endpoint>`` option of the agent configuration file. The file is:
 
--  :ref:`Pointing Wazuh agents to the Wazuh cluster (Failover mode) <connecting_failover_mode>`.
--  :ref:`Pointing Wazuh agents to the Wazuh cluster with a load balancer <connecting_with_load_balancer>`.
+-  ``/var/ossec/etc/ossec.conf`` on Linux
+-  ``/Library/Ossec/etc/ossec.conf`` on macOS
+-  ``C:\Program Files (x86)\ossec-agent\ossec.conf`` on Windows
 
-.. note::
+The agent doesn't keep a list of nodes and doesn't fail over between them. If the file has more than one ``<manager>`` block, the agent uses the last one and logs a warning.
 
-   We recommend using a :doc:`load balancer </user-manual/wazuh-server-cluster/load-balancers>` to enroll and connect Wazuh agents. This way, the Wazuh agents register and report to the Wazuh server cluster nodes in a distributed manner, and the load balancer assigns which worker they will report to. Using this option, we can better distribute the load, and in the event of a failure on a Wazuh server worker node, the Wazuh agents can reconnect to another Wazuh server node.
+You can point the agents at the cluster in one of the following ways:
 
-.. _connecting_failover_mode:
+-  **Load balancer**: The agents use the load balancer address, and the load balancer spreads them across the nodes. If a node fails, the load balancer sends the agents to the remaining nodes.
+-  **Single node**: Each agent uses the address of one node. If that node fails, the agent waits until the node returns.
 
-Connecting Wazuh agents to the Wazuh cluster (Failover mode)
-------------------------------------------------------------
+We recommend a load balancer for any cluster with more than one node. For the load balancer setup, see :ref:`Load balancers <wazuh_manager_cluster_load_balancers_for_the_wazuh_manager_cluster>`. To connect the agents through it, see :ref:`Point the Wazuh agents at the load balancer <wazuh_manager_cluster_point_the_wazuh_agents_at_the_load_balancer>`.
 
-In this method, we add a list of Wazuh server nodes (master/workers) to the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``. In case of a disconnection, the Wazuh agent will connect to another Wazuh server node on the list to continue reporting.
+What every node serves
+----------------------
 
-After :doc:`configuring the Wazuh server cluster </user-manual/wazuh-server-cluster/cluster-nodes-configuration>`, we configure the Wazuh agents to connect and report to the Wazuh server cluster nodes as shown below.
+Every node serves the same agent API, so an agent works with whichever node answers. The master node also owns the operations that create or change an agent identity.
 
-Suppose we have the following IP addresses for the Wazuh server nodes:
+-  Events, inventory, and configuration downloads work on any node.
+-  Enrollment requests reach any node. A worker node forwards them to the master node, which creates the agent identity.
+-  Group changes and agent deletion go through the Wazuh manager API on the master node.
 
-.. code-block:: none
+A newly enrolled agent is known to the worker nodes after the next synchronization cycle. Until then, a worker node can reject its requests. The agent retries and recovers on its own.
 
-   master: 10.0.0.9
-   worker: 10.0.0.10
-   worker2: 10.0.0.11
+Connect Wazuh agents to a single node
+-------------------------------------
 
-#. Edit the ``<client></client>`` block of the Wazuh agent ``/var/ossec/etc/ossec.conf`` file to add the IP addresses of the Wazuh server nodes:
+Without a load balancer, each agent reports to the one node in its endpoint. You can spread agents by giving different agents different node addresses.
 
-   .. code-block:: xml
+Wazuh agents 5.x don't support the failover list of Wazuh agents 4.x. If you upgrade a Wazuh agent 4.x that lists several ``<server>`` blocks, the upgraded agent uses only the last address, on port ``1517``.
 
-      <client>
-          <server>
-              <address>10.0.0.10</address>
-              <port>1514</port>
-          </server>
-          <server>
-              <address>10.0.0.11</address>
-              <port>1514</port>
-          </server>
-          <server>
-              <address>10.0.0.9</address>
-              <port>1514</port>
-          </server>
-          <config-profile>ubuntu, ubuntu18, ubuntu18.04</config-profile>
-          <notify_time>10</notify_time>
-          <time-reconnect>60</time-reconnect>
-          <auto_restart>yes</auto_restart>
-      </client>
+You can also use an enrollment token minted for the master node address. Enroll new agents with it, and move enrolled agents with ``--certs-only``, as described in :ref:`Point the Wazuh agents at the load balancer <wazuh_manager_cluster_point_the_wazuh_agents_at_the_load_balancer>`. The master node mints tokens only for addresses in the SAN of its agent listener certificate. For a worker node address that it doesn't name, set the address by hand.
 
-#. Restart the Wazuh agent to apply changes:
+To set the node address by hand, complete these steps on each Wazuh agent.
 
-   .. include:: /_templates/common/restart_agent.rst
-
-Using this method, if the ``worker`` node is unavailable, the Wazuh agents will report to ``worker2``. If both worker nodes are unavailable, the agent will report to the ``master`` node. This process is performed cyclically between all the nodes that we place in the ``/var/ossec/etc/ossec.conf`` of the Wazuh agents.
-
-.. _connecting_with_load_balancer:
-
-Connecting Wazuh agents to the Wazuh cluster with a load balancer
------------------------------------------------------------------
-
-Wazuh agents can be configured to report to a :doc:`load balancer </user-manual/wazuh-server-cluster/load-balancers>` to evenly distribute incoming Wazuh agent traffic among all available Wazuh server nodes in a cluster. This way, Wazuh agents can report to newly added Wazuh server nodes without modifying the Wazuh agents' configuration.
-
-Perform the following steps to point a Wazuh agent to a load balancer.
-
-#. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Load Balancer IP address. In the ``<server></server>`` block, replace the ``<LOAD_BALANCER_IP>`` with the load balancer IP address:
+#. Set the node address in the ``<agent><manager>`` block of the configuration file on the Wazuh agent:
 
    .. code-block:: xml
-      :emphasize-lines: 3
 
-      <client>
-        <server>
-          <address><LOAD_BALANCER_IP></address>
-          …
-        </server>
-      </client>
+      <agent>
+        <manager>
+          <endpoint><NODE_ADDRESS>:1517/wazuh-manager/</endpoint>
+        </manager>
+      </agent>
 
-#. Restart the Wazuh agents to apply changes:
+   -  Replace ``<NODE_ADDRESS>`` with the IP address or DNS name of the master node or a worker node. The agent listener certificate of that node must name this address.
 
-   .. include:: /_templates/common/restart_agent.rst
+#. Restart the Wazuh agent to apply the change, for example with ``systemctl restart wazuh-agent`` on Linux.
+#. Check on the master node that the agent is active:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/cluster_control -a
+
+   The output lists the agent with the active status.
+
+Wazuh agents 4.x
+----------------
+
+Each node also accepts Wazuh agents 4.x on the legacy channel while the ``<remote><legacy>`` block is enabled. The installer enables it, with agent traffic on port ``1514`` and legacy enrollment on port ``1515``.
+
+-  Wazuh agents 4.x keep their ``<client><server>`` configuration and connect to port ``1514``.
+-  A worker node forwards legacy enrollment requests on port ``1515`` to the master node, like requests on port ``1517``.
+-  Wazuh agents 4.x enroll on port 1515 with the enrollment password, because the installer sets ``<auth><use_password>`` to yes. The cluster copies the password file, ``authd.pass``, to every node.
+-  A Wazuh agent upgraded to 5.x keeps its identity and switches to port ``1517``. It logs the ``<endpoint>`` line that replaces its ``<client><server>`` block. Without a trust anchor, it runs with TLS verification disabled. To give it one, run ``wazuh-agent-auth`` with ``--certs-only``, as in :ref:`Move an enrolled Wazuh agent <wazuh_manager_cluster_move_an_enrolled_wazuh_agent>`.
+
+To balance the legacy ports, send ``1514`` and ``1515`` to every node, as described in :ref:`Balance the legacy channels for Wazuh 4.x agents <wazuh_manager_cluster_balance_the_legacy_channels_for_wazuh_4_x_agents>`.
+

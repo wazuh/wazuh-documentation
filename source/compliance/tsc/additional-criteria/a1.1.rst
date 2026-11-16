@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh helps meet the TSC additional criteria for availability A1.1 using IT hygiene, command monitoring, log data analysis, and security configuration assessment.
+   :description: Wazuh helps meet the TSC additional criteria for availability A1.1 using the IT Hygiene capability, which reports the hardware resources of monitored endpoints.
 
 Availability - A1.1
 =====================
 
-The TSC **additional criteria** for **availability A1.1** *states* that *“The entity maintains, monitors, and evaluates current processing capacity and use of system components (infrastructure, data, and software) to manage capacity demand and to enable the implementation of additional capacity to help meet its objectives”.* Maintaining the availability of information systems is very important to the business activities of service organizations.
+The TSC **additional criteria** for **availability A1.1** states that *“The entity maintains, monitors, and evaluates current processing capacity and use of system components (infrastructure, data, and software) to manage capacity demand and to enable the implementation of additional capacity to help meet its objectives”.* Maintaining the availability of information systems is very important to the business activities of service organizations.
 
-Wazuh helps meet the TSC additional criteria for availability A1.1 requirement by providing several capabilities, including IT hygiene, command monitoring, log data analysis, and security configuration assessment.
+Wazuh helps meet the TSC additional criteria for availability A1.1 requirement with the IT Hygiene capability, which reports the hardware resources, such as CPU and memory, of monitored endpoints.
 
 The use case below demonstrates how Wazuh helps meet this requirement.
 
@@ -20,7 +20,7 @@ Wazuh helps to meet the **TSC additional criteria for availability A1.1** using 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-#. Navigate to **IT Hygiene** on the Wazuh dashboard.
+#. Open the menu (**☰**) and go to **Security operations** > **IT Hygiene**.
 
    .. thumbnail:: /images/compliance/tsc/additional-criteria/overview-it-hygiene-card.png
       :title: Wazuh Overview dashboard - IT Hygiene

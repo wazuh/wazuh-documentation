@@ -381,7 +381,7 @@ Sample of multi-line log message in original log file:
    Aug 9 14:22:47 hostname log line three
    Aug 9 14:22:47 hostname log line five
 
-Sample log message as analyzed by ``wazuh-analysisd``:
+Sample log message as analyzed by ``wazuh-manager-analysisd``:
 
 The command output looks similar to this:
 
@@ -462,9 +462,9 @@ If this is set to yes and the file is, for example, a binary file, it will be di
 age
 ^^^
 
-This specifies to read-only files that have been modified before the specified age.
+Ignores files that have not been modified within the given period.
 
-For example, if the age is set to 1 day, all files that have not been modified since 1 day will be ignored.
+For example, if the age is set to 1 day, files that have not been modified in the last day are ignored.
 
 .. code-block:: xml
 
@@ -572,15 +572,15 @@ For example, we may want to read a Python Traceback output as one single log, re
 ignore
 ^^^^^^
 
-Specify a regular expression to ignore log lines or command outputs when matching. Whether several ignore labels are defined, entries are ignored when matching any of the specified ones.
+Specify a regular expression to ignore log lines or command outputs when matching. If several ignore labels are defined, entries are ignored when matching any of the specified ones.
 
-+----------------------+------------------------------------------+
-| **Default value**    | n/a                                      |
-+----------------------+------------------------------------------+
-| **Allowed values**   | Any regex, sregex or PCRE2 expression.   |
-+----------------------+------------------------------------------+
++----------------------+----------------------------------------------------------------------+
+| **Default value**    | n/a                                                                  |
++----------------------+----------------------------------------------------------------------+
+| **Allowed values**   | Any ``osregex``, ``osmatch`` or ``PCRE2`` expression (see ``type``). |
++----------------------+----------------------------------------------------------------------+
 
-Use the type attribute to define the regular expression type. By default, PCRE2 is applied.
+Use the ``type`` attribute to define the regular expression type: ``osregex`` (OS_Regex syntax), ``osmatch`` (OS_Match syntax, simple string matching where ``^`` matches the start, ``$`` matches the end, ``|`` separates alternatives and ``!`` negates the expression) or ``PCRE2``. By default, PCRE2 is applied.
 
 +------------------+-----------------------------------------+
 | type             | Allows to set regular expression type   |
@@ -604,15 +604,15 @@ For example, to ignore events related to configuration changes in the audit log:
 restrict
 ^^^^^^^^
 
-Specify a regular expression to restrict processed log lines or command outputs. Whether several restrict labels are defined, entries are processed when matching all of them.
+Specify a regular expression to restrict processed log lines or command outputs. If several restrict labels are defined, entries are processed when matching all of them.
 
-+----------------------+------------------------------------------+
-| **Default value**    | n/a                                      |
-+----------------------+------------------------------------------+
-| **Allowed values**   | Any regex, sregex or PCRE2 expression.   |
-+----------------------+------------------------------------------+
++----------------------+----------------------------------------------------------------------+
+| **Default value**    | n/a                                                                  |
++----------------------+----------------------------------------------------------------------+
+| **Allowed values**   | Any ``osregex``, ``osmatch`` or ``PCRE2`` expression (see ``type``). |
++----------------------+----------------------------------------------------------------------+
 
-Use the type attribute to define the regular expression type. By default, PCRE2 is applied.
+Use the ``type`` attribute to define the regular expression type: ``osregex`` (OS_Regex syntax), ``osmatch`` (OS_Match syntax, simple string matching where ``^`` matches the start, ``$`` matches the end, ``|`` separates alternatives and ``!`` negates the expression) or ``PCRE2``. By default, PCRE2 is applied.
 
 +------------------+-----------------------------------------+
 | type             | Allows to set regular expression type   |
@@ -634,7 +634,7 @@ For example, to restrict syslog events related to a particular user name:
    </localfile>
 
 .. note::
-   For formats that group multiple lines, the entire group is treated as a single log when evaluating the regex. Whether the same log entry matches an ignore and also a restrict configured for the same ``localfile``, the entry is discarded. In other words, the ``ignore`` has precedence over ``restrict``. Said that, if the same expression is defined in both ``ignore`` and ``restrict``, no log will be processed for that ``localfile``. The ``eventchannel`` format already provides a way to filter logs through queries. Therefore, ``ignore`` and ``restrict`` settings don't apply to this format.
+   For formats that group multiple lines, the entire group is treated as a single log when evaluating the regex. If the same log entry matches an ignore and also a restrict configured for the same ``localfile``, the entry is discarded. In other words, the ``ignore`` has precedence over ``restrict``. Said that, if the same expression is defined in both ``ignore`` and ``restrict``, no log will be processed for that ``localfile``. The ``eventchannel`` format already provides a way to filter logs through queries. Therefore, ``ignore`` and ``restrict`` settings don't apply to this format.
 
 filter
 ^^^^^^

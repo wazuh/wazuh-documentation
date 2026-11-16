@@ -17,4 +17,4 @@ The additional security options include:
    manager-identity-verification
    agent-identity-verification
 
-These security options are available only when enrolling Wazuh agents via the :doc:`agent configuration method <../enrollment-methods/via-agent-configuration/index>`.
+These security options are used when enrolling Wazuh agents via the :doc:`agent configuration method <../enrollment-methods/via-agent-configuration/index>`. With an enrollment token, the Wazuh agent verifies the Wazuh manager without them, as described in :doc:`Wazuh manager identity verification <manager-identity-verification>`.

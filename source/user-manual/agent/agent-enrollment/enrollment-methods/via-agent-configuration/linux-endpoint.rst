@@ -10,7 +10,7 @@ Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent confi
 
 #. Launch the terminal, obtain root access, edit the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``, and make the following changes:
 
-   #. Add the Wazuh manager IP address or fully qualified domain name (FQDN). For Wazuh 5.0 agents, replace the ``MANAGER_IP`` placeholder that the package writes in ``<endpoint>``. The setting depends on the Wazuh agent version:
+   #. Add the Wazuh manager IP address or fully qualified domain name (FQDN). For Wazuh 5.0 agents, replace the ``MANAGER_IP`` placeholder that the package writes in ``<endpoint>``. Set ``<WAZUH_MANAGER_ADDRESS>`` to the IP address or FQDN only. The Wazuh agent adds the default port, ``1517``, and path, ``wazuh-manager``. The setting depends on the Wazuh agent version:
 
       **Wazuh 5.0 agents**:
 
@@ -43,7 +43,7 @@ Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent confi
 
       .. note::
 
-         (4.x only) If you have a Wazuh manager cluster, you can add multiple ``<server>`` sections that point to the worker nodes. Refer to pointing agents to the cluster (Failover mode) for more information.
+         (4.x only) If you have a Wazuh manager cluster, you can add multiple ``<server>`` sections that point to the worker nodes. Refer to `pointing agents to the cluster (Failover mode) <https://documentation.wazuh.com/4.14/user-manual/wazuh-server-cluster/agent-connections.html#connecting-wazuh-agents-to-the-wazuh-cluster-failover-mode>`__ for more information.
 
    #. Store the enrollment password in ``/var/ossec/etc/authd.pass``. For the steps and the required file permissions, see the :doc:`Enroll Wazuh agents with password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>` section.
 
@@ -77,8 +77,8 @@ Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent confi
          <ossec_config>
            <agent>
              <enrollment>
-               <agent_name><EXAMPLE_NAME></agent_name>
-               <groups><GROUP1>,<GROUP2>,<GROUP3></groups>
+               <agent_name>EXAMPLE_NAME</agent_name>
+               <groups>GROUP1,GROUP2,GROUP3</groups>
                ...
              </enrollment>
            </agent>
@@ -93,8 +93,8 @@ Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent confi
            <client>
              ...
              <enrollment>
-               <agent_name><EXAMPLE_NAME></agent_name>
-               <groups><GROUP1>,<GROUP2>,<GROUP3></groups>
+               <agent_name>EXAMPLE_NAME</agent_name>
+               <groups>GROUP1,GROUP2,GROUP3</groups>
                ...
              </enrollment>
            </client>
@@ -102,8 +102,8 @@ Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent confi
 
       These optional enrollment parameters provide the Wazuh agent with specific information during enrollment. Some common enrollment parameters are:
 
-      -  ``<agent_name><EXAMPLE_NAME></agent_name>``: Specifies the name that the Wazuh agent uses during enrollment. If you do not configure this setting, the Wazuh agent uses the endpoint hostname.
-      -  ``<groups><GROUP1>,<GROUP2>,<GROUP3></groups>``: Specifies the groups that the Wazuh agent joins during enrollment. An agent group is a collection of Wazuh agents that share the same configuration. The Wazuh manager pushes configuration settings to Wazuh agents that belong to the same group. Enrollment fails if you specify a group that does not exist. Create the required group on the Wazuh manager before you use the ``<groups>`` setting. For more information, see :doc:`Grouping agents </user-manual/agent/agent-management/grouping-agents>`.
+      -  ``<agent_name>EXAMPLE_NAME</agent_name>``: Specifies the name that the Wazuh agent uses during enrollment. If you do not configure this setting, the Wazuh agent uses the endpoint hostname.
+      -  ``<groups>GROUP1,GROUP2,GROUP3</groups>``: Specifies the groups that the Wazuh agent joins during enrollment. An agent group is a collection of Wazuh agents that share the same configuration. The Wazuh manager pushes configuration settings to Wazuh agents that belong to the same group. Enrollment fails if you specify a group that does not exist. Create the required group on the Wazuh manager before you use the ``<groups>`` setting. For more information, see :doc:`Grouping agents </user-manual/agent/agent-management/grouping-agents>`.
 
       More optional enrollment parameters and their usage can be found in the :ref:`Wazuh agent configuration reference <reference_ossec_agent_enrollment>`.
 

@@ -40,7 +40,7 @@ Although the COSO framework and the Trust Services Criteria (TSC) are closely re
 
 To view the TSC-related data on the Wazuh dashboard:
 
-#. Click the menu icon, then navigate to **Security operations** > **Regulatory Compliance** > **TSC**.
+#. Open the menu (**☰**) and go to **Security operations** > **Regulatory Compliance**, then click **TSC**.
 
    .. thumbnail:: /images/compliance/tsc/wazuh-overview-tsc-card.png
       :title: Wazuh Overview dashboard
@@ -83,13 +83,15 @@ Wazuh has standard policies that include decoders, KVDBs, and rules that detect 
        - CC7.2
        - CC7.3
 
+To create a custom rule and put it into production, see :ref:`Create a custom rule <data_analysis_create_custom_rule>`.
+
 You can find examples of technical requirements that Wazuh supports in the following sections:
 
 .. toctree::
    :maxdepth: 1
 
-   common-criteria/cc2.1
-   common-criteria/cc3.1
+   common-criteria/cc7.2
+   common-criteria/cc6.8
    common-criteria/cc5.1
    common-criteria/cc6.1
    common-criteria/cc7.1

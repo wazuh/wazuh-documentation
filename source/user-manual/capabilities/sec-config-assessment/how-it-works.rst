@@ -33,7 +33,7 @@ The sequence diagram below depicts the integrity and alerting flow.
 Understanding SCA scan results
 -------------------------------
 
-SCA scan results appear as findings with SCA scan data when a check's status changes between scans. Wazuh agents send only the events necessary to keep the SCA state synchronized, which avoids potential event flooding.
+SCA scan results appear as findings with SCA scan data when a check's status changes between scans. Wazuh agents send only the events necessary to keep the SCA state synchronized, which avoids potential event flooding. The exception is a policy update, described in :ref:`Integrity of policy files <sca_integrity_policy_files>`.
 
 Any given check event has three possible results:
 
@@ -41,7 +41,7 @@ Any given check event has three possible results:
 - Failed: The endpoint configuration does not satisfy the conditions defined in the check.
 - Not applicable: The check cannot be evaluated, for example, because a required file, command output, or registry value is unavailable or it does not apply to the operating system or software.
 
-The set of rules and the :ref:`check <sca_policy_file_checks_section>` result aggregator determine this result.
+The set of rules and the :ref:`check's <sca_policy_file_checks_section>` condition field (``all``, ``any``, or ``none``) determine this result.
 
 The Wazuh dashboard shows the **Overall score** of each SCA policy. The score is the percentage of applicable checks that passed. It equals the passed checks divided by the sum of passed and failed checks. Checks with the Not applicable result don't count toward the score. For example, 119 passed checks and 118 failed checks give a score of 50.211%.
 
@@ -162,7 +162,7 @@ The YAML definition for check ``35622`` is shown below.
        - "c:systemctl is-active ufw -> r:^active"
        - 'c:ufw status -> r:Status:\s+active'
 
-Evaluating each check updates its state document in the ``wazuh-states-sca`` index. The following document is the state of check ``35624`` on the same endpoint, before the remediation:
+Evaluating each check updates its state document in the ``wazuh-states-sca`` index. The following document is the state of check ``35624`` (Ensure ufw default deny firewall policy), another ufw check of the same policy, on the same endpoint, before the remediation:
 
 .. code-block:: json
 
@@ -337,11 +337,11 @@ Evaluating each check updates its state document in the ``wazuh-states-sca`` ind
 Remediation
 ~~~~~~~~~~~
 
-The scan result above is **Failed** because ufw is inactive, so the output of the command ``ufw status`` is ``Status: inactive``. Check ``35622`` needs the ufw service to be enabled and active, and ``ufw status`` to show ``Status: active``.
+On this endpoint, check ``35622`` is **Failed** because ufw is inactive, so the output of the command ``ufw status`` is ``Status: inactive``. Check ``35622`` needs the ufw service to be enabled and active, and ``ufw status`` to show ``Status: active``. The remediation in the scan result quotes the CIS benchmark text. Some of its commands, such as ``systemctl --now enable ufw.service active`` and ``ufw enable.``, aren't valid as written, so use the steps below instead of pasting them.
 
-The steps below show how to apply the remediation that Wazuh suggests to harden the endpoint:
+The steps below adapt the remediation that Wazuh suggests so that the endpoint keeps its connection to the Wazuh manager:
 
-#. Run the following commands on the monitored endpoint. They allow SSH, DNS, and the Wazuh agent connections to the Wazuh manager, then set the default deny policy and turn on ufw. Replace ``<WAZUH_MANAGER_IP>`` with the IP address of your Wazuh manager, and add an allow rule for any other connection the endpoint needs:
+#. Run the following commands on the monitored endpoint. They allow SSH, DNS, and the Wazuh agent connections to the Wazuh manager, then set the default deny policy and turn on ``ufw``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address of your Wazuh manager, and add an allow rule for any other connection the endpoint needs. Without these allow rules, the default deny policy cuts the endpoint off from the Wazuh manager and from remote access:
 
    .. code-block:: console
 
@@ -359,7 +359,7 @@ The steps below show how to apply the remediation that Wazuh suggests to harden 
 
       # systemctl restart wazuh-agent
 
-The scan result for check ``35622`` changes to **Passed** at the next SCA synchronization, about 5 minutes after the restart, as shown in the image below:
+The scan result for check ``35622`` changes to **Passed** at the next SCA synchronization, usually 5 to 15 minutes after the restart, as shown in the image below:
 
 .. thumbnail:: /images/sca/configuration-assessment-scan-result.png
    :title: Check 35622 passed after remediation
@@ -371,6 +371,8 @@ Integrity mechanisms
 ---------------------
 
 Wazuh uses two integrity mechanisms to keep the SCA states on the Wazuh agent and the Wazuh manager synchronized. These mechanisms ensure the integrity of the policy files and scan results.
+
+.. _sca_integrity_policy_files:
 
 Integrity of policy files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -385,7 +387,7 @@ When the hash of a policy file changes, Wazuh performs the following recovery st
 
 .. note::
 
-   Wazuh triggers findings for every check in a policy when the policy is updated. This avoids false negatives.
+   When a policy file changes, Wazuh generates findings for every check in the policy, not only for checks whose result changed. This is the exception to the usual behavior: the Wazuh manager has flushed its data for the policy, so resending every result makes sure that no check result is missing.
 
 Integrity of the scan results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -409,7 +411,7 @@ The table below shows an example of the SCA state stored in the Wazuh agent and 
    | 1003     | Passed           | Passed             |
    +----------+------------------+--------------------+
 
-For these databases, the corresponding SHA256 hashes are:
+Each side computes a SHA256 hash over the check results it stores for the policy. In this example, the hashes are:
 
 .. code-block:: none
 

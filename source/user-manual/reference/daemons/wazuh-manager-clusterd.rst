@@ -17,7 +17,8 @@ For more information about configuring and managing a Wazuh cluster, see the :do
 +---------------+------------------------------------------------------------------------+
 | Option        | Description                                                            |
 +===============+========================================================================+
-| -c <config>   | Specifies the configuration file to use.                               |
+| -c <config>   | Specifies the configuration file to use. The default is                |
+|               | ``/etc/wazuh-manager/wazuh-manager.conf``.                             |
 +---------------+------------------------------------------------------------------------+
 | -d            | Enables debug messages. Repeat the option to increase the verbosity.   |
 +---------------+------------------------------------------------------------------------+
@@ -25,7 +26,8 @@ For more information about configuring and managing a Wazuh cluster, see the :do
 +---------------+------------------------------------------------------------------------+
 | -h, --help    | Displays the help message and exits.                                   |
 +---------------+------------------------------------------------------------------------+
-| -r            | Runs the service as the root user.                                     |
+| -r            | Keeps the service running as root. Without this option, the service    |
+|               | switches to the ``wazuh-manager`` user when it starts as root.         |
 +---------------+------------------------------------------------------------------------+
 | -t            | Tests the configuration and exits.                                     |
 +---------------+------------------------------------------------------------------------+

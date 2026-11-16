@@ -22,7 +22,7 @@ Prerequisites
 
 Before a Wazuh agent can be enrolled in the Wazuh manager using the password authentication method, you must complete the following on the Wazuh manager:
 
-#. The configuration that the installer generates enables password authentication. When ``<use_password>`` is absent, the default value is ``no``. The ``<auth>`` section of the Wazuh manager configuration file ``/etc/wazuh-manager/wazuh-manager.conf`` includes the following setting:
+#. Check that the ``<auth>`` section of the Wazuh manager configuration file ``/etc/wazuh-manager/wazuh-manager.conf`` includes the following setting. The installer adds it. If ``<use_password>`` is absent, the default value is ``no``, so add it:
 
    .. code-block:: xml
 
@@ -94,36 +94,39 @@ Linux/Unix
 
 Follow these steps to enroll a Linux/Unix endpoint with password authentication:
 
-#. Launch the terminal with root permissions, and create the ``/var/ossec/etc/authd.pass`` file with the Wazuh agent enrollment password in it.
+#. Launch the terminal with root permissions, and create the ``/var/ossec/etc/authd.pass`` file with the Wazuh agent enrollment password in it. Replace ``<CUSTOM_PASSWORD>`` with the Wazuh agent enrollment password from the Wazuh manager.
 
    .. code-block:: console
 
       # echo "<CUSTOM_PASSWORD>" > /var/ossec/etc/authd.pass
 
-   #. Replace ``<CUSTOM_PASSWORD>`` with the Wazuh agent enrollment password from the Wazuh manager.
-   #. Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. You can configure the permissions and ownership by running the commands below:
+   Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. You can configure the permissions and ownership by running the commands below:
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # chmod 640 /var/ossec/etc/authd.pass
-         # chown root:wazuh /var/ossec/etc/authd.pass
-         # ls -l /var/ossec/etc/authd.pass
+      # chmod 640 /var/ossec/etc/authd.pass
+      # chown root:wazuh /var/ossec/etc/authd.pass
+      # ls -l /var/ossec/etc/authd.pass
 
-      The output below shows the recommended file owner and permissions.
+   The output below shows the recommended file owner and permissions.
 
-      .. code-block:: none
-         :class: output
+   .. code-block:: none
+      :class: output
 
-         -rw-r-----. 1 root wazuh   33 Jul 10 16:39 authd.pass
+      -rw-r-----. 1 root wazuh   33 Jul 10 16:39 authd.pass
 
-#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``/var/ossec/etc/authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file.
+#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``/var/ossec/etc/authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file. For Wazuh 4.x agents, use ``<client>`` instead of ``<agent>``.
 
    .. code-block:: xml
-      :emphasize-lines: 2
+      :emphasize-lines: 4
 
-      <enrollment>
-        <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
-      </enrollment>
+      <ossec_config>
+        <agent>
+          <enrollment>
+            <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
+          </enrollment>
+        </agent>
+      </ossec_config>
 
 #. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``. The setting depends on the Wazuh agent version:
 
@@ -175,10 +178,10 @@ Windows
 
 Follow these steps to enroll a Windows endpoint with password authentication:
 
-The Wazuh agent installation directory depends on the host's architecture.
+The Wazuh agent is a 32-bit application. Its installation directory depends on the Windows operating system architecture:
 
--  ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
--  ``C:\Program Files\ossec-agent`` for 32-bit systems.
+-  On a 64-bit Windows operating system, Windows installs the Wazuh agent in ``C:\Program Files (x86)\ossec-agent``
+-  On a 32-bit Windows operating system, Windows installs the Wazuh agent in ``C:\Program Files\ossec-agent``
 
 #. Launch PowerShell as an administrator.
 
@@ -196,14 +199,18 @@ The Wazuh agent installation directory depends on the host's architecture.
 
       > Set-Content -Path "C:\Program Files (x86)\ossec-agent\authd.pass" -Value "<CUSTOM_PASSWORD>" -Encoding ascii
 
-#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``C:\Program Files (x86)\ossec-agent\authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file.
+#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``C:\Program Files (x86)\ossec-agent\authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file. For Wazuh 4.x agents, use ``<client>`` instead of ``<agent>``.
 
    .. code-block:: xml
-      :emphasize-lines: 2
+      :emphasize-lines: 4
 
-      <enrollment>
-        <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
-      </enrollment>
+      <ossec_config>
+        <agent>
+          <enrollment>
+            <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
+          </enrollment>
+        </agent>
+      </ossec_config>
 
 #. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. The setting depends on the Wazuh agent version:
 
@@ -266,35 +273,38 @@ macOS
 
 Follow the steps below to enroll a macOS endpoint with password authentication:
 
-#. Launch the terminal with root permissions, create a file called ``/Library/Ossec/etc/authd.pass``, and save the password to it:
+#. Launch the terminal with root permissions, create a file called ``/Library/Ossec/etc/authd.pass``, and save the password to it. Replace ``<CUSTOM_PASSWORD>`` with the Wazuh agent enrollment password created on the Wazuh manager:
 
    .. code-block:: console
 
       # echo "<CUSTOM_PASSWORD>" > /Library/Ossec/etc/authd.pass
 
-   #. Replace ``<CUSTOM_PASSWORD>`` with the Wazuh agent enrollment password created on the Wazuh manager.
-   #. Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. Configure the permissions and ownership by running the commands below:
+   Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. Configure the permissions and ownership by running the commands below:
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # chmod 640 /Library/Ossec/etc/authd.pass
-         # chown root:wazuh /Library/Ossec/etc/authd.pass
+      # chmod 640 /Library/Ossec/etc/authd.pass
+      # chown root:wazuh /Library/Ossec/etc/authd.pass
 
-      The output below shows the recommended file owner and permissions:
+   The output below shows the recommended file owner and permissions:
 
-      .. code-block:: none
-         :class: output
+   .. code-block:: none
+      :class: output
 
-         -rw-r-----  1 root  wazuh  33 Jul 09 20:26 /Library/Ossec/etc/authd.pass
+      -rw-r-----  1 root  wazuh  33 Jul 09 20:26 /Library/Ossec/etc/authd.pass
 
-#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``/Library/Ossec/etc/authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file.
+#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``/Library/Ossec/etc/authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file. For Wazuh 4.x agents, use ``<client>`` instead of ``<agent>``.
 
    .. code-block:: xml
-      :emphasize-lines: 2
+      :emphasize-lines: 4
 
-      <enrollment>
-        <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
-      </enrollment>
+      <ossec_config>
+        <agent>
+          <enrollment>
+            <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
+          </enrollment>
+        </agent>
+      </ossec_config>
 
 #. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file ``/Library/Ossec/etc/ossec.conf``. The setting depends on the Wazuh agent version:
 

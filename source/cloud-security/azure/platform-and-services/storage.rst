@@ -9,6 +9,7 @@ Microsoft Azure Storage
 `Microsoft Azure Storage <https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction>`__ refers to the Microsoft Azure cloud storage solution. This service provides a massively scalable object store for data objects, a messaging store for reliable messaging, a file system service for the cloud, and a NoSQL store.
 
 .. thumbnail:: /images/cloud-security/azure/microsoft-azure-storage-diagram.png
+   :alt: Diagram of Azure Activity Log exported to OMS Log Analytics, Event Hubs, Power BI, and Azure Storage (highlighted)
    :align: center
    :width: 80%
 
@@ -25,18 +26,21 @@ Configure the audit log export on Microsoft Azure
 #. Select the **Audit Logs** option from the **Monitoring** section within **Microsoft Entra ID** and click on **Export Data Settings**.
 
    .. thumbnail:: /images/cloud-security/azure/export-data-settings.png
+      :alt: Export Data Settings option on the Microsoft Entra ID Audit logs page in the Azure portal
       :align: center
       :width: 80%
 
 #. Click **Add diagnostic setting**.
 
    .. thumbnail:: /images/cloud-security/azure/add-diagnostic-setting2.png
+      :alt: Add diagnostic setting link on the Microsoft Entra ID Diagnostic settings page in the Azure portal
       :align: center
       :width: 80%
 
 #. Select the **AuditLogs** and **Archive to the storage account** checkboxes, then select the subscription and storage account to which you want to export the logs from the drop-down menu.
 
    .. thumbnail:: /images/cloud-security/azure/archive-to-the-storage-account.png
+      :alt: Diagnostic setting in the Azure portal, with AuditLogs and Archive to a storage account selected
       :align: center
       :width: 80%
 
@@ -99,15 +103,18 @@ Create a new user in your Microsoft Azure environment using Microsoft Entra ID. 
 Refer to the :ref:`creating a user <log_analytics_use_case_creating_user>` section under the Azure Log Analytics use case and follow the steps.
 
 .. thumbnail:: /images/cloud-security/azure/new-container-available.png
+   :alt: insights-logs-auditlogs container listed on the storage account Containers page in the Azure portal
    :align: center
    :width: 80%
 
 You can check the results in the Wazuh dashboard.
 
 .. thumbnail:: /images/cloud-security/azure/results-in-wazuh-dashboard2.png
+   :alt: Threat Hunting Findings tab in the Wazuh dashboard, showing Azure user account created and modified events
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/cloud-security/azure/results-in-wazuh-dashboard2-details.png
+   :alt: Document Details flyout in the Wazuh dashboard for an Azure audit log finding
    :align: center
    :width: 80%

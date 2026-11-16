@@ -13,7 +13,7 @@ Example: Extract the command line of a started process
 
 ``process.command_line`` holds the full command line of a process. This decoder extracts it with a parse pattern: the text between the quotes after ``cmdline=`` goes into the field.
 
-The decoder is a child of the root decoder of your integration, ``decoder/core-wazuh-message/0``, as in :ref:`Create a security analytics detection workflow <data_analysis_detection_workflow>`. Create it in **Ruleset management** > **Normalization** > **Decoders**, then check the output in **Log test**. The highlighted lines show where ``process.command_line`` is used and where it appears in the output.
+The decoder is a child of the root decoder of the space, ``decoder/core-wazuh-message/0``, as in :ref:`Create a security analytics detection workflow <data_analysis_detection_workflow>`. Create it in **Ruleset management** > **Normalization** > **Decoders**, then check the output in **Log test**. The highlighted lines show where ``process.command_line`` is used and where it appears in the output.
 
 **Sample log**
 

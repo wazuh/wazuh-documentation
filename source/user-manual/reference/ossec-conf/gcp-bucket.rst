@@ -75,7 +75,7 @@ Bucket options
 +======================+=============================================================================================+======================+
 | name                 | Any valid bucket name                                                                       | Mandatory            |
 +----------------------+---------------------------------------------------------------------------------------------+----------------------+
-| credentials_file     | Path to a credentials file. It can be absolute or relative to WAZUH_HOME                    | Mandatory            |
+| credentials_file     | Path to a credentials file, absolute or relative to the Wazuh agent installation directory  | Mandatory            |
 +----------------------+---------------------------------------------------------------------------------------------+----------------------+
 | path                 | Any valid path                                                                              | Optional             |
 +----------------------+---------------------------------------------------------------------------------------------+----------------------+
@@ -109,7 +109,7 @@ Name of the Google Cloud Storage bucket from which logs are read.
 credentials_file
 ^^^^^^^^^^^^^^^^^^
 
-Path to the Google Cloud credentials file. It can be an absolute path or relative to WAZUH_HOME.
+Path to the Google Cloud credentials file. It can be an absolute path or a path relative to the Wazuh agent installation directory (``/var/ossec`` on Linux).
 
 +----------------------+----------------------------------+
 | **Default value**    | n/a                              |

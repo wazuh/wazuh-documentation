@@ -16,6 +16,10 @@ The ``ossec.conf`` file is the main local configuration file for the Wazuh agent
 
 The file uses XML syntax. All configuration sections must be defined within the top-level ``<ossec_config>`` element. It is recommended to back up this file before making changes to it. A configuration error may prevent Wazuh services from starting up.
 
+.. note::
+
+   This file configures the Wazuh agent only. The Wazuh manager uses ``/etc/wazuh-manager/wazuh-manager.conf``. See :ref:`reference_wazuh_manager_conf`.
+
 The following example shows the placement of the ``<agent>`` section:
 
 .. code-block:: xml
@@ -29,9 +33,11 @@ The following example shows the placement of the ``<agent>`` section:
      </agent>
    </ossec_config>
 
-You can define multiple ``<ossec_config>`` elements in the file. When the same option is defined more than once, a later definition may override an earlier one.
+You can define multiple ``<ossec_config>`` elements in the file. The Wazuh agent reads them in order. When the same option is defined more than once, most single-value options take the last definition, and repeatable options such as ``<localfile>`` or ``<directories>`` add up.
 
 Use ``ossec.conf`` to configure an individual agent locally. To distribute supported configuration settings centrally, use the ``agent.conf`` file for the agent group. See :doc:`centralized configuration <../centralized-configuration>`.
+
+Sections written as ``<wodle name="...">`` configure wodles. A wodle (Wazuh module) is a data-collection module that the Wazuh agent runs inside ``wazuh-modulesd``, such as ``aws-s3``, ``azure-logs``, ``command``, ``docker-listener`` or ``syscollector``.
 
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | Configuration sections                                  | Description                                                                                  |
@@ -40,6 +46,9 @@ Use ``ossec.conf`` to configure an individual agent locally. To distribute suppo
 |                                                         | offender timeouts.                                                                           |
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | :doc:`agent <agent>`                                    | Configures the agent's connection to the manager and enrollment settings.                    |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`agent-info <agent-info>`                          | Sets how often the agent collects its metadata and checks its synchronization with the Wazuh |
+|                                                         | manager.                                                                                     |
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | :doc:`agent-upgrade <agent-upgrade>`                    | Configures remote agent upgrade behavior and WPK certificate validation.                     |
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+
@@ -89,6 +98,7 @@ Use ``ossec.conf`` to configure an individual agent locally. To distribute suppo
 
    active-response
    agent
+   agent-info
    agent-upgrade
    anti-tampering
    client

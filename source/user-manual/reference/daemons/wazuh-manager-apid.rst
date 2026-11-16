@@ -17,7 +17,9 @@ The API enables applications, the Wazuh dashboard, and other clients to securely
 +---------------+-------------------------------------------------------------------------------------------+
 | Option        | Description                                                                               |
 +===============+===========================================================================================+
-| -c <config>   | Uses the specified configuration file.                                                    |
+| -c <config>   | Reads the Wazuh manager API configuration from the specified YAML file instead of         |
+|               | ``/var/wazuh-manager/api/configuration/api.yaml``. Settings missing from the file take    |
+|               | their default values.                                                                     |
 +---------------+-------------------------------------------------------------------------------------------+
 | -d            | Enables debug messages. Repeat the option (for example, -dd) to increase the verbosity.   |
 +---------------+-------------------------------------------------------------------------------------------+
@@ -25,7 +27,8 @@ The API enables applications, the Wazuh dashboard, and other clients to securely
 +---------------+-------------------------------------------------------------------------------------------+
 | -h, --help    | Displays the help message and exits.                                                      |
 +---------------+-------------------------------------------------------------------------------------------+
-| -r            | Runs the service as the root user.                                                        |
+| -r            | Keeps the service running as root. Without this option, the service switches to the       |
+|               | ``wazuh-manager`` user when it starts.                                                    |
 +---------------+-------------------------------------------------------------------------------------------+
 | -t            | Tests the configuration.                                                                  |
 +---------------+-------------------------------------------------------------------------------------------+

@@ -141,7 +141,7 @@ After every component is installed and running, each component stores the passwo
 
       # rm -f /etc/wazuh-indexer/ca/root-ca.key /etc/wazuh-manager/ca/root-ca.key /etc/wazuh-manager/ca/root-ca.srl
 
-Editing ``local.env`` after installation doesn't change any password. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation. In a distributed deployment, after you change the ``kibanaserver`` or ``wazuh-internal-client`` password, also update the keystore of each Wazuh dashboard node where you didn't run the Wazuh passwords tool, as described in :ref:`Update the Wazuh dashboard configuration <update_wazuh_dashboard_configuration>`.
+Editing ``local.env`` after installation doesn't change any password. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation. In a distributed deployment, after you change the ``kibanaserver`` or ``wazuh-internal-client`` password, also update the keystore of each Wazuh dashboard node where you didn't run the Wazuh passwords tool, as described in :ref:`Update the Wazuh dashboard nodes <update_wazuh_dashboard_configuration>`.
 
 Disable Wazuh updates
 ---------------------

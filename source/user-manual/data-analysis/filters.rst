@@ -8,7 +8,7 @@
 Filters
 =======
 
-Filters are engine-level constructs that control how events are routed and processed within the security analytics pipeline. Like rules, decoders, integrations, and KVDBs, they are a core content type managed by the Wazuh engine, though their use is optional. Defined in YAML, filters are stored in the ``wazuh-threatintel-filters`` index and passed directly to the Wazuh normalization engine, where they govern how events are routed or excluded before and after normalization.
+Filters are engine-level constructs that control how events are routed and processed within the security analytics pipeline. Like rules, decoders, integrations, and KVDBs, they are a core content type managed by the Wazuh normalization engine, though their use is optional. Defined in YAML, filters are stored in the ``wazuh-threatintel-filters`` index and passed directly to the Wazuh normalization engine, where they govern how events are routed or excluded before and after normalization.
 
 There are two types of filters:
 

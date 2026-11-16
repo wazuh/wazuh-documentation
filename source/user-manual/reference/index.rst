@@ -11,6 +11,8 @@ Reference
 
 This part of the user manual covers the configuration files that Wazuh uses and defines the setting options. It explains how to customize Wazuh functionality for the unique environment and specific requirements of each installation.
 
+The Wazuh manager and the Wazuh agent use different configuration files. The Wazuh manager reads ``/etc/wazuh-manager/wazuh-manager.conf``, with the ``<wazuh_config>`` root element, described in :ref:`reference_wazuh_manager_conf`. The Wazuh agent reads ``ossec.conf``, with the ``<ossec_config>`` root element, described in :ref:`reference_ossec_conf`.
+
 .. topic:: Contents
 
     .. toctree::
@@ -18,7 +20,7 @@ This part of the user manual covers the configuration files that Wazuh uses and 
 
        wazuh-manager-conf/index
        ossec-conf/index
-       centralized-configuration.rst
+       centralized-configuration
        internal-options
        daemons/index
        tools/index

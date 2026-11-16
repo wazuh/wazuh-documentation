@@ -8,7 +8,7 @@
 
          .. code-block:: console
 
-            # apt-get install -y tar curl libcap2-bin openssl
+            # apt-get update && apt-get install -y tar curl libcap2-bin openssl
 
       .. group-tab:: Yum
 

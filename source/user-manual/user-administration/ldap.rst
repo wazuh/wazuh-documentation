@@ -6,9 +6,9 @@
 Active Directory and LDAP integration
 =====================================
 
-Lightweight Directory Access Protocol (LDAP) centralizes authentication and authorization data. It also stores structured data such as employee records and contact information. Microsoft Active Directory is a widely used directory service that implements LDAP and extends it with additional features for enterprise identity and access management.
+Lightweight Directory Access Protocol (LDAP) centralizes authentication and authorization data. It also stores structured data such as employee records and contact information. Microsoft Active Directory is a widely used directory service that implements LDAP and adds features for enterprise identity and access management.
 
-You can configure LDAP to provide both authentication and authorization for users accessing the Wazuh dashboard. Authentication verifies user identity using credentials such as a username and password. Authorization retrieves backend roles based on LDAP attributes and determines which actions a user is allowed to perform.
+You can configure LDAP to provide both authentication and authorization for users accessing the Wazuh dashboard. Authentication verifies user identity using credentials such as a username and password. Authorization retrieves backend roles based on LDAP attributes and determines which actions a user can perform.
 
 In this section, we show how to integrate LDAP authentication and authorization with the Wazuh platform. The guide assumes you already have an LDAP server or Microsoft Active Directory.
 
@@ -65,9 +65,9 @@ Create an OU for the Users
    #. Assign a name to the OU. In our case, we name it *People*.
    #. Right-click the **People** OU -> **New -> User** and create users with the following User logon name:
 
-      -  **ldap** — used as the bind user
-      -  **wazuh-admin-user** — used for administrator access
-      -  **wazuh-readonly-user** — used for read-only access
+      -  **ldap**: used as the bind user
+      -  **wazuh-admin-user**: used for administrator access
+      -  **wazuh-readonly-user**: used for read-only access
 
       Fill in the required details and complete the user creation process for each account.
 
@@ -96,8 +96,8 @@ Create an OU for the Groups
    #. Assign a name to the OU. In our case, this is *Groups*.
    #. Right-click the **Groups** OU -> **New -> Group** and create the following groups:
 
-      -  **wazuh-admins** — users who are members have administrator access
-      -  **wazuh-readonly** — users who are members have read-only access
+      -  **wazuh-admins**: users who are members have administrator access
+      -  **wazuh-readonly**: users who are members have read-only access
 
       Fill in the required details and complete the group creation process. These groups will be the backend role in the Wazuh indexer configuration.
 
@@ -230,12 +230,13 @@ The ``authc`` section of the Wazuh indexer security configuration file handles a
 
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
 
-#. Move the ``ldapcacert.pem`` file to the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+#. Move the ``ldapcacert.pem`` file to the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to root:wazuh-indexer and the permissions to 640 using the following commands:
 
    .. code-block:: console
 
       # mv ldapcacert.pem /etc/wazuh-indexer/opensearch-security/
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/ldapcacert.pem
+      # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/ldapcacert.pem
+      # chmod 640 /etc/wazuh-indexer/opensearch-security/ldapcacert.pem
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the appropriate values.
 
@@ -409,7 +410,7 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
       SUCC: Expected 1 config types for node {"updated_config_types":["rolesmapping"],"updated_config_size":1,"message":null} is 1 (["rolesmapping"]) due to: null
       Done with success
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -422,9 +423,9 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** -> **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-      .. thumbnail:: /images/manual/user-administration/ldap/select-roles-mapping.gif
+      .. thumbnail:: /images/manual/user-administration/ldap/select-roles-mapping.png
          :title: Roles mapping selection
          :alt: Roles mapping selection
          :align: center
@@ -453,9 +454,9 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
 
       # systemctl restart wazuh-dashboard
 
-#. Log in to the Wazuh dashboard with your LDAP credentials to test the configuration. In our case, we log in using the ``wazuh-admin-user`` credentials.
+#. Log in to the Wazuh dashboard with your LDAP credentials to test the configuration. In our case, we log in using the ``wazuh-admin-user`` credentials. The Wazuh dashboard displays the user by the value of ``username_attribute``, in our case, Wazuh Admin.
 
-   .. thumbnail:: /images/manual/user-administration/ldap/ldap-admin-login.gif
+   .. thumbnail:: /images/manual/user-administration/ldap/ldap-admin-login.png
       :title: LDAP administrator login
       :alt: LDAP administrator login
       :align: center
@@ -467,7 +468,7 @@ Map LDAP role to Wazuh read-only role
 #. Follow these steps to create a new role mapping and grant read-only permissions to the backend role.
 
    #. Log in to the Wazuh dashboard as an administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** -> **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
@@ -477,9 +478,9 @@ Map LDAP role to Wazuh read-only role
 
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
-   #. Under **Backend roles**, assign the name of the read-only role you have in your LDAP server and click on **Map** to confirm the action. In our case, the backend role (CN) is ``wazuh-readonly``.
+   #. Under **Backend roles**, assign the name of the read-only role you have in your LDAP server and click **Map** to confirm the action. In our case, the backend role (CN) is ``wazuh-readonly``.
 
-#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -492,9 +493,9 @@ Map LDAP role to Wazuh read-only role
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** -> **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
 
-      .. thumbnail:: /images/manual/user-administration/ldap/select-roles-mapping.gif
+      .. thumbnail:: /images/manual/user-administration/ldap/select-roles-mapping.png
          :title: Roles mapping selection
          :alt: Roles mapping selection
          :align: center
@@ -525,7 +526,7 @@ Map LDAP role to Wazuh read-only role
 
 #. Log in to the Wazuh dashboard with your LDAP credentials to test the configuration. In our case, we log in using the ``wazuh-readonly-user`` credentials.
 
-   .. thumbnail:: /images/manual/user-administration/ldap/ldap-readonly-login.gif
+   .. thumbnail:: /images/manual/user-administration/ldap/ldap-readonly-login.png
       :title: LDAP read-only login
       :alt: LDAP read-only login
       :align: center

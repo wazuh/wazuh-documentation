@@ -14,7 +14,7 @@ To run an unattended installation, download and extract the Wazuh source code as
 
 .. code-block:: console
 
-   # sudo ./install.sh
+   # ./install.sh
 
 -  :ref:`Global <unattended_installation_global>`
 -  :ref:`Agent <unattended_installation_agent>`
@@ -50,7 +50,7 @@ The following variables apply to agent installations only and have no effect on 
 |                                 | manager, it also deletes /etc/wazuh-manager, including the       |                              |                                          |
 |                                 | private key of the Wazuh manager CA.                             |                              |                                          |
 +---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
-| ``USER_ENABLE_ACTIVE_RESPONSE`` | If set to n, Active Response is disabled (disabled is set to yes | y                            | y, n                                     |
+| ``USER_ENABLE_ACTIVE_RESPONSE`` | If set to n, Active Response is disabled (disabled is set to yes | y (agent installations only) | y, n                                     |
 |                                 | in the active-response section of ossec.conf).                   |                              |                                          |
 +---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
 | ``USER_ENABLE_SYSCHECK``        | Enables or disables the File integrity monitoring module         | y (agent installations only) | y, n                                     |
@@ -157,7 +157,9 @@ Manager
 |                       | Used for manager installations only; agent installations ignore |         |                |
 |                       | it.                                                             |         |                |
 +-----------------------+-----------------------------------------------------------------+---------+----------------+
-| ``USER_ENABLE_AUTHD`` | Enables or disables the agent enrollment (Auth) service.        | y       | y, n           |
+| ``USER_ENABLE_AUTHD`` | Enables or disables the agent enrollment service                | y       | y, n           |
+|                       | (``wazuh-manager-authd``). If set to n, disabled is set to yes  |         |                |
+|                       | in the auth section of wazuh-manager.conf.                      |         |                |
 +-----------------------+-----------------------------------------------------------------+---------+----------------+
 
 .. note::
@@ -175,7 +177,6 @@ Example:
    USER_LANGUAGE="en"
    USER_INSTALL_TYPE="manager"
    USER_DIR="/var/wazuh-manager"
-   USER_ENABLE_ACTIVE_RESPONSE="y"
    USER_ENABLE_AUTHD="y"
    USER_AUTO_START="y"
    USER_REGISTER_SERVICE="y"

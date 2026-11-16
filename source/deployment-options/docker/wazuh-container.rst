@@ -16,7 +16,7 @@ Wazuh supports deploying its central components and agent on Docker.
 -  :ref:`Single-node stack <deploying-central-components>`: This stack deploys one of each Wazuh central component as a separate container. It includes:
 
    -  Wazuh indexer container: Stores and indexes security data collected by the Wazuh manager. It also provides near real-time search and security analytics.
-   -  Wazuh manager container: Transforms data received from Wazuh agents into standardized schema documents using the Wazuh Common Schema (WCS).
+   -  Wazuh manager container: Transforms data received from Wazuh agents into standardized schema documents using the :doc:`Wazuh Common Schema (WCS) </user-manual/reference/wazuh-common-schema>`.
    -  Wazuh dashboard container: Centralized web interface for monitoring and searching security data, and managing Wazuh.
 
    It provides persistent storage and certificates for secure communication.
@@ -157,7 +157,7 @@ Exposed ports
 
 The following ports are exposed when the Wazuh central components are deployed.
 
-In the multi-node stack, the Nginx container publishes ports 1517 and 1514, and the Wazuh manager master node publishes ports 1515 and 55000. Neither stack publishes the Wazuh indexer API on port 9200. Only the other containers can reach it. The other ports are published on every network interface of the Docker host. The Wazuh dashboard container reaches the Wazuh manager API through the Docker network. If no other host needs port 55000, or the Wazuh 4.x agent ports 1514 and 1515, remove its line from the ports section of the service in ``docker-compose.yml``, or bind it to the local host, for example, ``"127.0.0.1:55000:55000"``.
+In the multi-node stack, the Nginx container publishes ports 1517 and 1514, and the Wazuh manager master node publishes ports 1515 and 55000. Neither stack publishes the Wazuh indexer API on port 9200. Only the other containers can reach it. Every published port listens on all network interfaces of the Docker host. The Wazuh dashboard container reaches the Wazuh manager API through the Docker network. If no other host needs port 55000, or the Wazuh 4.x agent ports 1514 and 1515, remove its line from the ports section of the service in ``docker-compose.yml``, or bind it to the local host, for example, ``"127.0.0.1:55000:55000"``.
 
 +----------+-------------------------------------------+
 | **Port** | **Component**                             |
@@ -316,13 +316,15 @@ Secure communication between Wazuh components requires the use of certificates. 
 
       .. group-tab:: Single-node
 
-         The script adds the address to the certificate of the Wazuh manager.
+         The script adds the address to the certificate of the Wazuh manager. The Wazuh manager API certificate names only ``wazuh.manager``. If API clients outside the stack connect to port 55000 through the Docker host and verify the certificate, also add the Docker host address with ``--api-san <DOCKER_HOST_IP>``. Repeat ``--api-san`` for each address.
 
       .. group-tab:: Multi-node
 
-         The script adds the address to the agent listener certificate of both Wazuh manager nodes so that an agent can verify whichever node answers. Don't add this address to ``config.yml`` instead, because the script rejects an address repeated across Wazuh manager nodes.
+         The script adds the address to the agent listener certificate of both Wazuh manager nodes so that an agent can verify whichever node answers. Don't add this address to ``config.yml`` instead, because the script rejects an address repeated across Wazuh manager nodes. The Wazuh manager API certificates name only ``wazuh.master`` and ``wazuh.worker``. If API clients outside the stack connect to port 55000 through the Docker host and verify the certificate, also add the Docker host address with ``--api-san <DOCKER_HOST_IP>``. The script adds it to the API certificate of both Wazuh manager nodes. Repeat ``--api-san`` for each address.
 
    The certificate creation tool keeps the root CA certificate and its private key in the ``wazuh-ca/`` directory, next to ``wazuh-certs-tool.sh`` in the directory of your stack. The containers receive only the root CA certificate from ``config/root-ca/certs/root-ca.pem``. Back up ``wazuh-ca/``, because you need it to create certificates for new nodes or new Wazuh agent addresses. Always run the script from the directory of your stack. From another directory, the tool creates a new root CA, and Wazuh agents enrolled with the current root CA reject the certificates it signs. To keep the root CA in another directory, set ``WAZUH_CA_DIR`` to its absolute path before you run the script.
+
+.. _docker-create-credentials:
 
 Create the credentials
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -399,7 +401,7 @@ Check that the stack is ready. Run the following command from the directory of y
          # bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv --agent-san <DOCKER_HOST_IP>
          # docker compose up -d
 
-      If ``docker compose up -d`` still stops with ``Are you trying to mount a directory onto a file``, the Wazuh manager volume holds the same directories. Remove them, then start the stack again. If you upgraded the deployment, use the Wazuh manager image tag in your ``docker-compose.yml`` file:
+      If ``docker compose up -d`` still stops with ``Are you trying to mount a directory onto a file``, the Wazuh manager volume holds the same directories. Remove them, then start the stack again. If you migrated from Wazuh 4.x, replace ``single-node_wazuh_etc`` with ``wazuh-5_wazuh_etc``:
 
       .. code-block:: console
 
@@ -424,7 +426,7 @@ Check that the stack is ready. Run the following command from the directory of y
          # bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv --agent-san <DOCKER_HOST_IP>
          # docker compose up -d
 
-      If ``docker compose up -d`` still stops with ``Are you trying to mount a directory onto a file``, the volume of that node holds the same directories. Remove them, then start the stack again. For the master node, use the ``multi-node_master-wazuh-etc`` volume. If you upgraded the deployment, use the Wazuh manager image tag in your ``docker-compose.yml`` file:
+      If ``docker compose up -d`` still stops with ``Are you trying to mount a directory onto a file``, the volume of that node holds the same directories. Remove them, then start the stack again. For the master node, use the ``multi-node_master-wazuh-etc`` volume. Run the following commands from the directory of your stack:
 
       .. code-block:: console
 
@@ -439,6 +441,8 @@ The Wazuh central components don't reload their configuration while they run. Af
 
 At each start, each Wazuh manager container sets its Wazuh indexer hosts, cluster settings, and listener addresses from the ``environment`` section of the ``docker-compose.yml`` file in the directory of your stack (``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/``), so change those settings there. After you change ``docker-compose.yml``, run ``docker compose up -d``, because ``docker compose restart`` doesn't apply changes to that file.
 
+.. _docker-accessing-dashboard:
+
 Accessing the Wazuh dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -450,7 +454,7 @@ After deploying the stack, you can access the Wazuh dashboard using your Docker 
 
 .. note::
 
-   If you open the Wazuh dashboard, your browser warns that it can't verify its certificate. The certificate creation script issued the certificate from a root CA that it created for your deployment, and for the name ``wazuh.dashboard``, not the address you open.
+   If you open the Wazuh dashboard, your browser warns that it can't verify its certificate. The certificate creation script issued the certificate from a root CA that it created for your deployment, and for the name ``wazuh.dashboard``, not the address you open. To continue, accept the warning in your browser. To remove the warning, import ``config/root-ca/certs/root-ca.pem`` from the directory of your stack into the trust store of your browser or operating system. Then open ``https://wazuh.dashboard`` from a computer that resolves that name to the Docker host, for example, through its hosts file.
 
 Log in to the Wazuh dashboard with the ``admin`` username. The password is the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``config/credentials/indexer.env``. Run the following command from the directory of your stack to print it:
 
@@ -492,7 +496,7 @@ You need root user privileges to run the commands below. If you use Docker as a 
 
    The first line of the output is the enrollment token. Copy it. The token expires after 30 days, and any number of Wazuh agents can use it until then. You can also use the token to enroll a Wazuh agent installed from packages. Pass it in ``WAZUH_ENROLLMENT_TOKEN`` when you :doc:`install the Wazuh agent </installation-guide/wazuh-agent/index>`.
 
-   If the command returns ``address not in certificate SAN``, the address isn't in the Wazuh manager agent listener certificate. Use an address you passed with ``--agent-san``, or add the address. To add it, run the following commands from the ``single-node`` or ``multi-node`` directory. Pass every address agents use, because the script creates the certificates again from ``config.yml`` and the ``--agent-san`` values:
+   If the command returns ``address not in certificate SAN``, the address isn't in the Wazuh manager agent listener certificate. Use an address you passed with ``--agent-san``, or add the address. To add it, run the following commands from the ``single-node`` or ``multi-node`` directory. Pass every address agents use, and every ``--api-san`` address you added, because the script creates the certificates again from ``config.yml`` and these options:
 
    .. tabs::
 

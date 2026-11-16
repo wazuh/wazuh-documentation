@@ -52,14 +52,14 @@ Configure the Wazuh manager and dashboard components of an existing deployment t
 Wazuh manager
 ^^^^^^^^^^^^^
 
-#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the ``wazuh-manager-keystore`` tool.
+#. The Wazuh manager connects to the Wazuh indexer as the ``wazuh-manager`` user, and sets that username itself. If the password of the ``wazuh-manager`` user changes, save the new password in the Wazuh manager keystore on every Wazuh manager node, then restart the Wazuh manager. The Wazuh manager never replaces a password it already stored:
 
    .. code-block:: console
 
-      # echo '<WAZUH_INDEXER_USERNAME>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k username
       # echo '<WAZUH_INDEXER_PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password
+      # systemctl restart wazuh-manager
 
-   Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the Wazuh indexer username and password.
+   Replace ``<WAZUH_INDEXER_PASSWORD>`` with the new password of the ``wazuh-manager`` user.
 
    .. note::
 
@@ -93,50 +93,11 @@ Configure the Wazuh dashboard to query all nodes in the cluster by editing ``ope
 Certificates deployment
 -----------------------
 
-Wazuh uses certificates to establish confidentiality and encrypt communications between its central components and between the Wazuh indexer cluster nodes. Follow these steps to create and deploy the certificates.
+Wazuh uses certificates to establish confidentiality and encrypt communications between its central components and between the Wazuh indexer cluster nodes. The Wazuh indexer package of the first node creates the root CA of the deployment in ``/etc/wazuh-indexer/ca``. Every certificate of the cluster must be issued from this root CA.
 
-#. Download the certificates tool and the configuration file:
+Create and deploy the certificates as the :doc:`Wazuh indexer step-by-step installation </installation-guide/wazuh-indexer/step-by-step>` describes. Run the certificates tool on the first Wazuh indexer node with ``WAZUH_CA_DIR=/etc/wazuh-indexer/ca``. On every other node, place the passwords, the root CA certificate, and the certificates of the node before you install the Wazuh indexer package. Otherwise, the package creates its own root CA, certificates, and passwords.
 
-   .. code-block:: console
-
-      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
-      # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yml
-
-#. Edit ``config.yml`` and replace the node names and IP values with the corresponding names and IP addresses of all the Wazuh indexer, Wazuh manager, and Wazuh dashboard nodes. Add as many node fields as your deployment requires.
-
-#. Run the certificates tool to create the certificates:
-
-   .. code-block:: console
-
-      # bash ./wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A
-
-#. Compress all the necessary files and copy the archive to every node in your deployment. You can use the ``scp`` utility or any other secure file transfer method available in your environment:
-
-   .. code-block:: console
-      :emphasize-lines: 2
-
-      # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
-      # scp ./wazuh-certificates.tar <USERNAME>@<TARGET_ENDPOINT_IP>:.
-
-#. On each Wazuh indexer node, deploy the certificates. Replace ``<INDEXER_NODE_NAME>`` with the name of the node you are configuring as defined in ``config.yml``:
-
-   .. code-block:: console
-      :emphasize-lines: 1
-
-      # NODE_NAME=<INDEXER_NODE_NAME>
-      # mkdir -p /etc/wazuh-indexer/certs
-      # tar -xf ./wazuh-certificates.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
-      # mv -n /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
-      # mv -n /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
-      # chmod 500 /etc/wazuh-indexer/certs
-      # chmod 400 /etc/wazuh-indexer/certs/*
-      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
-
-#. Follow these steps to deploy the certificates for the :doc:`Wazuh manager </installation-guide/wazuh-manager/step-by-step>` and the :doc:`Wazuh dashboard </installation-guide/wazuh-dashboard/step-by-step>` nodes.
-
-   .. note::
-
-      Store the root CA certificate and key securely, as they are required to sign certificates for new nodes. If you won't install any other Wazuh components on the node, remove the ``wazuh-certificates.tar`` file for security after deploying the certificates using the command: ``rm -rf ./wazuh-certificates.tar``.
+Keep ``root-ca.key`` in ``/etc/wazuh-indexer/ca`` on the first node, and back up that directory. You need it to add nodes or renew certificates.
 
 .. _wazuh_indexer_cluster_tuning:
 

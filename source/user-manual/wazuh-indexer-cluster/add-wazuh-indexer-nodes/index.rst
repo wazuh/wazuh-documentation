@@ -18,6 +18,8 @@ We have organized the steps for upscaling the Wazuh indexer into two subsections
 
 .. note::
 
+   For high availability, a Wazuh indexer cluster needs at least three cluster-manager-eligible nodes. Electing a cluster manager requires a majority (quorum) of the voting nodes. In a two-node cluster, only one node takes part in the vote, so if that node fails, the cluster can't elect a cluster manager and stops accepting changes. A second node adds data redundancy (replica shards) but not cluster-manager fault tolerance. Use an odd number of cluster-manager-eligible nodes, and add a third node for production deployments.
+
    You need root user privileges to execute the commands below.
 
 .. toctree::

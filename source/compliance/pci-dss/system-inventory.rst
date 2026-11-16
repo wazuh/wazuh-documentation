@@ -12,7 +12,7 @@ The Wazuh Syscollector module helps to meet the following PCI DSS requirement:
 
 -  **Requirement 2 - Apply Secure Configurations to All System Components**: This requirement mandates applying secure configurations to system components to reduce exposure to vendor defaults commonly exploited by malicious individuals. Default passwords and settings are widely known and easily obtained. Secure configurations such as changing default credentials, removing unnecessary software and accounts, and disabling unused services reduce the available attack surface.
 
-The Wazuh Syscollector module satisfies this requirement by maintaining an inventory of endpoint configurations. It discovers active processes, system daemons, hardware specifications, operating system details, network settings, and running services. Additionally, it audits installed browser extensions, user accounts, and local groups. This centralized inventory grants organizations complete visibility into PCI DSS-relevant assets, active network ports, and running software. It enables administrators to systematically identify and remove unauthorized services or default configurations.
+The Wazuh Syscollector module helps meet this requirement by maintaining an inventory of endpoint configurations. It discovers active processes, system daemons, hardware specifications, operating system details, network settings, and running services. Additionally, it audits installed browser extensions, user accounts, and local groups. This centralized inventory grants organizations complete visibility into PCI DSS-relevant assets, active network ports, and running software. It enables administrators to systematically identify and remove unauthorized services or default configurations.
 
 Use case
 --------
@@ -40,10 +40,10 @@ Click the upper-left menu icon **☰** to open the options, and go to **Security
 PCI DSS dashboard
 ~~~~~~~~~~~~~~~~~~
 
-Syscollector data doesn't generate PCI DSS findings. The PCI DSS dashboard shows the findings for requirement 2.2.4 from SCA checks, such as check 35608 in :doc:`Configuration assessment <configuration-assessment>`. To review them, click the menu icon, navigate to **Security operations** > **Regulatory Compliance** > **PCI DSS**, then click the **Controls** tab and select **Requirement 2**. The following image shows the SCA findings for requirement 2.2.4:
+Click the menu icon, navigate to **Security operations** > **Regulatory Compliance** > **PCI DSS**, then click the **Controls** tab and select **Requirement 2** to review findings related to PCI DSS requirement 2.2.4. These findings come from SCA checks that map to this requirement, such as check 35608 in :doc:`Configuration assessment <configuration-assessment>`, not from Syscollector. The following image shows the corresponding PCI DSS finding in the Wazuh dashboard:
 
 .. thumbnail:: /images/compliance/pci/pci-dss-dashboard-requirement-2-2-4.png
    :title: PCI DSS dashboard finding for requirement 2.2.4
-   :alt: PCI DSS Controls tab with Requirement 2 selected and the 2.2.4 requirement card
+   :alt: Requirement 2.2.4 details in the PCI DSS Controls tab with its recent SCA findings
    :align: center
    :width: 80%

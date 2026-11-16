@@ -197,6 +197,8 @@ Wazuh agents perform SCA scans using policy files that contain security configur
 
 SCA data can be queried and visualized from the Wazuh dashboard, providing centralized visibility into compliance status and security configuration findings across monitored endpoints.
 
+.. _wazuh_indexer_indices_data_stream_lifecycle:
+
 Data stream lifecycle
 ---------------------
 

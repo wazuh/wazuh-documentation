@@ -8,7 +8,7 @@ Importing the client key to the Wazuh agent
 
 Configure the Wazuh agent with the client key that you received from the Wazuh manager. The Wazuh agent uses this key to authenticate and communicate with the Wazuh manager.
 
-You can retrieve the client key by using the :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>` endpoint in **Server management** > **Dev Tools** on the Wazuh dashboard. Replace ``<WAZUH_AGENT_ID>`` with the Wazuh agent ID.
+You can retrieve the client key by using the :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>` endpoint in **Server management** > **Dev Tools** on the Wazuh dashboard. Replace ``{agent_id}`` with the Wazuh agent ID returned when you :doc:`requested the client key <requesting-the-key>`.
 
 .. thumbnail:: /images/manual/agent/api-get-agent-key.png
    :title: GET /agents/{agent_id}/key request
@@ -46,7 +46,7 @@ Follow the steps below to import the client key to a Linux/Unix endpoint:
    	Confirm adding it?(y/n): y
    	Added.
 
-#. Add the Wazuh manager IP address or fully qualified domain name (FQDN)  to the Wazuh agent configuration file at ``/var/ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or FQDN.
+#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the Wazuh agent configuration file at ``/var/ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the Wazuh manager IP address or FQDN.
 
    **Wazuh 5.0 agents**:
 

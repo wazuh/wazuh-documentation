@@ -45,13 +45,13 @@ For this use case, configure Wazuh to detect changes to files in the ``/root/cre
 
 **On the agent**
 
-#. Check whether the Audit daemon is installed on your endpoint.
+#. Switch to the root user with ``sudo su``, then check whether the Audit daemon is installed on your endpoint.
 
    .. code-block:: console
 
       # auditctl -v
 
-   In Red Hat-based systems, Auditd is commonly installed by default. If it's not installed, install it using the following command:
+   If the Audit daemon is installed, the output shows its version, for example, ``auditctl version 3.1.2``. You need this version in a later step. In Red Hat-based systems, Auditd is commonly installed by default. If it's not installed, install it using the following command:
 
    .. code-block:: console
 
@@ -63,11 +63,10 @@ For this use case, configure Wazuh to detect changes to files in the ``/root/cre
 
       # apt install auditd
 
-   For audit version 3.1.1 and later, install the audispd-af_unix plugin and restart the audit service:
+   For audit version 3.1.1 and later, restart the audit service. On Red Hat-based systems, first install the ``audispd-af_unix`` plugin with ``yum install audispd-plugins``. On Debian-based systems, the ``auditd`` package already includes the plugin:
 
    .. code-block:: console
 
-      # apt-get install audispd-plugins
       # service auditd restart
 
 #. Create the directory to monitor and a file inside it:
@@ -91,7 +90,7 @@ For this use case, configure Wazuh to detect changes to files in the ``/root/cre
 
       User1 = card4
 
-#. Add the following configuration to the ``syscheck`` block of the agent configuration file (``/var/ossec/etc/ossec.conf``):
+#. Add the following configuration to the ``syscheck`` block of the agent configuration file (``/var/ossec/etc/ossec.conf``). Without a ``<whodata>`` block, the FIM module uses the audit provider for who-data monitoring on Linux, so you don't need to add one. Add it only to choose another provider, such as ``ebpf``:
 
    .. code-block:: xml
 
@@ -116,13 +115,13 @@ For this use case, configure Wazuh to detect changes to files in the ``/root/cre
 
       -w /root/credit_cards -p wa -k wazuh_fim
 
-#. Modify the file by adding new content using nano:
+#. Add new content to the file:
 
    .. code-block:: console
 
-      # nano /root/credit_cards/cardholder_data.txt
+      # echo 'User2 = card2' >> /root/credit_cards/cardholder_data.txt
 
-   You can see a finding indicating that a file in the monitored directory was modified.
+   Open the menu (**☰**), go to **Endpoint security** > **File Integrity Monitoring**, and click the **Findings** tab. You can see a finding indicating that a file in the monitored directory was modified.
 
    .. thumbnail:: /images/compliance/pci/fim-file-modified-finding-01.png
       :title: FIM file modified finding
@@ -155,14 +154,14 @@ In this use case, configure the Wazuh FIM module to scan monitored files every h
 
 **On the agent**
 
-#. Create the directory to monitor and a file inside it:
+#. Switch to the root user with ``sudo su``, then create the directory to monitor and a file inside it:
 
    .. code-block:: console
 
       # mkdir -p /root/debit_cards
       # touch /root/debit_cards/cardholder_data.txt
 
-#. Update the frequency option of the ``syscheck`` block in the agent configuration file (``/var/ossec/etc/ossec.conf``) to your desired scan interval in seconds:
+#. Update the frequency option of the ``syscheck`` block in the agent configuration file (``/var/ossec/etc/ossec.conf``) to the scan interval in seconds. This example uses 3600 seconds (one hour):
 
    .. code-block:: xml
 
@@ -187,7 +186,7 @@ In this use case, configure the Wazuh FIM module to scan monitored files every h
       # echo 'User5 = card5' > /root/debit_cards/cardholder_data.txt
       # echo 'User6 = card6' >> /root/debit_cards/cardholder_data.txt
 
-#. A finding is generated during the next FIM scan to report the file modification.
+#. A finding is generated during the next FIM scan, up to one hour later with this frequency, to report the file modification. For a quicker test, set a lower value, such as ``300``, and restore your production value afterward. Open the menu (**☰**), go to **Endpoint security** > **File Integrity Monitoring**, and click the **Findings** tab.
 
    .. thumbnail:: /images/compliance/pci/fim-content-changes-finding-01.png
       :title: FIM content changes finding
@@ -201,7 +200,7 @@ In this use case, configure the Wazuh FIM module to scan monitored files every h
       :align: center
       :width: 80%
 
-In the expanded finding, you can see the changes made in ``content_changes``, the file modified, and the PCI DSS requirement met. It also includes the differences in the file checksum, the modification time, and other details.
+In the expanded finding, you can see the changes made in ``file.diff``, the file modified, and the PCI DSS requirement met. It also includes the differences in the file checksum, the modification time, and other details.
 
 .. _pci_dss_fim_detect_creation_deletion:
 
@@ -212,7 +211,7 @@ In this use case, the Wazuh FIM module detects when a file in a monitored direct
 
 **On the agent**
 
-#. Create the ``/root/pin_data`` directory to monitor for changes:
+#. Switch to the root user with ``sudo su``, then create the ``/root/pin_data`` directory to monitor for changes:
 
    .. code-block:: console
 
@@ -242,7 +241,7 @@ In this use case, the Wazuh FIM module detects when a file in a monitored direct
 
       # rm /root/pin_data/pin.txt
 
-#. You can see a finding generated for the deleted file.
+#. Open the menu (**☰**), go to **Endpoint security** > **File Integrity Monitoring**, and click the **Findings** tab. You can see one finding for the created file and one for the deleted file.
 
    .. thumbnail:: /images/compliance/pci/fim-file-deleted-finding.png
       :title: FIM file deleted finding
@@ -250,6 +249,6 @@ In this use case, the Wazuh FIM module detects when a file in a monitored direct
       :align: center
       :width: 80%
 
-In the finding details, you can see the file deleted, the PCI DSS requirement met, the deletion time, and other details.
+In the details of the deletion finding, you can see the file deleted, the PCI DSS requirement met, the deletion time, and other details.
 
 You can track these activities from the PCI DSS dashboard. The dashboard shows all activities that trigger a PCI DSS requirement, including FIM changes.

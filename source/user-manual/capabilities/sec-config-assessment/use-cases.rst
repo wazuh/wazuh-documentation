@@ -6,7 +6,7 @@
 Use cases
 =========
 
-This section shows some custom SCA use cases for various operating systems. We provide detailed steps on how to replicate these use cases. The results of a new policy appear in the **Inventory** tab at the next SCA synchronization, about 5 minutes after the Wazuh agent restarts. A finding appears in the **Findings** tab when a check result changes in a later scan.
+This section shows some custom SCA use cases for various operating systems. We provide detailed steps on how to replicate these use cases. The results of a new policy appear in the **Inventory** tab at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts. A finding appears in the **Findings** tab when a check result changes in a later scan. SCA synchronization runs every 5 minutes by default, set by ``<interval>`` in the ``<synchronization>`` block of the ``<sca>`` configuration, and the first one after a restart can take longer. To confirm that it ran, look for ``SCA synchronization finished successfully`` in the Wazuh agent log.
 
 Prerequisites
 -------------
@@ -20,12 +20,12 @@ You need the following deployment to test the use cases defined in this section:
   - A Windows 11 endpoint.
   - A macOS 12 endpoint.
 
-The use cases covered in this section include :ref:`Detecting keywords in a file <detecting_keyword_in_a_file>` and :ref:`Detecting a running process <detecting_a_running_process>`.
+The use cases covered in this section include :ref:`Detecting a keyword in a file <detecting_keyword_in_a_file>` and :ref:`Detecting a running process <detecting_a_running_process>`.
 
 .. _detecting_keyword_in_a_file:
 
-Detecting keyword in a file
----------------------------
+Detecting a keyword in a file
+-----------------------------
 
 In this use case, we demonstrate how you can configure Wazuh SCA to detect the presence of a keyword in a file. We monitor a file ``testfile.txt`` for the phrase ``password_enabled: yes``. The Wazuh SCA module marks the check as **Failed** when it detects the pattern in the file.
 
@@ -38,7 +38,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 
    .. code-block:: console
 
-      # echo -e "config_file\nsecond line of configuration\npassword_enabled: yes" > /usr/share/testfile.txt
+      # printf "config_file\nsecond line of configuration\npassword_enabled: yes\n" > /usr/share/testfile.txt
 
 #. Verify that the file has been created:
 
@@ -72,8 +72,8 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
         name: "SCA use case: Keyword check"
         description: "Guidance for checking for a keyword or phrase in files on Ubuntu endpoints."
         references:
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
 
       requirements:
         name: "Check that the desired file exists on the monitored endpoints"
@@ -94,9 +94,9 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 
 
    - We create a requirement to ensure that the policy runs only if the file ``/usr/share/testfile.txt`` exists on the endpoint.
-   - Check ID ``10000`` scans the file ``/usr/share/testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
+   - Check ID ``10000`` scans the file ``/usr/share/testfile.txt`` to find a line that is exactly ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
 
-#. Change the ownership of the file so Wazuh has permission to it:
+#. Optionally, change the ownership of the file to the ``wazuh`` user and group that the Wazuh agent creates. The SCA module runs as root, so it can read the policy file without this step:
 
    .. code-block:: console
 
@@ -118,7 +118,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 
       # systemctl restart wazuh-agent
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Ubuntu endpoint to view the custom SCA check result. The result appears at the next SCA synchronization, about 5 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Ubuntu endpoint to view the custom SCA check result. Check 10000 shows **Failed**, because the file contains the phrase. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/ubuntu-sca-check-results.png
      :title: Ubuntu results of the custom SCA check
@@ -168,8 +168,8 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
         name: "SCA use case: Keyword check"
         description: "Guidance for checking for a keyword or phrase in files on Windows."
         references:
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
       requirements:
         name: "Check that the desired file exists on the monitored endpoints"
         description: "Requirements for running the SCA scans against endpoints with testfile.txt on them."
@@ -188,7 +188,7 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
 
    - We create a requirement to ensure that the policy runs only if the file ``C:\Program Files\testfile.txt`` exists on the endpoint.
-   - Check ID ``10001`` scans the file ``C:\Program Files\testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
+   - Check ID ``10001`` scans the file ``C:\Program Files\testfile.txt`` to find a line that is exactly ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
 
@@ -206,7 +206,7 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
       > Restart-Service -Name wazuh
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Windows endpoint to view the custom SCA check result. The result appears at the next SCA synchronization, about 5 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Windows endpoint to view the custom SCA check result. Check 10001 shows **Failed**, because the file contains the phrase. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/windows-sca-check-results.png
      :title: Windows results of the custom SCA check
@@ -223,7 +223,7 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
 
    .. code-block:: console
 
-      # echo "config_file\nsecond line of configuration\npassword_enabled: yes" > /usr/local/testfile.txt
+      # printf "config_file\nsecond line of configuration\npassword_enabled: yes\n" > /usr/local/testfile.txt
 
 #. Verify that the file has been created:
 
@@ -256,8 +256,8 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
         name: "SCA use case: Keyword check"
         description: "Guidance for checking for a keyword or phrase in files on macOS endpoints."
         references:
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
 
       requirements:
         name: "Check that the desired file exists on the monitored endpoints"
@@ -278,7 +278,7 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
 
 
    - We create a requirement to ensure that the policy runs only if the file ``/usr/local/testfile.txt`` exists on the endpoint.
-   - Check ID ``10002`` scans the file ``/usr/local/testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
+   - Check ID ``10002`` scans the file ``/usr/local/testfile.txt`` to find a line that is exactly ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/Library/Ossec/etc/ossec.conf``:
 
@@ -296,7 +296,7 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
 
       # /Library/Ossec/bin/wazuh-control restart
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the macOS endpoint to view the custom SCA check result. The result appears at the next SCA synchronization, about 5 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the macOS endpoint to view the custom SCA check result. Check 10002 shows **Failed**, because the file contains the phrase. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/macos-sca-check-results.png
      :title: macOS results of the custom SCA check
@@ -334,8 +334,8 @@ The following steps show how to configure the Wazuh SCA module to detect running
         name: "SCA use case to detect running processes"
         description: "Guidance for checking running processes on Linux endpoints."
         references:
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
 
       requirements:
         name: "Check that the SSH service and password-related files are present on the system"
@@ -361,10 +361,10 @@ The following steps show how to configure the Wazuh SCA module to detect running
             - 'p:netcat'
 
 
-   - We create a requirement to ensure that the policy runs only on Linux endpoints. The requirement checks for the presence of the ``/etc/ssh/sshd_config``, ``/etc/passwd``, and ``/etc/shadow`` files, and passes if any of them is found.
+   - We create a requirement so that the policy runs only on Unix-like endpoints. The requirement checks for the presence of the ``/etc/ssh/sshd_config``, ``/etc/passwd``, and ``/etc/shadow`` files, and passes if any of them is found. ``/etc/passwd`` and ``/etc/ssh/sshd_config`` also exist on macOS, so use the policy in the macOS endpoint section on macOS endpoints.
    - Check ID ``10003`` scans the endpoint for processes named ``nc`` or ``netcat``. The ``none`` condition ensures that the check fails if a match is found.
 
-#. Change the ownership of the file so Wazuh has permission to it:
+#. Optionally, change the ownership of the file to the ``wazuh`` user and group that the Wazuh agent creates. The SCA module runs as root, so it can read the policy file without this step:
 
    .. code-block:: console
 
@@ -398,7 +398,7 @@ The following steps show how to configure the Wazuh SCA module to detect running
 
       # systemctl restart wazuh-agent
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Ubuntu endpoint to view the custom SCA check result. The result appears at the next SCA synchronization, about 5 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Ubuntu endpoint to view the custom SCA check result. Check 10003 shows **Failed** while netcat is running. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/ubuntu-sca-use-case.png
      :title: Detecting a running process on Ubuntu
@@ -409,7 +409,7 @@ The following steps show how to configure the Wazuh SCA module to detect running
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
-Standard users utilize PowerShell less frequently. Threat actors may take advantage of the living-off-the-land attack tactic via PowerShell. Take the following steps to configure the Wazuh SCA module to detect PowerShell processes and simulate an attack:
+Standard users rarely run PowerShell. Threat actors may take advantage of the living-off-the-land attack tactic via PowerShell. Take the following steps to configure the Wazuh SCA module to detect PowerShell processes and simulate an attack:
 
 #. Run CMD as an administrator and create a new directory to save your custom policy files:
 
@@ -428,8 +428,8 @@ Standard users utilize PowerShell less frequently. Threat actors may take advant
         name: "SCA use case to detect running processes"
         description: "Guidance for checking running PowerShell processes on Windows 10 endpoints."
         references:
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
 
       requirements:
         name: "Check that the Windows platform is Windows 10"
@@ -449,7 +449,7 @@ Standard users utilize PowerShell less frequently. Threat actors may take advant
             - 'p:powershell.exe'
 
 
-   - We create a requirement to ensure that the policy runs only on Windows 10 endpoints. The requirement checks the registry key ``HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion`` for the value ``Windows 10``.
+   - We create a requirement to ensure that the policy runs only on Windows 10 and Windows 11 endpoints. The requirement checks the registry key ``HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion`` for the value ``Windows 10``. On Windows 11, ``ProductName`` still starts with ``Windows 10``, for example ``Windows 10 Pro``, so the requirement matches both.
    - Check ID ``10004`` scans the endpoint for processes named ``powershell.exe``. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
@@ -470,7 +470,7 @@ Standard users utilize PowerShell less frequently. Threat actors may take advant
 
    .. note::
 
-      The command prompt closes after you run this command and PowerShell runs in the background.
+      The ``-windowstyle hidden`` option hides the console window, so the command prompt seems to close while PowerShell keeps running in the background for 300 seconds. Restart the Wazuh agent within these 5 minutes: the SCA scan runs when the Wazuh agent starts, so it finds the PowerShell process.
 
 #. Run the following commands on CMD as an Administrator to restart the Wazuh agent:
 
@@ -479,7 +479,7 @@ Standard users utilize PowerShell less frequently. Threat actors may take advant
       > NET STOP Wazuh
       > NET START Wazuh
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Windows endpoint to view the custom SCA check result. The result appears at the next SCA synchronization, about 5 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Windows endpoint to view the custom SCA check result. Check 10004 shows **Failed** while the PowerShell process is running. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/windows-sca-use-case.png
      :title: Detecting a running process on Windows
@@ -510,8 +510,8 @@ The following steps show how to configure the Wazuh SCA module to detect running
         name: "SCA use case to detect running processes"
         description: "Guidance for checking running processes on mac endpoints."
         references:
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
 
       requirements:
         name: "Check macOS"
@@ -532,7 +532,7 @@ The following steps show how to configure the Wazuh SCA module to detect running
 
 
    - We create a requirement to ensure that the policy runs only on macOS endpoints. The requirement runs the ``sw_vers`` command to check if the output contains the string ``ProductName: macOS``.
-   - Check ID ``10005`` runs a command which spawns a shell to run the ``ps`` utility to view all running processes. The command uses the ``grep`` utility to filter the output of the ``ps`` command for patterns of the netcat process. The ``none`` condition ensures that the check fails if a match is found.
+   - Check ID ``10005`` runs a command which spawns a shell to run the ``ps`` utility to view all running processes. The command uses the ``grep`` utility to filter the output of the ``ps`` command for patterns of the ``netcat`` process. The ``none`` condition ensures that the check fails if a match is found. The regular expression matches ``nc`` or ``netcat`` started with the ``-l`` (listen) option and a port number. The ``grep`` and ``sh`` processes don't match, because their command lines don't start with ``nc`` or ``netcat``.
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/Library/Ossec/etc/ossec.conf``:
 
@@ -556,7 +556,7 @@ The following steps show how to configure the Wazuh SCA module to detect running
 
       # /Library/Ossec/bin/wazuh-control restart
 
-#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the macOS endpoint to view the custom SCA check result. The result appears at the next SCA synchronization, about 5 minutes after the Wazuh agent restarts.
+#. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the macOS endpoint to view the custom SCA check result. Check 10005 shows **Failed** while netcat is running. The result appears at the next SCA synchronization, usually 5 to 15 minutes after the Wazuh agent restarts.
 
   .. thumbnail:: /images/sca/macos-sca-use-case.png
      :title: Detecting a running process on macOS

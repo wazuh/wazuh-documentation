@@ -15,7 +15,7 @@ Wazuh helps meet this requirement by providing several security monitoring and i
 Use case: Block a known malicious actor
 ------------------------------------------
 
-In this example, the Wazuh Active Response module blocks malicious IP addresses from accessing web resources on a web server monitored by a Wazuh agent. See :doc:`Blocking a known malicious actor </proof-of-concept-guide/block-malicious-actor-ip-reputation>` for more information.
+In this example, the Wazuh Active Response module blocks malicious IP addresses from accessing web resources on a web server monitored by a Wazuh agent. See :doc:`Blocking a known malicious actor </proof-of-concept-guide/block-malicious-actor-ip-reputation>` for more information. The custom rules in this proof of concept have no compliance mapping, so their findings do not appear under this requirement by default. To list the findings under § 164.308(a)(6)(ii) in the **Controls** tab, add the ``164.308.a.6.ii`` value to the ``hipaa`` list under the ``compliance`` field of each custom rule.
 
 .. thumbnail:: /images/compliance/hipaa/block-malicious-actor-poc.png
    :title: Threat Hunting findings - blocked malicious actor

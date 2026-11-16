@@ -22,6 +22,8 @@ Wazuh manager node installation
 
 Follow these steps to install a single-node or multi-node cluster Wazuh manager.
 
+.. _wazuh_manager_adding_the_repository:
+
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

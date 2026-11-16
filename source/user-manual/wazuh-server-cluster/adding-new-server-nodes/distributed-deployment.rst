@@ -1,804 +1,413 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to scale a Wazuh distributed deployment by adding new Wazuh server nodes.
+   :description: Learn how to add a Wazuh manager node to a distributed deployment to scale a Wazuh manager cluster.
 
-.. _distributed-deployment:
+.. _wazuh_manager_cluster_add_a_wazuh_manager_node_to_distributed_deployments:
 
-Distributed deployment
-======================
+Add a Wazuh manager node to distributed deployments
+===================================================
 
-The distributed deployment refers to installing the Wazuh components as separate servers, following the step-by-step installation guide (applicable to the Wazuh :doc:`indexer </installation-guide/wazuh-indexer/step-by-step>`, :doc:`server </installation-guide/wazuh-manager/step-by-step>`, and :doc:`dashboard </installation-guide/wazuh-dashboard/step-by-step>`) or using the install assistant (for the Wazuh :doc:`indexer </installation-guide/wazuh-indexer/installation-assistant>`, :doc:`server </installation-guide/wazuh-manager/installation-assistant>`, and :doc:`dashboard </installation-guide/wazuh-dashboard/installation-assistant>`).
+A worker node raises the number of Wazuh agents a distributed deployment serves, without reconfiguring the agents. Do it when the existing nodes approach their capacity, or to keep agents reporting when one node fails.
 
-.. note::
+In a distributed deployment, the Wazuh indexer, Wazuh manager, and Wazuh dashboard run on separate endpoints. Where the private key of the root certificate authority (CA), ``root-ca.key``, stays depends on the installation method:
 
-   You need root user privileges to execute the commands below.
+-  **Installation assistant deployment**: In the ``wazuh-ca`` directory next to ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh``, on the endpoint where you ran ``--generate-config-files``, or in the directory set in ``WAZUH_CA_DIR``.
+-  **Step-by-step deployment**: In ``/etc/wazuh-indexer/ca`` on the first Wazuh indexer node. This root CA issues the Wazuh indexer client certificate of each Wazuh manager node. If ``/etc/wazuh-manager/ca`` on the master node also holds ``root-ca.key``, the Wazuh manager nodes issue their agent listener and Wazuh manager API certificates from that CA.
 
-To scale your distributed deployment by adding a node, complete these steps:
+You issue the certificates of the new node on that endpoint, from that root CA. A node issued from another root CA doesn't work in the cluster. If no endpoint holds root-ca.key, see :ref:`Missing root CA <wazuh_manager_cluster_missing_root_ca>`.
 
--  `Certificate creation`_
--  `Configuring existing components to connect with the new node`_
--  `Wazuh server worker node(s) installation`_
--  `Testing the cluster`_
+The procedure has three tasks, which you complete in this order:
 
-.. _server_nodes_certificate_creation_distributed:
+#. :ref:`Issue the certificates for the new node <wazuh_manager_cluster_issue_the_certificates_for_the_new_node>`.
+#. :ref:`Install the new Wazuh manager node <wazuh_manager_cluster_install_the_new_wazuh_manager_node_2>`.
+#. :ref:`Configure the new node as a worker <wazuh_manager_cluster_configure_the_new_node_as_a_worker_2>`.
 
-Certificate creation
---------------------
+Prerequisites
+-------------
 
-For a distributed deployment, certificates can be generated either by using the pre-existing root CA keys or by generating a new root CA along with a new set of certificates. We recommend using the existing root CA keys to maintain trust between nodes.
+Check these requirements before you issue the certificates.
 
--  `Using pre-existing root CA key`_
--  `Generating new certificates`_
+-  Root privileges on the endpoint that holds the root CA and on the new node
+-  A new endpoint with an operating system that the Wazuh manager package supports
+-  The same Wazuh version on the new node as on the master node
+-  Network access from the new node to the master node on TCP port ``1516``, and to every Wazuh indexer node on TCP port ``9200``
+-  Synchronized clocks on every node, for example with the Network Time Protocol (NTP)
+-  A master node that accepts remote workers
 
-Using pre-existing root CA key
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If the deployment has a single Wazuh manager node, its ``<cluster>`` block still has :ref:`<bind_addr> <reference_wazuh_manager_conf_cluster_bind_addr>` set to ``127.0.0.1``. Configure that node as a master, as in steps 1 to 3 of :ref:`Prepare the existing node <wazuh_manager_cluster_prepare_the_existing_node>` in the all-in-one procedure. Then run ``/var/wazuh-manager/bin/wazuh-manager-conf validate`` and ``systemctl restart wazuh-manager`` on that node.
 
-Perform the steps below on your existing Wazuh server node to generate the certificates using the pre-existing root CA key.
+.. warning::
 
-.. note::
+   Don't run ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --generate-config-files`` again to add the node. It generates a new cluster key, so a node installed from the new bundle does not join the cluster. Do not run the certificates tool with ``-A`` or ``-ca`` on an endpoint without the root CA either. Both options create a new root CA there.
 
-   You will require a copy of the ``<CERTIFICATE_ARCHIVE>.tar`` file created during the initial configuration for the :ref:`Wazuh indexer <certificates_creation>` in steps 4 and 5 or a copy of the root CA keys. If neither is available, you can generate new certificates by following the steps outlined in the next :ref:`section <generating_new_certificates>`.
+.. _wazuh_manager_cluster_issue_the_certificates_for_the_new_node:
 
-#. Create a ``config.yml`` file in the ``/root`` directory to add the new Wazuh server node(s):
+Issue the certificates for the new node
+---------------------------------------
+
+The Wazuh certificates tool issues three pairs from the root CA for each Wazuh manager node. They are the agent listener pair, the Wazuh manager API pair, and the Wazuh indexer client pair.
+
+Complete these steps on the endpoint that holds ``root-ca.key``.
+
+#. Set ``CA_DIR`` to the directory of the root CA:
 
    .. code-block:: console
 
-      # touch /root/config.yml
+      # CA_DIR="<ROOT_CA_DIRECTORY>"
 
-   Edit the ``/root/config.yml`` file to include the Wazuh server node name and IP address of the new node:
+   -  Replace ``<ROOT_CA_DIRECTORY>`` with ``/etc/wazuh-indexer/ca`` in a step-by-step deployment, or with the absolute path of the ``wazuh-ca`` directory in an installation assistant deployment.
+
+#. Create a working directory and copy the certificates tool into it:
+
+   .. code-block:: console
+
+      # mkdir -p ~/certs-tool && cd ~/certs-tool
+      # cp /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh ~/certs-tool/
+
+   The Wazuh indexer package ships this copy of the tool. Work on a copy, so the new ``config.yml`` and certificates don't replace the files of the deployment in ``/usr/share/wazuh-indexer/tools/``. On an endpoint without the Wazuh indexer, `download the tool <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh>`__ to the same path instead:
+
+   .. code-block:: console
+
+      # curl -fsSo ~/certs-tool/wazuh-certs-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+
+#. Create the ``~/certs-tool/config.yml`` file with the new node only:
 
    .. code-block:: yaml
-      :emphasize-lines: 4,5,7,8
 
       nodes:
-        # Wazuh server nodes
-        server:
-          - name: <EXISTING_WAZUH_SERVER_NODE_NAME>
-            ip: <EXISTING_WAZUH_SERVER_IP>
-            node_type: master
-          - name: <NEW_WAZUH_SERVER_NODE_NAME>
-            ip: <NEW_WAZUH_SERVER_IP>
-            node_type: worker
+        manager:
+          - name: <NEW_NODE_NAME>
+            ip: "<NEW_NODE_IP>"
 
-   Replace the values with your node names and their corresponding IP addresses.
+   -  Replace ``<NEW_NODE_NAME>`` with a name for the new node and ``<NEW_NODE_IP>`` with its IP address. Leave out ``node_type``, because the tool accepts it only with more than one Wazuh manager node.
 
-   .. note::
-
-      The existing Wazuh server node name and IP address can be found in the cluster section in ``/var/ossec/etc/ossec.conf`` of the  existing Wazuh server.
-
-#. Extract the certificate archive to obtain the root CA keys:
+#. Create the Wazuh manager certificates from the root CA:
 
    .. code-block:: console
 
-      # mkdir wazuh-install-files && tar -xf ./<CERTIFICATE_ARCHIVE>.tar -C wazuh-install-files
+      # rm -rf wazuh-certificates
+      # WAZUH_CA_DIR="$CA_DIR" bash ~/certs-tool/wazuh-certs-tool.sh -wm
 
-   Replace ``<CERTIFICATE_ARCHIVE>.tar`` with the name of the compressed certificates generated during the certificate creation step. (for example, ``wazuh-certificates.tar`` or ``wazuh-install-files.tar``).
+   -  If the other Wazuh manager nodes were issued with ``--agent-san`` or ``--api-san``, pass the same addresses, for example ``--agent-san <AGENT_FACING_ADDRESS>``. The new node then answers on the address agents dial through the load balancer.
+   -  The ``-wm`` option only uses an existing root CA. Elsewhere, it stops with ``There is no valid root CA in …`` or ``The root CA in … has no private key (root-ca.key)``. See :ref:`Find the root CA of the deployment <wazuh_manager_cluster_find_the_root_ca_of_the_deployment>`.
 
-   If the archive is the ``wazuh-install-files.tar`` file created by the Wazuh installation assistant, add ``--strip-components=1`` to the ``tar`` command, because the archive stores its files in a ``wazuh-install-files/`` directory:
-
-   .. code-block:: console
-
-      # mkdir wazuh-install-files && tar -xf ./wazuh-install-files.tar -C wazuh-install-files --strip-components=1
-
-#. Download and run ``wazuh-certs-tool.sh`` to create the certificates for the new Wazuh server node using the pre-existing root CA keys:
+#. Check that the new certificates chain to the root CA:
 
    .. code-block:: console
 
-      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh
-      # bash wazuh-certs-tool.sh -A wazuh-install-files/root-ca.pem wazuh-install-files/root-ca.key
+      # openssl verify -CAfile "$CA_DIR/root-ca.pem" "wazuh-certificates/<NEW_NODE_NAME>-remoted.pem"
+      # openssl verify -CAfile "$CA_DIR/root-ca.pem" "wazuh-certificates/<NEW_NODE_NAME>-apid.pem"
+
+   -  Each command prints ``OK``.
+
+#. Copy the two password files to the working directory on this endpoint, for example with ``sudo cat`` over SSH:
+
+   .. code-block:: console
+
+      # install -m 0600 /dev/null manager-credentials.env
+      # install -m 0600 /dev/null indexer-credentials.env
+      # ssh "<USER>@<MASTER_NODE_IP>" sudo cat /etc/wazuh-manager/export/credentials.env > manager-credentials.env
+      # ssh "<USER>@<WAZUH_INDEXER_IP>" sudo cat /etc/wazuh-indexer/export/credentials.env > indexer-credentials.env
+
+   -  Both files are readable by ``root`` only, so the copy needs root privileges on the source endpoint. Replace ``<USER>`` with a user that can run ``sudo`` there without a password prompt, or have root copy the files another way. Replace ``<MASTER_NODE_IP>`` and ``<WAZUH_INDEXER_IP>`` with the node addresses. The first file holds the Wazuh manager API passwords, current only if nobody changed them with ``rbac_control`` or the Wazuh manager API. The second file holds the Wazuh indexer password.
+
+#. Add the passwords of the deployment to the certificates directory, and remove the copies:
+
+   .. code-block:: console
+
+      # install -m 0600 /dev/null wazuh-certificates/credentials.env
+      # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=' manager-credentials.env >> wazuh-certificates/credentials.env
+      # grep '^WAZUH_INDEXER_MANAGER_PASSWORD=' indexer-credentials.env >> wazuh-certificates/credentials.env
+      # rm -f manager-credentials.env indexer-credentials.env
+
+#. Pack the certificates and copy the archive to the new node, for example with ``scp``:
+
+   .. code-block:: console
+
+      # tar -cf wazuh-certificates.tar -C wazuh-certificates/ .
+      # chmod 600 wazuh-certificates.tar
+      # scp wazuh-certificates.tar "<USER>@<NEW_NODE_IP>:"
+
+#. Remove the ``wazuh-certificates`` directory and the archive from this endpoint:
+
+   .. code-block:: console
+
+      # rm -rf wazuh-certificates wazuh-certificates.tar
+
+.. warning::
+
+   The archive holds private keys and the passwords of the deployment. Keep it only until the installation finishes.
+
+.. _wazuh_manager_cluster_install_the_new_wazuh_manager_node_2:
+
+Install the new Wazuh manager node
+----------------------------------
+
+Place the certificates and the passwords on the new node **before** you install the package. The package then uses these files instead of creating a CA and certificates of its own. If the package already created its own CA, see :ref:`Fix a node that created its own CA <wazuh_manager_cluster_fix_a_node_that_created_its_own_ca>`.
+
+Complete the first step on the master node and the rest on the new node, in the directory that holds ``wazuh-certificates.tar``.
+
+#. On the master node, print the exact version and revision of the installed Wazuh manager package.
+
+   .. tabs::
+
+      .. group-tab:: DEB
+
+         .. code-block:: console
+
+            # dpkg-query -W -f='${Version}\n' wazuh-manager
+
+      .. group-tab:: RPM
+
+         .. code-block:: console
+
+            # rpm -q --qf '%{VERSION}-%{RELEASE}\n' wazuh-manager
+
+   -  The ``cluster_control -l`` output shows the version only, without the package revision.
+
+#. Add the Wazuh repository, as in the :ref:`Wazuh manager installation guide <wazuh_manager_adding_the_repository>`. A node installed with the installation assistant has no repository to reuse, because the assistant downloads the package directly.
+#. Set the name of the new node, as you wrote it in ``config.yml``:
+
+   .. code-block:: console
+
+      # NODE_NAME="<NEW_NODE_NAME>"
+
+#. Place the root CA, the passwords, and the certificates of the node.
+
+   .. tabs::
+
+      .. group-tab:: Installation assistant deployment
+
+         **Installation assistant deployment**, or **step-by-step** deployment whose master node has no ``root-ca.key``
+
+         .. code-block:: console
+
+            # umask 022
+            # mkdir wazuh-certificates
+            # tar -xf wazuh-certificates.tar -C wazuh-certificates
+            # [ -d /etc/wazuh-manager ] || install -d -m 0750 -o root -g root /etc/wazuh-manager
+            # [ -d /etc/wazuh-manager/certs ] || install -d -m 0750 -o root -g root /etc/wazuh-manager/certs
+            # install -d -m 0700 -o root -g root /etc/wazuh-manager/ca
+            # install -m 0644 wazuh-certificates/root-ca.pem /etc/wazuh-manager/ca/root-ca.pem
+            # install -m 0600 /dev/null /etc/wazuh-manager/local.env
+            # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD|WAZUH_INDEXER_MANAGER_PASSWORD)=' wazuh-certificates/credentials.env > /etc/wazuh-manager/local.env
+            # install -m 0640 wazuh-certificates/root-ca.pem /etc/wazuh-manager/certs/root-ca.pem
+            # install -m 0640 wazuh-certificates/root-ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
+            # install -m 0640 wazuh-certificates/$NODE_NAME.pem /etc/wazuh-manager/certs/indexer-connector.pem
+            # install -m 0640 wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
+            # install -m 0640 wazuh-certificates/$NODE_NAME-remoted.pem /etc/wazuh-manager/certs/remoted.pem
+            # install -m 0640 wazuh-certificates/$NODE_NAME-remoted-key.pem /etc/wazuh-manager/certs/remoted-key.pem
+            # install -m 0640 wazuh-certificates/$NODE_NAME-apid.pem /etc/wazuh-manager/certs/apid.pem
+            # install -m 0640 wazuh-certificates/$NODE_NAME-apid-key.pem /etc/wazuh-manager/certs/apid-key.pem
+            # rm -rf wazuh-certificates wazuh-certificates.tar
+
+         -  The root CA of the deployment also signed the Wazuh indexer certificates, so it goes in place as ``indexer-ca.pem`` too. The ``wazuh-manager`` group does not exist yet. You give the files that group after the installation.
+
+      .. group-tab:: Step-by-step deployment
+
+         Use this variant only when ``/etc/wazuh-manager/ca`` on the master node holds ``root-ca.key``. In that case, the Wazuh manager package created the CA, and every Wazuh manager node issues its certificates from it. Pack that root CA and copy it to the new node, as in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`. Run these commands on the master node, or on a worker node if you removed ``root-ca.key`` from the master node:
+
+         .. code-block:: console
+
+            # tar -cf manager-ca.tar -C /etc/wazuh-manager/ca root-ca.pem root-ca.key
+            # chmod 600 manager-ca.tar
+            # scp manager-ca.tar "<USER>@<NEW_NODE_IP>:"
+            # rm -f manager-ca.tar
+
+         On the new node, in the directory that holds both archives, place the root CA, the passwords, and the Wazuh indexer client certificate:
+
+         .. code-block:: console
+
+            # umask 022
+            # mkdir wazuh-certificates
+            # tar -xf wazuh-certificates.tar -C wazuh-certificates
+            # [ -d /etc/wazuh-manager ] || install -d -m 0750 -o root -g root /etc/wazuh-manager
+            # [ -d /etc/wazuh-manager/certs ] || install -d -m 0750 -o root -g root /etc/wazuh-manager/certs
+            # install -d -m 0700 -o root -g root /etc/wazuh-manager/ca
+            # tar -xf manager-ca.tar -C /etc/wazuh-manager/ca
+            # chown root:root /etc/wazuh-manager/ca/root-ca.pem /etc/wazuh-manager/ca/root-ca.key
+            # chmod 0644 /etc/wazuh-manager/ca/root-ca.pem
+            # chmod 0400 /etc/wazuh-manager/ca/root-ca.key
+            # install -m 0600 /dev/null /etc/wazuh-manager/local.env
+            # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD|WAZUH_INDEXER_MANAGER_PASSWORD)=' wazuh-certificates/credentials.env > /etc/wazuh-manager/local.env
+            # echo 'WAZUH_MANAGER_REMOTED_CERT_SANS=IP:<NEW_NODE_IP>,DNS:<LOAD_BALANCER_NAME>' >> /etc/wazuh-manager/local.env
+            # install -m 0640 wazuh-certificates/root-ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
+            # install -m 0640 wazuh-certificates/$NODE_NAME.pem /etc/wazuh-manager/certs/indexer-connector.pem
+            # install -m 0640 wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
+            # rm -rf wazuh-certificates wazuh-certificates.tar manager-ca.tar
+
+         -  Replace ``<NEW_NODE_IP>`` with the IP address of the new node and ``<LOAD_BALANCER_NAME>`` with the address that Wazuh agents use to reach the load balancer. Without a load balancer, leave out the ``WAZUH_MANAGER_REMOTED_CERT_SANS`` line. You issue the agent listener and Wazuh manager API certificates in step 6.
+
+#. Install the Wazuh manager package at the version that step 1 printed.
+
+   .. tabs::
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get -y install "wazuh-manager=<VERSION>-<REVISION>"
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum -y install "wazuh-manager-<VERSION>-<REVISION>"
+
+      .. group-tab:: DNF
+
+         .. code-block:: console
+
+            # dnf -y install "wazuh-manager-<VERSION>-<REVISION>"
+
+   -  Replace ``<VERSION>-<REVISION>`` with the output of step 1. To check that your repository has that version, run ``apt-cache madison wazuh-manager`` or ``yum --showduplicates list wazuh-manager``. The master refuses a worker with another version (error ``3031``).
+   -  On RPM-based systems, the installation prints ``UNSAFE /etc/wazuh-manager/certs/<FILE>.pem: group is root, not wazuh-manager`` for the files you placed. The next step fixes it.
+
+#. Give the staged certificates the ``wazuh-manager`` group, and run the credential resolver again:
+
+   .. code-block:: console
+
+      # chown root:wazuh-manager /etc/wazuh-manager/certs /etc/wazuh-manager/certs/*.pem
+      # chmod 750 /etc/wazuh-manager/certs
+      # chmod 640 /etc/wazuh-manager/certs/*.pem
+      # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --upgrade -H /var/wazuh-manager
+
+   If you used the step-by-step variant in step 4, replace the last command with this one. It issues the agent listener and Wazuh manager API certificates from the root CA of the master node:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install -H /var/wazuh-manager
+
+   -  The resolver runs during the installation, before the staged files have the ``wazuh-manager`` group, so it runs again here. The installation assistant runs the same commands after it installs a Wazuh manager node.
+
+#. Check the credentials:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check -H /var/wazuh-manager
+
+   The command ends with ``check: no problem found (1 warnings)``. The warning reports that the dashboard client pair wasn't generated, because ``/etc/wazuh-manager/ca`` holds no CA key. It doesn't stop the node from starting or joining the cluster. When ``/etc/wazuh-manager/ca`` holds ``root-ca.key``, as in the step-by-step variant, it ends with ``check: no problem found``.
+
+.. _wazuh_manager_cluster_configure_the_new_node_as_a_worker_2:
+
+Configure the new node as a worker
+----------------------------------
+
+The package wrote a single-node ``<cluster>`` block with a random key and :ref:`<node_type> <reference_wazuh_manager_conf_cluster_node_type>` set to ``master``. Replace it so the node joins the existing cluster as a worker. The cluster doesn't synchronize ``wazuh-manager.conf``, so this node needs its own ``<indexer>`` settings too.
+
+Complete the first step on the master node and the rest on the new node.
+
+#. On the master node, print the cluster name and key:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-conf get cluster.name
+      # /var/wazuh-manager/bin/wazuh-manager-conf get cluster.key
+
+   -  The installation assistant sets the cluster name to ``wazuh_cluster`` when its ``config.yml`` lists more than one Wazuh manager node. Otherwise the name is the package default, ``wazuh``.
+
+#. Edit the ``<indexer>`` block in the ``/etc/wazuh-manager/wazuh-manager.conf`` file with one ``<host>`` per Wazuh indexer node:
+
+   .. code-block:: xml
+      :emphasize-lines: 3,4
+
+      <indexer>
+        <hosts>
+          <host>https://<WAZUH_INDEXER_1_IP>:9200</host>
+          <host>https://<WAZUH_INDEXER_2_IP>:9200</host>
+        </hosts>
+        <ssl>
+          <certificate_authorities>
+            <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
+          </certificate_authorities>
+          <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
+          <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
+        </ssl>
+      </indexer>
+
+   -  Replace ``<WAZUH_INDEXER_1_IP>`` and ``<WAZUH_INDEXER_2_IP>`` with the addresses of your Wazuh indexer nodes. Change only the ``<host>`` values, and keep the ``<ssl>`` settings that the package wrote.
+
+#. Edit the ``<cluster>`` block in the same file:
+
+   .. code-block:: xml
+      :emphasize-lines: 2,3,5,9
+
+      <cluster>
+        <name><CLUSTER_NAME></name>
+        <node_name><NEW_NODE_NAME></node_name>
+        <node_type>worker</node_type>
+        <key><CLUSTER_KEY></key>
+        <port>1516</port>
+        <bind_addr>0.0.0.0</bind_addr>
+        <nodes>
+          <node><MASTER_NODE_IP></node>
+        </nodes>
+        <hidden>no</hidden>
+      </cluster>
+
+   Where:
+
+      -  :ref:`<name> <reference_wazuh_manager_conf_cluster_name>` must equal the cluster name of the master node. Replace ``<CLUSTER_NAME>`` with the value that step 1 printed.
+      -  :ref:`<node_name> <reference_wazuh_manager_conf_cluster_node_name>` is a unique name for this worker. Use only letters, digits, ``_``, and ``-``. Replace ``<NEW_NODE_NAME>`` with the node name, for example its name in ``config.yml``.
+      -  ``<node_type>`` is ``worker``.
+      -  :ref:`<key> <reference_wazuh_manager_conf_cluster_key>` is the key of the master node. Replace ``<CLUSTER_KEY>`` with the value that step 1 printed.
+      -  :ref:`<port> <reference_wazuh_manager_conf_cluster_port>` is the cluster port of the master node. The default is ``1516``.
+      -  ``<bind_addr>`` is ignored on a worker. Workers do not listen for cluster connections.
+      -  ``<node>`` is the address of the master node. Replace ``<MASTER_NODE_IP>`` with its IP address or DNS name.
+
+   -  For every option, see the :doc:`cluster configuration reference </user-manual/reference/wazuh-manager-conf/cluster>`.
+
+#. Validate the configuration:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-conf validate
+
+   -  The command prints nothing when the file is valid.
+
+#. Enable and start the Wazuh manager service:
+
+   .. code-block:: console
+
+      # systemctl daemon-reload
+      # systemctl enable wazuh-manager
+      # systemctl restart wazuh-manager
+
+Verify the cluster
+------------------
+
+Confirm that the new node joined the cluster and writes to the Wazuh indexer.
+
+#. On the new node, check that the Wazuh manager reaches the Wazuh indexer:
+
+   .. code-block:: console
+
+      # grep -E 'The indexer is reachable|No configured indexer host is currently reachable' /var/wazuh-manager/logs/wazuh-manager.log | tail -1
+
+   -  The last line, logged after the start, must be ``The indexer is reachable; inventory documents can be delivered.`` The Wazuh manager checks the Wazuh indexer every 60 seconds. If the last line is the ``No configured indexer host is currently reachable`` warning, wait one minute and run the command again.
+
+#. On any node, list the cluster nodes:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/cluster_control -l
+
+   -  The output lists every node with the same version.
 
    .. code-block:: none
       :class: output
 
-      23/01/2026 12:33:37 INFO: Generating Admin certificates.
-      23/01/2026 12:33:37 INFO: Admin certificates created.
-      23/01/2026 12:33:37 INFO: Generating Filebeat certificates.
-      23/01/2026 12:34:38 INFO: Wazuh Filebeat certificates created.
+      NAME      TYPE    VERSION  ADDRESS
+      master    master  5.0.0    10.0.0.3
+      worker    worker  5.0.0    10.0.0.4
+      worker-2  worker  5.0.0    10.0.0.5
 
-#. Copy the newly created certificates to the ``wazuh-install-files`` directory. Make sure you do not replace the admin certificates:
+   -  If the new node is missing, read ``/var/wazuh-manager/logs/cluster.log`` on it. The error code names the requirement it breaks.
 
-   .. code-block:: console
+The Wazuh dashboard needs no change. It connects to the Wazuh manager API, which runs on the master node only.
 
-      # cp wazuh-certificates/<NEW_WAZUH_SERVER_NODE_NAME>* wazuh-install-files
-      # cp wazuh-certificates/<EXISTING_WAZUH_SERVER_NODE_NAME>* wazuh-install-files
+Next steps
+----------
 
-#. Compress the certificates directory into a new ``<CERTIFICATE_ARCHIVE>.tar`` file and copy it to the new Wazuh server node(s). You can make use of the ``scp`` utility to securely copy the compressed file as follows:
-
-   .. code-block:: console
-
-      # tar -cvf ./<CERTIFICATE_ARCHIVE>.tar -C ./wazuh-install-files/ .
-      # scp <CERTIFICATE_ARCHIVE>.tar <TARGET_USERNAME>@<TARGET_IP>:
-
-   Replace ``<CERTIFICATE_ARCHIVE>.tar`` with the name of the compressed certificates generated during the certificate creation step. (for example, ``wazuh-certificates.tar`` or ``wazuh-install-files.tar``).
-
-   .. note::
-
-      The ``scp`` command copies the certificates to the ``/home`` directory of the target user on the endpoint. You can modify the command to specify a path to your installation directory.
-
-.. _generating_new_certificates:
-
-Generating new certificates
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-You can follow the steps below to generate new certificates if the pre-existing root CA keys have been deleted or are inaccessible.
-
-#. Create the ``/root/config.yml`` file to reference all your Wazuh server nodes:
-
-   .. code-block:: yaml
-      :emphasize-lines: 4,5,9,10,12,13,18,19
-
-      nodes:
-        # Wazuh indexer nodes
-        indexer:
-          - name: <WAZUH_INDEXER_NODE_NAME>
-            ip: <WAZUH_INDEXER_IP>
-
-        # Wazuh server nodes
-        server:
-          - name: <EXISTING_WAZUH_SERVER_NODE_NAME>
-            ip: <EXISTING_WAZUH_SERVER_IP>
-            node_type: master
-          - name: <NEW_WAZUH_SERVER_NODE_NAME>
-            ip: <NEW_WAZUH_SERVER_IP>
-            node_type: worker
-
-        # Wazuh dashboard nodes
-        dashboard:
-          - name: <WAZUH_DASHBOARD_NODE_NAME>
-            ip: <WAZUH_DASHBOARD_IP>
-
-   Replace the values with your node names and their corresponding IP addresses.
-
-   .. note::
-
-      The existing Wazuh server node name and IP address can be found in the cluster section of ``/var/ossec/etc/ossec.conf`` on the existing Wazuh server.
-
-#. Download and execute the ``wazuh-certs-tool.sh`` script to create the certificates:
-
-   .. code-block:: console
-
-      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh
-      # bash wazuh-certs-tool.sh -A
-
-#. Compress the certificates folder and copy it to the new Wazuh indexer node(s). You can make use of the ``scp`` utility to securely copy the compressed file:
-
-   .. code-block:: console
-
-      # tar -cvf ./<CERTIFICATE_ARCHIVE>.tar -C ./wazuh-certificates/ .
-      # scp <CERTIFICATE_ARCHIVE> <TARGET_USERNAME>@<TARGET_IP>:
-
-   Replace ``<CERTIFICATE_ARCHIVE>.tar`` with the name you want to use for the compressed certificate archive (for example, ``wazuh-certificates.tar`` or ``wazuh-install-files.tar``).
-
-   .. note::
-
-      The ``scp`` command copies the certificates to the ``/home`` directory of the target user on the endpoint. You can modify the command to specify a path to your installation directory.
-
-Configuring existing components to connect with the new node
-------------------------------------------------------------
-
-Before adding a new Wazuh server node, existing components must be adjusted to maintain proper cluster communication. This includes updating relevant configuration files and connection settings so the Wazuh manager, Wazuh indexer, and Wazuh dashboard can integrate the new node.
-
-#. Deploy the Wazuh server certificates on your existing Wazuh server node by running the following commands. Replace ``<EXISTING_WAZUH_SERVER_NODE_NAME>`` with the node name of the Wazuh server you are configuring as defined in ``/root/config.yml``.
-
-   .. code-block:: console
-
-      # NODE_NAME=<EXISTING_WAZUH_SERVER_NODE_NAME>
-
-   .. code-block:: console
-      :emphasize-lines: 3
-
-      # rm -rf /etc/filebeat/certs
-      # mkdir /etc/filebeat/certs
-      # tar -xf ./<CERTIFICATE_ARCHIVE>.tar -C /etc/filebeat/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
-      # mv -n /etc/filebeat/certs/$NODE_NAME.pem /etc/filebeat/certs/filebeat.pem
-      # mv -n /etc/filebeat/certs/$NODE_NAME-key.pem /etc/filebeat/certs/filebeat-key.pem
-      # chmod 500 /etc/filebeat/certs
-      # chmod 400 /etc/filebeat/certs/*
-      # chown -R root:root /etc/filebeat/certs
-
-   .. note::
-
-      If the certificates were recreated as recommended in the :ref:`generating_new_certificates` above.
-
-      You will also have to redeploy the certificates on all your existing Wazuh nodes (indexer and dashboard).
-
-   After deploying the new certificate on the server, run the following commands to deploy the certificates to the Wazuh indexer and dashboard:
-
-   -  On the Wazuh indexer node(s):
-
-      .. code-block:: console
-
-         # NODE_NAME=<WAZUH_INDEXER_NODE_NAME>
-
-      .. code-block:: console
-         :emphasize-lines: 3
-
-         # rm -rf /etc/wazuh-indexer/certs
-         # mkdir /etc/wazuh-indexer/certs
-         # tar -xf ./<CERTIFICATE_ARCHIVE>.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
-         # mv -n /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
-         # mv -n /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
-         # chmod 500 /etc/wazuh-indexer/certs
-         # chmod 400 /etc/wazuh-indexer/certs/*
-         # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
-
-   -  On the Wazuh dashboard node:
-
-      .. code-block:: console
-
-         # NODE_NAME=<WAZUH_DASHBOARD_NODE_NAME>
-
-      .. code-block:: console
-         :emphasize-lines: 3
-
-         # rm -rf /etc/wazuh-dashboard/certs
-         # mkdir /etc/wazuh-dashboard/certs
-         # tar -xf ./<CERTIFICATE_ARCHIVE>.tar -C /etc/wazuh-dashboard/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
-         # mv -n /etc/wazuh-dashboard/certs/$NODE_NAME.pem /etc/wazuh-dashboard/certs/wazuh-dashboard.pem
-         # mv -n /etc/wazuh-dashboard/certs/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem
-         # chmod 500 /etc/wazuh-dashboard/certs
-         # chmod 400 /etc/wazuh-dashboard/certs/*
-         # chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
-
-   .. note::
-
-      The certificate file names must match the ones in the component configuration. Check them with the following command:
-
-      .. code-block:: console
-
-         # grep -h "\.pem" /etc/wazuh-indexer/opensearch.yml /etc/filebeat/filebeat.yml /etc/wazuh-dashboard/opensearch_dashboards.yml 2>/dev/null
-
-      If you installed the node with the installation assistant, the files are named after the node (``<NODE_NAME>.pem`` and ``<NODE_NAME>-key.pem``). In that case, skip the two ``mv -n`` commands.
-
-   **Recommended action:** Securely save a copy offline for potential future use and scalability. You can  remove the ``<CERTIFICATE_ARCHIVE>.tar`` file on this node by running the command below to increase security:
-
-   .. code-block:: console
-
-      # rm -f ./<CERTIFICATE_ARCHIVE>.tar
-
-#. Edit the Wazuh indexer configuration file at ``/etc/wazuh-indexer/opensearch.yml`` to specify the Wazuh indexer's IP address as specified in the ``/root/config.yml`` file:
-
-   .. code-block:: yaml
-      :emphasize-lines: 1,2,4
-
-      network.host: "<WAZUH_INDEXER_IP>"
-      node.name: "<WAZUH_INDEXER_NODE_NAME>"
-      cluster.initial_master_nodes:
-      - "<WAZUH_INDEXER_NODE_NAME>"
-
-#. Edit the Filebeat configuration file ``/etc/filebeat/filebeat.yml`` (located in the Wazuh server node) to specify the indexer's IP address:
-
-   .. code-block:: yaml
-      :emphasize-lines: 2
-
-      output.elasticsearch.hosts:
-              - <WAZUH_INDEXER_IP>:9200
-
-   .. note::
-
-      The structure of this section will vary depending on whether you installed Wazuh using the Wazuh installation assistant or the step-by-step guide. Here, we used the Wazuh installation assistant.
-
-#. Generate an encryption key that will be used to encrypt communication between the Wazuh server cluster nodes:
-
-   .. _generate_random_encryption_key_cluster:
-
-   .. code-block:: console
-
-      # openssl rand -hex 16
-
-   Save the output of the above command, as it will be used later to configure cluster mode on both Wazuh server nodes.
-
-#. Edit the configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` to include the Wazuh indexer node's IP address:
-
-   .. code-block:: yaml
-
-      opensearch.hosts: https://<WAZUH_INDEXER_IP>:9200
-
-#. Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file located in the Wazuh dashboard node and replace the ``url`` value with the IP address or hostname of the Wazuh server master node:
-
-   .. code-block:: yaml
-      :emphasize-lines: 3,6
-
-      hosts:
-        - default:
-            url: https://<EXISTING_WAZUH_SERVER_IP>
-            port: 55000
-            username: wazuh-wui
-            password: <WAZUH-WUI-PASSWORD>
-            run_as: false
-
-#. Edit the Wazuh server configuration file at ``/var/ossec/etc/ossec.conf`` to enable cluster mode:
-
-   .. code-block:: xml
-      :emphasize-lines: 3-5,9,12
-
-      <cluster>
-        <name>wazuh</name>
-        <node_name><EXISTING_WAZUH_SERVER_NODE_NAME></node_name>
-        <node_type>master</node_type>
-        <key><ENCRYPTION_KEY></key>
-        <port>1516</port>
-        <bind_addr>0.0.0.0</bind_addr>
-        <nodes>
-            <node><MASTER_NODE_IP></node>
-        </nodes>
-        <hidden>no</hidden>
-        <disabled>no</disabled>
-      </cluster>
-
-   The configurable fields in the above section of the ``var/ossec/etc/ossec.conf`` file are as follows:
-
-   -  :ref:`<name> <cluster_name>` indicates the name of the cluster.
-   -  :ref:`<node_name> <cluster_node_name>` indicates the name of the current node. Replace ``<EXISTING_WAZUH_SERVER_NODE_NAME>`` with the name of the existing Wazuh server node as specified in the ``/root/config.yml`` file.
-   -  :ref:`<node_type> <cluster_node_type>` specifies the role of the node. It has to be set to master.
-   -  :ref:`<key> <cluster_key>` represents a :ref:`key <generate_random_encryption_key_cluster>` used to encrypt communication between cluster nodes. It should be the same on all the server nodes. To generate a unique key, you can use the command ``openssl rand -hex 16``.
-   -  :ref:`<port> <cluster_port>` indicates the destination port for cluster communication. Leave the default as ``1516``.
-   -  :ref:`<bind_addr> <cluster_bind_addr>` is the network IP address to which the node is bound to listen for incoming requests (0.0.0.0 means the node will use any IP address).
-   -  :ref:`<nodes> <cluster_nodes>` is the address of the master node and can be either an IP address or a DNS hostname. This parameter must be specified in all Wazuh server nodes, including the master itself. Replace ``<MASTER_NODE_IP>`` with the IP address of your master node.
-   -  :ref:`<hidden> <cluster_hidden>` shows or hides the cluster information in the generated alerts.
-   -  :ref:`<disabled> <cluster_disabled>` indicates whether the node is enabled or disabled in the cluster. This option must be set to ``no``.
-
-#. Run the following commands on your respective nodes to apply the changes.
-
-   -  **Wazuh indexer node**
-
-      .. tabs::
-
-         .. group-tab:: Systemd
-
-            .. code-block:: console
-
-               # systemctl restart wazuh-indexer
-
-         .. group-tab:: SysV init
-
-            .. code-block:: console
-
-               # service wazuh-indexer restart
-
-   -  **Wazuh server node(s)**
-
-      .. tabs::
-
-         .. group-tab:: Systemd
-
-            .. code-block:: console
-
-               # systemctl restart filebeat
-               # systemctl restart wazuh-manager
-
-         .. group-tab:: SysV init
-
-            .. code-block:: console
-
-               # service filebeat restart
-               # service wazuh-manager restart
-
-   -  **Wazuh dashboard node**
-
-      .. tabs::
-
-         .. group-tab:: Systemd
-
-            .. code-block:: console
-
-               # systemctl restart wazuh-dashboard
-
-         .. group-tab:: SysV init
-
-            .. code-block:: console
-
-               # service wazuh-dashboard restart
-
-Wazuh server worker node(s) installation
------------------------------------------
-
-Once the certificates have been created and copied to the new node(s), you can proceed to install and configure the new Wazuh server as a worker node.
-
-Adding the Wazuh repository
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This step ensures that the new Wazuh server node can download and install the required Wazuh packages from the official repository.
-
-.. tabs::
-
-   .. group-tab:: Yum
-
-      #. Import the GPG key:
-
-         .. code-block:: console
-
-            # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
-
-      #. Add the repository:
-
-         -  For RHEL-compatible systems version 8 and earlier, use the following command:
-
-            .. code-block:: console
-
-               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
-
-         -  For RHEL-compatible systems version 9 and later, use the following command:
-
-            .. code-block:: console
-
-               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
-
-   .. group-tab:: APT
-
-      #. Install the following packages if missing:
-
-         .. code-block:: console
-
-            # apt-get install gnupg apt-transport-https
-
-      #. Install the GPG key:
-
-         .. code-block:: console
-
-            # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
-
-      #. Update the packages' information:
-
-         .. code-block:: console
-
-            # apt-get update
-
-Installing the Wazuh manager
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This step installs the Wazuh manager on the node, which enables it to function as part of the cluster and manage alerts, Wazuh agents, and internal communication.
-
-#. Install the Wazuh manager package.
-
-   .. tabs::
-
-      .. group-tab:: Yum
-
-         .. code-block:: console
-
-            # yum -y install wazuh-manager
-
-      .. group-tab:: APT
-
-         .. code-block:: console
-
-            # apt-get -y install wazuh-manager
-
-   .. note::
-
-      The commands above install the latest version of the Wazuh manager. All nodes in a Wazuh server cluster must run the same version. If your existing node runs an earlier Wazuh server version, install that specific version instead, for example:
-
-      .. tabs::
-
-         .. group-tab:: Yum
-
-            .. code-block:: console
-
-               # yum -y install wazuh-manager-<VERSION>-1
-
-         .. group-tab:: APT
-
-            .. code-block:: console
-
-               # apt-get -y install wazuh-manager=<VERSION>-1
-
-      Alternatively, upgrade the existing Wazuh server to the latest version before adding the new node.
-
-#. Enable and start the Wazuh manager service.
-
-   .. tabs::
-
-      .. group-tab:: Systemd
-
-         .. code-block:: console
-
-            # systemctl daemon-reload
-            # systemctl enable wazuh-manager
-            # systemctl start wazuh-manager
-
-      .. group-tab:: SysV init
-
-         -  RPM-based operating system:
-
-            .. code-block:: console
-
-               # chkconfig --add wazuh-manager
-               # service wazuh-manager start
-
-         -  Debian-based operating system:
-
-            .. code-block:: console
-
-               # update-rc.d wazuh-manager defaults 95 10
-               # service wazuh-manager start
-
-#. Check the Wazuh manager status to ensure it is up and running.
-
-   .. tabs::
-
-      .. group-tab:: Systemd
-
-         .. code-block:: console
-
-            # systemctl status wazuh-manager
-
-      .. group-tab:: SysV init
-
-         .. code-block:: console
-
-            # service wazuh-manager status
-
-Install and configure Filebeat
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-#. Install the Filebeat package.
-
-   .. tabs::
-
-      .. group-tab:: Yum
-
-         .. code-block:: console
-
-            # yum -y install filebeat
-
-      .. group-tab:: APT
-
-         .. code-block:: console
-
-            # apt-get -y install filebeat
-
-#. Download the preconfigured Filebeat configuration file:
-
-   .. code-block:: console
-
-      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/wazuh/filebeat/filebeat.yml
-
-#. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
-
-   -  ``hosts:`` which represents the list of Wazuh indexer nodes to connect to. You can use either IP addresses or hostnames. By default, the host is set to localhost ``hosts: ["127.0.0.1:9200"]``. Replace it with the IP address of your Wazuh indexer.
-
-      If you have more than one Wazuh indexer node, you can separate the addresses using commas. For example, ``hosts: ["10.0.0.9:9200", "10.0.0.10:9200", "10.0.0.11:9200"]``:
-
-   .. code-block:: yaml
-      :emphasize-lines: 3
-
-      # Wazuh - Filebeat configuration file
-      output.elasticsearch:
-        hosts: <WAZUH_INDEXER_IP>:9200
-        protocol: https
-
-#. Create a Filebeat keystore to securely store authentication credentials:
-
-   .. code-block:: console
-
-      # filebeat keystore create
-
-#. Add the admin user and password to the secrets keystore:
-
-   .. code-block:: console
-
-      # echo admin | filebeat keystore add username --stdin --force
-      # echo <ADMIN_PASSWORD> | filebeat keystore add password --stdin --force
-
-   In case you are running an all-in-one deployment and using the default admin password, you could get it by running the following command:
-
-   .. code-block:: console
-
-      # sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
-
-#. Download the alerts template for the Wazuh indexer:
-
-   .. code-block:: console
-
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
-      # chmod go+r /etc/filebeat/wazuh-template.json
-
-#. Install the Wazuh module for Filebeat:
-
-   .. code-block:: console
-
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-|WAZUH_FILEBEAT|.tar.gz | tar -xvz -C /usr/share/filebeat/module
-
-Deploying certificates
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Before adding the new Wazuh server node, deploy the generated certificate archive on that node. This ensures that Filebeat can establish secure TLS communication with the Wazuh indexer and other required components.
-
-Run the following commands in the directory where the ``wazuh-certificates.tar`` file was copied to, replacing ``<NEW_WAZUH_SERVER_NODE_NAME>`` with the name of the Wazuh server node you are configuring as defined in ``/root/config.yml``. This deploys the SSL certificates to encrypt communications between the Wazuh central components:
-
-#. Create an environment variable to store the node name:
-
-   .. code-block:: console
-
-      NODE_NAME=<NEW_WAZUH_SERVER_NODE_NAME>
-
-#. Deploy the certificates:
-
-   .. code-block:: console
-
-      # mkdir /etc/filebeat/certs
-      # tar -xf ./wazuh-certificates.tar -C /etc/filebeat/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
-      # mv -n /etc/filebeat/certs/$NODE_NAME.pem /etc/filebeat/certs/filebeat.pem
-      # mv -n /etc/filebeat/certs/$NODE_NAME-key.pem /etc/filebeat/certs/filebeat-key.pem
-      # chmod 500 /etc/filebeat/certs
-      # chmod 400 /etc/filebeat/certs/*
-      #chown -R root:root /etc/filebeat/certs
-
-Starting the service
-^^^^^^^^^^^^^^^^^^^^^
-
-.. tabs::
-
-   .. group-tab:: Systemd
-
-      .. code-block:: console
-
-         # systemctl daemon-reload
-         # systemctl enable filebeat
-         # systemctl start filebeat
-
-   .. group-tab:: SysV init
-
-      -  RPM-based operating system:
-
-         .. code-block:: console
-
-            # chkconfig --add filebeat
-            # service filebeat start
-
-      -  Debian-based operating system:
-
-         .. code-block:: console
-
-            # update-rc.d filebeat defaults 95 10
-            # service filebeat start
-
-Run the following command to verify that Filebeat is successfully installed:
-
-.. code-block:: console
-
-   # filebeat test output
-
-An example output is shown below:
-
-.. code-block:: none
-   :class: output
-
-   elasticsearch: https://10.0.0.9:9200...
-     parse url... OK
-     connection...
-       parse host... OK
-       dns lookup... OK
-       addresses: 10.0.0.9
-       dial up... OK
-     TLS...
-       security: server's certificate chain verification is enabled
-       handshake... OK
-       TLS version: TLSv1.2
-       dial up... OK
-     talk to server... OK
-     version: 7.10.2
-
-Configuring the Wazuh server worker nodes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-#. Configure the Wazuh server worker node to enable cluster mode by editing the following settings in the ``/var/ossec/etc/ossec.conf`` file:
-
-   .. code-block:: xml
-      :emphasize-lines: 3-5,9,12
-
-      <cluster>
-          <name>wazuh</name>
-          <node_name><NEW_WAZUH_SERVER_NODE_NAME></node_name>
-          <node_type>worker</node_type>
-          <key><ENCRYPTION_KEY></key>
-          <port>1516</port>
-          <bind_addr>0.0.0.0</bind_addr>
-          <nodes>
-              <node><MASTER_NODE_IP_ADDRESS></node>
-          </nodes>
-          <hidden>no</hidden>
-          <disabled>no</disabled>
-      </cluster>
-
-   The configurable fields in the above section of the ``var/ossec/etc/ossec.conf`` file is as follows:
-
-   -  ``<name>`` indicates the name of the cluster.
-   -  ``<node_name>`` indicates the name of the current node. Each node of the cluster must have a unique name. Replace ``<NEW_WAZUH_SERVER_NODE_NAME>`` with the name specified in the ``/root/config.yml`` file.
-   -  ``node_type`` specifies the role of the Wazuh server node. In this instance, it is set as a worker.
-   -  ``key`` represents the :ref:`key created previously <generate_random_encryption_key_cluster>` for the master node. It has to be the same for all the nodes. In case you have an already distributed infrastructure, copy this key from the master node's ``/var/ossec/etc/ossec.conf`` file.
-   -  ``<port>`` indicates the destination port for cluster communication. Leave the default as ``1516``.
-   -  ``<bind_addr>`` is the network IP address to which the node is bound to listen for incoming requests (0.0.0.0 means the node will use any IP address).
-   -  ``<nodes>`` contain the address of the master node, which can be either an IP address or a DNS hostname. Replace ``<MASTER_NODE_IP_ADDRESS>`` with the IP address of your master node.
-   -  ``<hidden>`` shows or hides the cluster information in the generated alerts.
-   -  ``<disabled>`` indicates whether the node is enabled or disabled in the cluster. This option must be set to ``no``.
-
-   You can learn more about the available configuration options in the :doc:`cluster </user-manual/reference/ossec-conf/cluster>` reference guide.
-
-#. Restart the Wazuh manager service.
-
-   .. tabs::
-
-      .. group-tab:: Systemd
-
-         .. code-block:: console
-
-            # systemctl restart wazuh-manager
-
-      .. group-tab:: SysV init
-
-         .. code-block:: console
-
-            # service wazuh-manager restart
-
-Testing the cluster
--------------------
-
-Now that installation and configuration are complete, you can test your cluster to verify that the new Wazuh server node is connected. Two possible ways of doing this:
-
--  `Using the cluster control tool`_
--  `Using the Wazuh API console`_
-
-Using the cluster control tool
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Verify that the Wazuh server cluster is enabled and all the nodes are connected by executing the following command on any of the Wazuh server nodes:
-
-.. code-block:: console
-
-   # /var/ossec/bin/cluster_control -l
-
-A sample output of the command:
-
-.. code-block:: none
-   :class: output
-
-   NAME     TYPE    VERSION  ADDRESS
-   wazuh-1  master  4.14.2   10.0.0.9
-   wazuh-2  worker  4.14.2   10.0.0.10
-   wazuh-3  worker  4.14.2   10.0.0.11
-
-Note that ``10.0.0.9``, ``10.0.0.10, 10.0.0.11`` are example IP addresses.
-
-Using the Wazuh API console
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-You can also check your new Wazuh server cluster by using the **Wazuh API Console** accessible via the Wazuh dashboard.
-
-Access the Wazuh dashboard using the credentials below.
-
--  URL: ``https://<WAZUH_DASHBOARD_IP>``
--  Username: ``admin``
--  Password: ``<ADMIN_PASSWORD>`` or ``admin`` in case you already have a distributed architecture and are using the default password.
-
-Navigate to **Server management** > **Dev Tools**.  On the console, run the query below:
-
-.. code-block:: none
-
-   GET /cluster/healthcheck
-
-.. thumbnail:: /images/manual/wazuh-server/running-api-console-query1.png
-   :title: Running query in the API console
-   :alt: Running query in the API console
-   :align: center
-   :width: 80%
-
-This query will display the global status of your Wazuh server cluster with the following information for each node:
-
--  ``Name`` indicates the name of the Wazuh server node.
--  ``Type`` indicates the role assigned to a node(Master or Worker).
--  ``Version`` indicates the version of the ``Wazuh-manager`` service running on the node.
--  ``IP`` is the IP address of the Wazuh server node.
--  ``n_active_agents`` indicates the number of active Wazuh agents connected to the node.
-
-Having completed these steps, the Wazuh infrastructure has been successfully scaled up, and the new server nodes have been integrated into the cluster.
-
-If you want to uninstall the Wazuh server, see :ref:`Uninstall the Wazuh server <uninstall_server>` documentation.
+If agents reach the cluster through a load balancer, add the new node to the load balancer backend.

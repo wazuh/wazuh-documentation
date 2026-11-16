@@ -23,7 +23,7 @@ Every table in this section describes one field per row. Each field set table li
 
 -  ``Field``: The full name of the field as it appears in an event, including its field set prefix. For example, ``file.path`` or ``wazuh.agent.id``.
 -  ``Type``: The data type the Wazuh indexer uses to store the field's value. For example, ``keyword`` for text such as ``user.name``, ``long`` for whole numbers such as ``file.size``, ``date`` for timestamps such as ``@timestamp``, and ``ip`` for IP addresses.
--  ``Level``: Where the field comes from. ``core`` and ``extended`` fields come from ECS. ``core`` fields are the most widely used, such as ``@timestamp`` and ``user.name``, and ``extended`` fields cover more specific cases. ``custom`` fields are added by WCS, such as ``agent.groups``.
+-  ``Level``: Where the field comes from. ``core`` and ``extended`` fields come from ECS. ``core`` fields are the most widely used, such as ``@timestamp`` and ``user.name``, and ``extended`` fields cover more specific cases. ``custom`` fields are added by WCS, such as ``wazuh.agent.groups``.
 -  ``Normalization``: ``array`` means the field is expected to hold a list of values, for example, ``process.args``. An empty cell means the schema sets no expectation. Any field can still hold a list of values of its type; for example, ``gen_ai.response.finish_reasons``.
 -  ``Indexed``: Whether the Wazuh indexer indexes the field so you can search on it. Almost all fields are ``true``. Fields marked ``false``, such as ``event.original``, are stored in the event, but you can't search or filter on them.
 -  ``Example``: A sample value for the field, as it would appear in an event. For example, ``/home/alice/example.png`` for ``file.path``.

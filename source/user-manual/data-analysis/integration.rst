@@ -12,7 +12,7 @@ An integration is a logical grouping of decoders, KVDBs, and rules that belong t
 
 Follow these steps to create an integration:
 
-#. Navigate to the **Ruleset management** > **Overview** page and ensure you are in the draft space.
+#. Navigate to the **Ruleset Management** > **Overview** page and ensure you are in the draft space.
 
 #. Click the **Actions** drop-down under **Integrations** and select **Create**.
 
@@ -52,6 +52,11 @@ Each integration must be assigned a category. The available categories are descr
 |                   | etc.)                                                        |
 +-------------------+--------------------------------------------------------------+
 | Other             | Events that do not fit any of the above categories           |
++-------------------+--------------------------------------------------------------+
+| Unclassified      | Catch-all category for events that no other integration      |
+|                   | classifies. These events are stored in the                   |
+|                   | ``wazuh-events-v5-unclassified`` data stream only when       |
+|                   | unclassified event indexing is enabled for the space         |
 +-------------------+--------------------------------------------------------------+
 
 The category assigned to an integration is applied to all events decoded by that integration's decoders. This value is stored in the ``wazuh.integration.category`` field for every processed event and used during the output stage to route events to the appropriate data stream, such as ``wazuh-events-v5-cloud-services``.

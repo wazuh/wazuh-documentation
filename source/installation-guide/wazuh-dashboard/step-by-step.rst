@@ -303,17 +303,26 @@ If the Wazuh dashboard service fails to start, run the following command to see 
 
 -  A ``MISSING WAZUH_INDEXER_KIBANASERVER_PASSWORD`` or ``MISSING WAZUH_MANAGER_WUI_PASSWORD`` line means that the password isn't in ``/etc/wazuh-dashboard/local.env``.
 
--  A ``MISSING /etc/wazuh-dashboard/certs/indexer-ca.pem`` line means that the CA isn't there. An ``UNSAFE`` line means that a file or directory has the wrong owner or mode.
+-  A ``MISSING /etc/wazuh-dashboard/certs/indexer-ca.pem`` line means that the CA isn't there. Repeat :ref:`Deploying certificates and passwords <wazuh_dashboard_deploying_certificates>` to place it.
 
-For the other messages, see :ref:`Wazuh dashboard does not start <wazuh_dashboard_does_not_start>`. Don't change the owner of ``/etc/wazuh-dashboard/certs`` to ``wazuh-dashboard``. To repair it, run:
+-  An ``UNSAFE`` line names a file or directory that the start check refuses, and the reason, for example ``UNSAFE /etc/wazuh-dashboard/certs: it is not owned by root``. The check runs as root and accepts only files and directories that root owns and no other user can write. The Wazuh dashboard reads its certificates through the ``wazuh-dashboard`` group, so keep ``root`` as the owner even if the service can't read a file. Run the following commands to restore the owner and permissions of the certificates directory:
 
-.. code-block:: console
+   .. code-block:: console
 
-   # chown -R root:wazuh-dashboard /etc/wazuh-dashboard/certs
-   # chmod 0750 /etc/wazuh-dashboard/certs
-   # chmod 0640 /etc/wazuh-dashboard/certs/*.pem
+      # chown -R root:wazuh-dashboard /etc/wazuh-dashboard/certs
+      # chmod 0750 /etc/wazuh-dashboard/certs
+      # chmod 0640 /etc/wazuh-dashboard/certs/*.pem
 
-Repeat :ref:`Deploying certificates and passwords <wazuh_dashboard_deploying_certificates>` if a file is missing. The service stops after three failed starts. After you fix the cause, run the following commands to reset the count and start the service again:
+-  If the line names the ``/etc/wazuh-dashboard/ca`` or ``/etc/wazuh-dashboard/export`` directory, run the following commands:
+
+   .. code-block:: console
+
+      # chown -R root:root /etc/wazuh-dashboard/ca /etc/wazuh-dashboard/export
+      # chmod -R go-w /etc/wazuh-dashboard/ca /etc/wazuh-dashboard/export
+      # chmod 0700 /etc/wazuh-dashboard/ca /etc/wazuh-dashboard/export
+      # chmod 0400 /etc/wazuh-dashboard/ca/root-ca.key
+
+For the other messages, see :ref:`Wazuh dashboard does not start <wazuh_dashboard_does_not_start>`. The service stops after three failed starts. After you fix the cause, run the following commands to reset the count and start the service again:
 
 .. code-block:: console
 

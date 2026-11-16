@@ -49,12 +49,14 @@ The Azure integration is disabled by default on the Wazuh manager. Enable this i
 #. Search for the integration name Azure and select it.
 
    .. thumbnail:: /images/cloud-security/azure/ruleset-management-search-azure.png
+      :alt: Ruleset Management Overview in the Wazuh dashboard, with azure entered in the integrations search field
       :align: center
       :width: 80%
 
 #. Click on **Actions** \> **Enable** to enable the integration.
 
    .. thumbnail:: /images/cloud-security/azure/enable-azure-integration.png
+      :alt: Actions menu with Enable highlighted on the azure integration page of Ruleset Management in the Wazuh dashboard
       :align: center
       :width: 80%
 
@@ -146,30 +148,35 @@ Follow the steps below to obtain an ``application_id`` and ``application_key``:
 #. Go to Microsoft Entra ID and navigate to the registered application.
 
    .. thumbnail:: /images/cloud-security/azure/navigate-to-registered-application.png
+      :alt: Registered application selected on the Microsoft Entra ID App registrations page in the Azure portal
       :align: center
       :width: 80%
 
 #. Go to the **Certificates & secrets** section of the chosen application, then generate a secret key by selecting **New client secret**.
 
    .. thumbnail:: /images/cloud-security/azure/new-client-secret.png
+      :alt: New client secret button on the registered app Certificates & secrets page in the Azure portal
       :align: center
       :width: 80%
 
 #. Give the key a descriptive name and specify the duration for which the key remains active, then select **Add**.
 
    .. thumbnail:: /images/cloud-security/azure/add-client-secret.png
+      :alt: Add a client secret panel in the Azure portal, with description and expiry fields and the Add button
       :align: center
       :width: 80%
 
 #. Copy the ``Value`` and the ``Secret ID``. Store these values securely, as you can view them only once. The ``Value`` is the ``application_key``.
 
    .. thumbnail:: /images/cloud-security/azure/copy-client-secret.png
+      :alt: New client secret Value and Secret ID listed on the Certificates & secrets page in the Azure portal
       :align: center
       :width: 80%
 
 #. Copy the ``application_id`` value for your registered application from the **Overview** section.
 
    .. thumbnail:: /images/cloud-security/azure/copy-client-secret2.png
+      :alt: Application (client) ID in the Essentials section of the registered app Overview page in the Azure portal
       :align: center
       :width: 80%
 
@@ -185,12 +192,14 @@ The section below shows the steps to retrieve the Microsoft Azure Storage accoun
 #. Go to the **Storage accounts** section of your Microsoft Azure environment and select the account of interest.
 
    .. thumbnail:: /images/cloud-security/azure/select-storage-account.png
+      :alt: Storage account selected in the Storage accounts list in the Azure portal
       :align: center
       :width: 80%
 
 #. Navigate to **Access keys** located on the left pane to access the ``account_name`` and ``account_key`` values.
 
    .. thumbnail:: /images/cloud-security/azure/navigate-to-access-keys.png
+      :alt: Storage account Access keys page in the Azure portal, with the storage account name and key highlighted
       :align: center
       :width: 80%
 

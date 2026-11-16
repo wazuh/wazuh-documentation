@@ -67,7 +67,7 @@ Index templates define how the Wazuh indexer stores and indexes the fields of ea
 
 .. code-block:: console
 
-   # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X GET "https://<WAZUH_INDEXER_IP>:9200/_index_template/wazuh-events-*"
+   # curl -sk -u <USERNAME>:<PASSWORD> -X GET "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_index_template/wazuh-events-*"
 
 The index templates map only the fields that WCS defines:
 
@@ -81,6 +81,6 @@ Each WCS field has a level and a type. The level of a field shows where it comes
 
 -  ``core``: ECS fields that are widely used across sources, such as ``@timestamp`` and ``user.name``.
 -  ``extended``: ECS fields that cover more specific cases, such as ``file.path``.
--  ``custom``: Fields that WCS adds, such as ``wazuh.integration.name`` and ``agent.groups``.
+-  ``custom``: Fields that WCS adds, such as ``wazuh.integration.name`` and ``wazuh.agent.groups``.
 
 Most text fields are of type ``keyword``. A query on a ``keyword`` field matches the whole value, so use a wildcard to find a word inside it. The Wazuh indexer stores values longer than 4096 characters but doesn't index them. A few fields, such as ``event.original``, aren't indexed at all: you can read them in the event, but you can't search or aggregate on them.

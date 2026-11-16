@@ -1542,7 +1542,7 @@ Install the Wazuh agent package on the endpoint first. Then follow these steps t
 
    Where:
 
-   -  ``<WAZUH_MANAGER_IP_ADDRESS>`` is the IP address or FQDN of the Wazuh manager. It must match a name in the certificate of the Wazuh manager HTTPS listener, or the request fails with error ``1768``. To list those names, run ``GET /cluster/<NODE_ID>/daemons/remoted/tls`` and read ``listener.sans`` in the response. On an all-in-one installation, the names are the hostname and private IP address of the Wazuh manager, plus the loopback addresses. A default installation might not include a public address, so Wazuh agents outside the Wazuh manager network must use one of these names.
+   -  ``<WAZUH_MANAGER_IP_ADDRESS>`` is the IP address or FQDN of the Wazuh manager. It must match a name in the certificate of the Wazuh manager HTTPS listener. Otherwise, the request fails with error ``1768``, "Enrollment token refused", with the detail ``address not in certificate SAN``. To list those names, run ``GET /cluster/<NODE_ID>/daemons/remoted/tls`` and read ``listener.sans`` in the response. On an all-in-one installation, the names are the hostname and private IP address of the Wazuh manager, plus the loopback addresses. A default installation might not include a public address, so Wazuh agents outside the Wazuh manager network must use one of these names. To use another address, see :ref:`Enrollment token refused: address not in certificate SAN <agent_enrollment_token_refused_san>`.
    -  ``ttl`` is how long the token stays valid; for example, ``12h``.
    -  ``max_uses`` is the number of Wazuh agents that can enroll with the token.
    -  ``description`` is an optional label that helps you identify the token.

@@ -13,7 +13,7 @@ Example: Accept only the events of one log file
 
 Wazuh fills the ``wazuh.*`` fields itself, so you don't map them in a decoder, but you can read them. ``wazuh.protocol.location`` holds the log file the Wazuh agent read the event from. This decoder uses it in its ``check`` stage to accept only the events of ``/var/log/payments/api.log``.
 
-The decoder is a child of the root decoder of your integration, ``decoder/core-wazuh-message/0``, as in :ref:`Create a security analytics detection workflow <data_analysis_detection_workflow>`. Create it in **Ruleset management** > **Normalization** > **Decoders**, then check the output in **Log test**. The highlighted lines show where ``wazuh.protocol.location`` is used and where it appears in the output.
+The decoder is a child of the root decoder of the space, ``decoder/core-wazuh-message/0``, as in :ref:`Create a security analytics detection workflow <data_analysis_detection_workflow>`. Create it in **Ruleset management** > **Normalization** > **Decoders**, then check the output in **Log test**. The highlighted lines show where ``wazuh.protocol.location`` is used and where it appears in the output.
 
 **Sample log, from** ``/var/log/payments/api.log``
 
