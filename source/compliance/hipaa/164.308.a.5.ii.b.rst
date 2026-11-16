@@ -16,7 +16,7 @@ Wazuh supports this requirement by providing several capabilities that support m
 -  Threat detection ruleset
 -  Rootkit detection
 
-The Wazuh malware detection capability meets this requirement using out-of-the-box rules, threat intelligence enrichments, and KVDBs.
+The Wazuh malware detection capability helps meet this requirement using out-of-the-box rules, threat intelligence enrichments, and :doc:`key-value databases (KVDBs) </user-manual/data-analysis/key-value-databases>`.
 
 Use case: Rootkit detection
 ------------------------------
@@ -26,7 +26,7 @@ In this example, the Wazuh Rootcheck component detects abnormal behavior on moni
 Configuration
 ^^^^^^^^^^^^^^
 
-Follow these steps on the Ubuntu 26.04 endpoint to emulate rootkit-like process-hiding behavior. The Wazuh agent runs a RootCheck scan based on the set ``<frequency>`` and detects the rootkit behavior.
+Follow these steps on the Ubuntu 26.04 endpoint to emulate rootkit-like process-hiding behavior. The Wazuh agent runs a Rootcheck scan based on the set ``<frequency>`` and detects the rootkit behavior.
 
 #. Switch to the root user and refresh package lists:
 
@@ -39,9 +39,9 @@ Follow these steps on the Ubuntu 26.04 endpoint to emulate rootkit-like process-
 
    .. code-block:: console
 
-      # apt -y install gcc git make
+      # apt -y install gcc git make linux-headers-$(uname -r)
 
-#. For the purpose of this POC, configure the Wazuh agent to run rootcheck scans every 2 minutes. In the ``/var/ossec/etc/ossec.conf`` file, set the frequency option in the ``<rootcheck>`` section to 120:
+#. For this proof of concept, configure the Wazuh agent to run Rootcheck scans every 2 minutes. In the ``/var/ossec/etc/ossec.conf`` file, set the frequency option in the ``<rootcheck>`` section to 120:
 
    .. code-block:: xml
 
@@ -68,7 +68,7 @@ Follow these steps on the Ubuntu 26.04 endpoint to emulate rootkit-like process-
 Attack emulation
 ^^^^^^^^^^^^^^^^^^
 
-We performed the following emulation on the monitored Ubuntu 26.04 endpoint:
+Perform the following steps on the monitored Ubuntu 26.04 endpoint to emulate the attack:
 
 #. Fetch the Diamorphine rootkit source code from GitHub:
 
@@ -76,13 +76,14 @@ We performed the following emulation on the monitored Ubuntu 26.04 endpoint:
 
       # git clone https://github.com/m0nad/Diamorphine
 
-#. Navigate to the Diamorphine directory, replace the outdated ``PROC_ROOT_INO`` symbol with the Ubuntu 26.04 equivalent, and compile the source code:
+#. Navigate to the Diamorphine directory and compile the source code:
 
    .. code-block:: console
 
       # cd Diamorphine
-      # sed -i 's/PROC_ROOT_INO/PROCFS_ROOT_INO/g' diamorphine.c
       # make
+
+   If ``make`` fails with ``'PROC_ROOT_INO' undeclared``, your kernel renamed that symbol. Run ``sed -i 's/PROC_ROOT_INO/PROCFS_ROOT_INO/g' diamorphine.c`` and run ``make`` again.
 
 #. Load the rootkit kernel module:
 
@@ -90,15 +91,18 @@ We performed the following emulation on the monitored Ubuntu 26.04 endpoint:
 
       # insmod diamorphine.ko
 
-#. Run the kill signal ``63`` with the PID of a random process running on the Ubuntu endpoint. This unhides the Diamorphine rootkit. By default, Diamorphine hides itself so we do not detect it by running the ``lsmod`` command. Try it out:
+   If you receive the error ``insmod: ERROR: could not insert module diamorphine.ko: Invalid parameters``, restart the Ubuntu endpoint and try again. Sometimes it takes several tries for the module to load.
+
+#. Run the kill signal ``63`` to any PID to unhide the Diamorphine kernel module. By default, Diamorphine hides itself, so the ``lsmod`` command does not list it. Replace ``<PID>`` with any number. The target process does not need to exist. Try it out:
 
    .. code-block:: console
+      :emphasize-lines: 2
 
       # lsmod | grep diamorphine
-      # kill -63 509
+      # kill -63 <PID>
       # lsmod | grep diamorphine
 
-   The command output looks similar to this:
+   The first ``lsmod`` command returns no output because Diamorphine hides itself. After the ``kill -63`` command, the second ``lsmod`` command returns output similar to this:
 
    .. code-block:: none
       :class: output
@@ -121,11 +125,13 @@ We performed the following emulation on the monitored Ubuntu 26.04 endpoint:
    .. code-block:: console
 
       # kill -31 <PID_OF_RSYSLOGD>
-      # ps auxw | grep rsyslog | grep -v grep
+      # ps auxw | grep rsyslogd | grep -v grep
 
    Replace ``<PID_OF_RSYSLOGD>`` with the PID retrieved from the previous command.
 
-   When using this last command, you can expect an empty output. The next rootcheck scan runs and triggers a finding about the ``rsyslogd`` process, which was hidden with the Diamorphine rootkit.
+   The last command returns no output because the process is hidden. The next Rootcheck scan triggers a finding about the ``rsyslogd`` process, which the Diamorphine rootkit hides.
+
+#. Wait at least 2 minutes, the ``<frequency>`` value you set in the ``<rootcheck>`` section, for the next Rootcheck scan to run. Then, navigate to **Threat intelligence** > **Threat Hunting** and use the ``wazuh.integration.name: wazuh-rootcheck`` filter to confirm that the finding about the hidden process exists. Unload the rootkit only after the finding appears, because unloading it makes the hidden process visible again.
 
 #. Unload the rootkit kernel module:
 

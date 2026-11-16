@@ -26,16 +26,17 @@ This section explains how to create a backup of your Wazuh indexer configuration
 Preparing the backup
 ^^^^^^^^^^^^^^^^^^^^
 
-#. Backup the existing Wazuh indexer security configuration files.
+#. Export the current Wazuh indexer security configuration into ``/etc/wazuh-indexer/opensearch-security/``, so that the backup includes it. This command overwrites the YAML files in that directory with the configuration stored in the cluster:
 
    .. code-block:: console
 
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
 
-#. Create the destination folder to store the files. For version control, add the date and time of the backup to the name of the folder.
+#. Create the destination folder to store the files. For version control, add the date and time of the backup to the name of the folder. Set the umask to ``077`` first, so that only ``root`` can read the backup folder and the archive. They contain private keys.
 
    .. code-block:: console
 
+      # umask 077
       # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
       # mkdir -p $bkp_folder && echo $bkp_folder
 
@@ -49,22 +50,12 @@ Preparing the backup
 Backing up the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Back up the Wazuh indexer certificates and configuration files.
+#. Back up the Wazuh indexer configuration directory and the kernel settings file. The directory includes the certificates, the root CA in ``ca/``, the client certificates in ``export/``, and the keystores.
 
    .. code-block:: console
 
       # rsync -aREz \
-      /etc/wazuh-indexer/certs/ \
-      /etc/wazuh-indexer/jvm.options \
-      /etc/wazuh-indexer/jvm.options.d \
-      /etc/wazuh-indexer/log4j2.properties \
-      /etc/wazuh-indexer/opensearch.yml \
-      /etc/wazuh-indexer/opensearch.keystore \
-      /etc/wazuh-indexer/opensearch-security/ \
-      /etc/wazuh-indexer/wazuh-indexer-notifications/ \
-      /etc/wazuh-indexer/wazuh-indexer-notifications-core/ \
-      /etc/wazuh-indexer/wazuh-indexer-reports-scheduler/ \
-      /etc/wazuh-indexer/wazuh-indexer-security-analytics/ \
+      /etc/wazuh-indexer/ \
       /usr/lib/sysctl.d/wazuh-indexer.conf \
       "$bkp_folder"
 
@@ -111,38 +102,24 @@ Perform the following steps to restore Wazuh indexer files on the new server.
 
       # systemctl stop wazuh-indexer
 
-#. Restore the Wazuh indexer configuration files and change the file permissions and ownerships accordingly:
+#. Restore the Wazuh indexer configuration files. The ``-a`` option of ``rsync`` restores the ownership and permissions saved in the backup:
 
    .. code-block:: console
 
-      # cp -r etc/wazuh-indexer/certs/. /etc/wazuh-indexer/certs/
-      # cp etc/wazuh-indexer/jvm.options /etc/wazuh-indexer/jvm.options
-      # cp -r etc/wazuh-indexer/jvm.options.d/. /etc/wazuh-indexer/jvm.options.d/
-      # cp etc/wazuh-indexer/log4j2.properties /etc/wazuh-indexer/log4j2.properties
-      # cp etc/wazuh-indexer/opensearch.yml /etc/wazuh-indexer/opensearch.yml
-      # cp etc/wazuh-indexer/opensearch.keystore /etc/wazuh-indexer/opensearch.keystore
-      # cp -r etc/wazuh-indexer/opensearch-security/. /etc/wazuh-indexer/opensearch-security/
-      # cp -r etc/wazuh-indexer/wazuh-indexer-reports-scheduler/. /etc/wazuh-indexer/wazuh-indexer-reports-scheduler/
-      # cp -r etc/wazuh-indexer/wazuh-indexer-notifications/. /etc/wazuh-indexer/wazuh-indexer-notifications/
-      # cp -r etc/wazuh-indexer/wazuh-indexer-notifications-core/. /etc/wazuh-indexer/wazuh-indexer-notifications-core/
-      # cp -r etc/wazuh-indexer/wazuh-indexer-security-analytics/. /etc/wazuh-indexer/wazuh-indexer-security-analytics/
-      # cp usr/lib/sysctl.d/wazuh-indexer.conf /usr/lib/sysctl.d/wazuh-indexer.conf
+      # rsync -a etc/wazuh-indexer/ /etc/wazuh-indexer/
+      # rsync -a usr/lib/sysctl.d/wazuh-indexer.conf /usr/lib/sysctl.d/wazuh-indexer.conf
 
-      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs/
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/jvm.options
-      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/jvm.options.d
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/log4j2.properties
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch.yml
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch.keystore
-      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/
-      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/wazuh-indexer-reports-scheduler/
-      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/wazuh-indexer-notifications/
-      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/wazuh-indexer-notifications-core/
-      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/wazuh-indexer-security-analytics/
-      # chown root:root /usr/lib/sysctl.d/wazuh-indexer.conf
-
-#. Start the Wazuh indexer service:
+#. Start the Wazuh indexer service and check that the cluster status in the output is green. If the output is ``OpenSearch Security not initialized.``, or the status is ``red`` or ``yellow`` while shards are still recovering, wait a few seconds and run the ``curl`` command again:
 
    .. code-block:: console
 
       # systemctl start wazuh-indexer
+      # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> "https://localhost:9200/_cluster/health?pretty"
+
+#. Load the restored security configuration into the cluster. Until you do, the restored files under ``/etc/wazuh-indexer/opensearch-security/`` aren't used, and the cluster keeps the users, roles, and role mappings it already had:
+
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+
+   In a multi-node cluster, run the command once, on any node, after every node has been restored and started.

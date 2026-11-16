@@ -18,7 +18,7 @@ This article requires confidentiality and integrity in the processing of user da
 Use case: Detect file changes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, you configure the Wazuh agent on an Ubuntu 24.04 endpoint to detect changes in the ``/root/personal_data``. You then modify a file to trigger a finding.
+In this use case, you configure the Wazuh agent on an Ubuntu 24.04 endpoint to detect changes in the ``/root/personal_data`` directory. You then modify a file to trigger a finding.
 
 Ubuntu endpoint
 ~~~~~~~~~~~~~~~
@@ -74,7 +74,7 @@ Ubuntu endpoint
 
       User01= user02_ID
 
-On the Wazuh dashboard, a finding shows the modification of the ``subject_data.txt`` file. The finding is tagged with ``II_5.1.f``.
+On the Wazuh dashboard, navigate to **Threat intelligence** > **Threat Hunting** > **Findings** tab and filter for ``file.path`` is ``/root/personal_data/subject_data.txt``. A finding shows the modification of the ``subject_data.txt`` file. The finding is tagged with ``II_5.1.f``.
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-mod.png
    :title: File modification finding visualization
@@ -87,6 +87,8 @@ On the Wazuh dashboard, a finding shows the modification of the ``subject_data.t
    :alt: Document details of the file modified finding with the GDPR compliance field and rule title highlighted
    :align: center
    :width: 80%
+
+To revert the configuration, remove the ``<directories>`` line for ``/root/personal_data`` from the ``<syscheck>`` block of ``/var/ossec/etc/ossec.conf``, then restart the Wazuh agent.
 
 Use case: Detect file deletion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -136,7 +138,7 @@ Ubuntu endpoint
 
       # rm /root/personal_data/subject_data.txt
 
-On the Wazuh dashboard, a finding shows that the ``subject_data.txt`` file was deleted.
+On the Wazuh dashboard, navigate to **Threat intelligence** > **Threat Hunting** > **Findings** tab and filter for ``file.path`` is ``/root/personal_data/subject_data.txt``. A finding shows that the ``subject_data.txt`` file was deleted.
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-del.png
    :title: File deletion finding visualization
@@ -144,10 +146,12 @@ On the Wazuh dashboard, a finding shows that the ``subject_data.txt`` file was d
    :align: center
    :width: 80%
 
+To revert the configuration, remove the ``<directories>`` line for ``/root/personal_data`` from the ``<syscheck>`` block of ``/var/ossec/etc/ossec.conf``, then restart the Wazuh agent.
+
 Use case: Detect changes to file attributes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, you configure the Wazuh agent on an Ubuntu 24.04 endpoint to detect changes to ``/root/personal_data`` or its attributes, and to identify who made them. You then change the owner of a file to trigger a finding.
+In this use case, you configure the Wazuh agent on an Ubuntu 24.04 endpoint to detect changes to ``/root/personal_data`` or its attributes, and to identify who made them. To identify who made the changes, you use the FIM :ref:`who-data <who-data-monitoring>` feature. You then change the owner of a file to trigger a finding.
 
 Ubuntu endpoint
 ~~~~~~~~~~~~~~~
@@ -208,10 +212,12 @@ Ubuntu endpoint
 
       # chown <YOUR_REGULAR_USER>:<YOUR_REGULAR_USER> /root/personal_data/subject_data.txt
 
-The following image shows the change made to the file.
+On the Wazuh dashboard, navigate to **Threat intelligence** > **Threat Hunting** > **Findings** tab and filter for ``file.path`` is ``/root/personal_data/subject_data.txt``. The following image shows the finding for the ownership change.
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-mod-who.png
    :title: Changed attributes finding visualization
    :alt: Document details of a FIM finding with the changed attributes in event.original highlighted
    :align: center
    :width: 80%
+
+To revert the configuration, remove the ``<directories>`` line for ``/root/personal_data`` and the ``<whodata>`` block from the ``<syscheck>`` block of ``/var/ossec/etc/ossec.conf``, then restart the Wazuh agent.

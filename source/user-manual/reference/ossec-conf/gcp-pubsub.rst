@@ -20,7 +20,7 @@ Prerequisite: the Google Cloud integration runs on a Wazuh agent and needs Pytho
 This configuration section is used to configure the Google Cloud Pub/Sub module.
 
 .. note::
-   The Wazuh GCP module supports only one gcp-pubsub section per Wazuh configuration file ``<ossec_conf>``. To configure more than one service, you need to deploy multiple agents.
+   The Wazuh GCP module supports only one gcp-pubsub section per Wazuh configuration file ``<ossec_config>``. To configure more than one service, you need to deploy multiple agents.
 
 Options
 -------
@@ -86,7 +86,7 @@ For example ``<subscription_name>wazuh-name</subscription_name>``.
 credentials_file
 ^^^^^^^^^^^^^^^^^^
 
-Path to the Google Cloud credentials file. It can be absolute path or relative to WAZUH_HOME. This option is mandatory.
+Path to the Google Cloud credentials file. It can be an absolute path or a path relative to the Wazuh agent installation directory (``/var/ossec`` on Linux). This option is mandatory.
 
 +----------------------+----------------------------------+
 | **Default value**    | n/a                              |
@@ -134,7 +134,7 @@ Scheduling options
 pull_on_start
 ^^^^^^^^^^^^^^
 
-Pull logs on Wazuh agent start or restart.
+Pull logs on Wazuh agent start or restart. This option is the ``gcp-pubsub`` equivalent of the ``run_on_start`` option of the other modules. When it is set to ``no``, the first pull waits for the configured ``interval``.
 
 +----------------------+-----------+
 | **Default value**    | yes       |

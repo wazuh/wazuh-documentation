@@ -34,7 +34,7 @@ Depending on the given format, the output file will be ``/var/ossec/logs/ossec.l
 +----------------------+-----------------+
 | **Allowed values**   | - plain         |
 |                      | - json          |
-|                      | - plain, json   |
+|                      | - plain,json    |
 +----------------------+-----------------+
 
 Default configuration
