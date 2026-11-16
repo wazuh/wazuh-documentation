@@ -16,7 +16,7 @@ This section shows how to remove a Wazuh indexer node from the cluster safely by
    | Exclude the node from shard allocation | ``PUT _cluster/settings { "persistent": { "cluster.routing.allocation.exclude._ip": "<REMOVED_WAZUH_INDEXER_IP>" } }`` | ``curl -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> -XPUT https://<WAZUH_INDEXER_IP>:9200/_cluster/settings -H 'Content-Type: application/json' -d '{"persistent": {"cluster.routing.allocation.exclude._ip": "<REMOVED_WAZUH_INDEXER_IP>"}}'`` |
    +----------------------------------------+------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-   Replace ``<WAZUH_INDEXER_IP>`` with the address of any Wazuh indexer node that remains in the cluster, and ``<REMOVED_WAZUH_INDEXER_IP>`` with the address of the node you are removing. Curl exits with code 0 even when the Wazuh indexer rejects the request, so confirm that the response contains ``"acknowledged": true`` before stopping the node.
+   Replace ``<WAZUH_INDEXER_IP>`` with the address of any Wazuh indexer node that remains in the cluster, and ``<REMOVED_WAZUH_INDEXER_IP>`` with the address of the node you are removing, and ``<REMOVED_WAZUH_INDEXER_NODE_NAME>`` with its node name. Curl exits with code 0 even when the Wazuh indexer rejects the request, so confirm that the response contains ``"acknowledged": true`` before stopping the node.
 
    The response confirms the setting was applied:
 
@@ -68,7 +68,7 @@ This section shows how to remove a Wazuh indexer node from the cluster safely by
 
    .. note::
 
-      Wait for the cluster to return to a green state between restarts to avoid errors resulting from a yellow cluster state.
+      Wait for the cluster to return to a green state between restarts. If the removal leaves only two cluster-manager-eligible nodes, the cluster cannot elect a cluster manager while either of them restarts, and it does not answer requests until that node is back. The Wazuh manager stops sending data during that time. Add a replacement node before you remove one, or plan a maintenance window.
 
 #. Remove its ``<host>`` entry from ``/etc/wazuh-manager/wazuh-manager.conf`` and its address from ``opensearch.hosts`` in ``/etc/wazuh-dashboard/opensearch_dashboards.yml``, then restart the Wazuh manager and the Wazuh dashboard:
 
