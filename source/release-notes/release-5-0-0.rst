@@ -114,8 +114,8 @@ Wazuh agent
 -  `#35880 <https://github.com/wazuh/wazuh/issues/35880>`__ Reduced ``wazuh-agent`` Debian package dependencies, removing ``adduser``, ``lsb-release``, and ``debconf``.
 -  `#35471 <https://github.com/wazuh/wazuh/issues/35471>`__ Standardized agent-start and buffer-status events to a WCS-aligned JSON format.
 -  `#39274 <https://github.com/wazuh/wazuh/issues/39274>`__ Extended the Windows agent's default FIM registry ignore list to exclude the OS telemetry under ``HKLM\System\CurrentControlSet\Services``.
--  `#39064 <https://github.com/wazuh/wazuh/issues/39064>`__ The 5.0 package upgrade deletes ``/etc/wazuh-manager/authd.pass`` from the endpoint. **Operators who rotate it should know it disappears at upgrade.**.
--  `#39064 <https://github.com/wazuh/wazuh/issues/39064>`__ A fresh 5.0 install no longer creates ``/etc/wazuh-manager/authd.pass``.
+-  `#39064 <https://github.com/wazuh/wazuh/issues/39064>`__ The 5.0 package upgrade deletes ``etc/authd.pass`` from the endpoint. **Operators who rotate it should know it disappears at upgrade.**.
+-  `#39064 <https://github.com/wazuh/wazuh/issues/39064>`__ A fresh 5.0 install no longer creates ``etc/authd.pass``.
 -  `#39064 <https://github.com/wazuh/wazuh/issues/39064>`__ ``WAZUH_REGISTRATION_PASSWORD`` is no longer used; the installer logs that it was ignored.
 -  `#39064 <https://github.com/wazuh/wazuh/issues/39064>`__ An enrollment password stored outside the default path is left in place.
 -  `#39064 <https://github.com/wazuh/wazuh/issues/39064>`__ The installers no longer add an ``<authorization_pass_path>`` element naming the default password file.
