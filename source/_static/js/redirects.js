@@ -91,6 +91,7 @@ newUrls['5.0'] = [
   '/compliance/hipaa/164.312.c.2.html',
   '/compliance/hipaa/164.308.a.5.ii.c.html',
   '/user-manual/reference/ossec-conf/agent.html',
+  '/user-manual/reference/ossec-conf/agent-info.html',
   '/user-manual/reference/wazuh-common-schema.html',
   '/user-manual/reference/wazuh-common-schema/how-wcs-works.html',
   '/user-manual/reference/wazuh-common-schema/how-wazuh-uses-wcs-fields.html',

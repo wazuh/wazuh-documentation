@@ -44,9 +44,7 @@ Enables or disables the Office 365 module.
 only_future_events
 ^^^^^^^^^^^^^^^^^^^^
 
-Set it to yes to collect events generated since the Wazuh manager was started.
-
-By default, when Wazuh starts it will only read all log content from Office365 since the manager started.
+Set it to ``yes`` to collect only events generated after the Wazuh agent starts. Set it to ``no`` to resume, after a restart, from the last event collected before the Wazuh agent stopped.
 
 +----------------------+-----------+
 | **Default value**    | yes       |
