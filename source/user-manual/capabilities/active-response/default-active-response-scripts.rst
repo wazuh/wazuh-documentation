@@ -8,14 +8,17 @@ Default active response scripts
 
 Wazuh agents ship with active response scripts for Linux, Unix, macOS, and Windows endpoints.
 
-.. contents::
-   :local:
-   :depth: 1
-   :backlinks: none
+-  :ref:`Linux and Unix-based endpoints <active_response_default_scripts_linux_unix>`
+
+-  :ref:`macOS endpoints <active_response_default_scripts_macos>`
+
+-  :ref:`Windows endpoints <active_response_default_scripts_windows>`
 
 In Wazuh 5.x, Wazuh consolidates the firewall-specific active response scripts used in Wazuh 4.x into a single ``block-ip`` executable for each supported platform.
 
 The ``block-ip`` executable attempts to use the available firewall mechanisms in a predefined order. If a firewall method is unavailable or unsupported on the endpoint, the executable automatically proceeds to the next available method. This approach removes the need to select or configure a firewall-specific script for each endpoint.
+
+.. _active_response_default_scripts_linux_unix:
 
 Linux and Unix-based endpoints
 --------------------------------
@@ -37,6 +40,8 @@ The table below lists out-of-the-box active response scripts for:
 | |disable-account|    | Disables or re-enables a user account, using ``passwd -l/passwd -u`` on Linux.                                                                  |
 +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
 
+.. _active_response_default_scripts_macos:
+
 macOS endpoints
 -----------------
 
@@ -51,6 +56,8 @@ The table below lists out-of-the-box active response scripts for:
 +======================+====================================================================================================+
 | |block-ip-macos|     | Blocks or unblocks an IP address. On macOS, it tries pf and then ``/etc/hosts.deny``.              |
 +----------------------+----------------------------------------------------------------------------------------------------+
+
+.. _active_response_default_scripts_windows:
 
 Windows endpoints
 -------------------
