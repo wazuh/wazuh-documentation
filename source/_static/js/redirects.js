@@ -91,6 +91,7 @@ newUrls['5.0'] = [
   '/compliance/hipaa/164.312.c.2.html',
   '/compliance/hipaa/164.308.a.5.ii.c.html',
   '/user-manual/reference/ossec-conf/agent.html',
+  '/user-manual/reference/ossec-conf/agent-info.html',
   '/user-manual/reference/wazuh-common-schema.html',
   '/user-manual/reference/wazuh-common-schema/how-wcs-works.html',
   '/user-manual/reference/wazuh-common-schema/how-wazuh-uses-wcs-fields.html',
@@ -118,6 +119,7 @@ newUrls['5.0'] = [
   '/user-manual/agent/agent-management/upgrade-agents-remotely.html',
   '/user-manual/agent/agent-enrollment/deployment-variables/installing-without-token.html',
   '/user-manual/wazuh-dashboard/wazuh-dashboard-configurations.html',
+  '/user-manual/wazuh-dashboard/credentials.html',
   '/user-manual/manager/wazuh-manager-architecture.html',
   '/user-manual/manager/wazuh-normalization-engine.html',
   '/user-manual/manager/wazuh-indexer-connector.html',
@@ -127,6 +129,7 @@ newUrls['5.0'] = [
   '/user-manual/manager/logging.html',
   '/user-manual/manager/reference.html',
   '/user-manual/data-analysis/index.html',
+  '/user-manual/data-analysis/key-concepts.html',
   '/user-manual/data-analysis/data-analysis-components.html',
   '/user-manual/data-analysis/content-management.html',
   '/user-manual/data-analysis/space.html',
@@ -227,7 +230,7 @@ newUrls['5.0'] = [
   '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/new-wazuh-indexer-node.html',
   '/user-manual/wazuh-indexer-cluster/removing-a-wazuh-indexer-node.html',
   '/user-manual/wazuh-indexer-cluster/troubleshooting.html',
-  '/user-manual/wazuh-server-cluster/troubleshooting-load-balanced-cluster.html',
+  '/user-manual/wazuh-server-cluster/troubleshooting.html',
   '/getting-started/components/wazuh-manager.html',
   '/installation-guide/wazuh-manager/index.html',
   '/installation-guide/wazuh-manager/installation-assistant.html',
@@ -585,21 +588,6 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/capabilities/malware-detection/fim-threat-detection-rules.html',
     '5.0': '/user-manual/capabilities/malware-detection/fim-threat-intelligence.html',
-  },
-  {
-    'target': ['4.14=>5.0', '5.0=>4.14'],
-    '4.14': '/user-manual/wazuh-server-cluster/types-of-nodes.html',
-    '5.0': '/user-manual/wazuh-server-cluster/architecture-overview.html#types-of-nodes',
-  },
-  {
-    'target': ['4.14=>5.0', '5.0=>4.14'],
-    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html',
-    '5.0': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html#add-a-wazuh-manager-node-to-all-in-one-deployments',
-  },
-  {
-    'target': ['4.14=>5.0', '5.0=>4.14'],
-    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
-    '5.0': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html#add-a-wazuh-manager-node-to-distributed-deployments',
   }
 );
 
@@ -744,9 +732,6 @@ removedUrls['5.0'] = [
   '/user-manual/wazuh-indexer/re-indexing.html',
   '/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints.html',
   // End of 4.14 pages with no 5.0 page yet.
-  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html',
-  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
-  '/user-manual/wazuh-server-cluster/types-of-nodes.html',
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/labels.html',
   '/cloud-security/azure/ms-graph-api-setup.html',

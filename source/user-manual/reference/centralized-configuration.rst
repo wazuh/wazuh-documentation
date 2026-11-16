@@ -54,7 +54,7 @@ agent.conf structure
 
 The ``agent.conf`` file uses the ``<agent_config>`` XML element to define the configuration distributed to Wazuh agents.
 
-Each ``<agent_config>`` block contains one or more supported configuration sections: ``localfile``, ``socket``, ``syscheck``, ``rootcheck``, ``sca``, ``wodle``, the cloud and Microsoft modules (``gcp-pubsub``, ``gcp-bucket``, ``github``, ``office365``, ``ms-graph``), ``active-response`` and ``anti_tampering``.
+Each ``<agent_config>`` block contains one or more supported configuration sections: ``localfile``, ``socket``, ``syscheck``, ``rootcheck``, ``sca``, ``wodle``, ``agent-info``, the cloud and Microsoft modules (``gcp-pubsub``, ``gcp-bucket``, ``github``, ``office365``, ``ms-graph``), and ``anti_tampering``.
 
 You can define multiple ``<agent_config>`` blocks in the same file to apply different configurations based on agent attributes.
 
@@ -68,7 +68,7 @@ You can define multiple ``<agent_config>`` blocks in the same file to apply diff
    </agent_config>
 
 .. note::
-   In ``agent.conf``, the ``<agent>`` section only accepts ``<batch>``. The ``agent-upgrade`` and ``labels`` sections are ignored with a warning. Wazuh manager sections, such as ``remote``, are also ignored, with a warning such as ``remote configuration is only set in the manager``.
+   In ``agent.conf``, the ``<agent>`` section only accepts ``<batch>``. The ``agent-upgrade`` and ``labels`` sections are ignored with a warning. Wazuh manager sections, such as ``remote``, are also ignored, with a warning such as ``remote configuration is only set in the manager``. The Wazuh agent reads the ``<active-response>`` section only from its local ``ossec.conf`` file: it accepts an ``<active-response>`` block in ``agent.conf`` without a warning, but ignores it.
 
 Options
 ^^^^^^^^
@@ -251,14 +251,10 @@ Apply the configuration
 
       # mv /etc/wazuh-manager/shared/default/.agent.conf.tmp /etc/wazuh-manager/shared/default/agent.conf
 
-   The Wazuh manager will automatically detect the new configuration and distribute it to all Wazuh agents in the ``default`` group.
+   The Wazuh manager detects the new configuration and distributes it to the Wazuh agents in the ``default`` group. A restart isn't required. Refer to the :doc:`query the Wazuh agent configuration </user-manual/agent/agent-management/query-configuration>` documentation for more information on checking the synchronization status of a Wazuh agent.
 
-5. The Wazuh manager automatically detects the updated configuration and distributes it to agents in the group.
-
-   A restart is not normally required. To trigger distribution sooner, restart the Wazuh manager. Refer to the :doc:`query the Wazuh agent configuration </user-manual/agent/agent-management/query-configuration>` documentation for more information on checking the synchronization status of a Wazuh agent.
+5. Optionally, to trigger the distribution sooner, restart the Wazuh manager. This restarts all Wazuh manager services.
 
    .. code-block:: console
 
       # systemctl restart wazuh-manager
-
-   Connected agents receive the updated configuration automatically after the Wazuh manager detects the change.

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh meets the architecture, infrastructure, and security software aspects of the common criteria CC6.1 by providing the IT Hygiene capability.
+   :description: Wazuh helps meet the architecture, infrastructure, and security software aspects of the common criteria CC6.1 by providing the IT Hygiene capability.
 
 Common criteria 6.1
 =====================
@@ -13,7 +13,7 @@ The use case below shows how Wazuh helps meet this requirement.
 Use case: Maintaining asset inventory on a Windows endpoint
 --------------------------------------------------------------
 
-Wazuh meets the architecture, infrastructure, and security software aspects of the **common criteria CC6.1** using the IT Hygiene capability.
+Wazuh helps meet the architecture, infrastructure, and security software aspects of the **common criteria CC6.1** using the :doc:`IT Hygiene </user-manual/capabilities/system-inventory/index>` capability. IT Hygiene collects inventory data from monitored endpoints, such as hardware, operating system, packages, processes, ports, users, and services.
 
 Windows endpoint
 ^^^^^^^^^^^^^^^^^
@@ -50,7 +50,7 @@ In this use case, we show how to use the Wazuh Syscollector module to collect sy
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-#. Navigate to **IT Hygiene** on the Wazuh dashboard.
+#. Open the menu (**☰**) and go to **Security operations** > **IT Hygiene**.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/overview-it-hygiene-card.png
       :title: Wazuh Overview dashboard - IT Hygiene

@@ -23,6 +23,8 @@ The ``<client>`` section configures the Wazuh agent connection to the Wazuh mana
 Options
 -------
 
+A Wazuh 5.0 agent ignores the ``config-profile``, ``notify_time``, ``time-reconnect``, ``ip_update_interval``, and ``auto_restart`` options in ``<client>``, and the ``port``, ``interface_index``, ``max_retries``, and ``retry_interval`` options of ``<server>``. Their descriptions and default values below apply to Wazuh 4.x agents. For a Wazuh 5.0 agent, set these options in the :doc:`agent <agent>` section.
+
 - `server`_
 - `config-profile`_
 - `notify_time`_
@@ -168,7 +170,7 @@ Specifies the interval, in seconds, between agent keepalive messages sent to the
 +----------------------+-------------------------------+
 
 .. note::
-   Set this value lower than the agent disconnection time configured on the Wazuh manager. This ensures that the agent sends a keepalive before the manager marks it as disconnected.
+   Set this value lower than the :ref:`agents_disconnection_time <reference_manager_agents_disconnection_time>` option of the Wazuh manager, 15 minutes by default. This ensures that the agent sends a keepalive before the manager marks it as disconnected.
 
 time-reconnect
 ^^^^^^^^^^^^^^^
@@ -216,7 +218,10 @@ Toggles on and off the automatic restart of agents when a new valid configuratio
 enrollment
 ^^^^^^^^^^^
 
-Configures the connection parameters for the agent enrollment.
+Configures the agent enrollment.
+
+.. note::
+   A Wazuh 5.0 agent reads only ``enabled``, ``agent_name``, ``groups``, ``agent_address``, ``authorization_pass_path``, ``delay_after_enrollment`` and ``use_source_ip`` from this block. It ignores ``manager_address``, ``port``, ``interface_index``, ``ssl_cipher``, ``server_ca_path``, ``agent_certificate_path``, ``agent_key_path`` and ``auto_method``, and logs an INFO message for each one. Enrollment uses the Wazuh manager address and TLS settings of the :doc:`agent <agent>` section (``<manager>`` and ``<ssl>``).
 
 Options
 ~~~~~~~~
@@ -315,11 +320,11 @@ agent_address
 
 Specifies the IP address registered for the agent. When this option is not set, the Wazuh manager obtains the address from the enrollment request.
 
-+----------------------+-----------------------------+
-| **Default value**    | src                         |
-+----------------------+-----------------------------+
-| **Allowed values**   | string - Valid IP address   |
-+----------------------+-----------------------------+
++----------------------+---------------------------+
+| **Default value**    | n/a                       |
++----------------------+---------------------------+
+| **Allowed values**   | string - Valid IP address |
++----------------------+---------------------------+
 
 ssl_cipher
 """""""""""
@@ -374,11 +379,11 @@ authorization_pass_path
 
 Specifies the file containing the enrollment password.
 
-+----------------------+---------------------------------------------+
-| **Default value**    | Windows: authd.pass Unix: /etc/authd.pass   |
-+----------------------+---------------------------------------------+
-| **Allowed values**   | Path to a valid password file               |
-+----------------------+---------------------------------------------+
++----------------------+------------------------------------------------+
+| **Default value**    | ``etc/authd.pass`` (``authd.pass`` on Windows) |
++----------------------+------------------------------------------------+
+| **Allowed values**   | Path to a valid password file                  |
++----------------------+------------------------------------------------+
 
 auto_method
 """"""""""""

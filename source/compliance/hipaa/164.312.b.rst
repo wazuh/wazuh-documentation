@@ -20,7 +20,13 @@ The use case below shows how log data analysis can detect specific events on mon
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-#. Click **Threat Hunting** from the Wazuh dashboard:
+#. On a monitored Ubuntu endpoint, run a command with ``sudo`` to generate a ``Sudo command executed - <USER>`` finding, for example:
+
+   .. code-block:: console
+
+      $ sudo ls /root
+
+#. Navigate to **Threat intelligence** > **Threat Hunting** on the Wazuh dashboard:
 
    .. thumbnail:: /images/compliance/hipaa/threat-hunting-overview-card.png
       :title: Wazuh Overview dashboard - Threat Hunting
@@ -36,7 +42,7 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-#. Navigate to the **Findings** section and click on a finding to view details. In this example, the image shows the details of a Sudo command executed finding, which maps to HIPAA § 164.312(b).
+#. Switch to the **Findings** tab and click a finding to view details. In this example, the image shows the details of a Sudo command executed finding, which maps to HIPAA § 164.312(b).
 
    .. thumbnail:: /images/compliance/hipaa/threat-hunting-sudo-finding-details.png
       :title: Threat Hunting finding details - Sudo command executed
