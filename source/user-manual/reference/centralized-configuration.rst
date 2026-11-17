@@ -25,6 +25,11 @@ Location of the agent.conf file
 
 Centralized configuration files are stored in the ``/etc/wazuh-manager/shared/`` directory on the Wazuh manager. Each agent group has its own subdirectory containing an ``agent.conf`` file.
 
+The Wazuh manager distributes the files in each group directory to the Wazuh agents in that group, with two exceptions:
+
+-  Files whose names start with a dot. The Wazuh manager skips them without logging anything.
+-  Binary files. The Wazuh manager logs ``wazuh-remoted: ERROR: Invalid shared file '<path>'. Ignoring it.`` The ``GET /groups/{group_id}/files`` endpoint of the Wazuh manager API still lists these files.
+
 You can also edit the ``agent.conf`` file of a group in the Wazuh dashboard: go to **Agents management > Groups**, click **Edit group configuration** for the group, change the file, and click **Save**.
 
 .. code-block:: none
@@ -179,7 +184,7 @@ If an agent belongs to multiple groups, the configurations from all groups are m
 Best practices
 ^^^^^^^^^^^^^^^
 
-- Edit a copy with a name that starts with a dot (for example, ``.agent.conf.tmp``). The Wazuh manager distributes every other file in the group directory, ``agent.conf.tmp`` included.
+- Edit a copy with a name that starts with a dot (for example, ``.agent.conf.tmp``). The Wazuh manager distributes every other text file in the group directory, ``agent.conf.tmp`` included.
 - Validate configuration files before making them active.
 - Use agent groups to organize shared configuration.
 - Use attributes (``name``, ``os``, ``profile``) to target only the intended agents.
@@ -192,7 +197,7 @@ Create the configuration
 
 1. Create or edit the configuration file in the group directory on the Wazuh manager.
 
-   Use a temporary filename that starts with a dot, such as ``.agent.conf.tmp``, during editing. The Wazuh manager doesn't distribute files whose names start with a dot, but it distributes any other file in the group directory, including ``agent.conf.tmp``. For example, run these commands to create a configuration file for the ``default`` group.
+   Use a temporary filename that starts with a dot, such as ``.agent.conf.tmp``, during editing. The Wazuh manager doesn't distribute files whose names start with a dot, but it distributes any other text file in the group directory, including ``agent.conf.tmp``. For example, run these commands to create a configuration file for the ``default`` group.
 
    .. code-block:: console
 

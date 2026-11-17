@@ -482,6 +482,10 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
 Configuring database output
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. note::
+
+   Wazuh 4.14.7 and later don't include the database output. The Wazuh manager ignores a ``<database_output>`` block and logs ``WARNING: The 'database_output' configuration is deprecated and no longer supported. This configuration will be ignored.`` This section applies to Wazuh 4.14.6 and earlier.
+
 Wazuh supports forwarding alerts to database systems. You can configure the Wazuh manager to output generated alerts into a database. To achieve this configuration, you must compile the Wazuh manager from sources with the database type that you want to use. Wazuh currently supports MySQL and PostgreSQL databases.
 
 .. note::

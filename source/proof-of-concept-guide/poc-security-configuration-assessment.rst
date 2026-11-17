@@ -78,7 +78,6 @@ You can also configure custom SCA policies to meet your individual use cases. Fo
 
       # Security Configuration Assessment
       # Custom Web Server Hardening Policy
-      # Copyright (C) 2026, Your Organization / Wazuh Inc.
 
       policy:
         id: "custom_web_hardening"
@@ -86,7 +85,7 @@ You can also configure custom SCA policies to meet your individual use cases. Fo
         name: "Custom Web Server Hardening"
         description: "Checks for basic secure configuration of web servers (Nginx/Apache)."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/5.0/user-manual/capabilities/sec-config-assessment/index.html
 
       requirements:
         title: "Check that a web server is present on the system"
@@ -117,16 +116,6 @@ You can also configure custom SCA policies to meet your individual use cases. Fo
           rules:
             - 'f:/etc/nginx/nginx.conf -> r:^\s*autoindex\s+on'
 
-        - id: 10013
-          title: "Apache - ensure directory indexing is not enabled"
-          description: "Directory listing must be disabled to prevent information disclosure."
-          rationale: "Exposing directory contents helps attackers map the filesystem and discover unintended files."
-          remediation: "Remove 'Indexes' from the 'Options' directive in /etc/apache2/apache2.conf (e.g. 'Options FollowSymLinks' instead of 'Options Indexes FollowSymLinks'), then reload Apache."
-          condition: none
-          rules:
-            - 'f:/etc/apache2/apache2.conf -> r:Options\s+.*Indexes'
-
-
         - id: 10012
           title: "Nginx - ensure server_tokens is set to off"
           description: "Nginx must not disclose its version number in the Server header or default error pages."
@@ -135,6 +124,15 @@ You can also configure custom SCA policies to meet your individual use cases. Fo
           condition: all
           rules:
             - 'f:/etc/nginx/nginx.conf -> r:^\s*server_tokens\s+off;'
+
+        - id: 10013
+          title: "Apache - ensure directory indexing is not enabled"
+          description: "Directory listing must be disabled to prevent information disclosure."
+          rationale: "Exposing directory contents helps attackers map the filesystem and discover unintended files."
+          remediation: "Remove 'Indexes' from the 'Options' directive in /etc/apache2/apache2.conf (e.g. 'Options FollowSymLinks' instead of 'Options Indexes FollowSymLinks'), then reload Apache."
+          condition: none
+          rules:
+            - 'f:/etc/apache2/apache2.conf -> r:Options\s+.*Indexes'
 
         - id: 10014
           title: "Apache - ensure ServerTokens is set to Prod"
@@ -154,7 +152,7 @@ You can also configure custom SCA policies to meet your individual use cases. Fo
           rules:
             - 'f:/etc/apache2/apache2.conf -> r:^\s*ServerSignature\s+Off\s*$'
 
-   The policy targets endpoints with NGINX or Apache installed. It runs only on a system where the nginx or apache2 package is installed.
+   The policy targets endpoints with NGINX or Apache installed. It runs only on a system where the nginx or apache2 package is installed. In this test, only NGINX is installed, so the Apache checks (10013 to 10015) don't evaluate an Apache configuration.
 
    -  Check ID ``10010`` flags a FAIL if the NGINX worker processes run as the root user.
    -  Check ID ``10011`` flags a FAIL if NGINX directory listing is enabled.

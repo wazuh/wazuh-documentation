@@ -34,7 +34,7 @@ The finding details provide additional information about the detected activity, 
 Responding to malware activity
 ------------------------------
 
-Wazuh detects malware-related activity using capabilities such as :doc:`File Integrity Monitoring </user-manual/capabilities/file-integrity/index>`, threat intelligence, and security event analysis. Security teams can investigate the resulting findings and configure :doc:`Active Response </user-manual/capabilities/active-response/index>` to perform predefined actions when specific detection rules are triggered.
+Wazuh detects malware-related activity using capabilities such as :doc:`file integrity monitoring </user-manual/capabilities/file-integrity/index>`, threat intelligence, and security event analysis. Security teams can investigate the resulting findings and configure :doc:`Active Response </user-manual/capabilities/active-response/index>` to perform predefined actions when specific detection rules are triggered.
 
 For example, an organization can configure a response to remove a known malicious file or block an associated source address. The **Threat Hunting** section on the Wazuh dashboard below shows the removal of the EICAR file downloaded to a Windows endpoint.
 
@@ -52,7 +52,7 @@ The **Incident Response** section on the Wazuh dashboard shows the active respon
    :align: center
    :width: 80%
 
-Containing threats with active response
+Containing threats with Active Response
 ---------------------------------------
 
 Wazuh Active Response automatically executes configured actions when a detection rule matches specified activity. It can block a malicious IP address, disable a user account, or execute a custom script on the affected endpoint, depending on the configuration. Predefined containment actions reduce the time between threat detection and response, helping security teams contain threats more quickly.
