@@ -34,10 +34,10 @@ For the use cases in this guide, all Wazuh central components (manager, indexer,
 -  The :doc:`Quickstart guide </quickstart>`: Using this guide, you can install all the components on the same system in approximately 5 minutes.
 -  Our :doc:`preconfigured virtual machine </deployment-options/virtual-machine/virtual-machine>`: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. You can import it into VirtualBox or other OVA-compatible virtualization systems.
 
-Monitored endpoints
-^^^^^^^^^^^^^^^^^^^
+Endpoints
+^^^^^^^^^
 
-The Wazuh agent monitors the following endpoints. Depending on the use case, the endpoints act as victims of an attack or as malicious actors (attackers).
+The use cases in this guide use the following endpoints. The Wazuh agent monitors the Ubuntu and Windows endpoints, which act as the victims of the simulated attacks. The RHEL endpoint acts as the attacker and doesn't need a Wazuh agent.
 
 +----------+------------------------------+-----------+------+-------+
 | Endpoint | Operating system (64-bit)    | CPU cores | RAM  | Disk  |
@@ -49,7 +49,13 @@ The Wazuh agent monitors the following endpoints. Depending on the use case, the
 | Windows  | Windows 11                   | 2 vCPU    | 4 GB | 25 GB |
 +----------+------------------------------+-----------+------+-------+
 
-Refer to our :doc:`installation guide </installation-guide/index>` for information on how to install the Wazuh agent on these endpoints. You need internet access to perform some integrations and download the software used in these use cases.
+Prerequisites
+^^^^^^^^^^^^^
+
+Complete the following before you start the use cases:
+
+-  Install the Wazuh agent on the Ubuntu and Windows endpoints. Follow the :doc:`installation guide </installation-guide/index>`, then check that both agents show as **Active** in **Agents management** > **Summary** of the Wazuh dashboard.
+-  Make sure all the endpoints have internet access. Some use cases download software or connect to external services.
 
 Use cases
 ---------
