@@ -70,13 +70,12 @@ Wazuh helps meet SI-4 System monitoring by detecting system configuration change
 
 In this scenario, the Wazuh FIM monitors the Uncomplicated Firewall (UFW) rule files in the ``/etc/ufw/`` directory on an Ubuntu 24.04 endpoint. Using who-data, you can get more information like the user, program, or process that made changes to a monitored file or folder. Perform the steps below to monitor and detect changes to the UFW rule files:
 
-#. Switch to the root user, install the audit daemon, and restart it. Ubuntu 24.04 ships Audit 3.1.1 or later, so also install the ``audispd-plugins`` package:
+#. Switch to the root user, install the audit daemon, and restart it. On Ubuntu 24.04, the ``auditd`` package already includes the ``af_unix`` plugin that who-data monitoring uses, so you don't need ``audispd-plugins``:
 
    .. code-block:: console
 
       $ sudo su
       # apt-get install auditd
-      # apt-get install audispd-plugins
       # systemctl restart auditd
 
 #. Add the following configuration to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``.
