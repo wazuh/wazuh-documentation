@@ -254,7 +254,7 @@ Linux configuration:
 
     <gcp-bucket>
         <run_on_start>yes</run_on_start>
-        <interval>1m</interval>
+        <interval>10m</interval>
         <bucket type="access_logs">
             <name>wazuh-test-bucket</name>
             <credentials_file>/var/ossec/wodles/gcloud/credentials.json</credentials_file>

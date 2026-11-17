@@ -151,7 +151,7 @@ This section walks you through downloading the Wazuh source code, compiling it, 
 
    .. note::
 
-      If you want to enable the database output, check out the :ref:`Alert management <configuring_database_output>` section before running the installation script.
+      Wazuh 4.14.7 and later don't include the database output. On Wazuh 4.14.6 and earlier, if you want to enable it, check out the :ref:`Alert management <configuring_database_output>` section before running the installation script.
 
    .. code-block:: console
 

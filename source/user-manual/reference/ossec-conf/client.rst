@@ -152,11 +152,11 @@ notify_time
 
 Specifies the time in seconds between agent checkins to the manager.  More frequent checkins speed up dissemination of an updated ``agent.conf`` file to the agents, but may also put an undo load on the manager if there are a large number of agents.
 
-+--------------------+-----------------------------+
-| **Default value**  | 20                          |
-+--------------------+-----------------------------+
-| **Allowed values** | A positive number (seconds) |
-+--------------------+-----------------------------+
++--------------------+--------------------------------------------------------+
+| **Default value**  | 20                                                     |
++--------------------+--------------------------------------------------------+
+| **Allowed values** | A positive number (seconds). ``0`` uses the default.   |
++--------------------+--------------------------------------------------------+
 
 .. note::
 
