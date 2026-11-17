@@ -332,10 +332,12 @@ Enable or disable the scanning of network mounted filesystems (Works on Linux an
 Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
 +--------------------+---------+
-| **Default value**  | yes     |
+| **Default value**  | no      |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
+
+The ``ossec.conf`` file installed with the Wazuh manager and the Wazuh agent sets this option to ``yes``.
 
 Default Unix configuration
 --------------------------

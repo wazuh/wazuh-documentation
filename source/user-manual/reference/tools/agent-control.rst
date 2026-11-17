@@ -8,6 +8,10 @@ agent_control
 
 The agent_control program allows you to query the manager for information about any agent and also allows you to initiate a syscheck/rootcheck scan on an agent the next time it checks in.
 
+.. note::
+
+   In a cluster, run ``agent_control`` on the master node: it doesn't run on worker nodes. The ``-r``, ``-R``, ``-b`` and ``-f`` options reach only the agents connected to the master node. For agents connected to a worker node, use the :doc:`Wazuh server API </user-manual/api/index>` instead.
+
 With this tool, you can check the status of each available agent, which can be any of the following:
 
 -  **Active**: The agent is correctly connected to the manager.

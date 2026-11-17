@@ -16,7 +16,7 @@ auth
         </auth>
 
 
-This section shows the options for the registration service.
+This section shows the options for the agent enrollment service (``wazuh-authd``) on the Wazuh manager.
 
 Options
 -------
