@@ -25,7 +25,7 @@ Package-urls
 
 This role resolves and downloads the artifact URL definitions file that other roles use to locate the correct Wazuh packages for the target version. Depending on the ``source`` variable, the role downloads the URL definitions file from either the production repository or the pre-release staging environment. The resulting file, ``artifact_urls.yaml``, is stored locally in ``/etc/ansible/roles/wazuh-ansible/roles/vars/`` and subsequently loaded by other roles at runtime.
 
-This role runs once on the control node (not on target hosts) and is a prerequisite for any deployment that downloads packages from remote sources. The role is executed first in the ``wazuh-aio.yml``, ``wazuh-distributed.yml``, and ``wazuh-agent.yml`` playbooks to ensure package URLs are available before installation tasks begin.
+This role runs once on the control node (not on target hosts) and is a prerequisite for any deployment that downloads packages from remote sources. The role is executed first in the ``wazuh-aio.yml``, ``wazuh-distributed.yml``, and ``wazuh-agent.yml`` playbooks to ensure package URLs are available before installation tasks begin. The other roles also run the signature checks of this role on each target node, to verify every Wazuh package before they install it.
 
 Wazuh credentials
 -----------------
@@ -54,11 +54,11 @@ The role performs the following tasks:
 -  **Stage certificates:** In a Wazuh cluster deployment, copies the root CA certificate to ``/etc/wazuh-indexer/ca``, and the node and admin certificates to ``/etc/wazuh-indexer/certs``, before the package is installed. In an all-in-one deployment, the package creates its root CA and certificates itself.
 -  **Install package (RHEL):** Downloads and installs the ``.rpm`` package using the ``dnf`` package manager.
 -  **Install package (Debian):** Downloads and installs the ``.deb`` package using the ``apt`` package manager.
--  **Configure node:** Sets the node address, node name, cluster nodes, and ``plugins.security.nodes_dn`` using ``config_files_setup.yml``.
+-  **Configure node:** Sets the node address, node name, cluster nodes, and ``plugins.security.nodes_dn`` using ``config_files_setup.yml``. In a Wazuh cluster deployment, it builds the ``plugins.security.nodes_dn`` list from every Wazuh indexer node in ``instances``, so the list stays complete when you run the playbook with ``--limit``. It also checks that the node certificate has the DN listed for the node.
 -  **Configure JVM heap:** Sets the heap size to ``wazuh_indexer_heap_size``. When the variable is empty, it uses a quarter of the host memory with ``single_node: true``, and half of it otherwise.
 -  **Reload systemd:** Reloads the ``systemd`` daemon after installation.
 -  **Start service:** Enables and starts the Wazuh indexer service.
--  **Initialize security:** Runs the ``indexer-security-init.sh`` script once, from one node, to load the security configuration into the cluster.
+-  **Initialize security:** Runs the ``indexer-security-init.sh`` script once, from one node, to load the security configuration into the cluster. It runs the script only on a new cluster. In a Wazuh cluster deployment, it first waits for the cluster to have a cluster manager, then runs the script only if the cluster has no security index. If the node doesn't see a cluster manager, the run stops. In an all-in-one deployment, it runs the script only if the node doesn't report the security configuration loaded. The role stops the script after ``wazuh_indexer_security_init_timeout`` seconds.
 -  **Verify API:** Waits for the Wazuh indexer API on port ``9200`` to report a healthy cluster, authenticating as ``admin`` with the deployment password.
 -  **Remove installation files:** Deletes the ``wazuh_indexer_package_download_path`` directory from the node.
 
@@ -103,7 +103,7 @@ The role performs the following tasks:
 -  **Configure manager URL:** Configures the Wazuh manager URL in ``opensearch_dashboards.yml``. The address must be in the Wazuh manager API certificate of the master node. The role leaves ``opensearch.ssl.certificateAuthorities`` and ``wazuh_core.hosts.default.ca`` as the package ships them.
 -  **Check the CAs:** Stops the run if ``opensearch_dashboards.yml`` doesn't verify the Wazuh indexer with ``certs/indexer-ca.pem`` and the Wazuh manager API with ``certs/manager-ca.pem``.
 -  **Start service:** Enables and restarts the Wazuh dashboard service.
--  **Verify service:** Waits until the Wazuh dashboard login page returns HTTP 200. It doesn't check the Wazuh manager API connection. To check it, run the following command on the Wazuh dashboard host. Replace ``<CA_FILE>`` with ``/etc/wazuh-dashboard/export/ca.pem`` in an all-in-one deployment, or with ``/etc/wazuh-dashboard/certs/indexer-ca.pem``, the root CA of the deployment, in a Wazuh cluster deployment. The command asks for the ``admin`` password. Its output includes the name of the Wazuh manager master node, for example ``"node":"master-node"``:
+-  **Verify service:** Waits until the Wazuh dashboard login page returns HTTP 200. It doesn't check the Wazuh manager API connection. To check it, run the following command on the Wazuh dashboard host. Replace ``<CA_FILE>`` with ``/etc/wazuh-dashboard/export/ca.pem`` in an all-in-one deployment, or with ``/etc/wazuh-dashboard/certs/indexer-ca.pem``, the root CA of the deployment, in a Wazuh cluster deployment. The command asks for the ``admin`` password. Its output includes the name of the Wazuh manager master node, for example ``"node":"manager"``:
 
    .. code-block:: console
 

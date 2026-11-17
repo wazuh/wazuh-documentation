@@ -8,7 +8,7 @@ Posture management
 
 Cloud Service Posture Management (CSPM) encompasses a set of practices aimed at safeguarding the security and compliance of cloud environments. This involves the ongoing assessment and monitoring of cloud workloads to pinpoint misconfigurations, vulnerabilities, and potential threats. CSPM also offers actionable remediation steps for addressing security risks, ultimately bolstering the overall security posture of cloud environments.
 
-Wazuh provides security and compliance monitoring for various cloud platforms, including Google Cloud Platform (GCP), Amazon Web Services (AWS), and Microsoft Azure. We leverage Wazuh for CSPM across the platforms listed below.
+Wazuh provides security and compliance monitoring for various cloud platforms, including Google Cloud Platform (GCP), Amazon Web Services (AWS), and Microsoft Azure. The following sections describe CSPM for each platform.
 
 Google Cloud Platform
 ---------------------
@@ -21,7 +21,7 @@ Wazuh connects with GCP through the Google Cloud publisher and subscriber servic
    :align: center
    :width: 80%
 
-You can configure your Wazuh instance to receive GCP logs using the Pub/Sub service. Once configured, you can go to the Google Cloud module in the Wazuh dashboard to view logs related to your GCP services. We provide detailed guidelines on configuring Wazuh to receive GCP logs using the Pub/Sub service in our :doc:`using Wazuh to monitor GCP services </cloud-security/gcp/index>` documentation.
+The GCP module of the Wazuh agent pulls logs from a Pub/Sub subscription. After you configure it, the **Google Cloud** section of the Wazuh dashboard shows the logs from your GCP services. See :doc:`Monitoring Google Cloud </cloud-security/gcp/index>` for the configuration.
 
 .. thumbnail:: /images/getting-started/use-cases/posture-management/using-wazuh-to-monitor-gcp.png
    :title: Using Wazuh to monitor Google Cloud Platform
@@ -50,21 +50,21 @@ You can use the Amazon Web Services module in the Wazuh dashboard to view logs r
    :align: center
    :width: 80%
 
-Follow the :doc:`AWS prerequisite </cloud-security/amazon/services/prerequisites/index>` documentation to set up your Wazuh instance for AWS log collection. The documentation shows a list of the :doc:`supported AWS services </cloud-security/amazon/services/supported-services/index>` that Wazuh can monitor. The image below shows an Amazon Security Hub log received using the CloudWatch service.
+Follow the :doc:`AWS prerequisite </cloud-security/amazon/services/prerequisites/index>` documentation to set up your Wazuh instance for AWS log collection. The documentation shows a list of the :doc:`supported AWS services </cloud-security/amazon/services/supported-services/index>` that Wazuh can monitor. The image below shows an AWS Security Hub finding that the AWS module collects through an Amazon SQS queue.
 
 .. thumbnail:: /images/getting-started/use-cases/posture-management/amazon-security-hub-log.png
-   :title: Amazon Security Hub log
-   :alt: Amazon Security Hub log
+   :title: AWS Security Hub finding collected by the Wazuh AWS module
+   :alt: AWS Security Hub finding collected by the Wazuh AWS module
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/getting-started/use-cases/posture-management/amazon-security-hub-log-details.png
-   :title: Amazon Security Hub log – Details
-   :alt: Amazon Security Hub log – Details
+   :title: Details of an AWS Security Hub finding on the Wazuh dashboard
+   :alt: Details of an AWS Security Hub finding on the Wazuh dashboard
    :align: center
    :width: 80%
 
-This control is designed to assess the security configuration of S3 buckets by verifying that user permissions are not granted through access control lists (ACLs). It is recommended to use AWS Identity and Access Management (IAM) policies rather than S3 bucket ACLs for managing user permissions.
+This control is designed to assess the security configuration of S3 buckets by verifying that user permissions are not granted through access control lists (ACLs). AWS recommends AWS Identity and Access Management (IAM) policies instead of S3 bucket ACLs to manage user permissions.
 
 Microsoft Azure
 ---------------
@@ -77,7 +77,7 @@ Wazuh integrates with Azure using the Log Analytics Workspace. The Azure Log Ana
    :align: center
    :width: 80%
 
-We provide detailed guidelines on configuring Wazuh to receive Azure Cloud logs using the Log Analytics Workspace in our :doc:`Azure Log Analytics </cloud-security/azure/platform-and-services/log-analytics>` documentation. Once configured, you can set up your Wazuh deployment to retrieve *Recommendations*, *Security alerts*, and *Regulatory compliance* logs for your Azure cloud infrastructure.
+You can find detailed guidelines on configuring Wazuh to receive Azure Cloud logs using the Log Analytics Workspace in the :doc:`Azure Log Analytics </cloud-security/azure/platform-and-services/log-analytics>` documentation. Once configured, you can set up your Wazuh deployment to retrieve *Recommendations*, *Security alerts*, and *Regulatory compliance* logs for your Azure cloud infrastructure.
 
 The image below shows Azure security posture management logs received on Wazuh.
 

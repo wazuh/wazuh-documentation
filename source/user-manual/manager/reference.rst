@@ -22,7 +22,7 @@ Daemons
      - Purpose
    * - Normalization engine
      - ``wazuh-manager-analysisd``
-     - Event processing and event generation (replaces legacy ``analysisd``)
+     - Event processing and event generation (replaces legacy ``analysisd``).
    * - Remoted
      - ``wazuh-manager-remoted``
      - The Wazuh agent communication gateway serves the HTTPS agent API on port ``1517`` and forwards agent events to the Wazuh normalization engine. The legacy AES-encrypted TCP/UDP channel on port ``1514`` serves Wazuh 4.x agents.
@@ -34,13 +34,21 @@ Daemons
      - The Wazuh agent enrollment service owns all enrollment logic. It receives enrollment requests through the HTTPS ``POST /enroll`` endpoint and, for legacy Wazuh 4.x agents, through TLS port ``1515``.
    * - Wazuh manager API
      - ``wazuh-manager-apid``
-     - REST API (Python/Starlette, HTTPS) with JWT auth and RBAC. Runs only on the master node
+     - REST API (Python/Starlette, HTTPS) with JSON Web Token (JWT) authentication and role-based access control (RBAC). Runs only on the master node.
    * - Modulesd
      - ``wazuh-manager-modulesd``
-     - Hosts manager-side modules: vulnerability scanner, inventory sync server, keystore server, task manager (which also serves agent upgrades), database, and control (restart/reload)
+     - Hosts manager-side modules, including:
+
+       -  **Vulnerability Scanner:** Matches Wazuh agent inventory against CVE data.
+       -  **Inventory Sync Server:** Receives and indexes Wazuh agent inventory.
+       -  **Keystore server:** Provides Wazuh indexer credentials to the Wazuh manager API.
+       -  **Vulnerability feed content manager:** Downloads CVE feeds from the Wazuh indexer for the Vulnerability Scanner.
+       -  **Task Manager:** Manages Wazuh agent tasks and serves agent upgrades.
+       -  **Database sync:** Keeps ``global.db`` synchronized with ``client.keys`` and ``/etc/wazuh-manager/shared/``.
+       -  **Control:** Handles restart and reload requests through ``wazuh-manager-service-control``.
    * - Clusterd
      - ``wazuh-manager-clusterd``
-     - Multi-node Wazuh manager master-worker synchronization (Python, asyncio)
+     - Multi-node Wazuh manager master-worker synchronization (Python, asyncio).
 
 .. _normalization_engine_modules:
 
@@ -50,7 +58,7 @@ Normalization engine modules
 The modules of the Wazuh normalization engine work together to transform raw events into structured and enriched security data. Each module is responsible for a specific stage of the :ref:`event processing pipeline <event_processing_pipeline>`, including event reception, decoding, normalization, enrichment, and output generation. This modular architecture constitutes a unified event processing workflow.
 
 Server
-   The Server module includes two HTTP servers. The events socket receives raw events from the :ref:`Remoted <wazuh_manager_daemons>` daemon or the vulnerability scanner. The management API socket exposes operations that internal client dev tools and other Wazuh manager components use. These operations include managing routes, running tester sessions, applying content changes, querying GeoIP and IOC state, toggling raw event indexing, and reading metrics. Both sockets use HTTP with JSON bodies. Protocol buffers (protobuf) define the schema for every request and response.
+   The Server module includes two HTTP servers. The events socket receives raw events from the :ref:`Remoted <wazuh_manager_daemons>` daemon or the Vulnerability Scanner. The management API socket exposes operations that the Wazuh manager API, the ``wazuh-manager-control`` readiness check, and the ``engine-suite`` development tools use. These operations include managing routes, running tester sessions (test runs of events against a policy), applying content changes, querying GeoIP and IOC state, toggling raw event indexing, and reading metrics. Both sockets use HTTP with JSON bodies. Protocol buffers (protobuf) define the schema for every request and response.
 
 .. _orchestrator_module:
 
@@ -63,16 +71,16 @@ Builder
 .. _backend_module:
 
 Backend
-   The Backend is the runtime that executes the compiled graph for every event. It goes through the stages described in :ref:`event policy processing <event_processing_pipeline>`: pre-filter, decoders (including KVDB lookups), enrichment (Geo and IOC), post-filter, and outputs.
+   The Backend is the runtime that executes the compiled graph for every event. It goes through the stages described in :ref:`Event processing pipeline <event_processing_pipeline>`: pre-filter, decoders (including KVDB lookups), enrichment (Geo and IOC), post-filter, and outputs.
 
 .. _engine_content_manager_module:
 
 Engine Content Manager
-   The Engine Content Manager is the local mirror of the content managed in the Wazuh indexer. It is organized by :ref:`spaces <space>`. The Engine Content Manager has three responsibilities:
+   The Engine Content Manager is the local mirror of the content managed in the Wazuh indexer. It is unrelated to the vulnerability feed content manager shared library, which fetches CVE feeds for the Vulnerability Scanner, and to the Content Manager plugin of the Wazuh indexer. It is organized by :ref:`spaces <space>`. The Engine Content Manager has three responsibilities:
 
    -  Storage of decoders, filters, KVDBs, integrations, and policies on the normalization engine endpoint.
    -  :ref:`Synchronization <synchronization_process>` with the Wazuh indexer (CMSync), which periodically compares per-space content hashes and pulls the full content when they differ.
-   -  CRUD which validates and applies any mutations issued through the management API.
+   -  Create, read, update, and delete (CRUD) operations that validate and apply any changes issued through the management API.
 
    After every applied change, the Engine Content Manager hands the affected policies to the Builder and asks the Orchestrator to swap the corresponding routes.
 
@@ -91,7 +99,7 @@ Geo
    The Geo module performs GeoIP and ASN lookups using ``MaxMind MMDB`` databases. Like the IOC databases, the Geo databases are global rather than per-space. They are refreshed in the background and hot-reloaded without restarting the Wazuh normalization engine. Refer to the :ref:`Geo enrichment <geo_enrichment>` section of the documentation for more information.
 
 Indexer connector
-   The :doc:`indexer connector <wazuh-indexer-connector>` carries the Wazuh indexer traffic of the normalization engine. It sends outbound processed events (driven by policy outputs) and receives inbound runtime configuration (consumed by the :ref:`Configuration <configuration_module>` module). The shared content manager library downloads the ruleset and IOC content through the read calls of the same connection, so content downloads never delay events.
+   The :doc:`indexer connector <wazuh-indexer-connector>` carries the Wazuh indexer traffic of the normalization engine. It sends outbound processed events (driven by policy outputs) and receives inbound runtime configuration (consumed by the :ref:`Configuration <configuration_module>` module). CMSync and the IOC synchronizer download the ruleset and IOC content through the read calls of the same connection, so content downloads never delay events.
 
 Stream Log
    Stream Log provides asynchronous, rotating log channels with size-based and time-based rotation, gzip compression, and retention by file count and total size. It backs the file outputs that policies can configure, and it is also what the optional event dumper uses to persist raw events for forensic investigation. Hot-path writes never block on disk I/O.
@@ -99,7 +107,7 @@ Stream Log
 .. _configuration_module:
 
 Configuration
-   The local configuration is loaded from the Wazuh manager ``XML/ini`` at startup, allowing every module to read from it. A subset of runtime parameters is also pulled periodically from the Wazuh indexer as remote configuration, so operators can tune behavior without restarting the engine. Remote configuration changes are applied with rollback if a module rejects the new values.
+   The local configuration is loaded from the ``/etc/wazuh-manager/wazuh-manager.conf`` and ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` files at startup, allowing every module to read from it. A subset of runtime parameters is also pulled periodically from the Wazuh indexer as remote configuration, so operators can tune behavior without restarting the engine. Remote configuration changes are applied with rollback if a module rejects the new values.
 
 Shared libraries
 ----------------
@@ -116,15 +124,15 @@ The table below lists the shared libraries provided by the Wazuh manager, their 
      - Purpose
    * - Indexer connector
      - ``shared_modules/indexer_connector``
-     - Normalization engine, Vulnerability scanner, Inventory sync, Content manager
+     - Normalization engine, Vulnerability Scanner, Inventory Sync, Vulnerability feed content manager
      - Client library for reading data from and pushing data to the Wazuh indexer
-   * - Content manager
+   * - Vulnerability feed content manager
      - ``shared_modules/content_manager``
-     - Vulnerability scanner, Normalization engine
-     - Fetches CVE feeds, rulesets, and IOC data from the Wazuh indexer and delivers them page by page to the consumer
+     - Vulnerability Scanner
+     - Fetches CVE feeds from the Wazuh indexer and delivers them page by page to the consumer
    * - Unix domain socket (UDS) HTTP server
      - ``shared_modules/uds_http_server``
-     - Wazuh DB, Inventory sync, Task manager, Vulnerability scanner, Remoted
+     - Wazuh DB, Inventory Sync, Task Manager, Vulnerability Scanner, Remoted
      - HTTP/1.1 server over Unix domain sockets for communication between daemons
    * - Keystore
      - ``shared_modules/keystore``
@@ -143,26 +151,26 @@ The Wazuh manager provides a set of command-line interface (CLI) tools for manag
    * - Binary
      - Purpose
    * - ``wazuh-manager-control``
-     - The Wazuh manager service control script is used to start, stop, restart, reload, and check the status of all daemons, and show version information
+     - The Wazuh manager service control script is used to start, stop, restart, reload, and check the status of all daemons, and show version information.
    * - ``wazuh-manager-keystore``
-     - Manage secrets in the encrypted keystore (AES-256, RocksDB)
+     - Manage secrets in the encrypted keystore (AES-256, RocksDB).
    * - ``verify-agent-conf``
-     - Validate ``agent.conf`` syntax for shared group configurations
+     - Validate ``agent.conf`` syntax for shared group configurations.
    * - ``agent_groups``
-     - Manage Wazuh agent group assignments
+     - Manage Wazuh agent group assignments.
    * - ``agent_upgrade``
-     - Orchestrate agent WPK upgrades
+     - Orchestrate agent upgrades with WPK (Wazuh Package Kit) files.
    * - ``cluster_control``
-     - Query cluster status and node health
+     - Query cluster status and node health.
    * - ``rbac_control``
-     - Seed the RBAC database, change the passwords of the default Wazuh manager API users, or reset the RBAC database
+     - Seed the RBAC database, change the passwords of the default Wazuh manager API users, or reset the RBAC database.
    * - ``wazuh-manager-conf``
-     - Validates and retrieves the Wazuh manager configuration. Run ``/var/wazuh-manager/bin/wazuh-manager-conf validate`` to check ``/etc/wazuh-manager/wazuh-manager.conf`` before restarting the Wazuh manager. It prints nothing when the file is valid. Run ``wazuh-manager-conf get <OPTION>`` to print a specific option, such as ``cluster.key``, or ``wazuh-manager-conf dump`` to print the entire configuration.
+     - Validates and retrieves the Wazuh manager configuration. Run ``/var/wazuh-manager/bin/wazuh-manager-conf validate`` to check ``/etc/wazuh-manager/wazuh-manager.conf`` before restarting the Wazuh manager. It prints nothing when the file is valid and exits with status ``0``. Otherwise, it prints the invalid option and exits with status ``1``. Run ``/var/wazuh-manager/bin/wazuh-manager-conf get <OPTION>`` to print a specific option, such as ``cluster.key``, or ``/var/wazuh-manager/bin/wazuh-manager-conf dump`` to print the entire configuration.
    * - ``wazuh-manager-resolve-credentials``
      - Resolves, issues, and validates Wazuh manager credentials and certificates. The package runs this command during installation, upgrades, and every startup. Use the ``--check`` option to perform a read-only check.
    * - ``wazuh-manager-certs``
      - Manages the CA bundle that Wazuh agents trust, stored in ``/etc/wazuh-manager/certs/root-ca.pem``. On a worker node, use the ``--from-master`` option to download the bundle from the master node.
    * - ``wazuh-manager-authd``
-     - Creates and manages enrollment tokens on the master node. Run ``wazuh-manager-authd --create-enrollment-token --address <ADDRESS>`` to create a token. Use the ``--list-enrollment-tokens``, ``--show-token``, ``--revoke-enrollment-token``, and ``--purge-enrollment-tokens`` options to list, show, revoke, and delete tokens.
+     - Creates and manages enrollment tokens on the master node. Run ``/var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <ADDRESS>`` to create a token. Use the ``--list-enrollment-tokens``, ``--show-token``, ``--revoke-enrollment-token``, and ``--purge-enrollment-tokens`` options to list, show, revoke, and delete tokens. The same binary also runs as the agent enrollment service daemon.
    * - ``wazuh-manager-service-control``
      - Restarts or reloads the Wazuh manager service. Run ``/var/wazuh-manager/bin/wazuh-manager-service-control restart`` or ``/var/wazuh-manager/bin/wazuh-manager-service-control reload``. A reload keeps Wazuh agent connections active.

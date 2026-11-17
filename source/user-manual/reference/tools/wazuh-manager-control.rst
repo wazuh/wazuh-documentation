@@ -42,7 +42,7 @@ Commands
 | info [-v -r -t]   | Displays information about the Wazuh manager installation. Specify only one option to        |
 |                   | display the version (-v), revision (-r), or installation type (-t).                          |
 +-------------------+----------------------------------------------------------------------------------------------+
-| enable debug      | Run all Wazuh daemons in debug mode.                                                         |
+| enable debug      | Runs the Wazuh manager daemons in debug mode, except ``wazuh-manager-analysisd``.            |
 +-------------------+----------------------------------------------------------------------------------------------+
 | disable debug     | Disables debug mode for all Wazuh manager daemons.                                           |
 +-------------------+----------------------------------------------------------------------------------------------+
@@ -65,7 +65,8 @@ The error numbers appear only in the JSON output, when ``-j`` is the first argum
 
 -  ``status`` exits with 1 when a daemon is not running. It can also report that a daemon refused its configuration or failed to start.
 -  ``wazuh-manager-apid`` is listed and started only on a master node. ``wazuh-manager-authd`` is skipped when ``<auth><disabled>`` is ``yes``.
--  ``enable debug`` and ``disable debug`` take effect at the next start.
+-  ``enable debug`` and ``disable debug`` take effect at the next start. They don't change ``wazuh-manager-analysisd``, which takes its log level from the ``analysisd.debug`` option in ``/etc/wazuh-manager/wazuh-manager-internal-options.conf``.
+-  ``wazuh-manager-analysisd`` counts as started once its API answers a ``GET /status`` request on ``/var/wazuh-manager/queue/sockets/engine-api-http.sock``. The tool waits up to 10 seconds for its PID file, then sends the request once per second, up to 120 times. If the daemon exits or doesn't answer in time, the start fails.
 -  ``help`` exits with 1.
 
 Examples
