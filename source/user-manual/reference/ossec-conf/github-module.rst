@@ -76,7 +76,7 @@ time_delay
 Specifies how far behind the current time the module stops collecting events.
 
 .. note::
-   This delay accounts for events that might not be immediately available through the GitHub API. Lower values provide collection closer to real time but increase the risk of missing delayed events. Use a value greater than ``30s``.
+   This delay accounts for events that might not be immediately available through the GitHub API. Lower values provide collection closer to real time but increase the risk of missing delayed events. Use a value of ``30s`` or greater.
 
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Default value**    | 30s                                                                                          |

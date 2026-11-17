@@ -48,7 +48,7 @@ Perform the following steps to install an Apache web server and monitor its logs
 
       $ sudo systemctl status apache2
 
-#. Add the following lines to the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. This sets the Wazuh agent to monitor the access logs of your Apache server:
+#. Append the following lines to the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. This sets the Wazuh agent to monitor the access logs of your Apache server:
 
    .. code-block:: xml
 
@@ -68,13 +68,11 @@ Perform the following steps to install an Apache web server and monitor its logs
 Attack emulation
 ----------------
 
-Perform the following attack emulation from the RHEL endpoint.
-
-Replace ``<WEBSERVER_IP_ADDRESS>`` with the Ubuntu IP address and execute the following command from the attacker endpoint:
+Replace ``<UBUNTU_IP>`` with the Ubuntu IP address and execute the following command from the RHEL endpoint:
 
 .. code-block:: console
 
-   $ curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" "http://<WEBSERVER_IP_ADDRESS>/index.html?q=<script>document.cookie</script>"
+   $ curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" "http://<UBUNTU_IP>/index.html?q=<script>document.cookie</script>"
 
 Visualize the findings
 -----------------------
@@ -89,7 +87,7 @@ You can visualize the findings in the Wazuh dashboard. To do this, go to **Threa
       :align: center
       :width: 80%
 
-Expand the finding to see other information contained in the malicious payload, such as the URL path and query.
+The finding title is ``Cross site scripting strings - <RHEL_IP>``, with level ``high``. Expand the finding to see other information contained in the malicious payload, such as the URL path and query.
 
 .. thumbnail:: /images/poc/xss-attack-finding-details.png
    :title: XSS attack finding details

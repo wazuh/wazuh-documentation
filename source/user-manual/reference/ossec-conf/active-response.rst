@@ -38,15 +38,15 @@ If you omit this option, Active Response is enabled. The ``<ca_store>`` and ``<c
 repeated_offenders
 ^^^^^^^^^^^^^^^^^^^^
 
-Defines increasing timeout periods for repeated offenders. Specify a comma-separated list of up to five values in increasing order.
+Defines increasing timeout periods for repeated offenders. Specify a comma-separated list of up to six values in increasing order.
 
 The timeout configured on the Wazuh manager applies to the first occurrence. The values configured here apply to subsequent occurrences.
 
-+----------------------+-------------------------------+
-| **Default value**    | n/a                           |
-+----------------------+-------------------------------+
-| **Allowed values**   | A positive number (minutes)   |
-+----------------------+-------------------------------+
++----------------------+-----------------------------------------------------+
+| **Default value**    | n/a                                                 |
++----------------------+-----------------------------------------------------+
+| **Allowed values**   | Comma-separated list of positive integers (minutes) |
++----------------------+-----------------------------------------------------+
 
 .. note::
    Configure this option directly in the agent's ``ossec.conf`` file. It cannot be distributed through ``agent.conf`` and is not supported on Windows agents.

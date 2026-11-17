@@ -17,6 +17,13 @@ task-manager
 
 The ``<task-manager>`` section configures the task manager module. It tracks the status of agent tasks, applies execution timeouts, removes expired task records, and serves remote Wazuh agent upgrades.
 
+The task manager handles two kinds of tasks:
+
+- An agent task is work for a Wazuh agent, such as a remote upgrade, an active response, or an agent restart or reload. The task manager stores the task until the agent fetches it.
+- A manager task is work that the Wazuh manager runs itself, such as removing a deleted agent's data from the Wazuh indexer, the agent disconnection sweep, or the daily log rotation.
+
+A poll is a request for an agent's pending agent tasks. Wazuh 5.0 agents poll through ``wazuh-manager-remoted``. For Wazuh agents earlier than 5.0, ``wazuh-manager-remoted`` polls on the agent's behalf and delivers only remote upgrade tasks.
+
 Options
 -------
 
@@ -32,49 +39,49 @@ task_ttl
 
 Time-to-live for a pending agent task, measured from its creation. Pending agent tasks older than this are moved to the expired state. Manager tasks are never expired by age.
 
-+--------------------+-----------------------------------------------+
-| **Default value**  | 3600 (1 hour)                                 |
-+--------------------+-----------------------------------------------+
-| **Allowed values** | Integer >= 0 (seconds); 0 means "use default" |
-+--------------------+-----------------------------------------------+
++--------------------+----------------------------------------------------------------+
+| **Default value**  | 3600 (1 hour)                                                  |
++--------------------+----------------------------------------------------------------+
+| **Allowed values** | Integer from 0 to 2147483647 (seconds); 0 means "use default"  |
++--------------------+----------------------------------------------------------------+
 
 cleanup_interval
 ^^^^^^^^^^^^^^^^^
 
 Interval between cleanup runs - marks expired tasks and deletes rows expired more than 24h ago.
 
-+--------------------+-----------------------------------------------+
-| **Default value**  | 300 (5 minutes)                               |
-+--------------------+-----------------------------------------------+
-| **Allowed values** | Integer >= 0 (seconds); 0 means "use default" |
-+--------------------+-----------------------------------------------+
++--------------------+----------------------------------------------------------------+
+| **Default value**  | 300 (5 minutes)                                                |
++--------------------+----------------------------------------------------------------+
+| **Allowed values** | Integer from 0 to 2147483647 (seconds); 0 means "use default"  |
++--------------------+----------------------------------------------------------------+
 
 max_payload_bytes
 ^^^^^^^^^^^^^^^^^^
 
 Maximum accepted size of a single task payload after JSON serialization.
 
-+--------------------+---------------------------------------------+
-| **Default value**  | 1048576 (1 MiB)                             |
-+--------------------+---------------------------------------------+
-| **Allowed values** | Integer >= 0 (bytes); 0 means "use default" |
-+--------------------+---------------------------------------------+
++--------------------+----------------------------------------------------------------+
+| **Default value**  | 1048576 (1 MiB)                                                |
++--------------------+----------------------------------------------------------------+
+| **Allowed values** | Integer from 0 to 2147483647 (bytes); 0 means "use default"    |
++--------------------+----------------------------------------------------------------+
 
 max_tasks_per_poll
 ^^^^^^^^^^^^^^^^^^^
 
 Maximum tasks returned by a single poll; remaining pending tasks are returned on later polls.
 
-+--------------------+-------------------------------------+
-| **Default value**  | 100                                 |
-+--------------------+-------------------------------------+
-| **Allowed values** | Integer >= 0; 0 means "use default" |
-+--------------------+-------------------------------------+
++--------------------+----------------------------------------------------------------+
+| **Default value**  | 100                                                            |
++--------------------+----------------------------------------------------------------+
+| **Allowed values** | Integer from 0 to 2147483647; 0 means "use default"            |
++--------------------+----------------------------------------------------------------+
 
 upgrade_enabled
 ^^^^^^^^^^^^^^^
 
-Enables or disables remote Wazuh agent upgrades (WPK upgrades requested through the Wazuh manager API).
+Enables or disables remote Wazuh agent upgrades requested through the Wazuh manager API. These upgrades use Wazuh signed package (WPK) files. See :ref:`upgrade_agents_remotely`.
 
 +--------------------+---------+
 | **Default value**  | yes     |

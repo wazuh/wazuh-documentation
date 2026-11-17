@@ -20,7 +20,7 @@ The use case below shows how log data analysis can detect specific events on mon
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-#. Click **Threat Hunting** from the Wazuh dashboard:
+#. Open the menu (**☰**) and go to **Threat intelligence** > **Threat Hunting**:
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/overview-threat-hunting-card.png
       :title: Wazuh Overview dashboard - Threat Hunting
@@ -36,9 +36,9 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-   The Wazuh ruleset also labels these triggered events correctly. For example, the image below shows details for the triggered finding: ``Secret or credential accessed from vault``.
+   Each finding shows the title of the Wazuh rule that detected the event. For example, the image below shows details for the triggered finding: ``Secret or credential accessed from vault``.
 
-#. Navigate to the **Findings** section and click on a finding to view details.
+#. Switch to the **Findings** tab and click a finding to view details.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/vault-secret-finding-details.png
       :title: Secret or credential accessed from vault finding details
@@ -105,7 +105,7 @@ Ubuntu endpoint
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-#. Click the menu icon, then navigate to **Security operations** > **Regulatory Compliance** > **TSC**.
+#. Open the menu (**☰**) and go to **Security operations** > **Regulatory Compliance**, then click **TSC**.
 
    .. thumbnail:: /images/compliance/tsc/additional-criteria/overview-regulatory-compliance-tsc-card.png
       :title: Wazuh Overview dashboard - Regulatory Compliance

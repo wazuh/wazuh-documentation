@@ -57,7 +57,7 @@ The following SCA scan result shows a failed check because the Windows password 
 Identifying vulnerable software for IT hygiene
 ----------------------------------------------
 
-The Wazuh :doc:`Vulnerability Scanner </user-manual/capabilities/vulnerability-detection/index>` module identifies vulnerable applications by using vulnerability information available in the `Wazuh CTI <https://cti.wazuh.com/vulnerabilities/cves>`__. Links to specific vulnerabilities on the Wazuh CTI are also available on each vulnerability ID.
+The Wazuh :doc:`Vulnerability Scanner </user-manual/capabilities/vulnerability-detection/index>` module identifies vulnerable applications by using vulnerability information available in the `Wazuh Cyber Threat Intelligence (CTI) <https://cti.wazuh.com/vulnerabilities/cves>`__. Links to specific vulnerabilities on the Wazuh CTI are also available on each vulnerability ID.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerable-applications.png
    :title: Vulnerability Detection inventory linking each vulnerability to Wazuh CTI

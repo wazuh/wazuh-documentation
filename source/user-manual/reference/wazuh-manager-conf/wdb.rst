@@ -20,7 +20,18 @@ The ``<wdb>`` section configures automatic backups of the Wazuh global agent dat
 Options
 -------
 
-The ``<backup>`` sub-element configures automatic database backups. The database attribute specifies the database to back up. Currently, the only supported value is ``global``.
+The ``<backup>`` sub-element configures automatic database backups. Its ``database`` attribute selects the database to back up.
+
+backup/database
+^^^^^^^^^^^^^^^^
+
+Attribute of ``<backup>`` that selects the database to back up. The Wazuh manager rejects a ``<backup>`` element without it.
+
++----------------------+-----------+
+| **Required**         | yes       |
++----------------------+-----------+
+| **Allowed values**   | global    |
++----------------------+-----------+
 
 backup/enabled
 ^^^^^^^^^^^^^^^

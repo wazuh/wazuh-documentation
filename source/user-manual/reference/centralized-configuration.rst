@@ -25,6 +25,11 @@ Location of the agent.conf file
 
 Centralized configuration files are stored in the ``/etc/wazuh-manager/shared/`` directory on the Wazuh manager. Each agent group has its own subdirectory containing an ``agent.conf`` file.
 
+The Wazuh manager distributes the files in each group directory to the Wazuh agents in that group, with two exceptions:
+
+-  Files whose names start with a dot. The Wazuh manager skips them without logging anything.
+-  Binary files. The Wazuh manager logs ``wazuh-remoted: ERROR: Invalid shared file '<path>'. Ignoring it.`` The ``GET /groups/{group_id}/files`` endpoint of the Wazuh manager API still lists these files.
+
 You can also edit the ``agent.conf`` file of a group in the Wazuh dashboard: go to **Agents management > Groups**, click **Edit group configuration** for the group, change the file, and click **Save**.
 
 .. code-block:: none
@@ -54,7 +59,7 @@ agent.conf structure
 
 The ``agent.conf`` file uses the ``<agent_config>`` XML element to define the configuration distributed to Wazuh agents.
 
-Each ``<agent_config>`` block contains one or more supported configuration sections: ``localfile``, ``socket``, ``syscheck``, ``rootcheck``, ``sca``, ``wodle``, the cloud and Microsoft modules (``gcp-pubsub``, ``gcp-bucket``, ``github``, ``office365``, ``ms-graph``), ``active-response`` and ``anti_tampering``.
+Each ``<agent_config>`` block contains one or more supported configuration sections: ``localfile``, ``socket``, ``syscheck``, ``rootcheck``, ``sca``, ``wodle``, ``agent-info``, the cloud and Microsoft modules (``gcp-pubsub``, ``gcp-bucket``, ``github``, ``office365``, ``ms-graph``), and ``anti_tampering``.
 
 You can define multiple ``<agent_config>`` blocks in the same file to apply different configurations based on agent attributes.
 
@@ -68,7 +73,7 @@ You can define multiple ``<agent_config>`` blocks in the same file to apply diff
    </agent_config>
 
 .. note::
-   In ``agent.conf``, the ``<agent>`` section only accepts ``<batch>``. The ``agent-upgrade`` and ``labels`` sections are ignored with a warning. Wazuh manager sections, such as ``remote``, are also ignored, with a warning such as ``remote configuration is only set in the manager``.
+   In ``agent.conf``, the ``<agent>`` section only accepts ``<batch>``. The ``agent-upgrade`` and ``labels`` sections are ignored with a warning. Wazuh manager sections, such as ``remote``, are also ignored, with a warning such as ``remote configuration is only set in the manager``. The Wazuh agent reads the ``<active-response>`` section only from its local ``ossec.conf`` file: it accepts an ``<active-response>`` block in ``agent.conf`` without a warning, but ignores it.
 
 Options
 ^^^^^^^^
@@ -179,7 +184,7 @@ If an agent belongs to multiple groups, the configurations from all groups are m
 Best practices
 ^^^^^^^^^^^^^^^
 
-- Edit a copy with a name that starts with a dot (for example, ``.agent.conf.tmp``). The Wazuh manager distributes every other file in the group directory, ``agent.conf.tmp`` included.
+- Edit a copy with a name that starts with a dot (for example, ``.agent.conf.tmp``). The Wazuh manager distributes every other text file in the group directory, ``agent.conf.tmp`` included.
 - Validate configuration files before making them active.
 - Use agent groups to organize shared configuration.
 - Use attributes (``name``, ``os``, ``profile``) to target only the intended agents.
@@ -192,7 +197,7 @@ Create the configuration
 
 1. Create or edit the configuration file in the group directory on the Wazuh manager.
 
-   Use a temporary filename that starts with a dot, such as ``.agent.conf.tmp``, during editing. The Wazuh manager doesn't distribute files whose names start with a dot, but it distributes any other file in the group directory, including ``agent.conf.tmp``. For example, run these commands to create a configuration file for the ``default`` group.
+   Use a temporary filename that starts with a dot, such as ``.agent.conf.tmp``, during editing. The Wazuh manager doesn't distribute files whose names start with a dot, but it distributes any other text file in the group directory, including ``agent.conf.tmp``. For example, run these commands to create a configuration file for the ``default`` group.
 
    .. code-block:: console
 
@@ -251,14 +256,10 @@ Apply the configuration
 
       # mv /etc/wazuh-manager/shared/default/.agent.conf.tmp /etc/wazuh-manager/shared/default/agent.conf
 
-   The Wazuh manager will automatically detect the new configuration and distribute it to all Wazuh agents in the ``default`` group.
+   The Wazuh manager detects the new configuration and distributes it to the Wazuh agents in the ``default`` group. A restart isn't required. Refer to the :doc:`query the Wazuh agent configuration </user-manual/agent/agent-management/query-configuration>` documentation for more information on checking the synchronization status of a Wazuh agent.
 
-5. The Wazuh manager automatically detects the updated configuration and distributes it to agents in the group.
-
-   A restart is not normally required. To trigger distribution sooner, restart the Wazuh manager. Refer to the :doc:`query the Wazuh agent configuration </user-manual/agent/agent-management/query-configuration>` documentation for more information on checking the synchronization status of a Wazuh agent.
+5. Optionally, to trigger the distribution sooner, restart the Wazuh manager. This restarts all Wazuh manager services.
 
    .. code-block:: console
 
       # systemctl restart wazuh-manager
-
-   Connected agents receive the updated configuration automatically after the Wazuh manager detects the change.

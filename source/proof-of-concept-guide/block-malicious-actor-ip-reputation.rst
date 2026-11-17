@@ -60,13 +60,13 @@ Perform the following steps to install an Apache web server and monitor its logs
 
       $ curl http://<UBUNTU_IP>
 
-#. Add the following to the ``/var/ossec/etc/ossec.conf`` file to configure the Wazuh agent and monitor the Apache access logs:
+#. Append the following to the ``/var/ossec/etc/ossec.conf`` file to configure the Wazuh agent and monitor the Apache access logs:
 
    .. code-block:: xml
 
       <ossec_config>
         <localfile>
-          <log_format>syslog</log_format>
+          <log_format>apache</log_format>
           <location>/var/log/apache2/access.log</location>
         </localfile>
       </ossec_config>
@@ -100,13 +100,13 @@ Perform the following steps to install and configure an Apache web server and a 
 
 #. Open ``http://<WINDOWS_IP>`` in a browser to view the Apache landing page and verify the installation. Also, verify that the attacker endpoint can reach this URL.
 
-#. Add the following to ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to configure the Wazuh agent and monitor the Apache access logs:
+#. Append the following to ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to configure the Wazuh agent and monitor the Apache access logs:
 
    .. code-block:: xml
 
       <ossec_config>
         <localfile>
-          <log_format>syslog</log_format>
+          <log_format>apache</log_format>
           <location>C:\Apache24\logs\access_log</location>
         </localfile>
       </ossec_config>
@@ -127,7 +127,7 @@ Decoders
 
 #. Navigate to **Ruleset management** > **Decoders**.
 
-#. Select the **Draft** space, then select **Actions** > **Create**.
+#. Select the **Draft** space, then select **Actions** > **Create**. Ruleset content moves through spaces: you create and edit assets in the ``Draft`` space, promote them to ``Test``, then promote them to ``Custom``, where they run alongside the Standard content. See :ref:`Spaces <data_analysis_space>`.
 
 #. Create an integration with the title ``custom_http`` using the **Create integration** button if you haven't created one before. Select **Network Activity** as the **Category** and set a preferred name as the **Author**.
 
@@ -307,7 +307,7 @@ KVDBs
    +-----------------+-----------------------------+
    | ``Title``       | ``malicious_IPs``           |
    +-----------------+-----------------------------+
-   | ``Author``      | ``customer``                |
+   | ``Author``      | ``Custom``                  |
    +-----------------+-----------------------------+
    | ``Description`` | ``A list of malicious IPs`` |
    +-----------------+-----------------------------+
@@ -346,7 +346,7 @@ Rules
             - apache-access
           event.outcome:
             - success
-          threat.indicator.description|all:
+          threat.indicator.description:
             - malicious
       metadata:
         title: 'Apache: Successful HTTP connection from malicious IP'
@@ -375,13 +375,13 @@ Rules
       detection:
         condition: Selection_1
         Selection_1:
-          event.dataset|all:
+          event.dataset:
             - active-response-block-ip
-          event.outcome|all:
+          event.outcome:
             - success
       metadata:
         title: Active response blocked IP - {{source.ip}}
-        author: custom
+        author: Custom
         description: >-
           Detects when Active response successfully blocks an IP.
         references:
@@ -405,9 +405,15 @@ Rules
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Overview,** then click **Actions** > **Promote.** Type the confirmation message when prompted, and click **Promote**. This promotes the created assets from the **Draft** user space to the **Test** user space.
+#. Navigate to **Ruleset management** > **Overview**, then click **Actions** > **Promote**. **Actions** > **Promote** opens the Promote page, which lists the changes to promote. Click **Promote**, type ``promote`` in the confirmation dialog, and click **Promote**. This promotes the created assets from the **Draft** user space to the **Test** user space.
 
-#. Select the **Test** space, then click **Actions** > **Promote.** Type the confirmation message when prompted, and click **Promote**. This promotes the created assets from the **Test** user space to the **Custom** user space. Wait a few minutes for the changes to apply before you test them.
+   .. thumbnail:: /images/poc/block-malicious-actor-promote-dialog.png
+      :title: Promote confirmation dialog
+      :alt: Wazuh dashboard Promote to test space dialog listing the space and integration to promote, with a field to type promote to confirm
+      :align: center
+      :width: 80%
+
+#. Select the **Test** space, then click **Actions** > **Promote**. **Actions** > **Promote** opens the Promote page, which lists the changes to promote. Click **Promote**, type ``promote`` in the confirmation dialog, and click **Promote**. This promotes the created assets from the **Test** user space to the **Custom** user space. Wait a few minutes for the changes to apply before you test them.
 
 Detector
 ~~~~~~~~
@@ -442,10 +448,16 @@ Active response
    +----------------------+--------------------------------------------------------------+
    | ``Type``             | ``Stateful``                                                 |
    +----------------------+--------------------------------------------------------------+
-   | ``Stateful timeout`` | ``60``                                                       |
+   | ``Stateful timeout`` | ``60 (seconds)``                                             |
    +----------------------+--------------------------------------------------------------+
    | ``Location``         | ``Local``                                                    |
    +----------------------+--------------------------------------------------------------+
+
+   .. thumbnail:: /images/poc/block-malicious-actor-active-response-form.png
+      :title: Active response form
+      :alt: Wazuh dashboard Create active response form showing the Executable, Type, Stateful timeout and Location fields
+      :align: center
+      :width: 80%
 
 #. Click **Create** to create the Active Response.
 
@@ -455,14 +467,16 @@ Active response
       :align: center
       :width: 80%
 
-#. Before you create the monitor, run ``curl http://<WEBSERVER_IP>`` once from the RHEL endpoint and check that a ``custom_http`` finding appears in Threat Hunting. The Field list offers ``service.type`` only after such a finding exists. Navigate to **Explore** > **Alerting**. Switch to the **Monitors** tab, then select **Create Monitor**. Fill in the following parameters:
+#. Run ``curl http://<WEBSERVER_IP>`` once from the RHEL endpoint. Wait about two minutes, then check that a finding with ``wazuh.integration.name: custom_http`` appears in **Threat intelligence** > **Threat Hunting** > **Findings**. If no finding appears, check that the assets are in the Custom space and that ``http_detector`` is active in **Ruleset management** > **Detectors**. The Field list of the monitor offers ``service.type`` only after such a finding exists.
+
+#. Navigate to **Explore** > **Alerting**. Switch to the **Monitors** tab, then select **Create Monitor**. Fill in the following parameters:
 
    +-----------------------------+----------------------------------------+
    | Field                       | Value                                  |
    +=============================+========================================+
    | ``Monitor name``            | ``apache_malicious_ip_monitor``        |
    +-----------------------------+----------------------------------------+
-   | ``Monitor type``            | ``Active response``                    |
+   | ``Monitor type``            | ``Active Response monitor``            |
    +-----------------------------+----------------------------------------+
    | ``Monitor defining method`` | ``Visual editor``                      |
    +-----------------------------+----------------------------------------+
@@ -476,6 +490,12 @@ Active response
    +-----------------------------+----------------------------------------+
    | ``Field``                   | ``service.type is apache``             |
    +-----------------------------+----------------------------------------+
+
+   .. thumbnail:: /images/poc/block-malicious-actor-monitor-type.png
+      :title: Monitor type
+      :alt: Wazuh dashboard Create monitor page showing the Monitor type options, including Active Response monitor
+      :align: center
+      :width: 80%
 
 #. In the **Triggers** section, click **Add trigger** and fill in the following parameters:
 
@@ -517,6 +537,21 @@ Access any of the web servers from the RHEL endpoint using the corresponding IP 
    $ curl http://<WEBSERVER_IP>
 
 The first connections from the attacker endpoint to the victim's web servers succeed. Within about two minutes, the Active Response monitor runs and the Wazuh Active Response module blocks any further connection from the attacker endpoint to the web servers for 60 seconds.
+
+Wait about two minutes, then run the request again from the attacker endpoint:
+
+.. code-block:: console
+
+   $ curl --max-time 10 http://<WEBSERVER_IP>
+
+While the block is active, the request fails with: ``curl: (28) Connection timed out after 10001 milliseconds``
+
+To see the block on the victim endpoint:
+
+-  **Ubuntu**: ``sudo iptables -L INPUT -n | grep <RHEL_IP>`` shows a DROP rule for the attacker IP address.
+-  **Windows**: ``netsh advfirewall firewall show rule name="WAZUH ACTIVE RESPONSE BLOCKED IP"``
+
+After 60 seconds the Wazuh agent removes the rule and the request succeeds again.
 
 Visualize the findings
 -----------------------

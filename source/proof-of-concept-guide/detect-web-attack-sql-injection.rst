@@ -54,7 +54,7 @@ Perform the following steps to install Apache and configure the Wazuh agent to m
 
       $ curl http://<UBUNTU_IP>
 
-#. Add the following lines to the Wazuh agent ``/var/ossec/etc/ossec.conf`` file. This allows the Wazuh agent to monitor the access logs of your Apache server:
+#. Append the following lines to the Wazuh agent ``/var/ossec/etc/ossec.conf`` file. This allows the Wazuh agent to monitor the access logs of your Apache server:
 
    .. code-block:: xml
 
@@ -89,11 +89,7 @@ You can visualize the findings on the Wazuh dashboard. Perform the following:
 
 #. Go to **Threat intelligence** > **Threat Hunting** and select **Findings**.
 
-#. Click **+ Add filter**. Then filter by ``event.dataset``.
-
-#. In the **Operator** field, select ``is``.
-
-#. In the **Values** field, enter ``apache-access``.
+#. Enter the query ``event.dataset: apache-access`` in the search bar and click **Update**.
 
    .. thumbnail:: /images/poc/sql-injection-findings.png
       :title: SQL injection attack findings

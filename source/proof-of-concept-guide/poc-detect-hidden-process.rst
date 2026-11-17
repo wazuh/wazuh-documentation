@@ -6,7 +6,7 @@
 Detecting hidden processes
 ==========================
 
-Rootkit detection helps identify stealthy, kernel-level compromises that evade standard system monitoring tools. The Wazuh Rootcheck module performs periodic scans on a monitored endpoint to detect signs of rootkits, hidden processes, and other host-based anomalies. In this use case, we show how Wazuh detects hidden processes created by a rootkit on a Linux endpoint. You deploy a kernel-mode rootkit on an Ubuntu endpoint. This rootkit hides itself from the kernel module list. It also hides selected processes from the ``ps`` utility. However, Wazuh detects it using the ``setsid()``, ``getpid()``, and ``kill()`` system calls.
+Rootkit detection helps identify stealthy, kernel-level compromises that evade standard system monitoring tools. The Wazuh Rootcheck module performs periodic scans on a monitored endpoint to detect signs of rootkits, hidden processes, and other host-based anomalies. In this use case, we show how Wazuh detects hidden processes created by a rootkit on a Linux endpoint. You deploy a kernel-mode rootkit on an Ubuntu endpoint. This rootkit hides itself from the kernel module list. It also hides selected processes from the ``ps`` utility. However, Wazuh detects the hidden processes by comparing the results of the ``kill()``, ``getsid()``, and ``getpgid()`` system calls with the entries in ``/proc``.
 
 Infrastructure
 --------------
@@ -102,8 +102,10 @@ Perform the following steps on the monitored Ubuntu 24.04 endpoint:
    .. code-block:: console
 
       # lsmod | grep diamorphine
-      # kill -63 509
+      # kill -63 <ANY_PID>
       # lsmod | grep diamorphine
+
+   Replace ``<ANY_PID>`` with any number. Diamorphine intercepts signal 63 for any PID, whether or not the process exists.
 
    The command output looks similar to this:
 
@@ -134,7 +136,7 @@ Perform the following steps on the monitored Ubuntu 24.04 endpoint:
 
    -  Replace ``<PID_OF_RSYSLOGD>`` with the PID retrieved from the previous command.
 
-   The last command returns no output. The next Rootcheck scan runs and generates a finding about the ``rsyslogd`` process, which was hidden with the Diamorphine rootkit.
+   The last command returns no output. The next Rootcheck scan runs and generates a finding about the ``rsyslogd`` process, which was hidden by the Diamorphine rootkit.
 
 Visualize the findings
 -----------------------
@@ -160,3 +162,13 @@ Click the magnifying glass icon to view the details of the findings.
    :width: 80%
 
 If you run the same ``kill -31`` command as before against ``rsyslogd``, the ``rsyslogd`` process becomes visible again. The subsequent rootcheck scan no longer generates findings about this event.
+
+To remove the rootkit, make the module visible, then unload it:
+
+.. code-block:: console
+
+   # kill -63 <ANY_PID>
+   # lsmod | grep diamorphine
+   # rmmod diamorphine
+
+If ``lsmod`` shows no output, the module is still hidden: run ``kill -63 <ANY_PID>`` again. You can also restart the endpoint, because Diamorphine doesn't persist across reboots.

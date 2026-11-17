@@ -21,11 +21,19 @@ The Wazuh manager API has two default users:
 
 There are no default passwords. The Wazuh packages generate random passwords when you install them. The Wazuh indexer saves the passwords of its users in ``/etc/wazuh-indexer/export/credentials.env``, and the Wazuh manager master node saves the passwords of the Wazuh manager API users in ``/etc/wazuh-manager/export/credentials.env``. See :ref:`Where the passwords are saved <passwords_where_saved>` for more details.
 
-The tool is located at ``/usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh``. You can also download it by running the following command:
+The Wazuh passwords tool is located at ``/usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh`` on every Wazuh indexer node. The commands on this page run the tool from the current directory. On a Wazuh indexer node, change to the tool directory first:
 
 .. code-block:: console
 
-   # curl -so wazuh-passwords-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+   # cd /usr/share/wazuh-indexer/tools/
+
+On a host without the Wazuh indexer, such as a Wazuh manager master node in a distributed deployment, download the tool to the current directory instead:
+
+.. code-block:: console
+
+   # curl -fsSo wazuh-passwords-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+
+If the download fails, curl prints the error, for example ``The requested URL returned error: 403``, and saves no file. Run the tool only after the download succeeds.
 
 The tool requires root privileges.
 
@@ -137,7 +145,7 @@ Where:
 
 .. note::
 
-   Run this command on the **Wazuh manager master node** for distributed deployments.
+   Run this command on the **Wazuh manager master node** for distributed deployments. If that node has no Wazuh indexer, download the tool there first, as described at the start of this page.
 
 For example, run the following command to change the password of the ``wazuh`` user to ``Secr3tP4ssw.rd``:
 

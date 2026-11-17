@@ -24,17 +24,18 @@ Detect SSH configuration changes
 
 Wazuh helps meet the CM-6 Configuration settings requirement by providing file integrity monitoring on specified files and paths.
 
-In this scenario, the Wazuh FIM monitors the SSH configuration file ``/etc/ssh/sshd_config`` on an Ubuntu 24.04 endpoint to detect changes in the SSH configuration. Monitor the SSH configuration file for changes using the steps below:
+In this scenario, the Wazuh FIM module monitors the ``/etc/ssh`` directory, which contains the SSH configuration file ``/etc/ssh/sshd_config``, on an Ubuntu 24.04 endpoint to detect changes in the SSH configuration. Monitor the directory for changes using the steps below:
 
-#. Install OpenSSH server:
+#. Switch to the root user and install the OpenSSH server:
 
    .. code-block:: console
 
+      $ sudo su
       # apt install openssh-server
 
 #. Add the following configuration to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``.
 
-   This monitors the ``/etc/ssh/sshd_config`` file for changes:
+   This monitors all files in the ``/etc/ssh`` directory, including ``/etc/ssh/sshd_config``, for changes:
 
    .. code-block:: xml
 
@@ -54,7 +55,7 @@ In this scenario, the Wazuh FIM monitors the SSH configuration file ``/etc/ssh/s
 
 #. Click the upper-left menu icon (**☰**) and go to **Endpoint security > File Integrity Monitoring**.
 
-   The finding details show that ``/etc/ssh/sshd_config`` changed, including the differences in the file checksum, the modification made, the modification time, and other information. The first change after the Wazuh agent restarts can show ``Unable to calculate diff due to no previous data stored for this file.`` in the ``file.diff`` field. Later changes show the modified lines.
+   The finding details show that ``/etc/ssh/sshd_config`` changed, including the differences in the file checksum, the modification made, the modification time, and other information. The first change after the Wazuh agent restarts can show ``Unable to calculate diff due to no previous data stored for this file.`` in the ``file.diff`` field. Later changes show the modified lines. The ``sed`` command also saves a copy of the original file as ``/etc/ssh/sshd_config.<YYYY-MM-DD>``. Because the Wazuh FIM module monitors the whole ``/etc/ssh`` directory, you also see a finding for this new backup file.
 
    .. thumbnail:: /images/compliance/nist/fim-sshd-config-finding.png
       :title: FIM finding for the sshd_config file
@@ -69,12 +70,13 @@ Wazuh helps meet SI-4 System monitoring by detecting system configuration change
 
 In this scenario, the Wazuh FIM monitors the Uncomplicated Firewall (UFW) rule files in the ``/etc/ufw/`` directory on an Ubuntu 24.04 endpoint. Using who-data, you can get more information like the user, program, or process that made changes to a monitored file or folder. Perform the steps below to monitor and detect changes to the UFW rule files:
 
-#. Install the audit daemon:
+#. Switch to the root user, install the audit daemon, and restart it. On Ubuntu 24.04, the ``auditd`` package already includes the ``af_unix`` plugin that who-data monitoring uses, so you don't need ``audispd-plugins``:
 
    .. code-block:: console
 
+      $ sudo su
       # apt-get install auditd
-      # apt-get install audispd-plugins
+      # systemctl restart auditd
 
 #. Add the following configuration to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``.
 
@@ -84,7 +86,7 @@ In this scenario, the Wazuh FIM monitors the Uncomplicated Firewall (UFW) rule f
 
       <directories report_changes="yes" whodata="yes">/etc/ufw/</directories>
 
-   UFW stores its rule files in the ``/etc/ufw/`` directory, and all rule files have the extension ``.rules``. We use the configuration above to monitor the modification, addition, and deletion of any files in the ``/etc/ufw/`` directory.
+   UFW stores its rule files in the ``/etc/ufw/`` directory, and all rule files have the extension ``.rules``. The configuration above monitors the modification, addition, and deletion of any files in the ``/etc/ufw/`` directory.
 
 #. Restart the Wazuh agent to apply the changes:
 

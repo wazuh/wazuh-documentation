@@ -27,7 +27,7 @@ Take the following steps to configure Suricata on the Ubuntu endpoint and send t
 Ubuntu endpoint
 ^^^^^^^^^^^^^^^
 
-#. Install Suricata on the Ubuntu endpoint. We tested this process with version 8.0.6:
+#. Install Suricata on the Ubuntu endpoint. We tested this process with version 8.0.8:
 
    .. code-block:: console
 
@@ -41,26 +41,22 @@ Ubuntu endpoint
 
       $ sudo suricata-update
 
-#. Modify Suricata settings in the ``/etc/suricata/suricata.yaml`` file and set the following variables:
+#. Edit Suricata settings in the ``/etc/suricata/suricata.yaml`` file and change these values under their parent keys. Leave the other settings as they are:
 
    .. code-block:: yaml
+      :emphasize-lines: 3, 7
 
-      HOME_NET: "<UBUNTU_IP>"
-      EXTERNAL_NET: "any"
+      vars:
+        address-groups:
+          HOME_NET: "<UBUNTU_IP>"
+          EXTERNAL_NET: "any"
 
-      default-rule-path: /var/lib/suricata/rules
-      rule-files:
-      - suricata.rules
-
-      # Global stats configuration
-      stats:
-        enabled: yes
-
-      # Linux high speed capture support
       af-packet:
-        - interface: enp0s3
+        - interface: <INTERFACE>
 
-   ``interface`` represents the network interface you want to monitor. Replace the value with the interface name of the Ubuntu endpoint. For example, ``enp0s3``. Run the following command to find the interface name:
+   Replace ``<UBUNTU_IP>`` with the IP address of the Ubuntu endpoint and ``<INTERFACE>`` with its network interface name.
+
+   Run the following command to find the interface name:
 
    .. code-block:: console
 
@@ -80,7 +76,7 @@ Ubuntu endpoint
 
       $ sudo systemctl restart suricata
 
-#. Add the following configuration to the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent. This allows the Wazuh agent to read the Suricata log file:
+#. Append the following configuration to the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent. This allows the Wazuh agent to read the Suricata log file:
 
    .. code-block:: xml
 
@@ -129,10 +125,18 @@ Run the command below on the Ubuntu endpoint to generate suspicious traffic:
 
    $ curl -s http://1.1.1.1/
 
+Check that Suricata raised an alert:
+
+.. code-block:: console
+
+   $ sudo grep '"event_type":"alert"' /var/log/suricata/eve.json | tail -1
+
+The output includes ``"signature":"ET HUNTING curl User-Agent to Dotted Quad"``.
+
 Visualize the findings
 ----------------------
 
-You can visualize the findings in the Wazuh dashboard. Go to **Threat intelligence** > **Threat Hunting** > **Findings**, then filter for ``wazuh.integration.name: suricata``.
+You can visualize the findings in the Wazuh dashboard. Go to **Threat intelligence** > **Threat Hunting** > **Findings**, then filter for ``wazuh.integration.name: suricata``. The finding title is ``Suricata IDS alert triggered - uncategorized - ET HUNTING curl User-Agent to Dotted Quad``.
 
 .. thumbnail:: /images/poc/network-ids-findings.png
    :title: Network IDS findings

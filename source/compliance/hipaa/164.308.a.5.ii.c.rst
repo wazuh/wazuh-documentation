@@ -20,13 +20,15 @@ In this use case, Wazuh monitors SSH authentication activity on an Ubuntu 26.04 
 Ubuntu endpoint
 ^^^^^^^^^^^^^^^^
 
-#. Attempt an SSH login to the monitored endpoint with valid credentials:
+#. From a different host, attempt an SSH login to the monitored Ubuntu endpoint with valid credentials. Replace ``<USERNAME>`` with an existing user on the endpoint and ``<ENDPOINT_IP>`` with the IP address of the Ubuntu endpoint:
 
    .. code-block:: console
 
-      # ssh <USERNAME>@<IP_ADDRESS>
+      $ ssh <USERNAME>@<ENDPOINT_IP>
 
-#. Navigate to **Threat intelligence** > **Threat Hunting** > **Findings** to see the finding on the Wazuh dashboard:
+#. From the same host, run the SSH login again and enter an incorrect password to generate a finding for the failed attempt.
+
+#. Navigate to **Threat intelligence** > **Threat Hunting** > **Findings** to see the findings on the Wazuh dashboard:
 
    .. thumbnail:: /images/compliance/hipaa/ssh-authentication-finding.png
       :title: Threat Hunting findings - SSH authentication
@@ -34,7 +36,7 @@ Ubuntu endpoint
       :align: center
       :width: 80%
 
-   The finding includes the username, timestamp, and authentication status (success or failure). Repeat the SSH login with an incorrect password to generate a finding for the failed attempt.
+   The finding includes the username, timestamp, and authentication status (success or failure).
 
    .. thumbnail:: /images/compliance/hipaa/ssh-authentication-finding-details.png
       :title: Threat Hunting finding details - SSH authentication
