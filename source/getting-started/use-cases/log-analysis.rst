@@ -17,7 +17,7 @@ Security events originate from operating systems, applications, network devices,
 
 The :doc:`Logcollector module </user-manual/capabilities/log-data-collection/how-it-works>` collects log files on :ref:`Linux <how-to-collect-linuxlogs>`, :ref:`Windows <how-to-collect-windowslogs>`, and :ref:`macOS <how-to-collect-macoslogs>` operating systems. It also monitors Windows Event Channels, collects logs from the macOS Unified Logging System (ULS), and reads the systemd journal through the journald collector. The Wazuh agent forwards collected logs to the Wazuh manager. The Wazuh manager normalizes and processes the logs before forwarding them to the Wazuh indexer. The Wazuh indexer analyzes the logs and stores them in dedicated data streams for centralized analysis.
 
-Wazuh also collects logs from syslog-enabled devices through a Wazuh agent that reads them, from cloud providers, and from third-party applications. A new log source requires only a configuration change on the Wazuh agent or Wazuh manager, depending on the integration.
+Wazuh also collects logs from syslog-enabled devices through a Wazuh agent on a relay endpoint, from cloud providers, and from third-party applications. A new log source requires only a configuration change on the Wazuh agent or Wazuh manager, depending on the integration.
 
 The **Discover** section of the Wazuh dashboard centralizes security events collected from monitored endpoints, applications, network devices, and cloud services.
 
@@ -59,15 +59,13 @@ The Wazuh indexer stores generated findings in the ``wazuh-findings-v5*`` data s
    :align: center
    :width: 80%
 
-For example, the rule below is triggered when a security audit log, shell history, or cloud audit trail is cleared. Additionally, rules enrich events with technique identifiers from the MITRE ATT&CK framework and map them to regulatory compliance controls.
+For example, the rule below is triggered when shell history is cleared on a Linux endpoint. Additionally, rules enrich events with technique identifiers from the MITRE ATT&CK framework and map them to regulatory compliance controls.
 
 .. code-block:: json
 
    {
      "id": "77a9994e-d0db-535f-876c-fefdf7913d38",
      "level": "high",
-     "category": "configuration",
-     "status": "stable",
      "detection": {
        "condition": "selection and not filter_windows_eventlog",
        "filter_windows_eventlog": {
@@ -93,37 +91,6 @@ For example, the rule below is triggered when a security audit log, shell histor
          "value": "attack.t1070.003"
        }
      ],
-     "false_positives": [
-       {
-         "value": "An interactive shell writing its history file at exit when the history file is under an audit write watch (bash appends ~/.bash_history on every exit)"
-       },
-       {
-         "value": "A shell configuration that empties the history file by design (HISTFILESIZE=0, a ~/.bash_logout that truncates it)"
-       },
-       {
-         "value": "Account deprovisioning or home directory cleanup that deletes or empties *_history files"
-       },
-       {
-         "value": "Authorised log management and archival procedures"
-       }
-     ],
-     "log_source": {
-       "category": "configuration",
-       "product": "wazuh-generic-1"
-     },
-     "metadata": {
-       "author": "Wazuh, Inc.",
-       "date": "2026-04-01",
-       "description": "Detects when a security audit log, shell history, or cloud audit trail is cleared. Log clearing is a common anti-forensics technique used by attackers to cover their tracks after a compromise. On Linux this fires on bash/shell history truncation, which corresponds to Clear Command History, not Windows Event Log clearing.\n",
-       "documentation": "Blind spots: Windows Security 1102 (event.dataset security) and the System channel 104 (event.dataset system) are excluded by event.dataset plus event.code; the Windows rule c21c2a72 owns Windows event log clearing. The filter is a cross product of the two lists, so security with 104 and system with 1102 are also excluded; neither pair is written by any decoder at offset 1787. On Linux the only producer is decoder/auditd/0, which writes security-log-cleared when the delivered audit event (the agent joins SYSCALL, PATH and PROCTITLE records into one event) carries a file.name containing _history; a PATH record alone decodes as file-referenced. The default Wazuh audit rules record execve only, so a history truncation raises nothing unless an audit watch covers the history file. unset HISTFILE before exit writes no file and is never seen. history -c clears only the shell's memory; it is seen only when the shell later writes the history file at exit and a write watch covers that file, and that write is indistinguishable from an ordinary exit append. The decoder does not check the syscall or the access type: any audited access to a *_history file matches, including an ordinary append at shell exit. Cloud audit trail deletion does not decode to security-log-cleared at offset 1787 and is not covered, although the description names it.",
-       "modified": "2026-10-06",
-       "references": [
-         "https://attack.mitre.org/techniques/T1070/003/"
-       ],
-       "title": "Security audit log cleared",
-       "supports": []
-     },
-     "enabled": true,
      "mitre": {
        "subtechnique": {
          "id": [
@@ -165,10 +132,7 @@ For example, the rule below is triggered when a security audit log, shell histor
        "pci_dss": [
          "10.2.1.3"
        ]
-     },
-     "rule": "",
-     "queries": [],
-     "query_field_names": []
+     }
    }
 
 The **Findings** tab in the **Threat Hunting** section of the Wazuh dashboard shows the findings generated after normalized logs are evaluated against Wazuh detection rules.

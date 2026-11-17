@@ -21,15 +21,15 @@ Once the certificates have been created and copied to the new Wazuh indexer node
 
          .. code-block:: console
 
-            # yum install coreutils
+            # yum install -y coreutils
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-            # apt-get install debconf adduser procps curl
+            # apt-get install -y debconf adduser procps curl
 
-#. Place the passwords, the root CA certificate, and the certificates of this node before you install the package. Run the following commands in the directory that holds the archive you copied to this node. Replace ``<NEW_WAZUH_INDEXER_NODE_NAME>`` with the name of the new node in ``config.yml``. The package then uses these files and generates nothing:
+#. Place the passwords, the root CA certificate and its private key, and the certificates of this node before you install the package. Run the following commands in the directory that holds the archive you copied to this node. Replace ``<NEW_WAZUH_INDEXER_NODE_NAME>`` with the name of the new node in ``config.yml``. The package then uses these files and generates nothing:
 
    .. code-block:: console
       :emphasize-lines: 1
@@ -39,6 +39,7 @@ Once the certificates have been created and copied to the new Wazuh indexer node
       # tar -xf ./wazuh-certificates-$NODE_NAME.tar -C wazuh-certificates
       # install -d -m 0750 /etc/wazuh-indexer /etc/wazuh-indexer/ca /etc/wazuh-indexer/certs
       # install -m 0644 wazuh-certificates/root-ca.pem /etc/wazuh-indexer/ca/root-ca.pem
+      # install -m 0400 wazuh-certificates/root-ca.key /etc/wazuh-indexer/ca/root-ca.key
       # install -m 0600 /dev/null /etc/wazuh-indexer/local.env
       # grep '^WAZUH_INDEXER_' wazuh-certificates/credentials.env > /etc/wazuh-indexer/local.env
       # install -m 0400 wazuh-certificates/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
@@ -159,7 +160,7 @@ The command output looks similar to this:
 
    Security Admin v7
    Will connect to x.x.x.x:9200 ... done
-   Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+   Connected as "C=US,L=California,O=Wazuh,OU=Wazuh,CN=admin"
    OpenSearch Version: 3.6.0
    Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
    Clustername: wazuh-cluster
@@ -174,7 +175,7 @@ The output confirms the state of the cluster and the number of nodes it contains
 +-----------------------+-------------------------------------------------+-------------------------------------------------------------------+
 | Field                 | Example value                                   | Description                                                       |
 +=======================+=================================================+===================================================================+
-| Connected as          | ``CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US`` | Identity of the admin certificate used to run the script.         |
+| Connected as          | ``C=US,L=California,O=Wazuh,OU=Wazuh,CN=admin`` | Identity of the admin certificate used to run the script.         |
 +-----------------------+-------------------------------------------------+-------------------------------------------------------------------+
 | Clustername           | ``wazuh-cluster``                               | Name of the Wazuh indexer cluster.                                |
 +-----------------------+-------------------------------------------------+-------------------------------------------------------------------+
@@ -191,16 +192,17 @@ Confirm that the Wazuh manager communicates with the new Wazuh indexer node by r
 
 .. code-block:: console
 
-   # grep -i indexer /var/wazuh-manager/logs/wazuh-manager.log
+   # grep "Indexer node 'https://<NEW_WAZUH_INDEXER_IP>:9200'" /var/wazuh-manager/logs/wazuh-manager.log | tail -n 4
 
 The command output looks similar to this:
 
 .. code-block:: none
    :class: output
 
-   2026/09/09 15:32:05 wazuh-manager-modulesd:inventory-sync-server: INFO: The indexer is reachable; inventory documents can be delivered.
-   2026/09/09 15:32:07 wazuh-manager-modulesd:content-updater: INFO: IndexerDownloader: Consumer 'cti:catalog:consumer:vulnerabilities' in index '.wazuh-cti-consumers' is ready. Starting feed download.
-   2026/09/09 15:32:07 wazuh-manager-modulesd:content-updater: INFO: IndexerDownloader: Starting incremental update from offset 906452
+   2026/11/13 23:57:11 wazuh-manager-analysisd(monitoring): INFO: Indexer node 'https://<NEW_WAZUH_INDEXER_IP>:9200' is available again.
+   2026/11/13 23:57:11 wazuh-manager-modulesd:vulnerability-scanner(monitoring): INFO: Indexer node 'https://<NEW_WAZUH_INDEXER_IP>:9200' is available again.
+   2026/11/13 23:57:11 wazuh-manager-modulesd:content-updater(monitoring): INFO: Indexer node 'https://<NEW_WAZUH_INDEXER_IP>:9200' is available again.
+   2026/11/13 23:57:11 wazuh-manager-modulesd:inventory-sync-server:indexer(monitoring): INFO: Indexer node 'https://<NEW_WAZUH_INDEXER_IP>:9200' is available again.
 
 Testing the cluster
 -------------------
@@ -335,7 +337,7 @@ Using the validation script
 
    .. note::
 
-      A yellow result exits with code 0 because replicas can still be allocating on a cluster that was just changed. A red result, an unreachable node, rejected credentials, or a node that is not listed all exit with code 1.
+      A yellow result exits with code ``0`` because replicas can still be allocating on a cluster that was just changed. A red result, an unreachable node, rejected credentials, or a node that is not listed all exit with code ``1``.
 
 Using the Wazuh dashboard console and the Wazuh indexer API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

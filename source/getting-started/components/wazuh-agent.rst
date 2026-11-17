@@ -40,7 +40,7 @@ All agent modules are configurable and perform different security tasks. This mo
 
 -  **System inventory:** Periodically runs scans to collect inventory data such as the operating system version, network interfaces, running processes, installed applications, and open ports. The Wazuh agent stores the inventory locally to detect changes and synchronizes it with the Wazuh manager. The Wazuh manager keeps the inventory state in the Wazuh indexer.
 
--  **Malware detection:** Uses a non-signature-based approach to detect anomalies and the possible presence of rootkits. It also looks for hidden processes, hidden files, and hidden ports while monitoring system calls.
+-  **Malware detection (Rootcheck):** Uses a non-signature-based approach to detect anomalies and the possible presence of rootkits. It also looks for hidden processes, hidden files, and hidden ports while monitoring system calls.
 
 -  **Active Response:** Retrieves response tasks from the Wazuh manager and runs the matching action. Examples include blocking a network connection, stopping a running process, or deleting a malicious file. You can also create custom responses, for example, running a binary in a sandbox, capturing network traffic, or scanning a file with an antivirus.
 
@@ -57,7 +57,7 @@ The Wazuh agent communicates with the Wazuh manager through the HTTPS agent API 
 
 Wazuh 4.x agents use the legacy AES-encrypted TCP or UDP channel on port 1514. The ``<legacy>`` block of the ``<remote>`` section in the Wazuh manager configuration controls this channel, and the configuration the installer generates enables it.
 
-Install and enroll the Wazuh agent before its first connection to the Wazuh manager. Enrollment provides the Wazuh agent with a unique authentication key. The Wazuh agent uses this key to generate the bearer tokens that authenticate its requests.
+The Wazuh agent enrolls with the Wazuh manager before it can send data. Enrollment provides the Wazuh agent with a unique authentication key. The Wazuh agent uses this key to generate the bearer tokens that authenticate its requests.
 
 Next step
 ---------

@@ -36,6 +36,10 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
 
 #. Install the `Python Docker library <https://pypi.org/project/docker/>`__ and other dependencies:
 
+   .. warning::
+
+      Before you confirm the removal, check the packages that ``apt`` lists. Removing ``python3-urllib3`` also removes the packages that depend on it, such as ``cloud-init`` and ``python3-boto3``.
+
    .. code-block:: console
 
       $ sudo apt remove python3-urllib3
@@ -45,7 +49,7 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
 
       This command modifies the default externally managed Python environment. See the `PEP 668 <https://peps.python.org/pep-0668/>`__ description for more information. To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the Docker ``/var/ossec/wodles/docker/DockerListener`` script shebang with your virtual environment interpreter, for example, ``#!</path/to/your/virtual/environment>/bin/python3``.
 
-      Some Ubuntu distributions have ``urllib3`` already installed using Debian packages. Uninstall and reinstall with the method above. Before you confirm the removal, check the packages that ``apt`` lists. Removing ``python3-urllib3`` also removes the packages that depend on it, such as ``cloud-init`` and ``python3-boto3``.
+      Some Ubuntu distributions have ``urllib3`` already installed using Debian packages. Uninstall and reinstall with the method above.
 
 #. Start and enable the Docker service:
 
@@ -54,7 +58,7 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
       $ sudo systemctl start docker.service
       $ sudo systemctl enable docker.service
 
-#. Edit the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf`` and add this block to enable the ``docker-listener`` module:
+#. Append the following configuration to the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf`` to enable the ``docker-listener`` module:
 
    .. code-block:: xml
 
@@ -87,7 +91,7 @@ Perform the following steps on the Wazuh dashboard to enable the docker integrat
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset Management** > **Detection** > **Detectors**, select the **docker** detector, and start it if it isn't active. To do so, click **Actions** and select **Start detector**. Wait a few minutes before you test the configuration, because the Wazuh manager applies content changes at its next synchronization.
+#. Navigate to **Ruleset management** > **Detectors**, select the **docker** detector, and start it if it isn't active. To do so, click **Actions** and select **Start detector**. Wait a few minutes before you test the configuration, because the Wazuh manager applies content changes at its next synchronization.
 
    .. thumbnail:: /images/poc/docker-detector-start.png
       :title: Start the docker detector

@@ -10,7 +10,7 @@ Wazuh supports custom branding, allowing organizations to customize the appearan
 
 .. note::
 
-   The loading logo, home logo, and application title settings all go under one ``opensearchDashboards.branding`` key. If the file already has this key, add the new settings under it. A second ``opensearchDashboards.branding`` key stops the Wazuh dashboard from starting, with a duplicated mapping key error.
+   The loading logo, home logo, and application title settings all go under one ``opensearchDashboards.branding`` key. If the file already has this key, add the new settings under it. A second ``opensearchDashboards.branding`` key stops the Wazuh dashboard from starting, with a duplicated mapping key error. Indent every setting under it with two spaces, as in the examples.
 
 This section of the documentation covers the configuration of the following custom branding options in the Wazuh dashboard:
 
@@ -42,9 +42,9 @@ Perform the following actions to customize the *global App loading* logo.
       :emphasize-lines: 3,4
 
       opensearchDashboards.branding:
-         loadingLogo:
-            defaultUrl: "<URL_TO_CUSTOM_LOGO>"
-            darkModeUrl: "<URL_TO_CUSTOM_LOGO>"
+        loadingLogo:
+          defaultUrl: "<URL_TO_CUSTOM_LOGO>"
+          darkModeUrl: "<URL_TO_CUSTOM_LOGO>"
 
    Replace ``<URL_TO_CUSTOM_LOGO>`` with the URL to your custom logo.
 
@@ -77,9 +77,9 @@ Perform the following to customize the *Wazuh dashboard home* logo in the top he
    .. code-block:: yaml
 
       opensearchDashboards.branding:
-         mark:
-            defaultUrl: "<URL_TO_CUSTOM_LOGO>"
-            darkModeUrl: "<URL_TO_CUSTOM_LOGO>"
+        mark:
+          defaultUrl: "<URL_TO_CUSTOM_LOGO>"
+          darkModeUrl: "<URL_TO_CUSTOM_LOGO>"
 
    Replace ``<URL_TO_CUSTOM_LOGO>`` with the URL to your custom logo. If you are customizing only the default theme logo, remove the ``darkModeUrl`` line from the configuration.
 
@@ -126,9 +126,7 @@ Perform the following actions to customize the *Wazuh dashboard login page*.
    -  ``showbrandimage``: Enables or disables the display of the logo.
    -  ``brandimage``: Specifies the logo image to display.
 
-   Replace
-
-   -  ``<URL_TO_CUSTOM_LOGO>`` with the URL to your custom logo.
+   Replace ``<MY_CUSTOM_TITLE>`` and ``<MY_CUSTOM_SUBTITLE>`` with your texts, and ``<URL_TO_CUSTOM_LOGO>`` with the URL to your custom logo.
 
 #. Restart the Wazuh dashboard service:
 
@@ -160,16 +158,14 @@ Perform the following actions to customize the *application title and favicon*.
 
       opensearchDashboards.branding:
         applicationTitle: '<MY_CUSTOM_APPLICATION_NAME>'
-        faviconUrl: '<URL_TO_CUSTOM_LOGO>'
+        faviconUrl: '<URL_TO_CUSTOM_FAVICON>'
 
    Where:
 
    -  ``applicationTitle``: Defines the application name.
    -  ``faviconUrl``: Specifies the favicon image to display.
 
-   Replace
-
-   -  ``<URL_TO_CUSTOM_LOGO>`` with the URL to your custom logo.
+   Replace ``<MY_CUSTOM_APPLICATION_NAME>`` with your application title and ``<URL_TO_CUSTOM_FAVICON>`` with the URL to your favicon.
 
 #. Restart the Wazuh dashboard service:
 

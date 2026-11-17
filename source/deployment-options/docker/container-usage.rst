@@ -41,6 +41,8 @@ This section explains how to list the Wazuh containers and open a shell inside t
 
    When you are done, run ``exit`` to close the shell and return to the terminal of the Docker host.
 
+.. _docker-service-data-volumes:
+
 Wazuh service data volumes
 --------------------------
 
@@ -89,9 +91,9 @@ To back up a single-node deployment, run the following commands as root from ``w
    # chmod 700 /root/wazuh-backup
    # docker compose start
 
-For the ``wazuh_queue`` volume, ``tar`` prints ``socket ignored`` for five files in ``sockets/``. The Wazuh manager creates these sockets again when it starts.
+For each Wazuh manager queue volume, ``tar`` prints ``socket ignored`` for the files in ``sockets/``. The Wazuh manager creates these sockets again when it starts.
 
-To restore the deployment, run the following commands as root from the same directory. On a new Docker host, first clone the same release of the Wazuh Docker repository:
+To restore the deployment, run the following commands as root from the same directory. On the Docker host that runs the stack, first run ``docker compose down -v``. It deletes the current containers and volumes, and the commands below create the volumes again from the backup. On a new Docker host, first clone the same release of the Wazuh Docker repository:
 
 .. code-block:: console
 
@@ -100,10 +102,20 @@ To restore the deployment, run the following commands as root from the same dire
    # for v in $(docker volume ls -q --filter label=com.docker.compose.project=single-node); do docker run --rm -v $v:/target -v /root/wazuh-backup:/backup:ro ubuntu:24.04 tar -C /target --numeric-owner -xzpf /backup/$v.tar.gz ; done
    # docker compose start
 
-The label filter selects the volumes of the stack, because Docker Compose names the project after its directory. It leaves out the ``wazuh-agent_wazuh_agent_etc`` volume of a Wazuh agent container, which ``docker volume ls`` also lists.
+The label filter selects the volumes of the stack, because Docker Compose names the project after its directory. If you migrated from Wazuh 4.x, the project is ``wazuh-5``: replace ``single-node`` with ``wazuh-5`` in both label filters. It leaves out the ``wazuh-agent_wazuh_agent_etc`` volume of a Wazuh agent container, which ``docker volume ls`` also lists. For a multi-node deployment, run the same commands from ``wazuh-docker/multi-node/``, and replace ``single-node`` with ``multi-node`` in both label filters. Restore in a directory with the same name as the one you backed up, because the volume names start with it.
 
 Adding a custom volume
 ^^^^^^^^^^^^^^^^^^^^^^
+
+To make a directory of the Docker host available in a container, add an entry for it to the ``volumes`` section of the service in your ``docker-compose.yml`` file. A directory needs no entry in the top-level ``volumes`` section. To apply the change, run ``docker compose up -d`` from the directory of your stack. For example, these entries mount the ``my-files`` directory, next to ``docker-compose.yml``, at ``/opt/my-files`` in the Wazuh manager container:
+
+.. code-block:: yaml
+
+   services:
+     wazuh.manager:
+       . . .
+       volumes:
+         - ./my-files:/opt/my-files
 
 To keep another path of a container when Docker recreates it, add an entry for that path to the ``volumes`` section of the service, with a new volume name, and declare the name in the top-level ``volumes`` section of your ``docker-compose.yml`` file. The ``volumes`` the stack already has use this format. For example, these are the entries that keep the Wazuh manager API configuration:
 
@@ -127,9 +139,43 @@ You can also open a shell with ``docker exec``, from any directory. ``docker exe
 
    # docker exec -it single-node-wazuh.manager bash
 
-Changes persist only under the paths mounted as volumes, such as ``/etc/wazuh-manager`` in the Wazuh manager container. The ``volumes`` section of each service in ``wazuh-docker/single-node/docker-compose.yml`` or ``wazuh-docker/multi-node/docker-compose.yml`` lists them. Changes anywhere else are lost when Docker recreates the container, for example, after ``docker compose down`` or an upgrade.
+Changes persist only under the paths mounted as volumes, such as ``/etc/wazuh-manager`` in the Wazuh manager container. The ``volumes`` section of each service in ``wazuh-docker/single-node/docker-compose.yml`` or ``wazuh-docker/multi-node/docker-compose.yml`` lists them. Changes anywhere else are lost when Docker recreates the container, for example, after ``docker compose down``, or after ``docker compose up -d`` applies a change to ``docker-compose.yml``.
 
 At every start, the Wazuh manager container sets the Wazuh indexer hosts, the cluster settings, and the listener addresses in ``/etc/wazuh-manager/wazuh-manager.conf`` from its environment variables. Change those settings in the ``environment`` section of the ``docker-compose.yml`` file instead.
+
++------------------------------+--------------------------------------------------------------+------------------------------------------+
+| **Variable**                 | **Setting in** ``wazuh-manager.conf``                        | **When the variable isn't set**          |
++------------------------------+--------------------------------------------------------------+------------------------------------------+
+| ``WAZUH_INDEXER_HOSTS``      | ``<indexer><hosts>``: a comma-separated list of Wazuh        | The file keeps its value.                |
+|                              | indexer nodes, such as                                       |                                          |
+|                              | ``wazuh1.indexer:9200,wazuh2.indexer:9200``. The scheme      |                                          |
+|                              | defaults to ``https`` and the port to 9200.                  |                                          |
++------------------------------+--------------------------------------------------------------+------------------------------------------+
+| ``WAZUH_NODE_NAME``          | ``<cluster><node_name>``                                     | The container hostname.                  |
++------------------------------+--------------------------------------------------------------+------------------------------------------+
+| ``WAZUH_NODE_TYPE``          | ``<cluster><node_type>``: ``master`` or ``worker``.          | ``master``                               |
++------------------------------+--------------------------------------------------------------+------------------------------------------+
+| ``WAZUH_CLUSTER_KEY``        | ``<cluster><key>``                                           | In the multi-node stack, the key in the  |
+|                              |                                                              | ``wazuh-cluster-key`` volume. Otherwise, |
+|                              |                                                              | the key in the file, or a key the        |
+|                              |                                                              | container generates on its first start.  |
++------------------------------+--------------------------------------------------------------+------------------------------------------+
+| ``WAZUH_CLUSTER_NODES``      | ``<cluster><nodes>``: the address of the Wazuh manager       | The file keeps its value.                |
+|                              | master node.                                                 |                                          |
++------------------------------+--------------------------------------------------------------+------------------------------------------+
+| ``WAZUH_CLUSTER_BIND_ADDR``  | ``<cluster><bind_addr>``                                     | ``0.0.0.0``                              |
++------------------------------+--------------------------------------------------------------+------------------------------------------+
+| ``WAZUH_REMOTE_BIND_ADDR``   | The address that the Wazuh agent listeners on ports 1517 and | ``0.0.0.0``                              |
+|                              | 1514 bind to.                                                |                                          |
++------------------------------+--------------------------------------------------------------+------------------------------------------+
+
+The Wazuh manager nodes of the multi-node stack share their cluster key through the ``wazuh-cluster-key`` volume. To set the key yourself, for example, for Wazuh manager nodes on different Docker hosts, give every node the same ``WAZUH_CLUSTER_KEY`` value. In the multi-node stack, ``docker-compose.yml`` reads ``WAZUH_CLUSTER_KEY`` from a ``.env`` file in ``wazuh-docker/multi-node/``. Run the following commands from that directory to generate a key, restrict the file to ``root``, and apply it:
+
+.. code-block:: console
+
+   # echo "WAZUH_CLUSTER_KEY=$(openssl rand -hex 16)" > .env
+   # chmod 600 .env
+   # docker compose up -d
 
 To use your own ``opensearch.yml`` or ``opensearch_dashboards.yml``, start from the file that the running container uses. A file written from scratch lacks settings that the container needs, such as its TLS paths and security plugin settings. From the directory of your stack, copy the file out of the container. For the Wazuh dashboard, run:
 
@@ -150,24 +196,20 @@ These commands use the service names of the single-node stack. Edit the file, th
    - ./opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
    - ./opensearch.yml:/usr/share/wazuh-indexer/config/opensearch.yml
 
-To use your own ``opensearch.yml`` or ``opensearch_dashboards.yml``, mount it in the ``volumes`` section of the service, at ``/usr/share/wazuh-indexer/config/opensearch.yml`` or ``/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml``. The file must be owned by ``root``, with group ``101`` and mode ``0640``. Run the following commands on the Docker host before you start the stack or apply the change. Replace ``<FILE>`` with the path of your file:
+To use your own ``opensearch.yml`` or ``opensearch_dashboards.yml``, mount it in the ``volumes`` section of the service, at ``/usr/share/wazuh-indexer/config/opensearch.yml`` or ``/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml``. The mounted file must be owned by ``root``, with group ``101`` and mode ``0640``. Run the following commands on the Docker host before you start the stack or apply the change. Replace ``<FILE>`` with the path of your file:
 
 .. code-block:: console
 
    # chown 0:101 <FILE>
    # chmod 640 <FILE>
 
-Otherwise, the container won't start, and Docker will restart it in a loop. ``docker compose logs <SERVICE>`` shows ``UNSAFE <PATH>: <REASON>``. The container keeps the owner and mode of the mounted file. Settings in the ``environment`` section of the service take precedence over the same settings in the file. At every start, the Wazuh dashboard container also writes the following settings into its file, from the environment variable in brackets or, when that variable is not set, from its default value: ``server.host`` (``SERVER_HOST``), ``server.port`` (``SERVER_PORT``), ``opensearch.hosts`` (``OPENSEARCH_HOSTS``), ``opensearch.ssl.verificationMode`` (``OPENSEARCH_SSL_VERIFICATION_MODE``), ``opensearch.requestHeadersAllowlist`` (``OPENSEARCH_REQUEST_HEADERS_ALLOWLIST``), ``opensearch_security.multitenancy.enabled`` (``OPENSEARCH_SECURITY_MULTITENANCY_ENABLED``), ``opensearch_security.readonly_mode.roles`` (``OPENSEARCH_SECURITY_READONLY_MODE_ROLES``), ``server.ssl.enabled`` (``SERVER_SSL_ENABLED``), ``server.ssl.key`` (``SERVER_SSL_KEY``), ``server.ssl.certificate`` (``SERVER_SSL_CERTIFICATE``), ``opensearch.ssl.certificateAuthorities`` (``OPENSEARCH_SSL_CERTIFICATE_AUTHORITIES``), ``uiSettings.overrides.defaultRoute`` (``UI_SETTINGS_OVERRIDES_DEFAULT_ROUTE``), ``opensearch_security.cookie.ttl`` (``OPENSEARCH_SECURITY_COOKIE_TTL``), ``opensearch_security.session.ttl`` (``OPENSEARCH_SECURITY_SESSION_TTL``), ``opensearch_security.session.keepalive`` (``OPENSEARCH_SECURITY_SESSION_KEEPALIVE``), and the url, port, username, run_as, and ca of every ``wazuh_core.hosts`` entry (``WAZUH_API_URL``, ``API_PORT``, ``API_USERNAME``, ``RUN_AS``, and ``WAZUH_API_CA``). To change one of these settings, set its variable in the environment section of the service, not in the file.
+Otherwise, the container won't start, and Docker will restart it in a loop. ``docker compose logs <SERVICE>`` shows ``UNSAFE <PATH>: <REASON>``. A file you copy out of the container with ``docker compose cp`` has group ``root``. With that file, the Wazuh dashboard container also restarts in a loop, with no ``UNSAFE`` line. Instead, ``docker compose logs wazuh.dashboard`` shows ``Error: ENOENT: no such file or directory, open '/etc/wazuh-dashboard/opensearch_dashboards.yml'``. Run the ``chown`` and ``chmod`` commands above on the copy. The container keeps the owner and mode of the mounted file. Settings in the ``environment`` section of the service take precedence over the same settings in the file. At every start, the Wazuh dashboard container also writes the following settings into its file, from the environment variable in brackets or, when that variable is not set, from its default value: ``server.host`` (``SERVER_HOST``), ``server.port`` (``SERVER_PORT``), ``opensearch.hosts`` (``OPENSEARCH_HOSTS``), ``opensearch.ssl.verificationMode`` (``OPENSEARCH_SSL_VERIFICATION_MODE``), ``opensearch.requestHeadersAllowlist`` (``OPENSEARCH_REQUEST_HEADERS_ALLOWLIST``), ``opensearch_security.multitenancy.enabled`` (``OPENSEARCH_SECURITY_MULTITENANCY_ENABLED``), ``opensearch_security.readonly_mode.roles`` (``OPENSEARCH_SECURITY_READONLY_MODE_ROLES``), ``server.ssl.enabled`` (``SERVER_SSL_ENABLED``), ``server.ssl.key`` (``SERVER_SSL_KEY``), ``server.ssl.certificate`` (``SERVER_SSL_CERTIFICATE``), ``opensearch.ssl.certificateAuthorities`` (``OPENSEARCH_SSL_CERTIFICATE_AUTHORITIES``), ``uiSettings.overrides.defaultRoute`` (``UI_SETTINGS_OVERRIDES_DEFAULT_ROUTE``), ``opensearch_security.cookie.ttl`` (``OPENSEARCH_SECURITY_COOKIE_TTL``), ``opensearch_security.session.ttl`` (``OPENSEARCH_SECURITY_SESSION_TTL``), ``opensearch_security.session.keepalive`` (``OPENSEARCH_SECURITY_SESSION_KEEPALIVE``), and the url, port, username, run_as, and ca of every ``wazuh_core.hosts`` entry (``WAZUH_API_URL``, ``API_PORT``, ``API_USERNAME``, ``RUN_AS``, and ``WAZUH_API_CA``). To change one of these settings, set its variable in the environment section of the service, not in the file.
 
 To apply the change, run the following command from the directory of your stack:
 
 .. code-block:: console
 
    # docker compose up -d
-
-.. note::
-
-   The actions you can perform inside the containers are limited.
 
 .. _docker_changing_password:
 

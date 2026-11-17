@@ -114,7 +114,7 @@ Wazuh manager configuration
 
    For Wazuh agent verification with host validation, also add ``<ssl_verify_host>yes</ssl_verify_host>`` to the ``<auth>`` section.
 
-   For Wazuh 5.0 agents, set the CA in the ``<https>`` block of the ``<remote>`` section. Wazuh 5.0 agents without a certificate signed by this CA are then refused. Keep ``<ssl_agent_ca>`` for Wazuh 4.x agents (port 1515):
+   ``<ssl_agent_ca>`` applies only to Wazuh 4.x agents, which enroll on port 1515. Wazuh 5.0 agents enroll and connect on port 1517. For them, set the CA and the ``<verification_mode>`` option in the ``<https>`` block of the ``<remote>`` section:
 
    .. code-block:: xml
 
@@ -122,10 +122,17 @@ Wazuh manager configuration
          ...
          <https>
            <ca>/etc/wazuh-manager/rootCA.pem</ca>
+           <verification_mode>certificate</verification_mode>
          </https>
       </remote>
 
-   For Wazuh agent verification with host validation, also add ``<verification_mode>full</verification_mode>`` to the ``<https>`` block. The Wazuh manager then refuses, with HTTP 403, a Wazuh 5.0 agent whose certificate doesn't list the address it connects from. Behind a load balancer or proxy that terminates TLS, that address is the proxy's.
+   These settings apply to all the traffic on port 1517, not only to enrollment. Every Wazuh 5.0 agent then needs a certificate signed by this CA, or the Wazuh manager refuses its connection. ``certificate`` is also the mode the Wazuh manager uses when ``<ca>`` is set without a ``<verification_mode>``, and it logs a warning when it does. See :ref:`reference_wazuh_manager_conf_remote` for the allowed values.
+
+   For Wazuh agent verification with host validation, set ``<verification_mode>full</verification_mode>`` in the ``<https>`` block. The Wazuh manager then refuses, with HTTP 403, a Wazuh 5.0 agent whose certificate doesn't list the address it connects from. Behind a load balancer or proxy that terminates TLS, that address is the proxy's. The address must be an IP entry in the subject alternative name of the certificate of the Wazuh agent. The CN isn't checked.
+
+   .. note::
+
+      With ``<verification_mode>`` set to ``certificate`` or ``full``, the Wazuh manager rejects remote upgrades to Wazuh 5.0.0 or later unless the upgrade request sets ``force_upgrade``. Upgrades with a custom WPK can't be forced. After you change ``<verification_mode>``, restart ``wazuh-manager-modulesd`` as well as ``wazuh-manager-remoted``, or upgrade requests keep using the previous value.
 
 #. Restart the Wazuh manager service to apply the changes:
 

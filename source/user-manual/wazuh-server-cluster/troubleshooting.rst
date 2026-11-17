@@ -21,31 +21,46 @@ Quick reference
 
 Each symptom points to one likely cause. Check whether the symptom is expected before you change anything.
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
-| **Symptom**                                                                                                                                                                                  | **Most likely cause**                                                                           | **Expected**                              |
-+==============================================================================================================================================================================================+=================================================================================================+===========================================+
-| :ref:`401 <wazuh_manager_cluster_agents_get_401_right_after_they_enroll>` :ref:`right after an agent enrolls <wazuh_manager_cluster_agents_get_401_right_after_they_enroll>`                 | The cluster has not copied the agent key to every node yet.                                     | Yes. It clears within about 25 seconds.   |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
-| :ref:`401 <wazuh_manager_cluster_agents_get_401_on_every_request>` :ref:`that persists <wazuh_manager_cluster_agents_get_401_on_every_request>`                                              | Clock drift on one node, or a key that didn't replicate.                                        | No.                                       |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
-| :ref:`403 <wazuh_manager_cluster_agents_get_403_on_configuration_download_only>` :ref:`on configuration download only <wazuh_manager_cluster_agents_get_403_on_configuration_download_only>` | A node has not applied a group change yet.                                                      | Briefly, for one or two 10-second rounds. |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
-| :ref:`404 <wazuh_manager_cluster_agents_get_404_on_every_request>` :ref:`on every request <wazuh_manager_cluster_agents_get_404_on_every_request>`                                           | A different ``global_prefix`` on one node, or a proxy that rewrites the path.                   | No.                                       |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
-| ``413``                                                                                                                                                                                      | An event batch above the 5 MiB limit of the Wazuh manager.                                      | Yes. The agent splits the batch.          |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
-| ``502``                                                                                                                                                                                      | A batch above the 10 MiB transport limit, or an unreachable node.                               | Check the batch size first.               |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
-| :ref:`503 <wazuh_manager_cluster_agents_get_503_errors>` :ref:`with error <wazuh_manager_cluster_agents_get_503_errors>` :ref:`9016 <wazuh_manager_cluster_agents_get_503_errors>`           | The master node is unreachable.                                                                 | Only during a master outage.              |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
-| ``503 dependency_unavailable``                                                                                                                                                               | The node has no database row for the agent yet, or its database doesn't answer.                 | Yes for a new agent. No if it persists.   |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
-| :ref:`503 <wazuh_manager_cluster_agents_get_503_errors>` :ref:`on events <wazuh_manager_cluster_agents_get_503_errors>`                                                                      | Back-pressure on the node.                                                                      | Yes, briefly.                             |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
-| :ref:`TLS error with no HTTP status <wazuh_manager_cluster_agents_get_tls_errors_with_no_http_status>`                                                                                       | Certificate authority (CA), validity dates, or subject alternative name (SAN) of a certificate. | No.                                       |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
-| :ref:`Agents fail at random <wazuh_manager_cluster_agents_fail_at_random>`                                                                                                                   | One node is degraded.                                                                           | No.                                       |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+-------------------------------------------+
+.. list-table::
+   :header-rows: 1
+   :widths: 58 29 13
+
+   * - **Symptom**
+     - **Most likely cause**
+     - **Expected**
+   * - :ref:`401 <wazuh_manager_cluster_agents_get_401_right_after_they_enroll>` :ref:`right after an agent enrolls <wazuh_manager_cluster_agents_get_401_right_after_they_enroll>`
+     - The cluster has not copied the agent key to every node yet.
+     - Yes. It clears within about 25 seconds.
+   * - :ref:`401 <wazuh_manager_cluster_agents_get_401_on_every_request>` :ref:`that persists <wazuh_manager_cluster_agents_get_401_on_every_request>`
+     - Clock drift on one node, or a key that didn't replicate.
+     - No.
+   * - :ref:`403 <wazuh_manager_cluster_agents_get_403_on_configuration_download_only>` :ref:`on configuration download only <wazuh_manager_cluster_agents_get_403_on_configuration_download_only>`
+     - A node has not applied a group change yet.
+     - Briefly, for one or two 10-second rounds.
+   * - :ref:`404 <wazuh_manager_cluster_agents_get_404_on_every_request>` :ref:`on every request <wazuh_manager_cluster_agents_get_404_on_every_request>`
+     - A different ``global_prefix`` on one node, or a proxy that rewrites the path.
+     - No.
+   * - ``413``
+     - An event batch above the 5 MiB limit of the Wazuh manager.
+     - Yes. The agent splits the batch.
+   * - ``502``
+     - A batch above the 10 MiB transport limit, or an unreachable node.
+     - Check the batch size first.
+   * - :ref:`503 <wazuh_manager_cluster_agents_get_503_errors>` :ref:`with error <wazuh_manager_cluster_agents_get_503_errors>` :ref:`9016 <wazuh_manager_cluster_agents_get_503_errors>`
+     - The master node is unreachable.
+     - Only during a master outage.
+   * - ``503 dependency_unavailable``
+     - The node has no database row for the agent yet, or its database doesn't answer.
+     - Yes for a new agent. No if it persists.
+   * - :ref:`503 <wazuh_manager_cluster_agents_get_503_errors>` :ref:`on events <wazuh_manager_cluster_agents_get_503_errors>`
+     - Back-pressure on the node.
+     - Yes, briefly.
+   * - :ref:`TLS error with no HTTP status <wazuh_manager_cluster_agents_get_tls_errors_with_no_http_status>`
+     - Certificate authority (CA), validity dates, or subject alternative name (SAN) of a certificate.
+     - No.
+   * - :ref:`Agents fail at random <wazuh_manager_cluster_agents_fail_at_random>`
+     - One node is degraded.
+     - No.
 
 Every ``401`` carries the message ``Invalid client authentication``. Read the ``code`` field instead. The codes ``unknown_agent``, ``enrollment_key_unavailable``, and ``token_unknown`` mean the node hasn't received the agent key, the enrollment password, or the enrollment token yet. The code ``stale_token`` means that the clocks of the agent and the node differ. It persists until you synchronize the clocks, and the ``remoted.auth.reject.clock_skew`` metric counts it.
 

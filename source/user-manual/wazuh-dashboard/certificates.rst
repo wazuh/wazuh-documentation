@@ -6,7 +6,7 @@
 Certificates deployment
 =======================
 
-SSL certificates are required to secure communication between Wazuh components and verify the identity of participating nodes. The Wazuh certificates tool is a utility that automates the generation of the SSL/TLS certificates required for a Wazuh deployment, including the root Certificate Authority (CA), node certificates, and administrative certificates. The :ref:`installation guide <installation_guide>` uses the Wazuh certificates tool to create certificates, but any certificate generation method, such as `OpenSSL <https://www.openssl.org/>`__, can be used.
+SSL certificates secure communication between Wazuh components and verify the identity of participating nodes. The Wazuh certificates tool generates the SSL/TLS certificates of a Wazuh deployment, including the root certificate authority (CA), node certificates, and administrative certificates. The :ref:`installation guide <installation_guide>` uses the Wazuh certificates tool to create certificates. You can also use any other certificate generation method, such as `OpenSSL <https://www.openssl.org/>`__. The Wazuh dashboard issues its own certificate at installation, so the dashboard node in ``config.yml`` is optional. See :ref:`dashboard_certificate`.
 
 Download the `Wazuh certificates tool <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh>`__ and save it as ``wazuh-certs-tool.sh`` in a working directory.
 
@@ -94,7 +94,7 @@ Run the ``wazuh-certs-tool.sh`` script with the option ``-A`` to generate all th
 
         # bash wazuh-certs-tool.sh -A
 
-After running the script, the directory ``wazuh-certificates`` will be created and will have the following content:
+After you run the script, the ``wazuh-certificates`` directory holds the following files:
 
 .. code-block:: none
 
@@ -124,24 +124,9 @@ Additionally, this script allows the use of a pre-existing rootCA certificate. T
        # install -m 0400 -o root -g root /path/to/root-ca.key wazuh-ca/root-ca.key
        # bash wazuh-certs-tool.sh -A
 
-After running the script, the directory wazuh-certificates will be created and will have the following content:
+The script creates the ``wazuh-certificates`` directory with the same files as in the previous example.
 
-.. code-block:: none
-
-   wazuh-certificates/
-   ├── admin-key.pem
-   ├── admin.pem
-   ├── dashboard-key.pem
-   ├── dashboard.pem
-   ├── indexer-key.pem
-   ├── indexer.pem
-   ├── manager-apid-key.pem
-   ├── manager-apid.pem
-   ├── manager-key.pem
-   ├── manager-remoted-key.pem
-   ├── manager-remoted.pem
-   ├── manager.pem
-   └── root-ca.pem
+.. _dashboard_certificate:
 
 The Wazuh dashboard certificate
 -------------------------------
@@ -153,7 +138,9 @@ The Wazuh dashboard does not need the Wazuh certificates tool. At installation, 
 -  ``certs/dashboard.pem`` and ``certs/dashboard-key.pem``: the certificate and key that the Wazuh dashboard serves.
 -  ``certs/indexer-ca.pem`` and ``certs/manager-ca.pem``: the CA certificates that the Wazuh dashboard uses to verify the Wazuh indexer and the Wazuh manager API.
 
-Every file that the Wazuh dashboard reads must be owned by root, must not be writable by group or others, and must not be a symbolic link. The ``certs`` directory and its files belong to the ``wazuh-dashboard group``, with modes ``0750`` and ``0640``. Otherwise, the Wazuh dashboard does not start.
+Every file that the Wazuh dashboard reads must be owned by root, must not be writable by group or others, and must not be a symbolic link. The ``certs`` directory and its files belong to the ``wazuh-dashboard`` group, with modes ``0750`` and ``0640``. Otherwise, the Wazuh dashboard does not start.
+
+.. _dashboard_certificate_issue:
 
 Issuing a new Wazuh dashboard certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -171,6 +158,41 @@ Replace ``<DNS_NAME>`` and ``<IP_ADDRESS>`` with the names and addresses that us
    # rm /etc/wazuh-dashboard/certs/dashboard.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
    # /usr/share/wazuh-dashboard/bin/resolve-credentials --install
    # systemctl restart wazuh-dashboard
+
+Using your own certificate authority
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To issue the Wazuh dashboard certificate from your own CA, place its certificate and RSA private key in ``/etc/wazuh-dashboard/ca`` before you install the Wazuh dashboard. Replace ``<CA_CERTIFICATE>`` and ``<CA_KEY>`` with the full paths of your CA files:
+
+.. code-block:: console
+   :emphasize-lines: 3,4
+
+   # install -d -m 0750 -o root -g root /etc/wazuh-dashboard
+   # install -d -m 0700 -o root -g root /etc/wazuh-dashboard/ca
+   # install -m 0644 -o root -g root <CA_CERTIFICATE> /etc/wazuh-dashboard/ca/root-ca.pem
+   # install -m 0400 -o root -g root <CA_KEY> /etc/wazuh-dashboard/ca/root-ca.key
+
+The installation issues the Wazuh dashboard certificate from this CA and publishes the CA certificate as ``/etc/wazuh-dashboard/export/ca.pem``. The Wazuh dashboard keeps the CA files you placed.
+
+On an installed Wazuh dashboard, replace the two files in ``/etc/wazuh-dashboard/ca`` the same way and remove ``/etc/wazuh-dashboard/ca/.wazuh-dashboard-bootstrap-ca``. Then follow :ref:`dashboard_certificate_issue`.
+
+Removing the Wazuh dashboard RPM package deletes ``/etc/wazuh-dashboard/ca``, including the private key. Back up the directory first.
+
+.. _dashboard_certificate_elsewhere:
+
+Using a certificate issued elsewhere
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can serve a certificate from the Wazuh certificates tool or from your own public key infrastructure (PKI) instead of the issued one. Copy the certificate and its key over the issued pair, then restart the Wazuh dashboard. Replace ``<CERTIFICATE>`` and ``<KEY>`` with the full paths of your files:
+
+.. code-block:: console
+   :emphasize-lines: 1,2
+
+   # install -m 0640 -o root -g wazuh-dashboard <CERTIFICATE> /etc/wazuh-dashboard/certs/dashboard.pem
+   # install -m 0640 -o root -g wazuh-dashboard <KEY> /etc/wazuh-dashboard/certs/dashboard-key.pem
+   # systemctl restart wazuh-dashboard
+
+For a pair from the Wazuh certificates tool, use ``dashboard.pem`` and ``dashboard-key.pem`` from the ``wazuh-certificates`` directory. Browsers then trust the CA that issued the pair, such as ``root-ca.pem`` from the same directory, instead of ``/etc/wazuh-dashboard/export/ca.pem``. The Wazuh dashboard keeps this pair across restarts and upgrades.
 
 .. toctree::
    :maxdepth: 2

@@ -415,7 +415,7 @@ The ``metadata`` block captures authorship, lifecycle, and descriptive informati
 | Field             | Required | Description                      | Example                                                                   |
 +===================+==========+==================================+===========================================================================+
 | ``title``         | Yes      | A human-readable rule title is   | ``title: Suspicious SSH Login from IPv6``                                 |
-|                   |          | shown in alerts and the rule     |                                                                           |
+|                   |          | shown in findings and the rule   |                                                                           |
 |                   |          | catalog. Keep titles short and   |                                                                           |
 |                   |          | avoid prefixes like "Detects     |                                                                           |
 |                   |          | when…" or "This rule will…".     |                                                                           |

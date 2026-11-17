@@ -34,6 +34,7 @@ The following parameters are required to make the configurations on the Wazuh in
 .. note::
 
    -  This integration uses Microsoft Active Directory, configured for LDAP over SSL (LDAPS).
+   -  For an LDAP server without TLS, such as OpenLDAP, skip `LDAP configuration`_ and steps 2 and 4 of `LDAP authentication and authorization configuration`_. In the ``authc`` and ``authz`` blocks, set ``enable_ssl: false``, remove ``pemtrustedcas_filepath``, use port ``389`` in ``hosts``, and set ``usersearch`` for your schema, for example ``(cn={0})``.
    -  The LDAP attribute types, such as Common Name (CN), Organizational Unit (OU), Distinguished Name (DN), and Domain Component (DC), used in this integration are from a test Microsoft Active Directory server. Replace them with the corresponding values from your Microsoft Active Directory or LDAP server.
    -  The ``securityadmin`` script has to be executed with root privileges.
    -  You need an account with administrator privileges on the Wazuh dashboard.
@@ -48,7 +49,7 @@ Depending on your LDAP server configuration, you need to create users and groups
 -  Create an OU for the group(s) (or use an already created OU). Get the DN of the OU, in our case: ``ou=Groups,dc=example,dc=org``.
 -  Create a user with sufficient privileges to bind to the service. Get the DN of the user, in our case, this is ``cn=ldap,ou=people,dc=example,dc=org``.
 -  Create a group to manage users with access to Wazuh; in our case, this includes the ``wazuh-admins`` and ``wazuh-readonly`` groups.
--  Get the FQDN of the LDAP server or Domain Controller.
+-  Get the FQDN of the LDAP server or Domain Controller
 
 LDAP configuration
 ------------------
@@ -224,10 +225,11 @@ The ``authc`` section of the Wazuh indexer security configuration file handles a
       verify return:1
       DONE
 
-#. Backup the existing Wazuh indexer security configuration files:
+#. Back up the Wazuh indexer security configuration files, then export the configuration that the Wazuh indexer is using. The export overwrites these files with the active configuration, including changes made in the Wazuh dashboard:
 
    .. code-block:: console
 
+      # cp -a /etc/wazuh-indexer/opensearch-security /root/opensearch-security-backup-$(date +%Y%m%d%H%M%S)
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
 
 #. Move the ``ldapcacert.pem`` file to the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to root:wazuh-indexer and the permissions to 640 using the following commands:
@@ -271,10 +273,12 @@ The ``authc`` section of the Wazuh indexer security configuration file handles a
                  usersearch: (sAMAccountName={0}) #Depending on your LDAP schema this can be CN, sAMAccountName, etc
                  username_attribute: cn
 
+      The ``order`` value must differ from every other domain in the ``authc`` section. If the file already has a ``saml_auth_domain`` with ``order: 1``, use ``order: 2`` in the ``ldap`` domain.
+
    -  Under the ``authz`` section, modify the LDAP configuration. Your configuration should be similar to this:
 
       .. code-block:: yaml
-         :emphasize-lines: 4,9,10,14-28
+         :emphasize-lines: 4,9,10,14-29
 
          authz:
            roles_from_myldap:
@@ -304,6 +308,7 @@ The ``authc`` section of the Wazuh indexer security configuration file handles a
                  skip_users:
                    - admin
                    - kibanaserver
+                   - wazuh-manager
 
    Change the following parameters to their corresponding value:
 
@@ -319,11 +324,11 @@ The ``authc`` section of the Wazuh indexer security configuration file handles a
    -  ``userrolename``
    -  ``rolename``
 
-#. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file. Replace ``<WAZUH_INDEXER_URL>`` with the IP address of the Wazuh indexer:
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file. On an all-in-one deployment, the Wazuh indexer listens on ``127.0.0.1``, so keep ``localhost``. On a distributed deployment, replace ``localhost`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml``:
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h <WAZUH_INDEXER_URL> -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
    The command output must be similar to the following:
 
@@ -360,10 +365,11 @@ Map LDAP role to Wazuh administrator role
 
 Follow these steps on the Wazuh indexer node to create a new role mapping and grant the backend role administrator permissions.
 
-#. Backup the existing Wazuh indexer security configuration files:
+#. Back up the Wazuh indexer security configuration files, then export the configuration that the Wazuh indexer is using. The export overwrites these files with the active configuration, including changes made in the Wazuh dashboard:
 
    .. code-block:: console
 
+      # cp -a /etc/wazuh-indexer/opensearch-security /root/opensearch-security-backup-$(date +%Y%m%d%H%M%S)
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
 
 #. Configure the ``roles_mapping.yml`` file to map the role in the LDAP server to the appropriate Wazuh indexer role. In our case, we map users in the ``wazuh-admins`` group in LDAP to the ``all_access`` role on the Wazuh indexer.
@@ -384,11 +390,11 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
         and_backend_roles: []
         description: "Maps admin to all_access"
 
-#. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file. Replace ``<WAZUH_INDEXER_URL>`` with the IP address of the Wazuh indexer:
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file. On an all-in-one deployment, the Wazuh indexer listens on ``127.0.0.1``, so keep ``localhost``. On a distributed deployment, replace ``localhost`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml``:
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h <WAZUH_INDEXER_URL> -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
    The command output must be similar to the following:
 
@@ -417,7 +423,7 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
 
       wazuh_core.hosts:
         default:
-          url: https://127.0.0.1
+          url: https://localhost
           port: 55000
           username: wazuh-internal-client
           run_as: true
@@ -436,7 +442,7 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``administrator``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field:** ``backend_roles``
+      -  **Auth context field:** ``backend_roles``
       -  **Search operation:** ``FIND``
       -  **Value:** Assign the name of your backend role in your LDAP server. In our case, this is a group named ``wazuh-admins``, which contains users with administrator roles.
 
@@ -448,7 +454,7 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
          :align: center
          :width: 80%
 
-#. Restart the Wazuh dashboard service using this command:
+#. If you changed ``run_as`` in the previous step, restart the Wazuh dashboard. A role mapping applies at once, without a restart:
 
    .. code-block:: console
 
@@ -487,7 +493,7 @@ Map LDAP role to Wazuh read-only role
 
       wazuh_core.hosts:
         default:
-          url: https://127.0.0.1
+          url: https://localhost
           port: 55000
           username: wazuh-internal-client
           run_as: true
@@ -506,7 +512,7 @@ Map LDAP role to Wazuh read-only role
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``readonly``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field:** ``backend_roles``
+      -  **Auth context field:** ``backend_roles``
       -  **Search operation:** ``FIND``
       -  **Value:** Assign the name of your backend role in your LDAP server. In our case, this is a group named ``wazuh-readonly``, which contains users with read-only roles.
 
@@ -518,7 +524,7 @@ Map LDAP role to Wazuh read-only role
          :align: center
          :width: 80%
 
-#. Restart the Wazuh dashboard service using this command:
+#. If you changed ``run_as`` in the previous step, restart the Wazuh dashboard. A role mapping applies at once, without a restart:
 
    .. code-block:: console
 

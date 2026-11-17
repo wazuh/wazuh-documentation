@@ -14,11 +14,13 @@ The Wazuh Active Response module works with Alerting monitors to run response ac
 
 #. The active response configuration selects the executable, location, and :ref:`type <active_response_types>`.
 
-#. The Wazuh manager then sends the active response command, together with the relevant finding information, to the selected monitored endpoint.
+#. The Wazuh manager then sends the active response command, together with the relevant finding information to the selected monitored endpoint.
 
 #. The Wazuh agent receives the command and executes the specified active response script.
 
-After execution, Wazuh stores the results of each active response in the ``wazuh-active-responses*`` index. Each entry includes details such as the command and execution location, which can be reviewed from the Wazuh dashboard. The index data is available for only 3 days. The ``stream-active-responses-policy`` ISM policy controls the retention period. Navigate to **Indexer Management** > **Index Management** > **State management policies** and edit the policy if you need to keep active response results for longer.
+After execution, Wazuh stores the results of each active response in the ``wazuh-active-responses*`` index. Each entry includes details such as the active response name, executable, and execution location, which can be reviewed from the Wazuh dashboard.
+
+The default ``stream-active-responses-policy`` ISM policy controls the retention period. It rolls over the active response index at 20 GB per primary shard or 200,000,000 documents, and deletes each rolled-over index 3 days after the rollover. Deployments that don't reach the rollover threshold keep active response results until they do. Wazuh restores this default policy on every restart, so don't edit it. To change the retention, create a custom policy in **Indexer management** > **Index Management** > **State management policies** and apply it to the active response indices.
 
 You can find the results of active response script executions in:
 
@@ -30,6 +32,7 @@ The following diagram shows the active response workflow.
 
 .. thumbnail:: /images/manual/active-response/active-response-workflow.png
    :title: Active response workflow
+   :alt: Diagram of the active response workflow between the monitored endpoint, the Wazuh manager, and the Wazuh indexer
    :align: center
    :width: 100%
 

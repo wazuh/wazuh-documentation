@@ -6,7 +6,7 @@
 Security analytics and reporting
 ================================
 
-Wazuh provides security analytics and reporting capabilities through the Wazuh dashboard, a web interface for continuous data visualization and analysis. The Wazuh dashboard comes with out-of-the-box modules for security events, regulatory compliance, detected vulnerable applications, file integrity monitoring, configuration assessment results, and cloud infrastructure monitoring. It helps perform forensic and historical finding analyses.
+Wazuh provides security analytics and reporting capabilities through the Wazuh dashboard, a web interface for continuous data visualization and analysis. The Wazuh dashboard comes with out-of-the-box modules for security events, regulatory compliance, detected vulnerable applications, file integrity monitoring, configuration assessment results, and cloud infrastructure monitoring. It helps you perform forensic and historical analysis of findings.
 
 The :doc:`Wazuh dashboard </user-manual/wazuh-dashboard/index>` assists in meeting the following NIST 800-53 controls:
 
@@ -32,7 +32,7 @@ Wazuh helps meet the CA-7 Continuous monitoring NIST requirement by providing se
       :align: center
       :width: 80%
 
-#. Add a query for user login events using the ``event.action:logged-in`` filter and set the time to **Last 30 days** then click **Update**.
+#. In the search bar, enter the ``event.action:logged-in`` query to find user login events. Set the time to **Last 30 days**, then click **Update**.
 
    .. thumbnail:: /images/compliance/nist/add-a-filter.png
       :title: Add a query for user login events
@@ -40,7 +40,7 @@ Wazuh helps meet the CA-7 Continuous monitoring NIST requirement by providing se
       :align: center
       :width: 80%
 
-#. Save the results of the search using any name of your choice.
+#. Click **Save** in the top menu of **Discover** and save the search with any name of your choice.
 
    .. thumbnail:: /images/compliance/nist/save-the-results.png
       :title: Save the results
@@ -54,7 +54,7 @@ Wazuh helps meet the CA-7 Continuous monitoring NIST requirement by providing se
       :align: center
       :width: 80%
 
-#. Select **Reporting**, then click **Generate CSV** to download a report of all successful authentication events as a CSV file for your review.
+#. Click **Reporting** in the top menu of **Discover**, then click **Generate CSV**. The Wazuh dashboard creates a CSV report of all successful authentication events, and your browser downloads it for your review.
 
    .. thumbnail:: /images/compliance/nist/select-reporting.png
       :title: Select Reporting
