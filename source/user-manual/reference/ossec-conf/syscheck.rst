@@ -166,6 +166,8 @@ These wildcards will be reloaded every time a scheduled scan is run.
 
 On macOS agents, the default value is ``/private/etc,/usr/bin,/usr/sbin,/bin,/sbin``, because ``/etc`` is a symbolic link to ``/private/etc``.
 
+On Windows agents, environment variables written as ``%NAME%`` are expanded anywhere in the entry, for example ``%WINDIR%\System32``. On Linux and macOS agents, only an entry that is a variable name alone, such as ``$HOME``, is expanded: a path such as ``$HOME/docs`` is not. If the variable holds several paths, separated by ``;`` on Windows or by ``:`` on Linux and macOS, each path is monitored. The agent reads the variables from its own environment when it loads the configuration.
+
 Attributes:
 
 +--------------------------+-----------------------------------------------------------------------------------------------------------------------+
@@ -894,7 +896,7 @@ The diff settings will be configured inside this tag.
 disk_quota
 """"""""""
 
-This option can be used to limit the size of the ``queue/diff/file`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
+This option can be used to limit the size of the ``queue/diff/file`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit. If ``file_size`` is enabled and the ``disk_quota`` limit is lower than the ``file_size`` limit, Wazuh raises the ``disk_quota`` limit to the ``file_size`` limit.
 
 **enabled**
 
@@ -1441,7 +1443,7 @@ Default syscheck configuration:
 
 
 
- .. group-tab:: Wazuh agent - MacOS X
+ .. group-tab:: Wazuh agent - macOS
 
   .. code-block:: xml
 

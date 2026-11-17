@@ -71,7 +71,9 @@ Rule group of the alerts to be forwarded.
 +--------------------+--------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                      |
 +--------------------+--------------------------------------------------------------------------+
-| **Allowed values** | Any valid group. Separate multiple groups with the pipe ("|") character. |
+| **Allowed values** | An :ref:`sregex (OS_Match) <sregex_os_match_syntax>` pattern that        |
+|                    | matches the alert groups. Separate alternatives with the pipe (``|``)    |
+|                    | character. Start the pattern with ``!`` to exclude matching alerts.      |
 +--------------------+--------------------------------------------------------------------------+
 
 .. note::
@@ -103,11 +105,13 @@ The location field refers to the origin of the alert, it could be:
 - vulnerability-detector
 - syscollector
 
-+--------------------+-----------------------------+
-| **Default value**  | n/a                         |
-+--------------------+-----------------------------+
-| **Allowed values** | Any valid location          |
-+--------------------+-----------------------------+
++--------------------+--------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                      |
++--------------------+--------------------------------------------------------------------------+
+| **Allowed values** | An :ref:`sregex (OS_Match) <sregex_os_match_syntax>` pattern that        |
+|                    | matches the alert location. Start the pattern with ``!`` to exclude      |
+|                    | matching alerts, for example ``!vulnerability-detector``.                |
++--------------------+--------------------------------------------------------------------------+
 
 use_fqdn
 ^^^^^^^^^
