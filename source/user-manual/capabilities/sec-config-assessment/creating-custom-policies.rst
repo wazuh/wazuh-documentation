@@ -126,7 +126,7 @@ Each section has its fields as described in the tables :ref:`Policy section<sca_
     +--------------------+----------------+-------------------+------------------------+
 
 .. note::
-  The ``id`` field under ``policy`` and ``checks`` must be unique across policy files.
+   The ``id`` field under ``policy`` and ``checks`` must be unique across policy files. To avoid conflicts, start the check IDs of your custom policies from 100000.
 
 Variables
 ---------

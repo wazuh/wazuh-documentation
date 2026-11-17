@@ -8,7 +8,7 @@
 Available SCA policies
 ======================
 
-The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wazuh agent only installs the policy file that is applicable to the endpoint operating system:
+The table below lists the SCA policies that ship with Wazuh. The Wazuh agent only installs the policy file that is applicable to the endpoint operating system. The Wazuh server also keeps a disabled copy of most policies in ``/var/ossec/ruleset/sca/``, except ``cis_apple_macOS_26.x``, ``cis_hpux_11i``, ``cis_hpux_11i_bastille``, and ``cis_sles16_linux``, which are available only on the matching Wazuh agents:
 
 .. table:: Available SCA policies
    :widths: auto
@@ -46,6 +46,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
    | cis_rocky_linux_10          |  CIS Benchmark for Rocky Linux 10                          | Rocky Linux 10                |
    +-----------------------------+------------------------------------------------------------+-------------------------------+
    | cis_oracle_linux_9          |  CIS Benchmark for Oracle Linux 9                          | Oracle Linux 9                |
+   +-----------------------------+------------------------------------------------------------+-------------------------------+
+   | cis_oracle_linux_10         |  CIS Benchmark for Oracle Linux 10                         | Oracle Linux 10               |
    +-----------------------------+------------------------------------------------------------+-------------------------------+
    | cis_centos6_linux           |  CIS Benchmark for CentOS Linux 6                          | CentOS Linux 6                |
    +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -103,6 +105,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
    +-----------------------------+------------------------------------------------------------+-------------------------------+
    | cis_sles15_linux            |  CIS Checks for SUSE SLES 15                               | SUSE 15                       |
    +-----------------------------+------------------------------------------------------------+-------------------------------+
+   | cis_sles16_linux            |  CIS SUSE Linux Enterprise 16 Benchmark                    | SUSE 16                       |
+   +-----------------------------+------------------------------------------------------------+-------------------------------+
    | cis_amazon_linux_1          |  CIS Checks for Amazon Linux 1                             | Amazon Linux 1                |
    +-----------------------------+------------------------------------------------------------+-------------------------------+
    | cis_amazon_linux_2          |  CIS Checks for Amazon Linux 2                             | Amazon Linux 2                |
@@ -113,9 +117,9 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
    +-----------------------------+------------------------------------------------------------+-------------------------------+
    | cis_solaris11.4             |  CIS Checks for Oracle Solaris 11.4                        | Solaris 11.4                  |
    +-----------------------------+------------------------------------------------------------+-------------------------------+
-   | cis_hpux                    |  CIS Benchmark for HP-UX 11i                               | HPUX 11i                      |
+   | cis_hpux_11i                |  CIS Benchmark for HP-UX 11i                               | HPUX 11i                      |
    +-----------------------------+------------------------------------------------------------+-------------------------------+
-   | cis_hpux_bastille           |  CIS Benchmark for HP-UX 11i using Bastille                | HPUX 11i                      |
+   | cis_hpux_11i_bastille       |  CIS Benchmark for HP-UX 11i using Bastille                | HPUX 11i                      |
    +-----------------------------+------------------------------------------------------------+-------------------------------+
    | cis_apple_macOS_10.11       |  CIS Apple macOS 10.11 Benchmark                           | macOS 10.11 (El Capitan)      |
    +-----------------------------+------------------------------------------------------------+-------------------------------+
