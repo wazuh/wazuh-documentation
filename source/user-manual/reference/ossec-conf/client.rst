@@ -23,7 +23,7 @@ The ``<client>`` section configures the Wazuh agent connection to the Wazuh mana
 Options
 -------
 
-A Wazuh 5.0 agent ignores the ``config-profile``, ``notify_time``, ``time-reconnect``, ``ip_update_interval``, and ``auto_restart`` options in ``<client>``, and the ``port``, ``interface_index``, ``max_retries``, and ``retry_interval`` options of ``<server>``. Their descriptions and default values below apply to Wazuh 4.x agents. For a Wazuh 5.0 agent, set these options in the :doc:`agent <agent>` section.
+A Wazuh 5.0 agent ignores the ``config-profile``, ``notify_time``, ``time-reconnect``, ``ip_update_interval``, and ``auto_restart`` options in ``<client>``, and the ``port``, ``interface_index``, ``max_retries``, and ``retry_interval`` options of ``<server>``. Their descriptions and default values below apply to Wazuh 4.x agents. For a Wazuh 5.0 agent, set ``config-profile``, ``notify_time`` and ``auto_restart`` in the :doc:`agent <agent>` section, and give an IPv6 zone ID inside ``<endpoint>``. ``time-reconnect``, ``ip_update_interval``, ``max_retries`` and ``retry_interval`` have no Wazuh 5.0 equivalent.
 
 - `server`_
 - `config-profile`_
