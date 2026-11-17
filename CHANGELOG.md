@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Removed Amazon Inspector Classic from the *Amazon Inspector* integration documentation, which now covers Amazon Inspector (v2) only. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
-- Added the Windows and macOS agent restart commands and the Windows path of shared policies to the steps for enabling, disabling, and sharing policies, and corrected the fields of checks marked as not applicable, in the *Security Configuration Assessment* documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399)) ([#10425](https://github.com/wazuh/wazuh-documentation/pull/10425)) ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519)) ([#10779](https://github.com/wazuh/wazuh-documentation/pull/10779))
+- Added the Windows and macOS agent restart commands and the Windows path of shared policies to the steps for enabling, disabling, and sharing policies, and corrected the fields of checks marked as not applicable, in the *Security Configuration Assessment* documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399)) ([#10425](https://github.com/wazuh/wazuh-documentation/pull/10425)) ([#10519](https://github.com/wazuh/wazuh-documentation/pull/10519))
 - Added a note about the pages that a read-only user cannot open to the *User administration* documentation. ([#10425](https://github.com/wazuh/wazuh-documentation/pull/10425))
 - Added a note that the Wazuh module for Google Cloud Pub/Sub supports only one `gcp-pubsub` block per configuration file to the *Monitoring Google Cloud Pub/Sub* documentation. ([#10430](https://github.com/wazuh/wazuh-documentation/pull/10430))
 - Corrected the queue list in the *Wazuh server queue* documentation, the allowed `<protocol>` values in the *Wazuh manager* documentation, and the archives files in the *Event logging* documentation. ([#10430](https://github.com/wazuh/wazuh-documentation/pull/10430))
@@ -47,6 +47,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Corrected the cluster name in the expected output of the cluster test in the *Installing the Wazuh indexer using the assisted installation method* documentation. ([#10682](https://github.com/wazuh/wazuh-documentation/pull/10682))
 - **Post-release**: Removed the leading `.\` from the PowerShell command in the *Deploying Wazuh agents on Windows endpoints* installation documentation, so it matches the CMD command. ([#10684](https://github.com/wazuh/wazuh-documentation/pull/10684))
 - **Post-release**: Added `apt-get update` to the APT commands that install the required packages and dependencies in the *Deploying Wazuh agents on Linux endpoints*, *Installing the Wazuh indexer step by step*, *Installing the Wazuh server step by step*, *Installing the Wazuh dashboard step by step*, and *Wazuh central components* upgrade documentation. ([#10746](https://github.com/wazuh/wazuh-documentation/pull/10746))
+- **Post-release**: Corrected the Windows agent service name in the restart commands, added the starting check ID for custom policies, and updated the *Available SCA policies* table and the use case examples in the *Security Configuration Assessment* documentation. ([#10779](https://github.com/wazuh/wazuh-documentation/pull/10779))
 
 ## [v4.14.9]
 
