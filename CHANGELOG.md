@@ -47,7 +47,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Corrected the cluster name in the expected output of the cluster test in the *Installing the Wazuh indexer using the assisted installation method* documentation. ([#10682](https://github.com/wazuh/wazuh-documentation/pull/10682))
 - **Post-release**: Removed the leading `.\` from the PowerShell command in the *Deploying Wazuh agents on Windows endpoints* installation documentation, so it matches the CMD command. ([#10684](https://github.com/wazuh/wazuh-documentation/pull/10684))
 - **Post-release**: Added `apt-get update` to the APT commands that install the required packages and dependencies in the *Deploying Wazuh agents on Linux endpoints*, *Installing the Wazuh indexer step by step*, *Installing the Wazuh server step by step*, *Installing the Wazuh dashboard step by step*, and *Wazuh central components* upgrade documentation. ([#10746](https://github.com/wazuh/wazuh-documentation/pull/10746))
-- **Post-release**: Corrected the Windows agent service name in the restart commands, added the starting check ID for custom policies, and updated the *Available SCA policies* table and the use case examples in the *Security Configuration Assessment* documentation. ([#10779](https://github.com/wazuh/wazuh-documentation/pull/10779))
+- **Post-release**: Standardized the Windows agent service name in the restart commands, documented when remote commands are needed for policies pushed from the Wazuh server, added the starting check ID for custom policies, and updated the *Available SCA policies* table and the use case examples in the *Security Configuration Assessment* documentation. ([#10779](https://github.com/wazuh/wazuh-documentation/pull/10779))
 
 ## [v4.14.9]
 
