@@ -67,9 +67,9 @@ These rules come from the agent protocol, so they apply to NGINX, HAProxy, a clo
 -  **Allow 10 MiB request bodies.** Set the proxy limit at or above ``<remote><https><max_body_size>``, 10 MiB by default. NGINX defaults to 1 MB. A Wazuh manager node closes the connection on a larger body instead of answering 413.
 -  **Wait more than 30 seconds for an answer.** The Wazuh manager gives each request 30 seconds. A shorter proxy timeout cuts off requests in progress.
 -  **Keep idle backend connections under 10 seconds.** The Wazuh manager closes an idle connection after 10 seconds. A request on a closed connection fails with ``502``.
--  **Check health with** ``GET /wazuh-manager/``\ **.** Each node answers ``200`` without authentication.
+-  **Use the health endpoint to check a node.** Send ``GET /wazuh-manager/`` to it. Each node answers ``200`` without authentication.
 -  **Retry only undelivered requests.** Retries on responses can deliver the same events to two nodes. Never retry ``400``, ``401``, or ``413``.
--  **Register agents with the address** ``any``\ **.** The Wazuh manager sees the address of the load balancer, not of the agent, and ignores ``X-Forwarded-For``.
+-  **Register agents without a fixed address.** Use the address ``any``. The Wazuh manager sees the address of the load balancer, not of the agent, and ignores ``X-Forwarded-For``.
 
 .. note::
 
@@ -170,87 +170,87 @@ Before you start, `install NGINX <https://nginx.org/en/linux_packages.html>`__ f
 
 #. Add the configuration for your TLS model to NGINX.
 
-TLS passthrough
-^^^^^^^^^^^^^^^
+   .. tabs::
 
-Add this ``stream`` block to the end of the ``/etc/nginx/nginx.conf`` file, after the closing brace of the ``http`` block. Keep the existing content of the file:
+      .. group-tab:: TLS passthrough
 
-.. code-block:: nginx
-   :emphasize-lines: 3,4
+         Add this ``stream`` block to the end of the ``/etc/nginx/nginx.conf`` file, after the closing brace of the ``http`` block. Keep the existing content of the file:
 
-   stream {
-       upstream wazuh_manager_nodes {
-           server <MANAGER_NODE_1_IP>:1517 max_fails=3 fail_timeout=10s;
-           server <MANAGER_NODE_2_IP>:1517 max_fails=3 fail_timeout=10s;
-       }
+         .. code-block:: nginx
+            :emphasize-lines: 3,4
 
-       server {
-           listen 1517;
-           proxy_pass wazuh_manager_nodes;
-           proxy_connect_timeout 5s;
-       }
-   }
+            stream {
+                upstream wazuh_manager_nodes {
+                    server <MANAGER_NODE_1_IP>:1517 max_fails=3 fail_timeout=10s;
+                    server <MANAGER_NODE_2_IP>:1517 max_fails=3 fail_timeout=10s;
+                }
 
-TLS termination
-^^^^^^^^^^^^^^^
+                server {
+                    listen 1517;
+                    proxy_pass wazuh_manager_nodes;
+                    proxy_connect_timeout 5s;
+                }
+            }
 
-Install the certificate files that the configuration names. Run these commands in the directory that holds ``lb.pem``, ``lb-key.pem``, and ``root-ca.pem``:
+      .. group-tab:: TLS termination
 
-.. code-block:: console
+         Install the certificate files that the configuration names. Run these commands in the directory that holds ``lb.pem``, ``lb-key.pem``, and ``root-ca.pem``:
 
-   # mkdir -p /etc/nginx/certs
-   # install -m 0644 lb.pem /etc/nginx/certs/lb.pem
-   # install -m 0600 lb-key.pem /etc/nginx/certs/lb-key.pem
-   # install -m 0644 root-ca.pem /etc/nginx/certs/root-ca.pem
-   # rm -f lb.pem lb-key.pem
+         .. code-block:: console
 
-Save these ``upstream`` and ``server`` blocks as a new file, ``/etc/nginx/conf.d/wazuh-manager.conf``. Don't edit ``nginx.conf``, and don't wrap the blocks in an ``http`` block. The NGINX packages load every file in ``/etc/nginx/conf.d/`` that ends in .conf inside the ``http`` block of ``nginx.conf``:
+            # mkdir -p /etc/nginx/certs
+            # install -m 0644 lb.pem /etc/nginx/certs/lb.pem
+            # install -m 0600 lb-key.pem /etc/nginx/certs/lb-key.pem
+            # install -m 0644 root-ca.pem /etc/nginx/certs/root-ca.pem
+            # rm -f lb.pem lb-key.pem
 
-.. code-block:: nginx
-   :emphasize-lines: 2,3,10,24
+         Save these ``upstream`` and ``server`` blocks as a new file, ``/etc/nginx/conf.d/wazuh-manager.conf``. Don't edit ``nginx.conf``, and don't wrap the blocks in an ``http`` block. The NGINX packages load every file in ``/etc/nginx/conf.d/`` that ends in .conf inside the ``http`` block of ``nginx.conf``:
 
-   upstream wazuh_manager_nodes {
-       server <MANAGER_NODE_1_IP>:1517;
-       server <MANAGER_NODE_2_IP>:1517;
-       keepalive 32;
-       keepalive_timeout 5s;
-   }
+         .. code-block:: nginx
+            :emphasize-lines: 2,3,10,24
 
-   server {
-       listen 1517 ssl;
-       server_name <AGENT_FACING_NAME>;
-       ssl_certificate     /etc/nginx/certs/lb.pem;
-       ssl_certificate_key /etc/nginx/certs/lb-key.pem;
-       ssl_protocols TLSv1.2 TLSv1.3;
-       client_max_body_size 10m;
+            upstream wazuh_manager_nodes {
+                server <MANAGER_NODE_1_IP>:1517;
+                server <MANAGER_NODE_2_IP>:1517;
+                keepalive 32;
+                keepalive_timeout 5s;
+            }
 
-       location / {
-           proxy_pass https://wazuh_manager_nodes;
-           proxy_http_version 1.1;
-           proxy_set_header Connection "";
-           proxy_ssl_protocols TLSv1.3;
-           proxy_ssl_trusted_certificate /etc/nginx/certs/root-ca.pem;
-           proxy_ssl_verify on;
-           proxy_ssl_verify_depth 2;
-           proxy_ssl_name <AGENT_FACING_NAME>;
-           proxy_ssl_server_name on;
-           proxy_next_upstream error timeout http_502 http_503;
-           proxy_connect_timeout 5s;
-           proxy_read_timeout 60s;
-       }
-   }
+            server {
+                listen 1517 ssl;
+                server_name <AGENT_FACING_NAME>;
+                ssl_certificate     /etc/nginx/certs/lb.pem;
+                ssl_certificate_key /etc/nginx/certs/lb-key.pem;
+                ssl_protocols TLSv1.2 TLSv1.3;
+                client_max_body_size 10m;
 
--  Replace ``<MANAGER_NODE_1_IP>`` and ``<MANAGER_NODE_2_IP>`` with the addresses of your nodes, and add one ``server`` line per node. Replace ``<AGENT_FACING_NAME>`` with the name agents dial. NGINX accepts one ``http`` block and one ``stream`` block, so never add a second one.
--  In the termination blocks:
+                location / {
+                    proxy_pass https://wazuh_manager_nodes;
+                    proxy_http_version 1.1;
+                    proxy_set_header Connection "";
+                    proxy_ssl_protocols TLSv1.3;
+                    proxy_ssl_trusted_certificate /etc/nginx/certs/root-ca.pem;
+                    proxy_ssl_verify on;
+                    proxy_ssl_verify_depth 2;
+                    proxy_ssl_name <AGENT_FACING_NAME>;
+                    proxy_ssl_server_name on;
+                    proxy_next_upstream error timeout http_502 http_503;
+                    proxy_connect_timeout 5s;
+                    proxy_read_timeout 60s;
+                }
+            }
 
-   -  ``proxy_pass`` has nothing after the group name. In a location other than ``/``, such as ``location /wazuh-manager/``, a URI after the group name replaces the matched prefix, and every request gets ``404``.
-   -  ``proxy_ssl_protocols TLSv1.3`` matches the minimum the Wazuh manager accepts. Don't add ``proxy_ssl_ciphers``, because NGINX fails to start with TLS 1.3 suite names.
-   -  ``proxy_ssl_name`` is the one name NGINX checks on every node certificate. Issue the node certificates with ``--agent-san <AGENT_FACING_NAME>`` so each one carries it.
-   -  ``client_max_body_size`` matches the 10 MiB body limit of the Wazuh manager.
-   -  ``keepalive_timeout 5s`` keeps idle backend connections under the 10-second limit of the Wazuh manager.
-   -  ``proxy_read_timeout 60s`` waits longer than the 30-second request budget of the Wazuh manager.
+   -  Replace ``<MANAGER_NODE_1_IP>`` and ``<MANAGER_NODE_2_IP>`` with the addresses of your nodes, and add one ``server`` line per node. Replace ``<AGENT_FACING_NAME>`` with the name agents dial. NGINX accepts one ``http`` block and one ``stream`` block, so never add a second one.
+   -  In the termination blocks:
 
-2. Check the configuration for syntax errors:
+      -  ``proxy_pass`` has nothing after the group name. In a location other than ``/``, such as ``location /wazuh-manager/``, a URI after the group name replaces the matched prefix, and every request gets ``404``.
+      -  ``proxy_ssl_protocols TLSv1.3`` matches the minimum the Wazuh manager accepts. Don't add ``proxy_ssl_ciphers``, because NGINX fails to start with TLS 1.3 suite names.
+      -  ``proxy_ssl_name`` is the one name NGINX checks on every node certificate. Issue the node certificates with ``--agent-san <AGENT_FACING_NAME>`` so each one carries it.
+      -  ``client_max_body_size`` matches the 10 MiB body limit of the Wazuh manager.
+      -  ``keepalive_timeout 5s`` keeps idle backend connections under the 10-second limit of the Wazuh manager.
+      -  ``proxy_read_timeout 60s`` waits longer than the 30-second request budget of the Wazuh manager.
+
+#. Check the configuration for syntax errors:
 
    .. code-block:: console
 
@@ -281,69 +281,69 @@ Before you start, install HAProxy 2.2 or later, for example from the `HAProxy pa
           timeout client  60s
           timeout server  60s
 
-TLS passthrough
-^^^^^^^^^^^^^^^
+   .. tabs::
 
-.. code-block:: none
-   :emphasize-lines: 9,10
+      .. group-tab:: TLS passthrough
 
-   frontend wazuh_agents
-       mode tcp
-       bind :1517
-       option tcplog
-       default_backend wazuh_manager_nodes
+         .. code-block:: none
+            :emphasize-lines: 9,10
 
-   backend wazuh_manager_nodes
-       mode tcp
-       server node1 <MANAGER_NODE_1_IP>:1517 check
-       server node2 <MANAGER_NODE_2_IP>:1517 check
+            frontend wazuh_agents
+                mode tcp
+                bind :1517
+                option tcplog
+                default_backend wazuh_manager_nodes
 
-TLS termination
-^^^^^^^^^^^^^^^
+            backend wazuh_manager_nodes
+                mode tcp
+                server node1 <MANAGER_NODE_1_IP>:1517 check
+                server node2 <MANAGER_NODE_2_IP>:1517 check
 
-Install the certificate files that the configuration names. Run these commands in the directory that holds ``lb.pem``, ``lb-key.pem``, and ``root-ca.pem``:
+      .. group-tab:: TLS termination
 
-.. code-block:: console
+         Install the certificate files that the configuration names. Run these commands in the directory that holds ``lb.pem``, ``lb-key.pem``, and ``root-ca.pem``:
 
-   # mkdir -p /etc/haproxy/certs
-   # cat lb.pem lb-key.pem > lb-combined.pem
-   # install -m 0640 -o root -g haproxy lb-combined.pem /etc/haproxy/certs/lb-combined.pem
-   # install -m 0644 root-ca.pem /etc/haproxy/certs/root-ca.pem
-   # rm -f lb.pem lb-key.pem lb-combined.pem
+         .. code-block:: console
 
-Then add this configuration below the timeouts:
+            # mkdir -p /etc/haproxy/certs
+            # cat lb.pem lb-key.pem > lb-combined.pem
+            # install -m 0640 -o root -g haproxy lb-combined.pem /etc/haproxy/certs/lb-combined.pem
+            # install -m 0644 root-ca.pem /etc/haproxy/certs/root-ca.pem
+            # rm -f lb.pem lb-key.pem lb-combined.pem
 
-.. code-block:: none
-   :emphasize-lines: 15,16
+         Then add this configuration below the timeouts:
 
-   frontend wazuh_agents
-       mode http
-       option httplog
-       bind :1517 ssl crt /etc/haproxy/certs/lb-combined.pem ssl-min-ver TLSv1.2
-       default_backend wazuh_manager_nodes
+         .. code-block:: none
+            :emphasize-lines: 15,16
 
-   backend wazuh_manager_nodes
-       mode http
-       option httpchk
-       http-check send meth GET uri /wazuh-manager/
-       http-check expect status 200
-       retries 3
-       option redispatch
-           http-reuse never
-       server node1 <MANAGER_NODE_1_IP>:1517 ssl ssl-min-ver TLSv1.3 verify required ca-file /etc/haproxy/certs/root-ca.pem verifyhost <MANAGER_NODE_1_NAME> sni str(<MANAGER_NODE_1_NAME>) check
-       server node2 <MANAGER_NODE_2_IP>:1517 ssl ssl-min-ver TLSv1.3 verify required ca-file /etc/haproxy/certs/root-ca.pem verifyhost <MANAGER_NODE_2_NAME> sni str(<MANAGER_NODE_2_NAME>) check
+            frontend wazuh_agents
+                mode http
+                option httplog
+                bind :1517 ssl crt /etc/haproxy/certs/lb-combined.pem ssl-min-ver TLSv1.2
+                default_backend wazuh_manager_nodes
 
--  Replace ``<MANAGER_NODE_1_IP>`` and ``<MANAGER_NODE_2_IP>`` with the addresses of your nodes, and add one ``server`` line per node. Replace ``<MANAGER_NODE_1_NAME>`` and ``<MANAGER_NODE_2_NAME>`` with a DNS name in the SAN of each node certificate.
--  In the termination configuration:
+            backend wazuh_manager_nodes
+                mode http
+                option httpchk
+                http-check send meth GET uri /wazuh-manager/
+                http-check expect status 200
+                retries 3
+                option redispatch
+                    http-reuse never
+                server node1 <MANAGER_NODE_1_IP>:1517 ssl ssl-min-ver TLSv1.3 verify required ca-file /etc/haproxy/certs/root-ca.pem verifyhost <MANAGER_NODE_1_NAME> sni str(<MANAGER_NODE_1_NAME>) check
+                server node2 <MANAGER_NODE_2_IP>:1517 ssl ssl-min-ver TLSv1.3 verify required ca-file /etc/haproxy/certs/root-ca.pem verifyhost <MANAGER_NODE_2_NAME> sni str(<MANAGER_NODE_2_NAME>) check
 
-   -  ``crt`` takes one file with the certificate and its key. The commands above build it as ``lb-combined.pem``, with mode ``640``.
-   -  ``verify required`` turns on backend certificate validation, which HAProxy doesn't do by default.
-   -  ``http-check send meth GET uri /wazuh-manager/`` probes the health endpoint every 2 seconds and removes a failed node before agent traffic reaches it.
-   -  Each ``server`` line stays on one physical line. HAProxy has no line continuation.
-   -  Don't add ``send-proxy`` or ``send-proxy-v2`` to a ``server`` line.
-   -  ``http-reuse never`` opens a new connection to the node for each request. The Wazuh manager closes an idle connection after 10 seconds, so a reused connection can fail with ``502``.
+   -  Replace ``<MANAGER_NODE_1_IP>`` and ``<MANAGER_NODE_2_IP>`` with the addresses of your nodes, and add one ``server`` line per node. Replace ``<MANAGER_NODE_1_NAME>`` and ``<MANAGER_NODE_2_NAME>`` with a DNS name in the SAN of each node certificate.
+   -  In the termination configuration:
 
-2. Check the configuration for errors:
+      -  ``crt`` takes one file with the certificate and its key. The commands above build it as ``lb-combined.pem``, with mode ``640``.
+      -  ``verify required`` turns on backend certificate validation, which HAProxy doesn't do by default.
+      -  ``http-check send meth GET uri /wazuh-manager/`` probes the health endpoint every 2 seconds and removes a failed node before agent traffic reaches it.
+      -  Each ``server`` line stays on one physical line. HAProxy has no line continuation.
+      -  Don't add ``send-proxy`` or ``send-proxy-v2`` to a ``server`` line.
+      -  ``http-reuse never`` opens a new connection to the node for each request. The Wazuh manager closes an idle connection after 10 seconds, so a reused connection can fail with ``502``.
+
+#. Check the configuration for errors:
 
    .. code-block:: console
 
@@ -376,63 +376,63 @@ A cluster that still serves Wazuh 4.x agents needs ports ``1514`` and ``1515`` b
 
 #. Add the legacy ports to the load balancer.
 
-NGINX
-^^^^^
+   .. tabs::
 
-Add these ``upstream`` and ``server`` blocks to the ``/etc/nginx/nginx.conf`` file, and keep its existing content. With TLS passthrough on port ``1517``, paste them inside the existing ``stream`` block, before its closing brace. Otherwise, wrap them in a new ``stream { }`` block, and add it to the end of the file, after the closing brace of the ``http`` block:
+      .. group-tab:: NGINX
 
-.. code-block:: nginx
-   :emphasize-lines: 2,3,6,7
+         Add these ``upstream`` and ``server`` blocks to the ``/etc/nginx/nginx.conf`` file, and keep its existing content. With TLS passthrough on port ``1517``, paste them inside the existing ``stream`` block, before its closing brace. Otherwise, wrap them in a new ``stream { }`` block, and add it to the end of the file, after the closing brace of the ``http`` block:
 
-   upstream enrollment {
-       server <MASTER_NODE_IP>:1515;
-       server <WORKER_NODE_IP>:1515;
-   }
-   upstream agents {
-       server <MASTER_NODE_IP>:1514;
-       server <WORKER_NODE_IP>:1514;
-   }
-   server {
-       listen 1515;
-       proxy_pass enrollment;
-   }
-   server {
-       listen 1514;
-       proxy_pass agents;
-   }
+         .. code-block:: nginx
+            :emphasize-lines: 2,3,6,7
 
-HAProxy
-^^^^^^^
+            upstream enrollment {
+                server <MASTER_NODE_IP>:1515;
+                server <WORKER_NODE_IP>:1515;
+            }
+            upstream agents {
+                server <MASTER_NODE_IP>:1514;
+                server <WORKER_NODE_IP>:1514;
+            }
+            server {
+                listen 1515;
+                proxy_pass enrollment;
+            }
+            server {
+                listen 1514;
+                proxy_pass agents;
+            }
 
-Add these sections to the end of the ``/etc/haproxy/haproxy.cfg`` file, below the sections for port ``1517``. Keep the existing content of the file:
+      .. group-tab:: HAProxy
 
-.. code-block:: none
-   :emphasize-lines: 8,9,19,20
+         Add these sections to the end of the ``/etc/haproxy/haproxy.cfg`` file, below the sections for port ``1517``. Keep the existing content of the file:
 
-   frontend enrollment
-       bind :1515
-       mode tcp
-       default_backend enrollment_nodes
+         .. code-block:: none
+            :emphasize-lines: 8,9,19,20
 
-   backend enrollment_nodes
-       mode tcp
-       server master  <MASTER_NODE_IP>:1515 check
-       server worker1 <WORKER_NODE_IP>:1515 check
+            frontend enrollment
+                bind :1515
+                mode tcp
+                default_backend enrollment_nodes
 
-   frontend agents
-       bind :1514
-       mode tcp
-       default_backend agent_nodes
+            backend enrollment_nodes
+                mode tcp
+                server master  <MASTER_NODE_IP>:1515 check
+                server worker1 <WORKER_NODE_IP>:1515 check
 
-   backend agent_nodes
-       mode tcp
-       balance leastconn
-       server master  <MASTER_NODE_IP>:1514 check
-       server worker1 <WORKER_NODE_IP>:1514 check
+            frontend agents
+                bind :1514
+                mode tcp
+                default_backend agent_nodes
 
-Replace ``<MASTER_NODE_IP>`` and ``<WORKER_NODE_IP>`` with the addresses of your nodes, and add one ``server`` line per worker.
+            backend agent_nodes
+                mode tcp
+                balance leastconn
+                server master  <MASTER_NODE_IP>:1514 check
+                server worker1 <WORKER_NODE_IP>:1514 check
 
-3. Restart the Wazuh manager on every node, then apply the load balancer configuration with ``nginx -s reload`` for NGINX or ``systemctl restart haproxy`` for HAProxy:
+   Replace ``<MASTER_NODE_IP>`` and ``<WORKER_NODE_IP>`` with the addresses of your nodes, and add one ``server`` line per worker.
+
+#. Restart the Wazuh manager on every node, then apply the load balancer configuration with ``nginx -s reload`` for NGINX or ``systemctl restart haproxy`` for HAProxy:
 
    .. code-block:: console
 
@@ -545,7 +545,7 @@ Instead of a token, you can set the ``<agent>`` block in the configuration file 
 Where:
 
 -  ``<endpoint>`` is the agent-facing address, port, and prefix. The prefix must equal the ``global_prefix`` of the Wazuh manager nodes. A mismatch gets ``404``.
--  ``<certificate_authorities>`` is the path of the CA that signed the certificates agents validate. Copy that CA file to this path on the agent first, or the agent refuses to start. The file can hold more than one CA, which allows a CA rotation without downtime. The Wazuh agent keeps a CA file whose path you set by hand. A CA bundle that the Wazuh manager publishes doesn't replace it, so you update the file yourself. The Wazuh agent replaces only its default trust anchor, ``/var/ossec/etc/certs/root-ca.pem``, during a CA rotation. For the rotation procedure, see :ref:`Replace a lost root CA <wazuh_manager_cluster_replace_a_lost_root_ca>`.
+-  ``<certificate_authorities>`` is the path of the CA that signed the certificates agents validate. Copy that CA file to this path on the agent first, or the agent refuses to start. The file can hold more than one CA, which allows a CA rotation without downtime. The Wazuh agent keeps a CA file whose path you set by hand. A CA bundle that the Wazuh manager publishes doesn't replace it, so you update the file yourself. The Wazuh agent replaces only its default trust anchor, ``/var/ossec/etc/certs/root-ca.pem``, during a CA rotation.
 -  ``<verification_mode>`` set to ``full`` also checks the agent-facing address against the SAN of the certificate.
 
 Check the agent connection

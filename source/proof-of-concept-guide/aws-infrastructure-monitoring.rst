@@ -68,22 +68,24 @@ Wazuh agent
 
       $ sudo pip3 install --break-system-packages boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
 
-#. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Ubuntu endpoint. Add only the AWS buckets of interest. Read our guide on how to :doc:`configure AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
+#. Append the following configuration to the ``/var/ossec/etc/ossec.conf`` configuration file on the Ubuntu endpoint to enable the Wazuh AWS module. Add only the AWS buckets of interest. Read our guide on how to :doc:`configure AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
 
    .. code-block:: xml
-      :emphasize-lines: 8, 9
+      :emphasize-lines: 9, 10
 
-      <wodle name="aws-s3">
-        <disabled>no</disabled>
-        <interval>30m</interval>
-        <run_on_start>yes</run_on_start>
-        <skip_on_error>no</skip_on_error>
+      <ossec_config>
+        <wodle name="aws-s3">
+          <disabled>no</disabled>
+          <interval>30m</interval>
+          <run_on_start>yes</run_on_start>
+          <skip_on_error>no</skip_on_error>
 
-        <bucket type="cloudtrail">
-          <name><AWS_BUCKET_NAME></name>
-          <aws_profile><AWS_PROFILE_NAME></aws_profile>
-        </bucket>
-      </wodle>
+          <bucket type="cloudtrail">
+            <name><AWS_BUCKET_NAME></name>
+            <aws_profile><AWS_PROFILE_NAME></aws_profile>
+          </bucket>
+        </wodle>
+      </ossec_config>
 
 #. Restart the Wazuh agent to apply the changes:
 

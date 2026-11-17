@@ -97,7 +97,7 @@ Controls the page size by limiting the items returned per page on every API requ
 time_delay
 ^^^^^^^^^^^
 
-Adds ``time_delay`` setting. Its value must be greater than or equal to ``0``. By default, its value is ``30s``. This setting allows time suffixes s (seconds), m (minutes), h (hours), d (days), and w (weeks).
+Specifies how far behind the current time the module stops collecting events. Its value must be greater than or equal to ``0``. By default, its value is ``30s``. This setting allows time suffixes s (seconds), m (minutes), h (hours), d (days), and w (weeks).
 
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Default value**    | 30s                                                                                          |

@@ -12,7 +12,7 @@ The following configuration and management capabilities are covered in this sect
 
 -  :ref:`Ruleset management <dashboard_configurations_ruleset_management>`
 -  :ref:`Active response <dashboard_configurations_active_response>`
--  :ref:`Notification and alerting <dashboard_configurations_notifications>`
+-  :ref:`Notifications and alerts <dashboard_configurations_notifications>`
 -  :ref:`Multi-tenancy <dashboard_configurations_multitenancy>`
 -  :ref:`Creating a custom dashboard <creating_custom_dashboards>`
 
@@ -89,7 +89,7 @@ The Normalization section manages the following components:
 Integration
 ~~~~~~~~~~~
 
-An integration is the top-level organizational unit in the **Ruleset management** section of the Wazuh dashboard. It groups related decoders and rules that provide support for a specific log source or use case. Each integration is configured through a space policy within a space. The policy must be enabled before the integration can progress through the promotion workflow. It also defines the root decoder used by the normalization engine as the entry point for processing events for the integration in the Test and Custom spaces.
+An integration is the top-level organizational unit in the **Ruleset management** section of the Wazuh dashboard. It groups related decoders and rules that provide support for a specific log source or use case. Each space has a space policy, the settings that apply to all the content of that space. The space policy sets the root decoder, the first decoder that the Wazuh engine runs on each event in the Test and Custom spaces. Its **Status** setting is on by default and turns event processing for the space on or off.
 
 In the **Ruleset management** section of the Wazuh dashboard, click **Overview** to display the integrations in the space you select in **Space** (Draft, Test, Custom, or Standard), along with their status and associated metadata.
 
@@ -113,7 +113,13 @@ In the **Ruleset management** section of the Wazuh dashboard, click **Overview**
    :title: Create integration
    :alt: Create integration
 
-User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation. A promotion requires a root decoder in the space, so create the integration's decoders first, as described in :ref:`Decoder <dashboard_configurations_decoder>`. Then set the root decoder. On the **Overview** page, select **Draft** in **Space**, click **Actions** at the top-right corner, and select **Edit**. Select the decoder under **Root decoder** and click **Save**. To ``promote``, click **Actions** > **Promote**, review the changes on the **Promote** page, and click **Promote**. Type promote to confirm and click **Promote**.
+User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation. A promotion requires a root decoder in the space, so create the integration's decoders first, as described in :ref:`Decoder <dashboard_configurations_decoder>`. Then edit the space policy. On the **Overview** page, select **Draft** in **Space**, click **Space actions** at the top-right corner, and select **Edit**. In the **Edit Draft** flyout, under **Settings**, select the decoder in **Root decoder**, keep **Status** on, and click **Save**. To promote the space, click **Space actions** > **Promote**, review the changes on the **Promote** page, and click **Promote**. Type ``promote`` to confirm, then click **Promote**.
+
+.. thumbnail:: /images/wazuh-dashboard/configurations/edit-draft-root-decoder.png
+   :align: center
+   :width: 80%
+   :title: Edit Draft flyout with a root decoder selected
+   :alt: Ruleset management > Overview, Edit Draft flyout for the Draft space with a root decoder selected in Root decoder and Status on
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-integration-actions.png
    :align: center
@@ -147,7 +153,7 @@ In the **Ruleset management** section of the Wazuh dashboard, navigate to **Deco
    :title: Create decoder
    :alt: Create decoder
 
-After creating the custom decoder, go to the **Overview** page, select **Draft** in **Space**, click **Actions** at the top-right corner, and select **Promote**. User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation.
+After creating the custom decoder, go to the **Overview** page, select **Draft** in **Space**, click **Space actions** at the top-right corner, and select **Promote**. User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation.
 
 KVDB
 ~~~~
@@ -177,7 +183,7 @@ To create custom KVDBs, navigate to **Ruleset management** > **KVDBs** in the Wa
       :title: Create KVDB
       :alt: Create KVDB
 
-After creating the custom KVDB, go to the **Overview** page, select **Draft** in **Space**, click **Actions** at the top-right corner, and select **Promote**. User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation.
+After creating the custom KVDB, go to the **Overview** page, select **Draft** in **Space**, click **Space actions** at the top-right corner, and select **Promote**. User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation.
 
 .. _dashboard_configurations_detection:
 
@@ -249,7 +255,7 @@ In the **Ruleset management** section of the Wazuh dashboard, navigate to **Dete
    :title: Create rule
    :alt: Create rule
 
-After creating the custom rules, go to the **Overview** page, select **Draft** in **Space**, click **Actions** at the top-right corner, and select **Promote**. User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation.
+After creating the custom rules, go to the **Overview** page, select **Draft** in **Space**, click **Space actions** at the top-right corner, and select **Promote**. User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation.
 
 .. _dashboard_configurations_logtest:
 
@@ -312,11 +318,11 @@ Perform the following actions to create an active response.
 
 #. Click **Create** to save the configuration.
 
-The active response runs as the action of an **Active Response monitor**. To attach it, navigate to **Explore** > **Alerting** > **Monitors** and click **Create monitor**. Type a **Monitor name** and select **Active Response monitor** in **Monitor type**. Under **Index**, select the findings index to watch, for example ``wazuh-findings-v5-system-activity``. Active Response monitors need a concrete index name, not an index pattern. Define the query, selecting each field from its list, and click **Add trigger**. In the trigger, click **Add active response**, select your active response in **Active response**, and click **Create**.
+The active response runs as the action of an **Active Response monitor**. To attach it, navigate to **Explore** > **Alerting** > **Monitors** and click **Create monitor**. Type a **Monitor name** and select **Active Response monitor** in **Monitor type**. Under **Index**, select the findings index to watch, for example ``wazuh-findings-v5-system-activity``. Active Response monitors need a concrete index name, not an index pattern. Define the query, selecting each field from its list, and click **Add trigger**. Type a name in **Trigger name**. Click **Add active response**, type a name in **Action name**, select your active response in **Active response**, and click **Create**.
 
 .. _dashboard_configurations_notifications:
 
-Notifications and Alerts
+Notifications and alerts
 ------------------------
 
 External API integrations such as Slack, PagerDuty, Jira, and Shuffle are centrally managed through the Wazuh dashboard using the **Notifications** and **Alerting** plugins. The **Notifications** plugin allows you to define output channels such as Slack, PagerDuty, Jira, or Shuffle, where Wazuh can send messages triggered by system events. The **Alerting** plugin enables the creation of monitors that query Wazuh data and execute actions when specific conditions are met, including sending alerts to the configured notification channels.
@@ -356,7 +362,7 @@ The channels are named **Slack Channel**, **PagerDuty Channel**, **Jira Channel*
 
    Security recommendations:
 
-   Treat these URLs and credentials as secrets. Review permissions and channel visibility before enabling it.
+   Treat these URLs and credentials as secrets. Before you unmute a channel, review who can view and edit it.
 
 Default monitors
 ^^^^^^^^^^^^^^^^
@@ -367,10 +373,10 @@ You can create monitors under **Explore** > **Alerting** > **Monitors**. For mor
 
 .. _notifications_and_alerting_configuration:
 
-Notifications and alerting configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configuring notifications and alerts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Notifications and Alerting configuration supports Slack, PagerDuty, Jira, Shuffle, and Email. Slack, PagerDuty, Jira, and Shuffle have default channels, and you create the Email channel. Follow these steps to configure notifications and alerting for supported channels.
+Notifications and alerts support Slack, PagerDuty, Jira, Shuffle, and Email. Slack, PagerDuty, Jira, and Shuffle have default channels, and you create the Email channel. Follow these steps to configure notifications and alerting for supported channels.
 
 .. contents::
    :local:
@@ -396,11 +402,11 @@ Configure and enable the notification channel and monitor
       :title: Slack Channel
       :alt: Slack Channel
 
-#. **Click Actions > Edit**, then enter the `incoming webhook URL <https://api.slack.com/messaging/webhooks>`__ obtained from your Slack workspace in the **Slack webhook URL** field.
+#. Click **Actions** > **Edit**, then enter the `incoming webhook URL <https://api.slack.com/messaging/webhooks>`__ obtained from your Slack workspace in the **Slack webhook URL** field.
 
 #. Save the Slack channel configuration and unmute the channel.
 
-#. **Click Actions > Send test message** to validate the channel.
+#. Click **Actions** > **Send test message** to validate the channel.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/slack-test.png
       :align: center
@@ -408,7 +414,7 @@ Configure and enable the notification channel and monitor
       :title: Slack test message
       :alt: Slack test message
 
-#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Slack. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Slack. For an example, see :ref:`Create the alerting monitor <dashboard_notifications_create_monitor>` in the Email section. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/slack-monitor.png
       :align: center
@@ -416,7 +422,7 @@ Configure and enable the notification channel and monitor
       :title: Monitors
       :alt: Monitors
 
-#. In the monitor trigger, click **Add notification** and select the Slack channel in **Channel**. Adjust the message subject and message if necessary, then click **Create**. The monitor is enabled when you create it.
+#. In the monitor trigger, type a name in **Trigger name**. Click **Add notification**, type a name in **Action name**, and select the Slack channel in **Channel**. Adjust the message subject and message if necessary, then click **Create**. The monitor is enabled when you create it.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/slack-add-action.png
       :align: center
@@ -451,7 +457,7 @@ Configure and enable the notification channel and monitor
       :title: PagerDuty Channel
       :alt: PagerDuty Channel
 
-#. **Click Actions > Edit**, leave the default URL, and enter your Integration Key as the ``X-Routing-Key`` value.
+#. Click **Actions** > **Edit**, leave the default URL, and enter your Integration Key as the ``X-Routing-Key`` value.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/pagerduty-edit.png
       :align: center
@@ -461,7 +467,7 @@ Configure and enable the notification channel and monitor
 
 #. Save the PagerDuty channel configuration and unmute the channel.
 
-#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to PagerDuty. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to PagerDuty. For an example, see :ref:`Create the alerting monitor <dashboard_notifications_create_monitor>` in the Email section. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/pagerduty-monitor.png
       :align: center
@@ -469,7 +475,7 @@ Configure and enable the notification channel and monitor
       :title: Monitors
       :alt: Monitors
 
-#. In the monitor trigger, click **Add notification** and select the PagerDuty channel in **Channel**. Adjust the message if necessary, then click **Create**. The monitor is enabled when you create it.
+#. In the monitor trigger, type a name in **Trigger name**. Click **Add notification**, type a name in **Action name**, and select the PagerDuty channel in **Channel**. Adjust the message if necessary, then click **Create**. The monitor is enabled when you create it.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/pagerduty-add-action.png
       :align: center
@@ -514,7 +520,7 @@ Configure and enable the notification channel
 
 #. Save the Jira channel configuration and unmute the channel.
 
-#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Jira. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Jira. For an example, see :ref:`Create the alerting monitor <dashboard_notifications_create_monitor>` in the Email section. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/jira-monitor.png
       :align: center
@@ -522,7 +528,7 @@ Configure and enable the notification channel
       :title: Monitors
       :alt: Monitors
 
-#. In the monitor trigger, click **Add notification** and select the Jira channel in **Channel**. Adjust the message to match your Jira instance, then click **Create**. The monitor is enabled when you create it.
+#. In the monitor trigger, type a name in **Trigger name**. Click **Add notification**, type a name in **Action name**, and select the Jira channel in **Channel**. Adjust the message to match your Jira instance, then click **Create**. The monitor is enabled when you create it.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/jira-add-action.png
       :align: center
@@ -536,7 +542,7 @@ Configure and enable the notification channel
       :title: Add notification action
       :alt: Add notification action
 
-#. Open **Dashboard management** > **Health Check** and run the checks. The ``integrations:default-notifications-channels`` check passes when all the default notification channels exist.
+#. Open **Dashboard management** > **Health Check**. The ``integrations:default-notifications-channels`` check is **green** when all the default notification channels exist.
 
 Shuffle
 ~~~~~~~
@@ -567,7 +573,7 @@ Configure and enable the notification channel
 
 #. Save the Shuffle channel configuration and unmute the channel. Then click **Actions** > **Send test message** to validate the channel.
 
-#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Shuffle. The Create the alerting monitor steps in the Email section show an example. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Shuffle. For an example, see :ref:`Create the alerting monitor <dashboard_notifications_create_monitor>` in the Email section. To start from a ready-made monitor instead, open the unmuted channel and click **Send findings to this channel**. The monitor watches new high and critical findings in all eight ``wazuh-findings-v5-*`` categories. To watch fewer categories, remove indices from **Index**.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/shuffle-monitor.png
       :align: center
@@ -575,7 +581,7 @@ Configure and enable the notification channel
       :title: Monitors
       :alt: Monitors
 
-#. In the monitor trigger, click **Add notification** and select the Shuffle channel in **Channel**. Adjust the message if necessary, then click **Create**. The monitor is enabled when you create it.
+#. In the monitor trigger, type a name in **Trigger name**. Click **Add notification**, type a name in **Action name**, and select the Shuffle channel in **Channel**. Adjust the message if necessary, then click **Create**. The monitor is enabled when you create it.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/shuffle-add-action.png
       :align: center
@@ -710,6 +716,8 @@ The **Sender type** field offers two options:
 +------------------+-----------------------------------------------------------------------------+
 
 
+.. _dashboard_notifications_create_monitor:
+
 Create the alerting monitor
 """""""""""""""""""""""""""
 
@@ -786,7 +794,7 @@ The **Perform action** field controls how often Wazuh sends the notification:
 
 .. note::
 
-   On a busy endpoint, the **Per alert** option can generate frequent emails. To reduce the volume, use a **Per query monitor** with a threshold instead.
+   On a busy endpoint, the **Per alert** option can generate frequent emails. To reduce the volume, use a **Per query monitor** with a threshold instead. See :ref:`dashboard_notifications_threshold_monitor`.
 
 .. note::
 
@@ -805,6 +813,20 @@ The email identifies the trigger, the severity, the monitor, and the detection w
    :width: 80%
    :title: Email notification dashboard findings
    :alt: Email notification dashboard findings
+
+.. _dashboard_notifications_threshold_monitor:
+
+Send a notification when failures exceed a threshold
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+A per query monitor counts the findings that match a filter in a time window, and notifies when the count passes a threshold. The following monitor sends a notification when more than five failed authentications occur in 10 minutes. With throttling on, it sends at most one notification every 10 minutes while the count stays above five.
+
+#. Click the menu icon, then navigate to **Explore** > **Alerting**. On the **Monitors** tab, click **Create monitor**.
+#. Type a name in **Monitor name**, select **Per query monitor** in **Monitor type**, and select **Visual editor** in **Monitor defining method**.
+#. Under **Select data**, type ``wazuh-findings-v5-system-activity`` in **Indexes** and press Enter. In **Time field**, type ``@timestamp`` and select it.
+#. Under **Query**, set **Time range for the last** to ``10`` minute(s). In **Data filter**, click **Add filter**, select ``event.action``, **is**, and type ``authentication-failure``.
+#. Click **Add trigger**. Type a name in **Trigger name**. In **Trigger condition**, select **IS ABOVE** and type ``5``.
+#. Click **Add notification**. Type a name in **Action name** and select your channel in **Channel**. Under **Throttling**, select **Enable action throttling** and set **Throttle actions to only trigger every** to ``10`` minutes. Click **Create**.
 
 AI Assistant
 ------------
@@ -825,15 +847,15 @@ Perform the following actions to configure the AI Assistant.
 
 #. Fill in the configuration form with the following details:
 
-   -  **Name**: A name for the provider.
    -  **Provider type**: Select a provider type. The available options are:
 
-      -  OpenAI-compatible (OpenAI, Gemini, Ollama and LM studios)
-      -  Anthropic
+      -  OpenAI-compatible (OpenAI, Gemini, Ollama, and LM Studio)
+      -  Anthropic (Claude)
 
-   -  **Endpoint URL**: The endpoint URL of the provider. This field is required.
+   -  **Name**: A name for the provider.
    -  **API key**: The API key for the provider. It is required for Anthropic and optional for a local OpenAI-compatible endpoint without authentication.
-   -  **Model**: The model the AI Assistant uses. This field is required.
+   -  **Endpoint URL**: The endpoint URL of the provider. This field is required.
+   -  **Model**: The model the AI Assistant uses. This field is required. It must support tool calling, also called function calling, because the AI Assistant reads Wazuh data through tool calls. A model without tool calling answers with invented data.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/ai-assistant-provider-form.png
       :align: center
@@ -841,11 +863,11 @@ Perform the following actions to configure the AI Assistant.
       :title: Configure the AI Assistant provider
       :alt: Configure the AI Assistant provider
 
-#. Click **Save & test** to add the AI Assistant provider.
+#. Click **Save & test** to add the AI Assistant provider. The **Status** column of the provider list shows the result of a connection test. The Wazuh dashboard runs this test each time you open the list, and again when you click **Test** or **Test all**. **OK** and **Slow** give the time to the first response, and **Slow** starts at 5 seconds. **Failed** and **Could not verify** mark a test that failed. To read the cause, expand the provider row and read **Reason**. A passing test shows only that the endpoint answers. To confirm that the provider works, ask a question in the **Chat** tab.
 
    .. note::
 
-      The Wazuh dashboard stores provider API keys encrypted when its keystore holds ``wazuh_ai_assistant.encryptionKey``. To check, run ``/usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore list --allow-root`` as root.
+      The Wazuh dashboard encrypts provider API keys with ``wazuh_ai_assistant.encryptionKey`` from its keystore. It generates this key at installation, and again at startup if the key is missing. Without the key, the provider form refuses to save an API key. To check that the key exists, run ``/usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore list --allow-root`` as root. If you change the key, the Wazuh dashboard can no longer decrypt the saved API keys, and you must enter them again.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/ai-assistant-save-provider.png
       :align: center
@@ -855,8 +877,10 @@ Perform the following actions to configure the AI Assistant.
 
 #. Configure the privacy settings to control how security data is handled before it is sent to the configured AI provider:
 
-   -  **Enable privacy mode by default**: Enables privacy mode by default for AI Assistant conversations. When enabled, configured fields containing sensitive information are anonymized or excluded before data is sent to the AI provider.
-   -  **Allow users to override privacy mode from the chat page**: Allows users to enable or disable privacy mode for individual conversations from the AI Assistant chat page. Disable this option to enforce the default privacy mode setting for all users.
+   -  **Enable privacy mode by default**: Enables privacy mode by default for AI Assistant conversations. When enabled, configured fields containing sensitive information are anonymized or excluded before data is sent to the AI provider. This option is off by default. With privacy mode off, the AI Assistant sends hostnames, IP addresses, user names, and finding text as they are, and drops only the fields set to **Never send**.
+   -  **Allow users to override privacy mode from the chat page**: Allows users to enable or disable privacy mode for individual conversations from the AI Assistant chat page. Disable this option to enforce the default privacy mode setting for all users. This option is on by default.
+   -  **Field policy**: Sets what the AI provider receives for each field. **Allow** sends the value, and privacy mode still pseudonymizes known identifiers in it. **Anonymize** sends a pseudonym while privacy mode is on, and the real value while it is off. **Never send** drops the field in both modes.
+   -  **Per-provider override**: Sets privacy mode for each provider to **On**, **Off**, or **Use global default**. For example, anonymize the data sent to hosted providers and send raw data to a local model. Providers set to **Use global default** follow **Enable privacy mode by default**.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/ai-assistant-privacy-settings.png
       :align: center
@@ -864,7 +888,7 @@ Perform the following actions to configure the AI Assistant.
       :title: Configure the AI Assistant privacy settings
       :alt: Configure the AI Assistant privacy settings
 
-#. **Click Save changes** to save the privacy configuration.
+#. Click **Save changes** to save the privacy configuration.
 
 #. Configure the conversation history settings to control how long saved AI Assistant conversations are retained. Set the value to ``0`` to retain saved conversations indefinitely. Click **Save conversation history settings** to apply the configuration.
 
@@ -890,7 +914,7 @@ Multi-tenancy
 Tenants in the Wazuh dashboard are containers for saving index patterns, visualizations, dashboards, and other objects. Tenants are useful for safely sharing your work with other users. You can control which roles have access to a tenant and whether those roles have read or write access. By default, all Wazuh dashboard users have access to two independent tenants, Global and Private. Administrators can also create custom tenants. The tenant types are the following:
 
 -  Global: This tenant is shared between every Wazuh dashboard user.
--  Private: This tenant is exclusive to each user and can't be shared. Users in the private tenant can't access routes or index patterns made by users in the global tenant.
+-  Private: This tenant belongs to one user, and only that user can see it. It has its own index patterns, visualizations, and dashboards, separate from the ones in the Global tenant.
 -  Custom: Administrators can create custom tenants and assign them to specific roles. Once created, these tenants can then provide spaces for specific groups of users.
 
 Configuring multi-tenancy
@@ -938,7 +962,46 @@ The configuration above adds the options to switch tenants on the Wazuh dashboar
    :align: center
    :width: 80%
 
-Click the user avatar, then click **Switch tenants**. Select a tenant in **Select your tenant** and click **Confirm**.
+Click the user avatar, then click **Switch tenants**. Select a tenant in **Select your tenant** and click **Confirm**. To select a custom tenant, select **Choose from custom** and select the tenant in **Select a custom tenant**.
+
+Creating a custom tenant
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Create a tenant for a team, then give a role access to it. Enable multi-tenancy first, as described in the previous steps.
+
+#. Navigate to **Indexer management** > **Users and data access** > **Tenants**. On the **Manage** tab, click **Create tenant**.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/custom-tenant-tenants-list.png
+      :align: center
+      :width: 80%
+      :title: Tenants page
+      :alt: Indexer management > Users and data access > Tenants, Manage tab, listing the Global, Private, and admin_tenant tenants with the Create tenant button
+
+#. Type the tenant name in **Name** and an optional description in **Description**, then click **Create**.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/custom-tenant-create-tenant.png
+      :align: center
+      :width: 80%
+      :title: Create tenant
+      :alt: Create tenant dialog with team-a in Name and Tenant for team A in Description
+
+#. Navigate to **Indexer management** > **Users and data access** > **Roles**. Click **Create role**, or select one of your roles and click **Actions** > **Edit**.
+
+#. Under **Tenant permissions**, select the tenant in **Tenant**, then select **Read and Write** or **Read only**. Click **Create**, or **Update** for an existing role.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/custom-tenant-role-tenant-permissions.png
+      :align: center
+      :width: 80%
+      :title: Tenant permissions of a role
+      :alt: Edit role page with the team-a tenant selected under Tenant permissions and Read and Write permissions
+
+On the **Mapped users** tab of the role, click **Manage mapping** to add users. These users can then select the tenant in **Switch tenants**.
+
+.. thumbnail:: /images/wazuh-dashboard/configurations/custom-tenant-select-custom-tenant.png
+   :align: center
+   :width: 80%
+   :title: Select your tenant
+   :alt: Select your tenant dialog with Choose from custom selected and team-a listed in Select a custom tenant
 
 .. _creating_custom_dashboards:
 
@@ -973,7 +1036,7 @@ Click **Create new visualization**, or **Create visualization** once the page li
 
 Choose the visualization option that best suits your data by clicking on the visualization type box. Here, we selected the **Area** chart visualization.
 
-After selecting a visualization type, the next step for most visualization types is to choose the index pattern to use. The selected index pattern serves as the data source for building the visualization.
+After selecting a visualization type, the next step for most visualization types is to choose the index pattern to use. The selected index pattern serves as the data source for building the visualization. The Wazuh dashboard creates the index patterns used in this section, such as ``wazuh-findings-v5*``, ``wazuh-events-v5*``, and ``wazuh-states-sca*``, when it runs its health check. You select them; you don't create them.
 
 .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/choose-source.png
    :align: center
@@ -1563,7 +1626,7 @@ VisBuilder
 
 Visualization Builder is an intuitive tool that allows users to create customized visualizations without programming knowledge. It is beneficial for users who want to quickly generate visual representations of their data without extensive technical knowledge.
 
-As of the time of writing this document, this visualization is experimental. The design and implementation are less mature than stable visualizations and might be subject to change.
+In Wazuh 5.0, this visualization is experimental. Its design and implementation can change in later versions.
 
 The steps below show how to use Visualization Builder to present the Wazuh integration name and category.
 
@@ -1702,7 +1765,7 @@ Controls
 
 These are interactive tools that provide users with the ability to manipulate or adjust parameters or settings within a software application or user interface. These controls enable users to customize their experience or modify certain aspects of the system according to their preferences. Controls are typically used in interactive applications or interfaces where users need to adjust settings, parameters, or filters to customize their experience or analyze specific aspects of the data.
 
-At the time of writing this document, this visualization is experimental. The design and implementation are less mature than stable visualizations and might be subject to change.
+In Wazuh 5.0, this visualization is experimental. Its design and implementation can change in later versions.
 
 **Creating controls**
 
@@ -1794,7 +1857,7 @@ They are commonly used in historical analysis, project planning, or storytelling
 Vega
 ~~~~
 
-This is a versatile declarative language for creating interactive visualizations. It allows users to define visualizations using JSON syntax. It allows users to define complex visualizations using JSON syntax and is suitable for advanced data visualization needs.
+This is a versatile declarative language for creating interactive visualizations. It defines complex visualizations in JSON and suits advanced data visualization needs.
 
 Creating a dashboard
 ^^^^^^^^^^^^^^^^^^^^

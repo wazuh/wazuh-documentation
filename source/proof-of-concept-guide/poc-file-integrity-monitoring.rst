@@ -37,6 +37,8 @@ Perform the following steps to configure the Wazuh agent to monitor file system 
         <provider>ebpf</provider>
       </whodata>
 
+   The ebpf provider needs a Linux kernel with BPF ring buffer and BTF support (5.8 or later, which Ubuntu 24.04 meets). If its health check fails, the agent logs (``6959``) and switches to the audit provider, which needs the auditd package. See :ref:`Who-data monitoring <who-data-monitoring>` for both providers.
+
    .. note::
 
       You can also configure any path of your choice in the ``<directories>`` block.
@@ -46,10 +48,6 @@ Perform the following steps to configure the Wazuh agent to monitor file system 
    .. code-block:: console
 
       $ sudo systemctl restart wazuh-agent
-
-   .. note::
-
-      Wait until the Wazuh agent finishes its initial scan before you test the configuration. The agent logs ``(6012): Real-time file integrity monitoring started.`` in the ``/var/ossec/logs/ossec.log`` file. Changes made before that aren't reported. See :ref:`Real-time monitoring <real_time_monitoring>`.
 
 Windows endpoint
 ^^^^^^^^^^^^^^^^
@@ -72,22 +70,58 @@ Take the following steps to configure the Wazuh agent to monitor file system cha
 
       > Restart-Service -Name WazuhSvc
 
-   .. note::
-
-      Wait until the Wazuh agent finishes its initial scan before you test the configuration. The agent logs ``(6012): Real-time file integrity monitoring started.`` in the ``C:\Program Files (x86)\ossec-agent\ossec.log`` file. Changes made before that aren't reported. See :ref:`Real-time monitoring <real_time_monitoring>`.
-
 As an alternative to local configurations on the Wazuh agents, you can :doc:`centrally configure groups of agents </user-manual/reference/centralized-configuration>`.
 
 Test the configuration
 ----------------------
 
-On the Ubuntu endpoint, run the following steps as root, for example with ``sudo``, because the monitored directory is ``/root``.
+On the Ubuntu endpoint, run the following steps as root, for example with ``sudo``, because the monitored directory is ``/root``. Before you start, wait until the Wazuh agent finishes its initial scan. On the Ubuntu endpoint, the agent logs ``(6009): File integrity monitoring scan ended.`` in ``/var/ossec/logs/ossec.log``, and ``(6048): Healthcheck for eBPF FIM whodata module success.`` when the eBPF who-data engine is ready. Changes made before that aren't reported. On the Windows endpoint, wait until ``C:\Program Files (x86)\ossec-agent\ossec.log`` shows ``(6009): File integrity monitoring scan ended.`` and ``(6019): File integrity monitoring real-time Whodata engine started``. See :ref:`Real-time monitoring <real_time_monitoring>`.
 
-#. Create a text file in the monitored directory, then wait for 5 seconds.
+Ubuntu endpoint
+^^^^^^^^^^^^^^^
 
-#. Add content to the text file and save it. Then wait for 5 seconds.
+#. Create a text file in the monitored directory, then wait for 5 seconds:
 
-#. Delete the text file from the monitored directory.
+   .. code-block:: console
+
+      # echo "Hello from Wazuh FIM" > /root/fim-test.txt
+      # sleep 5
+
+#. Add content to the text file and save it. Then wait for 5 seconds:
+
+   .. code-block:: console
+
+      # echo "Modified content" >> /root/fim-test.txt
+      # sleep 5
+
+#. Delete the text file from the monitored directory:
+
+   .. code-block:: console
+
+      # rm /root/fim-test.txt
+
+Windows endpoint
+^^^^^^^^^^^^^^^^
+
+#. Create a text file in the monitored directory, then wait for 5 seconds:
+
+   .. code-block:: ps1con
+
+      > Set-Content -Path C:\Users\<USER_NAME>\Desktop\fim-test.txt -Value "Hello from Wazuh FIM"
+      > Start-Sleep 5
+
+#. Add content to the text file and save it. Then wait for 5 seconds:
+
+   .. code-block:: ps1con
+
+      > Add-Content -Path C:\Users\<USER_NAME>\Desktop\fim-test.txt -Value "Modified content"
+      > Start-Sleep 5
+
+#. Delete the text file from the monitored directory:
+
+   .. code-block:: ps1con
+
+      > Remove-Item -Path C:\Users\<USER_NAME>\Desktop\fim-test.txt
 
 Visualize the findings
 ----------------------

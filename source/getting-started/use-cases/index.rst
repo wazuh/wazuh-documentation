@@ -29,12 +29,12 @@ The use cases are grouped into four categories that include endpoint security, t
 Endpoint security
 -----------------
 
-The Wazuh platform secures monitored endpoints through Security Configuration Assessment (SCA), malware detection, and File integrity monitoring (FIM).
+The Wazuh platform secures monitored endpoints through Security Configuration Assessment (SCA), malware detection, and file integrity monitoring (FIM).
 
 Threat intelligence
 -------------------
 
-The Wazuh unified XDR and SIEM platform provides threat intelligence capabilities. They help you hunt for threats, analyze log data at scale, and detect vulnerable software across your monitored endpoints.
+The Wazuh unified XDR (Extended Detection and Response) and SIEM (Security Information and Event Management) platform provides threat intelligence capabilities. They help you hunt for threats, analyze log data at scale, and detect vulnerable software across your monitored endpoints.
 
 Security operations
 -------------------
@@ -44,7 +44,7 @@ The Wazuh unified XDR (Extended Detection and Response) and SIEM (Security Infor
 Cloud security
 --------------
 
-The Wazuh unified XDR and SIEM platform helps organizations monitor cloud environments by analyzing container activity, assessing configuration posture, and collecting and analyzing cloud provider logs and workload data.
+The Wazuh unified XDR (Extended Detection and Response) and SIEM (Security Information and Event Management) platform helps organizations secure cloud environments by monitoring container activity, assessing configuration posture, and analyzing cloud provider logs and workload data.
 
 .. toctree::
    :hidden:

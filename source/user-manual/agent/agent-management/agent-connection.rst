@@ -94,8 +94,8 @@ Reading the local wazuh-agentd.state file
 You can read the ``/var/ossec/var/run/wazuh-agentd.state`` file (``C:\Program Files (x86)\ossec-agent\wazuh-agent.state`` on Windows) found in the endpoint to check the status of the connection. The Wazuh agent keeps reporting its connection status in this file as follows:
 
 -  ``pending``: Waiting for acknowledgement from the Wazuh manager about the connection established.
--  ``disconnected``: No acknowledgement signal received in the last 60 seconds or lost connection. This is the Wazuh agent's own view. The Wazuh manager marks it as disconnected only after ``agents_disconnection_time``, 15 minutes by default. See :ref:`Agent connection states <agent-connection-states>`.
--  ``connected``: The Wazuh agent connected to the Wazuh manager in the last 10 seconds.
+-  ``disconnected``: No acknowledgement signal received in the last 60 seconds, or three times :ref:`notify_time <reference_ossec_agent>` if ``notify_time`` is 60 or more, or lost connection. This is the Wazuh agent's own view. The Wazuh manager marks it as disconnected only after ``agents_disconnection_time``, 15 minutes by default. See :ref:`Agent connection states <agent-connection-states>`.
+-  ``connected``: The Wazuh agent connected to the Wazuh manager in the last ``notify_time`` seconds, 10 by default.
 
 To check the current status and verify the connection of the Wazuh agent to the Wazuh manager, run the following command on the endpoint:
 

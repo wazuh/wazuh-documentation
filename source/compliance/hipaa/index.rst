@@ -18,7 +18,7 @@ Wazuh supports HIPAA compliance by performing log data analysis, configuration a
 
 Follow these steps to view the HIPAA-related data on the Wazuh dashboard:
 
-#. Click the menu icon, then navigate to **Security operations** > **Regulatory Compliance** > **HIPAA**.
+#. Navigate to **Security operations** > **Regulatory Compliance**, then click **HIPAA**.
 
    .. thumbnail:: /images/compliance/hipaa/hipaa-overview-card.png
       :title: Wazuh Overview dashboard - Regulatory Compliance

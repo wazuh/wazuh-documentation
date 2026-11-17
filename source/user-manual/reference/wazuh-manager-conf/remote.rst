@@ -72,7 +72,7 @@ Sends the Wazuh manager CA certificate to Wazuh agents below v5.0.0 during a rem
 port
 ^^^^
 
-Port on which the Wazuh manager listens for incoming agent connections.
+Port of the legacy TCP/UDP listener, which serves Wazuh 4.x agents.
 
 +----------------------+---------------------------+
 | **Default value**    | 1514                      |
@@ -135,7 +135,7 @@ Maximum number of messages that the internal queue can hold while worker threads
 rids_closing_time
 ^^^^^^^^^^^^^^^^^^
 
-Time after which the Wazuh manager closes inactive agent RIDS (registration identifier) file handles to release file descriptors.
+Time after which the Wazuh manager closes the RIDS (remote IDs) files of inactive Wazuh agents to release file descriptors. The Wazuh manager keeps one RIDS file per Wazuh agent in ``/var/wazuh-manager/queue/rids/``. The file stores the agent's message counters, which the Wazuh manager uses to detect duplicated or replayed messages.
 
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Default value**    | 300 (5 minutes)                                                                              |
@@ -217,6 +217,7 @@ All options are optional. An absent ``<https>`` block, or an absent individual o
 - `ca_certificate`_
 - `verification_mode`_
 - `ciphers`_
+- `groups`_
 - `max_body_size`_
 - `enroll_rate_limit`_
 - `cacerts_rate_limit`_
@@ -226,7 +227,7 @@ All options are optional. An absent ``<https>`` block, or an absent individual o
 port
 ^^^^
 
-Port on which the Wazuh manager listens for incoming agent connections.
+Port of the HTTPS listener, which serves Wazuh 5.0 agents.
 
 +----------------------+---------------------------+
 | **Default value**    | 1517                      |
@@ -260,7 +261,7 @@ URL path prefix every HTTPS endpoint is served under (for example, with ``/wazuh
 dual_stack
 ^^^^^^^^^^
 
-Whether an IPv6 ``bind_addr`` also accepts IPv4 clients on the same socket.
+Whether an IPv6 ``bind_addr`` also accepts IPv4 clients on the same socket. The option applies only to an IPv6 ``bind_addr``. With an IPv4 ``bind_addr``, ``yes`` has no effect and the Wazuh manager logs a warning. ``no`` is the same as leaving the option out, and logs no warning.
 
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Default value**    | no (force IPv6-only)                                                                         |
@@ -274,37 +275,49 @@ certificate
 
 Path to the TLS certificate chain (PEM) presented by the server. Set it together with ``key``: setting only one of the two makes the configuration invalid.
 
-+----------------------+--------------------------------------+
-| **Default value**    | /etc/wazuh-manager/certs/remoted.pem |
-+----------------------+--------------------------------------+
++--------------------+--------------------------------------------------------------------------------------------+
+| **Default value**  | /etc/wazuh-manager/certs/remoted.pem                                                       |
++--------------------+--------------------------------------------------------------------------------------------+
+| **Allowed values** | Absolute path to a PEM-encoded certificate directly in /etc/wazuh-manager/certs, at most   |
+|                    | 511 characters                                                                             |
++--------------------+--------------------------------------------------------------------------------------------+
 
 key
 ^^^
 
 Path to the TLS private key (PEM) matching ``certificate``. Set it together with ``certificate``.
 
-+-------------------+------------------------------------------+
-| **Default value** | /etc/wazuh-manager/certs/remoted-key.pem |
-+-------------------+------------------------------------------+
++--------------------+--------------------------------------------------------------------------------------------+
+| **Default value**  | /etc/wazuh-manager/certs/remoted-key.pem                                                   |
++--------------------+--------------------------------------------------------------------------------------------+
+| **Allowed values** | Absolute path to a PEM-encoded private key directly in /etc/wazuh-manager/certs, at most   |
+|                    | 511 characters                                                                             |
++--------------------+--------------------------------------------------------------------------------------------+
 
 ca
 ^^
 
 Path to a CA bundle (PEM) used to verify client (agent) certificates.
 
-+-------------------+---------------------------------------------------------------------------------------------+
-| **Default value** | Empty (agent certificate verification disabled). If ``verification_mode`` is set explicitly |
-|                   | and ``ca`` is empty, ``/etc/wazuh-manager/certs/root-ca.pem`` is used.                      |
-+-------------------+---------------------------------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------------------------------------+
+| **Default value**  | Empty (agent certificate verification disabled). If ``verification_mode`` is set explicitly |
+|                    | and ``ca`` is empty, ``/etc/wazuh-manager/certs/root-ca.pem`` is used.                      |
++--------------------+---------------------------------------------------------------------------------------------+
+| **Allowed values** | Path to a PEM-encoded CA bundle, absolute or relative to /var/wazuh-manager, at most 511    |
+|                    | characters                                                                                  |
++--------------------+---------------------------------------------------------------------------------------------+
 
 ca_certificate
 ^^^^^^^^^^^^^^
 
 Path to the CA certificate that signs the HTTPS listener certificate. The Wazuh manager serves it on ``GET /cacerts``, and enrollment tokens pin it. This is not the CA used to verify agent certificates (``ca``).
 
-+-------------------+--------------------------------------+
-| **Default value** | /etc/wazuh-manager/certs/root-ca.pem |
-+-------------------+--------------------------------------+
++--------------------+--------------------------------------------------------------------------------------------+
+| **Default value**  | /etc/wazuh-manager/certs/root-ca.pem                                                       |
++--------------------+--------------------------------------------------------------------------------------------+
+| **Allowed values** | Absolute path to a PEM-encoded CA certificate directly in /etc/wazuh-manager/certs, at     |
+|                    | most 511 characters                                                                        |
++--------------------+--------------------------------------------------------------------------------------------+
 
 verification_mode
 ^^^^^^^^^^^^^^^^^^
@@ -314,19 +327,52 @@ Client-certificate verification strictness.
 +--------------------+----------------------------------------------------------------------------------------------+
 | **Default value**  | ``certificate`` when ``ca`` is set; ``none`` otherwise.                                      |
 +--------------------+----------------------------------------------------------------------------------------------+
-| **Allowed values** | none - the client certificate is not verified. certificate - the client certificate chain is |
-|                    | validated against ``ca``. full - same as certificate, plus the address the peer connects     |
-|                    | from must appear as an IP entry in that certificate's Subject Alternative Name.              |
+| **Allowed values** | - ``none``: the client certificate is not verified.                                          |
+|                    | - ``certificate``: the client certificate chain is validated against ``ca``.                 |
+|                    | - ``full``: same as ``certificate``, plus the address the peer connects from must appear as  |
+|                    |   an IP entry in that certificate's Subject Alternative Name.                                |
 +--------------------+----------------------------------------------------------------------------------------------+
 
 ciphers
 ^^^^^^^
 
-TLS 1.3 ciphersuite override for the HTTPS listener (``SSL_CTX_set_ciphersuites()`` naming scheme, for example ``TLS_AES_256_GCM_SHA384``). The listener requires TLS 1.3 as its minimum protocol version.
+TLS 1.3 ciphersuite override for the HTTPS listener (``SSL_CTX_set_ciphersuites()`` naming scheme, for example ``TLS_AES_256_GCM_SHA384``). The listener requires TLS 1.3 as its minimum protocol version. Any other suite name fails the configuration validation, and the Wazuh manager doesn't start.
 
-+-------------------+----------------------------------------------------------------------------+
-| **Default value** | TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256 |
-+-------------------+----------------------------------------------------------------------------+
++--------------------+--------------------------------------------------------------------------------+
+| **Default value**  | TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256     |
++--------------------+--------------------------------------------------------------------------------+
+| **Allowed values** | Colon-separated combination of TLS_AES_128_GCM_SHA256, TLS_AES_256_GCM_SHA384, |
+|                    | TLS_CHACHA20_POLY1305_SHA256, TLS_AES_128_CCM_SHA256, TLS_AES_128_CCM_8_SHA256 |
++--------------------+--------------------------------------------------------------------------------+
+
+groups
+^^^^^^
+
+TLS 1.3 key exchange groups that the HTTPS listener offers, in order of preference (``SSL_CTX_set1_groups_list()`` naming scheme). Use it to exclude, for example, the finite-field (``ffdhe*``) or the hybrid post-quantum (``*MLKEM*``) groups. A name that is not in the allowed values fails the configuration validation. A name that the TLS library can't use makes the Wazuh manager fail to start with the error ``Unable to configure the requested TLS key exchange groups '<VALUE>'``.
+
++--------------------+----------------------------------------------------------------------------------------------+
+| **Default value**  | Not set: the groups of the TLS library (OpenSSL), or the groups that its configuration file  |
+|                    | sets.                                                                                        |
++--------------------+----------------------------------------------------------------------------------------------+
+| **Allowed values** | Colon-separated combination of X25519, X448, P-256, P-384, P-521, secp256r1, secp384r1,      |
+|                    | secp521r1, ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192, brainpoolP256r1tls13,      |
+|                    | brainpoolP384r1tls13, brainpoolP512r1tls13, X25519MLKEM768, SecP256r1MLKEM768,               |
+|                    | SecP384r1MLKEM1024, MLKEM512, MLKEM768, MLKEM1024, spelled as shown. At most 255 characters. |
+|                    | The OpenSSL list syntax (``DEFAULT``, ``?``, ``-``, ``/``) is not accepted.                  |
++--------------------+----------------------------------------------------------------------------------------------+
+
+.. note::
+   The configuration file of the TLS library is the file that the ``OPENSSL_CONF`` environment variable names in the service environment, for example through a systemd drop-in with ``Environment=OPENSSL_CONF=<PATH>``. The Wazuh manager reads it as root when ``wazuh-manager-remoted`` starts. A ``Groups`` line under ``system_default`` in that file applies to this listener, as it does to the Wazuh manager API. An explicit ``groups`` value overrides it.
+
+Example:
+
+.. code-block:: xml
+
+   <remote>
+     <https>
+       <groups>X25519:P-256:P-384:P-521</groups>
+     </https>
+   </remote>
 
 max_body_size
 ^^^^^^^^^^^^^

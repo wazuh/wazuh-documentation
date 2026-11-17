@@ -17,7 +17,7 @@ This article requires that organizations document, inventory, and audit data pro
 
 Wazuh stores information about system events. Each event enters through the root decoder ``decoder/core-wazuh-message/0``, which belongs to the ``wazuh-core`` integration in the unclassified category. If an integration can process the event, it changes the category of the event and sends it to the matching index. Events that no integration processes remain unclassified. Decoded events are indexed whether or not a rule matches.
 
-You can enable the **Index unclassified events** and **Index discarded events** settings to store these events. When this is configured, Wazuh indexes unclassified events into the ``wazuh-events-v5-unclassified`` index. This gives you a record of events that no integration processes, including those that do not trigger a finding. These records help with activities such as data audits and threat hunting.
+You can enable the **Index unclassified events** and **Index discarded events** settings of a :doc:`space </user-manual/data-analysis/space>` to store these events. A space is where Wazuh keeps its detection content, such as decoders, rules, and integrations. Unclassified events are events that no decoder accepts. Discarded events are events that a decoder marks as discarded. When **Index discarded events** is on, Wazuh replaces the content of each discarded event with the ``wazuh.space.event_discarded: true`` marker before indexing it. Events that a filter rejects are always dropped. When this is configured, Wazuh indexes unclassified events into the ``wazuh-events-v5-unclassified`` index. This gives you a record of events that no integration processes, including those that do not trigger a finding. These records help with activities such as data audits and threat hunting.
 
 Use case: Store all logs generated from an endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -27,7 +27,7 @@ In this use case, you store all events from monitored endpoints whether they gen
 Wazuh dashboard
 ~~~~~~~~~~~~~~~
 
-#. Click the menu icon, then navigate to **Ruleset management** > **Overview**.
+#. Click the menu icon, then navigate to **Ruleset Management** > **Overview**.
 
 #. Select **Standard** in **Space**, then select **Actions** > **Edit** at the top-right section.
 
@@ -73,13 +73,13 @@ In this use case, the Wazuh agent on an Ubuntu 24.04 endpoint collects authentic
 
 The Wazuh agent reads authentication events from journald by default through the Linux integration. No extra configuration is required to collect these events.
 
-To generate a finding, attempt an SSH login with an invalid username on the monitored endpoint:
+To generate a finding, attempt an SSH login to the monitored endpoint from a different host. Use a username that doesn't exist on the endpoint. Replace ``<INVALID_USER>`` with that username and ``<ENDPOINT_IP>`` with the IP address of the Ubuntu endpoint:
 
 .. code-block:: console
 
-   # ssh <USERNAME>@<IP_ADDRESS>
+   $ ssh <INVALID_USER>@<ENDPOINT_IP>
 
-When an invalid login attempt is detected, you can see the following finding on the Wazuh dashboard.
+When Wazuh detects the invalid login attempt, two findings appear in **Threat intelligence** > **Threat Hunting** > **Findings** tab on the Wazuh dashboard: SSH authentication failure and Failed authentication attempt - ``<INVALID_USER>``.
 
 .. thumbnail:: /images/compliance/gdpr/invalid-ssh-login-attempt1.png
    :title: Invalid SSH login attempts findings
@@ -302,8 +302,6 @@ The alerting monitor watches your findings for failed authentication attempts. W
 
 #. Select **Per alert** in **Perform action**.
 
-#. Don't rely on **Send test message** here. With **Per alert** selected, it reports success but sends an email only when a finding matches the monitor's query. To test the email delivery, use **Send test message** on the channel, as in the previous section.
-
 #. Click **Create**.
 
    .. thumbnail:: /images/compliance/gdpr/create-alerting-monitor.gif
@@ -340,7 +338,7 @@ The **Perform action** field controls how often Wazuh sends the notification:
 
 .. note::
 
-   On a busy endpoint, the **Per alert** option can generate frequent emails. To reduce the volume, use a **Per query monitor** with a threshold instead.
+   On a busy endpoint, the **Per alert** option can generate frequent emails. To reduce the volume, use a **Per query monitor** with a threshold instead. With **Per alert** selected, **Send test message** in the action reports success but doesn't send an email unless a finding matches the monitor's query. To test email delivery, use **Send test message** on the email channel instead.
 
 .. note::
 
@@ -351,19 +349,15 @@ Verify the configuration
 
 Verify that Wazuh sends the email when a failed authentication occurs.
 
-#. On a monitored endpoint, attempt a Secure Shell (SSH) login with an invalid username:
+#. From a different host, attempt a Secure Shell (SSH) login to a monitored endpoint with a username that doesn't exist on that endpoint. Replace ``<INVALID_USER>`` with that username and ``<ENDPOINT_IP>`` with the IP address of the monitored endpoint:
 
    .. code-block:: console
 
-      # ssh <INVALID_USER>@<ENDPOINT_IP>
-
-#. The login fails because the user does not exist.
+      $ ssh <INVALID_USER>@<ENDPOINT_IP>
 
 #. Wait for one monitor interval.
 
-#. Wazuh detects the finding, the trigger fires, and the action sends an email to the recipient group.
-
-The data protection officer receives an email similar to the following:
+**Expected result:** The login fails because the user doesn't exist. Wazuh detects the finding, the trigger fires, and the action sends an email to the recipient group. The data protection officer receives an email similar to the following:
 
 .. thumbnail:: /images/compliance/gdpr/sample-email-alert-notification.png
    :title: Sample email alert notification
@@ -439,14 +433,14 @@ A medium severity finding on the Wazuh dashboard shows that a file was modified 
 Wazuh dashboard
 ~~~~~~~~~~~~~~~
 
-Create a custom rule to increase the severity of file modification in the directory ``/customers/personal_data`` from medium to critical.
+Create a custom rule to increase the severity of file modification in the directory ``/customers/personal_data`` from medium to critical. You create the integration, decoders, and rule in the **Draft** space, then promote them to the **Test** space and then to the **Custom** space, where Wazuh uses them to process events. The **Standard** space holds the built-in, read-only Wazuh content. An integration groups related decoders and rules. The root decoder is the first decoder that processes every event. A detector applies the rules of an integration to an index of events to generate findings. See :doc:`Space </user-manual/data-analysis/space>` for more information.
 
 Create decoder and integration
 """"""""""""""""""""""""""""""
 
 The two decoders that need to exist in your custom space are ``decoder/core-wazuh-message/0`` and ``decoder/wazuh-fim/0``. ``decoder/core-wazuh-message/0`` is the Wazuh root decoder, and ``decoder/wazuh-fim/0`` decodes FIM-related events.
 
-#. Click the menu icon, then navigate to **Ruleset management** > **Decoders**.
+#. Click the menu icon, then navigate to **Ruleset Management** > **Decoders**.
 
 #. Switch to **Standard** in **Space**.
 
@@ -464,11 +458,11 @@ The two decoders that need to exist in your custom space are ``decoder/core-wazu
 
 #. Click **Create decoder**.
 
-#. Repeat steps 2 to 5 for ``decoder/wazuh-fim/0``.
+#. Switch to **Standard** in **Space**, search for ``decoder/wazuh-fim/0``, and copy its contents from the **YAML** tab. Close the tab, switch to **Draft** in **Space**, click the dropdown under **Actions**, and select **+ Create**.
 
 #. In the **Integration** section, select the previously created integration.
 
-#. Repeat steps 8 and 9.
+#. Switch to the **YAML Editor** tab, paste the copied ``decoder/wazuh-fim/0`` contents into the decoder section, and click **Create decoder**.
 
 #. Click **Overview** in the left pane, click the **Actions** dropdown, and select **Edit**.
 
@@ -478,7 +472,7 @@ The two decoders that need to exist in your custom space are ``decoder/core-wazu
 
 #. Click the dropdown under **Actions** and select **Promote** to promote the decoders from **Draft** space to **Test**. In the prompt, type ``promote`` and click **Promote**.
 
-#. Switch to **Test** in **Space** and repeat step 16 to promote the decoders from **Test** space to **Custom**.
+#. Switch to **Test** in **Space**, click the dropdown under **Actions**, and select **Promote** to promote the decoders from **Test** space to **Custom**. In the prompt, type ``promote`` and click **Promote**.
 
    .. thumbnail:: /images/compliance/gdpr/create-decoders-integration.gif
       :title: Create decoders and integration
@@ -488,14 +482,14 @@ The two decoders that need to exist in your custom space are ``decoder/core-wazu
 
    .. note::
 
-      You can ignore the steps to create a root decoder if you already have this configured in your custom space.
+      If ``decoder/core-wazuh-message/0`` is already the root decoder of your custom space, skip the steps that copy it and set it as the root decoder.
 
 Create custom rule
 """"""""""""""""""
 
 The file modification rule already exists out of the box. To change the severity of file modification findings in your directory of choice, you need to create a custom rule to achieve this.
 
-#. Click the menu icon, then navigate to **Ruleset management** > **Rules**.
+#. Click the menu icon, then navigate to **Ruleset Management** > **Rules**.
 
 #. Switch to **Standard** in **Space**.
 
@@ -527,7 +521,7 @@ The file modification rule already exists out of the box. To change the severity
 
 #. Click the dropdown under **Actions** and select **Promote** to promote the rule from **Draft** space to **Test**. In the prompt, type ``promote`` and click **Promote**.
 
-#. Switch to **Test** in **Space** and repeat step 16 to promote the rule from **Test** space to **Custom**.
+#. Switch to **Test** in **Space**, click the dropdown under **Actions**, and select **Promote** to promote the rule from **Test** space to **Custom**. In the prompt, type ``promote`` and click **Promote**.
 
    .. thumbnail:: /images/compliance/gdpr/create-custom-rule.gif
       :title: Create custom rule
@@ -540,7 +534,7 @@ Create detector
 
 To generate a finding on the Wazuh dashboard, a corresponding detector must exist in your custom space to handle your custom rules.
 
-#. Click the menu icon, then navigate to **Ruleset management** > **Detectors**.
+#. Click the menu icon, then navigate to **Ruleset Management** > **Detectors**.
 
 #. Click **+ Create detector**.
 

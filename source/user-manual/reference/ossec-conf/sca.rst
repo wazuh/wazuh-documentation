@@ -50,7 +50,7 @@ Enables the module.
 policies
 ^^^^^^^^
 
-Between ``<policy>`` tags, in this section it can be included policy files to run assessments.
+Contains one ``<policy>`` element per policy file to run.
 
 +----------------------+------------------------+
 | **Default value**    | n/a                    |
@@ -65,17 +65,17 @@ Attributes
 +-----------+-----------------------------------------------------------------------------------+
 
 .. note::
-   Since Wazuh v3.10.0, although this section is missing, the Wazuh Agent will run scans for every policy (``.yaml`` or ``.yml`` files) present in their ruleset folder.
+   The Wazuh agent runs every policy (``.yaml`` or ``.yml`` file) in its ``ruleset/sca`` folder, even when this section is missing. Use ``<policy enabled="no">`` to disable one of them.
 
 .. note::
-   Since Wazuh v4.2.0, when a policy is defined by a relative path, this path is relative to the Wazuh installation directory. If the policy is located outside the installation directory, a full path can be used.
+   A relative policy path is relative to the Wazuh agent installation directory. For a policy outside the installation directory, use a full path.
 
 Example
 
 .. code-block:: xml
 
    <policies>
-     <policy>etc/shared/cis_debian10.yml</policy>
+     <policy>ruleset/sca/cis_debian10.yml</policy>
      <policy>/path/to/my/policy.yml</policy>
    </policies>
 
@@ -161,7 +161,7 @@ Sample configuration
      <enabled>yes</enabled>
      <scan_on_start>yes</scan_on_start>
      <policies>
-       <policy>etc/shared/cis_debian10.yml</policy>
+       <policy>ruleset/sca/cis_debian10.yml</policy>
        <policy enabled="no">ruleset/sca/cis_debian9.yml</policy>
        <policy>/my/custom/policy/path/my_policy.yaml</policy>
      </policies>

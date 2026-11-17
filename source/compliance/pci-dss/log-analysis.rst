@@ -42,10 +42,10 @@ PCI DSS requirement 10.2.1.4 mandates that audit logs capture invalid logical ac
 
 The following Wazuh rule helps achieve this requirement:
 
-Failed authentication attempt
+SSH authentication failure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This rule triggers a finding when a non-existent user tries to log in to a system via SSH. The generated finding contains the information listed above. On Ubuntu, a second rule, Failed authentication attempt, also triggers for the same login. The screenshot below shows the finding generated on the dashboard.
+This rule triggers a finding when a non-existent user tries to log in to a system via SSH. The generated finding contains the information listed above. On Ubuntu, a second rule, ``Failed authentication attempt - <user>``, also triggers for the same login. The screenshot below shows the finding generated on the dashboard.
 
 .. thumbnail:: /images/compliance/pci/failed-authentication-attempt-finding-01.png
    :title: Failed authentication attempt finding
@@ -93,7 +93,7 @@ By default, Wazuh deletes an events backing index once it has rolled over and is
 Keep events and findings for at least 12 months
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run the following steps on a Wazuh indexer node to create custom retention policies for events and findings. The commands use ``jq``.
+Run the following steps on a Wazuh indexer node to create custom retention policies for events and findings. The commands use ``jq``. Install it first if the node doesn't have it, for example with ``apt install jq`` or ``yum install jq``.
 
 #. Copy the default events policy. In the copy, set the minimum age for deletion to 365 days and the template priority to 1, so that new event indices use it:
 
@@ -135,7 +135,7 @@ Run the following steps on a Wazuh indexer node to create custom retention polic
         'https://localhost:9200/_plugins/_ism/explain/.ds-wazuh-events-v5-*' \
         | jq -r 'to_entries[] | select(.value | type == "object") | [.key, .value.policy_id, (.value.step.name // "pending")] | @tsv'
 
-#. Repeat steps 1 to 4 for findings. Use ``stream-findings-policy``, ``custom-findings-policy``, and ``.ds-wazuh-findings-v5-*`` instead of the events values.
+#. Repeat steps 1 to 4 for findings. In the commands, replace ``stream-events-policy`` with ``stream-findings-policy``, ``custom-events-policy`` with ``custom-findings-policy``, including the ``custom-events-policy.json`` file name, and ``.ds-wazuh-events-v5-*`` with ``.ds-wazuh-findings-v5-*``. You can also change the policy description to mention findings.
 
 .. _pci_dss_unclassified_events:
 
@@ -144,9 +144,9 @@ Enable the storage of unclassified events
 
 Wazuh indexes decoded events in ``wazuh-events-v5-<category>`` whether or not a rule matches. An event is unclassified when the decoder that matched it belongs to an integration in the **Unclassified** category, such as ``wazuh-core``. Wazuh drops these events unless you turn on **Index unclassified events**.
 
-Unclassified event indexing is configured per :doc:`space </user-manual/data-analysis/space>`. When it's turned on, Wazuh stores unclassified events in the :ref:`wazuh-events-v5-unclassified <wazuh_indexer_indices_data_streams>` index. The Wazuh agents' events are processed in the **Standard** space by default.
+Unclassified event indexing is configured per :doc:`space </user-manual/data-analysis/space>`. When it's turned on, Wazuh stores unclassified events in the :ref:`wazuh-events-v5-unclassified <wazuh_indexer_indices_data_streams>` index. The Wazuh agents' events are processed in the **Standard** space by default. A space also has an **Index discarded events** setting, which applies to events that a decoder marks as discarded. When it's turned on, Wazuh replaces the content of each discarded event with the ``wazuh.space.event_discarded: true`` marker before indexing it. Events that a filter rejects are always dropped. You don't need it for this requirement. See :doc:`Space </user-manual/data-analysis/space>` for more information about both settings.
 
-#. Navigate to **Ruleset management** > **Overview**. Select **Standard** in **Space**, then select **Actions** > **Edit**.
+#. Navigate to **Ruleset Management** > **Overview**. Select **Standard** in **Space**, then select **Actions** > **Edit**.
 
    .. thumbnail:: /images/compliance/pci/security-analytics-edit-space.png
       :title: Edit a space in Ruleset management

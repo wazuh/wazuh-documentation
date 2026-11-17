@@ -10,11 +10,13 @@ Adding a new node to the Wazuh indexer cluster can enhance the capacity and resi
 
 The upscale process involves creating certificates, configuring existing components to connect with the new Wazuh indexer node(s), and then installing and configuring the new node(s).
 
-We have organized the steps for upscaling the Wazuh indexer into two subsections. The choice between these methods depends on your existing deployment and the infrastructure you aim to scale up.
+We have organized the steps for upscaling the Wazuh indexer into three subsections. Follow :doc:`All-in-one deployment <all-in-one-deployment>` or :doc:`Distributed deployment <distributed-deployment>`, depending on your existing deployment, and then :doc:`New Wazuh indexer node <new-wazuh-indexer-node>` on the new node.
 
 -  :doc:`All-in-one deployment <all-in-one-deployment>`: If you have a Wazuh deployment with the indexer, manager, and dashboard on a single node, follow the steps in this section.
 
 -  :doc:`Distributed deployment <distributed-deployment>`: For an existing distributed deployment, follow the steps in this section.
+
+-  :doc:`New Wazuh indexer node <new-wazuh-indexer-node>`: After either method, follow the steps in this section on the new Wazuh indexer node.
 
 .. note::
 
