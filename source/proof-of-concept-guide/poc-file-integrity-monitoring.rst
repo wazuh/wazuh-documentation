@@ -75,7 +75,7 @@ As an alternative to local configurations on the Wazuh agents, you can :doc:`cen
 Test the configuration
 ----------------------
 
-On the Ubuntu endpoint, run the following steps as root, for example with ``sudo``, because the monitored directory is ``/root``. Before you start, wait until the Wazuh agent finishes its initial scan. On the Ubuntu endpoint, the agent logs ``(6009): File integrity monitoring scan ended.`` in ``/var/ossec/logs/ossec.log``, and ``(6048): Healthcheck for eBPF FIM whodata module success.`` when the eBPF who-data engine is ready. Changes made before that aren't reported. On the Windows endpoint, wait until ``C:\Program Files (x86)\ossec-agent\ossec.log`` shows ``(6009): File integrity monitoring scan ended.`` and ``(6019): File integrity monitoring real-time Whodata engine started``.
+On the Ubuntu endpoint, run the following steps as root, for example with ``sudo``, because the monitored directory is ``/root``. Before you start, wait until the Wazuh agent finishes its initial scan. On the Ubuntu endpoint, the agent logs ``(6009): File integrity monitoring scan ended.`` in ``/var/ossec/logs/ossec.log``, and ``(6048): Healthcheck for eBPF FIM whodata module success.`` when the eBPF who-data engine is ready. Changes made before that aren't reported. On the Windows endpoint, wait until ``C:\Program Files (x86)\ossec-agent\ossec.log`` shows ``(6009): File integrity monitoring scan ended.`` and ``(6019): File integrity monitoring real-time Whodata engine started``. See :ref:`Real-time monitoring <real_time_monitoring>`.
 
 Ubuntu endpoint
 ^^^^^^^^^^^^^^^
