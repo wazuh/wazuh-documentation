@@ -112,6 +112,7 @@ Agent
 Analysisd
 ---------
 
+The options whose names end in ``_queue_size`` set the number of events each queue can hold.
 
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
 |   **analysisd.default_timeframe**                       | Description   | Default rule time-frame.                                            |
@@ -469,6 +470,8 @@ Authd
 DBD
 ---
 
+Wazuh 4.14.7 removed ``wazuh-dbd``. This option applies to Wazuh 4.14.6 and earlier.
+
 +----------------------------+---------------+--------------------------------------------------------------------------+
 | **dbd.reconnect_attempts** | Description   | Number of times wazuh-dbd will attempt to reconnect to the database.     |
 +                            +---------------+--------------------------------------------------------------------------+
@@ -557,7 +560,9 @@ Logcollector
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 10000                                                                      |
 +                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 100 and 100000                                         |
+|                                          | Allowed values| 0: No limit                                                                |
++                                          +               +----------------------------------------------------------------------------+
+|                                          |               | Any other integer between 100 and 1000000                                  |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 |   **logcollector.sample_log_length**     | Description   | Sample log length limit for errors about large input logs.                 |
 +                                          +---------------+----------------------------------------------------------------------------+

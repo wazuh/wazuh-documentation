@@ -21,6 +21,15 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 -  :doc:`Avoid events flooding <ossec-conf/client-buffer>` (**client_buffer**)
 -  :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
 -  :doc:`force_reconnect_interval setting <ossec-conf/client>` (**client**)
+-  :doc:`Amazon Web Services <ossec-conf/wodle-s3>` (**wodle name="aws-s3"**)
+-  :doc:`Microsoft Azure <ossec-conf/wodle-azure-logs>` (**wodle name="azure-logs"**)
+-  :doc:`Google Cloud Pub/Sub <ossec-conf/gcp-pubsub>` (**gcp-pubsub**)
+-  :doc:`Google Cloud Storage <ossec-conf/gcp-bucket>` (**gcp-bucket**)
+-  :doc:`GitHub <ossec-conf/github-module>` (**github**)
+-  :doc:`Office 365 <ossec-conf/office365-module>` (**office365**)
+-  :doc:`Microsoft Graph <ossec-conf/ms-graph-module>` (**ms-graph**)
+-  :doc:`Docker listener <ossec-conf/wodle-docker>` (**wodle name="docker-listener"**)
+-  :doc:`Output sockets <ossec-conf/socket>` (**socket**)
 
 .. note::
   When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in the agent:
@@ -154,7 +163,7 @@ Options
 
    .. code-block:: console
 
-      agent_control -i <AGENT_ID>
+      /var/ossec/bin/agent_control -i <AGENT_ID>
 
    Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
 
