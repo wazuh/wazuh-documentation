@@ -90,11 +90,13 @@ For this use case, configure Wazuh to detect changes to files in the ``/root/cre
 
       User1 = card4
 
-#. Add the following configuration to the ``syscheck`` block of the agent configuration file (``/var/ossec/etc/ossec.conf``). Without a ``<whodata>`` block, the FIM module uses the audit provider for who-data monitoring on Linux, so you don't need to add one. Add it only to choose another provider, such as ``ebpf``:
+#. Add the following configuration to the ``syscheck`` block of the agent configuration file (``/var/ossec/etc/ossec.conf``):
 
    .. code-block:: xml
 
       <directories whodata="yes">/root/credit_cards</directories>
+
+   You don't need a ``<whodata>`` block. Without one, the FIM module uses the audit provider for who-data monitoring on Linux. Add a ``<whodata>`` block only to choose another provider, such as ``ebpf``.
 
 #. Restart the Wazuh agent to apply the changes:
 
