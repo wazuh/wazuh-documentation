@@ -41,7 +41,7 @@ You can add any of the following settings to ``/etc/wazuh-manager/wazuh-manager-
 Analysisd
 ^^^^^^^^^^
 
-The ``analysisd.*`` internal options configure the Wazuh Engine (``wazuh-manager-analysisd``), which processes, enriches, and evaluates events before forwarding them to configured outputs.
+The ``analysisd.*`` internal options configure the Wazuh normalization engine (``wazuh-manager-analysisd``), which processes, enriches, and evaluates events before forwarding them to configured outputs.
 
 +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------+
 | Setting                                                      | Description                                                                                  | Default value                                              |
@@ -206,7 +206,7 @@ The ``analysisd.*`` internal options configure the Wazuh Engine (``wazuh-manager
 Remoted
 ^^^^^^^^^^^^^^^^^^^
 
-The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
+The ``remoted.*`` internal options configure the agent connection service (``wazuh-manager-remoted``).
 
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | Setting                                          | Description                                                                                    | Default value            | Allowed values                       |
@@ -455,9 +455,9 @@ The ``authd.*`` and ``auth.*`` internal options configure the Wazuh enrollment s
 | **authd.max_agents**                               | Maximum number of agents that can be registered. A value of 0 means unlimited.                 | 0             | Non-negative integer                 |
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
 | **authd.purge_delay**                              | Seconds an agent deletion waits before its indexer purge may run (0 = immediate). The deletion | 120           | 0 to 3600 (seconds)                  |
-|                                                    | itself - client.keys and wazuh-db - is never delayed, only the indexer purge.                  |               |                                      |
+|                                                    | itself - client.keys and wazuh-manager-db - is never delayed, only the indexer purge.          |               |                                      |
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **authd.wdb_timeout**                              | Seconds authd allows for one wazuh-db round trip.                                              | 10            | 1 to 300 (seconds)                   |
+| **authd.wdb_timeout**                              | Seconds wazuh-manager-authd allows for one wazuh-manager-db round trip.                        | 10            | 1 to 300 (seconds)                   |
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
 | **wazuh_modules.manager_task_max_pending_deletes** | Deletions still waiting to reach the indexer before new ones are refused (0 = unlimited).      | 20000         | 0 (unlimited) to 1000000             |
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
@@ -478,10 +478,10 @@ The ``wazuh_clusterd.*`` internal options configure the Wazuh cluster daemon.
 |                            | refuses to start the Wazuh manager.                 |                 |                                        |
 +----------------------------+-----------------------------------------------------+-----------------+----------------------------------------+
 
-Wazuh database
+Database sync
 ^^^^^^^^^^^^^^^
 
-The ``wazuh_database.*`` internal options configure the Database Sync module.
+The ``wazuh_database.*`` internal options configure the database sync module of ``wazuh-manager-modulesd``. They don't configure the Wazuh database daemon, ``wazuh-manager-db``, which uses the ``wazuh_db.*`` options described in `Wazuh DB`_.
 
 +------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------+
 | Setting                            | Description                                                                                  | Default value   | Allowed values                |
@@ -776,7 +776,7 @@ The ``wazuh_modules.manager_task_*`` internal options configure the task manager
 Wazuh DB
 ^^^^^^^^^
 
-The ``wazuh_db.*`` internal options configure the Wazuh database daemon.
+The ``wazuh_db.*`` internal options configure the Wazuh database daemon (``wazuh-manager-db``).
 
 +---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
 | Setting                                     | Description                                                                            | Default value   | Allowed values                         |
