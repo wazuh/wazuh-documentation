@@ -8,9 +8,9 @@ Wazuh normalization engine
 
 The Wazuh normalization engine is the event processing pipeline of the Wazuh manager. It transforms raw events into structured documents, enriches them with contextual information, and evaluates them against configured security policies. It then forwards the resulting events to the Wazuh indexer and other configured destinations.
 
-The Wazuh normalization engine ingests events from monitored endpoints and from the vulnerability detection service for processing. During event processing, it retrieves required resources such as decoders, integrations, policies, and key-value databases from the Wazuh indexer through the shared content manager library, which reads over the :doc:`indexer connector <wazuh-indexer-connector>` connection. The indexer connector also serves as the only outbound path for sending processed events back to the Wazuh indexer.
+The Wazuh normalization engine ingests events from monitored endpoints and from the vulnerability detection service for processing. During event processing, it retrieves resources such as decoders, integrations, policies, and key-value databases from the Wazuh indexer through its content synchronization module (CMSync). CMSync uses the :doc:`indexer connector <wazuh-indexer-connector>` connection to retrieve these resources. The indexer connector also serves as the only outbound path for sending processed events back to the Wazuh indexer.
 
-The diagram below shows the Wazuh normalization engine and its relationships with other components. Refer to the reference section for a description of each :ref:`module <normalization_engine_modules>` of the Wazuh normalization engine.
+The diagram below shows the Wazuh normalization engine and its relationships with other components. Refer to the references section for a description of each :ref:`module <normalization_engine_modules>` of the Wazuh normalization engine.
 
 .. thumbnail:: /images/manual/wazuh-server/normalization-engine-architecture.png
    :title: Normalization engine architecture
@@ -23,7 +23,7 @@ The diagram below shows the Wazuh normalization engine and its relationships wit
 Event processing pipeline
 -------------------------
 
-The Wazuh normalization engine provides an :ref:`Orchestrator <orchestrator_module>`, which is the central runtime component that manages active security policies. A security policy is an operational graph that defines an ordered pipeline of stages applied to each event. The Orchestrator forwards an independent copy of every incoming event to each active policy, so a single incoming event can produce multiple output documents, one per active policy.
+The Wazuh normalization engine provides an :ref:`Orchestrator <orchestrator_module>`, which is the central runtime component that manages active security policies. A security policy is an operational graph that defines an ordered pipeline of stages applied to each event. Each :doc:`space </user-manual/data-analysis/space>`, a namespace that scopes content, has its own policy. The policy lists the integrations to evaluate, and each integration groups the decoders of one log source. A route is an entry in the routes table of the Orchestrator that maps a space to its active policy. The Orchestrator forwards an independent copy of every incoming event to each active policy, so a single incoming event can produce multiple output documents, one per active policy.
 
 The diagram below shows how an incoming event moves through the Wazuh normalization engine, including the modules involved at each stage until its output.
 
@@ -36,7 +36,7 @@ The diagram below shows how an incoming event moves through the Wazuh normalizat
 Policies consist of an ordered set of stages that perform pre-filtering, decoding, enrichment, post-filtering, and output delivery. The pre-filtering, enrichment, and post-filtering stages are optional, and each policy configuration can omit or disable them. Each event passes through the following ordered stages inside a policy:
 
 -  **Pre-filtering** *(optional)*: Evaluated before decoding. If configured, events that do not satisfy the filter conditions are discarded immediately, avoiding unnecessary decoding work. If no pre-filter is configured, all events proceed to the decoding stage unconditionally.
--  :ref:`Decoding <decoding_process>`: Normalize and extract fields from the raw event, mapping them to the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>`. This stage is mandatory as every event must traverse the decoder tree.
+-  :ref:`Decoding <decoding_process>`: Normalizes and extracts fields from the raw event, mapping them to the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>`. This stage is mandatory as every event must traverse the decoder tree.
 -  :ref:`Enrichment <enrichment>` *(optional)*: This stage involves plugins that augment the normalized event with additional context after decoding. Built-in plugins include GeoIP geolocation and indicator of compromise (IOC) matching. Enrichment can be fully disabled at the policy level. When disabled, the normalized event is passed directly to the next stage.
 -  **Post-filtering** *(optional)*: Evaluated after enrichment (or after decoding if enrichment is disabled). If configured, events that do not satisfy the filter conditions are discarded before reaching the outputs. If no post-filter is configured, all events are forwarded unconditionally.
 -  :ref:`Outputs <output_process>`: Sends the final processed events to the Wazuh indexer or other downstream components.
@@ -58,7 +58,7 @@ Decoding process
 
 The decoding process converts the unstructured or semi-structured raw event received by the Wazuh normalization engine into a schema-based JSON document aligned with the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>`.
 
-All events enter the decoder stage through the ``root`` decoder, which acts as the entry point of the decoder tree. The root decoder evaluates the event and, upon matching, passes it down to the appropriate child decoders for progressively more specialized processing. Each decoder in the tree applies its own field mappings and transformations. If an event does not match a decoder's conditions, the next sibling decoder at the same level is tried instead. This process continues until no further applicable decoder is found.
+All events enter the decoder stage through the ``root`` decoder, which acts as the entry point of the decoder tree. The root decoder evaluates the event and, upon matching, passes it down to the appropriate child decoders for progressively more specialized processing. Each decoder in the tree applies its own field mappings and transformations.
 
 .. thumbnail:: /images/manual/wazuh-server/decoder-tree.png
    :title: Decoder tree
@@ -66,7 +66,7 @@ All events enter the decoder stage through the ``root`` decoder, which acts as t
    :align: center
    :width: 80%
 
-When a decoder evaluates an event, it checks whether the event satisfies its match conditions. If the conditions are not met, the event is passed to the next sibling decoder in the same hierarchy. This process continues until a decoder accepts the event or no more sibling decoders remain at that level. At that point, the decoder branch has fully decoded the event.
+When a decoder evaluates an event, it checks whether the event satisfies its match conditions. If the conditions are not met, the event is passed to the next sibling decoder in the same hierarchy. This process continues until a decoder accepts the event or no more sibling decoders remain at that level. At that point, the evaluation at that level ends.
 
 Once a decoder accepts an event, it applies its transformations: normalizing fields, extracting values, or mapping data to schema fields. The transformed event is then forwarded to that decoder's child decoders for additional, more specialized processing. Each child decoder follows the same evaluation logic, making the overall process both hierarchical and iterative.
 
@@ -75,10 +75,10 @@ This tree-based evaluation ensures that events are efficiently routed to the mos
 Security enrichment process
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The security enrichment process is divided into two consecutive stages in the policy pipeline:
+The security enrichment process is divided into two consecutive stages in the policy pipeline, which run between decoding and post-filtering:
 
 -  The :ref:`pre-enrichment <pre_enrichment>` stage performs preliminary event adjustments and filtering before the enrichment stage is executed. It takes care of event control decisions.
--  The :ref:`enrichment <enrichment>` stage applies the enrichments configured in the policy, such as Geo/ASN or IOC enrichments. It is dedicated to contextual event augmentation based on predefined WCS-driven observation rules, and handles unclassified-event routing later, as part of :ref:`output <output_process>` selection.
+-  The :ref:`enrichment <enrichment>` stage applies the enrichments configured in the policy, such as geolocation and autonomous system number (Geo/ASN) or IOC enrichments. It is dedicated to contextual event augmentation based on predefined WCS-driven observation rules. Unclassified-event routing happens later, as part of :ref:`output <output_process>` selection.
 
 .. _pre_enrichment:
 
@@ -104,7 +104,7 @@ The pre-enrichment stage performs the following actions:
         }
       }
 
--  **Discarded events filter**: The discarded events filter decides whether discarded events continue through the pipeline. This behavior is controlled by the policy configuration.
+-  **Discarded events filter**: The discarded events filter decides whether discarded events continue through the pipeline. A discarded event is an event that a decoder marks with the ``discard_events`` :doc:`helper function </user-manual/data-analysis/helper-functions>`, which sets the ``wazuh.space.event_discarded`` field to ``true``. This behavior is controlled by the ``index_discarded_events`` setting of the policy.
 -  **Cleanup of decoder temporary variables**: Decoders can only map fields that belong to the WCS or to temporary variables. Temporary variables are used to store intermediate values that help decoders share information while processing an event. After decoding is complete, all temporary variables are automatically removed. This cleanup step always runs at the end of pre-enrichment and requires no user configuration. As a result, only WCS-compliant fields remain in the event, ensuring it can be successfully indexed by the Wazuh indexer.
 
 .. _enrichment:
@@ -202,9 +202,9 @@ Conceptually, the event is enriched with the following threat context:
 Output process
 ^^^^^^^^^^^^^^
 
-Once an event completes the full processing pipeline, including decoding, optional enrichment, and optional post-filtering, it is forwarded to the output stage. Outputs are files that deliver the decoded event to one or more configured destinations, such as the Wazuh indexer or a local file.
+Once an event completes the full processing pipeline, including decoding, optional enrichment, and optional post-filtering, it is forwarded to the output stage. Outputs are YAML definition files that deliver the decoded event to one or more configured destinations, such as the Wazuh indexer or a local file.
 
-Unlike decoders and enrichment assets, which are downloaded from the content distribution infrastructure, outputs are bundled with the Wazuh manager installation and stored locally on the Wazuh manager endpoint. They do not originate from the Wazuh indexer.
+Unlike decoders and enrichment assets, which are pulled from the Wazuh indexer, outputs are bundled with the Wazuh manager installation and stored locally on the Wazuh manager endpoint. They do not originate from the Wazuh indexer.
 
 Output directory structure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -215,7 +215,7 @@ Outputs are stored under ``/etc/wazuh-manager/outputs/`` and organized by space 
 
    /etc/wazuh-manager/outputs/
    ├── default/                          # Fallback outputs, applied to all spaces unless overridden
-   │   ├── indexer.yml                   # Sends decoded events to the Wazuh Indexer (enabled)
+   │   ├── indexer.yml                   # Sends decoded events to the Wazuh indexer (enabled)
    │   └── file-output-integrations.yml  # Writes decoded events to a local file (disabled)
    ├── standard/                         # (Optional) Outputs specific to the standard space
    └── custom/                           # (Optional) Outputs specific to the custom space
@@ -252,7 +252,29 @@ The output stage operates as a broadcaster. It dispatches the processed event in
 Unclassified events
 ~~~~~~~~~~~~~~~~~~~
 
-An event is unclassified when its ``wazuh.integration.category`` field equals unclassified. This category comes from a catch-all integration whose decoder accepts events that no other integration decoder matched. The ``/etc/wazuh-manager/outputs/default/indexer.yml`` output sends unclassified events to the ``wazuh-events-v5-unclassified`` index only when the policy enables indexing of unclassified events. Otherwise, the Wazuh normalization engine does not index them.
+An event is unclassified when its ``wazuh.integration.category`` field has the value ``unclassified``. This category comes from a catch-all integration whose decoder accepts events that no other integration decoder matches. The ``/etc/wazuh-manager/outputs/default/indexer.yml`` output sends unclassified events to the ``wazuh-events-v5-unclassified`` index only when the policy's ``index_unclassified_events`` setting is enabled. Otherwise, the Wazuh normalization engine does not index these events. The output sends other events to the ``wazuh-events-v5-<CATEGORY>`` index, where ``<CATEGORY>`` is the value of the ``wazuh.integration.category`` field.
+
+The ``index_unclassified_events`` setting is ``false`` by default. To enable it, set it to ``true`` in the policy of the standard space using the Content Manager API of the Wazuh indexer. The Content Manager API accepts only the ``draft`` and ``standard`` spaces. For custom content, set it in the policy of the ``draft`` space, and then promote the ``draft`` space to the ``test`` space and the ``test`` space to the ``custom`` space. For example, run the following request to update the policy for the standard space:
+
+.. code-block:: bash
+   :emphasize-lines: 1,2,6,7
+
+   curl -sk -u admin:<ADMIN_PASSWORD> -X PUT \
+     "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_plugins/_content_manager/policy/standard" \
+     -H 'Content-Type: application/json' \
+     -d '{
+       "resource": {
+         "enrichments": [<CURRENT_ENRICHMENTS>],
+         "filters": [<CURRENT_FILTER_IDS>],
+         "enabled": true,
+         "index_unclassified_events": true,
+         "index_discarded_events": false
+       }
+     }'
+
+Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the IP address of the Wazuh indexer and ``<ADMIN_PASSWORD>`` with the password of the Wazuh indexer ``admin`` user. The request also sets the ``enrichments``, ``filters``, ``enabled``, and ``index_discarded_events`` fields of the policy. Replace ``<CURRENT_ENRICHMENTS>`` and ``<CURRENT_FILTER_IDS>`` with the current values in the policy, because the request replaces the ``enrichments`` list and rejects a ``filters`` list that differs from the current one. Keep the current values of ``enabled`` and ``index_discarded_events``. In the ``draft`` space, the request also requires the ``author``, ``description``, ``documentation``, and ``references`` fields in ``resource.metadata``.
+
+To view these events in **Discover**, select an index pattern that matches ``wazuh-events-v5-unclassified*`` to view unclassified events, or ``wazuh-events-v5-*`` to view all indexed events.
 
 Event format
 ------------
@@ -287,7 +309,7 @@ The following sample logs illustrate the transformation process:
             "Class":"IN"
          }
       ],
-      "srcaddr":"8.8.8.8",
+      "srcaddr":"203.0.113.10",
       "srcport":"8010",
       "transport":"UDP",
       "srcids":{}
@@ -302,7 +324,7 @@ The following sample logs illustrate the transformation process:
      "wazuh": {
        "protocol": {
          "queue": 49,
-         "location": "/var/ossec/logs/active-responses.log"
+         "location": "Wazuh-AWS"
        },
        "agent": {
          "host": {
@@ -328,7 +350,7 @@ The following sample logs illustrate the transformation process:
        }
      },
      "event": {
-       "original": "{\"version\":\"1.100000\",\"account_id\":\"123456789023\",\"region\":\"us-east-1\",\"vpc_id\":\"vpc-0000000\",\"query_timestamp\":\"2025-12-11T22:22:22Z\",\"query_name\":\"amazonlinux-2-repos-us-east-1.s3.dualstack.us-east-1.amazonaws.com.\",\"query_type\":\"AAAA\",\"query_class\":\"IN\",\"rcode\":\"NOERROR\",\"answers\":[{\"Rdata\":\"s3-r-w.dualstack.us-east-1.amazonaws.com.\",\"Type\":\"CNAME\",\"Class\":\"IN\"},{\"Rdata\":\"2a02:cf40:add:4444:9191:a9a9:aaaa:cccc\",\"Type\":\"AAAA\",\"Class\":\"IN\"}],\"srcaddr\":\"8.8.8.8\",\"srcport\":\"8010\",\"transport\":\"UDP\",\"srcids\":{}}"
+       "original": "{\"version\":\"1.100000\",\"account_id\":\"123456789023\",\"region\":\"us-east-1\",\"vpc_id\":\"vpc-0000000\",\"query_timestamp\":\"2025-12-11T22:22:22Z\",\"query_name\":\"amazonlinux-2-repos-us-east-1.s3.dualstack.us-east-1.amazonaws.com.\",\"query_type\":\"AAAA\",\"query_class\":\"IN\",\"rcode\":\"NOERROR\",\"answers\":[{\"Rdata\":\"s3-r-w.dualstack.us-east-1.amazonaws.com.\",\"Type\":\"CNAME\",\"Class\":\"IN\"},{\"Rdata\":\"2a02:cf40:add:4444:9191:a9a9:aaaa:cccc\",\"Type\":\"AAAA\",\"Class\":\"IN\"}],\"srcaddr\":\"203.0.113.10\",\"srcport\":\"8010\",\"transport\":\"UDP\",\"srcids\":{}}"
      }
    }
 
@@ -341,7 +363,7 @@ The following sample logs illustrate the transformation process:
      "wazuh": {
        "protocol": {
          "queue": 49,
-         "location": "/var/ossec/logs/active-responses.log"
+         "location": "Wazuh-AWS"
        },
        "agent": {
          "host": {
@@ -387,7 +409,7 @@ The following sample logs illustrate the transformation process:
                "first_seen": "2026-01-13T00:35:01.000Z",
                "id": "1718594",
                "last_seen": "2026-01-13T00:35:01.000Z",
-               "name": "8.8.8.8:8010",
+               "name": "203.0.113.10:8010",
                "provider": "threat-fox",
                "software": {
                  "alias": [
@@ -413,7 +435,7 @@ The following sample logs illustrate the transformation process:
        }
      },
      "event": {
-       "original": "{\"version\":\"1.100000\",\"account_id\":\"123456789023\",\"region\":\"us-east-1\",\"vpc_id\":\"vpc-0000000\",\"query_timestamp\":\"2025-12-11T22:22:22Z\",\"query_name\":\"amazonlinux-2-repos-us-east-1.s3.dualstack.us-east-1.amazonaws.com.\",\"query_type\":\"AAAA\",\"query_class\":\"IN\",\"rcode\":\"NOERROR\",\"answers\":[{\"Rdata\":\"s3-r-w.dualstack.us-east-1.amazonaws.com.\",\"Type\":\"CNAME\",\"Class\":\"IN\"},{\"Rdata\":\"2a02:cf40:add:4444:9191:a9a9:aaaa:cccc\",\"Type\":\"AAAA\",\"Class\":\"IN\"}],\"srcaddr\":\"8.8.8.8\",\"srcport\":\"8010\",\"transport\":\"UDP\",\"srcids\":{}}",
+       "original": "{\"version\":\"1.100000\",\"account_id\":\"123456789023\",\"region\":\"us-east-1\",\"vpc_id\":\"vpc-0000000\",\"query_timestamp\":\"2025-12-11T22:22:22Z\",\"query_name\":\"amazonlinux-2-repos-us-east-1.s3.dualstack.us-east-1.amazonaws.com.\",\"query_type\":\"AAAA\",\"query_class\":\"IN\",\"rcode\":\"NOERROR\",\"answers\":[{\"Rdata\":\"s3-r-w.dualstack.us-east-1.amazonaws.com.\",\"Type\":\"CNAME\",\"Class\":\"IN\"},{\"Rdata\":\"2a02:cf40:add:4444:9191:a9a9:aaaa:cccc\",\"Type\":\"AAAA\",\"Class\":\"IN\"}],\"srcaddr\":\"203.0.113.10\",\"srcport\":\"8010\",\"transport\":\"UDP\",\"srcids\":{}}",
        "kind": "event",
        "action": "dns-query",
        "category": [
@@ -459,8 +481,8 @@ The following sample logs illustrate the transformation process:
        "type": "IPv4"
      },
      "source": {
-       "address": "8.8.8.8",
-       "ip": "8.8.8.8",
+       "address": "203.0.113.10",
+       "ip": "203.0.113.10",
        "port": 8010,
        "as": {
          "number": 55990,
@@ -485,7 +507,7 @@ The following sample logs illustrate the transformation process:
      },
      "related": {
        "ip": [
-         "8.8.8.8"
+         "203.0.113.10"
        ],
        "hosts": [
          "amazonlinux-2-repos-us-east-1.s3.dualstack.us-east-1.amazonaws.com."
@@ -575,19 +597,19 @@ Content management
 Content management keeps the processing content of the Wazuh normalization engine in step with the Wazuh indexer. The content includes:
 
 -  **Policy configuration**: The list of integrations (ordered by evaluation priority) and policy-level settings.
--  **Integrations**: Logical groups of decoders (and optionally KVDBs) for each log source.
+-  **Integrations**: Logical groups of decoders (and optionally key-value databases, or KVDBs) for each log source.
 -  **Decoders**: Normalization and field-extraction assets.
 -  **Filters**: Pre-filter and post-filter assets.
 -  **KVDBs**: Key-value databases used by decoders and filters during event processing.
 
-The normalization engine pulls all content and policy configurations from the Wazuh indexer and stores them locally for runtime execution. The Wazuh indexer is the single source of truth for all content management. You create custom decoders and integrations, enable or disable them, and modify policy-related settings through the Wazuh indexer, not directly on the Wazuh normalization engine.
+The normalization engine pulls all content and policy configurations from the Wazuh indexer and stores them locally for runtime execution. The Wazuh indexer is the single source of truth for all content management. You create custom decoders and integrations, enable or disable them, and modify policy-related settings through the Wazuh indexer, not directly on the Wazuh normalization engine. For the steps, see :doc:`Data analysis </user-manual/data-analysis/index>`.
 
 .. _synchronization_process:
 
 Synchronization process
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Before building the security policy, the Wazuh normalization engine must ensure that its local state reflects the latest configuration available in the Wazuh indexer. The CMSync module keeps the local state current. It periodically pulls content from the Wazuh indexer and applies any detected changes to the local store of the Wazuh normalization engine.
+Before building the security policy, the Wazuh normalization engine must ensure that its local state reflects the latest configuration available in the Wazuh indexer. The content synchronization module (CMSync) of the Engine Content Manager, the local mirror of the content managed in the Wazuh indexer, keeps the local state current. It periodically pulls content from the Wazuh indexer and applies any detected changes to the local store of the Wazuh normalization engine.
 
 CMSync synchronizes content independently for the ``standard`` and ``custom`` :ref:`spaces <space>`, following the same two-step process for each:
 
@@ -603,7 +625,7 @@ CMSync synchronizes content independently for the ``standard`` and ``custom`` :r
 Space
 ^^^^^
 
-A :doc:`space </user-manual/data-analysis/space>` is a content organization concept that originates in the Wazuh indexer. The Wazuh indexer has four spaces: ``draft``, ``test``, ``custom``, and ``standard``. When CMSync pulls content from the Wazuh indexer, the normalization engine stores each synchronized asset under the space it belongs to. In this way, the Wazuh manager mirrors the relevant Wazuh indexer spaces.
+A :doc:`space </user-manual/data-analysis/space>` is a content organization concept that originates in the Wazuh indexer. The Wazuh indexer has four spaces: ``draft``, ``test``, ``custom``, and ``standard``. You edit and test content in the draft and test spaces before you promote it to the custom space. CMSync synchronizes only the standard and custom spaces. When CMSync pulls content from the Wazuh indexer, the normalization engine stores each synchronized asset under the space it belongs to. In this way, the Wazuh manager mirrors the relevant Wazuh indexer spaces.
 
 The Wazuh normalization engine manages the following spaces:
 

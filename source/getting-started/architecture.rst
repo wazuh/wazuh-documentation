@@ -10,18 +10,25 @@ The Wazuh architecture consists of a multi-platform :doc:`Wazuh agent <component
 
 -  The Wazuh agent is deployed on endpoints to collect and forward security data to the Wazuh manager, where it is transformed and enriched.
 -  The Wazuh manager transforms data received from Wazuh agents into standardized schema documents. It decodes and enriches the data with threat intelligence, then forwards the processed output to the Wazuh indexer and other configured destinations.
--  The Wazuh indexer is a highly scalable, full-text search and analytics engine. It serves as the central data store for the Wazuh platform. It indexes and stores security findings, events, vulnerability data, and system inventory from Wazuh agents. The Wazuh indexer includes purpose-built plugins for access control, reporting, and content management. Content management covers rules, decoders, integrations, key-value databases (KVDBs), and indicators of compromise (IoCs). It provides near real-time search and analytics capabilities, enabling security teams to investigate threats, monitor compliance, and gain visibility into their infrastructure.
+-  The Wazuh indexer is a highly scalable, full-text search and analytics engine. It serves as the central data store for the Wazuh platform. It indexes and stores security findings, events, vulnerability data, and system inventory from Wazuh agents. The Wazuh indexer includes purpose-built plugins for access control, reporting, threat detection, and content management. Content management covers rules, decoders, integrations, key-value databases (KVDBs), and indicators of compromise (IoCs). The Wazuh indexer provides near real-time search and analytics capabilities, enabling security teams to investigate threats, monitor compliance, and gain visibility into their infrastructure.
 -  The Wazuh dashboard queries the indexed data from the Wazuh indexer. It provides the user interface for configuring the Wazuh manager and viewing analyzed security data. It also supports the management of the Wazuh agent configuration, health status, notifications, and alerting integrations.
 
-Wazuh 5.0 removes the agentless monitoring service and the syslog remote input of Wazuh 4.x. To monitor a system where you can't install the Wazuh agent, run a collection script from another monitored endpoint.
+Wazuh 5.0 removes the agentless monitoring service and the syslog remote input of Wazuh 4.x. To monitor a system where you can't install the Wazuh agent, collect its data through a relay endpoint, a monitored endpoint with the Wazuh agent installed. For network devices that send syslog messages, see :ref:`Configuring rsyslog on a Linux endpoint <configuring_rsyslog_relay>`.
 
 You can deploy the Wazuh central components in different ways, depending on scalability and availability needs:
 
 -  **All-in-one deployment:** All Wazuh components (manager, indexer, and dashboard) are installed on a single server. This deployment is best suited for labs and small environments with a limited number of monitored endpoints.
 
--  **Single-node deployment:** The Wazuh manager, Wazuh indexer, and Wazuh dashboard are each deployed on separate servers. We recommend this deployment for medium environments that require higher performance than an *all-in-one* setup.
+-  **Single-node deployment:** Each central component runs as a single node on a separate server. Wazuh recommends this architecture for medium-sized environments that require higher performance than an *all-in-one* deployment.
 
--  **Multi-node deployment:** A typical deployment runs one Wazuh dashboard instance, a Wazuh manager cluster, and a Wazuh indexer cluster, each node on its own server. The number of instances varies depending on your needs. We recommend this deployment for large environments with high event throughput, or when you need fault tolerance and high availability.
+-  **Multi-node deployment:** A typical deployment consists of one Wazuh dashboard instance, a Wazuh manager cluster, and a Wazuh indexer cluster. Each node runs on a separate server. The number of instances depends on your deployment requirements. Wazuh recommends this architecture for large environments with high event throughput or requirements for fault tolerance and high availability.
+
+The two clusters use different node roles:
+
+-  A Wazuh manager cluster has one master node and one or more worker nodes.
+-  A Wazuh indexer cluster elects a cluster manager node from among its cluster-manager-eligible nodes.
+
+These roles are independent and serve different purposes.
 
 Visit the :doc:`installation guide </installation-guide/index>` to learn how to deploy the Wazuh central components and the Wazuh agent.
 
@@ -38,14 +45,14 @@ Component communication
 
 Wazuh components communicate over separate paths, each with its own default port, transport protocol, encryption, and authentication method. Use these details to plan firewall rules and secure your deployment.
 
-Wazuh 5.0 changes the agent-manager communication transport. A Wazuh 5.0 agent communicates with the Wazuh manager over HTTPS on port ``1517/TCP``. The Wazuh manager also keeps two legacy services for Wazuh 4.x agents. The legacy services are the AES-encrypted TCP/UDP channel on port ``1514`` and the Transport Layer Security (TLS) enrollment service on port ``1515/TCP``.
+Wazuh 5.0 changes the agent-manager communication transport. A Wazuh 5.x agent communicates with the Wazuh manager over HTTPS on port ``1517/TCP``. The Wazuh manager also keeps two legacy services for Wazuh 4.x agents. The legacy services are the AES-encrypted TCP/UDP channel on port ``1514`` and the Transport Layer Security (TLS) enrollment service on port ``1515/TCP``.
 
 Wazuh agent - Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh agent collects security data from monitored endpoints and forwards it to the :doc:`Wazuh manager <components/wazuh-manager>`, where the :doc:`normalization engine </user-manual/manager/wazuh-normalization-engine>` transforms and enriches the data. A Wazuh 5.0 agent uses an HTTPS channel for communication with the Wazuh manager. The channel carries enrollment, event reporting, state synchronization, control messages, and file downloads. The Wazuh manager serves this channel on port ``1517/TCP``. The listener requires a TLS certificate and private key.
+The Wazuh agent collects security data from monitored endpoints and forwards it to the :doc:`Wazuh manager <components/wazuh-manager>`, where the :doc:`normalization engine </user-manual/manager/wazuh-normalization-engine>` transforms and enriches the data. A Wazuh 5.x agent uses an HTTPS channel for communication with the Wazuh manager. The channel carries enrollment, event reporting, state synchronization, control messages, and file downloads. The Wazuh manager serves this channel on port ``1517/TCP``. The listener requires a TLS certificate and private key.
 
-A Wazuh 5.0 agent enrolls through the same HTTPS channel using the ``POST /enroll`` endpoint. The endpoint acts as a bridge to the enrollment service, authenticates the request, and relays it to that service. After enrollment, the Wazuh agent authenticates subsequent requests using a bearer token.
+A Wazuh 5.x agent enrolls through the same HTTPS channel using the ``POST /enroll`` endpoint. The endpoint acts as a bridge to the enrollment service, authenticates the request, and relays it to that service. After enrollment, the Wazuh agent authenticates subsequent requests using a bearer token.
 
 For Wazuh 4.x agents, the Wazuh manager provides the agent communication service on port ``1514/TCP`` by default, or on ``1514/UDP`` when you enable it. The service receives AES-encrypted messages, including keepalive messages and event data. Wazuh 4.x agents enroll through the enrollment service on port ``1515/TCP`` over TLS. The installer enables these legacy services in the ``<remote><legacy>`` section of the Wazuh manager configuration. You can disable them after all Wazuh agents run Wazuh 5.x.
 
@@ -76,11 +83,11 @@ The Wazuh dashboard queries the Wazuh manager API to retrieve information and pe
 
 The Wazuh manager API uses JSON Web Tokens (JWTs) for authentication. The Wazuh dashboard sends the API username and password to the ``POST /security/user/authenticate`` endpoint, which returns a signed JWT. The dashboard includes this token in the ``Authorization`` header of subsequent API requests. Tokens expire after 900 seconds by default.
 
-The Wazuh dashboard authenticates as the ``wazuh-internal-client`` user with ``run_as`` enabled. This allows the Wazuh manager API to apply the RBAC roles of the user logged in to the Wazuh dashboard.
+The Wazuh dashboard authenticates as the ``wazuh-internal-client`` user with ``run_as`` enabled. This allows the Wazuh manager API to apply the role-based access control (RBAC) roles of the user logged in to the Wazuh dashboard.
 
 The Wazuh dashboard verifies the Wazuh manager API certificate using the Wazuh manager CA at ``/etc/wazuh-dashboard/certs/manager-ca.pem``. This file is a copy of ``/etc/wazuh-manager/export/ca.pem`` from the master node. The API address configured in the Wazuh dashboard must match a name or IP address in the Wazuh manager API certificate. If the Wazuh manager CA is missing, the Wazuh dashboard can still start and display Wazuh indexer data, but it cannot connect to the Wazuh manager API.
 
-Role-Based Access Control (RBAC) authorizes each authenticated request based on the user's assigned permissions. RBAC supports permissions for specific resources and actions and operates in allowlist mode by default. In this mode, the API denies actions that the user's roles don't explicitly permit. In a Wazuh manager cluster, the Distributed API (DAPI) layer coordinates API requests across cluster nodes.
+RBAC authorizes each authenticated request based on the user's assigned permissions. RBAC supports permissions for specific resources and actions and operates in allowlist mode by default. In this mode, the API denies actions that the user's roles don't explicitly permit. In a Wazuh manager cluster, the Distributed API (DAPI) layer coordinates API requests across cluster nodes.
 
 Wazuh dashboard - Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -94,30 +101,55 @@ Required ports
 
 Wazuh components communicate through several services, each with a specific default port. The following table lists these default ports. You can change the ports as required.
 
-+-----------------+----------------------+----------------------------------------+-------------------------------------------+
-| Component       | Default port         | Transport and encryption               | Purpose                                   |
-+=================+======================+========================================+===========================================+
-| Wazuh manager   | 1517/TCP             | HTTPS, TLS                             | Wazuh 5.x agent enrollment and connection |
-+                 +----------------------+----------------------------------------+-------------------------------------------+
-|                 | 1514/TCP (default)   | Wazuh message protocol, AES encryption | Wazuh 4.x agent connection                |
-|                 | or 1514/UDP          |                                        |                                           |
-+                 +----------------------+----------------------------------------+-------------------------------------------+
-|                 | 1515/TCP             | TLS 1.3                                | Wazuh 4.x agent enrollment                |
-+                 +----------------------+----------------------------------------+-------------------------------------------+
-|                 | 1516/TCP             | Wazuh cluster protocol                 | Wazuh manager cluster communication       |
-+                 +----------------------+----------------------------------------+-------------------------------------------+
-|                 | 55000/TCP            | HTTPS, TLS                             | Wazuh manager API (master node only)      |
-+-----------------+----------------------+----------------------------------------+-------------------------------------------+
-| Wazuh indexer   | 9200/TCP             | HTTPS, TLS                             | Wazuh indexer API                         |
-+                 +----------------------+----------------------------------------+-------------------------------------------+
-|                 | 9300 - 9400/TCP      | TLS                                    | Wazuh indexer cluster communication       |
-+-----------------+----------------------+----------------------------------------+-------------------------------------------+
-| Wazuh dashboard | 443/TCP              | HTTPS                                  | Wazuh web user interface                  |
-+-----------------+----------------------+----------------------------------------+-------------------------------------------+
++-----------------+--------------------+----------------------------------------+--------------------------------------------------------------+
+| Component       | Default port       | Transport and encryption               | Purpose                                                      |
++=================+====================+========================================+==============================================================+
+| Wazuh manager   | 1517/TCP           | HTTPS, TLS                             | Wazuh 5.x agent enrollment and connection                    |
++                 +--------------------+----------------------------------------+--------------------------------------------------------------+
+|                 | 1514/TCP (default) | Wazuh message protocol, AES encryption | Wazuh 4.x agent connection                                   |
+|                 | or 1514/UDP        |                                        |                                                              |
++                 +--------------------+----------------------------------------+--------------------------------------------------------------+
+|                 | 1515/TCP           | TLS 1.3                                | Wazuh 4.x agent enrollment                                   |
++                 +--------------------+----------------------------------------+--------------------------------------------------------------+
+|                 | 1516/TCP           | Wazuh cluster protocol                 | Wazuh manager cluster communication                          |
++                 +--------------------+----------------------------------------+--------------------------------------------------------------+
+|                 | 55000/TCP          | HTTPS, TLS                             | Wazuh manager API (master node only). After an all-in-one    |
+|                 |                    |                                        | installation with the                                        |
+|                 |                    |                                        | :ref:`installation assistant <quickstart_installing_wazuh>`, |
+|                 |                    |                                        | the API listens only on the local host unless you add the    |
+|                 |                    |                                        | ``-ap`` option                                               |
++-----------------+--------------------+----------------------------------------+--------------------------------------------------------------+
+| Wazuh indexer   | 9200/TCP           | HTTPS, TLS                             | Wazuh indexer API                                            |
++                 +--------------------+----------------------------------------+--------------------------------------------------------------+
+|                 | 9300 - 9400/TCP    | TLS                                    | Wazuh indexer cluster communication                          |
++-----------------+--------------------+----------------------------------------+--------------------------------------------------------------+
+| Wazuh dashboard | 443/TCP            | HTTPS                                  | Wazuh web user interface                                     |
++-----------------+--------------------+----------------------------------------+--------------------------------------------------------------+
 
 .. note::
 
    Wazuh 5.x agents communicate exclusively through port ``1517``. Ports ``1514`` and ``1515`` serve Wazuh 4.x agents.
+
+Outbound connections
+--------------------
+
+Some Wazuh features need outbound Internet access from the Wazuh central components. If your environment restricts outbound traffic, allow the following connections:
+
++------------------------+-----------------------------+---------+-------------------------------------------------+
+| Source                 | Destination                 | Port    | Purpose                                         |
++========================+=============================+=========+=================================================+
+| Wazuh indexer          | ``api.pre.cloud.wazuh.com`` | 443/TCP | Wazuh Cyber Threat Intelligence (CTI) content   |
+|                        |                             |         | updates (ruleset, IoCs, and vulnerability data) |
+|                        |                             |         | and the daily update check                      |
++------------------------+-----------------------------+---------+-------------------------------------------------+
+| Wazuh manager          | ``api.pre.cloud.wazuh.com`` | 443/TCP | GeoIP database updates for event enrichment     |
++------------------------+-----------------------------+---------+-------------------------------------------------+
+| Wazuh manager          | ``packages.wazuh.com``      | 443/TCP | WPK (Wazuh Package Kit) files for remote Wazuh  |
+|                        |                             |         | agent upgrades                                  |
++------------------------+-----------------------------+---------+-------------------------------------------------+
+| All central components | ``packages.wazuh.com``      | 443/TCP | Installation and upgrade of the Wazuh central   |
+|                        |                             |         | components                                      |
++------------------------+-----------------------------+---------+-------------------------------------------------+
 
 Wazuh CTI
 ---------
