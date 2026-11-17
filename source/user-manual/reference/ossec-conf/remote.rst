@@ -15,7 +15,7 @@ remote
 		<remote>
 		</remote>
 
-Configuration of manager to listen for events from the agents.
+Configuration of the manager to listen for events from agents and from syslog clients.
 
 Options
 -------

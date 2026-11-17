@@ -356,7 +356,7 @@ To map the user with Wazuh, follow these steps:
 
 #. Click **Create policy** to complete the action.
 
-   The ``agent:group`` resource covers actions on the agents of the group, such as ``agent:read``, ``agent:restart``, and ``agent:upgrade``. To let the user list the group and its agents, create another policy with the ``group:read`` action on the ``group:id`` resource, for example ``Team_A``. To let the user move agents to other groups, also allow ``agent:modify_group`` on ``agent:group`` and ``group:modify_assignments`` on the ``group:id`` resource of each group the user can assign agents to. Add these policies to the role in the next step.
+   The ``agent:group`` resource covers actions on the agents of the group, such as ``agent:read``, ``agent:restart``, and ``agent:upgrade``. To let the user list the group and its agents, create another policy with the ``group:read`` action on the ``group:id`` resource, for example ``Team_A``. To let the user move agents to other groups, also allow ``agent:modify_group`` on ``agent:group`` and ``group:modify_assignments`` on the ``group:id`` resource of the group the agents leave, for example ``Team_A``, and of each group the user can assign agents to. Add these policies to the role in the next step.
 
 #. Click **Roles** to open the tab, click **Create Role**, and fill in the empty fields with the requested information.
 

@@ -52,6 +52,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 | :doc:`command <commands>`                                           | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`database_output <database-output>`                            | manager                |
+|                                                                     | (4.14.6 and earlier)   |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`email_alerts <email-alerts>`                                  | manager                |
 +---------------------------------------------------------------------+------------------------+
