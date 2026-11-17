@@ -109,7 +109,7 @@ The **Ruleset management** menu contains the following pages:
    :align: center
    :width: 80%
 
-The Wazuh dashboard sends this content to the content manager REST API of the Wazuh indexer. You can use **Log test** to check custom decoders and rules before you rely on them.
+The Wazuh dashboard sends this content to the Content Manager REST API of the Wazuh indexer. You can use **Log test** to check custom decoders and rules before you rely on them.
 
 .. thumbnail:: /images/getting-started/dashboard-log-test.png
    :title: Log test

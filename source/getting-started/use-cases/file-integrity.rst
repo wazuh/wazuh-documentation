@@ -8,7 +8,7 @@ File integrity monitoring
 
 File integrity monitoring (FIM) tracks changes to files and directories by detecting file creation, modification, and deletion events. It helps protect critical files by continuously monitoring their integrity and identifying changes that indicate unauthorized activity or a security incident.
 
-The Wazuh :doc:`File integrity monitoring </user-manual/capabilities/file-integrity/index>` capability monitors configured files and directories and records file creation, modification, and deletion events. When a monitored file changes, Wazuh compares its checksum against a previously recorded baseline and generates a finding if it detects a mismatch.
+The Wazuh :doc:`file integrity monitoring </user-manual/capabilities/file-integrity/index>` capability monitors configured files and directories and records file creation, modification, and deletion events. When a monitored file changes, Wazuh compares its checksum against a previously recorded baseline and generates a finding if it detects a mismatch.
 
 The FIM module supports real-time monitoring and scheduled scans, allowing you to monitor files according to their sensitivity and operational requirements.
 
@@ -73,8 +73,8 @@ The FIM module works with other Wazuh capabilities to detect and respond to malw
 
 The following combinations are available:
 
--  **FIM and threat intelligence:** The Wazuh normalization engine compares file hashes from FIM events against indicators of compromise from Wazuh Cyber Threat Intelligence (CTI). Custom decoders can also check hashes against your own Key-Value Databases (KVDBs). When a file hash matches an indicator, Wazuh adds the threat context to the event.
--  **FIM and active response:** An :doc:`Alerting module </user-manual/wazuh-indexer/modules/alerting>` in the Wazuh indexer matches FIM findings and triggers an Active Response channel. The Wazuh manager sends the response to the Wazuh agent as a task, and the agent runs the channel executable. A custom executable can delete a malicious file, which contains the threat immediately and reduces the Mean Time to Respond (MTTR).
+-  **FIM and threat intelligence:** The Wazuh normalization engine compares file hashes from FIM events against indicators of compromise from Wazuh Cyber Threat Intelligence (CTI). Custom decoders can also check hashes against your own key-value databases (KVDBs). When a file hash matches an indicator, Wazuh adds the threat context to the event.
+-  **FIM and Active Response:** The :doc:`Alerting module </user-manual/wazuh-indexer/modules/alerting>` in the Wazuh indexer matches FIM findings and triggers an Active Response channel. This notification channel defines the executable to run and the target Wazuh agents. The Wazuh manager sends the response to the Wazuh agent as a task, and the agent runs the channel executable. A custom executable can delete a malicious file, which contains the threat immediately and reduces the Mean Time to Respond (MTTR).
 -  **FIM and YARA:** A custom Active Response executable can run a YARA scan when FIM detects that a file was created or modified.
 
 For example, the **File Integrity Monitoring** section of the Wazuh dashboard shows the detection and removal of the EICAR file. The file was in the ``C:\Users\<USER>\Downloads`` directory on a monitored Windows endpoint.
