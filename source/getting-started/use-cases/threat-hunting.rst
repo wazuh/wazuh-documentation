@@ -13,17 +13,17 @@ Wazuh supports threat hunting by collecting and correlating security telemetry f
 Hunting for indicators of compromise
 ------------------------------------
 
-Wazuh helps security teams proactively search for indicators of compromise (IOCs), including malicious IP addresses, domains, URLs, and file hashes. Wazuh uses information from the `Wazuh Cyber Threat Intelligence (CTI) <https://cti.wazuh.com/>`__ platform and custom Key-Value Databases (KVDBs) to match these indicators against endpoint security events. Matching indicators identify systems that have communicated with known malicious infrastructure.
+Wazuh helps security teams proactively search for indicators of compromise (IoCs), including malicious IP addresses, domains, URLs, and file hashes. Wazuh uses information from the `Wazuh Cyber Threat Intelligence (CTI) <https://cti.wazuh.com/>`__ platform and custom key-value databases (KVDBs) to match these indicators against endpoint security events. Matching indicators identify systems that have communicated with known malicious infrastructure.
 
-The Wazuh normalization engine enriches events during processing with IOC and GeoIP context. When an event matches an indicator from Wazuh CTI, the resulting finding includes threat enrichment details such as the provider, confidence level, and associated malware family. GeoIP enrichment also adds geolocation information for IP addresses when available.
+The Wazuh normalization engine enriches events during processing with IoC and GeoIP context. When an event matches an indicator from Wazuh CTI, the resulting finding includes threat enrichment details such as the provider, confidence level, and associated malware family. GeoIP enrichment also adds geolocation information for IP addresses when available.
 
-Security teams can use the **Discover** section of the Wazuh dashboard to search findings and historical telemetry for matching IOCs. They can identify affected endpoints and investigate potential threats across their environment.
+Security teams can use the **Discover** section of the Wazuh dashboard to search findings and historical telemetry for matching IoCs. They can identify affected endpoints and investigate potential threats across their environment.
 
-The finding details show IOC enrichment from Wazuh CTI, including the matched indicator, provider, confidence level, and malware family.
+The finding details show IoC enrichment from Wazuh CTI, including the matched indicator, provider, confidence level, and malware family.
 
 .. thumbnail:: /images/getting-started/use-cases/threat-hunting/ioc-enrichment-details.png
-   :title: Finding details showing Wazuh CTI IOC enrichment with the matched indicator, provider, confidence, and malware family
-   :alt: Finding details showing Wazuh CTI IOC enrichment with the matched indicator, provider, confidence, and malware family
+   :title: Finding details showing Wazuh CTI IoC enrichment with the matched indicator, provider, confidence, and malware family
+   :alt: Finding details showing Wazuh CTI IoC enrichment with the matched indicator, provider, confidence, and malware family
    :align: center
    :width: 80%
 
@@ -42,7 +42,7 @@ Wazuh stores security events and findings in dedicated data streams, and the cur
 
 Wazuh normalizes collected logs into the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>`, extracting fields such as timestamps, source and destination IP addresses, usernames, processes, and event types. This consistent data model allows threat hunters to search and correlate activity across multiple data streams in the **Discover** section of the Wazuh dashboard.
 
-The **Discover** section of the Wazuh dashboard lets security teams search and correlate data across Wazuh security events, inventory, vulnerability, and other telemetry data streams.
+The **Discover** section of the Wazuh dashboard lets security teams search and correlate data across Wazuh security events, inventory, vulnerability, and other telemetry.
 
 .. thumbnail:: /images/getting-started/use-cases/threat-hunting/discover-section.png
    :title: Discover section of the Wazuh dashboard searching across Wazuh data streams
@@ -67,12 +67,12 @@ The **Services** tab in the **IT Hygiene** section of the Wazuh dashboard displa
    :align: center
    :width: 80%
 
-The :doc:`Rootcheck module </proof-of-concept-guide/poc-detect-hidden-process>` complements inventory-based hunting by detecting anomalies that do not appear in standard inventory data. It can identify processes and network ports hidden from standard operating system tools, helping hunters investigate activity that inventory queries alone might not reveal.
+The :doc:`Malware detection (Rootcheck) module </proof-of-concept-guide/poc-detect-hidden-process>` complements inventory-based hunting by detecting anomalies that do not appear in standard inventory data. It can identify processes and network ports hidden from standard operating system tools, helping hunters investigate activity that inventory queries alone might not reveal.
 
 Hunting for unauthorized file and configuration changes
 -------------------------------------------------------
 
-Wazuh File Integrity Monitoring (FIM) helps security teams proactively hunt for unauthorized changes to critical files, directories, and Windows registry keys that attackers commonly modify to establish persistence. The FIM module records file additions, modifications, deletions, permission changes, and registry changes in these locations. It monitors them in real time when you enable the ``realtime`` or ``whodata`` attribute for them. By default, it scans monitored directories every 12 hours.
+Wazuh file integrity monitoring (FIM) helps security teams proactively hunt for unauthorized changes to critical files, directories, and Windows registry keys that attackers commonly modify to establish persistence. The FIM module records file additions, modifications, deletions, permission changes, and registry changes in these locations. It monitors them in real time when you enable the ``realtime`` or ``whodata`` attribute for them. By default, it scans monitored directories every 12 hours.
 
 Attackers often establish persistence by modifying startup locations such as the Windows Run and RunOnce registry keys, scheduled tasks, cron entries, and startup folders. They can also modify web-accessible directories to deploy web shells. Wazuh monitors these locations and synchronizes the current file and registry state across monitored endpoints.
 

@@ -14,7 +14,7 @@ Wazuh helps you monitor systems, detect security issues, and collect evidence th
 -  Security Configuration Assessment (SCA)
 -  Vulnerability detection
 -  Malware detection
--  Active response
+-  Active Response
 
 Wazuh includes out-of-the-box detection rules with compliance mappings for multiple regulatory frameworks and security standards. Supported frameworks include PCI DSS, HIPAA, GDPR, NIST SP 800-53, NIST SP 800-171, CMMC, ISO 27001, NIS2, FedRAMP, and TSC. Compliance mappings help security teams identify findings associated with specific requirements.
 
@@ -54,7 +54,7 @@ The finding details show the compliance requirements mapped to the detected acti
 Monitoring file integrity for compliance evidence
 -------------------------------------------------
 
-File Integrity Monitoring (FIM) helps organizations monitor changes to critical files and directories. It detects file creation, modification, and deletion events and can record changes to file permissions, ownership, and other attributes. FIM also supports who-data collection, which identifies the user and process responsible for file changes. This information helps security teams investigate unauthorized changes and maintain evidence of configuration activity.
+File integrity monitoring (FIM) helps organizations monitor changes to critical files and directories. It detects file creation, modification, and deletion events and can record changes to file permissions, ownership, and other attributes. FIM also supports who-data collection, which identifies the user and process responsible for file changes. This information helps security teams investigate unauthorized changes and maintain evidence of configuration activity.
 
 For example, organizations can monitor firewall configuration files to detect unauthorized changes. FIM supports controls such as PCI DSS 11.5.2, which requires mechanisms to detect unauthorized changes to critical files.
 
@@ -100,7 +100,7 @@ The finding details show the compliance requirements mapped to the detected acti
 Monitoring security events
 --------------------------
 
-Wazuh collects and analyzes operating system, application, and security logs from monitored systems. It can also receive data from network devices and applications through supported integrations or syslog sources. For example, a syslog relay can run on an endpoint where a Wazuh agent reads the messages. The Wazuh manager does not provide a syslog listener.
+Wazuh collects and analyzes operating system, application, and security logs from monitored systems. It can also receive data from network devices and applications through supported integrations or syslog sources. For example, network devices can send syslog messages to a relay endpoint, where a Wazuh agent reads the messages. The Wazuh manager does not provide a syslog listener.
 
 Wazuh detection rules identify security events such as authentication failures, privilege changes, suspicious activity, system errors, and policy violations. These rules carry compliance mappings such as PCI DSS 10.x, HIPAA 164.312(b), and NIST SP 800-53 AU controls. Security teams can use the mappings to search for the security findings that relate to a specific requirement.
 
@@ -125,7 +125,7 @@ Detecting malware and indicators of compromise
 
 Wazuh helps detect malware by analyzing endpoint activity, file changes, logs, and indicators of compromise. FIM can identify changes to monitored files, while threat intelligence can be used to compare file hashes and other observables against known indicators.
 
-Security teams can combine malware detection with active response to automate configured actions when specific detection conditions are met.
+Security teams can combine malware detection with Active Response to automate configured actions when specific detection conditions are met.
 
 Supporting compliance reporting
 -------------------------------
