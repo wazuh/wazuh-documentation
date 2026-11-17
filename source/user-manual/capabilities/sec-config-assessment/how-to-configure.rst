@@ -31,6 +31,7 @@ Alternatively, disable a policy in the Wazuh agent ``ossec.conf`` file by settin
 To disable a policy included with the Wazuh agent, specify its path relative to the Wazuh installation directory:
 
 .. code-block:: xml
+   :emphasize-lines: 3
 
    <sca>
      <policies>
@@ -41,6 +42,7 @@ To disable a policy included with the Wazuh agent, specify its path relative to 
 For a policy distributed through centralized configuration, use its path in the ``etc/shared`` directory on Linux and macOS agents, or in the ``shared`` directory on Windows agents:
 
 .. code-block:: xml
+   :emphasize-lines: 3
 
    <sca>
      <policies>
@@ -49,6 +51,7 @@ For a policy distributed through centralized configuration, use its path in the 
    </sca>
 
 .. code-block:: xml
+   :emphasize-lines: 3
 
    <sca>
      <policies>
