@@ -34,7 +34,9 @@ Options
 |                     | :ref:`\<auth\>\<force\> <reference_wazuh_manager_conf_auth_force>` settings allow. By     |
 |                     | default, the existing agent must have been disconnected for more than 1 hour and          |
 |                     | registered more than 1 hour ago. Otherwise the Wazuh manager refuses the enrollment as a  |
-|                     | duplicate name or IP address (error 9008 or 9007), and the tool exits with code 4.        |
+|                     | duplicate name or IP address (error 9008 or 9007), and the tool exits with code 4. To     |
+|                     | enroll the agent again right away, remove it on the Wazuh manager first, as               |
+|                     | :doc:`Remove agents </user-manual/agent/agent-management/remove-agents>` describes.       |
 |                     | Without this option, the tool refuses to enroll an agent that has a key in                |
 |                     | ``/var/ossec/etc/client.keys``, even if the agent was removed from the Wazuh manager.     |
 +---------------------+-------------------------------------------------------------------------------------------+
@@ -125,6 +127,8 @@ The command output looks similar to this:
    would REPLACE the registration id=001 with a new one
    would REPLACE the trust anchor at etc/certs/root-ca.pem
    nothing was contacted and nothing was written.
+
+The dry run doesn't contact the Wazuh manager, so ``would REPLACE the registration`` doesn't mean the Wazuh manager will accept it. The real run can still fail with exit code 4 if the Wazuh manager refuses the enrollment.
 
 Refresh the trust anchor after the Wazuh manager rotated its CA, without enrolling again:
 
