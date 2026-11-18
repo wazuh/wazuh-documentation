@@ -190,7 +190,6 @@ Configuration example
   <integration>
     <name>pagerduty</name>
     <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
-    <options>{"pretext": "Custom title"}</options> <!-- Replace with your custom JSON object -->
     <alert_format>json</alert_format> <!-- With the new script this is mandatory -->
   </integration>
 
