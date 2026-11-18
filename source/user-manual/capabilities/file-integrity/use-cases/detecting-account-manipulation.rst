@@ -26,6 +26,8 @@ Configuration
 
 Perform the following steps to configure the FIM module to monitor SSH key modification.
 
+This configuration uses who-data monitoring in audit mode, which needs the audit daemon on the endpoint. See :ref:`Requirements <who_data_audit_requirements>` in *Who-data monitoring on Linux*.
+
 #. Edit the ``/var/ossec/etc/ossec.conf`` configuration file and add ``authorized_keys`` for monitoring inside the ``<ossec_config>`` block:
 
    .. code-block:: xml
@@ -49,7 +51,9 @@ Log in to the CentOS Stream 9 endpoint as the user whose ``authorized_keys`` fil
 
    .. code-block:: console
 
-      $ mkdir -m 700 -p ~/.ssh && ssh-keygen -f ~/.ssh/test_key
+      $ mkdir -m 700 -p ~/.ssh && ssh-keygen -f ~/.ssh/test_key -N ""
+
+   The ``-N ""`` option creates the key without a passphrase, so ``ssh-keygen`` doesn't prompt for one.
 
 #. Run the following command to append your ``test_key.pub`` public key to the ``authorized_keys`` file of the user:
 
@@ -60,7 +64,7 @@ Log in to the CentOS Stream 9 endpoint as the user whose ``authorized_keys`` fil
 Visualize the finding
 ----------------------
 
-Navigate to **Endpoint security** → **File Integrity Monitoring** → **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes to the ``authorized_keys`` file.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes to the ``authorized_keys`` file.
 
 .. thumbnail:: /images/manual/fim/changes-authorized-keys-file.png
    :title: Changes to the authorized_keys file

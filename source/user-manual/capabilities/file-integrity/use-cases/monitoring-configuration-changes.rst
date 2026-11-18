@@ -46,6 +46,8 @@ Perform the following steps to configure the FIM module to monitor the ``/etc/ap
         </whodata>
       </syscheck>
 
+   This configuration uses the eBPF provider, which collects who-data without the audit daemon. For its kernel requirements and its fallback to the audit provider, see :ref:`The eBPF mode <the_ebpf_mode>`.
+
 #. Restart the Wazuh agent to apply the configuration changes:
 
    .. code-block:: console
@@ -55,18 +57,18 @@ Perform the following steps to configure the FIM module to monitor the ``/etc/ap
 Test the configuration
 -----------------------
 
-#. Modify the ``/etc/app.conf`` file by using ``nano`` with root privileges:
+#. Log in to the endpoint as a regular user with sudo privileges, ``wazuh`` in this example, and open the ``/etc/app.conf`` file with ``nano``:
 
    .. code-block:: console
 
-      # nano /etc/app.conf
+      $ sudo nano /etc/app.conf
 
 #. Add ``updated image to V2`` to the file and save.
 
 Visualize the finding
 ----------------------
 
-Navigate to **Endpoint security** → **File Integrity Monitoring** → **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects modification of the configuration file.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects modification of the configuration file.
 
 .. thumbnail:: /images/manual/fim/modification-of-the-configuration-file.png
    :title: Modification of the configuration file

@@ -48,7 +48,7 @@ Perform the following steps to configure the FIM module to monitor a ``user_deta
 
    .. code-block:: console
 
-      /Library/Ossec/bin/wazuh-control restart
+      # /Library/Ossec/bin/wazuh-control restart
 
 Test the configuration
 -----------------------
@@ -58,7 +58,7 @@ Test the configuration
 Visualize the finding
 ----------------------
 
-Navigate to **Endpoint security** → **File Integrity Monitoring** → **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes to the ``user_details.txt`` file.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes to the ``user_details.txt`` file.
 
 .. thumbnail:: /images/manual/fim/changes-user-details-file.png
    :title: Changes to the user_details.txt file
