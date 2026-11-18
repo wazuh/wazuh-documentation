@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added a note on the launchd resource limits that can make the Wazuh agent miss macOS ULS events under high CPU load, and how to remove them, to the *Log data collection* documentation. ([#10717](https://github.com/wazuh/wazuh-documentation/pull/10717))
+- Added the `rootcheck.max_pid` internal option, updated the `rootcheck.sleep` description, and added a note to the `check_pids` setting, in the *Reference* documentation. ([#10805](https://github.com/wazuh/wazuh-documentation/pull/10805))
 
 ### Fixed
 
