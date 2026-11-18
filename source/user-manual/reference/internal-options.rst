@@ -303,7 +303,114 @@ The ``wazuh_database.*`` internal options configure the Database Sync module.
 Wazuh modules
 ^^^^^^^^^^^^^^
 
-The Inventory Sync Server module reads its tuning parameters from the ``wazuh_modules.inventory_sync_server_*`` internal options.
+The inventory sync server receives the Wazuh agents' inventory synchronization (``POST /stateful``) and writes it to the Wazuh indexer. Its options use the ``wazuh_modules.inventory_sync_server_`` prefix. Where the default value is ``0``, the module picks the value shown in the description. A value outside the allowed range stops ``wazuh-manager-modulesd`` at start.
+
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| Setting                                                                         | Description                                                            | Default value | Allowed values                 |
++=================================================================================+========================================================================+===============+================================+
+| ``wazuh_modules.inventory_sync_server_io_threads``                              | Threads that run the server's network I/O. ``0`` uses one per CPU.     | 0             | Integer from 0 to 128          |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_concurrent_accepts``                      | Connection accept operations kept in flight. ``0`` means 2.            | 0             | Integer from 0 to 64           |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_buffer_size``                             | Read buffer per connection, in bytes. ``0`` means 8192.                | 0             | Integer from 0 to 1048576      |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_max_body_size``                           | Largest request body, in bytes. Larger requests get HTTP 413. ``0``    | 0             | Integer from 0 to 536870912    |
+|                                                                                 | sets no limit of its own; ``inventory_sync_server_max_inflight_bytes`` |               |                                |
+|                                                                                 | still applies.                                                         |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_max_url_size``                            | Largest request URL, in bytes. Larger requests get HTTP 414. ``0``     | 0             | Integer from 0 to 65536        |
+|                                                                                 | means 2048.                                                            |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_max_header_name_size``                    | Largest header name, in bytes. Larger requests get HTTP 431. ``0``     | 0             | Integer from 0 to 65536        |
+|                                                                                 | means 256.                                                             |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_max_header_value_size``                   | Largest header value, in bytes. Larger requests get HTTP 431. ``0``    | 0             | Integer from 0 to 1048576      |
+|                                                                                 | means 8192.                                                            |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_header_timeout``                          | Seconds to receive the request headers. ``0`` means 10.                | 0             | Integer from 0 to 3600         |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_body_timeout``                            | Seconds to receive the request body after the headers. ``0`` means 30. | 0             | Integer from 0 to 3600         |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_response_timeout``                        | Seconds to answer a request before the connection is closed. ``0``     | 0             | Integer from 0 to 3600         |
+|                                                                                 | means 300.                                                             |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_write_timeout``                           | Seconds to send one response. ``0`` means 10.                          | 0             | Integer from 0 to 3600         |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_drain_timeout``                           | Seconds to wait for requests in progress when the module stops. ``0``  | 0             | Integer from 0 to 10           |
+|                                                                                 | means 2.                                                               |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_max_inflight_bytes``                      | Total bytes of requests being processed at once. Requests over it get  | 268435456     | Integer from 0 to 2147483647   |
+|                                                                                 | HTTP 503. If not set, 268435456 (256 MiB). ``0`` means no limit.       |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_max_parallel_connections``                | Simultaneous connections. Connections over it get HTTP 503. ``0``      | 0             | Integer from 0 to 65536        |
+|                                                                                 | means 1024. Keep it under ``wazuh_modules.rlimit_nofile``.             |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_reserved_control_connections``            | Connections kept free for agent removal requests, so synchronization   | 0             | Integer from 0 to 256          |
+|                                                                                 | can't use them all. At most a quarter of                               |               |                                |
+|                                                                                 | ``inventory_sync_server_max_parallel_connections``. ``0`` means 64.    |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_control_max_body_bytes``                  | Largest body of an agent removal request, in bytes. Larger requests    | 0             | Integer from 0 to 1048576      |
+|                                                                                 | get HTTP 413. ``0`` means 65536.                                       |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_control_max_sessions``                    | Simultaneous agent removal requests. Requests over it get HTTP 503.    | 0             | Integer from 0 to 1024         |
+|                                                                                 | ``0`` means 256.                                                       |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_sync_workers``                            | Threads that write synchronization sessions to the Wazuh indexer.      | 0             | Integer from 0 to 64           |
+|                                                                                 | ``0`` uses half the CPUs, at least 1.                                  |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_sync_queue_bytes``                        | Bytes of synchronization data waiting to be written. Requests over it  | 67108864      | Integer from 1048576 to        |
+|                                                                                 | get HTTP 503.                                                          |               | 1073741824                     |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_max_sessions_per_agent``                  | Sessions one agent can have waiting for an answer. Requests over it    | 2             | Integer from 1 to 1024         |
+|                                                                                 | get HTTP 503.                                                          |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_session_query_batch_size``                | Documents read from the Wazuh indexer per query while processing a     | 0             | Integer from 0 to 10000        |
+|                                                                                 | session. ``0`` means 1000.                                             |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_vd_workers``                              | Threads that run vulnerability detection scans. ``0`` uses half the    | 0             | Integer from 0 to 64           |
+|                                                                                 | CPUs, at least 1.                                                      |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_vd_scan_queue_slots``                     | Scans that can wait for a thread. Requests over it get HTTP 503. ``0`` | 0             | Integer from 0 to 256          |
+|                                                                                 | means twice ``inventory_sync_server_vd_workers``.                      |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_vd_feed_retry_after_seconds``             | ``Retry-After`` value, in seconds, sent to agents while the            | 10            | Integer from 10 to 1800        |
+|                                                                                 | vulnerability feed is still downloading.                               |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_sync_max_bulk_size``              | Bytes of synchronization data collected before they are written to the | 10485760      | Integer from 4096 to 104857600 |
+|                                                                                 | Wazuh indexer.                                                         |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_sync_connector_max_bulk_size``    | Largest ``_bulk`` request sent to the Wazuh indexer, in bytes. Keep it | 10485760      | Integer from 4096 to 104857600 |
+|                                                                                 | under the indexer's ``http.max_content_length``.                       |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_sync_flush_interval_seconds``     | Seconds between writes to the Wazuh indexer, even if                   | 20            | Integer from 1 to 3600         |
+|                                                                                 | ``inventory_sync_server_indexer_sync_max_bulk_size`` is not reached.   |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_sync_max_retry_delay_seconds``    | Longest wait between retries to the Wazuh indexer, in seconds.         | 15            | Integer from 1 to 3600         |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_sync_max_retry_attempts``         | Failed attempts before a write to the Wazuh indexer is given up. ``0`` | 5             | Integer from 0 to 1000         |
+|                                                                                 | means no limit.                                                        |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_sync_max_retry_duration_seconds`` | Seconds spent retrying one write before it is given up. ``0`` means no | 15            | Integer from 0 to 3600         |
+|                                                                                 | limit.                                                                 |               |                                |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_sync_request_timeout_seconds``    | Seconds to wait for one request to the Wazuh indexer.                  | 60            | Integer from 1 to 3600         |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_async_bulk_max_bytes``            | Bytes collected before a background write to the Wazuh indexer.        | 4194304       | Integer from 4096 to 104857600 |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_async_flush_interval_seconds``    | Seconds between background writes to the Wazuh indexer.                | 20            | Integer from 1 to 3600         |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_async_max_retry_delay_seconds``   | Longest wait between background write retries, in seconds.             | 15            | Integer from 1 to 3600         |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_async_request_timeout_seconds``   | Seconds to wait for one background request to the Wazuh indexer.       | 60            | Integer from 1 to 3600         |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_async_max_queue_bytes``           | Bytes of background writes waiting in memory. ``0`` means no limit.    | 67108864      | Integer from 0 to 2147483647   |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_async_logger_queue_size``         | Errors from background writes waiting to be logged.                    | 8             | Integer from 1 to 65536        |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_async_logger_threads``            | Threads that log errors from background writes.                        | 1             | Integer from 1 to 64           |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
+| ``wazuh_modules.inventory_sync_server_indexer_monitoring_interval_seconds``     | Seconds between health checks of the Wazuh indexer.                    | 10            | Integer from 1 to 3600         |
++---------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+--------------------------------+
 
 Vulnerability scanner
 ^^^^^^^^^^^^^^^^^^^^^^^
