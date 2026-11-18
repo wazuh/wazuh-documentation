@@ -340,7 +340,7 @@ Name of AWS organization. Only works with CloudTrail buckets.
 discard_regex
 ~~~~~~~~~~~~~~~
 
-A regular expression to determine if an event must be discarded. It requires a mandatory field attribute. If the field is present in the event log, the regex is applied to it. For example, ``userIdentity.principalId`` for the following AWS CloudTrail log example:
+A regular expression to determine if an event must be discarded. It requires a mandatory field attribute. If the field is present in the event log, the regex is applied to it. The field path is case-sensitive. For example, ``userIdentity.principalId`` for the following AWS CloudTrail log example:
 
 .. code-block:: json
 
@@ -767,7 +767,7 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 discard_regex
 ~~~~~~~~~~~~~~~
 
-A regular expression to determine if an event must be discarded. JSON and CSV logs require a mandatory field attribute. If the field is present in the event log, the regex is applied to it. For example, ``userIdentity.principalId`` for the following AWS CloudTrail log example:
+A regular expression to determine if an event must be discarded. JSON and CSV logs require a mandatory field attribute. If the field is present in the event log, the regex is applied to it. The field path is case-sensitive. For example, ``userIdentity.principalId`` for the following AWS CloudTrail log example:
 
 .. code-block:: json
 
