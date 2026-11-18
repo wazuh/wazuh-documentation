@@ -196,11 +196,11 @@ Then create an Alerting monitor that runs the active response when a finding mat
    .. code-block:: json
 
       {
-          "description": "Detects new files in Downloads directories",
+          "description": "Detects files with a known malicious hash",
           "queries": [
               {
                   "name": "remove_file_ar_query",
-                  "query": "wazuh.integration.name:\"wazuh-fim\" AND event.action:\"created\" AND file.path:*downloads*",
+                  "query": "wazuh.rule.title:*Malicious\\ hash\\ detected*",
                   "tags": []
               }
           ]
@@ -242,7 +242,7 @@ Then create an Alerting monitor that runs the active response when a finding mat
 
 .. note::
 
-   Extraction queries use the query string syntax. The ``*`` wildcard matches any sequence of characters. For example, ``file.path:*downloads*`` matches any file path that contains downloads. Matching is case-sensitive, and the Windows agent reports file paths in lowercase, such as ``c:\users\<USER>\downloads\eicar.txt``, so ``*Downloads*`` doesn't match these findings. Use ``AND``, ``OR``, and ``NOT`` to combine conditions.
+   Extraction queries use the query string syntax. The ``*`` wildcard matches any sequence of characters. For example, ``wazuh.rule.title:*Malicious\ hash\ detected*`` matches any rule title that contains Malicious hash detected. A backslash escapes each space, and the JSON needs each backslash twice.
 
 Attack emulation
 -------------------
