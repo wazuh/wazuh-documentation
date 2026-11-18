@@ -138,7 +138,7 @@ As described in the :doc:`centralized configuration section </user-manual/refere
 
 You can enable this feature to push policy files to Wazuh agents in defined groups. By default, every Wazuh agent belongs to the ``default`` group, which is used here as an example:
 
-#. Edit the Wazuh agent ``local_internal_options.conf`` file to allow SCA policies sent from the Wazuh manager to execute commands:
+#. If the policy files you push contain command rules, edit the Wazuh agent ``local_internal_options.conf`` file to let the Wazuh agent run them:
 
    .. tabs::
 
@@ -164,7 +164,7 @@ You can enable this feature to push policy files to Wazuh agents in defined grou
 
    .. note::
 
-      Enabling remote command execution lets the Wazuh manager execute commands on the monitored endpoint. Remote commands are disabled by default as a security measure, which helps reduce the attack surface if the Wazuh manager is compromised. You don't need to enable remote commands if you add the policy files to each agent without using Wazuh to push them. For example, you can create the policy file directly on the monitored endpoint, or use ``scp`` to copy it there.
+      Enabling remote command execution lets the Wazuh manager execute commands on the monitored endpoint. Remote commands are disabled by default as a security measure, which helps reduce the attack surface if the Wazuh manager is compromised. You don't need to enable remote commands if you add the policy files to each agent without using Wazuh to push them. For example, you can create the policy file directly on the monitored endpoint, or use ``scp`` to copy it there. This applies only when you enable the policy in the Wazuh agent ``ossec.conf`` file. If you enable it in ``agent.conf`` and the file isn't in the ``ruleset/sca`` folder, the Wazuh agent treats it as a remote policy, and its command rules need remote commands, even if you copied the file to the endpoint yourself. If you push a policy without enabling remote commands, the Wazuh agent still evaluates it. It reports the checks that use command rules as **Not applicable**, with the reason ``Remote commands are disabled for this policy``.
 
 #. On the Wazuh manager, place a new policy file in the ``/etc/wazuh-manager/shared/default`` folder and change its ownership. Replace ``<NEW_POLICY_FILE>`` with your policy name:
 
@@ -405,7 +405,7 @@ the evaluation of its rules.
 
 .. note::
 
-   -  The ``id`` field under the ``policy`` and ``checks`` sections must be unique across policy files.
+   -  The ``id`` field under the ``policy`` and ``checks`` sections must be unique across policy files. To avoid conflicts with the check IDs of the default policies, start the check IDs of your custom policies at 100000.
    -  The ``regex_type`` field is ignored. The Wazuh agent evaluates every rule with PCRE2.
    -  A check can use ``title`` instead of ``name``. The SCA module stores the value as ``name``.
 
