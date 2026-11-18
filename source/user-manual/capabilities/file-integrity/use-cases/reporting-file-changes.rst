@@ -63,7 +63,7 @@ Test the configuration
 Visualize the findings
 -----------------------
 
-Navigate to **Endpoint security** → **File Integrity Monitoring** → **Findings** on the Wazuh dashboard to view the findings. You can see four findings related to the monitored directory.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the findings. You can see four findings: a File created finding and a File modified finding for each of the ``appreport.conf`` and ``private-file.conf`` files.
 
 .. thumbnail:: /images/manual/fim/alerts-related-monitored-directory.png
    :title: Findings related to the monitored directory
