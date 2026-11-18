@@ -5,7 +5,9 @@ Writes every warning to the GitHub Actions job summary, optionally emits
 each one as an annotation on the affected file and line, and exits 1 when
 there is at least one warning so the check shows as failed.
 
-Usage: report-sphinx-warnings.py <warning-file> [--annotate]
+Usage: report-sphinx-warnings.py <warning-file> [--annotate] [--title <name>]
+
+--title names the build in the summary and annotations (default: Sphinx build).
 """
 
 import os
@@ -54,7 +56,15 @@ def main():
         print(__doc__)
         return 2
     path = sys.argv[1]
-    annotate = '--annotate' in sys.argv[2:]
+    options = sys.argv[2:]
+    annotate = '--annotate' in options
+    title = 'Sphinx build'
+    if '--title' in options:
+        index = options.index('--title') + 1
+        if index >= len(options):
+            print(__doc__)
+            return 2
+        title = options[index]
 
     if not os.path.exists(path):
         print(f'::error::Warning file {path} not found. The build probably crashed before it started.')
@@ -71,22 +81,22 @@ def main():
                 props.append(f"file={escape_property(w['file'])}")
                 if w['line']:
                     props.append(f"line={w['line']}")
-            props.append('title=Sphinx build')
+            props.append(f'title={escape_property(title)}')
             print(f"::{command} {','.join(props)}::{escape_data(w['msg'])}")
 
     summary = os.environ.get('GITHUB_STEP_SUMMARY')
     if summary:
         with open(summary, 'a', encoding='utf-8') as fh:
             if not warnings:
-                fh.write('### Sphinx build: no warnings\n')
+                fh.write(f'### {title}: no warnings\n')
             else:
-                fh.write(f'### Sphinx build: {len(warnings)} warning(s)\n\n')
+                fh.write(f'### {title}: {len(warnings)} warning(s)\n\n')
                 fh.write('| File | Line | Level | Message |\n|---|---|---|---|\n')
                 for w in warnings:
                     msg = w['msg'].replace('|', '\\|')
                     fh.write(f"| `{w['file'] or '-'}` | {w['line'] or '-'} | {w['level']} | {msg} |\n")
 
-    print(f'Sphinx build warnings: {len(warnings)}')
+    print(f'{title} warnings: {len(warnings)}')
     for w in warnings:
         location = w['file'] + (f":{w['line']}" if w['line'] else '')
         print(f"  {location or '-'}: {w['level']}: {w['msg']}")
