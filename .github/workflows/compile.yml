@@ -47,8 +47,10 @@ jobs:
 
     # Builds the .md copy of every page, the version llms.txt tells AI tools to
     # read. The Markdown builder leaves out markup it can't render and only warns
-    # about it, so any warning here means a page's .md copy lost content. It
-    # reuses the HTML build's cache, so it runs only when that build finished.
+    # about it ("unknown node type"), so that warning means a page's .md copy lost
+    # content. Link warnings the HTML build reports, such as an undefined label,
+    # repeat here. It reuses the HTML build's cache, so it runs only when that
+    # build finished.
     - name: Build the Markdown version
       id: markdown
       if: ${{ !cancelled() && steps.build.outcome == 'success' }}

@@ -15,7 +15,9 @@ import re
 import sys
 
 LINE_RE = re.compile(
-    r'^(?P<file>.+?)(?::(?P<line>\d+))?: (?P<level>WARNING|ERROR|CRITICAL|SEVERE): (?P<msg>.*)$'
+    # The line number can be empty ("page.rst:: WARNING: ..."), as in some
+    # Markdown builder warnings.
+    r'^(?P<file>.+?)(?::(?P<line>\d*))?: (?P<level>WARNING|ERROR|CRITICAL|SEVERE): (?P<msg>.*)$'
 )
 LEVEL_ONLY_RE = re.compile(r'^(?P<level>WARNING|ERROR|CRITICAL|SEVERE): (?P<msg>.*)$')
 
