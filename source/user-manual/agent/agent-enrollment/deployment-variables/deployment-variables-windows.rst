@@ -11,7 +11,7 @@ Pass the variables as properties to the MSI package, then start the Wazuh agent.
 .. code-block:: pwsh-session
 
    > (Start-Process msiexec.exe -ArgumentList '/i "<WAZUH_AGENT_MSI>" /q WAZUH_ENROLLMENT_TOKEN="<TOKEN>" WAZUH_AGENT_NAME="windows-server-01"' -Wait -PassThru).ExitCode
-   > Start-Service -Name wazuh
+   > Start-Service -Name WazuhSvc
 
 To check that the Wazuh agent enrolled, search its log for the ``Token bootstrap: enrollment succeeded`` message. The Wazuh agent also shows as Active in **Agents management** > **Summary** on the Wazuh dashboard.
 

@@ -45,6 +45,24 @@ jobs:
         python3 tools/ci/report-sphinx-warnings.py build/sphinx-warnings.log \
           ${{ matrix.python-version == '3.12' && '--annotate' || '' }}
 
+    # Builds the .md copy of every page, the version llms.txt tells AI tools to
+    # read. The Markdown builder leaves out markup it can't render and only warns
+    # about it ("unknown node type"), so that warning means a page's .md copy lost
+    # content. Link warnings the HTML build reports, such as an undefined label,
+    # repeat here. It reuses the HTML build's cache, so it runs only when that
+    # build finished.
+    - name: Build the Markdown version
+      id: markdown
+      if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+      run: |
+        make markdown SPHINXOPTS="-w build/markdown-warnings.log"
+
+    - name: Report Markdown build warnings
+      if: ${{ !cancelled() && steps.markdown.outcome != 'skipped' }}
+      run: |
+        python3 tools/ci/report-sphinx-warnings.py build/markdown-warnings.log --title "Markdown build" \
+          ${{ matrix.python-version == '3.12' && '--annotate' || '' }}
+
     - name: Lint llms.txt (content defects only) #Links need verification after publication
       if: ${{ !cancelled() && hashFiles('tools/ci/check-llms-txt.sh') != '' }}
       run: |
