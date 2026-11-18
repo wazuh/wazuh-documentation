@@ -26,6 +26,10 @@ Wazuh manager
 -  `#35623 <https://github.com/wazuh/wazuh/issues/35623>`__ Added CVSS v4.0 support to the Vulnerability Scanner.
 -  `#36000 <https://github.com/wazuh/wazuh/issues/36000>`__ Added new CVE 5.0 schema fields to the Vulnerability Detector content model.
 -  `#35579 <https://github.com/wazuh/wazuh/issues/35579>`__ Added manager watermarks.
+-  `#37706 <https://github.com/wazuh/wazuh/issues/37706>`__ `#1927 <https://github.com/wazuh/wazuh-indexer/issues/1927>`__ Added default API role mappings for the user names ``wazuh-admin``, ``wazuh-readonly`` and ``wazuh-demo``.
+
+   .. Corrected from the upstream changelog: wazuh/wazuh-indexer#1922 and #1938 removed these users from the indexer before 5.0.0-rc1, so the entry no longer calls them indexer users.
+
 -  `#38157 <https://github.com/wazuh/wazuh/issues/38157>`__ Added installation-time variables to customize the default ``<remote>`` configuration on source, DEB, and RPM manager installations.
 -  `#38553 <https://github.com/wazuh/wazuh/issues/38553>`__ Added the ``PUT /agents/scan/vulnerability`` endpoint to trigger an on-demand vulnerability scan for one agent, a list of agents, or all agents.
 -  `#38589 <https://github.com/wazuh/wazuh/issues/38589>`__ Added recurring manager tasks to the Task Manager: the agent disconnection sweep, the deletion of long-disconnected agents, and manager log rotation now run as durable, retried tasks inside ``wazuh-manager-modulesd``. Their resolved settings are reported by ``GET /manager/configuration/wmodules/wmodules``.
@@ -87,8 +91,6 @@ Wazuh manager
 -  `#38589 <https://github.com/wazuh/wazuh/issues/38589>`__ Removed the ``<global><agents_disconnection_alert_time>`` option. A configuration that still includes it fails to start.
 -  `#38992 <https://github.com/wazuh/wazuh/issues/38992>`__ Removed the certificate-generation mode (``-C``, ``-B``, ``-K``, ``-X``, ``-S``) of ``wazuh-manager-remoted`` and ``wazuh-manager-authd``, and the ``USER_CREATE_SSL_CERT`` and ``USER_GENERATE_AUTHD_CERT`` installation variables.
 -  `#39554 <https://github.com/wazuh/wazuh/issues/39554>`__ Removed the built-in ``wazuh-manager``/``wazuh-manager`` indexer credential: the indexer connector no longer falls back to it when the keystore is empty, and ``queue/sockets/keystore.sock`` no longer answers the literal ``wazuh-manager`` for a key nobody set. Both made "not set" indistinguishable from "set to a password everyone knows"; an absent credential is now an error the resolver reports by name before any daemon starts.
-
-.. Dropped from the upstream changelog: https://github.com/wazuh/wazuh/issues/37706 added default API role mappings for the indexer users wazuh-admin, wazuh-readonly and wazuh-demo, but the indexer no longer ships those users: wazuh/wazuh-indexer#1922 removed wazuh-admin and wazuh-demo, and wazuh/wazuh-indexer#1938 removed wazuh-readonly, before 5.0.0-rc1.
 
 Wazuh agent
 ^^^^^^^^^^^
