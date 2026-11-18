@@ -4,25 +4,25 @@
    :description: The Wazuh module for GitHub enables the collection of audit logs from GitHub through its API. Check out this section of our documentation to learn more about it.
 
 Monitoring GitHub audit logs
-=============================
+============================
 
 Organization administrators use GitHub audit logs to review the actions that members perform within their organization. Each log includes details such as the user who performs the action, the nature of the action, and the timestamp of its execution. The Wazuh module for GitHub enables the collection of audit logs from GitHub through its API. Wazuh initiates an HTTP GET request to the GitHub API endpoint ``/orgs/{org}/audit-log`` to collect the audit logs. For further details, refer to the `GitHub REST API <https://docs.github.com/en/rest>`__ documentation.
 
 Requirements for monitoring GitHub audit logs
------------------------------------------------
+---------------------------------------------
 
 You need the following requirements on GitHub to access the audit logs with Wazuh.
 
 -  **GitHub organization**: You can only view audit logs for GitHub organizations.
 -  **GitHub Enterprise Cloud subscription**: Only organizations with a GitHub Enterprise Cloud subscription can use the GitHub audit log REST API.
 
-Creating a personal access token on GitHub
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Create a GitHub personal access token
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Perform the following steps on GitHub to generate the required personal access token. This access token is required to read audit logs.
 
-#. Sign in to GitHub with an account that belongs to the organization owner.
-#. Navigate to https://github.com/settings/tokens/new to create a new personal access token.
+#. Sign in to GitHub with an account that is an owner of the organization.
+#. Navigate to https://github.com/settings/tokens/new to create a new personal access token (classic).
 #. Include a descriptive note for the personal access token, and select an expiration time.
 
    .. thumbnail:: /images/cloud-security/github/github-new-personal-access-token.png
@@ -39,7 +39,7 @@ Perform the following steps on GitHub to generate the required personal access t
       :align: center
       :width: 80%
 
-#. Copy the newly generated personal access token. Save this to a secure location as it is required to configure the Wazuh module for GitHub.
+#. Copy the newly generated personal access token. Save the token in a secure location, because you need it to configure the Wazuh module for GitHub.
 
    .. thumbnail:: /images/cloud-security/github/github-copy-generated-token.png
       :title: Copy generated token
@@ -47,10 +47,12 @@ Perform the following steps on GitHub to generate the required personal access t
       :align: center
       :width: 80%
 
-Configuring Wazuh to pull GitHub logs
-----------------------------------------
+Configure the Wazuh module for GitHub
+-------------------------------------
 
-Perform the following steps to allow Wazuh to monitor, collect, and analyze the GitHub audit logs. You can configure the Wazuh module for GitHub on the Wazuh agent.
+Perform the following steps to allow Wazuh to monitor, collect, and analyze the GitHub audit logs. The Wazuh module for GitHub runs on the Wazuh agent. The Wazuh manager does not run the module.
+
+Before you configure the module, enable the ``github`` integration in the standard ruleset on the Wazuh dashboard. The integration ships disabled. Until you enable it, the Wazuh manager receives the GitHub events but does not classify or index them. Events that arrive while the integration is disabled are not processed again after you enable it. To enable it, open **Ruleset management** > **Overview** on the Wazuh dashboard, make sure you are in the **Standard** space, search for ``github``, click github, and then click **Actions** > **Enable**.
 
 #. Append the following configuration to the ``/var/ossec/etc/ossec.conf`` file on the Wazuh agent.
 
@@ -75,12 +77,12 @@ Perform the following steps to allow Wazuh to monitor, collect, and analyze the 
 
    Where:
 
-   -  ``<enabled>``: Enables the Wazuh module for GitHub. The allowed values are ``yes`` and ``no``.
-   -  ``<interval>``: Defines the time interval between each execution of the Wazuh module for GitHub. The default value is ``10m``. The allowed value is any positive number with a suffix character indicating a time unit, such as s (seconds), m (minutes), h (hours), or d (days).
-   -  ``<time_delay>``: Specifies the delay time of the scan with respect to the current time. The default value is ``30s``. The allowed value is any positive number with a suffix character indicating a time unit, such as s (seconds), m (minutes), h (hours), or d (days).
-   -  ``<curl_max_size>``: Specifies the maximum size allowed for the GitHub API response. The default value is ``1M``. The allowed value is any positive number with a suffix character indicating a size unit, such as b/B (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes).
-   -  ``<only_future_events>``: When set to ``yes``, the Wazuh module for GitHub collects only events generated after you start the Wazuh agent. When set to ``no``, it collects events generated before you start the Wazuh agent. The default value is ``yes``, and the allowed values are ``yes`` and ``no``.
-   -  ``<api_auth>``: This block configures the credentials for authentication with the GitHub REST API. The tags ``<org_name>`` and ``<api_token>`` are configuration tags within ``<api_auth>``.
+   -  ``<enabled>``: Enables the Wazuh module for GitHub. The default value is ``yes``, and the allowed values are ``yes`` and ``no``.
+   -  ``<interval>``: Defines the time interval between each execution of the Wazuh module for GitHub. The default value is ``1m``. The value is a positive number with an optional time unit suffix: s (seconds), m (minutes), h (hours), d (days), or w (weeks). A value without a suffix is in seconds. Use a value greater than ``0``. With ``0``, the module queries the GitHub API continuously.
+   -  ``<time_delay>``: Specifies the delay time of the scan with respect to the current time. The default value is ``30s``. The value uses the same format as ``<interval>``.
+   -  ``<curl_max_size>``: Specifies the maximum size allowed for the GitHub API response. The default value is ``1M``. The value is a positive number with an optional unit suffix in uppercase or lowercase: B (bytes), K (kilobytes), M (megabytes), or G (gigabytes). The minimum value is ``1K``.
+   -  ``<only_future_events>``: When set to ``yes``, the Wazuh module for GitHub collects only events generated after you start the Wazuh agent. When set to ``no``, the module resumes from the last event it collected before the Wazuh agent stopped. On its first run, the module has no saved position and starts at the current time. The default value is ``yes``, and the allowed values are ``yes`` and ``no``.
+   -  ``<api_auth>``: This block configures the credentials for authentication with the GitHub REST API. The module requires at least one ``<api_auth>`` block. Each block requires the ``<org_name>`` and ``<api_token>`` tags, and neither tag can be empty.
 
       -  ``<org_name>``: Name of your GitHub organization. The allowed value is any string.
       -  ``<api_token>``: Personal access token to authenticate with the GitHub API. The allowed value is any string.
@@ -95,10 +97,18 @@ Perform the following steps to allow Wazuh to monitor, collect, and analyze the 
 
       # systemctl restart wazuh-agent
 
-Monitoring multiple GitHub organizations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   To confirm that the module started, check the Wazuh agent log:
 
-You can monitor multiple GitHub organizations with Wazuh by specifying the organization credentials in individual ``<api_auth>`` sections. For example, the following configuration monitors two organizations named ``organization1`` and ``organization2``.
+   .. code-block:: console
+
+      # grep "github" /var/ossec/logs/ossec.log
+
+   The output includes the ``Module GitHub started.`` message. On the first start, and on every start when ``<only_future_events>`` is ``yes``, the module saves the current time as its starting point and sends its first query to GitHub one ``<interval>`` later. Each run of the module sends one request to the GitHub API for each organization and event type, plus one request for each additional page of 100 events. If a request fails, for example because GitHub rejects the token or applies its API rate limit, the module keeps its starting point and queries the same time window again on the next run. After three consecutive failures for the same organization and event type, the Wazuh agent log shows a ``Sending GitHub internal message`` warning that includes the GitHub response, such as ``Bad credentials``.
+
+Monitoring multiple GitHub organizations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can monitor multiple GitHub organizations with Wazuh by specifying the organization credentials in individual ``<api_auth>`` sections. For example, the following ``<github>`` block monitors two organizations named ``organization1`` and ``organization2``. Place it inside ``<ossec_config>`` in the ``/var/ossec/etc/ossec.conf`` file on the Wazuh agent, and then restart the Wazuh agent.
 
 .. code-block:: xml
 
@@ -109,18 +119,15 @@ You can monitor multiple GitHub organizations with Wazuh by specifying the organ
      <curl_max_size>1M</curl_max_size>
      <only_future_events>yes</only_future_events>
 
-
      <api_auth>
        <org_name>organization1</org_name>
        <api_token><API_TOKEN></api_token>
      </api_auth>
 
-
      <api_auth>
        <org_name>organization2</org_name>
        <api_token><API_TOKEN></api_token>
      </api_auth>
-
 
      <api_parameters>
        <event_type>git</event_type>
@@ -129,15 +136,17 @@ You can monitor multiple GitHub organizations with Wazuh by specifying the organ
 
 Where:
 
--  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
+-  ``<API_TOKEN>`` is the personal access token with the ``read:audit_log`` scope for each organization.
 
-.. thumbnail:: /images/cloud-security/github/github-dashboard-tab.jpg
+After the module collects events, the **GitHub** module of the Wazuh dashboard shows them on the **Dashboard** and **Panel** tabs.
+
+.. thumbnail:: /images/cloud-security/github/github-dashboard-tab.png
    :title: GitHub dashboard tab
    :alt: GitHub dashboard tab
    :align: center
    :width: 80%
 
-.. thumbnail:: /images/cloud-security/github/github-panel-tab.jpg
+.. thumbnail:: /images/cloud-security/github/github-panel-tab.png
    :title: GitHub panel tab
    :alt: GitHub panel tab
    :align: center
@@ -146,18 +155,24 @@ Where:
 Use cases
 ---------
 
+The following use cases show how Wazuh detects changes to organization members and repositories. You make each change with the GitHub REST API, and then view the findings on the Wazuh dashboard.
+
 Requirements
 ^^^^^^^^^^^^
 
--  Integrate Wazuh with GitHub according to the :doc:`monitoring GitHub activity </cloud-security/github/monitoring-github-activity>` documentation.
+-  Configure the Wazuh module for GitHub as described in :doc:`Monitoring GitHub audit logs </cloud-security/github/monitoring-github-activity>`.
 -  An Ubuntu 24.04 endpoint with curl installed.
 
-GitHub
-^^^^^^
+Create a token for the use cases
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Create a GitHub personal access token within the ``admin:org``, ``repo``, and ``delete_repo`` scopes. We use this token with the GitHub REST API to test use cases by performing actions on the organization that trigger Wazuh findings.
+The use cases need a GitHub personal access token with the ``admin:org``, ``repo``, and ``delete_repo`` scopes. You use this token with the GitHub REST API to make changes that generate Wazuh findings.
 
-Perform the following steps to create the API token:
+.. warning::
+
+   The use cases invite members, change roles, and delete a repository and a team. Run them only on a test organization.
+
+Perform the following steps on GitHub to create the API token:
 
 #. Navigate to https://github.com/settings/tokens/new, add a note for the token, select your desired expiration time, and then select the ``repo`` and ``admin:org`` scopes.
 
@@ -167,7 +182,7 @@ Perform the following steps to create the API token:
       :align: center
       :width: 80%
 
-#. Scroll to the bottom of the page, then select the ``delete_repo`` scope and click the **Generate token** button.
+#. Scroll to the bottom of the page, then select the ``delete_repo`` scope and click **Generate token**.
 
    .. thumbnail:: /images/cloud-security/github/use-case-github-generate-token.png
       :title: Generate a token for admin
@@ -187,10 +202,10 @@ Ubuntu endpoint
 ^^^^^^^^^^^^^^^
 
 Detecting manipulation of organization members
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Inviting a member
-""""""""""""""""""
+Invite a member
+"""""""""""""""
 
 Perform the following steps to invite a member to your organization.
 
@@ -198,7 +213,7 @@ Perform the following steps to invite a member to your organization.
 
    .. code-block:: console
 
-      # curl -L \
+      $ curl -L \
         -X POST \
         -H "Accept: application/vnd.github+json" \
         -H "Authorization: Bearer <API_TOKEN>" \
@@ -254,14 +269,16 @@ Perform the following steps to invite a member to your organization.
 
 #. Go to the invited member’s mailbox and accept the invite.
 
-Promoting a member to administrator
-""""""""""""""""""""""""""""""""""""
+Promote a member to administrator
+"""""""""""""""""""""""""""""""""
+
+The administrator role gives a member full administrative access to the organization. GitHub records the role change in the organization audit log.
 
 Run the following command to promote a member of your organization to the role of an administrator:
 
 .. code-block:: console
 
-   # curl -L \
+   $ curl -L \
      -X PUT \
      -H "Accept: application/vnd.github+json" \
      -H "Authorization: Bearer <API_TOKEN>" \
@@ -324,14 +341,16 @@ Sample output:
      }
    }
 
-Creating a new team
-""""""""""""""""""""
+Create a team
+"""""""""""""
+
+Teams group organization members and control their access to repositories. GitHub records the new team in the organization audit log.
 
 Run the following command to create a new team in your organization:
 
 .. code-block:: console
 
-   # curl -X POST \
+   $ curl -L -X POST -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2026-03-10" \
         -H "Authorization: Bearer <API_TOKEN>" \
         -d '{"name": "<NEW_TEAM_NAME>"}' \
         "https://api.github.com/orgs/<ORG_NAME>/teams"
@@ -395,31 +414,33 @@ Sample output:
      "parent": null
    }
 
-Viewing the findings
-""""""""""""""""""""
+View the member findings
+""""""""""""""""""""""""
 
-View the findings generated on the Wazuh dashboard after we performed the above actions on the monitored GitHub organization.
+The Wazuh dashboard shows the findings that Wazuh generates from the previous actions on the monitored GitHub organization.
 
 #. Click the menu icon, then navigate to **Cloud security** > **GitHub**.
 #. Switch to the **Findings** tab.
 
    .. thumbnail:: /images/cloud-security/github/use-case-github-members-monitoring-alerts-dashboard.png
-      :title: Members monitoring alerts dashboard
-      :alt: Members monitoring alerts dashboard
+      :title: Members monitoring findings dashboard
+      :alt: Members monitoring findings dashboard
       :align: center
       :width: 80%
 
 Detecting changes to a repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Creating a new repository
-""""""""""""""""""""""""""
+Create a repository
+"""""""""""""""""""
+
+GitHub records each new repository in the organization audit log.
 
 Run the following command to create a new repository:
 
 .. code-block:: console
 
-   # curl -L \
+   $ curl -L \
      -X POST \
      -H "Accept: application/vnd.github+json" \
      -H "Authorization: Bearer <API_TOKEN>" \
@@ -583,8 +604,10 @@ Sample output:
      "subscribers_count": 0
    }
 
-Adding a team to your repository
-"""""""""""""""""""""""""""""""""
+Add a team to a repository
+""""""""""""""""""""""""""
+
+A team that you add to a repository gets the permission level that you set. GitHub records the permission change in the organization audit log.
 
 Run the following commands to list teams and add a team to your repository:
 
@@ -592,13 +615,13 @@ Run the following commands to list teams and add a team to your repository:
 
    .. code-block:: console
 
-      # curl -H "Authorization: Bearer <API_TOKEN>" "https://api.github.com/orgs/<ORG_NAME>/teams"
+      $ curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer <API_TOKEN>" -H "X-GitHub-Api-Version: 2026-03-10" "https://api.github.com/orgs/<ORG_NAME>/teams"
 
 #. Add the team to your repository using its slug.
 
    .. code-block:: console
 
-      # curl -X PUT \
+      $ curl -L -X PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2026-03-10" \
            -H "Authorization: Bearer <API_TOKEN>" \
            -d '{"permission": "push"}' \
            "https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_SLUG>/repos/<ORG_NAME>/<REPO_NAME>"
@@ -606,21 +629,23 @@ Run the following commands to list teams and add a team to your repository:
    Where:
 
    -  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
-   -  ``<TEAM_SLUG>`` is the team slug, shown in the ``slug`` field of the previous command's output.
+   -  ``<TEAM_SLUG>`` is the team ``slug``, shown in the slug field of the previous command's output.
    -  ``<ORG_NAME>`` is your organization's name.
    -  ``<REPO_NAME>`` is the name of the repository you want to add a team to.
 
-Managing privileges
-""""""""""""""""""""
+Grant a team administrator access to a repository
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+Administrator access gives team members full control of the repository. GitHub records the permission change in the organization audit log.
 
 Run the following command to grant members of your team administrator privileges on the repository:
 
 .. code-block:: console
 
-   # curl \
+   $ curl -L -H "X-GitHub-Api-Version: 2026-03-10" \
      -H "Authorization: Bearer <API_TOKEN>" \
      -X PUT \
-     -H "Accept: application/vnd.github.v3+json" \
+     -H "Accept: application/vnd.github+json" \
      https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_SLUG>/repos/<ORG_NAME>/<REPO_NAME> \
      -d '{"permission":"admin"}'
 
@@ -631,14 +656,20 @@ Where:
 -  ``<TEAM_SLUG>`` is the slug of the team.
 -  ``<REPO_NAME>`` is the name of the repository whose team access you want to manage.
 
-Deleting repository
-""""""""""""""""""""
+Delete the repository
+"""""""""""""""""""""
+
+GitHub records repository deletion in the organization audit log.
+
+.. warning::
+
+   Run this command only on the test repository that you created for this use case. The command deletes the repository and its contents.
 
 Run the following command to delete a repository in your organization:
 
 .. code-block:: console
 
-   # curl -L \
+   $ curl -L \
      -X DELETE \
      -H "Accept: application/vnd.github+json" \
      -H "Authorization: Bearer <API_TOKEN>" \
@@ -651,14 +682,16 @@ Where:
 -  ``<ORG_NAME>`` is your organization's name.
 -  ``<REPO_NAME>`` is the name of the repository you want to delete from your organization.
 
-Deleting team
-"""""""""""""
+Delete the team
+"""""""""""""""
+
+GitHub records team deletion in the organization audit log.
 
 Run the following command to delete the team you created:
 
 .. code-block:: console
 
-   # curl -L \
+   $ curl -L \
      -X DELETE \
      -H "Accept: application/vnd.github+json" \
      -H "Authorization: Bearer <API_TOKEN>" \
@@ -671,18 +704,16 @@ Where:
 -  ``<ORG_NAME>`` is your organization's name.
 -  ``<TEAM_SLUG>`` is the slug of the team.
 
-.. _github-viewing-the-findings-repository:
+View the repository findings
+""""""""""""""""""""""""""""
 
-Viewing the findings
-""""""""""""""""""""
-
-View the findings generated on the Wazuh dashboard after we performed the above actions on the monitored GitHub organization.
+The Wazuh dashboard shows the findings that Wazuh generates from the previous actions on the monitored GitHub organization.
 
 #. Click the menu icon, then navigate to **Cloud security** > **GitHub**.
 #. Switch to the **Findings** tab.
 
    .. thumbnail:: /images/cloud-security/github/use-case-github-repository-monitoring-alerts-dashboard.png
-      :title: Repository monitoring alerts dashboard
-      :alt: Repository monitoring alerts dashboard
+      :title: Repository monitoring findings dashboard
+      :alt: Repository monitoring findings dashboard
       :align: center
       :width: 80%
