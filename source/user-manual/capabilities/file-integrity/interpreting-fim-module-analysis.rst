@@ -6,7 +6,7 @@
 Interpreting FIM scans
 =======================
 
-The Wazuh dashboard displays FIM events whenever a monitored file is added, modified, or deleted. To view them, go to **Endpoint security** → **File Integrity Monitoring** on the Wazuh dashboard. Results appear in the following tabs:
+The Wazuh dashboard displays FIM events whenever a monitored file is added, modified, or deleted. To view them, go to **Endpoint security** > **File Integrity Monitoring** on the Wazuh dashboard. Results appear in the following tabs:
 
 -  :ref:`Dashboard <dashboard>`
 -  :ref:`Inventory <inventory>`
@@ -65,6 +65,14 @@ Findings
 
 This section displays the Wazuh FIM findings. A finding is generated when a FIM event matches a Wazuh detection rule. It provides details such as the Wazuh agent name, the monitored file path, the type of FIM event, the rule title, and the rule level associated with the finding.
 
+Each FIM event that a default rule of the ``wazuh-fim`` integration matches generates one finding. The finding title names the event type and the file path:
+
+-  ``Wazuh FIM - File created - <FILE_PATH>``: low level, MITRE ATT&CK techniques T1105 and T1036.
+-  ``Wazuh FIM - File modified - <FILE_PATH>``: medium level, MITRE ATT&CK techniques T1565 and T1036.
+-  ``Wazuh FIM - File deleted - <FILE_PATH>``: medium level, MITRE ATT&CK techniques T1070 and T1485.
+
+On Windows endpoints, the file path in a finding is in lowercase, for example ``c:\users\test\documents\audit_docu.txt``. Write the path in lowercase when you filter findings on ``file.path``.
+
 .. thumbnail:: /images/manual/fim/findings.png
    :title: Findings
    :alt: FIM Findings tab with a histogram and a table of file created and modified events for an Ubuntu endpoint
@@ -78,3 +86,14 @@ In addition, you can expand each finding entry to display additional information
    :alt: Expanded findings
    :align: center
    :width: 80%
+
+Troubleshooting missing findings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If a change to a monitored file doesn't appear in the **Findings** tab, check the following in order:
+
+#. The configuration reached the Wazuh agent. The ``<directories>`` option names the path you changed, and the directory exists on the endpoint. If you use centralized configuration, the Wazuh agent belongs to the group whose ``agent.conf`` file holds the block.
+#. The first scan ended. The Wazuh agent log contains ``(6009): File integrity monitoring scan ended.`` Changes made before this message become part of the baseline. Repeat the change after it.
+#. Who-data started, if the directory uses ``whodata="yes"``. On Linux with the eBPF provider, the log contains ``(6048)``. On Windows, it contains ``(6019)``.
+#. The filter matches the finding. On Windows endpoints, the ``file.path`` value in a finding is in lowercase.
+#. The ``wazuh-fim`` integration is enabled in **Ruleset management** → **Overview**.

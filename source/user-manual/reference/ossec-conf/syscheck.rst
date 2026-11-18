@@ -973,6 +973,8 @@ Example:
 
    <windows_audit_interval>300</windows_audit_interval>
 
+.. _reference_ossec_syscheck_windows_registry:
+
 windows_registry
 ^^^^^^^^^^^^^^^^^
 
