@@ -14,13 +14,11 @@ The Wazuh indexer API configuration is in the ``/etc/wazuh-indexer/opensearch.ym
 For more information on each available setting, see :ref:`Wazuh indexer API configuration options <configuration_options>`. The following are the default settings of the ``/etc/wazuh-indexer/opensearch.yml`` file in an all-in-one deployment. The installation fills in the ``network.host``, ``node.name``, and distinguished name (DN) values for each node. ``<NODE_CERTIFICATE_CN>`` is the common name (CN) of the node certificate, ``/etc/wazuh-indexer/certs/indexer.pem``.
 
 .. code-block:: yaml
+   :emphasize-lines: 1,57
 
-   network.host: "127.0.0.1"
-   node.name: "node-1"
-   cluster.initial_cluster_manager_nodes:
-   - "node-1"
-   #- "node-2"
-   #- "node-3"
+   network.host: '<NODE_ADDRESS>'
+   node.name: "indexer"
+   discovery.type: single-node
    cluster.name: "wazuh-cluster"
    #discovery.seed_hosts:
    #  - "node-1-ip"
@@ -37,6 +35,33 @@ For more information on each available setting, see :ref:`Wazuh indexer API conf
    plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/indexer-key.pem
    plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
    plugins.security.ssl.http.enabled: true
+   # AEAD suites only
+   plugins.security.ssl.http.enabled_ciphers:
+   - "TLS_AES_128_GCM_SHA256"
+   - "TLS_AES_256_GCM_SHA384"
+   - "TLS_CHACHA20_POLY1305_SHA256"
+   - "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+   - "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+   - "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+   - "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
+   - "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+   - "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256"
+   - "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+   - "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+   - "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+   plugins.security.ssl.transport.enabled_ciphers:
+   - "TLS_AES_128_GCM_SHA256"
+   - "TLS_AES_256_GCM_SHA384"
+   - "TLS_CHACHA20_POLY1305_SHA256"
+   - "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+   - "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+   - "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+   - "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
+   - "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+   - "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256"
+   - "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+   - "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+   - "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
    transport.ssl.enforce_hostname_verification: true
    transport.ssl.resolve_hostname: false
 
@@ -60,12 +85,14 @@ For more information on each available setting, see :ref:`Wazuh indexer API conf
    # Resilience under heap pressure (small heaps, e.g. 2 GB): shed work — reject (429)
    # and cancel runaway searches instead of letting the JVM heap exhaust and crash.
    search_backpressure.mode: enforced                    # actually cancel heavy search tasks (default only logs)
+   search_backpressure.search_shard_task.heap_percent_threshold: 0.04  # a shard task is a cancellation candidate from 4% of the heap (default 0.5%, ~10 MB on 2 GB), above the manager's inventory sync batches
    indices.breaker.total.use_real_memory: true           # account real heap used, not just reserved bytes
    indices.breaker.total.limit: 80%                      # trip early (default 95%); leaves headroom for Lucene flush/merge
    indexing_pressure.memory.limit: 10%                   # cap in-flight indexing bytes; reject excess bulk
 
    # Use no replicas by default on ISM internal indices
    plugins.index_state_management.history.number_of_replicas: 0
+
    # Default max scroll context keep alive
    search.max_keep_alive: "4h"
 

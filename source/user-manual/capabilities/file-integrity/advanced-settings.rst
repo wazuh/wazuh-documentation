@@ -30,6 +30,8 @@ The audit mode
 
 Who-data monitoring in audit mode uses the Linux Audit subsystem to identify who makes changes in a monitored directory. These changes produce audit events, which the FIM module processes and reports to the Wazuh manager. Audit mode extends the :ref:`real-time monitoring <real_time_monitoring>` by adding who-data information.
 
+.. _who_data_audit_requirements:
+
 Requirements
 """"""""""""""
 
@@ -41,7 +43,7 @@ Install the audit daemon if you do not already have it on your endpoint.
 
       # yum install audit
 
-   For audit version 3.1.1 and later, install the audispd-af_unix plugin and restart the audit service:
+   For audit version 3.1.1 and later, install the ``audispd-plugins`` package, which provides the ``audisp-af_unix`` plugin, and restart the audit service:
 
    .. code-block:: console
 
@@ -174,24 +176,32 @@ Perform the following steps to configure the FIM module to get the information a
 
 .. rubric:: Test the configuration
 
-#. Create the user ``smith`` on a Linux endpoint, and assign sudo privileges:
+#. Create the user ``smith`` on the Linux endpoint and give it sudo privileges. On Debian and Ubuntu, run:
 
    .. code-block:: console
 
       # adduser smith
-      # sudo usermod -aG sudo smith
+      # usermod -aG sudo smith
 
-#. Log out of the Linux endpoint and log in as ``smith``.
-
-#. Open the nano editor and add a new IP address, such as ``192.168.32.5``, in the ``/etc/hosts.allow`` file on the Linux endpoint.
+   On Red Hat-based systems, run:
 
    .. code-block:: console
 
-      # sudo nano /etc/hosts.allow
+      # adduser smith
+      # passwd smith
+      # usermod -aG wheel smith
+
+#. Log out of the Linux endpoint and log in as ``smith``.
+
+#. Open the ``/etc/hosts.allow`` file with ``nano``, add a line such as ``ALL: 192.168.32.5``, then save the file and exit the editor.
+
+   .. code-block:: console
+
+      $ sudo nano /etc/hosts.allow
 
 .. rubric:: Visualize the finding
 
-Navigate to **Endpoint security** → **File Integrity Monitoring → Findings** on the Wazuh dashboard to view the finding generated when the monitored file is modified.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the monitored file is modified.
 
 .. thumbnail:: /images/manual/fim/monitor-changes-finding.png
   :title: Monitor changes finding
@@ -447,6 +457,8 @@ The FIM events extracted from eBPF programs for who-data monitoring include:
 
 Wazuh uses a kernel data structure called ``ring_buffer`` to transfer these events from the kernel to the user space, where the FIM module analyzes them.
 
+In eBPF mode, the ``process.name``, ``process.executable``, ``process.parent.name``, and ``process.parent.executable`` fields hold the task name that the Linux kernel keeps for each process, for example, ``bash``. The kernel limits this name to 15 characters and truncates longer program names. To match these fields in rules or searches, use the first 15 characters of the program name. In audit mode, these fields hold the full program name and path.
+
 .. note::
 
    Who-data monitoring with eBPF requires a kernel that supports the BPF ring buffer and BTF. Upstream kernels support them from version 5.8, and some distributions backport them to older kernels, such as RHEL 8.10 (kernel 4.18). When the agent starts, the FIM module runs a health check of the eBPF provider and uses it only if the health check succeeds.
@@ -454,13 +466,14 @@ Wazuh uses a kernel data structure called ``ring_buffer`` to transfer these even
 Configuration
 """"""""""""""""
 
-Configuring who-data in eBPF mode requires a ``provider`` option within the ``<whodata>`` tag. The ``<provider>`` tag accepts two values, ``audit`` and ``ebpf``. The audit mode (default) and the eBPF mode should not be used together. If both are configured, only the last configured provider takes effect to monitor every who-data configured directory.
+Configuring who-data in eBPF mode requires a ``provider`` option within the ``<whodata>`` tag. The ``<provider>`` tag accepts two values, ``audit`` and ``ebpf``. Use only one provider. If you configure both, the agent uses the last configured provider for every directory with ``whodata="yes"``.
 
 .. note::
 
    -  If the ``<provider>`` tag is not configured, the FIM module uses the ``audit`` provider by default. To confirm which mode is in use, check the Wazuh agent log file ``/var/ossec/logs/ossec.log``.
    -  When the eBPF provider is configured and the eBPF health check succeeds, the agent logs this message ``(6048): Healthcheck for eBPF FIM whodata module success.``
    -  If the eBPF provider is configured but the health check fails, FIM falls back to the ``audit`` provider. The agent logs this message ``(6959): The eBPF healthcheck has failed. Switching all whodata eBPF configuration to audit.``
+   -  If BPF LSM isn't active on the kernel, the eBPF provider captures events through kprobe hooks instead, and who-data monitoring keeps working. The Wazuh agent logs a message that starts with ``(6052): BPF LSM is not active``. No action is needed.
 
 A configuration block of who-data in eBPF mode to monitor the ``/home/user/documents`` directory is shown below:
 
@@ -525,7 +538,7 @@ While logged in as the root user, append a comment line to the ``/etc/ssh/sshd_c
 
 .. rubric:: Visualize the finding
 
-Navigate to **Endpoint security → File Integrity Monitoring** → **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes in the monitored file.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes in the monitored file.
 
 .. thumbnail:: /images/manual/fim/fim-detects-changes-2.png
   :title: FIM detects changes 2
@@ -768,12 +781,12 @@ Who-data monitoring on Windows
 How it works
 ~~~~~~~~~~~~~~
 
-The who-data monitoring functionality uses the Microsoft Windows auditing subsystem to identify who modifies a monitored directory. These changes produce audit events, which the FIM module processes and reports to the Wazuh manager. This feature only works with Windows versions later than Windows Vista.
+The who-data monitoring functionality uses the Microsoft Windows auditing subsystem to identify who modifies a monitored directory. These changes produce audit events, which the FIM module processes and reports to the Wazuh manager. This feature works on every Windows version that the Wazuh agent supports.
 
 Configuration
 ~~~~~~~~~~~~~~~
 
-To enable the who-data feature, you must declare the tag ``whodata="yes"`` within the directories block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file. Wazuh automatically configures the Local Audit Policies and System Access Control List (SACL) for each monitored directory.
+To enable the who-data feature, set the ``whodata`` attribute to ``yes`` in the ``<directories>`` option of the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file. Wazuh automatically configures the Local Audit Policies and System Access Control List (SACL) for each monitored directory.
 
 .. code-block:: xml
 
@@ -787,10 +800,10 @@ To enable the who-data feature, you must declare the tag ``whodata="yes"`` withi
 
 The FIM module configures the required Local Audit Policies and SACLs at launch. However, other services might change this configuration and prevent who-data from receiving monitored events. To prevent this, FIM detects the change and switches the affected directories to real-time mode, using two available mechanisms:
 
-#. Wazuh monitors specific events (ID 4719) that Windows generates when one of the Audit Policies is modified (Success removed).
+#. Wazuh monitors the Windows Security event 4719, which Windows logs when an audit policy changes. When the event shows that success auditing was removed from the **Audit File System** or **Audit Handle Manipulation** policy, the FIM module switches the directories to real-time mode.
 #. Periodically, Wazuh checks that the Audit Policies and the SACLs are configured as expected. You can modify the frequency of this verification with ``windows_audit_interval``.
 
-For Windows versions earlier than Windows Vista, see the :ref:`Manual configuration of the Windows Audit Policies <manual_configuration_of_the_windows_audit_policies>` guide if the system does not automatically configure the audit policies.
+If the system doesn't configure the audit policies automatically, configure them manually. See :ref:`Manual configuration of the Windows Audit Policies <manual_configuration_of_the_windows_audit_policies>`.
 
 The following table establishes a correspondence between audit fields and their equivalent Wazuh Common Schema (WCS) fields in a finding when who-data is enabled:
 
@@ -832,7 +845,7 @@ Test the configuration
 Visualize the finding
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Navigate to **Endpoint security → File Integrity Monitoring → Findings** on the Wazuh dashboard and find the finding generated when the FIM module detects changes in the monitored directory.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard and find the finding generated when the FIM module detects changes in the monitored directory.
 
 .. thumbnail:: /images/manual/fim/windows-whodata-finding.png
   :title: Windows whodata finding
@@ -1060,7 +1073,7 @@ Finding in JSON:
 Manual configuration of the Windows Audit Policies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For Windows versions later than Windows Vista and Windows Server 2008, when you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the Local Audit Policies and the System Access Control List (SACL) for the file or directory. If this is not done automatically or you have an earlier version of Windows such as Windows Vista and Windows Server 2008, you have to manually configure the audit policies and the SACL.
+When you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the Local Audit Policies and the System Access Control List (SACL) for the file or directory. If this doesn't happen, configure the audit policies and the SACL manually.
 
 Local Audit Policies in Windows
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1136,7 +1149,7 @@ In 64-bit architecture systems, you can specifically locate 32-bit and 64-bit DL
 
 Furthermore, 32-bit processes running in 64-bit environments access ``System32`` through a virtual folder called ``Sysnative``.
 
-We disabled this redirection, and you can access ``System32`` directly. Monitoring ``%WINDIR%/System32`` and ``%WINDIR%/Sysnative`` directories is equivalent, and Wazuh shows the path ``%WINDIR%/System32`` in the findings. SysWOW64 is a different directory. To monitor ``%WINDIR%/SysWOW64``, you must add it to the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file.
+The Wazuh agent disables this redirection, so it accesses ``System32`` directly. Monitoring ``%WINDIR%/System32`` and ``%WINDIR%/Sysnative`` directories is equivalent, and Wazuh shows the path ``%WINDIR%/System32`` in the findings. ``SysWOW64`` is a different directory. To monitor ``%WINDIR%/SysWOW64``, you must add it to the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file.
 
 You can monitor the Windows special directories ``%WINDIR%/System32`` and ``%WINDIR%/SysWOW64`` by configuring them with any of the FIM modes. For example:
 
@@ -1226,7 +1239,7 @@ If you have the following directory structure and the above setting with ``recur
 
 To disable the recursion and generate the findings only for the files in the monitored folder, you need to set the ``recursion_level`` value to ``0``.
 
-If you do not specify ``recursion_level``, it is set to 256. This is the default value defined by ``syscheck.default_max_depth`` in the internal options configuration file.
+If you don't set ``recursion_level``, the FIM module uses ``256``, the default value of ``syscheck.default_max_depth`` in the internal options configuration file. To change this default, set ``syscheck.default_max_depth`` to a value from 1 to 320 in the ``local_internal_options.conf`` file of the Wazuh agent: ``/var/ossec/etc/local_internal_options.conf`` on Linux, ``C:\Program Files (x86)\ossec-agent\local_internal_options.conf`` on Windows, and ``/Library/Ossec/etc/local_internal_options.conf`` on macOS.
 
 Process priority
 -------------------
