@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Discover how to monitor your GitHub audit logs for your organization with Wazuh.
+   :description: Learn how to collect GitHub organization audit logs with the Wazuh module for GitHub and view the findings on the Wazuh dashboard.
 
 Monitoring GitHub
 =================
@@ -17,7 +17,7 @@ You can monitor GitHub audit logs for your organization with Wazuh. Wazuh monito
 -  User addition or removal in an organization, repository, or team.
 -  Changes in a member’s privilege.
 -  Changes to permissions of a GitHub app.
--  Git events such as cloning, fetching, and pushing.
+-  Git events such as cloning, fetching, and pushing. Wazuh indexes these events, but there are no rules in the standard ruleset for them. Create custom rules to generate findings for them.
 
 .. topic:: Contents
 
