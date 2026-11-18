@@ -91,6 +91,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added a note on the launchd resource limits that can make the Wazuh agent miss macOS ULS events under high CPU load, and how to remove them, to the *Log data collection* documentation. ([#10717](https://github.com/wazuh/wazuh-documentation/pull/10717))
+- Added the `rootcheck.max_pid` internal option, updated the `rootcheck.sleep` description, and added a note to the `check_pids` setting, in the *Reference* documentation. ([#10805](https://github.com/wazuh/wazuh-documentation/pull/10805))
 
 ### Fixed
 
@@ -146,6 +147,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added `apt-get update` to the APT commands that install the required packages and dependencies in the *Deploying Wazuh agents on Linux endpoints*, *Installing the Wazuh indexer step by step*, *Installing the Wazuh server step by step*, *Installing the Wazuh dashboard step by step*, and *Wazuh central components* upgrade documentation. ([#10746](https://github.com/wazuh/wazuh-documentation/pull/10746))
 - **Post-release**: Corrected the default values and allowed values of `notify_time`, `logcollector.max_lines`, `skip_nfs`, and the GitHub and Office 365 `interval` options, the *gcp-bucket* example interval, the `discard_regex` field name in the *wodle name="aws-s3"* reference, and the macOS tab name in the *syscheck* reference. Clarified the *auth*, *remote*, *socket*, *syscheck* and *syslog_output* reference descriptions and the *wazuh-logcollector.state* file paths. ([#10778](https://github.com/wazuh/wazuh-documentation/pull/10778))
 - **Post-release**: Standardized the Windows agent service name in the restart commands, documented when remote commands are needed for policies pushed from the Wazuh server, added the starting check ID for custom policies, and updated the *Available SCA policies* table and the use case examples in the *Security Configuration Assessment* documentation. ([#10779](https://github.com/wazuh/wazuh-documentation/pull/10779))
+- **Post-release**: Removed the `<options>` line, which has no effect on PagerDuty incidents, from the PagerDuty example in the *integration* reference documentation. ([#10803](https://github.com/wazuh/wazuh-documentation/pull/10803))
 
 ## [v4.14.9]
 
