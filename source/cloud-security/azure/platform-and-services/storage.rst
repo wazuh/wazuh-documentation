@@ -51,7 +51,7 @@ Configure the audit log export on Microsoft Azure
 Wazuh agent
 ^^^^^^^^^^^
 
-#. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf`` of the Wazuh agent:
+#. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf`` of the Wazuh agent, inside an ``<ossec_config>`` block:
 
    .. code-block:: xml
       :emphasize-lines: 7
