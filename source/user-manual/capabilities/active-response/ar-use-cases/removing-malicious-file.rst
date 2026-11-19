@@ -6,7 +6,7 @@
 Removing a malicious file with active response
 ====================================================
 
-In this use case, we download a malicious test file to a Windows 11 endpoint. Wazuh file integrity monitoring detects the file and evaluates the resulting finding against the configured Alerting monitor. When the finding meets the monitor conditions, Wazuh runs a custom ``remove-file`` script on the endpoint to delete the file.
+In this use case, we download a malicious test file to a Windows 11 endpoint. Wazuh file integrity monitoring detects the file, and Wazuh matches its hash against known malicious indicators. Wazuh then evaluates the resulting ``Malicious hash detected`` finding against the configured Alerting monitor. When the finding meets the monitor conditions, Wazuh runs a custom ``remove-file`` script on the endpoint to delete the file.
 
 Infrastructure
 -----------------
@@ -165,7 +165,7 @@ On the Wazuh dashboard, create the active response configuration as described in
    :align: center
    :width: 80%
 
-Then create an Alerting monitor that runs the active response when a finding matches your conditions. This use case uses the Extraction query editor to match the FIM integration name, the file action, and the file path.
+Then create an Alerting monitor that runs the active response when a finding matches your conditions. This use case uses the Extraction query editor to match findings whose rule title contains ``Malicious hash detected``. Wazuh generates these findings when the hash of a file that file integrity monitoring detects matches a known malicious indicator, so the active response removes only malicious files, not every file in the monitored directory.
 
 #. Navigate to **Explore** > **Alerting**, switch to the **Monitors** tab, then click **Create monitor**. Fill in the following parameters.
 
