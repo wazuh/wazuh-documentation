@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - Updated the `wazuh-certs-generator` image version to 0.0.5 in the *Deployment on Docker* and *Upgrading Wazuh Docker* documentation. ([#10588](https://github.com/wazuh/wazuh-documentation/pull/10588))
 - **Post-release**: Updated the *Wazuh agent* installation documentation for Windows to list Windows Server 2025 and to add the commands that download the installer. ([#10681](https://github.com/wazuh/wazuh-documentation/pull/10681))
 - **Post-release**: Documented that Wazuh 4.14.7 and later don't include the database output (`wazuh-dbd`) in the *database_output*, *wazuh-dbd*, *Internal configuration*, *wazuh-control*, *Alert management* and *Installing the Wazuh server from sources* documentation. ([#10778](https://github.com/wazuh/wazuh-documentation/pull/10778))
+- **Post-release**: Updated the *Elastic Stack*, *OpenSearch*, *Splunk* and *Amazon Security Lake* integration documentation for Logstash 9.5.6. ([#10814](https://github.com/wazuh/wazuh-documentation/pull/10814))
 
 ### Fixed
 
