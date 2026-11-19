@@ -1,21 +1,25 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: You can use the native support for managing and authenticating users or integrate with external user management systems.
+   :description: Learn how to create Wazuh dashboard users and assign them roles in your Wazuh Cloud environment, including admin and read-only users.
+
+.. _cloud_manage_auth:
 
 Authentication and authorization
 ================================
 
-You can use the native support for managing and authenticating users or integrate with external user management systems.
+Each Wazuh Cloud environment has its own users for the Wazuh dashboard. This page explains how to create Wazuh dashboard users in your environment and give them administrator or read-only permissions.
 
 .. note::
 
-   You cannot log in to the Wazuh dashboard with your Wazuh Cloud account credentials. To log in to the Wazuh dashboard, use the default credentials from the Wazuh Cloud Console or credentials for a dashboard user you created.
+   Wazuh Console accounts and Wazuh dashboard users are separate. You can't log in to the Wazuh dashboard with your Wazuh Console credentials. To log in to the Wazuh dashboard for the first time, use the default credentials shown by **See credentials** in Wazuh Console. See :doc:`Access the Wazuh dashboard </cloud-service/getting-started/access-wazuh-wui>`.
 
-Native support for users and roles
-----------------------------------
+Permissions in the Wazuh dashboard come from two kinds of roles:
 
-The Wazuh dashboard allows you to add users, create roles, and map roles to users. The following sections highlight more on this.
+-  **Indexer roles** control access to the indexed data, such as alerts and events. You manage them under **Indexer management** > **Users and data access**.
+-  **Wazuh roles** control what users can do in the Wazuh platform, such as managing agents or viewing their configuration. You manage them under **Server management** > **API access control**.
+
+A user needs both: an indexer role to see the data and a Wazuh role mapping to use the Wazuh features.
 
 .. contents::
    :local:
@@ -25,196 +29,80 @@ The Wazuh dashboard allows you to add users, create roles, and map roles to user
 .. _cloud_manage_auth_create_internal_user:
 
 Creating an internal user
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
-Follow these steps to create an internal user.
+#. Log in to the Wazuh dashboard as an administrator.
+#. Click the upper-left menu icon **☰**, go to **Indexer management** > **Users and data access**, and then select **Internal users**.
+#. Click **Create internal user**.
+#. Enter a username and a password.
+#. Click **Create**.
 
-#. Log in to the Wazuh dashboard.
-#. Click the upper-left menu icon **☰**, expand **Indexer management** and select **Security**.
-#. Select **Internal users** on the left pane, click **Create internal user** and complete the fields.
-#. Click **Create** to complete the action.
+To give the user permissions, map the user to an indexer role and create a Wazuh role mapping for the user:
 
-
-   .. thumbnail:: /images/cloud-service/create-internal-user.gif
-      :title: Create internal user
-      :alt: Create internal user
-      :align: center
-      :width: 80%
-
-Managing Wazuh indexer roles
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Indexer roles are the core way of controlling access to your Wazuh indexer cluster. Roles contain any combination of cluster-wide permission, index-specific permissions, document and field-level security, and tenants. These roles define what a user can query, view, or manage within the indexer (logs, alerts, dashboards).
-
-.. note::
-
-   You cannot customize reserved roles. Create a custom role with the same permissions or duplicate a reserved role to customize it. Then you map users to these roles so that users gain those permissions.
-
-Follow these steps to create an indexer role using existing roles templates:
-
-#. Log in to the Wazuh dashboard.
-#. Click the upper-left menu icon **☰**, expand **Indexer management** and select **Security**.
-#. Click on **Roles** on the left panel and select a role with the required permissions.
-#. Click **Actions** at the top section and select **Duplicate**.
-#. Fill in the required information on the **Duplicate Role** page.
-#. Click **Create** to complete the process.
-
-   .. thumbnail:: /images/cloud-service/managing-indexer-roles.gif
-      :title: Managing indexer roles
-      :alt: Managing indexer roles
-      :align: center
-      :width: 80%
-
-Mapping users to Wazuh indexer roles
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Wazuh indexer role mappings are how users are granted access to indexed data in Wazuh. While indexer roles define the set of permissions available (such as searching logs, viewing alerts, or managing index patterns), role mappings connect those roles to individual users or user groups. This allows administrators to control who can query data, build dashboards, or access specific indices.
-
-Follow these steps to map users to appropriate indexer roles:
-
-#. Log in to the Wazuh dashboard.
-#. Click the upper-left menu icon **☰**, expand **Indexer management** and select **Security**.
-#. Click on **Roles** on the left panel and search for the role created previously.
-#. Click the role name to open the window.
+#. Click **☰**, go to **Indexer management** > **Users and data access**, and then select **Roles**.
+#. Select the role you want to give the user.
 #. Select the **Mapped users** tab and click **Manage mapping**.
-#. Add the internal user and click **Map** to confirm the action.
+#. Add the user and click **Map**.
+#. Click **☰**, go to **Server management** > **API access control**, and then select **Roles mapping**.
+#. Click **Create Role mapping** and complete the fields:
 
-   .. thumbnail:: /images/cloud-service/mapping-users-to-indexer-roles.gif
-      :title: Mapping users to Wazuh indexer roles
-      :alt: Mapping users to Wazuh indexer roles
-      :align: center
-      :width: 80%
+   -  **Role mapping name**: a name for the role mapping.
+   -  **Roles**: the Wazuh roles to give the user. Wazuh includes default roles such as ``administrator``, ``readonly``, ``agents_admin``, and ``cluster_readonly``.
+   -  **Internal users**: the user you created.
 
-Managing Wazuh server roles
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#. Click **Save role mapping**.
 
-Wazuh server roles are the primary way of controlling access to the Wazuh platform. They define what actions a user can perform within the Wazuh server and dashboard. Server roles may include permissions to manage agents, configure rules, adjust settings, or perform read-only operations. By assigning roles, administrators can control who is allowed to view alerts, enroll or remove agents, modify security configurations, or access sensitive management functions.
+.. TODO: Confirm with engineering that run_as (wazuh_core.hosts.default.run_as) is enabled on Wazuh Cloud 5.0 environments so role mappings take effect without customer action.
 
-.. note::
+Creating an admin user
+----------------------
 
-   Policies assigned during a role creation define the permissions associated with the role. Explore the **Policies** pane before creating a role to understand the actions and other components that make a policy.
+#. Log in to the Wazuh dashboard as an administrator.
+#. Click **☰**, go to **Indexer management** > **Users and data access**, and then select **Internal users**.
+#. Click **Create internal user**, enter a username and a password, and type ``admin`` as the **Backend role**.
+#. Click **Create**.
+#. Click **☰**, go to **Server management** > **API access control**, and then select **Roles mapping**.
+#. Click **Create Role mapping** and complete the fields:
 
-In most cases, the available roles are sufficient for day to day operations. However, depending on user requirements, new roles can be created.
+   -  **Role mapping name**: a name for the role mapping.
+   -  **Roles**: ``administrator``.
+   -  **Internal users**: the user you created.
 
-Follow these steps to create a server role:
+#. Click **Save role mapping**.
 
-#. Log in to the Wazuh dashboard.
-#. Click the upper-left menu icon **☰**, expand **Server management** and select **Security**.
-#. On the **Security** page, go to the **Roles** pane.
-#. Click **Create role**.
-#. Provide a name for the new role and select your preferred policies from the list.
-#. Click **Create role** to complete the process.
+Creating a read-only user
+-------------------------
 
-   .. thumbnail:: /images/cloud-service/managing-server-roles.gif
-      :title: Managing Wazuh server roles
-      :alt: Managing Wazuh server roles
-      :align: center
-      :width: 80%
+#. Log in to the Wazuh dashboard as an administrator.
+#. Click **☰**, go to **Indexer management** > **Users and data access**, and then select **Internal users**.
+#. Click **Create internal user**, enter a username and a password, and click **Create**.
+#. Click **☰**, go to **Indexer management** > **Users and data access**, and then select **Roles**.
+#. Click **Create role** and complete the fields:
 
-Mapping users to Wazuh server roles
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   -  **Name**: a name for the role.
+   -  **Cluster permissions**: ``cluster_composite_ops_ro``.
+   -  **Index**: ``*``.
+   -  **Index permissions**: ``read``.
 
-Wazuh server role mappings are how permissions are assigned to users in the Wazuh platform. While server roles define what actions are possible, role mappings connect those roles to specific users or user groups. This ensures that the right people have the appropriate level of access to manage agents, configure rules, or view alerts. By managing role mappings, administrators control who can perform operational and administrative tasks within Wazuh.
+#. Click **Create**.
+#. Select the **Mapped users** tab and click **Manage mapping**.
+#. Add the user and click **Map**.
+#. Click **☰**, go to **Server management** > **API access control**, and then select **Roles mapping**.
+#. Click **Create Role mapping** and complete the fields:
 
-Follow these steps to map users to server roles:
+   -  **Role mapping name**: a name for the role mapping.
+   -  **Roles**: ``readonly``.
+   -  **Internal users**: the user you created.
 
-#. Log in to the Wazuh dashboard.
-#. Click the upper-left menu icon **☰**, expand **Server management** and select **Security**.
-#. On the **Security** page, go to the **Roles mapping** pane.
-#. Click **Create Role mapping**.
-#. Assign a name to the role mapping.
-#. Select the roles you want to map the user with.
-#. Select the internal user.
-#. Click **Save role mapping** to save and map the user with the role.
+#. Click **Save role mapping**.
 
-   .. thumbnail:: /images/cloud-service/mapping-users-to-server-roles.gif
-      :title: Mapping users to Wazuh server roles
-      :alt: Mapping users to Wazuh server roles
-      :align: center
-      :width: 80%
+To add more read-only users, create the users and map them to the read-only indexer role and role mapping you already created.
 
-Creating and setting a Wazuh admin user
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The read-only user can't change anything, and some pages show a permission error or an empty list. Don't map the user to the ``kibana_user`` role, because it gives write access to the Wazuh dashboard configuration.
 
-Follow the steps in the :ref:`Creating an internal user <cloud_manage_auth_create_internal_user>` section to create an internal user. Once the user has been created, follow these steps to create the required indexer role and map the created user to the role:
+External identity providers
+---------------------------
 
-#. Log in to the Wazuh dashboard.
-#. Click the upper-left menu icon **☰**, expand **Indexer management** and select **Security**.
-#. Click **Roles** to open the page and search for the **all_access** role in the list.
-#. Select it, click **Actions** and select **Duplicate**.
-#. Assign a name to the new role, then click **Create** to confirm the action.
-#. On the newly created role page, select the **Mapped users** tab and click **Manage mapping**.
-#. Add the user and click **Map** to confirm the action.
+To authenticate Wazuh dashboard users with an external identity provider, such as LDAP or a SAML provider, contact Wazuh support. In Wazuh Console, in the sidebar, under **Help**, select **Support**.
 
-   .. thumbnail:: /images/cloud-service/creating-admin-user.gif
-      :title: Creating and setting a Wazuh admin user
-      :alt: Creating and setting a Wazuh admin user
-      :align: center
-      :width: 80%
-
-Follow these steps to create the required server role mapping, and map the user with the role to assign admin permissions:
-
-#. Click the upper-left menu icon **☰**, expand **Server management** and select **Security**.
-#. On the **Security** page, go to the **Roles mapping** pane.
-#. Click **Create Role mapping**.
-#. Assign a name to the role mapping.
-#. Select **administrator** in the role field.
-#. Select the internal user.
-#. Click **Save role mapping** to save and map the user as an administrator.
-
-   .. thumbnail:: /images/cloud-service/create-server-role-mapping.gif
-      :title: Creating server role mapping
-      :alt: Creating server role mapping
-      :align: center
-      :width: 80%
-
-Creating and setting a Wazuh read-only user
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Follow the steps in the :ref:`Creating an internal user <cloud_manage_auth_create_internal_user>` section to create an internal user. Once the user has been created, follow these steps to create the required indexer role and map the created user to the role:
-
-#. Log in to the Wazuh dashboard.
-#. Click the upper-left menu icon **☰**, expand **Indexer management** and select **Security**.
-#. Click **Roles** to open the page and click **Create role**.
-#. Assign a name to the new role.
-#. Select the following options in the empty fields:
-
-   #. Cluster permissions: **cluster_composite_ops_ro**
-   #. Index: **\***
-   #. Index permissions: **read**
-   #. Tenant permissions: **global_tenant** and select the **Read only** option.
-
-#. Click **Create** to complete the process.
-#. On the newly created role page, select the **Mapped users** tab and click **Manage mapping**.
-#. Add the user and click **Map** to confirm the action.
-
-   .. thumbnail:: /images/cloud-service/creating-read-only-user.gif
-      :title: Creating and setting a Wazuh read-only user
-      :alt: Creating and setting a Wazuh read-only user
-      :align: center
-      :width: 80%
-
-Follow these steps to create the required server role mapping, and map the user with the role to assign read-only permissions:
-
-#. Click the upper-left menu icon **☰**, expand **Server management** and select **Security**.
-#. Go to the **Roles mapping** pane on the **Security** page.
-#. Click **Create Role mapping**.
-#. Assign a name to the role mapping.
-#. Select **readonly** in the role field.
-#. Select the internal user.
-#. Click **Save role mapping** to save and map the user with the read-only role.
-
-   .. thumbnail:: /images/cloud-service/create-server-role-mapping-ro.gif
-      :title: Creating server role mapping
-      :alt: Creating server role mapping
-      :align: center
-      :width: 80%
-
-To add more read-only users, you can skip the role creation task and map the users to the already existing read-only role.
-
-Integrating with external user management systems
---------------------------------------------------
-
-In many organizations, user access is centrally managed through directory services such as Active Directory, Keycloak, or other identity providers. Integrating Wazuh Cloud with these external systems ensures that authentication and authorization are consistent with existing security policies. This approach simplifies user management, improves compliance, and reduces the overhead of maintaining separate accounts just for Wazuh.
-
-Wazuh Cloud supports integration with external user management systems such as LDAP for authentication. To enable this feature, open a support ticket through the **Help** section in your Wazuh Cloud Console, and the Wazuh Support team will guide you through the setup process.
+.. TODO: Confirm with engineering which external identity providers Wazuh Cloud 5.0 environments support and how customers request them.
