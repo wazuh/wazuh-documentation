@@ -154,7 +154,9 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
 
    2026/10/27 22:41:23 wazuh-manager-authd: WARNING: Duplicate name '<AGENT_NAME>', rejecting enrollment. Agent '<ID>' can't be replaced since it is not disconnected.
 
-**Resolution**: Ensure the Wazuh agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<agent><enrollment><agent_name>`` section (Wazuh 5.0 agents) or ``<client><enrollment><agent_name>`` section (Wazuh 4.x agents) of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
+**Resolution**: If you are enrolling the same endpoint again, remove the existing Wazuh agent on the Wazuh manager first, as :doc:`Remove agents </user-manual/agent/agent-management/remove-agents>` describes, or wait until the Wazuh manager's :ref:`\<auth\>\<force\> <reference_wazuh_manager_conf_auth_force>` settings allow replacing it. By default, the existing Wazuh agent must have been disconnected for more than 1 hour and registered more than 1 hour ago. The Wazuh agent gets a new ID.
+
+If it's a different endpoint, ensure the Wazuh agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<agent><enrollment><agent_name>`` section (Wazuh 5.0 agents) or ``<client><enrollment><agent_name>`` section (Wazuh 4.x agents) of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
 
 -  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
 -  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
