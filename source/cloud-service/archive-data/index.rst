@@ -1,37 +1,36 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-
 .. meta::
-  :description: Wazuh provides two types of storage for your data: indexed and archive. Learn more about the archive data in this section. 
+   :description: Wazuh Cloud stores your data as indexed data and archive data. Learn how archive data works and how it complements indexed data.
+
+.. _cloud_archive_data:
 
 Archive data
-=============
+============
 
-Wazuh provides two types of storage for your data:
+Wazuh Cloud stores the data of your environment in two places: indexed data and archive data. This section explains how archive data works, how files are named, and how to download them.
 
--  Indexed data
--  Archive data
+-  **Indexed data**: When Wazuh ingests and indexes events from agents, the data becomes searchable and analyzable in the Wazuh dashboard. The **Indexed Data Retention** and **Indexed Data Capacity** settings of your environment limit how much indexed data your environment keeps.
+-  **Archive data**: Wazuh also sends the data to archive data, with a maximum delay of 30 minutes after it processes the events. Archive data is stored in an AWS S3 bucket, so you can keep logs for long periods and meet compliance requirements. You can also reindex this data into other environments for further investigation. The **Archive Data Retention** setting of your environment defines how long archive data is kept.
 
-When Wazuh ingests and indexes events from agents, the data becomes searchable and analyzable in the Wazuh dashboard. This information is stored in indexed data, which is limited by your :ref:`indexed data retention and indexed data capacity <cloud_glossary_hot_storage>` (formerly known as tier) settings. Simultaneously, the data is sent to archive data with a maximum delay of 30 minutes after initial processing by Wazuh. Archive data is stored in an AWS S3 bucket, allowing you to store logs for extended periods and meet compliance requirements. Additionally, you can reindex the data to other environments for further investigations.
+See :doc:`Environment settings </cloud-service/your-environment/settings>` to review or change the retention and capacity settings of your environment. The **Archive capacity used** metric on the environment details page shows how much archive storage your environment uses. See :doc:`Monitor environment usage </cloud-service/your-environment/monitor-environment-usage>` for details.
 
-Environment example for data storage
-------------------------------------
+Data storage example
+--------------------
 
-This example environment is configured with the following settings:
+An example environment has the following settings:
 
-- Indexed data retention: 3 months
-- Indexed data capacity (formerly known as tier): 100 GB
-- Archive data: 1 year
+-  **Indexed Data Retention**: 3 months
+-  **Indexed Data Capacity**: 100 GB
+-  **Archive Data Retention**: 12 months
 
-Assuming that Wazuh ingests 5GB of data daily, with 20% of events generating alerts, it indexes 1GB per day. In this scenario, the indexed data can retain alerts for up to 100 days (1GB per day - 100GB), but it will be rotated to maintain only 3 months of data as specified in the indexed data retention setting. However, all information from the past year is still accessible in the archive data according to the archive data setting.
+Wazuh ingests 5 GB of data daily, and 20% of the events generate alerts, so it indexes 1 GB per day. With 100 GB of capacity, the indexed data could hold alerts for up to 100 days, but Wazuh rotates it to keep only 3 months, as the indexed data retention setting specifies. All the information from the past 12 months remains available in archive data, as the archive data retention setting specifies.
 
-This configuration ensures that recent alerts are readily available in the indexed data, while older data is securely stored in the archive data for compliance and historical purposes.
-
-For more information about the archive data feature in the Wazuh Cloud service, please refer to the following sections:
+This configuration keeps recent alerts readily available in indexed data, while older data stays securely stored in archive data for compliance and historical purposes.
 
 .. toctree::
-  :maxdepth: 1
+   :maxdepth: 1
 
-  configuration
-  filename-format
-  access
+   configuration
+   filename-format
+   access
