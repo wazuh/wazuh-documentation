@@ -28,7 +28,7 @@ Components
 
 The Wazuh manager components perform functions such as agent enrollment, agent identity validation, and secure communication with Wazuh agents.
 
--  **Agent enrollment service:** Registers new Wazuh agents and provides each agent with a unique authentication key. Wazuh 5.x agents enroll through the HTTPS agent API with an enrollment token or the shared enrollment password. The default configuration requires the shared password. A TLS listener on port 1515 serves legacy Wazuh 4.x agents and supports certificate-based agent identity verification.
+-  **Agent enrollment service:** Registers new Wazuh agents and provides each agent with a unique authentication key. Wazuh 5.x agents enroll through the HTTPS agent API with an enrollment token or the shared enrollment password. The default configuration requires the shared password for agents that enroll without a token. A TLS listener on port 1515 serves legacy Wazuh 4.x agents and supports certificate-based agent identity verification.
 
 -  **Agent connection service:** Manages communication between Wazuh agents and the Wazuh manager through the HTTPS agent API. After enrollment, the service authenticates each request with a bearer token that the Wazuh agent signs with its key. The ``GET /``, ``GET /cacerts``, and ``POST /enroll`` endpoints don't require a bearer token. The service receives events and inventory data from Wazuh agents and delivers pending tasks, such as configuration updates and upgrades, when Wazuh agents request them.
 
