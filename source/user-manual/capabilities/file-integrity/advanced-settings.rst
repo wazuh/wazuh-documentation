@@ -1183,7 +1183,7 @@ The main advantage of using an in-memory database is the performance, as reading
 Synchronization
 ---------------
 
-The FIM module keeps the Wazuh agent and the Wazuh server databases synchronized with each other through synchronization messages. It always updates the file inventory in the Wazuh server with the data available to the Wazuh agent.
+The FIM module keeps the Wazuh agent and the Wazuh server databases synchronized with each other through synchronization messages. By default, it updates the file inventory in the Wazuh server with the data available to the Wazuh agent.
 
 Whenever the Wazuh agent service restarts, the module rebuilds the FIM database of the agent, runs a full scan, and synchronizes the result updating the file inventory in the Wazuh server. The module synchronizes directories monitored with the ``realtime`` or ``whodata`` options immediately, while others require a full scan before synchronization takes place. The module doesn’t report to the Wazuh server changes in the monitored files performed while the service was not running. If you restart the agent after the last scheduled scan, it also discards any event before the restart.
 
