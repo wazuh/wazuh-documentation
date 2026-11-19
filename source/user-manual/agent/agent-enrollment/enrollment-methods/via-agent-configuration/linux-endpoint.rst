@@ -3,8 +3,8 @@
 .. meta::
    :description: Follow these steps to enroll a Linux/Unix endpoint through the Wazuh agent configuration method.
 
-Linux/Unix
-==========
+Enroll a Linux/Unix endpoint through agent configuration
+========================================================
 
 Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent configuration method.
 
