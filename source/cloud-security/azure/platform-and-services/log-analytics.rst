@@ -237,7 +237,7 @@ Follow the steps outlined below to create a user on Microsoft Entra ID:
 Visualizing the findings on the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once set up, you can check the results in the **Wazuh dashboard**.
+Once set up, you can check the results in the **Wazuh dashboard**, in the **Findings** tab of **Threat Hunting**.
 
 .. thumbnail:: /images/cloud-security/azure/results-in-wazuh-dashboard.png
    :alt: Threat Hunting Findings tab in the Wazuh dashboard, showing Azure alerts including the new user creation event

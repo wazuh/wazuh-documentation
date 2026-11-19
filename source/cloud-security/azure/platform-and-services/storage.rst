@@ -107,7 +107,7 @@ Refer to the :ref:`creating a user <log_analytics_use_case_creating_user>` secti
    :align: center
    :width: 80%
 
-You can check the results in the Wazuh dashboard.
+You can check the results in the Wazuh dashboard, in the **Findings** tab of **Threat Hunting**.
 
 .. thumbnail:: /images/cloud-security/azure/results-in-wazuh-dashboard2.png
    :alt: Threat Hunting Findings tab in the Wazuh dashboard, showing Azure user account created and modified events
