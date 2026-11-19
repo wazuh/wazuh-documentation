@@ -104,7 +104,7 @@ The pre-enrichment stage performs the following actions:
         }
       }
 
--  **Discarded events filter**: The discarded events filter decides whether discarded events continue through the pipeline. A discarded event is an event that a decoder marks with the ``discard_events`` :doc:`helper function </user-manual/data-analysis/helper-functions>`, which sets the ``wazuh.space.event_discarded`` field to ``true``. This behavior is controlled by the ``index_discarded_events`` setting of the policy.
+-  **Discarded events filter**: The discarded events filter decides whether discarded events continue through the pipeline. A discarded event is an event that a decoder marks with the ``discard_event`` :doc:`helper function </user-manual/data-analysis/helper-functions>`, which sets the ``wazuh.space.event_discarded`` field to ``true``. This behavior is controlled by the ``index_discarded_events`` setting of the policy.
 -  **Cleanup of decoder temporary variables**: Decoders can only map fields that belong to the WCS or to temporary variables. Temporary variables are used to store intermediate values that help decoders share information while processing an event. After decoding is complete, all temporary variables are automatically removed. This cleanup step always runs at the end of pre-enrichment and requires no user configuration. As a result, only WCS-compliant fields remain in the event, ensuring it can be successfully indexed by the Wazuh indexer.
 
 .. _enrichment:
