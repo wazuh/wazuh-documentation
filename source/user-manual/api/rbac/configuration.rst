@@ -627,81 +627,81 @@ The command output looks similar to this:
 
 This example assumes that the role and both policies already exist. You want the ``allow`` policy to win. Assign the ``deny`` policy first (lower priority, position 0) and the ``allow`` policy second (higher priority, position 1).
 
-Step 1: Assign the deny policy at position 0 (lower priority):
+#. Assign the deny policy at position 0 (lower priority):
 
-.. code-block:: console
+   .. code-block:: console
 
-   # curl -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/roles/101/policies?policy_ids=101&position=0&pretty=true" \
-        -H "Authorization: Bearer $TOKEN"
+      # curl -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/roles/101/policies?policy_ids=101&position=0&pretty=true" \
+           -H "Authorization: Bearer $TOKEN"
 
-The command output looks similar to this:
+   The command output looks similar to this:
 
-.. code-block:: json
-   :class: output
+   .. code-block:: json
+      :class: output
 
-   {
-     "data": {
-       "affected_items": [
-         {
-           "id": 101,
-           "name": "example_role",
-           "policies": [
-             101
-           ],
-           "users": [],
-           "rules": []
-         }
-       ],
-       "total_affected_items": 1,
-       "total_failed_items": 0,
-       "failed_items": []
-     },
-     "message": "All policies were linked to role 101",
-     "error": 0
-   }
+      {
+        "data": {
+          "affected_items": [
+            {
+              "id": 101,
+              "name": "example_role",
+              "policies": [
+                101
+              ],
+              "users": [],
+              "rules": []
+            }
+          ],
+          "total_affected_items": 1,
+          "total_failed_items": 0,
+          "failed_items": []
+        },
+        "message": "All policies were linked to role 101",
+        "error": 0
+      }
 
-Step 2: Assign the allow policy at position 1 (higher priority, overrides deny):
+#. Assign the allow policy at position 1 (higher priority, overrides deny):
 
-.. code-block:: console
+   .. code-block:: console
 
-   # curl -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/roles/101/policies?policy_ids=100&position=1&pretty=true" \
-        -H "Authorization: Bearer $TOKEN"
+      # curl -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/roles/101/policies?policy_ids=100&position=1&pretty=true" \
+           -H "Authorization: Bearer $TOKEN"
 
-The command output looks similar to this:
+   The command output looks similar to this:
 
-.. code-block:: json
-   :class: output
+   .. code-block:: json
+      :class: output
 
-   {
-     "data": {
-       "affected_items": [
-         {
-           "id": 101,
-           "name": "example_role",
-           "policies": [
-             101,
-             100
-           ],
-           "users": [],
-           "rules": []
-         }
-       ],
-       "total_affected_items": 1,
-       "total_failed_items": 0,
-       "failed_items": []
-     },
-     "message": "All policies were linked to role 101",
-     "error": 0
-   }
+      {
+        "data": {
+          "affected_items": [
+            {
+              "id": 101,
+              "name": "example_role",
+              "policies": [
+                101,
+                100
+              ],
+              "users": [],
+              "rules": []
+            }
+          ],
+          "total_affected_items": 1,
+          "total_failed_items": 0,
+          "failed_items": []
+        },
+        "message": "All policies were linked to role 101",
+        "error": 0
+      }
 
-Even though the deny policy exists, the allow policy wins because it is applied last (higher position). A user with the ``example_role`` role can now read agent 001.
+   Even though the deny policy exists, the allow policy wins because it is applied last (higher position). A user with the ``example_role`` role can now read agent 001.
 
-Verify the order:
+#. Verify the order:
 
-.. code-block:: console
+   .. code-block:: console
 
-   # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/roles?pretty=true&role_ids=101" \
-        -H "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/roles?pretty=true&role_ids=101" \
+           -H "Authorization: Bearer $TOKEN"
 
 .. note::
 
