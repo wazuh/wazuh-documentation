@@ -6,7 +6,7 @@
 Removing a malicious file with active response
 ====================================================
 
-In this use case, we download a malicious test file to a Windows 11 endpoint. Wazuh file integrity monitoring detects the file and evaluates the resulting finding against the configured Alerting monitor. When the finding meets the monitor conditions, Wazuh runs a custom ``remove-file`` script on the endpoint to delete the file.
+In this use case, we download a malicious test file to a Windows 11 endpoint. Wazuh file integrity monitoring detects the file, and Wazuh matches its hash against known malicious indicators. Wazuh then evaluates the resulting ``Malicious hash detected`` finding against the configured Alerting monitor. When the finding meets the monitor conditions, Wazuh runs a custom ``remove-file`` script on the endpoint to delete the file.
 
 Infrastructure
 -----------------
@@ -165,7 +165,7 @@ On the Wazuh dashboard, create the active response configuration as described in
    :align: center
    :width: 80%
 
-Then create an Alerting monitor that runs the active response when a finding matches your conditions. This use case uses the Extraction query editor to match the FIM integration name, the file action, and the file path.
+Then create an Alerting monitor that runs the active response when a finding matches your conditions. This use case uses the Extraction query editor to match findings whose rule title contains ``Malicious hash detected``. Wazuh generates these findings when the hash of a file that file integrity monitoring detects matches a known malicious indicator, so the active response removes only malicious files, not every file in the monitored directory.
 
 #. Navigate to **Explore** > **Alerting**, switch to the **Monitors** tab, then click **Create monitor**. Fill in the following parameters.
 
@@ -196,11 +196,11 @@ Then create an Alerting monitor that runs the active response when a finding mat
    .. code-block:: json
 
       {
-          "description": "Detects new files in Downloads directories",
+          "description": "Detects files with a known malicious hash",
           "queries": [
               {
                   "name": "remove_file_ar_query",
-                  "query": "wazuh.integration.name:\"wazuh-fim\" AND event.action:\"created\" AND file.path:*downloads*",
+                  "query": "wazuh.rule.title:*Malicious\\ hash\\ detected*",
                   "tags": []
               }
           ]
@@ -242,7 +242,7 @@ Then create an Alerting monitor that runs the active response when a finding mat
 
 .. note::
 
-   Extraction queries use the query string syntax. The ``*`` wildcard matches any sequence of characters. For example, ``file.path:*downloads*`` matches any file path that contains downloads. Matching is case-sensitive, and the Windows agent reports file paths in lowercase, such as ``c:\users\<USER>\downloads\eicar.txt``, so ``*Downloads*`` doesn't match these findings. Use ``AND``, ``OR``, and ``NOT`` to combine conditions.
+   Extraction queries use the query string syntax. The ``*`` wildcard matches any sequence of characters. For example, ``wazuh.rule.title:*Malicious\ hash\ detected*`` matches any rule title that contains Malicious hash detected. A backslash escapes each space, and the JSON needs each backslash twice.
 
 Attack emulation
 -------------------
