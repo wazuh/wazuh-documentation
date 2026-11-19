@@ -233,9 +233,9 @@ Enable Microsoft Defender for Office 365, then send a malicious email to an addr
 #. Toggle the **Standard protection is off** button under **Standard protection** from **off** to **on**.
 #. Click on **Manage protection settings** and follow the prompt to set up the policies.
 
-When Microsoft Defender for Office 365 detects a malicious email event, it generates a log similar to the following. You can view this event using the **Alerts** tab of the Microsoft Defender portal. For example:
+When Microsoft Defender for Office 365 detects a malicious email event, it generates a log similar to the following. You can view this event using the **Alerts** tab of the Microsoft Defender portal.
 
-The command output looks similar to this:
+Sample alert:
 
 .. code-block:: json
    :class: output
