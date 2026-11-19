@@ -28,7 +28,7 @@ Commands
 | Command        | Description                                                                                  |
 +================+==============================================================================================+
 | validate       | Checks the file: XML syntax, schema, and rules that involve more than one option. Prints     |
-|                | nothing on success.                                                                          |
+|                | ``/etc/wazuh-manager/wazuh-manager.conf: configuration is valid.`` on success.               |
 +----------------+----------------------------------------------------------------------------------------------+
 | get <key.path> | Prints one option of the effective configuration, with defaults applied. Scalar values print |
 |                | as plain text, and objects and lists print as JSON. The key path uses dots between section   |
