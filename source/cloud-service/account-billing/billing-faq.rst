@@ -1,62 +1,88 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Get answers to the most frequently asked questions about billing in this FAQ. Explore the potential of Wazuh Cloud and the Wazuh Cloud Console.
+   :description: Find answers to frequently asked questions about billing for Wazuh Cloud environments and Wazuh CTI feed subscriptions in Wazuh Console.
+
+.. _cloud_billing_faq:
 
 Billing FAQ
 ===========
+
+This page answers common questions about how Wazuh charges for Wazuh Cloud environments and Wazuh CTI feed subscriptions.
 
 .. contents::
    :local:
    :depth: 1
    :backlinks: none
 
-When is my credit card charged?
--------------------------------
+How am I billed?
+----------------
 
-Each environment is charged monthly, according to the environment's beginning date.
+Each Wazuh Cloud environment and each feed subscription is billed separately, either monthly or yearly. You choose the billing period when you create the environment or buy the subscription. Subscriptions renew automatically at the end of each billing period until you cancel them.
 
-Is my credit card information safe?
+To see when each subscription renews, see :doc:`Subscriptions </cloud-service/account-billing/subscriptions>`.
+
+Which payment methods and currencies are accepted?
+--------------------------------------------------
+
+You pay with a credit or debit card. All prices are in US dollars (USD). See :doc:`Payment methods </cloud-service/account-billing/payment-methods>`.
+
+.. TODO: Confirm with sales whether other payment methods, such as bank transfer, are available for contracts agreed with Wazuh.
+
+Is my card information safe?
+----------------------------
+
+Yes. Payments are processed securely by Stripe, and your card details are stored by Stripe, not by Wazuh.
+
+Am I charged during the free trial?
 -----------------------------------
 
-Your credit card information is sent securely to our billing provider, `Stripe <https://stripe.com>`_, and stored there.
+No. A trial is free for 14 days, and adding a card is optional. If you add a card before the trial ends, the environment becomes a paid subscription when the trial ends and the card is charged. If you don't add a card, the environment is deleted when the trial ends. See :doc:`Start a trial </cloud-service/getting-started/start-trial>`.
 
-Where can I see the next payment for an environment?
-----------------------------------------------------
-
-Go to the :doc:`See your billing cycle and history </cloud-service/account-billing/billing-history>` section to learn how to view the billing details of your environments.
-
-What happens to my payments if I want to upgrade or downgrade a setting?
-------------------------------------------------------------------------
-
-If you choose to upgrade a setting, you need to make an immediate prorated payment. The upgrade becomes effective immediately, albeit leading to an increased price for your environment. Conversely, when downgrading a setting, the change takes effect in the subsequent billing cycle, with your price adjusted accordingly. See :ref:`Adjusting environment settings <cloud_settings_adjust>` for further details.
-
-How do I view previous receipts and billing history?
-----------------------------------------------------
-
-Go to the :doc:`See your billing cycle and history </cloud-service/account-billing/billing-history>` section to learn how to download an overview of all invoices issued for your account.
-
-How can I configure who receives receipts and billing notifications?
+What happens to my bill when I increase a setting of my environment?
 --------------------------------------------------------------------
 
-Go to :doc:`Update billing and operational contacts </cloud-service/account-billing/update-billing>` section to learn how to configure who receives receipts and billing notifications.
+When you increase a setting with **Edit settings**, you pay a prorated amount for the rest of the current billing period. Wazuh charges this amount to your card right away, and the change applies a few minutes after the payment. From the next billing period, you pay the full price of the updated settings. See :doc:`Settings </cloud-service/your-environment/settings>`.
 
-What are the available payment methods on Wazuh Cloud?
---------------------------------------------------------------
+Can I lower a setting or change the billing period?
+---------------------------------------------------
 
-Credit or debit card payments are supported. To learn more about Wazuh supported cards, see the certified payment processor list of card brands in the `Stripe documentation <https://stripe.com/docs/payments/cards/supported-card-brands>`_.
+You can't lower a setting or change the billing period of an environment in Wazuh Console. To request either change, contact Wazuh. See :doc:`Support </cloud-service/support>`.
+
+Can I use a discount code?
+--------------------------
+
+Yes. When you create an environment, buy a trial, or buy a feed subscription, enter the code under **Apply discount code** and click **Validate**. The order summary shows how much the discount takes off.
+
+What happens if a payment fails?
+--------------------------------
+
+The subscription becomes **Past due**, and Wazuh Console shows the amount due. For a Wazuh Cloud environment:
+
+#. The environment keeps running for 7 days.
+#. If the payment is still missing, the environment is suspended for 7 days if it's billed monthly, or 14 days if it's billed yearly.
+#. If the payment is still missing at the end of the suspension, the environment is terminated and all its data is permanently deleted.
+
+Pay the pending amount at any point to keep or reactivate the environment. See :doc:`Subscriptions </cloud-service/account-billing/subscriptions>`. If you need more time to pay, contact Wazuh.
+
+How do I stop being charged?
+----------------------------
+
+Cancel the subscription at any time. A paid environment or feed subscription stays available until the end of the current billing period and isn't charged again. See :doc:`Cancel an environment </cloud-service/your-environment/cancel-environment>` and :doc:`Subscriptions </cloud-service/account-billing/subscriptions>`.
 
 Can I get a refund?
 -------------------
 
-Charges are nonrefundable, but if you want to cease using an environment, you can :doc:`cancel your environment </cloud-service/your-environment/cancel-environment>` anytime. No new charges are incurred beyond the current billing period. For any special considerations regarding a refund, contact us through the **Help** section of the Wazuh Cloud Console.
+.. TODO: Confirm the refund policy with sales or legal. The Wazuh Console code and terms shown in the console don't state whether charges are refundable.
 
-What is included in my Wazuh Cloud environment?
------------------------------------------------
+Charges are nonrefundable. If you want to stop using an environment or a feed subscription, you can cancel it at any time, and no further charges are incurred after the current billing period. For special considerations, contact Wazuh. See :doc:`Support </cloud-service/support>`.
 
-A full set-up of Wazuh, according to your setting, and a standard or premium support service.
+Where can I find my invoices?
+-----------------------------
 
-How can I request more information?
------------------------------------
+In the sidebar, under **Billing**, select **Invoices**. See :doc:`Invoices </cloud-service/account-billing/invoices>`.
 
-You can contact the Wazuh team anytime through the **Help** section on your Wazuh Cloud Console.
+Who can manage billing?
+-----------------------
+
+Only members with the Editor role can open the **Billing** pages, add cards, buy, pay, and cancel subscriptions. See :doc:`Members and invitations </cloud-service/organization/members>`.

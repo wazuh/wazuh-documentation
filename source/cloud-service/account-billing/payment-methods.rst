@@ -1,46 +1,91 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to add your billing details to your Wazuh Cloud account in this section of the documentation. 
+   :description: Add cards to your Wazuh Console organization, choose the default card for charges, and delete cards.
 
-Manage your billing details
-===========================
+.. _cloud_billing_payment_methods:
 
-To continue using your environment beyond the trial period, you need to add credit card details to your Wazuh Cloud account. Your credit card information is sent securely to our billing provider and stored with them.
+Payment methods
+===============
 
-.. note::
+Your organization pays for Wazuh Cloud environments and Wazuh CTI feed subscriptions with a credit or debit card. This page describes how to add cards, choose the default card, and delete cards.
 
-   A trial environment is converted to a paid environment when the trial expires. If you do not add your credit card information before the expiration date, your environment is deleted, and all data is permanently erased. Make sure to add your credit card before the end of the trial period.
+All prices are in US dollars (USD). Payments are processed securely by Stripe, and your card details are stored by Stripe, not by Wazuh. Charges appear on your statement as "Wazuh Inc."
 
-Add your billing details
-------------------------
+You need the Editor role to manage payment methods.
 
-To add the billing details:
+Viewing your payment methods
+----------------------------
 
-#. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
-#. Go to the **Account** section and select **Billing**.
-#. Select **Add billing information** in the **Payment method** section.
-#. Fill in the form with your billing details.
-#. Click **Save** to confirm the payment method.
+#. In the sidebar, under **Billing**, select **Subscriptions**.
+#. Select the **Payment Methods** tab.
 
-You can stop upcoming charges by :doc:`canceling your environments <stop-charges>`.
+The tab lists the cards of your organization. Each card shows its brand, its last four digits, and its expiration date. A card can also show the following badges:
 
-.. note::
+.. TODO: Confirm with engineering whether renewals of existing subscriptions charge the organization default card or the card used for the original purchase.
 
-   Cancellation cannot be undone, all data will be permanently deleted.
+-  **Default**: The card that Wazuh charges for renewals and other payments of the organization.
+-  **Expired**: The card has passed its expiration date and can't be charged. Add a valid card and set it as the default.
 
-Remove your billing details
----------------------------
+If you never choose a default card, the most recently added card is used.
 
-You can only remove billing details when there are no active paid environments. This means either:
+Adding a payment method
+-----------------------
 
--  There are no environments.
--  The only active environment is in a trial period.
--  All the environments have been canceled.
+#. In the sidebar, under **Billing**, select **Subscriptions**.
+#. Select the **Payment Methods** tab.
+#. Click **New Payment Method**.
+#. Fill in the billing details:
 
-In order to remove your billing information:
+   +-----------------------------+------------------------------------------------------------+
+   | Field                       | Description                                                |
+   +=============================+============================================================+
+   | **First name**              | The first name of the cardholder.                          |
+   +-----------------------------+------------------------------------------------------------+
+   | **Last name**               | The last name of the cardholder.                           |
+   +-----------------------------+------------------------------------------------------------+
+   | **Email**                   | The billing email address.                                 |
+   +-----------------------------+------------------------------------------------------------+
+   | **Address**                 | The billing address.                                       |
+   +-----------------------------+------------------------------------------------------------+
+   | **Zip or postal code**      | The postal code of the billing address.                    |
+   +-----------------------------+------------------------------------------------------------+
+   | **City**                    | The city of the billing address.                           |
+   +-----------------------------+------------------------------------------------------------+
+   | **Country**                 | The two-letter country code of the billing address, for    |
+   |                             | example, ``US`` or ``ES``.                                 |
+   +-----------------------------+------------------------------------------------------------+
+   | **State**                   | Optional. The state of the billing address.                |
+   +-----------------------------+------------------------------------------------------------+
 
-#. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
-#. Go to the **Account** section, select **Billing**, and select **Payment method**.
-#. Select **Delete** in the **Payment method**. This button will be disabled if there is an active paid environment.
-#. Confirm **Delete** in the pop up.
+#. Enter the card number, expiration date, and security code in the card field.
+#. Click **Save**.
+
+If your bank requires extra verification, follow its instructions to complete it. The card appears in the **Payment Methods** tab.
+
+You can also add a card while you buy something in Wazuh Console, for example, when you create an environment, buy a trial, buy a feed subscription, or pay a pending amount.
+
+Setting the default payment method
+----------------------------------
+
+#. In the sidebar, under **Billing**, select **Subscriptions**.
+#. Select the **Payment Methods** tab.
+#. Open the options menu of the card and select **Set as default**.
+
+The card shows the **Default** badge.
+
+Deleting a payment method
+-------------------------
+
+Deleting a card removes it from Stripe, so Wazuh can't charge it. This action can't be undone.
+
+#. In the sidebar, under **Billing**, select **Subscriptions**.
+#. Select the **Payment Methods** tab.
+#. Open the options menu of the card and select **Delete**.
+#. In the **Delete payment method?** dialog, click **Delete card**.
+
+If you delete the default card, the most recently added card that remains becomes the default.
+
+.. warning::
+
+   Keep at least one valid card while your organization has active paid subscriptions. If a renewal payment fails, the subscription becomes past due. See :doc:`Subscriptions </cloud-service/account-billing/subscriptions>`.
