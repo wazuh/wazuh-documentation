@@ -3,8 +3,8 @@
 .. meta::
    :description: Follow these steps to enroll a Windows endpoint through the Wazuh agent configuration method.
 
-Windows
-=======
+Enroll a Windows endpoint through agent configuration
+=====================================================
 
 Follow these steps to enroll a Windows endpoint through the Wazuh agent configuration method.
 
