@@ -1,7 +1,7 @@
 
 .. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
-  :description: Check out how to upgrade the Wazuh agent to the latest available version remotely, using the agent_upgrade tool or the Wazuh API, or locally.
+  :description: Follow these steps to upgrade the Wazuh agent to the latest available version on Windows endpoints.
 
 
 Upgrading Wazuh agents on Windows endpoints
@@ -22,9 +22,9 @@ Follow these steps to upgrade Wazuh agents locally on Windows endpoints.
 
          To upgrade the Wazuh agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations.
 
-            .. code-block:: none
+            .. code-block:: pwsh-session
 
-               # .\wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q
+               > .\wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q
 
 
       .. group-tab:: GUI

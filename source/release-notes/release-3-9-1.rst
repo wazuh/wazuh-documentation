@@ -25,7 +25,7 @@ Wazuh core
         <localfile>
             <location>C:\Users\user\Desktop\*test*</location>
             <log_format>syslog</log_format>
-            <exclude>C:\Users\user\Desktop\*test*.json</log_format>
+            <exclude>C:\Users\user\Desktop\*test*.json</exclude>
         </localfile>
 
 - Fixed crash when an active response command was received and the module was disable

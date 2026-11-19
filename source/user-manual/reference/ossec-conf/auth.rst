@@ -16,7 +16,7 @@ auth
         </auth>
 
 
-This section shows the options for the registration service.
+This section shows the options for the agent enrollment service (``wazuh-authd``) on the Wazuh manager.
 
 Options
 -------
@@ -194,8 +194,10 @@ If this file does not exist, a **random password** will be generated.
 ssl_agent_ca
 ^^^^^^^^^^^^
 
-Specifies the path to the CA certificate used to verify clients. It can be referred to a relative path under the Wazuh installation directory or a full path.
+Specifies the path to the CA certificate used to verify clients. It can be referred to a relative path under the Wazuh installation directory or a full path. If it is not set, the Wazuh manager does not verify agent certificates.
 
++--------------------+---------------------+
+| **Default value**  | n/a                 |
 +--------------------+---------------------+
 | **Allowed values** | Any valid path      |
 +--------------------+---------------------+

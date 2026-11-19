@@ -21,7 +21,7 @@ In this use case, you configure the Active Response module to block an IP addres
 
 #. Add the following block to the Wazuh server configuration file (``/var/ossec/etc/ossec.conf``).
 
-    .. code-block:: console
+    .. code-block:: xml
 
         <active-response>
           <disabled>no</disabled>

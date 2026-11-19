@@ -13,7 +13,7 @@ Dynamic fields are additional fields extracted from log data during the decoding
 Traditional decoders
 --------------------
 
-Traditionally, Wazuh offers thirteen predefined fields for storing extracted information: ``user``, ``srcip``, ``dstip``, ``srcport``, ``dstport``, ``protocol``, ``action``, ``id``, ``url``, ``data``, ``extra_data``, ``status``, and ``system_name``. These are also referred to as “static fields”. However, only eight fields can be extracted simultaneously. This limitation arises because in certain scenarios where log entries contain multiple types of information, Wazuh prioritizes the extraction of specific fields over others. As a result, only eight out of the thirteen fields can be populated simultaneously to manage resource constraints and maintain efficiency in log processing. The prioritized fields in such cases are typically: ``user``, ``srcip``, ``dstip``, ``srcport``, ``dstport``, ``protocol``, ``action`` and ``id``.
+Traditionally, Wazuh offers fourteen predefined fields for storing extracted information: ``user``, ``srcuser``, ``srcip``, ``dstip``, ``srcport``, ``dstport``, ``protocol``, ``action``, ``id``, ``url``, ``data``, ``extra_data``, ``status``, and ``system_name``. These are also referred to as “static fields”. However, only eight fields can be extracted simultaneously. This limitation arises because in certain scenarios where log entries contain multiple types of information, Wazuh prioritizes the extraction of specific fields over others. As a result, only eight out of the fourteen fields can be populated simultaneously to manage resource constraints and maintain efficiency in log processing. The prioritized fields in such cases are typically: ``user``, ``srcip``, ``dstip``, ``srcport``, ``dstport``, ``protocol``, ``action`` and ``id``.
 
 You can find below an example decoder to match some static fields:
 
@@ -32,7 +32,7 @@ You can find below an example decoder to match some static fields:
 Dynamic decoders
 ----------------
 
-It is often necessary to extract more than eight relevant fields from an event, and often the actual data items extracted have no relationship to the limited list of predefined field names. Recognizing the limitations of operating within these constraints, 	 unlimited number of fields with names that accurately reflect the extracted data. This enhancement includes support for nested field names as well.
+It is often necessary to extract more than eight relevant fields from an event, and often the actual data items extracted have no relationship to the limited list of predefined field names. Recognizing the limitations of operating within these constraints, Wazuh supports an unlimited number of fields with names that accurately reflect the extracted data. This enhancement includes support for nested field names as well.
 
 You can find below an example decoder to match some dynamic fields:
 

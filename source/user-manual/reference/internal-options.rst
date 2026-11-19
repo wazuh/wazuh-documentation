@@ -25,69 +25,94 @@ Generally, this file is reserved for debugging issues and for troubleshooting. *
 Agent
 -----
 
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.tolerance**       | Description    | Number of seconds the agent is full before triggering a flooding alert.          |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 15                                                                               |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 0 and 600.                                                   |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.warn_level**      | Description    | Percentage of occupied capacity in agent buffer to trigger a warning alert.      |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 90                                                                               |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 1 and 100.                                                   |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.normal_level**    | Description    | Percentage of occupied capacity in agent buffer to return to normal state.       |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 70                                                                               |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 0 and *agent.warn_level - 1*.                                |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.min_eps**         | Description    | Minimum events per second permitted in ``<client_buffer>`` configuration.        |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 50                                                                               |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 1 and 1000.                                                  |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.recv_timeout**    | Description    | Maximum number of seconds to wait for server response from the TCP client socket.|
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 60                                                                               |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 1 and 600.                                                   |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.state_interval**  | Description    | The interval between the updates of the agent status file in seconds.            |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 5                                                                                |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed values | 0: Disable status file                                                           |
-+                           +                +----------------------------------------------------------------------------------+
-|                           |                | Any other integer between 1 and 86400                                            |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.debug**           | Description    | Run the Unix agent processes in debug mode.                                      |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 0                                                                                |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | 0: No debug output.                                                              |
-+                           +                +----------------------------------------------------------------------------------+
-|                           |                | 1: Standard debug output.                                                        |
-+                           +                +----------------------------------------------------------------------------------+
-|                           |                | 2: Verbose debug output.                                                         |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.remote_conf**     | Description    | Apply or refuse remote configuration.                                            |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 1                                                                                |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | 0: Remote configuration is disabled.                                             |
-+                           +                +----------------------------------------------------------------------------------+
-|                           |                | 1: Remote configuration is enabled.                                              |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.tolerance**      | Description    | Number of seconds the agent is full before triggering a flooding alert.                                   |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 15                                                                                                        |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed value  | Any integer between 0 and 600.                                                                            |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.warn_level**     | Description    | Percentage of occupied capacity in agent buffer to trigger a warning alert.                               |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 90                                                                                                        |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed value  | Any integer between 1 and 100.                                                                            |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.normal_level**   | Description    | Percentage of occupied capacity in agent buffer to return to normal state.                                |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 70                                                                                                        |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed value  | Any integer between 0 and *agent.warn_level - 1*.                                                         |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.min_eps**        | Description    | Minimum events per second permitted in ``<client_buffer>`` configuration.                                 |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 50                                                                                                        |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed value  | Any integer between 1 and 1000.                                                                           |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.recv_timeout**   | Description    | Maximum number of seconds to wait for server response from the TCP client socket.                         |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 60                                                                                                        |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed value  | Any integer between 1 and 600.                                                                            |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.state_interval** | Description    | The interval between the updates of the agent status file in seconds.                                     |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 5                                                                                                         |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed values | 0: Disable status file                                                                                    |
++                          +                +-----------------------------------------------------------------------------------------------------------+
+|                          |                | Any other integer between 1 and 86400                                                                     |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.debug**          | Description    | Run the Unix agent processes in debug mode.                                                               |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 0                                                                                                         |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed value  | 0: No debug output.                                                                                       |
++                          +                +-----------------------------------------------------------------------------------------------------------+
+|                          |                | 1: Standard debug output.                                                                                 |
++                          +                +-----------------------------------------------------------------------------------------------------------+
+|                          |                | 2: Verbose debug output.                                                                                  |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.remote_conf**    | Description    | Apply or refuse remote configuration.                                                                     |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 1                                                                                                         |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed value  | 0: Remote configuration is disabled.                                                                      |
++                          +                +-----------------------------------------------------------------------------------------------------------+
+|                          |                | 1: Remote configuration is enabled.                                                                       |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.tcp_keepidle**   | Description    | Time (in seconds) the connection needs to remain idle before TCP starts sending keepalive probes.         |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 60                                                                                                        |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed value  | Any integer between 1 and 7200.                                                                           |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.tcp_keepintvl**  | Description    | Time (in seconds) between individual keepalive probes.                                                    |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 15                                                                                                        |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed value  | Any integer between 1 and 100.                                                                            |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.tcp_keepcnt**    | Description    | Maximum number of unanswered keepalive probes before the kernel drops the connection.                     |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 4                                                                                                         |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed value  | Any integer between 1 and 50.                                                                             |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
+| **agent.send_timeout**   | Description    | Maximum time (in seconds) that ``send()`` may block on the agent-to-manager TCP socket before timing out. |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Default value  | 30                                                                                                        |
++                          +----------------+-----------------------------------------------------------------------------------------------------------+
+|                          | Allowed value  | Any integer between 1 and 600.                                                                            |
++--------------------------+----------------+-----------------------------------------------------------------------------------------------------------+
 
 .. _ossec_internal_analysisd:
 
 Analysisd
 ---------
 
+The options whose names end in ``_queue_size`` set the number of events each queue can hold.
 
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
 |   **analysisd.default_timeframe**                       | Description   | Default rule time-frame.                                            |
@@ -137,6 +162,29 @@ Analysisd
 |                                                         | Default value |256                                                                  |
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Allowed value | Any integer between 32 and 1024.                                    |
++---------------------------------------------------------+---------------+---------------------------------------------------------------------+
+|  **analysisd.rule_tree_memory_warning**                 | Description   | Rule tree memory above which a warning is logged while the ruleset  |
+|                                                         |               | is loaded. A rule is added as a child of every rule that matches    |
+|                                                         |               | its ``if_sid``, ``if_group``, ``if_level`` or category, so the rule |
+|                                                         |               | tree can be much larger than the number of rules suggests. Each     |
+|                                                         |               | node takes 32 bytes on 64-bit systems.                              |
++                                                         +---------------+---------------------------------------------------------------------+
+|                                                         | Default value | 25%                                                                 |
++                                                         +---------------+---------------------------------------------------------------------+
+|                                                         | Allowed value | A size (a number of bytes, or a number followed by ``K``, ``M`` or  |
+|                                                         |               | ``G``), or a percentage between 1% and 100% of the physical memory  |
+|                                                         |               | or of the cgroup memory limit, whichever is lower. 0 disables the   |
+|                                                         |               | warning.                                                            |
++---------------------------------------------------------+---------------+---------------------------------------------------------------------+
+|  **analysisd.rule_tree_memory_limit**                   | Description   | Maximum rule tree memory. If loading the ruleset would exceed it,   |
+|                                                         |               | loading stops and the ruleset is rejected. When both thresholds are |
+|                                                         |               | enabled, it must be greater than                                    |
+|                                                         |               | ``analysisd.rule_tree_memory_warning``.                             |
++                                                         +---------------+---------------------------------------------------------------------+
+|                                                         | Default value | 0 (disabled)                                                        |
++                                                         +---------------+---------------------------------------------------------------------+
+|                                                         | Allowed value | Same format as ``analysisd.rule_tree_memory_warning``. 0 disables   |
+|                                                         |               | the limit.                                                          |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
 |     **analysisd.geoip_jsonout**                         | Description   | Toggle to turn on or off the output of GeoIP data in JSON alerts.   |
 +                                                         +---------------+---------------------------------------------------------------------+
@@ -350,6 +398,59 @@ Analysisd
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
 
 
+.. _ossec_internal_analysisd_rule_tree:
+
+Rule tree memory thresholds
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When ``wazuh-analysisd`` loads the ruleset, it adds each rule to the rule tree as a child of every rule that matches its ``if_sid``, ``if_group``, ``if_level`` or category. A few rules can therefore create many tree nodes. The ``analysisd.rule_tree_memory_warning`` and ``analysisd.rule_tree_memory_limit`` options detect and stop this growth.
+
+Set both options in ``/var/ossec/etc/local_internal_options.conf`` and restart the Wazuh manager. Each option accepts a memory size, for example ``2G``, or a percentage of memory, for example ``25%``. Percentages apply to the physical memory, or to the cgroup memory limit of ``wazuh-analysisd`` if it is lower, as in containers or in a systemd service with ``MemoryMax``. ``0`` disables a threshold.
+
+When it starts, ``wazuh-analysisd`` converts each threshold to a number of rule tree nodes, using 32 bytes per node on 64-bit systems, and logs the result:
+
+.. code-block:: none
+
+   INFO: Rule tree threshold 'analysisd.rule_tree_memory_warning' set to <NODES> nodes: 25% of <MEMORY> MiB of physical memory, 32 bytes per node.
+
+For example, ``2G`` is 67,108,864 nodes, and the default warning threshold of ``25%`` is also 67,108,864 nodes on a system with 8 GiB of memory.
+
+-  If a percentage is set but the memory size cannot be determined, that threshold is disabled and ``wazuh-analysisd`` logs ``(7622): Could not determine the memory size.``
+-  If both thresholds are enabled and the warning threshold is not lower than the limit, ``wazuh-analysisd`` does not start and logs ``(5109): Invalid rule tree thresholds``.
+
+Warning threshold
+~~~~~~~~~~~~~~~~~
+
+When the rule tree exceeds the warning threshold, ``wazuh-analysisd`` logs the following message once per ruleset load and continues loading:
+
+.. code-block:: none
+
+   WARNING: (7621): The rule tree exceeded the warning threshold of <NODES> nodes while adding rule '<RULE_ID>' from '<FILE>'.
+
+The reported rule is the one being added when the threshold was crossed. It is not necessarily the only cause, because a rule can expand over nodes created by earlier rules. Logtest also returns this warning in its response.
+
+Node limit
+~~~~~~~~~~
+
+When adding a node would exceed the limit, ``wazuh-analysisd`` stops loading the ruleset and logs:
+
+.. code-block:: none
+
+   ERROR: (5108): Rule '<RULE_ID>' in '<FILE>' exceeds the rule tree node limit (<NODES> nodes in the tree, <RULE_NODES> added by this rule, limit <LIMIT>). Ruleset loading aborted.
+
+The result depends on how the ruleset is loaded:
+
+-  Manager start and ``wazuh-analysisd -t``: the ruleset isn't loaded and ``wazuh-analysisd`` doesn't start.
+-  Ruleset reload: the new ruleset is rejected and the current ruleset stays active.
+-  Rule or decoder file upload through the Wazuh server API, including from the Wazuh dashboard: the upload is rejected with API error ``1132`` ("The ruleset exceeds the rule tree node limit"), which includes the message above. A new file is removed and a replaced file is restored.
+
+The limit is disabled by default. Deployments that let users change rules from the Wazuh dashboard can set it to reject rulesets that would use too much memory.
+
+.. note::
+
+   The thresholds apply to each ruleset load, not to the whole process. The active ruleset, a ruleset being reloaded, and each logtest session have their own rule tree, and ``wazuh-analysisd`` also uses memory for other data. In a cluster, each node reads its own internal options, and rule and decoder uploads through the API are validated on the master node with its values. Use the same values on all nodes so that a ruleset accepted by the master also loads on the workers.
+
+
 Authd
 -----
 
@@ -364,22 +465,12 @@ Authd
 +                               +               +--------------------------------------------------------------------------+
 |                               |               | 2: Verbose debug output                                                  |
 +-------------------------------+---------------+--------------------------------------------------------------------------+
-| **auth.timeout_seconds**      | Description   | Network timeout to automatically close connections (second part).        |
-+                               +---------------+--------------------------------------------------------------------------+
-|                               | Default value | 1                                                                        |
-+                               +---------------+--------------------------------------------------------------------------+
-|                               | Allowed value | Any integer between 1 and 2147483647.                                    |
-+-------------------------------+---------------+--------------------------------------------------------------------------+
-| **auth.timeout_microseconds** | Description   | Network timeout to automatically close connections (microsecond part).   |
-+                               +---------------+--------------------------------------------------------------------------+
-|                               | Default value | 0                                                                        |
-+                               +---------------+--------------------------------------------------------------------------+
-|                               | Allowed value | Any integer between 0 and 999999.                                        |
-+-------------------------------+---------------+--------------------------------------------------------------------------+
 
 
 DBD
 ---
+
+Wazuh 4.14.7 removed ``wazuh-dbd``. This option applies to Wazuh 4.14.6 and earlier.
 
 +----------------------------+---------------+--------------------------------------------------------------------------+
 | **dbd.reconnect_attempts** | Description   | Number of times wazuh-dbd will attempt to reconnect to the database.     |
@@ -450,13 +541,14 @@ Logcollector
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Allowed value | Any integer between 0 and 998                                              |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
-| **logcollector.remote_commands**         | Description   | Toggles Logcollector to accept remote commands from the manager or not.    |
+| **logcollector.remote_commands**         | Description   | Toggles whether Logcollector accepts remote commands, sockets, and socket  |
+|                                          |               | targets from the manager.                                                  |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 0                                                                          |
 +                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | 0: Disable remote commands                                                 |
+|                                          | Allowed value | 0: Disable remote commands, sockets, and socket targets                    |
 +                                          +               +----------------------------------------------------------------------------+
-|                                          |               | 1: Enable remote commands                                                  |
+|                                          |               | 1: Enable remote commands, sockets, and socket targets                     |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 |   **logcollector.vcheck_files**          | Description   | File checking interval, in seconds.                                        |
 +                                          +---------------+----------------------------------------------------------------------------+
@@ -468,7 +560,9 @@ Logcollector
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 10000                                                                      |
 +                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 100 and 100000                                         |
+|                                          | Allowed values| 0: No limit                                                                |
++                                          +               +----------------------------------------------------------------------------+
+|                                          |               | Any other integer between 100 and 1000000                                  |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 |   **logcollector.sample_log_length**     | Description   | Sample log length limit for errors about large input logs.                 |
 +                                          +---------------+----------------------------------------------------------------------------+

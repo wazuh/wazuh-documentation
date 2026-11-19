@@ -11,11 +11,11 @@ This section provides several use cases to demonstrate some of the potentials of
 Exploring alerts
 ----------------
 
-Wazuh stores triggered alerts in the ``wazuh-alerts*`` index in the Wazuh indexer; we can use the Wazuh indexer API to query the alerts. In this use case, we identify the most risky users. This is done using the ``_search`` endpoint to search through all alerts in the index and aggregate the ``srcuser`` field to identify the top three (3) users associated with triggered alerts.
+Wazuh stores triggered alerts in the ``wazuh-alerts*`` index in the Wazuh indexer; we can use the Wazuh indexer API to query the alerts. In this use case, we identify the most risky users. This is done using the ``_search`` endpoint to search through all alerts in the index and aggregate the ``dstuser`` field to identify the top three (3) users associated with triggered alerts.
 
 Follow the steps below.
 
-#. Navigate to **Index management** > **Dev Tools**.
+#. Navigate to **Indexer management** > **Dev Tools**.
 #. Input the following query and execute:
 
    .. code-block:: none
@@ -83,7 +83,7 @@ Getting information about the Wazuh indexer configuration
 
 You can retrieve details about the Wazuh indexer through the Wazuh indexer API, such as configuration settings, status, logs, and more. The following example demonstrates how to retrieve the current security configuration (authentication) settings of the Wazuh indexer.
 
-#. Navigate to **Index management** > **Dev Tools**.
+#. Navigate to **Indexer management** > **Dev Tools**.
 #. Input the following query and execute:
 
    .. code-block:: none
@@ -113,7 +113,7 @@ The following output shows us the current authentication settings in the Wazuh i
            "anonymous_auth_enabled": false,
            "xff": {
              "enabled": false,
-             "internalProxies": """192\.168\.0\.10|192\.168\.0\.11""",
+             "internalProxies": "192\\.168\\.0\\.10|192\\.168\\.0\\.11",
              "remoteIpHeader": "X-Forwarded-For"
            }
          },
@@ -280,8 +280,8 @@ Keeping track of the Wazuh indexer health and associated node statistics is impo
 
    .. code-block:: console
 
-      # export WAZUH_INDEXER_USER= "<WAZUH_INDEXER_USERNAME>"
-      # export WAZUH_INDEXER_PASS = "<WAZUH_INDEXER_PASSWORD>"
+      # export WAZUH_INDEXER_USER="<WAZUH_INDEXER_USERNAME>"
+      # export WAZUH_INDEXER_PASS="<WAZUH_INDEXER_PASSWORD>"
 
    Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
 
@@ -522,8 +522,8 @@ The Wazuh indexer API is helpful during threat hunting exercises where you have 
 
    .. code-block:: console
 
-      # export WAZUH_INDEXER_USER= "<WAZUH_INDEXER_USERNAME>"
-      # export WAZUH_INDEXER_PASS= "<WAZUH_INDEXER_PASSWORD>"
+      # export WAZUH_INDEXER_USER="<WAZUH_INDEXER_USERNAME>"
+      # export WAZUH_INDEXER_PASS="<WAZUH_INDEXER_PASSWORD>"
       # export ABUSEIPDB_KEY="<ABUSEIPDB_KEY>"
 
    Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password. Replace ``ABUSEIPDB_KEY`` with your AbuseIPDB API key collected in step 1.

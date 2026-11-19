@@ -139,7 +139,7 @@ To set up this integration, perform the following steps:
 
    .. include:: /_templates/common/restart_manager.rst
 
-Once the configuration is complete, alerts start showing on the Pagerduty dashboard.
+Once the configuration is complete, alerts start showing on the PagerDuty dashboard.
 
 .. thumbnail:: /images/manual/wazuh-server/alerts-in-pagerduty.png
    :title: Alerts in PagerDuty
@@ -197,7 +197,7 @@ To set up this integration, do the following:
 
 #. Click on the ``Webhook`` node and rename it to ``Wazuh alerts``.
 
-   #. Copy and save the webhook URL to use it when configuring the Wazuh server. The webhook URL looks like ``https://shuffle.io/api/v1/hooks/<WEBHOOK>``.
+   #. Copy and save the webhook URL to use it when configuring the Wazuh server. The webhook URL looks like ``https://shuffler.io/api/v1/hooks/<WEBHOOK>``.
    #. Click on **Start** to run the webhook.
 
    .. thumbnail:: /images/manual/wazuh-server/shuffle-webhook-url.jpg
@@ -206,7 +206,7 @@ To set up this integration, do the following:
       :align: center
       :width: 80%
 
-#. Click on the **Change Me** node and configure it repeat Wazuh alerts
+#. Click on the **Change Me** node and configure it to repeat Wazuh alerts
 
    -  Ensure the action is **repeat back to me.**
    -  Enter the ``$exec`` in the **Code** section.
@@ -350,7 +350,7 @@ We recommend following the instructions below when creating an integration scrip
 
 #. The script checks the following arguments because it will receive configuration options from them.
 
-   -  The first parameter includes the location of the file that contains the alert. The parameter is the ``/logs/alerts/alerts.json`` file passed by default in the Wazuh Integrator module:
+   -  The first parameter is the path to a temporary file that contains the alert in JSON format. The Wazuh Integrator module writes each matching alert to a file such as ``/tmp/<INTEGRATION_NAME>-<TIMESTAMP>-<RANDOM>.alert`` and passes its path:
 
       .. code-block:: python
 
@@ -381,6 +381,6 @@ We recommend following the instructions below when creating an integration scrip
       agentname = alert_json['agent']['name']
       path = alert_json['syscheck']['path']
 
-We recommend that you check the ``/logs/alerts/alerts.json`` file before starting the development of the integration script to find the format of the alerts to be interpreted.
+We recommend that you check the ``/var/ossec/logs/alerts/alerts.json`` file before starting the development of the integration script to find the format of the alerts to be interpreted.
 
 You can see an example integration script for Jira in the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`__ blog post.

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh server is in charge of analyzing the data received from the Wazuh agents. Install the Wazuh server in a single-node or multi-node configuration according to your environment needs.
+   :description: The Wazuh server analyzes data received from Wazuh agents. Install it in a single-node or multi-node configuration.
 
 Installing the Wazuh server step by step
 ========================================
@@ -155,7 +155,7 @@ Configuring the Wazuh indexer connection
 
    You can skip this step if you are not going to use the vulnerability detection capability.
 
-#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool. Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the Wazuh indexer username and password:
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool. Replace ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the Wazuh indexer username and password:
 
    .. code-block:: console
 

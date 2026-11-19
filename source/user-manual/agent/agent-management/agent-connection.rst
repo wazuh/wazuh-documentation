@@ -6,7 +6,7 @@
 Wazuh agent connection
 ======================
 
-This section highlights different methods to verify the connection status between a Wazuh agent and the Wazuh manager. It also discusses how to check the Wazuh agent connnection to the Wazuh manager and verify the synchronization status of the Wazuh agent. These sections are outlined below:
+This section highlights different methods to verify the connection status between a Wazuh agent and the Wazuh manager. It also discusses how to check the Wazuh agent connection to the Wazuh manager and verify the synchronization status of the Wazuh agent. These sections are outlined below:
 
 .. contents::
    :local:

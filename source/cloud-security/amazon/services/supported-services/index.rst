@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The next table contains the most relevant information about configuring each service in the ``/var/ossec/etc/ossec.conf`` file, as well as the path where the logs will be stored in the bucket if the corresponding service uses them as its storage medium
+   :description: The next table contains the most relevant information about configuring each service in the ``/var/ossec/etc/ossec.conf`` file.
 
 Supported services
 ==================

@@ -14,7 +14,7 @@ Cloud service FAQ
 What is Wazuh Cloud?
 --------------------
 
-Wazuh Cloud hosts and manages all the Wazuh central components in a single platform. You create an environment, enroll Wazuh agents, and use capabilities such as security information and event management (SIEM) and extended detection and response (XDR).
+Wazuh Cloud is the software as a service (SaaS) edition of Wazuh. It provides a hosted platform for all Wazuh central components. You create an environment, enroll Wazuh agents, and use security information and event management (SIEM) and extended detection and response (XDR) capabilities to monitor security events, investigate alerts, and respond to incidents.
 
 Can I try it for free?
 ----------------------
@@ -71,7 +71,7 @@ Wazuh archives data in an AWS S3 bucket for long‑term storage. Unlike indexed 
 What happens if the tier limit is reached?
 ------------------------------------------
 
-See :ref:`cloud_starting_faq_data_reached`.
+The tier was replaced by the indexed data capacity setting. See :ref:`cloud_starting_faq_data_reached`.
 
 .. _cloud_starting_faq_data_reached:
 

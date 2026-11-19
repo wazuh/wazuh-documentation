@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The integration of AWS services with Wazuh configured on the Wazuh agent requires that certain dependencies be installed on the Wazuh agent. Learn more on this section of the documentation.
+   :description: Integrating AWS services with the Wazuh agent requires certain dependencies to be installed on the agent.
 
 Installing dependencies
 =======================
@@ -29,7 +29,7 @@ Python
 AWS client library for Python
 -----------------------------
 
-`Boto3 <https://boto3.readthedocs.io/>`__ is the official package supported by Amazon to manage AWS resources. It is used to download log messages from the different AWS services supported by Wazuh. The Wazuh module for AWS is compatible with ``boto3`` from version ``1.13.1`` to ``1.17.85``. Future ``boto3`` releases should maintain compatibility although we cannot assure it.
+`Boto3 <https://boto3.readthedocs.io/>`__ is the official package supported by Amazon to manage AWS resources. It is used to download log messages from the different AWS services supported by Wazuh. The Wazuh module for AWS is tested with ``boto3`` version ``1.34.135``, the version used in the commands below. Other ``boto3`` releases should maintain compatibility although we cannot assure it.
 
 Execute the following command to install the dependencies:
 

@@ -88,8 +88,8 @@ Examples:
 
    .. code-block:: console
 
-      # WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_REGISTRATION_KEY "/var/ossec/etc/sslagent.key" \
-           WAZUH_REGISTRATION_CERTIFICATE "/var/ossec/etc/sslagent.cert" rpm -i wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_KEY="/var/ossec/etc/sslagent.key" \
+           WAZUH_REGISTRATION_CERTIFICATE="/var/ossec/etc/sslagent.cert" rpm -i wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 .. note::
 

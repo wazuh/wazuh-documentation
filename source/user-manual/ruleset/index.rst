@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh data analysis engine is responsible for decoding logs, triggering rules, and generating alerts in Wazuh. Learn more in this section of the documentation.
+   :description: The Wazuh data analysis engine is responsible for decoding logs, triggering rules, and generating alerts in Wazuh.
   
 Data analysis
 =============

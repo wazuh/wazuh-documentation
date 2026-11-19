@@ -26,14 +26,14 @@ The installed agent runs on the endpoint you want to monitor and communicates wi
        # gzip -d wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar.gz
        # tar -xvf wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar
 
-#. Edit the ``/var/ossec/etc/ossec.conf`` file and replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address of the Wazuh manager:
+#. Edit the ``/var/ossec/etc/ossec.conf`` file and replace ``MANAGER_IP`` with the IP address of the Wazuh manager:
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <client>
         <server>
-          <address><WAZUH_MANAGER_IP_ADDRESS></address>
+          <address>MANAGER_IP</address>
         </server>
       </client>
 

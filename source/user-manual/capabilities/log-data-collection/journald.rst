@@ -104,7 +104,7 @@ Perform the steps below on your monitored Ubuntu endpoint.
 
    Where:
 
-   -  The ``<filter field>`` is set to ``_SYSTEM_UNIT`` with the value ``ssh.service`` and ``cron.service`` to collect SSH and CRON logs.
+   -  The ``<filter field>`` is set to ``_SYSTEMD_UNIT`` with the value ``ssh.service`` and ``cron.service`` to collect SSH and CRON logs.
    -  The ``<filter field>`` is set to ``PRIORITY`` to define a range of priority levels.
    -  The priority level is set to ``[0-6]`` to forward logs that have a priority level within this range. Logs with a priority level higher than 6 will be ignored.
 
@@ -164,11 +164,11 @@ Perform the steps below on your Wazuh server.
           <description>CRON: The $(service_user) user executed ($(command)) on $(hostname).</description>
         </rule>
 
-        <!-- rules to detect when the cron.service performs a reboot--> 
+        <!-- rule to detect when cron starts outside a system startup and skips @reboot jobs--> 
         <rule id="111802" level="12">
           <if_sid>111800</if_sid>
           <match>not system startup</match>
-          <description>CRON: The cron.service on $(hostname) just performed a $(message).</description>
+          <description>CRON: The cron.service on $(hostname) started outside a system startup: $(message).</description>
         </rule>
 
       </group>
@@ -177,7 +177,7 @@ Perform the steps below on your Wazuh server.
 
    -  Rule ID ``111800`` groups all CRON logs from the journald service.
    -  Rule ID ``111801`` triggers when the CRON service executes a command.
-   -  Rule ID ``111802`` triggers when the CRON service reboots after a configuration change.
+   -  Rule ID ``111802`` triggers when the CRON service starts outside a system startup, for example after a restart, and skips its ``@reboot`` jobs.
 
 #. Restart the Wazuh manager for the changes to take effect:
 
@@ -211,6 +211,7 @@ CRON
 
       # cd /
       # touch hello.py
+      # chmod +x hello.py
 
 #. Add the following contents to the ``hello.py`` file:
 

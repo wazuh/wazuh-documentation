@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh agent lifecycle includes the Installation and enrollment, Agent connection states, and Removal stages. Learn more in this section of the documentation.
+   :description: The Wazuh agent lifecycle includes installation and enrollment, agent connection states, and removal stages.
 
 Wazuh agent life cycle
 ======================

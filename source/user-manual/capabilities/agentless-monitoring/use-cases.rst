@@ -49,11 +49,11 @@ Perform the following steps on the monitored VMware ESXI endpoint.
 
       $ touch /tmp/newfile.txt
 
-#. Add the text “new addition” and wait for *3 minutes*: 
+#. Add the text "new addition" and wait for *3 minutes*: 
  
    .. code-block:: console
 
-      $ echo “new addition” > /tmp/newfile.txt
+      $ echo "new addition" > /tmp/newfile.txt
 
 Visualize the alert
 ^^^^^^^^^^^^^^^^^^^

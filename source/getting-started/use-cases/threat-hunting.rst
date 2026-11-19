@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides multiple capabilities to aid security teams in threat hunting, empowering them to swiftly contain threats and prevent further damage. Explore this documentation section to learn more about effective threat hunting.
+  :description: Wazuh provides multiple capabilities to aid security teams in threat hunting, helping them swiftly contain threats and prevent damage.
 
 Threat hunting
 ==============

@@ -93,7 +93,7 @@ The index by which the agent must try to connect to the server when setting link
 | **Allowed values** | A positive number. |
 +--------------------+--------------------+
 
-.. note:: In the case that the interface number changes, you must change this setting mannually.
+.. note:: In the case that the interface number changes, you must change this setting manually.
 
 .. _server_max_retries:
 
@@ -137,7 +137,7 @@ Options
 config-profile
 ^^^^^^^^^^^^^^
 
-Specifies the ``agent.conf`` profile(s) to be used by the agent.
+Specifies the ``agent.conf`` profile(s) to be used by the agent. The Linux agent packages add a ``<config-profile>`` setting with profiles for the operating system, for example ``amzn, amzn2023`` on Amazon Linux 2023 or ``rhel, rhel9, rhel9.7`` on RHEL 9.7. The ``profile`` attribute of ``agent.conf`` matches against this whole comma-separated list.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | n/a                                                                  |
@@ -152,11 +152,11 @@ notify_time
 
 Specifies the time in seconds between agent checkins to the manager.  More frequent checkins speed up dissemination of an updated ``agent.conf`` file to the agents, but may also put an undo load on the manager if there are a large number of agents.
 
-+--------------------+-----------------------------+
-| **Default value**  | 20                          |
-+--------------------+-----------------------------+
-| **Allowed values** | A positive number (seconds) |
-+--------------------+-----------------------------+
++--------------------+--------------------------------------------------------+
+| **Default value**  | 20                                                     |
++--------------------+--------------------------------------------------------+
+| **Allowed values** | A positive number (seconds). ``0`` uses the default.   |
++--------------------+--------------------------------------------------------+
 
 .. note::
 
@@ -353,7 +353,7 @@ The index by which the agent must send enrollment requests to the server when se
 | **Allowed values** | A positive number. |
 +--------------------+--------------------+
 
- .. note:: In the case that the interface number changes, you must change this setting mannually.
+ .. note:: In the case that the interface number changes, you must change this setting manually.
 
 .. _enrollment_agent_name:
 

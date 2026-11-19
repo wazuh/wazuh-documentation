@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how the Wazuh Syscollector module supports PCI DSS compliance by collecting hardware, OS, network, and process data to build a complete system inventory and identify unnecessary services.
+   :description: Learn how the Wazuh Syscollector module supports PCI DSS compliance by building a complete system inventory of monitored endpoints.
 
 System inventory
 ================

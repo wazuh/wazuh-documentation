@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to install the Wazuh indexer using the assisted installation method. The Wazuh indexer is a highly scalable full-text search engine and offers advanced security, alerting, index management, deep performance analysis, and several other features.
+   :description: Learn how to install the Wazuh indexer, a highly scalable full-text search engine, using the assisted installation method.
 
 Installing the Wazuh indexer using the assisted installation method
 ===================================================================
@@ -138,7 +138,7 @@ Verify that the Wazuh indexer installed correctly and the Wazuh indexer cluster 
 
       {
         "name" : "node-1",
-        "cluster_name" : "wazuh-cluster",
+        "cluster_name" : "wazuh-indexer-cluster",
         "cluster_uuid" : "095jEW-oRJSFKLz5wmo5PA",
         "version" : {
           "number" : "7.10.2",

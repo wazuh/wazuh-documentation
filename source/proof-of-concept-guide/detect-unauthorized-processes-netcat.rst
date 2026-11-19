@@ -46,11 +46,11 @@ Take the following steps to configure command monitoring and query a list of all
 
       $ sudo systemctl restart wazuh-agent
 
-#. Install Netcat and the required dependencies:
+#. Install Netcat:
 
    .. code-block:: console
 
-      $ sudo apt install ncat nmap -y
+      $ sudo apt install netcat-openbsd -y
 
 Wazuh server
 ^^^^^^^^^^^^

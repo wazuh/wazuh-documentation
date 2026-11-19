@@ -47,7 +47,7 @@ In cases where you need to increase the Active Response blocking time for :ref:`
 
 .. note::
 
-   This option is currently not available for Wazuh agents running on Windows operating endpoints. The ``<repeated offenders>`` timer is in minutes while the Active Response ``<timeout>`` is in seconds. Also, it can contain a maximum of 5 entries.
+   This option is currently not available for Wazuh agents running on Windows operating endpoints. The ``<repeated_offenders>`` timer is in minutes while the Active Response ``<timeout>`` is in seconds. Also, it can contain a maximum of 5 entries.
 
 Restart the Wazuh agent to apply changes:
 
@@ -55,6 +55,6 @@ Restart the Wazuh agent to apply changes:
 
    $ sudo systemctl restart wazuh-agent
 
-The first time the Active Response triggers, it blocks the IP address for the specified period using the ``<timeout>`` configured on the Wazuh server side. Then, the second time for 10 minutes, the third time for 20 minutes, and the fourth time for 30 minutes using the ``<repeated offenders>`` on the agent side.
+The first time the Active Response triggers, it blocks the IP address for the specified period using the ``<timeout>`` configured on the Wazuh server side. Then, the second time for 10 minutes, the third time for 20 minutes, and the fourth time for 30 minutes using the ``<repeated_offenders>`` on the agent side.
 
 Using the Active Response module, you can respond to several scenarios like restricting malicious activities and blocking attacks. Be aware that improperly configured responses can make an endpoint vulnerable, so you have to define your active responses carefully.

@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+   :description: This section explains how Wazuh checks and upgrades the RBAC database integrity when the Wazuh server API starts.
+
 RBAC database integrity
 =======================
 

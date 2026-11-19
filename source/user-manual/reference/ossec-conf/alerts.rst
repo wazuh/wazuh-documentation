@@ -50,10 +50,12 @@ Sets the minimum severity level for an alert to generate an email notification.
 	Individual rules can override this with the *alert_by_email* option which forces an email alert regardless of global or granular alert level thresholds.
 
 +--------------------+-------------------------+
-| **Default value**  | 12                      |
+| **Default value**  | 7                       |
 +--------------------+-------------------------+
 | **Allowed values** | Any level from 1 to 16  |
 +--------------------+-------------------------+
+
+The ``ossec.conf`` file installed with the Wazuh manager sets this option to ``12``.
 
 use_geoip
 ^^^^^^^^^

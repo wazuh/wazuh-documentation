@@ -1,7 +1,7 @@
 
 .. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
-  :description: Check out how to upgrade the Wazuh agent to the latest available version remotely, using the agent_upgrade tool or the Wazuh API, or locally.
+  :description: Follow these steps to upgrade the Wazuh agent to the latest available version on Linux endpoints.
 
 
 Upgrading Wazuh agents on Linux endpoints
@@ -44,7 +44,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
       .. note::
 
-         For Debian 7, 8, and Ubuntu 14 systems import the GCP key and add the Wazuh repository (steps 1 and 2) using the following commands.
+         For Debian 7, 8, and Ubuntu 14 systems import the GPG key and add the Wazuh repository (steps 1 and 2) using the following commands.
 
          .. code-block:: console
 

@@ -90,7 +90,7 @@ Time between system scans.
 | **Default value**  | 1h                                                                                                                          |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number with a suffix character for the time unit. Use ``s`` for seconds, ``m`` for minutes, ``h`` for hours, and |
-|                    | ``d`` for days. If the configured value is lower than 60 seconds, it automatically adjusts it to 60 seconds.                |
+|                    | ``d`` for days.                                                                                                             |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------+
 
 scan_on_start

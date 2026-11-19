@@ -154,7 +154,7 @@ custom_replacements = {
     "|WAZUH_FILEBEAT|": "0.5",
     #
     # === OpenSearch
-    "|OPENSEARCH_DASHBOARDS_VERSION|": "2.19.5",
+    "|OPENSEARCH_DASHBOARDS_VERSION|": "2.19.6",
     #
     # === Elastic
     # --- Filebeat
@@ -181,7 +181,7 @@ custom_replacements = {
     "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
     #
     # === Tools
-    "|WAZUH_CERTS_GENERATOR|": "0.0.4",
+    "|WAZUH_CERTS_GENERATOR|": "0.0.5",
     "|CERT_TOOL_VERSION|": version,
     "|YARA_VERSION|": "4.5.5",
 }

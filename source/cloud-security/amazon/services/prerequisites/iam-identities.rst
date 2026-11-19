@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: In the following sections, we describe how to create an IAM user group, how to create an AWS IAM user with access credentials, and how to add the user to the group.
+   :description: Learn how to create an IAM user group, create an AWS IAM user with access credentials, and add the user to the group.
 
 Configuring AWS IAM Identities
 ==============================

@@ -24,7 +24,7 @@ Here is an example of the proper location of the *alerts* configuration section:
         </alerts>
     </ossec_config>
 
-The ``agent.conf`` file is very similar to ``ossec.conf`` but ``agent.conf`` is used to centrally distribute configuration information to agents. See more :doc:`here <../centralized-configuration>`.
+The ``agent.conf`` file is very similar to ``ossec.conf`` but ``agent.conf`` is used to centrally distribute configuration information to agents. See :doc:`Centralized configuration <../centralized-configuration>`.
 
 Wazuh can be installed in two ways: as a manager by using the "server/manager" installation type and as an agent by using the "agent" installation type.
 
@@ -52,6 +52,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 | :doc:`command <commands>`                                           | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`database_output <database-output>`                            | manager                |
+|                                                                     | (4.14.6 and earlier)   |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`email_alerts <email-alerts>`                                  | manager                |
 +---------------------------------------------------------------------+------------------------+

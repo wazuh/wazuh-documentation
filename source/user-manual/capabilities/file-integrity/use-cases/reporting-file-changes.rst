@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh FIM module monitors directories to detect file changes, additions, and deletions. Discover some FIM use cases in this section of our documentation.
+   :description: Learn how the Wazuh FIM module reports file changes, showing the state before and after each change.
 
 Reporting file changes
 ======================
@@ -58,7 +58,7 @@ Test the configuration
 
    .. code-block:: console
 
-      echo “I added this text” | tee /appfolder/appreport.conf /appfolder/private-file.conf
+      echo "I added this text" | tee /appfolder/appreport.conf /appfolder/private-file.conf
 
 Visualize the alert
 -------------------

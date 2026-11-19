@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: When changes are made to the data schema, it becomes necessary to re-index data to reflect these changes. Find out how to re-index an existing index in this section of the documentation.
+   :description: When changes are made to the data schema, it becomes necessary to re-index data. Learn how to re-index an existing index.
 
 Re-indexing
 ===========

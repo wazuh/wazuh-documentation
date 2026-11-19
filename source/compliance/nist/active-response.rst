@@ -26,18 +26,18 @@ In this scenario, the Wazuh Active Response module automatically disables a user
 Wazuh server
 ^^^^^^^^^^^^
 
-#. Add the following configuration to the ``<ossec-config>`` block of the Wazuh server configuration file ``/var/ossec/etc/ossec.conf``:
+#. Add the following configuration to the ``<ossec_config>`` block of the Wazuh server configuration file ``/var/ossec/etc/ossec.conf``:
 
    .. code-block:: xml
        
-      <ossec-config> 
+      <ossec_config>
         <active-response>
           <disabled>no</disabled>
           <command>disable-account</command>
           <location>local</location>
           <rules_id>5503</rules_id>
         </active-response>
-      <ossec-config>
+      </ossec_config>
 
    - ``command``: The active response script for the ``disable-account`` command disables a user account when triggered.
    - ``location``: This specifies where to execute the active response command. The ``local`` option executes the script on the monitored endpoint where the event occurred. 

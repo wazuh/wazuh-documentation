@@ -90,9 +90,9 @@ Enables the Microsoft Graph module.
 only_future_events
 ^^^^^^^^^^^^^^^^^^
 
-Set it to **yes** to collect events generated since the Wazuh manager was started.
+Set it to **yes** to collect only events generated from the module start onward. The first scan starts ``time_delay`` before the module start, so it also collects events up to ``time_delay`` older than the start.
 
-By default, the Microsoft Graph module will only read logs from when the module was started onward.
+By default, the Microsoft Graph module only reads logs from the module start onward.
 
 +--------------------+-----------------------------+
 | **Default value**  | yes                         |
@@ -120,11 +120,11 @@ curl_max_size
 
 Specifies the maximum size allowed for the Microsoft Graph API response.
 
-+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1M                                                                                                                                                                                |
-+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a size unit, such as b/B (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes). Minimum value of 1M. |
-+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 1M                                                                                                                                                                                 |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a size unit, such as b/B (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes). Minimum value of 1K.  |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 page_size
 ^^^^^^^^^
@@ -175,12 +175,14 @@ api_auth
 
 This block configures the credentials used for authenticating with the Microsoft Graph REST API.
 
+To collect events from more than one tenant, repeat the ``api_auth`` block inside the same ``ms-graph`` block, one ``api_auth`` block per tenant. The module queries every configured ``resource`` for each tenant, and the alerts from all tenants carry the name of the Wazuh manager or agent that runs the module. See the `Example with two tenants`_.
+
 - `api_auth\\tenant_id`_
 - `api_auth\\client_id`_
 - `api_auth\\secret_value`_
 - `api_auth\\api_type`_
 
-.. note:: In the case of an invalid configuration, a warning message will be generated in the log file.
+.. note:: If the credentials are invalid, the module logs a warning when it requests the access token. If the configuration block is malformed, for example an ``api_auth`` block without ``client_id``, ``wazuh-modulesd`` logs an error and stops with a configuration error.
 
 +----------------------------------------+----------------------------------------------+
 | Options                                | Allowed values                               |
@@ -332,3 +334,35 @@ Example of configuration
           <relationship>riskDetections</relationship>
         </resource>
     </ms-graph>
+
+Example with two tenants
+------------------------
+
+.. code-block:: xml
+
+   <ms-graph>
+       <enabled>yes</enabled>
+       <only_future_events>yes</only_future_events>
+       <curl_max_size>10M</curl_max_size>
+       <run_on_start>yes</run_on_start>
+       <interval>5m</interval>
+       <version>v1.0</version>
+       <api_auth>
+         <client_id>tenant_a_client_id</client_id>
+         <tenant_id>tenant_a_tenant_id</tenant_id>
+         <secret_value>tenant_a_secret_value</secret_value>
+         <api_type>global</api_type>
+       </api_auth>
+       <api_auth>
+         <client_id>tenant_b_client_id</client_id>
+         <tenant_id>tenant_b_tenant_id</tenant_id>
+         <secret_value>tenant_b_secret_value</secret_value>
+         <api_type>global</api_type>
+       </api_auth>
+       <resource>
+         <name>security</name>
+         <relationship>alerts_v2</relationship>
+       </resource>
+   </ms-graph>
+
+After you restart the Wazuh manager or agent, ``ossec.log`` shows a ``Scanning tenant '<TENANT_ID>'`` line for each tenant.

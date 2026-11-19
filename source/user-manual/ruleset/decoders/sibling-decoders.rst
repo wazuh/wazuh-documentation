@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Sibling decoders refer to a decoder building strategy where multiple decoders operate at the same hierarchical level without a parent-child relationship. Learn more about it in this section.
+   :description: Sibling decoders are a decoder-building strategy where multiple decoders operate at the same hierarchical level.
 
 Sibling Decoders
 ================
@@ -31,8 +31,8 @@ The process of matching at decoder level uses :ref:`regular expressions <os_rege
 Sibling decoders take advantage of the simple parent-children matching logic, enabling the creation of a set of decoders that are 'parents' of each other. As a result, when one of these decoders is matched, it will also check the "sibling" decoders, while extracting one piece of information at a time.
 
 .. thumbnail:: /images/manual/ruleset/dynamically-structured-decoding.png
-   :title: 
-   :alt: 
+   :title: Dynamically structured log decoding
+   :alt: Diagram of sibling decoding: a log message passes through decoders A, B and C, and decoder C's sibling decoders CA, CB, CC and CD each extract one piece of information
    :align: center
    :width: 80%
 

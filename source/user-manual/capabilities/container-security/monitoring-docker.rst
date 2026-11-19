@@ -37,7 +37,7 @@ Docker library for Python
 
    The Wazuh manager includes all dependencies installed. These steps are only necessary when configuring the integration in a Wazuh agent.
 
-`Python Docker library <https://pypi.org/project/docker/>`_ is the official Python library for the Docker Engine API. The Wazuh docker integration requires ``docker 6.0.0``.
+`Python Docker library <https://pypi.org/project/docker/>`_ is the official Python library for the Docker Engine API. The Wazuh docker integration requires ``docker 7.1.0``.
 
 .. tabs::
 

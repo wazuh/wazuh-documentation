@@ -38,7 +38,7 @@ Check the processes that have a deleted executable.
 
     SELECT * FROM processes WHERE on_disk = 0;
 
-A complete list of all the available tables can be found `here <https://osquery.io/schema/current/>`_.
+A complete list of all the available tables can be found in the `osquery schema <https://osquery.io/schema/current/>`__.
 
 Configuration
 -------------
@@ -60,11 +60,11 @@ Debian and Ubuntu based Linux distributions:
 
 .. code-block:: console
 
-    # export OSQUERY_KEY=1484120AC4E9F8A1A577AEEE97A80C63C9D8B80B
-    # apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $OSQUERY_KEY
-    # add-apt-repository 'deb [arch=amd64] https://pkg.osquery.io/deb deb main'
-    # apt-get update
-    # apt-get install osquery
+   # mkdir -p /etc/apt/keyrings
+   # curl -L https://pkg.osquery.io/deb/pubkey.gpg | tee /etc/apt/keyrings/osquery.asc
+   # echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/osquery.asc] https://pkg.osquery.io/deb deb main" | tee /etc/apt/sources.list.d/osquery.list
+   # apt-get update
+   # apt-get install osquery
 
 
 Once installed, you will need a configuration file for Osquery. If you don't have any, you can use the following one provided by Osquery:

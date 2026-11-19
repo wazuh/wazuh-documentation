@@ -27,7 +27,7 @@ Below is an example of a Syslog message:
 
 ::
 
-    Sept  9 16:06:16 localhost salute: Hello world.
+    Sep  9 16:06:26 localhost salute: Hello world.
 
 When logs are in Syslog format, the pre-decoder processes and interprets the message header, extracting essential information like timestamps, hostnames, and severity levels before further analysis. In the case of the message above, the following fields are extracted:
 
@@ -91,7 +91,7 @@ Example:
 .. code-block:: none
     :class: output
 
-    1:/var/log/syslog:Nov  9 16:06:26 localhost salute: Hello world.
+    1:/var/log/syslog:Sep  9 16:06:26 localhost salute: Hello world.
 
 Secure message format
 ---------------------
@@ -240,9 +240,10 @@ For agents with unrestricted address (address ``any`` or netmask different from 
 This is the encryption flow chart:
 
 .. thumbnail:: ../images/development/encryption-flow.png
-    :title: OSSEC message encryption flow chart
-    :align: center
-    :width: 60%
+   :title: OSSEC message encryption flow chart
+   :alt: Flow chart of agent message encryption: the random number, global counter, local counter and event are hashed with MD5 and the hash is prepended, the block is compressed with zlib and padded to a multiple of 8 bytes, then encrypted with AES and prefixed with the agent ID for agents with a dynamic IP address
+   :align: center
+   :width: 60%
 
 Network protocol
 ~~~~~~~~~~~~~~~~

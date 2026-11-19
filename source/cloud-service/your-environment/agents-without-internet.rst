@@ -53,11 +53,11 @@ To achieve this configuration, follow these steps:
    	       server <CLOUD_ID>.cloud.wazuh.com:1514;
    	       }
    	     server {
-   	       listen nginx_ip:1515;
+   	       listen <nginx_ip>:1515;
    	       proxy_pass master;
    	     }
    	     server {
-   	       listen nginx_ip:1514;
+   	       listen <nginx_ip>:1514;
    	       proxy_pass mycluster;
    	     }
    	   }
@@ -74,8 +74,8 @@ To achieve this configuration, follow these steps:
 
       .. code-block:: console
 
-         # WAZUH_MANAGER_IP=<NGINX_IP_ADDRESS> WAZUH_PROTOCOL="tcp" \
-         WAZUH_PASSWORD="<PASSWORD>" \
+         # WAZUH_MANAGER=<NGINX_IP_ADDRESS> WAZUH_PROTOCOL="tcp" \
+         WAZUH_REGISTRATION_PASSWORD="<PASSWORD>" \
          yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 
       Replace ``<PASSWORD>`` with your Wazuh server enrollment password.
@@ -108,7 +108,7 @@ Follow the below steps to connect using AWS PrivateLink:
 
 #. Enroll your Wazuh agent
 
-   -  When configuring your agent, replace the ``WAZUH_MANAGER_IP`` value with your endpoint’s DNS name: ``vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com``.
+   -  When configuring your agent, replace the ``WAZUH_MANAGER`` value with your endpoint’s DNS name: ``vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com``.
 
 #. If the agents are located in a different region than your endpoint, use VPC Peerings to connect them to the endpoint service. This allows them to send data securely through the PrivateLink connection.
 
@@ -116,8 +116,8 @@ Follow the below steps to connect using AWS PrivateLink:
 
    .. code-block:: console
 
-      # WAZUH_MANAGER_IP=vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com WAZUH_PROTOCOL="tcp" \
-      WAZUH_PASSWORD="<PASSWORD>>" \
+      # WAZUH_MANAGER=vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com WAZUH_PROTOCOL="tcp" \
+      WAZUH_REGISTRATION_PASSWORD="<PASSWORD>" \
       yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 
    In this example, make sure to replace ``<PASSWORD>`` with your actual password.

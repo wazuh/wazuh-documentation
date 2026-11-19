@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh module for AWS  enables monitoring of various AWS services by collecting logs of these services and analyzing the logs with the Wazuh ruleset. Learn more in this section of the documentation.
+   :description: The Wazuh module for AWS enables monitoring of various AWS services by collecting and analyzing their logs with the Wazuh ruleset.
 
 Monitoring AWS based services
 =============================

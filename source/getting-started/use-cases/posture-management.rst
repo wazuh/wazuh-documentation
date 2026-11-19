@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh provides security and compliance monitoring for various cloud platforms, including Google Cloud Platform (GCP), Amazon Web Services (AWS), and Microsoft Azure.
+   :description: Wazuh provides security and compliance monitoring for cloud platforms including GCP, AWS, and Microsoft Azure.
 
 Posture management
 ==================

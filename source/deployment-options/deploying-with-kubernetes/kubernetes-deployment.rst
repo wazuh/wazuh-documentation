@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This section covers deploying Wazuh on Kubernetes for Amazon EKS and Local Kubernetes clusters, from environment preparation to verifying that all components are running correctly.
+   :description: Learn how to deploy Wazuh on Kubernetes for Amazon EKS and local clusters, from preparation to verifying components.
 
 Deployment
 ==========
@@ -1190,7 +1190,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                       lifecycle:
                         preStop:
                           exec:
-                            command: ["/bin/sh", "-lc", "/var/ossec/bin/ossec-control stop || true; sleep 2"]
+                            command: ["/bin/sh", "-lc", "/var/ossec/bin/wazuh-control stop || true; sleep 2"]
                       command: ["/bin/sh", "-lc"]
                       args:
                         - |
@@ -1252,12 +1252,6 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
             spec:
               selector:
                 app: tomcat-wazuh-agent
-              type: NodePort
-              ports:
-                - protocol: TCP
-                  port: 80
-                  targetPort: 8080
-                  nodePort: 30013
               type: NodePort
               ports:
                 - protocol: TCP
@@ -1440,7 +1434,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                       lifecycle:
                         preStop:
                           exec:
-                            command: ["/bin/sh", "-lc", "/var/ossec/bin/ossec-control stop || true; sleep 2"]
+                            command: ["/bin/sh", "-lc", "/var/ossec/bin/wazuh-control stop || true; sleep 2"]
                       command: ["/bin/sh", "-lc"]
                       args:
                         - |

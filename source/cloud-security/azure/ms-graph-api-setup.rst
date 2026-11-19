@@ -67,6 +67,7 @@ To configure the application permissions, go to the **API permissions** page and
 
    -  ``SecurityAlert.Read.All``: This permission is required to read security alerts from the ``/security/alerts_v2`` API on your tenant.
    -  ``SecurityIncident.Read.All``: This permission is required to read security incident data, including associated events/alerts from the ``/security/incidents`` API on your tenant.
+   -  ``DeviceManagementApps.Read.All``: This permission is required to read Microsoft Intune audit events from the ``deviceManagement/auditEvents`` API on your tenant. See :doc:`Microsoft Intune integration </cloud-security/azure/ms-intune-integration>` for the other Intune relationships.
 
    .. thumbnail:: /images/cloud-security/ms-graph/add-api-permissions.png
       :align: center
@@ -144,7 +145,7 @@ Next, we will set the necessary configurations to allow the Wazuh module for Mic
           
 .. note::
 
-   Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
+   To collect events from more than one tenant, add one ``api_auth`` block per tenant to the same ``ms-graph`` block. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
 
 Use cases
 ---------
@@ -217,7 +218,7 @@ When Microsoft Defender for Office 365 detects a malicious email event, a log si
       }
 
 
-The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph API. This log matches an out-of-the-box rule with ID ``99506``. This triggers an alert with the following details:
+The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph API. This log matches an out-of-the-box rule with ID ``99633``. This triggers an alert with the following details:
 
    .. code-block:: none
       :class: output
@@ -225,16 +226,12 @@ The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph 
       {
           "timestamp":"2024-08-29T14:53:15.301+0000",
           "rule":{
-              "id":"99506",
-
-
-                 "level":6,
-
-
-                 "description":"MS Graph message: The alert is true positive and detected malicious activity.",
-                  "groups":["ms-graph"],
-                  "firedtimes":1,
-                  "mail":"false"
+              "id":"99633",
+              "level":3,
+              "description":"MS Graph message: This indicates that the alert has been resolved.",
+              "groups":["ms-graph"],
+              "firedtimes":1,
+              "mail":"false"
           },
           "agent":{
               "id":"001",
@@ -245,7 +242,7 @@ The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph 
           },
           "id":"1623276774.47272",
           "decoder":{
-              "name":"json"
+              "name":"json-msgraph"
           },
           "data":{
               "integration":"ms-graph",
@@ -292,12 +289,6 @@ The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph 
               }
           }
       }
-
-The alert is seen on the Wazuh dashboard.
-
-.. thumbnail:: /images/cloud-security/ms-graph/alert-on-wazuh-dashboard.png
-   :align: center
-   :width: 80%
 
 Monitoring device management audit events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -384,7 +375,7 @@ For instance, if a user updates the enrollment settings, configuring the module 
                    {
                        "displayName": "DeviceManagementAPIVersion",
                        "oldValue": null,
-                       "newValue": "5023-03-29"
+                       "newValue": "2023-03-29"
                    },
                    {
                        "displayName": "$Collection.RoleScopeTagIds[0]",
@@ -433,7 +424,7 @@ Once Wazuh connects with the Microsoft Graph API, the previous log triggers the 
        },
        "id": "1723228143.38630",
        "decoder": {
-           "name": "json"
+           "name": "json-msgraph"
        },
        "data": {
            "integration": "ms-graph",
@@ -509,7 +500,7 @@ Once Wazuh connects with the Microsoft Graph API, the previous log triggers the 
                            {
                                "displayName": "DeviceManagementAPIVersion",
                                "oldValue": null,
-                               "newValue": "5023-03-29"
+                               "newValue": "2023-03-29"
                            },
                            {
                                "displayName": "$Collection.RoleScopeTagIds[0]",

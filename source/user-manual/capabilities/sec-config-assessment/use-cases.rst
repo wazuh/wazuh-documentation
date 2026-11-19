@@ -73,8 +73,8 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
         name: "SCA use case: Keyword check"
         description: "Guidance for checking for a keyword or phrase in files on Ubuntu endpoints."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
 
       requirements:
         title: "Check that the desired file exists on the monitored endpoints"
@@ -84,7 +84,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
           - 'f:/usr/share/testfile.txt'
 
       checks:
-        - id: 10000
+        - id: 100000
           title: "Ensure password is disabled in the test configuration file"
           description: "Password is enabled in the test configuration file."
           rationale: "Password is considered weak for the custom test application. Threat actors can brute-force your password."
@@ -95,7 +95,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 
 
    - We create a requirement to ensure that the policy runs only if the file ``/usr/share/testfile.txt`` exists on the endpoint.
-   - Check ID ``10000`` scans the file ``/usr/share/testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
+   - Check ID ``100000`` scans the file ``/usr/share/testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Change the ownership of the file so Wazuh has permission to it:
 
@@ -134,15 +134,15 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
 #. Run PowerShell as an administrator and create the test file and add some text to it, including the keyword ``password_enabled: yes``:
 
-   .. code-block:: console
+   .. code-block:: pwsh-session
    
-      # New-Item "C:\Program Files\testfile.txt" -ItemType File -Value "config_file`nsecond line of configuration`npassword_enabled: yes"
+      > New-Item "C:\Program Files\testfile.txt" -ItemType File -Value "config_file`nsecond line of configuration`npassword_enabled: yes"
 
 #. Verify that the file has been created:
 
-   .. code-block:: console
+   .. code-block:: pwsh-session
    
-      # Get-Content "C:\Program Files\testfile.txt"
+      > Get-Content "C:\Program Files\testfile.txt"
 
    You should get output similar to the following:
 
@@ -155,9 +155,9 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
 #. Create a new directory to save your custom policy files:
 
-   .. code-block:: console
+   .. code-block:: pwsh-session
    
-      # New-Item "C:\Program Files (x86)\ossec-agent\custom-sca-files" -itemType Directory
+      > New-Item "C:\Program Files (x86)\ossec-agent\custom-sca-files" -itemType Directory
 
 #. Open Notepad as an administrator, create a new SCA policy file with the following content and save it as ``C:\Program Files (x86)\ossec-agent\custom-sca-files\keywordcheck.yml``:
 
@@ -170,8 +170,8 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
         name: "SCA use case: Keyword check"
         description: "Guidance for checking for a keyword or phrase in files on Windows."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
       requirements:
         title: "Check that the desired file exists on the monitored endpoints"
         description: "Requirements for running the SCA scans against endpoints with testfile.txt on them."
@@ -179,7 +179,7 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
         rules:
           - 'f:C:\Program Files\testfile.txt'
       checks:
-        - id: 10001
+        - id: 100001
           title: "Ensure password is disabled in the test configuration file"
           description: "Password is enabled in the test configuration file."
           rationale: "Password is considered weak for the custom test application. Threat actors can brute-force your password."
@@ -190,7 +190,7 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
 
    - We create a requirement to ensure that the policy runs only if the file ``C:\Program Files\testfile.txt`` exists on the endpoint.
-   - Check ID ``10001`` scans the file ``C:\Program Files\testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
+   - Check ID ``100001`` scans the file ``C:\Program Files\testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
 
@@ -204,9 +204,9 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 
 #. Restart the Wazuh agent to apply the changes and to run the new SCA check:
 
-   .. code-block:: console
+   .. code-block:: pwsh-session
    
-      # Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 #. On your Wazuh dashboard, navigate to the **Configuration Assessment** module and select the Windows endpoint to view the results of the custom SCA check you have created.
 
@@ -259,8 +259,8 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
         name: "SCA use case: Keyword check"
         description: "Guidance for checking for a keyword or phrase in files on macOS endpoints."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
 
       requirements:
         title: "Check that the desired file exists on the monitored endpoints"
@@ -270,7 +270,7 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
           - 'f:/usr/local/testfile.txt'
 
       checks:
-        - id: 10002
+        - id: 100002
           title: "Ensure password is disabled in the test configuration file"
           description: "Password is enabled in the test configuration file."
           rationale: "Password is considered weak for the custom test application. Threat actors can brute-force your password."
@@ -281,7 +281,7 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
 
 
    - We create a requirement to ensure that the policy runs only if the file ``/usr/local/testfile.txt`` exists on the endpoint.
-   - Check ID ``10002`` scans the file ``/usr/local/testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
+   - Check ID ``100002`` scans the file ``/usr/local/testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
       
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/Library/Ossec/etc/ossec.conf``:
 
@@ -336,8 +336,8 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
         name: "SCA use case to detect running processes"
         description: "Guidance for checking running processes on Linux endpoints."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
 
       requirements:
         title: "Check that the SSH service and password-related files are present on the system"
@@ -352,7 +352,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
         $sshd_file: /etc/ssh/sshd_config
 
       checks:
-        - id: 10003
+        - id: 100003
           title: "Ensure that netcat is not running on your endpoint"
           description: "Netcat is running on your endpoint."
           rationale: "Threat actors can use netcat to open ports on your endpoints or to connect to remote servers."
@@ -364,7 +364,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
 
 
    - We create a requirement to ensure that the policy runs only on Linux endpoints. The requirement checks for the presence of the ``/etc/ssh/sshd_config``, ``/etc/passwd``, and ``/etc/shadow`` files, and passes if any of them is found.
-   - Check ID ``10003`` scans the endpoint for processes named ``nc`` or ``netcat``. The ``none`` condition ensures that the check fails if a match is found.
+   - Check ID ``100003`` scans the endpoint for processes named ``nc`` or ``netcat``. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Change the ownership of the file so Wazuh has permission to it:
 
@@ -431,8 +431,8 @@ System administrators use PowerShell to configure systems. Standard users utiliz
         name: "SCA use case to detect running processes"
         description: "Guidance for checking running PowerShell processes on Windows 10 endpoints."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
 
       requirements:
         title: "Check that the Windows platform is Windows 10"
@@ -442,7 +442,7 @@ System administrators use PowerShell to configure systems. Standard users utiliz
           - 'r:HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion -> ProductName -> r:^Windows 10'
 
       checks:
-        - id: 10004
+        - id: 100004
           title: "Ensure PowerShell is not running on the endpoint"
           description: "PowerShell is running on the endpoint."
           rationale: "PowerShell should be used by only the system administrators. Threat actors can leverage PowerShell for living-off-the-land attacks."
@@ -453,7 +453,7 @@ System administrators use PowerShell to configure systems. Standard users utiliz
 
 
    - We create a requirement to ensure that the policy runs only on Windows 10 endpoints. The requirement checks the registry key ``HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion`` for the value ``Windows 10``.
-   - Check ID ``10004`` scans the endpoint for processes named ``powershell.exe``. The ``none`` condition ensures that the check fails if a match is found.
+   - Check ID ``100004`` scans the endpoint for processes named ``powershell.exe``. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
 
@@ -512,8 +512,8 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
         name: "SCA use case to detect running processes"
         description: "Guidance for checking running processes on mac endpoints."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/4.14/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
 
       requirements:
         title: "Check macOS"
@@ -523,7 +523,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
           - 'c:sw_vers -> r:^ProductName:\t*\s*macOS'
 
       checks:
-        - id: 10005
+        - id: 100005
           title: "Ensure that netcat is not running on your endpoint"
           description: "Netcat is running on your endpoint."
           rationale: "Threat actors can use netcat to open ports on your endpoints or to connect to remote servers."
@@ -534,7 +534,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
 
 
    - We create a requirement to ensure that the policy runs only on macOS endpoints. The requirement runs the ``sw_vers`` command to check if the output contains the string ``ProductName: macOS``.
-   - Check ID ``10005`` runs a command which spawns a shell to run the ``ps`` utility to view all running processes. The command uses the ``grep`` utility to filter the output of the ``ps`` command for patterns of the netcat process. The ``none`` condition ensures that the check fails if a match is found.
+   - Check ID ``100005`` runs a command which spawns a shell to run the ``ps`` utility to view all running processes. The command uses the ``grep`` utility to filter the output of the ``ps`` command for patterns of the netcat process. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/Library/Ossec/etc/ossec.conf``:
 

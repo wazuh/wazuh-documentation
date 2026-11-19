@@ -38,18 +38,18 @@ Manual restoration process
 
       This process is valid for all the backups in the folder. Snapshot names containing the special tag ``pre_upgrade`` were created right before upgrading the Wazuh server. Any other snapshot is a periodic backup created according to the :doc:`backup </user-manual/reference/ossec-conf/wazuh-db-config>` setting.
 
-#. Decompress the backup file. Always use the ``-k`` flag to preserve the original file:
+#. Decompress the backup file. Always use the ``-k`` flag to preserve the original file. Replace ``<TIMESTAMP>`` with the timestamp in the backup file name:
 
    .. code-block:: console
 
-      # gzip -dk WAZUH_HOME/backup/db/global.db-backup-TIMESTAMP-pre_upgrade.gz
+      # gzip -dk /var/ossec/backup/db/global.db-backup-<TIMESTAMP>-pre_upgrade.gz
 
 #. Remove the current ``global.db`` database and move the backup to the right location:
 
    .. code-block:: console
 
-      # rm  WAZUH_HOME/queue/db/global.db
-      # mv  WAZUH_HOME/backup/db/global.db-backup-TIMESTAMP-pre_upgrade WAZUH_HOME/queue/db/global.db
+      # rm /var/ossec/queue/db/global.db
+      # mv /var/ossec/backup/db/global.db-backup-<TIMESTAMP>-pre_upgrade /var/ossec/queue/db/global.db
 
 #. Start the Wazuh manager.
 
@@ -183,7 +183,7 @@ Previously, ``exchange_key`` was set by copying the X.509 Certificate blob, excl
 
 Starting with Wazuh 4.9.0, ``exchange_key`` must be a 64-character random alphanumeric string.
 
-For guidance, refer to the first step of the Wazuh indexer configuration in the :doc:`Single sign-on </user-manual/user-administration/single-sign-on/index>` (SSO) guides for platforms like :doc:`Okta </user-manual/user-administration/single-sign-on/okta>`, :doc:`Microsoft Entra ID </user-manual/user-administration/single-sign-on/microsoft-entra-id>`, :doc:`PingOne </user-manual/user-administration/single-sign-on/pingone>`, :doc:`Google </user-manual/user-administration/single-sign-on/google>`, :doc:`Jumpcloud </user-manual/user-administration/single-sign-on/jumpcloud>`, :doc:`OneLogin </user-manual/user-administration/single-sign-on/onelogin>`, and :doc:`Keycloack </user-manual/user-administration/single-sign-on/keycloak>`.
+For guidance, refer to the first step of the Wazuh indexer configuration in the :doc:`Single sign-on </user-manual/user-administration/single-sign-on/index>` (SSO) guides for platforms like :doc:`Okta </user-manual/user-administration/single-sign-on/okta>`, :doc:`Microsoft Entra ID </user-manual/user-administration/single-sign-on/microsoft-entra-id>`, :doc:`PingOne </user-manual/user-administration/single-sign-on/pingone>`, :doc:`Google </user-manual/user-administration/single-sign-on/google>`, :doc:`Jumpcloud </user-manual/user-administration/single-sign-on/jumpcloud>`, :doc:`OneLogin </user-manual/user-administration/single-sign-on/onelogin>`, and :doc:`Keycloak </user-manual/user-administration/single-sign-on/keycloak>`.
 
 None of the above solutions are fixing my problem
 -------------------------------------------------

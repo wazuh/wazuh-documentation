@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for Docker identifyes security incidents across containers alerting in real time. Learn more about this in this PoC.
+  :description: The Wazuh module for Docker identifies security incidents across containers alerting in real time. Learn more about this in this PoC.
 
 Monitoring Docker events
 ========================
@@ -127,7 +127,7 @@ Troubleshooting
 
    .. code-block:: none
 
-      wazuh-modulesd:docker-listener: ERROR: /usr/bin/env: ‘python’: No such file or directory
+      wazuh-modulesd:docker-listener: ERROR: /usr/bin/env: 'python': No such file or directory
 
    **Location**: Wazuh agent log - ``/var/ossec/logs/ossec.log``
 

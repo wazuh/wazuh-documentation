@@ -408,7 +408,7 @@ Creating a Heat Map
 #. Add a ``Y-axis`` in **Buckets** and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   -  ``Field`` = ``rule.mitre.techniques``
+   -  ``Field`` = ``rule.mitre.technique``
    -  ``Order by`` = ``Metric: Count``
    -  ``Order`` = ``Descending``
    -  ``Size`` = ``5``
@@ -722,7 +722,7 @@ Creating a Visualization Builder
 #. Drag a field to the configuration panel to generate a visualization.
 #. Set aggregation to count on the ``Y-axis``.
 #. Set ``rule.mitre.technique`` on an ``X-axis``.
-#. Set ``rule.mitre.tactics`` on the split series.
+#. Set ``rule.mitre.tactic`` on the split series.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization-data.png
       :align: center

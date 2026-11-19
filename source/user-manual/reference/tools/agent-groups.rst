@@ -31,7 +31,8 @@ The agent_groups program allows you to list agents assigned to a group, assign a
 +---------------------------------------+-----------------------------------------------------------+
 | **-a -f -i agent_id -g group_id [-q]**| Replaces the agent's groups to group_id                   |
 +---------------------------------------+-----------------------------------------------------------+
-| **-r -i agent_id [-q]**               | Remove an agent from all its groups                       |
+| **-r -i agent_id [-q]**               | Remove an agent from all its groups. The agent returns to |
+|                                       | the ``default`` group.                                    |
 +---------------------------------------+-----------------------------------------------------------+
 | **-r -i agent_id -g group_id [-q]**   | Remove an agent from a specific group                     |
 +---------------------------------------+-----------------------------------------------------------+

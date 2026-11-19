@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :Description: Ansible is an agentless automation platform. Learn more about remote endpoints deployments in this section of the Wazuh documentation.
+  :description: Ansible is an agentless automation platform. Learn more about remote endpoints deployments in this section of the Wazuh documentation.
   
 Remote endpoint connection
 ==========================
@@ -119,7 +119,7 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
                   # systemctl start ssh
 
-         .. group-tab:: SysV Init
+         .. group-tab:: SysV init
 
             -  CentOS / RHEL / Fedora:
 
@@ -179,27 +179,27 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
             .. code-block:: console
 
-               # systemctl start sshd
+               # systemctl restart sshd
 
          -  Ubuntu/Debian:
 
             .. code-block:: console
 
-               # systemctl start ssh
+               # systemctl restart ssh
 
-      .. group-tab:: SysV Init
+      .. group-tab:: SysV init
 
          -  CentOS / RHEL / Fedora:
 
             .. code-block:: console
 
-               # service sshd start
+               # service sshd restart
 
          -  Ubuntu/Debian:
 
             .. code-block:: console
 
-               # service ssh start
+               # service ssh restart
 
 #. Test the connection from the Ansible server:
 
@@ -393,7 +393,7 @@ Where:
 
    ``ansible_python_interpreter=/usr/bin/python3``
 
-   You can check the `Ansible inventory documentation <http://docs.ansible.com/ansible/intro_inventory.html>`_ for more info regarding hosts and groups.
+   You can check the `Ansible inventory documentation <https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html>`_ for more info regarding hosts and groups.
 
 Testing the Ansible connection to remote endpoints
 --------------------------------------------------

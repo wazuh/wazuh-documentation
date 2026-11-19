@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh provides an automated way of building DEB and RPM Wazuh server packages using Docker. Follow the steps below to create a Debian or RPM Wazuh server package:
+   :description: Wazuh provides an automated way of building DEB and RPM Wazuh server packages using Docker. Follow the steps below.
 
 Wazuh server
 ============

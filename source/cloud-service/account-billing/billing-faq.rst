@@ -29,7 +29,7 @@ Go to the :doc:`See your billing cycle and history </cloud-service/account-billi
 What happens to my payments if I want to upgrade or downgrade a setting?
 ------------------------------------------------------------------------
 
-If you choose to upgrade a setting, you need to make an immediate prorated payment. The upgrade becomes effective immediately, albeit leading to an increased price for your environment. Conversely, when downgrading a setting, the change takes effect in the subsequent billing cycle, with your price adjusted accordingly. See *Adjusting environment settings* for further details.
+If you choose to upgrade a setting, you need to make an immediate prorated payment. The upgrade becomes effective immediately, albeit leading to an increased price for your environment. Conversely, when downgrading a setting, the change takes effect in the subsequent billing cycle, with your price adjusted accordingly. See :ref:`Adjusting environment settings <cloud_settings_adjust>` for further details.
 
 How do I view previous receipts and billing history?
 ----------------------------------------------------

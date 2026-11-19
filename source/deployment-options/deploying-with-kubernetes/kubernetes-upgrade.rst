@@ -122,11 +122,11 @@ Updating old paths
 
                volumes:
                - name: indexer-certs
-                  secret:
+                 secret:
                      secretName: indexer-certs
                      defaultMode: 0600
                - name: indexer-conf
-                  configMap:
+                 configMap:
                      name: indexer-conf
                      defaultMode: 0600
 
@@ -165,11 +165,11 @@ Updating old paths
 
                volumes:
                - name: indexer-certs
-                  secret:
+                 secret:
                      secretName: indexer-certs
                      defaultMode: 0600
                - name: indexer-conf
-                  configMap:
+                 configMap:
                      name: indexer-conf
                      defaultMode: 0600
 

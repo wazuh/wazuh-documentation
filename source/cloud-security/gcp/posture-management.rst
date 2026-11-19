@@ -129,7 +129,7 @@ Configure the Wazuh server to receive logs from Google Cloud by performing the f
    Where:
 
    -  ``<PROJECT_ID>`` is the ID of the `Google Cloud project`_ created above.
-   -  ``<SUBSCRIPTION_NAME>`` is the `subscription ID`_ of your Google Cloud Pub/Sub.
+   -  ``<SUBSCRIPTION_ID>`` is the `subscription ID`_ of your Google Cloud Pub/Sub.
 
 #. Create a rule file ``gcp_posture.xml`` in the ``/var/ossec/etc/rules/`` directory and add the following custom rules to detect Google Cloud posture findings:
 
@@ -140,7 +140,7 @@ Configure the Wazuh server to receive logs from Google Cloud by performing the f
           <rule id="100200" level="10">
               <if_sid>65000</if_sid>
               <field name="gcp.finding.findingClass">MISCONFIGURATION</field>
-              <description>A $(gcp.finding.findingClass) with $(gcp.finding.severity) severity has been discovered on the GCP project $(gcp.resource.projectDisplayName). $(gcp.finding.description)</description>
+              <description>A $(gcp.finding.findingClass) with $(gcp.finding.severity) severity has been discovered on the GCP project $(gcp.resource.gcpMetadata.projectDisplayName). $(gcp.finding.description)</description>
               <mitre>
                 <id>T1562</id>
               </mitre>
@@ -150,7 +150,7 @@ Configure the Wazuh server to receive logs from Google Cloud by performing the f
           <rule id="100201" level="10">
               <if_sid>65000</if_sid>
               <field name="gcp.finding.findingClass">THREAT</field>
-              <description>A $(gcp.finding.findingClass) with $(gcp.finding.severity) severity has been discovered on the GCP project $(gcp.resource.projectDisplayName). $(gcp.finding.category).</description>
+              <description>A $(gcp.finding.findingClass) with $(gcp.finding.severity) severity has been discovered on the GCP project $(gcp.resource.gcpMetadata.projectDisplayName). $(gcp.finding.category).</description>
               <mitre>
                 <id>T1562</id>
               </mitre>

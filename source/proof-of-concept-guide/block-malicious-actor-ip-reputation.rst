@@ -119,7 +119,7 @@ Perform the steps below to configure the Wazuh agent to monitor Apache web serve
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 Wazuh server
 ^^^^^^^^^^^^
@@ -135,7 +135,7 @@ Download the utilities and configure the CDB list
 
       $ sudo yum update && sudo yum install -y wget
 
-#. Download the Alienvault IP reputation database:
+#. Download the AlienVault IP reputation database:
 
    .. code-block:: console
 
@@ -145,7 +145,7 @@ Download the utilities and configure the CDB list
 
    .. code-block:: console
 
-      $ sudo echo "<ATTACKER_IP>" >> /var/ossec/etc/lists/alienvault_reputation.ipset
+      $ echo "<ATTACKER_IP>" | sudo tee -a /var/ossec/etc/lists/alienvault_reputation.ipset
 
 #. Download a script to convert from the ``.ipset`` format to the ``.cdb`` list format:
 

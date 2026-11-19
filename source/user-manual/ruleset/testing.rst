@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: wazuh-logtest tool allows the testing and verification of decoders and rules against provided log samples on the Wazuh server. Learn more in this section of the documentation.
+   :description: The wazuh-logtest tool allows testing and verification of decoders and rules against provided log samples on the Wazuh server.
     
 Testing decoders and rules
 ==========================

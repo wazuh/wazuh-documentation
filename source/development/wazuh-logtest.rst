@@ -21,9 +21,10 @@ Wazuh server API and :doc:`Wazuh-Logtest tool </user-manual/reference/tools/wazu
  The image below illustrates how the user logs test flow through the Wazuh environment.
 
 .. thumbnail:: ../images/development/logtest-flow.png
-  :title: Wazuh Logtest
-  :align: center
-  :width: 100%
+   :title: Wazuh Logtest
+   :alt: Diagram: the Wazuh dashboard sends logtest requests to the Wazuh API, which passes them to the session manager in analysisd on the Wazuh manager, and the rule engine processes them
+   :align: center
+   :width: 100%
 
 Sessions
 --------
@@ -38,9 +39,10 @@ The idle session collector runs every ``session_timeout`` seconds. This paramete
 The following illustration shows how the collector runs on T0, T1, T2 ... At the moment the session generates its last request, between T0 and T1, its timeout is between T1 and T2, then on T2 the collector closes the session.
 
 .. thumbnail:: ../images/manual/wazuh-logtest/logtest-session-collector.png
-  :title: Idle session collector
-  :align: center
-  :width: 100%
+   :title: Idle session collector
+   :alt: Timeline of a logtest session: session_timeout starts at T0 and restarts at the last request, and the session is closed at T2 after a full session_timeout with no new request
+   :align: center
+   :width: 100%
 
 
 

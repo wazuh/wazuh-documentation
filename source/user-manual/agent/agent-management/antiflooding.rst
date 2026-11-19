@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh agent includes a queue mechanism to prevent large bursts of events from negatively impacting the network or the Wazuh manager. Learn more in this section of the documentation.
+   :description: The Wazuh agent includes a queue mechanism to prevent event bursts from negatively impacting the network or the manager.
 
 Wazuh agent queue
 =================
@@ -113,7 +113,7 @@ Follow the steps below to configure the Wazuh agent queue.
 
          .. code-block:: pwsh-session
 
-            # Restart-Service -Name wazuh
+            > Restart-Service -Name wazuh
 
       .. group-tab:: macOS
 
@@ -182,7 +182,7 @@ When the buffer continues receiving events faster than they are removed, it will
 
    It is important to understand that when the buffer is full, all newly arriving events will be dropped until free space opens up in the buffer. For example, if 1000 events arrive at a full buffer with a throughput limit of 500 EPS in one second, 500 of these events will be stored, and the other 500 will be dropped.
 
-When the buffer is 100% full, a timer is started compared to the :ref:`agent.tolerance <internal_options_agent>` value is set in the :doc:`/var/ossec/etc/internal_options.conf </user-manual/reference/internal-options>` file.
+When the buffer is 100% full, a timer starts and is compared to the :ref:`agent.tolerance <internal_options_agent>` value set in the :doc:`/var/ossec/etc/internal_options.conf </user-manual/reference/internal-options>` file.
 
 At this point, two possible things could happen:
 

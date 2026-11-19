@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh is capable of detecting an SQL Injection attack from web server logs showing common SQL patterns of attack in a monitored endpoint. Learn more about this in this PoC.
+   :description: Wazuh can detect an SQL Injection attack from web server logs showing common attack patterns on a monitored endpoint.
 
 Detecting an SQL injection attack
 =================================

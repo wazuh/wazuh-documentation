@@ -10,7 +10,7 @@
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 

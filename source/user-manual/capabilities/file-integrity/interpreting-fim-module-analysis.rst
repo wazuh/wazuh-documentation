@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: FIM analysis results appear on the Wazuh dashboard whenever there’s an addition, modification, or deletion of monitored files. Learn more about it in this section.
+  :description: FIM analysis results appear on the Wazuh dashboard whenever a monitored file is added, modified, or deleted.
 
 Interpreting the FIM module analysis
 ====================================

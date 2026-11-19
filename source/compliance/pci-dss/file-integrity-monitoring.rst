@@ -134,7 +134,7 @@ In this use case, we configure SysCheck to detect changes to monitored files wit
 
 #. In the agent configuration file (``/var/ossec/etc/ossec.conf``), update the frequency option of the ``syscheck`` block to your desired scan interval in seconds. In this case, our desired scan interval is every 1 hour (3600 seconds):
 
-   .. code-block:: console 
+   .. code-block:: xml
 
       <frequency>3600</frequency>
 

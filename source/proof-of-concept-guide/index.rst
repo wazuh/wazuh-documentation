@@ -19,6 +19,7 @@ The diagram below illustrates the architecture of the Wazuh lab environment that
 
 .. thumbnail:: /images/poc/poc-lab-env-arch.png
    :title: Wazuh lab environment architecture
+   :alt: Lab architecture: Wazuh agents on two Linux endpoints and one Windows endpoint connect to the Wazuh manager, and the Wazuh server, with the Wazuh API and Filebeat, connects to the Wazuh dashboard and the Wazuh indexer
    :align: center
    :width: 80%
 

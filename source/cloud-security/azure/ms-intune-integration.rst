@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Integrate Microsoft Intune with Wazuh to enhance security monitoring, process audit logs, generate actionable alerts, and ensure compliance with device administration policies for improved endpoint visibility.
+   :description: Integrate Microsoft Intune with Wazuh to enhance security monitoring, process audit logs, and generate actionable alerts.
 
 Microsoft Intune integration
 ============================
@@ -44,7 +44,7 @@ This integration allows Wazuh to pull data from the Microsoft Graph API. Before 
 This step involves configuring the API permissions required to access Microsoft Intune events via the Microsoft Graph API. The required permissions are:
 
 -  ``DeviceManagementApps.Read.All``: Read ``auditEvents`` and ``detectedApps`` relationship data from your tenant.
--  ``DeviceManagementManagedDevices.Read.All``: Read ``auditEvents`` and ``managedDevices`` relationship data from your tenant.
+-  ``DeviceManagementManagedDevices.Read.All``: Read ``managedDevices`` relationship data from your tenant.
 
 .. thumbnail:: /images/cloud-security/azure/ms-intune/configuring-api-permissions.png
    :alt: Azure API permissions page showing DeviceManagementApps.Read.All and DeviceManagementManagedDevices.Read.All granted to the Wazuh application

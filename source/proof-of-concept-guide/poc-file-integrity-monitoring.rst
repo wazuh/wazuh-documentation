@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh File Integrity Monitoring system watches for modification of files in selected directories and triggers alerts when these files are modified. Learn more about it in this PoC.
+   :description: The Wazuh File Integrity Monitoring system watches for file modifications in selected directories and triggers alerts.
 
 File integrity monitoring
 =========================
@@ -33,17 +33,27 @@ Perform the following steps to configure the Wazuh agent to monitor filesystem c
 
    .. code-block:: xml
 
-      <directories check_all="yes" report_changes="yes" realtime="yes">/root</directories>
+      <directories check_all="yes" report_changes="yes" whodata="yes">/root</directories>
 
    .. note::
    
       You can also configure any path of your choice in the ``<directories>`` block.
+
+#. Install the Linux Audit system. The Wazuh FIM module needs it to collect who-data on the Ubuntu endpoint:
+
+   .. code-block:: console
+
+      $ sudo apt install auditd
 
 #. Restart the Wazuh agent to apply the configuration changes:
 
    .. code-block:: console
 
       $ sudo systemctl restart wazuh-agent
+
+   .. note::
+
+      Wait until the Wazuh agent finishes its initial scan before you test the configuration. The agent logs ``(6012): Real-time file integrity monitoring started.`` in the ``/var/ossec/logs/ossec.log`` file. Changes made before that aren't reported. See :ref:`Real-time monitoring <real_time_monitoring>`. To confirm that who-data is active, check that the same file also contains ``(6019): File integrity monitoring real-time Whodata engine started.`` If it contains ``(6913): Who-data engine could not start. Switching who-data to real-time.`` instead, the alerts don't include user or process data.
 
 
 Windows endpoint
@@ -55,7 +65,7 @@ Take the following steps to configure the Wazuh agent to monitor filesystem chan
 
    .. code-block:: xml
 
-      <directories check_all="yes" report_changes="yes" realtime="yes">C:\Users\<USER_NAME>\Desktop</directories>
+      <directories check_all="yes" report_changes="yes" whodata="yes">C:\Users\<USER_NAME>\Desktop</directories>
 
    .. note::
    
@@ -65,12 +75,18 @@ Take the following steps to configure the Wazuh agent to monitor filesystem chan
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
+
+   .. note::
+
+      Wait until the Wazuh agent finishes its initial scan before you test the configuration. The agent logs ``(6012): Real-time file integrity monitoring started.`` in the ``C:\Program Files (x86)\ossec-agent\ossec.log`` file. Changes made before that aren't reported. See :ref:`Real-time monitoring <real_time_monitoring>`.
 
 As an alternative to local configurations on the Wazuh agents, you can :doc:`centrally configure groups of agents </user-manual/reference/centralized-configuration>`.
 
 Test the configuration
 ----------------------
+
+On the Ubuntu endpoint, only the root user can write to the monitored ``/root`` directory. Run the following steps as root, for example with ``sudo``.
 
 #. Create a text file in the monitored directory then wait for 5 seconds.
 
@@ -81,9 +97,9 @@ Test the configuration
 Visualize the alerts
 --------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **File Integrity Monitoring** module and add the filters in the search bar to query the alerts:
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **File Integrity Monitoring** module, select the **Events** tab, and add the filters in the search bar to query the alerts:
 
--  Ubuntu - ``rule.id: is one of 550,553,554``
+-  Ubuntu - ``rule.id:550 or rule.id:553 or rule.id:554``
 
    .. thumbnail:: /images/poc/fim-alerts-ubuntu.png
          :title: Visualize FIM alerts from Ubuntu system
@@ -91,10 +107,10 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
          :align: center
          :width: 80%
 
--  Windows - ``rule.id: is one of 550,553,554``
+-  Windows - ``rule.id:550 or rule.id:553 or rule.id:554``
 
    .. thumbnail:: /images/poc/fim-alerts-windows.png
-         :title: Visualize FIM alerts from Ubuntu system
+         :title: Visualize FIM alerts from Windows system
          :alt: Wazuh dashboard Events table showing file added, modified, and deleted alerts for the Windows agent WindowsAgent
          :align: center
          :width: 80%

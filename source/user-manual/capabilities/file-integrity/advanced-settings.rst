@@ -387,7 +387,7 @@ Wazuh uses a kernel data structure called ``ring_buffer`` to transfer these even
 
 .. note::
 
-   Who-data monitoring with eBPF requires kernel version 5.8 or higher, as the data structure is only present in kernels starting with this version.
+   Who-data monitoring with eBPF requires a kernel that supports the BPF ring buffer and BTF. Upstream kernels support them from version 5.8, and some distributions backport them to older kernels, such as RHEL 8.10 (kernel 4.18). When the agent starts, the FIM module runs a health check of the eBPF provider and uses it only if the health check succeeds.
 
 Configuration
 .............
@@ -396,7 +396,9 @@ Configuring who-data in eBPF mode requires a :ref:`provider <syscheck_whodata_pr
 
 .. note::
 
-   If the ``<provider>`` tag is not configured, the FIM module defaults to the ``audit`` mode. Additionally, if the provider is set to ``ebpf``, but unavailable due to kernel version incompatibility, it also falls back to the ``audit`` mode.
+   -  If the ``<provider>`` tag is not configured, the FIM module uses the ``audit`` provider by default. To confirm which mode is in use, check the Wazuh agent log file ``/var/ossec/logs/ossec.log``.
+   -  When the eBPF provider is configured and the eBPF health check succeeds, the agent logs this message ``(6048): Healthcheck for eBPF FIM whodata module success.``
+   -  If the eBPF provider is configured but the health check fails, FIM falls back to the ``audit`` provider. The agent logs this message ``(6959): The eBPF healthcheck has failed. Switching all whodata eBPF configuration to audit.``
 
 A configuration block of who-data in eBPF mode to monitor the ``/home/user/documents`` directory is shown below:
 
@@ -427,7 +429,7 @@ You can learn more about the available configuration options in the :ref:`whodat
 Alert fields
 ............
 
-Who-data monitoring alerts generated using the eBPF mode preserve the same structure as the audit mode :ref:`alert fields <audit_mode_alert_fields>`.
+Who-data monitoring alerts generated using the eBPF mode preserve the same structure as the audit mode :ref:`alert fields <audit_mode_alert_fields>`. However, ``audit.process.name`` and ``audit.process.parent_name`` contain the short task name of the process (for example, ``bash``) instead of the absolute path of the executable (for example, ``/usr/bin/bash``). The name is limited to 15 characters. Rules or searches that match these fields by absolute path don't match eBPF mode alerts.
 
 Example: Monitoring changes in configuration files
 ..................................................
@@ -899,7 +901,7 @@ Alert in JSON:
           "timestamp": [
             "2023-04-18T14:17:59.498Z"
           ]
-        },
+        }
       }
 
 
@@ -1026,10 +1028,16 @@ You can monitor the Windows special directories ``%WINDIR%/System32`` and ``%WIN
    
    If these types of paths are included in your ``<directories>`` configuration, they will be ignored and no FIM events will be generated for them. This applies to all FIM modes: scheduled, real-time, and whodata.
 
+.. _recursion_level_directories:
+
 Recursion level
 ---------------
 
 You can configure the maximum recursion level allowed for a specific directory by using the ``recursion_level`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>`   option. The ``recursion_level`` value must be an integer between 0 and 320.
+
+.. note::
+
+   This 320 limit applies specifically to ``<directories>`` (file and folder monitoring). The ``recursion_level`` attribute for ``<windows_registry>`` is different and supports a wider range. See :ref:`Recursion level <recursion_level_windows_registry>` in *Windows Registry monitoring*.
 
 In the configuration example below, you can see how to set the ``recursion_level`` of the ``folder_test``  directory to 3. Replace ``<FILEPATH_OF_MONITORED_DIRECTORY>`` with your own file paths.
 
@@ -1209,5 +1217,5 @@ The table below explains the supported attributes of the synchronization option:
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | queue_size          | 16384                | Integer number between 2 and 1000000.                                                       | Specifies the queue size of the manager synchronization responses.                                                                                                                                      |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | response_timeout    | 10                   | Integer number between 0 and 1000000. 0 means disabled.                                     | Sets the maximum synchronization message throughput.                                                                                                                                                    |
+  | max_eps             | 10                   | Integer number between 0 and 1000000. 0 means disabled.                                     | Sets the maximum synchronization message throughput.                                                                                                                                                    |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

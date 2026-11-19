@@ -95,6 +95,13 @@ You need to configure your Docker host to run Wazuh correctly on any system that
 
       # sysctl -w vm.max_map_count=262144
 
+   This setting is lost when the Docker host restarts. To make it persistent on Linux hosts, add it to a ``sysctl`` configuration file and reload it:
+
+   .. code-block:: console
+
+      # echo "vm.max_map_count=262144" > /etc/sysctl.d/99-wazuh-max-map-count.conf
+      # sysctl --system
+
    .. warning::
 
       If you don’t set ``vm.max_map_count`` to at least ``262144``, the Wazuh indexer might fail due to limited virtual memory mapping. This value lets the indexer map more files and index segments to memory, preventing errors or crashes.
@@ -447,7 +454,7 @@ Follow these steps to deploy the Wazuh agent using Docker.
 
       # cd wazuh-docker/wazuh-agent
 
-#. Edit the ``docker-compose.yml`` file. Replace ``<YOUR_WAZUH_MANAGER_IP>`` with the IP address of your Wazuh manager. Locate the environment section for the agent service and update it:
+#. Edit the ``docker-compose.yml`` file. Replace ``<WAZUH_MANAGER_IP>`` with the IP address of your Wazuh manager. Locate the environment section for the agent service and update it:
 
    .. code-block:: yaml
       :emphasize-lines: 6,7

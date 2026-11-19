@@ -1,7 +1,7 @@
 
 .. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
-  :description: Check out how to upgrade the Wazuh agent to the latest available version remotely, using the agent_upgrade tool or the Wazuh API, or locally.
+  :description: Follow these steps to upgrade the Wazuh agent to the latest available version on macOS endpoints.
 
 
 Upgrading Wazuh agents on macOS endpoints
@@ -35,14 +35,14 @@ Follow these steps to upgrade Wazuh agents locally on macOS endpoints.
          
                .. code-block:: console
 
-                  # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
+                  # sudo installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
 
             .. group-tab:: Apple silicon
          
                .. code-block:: console
 
-                  # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
+                  # sudo installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
                .. note::
                   

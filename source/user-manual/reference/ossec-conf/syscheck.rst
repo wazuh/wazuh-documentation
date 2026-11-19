@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The ossec.conf file is the main configuration file on the Wazuh manager and also important on the agents. Learn more about FIM settings with configuration examples here.
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and also important on the agents. Learn about FIM settings.
 
 .. _reference_ossec_syscheck:
 
@@ -20,6 +20,7 @@ Configuration options for file integrity monitoring:
 
 - `alert_new_files`_
 - `allow_remote_prefilter_cmd`_
+- `auto_ignore`_
 - `database`_
 - `file_limit`_
 - `registry_limit`_
@@ -34,6 +35,7 @@ Configuration options for file integrity monitoring:
 - `process_priority`_
 - `registry_ignore`_
 - `scan_day`_
+- `scan_on_start`_
 - `scan_time`_
 - `skip_dev`_
 - `skip_nfs`_
@@ -91,6 +93,37 @@ Example:
 
    This option only can be activated from the agent side, on its own ``ossec.conf``.
 
+.. _reference_ossec_syscheck_auto_ignore:
+
+auto_ignore
+-----------
+
+Specifies whether the Wazuh manager stops alerting on a file that changes too often. When enabled, the Wazuh manager generates no more alerts for a monitored file after it changes ``frequency`` times within ``timeframe`` seconds. Alerts for that file resume after ``timeframe`` seconds. This option is read by the Wazuh manager from the ``<syscheck>`` section of its own configuration file and applies to the alerts of all agents. It has no effect in the Wazuh agent configuration.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+Attributes:
+
++---------------+-------------------------------------------------------------------------+
+| **frequency** | Number of changes allowed within the time frame before the alerts stop. |
++---------------+-------------------------------------------------------------------------+
+|               | Default value: 10. Allowed values: a number from 1 to 99.               |
++---------------+-------------------------------------------------------------------------+
+| **timeframe** | Time frame, in seconds.                                                 |
++---------------+-------------------------------------------------------------------------+
+|               | Default value: 3600. Allowed values: a number from 0 to 43200.          |
++---------------+-------------------------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+   <auto_ignore frequency="10" timeframe="3600">yes</auto_ignore>
+
 .. _reference_ossec_syscheck_database:
 
 database
@@ -130,6 +163,10 @@ These wildcards will be reloaded every time a scheduled scan is run.
 +                    +                                    +
 |                    | Any environment variable           |
 +--------------------+------------------------------------+
+
+On macOS agents, the default value is ``/private/etc,/usr/bin,/usr/sbin,/bin,/sbin``, because ``/etc`` is a symbolic link to ``/private/etc``.
+
+On Windows agents, environment variables written as ``%NAME%`` are expanded anywhere in the entry, for example ``%WINDIR%\System32``. On Linux and macOS agents, only an entry that is a variable name alone, such as ``$HOME``, is expanded: a path such as ``$HOME/docs`` is not. If the variable holds several paths, separated by ``;`` on Windows or by ``:`` on Linux and macOS, each path is monitored. The agent reads the variables from its own environment when it loads the configuration.
 
 Attributes:
 
@@ -534,6 +571,25 @@ Example:
  <scan_day>thursday</scan_day>
 
 
+.. _reference_ossec_syscheck_scan_on_start:
+
+scan_on_start
+-------------
+
+This option is accepted but has no effect. Syscheck always runs a scan when it starts, to create the baseline, whatever this option is set to.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+Example:
+
+.. code-block:: xml
+
+   <scan_on_start>yes</scan_on_start>
+
 .. _reference_ossec_syscheck_scan_time:
 
 scan_time
@@ -840,7 +896,7 @@ The diff settings will be configured inside this tag.
 disk_quota
 """"""""""
 
-This option can be used to limit the size of the ``queue/diff/local`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
+This option can be used to limit the size of the ``queue/diff/file`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit. If ``file_size`` is enabled and the ``disk_quota`` limit is lower than the ``file_size`` limit, Wazuh raises the ``disk_quota`` limit to the ``file_size`` limit.
 
 **enabled**
 
@@ -854,7 +910,7 @@ Set the disk quota limit option to enabled or disabled.
 
 **limit**
 
-Specifies the limit for the size of the ``queue/diff/local`` folder.
+Specifies the limit for the size of the ``queue/diff/file`` folder.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 1GB                                         |
@@ -951,7 +1007,7 @@ The Whodata options will be configured inside this tag.
 
 **provider**
 
-Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the ``audit`` mode. If the provider is set to ``ebpf`` but unavailable due to kernel version incompatibility, it also falls back to the ``audit`` mode. This option is only available for Linux endpoints.
+Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the ``audit`` mode. If the provider is set to ``ebpf`` but unavailable because its health check fails, for example on a kernel without the BPF ring buffer or BTF, it also falls back to the ``audit`` mode. This option is only available for Linux endpoints.
 
 +--------------------+---------------------+
 | **Default value**  | ``audit``           |
@@ -1061,9 +1117,9 @@ Attributes:
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | Tags list separated by commas                            |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
-| **report_changes**       | Report registry value changes. This is limited to REG_SZ, REG_MULTI_SZ, REG_DWORD, REG_DWORD_BIG_ENDIAN,              |
+| **report_changes**       | Report registry value changes. This is limited to REG_SZ, REG_EXPAND_SZ, REG_MULTI_SZ, REG_DWORD,                     |
 +                          +                                                                                                                       +
-|                          | REG_QWORD value.                                                                                                      |
+|                          | REG_DWORD_BIG_ENDIAN, REG_QWORD value.                                                                                |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | no                                                       |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1387,7 +1443,7 @@ Default syscheck configuration:
 
 
 
- .. group-tab:: Wazuh agent - MacOS X
+ .. group-tab:: Wazuh agent - macOS
 
   .. code-block:: xml
 
@@ -1398,25 +1454,25 @@ Default syscheck configuration:
     <frequency>43200</frequency>
     <scan_on_start>yes</scan_on_start>
     <!-- Directories to check  (perform all possible verifications) -->
-    <directories>/etc,/usr/bin,/usr/sbin</directories>
+    <directories>/private/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin</directories>
     <!-- Files/directories to ignore -->
-    <ignore>/etc/mtab</ignore>
-    <ignore>/etc/hosts.deny</ignore>
-    <ignore>/etc/mail/statistics</ignore>
-    <ignore>/etc/random-seed</ignore>
-    <ignore>/etc/random.seed</ignore>
-    <ignore>/etc/adjtime</ignore>
-    <ignore>/etc/httpd/logs</ignore>
-    <ignore>/etc/utmpx</ignore>
-    <ignore>/etc/wtmpx</ignore>
-    <ignore>/etc/cups/certs</ignore>
-    <ignore>/etc/dumpdates</ignore>
-    <ignore>/etc/svc/volatile</ignore>
+    <ignore>/private/etc/mtab</ignore>
+    <ignore>/private/etc/hosts.deny</ignore>
+    <ignore>/private/etc/mail/statistics</ignore>
+    <ignore>/private/etc/random-seed</ignore>
+    <ignore>/private/etc/random.seed</ignore>
+    <ignore>/private/etc/adjtime</ignore>
+    <ignore>/private/etc/httpd/logs</ignore>
+    <ignore>/private/etc/utmpx</ignore>
+    <ignore>/private/etc/wtmpx</ignore>
+    <ignore>/private/etc/cups/certs</ignore>
+    <ignore>/private/etc/dumpdates</ignore>
+    <ignore>/private/etc/svc/volatile</ignore>
     <!-- File types to ignore -->
     <ignore type="sregex">.log$|.swp$</ignore>
     <!-- Check the file, but never compute the diff -->
-    <nodiff>/etc/ssl/private.key</nodiff>
+    <nodiff type="sregex">^/private/etc/ssl/private/</nodiff>
     <skip_nfs>yes</skip_nfs>
     <skip_dev>yes</skip_dev>
     <skip_proc>yes</skip_proc>

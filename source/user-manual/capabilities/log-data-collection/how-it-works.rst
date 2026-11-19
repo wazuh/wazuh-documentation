@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh uses the Logcollector module to collect logs from monitored endpoints, applications, and network devices. Explore the log data collection and analysis flow in this documentation section.
+  :description: Wazuh uses the Logcollector module to collect logs from monitored endpoints, applications, and network devices for analysis.
 
 How it works
 ============

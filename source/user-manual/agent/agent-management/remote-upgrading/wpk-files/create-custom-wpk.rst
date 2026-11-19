@@ -81,18 +81,17 @@ Requirements
       Usage: ./generate_wpk_package.sh [OPTIONS]
 
           -t,   --target-system <target>              [Required] Select target wpk to build [linux/windows/macos].
-          -b,   --branch <branch>                     [Required] Select Git branch or tag e.g.
+          -b,   --branch <branch>                     [Required] Select Git branch.
           -d,   --destination <path>                  [Required] Set the destination path of package.
-          -pn,  --package-name <name>                 [Required for windows and macos] Package name to pack on wpk.
+          -pn,  --package-name <name>                 [Required] Path to package file (rpm, deb, apk, msi, pkg) to pack in wpk.
           -o,   --output <name>                       [Required] Name to the output package.
-          -k,   --key-dir <arch>                      [Required] Set the WPK key path to sign package.
+          -k,   --key-dir <path>                      [Optional] Set the WPK key path to sign package.
           --aws-wpk-key                               [Optional] AWS Secrets manager Name/ARN to get WPK private key.
           --aws-wpk-cert                              [Optional] AWS secrets manager Name/ARN to get WPK certificate.
           --aws-wpk-key-region                        [Optional] AWS Region where secrets are stored.
-          -a,   --architecture <arch>                 [Optional] Target architecture of the package [x86_64].
-          -j,   --jobs <number>                       [Optional] Number of parallel jobs when compiling.
-          -p,   --path <path>                         [Optional] Installation path for the package. By default: /var.
-          -c,   --checksum                            [Optional] Generatez checksum.
+          -c,   --checksum                            [Optional] Generate checksum on destination folder. By default: no.
+          --dont-build-docker                         [Optional] Locally built docker image will be used instead of generating a new one. By default: yes.
+          --tag <name>                                [Optional] Tag to use with the docker image.
           -h,   --help                                Show this help.
 
 To use this tool, the previously created :ref:`certificate and key <create-wpk-key>` must be in the same directory.
@@ -100,7 +99,7 @@ To use this tool, the previously created :ref:`certificate and key <create-wpk-k
 Linux WPK
 ~~~~~~~~~
 
-Download the latest version of the Wazuh DEB or RPM package :ref:`here <wazuh_agent_packages_list_linux>`. For example, for Debian:
+Download the latest version of the Wazuh DEB or RPM package from the :ref:`Linux agent packages list <wazuh_agent_packages_list_linux>`. For example, for Debian:
 
 .. code-block:: console
 
@@ -150,7 +149,7 @@ To build a WPK for macOS, you need to first download a PKG package of the desire
 
          # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
 
-   .. group-tab:: Apple Silicon
+   .. group-tab:: Apple silicon
 
       .. code-block:: console
 
@@ -166,7 +165,7 @@ Run the command below to build a macOS WPK:
 
          # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT_OSX| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT_OSX|_macOS.wpk -pn /<PATH_TO_WPK_FILE>/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
 
-   .. group-tab:: Apple Silicon
+   .. group-tab:: Apple silicon
 
       .. code-block:: console
 
@@ -224,7 +223,7 @@ Linux WPK
       # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
       # cd wazuh-|WAZUH_CURRENT|
 
-#. Download the latest version of the Wazuh DEB or RPM package :ref:`here <wazuh_agent_packages_list_linux>`. For example, for Debian:
+#. Download the latest version of the Wazuh DEB or RPM package from the :ref:`Linux agent packages list <wazuh_agent_packages_list_linux>`. For example, for Debian:
 
    .. code-block:: console
 
@@ -236,25 +235,25 @@ Linux WPK
 
       # cp <PATH_TO>/wpk_root.pem etc/wpk_root.pem
 
-#. Copy the necessary script to the Wazuh sources folder to compile the WPK.
+#. Copy the necessary script to the Wazuh sources folder to compile the WPK:
 
    .. code-block:: console
 
       # cp src/init/pkg_installer.sh .
 
-#. Compile the WPK package using the PKG package, along with your SSL certificate and key.
+#. Compile the WPK package using the DEB or RPM package, along with your SSL certificate and key:
 
    .. code-block:: console
 
-      # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb upgrade.sh pkg_installer.sh
+      # tools/agent-upgrade/wpkpack.py <PATH_TO>/myagent.wpk <PATH_TO>/wpkcert.pem <PATH_TO>/wpkcert.key wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb upgrade.sh pkg_installer.sh
 
 Definitions:
 
 -  ``<PATH_TO>/myagent.wpk`` is the name of the output WPK package.
 -  ``<PATH_TO>/wpkcert.pem`` is the path to the SSL certificate.
 -  ``<PATH_TO>/wpkcert.key`` is the path to the SSL certificate's key.
--  ``wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb`` is the PKG file downloaded in step 3.
--  ``upgrade.sh`` is the script that run first when the WPK is deployed in the target agent. Find an example at the base directory in the Wazuh repository.
+-  ``wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb`` is the DEB package downloaded in step 3.
+-  ``upgrade.sh`` is the script that runs first when the WPK is deployed in the target agent. Find an example in the base directory of the Wazuh repository.
 -  ``pkg_installer.sh`` is the script that manages the WPK upgrade procedure. Find an example in ``src/init`` in the Wazuh repository.
 
 Windows WPK
@@ -346,7 +345,7 @@ macOS WPK
 
             # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
 
-      .. group-tab:: Apple Silicon
+      .. group-tab:: Apple silicon
 
          .. code-block:: console
 

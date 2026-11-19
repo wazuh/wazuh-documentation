@@ -17,6 +17,12 @@ socket
 
 Configuration options for defining output sockets.
 
+Logcollector connects to each socket as a client and doesn't create it: another program must already be listening on ``location``. If Logcollector can't connect, it logs ``Unable to connect to socket '<name>'``, discards the events for that socket, and tries again after ``logcollector.sock_fail_time`` seconds (300 by default). To send the events of a log file to a socket, add the socket name to the ``target`` option of its ``localfile`` block, as in the example below.
+
+.. note::
+
+   The Wazuh agent ignores ``<socket>`` blocks received through the centralized configuration (``agent.conf``) unless ``logcollector.remote_commands=1`` is set in the ``/var/ossec/etc/local_internal_options.conf`` file of the agent. It logs ``Remote sockets are not accepted from the manager`` for each ignored socket. Sockets defined in the local ``ossec.conf`` file aren't affected.
+
 Options
 -------
 
@@ -83,3 +89,9 @@ Example of configuration
       <mode>tcp</mode>
       <prefix>custom_syslog: </prefix>
     </socket>
+
+    <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/log/custom.log</location>
+      <target>agent,custom_socket</target>
+    </localfile>

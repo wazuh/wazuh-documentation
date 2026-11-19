@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about the local configuration of Wazuh. In this section of the documentation you can learn more about the configuration options of the Wazuh integration with AWS.
+    :description: Learn about the local configuration options of the Wazuh integration with AWS in this section of the documentation.
 
 .. _wodle_s3:
 
@@ -316,7 +316,7 @@ If defined, the path or prefix for the bucket.
 path_suffix
 ^^^^^^^^^^^
 
-If defined, the suffix for the bucket. Only works with buckets that contain the folder named AWSLogs (Cloudtrail, VPC, and Macie).
+If defined, the suffix for the bucket. Only works with buckets that contain the folder named AWSLogs (CloudTrail, VPC, and Macie).
 
 +--------------------+---------------+
 | **Default value**  | N/A           |
@@ -368,7 +368,7 @@ Name of AWS organization. Only works with CloudTrail buckets.
 discard_regex
 ^^^^^^^^^^^^^
 
-A regular expression to determine if an event must be discarded. It requires a mandatory ``field`` attribute. If the field is present in the event log, the regex is applied to it. For example, ``userIdentity.principalID`` for the following AWS CloudTrail log example:
+A regular expression to determine if an event must be discarded. It requires a mandatory ``field`` attribute. If the field is present in the event log, the regex is applied to it. The field path is case-sensitive. For example, ``userIdentity.principalId`` for the following AWS CloudTrail log example:
 
 .. code-block:: json
    :emphasize-lines: 5
@@ -439,7 +439,7 @@ Usage example for the ``cloudtrail`` bucket type:
 
 .. code-block:: console
 
-    <discard_regex field="userIdentity.principalID">EXAMPLE6E4XEGITWATV6R</discard_regex>
+    <discard_regex field="userIdentity.principalId">EXAMPLE6E4XEGITWATV6R</discard_regex>
 
 .. _bucket_remove_from_bucket:
 
@@ -615,7 +615,7 @@ discard_regex
 A regular expression to determine if an event must be discarded.
 
 -  For ``inspector``, it requires a mandatory ``field`` attribute which must be present in the fetched event. The regex is applied to the event field specified with this attribute.
--  For ``cloudwatchlogs``, the ``field`` attribute is optional. You can omit it, for example, when monitoring Cloudwatch logs in JSON format and plain text.
+-  For ``cloudwatchlogs``, the ``field`` attribute is optional. You can omit it, for example, when monitoring CloudWatch logs in JSON format and plain text.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -852,7 +852,7 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 discard_regex
 ^^^^^^^^^^^^^
 
-A regular expression to determine if an event must be discarded. JSON and CSV logs require a mandatory ``field`` attribute. If the field is present in the event log, the regex is applied to it. For example, ``userIdentity.principalID`` for the following AWS CloudTrail log example:
+A regular expression to determine if an event must be discarded. JSON and CSV logs require a mandatory ``field`` attribute. If the field is present in the event log, the regex is applied to it. The field path is case-sensitive. For example, ``userIdentity.principalId`` for the following AWS CloudTrail log example:
 
 .. code-block:: json
    :emphasize-lines: 5
@@ -919,11 +919,11 @@ Attributes:
 |           | Allowed values   | A str containing the full field name path   |
 +-----------+------------------+---------------------------------------------+
 
-Usage example for ``Cloudtrail`` fetched events:
+Usage example for ``CloudTrail`` fetched events:
 
 .. code-block:: console
 
-    <discard_regex field="userIdentity.principalID">EXAMPLE6E4XEGITWATV6R</discard_regex>
+    <discard_regex field="userIdentity.principalId">EXAMPLE6E4XEGITWATV6R</discard_regex>
 
 Usage example only for plain text logs:
 
@@ -977,7 +977,7 @@ Example of configuration
           <aws_account_id>123456789012</aws_account_id>
           <aws_account_alias>dev1-account</aws_account_alias>
           <discard_regex field="userIdentity.userName">john.doe</discard_regex>
-          <remove_from_bucket>yes<remove_from_bucket>
+          <remove_from_bucket>yes</remove_from_bucket>
       </bucket>
       <bucket type="cloudtrail">
           <name>s3-dev-bucket</name>
@@ -1004,7 +1004,7 @@ Example of configuration
           <aws_account_id>11112222333</aws_account_id>
           <aws_account_alias>prod-account</aws_account_alias>
           <discard_regex field="detail.status">OK</discard_regex>
-          <remove_from_bucket>yes<remove_from_bucket>
+          <remove_from_bucket>yes</remove_from_bucket>
       </bucket>
       <service type="cloudwatchlogs">
           <aws_profile>default</aws_profile>

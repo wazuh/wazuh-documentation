@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This section outlines the steps required to completely clean up your environment, including deleting StatefulSets, services, ConfigMaps, and persistent volumes associated with the Wazuh cluster.
+   :description: Learn the steps to clean up your environment, including deleting StatefulSets, services, ConfigMaps, and persistent volumes.
 
 Clean Up
 ========

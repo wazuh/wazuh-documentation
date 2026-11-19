@@ -77,13 +77,13 @@ Follow the steps below to import the client key to a Windows endpoint.
 
    .. code-block:: pwsh-session
 
-      # "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <KEY>
+      > "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <KEY>
 
    For 32-bit systems:
 
    .. code-block:: pwsh-session
 
-      # "C:\Program Files\ossec-agent\manage_agents.exe" -i <KEY>
+      > "C:\Program Files\ossec-agent\manage_agents.exe" -i <KEY>
 
    The output should look like this:
 
@@ -116,14 +116,14 @@ Follow the steps below to import the client key to a Windows endpoint.
 
          .. code-block:: pwsh-session
 
-            # Restart-Service -Name wazuh
+            > Restart-Service -Name wazuh
 
       .. group-tab:: CMD (as an administrator):
 
          .. code-block:: doscon
 
-            # net stop wazuh
-            # net start wazuh
+            > net stop wazuh
+            > net start wazuh
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 

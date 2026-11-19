@@ -15,50 +15,73 @@ For a detailed description of the various configuration parameters of SCA, pleas
 Enabling and disabling policies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-By default, the Wazuh agent runs scans for every policy (``.yaml`` or ``.yml`` files) present in their ruleset folder:
+By default, the Wazuh agent scans every policy (``.yaml`` or ``.yml`` file) in its ruleset folder:
 
 - Linux and Unix-based agents: ``/var/ossec/ruleset/sca``.
 - Windows agents: ``C:\Program Files (x86)\ossec-agent\ruleset\sca``.
 - macOS agents: ``/Library/Ossec/ruleset/sca``.
 
 .. note::
-    The contents of the aforementioned default ruleset folders are neither kept across installations nor updates. Place them under an alternative folder if you wish to modify or add new policies.
+   Installations and updates don't preserve the contents of these default ruleset folders. Place your policies under an alternative folder if you want to modify or add new ones.
 
-To enable a policy file outside the Wazuh agent installation folder, add the policy file path to the ``<sca>`` block in the Wazuh agent configuration file. An example is shown below:
+There are two ways to disable policies on the Wazuh agent. The simplest method is to rename the policy file with an extension other than ``.yaml`` or ``.yml``.
 
-.. code-block:: xml
+Alternatively, disable a policy in the Wazuh agent ``ossec.conf`` file by setting the ``enabled`` attribute to ``no``.
 
-    <sca>
-      <policies>
-        <policy><FULLPATH_TO_CUSTOM_SCA_POLICY_FILE></policy>
-      </policies>
-    </sca>
-
-You can also specify a relative path to the Wazuh installation directory:
+To disable a policy included with the Wazuh agent, specify its path relative to the Wazuh installation directory:
 
 .. code-block:: xml
+   :emphasize-lines: 3
 
-    <sca>
-      <policies>
-        <policy>etc/shared/<CUSTOM_SCA_POLICY_FILE></policy>
-      </policies>
-    </sca>
+   <sca>
+     <policies>
+       <policy enabled="no">ruleset/sca/<POLICY_FILE_TO_DISABLE></policy>
+     </policies>
+   </sca>
 
-There are two ways to disable policies on the Wazuh agent. The simplest one is renaming the policy file by adding ``.disabled`` (or anything different from ``.yaml`` or ``.yml``) after their YAML extension. 
-
-The second is to disable them from the Wazuh agent ``ossec.conf`` file by adding a line such as the following to the ``<policy>`` section of the SCA module:
+For a policy distributed through centralized configuration, use its path in the ``etc/shared`` directory on Linux and macOS agents, or in the ``shared`` directory on Windows agents:
 
 .. code-block:: xml
+   :emphasize-lines: 3
 
-    <sca>
-      <policies>
-        <policy enabled="no">etc/shared/<POLICY_FILE_TO_DISABLE></policy>
-      </policies>
-    </sca>
+   <sca>
+     <policies>
+       <policy enabled="no">etc/shared/<POLICY_FILE_TO_DISABLE></policy>
+     </policies>
+   </sca>
 
-.. note::
+.. code-block:: xml
+   :emphasize-lines: 3
 
-   From Wazuh 4.13.0, SCA policy files must be on local file systems. UNC network paths or mapped network drives are not supported.
+   <sca>
+     <policies>
+       <policy enabled="no">shared\<POLICY_FILE_TO_DISABLE></policy>
+     </policies>
+   </sca>
+
+You can also specify an absolute path to the policy file.
+
+Restart the Wazuh agent to apply the change:
+
+.. tabs::
+
+   .. group-tab:: Linux
+
+      .. code-block:: console
+
+         # systemctl restart wazuh-agent
+
+   .. group-tab:: Windows
+
+      .. code-block:: pwsh-session
+
+         > Restart-Service -Name WazuhSvc
+
+   .. group-tab:: macOS
+
+      .. code-block:: console
+
+         # /Library/Ossec/bin/wazuh-control restart
 
 .. _share_policy_files_and_configuration_with_the_Wazuh_agents:
 
@@ -69,7 +92,7 @@ As described in the :doc:`centralized configuration </user-manual/reference/cent
 
 You can enable this feature to push policy files to the Wazuh agents in defined groups. By default, every Wazuh agent belongs to the ``default`` group, which is used here as an example:
 
-#. Edit the Wazuh agent ``local_internal_options.conf`` file to allow the execution of commands in SCA policies sent from the Wazuh server:
+#. Edit the Wazuh agent ``local_internal_options.conf`` file to allow the execution of commands in SCA policies sent from the Wazuh server. If the policy files you push contain command rules:
 
    .. tabs::
 
@@ -97,7 +120,7 @@ You can enable this feature to push policy files to the Wazuh agents in defined 
 
       By enabling remote command execution, the Wazuh server can execute commands on the monitored endpoint. Remote commands are disabled by default as a security measure, helping reduce the attack surface if the Wazuh server is compromised.
 
-      You do not need to enable remote commands if you add the policy files to each agent without using Wazuh to push them. For example, you can manually create the policy file directly on the monitored endpoint, or use ``scp`` to copy the policy file to the monitored endpoint.
+      You do not need to enable remote commands if you add the policy files to each agent without using Wazuh to push them. For example, you can manually create the policy file directly on the monitored endpoint, or use ``scp`` to copy the policy file to the monitored endpoint. If you push a policy without enabling remote commands, the Wazuh agent still evaluates the policy. It reports the checks that use command rules as **Not applicable** and logs this warning once per policy: ``Ignoring check for policy '<POLICY_NAME>'. The internal option 'sca.remote_commands' is disabled.``
 
 #. On the Wazuh server, place a new policy file in the ``/var/ossec/etc/shared/default`` folder and change its ownership. Replace ``<NEW_POLICY_FILE>`` with your policy name. 
 
@@ -110,17 +133,31 @@ You can enable this feature to push policy files to the Wazuh agents in defined 
 
 
      .. code-block:: xml
-        :emphasize-lines: 5
 
-        <agent_config>
-          <!-- Shared agent configuration here -->
+        <agent_config os="Linux">
           <sca>
             <policies>
-                <policy>etc/shared/<NEW_POLICY_FILE></policy>
+              <policy>etc/shared/<NEW_POLICY_FILE></policy>
             </policies>
           </sca>
         </agent_config>
 
-   All files remotely pushed from the Wazuh server are saved in the ``/<WAZUH_HOME_DIRECTORY>/etc/shared/`` directory on the agent endpoints regardless of the group they belong to. We specify the relative file path of the policy in the configuration because the full file path could differ depending on the operating system of the monitored endpoint.
+        <agent_config os="macOS">
+          <sca>
+            <policies>
+              <policy>etc/shared/<NEW_POLICY_FILE></policy>
+            </policies>
+          </sca>
+        </agent_config>
+
+        <agent_config os="Windows">
+          <sca>
+            <policies>
+              <policy>shared\<NEW_POLICY_FILE></policy>
+            </policies>
+          </sca>
+        </agent_config>
+
+   The Wazuh agent saves all files pushed from the Wazuh server in the ``etc/shared/`` directory on Linux and macOS endpoints and in the ``shared\`` directory on Windows endpoints, regardless of the group they belong to. We specify the relative file path of the policy because the installation directory differs between operating systems.
 
 The new ``<sca>`` block in the Wazuh server ``/var/ossec/etc/shared/default/agent.conf`` file is merged with the ``<sca>`` block on the Wazuh agent side, and the new configuration is added.

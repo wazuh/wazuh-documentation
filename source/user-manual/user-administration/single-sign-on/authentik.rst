@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: authentik is an open source Identity Provider (IdP) for modern SSO. Learn more about it and its integration with Wazuh roles in this section of the Wazuh documentation.
+   :description: authentik is an open source Identity Provider (IdP) for modern SSO. Learn about its integration with Wazuh roles.
 
 authentik
 =========
@@ -203,36 +203,36 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25-28
 
-      authc:
-        ...
-        basic_internal_auth_domain:
-          description: "Authenticate via HTTP Basic against internal users database"
-          http_enabled: true
-          transport_enabled: true
-          order: 0
-          http_authenticator:
-            type: "basic"
-            challenge: false
-          authentication_backend:
-            type: "intern"
-        saml_auth_domain:
-          http_enabled: true
-          transport_enabled: false
-          order: 1
-          http_authenticator:
-            type: saml
-            challenge: true
-            config:
-              idp:
-                metadata_file: '/etc/wazuh-indexer/opensearch-security/wazuh_authentik_meta.xml'
-                entity_id: 'wazuh-saml'
-              sp:
-                entity_id: 'wazuh-saml'
-              kibana_url: https://<WAZUH_DASHBOARD_URL>
-              roles_key: Roles
-              exchange_key: 'b1d6dd32753374557dcf92e241.......'
-          authentication_backend:
-            type: noop
+          authc:
+            ...
+            basic_internal_auth_domain:
+              description: "Authenticate via HTTP Basic against internal users database"
+              http_enabled: true
+              transport_enabled: true
+              order: 0
+              http_authenticator:
+                type: "basic"
+                challenge: false
+              authentication_backend:
+                type: "intern"
+            saml_auth_domain:
+              http_enabled: true
+              transport_enabled: false
+              order: 1
+              http_authenticator:
+                type: saml
+                challenge: true
+                config:
+                  idp:
+                    metadata_file: '/etc/wazuh-indexer/opensearch-security/wazuh_authentik_meta.xml'
+                    entity_id: 'wazuh-saml'
+                  sp:
+                    entity_id: 'wazuh-saml'
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
+                  roles_key: Roles
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
+              authentication_backend:
+                type: noop
 
    Ensure to change the following parameters to their corresponding value:
 
@@ -572,36 +572,36 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25-28
 
-      authc:
-        ...
-        basic_internal_auth_domain:
-          description: "Authenticate via HTTP Basic against internal users database"
-          http_enabled: true
-          transport_enabled: true
-          order: 0
-          http_authenticator:
-            type: "basic"
-            challenge: false
-          authentication_backend:
-            type: "intern"
-        saml_auth_domain:
-          http_enabled: true
-          transport_enabled: false
-          order: 1
-          http_authenticator:
-            type: saml
-            challenge: true
-            config:
-              idp:
-                metadata_file: '/etc/wazuh-indexer/opensearch-security/wazuh_authentik_meta.xml'
-                entity_id: 'wazuh-saml'
-              sp:
-                entity_id: 'wazuh-saml'
-              kibana_url: https://<WAZUH_DASHBOARD_URL>
-              roles_key: Roles
-              exchange_key: 'b1d6dd32753374557dcf92e241.......'
-          authentication_backend:
-            type: noop
+          authc:
+            ...
+            basic_internal_auth_domain:
+              description: "Authenticate via HTTP Basic against internal users database"
+              http_enabled: true
+              transport_enabled: true
+              order: 0
+              http_authenticator:
+                type: "basic"
+                challenge: false
+              authentication_backend:
+                type: "intern"
+            saml_auth_domain:
+              http_enabled: true
+              transport_enabled: false
+              order: 1
+              http_authenticator:
+                type: saml
+                challenge: true
+                config:
+                  idp:
+                    metadata_file: '/etc/wazuh-indexer/opensearch-security/wazuh_authentik_meta.xml'
+                    entity_id: 'wazuh-saml'
+                  sp:
+                    entity_id: 'wazuh-saml'
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
+                  roles_key: Roles
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
+              authentication_backend:
+                type: noop
 
    Ensure to change the following parameters to their corresponding value:
 

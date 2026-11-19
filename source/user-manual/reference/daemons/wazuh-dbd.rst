@@ -10,6 +10,10 @@ wazuh-dbd
 
 The ``wazuh-dbd`` program inserts the alert logs into a database.  These alerts can be inserted into either postgresql or mysql.
 
+.. note::
+
+   Wazuh 4.14.7 and later don't include ``wazuh-dbd``. This section applies to Wazuh 4.14.6 and earlier.
+
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+

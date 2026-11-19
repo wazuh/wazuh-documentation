@@ -99,10 +99,10 @@ Sample configuration
 
 .. code-block:: xml
 
-    <agentless>
-      <type>ssh_integrity_check_linux</type>
-      <frequency>300</frequency>
-      <host>admin@192.168.1.108</host>
-      <state>periodic_diff</state>
-      <arguments>/etc /usr/bin /usr/sbin</arguments>
-    </agentless>
+   <agentless>
+     <type>ssh_integrity_check_linux</type>
+     <frequency>300</frequency>
+     <host>admin@192.168.1.108</host>
+     <state>periodic</state>
+     <arguments>/etc /usr/bin /usr/sbin</arguments>
+   </agentless>

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how the Wazuh Syscollector module supports NIST 800-53 compliance by collecting detailed system inventory data, including installed applications, processes, and open ports on monitored endpoints.
+   :description: Learn how the Wazuh Syscollector module supports NIST 800-53 compliance by collecting system inventory data on monitored endpoints.
 
 System inventory
 ================
@@ -25,13 +25,13 @@ Using the Wazuh Syscollector module for this use case, you can see all packages 
 
    .. tabs::
 
-      .. group-tab:: PowerShell (as an administrator)
+      .. group-tab:: PowerShell (as an administrator):
 
          .. code-block:: powershell
 
             > Restart-Service -Name wazuh
 
-      .. group-tab:: CMD (as an administrator)
+      .. group-tab:: CMD (as an administrator):
 
          .. code-block:: doscon
 

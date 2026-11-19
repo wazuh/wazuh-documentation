@@ -25,9 +25,9 @@ Before we get started with Puppet, confirm that the following network requiremen
     .. toctree::
         :maxdepth: 1
 
-        install-puppet-master.rst
-        install-puppet-agent.rst        
-        setup-puppet-certificates.rst
+        install-puppet-master
+        install-puppet-agent
+        setup-puppet-certificates
         
 
 This section explains how to install puppet-master. Follow this link to check the `official installation guide <https://puppet.com/docs/puppetserver/latest/install_from_packages.html>`_.

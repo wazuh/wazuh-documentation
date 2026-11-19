@@ -466,13 +466,13 @@
       background-repeat: no-repeat;
       background-position: bottom;
       color: white;
-      display: flex;
-      padding: 28px;
+      // Block rather than flex, so a space between code and the words around
+      // it stays. The vertical padding centers a one-line title in the banner.
+      display: block;
+      padding: 32px 28px;
       border-radius: 26px;
       min-height: 100px;
       width: 100%;
-      align-items: center;
-      flex-direction: row;
       margin-bottom: 30px;
       @include media-min (sm) {
       margin-left: -28px;
@@ -667,4 +667,38 @@
       }
     }
   }
+}
+
+/* Code in titles and navigation -------------------------------------------- */
+
+// Code in a page title, a section heading, the breadcrumbs, the left index or
+// the On this page menu keeps a monospace font, so it still reads as code, but
+// takes the size, weight and color of the text around it instead of the boxed
+// style of code in body text. The ID in the selector list makes it win over
+// the theme colors.
+:is(h1, h2, h3, h4, h5, h6, #breadcrumbs, #global-toc, #local-toc) code {
+  padding: 0;
+  font-family: "Fira Mono", monospace;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+// In the breadcrumbs, the left index and the On this page menu, code keeps the
+// color of code in body text, so it stands out from the entry names around it.
+.light-theme :is(#breadcrumbs, #global-toc, #local-toc) code {
+  color: $light-color-highlight-inline-text;
+}
+
+.dark-theme :is(#breadcrumbs, #global-toc, #local-toc) code {
+  color: $dark-color-highlight-inline-text;
+}
+
+// The page title sits on a blue banner in both themes, so its code always uses
+// the light purple that reads on blue.
+#central-column h1 code {
+  color: $dark-color-highlight-inline-text;
 }

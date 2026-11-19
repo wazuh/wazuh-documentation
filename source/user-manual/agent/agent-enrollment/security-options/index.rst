@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: You can implement additional security measures in the enrollment process to authenticate the endpoint to the Wazuh manager and vice versa. Learn more in this section of the documentation.
+   :description: You can implement additional security measures in the enrollment process to authenticate the endpoint and the Wazuh manager.
 
 Additional security options
 ===========================

@@ -29,6 +29,7 @@ Use cases
       .. code-block:: xml
 
          <active-response>
+            <disabled>no</disabled>
             <command>firewall-drop</command>
             <location>local</location>
             <rules_id>5710</rules_id>

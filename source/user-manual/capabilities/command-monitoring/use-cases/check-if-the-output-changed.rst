@@ -52,7 +52,7 @@ Perform the following steps on the Linux endpoint.
 Wazuh server
 ^^^^^^^^^^^^
 
-Wazuh has an out-of-the-box rule with ID ``533`` that generates an alert when there is a change in the ``netstat`` listening ports. The rule is defined below and is found in the `Wazuh GitHub repository <https://github.com/wazuh/wazuh-ruleset/blob/master/rules/0015-ossec_rules.xml>`__.
+Wazuh has an out-of-the-box rule with ID ``533`` that generates an alert when there is a change in the ``netstat`` listening ports. The rule is defined below and is found in the `Wazuh GitHub repository <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/ruleset/rules/0015-ossec_rules.xml>`__.
 
    .. code-block:: xml
 

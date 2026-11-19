@@ -149,7 +149,7 @@ When a user creates a new instance in EC2, a CloudTrail event is generated. As p
    :align: center
    :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/ec2/1.2.run-a new-instance-in-ec2.png
+.. thumbnail:: /images/cloud-security/aws/ec2/1.2.run-a-new-instance-in-ec2.png
    :align: center
    :width: 80%
 

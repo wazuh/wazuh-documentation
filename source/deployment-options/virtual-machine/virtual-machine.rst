@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format.  It includes the Amazon Linux 2023 operating system and the Wazuh central components.
+   :description: Wazuh provides a pre-built virtual machine image in OVA format, including Amazon Linux 2023 and the Wazuh central components.
 
 Virtual machine (VM)
 ====================
@@ -90,6 +90,10 @@ It might take a few seconds to minutes for the Wazuh dashboard to complete initi
   .. code-block:: none
 
      ip a
+
+.. warning::
+
+   Every copy of the Wazuh virtual machine ships with the same default credentials, including ``wazuh-user``:``wazuh`` and ``admin``:``admin``. We highly recommend changing the Wazuh passwords and the ``wazuh-user`` system password on first access. To change the Wazuh passwords, see :doc:`Password management </user-manual/user-administration/password-management>`. To change the system password, run ``passwd`` as ``wazuh-user``.
 
 
 Configuration files

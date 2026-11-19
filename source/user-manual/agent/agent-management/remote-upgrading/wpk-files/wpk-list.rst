@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: WPK List.
+   :description: A list of WPK package files available for remotely upgrading the Wazuh agent, by operating system and architecture.
 
 WPK List
 ========

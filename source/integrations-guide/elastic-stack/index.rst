@@ -332,7 +332,7 @@ The Logstash pipeline requires access to your Elasticsearch credentials.
 
 We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/keystore.html>`__ to securely store these values.
 
-#. Run the following commands on your Logstash server to set a keystore password:
+#. Run the following commands on your Wazuh server to set a keystore password:
 
    .. code-block:: console
       :emphasize-lines: 2,3

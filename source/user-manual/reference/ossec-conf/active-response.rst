@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn about local configuration (ossec.conf) and how to configure the Active Response. Check out the options and a sample configuration in this section of the Wazuh documentation.
+  :description: Learn about local configuration (ossec.conf) and how to configure Active Response, including options and a sample configuration.
   
 .. _reference_ossec_active_response:
 

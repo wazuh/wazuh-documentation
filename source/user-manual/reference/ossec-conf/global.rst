@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The ossec.conf file is the main configuration file on the Wazuh manager and plays an important role on the agents. Learn more about the global configuration here.
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and plays an important role on the agents.
 
 .. _reference_ossec_global:
 
@@ -174,10 +174,12 @@ email_log_source
 This selects the alert file to be read from.
 
 +--------------------+---------------------------+
-| **Default value**  | alerts.log                |
+| **Default value**  | alerts.json               |
 +--------------------+---------------------------+
 | **Allowed values** | alerts.log or alerts.json |
 +--------------------+---------------------------+
+
+The ``ossec.conf`` file installed with the Wazuh manager sets this option to ``alerts.log``.
 
 custom_alert_output
 ^^^^^^^^^^^^^^^^^^^
@@ -466,7 +468,7 @@ agents_disconnection_alert_time
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This sets the time after which an alert is generated since an agent was considered as disconnected.
-As this is a time-lapse after an agent is considered as disconnected because of the :ref:`disconnection time<reference_agents_disconnection_time>`, the minimum time frame to produce an alert taking the default values is 2m and 20s.
+As this is a time-lapse after an agent is considered as disconnected because of the :ref:`disconnection time<reference_agents_disconnection_time>`, the minimum time frame to produce an alert taking the default values is 15m.
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0s                                                                                                                                                                                                                                            |

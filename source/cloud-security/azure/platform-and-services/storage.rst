@@ -115,7 +115,7 @@ Here is an example of Microsoft Entra ID activity monitoring using the above con
 Create a new user
 ~~~~~~~~~~~~~~~~~
 
-Create a new user in your Microsoft Azure environment using Microsoft Entra ID. A few minutes after creating the user, a new log will be available in a container named ``insights-activity-logs`` inside the Storage account specified when configuring the Activity log export.
+Create a new user in your Microsoft Azure environment using Microsoft Entra ID. A few minutes after creating the user, a new log will be available in a container named ``insights-logs-auditlogs`` inside the Storage account specified when configuring the Activity log export.
 
 Please refer to the :ref:`creating a user <log_analytics_use_case_creating_user>` section under the Azure Log Analytics use case.
 

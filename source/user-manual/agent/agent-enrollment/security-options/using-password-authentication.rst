@@ -144,10 +144,10 @@ Windows
 
 Follow these steps to enroll a Windows endpoint with password authentication:
 
-The Wazuh agent installation directory depends on the host's architecture.
+The Wazuh agent is a 32-bit application, so its installation directory depends on the architecture of the Windows operating system:
 
--  ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
--  ``C:\Program Files\ossec-agent`` for 32-bit systems.
+-  ``C:\Program Files (x86)\ossec-agent`` on 64-bit Windows.
+-  ``C:\Program Files\ossec-agent`` on 32-bit Windows.
 
 #. Launch PowerShell as an administrator.
 
@@ -157,13 +157,13 @@ The Wazuh agent installation directory depends on the host's architecture.
 
    .. code-block:: console
 
-      # echo “<CUSTOM_PASSWORD>” > "C:\Program Files\ossec-agent\authd.pass"
+      # echo "<CUSTOM_PASSWORD>" > "C:\Program Files\ossec-agent\authd.pass"
 
    For 64-bit systems
 
    .. code-block:: console
 
-      # echo “<CUSTOM_PASSWORD>” > "C:\Program Files (x86)\ossec-agent\authd.pass"
+      # echo "<CUSTOM_PASSWORD>" > "C:\Program Files (x86)\ossec-agent\authd.pass"
 
 #. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``C:\Program Files (x86)\ossec-agent\authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file.
 
@@ -193,14 +193,14 @@ The Wazuh agent installation directory depends on the host's architecture.
 
          .. code-block:: pwsh-session
 
-            # Restart-Service -Name wazuh
+            > Restart-Service -Name wazuh
 
       .. group-tab:: CMD (as an administrator):
 
          .. code-block:: doscon
 
-            # net stop wazuh
-            # net start wazuh
+            > net stop wazuh
+            > net start wazuh
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
@@ -234,7 +234,7 @@ Follow the steps below  to enroll a macOS endpoint with password authentication:
 
       .. code-block:: none
 
-         -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /Library/Ossec/etc/authd.pass
+         -rw-r----- 1 root wazuh 18 Jan 11 13:03 /Library/Ossec/etc/authd.pass
 
 #. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``/Library/Ossec/etc/authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file.
 

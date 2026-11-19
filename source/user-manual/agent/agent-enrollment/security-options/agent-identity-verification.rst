@@ -134,10 +134,10 @@ Windows
 
 Follow these steps to enroll a Windows endpoint by using certificates for the Wazuh agent verification:
 
-The Wazuh agent installation directory depends on the architecture of the host.
+The Wazuh agent is a 32-bit application, so its installation directory depends on the architecture of the Windows operating system:
 
--  ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
--  ``C:\Program Files\ossec-agent`` for 32-bit systems.
+-  ``C:\Program Files (x86)\ossec-agent`` on 64-bit Windows.
+-  ``C:\Program Files\ossec-agent`` on 32-bit Windows.
 
 #. Ensure that the signed SSL certificate and key files (``sslagent.cert`` and ``sslagent.key``) have been copied to the endpoint.
 
@@ -168,14 +168,14 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
          .. code-block:: pwsh-session
 
-            # Restart-Service -Name wazuh
+            > Restart-Service -Name wazuh
 
       .. group-tab:: CMD (as an administrator):
 
          .. code-block:: doscon
 
-            # net stop wazuh
-            # net start wazuh
+            > net stop wazuh
+            > net start wazuh
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to integrate Wazuh with the Google Cloud Pub/Sub messaging and ingestion service using the Wazuh module for Google Cloud Pub/Sub in this section of the documentation.
+   :description: Learn how to integrate Wazuh with Google Cloud Pub/Sub using the Wazuh module for Google Cloud Pub/Sub.
   
 Monitoring Google Cloud Pub/Sub
 ===============================
@@ -110,6 +110,10 @@ Follow the next steps to configure the Wazuh module for Google Cloud Pub/Sub on 
    -  ``<credential_file>`` represents the path to the Google Cloud credentials file <AUTHENTICATION_FILE_NAME> represents the path to the Google Cloud credentials file. Ensure the JSON extension is present after the file. If you do not have credentials, follow the steps in the :doc:`configuring Google Cloud credentials </cloud-security/gcp/prerequisites/credentials>` section. 
 
    See the :doc:`gcp-pubsub </user-manual/reference/ossec-conf/gcp-pubsub>` section for more information on configuring the Wazuh module for Google Pub/Sub.
+
+   .. note::
+
+      The Wazuh module for Google Cloud Pub/Sub supports only one ``gcp-pubsub`` block per configuration file. To read more than one subscription, configure each one on a different Wazuh agent.
 
 #. Restart the Wazuh manager or agent service to apply the changes:
 

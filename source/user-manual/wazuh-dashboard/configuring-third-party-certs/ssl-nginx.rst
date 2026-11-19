@@ -120,12 +120,12 @@ Configure the proxy and the certificates
       opensearch.ssl.verificationMode: certificate
       # opensearch.username: kibanaserver
       # opensearch.password: kibanaserver
-      opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
+      opensearch.requestHeadersAllowlist: ["securitytenant","Authorization"]
       opensearch_security.multitenancy.enabled: false
       opensearch_security.readonly_mode.roles: ["kibana_read_only"]
       server.ssl.enabled: true
-      server.ssl.key: "/etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem"
-      server.ssl.certificate: "/etc/wazuh-dashboard/certs/wazuh-dashboard.pem"
+      server.ssl.key: "/etc/wazuh-dashboard/certs/dashboard-key.pem"
+      server.ssl.certificate: "/etc/wazuh-dashboard/certs/dashboard.pem"
       opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
       uiSettings.overrides.defaultRoute: /app/wazuh
       opensearch_security.cookie.secure: true
@@ -160,12 +160,12 @@ Configure the proxy and the certificates
    -  ``<WAZUH_DASHBOARD_IP_ADDRESS>`` with your Wazuh dashboard IP address.
    -  ``<PORT_NUMBER>`` with your new port number.
 
-#. Restart the Wazuh dashboard and the Wazuh server:
+#. Restart the Wazuh dashboard and NGINX:
 
    .. code-block:: console
 
       # systemctl restart wazuh-dashboard
-      # systemctl restart wazuh-manager
+      # systemctl restart nginx
 
 #. Use certbot to generate an SSL certificate:
 

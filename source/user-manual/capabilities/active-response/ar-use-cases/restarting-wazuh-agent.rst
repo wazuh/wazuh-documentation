@@ -33,7 +33,7 @@ Wazuh server
 
    -  ``<name>``: Sets a name for the command. In this case, ``restart-wazuh``.
    -  ``<executable>``: Specifies the active response script or executable that must run after a trigger. In this case, it’s the ``restart-wazuh`` executable.
-   -  ``<timeout_allowed>``: Allows a timeout after a period of time. This tag is set to no here, which represents a stateless active response.
+   -  ``<timeout_allowed>``: Not set in this block, so it takes its default value ``no``. This makes it a stateless active response.
 
 #. Add the ``<active-response>`` block below to the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file:
 
@@ -48,6 +48,7 @@ Wazuh server
         </active-response>
       </ossec_config>
 
+   -  ``<disabled>``: Set to ``no`` to enable this active response.
    -  ``<command>``: Specifies the command to configure. This is the command name ``restart-wazuh`` defined in the previous step.
    -  ``<location>``: Specifies where the command executes. Using the ``local`` value here means that the command executes on the monitored endpoint where the trigger event occurs.
    -  ``<rules_id>``: The Active Response module executes the command if rule ID ``100009`` fires.

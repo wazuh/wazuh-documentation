@@ -141,4 +141,4 @@ Troubleshooting
 
    **Location**: Suricata log -  ``/var/log/suricata/suricata.log``
 
-   **Resolution**: To solve this issue, check the name of your network interface and configure it accordingly in the ``/etc/sysconfig/suricata`` and ``/etc/suricata/suricata.yaml`` files.
+   **Resolution**: To solve this issue, check the name of your network interface and configure it accordingly in the ``/etc/default/suricata`` and ``/etc/suricata/suricata.yaml`` files.

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh server API is an open source RESTful API that enables secure interaction with the Wazuh server infrastructure. Learn more in this section of the documentation.
+   :description: The Wazuh server API is an open source RESTful API that enables secure interaction with the Wazuh server infrastructure.
 
 Wazuh server API
 ================
