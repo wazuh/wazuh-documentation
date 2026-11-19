@@ -52,6 +52,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Corrected the default values and allowed values of `notify_time`, `logcollector.max_lines`, `skip_nfs`, and the GitHub and Office 365 `interval` options, the *gcp-bucket* example interval, the `discard_regex` field name in the *wodle name="aws-s3"* reference, and the macOS tab name in the *syscheck* reference. Clarified the *auth*, *remote*, *socket*, *syscheck* and *syslog_output* reference descriptions and the *wazuh-logcollector.state* file paths. ([#10778](https://github.com/wazuh/wazuh-documentation/pull/10778))
 - **Post-release**: Standardized the Windows agent service name in the restart commands, documented when remote commands are needed for policies pushed from the Wazuh server, added the starting check ID for custom policies, and updated the *Available SCA policies* table and the use case examples in the *Security Configuration Assessment* documentation. ([#10779](https://github.com/wazuh/wazuh-documentation/pull/10779))
 - **Post-release**: Removed the `<options>` line, which has no effect on PagerDuty incidents, from the PagerDuty example in the *integration* reference documentation. ([#10803](https://github.com/wazuh/wazuh-documentation/pull/10803))
+- **Post-release**: Fixed a leftover file-based term in the *Windows Registry monitoring* documentation's synchronization description, correcting "file inventory" to "registry inventory". ([#10135](https://github.com/wazuh/wazuh-documentation/pull/10135))
 
 ## [v4.14.9]
 
