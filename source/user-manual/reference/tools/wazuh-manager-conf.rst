@@ -73,7 +73,7 @@ Exit codes
 Examples
 --------
 
-Validate the configuration file. The command prints nothing when the file is valid:
+Validate the configuration file. When the file is valid, the command prints ``/etc/wazuh-manager/wazuh-manager.conf: configuration is valid.``:
 
 .. code-block:: console
 
