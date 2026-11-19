@@ -30,52 +30,86 @@ FIM findings: fields correspondence
 
 The following table shows a subset of FIM event fields and their corresponding Wazuh Common Schema (WCS) fields as they appear in a finding. Refer to `WCS fields <https://github.com/wazuh/wazuh-indexer-plugins/blob/main/wcs/stateless/events/main/docs/fields.csv>`__ for the complete list.
 
-+--------------------+-----------------------------------+---------------------------------------------+
-| Field Name         | WCS field                         | Field description                           |
-+====================+===================================+=============================================+
-| ``agent.id``       | ``wazuh.agent.id``                | Unique identifier of the Wazuh agent.       |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``agent.name``     | ``wazuh.agent.name``              | Name assigned to the agent.                 |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``agent.version``  | ``wazuh.agent.version``           | Version of the Wazuh agent.                 |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``agent.arch``     | ``wazuh.agent.host.architecture`` | Host system architecture.                   |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``cluster.name``   | ``wazuh.cluster.name``            | Name of the Wazuh cluster.                  |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``cluster.node``   | ``wazuh.cluster.node``            | Cluster node where the event originated.    |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``path``           | ``file.path``                     | Absolute path of the monitored file.        |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``size``           | ``file.size``                     | File size in bytes.                         |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``mtime``          | ``file.mtime``                    | Last modification timestamp.                |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``inode``          | ``file.inode``                    | Inode number of the file.                   |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``uid``            | ``file.uid``                      | User ID of the file owner.                  |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``owner``          | ``file.owner``                    | Username of the file owner.                 |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``gid``            | ``file.gid``                      | Group ID of the file.                       |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``group``          | ``file.group``                    | Group name owning the file.                 |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``permissions``    | ``file.mode``                     | File permissions, for example rw-r--r--.    |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``attributes``     | ``file.attributes``               | File attributes (system‑dependent).         |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``device``         | ``file.device``                   | Device associated with the file.            |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``md5``            | ``file.hash.md5``                 | MD5 hash of the file contents.              |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``sha1``           | ``file.hash.sha1``                | SHA‑1 hash of the file contents.            |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``sha256``         | ``file.hash.sha256``              | SHA‑256 hash of the file contents.          |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``created``        | ``event.created``                 | Time when the FIM module detected the       |
-|                    |                                   | change.                                     |
-+--------------------+-----------------------------------+---------------------------------------------+
++--------------------------+-----------------------------------+---------------------------------------------+
+| FIM event field          | WCS field                         | Field description                           |
++==========================+===================================+=============================================+
+| ``agent.id``             | ``wazuh.agent.id``                | Unique identifier of the Wazuh agent.       |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``agent.name``           | ``wazuh.agent.name``              | Name assigned to the agent.                 |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``agent.version``        | ``wazuh.agent.version``           | Version of the Wazuh agent.                 |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``agent.arch``           | ``wazuh.agent.host.architecture`` | Host system architecture.                   |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``cluster.name``         | ``wazuh.cluster.name``            | Name of the Wazuh cluster.                  |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``cluster.node``         | ``wazuh.cluster.node``            | Cluster node where the event originated.    |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``path``                 | ``file.path``                     | Absolute path of the monitored file.        |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``size``                 | ``file.size``                     | File size in bytes.                         |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``mtime``                | ``file.mtime``                    | Last modification timestamp.                |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``inode``                | ``file.inode``                    | Inode number of the file.                   |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``uid``                  | ``file.uid``                      | User ID of the file owner.                  |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``owner``                | ``file.owner``                    | Username of the file owner.                 |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``gid``                  | ``file.gid``                      | Group ID of the file.                       |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``group``                | ``file.group``                    | Group name owning the file.                 |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``permissions``          | ``file.mode``                     | File permissions, for example, rw-r--r--.   |
+|                          |                                   | On Windows, the access control list (ACL)   |
+|                          |                                   | of the file.                                |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``mode``                 | ``event.reason``                  | How the FIM module detected the change:     |
+|                          |                                   | scheduled, realtime, or whodata.            |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``attributes``           | ``file.attributes``               | File attributes (system‑dependent).         |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``device``               | ``file.device``                   | Device associated with the file.            |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``md5``                  | ``file.hash.md5``                 | MD5 hash of the file contents.              |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``sha1``                 | ``file.hash.sha1``                | SHA‑1 hash of the file contents.            |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``sha256``               | ``file.hash.sha256``              | SHA‑256 hash of the file contents.          |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``created``              | ``event.created``                 | Time when the FIM module detected the       |
+|                          |                                   | change.                                     |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``type``                 | ``event.action``                  | Type of change: created, modified, or       |
+|                          |                                   | deleted.                                    |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.user_name``      | ``process.real_user.name``        | Name of the user who ran the process that   |
+|                          |                                   | changed the file. Who-data mode only.       |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.user_id``        | ``process.real_user.id``          | ID of that user. On Windows, it holds the   |
+|                          |                                   | user's security identifier (SID). Who-data  |
+|                          |                                   | mode only.                                  |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.process_name``   | ``process.executable``            | Process that changed the file. It holds the |
+|                          |                                   | full path on Windows and in Linux audit     |
+|                          |                                   | mode, and only the process name in Linux    |
+|                          |                                   | eBPF mode. Who-data mode only.              |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.process_name``   | ``process.name``                  | File name of the process that changed the   |
+|                          |                                   | file, for example, ``powershell.exe``.      |
+|                          |                                   | Who-data mode only.                         |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.process_id``     | ``process.pid``                   | ID of the process that changed the file.    |
+|                          |                                   | Who-data mode only.                         |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.audit_name``     | ``user.name``                     | Login name of the user who started the      |
+|                          |                                   | session, for example, the user who ran      |
+|                          |                                   | ``sudo``. Linux who-data mode only.         |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.effective_name`` | ``user.effective.name``           | Effective user of the process. Linux        |
+|                          |                                   | who-data mode only.                         |
++--------------------------+-----------------------------------+---------------------------------------------+
 
 Custom FIM rules example
 ----------------------------
@@ -110,7 +144,7 @@ An integration is a logical grouping of decoders, KVDBs, and rules that belong t
 
 #. Go to **Ruleset management** → **Overview** → **Integrations** → **Actions** → **Create**. Make sure the space selector reads Draft.
 
-#. In the form, enter the following values that we use in this example. Make sure the integration is **Enabled**, then click **Create integration**:
+#. In the form, enter the following values. Make sure the integration is **Enabled**, then click **Create integration**:
 
    -  **Title**: ``wazuh-fim-custom``
    -  **Category**: ``System Activity``
@@ -153,16 +187,16 @@ Wazuh rules define the detection logic for identifying relevant security activit
           event.action: deleted
       metadata:
         title: Wazuh FIM - Monitored file deleted by {{process.real_user.name}} with {{process.name}}
-        author: Wazuh, Inc.
+        author: Security Team
         description: >-
           Detects file deletion events reported by Wazuh File Integrity Monitoring
           (FIM). A monitored file was removed, which could indicate unauthorized
           deletion, anti-forensics activity, or data destruction.
         references:
         - >-
-          https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/index.html
+          https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/file-integrity/index.html
         - >-
-          https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/syscheck.html
+          https://documentation.wazuh.com/5.0-rc/user-manual/reference/ossec-conf/syscheck.html
         documentation: ''
         supports:
         - ''
@@ -226,6 +260,10 @@ Wazuh rules define the detection logic for identifying relevant security activit
         - CC7.2
         - CC7.3
 
+   The rule title uses two fields that the FIM module fills only in who-data mode: ``process.real_user.name``, the user who ran the process, and ``process.name``, the process that deleted the file. For this reason, the Windows endpoint configuration below monitors ``C:\test`` with ``whodata="yes"``. On Linux, ``process.real_user.name`` holds the real user of the process, which is ``root`` when a user runs the command with ``sudo``. The login user is in ``user.name``.
+
+   The ``documentation`` and ``supports`` keys are optional. You can leave them empty, as in this example, or delete them.
+
 #. Click **Create rule** to complete the rule creation process.
 
    .. thumbnail:: /images/manual/fim/create-rule.png
@@ -239,7 +277,7 @@ Promote the rule from the draft to the test space
 
 In the draft space, you create and refine your integrations, decoders, and rules. Promoting this rule to the test space allows you to validate it before introducing it to production. Make sure the space selector reads **Draft**, then follow these steps to promote the content.
 
-#. Go to **Ruleset management** → **Overview**, and click **Actions** → **Promote**.
+#. Go to **Ruleset management** → **Overview**, and click **Space actions** → **Promote**. The **Promote** page lists every pending change in the Draft space, not only this rule.
 
    .. thumbnail:: /images/manual/fim/promote-draft.png
      :title: Promote draft
@@ -247,7 +285,7 @@ In the draft space, you create and refine your integrations, decoders, and rules
      :align: center
      :width: 80%
 
-#. Click **Promote**, type the confirmation message when prompted, and click **Promote** again.
+#. Click **Promote**, type ``promote`` in the confirmation dialog, and click **Promote** again.
 
    .. thumbnail:: /images/manual/fim/promote-draft-confirmation.png
      :title: Promote confirmation
@@ -258,11 +296,11 @@ In the draft space, you create and refine your integrations, decoders, and rules
 Promote the rule from test to custom
 """"""""""""""""""""""""""""""""""""""
 
-Promoting your rule makes it available for use in production environments, where the Wazuh data analysis engine can process and analyze incoming events. Make sure the space selector reads **Test**, then follow these steps to promote the rule.
+Promoting your rule makes it available in production, where detectors can use it to analyze incoming events. Make sure the space selector reads **Test**, then follow these steps to promote the rule.
 
 #. Go to **Ruleset management → Overview**.
 
-#. Click **Actions** → **Promote**, type the confirmation message, and click **Promote**.
+#. Click **Space actions** → **Promote**, then click **Promote**. Type ``promote`` in the confirmation dialog, and click **Promote** again.
 
    .. thumbnail:: /images/manual/fim/promote-test.png
      :title: Promote test
@@ -276,12 +314,12 @@ Promoting your rule makes it available for use in production environments, where
      :align: center
      :width: 80%
 
-#. After promotion, the integration becomes active and is used by the Wazuh data analysis engine to process incoming FIM events and trigger findings when rule conditions are met. Promotion can take a few minutes to take effect. If the rule doesn't appear in the rule list of the detector, wait and reload the page.
+#. After promotion, the integration becomes active, and detectors can use its rules to generate findings from incoming FIM events. Promotion can take a few minutes to take effect. Changes apply to events within about 2 minutes. If the rule doesn't appear in the rule list of the detector, wait and reload the page.
 
 Create a detector
 """"""""""""""""""""
 
-A detector is the scheduled job that executes your rule. It scans indexed events from monitored endpoints at a defined interval, applies the selected rules, and generates findings when matches occur. Follow these steps to create a detector.
+A detector is the scheduled job that executes your rule. It scans indexed events from monitored endpoints at a defined interval, applies the selected rules, and generates findings when matches occur. Follow these steps to create a detector. Create the detector before you run the test. The detector checks only the events indexed after it starts.
 
 #. Go to **Ruleset management** → **Detection** → **Detectors** → **Create detector**.
 
@@ -323,7 +361,7 @@ Perform the following steps to configure the Wazuh FIM module to monitor file de
 
       > mkdir C:\test
 
-#. Edit the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the Wazuh agent. Add the ``C:\test`` directory for monitoring inside the ``<ossec_config>`` block:
+#. Edit the Wazuh agent configuration file ``C:\Program Files (x86)\ossec-agent\ossec.conf``. Add the ``C:\test`` directory for monitoring inside the ``<ossec_config>`` block:
 
    .. code-block:: xml
 
@@ -347,7 +385,7 @@ Test the configuration
 Visualize the findings
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Navigate to **Endpoint security** → **File Integrity Monitoring → Findings** on the Wazuh dashboard to view the finding generated when files are deleted in the monitored directory.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when files are deleted in the monitored directory.
 
 .. thumbnail:: /images/manual/fim/deleted-file-finding.png
   :title: Deleted file finding

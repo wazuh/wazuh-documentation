@@ -82,7 +82,7 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
 
       # /var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE>
 
-   If the Wazuh agent already has a key, add ``--force-enroll``. The Wazuh agent is enrolled again and gets a new ID. The Wazuh manager replaces the existing Wazuh agent only as its ``<auth><force>`` settings allow. By default, the existing Wazuh agent must have been disconnected for more than 1 hour and registered more than 1 hour ago. Otherwise the Wazuh manager refuses the enrollment as a duplicate name or IP address (error 9008 or 9007), and ``wazuh-agent-auth`` exits with code 4.
+   If the Wazuh agent already has a key, add ``--force-enroll``. The Wazuh agent is enrolled again and gets a new ID. The Wazuh manager replaces the existing Wazuh agent only as its ``<auth><force>`` settings allow. By default, the existing Wazuh agent must have been disconnected for more than 1 hour and registered more than 1 hour ago. Otherwise the Wazuh manager refuses the enrollment as a duplicate name or IP address (error 9008 or 9007), and ``wazuh-agent-auth`` exits with code 4. To enroll the Wazuh agent again right away, remove it on the Wazuh manager first, as :doc:`Remove agents </user-manual/agent/agent-management/remove-agents>` describes.
 
 #. Start the Wazuh agent:
 
@@ -97,7 +97,7 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
 
    .. code-block:: pwsh-session
 
-      > Start-Service -Name wazuh
+      > Start-Service -Name WazuhSvc
 
    macOS:
 
@@ -329,14 +329,14 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
          .. code-block:: pwsh-session
 
-            > Restart-Service -Name wazuh
+            > Restart-Service -Name WazuhSvc
 
       .. group-tab:: CMD (as an administrator)
 
          .. code-block:: doscon
 
-            > net stop wazuh
-            > net start wazuh
+            > net stop WazuhSvc
+            > net start WazuhSvc
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
