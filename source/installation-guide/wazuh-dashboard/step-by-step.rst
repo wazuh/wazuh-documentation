@@ -28,7 +28,7 @@ Installing package dependencies
 
          .. code-block:: console
 
-            # apt-get install -y tar curl
+            # apt-get update && apt-get install -y tar curl
 
       .. group-tab:: Yum
 
@@ -116,7 +116,7 @@ Do this **before installing the package**. The package then uses these passwords
 
    If the Wazuh indexer and Wazuh manager are already installed on this host, skip this section. Do not extract the archive or place any files manually. The Wazuh dashboard package retrieves the passwords and certificates from their export directories during installation and issues its own certificate.
 
-   Make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
+   On any other host, make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
 
 #. Extract the archive, and place the passwords, the Wazuh indexer root CA, and the Wazuh manager CA. The archive's ``root-ca.pem`` is the Wazuh indexer root CA, the same certificate as ``/etc/wazuh-indexer/export/ca.pem`` on the first Wazuh indexer node:
 
@@ -193,7 +193,9 @@ Configuring the Wazuh dashboard
 
 #. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file. The package ships it pre-filled with single-host values, so change only ``opensearch.hosts`` and ``wazuh_core.hosts.default.url``, and leave the rest of the file as shipped:
 
-   #. ``server.host``: The package sets ``0.0.0.0``, which accepts connections on every address of the host. You don't need to change it.
+   .. note::
+
+      ``server.host``: The package sets ``0.0.0.0``, which accepts connections on every address of the host. You don't need to change it.
 
    #. ``opensearch.hosts``: The package sets ``https://localhost:9200``. Replace it with the URL of the Wazuh indexer node, using the address you set in ``network.host`` in :ref:`Configuring the Wazuh indexer <wazuh_indexer_configuring>`. If you set ``network.host`` to one IP address, the Wazuh indexer listens only on that address. Then ``localhost`` fails, even when the Wazuh indexer runs on this host. If you left the package default, ``https://localhost:9200`` works.
 
@@ -215,7 +217,7 @@ Configuring the Wazuh dashboard
 
    #. ``wazuh_core.hosts.default.url``: The Wazuh manager master node. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node. If the Wazuh manager master node is on this host, keep the shipped value, ``https://localhost``.
 
-   #. Edit the block that the package shipped, and don't add a second one or a password line. The host in ``url`` must be in the Wazuh manager API certificate. To list its addresses, run this command on the master node:
+      Edit the block that the package shipped, and don't add a second one or a password line. The host in ``url`` must be in the Wazuh manager API certificate. To list its addresses, run this command on the master node:
 
       .. code-block:: console
 
@@ -232,16 +234,16 @@ Configuring the Wazuh dashboard
              run_as: true
              ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-      On a host with firewalld, open port 443/TCP for the browsers:
+#. On a host with firewalld, open port 443/TCP for the browsers:
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # firewall-cmd --permanent --add-port=443/tcp
-         # firewall-cmd --reload
+      # firewall-cmd --permanent --add-port=443/tcp
+      # firewall-cmd --reload
 
-      .. note::
+   .. note::
 
-         Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and make sure the necessary ports are open.
+      Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and make sure the necessary ports are open.
 
 Starting the Wazuh dashboard service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

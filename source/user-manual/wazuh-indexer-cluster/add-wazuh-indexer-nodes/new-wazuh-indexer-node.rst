@@ -27,7 +27,7 @@ Once the certificates have been created and copied to the new Wazuh indexer node
 
          .. code-block:: console
 
-            # apt-get install -y debconf adduser procps curl
+            # apt-get update && apt-get install -y debconf adduser procps curl
 
 #. Place the passwords, the root CA certificate and its private key, and the certificates of this node before you install the package. Run the following commands in the directory that holds the archive you copied to this node. Replace ``<NEW_WAZUH_INDEXER_NODE_NAME>`` with the name of the new node in ``config.yml``. The package then uses these files and generates nothing:
 
@@ -72,7 +72,7 @@ Once the certificates have been created and copied to the new Wazuh indexer node
 
          .. code-block:: console
 
-            # apt-get install -y gnupg apt-transport-https curl
+            # apt-get update && apt-get install -y gnupg apt-transport-https curl
             # curl -s https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
             # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list
             # apt-get update
