@@ -33,8 +33,6 @@ The usage metrics appear on the details page, below the **Settings** card. Each 
    * - **Events per second (EPS)**
      - A chart of the events per second over the last 24 hours, compared to the **EPS** setting. A **Limit exceeded** pill appears when the rate went above the EPS setting during that period.
 
-.. TODO: Confirm with engineering that the Agents metric counts all registered agents (not only active ones) against the Active Agents setting.
-
 When a limit is reached
 -----------------------
 

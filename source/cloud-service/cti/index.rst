@@ -8,8 +8,6 @@
 Wazuh CTI
 =========
 
-.. TODO: Confirm with engineering that the CTI section of the sidebar (Deployments and Feeds) is visible in the production Wazuh Console at release time.
-
 Wazuh Console lets you connect the Wazuh deployments that you run on your own infrastructure to Wazuh Cyber Threat Intelligence (CTI), and manage the feeds they receive. This section describes how to register a deployment, manage your deployments, and buy feed subscriptions.
 
 Wazuh CTI provides detection content, indicators of compromise (IoCs), and vulnerability intelligence to Wazuh. To learn how Wazuh uses this content, see :doc:`Wazuh CTI </wazuh-cti/index>`.

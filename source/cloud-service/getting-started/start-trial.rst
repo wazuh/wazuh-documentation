@@ -22,8 +22,6 @@ Trial conditions
 
 If all trial slots are in use, Wazuh Console shows **All trial slots are in use right now. Please try again later.**
 
-.. TODO: Confirm with engineering whether trial environments run with limited resources compared to paid environments. The provisioning request flags them as trials.
-
 Creating a trial
 ----------------
 
@@ -95,7 +93,7 @@ We send you reminder emails 7 days and 2 days before the trial ends. What happen
    * - Situation
      - Result
    * - With a payment method
-     - The trial becomes a paid environment with the settings, billing period, and discount code you chose. We charge the payment method. If the payment fails, the environment keeps running for 7 days while you complete the payment from :doc:`Subscriptions </cloud-service/account-billing/subscriptions>`. If it is still unpaid after that, the trial is cancelled and the environment is terminated.
+     - The trial becomes a paid environment with the settings, billing period, and discount code you chose. We charge the payment method. If the payment fails, complete it from :doc:`Subscriptions </cloud-service/account-billing/subscriptions>`. If it remains unpaid, the environment is terminated.
    * - Without a payment method
      - The trial ends and the environment and its data are deleted.
    * - No agent connected within 4 days

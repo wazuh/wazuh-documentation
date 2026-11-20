@@ -96,16 +96,12 @@ The **Status** of an environment appears on the **Environments** page and on the
      - The environment has a problem and might be unavailable.
    * - **Suspended**
      - You can't access the environment. See `Suspension and termination for non-payment`_.
-   * - **Hibernated**
-     - The environment is paused.
    * - **Decommissioning**
      - The environment is being removed.
    * - **Terminated**
      - The environment is removed and its data is permanently deleted.
    * - **Cancelled**
      - The environment is cancelled and isn't available.
-
-.. TODO: Confirm with engineering the customer-facing meaning of Hibernated and whether agents keep reporting while an environment is Suspended.
 
 Other pills can appear next to the status:
 
@@ -115,10 +111,7 @@ Other pills can appear next to the status:
 Suspension and termination for non-payment
 ------------------------------------------
 
-When a payment for a paid environment fails, the subscription becomes past due. The environment keeps running for 7 days. If the payment is still missing after that, the environment is suspended:
-
--  A subscription billed monthly stays suspended for 7 days.
--  A subscription billed yearly stays suspended for 14 days.
+When a payment for a paid environment fails, the subscription becomes past due and the environment is suspended. The environment stays suspended for 7 days if it's billed monthly, or 14 days if it's billed yearly.
 
 If the subscription is still unpaid at the end of the suspension, the environment is terminated, all its data is permanently deleted, and the subscription is cancelled. Every member of your organization receives an email when the environment is suspended and when it is terminated.
 

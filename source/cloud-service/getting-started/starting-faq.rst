@@ -110,8 +110,6 @@ Rotation depends on two settings: indexed data retention and indexed data capaci
 What happens if the EPS limit is exceeded?
 ------------------------------------------
 
-.. TODO: Confirm with engineering that the queue-then-discard behavior still applies to the single EPS setting of Wazuh Console environments.
-
 If incoming events per second exceed the **EPS** setting of your environment, events queue. When the queue is full, Wazuh discards incoming events, which can cause event loss. The environment details page shows **Limit exceeded** in the **Events per second (EPS)** chart when this happens.
 
 Can I increase my settings?

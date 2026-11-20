@@ -65,10 +65,8 @@ Subscription states
 | **Canceling**           | The subscription is canceled. It stays active until the end of the        |
 |                         | current billing period and doesn't renew.                                 |
 +-------------------------+---------------------------------------------------------------------------+
-| **Past due**            | A payment failed. Pay the pending amount to keep the subscription active. |
-+-------------------------+---------------------------------------------------------------------------+
-| **Past due, suspended** | A payment failed and wasn't completed in time, so the Wazuh Cloud         |
-|                         | environment is suspended. Pay the pending amount to reactivate it.        |
+| **Past due**            | A payment failed. The Wazuh Cloud environment is suspended until you pay  |
+|                         | the pending amount.                                                       |
 +-------------------------+---------------------------------------------------------------------------+
 | **Suspended**           | The subscription is suspended.                                            |
 +-------------------------+---------------------------------------------------------------------------+
@@ -80,13 +78,7 @@ Subscription states
 Paying a pending amount
 -----------------------
 
-When a payment fails, the subscription shows a **<AMOUNT> due** badge, and its state changes to **Past due**. For a Wazuh Cloud environment, the following happens if the payment is still missing:
-
-#. The subscription stays **Past due** for 7 days. The environment keeps running.
-#. The subscription becomes **Past due, suspended**, and the environment is suspended for 7 days if it's billed monthly, or 14 days if it's billed yearly.
-#. The environment is terminated, all its data is permanently deleted, and the subscription is canceled.
-
-.. TODO: Confirm with engineering the past-due and suspension periods for Wazuh CTI feed subscriptions and what happens to the deployments when they end. The periods are configurable, and the code doesn't show the production values.
+When a payment fails, the subscription shows a **<AMOUNT> due** badge, its state changes to **Past due**, and the Wazuh Cloud environment is suspended. The environment stays suspended for 7 days if it's billed monthly, or 14 days if it's billed yearly. If the pending amount is still unpaid at the end of the suspension, the environment is terminated, all its data is permanently deleted, and the subscription is canceled.
 
 The **Renews or ends** column shows the date of the next step. While a payment is pending, you can't cancel the subscription. To pay the pending amount:
 

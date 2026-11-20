@@ -27,8 +27,6 @@ Which payment methods and currencies are accepted?
 
 You pay with a credit or debit card. All prices are in US dollars (USD). See :doc:`Payment methods </cloud-service/account-billing/payment-methods>`.
 
-.. TODO: Confirm with sales whether other payment methods, such as bank transfer, are available for contracts agreed with Wazuh.
-
 Is my card information safe?
 ----------------------------
 
@@ -57,11 +55,7 @@ Yes. When you create an environment, buy a trial, or buy a feed subscription, en
 What happens if a payment fails?
 --------------------------------
 
-The subscription becomes **Past due**, and Wazuh Console shows the amount due. For a Wazuh Cloud environment:
-
-#. The environment keeps running for 7 days.
-#. If the payment is still missing, the environment is suspended for 7 days if it's billed monthly, or 14 days if it's billed yearly.
-#. If the payment is still missing at the end of the suspension, the environment is terminated and all its data is permanently deleted.
+The subscription becomes **Past due**, Wazuh Console shows the amount due, and the Wazuh Cloud environment is suspended. The environment stays suspended for 7 days if it's billed monthly, or 14 days if it's billed yearly. If the payment is still missing at the end of the suspension, the environment is terminated and all its data is permanently deleted.
 
 Pay the pending amount at any point to keep or reactivate the environment. See :doc:`Subscriptions </cloud-service/account-billing/subscriptions>`. If you need more time to pay, contact Wazuh.
 
@@ -73,9 +67,7 @@ Cancel the subscription at any time. A paid environment or feed subscription sta
 Can I get a refund?
 -------------------
 
-.. TODO: Confirm the refund policy with sales or legal. The Wazuh Console code and terms shown in the console don't state whether charges are refundable.
-
-Charges are nonrefundable. If you want to stop using an environment or a feed subscription, you can cancel it at any time, and no further charges are incurred after the current billing period. For special considerations, contact Wazuh. See :doc:`Support </cloud-service/support>`.
+Charges are nonrefundable. If you want to stop using an environment or a feed subscription, you can cancel it at any time, and no further charges are incurred after the current billing period.
 
 Where can I find my invoices?
 -----------------------------

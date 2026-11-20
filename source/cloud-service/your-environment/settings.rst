@@ -87,8 +87,6 @@ Support plan
 
 **Support Plan** sets the level of support you receive from the Wazuh team: **Standard Support** or **Premium Support**.
 
-.. TODO: Confirm with engineering or sales the differences between Standard Support and Premium Support (response times, channels) to document here.
-
 .. _cloud_settings_adjust:
 
 Upgrading a paid environment

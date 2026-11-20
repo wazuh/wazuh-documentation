@@ -73,8 +73,6 @@ The **Event** column describes what happened to the environment:
      - The environment was suspended.
    * - Environment resumed
      - The environment is running again after a suspension.
-   * - Environment hibernated
-     - The environment was paused.
    * - Environment decommissioning started
      - The environment is being removed.
    * - Environment terminated

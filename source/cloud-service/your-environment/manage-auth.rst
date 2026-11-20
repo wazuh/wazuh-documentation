@@ -52,8 +52,6 @@ To give the user permissions, map the user to an indexer role and create a Wazuh
 
 #. Click **Save role mapping**.
 
-.. TODO: Confirm with engineering that run_as (wazuh_core.hosts.default.run_as) is enabled on Wazuh Cloud 5.0 environments so role mappings take effect without customer action.
-
 Creating an admin user
 ----------------------
 
@@ -104,5 +102,3 @@ External identity providers
 ---------------------------
 
 To authenticate Wazuh dashboard users with an external identity provider, such as LDAP or a SAML provider, contact Wazuh support. In Wazuh Console, in the sidebar, under **Help**, select **Support**.
-
-.. TODO: Confirm with engineering which external identity providers Wazuh Cloud 5.0 environments support and how customers request them.

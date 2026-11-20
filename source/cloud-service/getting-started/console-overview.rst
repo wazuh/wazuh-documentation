@@ -27,8 +27,6 @@ Sidebar
 
 The sidebar on the left gives access to every section of Wazuh Console. To make it narrower, select **Collapse** at the bottom of the sidebar.
 
-.. TODO: Confirm with engineering whether the CTI sidebar group is visible to all organizations in production. Its visibility is configurable.
-
 .. list-table::
    :header-rows: 1
    :widths: 20 25 55

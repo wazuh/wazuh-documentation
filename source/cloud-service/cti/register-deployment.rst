@@ -37,8 +37,6 @@ Starting the registration in the Wazuh dashboard
 
 The Wazuh dashboard opens Wazuh Console in your browser, with the code filled in.
 
-.. TODO: Confirm with engineering the exact Wazuh dashboard labels of the registration dialog, whether the dashboard shows the code so the user can compare it, and how long the one-time code stays valid.
-
 Confirming the code in Wazuh Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

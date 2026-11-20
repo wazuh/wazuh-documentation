@@ -75,8 +75,6 @@ How is my environment updated?
 
 Wazuh manages the updates of your environment. You can't change the Wazuh version yourself. The **Version** of each environment appears on the **Environments** page.
 
-.. TODO: Confirm with engineering whether Wazuh version updates of cloud environments cause downtime and how customers are notified.
-
 Can I send data directly to the Wazuh indexer of my environment?
 ----------------------------------------------------------------
 
@@ -108,8 +106,6 @@ Is my environment shared with other customers?
 ----------------------------------------------
 
 No. Your environment is isolated from other customers, and only your organization has access to it.
-
-.. TODO: Confirm with engineering the isolation statement for 5.0 environments, which share load balancers between environments.
 
 What are the available regions?
 -------------------------------

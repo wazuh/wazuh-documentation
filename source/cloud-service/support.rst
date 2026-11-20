@@ -23,8 +23,6 @@ Organizations with a paid environment or subscription
 
 To help us resolve your issue faster, include the following information in your ticket:
 
-.. TODO: Confirm with engineering that the ID shown in the environment Information card is the Cloud ID support expects.
-
 -  The Cloud ID of your environment. It is shown as **ID** in the **Information** card of the environment details page.
 -  A clear description of the question or issue.
 -  Steps to reproduce the issue, for incidents.

@@ -22,8 +22,6 @@ Enabling and disabling AI reports
 
 AI reports are enabled by default. You need the Editor role to enable or disable them.
 
-.. TODO: Confirm with engineering that AI reports are enabled by default for paid environments (console schema default is true).
-
 To stop receiving reports:
 
 #. In the sidebar, under **Wazuh Cloud**, select **Environments** and open the details page of the environment.
@@ -46,9 +44,7 @@ The card also shows a message when there are no reports to list, for example whe
 AI Analyst email
 ----------------
 
-.. TODO: Confirm with engineering that AI Analyst emails are sent in 5.0, who receives them (organization members, notification email), and their content.
-
-When a report is issued, you receive an email with key indicators and a summary of your security posture. The email includes:
+When a report is issued, the organization members who are subscribed to AI report notifications receive an email with key indicators and a summary of your security posture. To choose the notifications you receive, see :doc:`User settings </cloud-service/account-billing/user-settings>`. The email includes:
 
 -  A histogram of the number of protected endpoints.
 -  The volume of alerts received by the Wazuh server.
@@ -58,8 +54,6 @@ When a report is issued, you receive an email with key indicators and a summary 
 
 AI report content
 -----------------
-
-.. TODO: Confirm with engineering the current sections of the AI report PDF.
 
 The report contains AI-generated insights based on the data of your environment, in the following sections.
 
@@ -85,8 +79,6 @@ The ten most active endpoints by alert volume, to help you identify the areas wi
 
 Data privacy and security FAQ
 -----------------------------
-
-.. TODO: Confirm with engineering and legal that the AI Analyst still uses AWS Bedrock and Anthropic's Claude, and that the privacy statements and linked terms below are current.
 
 .. contents::
    :local:

@@ -53,8 +53,6 @@ Creating a custom DNS
 
 If the certificate doesn't meet the requirements, the console shows an error and doesn't save the configuration.
 
-.. TODO: Confirm with engineering the maximum number of custom DNS configurations per environment.
-
 After you save the configuration, the **Custom DNS** card lists the **Custom domain name**, the **Expiration date** of the certificate, and whether **Allow wildcard domain** is enabled.
 
 Creating the DNS record

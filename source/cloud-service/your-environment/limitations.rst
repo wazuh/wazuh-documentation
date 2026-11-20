@@ -23,8 +23,6 @@ You don't have command-line, shell, or SSH access to the infrastructure of your 
 Restricted API access
 ---------------------
 
-.. TODO: Confirm with engineering that Wazuh server API and Wazuh indexer API access in 5.0 environments is still available on request through support, and whether it remains read-only.
-
 -  The Wazuh server API and the Wazuh indexer API aren't exposed by default.
 -  You can request access to these APIs through Wazuh support.
 -  Even when access is enabled, write operations through the Wazuh indexer API aren't permitted.

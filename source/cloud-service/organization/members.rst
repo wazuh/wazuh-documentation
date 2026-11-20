@@ -41,12 +41,6 @@ The tab lists every member of the organization with the following columns:
 
 Click a column header to sort the list by that column.
 
-Changing roles and removing members
------------------------------------
-
-You can't change the role of a member or remove a member from an organization in Wazuh Console. To request either change, contact Wazuh. See :doc:`Support </cloud-service/support>`.
-
-.. TODO: Confirm with engineering/support the channel customers should use to change a member's role or remove a member. The console has no UI for it.
 
 Inviting a member
 -----------------
@@ -106,8 +100,6 @@ When a member of an organization invites you, you receive an email with a link t
 #. Click **Accept invitation**. To decide later, click **Not now**.
 
 Wazuh Console shows **Invitation accepted successfully.** and switches to the organization you joined. To return to another organization, use the organization selector in the header. See :doc:`Organization </cloud-service/organization/index>`.
-
-.. TODO: Confirm with engineering that the invitation link still opens the Organization invitation dialog after a new user completes sign-up and confirms their email.
 
 If the invitation can't be accepted
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

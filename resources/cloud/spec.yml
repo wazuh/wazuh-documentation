@@ -12,7 +12,7 @@ info:
     Wazuh Console, under **Organization** > **API Keys**.
   version: "1.0.0"
 paths:
-  /platform/environments/{environment_id}/storage/credentials:
+  /platform/environments/{cloud_id}/storage/credentials:
     post:
       tags:
         - storage
@@ -25,10 +25,10 @@ paths:
       security:
         - api_key: []
       parameters:
-        - name: environment_id
+        - name: cloud_id
           in: path
           required: true
-          description: ID of the environment, as shown in the **ID** field of the environment details page in Wazuh Console.
+          description: Cloud ID of the environment, as shown in the **ID** field of the environment details page in Wazuh Console.
           schema:
             type: string
           example: "0123456789ab"

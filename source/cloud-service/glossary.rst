@@ -114,8 +114,6 @@ Seat
 
 A seat is a Professional Feed subscription that you assign to one deployment. A seat has no effect until you assign it to a deployment.
 
-.. TODO: Confirm with engineering that each Wazuh Cloud environment includes a Professional Feed seat. Wazuh Console lists "Professional Feed seat included" among the Wazuh Cloud benefits.
-
 Each Wazuh Cloud environment includes a Professional Feed seat.
 
 Subscription

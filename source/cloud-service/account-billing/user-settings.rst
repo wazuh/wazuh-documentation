@@ -129,8 +129,6 @@ Wazuh Console shows **Multi-factor authentication has been disabled.** You can s
 
 If you lose access to your authenticator app and your recovery code, contact Wazuh. See :doc:`Support </cloud-service/support>`.
 
-.. TODO: Confirm with support the procedure to recover an account when the user loses both the authenticator app and the recovery code.
-
 Notifications
 -------------
 

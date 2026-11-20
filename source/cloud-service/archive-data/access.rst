@@ -14,7 +14,7 @@ Prerequisites
 -------------
 
 -  **An organization API key.** You need the Editor role to create one. See :doc:`API keys </cloud-service/organization/api-keys>`.
--  **The ID of your environment.** To get it:
+-  **The Cloud ID of your environment.** To get it:
 
    #. In the sidebar, under **Wazuh Cloud**, select **Environments**.
    #. Select your environment to open its details page.
@@ -22,16 +22,14 @@ Prerequisites
 
 -  **The AWS CLI** installed on your computer. See the `AWS CLI documentation <https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html>`__.
 
-.. TODO: Confirm with engineering which identifier the storage credentials endpoint accepts. The console route looks the environment up by its environments_uid, while the ID field on the environment details page shows the Cloud ID when the environment has one. If they differ, requests with the Cloud ID return 401.
-
 Request temporary credentials
 -----------------------------
 
-Send a ``POST`` request to the ``/platform/environments/<ENVIRONMENT_ID>/storage/credentials`` endpoint of the Wazuh Console API. Replace ``<ENVIRONMENT_ID>`` with the ID of your environment and ``<API_KEY>`` with your organization API key. See the :cloud-api-ref:`API reference <tag/storage>` for the full specification.
+Send a ``POST`` request to the ``/platform/environments/<CLOUD_ID>/storage/credentials`` endpoint of the Wazuh Console API. Replace ``<CLOUD_ID>`` with the Cloud ID of your environment and ``<API_KEY>`` with your organization API key. See the :cloud-api-ref:`API reference <tag/storage>` for the full specification.
 
 .. code-block:: console
 
-   $ curl -X POST "https://console.pro.cloud.wazuh.com/api/v1/platform/environments/<ENVIRONMENT_ID>/storage/credentials" \
+   $ curl -X POST "https://console.pro.cloud.wazuh.com/api/v1/platform/environments/<CLOUD_ID>/storage/credentials" \
      -H "Authorization: Bearer <API_KEY>" \
      -H "Content-Type: application/json" \
      -d '{"token_expiration": 3600}'
@@ -78,9 +76,7 @@ When the credentials expire, request them again.
 Error responses
 ^^^^^^^^^^^^^^^
 
-Errors return a JSON body with an ``errors.detail`` message, for example ``{"errors": {"detail": "Unauthorized"}}``.
-
-.. TODO: Confirm with engineering the status code and body returned for an invalid request body. The console passes the upstream status through; 422 is the FastAPI default for validation errors.
+``401`` and ``503`` errors return a JSON body with an ``errors.detail`` message, for example ``{"errors": {"detail": "Unauthorized"}}``. ``422`` errors return a ``detail`` list that describes each invalid field.
 
 .. list-table::
    :header-rows: 1

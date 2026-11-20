@@ -21,8 +21,6 @@ The environment must be **Active** to open its Wazuh dashboard.
 
 The Wazuh dashboard opens in a new browser tab.
 
-.. TODO: Confirm the production environment URL format (https://<CLOUD_ID>.cloud.wazuh.com) with engineering.
-
 You can also open the Wazuh dashboard directly at ``https://<CLOUD_ID>.cloud.wazuh.com``, where ``<CLOUD_ID>`` is the identifier of your environment. To use your own domain name, see :doc:`Custom DNS </cloud-service/your-environment/custom-dns>`.
 
 Getting the default credentials
@@ -45,8 +43,6 @@ Changing the default password
 -----------------------------
 
 The default user has super user access. We strongly recommend changing its password the first time you log in. Once you change it, the default password stops working.
-
-.. TODO: Confirm with engineering the 5.0 Wazuh dashboard path to change the logged-in user's password (user icon > Reset password).
 
 #. Open the Wazuh dashboard and log in with the default credentials.
 #. Select the user icon in the upper-right corner and select **Reset password**.

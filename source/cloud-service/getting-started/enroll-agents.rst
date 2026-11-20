@@ -34,11 +34,9 @@ The **Deploy new agent** wizard in the Wazuh dashboard generates the enrollment 
 #. Click the upper-left menu icon **☰** and go to **Agents management** > **Summary**.
 #. Click **Deploy new agent**.
 #. Select the package for the operating system and architecture of your endpoint.
-#. Enter the address of your environment as the server address. This is the host name of your environment URL, without ``https://``. For example, ``<CLOUD_ID>.cloud.wazuh.com``.
+#. Enter the address of your environment as the server address. This is the host name of your environment URL, without ``https://``. For example, ``<CLOUD_ID>.cloud.wazuh.com``. If you configured a :doc:`custom DNS </cloud-service/your-environment/custom-dns>` for the environment, you can use your custom domain name instead.
 #. Click **Generate token**.
 #. Copy the installation and start commands and run them on the endpoint, with administrator or root privileges.
-
-.. TODO: Confirm with engineering the server address that Wazuh Cloud agents use (the environment host name <CLOUD_ID>.cloud.wazuh.com or a dedicated agent endpoint), and whether custom DNS names are valid enrollment addresses.
 
 The agent installs, enrolls with the enrollment token, and starts sending data to your environment. To install agents from the command line or with deployment tools, see :doc:`Deploying Wazuh agents </installation-guide/wazuh-agent/index>`.
 
