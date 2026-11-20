@@ -60,8 +60,6 @@ Wazuh manager cluster installation
 
 Your Wazuh manager is now successfully installed.
 
-On the master node, the Wazuh manager log starts with ``WARNING: dashboard client pair not generated: /etc/wazuh-manager/ca has no key; provision it externally in /etc/wazuh-manager/export``. This is expected, because ``/etc/wazuh-manager/ca`` holds only the root CA certificate. Nothing uses that pair, and you don't need to do anything.
-
 To check the Wazuh manager API, run these commands on the master node. The API runs only on the master node. The first command prints the password of the ``wazuh`` API user, and the second asks for it:
 
 .. code-block:: console
