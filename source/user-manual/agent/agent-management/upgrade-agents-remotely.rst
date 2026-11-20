@@ -26,6 +26,10 @@ WPK List
 .. |WPK_macOS_Intel| replace:: `wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_intel64.pkg.wpk <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OSX|/wpk/macos/pkg/intel64/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_intel64.pkg.wpk>`__
 .. |WPK_macOS_ARM64| replace:: `wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_arm64.pkg.wpk <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OSX|/wpk/macos/pkg/arm64/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_arm64.pkg.wpk>`__
 
+.. note::
+
+   Direct upgrades to Wazuh agent |WAZUH_CURRENT| are supported from Wazuh agent 4.14.0 or later. Upgrade earlier Wazuh agents to a 4.14.x release first, and then to |WAZUH_CURRENT|. Otherwise the upgrade request returns error ``1819``.
+
 Linux
 ^^^^^
 
@@ -60,10 +64,6 @@ macOS
 +--------------+-----------------+--------------+--------------------+
 | macOS        | |WAZUH_CUR_OSX| | ARM64        | |WPK_macOS_ARM64|  |
 +--------------+-----------------+--------------+--------------------+
-
-.. note::
-
-   Direct upgrades to Wazuh agent |WAZUH_CURRENT| are supported from Wazuh agent 4.14.0 or later. Upgrade earlier Wazuh agents to a 4.14.x release first, and then to |WAZUH_CURRENT|. Otherwise the upgrade request returns error ``1819``.
 
 Upgrade the Wazuh agent using a WPK file
 -----------------------------------------

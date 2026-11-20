@@ -71,7 +71,7 @@ The test and custom spaces are read-only, so you can't delete content from them 
    :align: center
    :width: 80%
 
-#. In the draft space, delete the integration, decoder, KVDB, filter, or rule. To remove all your custom content at once, go to **Ruleset Management** > **Overview** and click **Actions** > **Clear space**. This removes all integrations, rules, decoders, KVDBs, and filters from the draft space and unsets its root decoder. It doesn't affect detectors.
+#. In the draft space, delete the integration, decoder, KVDB, filter, or rule. To remove all your custom content at once, go to **Ruleset Management** > **Overview** and click **Space actions** > **Clear space**. This removes all integrations, rules, decoders, KVDBs, and filters from the draft space and unsets its root decoder. It doesn't affect detectors.
 
    .. thumbnail:: /images/manual/data-analysis/space-clear-draft-space.jpg
       :title: Clear the draft space
@@ -79,7 +79,7 @@ The test and custom spaces are read-only, so you can't delete content from them 
       :align: center
       :width: 80%
 
-#. Go to **Ruleset Management** > **Overview** and click **Actions** > **Promote**. The Promote page lists the deleted content as ``(remove)``. Promote the content from draft to test.
+#. Go to **Ruleset Management** > **Overview** and click **Space actions** > **Promote**. The Promote page lists the deleted content as ``(remove)``. Promote the content from draft to test.
 
    .. thumbnail:: /images/manual/data-analysis/space-promote-removed-content.jpg
       :title: Promote page listing removed content
@@ -101,4 +101,4 @@ The test and custom spaces are read-only, so you can't delete content from them 
 
    .. note::
 
-      You can't delete a decoder while it's the root decoder of the space. Clear the **Root decoder** field in **Overview** > **Actions** > **Edit** first, or use **Clear space**.
+      You can't delete a decoder while it's the root decoder of the space. Clear the **Root decoder** field in **Overview** > **Space actions** > **Edit** first, or use **Clear space**.

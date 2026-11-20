@@ -6,32 +6,28 @@
 Network IDS integration
 =======================
 
-Wazuh integrates with a network-based intrusion detection system (NIDS) to enhance threat detection by monitoring and analyzing network traffic.
+Wazuh integrates with network intrusion detection systems (NIDS) to detect threats in network traffic. In this use case, you install `Suricata <https://suricata.io/>`__ on the Ubuntu endpoint, send its alerts to Wazuh, and generate suspicious traffic.
 
-In this use case, you integrate Suricata with Wazuh. Suricata provides additional insights into your network's security with its network traffic inspection capabilities.
+Endpoints
+---------
 
-Infrastructure
---------------
-
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-| Endpoint     | Description                                                                                                                                    |
-+==============+================================================================================================================================================+
-| Ubuntu 24.04 | This is the endpoint where you install Suricata. In this use case, Wazuh monitors and analyzes the network traffic generated on this endpoint. |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+-----------------------------------------------------------------------------------------------+
+| Endpoint     | Role                                                                                          |
++==============+===============================================================================================+
+| Ubuntu 24.04 | Runs Suricata. Wazuh analyzes the Suricata alerts about the network traffic of this endpoint. |
++--------------+-----------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
 
-Take the following steps to configure Suricata on the Ubuntu endpoint and send the generated logs to the Wazuh manager.
-
 Ubuntu endpoint
 ^^^^^^^^^^^^^^^
 
-#. Install Suricata on the Ubuntu endpoint. We tested this process with version 8.0.8:
+#. Install Suricata. We tested this procedure with Suricata 8.0.8:
 
    .. code-block:: console
 
-      $ sudo add-apt-repository ppa:oisf/suricata-stable
+      $ sudo add-apt-repository -y ppa:oisf/suricata-stable
       $ sudo apt-get update
       $ sudo apt-get install suricata -y
 
@@ -41,22 +37,7 @@ Ubuntu endpoint
 
       $ sudo suricata-update
 
-#. Edit Suricata settings in the ``/etc/suricata/suricata.yaml`` file and change these values under their parent keys. Leave the other settings as they are:
-
-   .. code-block:: yaml
-      :emphasize-lines: 3, 7
-
-      vars:
-        address-groups:
-          HOME_NET: "<UBUNTU_IP>"
-          EXTERNAL_NET: "any"
-
-      af-packet:
-        - interface: <INTERFACE>
-
-   Replace ``<UBUNTU_IP>`` with the IP address of the Ubuntu endpoint and ``<INTERFACE>`` with its network interface name.
-
-   Run the following command to find the interface name:
+#. Find the name of the network interface:
 
    .. code-block:: console
 
@@ -70,13 +51,26 @@ Ubuntu endpoint
       lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP>
       enp0s3           UP             08:00:27:14:65:bd <BROADCAST,MULTICAST,UP,LOWER_UP>
 
+#. Edit ``/etc/suricata/suricata.yaml`` and set the following values under their parent keys. Replace ``<UBUNTU_IP>`` with the IP address of the Ubuntu endpoint and ``<INTERFACE>`` with the interface name from the previous step. Leave the other settings as they are:
+
+   .. code-block:: yaml
+      :emphasize-lines: 3, 7
+
+      vars:
+        address-groups:
+          HOME_NET: "<UBUNTU_IP>"
+          EXTERNAL_NET: "any"
+
+      af-packet:
+        - interface: <INTERFACE>
+
 #. Restart the Suricata service:
 
    .. code-block:: console
 
       $ sudo systemctl restart suricata
 
-#. Append the following configuration to the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent. This allows the Wazuh agent to read the Suricata log file:
+#. Append the following configuration to ``/var/ossec/etc/ossec.conf`` so that the Wazuh agent reads the Suricata log file:
 
    .. code-block:: xml
 
@@ -87,7 +81,7 @@ Ubuntu endpoint
         </localfile>
       </ossec_config>
 
-#. Add the ``wazuh`` user to the ``suricata`` group to give the Wazuh agent read access to the ``/var/log/suricata`` directory:
+#. Add the ``wazuh`` user to the ``suricata`` group, so that the Wazuh agent can read the ``/var/log/suricata`` directory:
 
    .. code-block:: console
 
@@ -102,52 +96,102 @@ Ubuntu endpoint
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-#. Navigate to **Ruleset management** > **Overview**.
+#. Go to **Ruleset management** > **Overview**.
 
-#. Enter ``suricata`` in the search box and select the **suricata** integration.
+#. Search for ``suricata`` and click the **suricata** integration name to open it.
 
-#. Click the **suricata** integration name to open it, then click **Actions** and select **Enable**. Wait a few minutes before you generate test traffic.
+#. Click **Actions** and select **Enable**.
 
    .. thumbnail:: /images/poc/network-ids-integration-enable.png
       :title: Enable the suricata integration
-      :alt: Wazuh dashboard Ruleset management page for the suricata integration with the Actions menu open and Enable highlighted
+      :alt: Wazuh dashboard Ruleset management page of the suricata integration with the Enable option in the Actions menu
       :align: center
       :width: 80%
+
+Wait a few minutes before you generate test traffic.
+
+.. _poc_network_ids_verify_data_ingestion:
+
+Verify data ingestion
+---------------------
+
+#. Check that Suricata loaded its rules. Without rules, Suricata raises no alerts, and a fresh install has no rules until ``suricata-update`` runs. The command prints a number greater than 0:
+
+   .. code-block:: console
+
+      $ sudo grep -c '^alert' /var/lib/suricata/rules/suricata.rules
+
+#. Check that Suricata writes events:
+
+   .. code-block:: console
+
+      $ sudo tail -n 1 /var/log/suricata/eve.json
+
+#. In the Wazuh dashboard, go to **Explore** > **Discover** and search for ``wazuh.integration.name: suricata`` in the last 15 minutes. You see Suricata events.
+
+   .. thumbnail:: /images/poc/network-ids-discover.png
+      :title: Suricata events in Discover
+      :alt: Wazuh dashboard Discover page listing the events found with the wazuh.integration.name: suricata search
+      :align: center
+      :width: 80%
+
+.. _poc_network_ids_attack_emulation:
 
 Attack emulation
 ----------------
 
-Wazuh automatically parses data from ``/var/log/suricata/eve.json`` and generates related findings on the Wazuh dashboard.
+Wazuh reads the Suricata alerts from ``/var/log/suricata/eve.json`` and creates findings from them.
 
-Run the command below on the Ubuntu endpoint to generate suspicious traffic:
+#. On the Ubuntu endpoint, send an HTTP request to an IP address with curl. Suricata flags this traffic as suspicious:
 
-.. code-block:: console
+   .. code-block:: console
 
-   $ curl -s http://1.1.1.1/
+      $ curl -s http://1.1.1.1/
 
-Check that Suricata raised an alert:
+#. Check that Suricata raised an alert:
 
-.. code-block:: console
+   .. code-block:: console
 
-   $ sudo grep '"event_type":"alert"' /var/log/suricata/eve.json | tail -1
+      $ sudo grep '"event_type":"alert"' /var/log/suricata/eve.json | tail -1
 
 The output includes ``"signature":"ET HUNTING curl User-Agent to Dotted Quad"``.
 
-Visualize the findings
-----------------------
+View the findings
+-----------------
 
-You can visualize the findings in the Wazuh dashboard. Go to **Threat intelligence** > **Threat Hunting** > **Findings**, then filter for ``wazuh.integration.name: suricata``. The finding title is ``Suricata IDS alert triggered - uncategorized - ET HUNTING curl User-Agent to Dotted Quad``.
+You see the finding ``Suricata IDS alert triggered - uncategorized - ET HUNTING curl User-Agent to Dotted Quad``, from the Suricata integration rules.
 
-.. thumbnail:: /images/poc/network-ids-findings.png
-   :title: Network IDS findings
-   :alt: Wazuh dashboard Threat Hunting Findings tab filtered by wazuh.integration.name suricata, showing the Suricata finding
-   :align: center
-   :width: 80%
+#. In the Wazuh dashboard, go to **Threat intelligence** > **Threat Hunting** > **Findings**.
 
-Click the magnifying glass icon to view the finding details, including the source and destination IP addresses.
+#. Filter for ``wazuh.integration.name: suricata``. You see the finding, with level medium.
 
-.. thumbnail:: /images/poc/network-ids-findings-details.png
-   :title: Network IDS finding details
-   :alt: Wazuh dashboard document details panel for a Suricata finding showing the source and destination IP addresses
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/poc/network-ids-findings.png
+      :title: Network IDS findings
+      :alt: Wazuh dashboard Threat Hunting Findings tab showing the Suricata IDS alert triggered finding for the Ubuntu 24.04 agent
+      :align: center
+      :width: 80%
+
+#. Click the magnifying glass icon to see the finding details, including the source and destination IP addresses.
+
+   .. thumbnail:: /images/poc/network-ids-findings-details.png
+      :title: Network IDS finding details
+      :alt: Document details of the Suricata IDS alert finding, including the source and destination IP addresses
+      :align: center
+      :width: 80%
+
+Troubleshooting
+---------------
+
++-----------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| Check                                   | How                                                                                                                   |
++=========================================+=======================================================================================================================+
+| Suricata runs                           | ``systemctl is-active suricata`` prints ``active``.                                                                   |
++-----------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| Suricata has rules loaded               | The ``grep -c`` command from :ref:`Verify data ingestion <poc_network_ids_verify_data_ingestion>` prints more than 0. |
++-----------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| Suricata raised an alert                | The ``grep`` command from :ref:`Attack emulation <poc_network_ids_attack_emulation>` prints one line.                 |
++-----------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| The agent can read the log              | The ``wazuh`` user is in the ``suricata`` group: ``id wazuh``.                                                        |
++-----------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| The ``suricata`` integration is enabled | **Ruleset management** > **Overview** shows it enabled. With it off, Wazuh drops the events without any message.      |
++-----------------------------------------+-----------------------------------------------------------------------------------------------------------------------+

@@ -218,6 +218,6 @@ if is_latest_release or is_prerelease:
     custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = ''
     custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = ''
 else:
-    custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_AGENT_CURRENT_REV|"]
-    custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_AGENT_CURRENT_REV|"]
+    custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_AGENT_PKG_REV|"]
+    custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_AGENT_PKG_REV|"]
     custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + '1'

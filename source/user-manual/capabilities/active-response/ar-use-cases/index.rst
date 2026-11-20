@@ -12,7 +12,7 @@ These use cases show how to configure an active response and an Active Response 
 
 -  :doc:`Blocking web attacks with active response <blocking-web-attacks>`: Blocks the IP address of a cross-site scripting attacker. You need an Ubuntu endpoint with a Wazuh agent and Apache, and a Linux endpoint with curl.
 
--  :doc:`Removing a malicious file with active response <removing-malicious-file>`: Deletes a test malware file that file integrity monitoring detects. You need a Windows endpoint with a Wazuh agent and Python 3.
+-  :doc:`Removing a malicious file with active response <removing-malicious-file>`: Deletes a test malware file whose hash matches a known malicious indicator. You need a Windows endpoint with a Wazuh agent and Python 3.
 
 .. toctree::
    :maxdepth: 1
