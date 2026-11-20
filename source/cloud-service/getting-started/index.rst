@@ -8,7 +8,7 @@
 Getting started
 ===============
 
-Wazuh Cloud runs the Wazuh central components for you. We install, update, and scale them, so you can focus on securing your endpoints and responding to threats instead of managing infrastructure. You manage your organization, environments, and billing from **Wazuh Console** at `https://console.pro.cloud.wazuh.com <https://console.pro.cloud.wazuh.com>`__.
+Wazuh Cloud runs the Wazuh central components for you. We install, update, and scale them, so you can focus on securing your endpoints and responding to threats instead of managing infrastructure. You manage your organization, environments, and billing from **Wazuh Console** at `https://console.cloud.wazuh.com <https://console.cloud.wazuh.com>`__.
 
 The pages in this section guide you from account creation to monitoring your endpoints:
 

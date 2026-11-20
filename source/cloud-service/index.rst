@@ -21,7 +21,7 @@ Wazuh Cloud manages the Wazuh central components and their underlying infrastruc
 Wazuh Console
 -------------
 
-`Wazuh Console <https://console.pro.cloud.wazuh.com>`__ is the web application you use to manage your Wazuh services. From Wazuh Console you can:
+`Wazuh Console <https://console.cloud.wazuh.com>`__ is the web application you use to manage your Wazuh services. From Wazuh Console you can:
 
 -  Start a free trial or create a Wazuh Cloud environment, choosing its region, capacity, and support plan.
 -  Open the Wazuh dashboard of each environment and retrieve its default credentials.

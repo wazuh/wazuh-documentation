@@ -144,7 +144,7 @@ Wazuh Cloud is the software as a service (SaaS) offering of Wazuh. It hosts and 
 Wazuh Console
 -------------
 
-Wazuh Console is the web application at https://console.pro.cloud.wazuh.com that you use to manage your organization, Wazuh Cloud environments, CTI deployments and feeds, and billing.
+Wazuh Console is the web application at https://console.cloud.wazuh.com that you use to manage your organization, Wazuh Cloud environments, CTI deployments and feeds, and billing.
 
 .. _cloud_glossary_wazuh_cloud_api:
 

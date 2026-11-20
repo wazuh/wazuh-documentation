@@ -15,7 +15,7 @@ Opening the Wazuh dashboard
 
 The environment must be **Active** to open its Wazuh dashboard.
 
-#. Log in to `Wazuh Console <https://console.pro.cloud.wazuh.com>`__.
+#. Log in to `Wazuh Console <https://console.cloud.wazuh.com>`__.
 #. In the sidebar, under **Wazuh Cloud**, select **Environments**.
 #. Select **Open XDR** on the environment card. You can also open the environment and select **Open XDR** on its details page, or select **Open XDR** in the options menu of the table view.
 

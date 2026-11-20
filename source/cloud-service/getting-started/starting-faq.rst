@@ -23,7 +23,7 @@ Wazuh Cloud is the software as a service (SaaS) edition of Wazuh. It provides a 
 What is Wazuh Console?
 ----------------------
 
-Wazuh Console, at `https://console.pro.cloud.wazuh.com <https://console.pro.cloud.wazuh.com>`__, is the web application where you manage your organization, members, environments, subscriptions, and invoices. See :doc:`Wazuh Console overview </cloud-service/getting-started/console-overview>`.
+Wazuh Console, at `https://console.cloud.wazuh.com <https://console.cloud.wazuh.com>`__, is the web application where you manage your organization, members, environments, subscriptions, and invoices. See :doc:`Wazuh Console overview </cloud-service/getting-started/console-overview>`.
 
 Can I try it for free?
 ----------------------

@@ -29,7 +29,7 @@ Send a ``POST`` request to the ``/platform/environments/<CLOUD_ID>/storage/crede
 
 .. code-block:: console
 
-   $ curl -X POST "https://console.pro.cloud.wazuh.com/api/v1/platform/environments/<CLOUD_ID>/storage/credentials" \
+   $ curl -X POST "https://console.cloud.wazuh.com/api/v1/platform/environments/<CLOUD_ID>/storage/credentials" \
      -H "Authorization: Bearer <API_KEY>" \
      -H "Content-Type: application/json" \
      -d '{"token_expiration": 3600}'

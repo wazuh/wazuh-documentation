@@ -13,7 +13,7 @@ A Wazuh Console account gives you access to Wazuh Cloud. This page explains how 
 Signing up
 ----------
 
-#. Go to `https://console.pro.cloud.wazuh.com/signup <https://console.pro.cloud.wazuh.com/signup>`__. From the log in page, you can also select **Sign up**.
+#. Go to `https://console.cloud.wazuh.com/signup <https://console.cloud.wazuh.com/signup>`__. From the log in page, you can also select **Sign up**.
 #. On the **Create your account** form, fill in the following fields:
 
    -  **First name** and **Last name**.
@@ -38,7 +38,7 @@ The confirmation link is valid for 7 days. If it expires, the page shows **This 
 Logging in
 ----------
 
-#. Go to `https://console.pro.cloud.wazuh.com/login <https://console.pro.cloud.wazuh.com/login>`__.
+#. Go to `https://console.cloud.wazuh.com/login <https://console.cloud.wazuh.com/login>`__.
 #. Enter your **Email** and **Password**.
 #. Select **Log in**.
 
