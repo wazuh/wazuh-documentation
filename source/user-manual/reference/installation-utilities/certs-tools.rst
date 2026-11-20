@@ -57,7 +57,7 @@ Options list
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -tmp, --cert_tmp_path </path/to/tmp_dir>                                            | Uses this directory to create the certificates, instead of a new one with a random name in   |
 |                                                                                     | /tmp. The directory must not exist, or must be an empty directory owned by root. Must be     |
-|                                                                                     | used along with one of these options: -a, -A, -ca, -wi, -wd, -wm                             |
+|                                                                                     | used along with one of these options: -a, -A, -ca, -wi, -wd, -wm, -lb                        |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 
 Root CA
@@ -73,7 +73,7 @@ An existing root CA is validated and reused, never replaced. To use a root CA cr
 
 .. code-block:: console
 
-   # sudo WAZUH_CA_DIR=/path/to/ca bash wazuh-certs-tool.sh -A
+   # WAZUH_CA_DIR=/path/to/ca bash wazuh-certs-tool.sh -A
 
 Back up the CA directory in a safe place. When there is no root CA in the CA directory, ``-A``, ``-ca`` and ``--generate-config-files`` create a new one and log a warning. That's expected for a new deployment, but the nodes of an existing deployment only trust the root CA they were issued from. To issue certificates for an existing deployment, run the tool on the node that holds its root CA, or point ``WAZUH_CA_DIR`` at a copy of it.
 
@@ -89,7 +89,7 @@ Repeat the option once per address:
 
 .. code-block:: console
 
-   # sudo bash wazuh-certs-tool.sh -A --agent-san wazuh.example.com --api-san api.example.com
+   # bash wazuh-certs-tool.sh -A --agent-san wazuh.example.com --api-san api.example.com
 
 A proxy that terminates the agents' TLS sessions presents its own certificate. Declare it in the ``load_balancer`` section of ``config.yml`` and create it with ``-lb``. A passthrough load balancer needs ``--agent-san`` instead.
 

@@ -387,10 +387,55 @@ Upgrade the migrated Wazuh agents
 You can upgrade the Wazuh agents remotely, as described in :doc:`Upgrading the Wazuh agent </user-manual/agent/agent-management/remote-upgrading/upgrading-agent>`. Before you upgrade them, make sure that:
 
 -  Each Wazuh agent runs Wazuh 4.14.0 or later. Upgrade older agents to the latest Wazuh 4.14 version first.
--  Each Wazuh agent reaches the Wazuh 5.x manager on port 1517/TCP. Otherwise, the agent doesn't install the upgrade. Keep port 1514 open until every agent runs Wazuh 5.x.
+-  Each Wazuh agent reaches the Wazuh 5.x manager on port 1517/TCP. Otherwise, the agent doesn't install the upgrade. To check the connection, run ``nc -zv <WAZUH_MANAGER_IP> 1517`` on Linux and macOS agents, or ``Test-NetConnection -ComputerName <WAZUH_MANAGER_IP> -Port 1517`` in PowerShell on Windows agents. Keep port 1514 open until every agent runs Wazuh 5.x.
 -  The certificate of every Wazuh manager node contains the address that the Wazuh agents connect to. To add an address, see :ref:`Certificate creation <certificates_creation>`.
 -  ``<verification_mode>`` in the ``<remote><https>`` section of ``wazuh-manager.conf`` is ``none`` or not set. Otherwise, the Wazuh manager rejects the upgrade.
 -  Linux agents have the ``openssl`` command. Otherwise, the upgraded agent runs with TLS verification disabled.
+
+The upgrade keeps the Wazuh 4.x ``ossec.conf`` file of each Wazuh agent. The Wazuh agent ignores the settings that Wazuh 5.x doesn't support and logs a message for each one every time it reads its configuration. Update or remove the following settings in ``ossec.conf`` on each upgraded Wazuh agent. Except for ``<labels>``, the Wazuh 4.x default configuration contains all of them.
+
+-  ``<client>``: rename the block to ``<agent>``, replace its ``<server>`` subsection with ``<manager><endpoint>``, and remove ``<time-reconnect>`` and ``<crypto_method>``, as in the example below. From a ``<client>`` block, the Wazuh agent reads only the Wazuh manager address and the ``<enrollment>`` subsection.
+-  ``<client_buffer>``: Wazuh 5.x configures event batching in ``<agent><batch>``.
+-  ``<labels>``: Wazuh 5.x doesn't support agent labels. Also remove ``<labels>`` from the ``agent.conf`` file of every group.
+-  ``<scan_on_start>`` in ``<syscheck>``, and ``<max_eps>`` and ``<max_interval>`` in ``<syscheck><synchronization>``.
+-  ``<max_eps>`` in the ``<synchronization>`` section of ``<wodle name="syscollector">``.
+-  ``<check_files>``, ``<check_trojans>``, ``<rootkit_files>``, and ``<rootkit_trojans>`` in ``<rootcheck>``.
+-  ``<skip_nfs>`` in ``<sca>``.
+-  The ``<wodle name="cis-cat">`` and ``<wodle name="osquery">`` blocks. Wazuh 5.x doesn't include these modules. Use SCA instead of CIS-CAT, and system inventory instead of Osquery.
+
+For example, change the following ``<client>`` block of a Wazuh 4.x agent:
+
+.. code-block:: xml
+   :emphasize-lines: 3
+
+   <client>
+     <server>
+       <address><WAZUH_MANAGER_IP></address>
+       <port>1514</port>
+       <protocol>tcp</protocol>
+     </server>
+     <config-profile>ubuntu, ubuntu24, ubuntu24.04</config-profile>
+     <notify_time>20</notify_time>
+     <time-reconnect>60</time-reconnect>
+     <auto_restart>yes</auto_restart>
+     <crypto_method>aes</crypto_method>
+   </client>
+
+To the following ``<agent>`` block:
+
+.. code-block:: xml
+   :emphasize-lines: 3
+
+   <agent>
+     <manager>
+       <endpoint><WAZUH_MANAGER_IP>:1517</endpoint>
+     </manager>
+     <config-profile>ubuntu, ubuntu24, ubuntu24.04</config-profile>
+     <notify_time>20</notify_time>
+     <auto_restart>yes</auto_restart>
+   </agent>
+
+Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh 5.x manager. Then restart the Wazuh agent for the changes to take effect.
 
 After the upgrade, navigate to **Agents management** > **Summary** and verify that every Wazuh agent is active and that none is marked **Outdated**. Then check that the migrated dashboards show data. To monitor the Wazuh manager hosts, install a Wazuh agent on every Wazuh manager node, as described in the :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>`.
 
