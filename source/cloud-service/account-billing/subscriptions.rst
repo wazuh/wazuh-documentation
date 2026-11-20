@@ -40,8 +40,7 @@ The **Deployment Subscriptions** and **Cloud Subscriptions** tabs show the follo
 |                    | its own.                                                                  |
 +--------------------+---------------------------------------------------------------------------+
 | **State**          | The state of the subscription. See `Subscription states`_. A              |
-|                    | **<AMOUNT> due** badge means that a payment is pending. A **Contract**    |
-|                    | badge means that the subscription is part of a contract.                  |
+|                    | **<AMOUNT> due** badge means that a payment is pending.                   |
 +--------------------+---------------------------------------------------------------------------+
 | **Started at**     | The date the subscription started.                                        |
 +--------------------+---------------------------------------------------------------------------+
@@ -77,11 +76,6 @@ Subscription states
 +-------------------------+---------------------------------------------------------------------------+
 | **Expired**             | The subscription reached its end date.                                    |
 +-------------------------+---------------------------------------------------------------------------+
-
-Contract subscriptions
-^^^^^^^^^^^^^^^^^^^^^^
-
-A subscription with the **Contract** badge is part of a contract that you agreed with Wazuh. Some contracts have a fixed term. You can't cancel or change these subscriptions in Wazuh Console. To change them, contact Wazuh. See :doc:`Support </cloud-service/support>`.
 
 Paying a pending amount
 -----------------------
@@ -142,12 +136,6 @@ If a subscription has no available actions, its options menu shows the reason:
 +-------------------------------------------------------------------------+-----------------------------------------------------------+
 | Message                                                                 | Meaning                                                   |
 +=========================================================================+===========================================================+
-| **This subscription has a fixed term and cannot be changed here.**      | The subscription is part of a fixed-term contract.        |
-|                                                                         | Contact Wazuh to change it.                               |
-+-------------------------------------------------------------------------+-----------------------------------------------------------+
-| **This subscription cannot be changed here.**                           | The subscription is managed with Wazuh. Contact Wazuh to  |
-|                                                                         | change it.                                                |
-+-------------------------------------------------------------------------+-----------------------------------------------------------+
 | **Waiting for the first payment to be confirmed.**                      | The first payment is being processed.                     |
 +-------------------------------------------------------------------------+-----------------------------------------------------------+
 | **Nothing to do until the trial ends.**                                 | The environment is in its free trial. To cancel the trial |
