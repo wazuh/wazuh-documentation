@@ -86,6 +86,7 @@ All notable changes to this project will be documented in this file.
 - Removed support for legacy operating systems, including Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, AIX, HP-UX, Solaris, Windows XP, Windows Vista, and Windows Server 2003. ([#8894](https://github.com/wazuh/wazuh-documentation/pull/8894))
 - Removed deprecated configuration variables in the *Deployment with Puppet* documentation. ([#9378](https://github.com/wazuh/wazuh-documentation/pull/9378))
 - Removed Osquery references as this capability is now deprecated. ([#8958](https://github.com/wazuh/wazuh-documentation/pull/8958))
+- Removed the *Upgrading Wazuh Docker* page from the *Deployment on Docker* documentation. Its URL now redirects to the *Docker deployments* section of the *Transitioning from 4.x to 5.x* documentation. ([#10839](https://github.com/wazuh/wazuh-documentation/pull/10839))
 
 ## [v4.14.11]
 
