@@ -79,6 +79,8 @@ These monitors are commonly used for:
 -  Event correlation.
 -  Threat detection workflows.
 
+.. _alerting_active_response_monitors:
+
 Active Response monitors
 ^^^^^^^^^^^^^^^^^^^^^^^^
 

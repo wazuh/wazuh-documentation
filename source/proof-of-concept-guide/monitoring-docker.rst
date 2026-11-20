@@ -6,50 +6,50 @@
 Monitoring Docker events
 ========================
 
-Docker automates the deployment of different applications inside software containers. The Wazuh module for Docker identifies security incidents across containers and alerts in real time. In this use case, you configure Wazuh to monitor Docker events on an Ubuntu endpoint hosting Docker containers. See :doc:`Monitoring Docker environments </user-manual/capabilities/container-security/monitoring-docker>` to learn more about monitoring Docker.
+Docker runs applications inside software containers. The Wazuh module for Docker collects Docker events, such as image pulls and container creation and removal, to identify security incidents across containers. In this use case, you install Docker on the Ubuntu endpoint and configure Wazuh to monitor its events. See :doc:`Monitoring Docker </user-manual/capabilities/container-security/monitoring-docker>`.
 
-Infrastructure
---------------
+Endpoints
+---------
 
-+--------------+-----------------------------------------------------------------+
-| Endpoint     | Description                                                     |
-+==============+=================================================================+
-| Ubuntu 24.04 | This is the Docker host where you create and delete containers. |
-+--------------+-----------------------------------------------------------------+
++--------------+-----------------------------------------------------+
+| Endpoint     | Role                                                |
++==============+=====================================================+
+| Ubuntu 24.04 | Docker host where you create and delete containers. |
++--------------+-----------------------------------------------------+
 
 Configuration
 -------------
 
-Perform the following steps to install Docker on the Ubuntu endpoint and configure Wazuh to monitor Docker events.
+Ubuntu endpoint
+^^^^^^^^^^^^^^^
 
 #. Install Python and pip:
 
    .. code-block:: console
 
+      $ sudo apt update
       $ sudo apt install -y python3 python3-pip
 
-#. Install Docker:
+#. `Install Docker <https://docs.docker.com/engine/install/ubuntu/>`__:
 
    .. code-block:: console
 
       $ curl -sSL https://get.docker.com | sh
 
-#. Install the `Python Docker library <https://pypi.org/project/docker/>`__ and other dependencies:
+#. Install the `Python Docker library <https://pypi.org/project/docker/>`__ and its dependencies:
 
    .. warning::
 
-      Before you confirm the removal, check the packages that ``apt`` lists. Removing ``python3-urllib3`` also removes the packages that depend on it, such as ``cloud-init`` and ``python3-boto3``.
+      Before you confirm the removal, check the packages that apt lists. Apt also removes the packages that depend on ``python3-urllib3``, such as ``cloud-init``, ``ubuntu-server``, and ``python3-boto3``.
 
    .. code-block:: console
 
       $ sudo apt remove python3-urllib3
-      $ sudo pip3 install docker==7.1.0 urllib3==1.26.20 requests==2.32.2 --break-system-packages
+      $ sudo pip3 install docker==7.1.0 urllib3==1.26.20 requests==2.32.2 --ignore-installed --break-system-packages
 
    .. note::
 
-      This command modifies the default externally managed Python environment. See the `PEP 668 <https://peps.python.org/pep-0668/>`__ description for more information. To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the Docker ``/var/ossec/wodles/docker/DockerListener`` script shebang with your virtual environment interpreter, for example, ``#!</path/to/your/virtual/environment>/bin/python3``.
-
-      Some Ubuntu distributions have ``urllib3`` already installed using Debian packages. Uninstall and reinstall with the method above.
+      These commands modify the default externally managed Python environment. See `PEP 668 <https://peps.python.org/pep-0668/>`__ for more information. Ubuntu can install ``urllib3`` from a Debian package, so the first command removes it before ``pip3`` installs the required version.
 
 #. Start and enable the Docker service:
 
@@ -58,7 +58,7 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
       $ sudo systemctl start docker.service
       $ sudo systemctl enable docker.service
 
-#. Append the following configuration to the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf`` to enable the ``docker-listener`` module:
+#. Append the following configuration to ``/var/ossec/etc/ossec.conf`` to enable the ``docker-listener`` module:
 
    .. code-block:: xml
 
@@ -77,34 +77,48 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
 
       $ sudo systemctl restart wazuh-agent
 
-Perform the following steps on the Wazuh dashboard to enable the docker integration and its detector.
+Wazuh dashboard
+^^^^^^^^^^^^^^^
 
-#. Navigate to **Ruleset management** > **Overview**.
+#. Go to **Ruleset management** > **Overview**.
 
-#. Enter ``docker`` in the search box and select the **docker** integration.
+#. Search for ``docker`` and click the **docker** integration name to open it.
 
-#. Click the **docker** integration name to open it, then click **Actions** and select **Enable**.
+#. Click **Actions** and select **Enable**.
 
    .. thumbnail:: /images/poc/docker-integration-enable.png
       :title: Enable the docker integration
-      :alt: Wazuh dashboard Ruleset management page for the docker integration with the Actions menu open and Enable highlighted
+      :alt: Wazuh dashboard Ruleset management page of the docker integration with the Enable option in the Actions menu
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Detectors**, select the **docker** detector, and start it if it isn't active. To do so, click **Actions** and select **Start detector**. Wait a few minutes before you test the configuration, because the Wazuh manager applies content changes at its next synchronization.
+#. Go to **Ruleset management** > **Detectors** and select the **docker** detector. If it isn't active, click **Actions** and select **Start detector**.
 
    .. thumbnail:: /images/poc/docker-detector-start.png
       :title: Start the docker detector
-      :alt: Wazuh dashboard Ruleset management page for the docker detector with the Actions menu open and Start detector highlighted
+      :alt: Wazuh dashboard Ruleset management Detectors page of the docker detector with the Actions menu open
       :align: center
       :width: 80%
+
+Wait a few minutes before you test the configuration. The Wazuh manager applies content changes at its next synchronization.
+
+Verify data ingestion
+---------------------
+
+Check that the Docker module started:
+
+.. code-block:: console
+
+   $ sudo grep -i docker-listener /var/ossec/logs/ossec.log
+
+The output includes ``Module docker-listener started.`` and no ``ERROR`` line.
 
 Test the configuration
 ----------------------
 
-Perform several Docker activities, such as pulling a Docker image, running a container, running additional Docker commands, and deleting the container.
+Run the following Docker commands on the Ubuntu endpoint to generate events.
 
-#. Pull an image, such as the NGINX image, and run a container:
+#. Pull the NGINX image, run a container, and run commands inside it:
 
    .. code-block:: console
 
@@ -112,22 +126,50 @@ Perform several Docker activities, such as pulling a Docker image, running a con
       $ sudo docker run -d -P --name nginx_container nginx
       $ sudo docker exec -it nginx_container cat /etc/passwd
       $ sudo docker exec -it nginx_container /bin/bash
-      $ exit
+      # exit
 
-#. Stop and remove the container:
+#. Pause, unpause, stop, and remove the container:
 
    .. code-block:: console
 
+      $ sudo docker pause nginx_container
+      $ sudo docker unpause nginx_container
       $ sudo docker stop nginx_container
       $ sudo docker rm nginx_container
 
-Visualize the findings
-----------------------
+View the findings
+-----------------
 
-You can visualize the findings on the Wazuh dashboard. Go to **Cloud security** > **Docker** and select **Findings**.
+You see one finding for each container action, for example ``Command executed inside Docker container - nginx_container`` and ``Interactive shell session started inside Docker container - nginx_container``.
+
+In the Wazuh dashboard, go to **Cloud security** > **Docker** and select **Findings**. You see findings for the image pull and the container activity.
 
 .. thumbnail:: /images/poc/docker-findings.png
    :title: Visualize Docker findings
-   :alt: Wazuh dashboard Docker module Findings tab showing a histogram and table of Docker container findings
+   :alt: Wazuh dashboard Docker Findings tab listing the findings for the container actions on the Ubuntu endpoint
    :align: center
    :width: 80%
+
+Troubleshooting
+---------------
+
++---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Check                                 | How                                                                                                                                                |
++=======================================+====================================================================================================================================================+
+| The Docker module runs                | ``sudo grep -i docker-listener /var/ossec/logs/ossec.log`` shows no ``ERROR`` line.                                                                |
++---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| The interactive shell opened          | ``docker exec -it`` needs a terminal. Without one, run ``sudo docker exec nginx_container /bin/bash -c id``, which raises only the medium finding. |
++---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Docker events reach Wazuh             | In **Explore** > **Discover**, search for ``wazuh.integration.name: docker``.                                                                      |
++---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| The ``docker`` integration is enabled | **Ruleset management** > **Overview** shows it enabled. With it off, Wazuh drops the events without any message.                                   |
++---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Clean up
+--------
+
+The test already removes the container. To also remove the NGINX image, run the following command:
+
+.. code-block:: console
+
+   $ sudo docker rmi nginx
