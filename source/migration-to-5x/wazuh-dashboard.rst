@@ -1,21 +1,21 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Recreate the supported Wazuh dashboard configuration, custom dashboards, and visualizations when migrating from Wazuh 4.x to Wazuh 5.x.
+   :description: Recreate the supported Wazuh dashboard configuration, custom dashboards, and visualizations when transitioning from Wazuh 4.x to Wazuh 5.x.
 
 Wazuh dashboard
 ===============
 
-The Wazuh dashboard in Wazuh 5.x introduces changes to its configuration, navigation, reporting, health checks, branding, and support for multi-manager environments. These changes prevent Wazuh 4.x dashboard deployments from being upgraded in place. Migrating to Wazuh 5.x dashboard requires deploying a new dashboard instance and recreating the supported configuration from the existing Wazuh 4.x deployment.
+The Wazuh dashboard in Wazuh 5.x introduces changes to its configuration, navigation, reporting, health checks, branding, and support for multi-manager environments. These changes prevent Wazuh 4.x dashboard deployments from being upgraded in place. Transitioning to the Wazuh 5.x dashboard requires deploying a new dashboard instance and recreating the supported configuration from the existing Wazuh 4.x deployment. For Docker or Kubernetes deployments, see :doc:`Docker and Kubernetes deployments <docker-kubernetes-deployments>`.
 
-After the migration, the Wazuh 5.x dashboard has:
+After the transition, the Wazuh 5.x dashboard has:
 
 -  Your supported Wazuh 4.x settings, in their Wazuh 5.x locations.
 -  Your custom dashboards, visualizations, and saved searches, rewritten to Wazuh 5.x index patterns and WCS fields. They show data after the Wazuh agents report to the Wazuh 5.x manager.
 
 .. note::
 
-   You can't recreate previously generated PDF reports in Wazuh 5.x.
+   Previously generated PDF reports aren't carried over to Wazuh 5.x. Download the ones that you need from Wazuh 4.x before you retire it.
 
 Prerequisites
 -------------
@@ -43,7 +43,7 @@ The Wazuh dashboard configuration defines how the dashboard connects to the Wazu
 
 Review the existing Wazuh 4.x configuration and recreate the supported settings manually in the Wazuh 5.x deployment. Don't copy the Wazuh 4.x ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration directly, because Wazuh 5.x stores dashboard configuration in different locations.
 
-The following configuration locations are commonly reviewed during the migration.
+The following configuration locations are commonly reviewed during the transition.
 
 +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Location**                                       | **Purpose**                                                                                                                |
@@ -94,7 +94,7 @@ Branding
 +=================+=======================================================================================================================================================================================================================================================================================================================+
 | Branding        | Wazuh 5.x doesn't upload logos. Copy the Wazuh 4.x logos from ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/`` to a web server that the Wazuh 5.x dashboard can reach. Then set their URLs as described in :doc:`Setting up custom branding </user-manual/wazuh-dashboard/custom-branding>`. |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Report branding | You can't use a custom logo, but you can add a header or footer to a report.                                                                                                                                                                                                                                          |
+| Report branding | Reports don't support a custom logo. You can add a header or footer to a report instead.                                                                                                                                                                                                                              |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Recreate the Wazuh dashboard configuration
@@ -134,7 +134,8 @@ Perform the following steps to recreate the Wazuh dashboard configuration in Waz
    +----------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | ``reports.csv.maxRows``    | Maximum rows allowed in exported CSV files.                                                                                                                           |
    +----------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | ``wazuh.updates.disabled`` | Disables the check for updates. The default is ``true``, so the Wazuh dashboard doesn't check for updates. In Advanced settings, On means that the check is disabled. |
+   | ``wazuh.updates.disabled`` | Disables the check for updates. The default is ``true``, which means the Wazuh dashboard doesn't check for updates. In Advanced settings, On means that the check is  |
+   |                            | disabled.                                                                                                                                                             |
    +----------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 #. Restart the Wazuh dashboard service:
@@ -209,7 +210,7 @@ The following table provides examples of Wazuh 4.x fields and related WCS fields
 +-----------------------------+-----------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``rule.description``        | ``wazuh.rule.title``        | Use this field for the rule title or description shown in migrated visualizations.                                                                                                                                                                                                                                                                                             |
 +-----------------------------+-----------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``rule.id``                 | ``wazuh.rule.id``           | Use this field to filter or aggregate by rule ID. Wazuh 5.x rule IDs are UUIDs, so filters on Wazuh 4.x numeric rule IDs don't match.                                                                                                                                                                                                                                          |
+| ``rule.id``                 | ``wazuh.rule.id``           | Use this field to filter or aggregate by rule ID. Wazuh 5.x rule IDs are UUIDs. Filters on Wazuh 4.x numeric rule IDs don't match.                                                                                                                                                                                                                                             |
 +-----------------------------+-----------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``agent.name``              | ``wazuh.agent.name``        | Use this field to filter or group by agent name.                                                                                                                                                                                                                                                                                                                               |
 +-----------------------------+-----------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -227,7 +228,7 @@ The following table provides examples of Wazuh 4.x fields and related WCS fields
 +-----------------------------+-----------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``agent.labels.*``          | No Wazuh 5.x field          | Wazuh 5.x doesn't support agent labels and has no replacement field. Remove filters and aggregations on these fields.                                                                                                                                                                                                                                                          |
 +-----------------------------+-----------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``full_log``                | ``event.original``          | You can't search or aggregate on this field.                                                                                                                                                                                                                                                                                                                                   |
+| ``full_log``                | ``event.original``          | This field isn't searchable or aggregatable.                                                                                                                                                                                                                                                                                                                                   |
 +-----------------------------+-----------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``location``                | ``wazuh.protocol.location`` | Where the Wazuh agent read the event, such as a log file path.                                                                                                                                                                                                                                                                                                                 |
 +-----------------------------+-----------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -243,7 +244,7 @@ The following table provides examples of Wazuh 4.x fields and related WCS fields
 Verify the migrated objects
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Migrated dashboards show only Wazuh 5.x data, so their panels stay empty until the Wazuh agents report to the Wazuh 5.x manager and the Wazuh 5.x detection content exists. Check that the panels show data after you migrate the Wazuh agents. Now, verify the following:
+Migrated dashboards show only Wazuh 5.x data. Their panels stay empty until the Wazuh agents report to the Wazuh 5.x manager and the Wazuh 5.x detection content exists. Check that the panels show data after you migrate the Wazuh agents. Now, verify the following:
 
 -  Click the **☰** menu, navigate to **Dashboards Management** > **Saved objects**, and verify that the expected objects are present.
 -  Open each migrated dashboard and confirm that all panels load correctly.
