@@ -51,12 +51,14 @@ You must install Logstash on a dedicated server or on the server hosting the thi
 
 Perform the following steps on your Logstash server to set up your forwarder.
 
-#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html>`__. Ensure that you consider the `requirements <https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html>`__ and `performance tuning <https://www.elastic.co/guide/en/logstash/current/performance-troubleshooting.html>`__ guidelines for running Logstash.
+#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/docs/reference/logstash/installing-logstash>`__ 9.5.6, the version the integration is tested with. Ensure that you consider the `requirements <https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html>`__ and `performance tuning <https://www.elastic.co/guide/en/logstash/current/performance-troubleshooting.html>`__ guidelines for running Logstash.
 #. Run the following command to install the `logstash-input-opensearch plugin <https://github.com/opensearch-project/logstash-input-opensearch>`__. This plugin reads data from the Wazuh indexer into the Logstash pipeline.
 
    .. code-block:: console
 
-      $ sudo /usr/share/logstash/bin/logstash-plugin install logstash-input-opensearch
+      $ sudo env LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 1.0.0 logstash-input-opensearch
+
+   The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
 
 #. Copy the Wazuh indexer and Splunk root certificates to the Logstash server.
 
@@ -157,7 +159,7 @@ Perform the following steps to configure the Logstash pipeline.
             http_method => "post" # HTTP method used to forward logs
             url => "<SPLUNK_URL>:8088/services/collector/raw" # endpoint to forward logs to
             headers => ["Authorization", "Splunk ${SPLUNK_AUTH}"]
-            cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"
+            ssl_certificate_authorities => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"
          }
       }
 
@@ -170,17 +172,22 @@ Perform the following steps to configure the Logstash pipeline.
 
    .. note::
       
-      For testing purposes, you can avoid SSL verification by replacing the line ``cacert => "/PATH/TO/LOCAL/SPLUNK/ca.pem"`` with ``ssl_verification_mode => "none"``.
+      For testing purposes, you can avoid SSL verification by replacing the line ``ssl_certificate_authorities => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"`` with ``ssl_verification_mode => "none"``.
 
 Running Logstash
 ^^^^^^^^^^^^^^^^
 
 #. Once you have everything set, start Logstash from the command line with its configuration:
 
+   Run the command as the ``logstash`` user. Logstash 9 doesn't run as root, and that user must own the log files that earlier commands created as root:
+
    .. code-block:: console
 
       $ sudo systemctl stop logstash
-      $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-splunk.conf --path.settings /etc/logstash/
+      $ sudo chown -R logstash:logstash /var/log/logstash
+      $ sudo -E -u logstash /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-splunk.conf --path.settings /etc/logstash/
+
+   ``sudo -E`` passes ``LOGSTASH_KEYSTORE_PASS`` to Logstash, so run the command in the shell where you exported it. Without it, Logstash reports that the keystore is not valid.
 
    Make sure to use your own paths for the executable, the pipeline, and the settings files.
 
@@ -231,7 +238,7 @@ Installing Logstash
 
 Logstash must forward the data from the Wazuh server to the Splunk indexes created previously.
 
-#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html>`__ on the same system as the Wazuh server.
+#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/docs/reference/logstash/installing-logstash>`__ 9.5.6, the version the integration is tested with, on the same system as the Wazuh server.
 #. Copy the Splunk root certificates to the Wazuh server.
 
    .. note::
@@ -312,7 +319,7 @@ To configure the Logstash pipeline do the following.
             http_method => "post" # HTTP method used to forward logs
             url => "<SPLUNK_URL>:8088/services/collector/raw" # endpoint to forward logs to
             headers => ["Authorization", "Splunk ${SPLUNK_AUTH}"]
-            cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"
+            ssl_certificate_authorities => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"
          }
       }
 
@@ -323,7 +330,7 @@ To configure the Logstash pipeline do the following.
 
    .. note::
       
-      For testing purposes, you can avoid SSL verification by replacing the line ``cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"`` with ``ssl_verification_mode => "none"``.
+      For testing purposes, you can avoid SSL verification by replacing the line ``ssl_certificate_authorities => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"`` with ``ssl_verification_mode => "none"``.
 
 #. By default, the ``/var/ossec/logs/alerts/alerts.json`` file is owned by the ``wazuh`` user with restrictive permissions. You must add the ``logstash`` user to the ``wazuh`` group so it can read the file when running Logstash as a service:
 
@@ -336,10 +343,15 @@ Running Logstash
 
 #. Once you have everything set, start Logstash with its configuration:
 
+   Run the command as the ``logstash`` user. Logstash 9 doesn't run as root, and that user must own the log files that earlier commands created as root:
+
    .. code-block:: console
 
       $ sudo systemctl stop logstash
-      $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-splunk.conf --path.settings /etc/logstash/
+      $ sudo chown -R logstash:logstash /var/log/logstash
+      $ sudo -E -u logstash /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-splunk.conf --path.settings /etc/logstash/
+
+   ``sudo -E`` passes ``LOGSTASH_KEYSTORE_PASS`` to Logstash, so run the command in the shell where you exported it. Without it, Logstash reports that the keystore is not valid.
 
    Make sure to use your own paths for the executable, the pipeline, and the settings files.
 
