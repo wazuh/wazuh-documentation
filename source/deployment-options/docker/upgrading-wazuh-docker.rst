@@ -10,7 +10,7 @@ This procedure moves a Wazuh 4.x single-node stack to a new Wazuh 5.0 single-nod
 
 A Wazuh 4.x deployment moves to Wazuh 5.0 as a new deployment with new volumes. The Wazuh 5.0 manager keeps its files in ``/var/wazuh-manager/`` and ``/etc/wazuh-manager/``, uses a new configuration format, and uses a new agent protocol. The ``wazuh-migrate-identity.py`` tool copies the agent registrations, the custom groups and their ``agent.conf`` files, and, optionally, the Wazuh manager API users, roles, and policies from the Wazuh 4.x volumes to the Wazuh 5.0 manager.
 
-The Wazuh 4.x alerts and inventory data stay in the Wazuh 4.x indexer volume. To move the Wazuh manager configuration, rules, decoders, and custom dashboards, see the :doc:`Migration guide </migration-to-5x/index>`.
+The Wazuh 4.x alerts and inventory data stay in the Wazuh 4.x indexer volume. To move the Wazuh manager configuration, rules, decoders, and custom dashboards, see the :doc:`/migration-to-5x/index`.
 
 You need root user privileges to run the commands below. If you use Docker as a non-root user, run them with ``sudo``.
 
@@ -285,7 +285,7 @@ After the migration
 
 The migrated stack uses the ``wazuh-5`` project name. Its volumes are named ``wazuh-5_wazuh_etc``, ``wazuh-5_wazuh-indexer-data``, and so on. Where this guide uses ``single-node`` in a volume name or a project label, as in :ref:`Wazuh service data volumes <docker-service-data-volumes>`, use ``wazuh-5`` instead.
 
-The Wazuh 4.x agents send their log events to the Wazuh 5.0 manager. To upgrade them to Wazuh 5.0, see the :doc:`Migration guide </migration-to-5x/index>`. A Wazuh 4.x agent container keeps running from ``<WAZUH_4X_DIRECTORY>/wazuh-docker/wazuh-agent/``, so keep that directory while you use it.
+The Wazuh 4.x agents send their log events to the Wazuh 5.0 manager. To upgrade them to Wazuh 5.0, see the :doc:`/migration-to-5x/index`. A Wazuh 4.x agent container keeps running from ``<WAZUH_4X_DIRECTORY>/wazuh-docker/wazuh-agent/``, so keep that directory while you use it.
 
 The Wazuh 4.x alerts and inventory data stay in the ``single-node_wazuh-indexer-data`` volume. To search them, start the Wazuh 4.x indexer alone. It runs beside the Wazuh 5.0 stack:
 
