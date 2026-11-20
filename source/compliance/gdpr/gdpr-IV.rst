@@ -29,7 +29,7 @@ Wazuh dashboard
 
 #. Click the menu icon, then navigate to **Ruleset Management** > **Overview**.
 
-#. Select **Standard** in **Space**, then select **Actions** > **Edit** at the top-right section.
+#. Select **Standard** in **Space**, then select **Space actions** > **Edit** at the top-right section.
 
 #. Under **Settings**, toggle on **Index unclassified events** and **Index discarded events**.
 
@@ -454,7 +454,7 @@ The two decoders that need to exist in your custom space are ``decoder/core-wazu
 
 #. Give it a title and select **System Activity** under **Category**. Type the author name in **Author** and click **Create integration**.
 
-#. Switch to the **YAML Editor** tab and paste the copied decoder contents from the standard space into the decoder section.
+#. Switch to the **YAML Editor** tab and paste the copied decoder contents from the standard space into the decoder section. Then add the following line at the top level, before ``normalize:``, so that the custom space accepts only FIM events: ``check: "regex_match($wazuh.protocol.location, '^syscheck$')"``. Without this line, the custom space indexes every agent event a second time.
 
 #. Click **Create decoder**.
 
@@ -464,15 +464,15 @@ The two decoders that need to exist in your custom space are ``decoder/core-wazu
 
 #. Switch to the **YAML Editor** tab, paste the copied ``decoder/wazuh-fim/0`` contents into the decoder section, and click **Create decoder**.
 
-#. Click **Overview** in the left pane, click the **Actions** dropdown, and select **Edit**.
+#. Click **Overview** in the left pane, click the **Space actions** dropdown, and select **Edit**.
 
 #. In the **Settings** section, under **Root Decoder**, select the created root decoder ``decoder/core-wazuh-message/0`` and click **Save**.
 
 #. In **Overview**, select **Draft** in **Space**.
 
-#. Click the dropdown under **Actions** and select **Promote** to promote the decoders from **Draft** space to **Test**. In the prompt, type ``promote`` and click **Promote**.
+#. Click the dropdown under **Space actions** and select **Promote** to promote the decoders from **Draft** space to **Test**. In the prompt, type ``promote`` and click **Promote**.
 
-#. Switch to **Test** in **Space**, click the dropdown under **Actions**, and select **Promote** to promote the decoders from **Test** space to **Custom**. In the prompt, type ``promote`` and click **Promote**.
+#. Switch to **Test** in **Space**, click the dropdown under **Space actions**, and select **Promote** to promote the decoders from **Test** space to **Custom**. In the prompt, type ``promote`` and click **Promote**.
 
    .. thumbnail:: /images/compliance/gdpr/create-decoders-integration.gif
       :title: Create decoders and integration
@@ -519,9 +519,9 @@ The file modification rule already exists out of the box. To change the severity
 
 #. Click **Overview** in the left pane and select **Draft** in **Space**.
 
-#. Click the dropdown under **Actions** and select **Promote** to promote the rule from **Draft** space to **Test**. In the prompt, type ``promote`` and click **Promote**.
+#. Click the dropdown under **Space actions** and select **Promote** to promote the rule from **Draft** space to **Test**. In the prompt, type ``promote`` and click **Promote**.
 
-#. Switch to **Test** in **Space**, click the dropdown under **Actions**, and select **Promote** to promote the rule from **Test** space to **Custom**. In the prompt, type ``promote`` and click **Promote**.
+#. Switch to **Test** in **Space**, click the dropdown under **Space actions**, and select **Promote** to promote the rule from **Test** space to **Custom**. In the prompt, type ``promote`` and click **Promote**.
 
    .. thumbnail:: /images/compliance/gdpr/create-custom-rule.gif
       :title: Create custom rule
