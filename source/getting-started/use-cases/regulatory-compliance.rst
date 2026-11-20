@@ -101,7 +101,7 @@ TSC
 
 The Trust Services Criteria were developed by the Assurance Services Executive Committee (ASEC) of the AICPA. The TSC has five trust service areas which are security, availability, processing integrity, confidentiality, and privacy. Organizations implement TSC to protect customer data from unauthorized access, use, disclosure, modification or destruction.
 
-Wazuh provides out-of-the-box tags for TSC Common Criterias that give organizations a standardized way to evaluate and report on the effectiveness of their information security policies. You can find more information on how :doc:`Wazuh helps organizations meet TSC compliance </compliance/tsc/index>`.
+Wazuh provides out-of-the-box tags for TSC Common Criteria that give organizations a standardized way to evaluate and report on the effectiveness of their information security policies. You can find more information on how :doc:`Wazuh helps organizations meet TSC compliance </compliance/tsc/index>`.
 
 The image below shows some of the Common criteria Wazuh helps organizations meet *CC7.2 - Requiring ongoing monitoring for all irregular activity indicative of incidents*.
 
