@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - Added the *Incident response* dashboard section, the *Email* notification channel, and the *AI Assistant* configuration documentation to the *Wazuh dashboard* section. ([#10033](https://github.com/wazuh/wazuh-documentation/pull/10033))
 - Added the *Installation Assistant*, *Certs tool*, *Wazuh passwords tool*, *wazuh-manager-certs*, *wazuh-manager-resolve-credentials* and *resolve-credentials* documentation to the *Reference* section. ([#10047](https://github.com/wazuh/wazuh-documentation/pull/10047)) ([#10416](https://github.com/wazuh/wazuh-documentation/pull/10416)) ([#10499](https://github.com/wazuh/wazuh-documentation/pull/10499)) ([#10540](https://github.com/wazuh/wazuh-documentation/pull/10540)) ([#10675](https://github.com/wazuh/wazuh-documentation/pull/10675))
 - Added a note to the *Regulatory compliance* index page stating that the rule and control mappings are indicative and require an independent qualified assessor for formal certification, and updated the list of supported frameworks. ([#10191](https://github.com/wazuh/wazuh-documentation/pull/10191)) ([#10321](https://github.com/wazuh/wazuh-documentation/pull/10321)) ([#10708](https://github.com/wazuh/wazuh-documentation/pull/10708))
+- Added the *Wazuh Cloud service* documentation for Wazuh Console and enabled the section in the 5.0 documentation. ([#10834](https://github.com/wazuh/wazuh-documentation/pull/10834))
 
 ### Changed
 
