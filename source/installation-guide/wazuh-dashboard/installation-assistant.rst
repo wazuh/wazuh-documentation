@@ -121,7 +121,7 @@ After every component is installed and running, each component stores the passwo
 
    The passwords of the Wazuh indexer and Wazuh manager stay in ``local.env`` and ``export/credentials.env`` in their configuration directories, readable by ``root`` only.
 
-#. On each Wazuh dashboard node, remove the two passwords from ``/etc/wazuh-dashboard/local.env``. The Wazuh dashboard keeps them in its keystore. Skip this step on an all-in-one host, which has no such file:
+#. On each Wazuh dashboard node, remove the two passwords from ``/etc/wazuh-dashboard/local.env``. The Wazuh dashboard keeps them in its keystore. Skip this step on a host installed with the quickstart (``-a``), which has no such file:
 
    .. code-block:: console
 
