@@ -38,6 +38,20 @@ Step-by-step guides for installing Wazuh central components and agents across va
 - **[Installation from sources](https://documentation.wazuh.com/current/deployment-options/wazuh-from-sources/index.md)** Compile and install the Wazuh manager and agent from source code as an alternative to the packages. Covers build dependencies, compiling, the installation wizard, enrollment, and uninstalling. The Wazuh manager is covered for Linux, and the Wazuh agent for Linux, Windows, and macOS.
 - **[Migration guide](https://documentation.wazuh.com/current/migration-to-5x/index.md)** Migrate supported Wazuh data and configurations from an existing Wazuh 4.x deployment to a newly deployed Wazuh 5.x environment. Covers migration planning, migrating agent registrations, and recreating supported configuration for the Wazuh indexer, manager, dashboard, and agents.
 
+### Wazuh Cloud Service
+Use Wazuh Cloud, the software as a service (SaaS) edition of Wazuh, managed from Wazuh Console.
+
+- **[Getting started](https://documentation.wazuh.com/current/cloud-service/getting-started/index.md)** Create a Wazuh Console account, start a trial, access the Wazuh dashboard, and enroll your first agents.
+- **[Your environment](https://documentation.wazuh.com/current/cloud-service/your-environment/index.md)** Create a Wazuh Cloud environment and manage its settings, usage, logs, custom DNS, authentication, limitations, and cancellation.
+- **[AI Analyst](https://documentation.wazuh.com/current/cloud-service/ai-analyst.md)** Enable and download the weekly AI reports on the security posture of your environment.
+- **[Organization](https://documentation.wazuh.com/current/cloud-service/organization/index.md)** Manage your organization, invite members with the Editor or Viewer role, and create API keys.
+- **[Account and billing](https://documentation.wazuh.com/current/cloud-service/account-billing/index.md)** Manage user settings, payment methods, subscriptions, and invoices.
+- **[Wazuh CTI](https://documentation.wazuh.com/current/cloud-service/cti/index.md)** Register self-hosted Wazuh deployments and assign them Wazuh CTI feed subscriptions.
+- **[Archive data](https://documentation.wazuh.com/current/cloud-service/archive-data/index.md)** Understand the archive data file format and download archive data from AWS S3.
+- **[Wazuh Console API](https://documentation.wazuh.com/current/cloud-service/apis/index.md)** Authenticate with organization API keys and use the Wazuh Console API.
+- **[Support](https://documentation.wazuh.com/current/cloud-service/support.md)** Get help from Wazuh support and sales.
+- **[Glossary](https://documentation.wazuh.com/current/cloud-service/glossary.md)** Definitions of key terms and concepts related to Wazuh Cloud and Wazuh Console.
+
 ### Configuration & Management
 Fine-tune settings and manage the platform's operation.
 

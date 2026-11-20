@@ -1,80 +1,63 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out how to monitor your environment usage in Wazuh Cloud. Learn more about it in this section of the documentation.
+   :description: Learn how to monitor the agents, indexed and archive capacity, and events per second of your Wazuh Cloud environment in Wazuh Console.
 
 Monitor usage
 =============
 
-This section provides details on using your environment, helping you to optimize its performance.
+The usage metrics of an environment show how close it is to the limits set by its :doc:`settings </cloud-service/your-environment/settings>`. This page explains each metric and what to do when your environment reaches a limit.
 
-Viewing environment usage metrics
----------------------------------
+Viewing the usage metrics
+-------------------------
 
-To see metrics of your Wazuh Cloud environment, follow these steps:
+#. In the sidebar, under **Wazuh Cloud**, select **Environments**.
+#. Click **See detail** on the environment.
 
-#. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`__.
-#. Go to the **Environments** page and select your specific environment.
-#. Click on the **Metrics** tab.
+The usage metrics appear on the details page, below the **Settings** card. Each metric has a refresh icon that reloads its value. If a metric can't be loaded, it shows **Not available**.
 
-Agents metric
--------------
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
 
-The **Agents** metric shows the number of Wazuh agents in the active, disconnected, never connected, and pending states. It also displays the limit of active agents, which is configurable through the :ref:`active agents <cloud_settings_active_agents>` setting.
+   * - Metric
+     - What it shows
+   * - **Agents**
+     - The number of agents registered in the environment compared to the **Active Agents** setting, as a percentage and as a count.
+   * - **Indexed capacity used**
+     - The size of the indexed data compared to the **Indexed Data Capacity** setting, as a percentage and in GB.
+   * - **Archive capacity used**
+     - The size of the archive data, in GB.
+   * - **Indexed capacity evolution**
+     - A chart of the indexed data size, in GB, over the last 24 hours.
+   * - **Events per second (EPS)**
+     - A chart of the events per second over the last 24 hours, compared to the **EPS** setting. A **Limit exceeded** pill appears when the rate went above the EPS setting during that period.
 
-Exceeding the active agents limit might cause operational issues and decrease system stability. Though the system can handle a temporary surplus of active agents, we advise immediate action:
+When a limit is reached
+-----------------------
 
--  Upgrade the :ref:`active agents <cloud_settings_active_agents>` setting to match the actual count.
--  Reduce active agents.
+Active agents
+^^^^^^^^^^^^^
 
-This ensures a smooth operation and stability of your environment.
+If more agents are active than the **Active Agents** setting allows, agent connections can become unstable. The environment tolerates a temporary surplus, but take action:
 
-Data indexed metric
--------------------
+-  Upgrade the **Active Agents** setting with **Edit settings**. See :ref:`Upgrading a paid environment <cloud_settings_adjust>`.
+-  Reduce the number of active agents.
 
-The **data indexed** metric presents a histogram that shows how much security data has been indexed in your environment over time:
+Indexed capacity
+^^^^^^^^^^^^^^^^
 
--  X-axis: time
--  Y-axis: indexed data volume (in gigabytes)
--  It also displays the date of the oldest indexed alert currently stored.
+When the indexed data reaches the **Indexed Data Capacity**, Wazuh removes the oldest indices, even if they are within the **Indexed Data Retention** period. The removed data remains available as :doc:`archive data </cloud-service/archive-data/index>`.
 
-This metric helps you verify whether your :ref:`indexed data capacity and indexed data retention <cloud_settings_indexed_data>` are sufficient for your needs. The Wazuh Cloud environment automatically rotates (deletes) data when either:
+If **Indexed capacity used** stays close to 100% or **Indexed capacity evolution** grows steadily, older data might be removed before the end of the retention period. To keep your data searchable for the whole retention period:
 
--  The used storage exceeds the configured indexed data capacity, or
--  The alert date exceeds the configured indexed data retention period.
+-  Upgrade the **Indexed Data Capacity** setting with **Edit settings**.
+-  Reduce the volume of data, for example by tuning your rules and agent configuration to filter out less relevant events.
 
-How to interpret this metric:
+Events per second
+^^^^^^^^^^^^^^^^^
 
--  If your environment age is less than the configured retention period, the oldest alert date should align with the environment age.
--  If your environment age is greater than or equal to the retention period, the oldest alert date should align with the retention period.
+When the incoming event rate exceeds the **EPS** setting, events queue and, when the queue is full, Wazuh drops the events above the limit. Dropped events are lost and don't generate alerts. If the **Events per second (EPS)** chart shows **Limit exceeded** regularly:
 
-In both cases, your configuration is working correctly and no action is required. If the oldest alert date does not align with either, it indicates premature data rotation. In this case, you should:
-
--  Increase the :ref:`indexed data capacity <cloud_settings_indexed_data>`, or
--  Adjust your rule configurations to filter out less critical events and reduce data volume.
-
-.. note::
-
-   Oldest alert date never exceeds the configured retention period, rotation enforces this limit.
-
-Monitoring the data indexed metric ensures that your storage and retention settings continue to match your operational needs. If usage trends change, you can upgrade or downgrade your environment's settings to maintain optimal performance and data availability.
-
-Events - Dropped over time and Events - Processed vs dropped metrics
---------------------------------------------------------------------
-
-The Wazuh Cloud dashboard provides two key metrics to help you understand the efficiency of event ingestion and processing in your environment:
-
--  **Events - Dropped over time**: A histogram that shows the number of events lost or dropped during a given period. Drops occur when the rate of incoming events exceeds the environment's configured average/peak EPS (events per second) limit. When this happens, the event queues fill up, and additional events are discarded.
--  **Events - Processed vs dropped**: A pie chart that compares the proportion of successfully processed events against those that were dropped. This provides a quick visual summary of overall event handling performance.
-
-Consistent or frequent event drops indicate that your environment may not be able to handle the current event rate. If this continues, important alerts could be lost, reducing visibility into your security posture.
-
-If you observe a pattern of drops in these metrics, consider the following actions to address this:
-
--  **Increase the EPS setting**: Adjust the :ref:`average/peak EPS <cloud_settings_data_ingestion_rate>` configuration to better align with your actual event rate. This ensures your environment can process more events without loss.
--  **Review agent configuration**: Some agents may be sending excessive or unnecessary data. Tune their configuration to reduce noise, such as by filtering out less critical events before they are sent.
--  **Use the leaky bucket algorithm**: Implement a :doc:`leaky bucket </user-manual/agent/agent-management/antiflooding>` configuration on agents to smooth out event flow. This prevents sudden spikes in event bursts that could overwhelm queues and cause drops.
-
-By combining these strategies, you can ensure that your environment remains within its processing limits, reducing the risk of lost events while maintaining efficient and reliable event ingestion.
-
-
+-  Upgrade the **EPS** setting with **Edit settings**.
+-  Review the configuration of your agents. Some agents might send unnecessary events. Tune their configuration to send only the events you need.

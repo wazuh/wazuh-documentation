@@ -29,6 +29,7 @@ Index
    deployment-options/index
    user-manual/index
    wazuh-cti/index
+   Wazuh Cloud service <cloud-service/index>
    cloud-security/monitoring
    compliance/index
    proof-of-concept-guide/index
@@ -38,6 +39,5 @@ Index
    upgrade-guide/index
    Integrations guide <integrations-guide/index>
    migration-guide/index
-   Wazuh Cloud service <cloud-service/index>
    development/index
    release-notes/index
