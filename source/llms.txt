@@ -64,6 +64,7 @@ Hands-on use cases for exploring Wazuh capabilities in a lab environment, coveri
 - **[Network IDS Integration](https://documentation.wazuh.com/current/proof-of-concept-guide/network-ids-integration.md)** Integrate Suricata with Wazuh to enhance threat detection by monitoring and analyzing network traffic on an Ubuntu endpoint.
 - **[Detecting a Cross-Site Scripting (XSS) Attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-web-attack-xss.md)** Simulate and detect a Cross-Site Scripting (XSS) attack from Apache web server logs on an Ubuntu endpoint.
 - **[Detecting Hidden Processes](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-detect-hidden-process.md)** Detect hidden processes created by a kernel-mode rootkit on an Ubuntu endpoint using the Wazuh Rootcheck module.
+- **[Detecting a Known Malicious File](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-known-malicious-file.md)** Detect a known malicious file hash with the Wazuh CTI indicator of compromise feed, using the EICAR test file on Ubuntu and Windows endpoints.
 - **[Blocking a Known Malicious Actor](https://documentation.wazuh.com/current/proof-of-concept-guide/block-malicious-actor-ip-reputation.md)** Use a KVDB, custom decoders and rules, and Active Response to automatically block a malicious IP address from accessing Apache web servers on Ubuntu and Windows endpoints.
 
 ## Management & Administration

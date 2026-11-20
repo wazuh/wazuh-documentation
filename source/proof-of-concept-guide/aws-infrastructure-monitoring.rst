@@ -6,72 +6,68 @@
 Monitoring AWS infrastructure
 =============================
 
-This use case shows how the Wazuh module for AWS (aws-s3) enables log data collection from different AWS sources. To learn more about monitoring AWS resources, see the :doc:`Using Wazuh to monitor AWS </cloud-security/amazon/index>` section of the documentation.
+The Wazuh module for AWS (``aws-s3``) collects logs from AWS services. In this use case, you configure Wazuh to read AWS CloudTrail logs from an S3 bucket and detect activity in your AWS account. See :doc:`Using Wazuh to monitor AWS </cloud-security/amazon/index>`.
 
-.. |CLOUDTRAIL_POLICY| replace:: :ref:`necessary policies <cloudtrail_policy_configuration>`
-.. |AWS_PROFILE_AUTH| replace:: :ref:`profile authentication <aws_profile>`
+Endpoints
+---------
 
-Infrastructure
---------------
++----------------+-------------------------------------------------------------------------------+
+| Component      | Role                                                                          |
++================+===============================================================================+
+| AWS CloudTrail | Records the activity in your AWS account and stores the logs in an S3 bucket. |
++----------------+-------------------------------------------------------------------------------+
+| Ubuntu 24.04   | The Wazuh agent collects the CloudTrail logs from the S3 bucket.              |
++----------------+-------------------------------------------------------------------------------+
 
-+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Component      | Description                                                                                                                                                                                                                |
-+================+============================================================================================================================================================================================================================+
-| AWS CloudTrail | AWS CloudTrail, like all other supported AWS services, requires setting the |CLOUDTRAIL_POLICY| for user permissions and providing a valid authentication method. In this use case, you use the |AWS_PROFILE_AUTH| method. |
-+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Ubuntu 24.04   | The Wazuh agent on this endpoint collects the AWS CloudTrail logs from the S3 bucket.                                                                                                                                      |
-+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+Like other supported AWS services, CloudTrail needs the :doc:`necessary policies </cloud-security/amazon/services/supported-services/cloudtrail>` for user permissions and a valid authentication method. This use case uses the :doc:`profile authentication </cloud-security/amazon/services/prerequisites/credentials>` method.
 
 Configuration
 -------------
 
-Take the following steps to configure Wazuh to monitor AWS CloudTrail and identify security incidents.
+AWS CloudTrail
+^^^^^^^^^^^^^^
 
-CloudTrail
-^^^^^^^^^^
+#. In the AWS console, open the CloudTrail service.
 
-#. Access the CloudTrail service using the AWS console.
+#. `Create a new trail <https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html>`__.
 
-#. Create a new trail.
+#. Create a new S3 bucket or select an existing one to store the CloudTrail logs. Note the bucket name, because you need it in the Wazuh configuration. The image below shows a new trail with a new S3 bucket.
 
-#. Choose whether to create a new S3 bucket or specify an existing one to store CloudTrail logs. Note down the name of the S3 bucket used, as it is necessary to specify it in the Wazuh configuration.
-
-The image below shows how to create a new trail and attach a new S3 bucket.
-
-.. thumbnail:: /images/poc/cloudtrail.gif
-   :title: Creating a CloudTrail service
-   :alt: Animated walkthrough of creating a new AWS CloudTrail trail and attaching a new S3 bucket in the AWS console
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/poc/cloudtrail.gif
+      :title: Creating a CloudTrail service
+      :alt: Animation showing how to open the CloudTrail service in the AWS console and create a new trail with an S3 bucket
+      :align: center
+      :width: 80%
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-#. Navigate to **Ruleset management** > **Overview**.
+#. Go to **Ruleset management** > **Overview**.
 
-#. Enter ``aws`` in the search box and select the **aws** integration.
+#. Search for ``aws`` and click the **aws** integration name to open it.
 
-#. Click the **aws** integration name to open it, then click **Actions** and select **Enable**.
+#. Click **Actions** and select **Enable**.
 
    .. thumbnail:: /images/poc/aws-integration-enable.png
       :title: Enable the aws integration
-      :alt: Wazuh dashboard Ruleset management page for the aws integration with the Actions menu open and Enable highlighted
+      :alt: Wazuh dashboard Ruleset management page of the aws integration with the Enable option in the Actions menu
       :align: center
       :width: 80%
 
-Wazuh agent
-^^^^^^^^^^^
+Ubuntu endpoint
+^^^^^^^^^^^^^^^
 
-#. Install the Python dependencies of the Wazuh module for AWS on the Ubuntu endpoint. The command below is for Python 3.12, the default on Ubuntu 24.04. For other Python versions, see :doc:`Install dependencies </cloud-security/amazon/services/prerequisites/dependencies>`:
+#. Install the Python dependencies of the Wazuh module for AWS. This command is for Python 3.12, the default on Ubuntu 24.04. For other Python versions, see :doc:`Install dependencies </cloud-security/amazon/services/prerequisites/dependencies>`:
 
    .. code-block:: console
 
+      $ sudo apt update
+      $ sudo apt install -y python3-pip
       $ sudo pip3 install --break-system-packages boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
 
-#. Append the following configuration to the ``/var/ossec/etc/ossec.conf`` configuration file on the Ubuntu endpoint to enable the Wazuh AWS module. Add only the AWS buckets of interest. Read our guide on how to :doc:`configure AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
+#. Append the following configuration to ``/var/ossec/etc/ossec.conf``. Replace ``<AWS_BUCKET_NAME>`` with the name of your S3 bucket and ``<AWS_PROFILE_NAME>`` with your AWS profile. See :doc:`Configuring AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
 
    .. code-block:: xml
-      :emphasize-lines: 9, 10
 
       <ossec_config>
         <wodle name="aws-s3">
@@ -93,18 +89,59 @@ Wazuh agent
 
       $ sudo systemctl restart wazuh-agent
 
+Verify data ingestion
+---------------------
+
+Check that the module ran without errors:
+
+.. code-block:: console
+
+   $ sudo grep -i aws-s3 /var/ossec/logs/ossec.log
+
+The output includes ``Module AWS started`` and ``Executing Bucket Analysis`` with your bucket name.
+
 Test the configuration
 ----------------------
 
-Once you configure CloudTrail, you can generate events by creating a new IAM user account using the IAM service. This generates an event that Wazuh processes. The Wazuh default ruleset parses AWS logs and generates findings automatically. The findings appear after the module's next run, every ``<interval>`` (30m in this example). To test sooner, set ``<interval>`` to 5m. You can also find additional :ref:`CloudTrail use cases <cloudtrail-use-cases>` in our documentation.
+Generate a CloudTrail event, for example by `creating a new IAM user <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html>`__ in the IAM service. The default Wazuh ruleset parses AWS logs and creates findings automatically. Findings appear after the next run of the module, every ``<interval>`` (``30m`` in this example). To test sooner, set ``<interval>`` to ``5m``. See more :ref:`CloudTrail use cases <cloudtrail-use-cases>`.
 
-Visualize the findings
-----------------------
+View the findings
+-----------------
 
-You can visualize the findings on the Wazuh dashboard. Go to **Cloud security** > **Amazon Web Services** and select **Findings**.
+You see findings such as ``New user account <TEST_USER> created``, where ``<TEST_USER>`` is the IAM user you created. CloudTrail delivers events to the bucket a few minutes after the API call.
+
+In the Wazuh dashboard, go to **Cloud security** > **Amazon Web Services** and select **Findings**.
 
 .. thumbnail:: /images/poc/aws-findings.png
    :title: Visualize Amazon Web Services findings
-   :alt: Wazuh dashboard Amazon Web Services Findings tab listing AWS CloudTrail IAM user creation findings
+   :alt: Wazuh dashboard Amazon Web Services Findings tab listing the findings generated from the CloudTrail logs
    :align: center
    :width: 80%
+
+.. thumbnail:: /images/poc/aws-findings-details.png
+   :title: Amazon Web Services finding details
+   :alt: Document details of an Amazon Web Services finding about a new user account created
+   :align: center
+   :width: 80%
+
+Troubleshooting
+---------------
+
++------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
+| Check                              | How                                                                                                                                               |
++====================================+===================================================================================================================================================+
+| The module runs without errors     | ``sudo grep -i aws-s3 /var/ossec/logs/ossec.log``                                                                                                 |
++------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
+| The agent can read the bucket      | The profile has ``s3:GetObject`` and ``s3:ListBucket`` on the bucket, and ``kms:Decrypt`` on the key if the trail encrypts its logs with AWS KMS. |
++------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
+| CloudTrail delivered the event     | The bucket has a log file newer than the IAM call.                                                                                                |
++------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
+| The module ran after the delivery  | Restart the Wazuh agent to force a run.                                                                                                           |
++------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
+| The ``aws`` integration is enabled | **Ruleset management** > **Overview** shows it enabled. With it off, Wazuh drops the events without any message.                                  |
++------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Clean up
+--------
+
+Delete the test IAM user. If you no longer need the trail, delete it in the CloudTrail service so it stops writing logs to the S3 bucket.
