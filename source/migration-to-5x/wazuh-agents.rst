@@ -6,7 +6,7 @@
 Wazuh agents
 ============
 
-The Wazuh agent identifies itself to the Wazuh manager using a unique agent ID and authentication key. When migrating from Wazuh 4.x to Wazuh 5.x, you can migrate the existing agent registrations to the Wazuh 5.x manager, restore the required agent groups, reconnect the agents to the new deployment, and upgrade them to Wazuh 5.x. You run the export on the Wazuh 4.x manager, the import on the master node of the Wazuh 5.x manager, and the reconnection and upgrade steps on each Wazuh agent.
+The Wazuh agent identifies itself to the Wazuh manager using a unique agent ID and authentication key. When transitioning from Wazuh 4.x to Wazuh 5.x, you can migrate the existing agent registrations to the Wazuh 5.x manager, restore the required agent groups, reconnect the agents to the new deployment, and upgrade them to Wazuh 5.x. You run the export on the Wazuh 4.x manager, the import on the master node of the Wazuh 5.x manager, and the reconnection and upgrade steps on each Wazuh agent. For Docker or Kubernetes deployments, see :doc:`Docker and Kubernetes deployments <docker-kubernetes-deployments>`.
 
 You can migrate the following Wazuh agent components:
 
@@ -18,7 +18,7 @@ You can migrate the following Wazuh agent components:
 Agent registration
 ------------------
 
-The Wazuh manager 4.x stores agent registrations in the ``/var/ossec/etc/client.keys`` file and the Wazuh manager database. To preserve existing Wazuh agent identities during the migration, migrate the agent registrations to the Wazuh 5.x manager before reconnecting the agents. You can migrate them with the ``wazuh-migrate-identity.py`` migration tool or manually. Use the manual procedure to keep the registration dates and the exact group memberships.
+The Wazuh manager 4.x stores agent registrations in the ``/var/ossec/etc/client.keys`` file and the Wazuh manager database. To preserve existing Wazuh agent identities during the transition, migrate the agent registrations to the Wazuh 5.x manager before reconnecting the agents. You can migrate them with the ``wazuh-migrate-identity.py`` migration tool or manually. Use the manual procedure to keep the registration dates.
 
 The following table compares the two methods:
 
@@ -27,7 +27,7 @@ The following table compares the two methods:
 +==============================================+========================================+=====================================+
 | Agent IDs and keys                           | Kept                                   | Kept                                |
 +----------------------------------------------+----------------------------------------+-------------------------------------+
-| Group memberships                            | Every agent moves to the default group | Kept                                |
+| Group memberships                            | Kept                                   | Kept                                |
 +----------------------------------------------+----------------------------------------+-------------------------------------+
 | Registration dates                           | Set to the time of import              | Kept                                |
 +----------------------------------------------+----------------------------------------+-------------------------------------+
@@ -53,7 +53,6 @@ Limitations
 ~~~~~~~~~~~
 
 -  Registration dates: The tool sets each migrated agent's registration date to the time of import. To preserve the original dates, migrate agent registrations manually.
--  Group membership: The tool adds every migrated agent to the default group. To preserve exact group memberships, migrate agent registrations manually.
 -  Group files: The tool migrates only ``agent.conf`` files from group folders. It doesn't migrate other files, such as SCA policies, which Wazuh 5.x agents still run. Copy the files that you need from ``/var/ossec/etc/shared/<GROUP>/`` on the Wazuh 4.x manager to ``/etc/wazuh-manager/shared/<GROUP>/`` on the Wazuh 5.x manager, owned by ``wazuh-manager``.
 -  Customized default configuration: The tool doesn't migrate a customized ``shared/default/agent.conf``. Manually merge its settings into the Wazuh 5.x default group.
 -  Unsupported options: After import, review each migrated group folder and remove any ``agent.conf`` options that Wazuh 5.x doesn't support, such as ``<labels>``, ``<scan_on_start>``, and ``<check_files>``.
@@ -61,7 +60,7 @@ Limitations
 Prerequisites
 ~~~~~~~~~~~~~
 
--  Run every command as root. Don't enroll agents on the Wazuh 5.x manager before the import, and don't point Wazuh 4.x agents to the Wazuh 5.x manager until the import is complete.
+-  Run every command as root. Complete the import before any agent enrolls on or connects to the Wazuh 5.x manager, as described in :ref:`Prerequisites <migration_prerequisites>`.
 -  The ``wazuh-migrate-identity.py`` tool supports exports from Wazuh 4.13.0 or later. For an older Wazuh 4.x manager, add ``--force`` to the export command and run the check command after import.
 -  The Wazuh 5.x manager requires an enrollment password of at least 16 bytes. If the Wazuh 4.x password is shorter, either set a longer password on the Wazuh 4.x manager and its agents before exporting, or omit ``--with-password``.
 
@@ -214,7 +213,7 @@ Perform the following steps on the master node in the Wazuh manager cluster. The
 Migrate agent registrations manually
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps to migrate the Wazuh agent registrations from Wazuh 4.x to Wazuh 5.x. Do this before you enroll any agent on the Wazuh 5.x manager. These steps replace the Wazuh 5.x ``client.keys`` file and any agent already registered with the same ID.
+Perform the following steps to migrate the Wazuh agent registrations from Wazuh 4.x to Wazuh 5.x. These steps replace the Wazuh 5.x ``client.keys`` file and any agent already registered with the same ID. Run them before any agent enrolls on the Wazuh 5.x manager.
 
 Wazuh 4.x manager
 ~~~~~~~~~~~~~~~~~
@@ -268,7 +267,7 @@ Wazuh 5.x manager
 
       # install -m 660 -o wazuh-manager -g wazuh-manager /root/wazuh-4x-backup/client.keys /etc/wazuh-manager/client.keys
 
-#. Copy the agent registrations and group memberships from the Wazuh 4.x database into the Wazuh 5.x database. Wazuh 5.x uses a different database schema, so you can't replace the database file:
+#. Copy the agent registrations and group memberships from the Wazuh 4.x database into the Wazuh 5.x database. Because Wazuh 5.x uses a different database schema, copy the records instead of replacing the database file:
 
    .. note::
 
@@ -376,9 +375,11 @@ Perform the following steps on each Wazuh agent after you migrate the agent regi
 
    .. note::
 
-      Upgrade the Wazuh agents to Wazuh 5.x to complete the migration. The migrated Wazuh 4.x agents send only log events and findings, without FIM, SCA, system inventory, or vulnerability detection data. They also don't run rootkit checks, because the Wazuh 5.x default group doesn't include the ``rootkit_files.txt`` and ``rootkit_trojans.txt`` files. To keep these checks until you upgrade the agents, copy the ``.txt`` files of ``/var/ossec/etc/shared/default/`` on the Wazuh 4.x manager to ``/etc/wazuh-manager/shared/default/`` on the Wazuh 5.x manager, owned by ``wazuh-manager``. Remove them after every agent runs Wazuh 5.x.
+      Upgrade the Wazuh agents to Wazuh 5.x to complete the transition. The migrated Wazuh 4.x agents send only log events and findings, without FIM, SCA, system inventory, or vulnerability detection data. They also don't run rootkit checks, because the Wazuh 5.x default group doesn't include the ``rootkit_files.txt`` and ``rootkit_trojans.txt`` files. To keep these checks until you upgrade the agents, copy the ``.txt`` files of ``/var/ossec/etc/shared/default/`` on the Wazuh 4.x manager to ``/etc/wazuh-manager/shared/default/`` on the Wazuh 5.x manager, owned by ``wazuh-manager``. Remove them after every agent runs Wazuh 5.x.
 
       A new Wazuh 4.x agent enrolls on port 1515 with the enrollment password of the Wazuh 5.x manager. Otherwise, the agent logs Invalid password. Unable to add an agent (from manager) and stays pending. Read the password from ``/etc/wazuh-manager/authd.pass`` on the Wazuh 5.x manager. Then set it in the ``WAZUH_REGISTRATION_PASSWORD`` variable when you install the agent.
+
+.. _migration_upgrade_migrated_wazuh_agents:
 
 Upgrade the migrated Wazuh agents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -391,7 +392,7 @@ You can upgrade the Wazuh agents remotely, as described in :doc:`Upgrading the W
 -  ``<verification_mode>`` in the ``<remote><https>`` section of ``wazuh-manager.conf`` is ``none`` or not set. Otherwise, the Wazuh manager rejects the upgrade.
 -  Linux agents have the ``openssl`` command. Otherwise, the upgraded agent runs with TLS verification disabled.
 
-After the upgrade, navigate to **Agents management** > **Summary** and verify that every Wazuh agent is active and that none is marked **Outdated**. Then check that the migrated dashboards show data.
+After the upgrade, navigate to **Agents management** > **Summary** and verify that every Wazuh agent is active and that none is marked **Outdated**. Then check that the migrated dashboards show data. To monitor the Wazuh manager hosts, install a Wazuh agent on every Wazuh manager node, as described in the :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>`.
 
 .. note::
 
