@@ -360,7 +360,7 @@ Complete these steps on the new node.
 
       # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check -H /var/wazuh-manager
 
-   The output ends with ``check: no problem found``. In a distributed deployment, it ends with ``check: no problem found (1 warnings)`` instead. The warning reports the dashboard client pair, which the node can't issue without the CA key.
+   The output ends with ``check: no problem found``.
 
 #. Check that the agent listener certificate chains to the root CA of the deployment:
 

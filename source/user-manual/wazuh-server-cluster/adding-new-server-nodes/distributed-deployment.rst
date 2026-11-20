@@ -287,7 +287,7 @@ Complete the first step on the master node and the rest on the new node, in the 
 
       # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check -H /var/wazuh-manager
 
-   The command ends with ``check: no problem found (1 warnings)``. The warning reports that the dashboard client pair wasn't generated, because ``/etc/wazuh-manager/ca`` holds no CA key. It doesn't stop the node from starting or joining the cluster. When ``/etc/wazuh-manager/ca`` holds ``root-ca.key``, as in the step-by-step variant, it ends with ``check: no problem found``.
+   The command ends with ``check: no problem found``.
 
 .. _wazuh_manager_cluster_configure_the_new_node_as_a_worker_2:
 

@@ -86,7 +86,7 @@ You can write :ref:`custom SCA policies <sca_creating_custom_policies>` for your
         name: "Custom Web Server Hardening"
         description: "Checks for basic secure configuration of web servers (Nginx/Apache)."
         references:
-          - https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
 
       requirements:
         title: "Check that a web server is present on the system"
@@ -203,7 +203,7 @@ SCA scans when the agent starts. NGINX isn't installed yet, so the agent skips t
 
 .. note::
 
-   NGINX needs port 80. If Apache runs on the endpoint, for example from the web attack use cases, stop it first with ``sudo systemctl stop apache2``.
+   If Apache is installed on the endpoint, for example from a web attack use case, the agent doesn't skip the custom policy and the command prints nothing. Apache also uses port 80, which NGINX needs. Restore the lab snapshot, or remove Apache with ``sudo apt purge -y apache2`` and restart the Wazuh agent with ``sudo systemctl restart wazuh-agent``.
 
 Test the configuration
 ----------------------
