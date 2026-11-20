@@ -147,7 +147,7 @@ Bucket path or prefix.
 only_logs_after
 ~~~~~~~~~~~~~~~
 
-Parse logs from a specific date onwards. It must follow the YYYY-MMM-DD format (for example, ``2021-Jun-01``); a numeric month is not accepted.
+Parse logs from a specific date onwards. It must follow the YYYY-MMM-DD format (for example, ``2021-Jun-01``). The month is the three-letter English abbreviation and isn't case-sensitive; a numeric month is not accepted.
 
 +--------------------+-----------------------------------+
 | **Default value**  | Date of execution at ``00:00:00`` |
@@ -258,7 +258,7 @@ Linux configuration:
         <bucket type="access_logs">
             <name>wazuh-test-bucket</name>
             <credentials_file>/var/ossec/wodles/gcloud/credentials.json</credentials_file>
-            <only_logs_after>2021-JUN-01</only_logs_after>
+            <only_logs_after>2021-Jun-01</only_logs_after>
             <path>access_logs/</path>
             <remove_from_bucket>no</remove_from_bucket>
         </bucket>
