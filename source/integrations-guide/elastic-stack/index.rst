@@ -30,7 +30,7 @@ Installing Logstash
 
 Perform the following steps to install Logstash and the required plugin.
 
-#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html>`__. Ensure that you consider the `requirements <https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html>`__ and `performance tuning <https://www.elastic.co/guide/en/logstash/current/performance-troubleshooting.html>`__ guidelines for running Logstash.
+#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/docs/reference/logstash/installing-logstash>`__ 9.5.6, the version the integration is tested with. Ensure that you consider the `requirements <https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html>`__ and `performance tuning <https://www.elastic.co/guide/en/logstash/current/performance-troubleshooting.html>`__ guidelines for running Logstash.
 
    .. note::
 
@@ -40,7 +40,9 @@ Perform the following steps to install Logstash and the required plugin.
 
    .. code-block:: console
 
-      $ sudo /usr/share/logstash/bin/logstash-plugin install logstash-input-opensearch
+      $ sudo env LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 1.0.0 logstash-input-opensearch
+
+   The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
 
 #. Copy the Wazuh indexer and Elasticsearch root certificates to the Logstash server. 
 
@@ -198,8 +200,8 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
                   index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
                   user => '${ELASTICSEARCH_USERNAME}'
                   password => '${ELASTICSEARCH_PASSWORD}'
-                  ssl => true
-                  cacert => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"
+                  ssl_enabled => true
+                  ssl_certificate_authorities => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"
                   template => "/etc/logstash/templates/wazuh.json"
                   template_name => "wazuh"
                   template_overwrite => true
@@ -215,7 +217,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 
       .. note::
          
-         For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
+         For testing purposes, you can avoid SSL verification by replacing ``ssl_certificate_authorities => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"`` with ``ssl_verification_mode => "none"``.
 
          If you are using composable index templates and the _index_template API, set the optional parameter `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__.
 
@@ -224,10 +226,15 @@ Running Logstash
 
 #. Once you have everything set, run Logstash from CLI with your configuration:
 
+   Run the command as the ``logstash`` user. Logstash 9 doesn't run as root, and that user must own the log files that earlier commands created as root:
+
    .. code-block:: console
 
       $ sudo systemctl stop logstash
-      $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-elasticsearch.conf --path.settings /etc/logstash/
+      $ sudo chown -R logstash:logstash /var/log/logstash
+      $ sudo -E -u logstash /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-elasticsearch.conf --path.settings /etc/logstash/
+
+   ``sudo -E`` passes ``LOGSTASH_KEYSTORE_PASS`` to Logstash, so run the command in the shell where you exported it. Without it, Logstash reports that the keystore is not valid.
    
    Make sure to use your own paths for the executable, the pipeline, and the configuration files.
 
@@ -264,7 +271,7 @@ We use Logstash to forward security data in the ``/var/ossec/logs/alerts/alerts.
 
 Perform the following steps to install Logstash and the required plugin.
 
-#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html>`__. Ensure that you consider the `requirements <https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html>`__ and `performance tuning <https://www.elastic.co/guide/en/logstash/current/performance-troubleshooting.html>`__ guidelines for running Logstash.
+#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/docs/reference/logstash/installing-logstash>`__ 9.5.6, the version the integration is tested with. Ensure that you consider the `requirements <https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html>`__ and `performance tuning <https://www.elastic.co/guide/en/logstash/current/performance-troubleshooting.html>`__ guidelines for running Logstash.
 
    .. note::
       
@@ -274,7 +281,9 @@ Perform the following steps to install Logstash and the required plugin.
 
    .. code-block:: console
 
-      $ sudo /usr/share/logstash/bin/logstash-plugin install logstash-output-elasticsearch
+      $ sudo env LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install logstash-output-elasticsearch
+
+   The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
 
 #. Copy the Elasticsearch root certificate to the Wazuh server. You can add the certificate to any directory of your choice. In our case, we add it in ``/etc/logstash/elasticsearch-certs`` directory.
 
@@ -405,8 +414,8 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
                   index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
                   user => '${ELASTICSEARCH_USERNAME}'
                   password => '${ELASTICSEARCH_PASSWORD}'
-                  ssl => true
-                  cacert => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"
+                  ssl_enabled => true
+                  ssl_certificate_authorities => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"
                   template => "/etc/logstash/templates/wazuh.json"
                   template_name => "wazuh"
                   template_overwrite => true
@@ -420,7 +429,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 
       .. note::
          
-         For testing purposes, you can avoid SSL verification by replacing ``cacert => "/PATH/TO/LOCAL/ELASTICSEARCH/root-ca.pem"`` with ``ssl_certificate_verification => false``.
+         For testing purposes, you can avoid SSL verification by replacing ``ssl_certificate_authorities => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"`` with ``ssl_verification_mode => "none"``.
 
 #. By default the ``/var/ossec/logs/alerts/alerts.json`` file is owned by the ``wazuh`` user with restrictive permissions. You must add the ``logstash`` user to the ``wazuh`` group so it can read the file when running Logstash as a service:
 
@@ -433,10 +442,15 @@ Running Logstash
 
 #. Once you have everything set, run Logstash from CLI with your configuration:
 
+   Run the command as the ``logstash`` user. Logstash 9 doesn't run as root, and that user must own the log files that earlier commands created as root:
+
    .. code-block:: console
 
       $ sudo systemctl stop logstash
-      $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-elasticsearch.conf --path.settings /etc/logstash/
+      $ sudo chown -R logstash:logstash /var/log/logstash
+      $ sudo -E -u logstash /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-elasticsearch.conf --path.settings /etc/logstash/
+
+   ``sudo -E`` passes ``LOGSTASH_KEYSTORE_PASS`` to Logstash, so run the command in the shell where you exported it. Without it, Logstash reports that the keystore is not valid.
 
    Make sure to use your own paths for the executable, the pipeline, and the configuration files.
 
