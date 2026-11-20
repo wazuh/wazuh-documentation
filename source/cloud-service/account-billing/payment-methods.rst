@@ -22,8 +22,6 @@ Viewing your payment methods
 
 The tab lists the cards of your organization. Each card shows its brand, its last four digits, and its expiration date. A card can also show the following badges:
 
-.. TODO: Confirm with engineering whether renewals of existing subscriptions charge the organization default card or the card used for the original purchase.
-
 -  **Default**: The card that Wazuh charges for renewals and other payments of the organization.
 -  **Expired**: The card has passed its expiration date and can't be charged. Add a valid card and set it as the default.
 

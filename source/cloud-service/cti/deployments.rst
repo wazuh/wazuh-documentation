@@ -83,5 +83,3 @@ Deleting a deployment removes it from your organization.
 #. Confirm the deletion.
 
 To connect the deployment again, register it again. See :doc:`Registering a deployment </cloud-service/cti/register-deployment>`.
-
-.. TODO: Confirm with engineering what happens to a paid subscription assigned to a deployment that is deleted (whether the seat returns to the unassigned pool) and whether the deleted deployment stops receiving feeds immediately.

@@ -21,9 +21,7 @@ Requirements
 -  An endpoint with a supported operating system. See the list of supported operating systems in :doc:`Agent enrollment requirements </user-manual/agent/agent-enrollment/requirements>`.
 -  Outbound connectivity from the endpoint to your environment.
 
-.. TODO: Confirm with engineering which ports Wazuh 5.0 agents use to reach a Wazuh Cloud environment (443, 1514, 1515, or 1517/TCP). Self-hosted 5.0 agents use 1517/TCP for enrollment and communication.
-
-The endpoint must reach your environment on port 1517/TCP. Allow this outbound connection in your firewalls and proxies.
+The endpoint must reach your environment on port 443/TCP. Allow this outbound connection in your firewalls and proxies.
 
 Deploying an agent
 ------------------
@@ -46,7 +44,7 @@ Verifying the enrollment
 #. In the Wazuh dashboard, click the upper-left menu icon **☰** and go to **Agents management** > **Summary**.
 #. Check that the agent is listed with the **Active** status.
 
-If the agent doesn't appear after a few minutes, check that the endpoint can reach your environment on the required port and that the agent service is running.
+If the agent doesn't appear after a few minutes, check that the endpoint can reach your environment on port 443/TCP and that the agent service is running.
 
 Grouping agents
 ---------------

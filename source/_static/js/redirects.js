@@ -643,6 +643,7 @@ removedUrls['5.0'] = [
   '/cloud-service/account-billing/manage-billing-details.html',
   '/cloud-service/account-billing/stop-charges.html',
   '/cloud-service/account-billing/update-billing.html',
+  '/cloud-service/archive-data/configuration.html',
   '/cloud-service/cli/index.html',
   '/cloud-service/getting-started/sign-up-trial.html',
   '/cloud-service/your-environment/agents-without-internet.html',

@@ -10,8 +10,6 @@ Filename format
 
 Wazuh Cloud stores archive data files in a directory structure that indicates the date and time each file was delivered. This page describes the path and filename format so you can locate and process the files.
 
-.. TODO: Confirm with engineering the archive data path and filename format for 5.0 environments. The bucket and prefix wazuh-cloud-cold-<REGION>/<CLOUD_ID> are confirmed in code; the category, subcategory, and filename layout below are carried over from 4.x.
-
 The path follows this format:
 
 ``wazuh-cloud-cold-<REGION>/<CLOUD_ID>/<CATEGORY>[/<SUBCATEGORY>]/<YEAR>/<MONTH>/<DAY>``

@@ -95,8 +95,6 @@ Do I have access to the Wazuh indexer API?
 
 The Wazuh indexer API isn't exposed by default. To request access from a specific IP address, contact Wazuh support. When access is granted, you can use the ``GET`` methods of the Wazuh indexer API. See :doc:`Limitations </cloud-service/your-environment/limitations>`.
 
-.. TODO: Confirm with engineering that server and indexer API access on request (by source IP, GET only for the indexer) applies to Wazuh Cloud 5.0 environments.
-
 How can I forward my data to another solution or SOC?
 -----------------------------------------------------
 

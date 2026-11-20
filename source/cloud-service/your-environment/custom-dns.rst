@@ -58,9 +58,7 @@ After you save the configuration, the **Custom DNS** card lists the **Custom dom
 Creating the DNS record
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-In your DNS provider, create a ``CNAME`` record that points your custom domain name to the default URL of your environment.
-
-.. TODO: Confirm with engineering the CNAME target for custom DNS (default environment hostname vs a load balancer hostname) and whether the console shows it.
+In your DNS provider, create a ``CNAME`` record that points your custom domain name to the default host name of your environment, ``<CLOUD_ID>.cloud.wazuh.com``.
 
 Updating a custom DNS
 ---------------------

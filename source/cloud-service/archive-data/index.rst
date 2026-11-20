@@ -31,6 +31,5 @@ This configuration keeps recent alerts readily available in indexed data, while 
 .. toctree::
    :maxdepth: 1
 
-   configuration
    filename-format
    access
