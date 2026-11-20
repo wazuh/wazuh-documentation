@@ -17,7 +17,7 @@ How it works
 
 #. If the IP address exists in the KVDB, the ``http_detector`` detector generates a finding based on a custom rule.
 
-#. An Active Response monitor checks for these findings every minute and triggers the ``block_traffic`` Active Response. The Active Response blocks the source IP address on the endpoint for a few minutes.
+#. An Active Response monitor checks for these findings every minute and triggers the ``block_traffic`` Active Response. The Active Response blocks the source IP address on the endpoint for 60 seconds after the last Active Response command.
 
 #. A second decoder and rule convert the ``block-ip`` log messages into a finding that records the blocking action.
 
@@ -158,7 +158,7 @@ Create the decoders
         - "https://documentation.wazuh.com/"
         supports: []
         title: "Wazuh message decoder"
-      check: "regex_match($wazuh.protocol.location, '(access[.]log|access_log|active-responses[.]log)$')"
+      check: "regex_match($wazuh.protocol.location, 'access[.]log$|access_log$|active-responses[.]log$')"
       normalize:
       - map:
         - _tmp_json: "parse_json($event.original)"
@@ -555,15 +555,15 @@ Attack emulation
 
       $ curl http://<WEBSERVER_IP>
 
-   The first requests succeed. Within about two minutes, the Active Response monitor runs. Wazuh then blocks further connections from the RHEL endpoint to the web server for a few minutes.
+   The first requests succeed. Within about two minutes, the Active Response monitor runs. Wazuh then blocks further connections from the RHEL endpoint to the web server.
 
-#. Wait about two minutes, then send the request again:
+#. Wait about one minute, then send the request again:
 
    .. code-block:: console
 
       $ curl --max-time 10 http://<WEBSERVER_IP>
 
-   While the block is active, the request fails with ``curl: (28) Connection timed out after 10001 milliseconds``.
+   While the block is active, the request fails with ``curl: (28) Connection timed out after 10001 milliseconds``. If the request succeeds, the monitor hasn't run yet. Wait 30 seconds and send it again.
 
 #. Check the block on the victim endpoint with the command in the following table.
 
@@ -620,7 +620,7 @@ Troubleshooting
 Clean up
 --------
 
-Each block expires after a few minutes.
+Each block expires 60 seconds after the last Active Response command.
 
 To stop blocking the RHEL endpoint, delete the ``apache_malicious_ip_monitor`` monitor in **Explore** > **Alerting** > **Monitors**.
 
