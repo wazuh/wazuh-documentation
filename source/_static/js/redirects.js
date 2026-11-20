@@ -157,6 +157,7 @@ newUrls['5.0'] = [
   '/migration-to-5x/docker-kubernetes-deployments.html',
   '/proof-of-concept-guide/poc-security-configuration-assessment.html',
   '/proof-of-concept-guide/detect-web-attack-xss.html',
+  '/proof-of-concept-guide/detect-known-malicious-file.html',
   '/wazuh-cti/index.html',
   '/wazuh-cti/how-it-works.html',
   '/wazuh-cti/managing-wazuh-cti.html',
