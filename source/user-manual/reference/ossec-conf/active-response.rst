@@ -40,7 +40,7 @@ repeated_offenders
 
 Defines increasing timeout periods for repeated offenders. Specify a comma-separated list of up to six values in increasing order.
 
-The timeout configured on the Wazuh manager applies to the first occurrence. The values configured here apply to subsequent occurrences.
+The timeout configured on the Wazuh manager applies to the first occurrence. The values configured here apply to subsequent occurrences. An occurrence counts as repeated only if it starts within the largest configured value after the previous timeout ends. Otherwise, it gets the Wazuh manager timeout again. This time includes the delay between the finding and the Wazuh agent receiving the response, so very small values might never apply.
 
 +----------------------+-----------------------------------------------------+
 | **Default value**    | n/a                                                 |
