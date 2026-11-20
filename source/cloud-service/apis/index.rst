@@ -18,7 +18,7 @@ All endpoints share the following base URL:
 
 .. code-block:: none
 
-   https://console.wazuh.com/api/v1
+   https://console.pro.cloud.wazuh.com/api/v1
 
 Requests and responses use JSON. Each request authenticates with an organization API key. See :doc:`Authentication </cloud-service/apis/authentication>`.
 

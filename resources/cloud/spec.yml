@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://console.wazuh.com/api/v1
+  - url: https://console.pro.cloud.wazuh.com/api/v1
     description: Wazuh Console API
 info:
   title: Wazuh Console API

@@ -10,12 +10,10 @@ Creating an account
 
 A Wazuh Console account gives you access to Wazuh Cloud. This page explains how to sign up, confirm your email address, log in, and reset your password.
 
-.. TODO: Confirm the production Wazuh Console host (https://console.wazuh.com) with engineering.
-
 Signing up
 ----------
 
-#. Go to `https://console.wazuh.com/signup <https://console.wazuh.com/signup>`__. From the log in page, you can also select **Sign up**.
+#. Go to `https://console.pro.cloud.wazuh.com/signup <https://console.pro.cloud.wazuh.com/signup>`__. From the log in page, you can also select **Sign up**.
 #. On the **Create your account** form, fill in the following fields:
 
    -  **First name** and **Last name**.
@@ -40,7 +38,7 @@ The confirmation link is valid for 7 days. If it expires, the page shows **This 
 Logging in
 ----------
 
-#. Go to `https://console.wazuh.com/login <https://console.wazuh.com/login>`__.
+#. Go to `https://console.pro.cloud.wazuh.com/login <https://console.pro.cloud.wazuh.com/login>`__.
 #. Enter your **Email** and **Password**.
 #. Select **Log in**.
 
