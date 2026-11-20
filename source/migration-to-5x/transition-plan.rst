@@ -33,8 +33,9 @@ The following table summarizes the Wazuh data and configurations that you can mi
 | :ref:`Agent registration <migration_agent_registration>`                                    | Migrate existing Wazuh agent registrations to the Wazuh 5.x manager while preserving their |
 |                                                                                             | agent IDs and authentication keys. Only the manual procedure keeps the registration dates. |
 +---------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+
-| :ref:`Agent groups <migration_migrate_agent_registrations>`                                 | Migrated with the agent registrations, including group configuration. The migration tool   |
-|                                                                                             | migrates only the ``agent.conf`` file of each group.                                       |
+| :ref:`Agent groups <migration_migrate_agent_registrations>`                                 | Migrated with the agent registrations, including group configuration. The                  |
+|                                                                                             | ``wazuh-migrate-identity.py`` migration tool migrates only the ``agent.conf`` file of each |
+|                                                                                             | group.                                                                                     |
 +---------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+
 
 Limitations
