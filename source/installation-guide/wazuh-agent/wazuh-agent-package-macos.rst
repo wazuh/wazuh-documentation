@@ -19,8 +19,8 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
 #. To start the installation process, download the Wazuh agent according to your architecture:
 
-   -  Intel: |macOS_intel_64|. Suitable for macOS Sonoma (14), Sequoia (15), Tahoe (26), and 27 on Intel.
-   -  Apple Silicon: |macOS_arm64|. Suitable for macOS Sonoma (14), Sequoia (15), Tahoe (26), and 27 on Apple Silicon.
+   -  Intel: |macOS_intel_64|. Suitable for macOS Sonoma (14), Sequoia (15), Tahoe (26), and macOS 27 on Intel.
+   -  Apple Silicon: |macOS_arm64|. Suitable for macOS Sonoma (14), Sequoia (15), Tahoe (26), and macOS 27 on Apple Silicon.
 
 #. Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
 

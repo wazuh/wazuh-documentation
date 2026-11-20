@@ -43,17 +43,17 @@ Wazuh
 Enable the Microsoft Azure integration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Azure integration is disabled by default on the Wazuh manager. Enable this integration to allow Microsoft Azure event analysis and processing.
+The **azure** integration is disabled by default. Enable it before you configure the Wazuh module for Azure. While the integration is disabled, the Wazuh manager receives the Azure events but discards them without generating findings.
 
-#. Navigate to the **Ruleset Management** dashboard \> **Overview** dashboard.
-#. Search for the integration name Azure and select it.
+#. On the Wazuh dashboard, navigate to **Ruleset Management** \> **Overview** and make sure you are in the **Standard** space.
+#. Search for ``azure`` and select the integration named **azure**.
 
    .. thumbnail:: /images/cloud-security/azure/ruleset-management-search-azure.png
       :alt: Ruleset Management Overview in the Wazuh dashboard, with azure entered in the integrations search field
       :align: center
       :width: 80%
 
-#. Click on **Actions** \> **Enable** to enable the integration.
+#. On the integration page, click **Actions** \> **Enable** to enable the integration.
 
    .. thumbnail:: /images/cloud-security/azure/enable-azure-integration.png
       :alt: Actions menu with Enable highlighted on the azure integration page of Ruleset Management in the Wazuh dashboard
@@ -84,7 +84,7 @@ You need the libraries below to set up your Wazuh agent endpoint and monitor you
 
       .. code-block:: console
 
-         # pip3 install azure-storage-blob==12.20.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.14.0 python-dateutil==2.8.1 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.18 SQLAlchemy==2.0.23 pytz==2020.1
+         # pip3 install --ignore-installed azure-storage-blob==12.20.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.14.0 python-dateutil==2.8.1 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.18 SQLAlchemy==2.0.23 pytz==2020.1
 
    .. group-tab:: Python 3.11
 
@@ -216,7 +216,7 @@ To authenticate your Microsoft Azure environment to Wazuh, store your credential
 
       # mkdir -p /var/ossec/wodles/credentials
 
-#. Create the credentials file for your service inside that directory, using the ``field = value`` format:
+#. Create the credentials file for your service inside that directory, using the ``field = value`` format. Use one file per service, for example log_analytics, graph, or storage, and use the same file name in the <auth_path> option of the service configuration:
 
    The fields expected in the credentials file depend on the type of service or activity you are monitoring.
 
@@ -238,17 +238,17 @@ To authenticate your Microsoft Azure environment to Wazuh, store your credential
          account_name = <YOUR_ACCOUNT_NAME>
          account_key = <YOUR_ACCOUNT_KEY>
 
-#. Restrict the file so that only the root user can write it and the wazuh group can read it:
+#. Restrict the file so that only the root user can write it and the wazuh group can read it. Replace ``<CREDENTIALS_FILE>`` with the file name you used in the previous step, for example ``log_analytics``:
 
    .. code-block:: console
 
-      # chown root:wazuh /var/ossec/wodles/credentials/<SERVICE_NAME_CREDENTIALS>
-      # chmod 640 /var/ossec/wodles/credentials/<SERVICE_NAME_CREDENTIALS>
+      # chown root:wazuh /var/ossec/wodles/credentials/<CREDENTIALS_FILE>
+      # chmod 640 /var/ossec/wodles/credentials/<CREDENTIALS_FILE>
 
-#. Specify the authentication file in the ``/var/ossec/etc/ossec.conf`` configuration file using the ``<auth_path>`` option, regardless of the service or activity you monitor. For example:
+#. Specify the authentication file in the ``/var/ossec/etc/ossec.conf`` configuration file of the Wazuh agent, inside the ``<ossec_config>`` section. Use the ``<auth_path>`` option, regardless of the service or activity you monitor. For example:
 
    .. code-block:: xml
-      :emphasize-lines: 6, 16, 26
+      :emphasize-lines: 6, 17, 27
 
       <wodle name="azure-logs">
          <disabled>no</disabled>
@@ -258,7 +258,8 @@ To authenticate your Microsoft Azure environment to Wazuh, store your credential
             <auth_path>/var/ossec/wodles/credentials/<LOG_ANALYTICS_CREDENTIALS></auth_path>
             <tenantdomain><YOUR_TENANT_DOMAIN></tenantdomain>
             <request>
-               <query>AzureActivity</query>
+               <tag>azure-auditlogs</tag>
+               <query>AuditLogs</query>
                <workspace><WORKSPACE_ID></workspace>
                <time_offset>1d</time_offset>
             </request>
@@ -284,7 +285,19 @@ To authenticate your Microsoft Azure environment to Wazuh, store your credential
          </storage>
       </wodle>
 
-You can add more than one ``request`` block simultaneously in the same configuration. The Wazuh module for Azure processes each request sequentially. The above configuration is an example. It includes Microsoft Azure Log Analytics, Graph, and Storage configuration blocks.
+   You can add more than one ``request`` block simultaneously in the same configuration. The Wazuh module for Azure processes each request sequentially. The above configuration is an example. It includes Microsoft Azure Log Analytics, Graph, and Storage configuration blocks.
+
+#. Restart the Wazuh agent to apply the configuration changes:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+#. Check the Wazuh agent log for the Wazuh module for Azure. Each configured service logs a line when its collection starts and another when it finishes, such as ``Finished Log Analytics collection for the domain '<YOUR_TENANT_DOMAIN>'.`` A failed request logs a warning instead:
+
+   .. code-block:: console
+
+      # grep azure-logs /var/ossec/logs/ossec.log
 
 For more information on ``<auth_path>``, look at the :doc:`Wazuh module for Azure </user-manual/reference/ossec-conf/wodle-azure-logs>` reference page.
 

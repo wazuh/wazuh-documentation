@@ -6,24 +6,33 @@
 Blocking a known malicious actor
 ================================
 
-In this use case, we demonstrate how to block malicious IP addresses from accessing web resources on a web server monitored by a Wazuh agent. You set up Apache web servers on Ubuntu and Windows endpoints, and try to access them from a RHEL endpoint, which acts as the attacker.
+In this use case, you block a malicious IP address from accessing web servers monitored by Wazuh. The RHEL endpoint simulates the attacker. You add its IP address to a :doc:`key-value database (KVDB) </user-manual/data-analysis/key-value-databases>` of malicious IP addresses. Then, you configure :doc:`Active Response </user-manual/capabilities/active-response/index>` to run the :doc:`block-ip </user-manual/capabilities/active-response/default-active-response-scripts>` script on the Ubuntu and Windows web servers to block the address.
 
-A Key-Value Database (KVDB) is used to hold the IP addresses of malicious IP addresses. The RHEL endpoint plays the role of the malicious actor here; therefore, you add its IP address to the reputation database. Then, configure Wazuh to block the RHEL endpoint from accessing the Apache web server using the out-of-the-box ``block-ip`` Active Response script. This discourages attackers from continuing their malicious activities.
+How it works
+------------
 
-In this use case, you use the Wazuh :doc:`KVDB </user-manual/data-analysis/key-value-databases>` and :doc:`Active Response </user-manual/capabilities/active-response/index>` capabilities.
+#. The Wazuh agents on the Ubuntu and Windows endpoints forward Apache access logs to the Wazuh manager.
 
-Infrastructure
---------------
+#. A custom decoder parses each request and checks whether its source IP address exists in the ``malicious_IPs`` KVDB.
 
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Endpoint     | Description                                                                                                                                                        |
-+==============+====================================================================================================================================================================+
-| RHEL 9.0     | Attacker endpoint connecting to the victim's web server, on which you use the Wazuh KVDB capability to flag its IP address as malicious.                           |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Ubuntu 24.04 | Victim endpoint running an Apache 2.4.58 web server. Here, you use the Wazuh Active Response module to automatically block connections from the attacker endpoint. |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Windows 11   | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh Active Response module to automatically block connections from the attacker endpoint. |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+#. If the IP address exists in the KVDB, the ``http_detector`` detector generates a finding based on a custom rule.
+
+#. An Active Response monitor checks for these findings every minute and triggers the ``block_traffic`` Active Response. The Active Response blocks the source IP address on the endpoint for 60 seconds after the last Active Response command.
+
+#. A second decoder and rule convert the ``block-ip`` log messages into a finding that records the blocking action.
+
+Endpoints
+---------
+
++--------------+--------------------------------------------------------------------------------+
+| Endpoint     | Role                                                                           |
++==============+================================================================================+
+| RHEL 9.0     | Attacker. Its IP address is in the malicious IP KVDB.                          |
++--------------+--------------------------------------------------------------------------------+
+| Ubuntu 24.04 | Victim running an Apache web server. Active Response blocks the attacker here. |
++--------------+--------------------------------------------------------------------------------+
+| Windows 11   | Victim running an Apache web server. Active Response blocks the attacker here. |
++--------------+--------------------------------------------------------------------------------+
 
 Configuration
 -------------
@@ -31,16 +40,14 @@ Configuration
 Ubuntu endpoint
 ^^^^^^^^^^^^^^^
 
-Perform the following steps to install an Apache web server and monitor its logs with the Wazuh agent.
-
-#. Update local packages and install the Apache web server:
+#. Update the local packages and install the Apache web server:
 
    .. code-block:: console
 
       $ sudo apt update
-      $ sudo apt install apache2
+      $ sudo apt install -y apache2
 
-#. If the firewall is enabled, modify the firewall to allow external access to web ports. Skip this step if the firewall is disabled:
+#. If the firewall is enabled, allow access to the web ports. Skip this step if the firewall is disabled:
 
    .. code-block:: console
 
@@ -48,19 +55,19 @@ Perform the following steps to install an Apache web server and monitor its logs
       $ sudo ufw app list
       $ sudo ufw allow 'Apache'
 
-#. Check the status of the Apache service to verify that the web server is running:
+#. Check that the Apache service is running:
 
    .. code-block:: console
 
       $ sudo systemctl status apache2
 
-#. Use the ``curl`` command or open ``http://<UBUNTU_IP>`` in a browser to view the Apache landing page and verify the installation:
+#. Check that the Apache landing page loads. Run the following command, or open ``http://<UBUNTU_IP>`` in a browser:
 
    .. code-block:: console
 
       $ curl http://<UBUNTU_IP>
 
-#. Append the following to the ``/var/ossec/etc/ossec.conf`` file to configure the Wazuh agent and monitor the Apache access logs:
+#. Append the following lines to ``/var/ossec/etc/ossec.conf`` so that the Wazuh agent monitors the Apache access logs:
 
    .. code-block:: xml
 
@@ -80,27 +87,25 @@ Perform the following steps to install an Apache web server and monitor its logs
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
-Perform the following steps to install and configure an Apache web server and a Wazuh agent to monitor Apache server events.
-
 #. Install the latest `Visual C++ Redistributable package <https://aka.ms/vs/17/release/vc_redist.x64.exe>`__.
 
-#. Download the `Apache web server <https://www.apachelounge.com/download/>`__ Win64 ZIP installation file. This is a precompiled binary for Windows operating systems.
+#. Download the `Apache web server <https://www.apachelounge.com/download/>`__ Win64 ZIP file. It contains precompiled binaries for Windows.
 
-#. Unzip the contents of the Apache web server ZIP file and copy the extracted ``Apache24`` folder to the ``C:`` drive.
+#. Unzip the file and copy the extracted ``Apache24`` folder to ``C:\``.
 
-#. Navigate to the ``C:\Apache24\bin\`` folder and run the following command in a PowerShell terminal with administrator privileges:
+#. In a PowerShell terminal with administrator privileges, go to ``C:\Apache24\bin\`` and start Apache:
 
-   .. code-block:: powershell
+   .. code-block:: ps1con
 
       > .\httpd.exe
 
-   The first time you run the Apache binary, a Windows Defender Firewall notification pops up.
+   The first time you run Apache, Windows Defender Firewall shows a notification.
 
-#. Click **Allow Access**. This allows the Apache HTTP server to communicate on your private or public networks depending on your network settings. It creates an inbound rule in your firewall to allow incoming traffic on port 80.
+#. Click **Allow Access**. This creates an inbound firewall rule that allows incoming traffic on port 80.
 
-#. Open ``http://<WINDOWS_IP>`` in a browser to view the Apache landing page and verify the installation. Also, verify that the attacker endpoint can reach this URL.
+#. Open ``http://<WINDOWS_IP>`` in a browser to check that the Apache landing page loads. Also check that the RHEL endpoint can reach this URL.
 
-#. Append the following to ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to configure the Wazuh agent and monitor the Apache access logs:
+#. Append the following lines to ``C:\Program Files (x86)\ossec-agent\ossec.conf`` so that the Wazuh agent monitors the Apache access logs:
 
    .. code-block:: xml
 
@@ -111,27 +116,33 @@ Perform the following steps to install and configure an Apache web server and a 
         </localfile>
       </ossec_config>
 
-#. Restart the Wazuh agent in a PowerShell terminal with administrator privileges to apply the changes:
+#. Open a second PowerShell terminal with administrator privileges, because Apache keeps the first one busy, and restart the Wazuh agent:
 
-   .. code-block:: powershell
+   .. code-block:: ps1con
 
       > Restart-Service -Name WazuhSvc
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-Perform the following steps on the Wazuh dashboard to add the IP address of the RHEL endpoint to a KVDB, and then configure custom decoders, rules, a detector, and Active Response.
+In the Wazuh dashboard, you create the custom decoders, KVDB, and rules in the **Draft** space and promote them to the **Custom** space. Then you create the detector, the Active Response, and the :ref:`monitor <alerting_active_response_monitors>` that runs it. See :doc:`Spaces </user-manual/data-analysis/space>`.
 
-Decoders
-~~~~~~~~
+Create the decoders
+~~~~~~~~~~~~~~~~~~~
 
-#. Navigate to **Ruleset management** > **Decoders**.
+#. Go to **Ruleset management** > **Decoders**.
 
-#. Select the **Draft** space, then select **Actions** > **Create**. Ruleset content moves through spaces: you create and edit assets in the ``Draft`` space, promote them to ``Test``, then promote them to ``Custom``, where they run alongside the Standard content. See :ref:`Spaces <data_analysis_space>`.
+#. Select the **Draft** space, then select **Actions** > **Create**.
 
-#. Create an integration with the title ``custom_http`` using the **Create integration** button if you haven't created one before. Select **Network Activity** as the **Category** and set a preferred name as the **Author**.
+#. If you haven't created it before, click **Create integration** and create an integration titled ``custom_http``. Select **Network Activity** as the **Category** and enter your name as the **Author**.
 
-#. Switch to the YAML editor, then enter the decoder below and click the **Create decoder** button. This decoder is a copy of the Wazuh message root decoder, ``decoder/core-wazuh-message/0``. Each space needs its own root decoder, and you select this one for the ``custom_http`` integration in a later step.
+   .. thumbnail:: /images/poc/block-malicious-actor-create-integration.png
+      :title: Create the custom_http integration
+      :alt: Wazuh dashboard Create integration panel with the custom_http title and the Network Activity category
+      :align: center
+      :width: 80%
+
+#. Switch to the YAML editor, select the ``custom_http`` integration, enter the following decoder, and click **Create decoder**. The decoder is a copy of the Wazuh message root decoder, ``decoder/core-wazuh-message/0``. Each space needs its own root decoder, and you set this one as the ``root`` decoder of the **Draft** space in a later step. It adds a check so that only events from the Apache access log and the Active Response log enter the ``custom_http`` integration. Without it, the Custom space indexes every other agent event a second time.
 
    .. code-block:: yaml
 
@@ -147,12 +158,19 @@ Decoders
         - "https://documentation.wazuh.com/"
         supports: []
         title: "Wazuh message decoder"
+      check: "regex_match($wazuh.protocol.location, 'access[.]log$|access_log$|active-responses[.]log$')"
       normalize:
       - map:
         - _tmp_json: "parse_json($event.original)"
       enabled: true
 
-#. Select the **Draft** space, then select **Actions** > **Create**. Switch to the YAML editor, select the ``custom_http`` integration, then enter the decoder below and click the **Create decoder** button.
+   .. thumbnail:: /images/poc/block-malicious-actor-root-decoder-yaml.png
+      :title: Root decoder of the Draft space
+      :alt: Wazuh dashboard Create decoder page in the YAML editor with the copy of the Wazuh message root decoder for the custom_http integration
+      :align: center
+      :width: 80%
+
+#. Select **Actions** > **Create** again. Switch to the YAML editor, select the ``custom_http`` integration, enter the following decoder for Apache access logs, and click **Create decoder**. Its ``threat.indicator.description`` mapping looks up the source IP address in the ``malicious_IPs`` KVDB. It covers the Apache combined and common log formats.
 
    .. code-block:: yaml
 
@@ -171,36 +189,7 @@ Decoders
       parents:
       - "decoder/core-wazuh-message/0"
       parse|event.original:
-      - "<destination.domain> <source.address> - <user.name> [<event.start/ANSIC>] \"<~/literal/->?<_http_request>\"\
-        \ <http.response.status_code> <http.response.body.bytes>?<~/literal/-> \"<http.request.referrer>\"\
-        \ \"<user_agent.original>\""
-      - "<destination.domain> <source.address> - <user.name> [<event.start/HTTPDATE>] \"\
-        <~/literal/->?<_http_request>\" <http.response.status_code> <http.response.body.bytes>?<~/literal/->\
-        \ \"<http.request.referrer>\" \"<user_agent.original>\""
-      - "<source.address> - <user.name> [<event.start/HTTPDATE>] \"<_http_request>\" <http.response.status_code>\
-        \ <_ignore/literal/->?<http.response.body.bytes>(? \"<http.request.referrer>\" \"\
-        <user_agent.original>\")"
-      - "<source.address> - <user.name> [<event.start/HTTPDATE>] \"-\" <http.response.status_code>\
-        \ -"
-      - "<source.address> - - [<event.start/ANSIC>] \"-\" <http.response.status_code> -"
-      - "<source.address> - - [<event.start/ANSIC>] \"<~/literal/->?<_http_request>\" <http.response.status_code>\
-        \ <http.response.body.bytes>?<~/literal/-> \"<http.request.referrer>\" \"<user_agent.original>\""
-      - "<source.address> - <user.name> [<event.start/ANSIC>] \"<~/literal/->?<_http_request>\"\
-        \ <http.response.status_code> <http.response.body.bytes>?<~/literal/-> \"<http.request.referrer>\"\
-        \ \"<user_agent.original>\""
-      - "[<event.start/ANSIC>] <source.address> <network.protocol> <tls.cipher> \"<_http_request>\"\
-        \ <http.response.body.bytes>?<~/literal/->"
-      - "[<event.start/HTTPDATE>] <source.address> <network.protocol> <tls.cipher> \"<_http_request>\"\
-        \ <http.response.body.bytes>?<~/literal/->"
-      - "<source.address> - - [<event.start/HTTPDATE>] \"<~/literal/->?<_http_request>\"\
-        \ <http.response.status_code> <http.response.body.bytes>?<~/literal/-> \"<http.request.referrer>\"\
-        \ \"<user_agent.original>\" \"-\""
-      - "<source.address> - <user.name> [<event.start/HTTPDATE>] \"<~/literal/->?<_http_request>\"\
-        \ <http.response.status_code> <http.response.body.bytes>?<~/literal/-> \"<http.request.referrer>\"\
-        \ \"<user_agent.original>\" X-Forwarded-For=\"<?_forwarded_for>\""
-      - "<source.address> - <user.name> [<event.start/HTTPDATE>] \"<~/literal/->?<_http_request>\"\
-        \ <http.response.status_code> <http.response.body.bytes>?<~/literal/-> \"<http.request.referrer>\"\
-        \ \"<user_agent.original>"
+      - "<source.address> - <user.name> [<event.start/HTTPDATE>] \"<_http_request>\" <http.response.status_code> <_ignore/literal/->?<http.response.body.bytes>(? \"<http.request.referrer>\" \"<user_agent.original>\")"
       normalize:
       - map:
         - event.category: "array_append(web)"
@@ -210,42 +199,24 @@ Decoders
         - event.kind: "event"
         - service.type: "apache"
         - source.ip: "$source.address"
-        - _tls: "split($network.protocol, 'v')"
-        - _tls_1: "$_tls.1"
-        - _client_ip: "split($_forwarded_for, ',')"
-        - client.ip: "$_client_ip.0"
-        - network.forwarded_ip: "$_client_ip.0"
-        - tls.version_protocol: "$_tls.0"
-        - tls.cipher: "$tls.cipher"
         - threat.indicator.description: "kvdb_lookup('malicious_IPs', $source.ip)"
         parse|_http_request:
         - "<http.request.method> <url.original> HTTP/<http.version>"
-      - check:
-        - _tls_1: "regex_match(\\\\d+\\\\.\\\\d+)"
-        map:
-        - tls.version: "$_tls_1"
-      - check:
-        - _tls_1: "regex_not_match(\\\\d+\\\\.\\\\d+)"
-        map:
-        - tls.version: "concat_any($_tls_1, '.0')"
       - check: "number_lt($http.response.status_code, 400)"
         map:
         - event.outcome: "success"
       - check: "number_gte($http.response.status_code, 400)"
         map:
         - event.outcome: "failure"
-      - check:
-        - source.ip: "not_exists()"
-        map:
-        - source.domain: "parse_fqdn($source.address)"
-      - map:
-        - url.extension: "regex_extract($url.original, '.*\\\\.([a-zA-Z0-9]+)(?:\\\\?|$)')"
-        - url.path: "$url.original"
-        - url.query: "regex_extract($url.original, '\\\\?(.*)')"
-        - url.domain: "$destination.domain"
       enabled: true
 
-#. Select the **Draft** space, then select **Actions** > **Create**. Switch to the YAML editor, select the ``custom_http`` integration, then enter the decoder below and click the **Create decoder** button.
+   .. thumbnail:: /images/poc/block-malicious-actor-decoder-config.png
+      :title: Apache access decoder
+      :alt: Wazuh dashboard Create decoder page in the YAML editor with the Apache access log decoder for the custom_http integration
+      :align: center
+      :width: 80%
+
+#. Create the following decoder for the ``block-ip`` Active Response logs the same way, in the ``custom_http`` integration:
 
    .. code-block:: yaml
 
@@ -289,45 +260,47 @@ Decoders
         - event.outcome: "failure"
       enabled: true
 
-   .. thumbnail:: /images/poc/block-malicious-actor-decoder-config.png
-      :title: Decoder configuration
-      :alt: Wazuh dashboard Decoders page in the Draft space listing the custom_http decoders core-wazuh-message, apache-access, and active-response-block-ip
+   .. thumbnail:: /images/poc/block-malicious-actor-block-ip-decoder-config.png
+      :title: Active Response block-ip decoder
+      :alt: Wazuh dashboard Create decoder page in the YAML editor with the block-ip Active Response decoder for the custom_http integration
       :align: center
       :width: 80%
 
-KVDBs
-~~~~~
+Create the KVDB
+~~~~~~~~~~~~~~~
 
-#. Navigate to **Ruleset management** > **KVDBs**. Ensure you are in the **Draft** space, click **Actions**, and select **Create**. Fill in the following parameters:
+#. Go to **Ruleset management** > **KVDBs**. In the **Draft** space, click **Actions** and select **Create**.
 
-   +-----------------+-----------------------------+
-   | Field           | Value                       |
-   +=================+=============================+
-   | ``Integration`` | ``custom_http``             |
-   +-----------------+-----------------------------+
-   | ``Title``       | ``malicious_IPs``           |
-   +-----------------+-----------------------------+
-   | ``Author``      | ``Custom``                  |
-   +-----------------+-----------------------------+
-   | ``Description`` | ``A list of malicious IPs`` |
-   +-----------------+-----------------------------+
+#. Fill in the following fields.
 
-   #. Click **Add** under the **Content** section, then add the ``<RHEL_IP>`` as **Key** and ``malicious`` as **Value.**
+   +-------------+-----------------------------+
+   | Field       | Value                       |
+   +=============+=============================+
+   | Integration | ``custom_http``             |
+   +-------------+-----------------------------+
+   | Title       | ``malicious_IPs``           |
+   +-------------+-----------------------------+
+   | Author      | ``Custom``                  |
+   +-------------+-----------------------------+
+   | Description | ``A list of malicious IPs`` |
+   +-------------+-----------------------------+
 
-   #. Click **Create KVDB**.
+#. Under **Content**, click **Add**. Enter ``<RHEL_IP>`` as the **Key** and ``malicious`` as the **Value**.
+
+#. Click **Create KVDB**.
 
    .. thumbnail:: /images/poc/block-malicious-actor-kvdb-config.png
       :title: KVDB configuration
-      :alt: Wazuh dashboard KVDBs page showing the malicious_IPs KVDB in the custom_http integration
+      :alt: Wazuh dashboard Create KVDB page with the malicious_IPs KVDB and the RHEL IP address with the value malicious
       :align: center
       :width: 80%
 
-Rules
-~~~~~
+Create the rules
+~~~~~~~~~~~~~~~~
 
-#. Navigate to **Ruleset management** > **Rules**. Select the **Draft** space, then select **Actions** > **Create**.
+#. Go to **Ruleset management** > **Rules**. Select the **Draft** space, then select **Actions** > **Create**.
 
-#. Switch to the YAML editor, select the ``custom_http`` integration, then enter the rule below and click the **Create rule** button.
+#. Switch to the YAML editor, select the ``custom_http`` integration, enter the following rule, and click **Create rule**. It detects successful HTTP requests from an IP address in the KVDB:
 
    .. code-block:: yaml
 
@@ -361,7 +334,7 @@ Rules
           - ''
         modified: '2026-07-10T14:24:11Z'
 
-#. Repeat step 1. Switch to the YAML editor, select the ``custom_http`` integration, then enter the rule below and click the **Create rule** button:
+#. Create the following rule the same way, in the ``custom_http`` integration. It detects when Active Response blocks an IP address:
 
    .. code-block:: yaml
 
@@ -393,183 +366,262 @@ Rules
 
    .. thumbnail:: /images/poc/block-malicious-actor-rules-config.png
       :title: Rules configuration
-      :alt: Wazuh dashboard Ruleset management Decoders page in the Draft space listing the apache-access and core-wazuh-message decoders of the custom_http integration
+      :alt: Wazuh dashboard Ruleset management Rules page in the Draft space listing the two custom_http rules
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Overview** > **Actions** > **Edit**. Select the ``decoder/core-wazuh-message/0`` decoder under the **Root Decoder** field, then click **Save**.
+Set the root decoder and promote the content
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Go to **Ruleset management** > **Overview**, select the **Draft** space, and select **Space actions** > **Edit**. Turn on **Status**, select ``decoder/core-wazuh-message/0`` in the **Root Decoder** field, and click **Save**.
 
    .. thumbnail:: /images/poc/block-malicious-actor-root-decoder-config.png
       :title: Root decoder configuration
-      :alt: Wazuh dashboard Edit Draft panel with the Wazuh message decoder selected as the root decoder
+      :alt: Wazuh dashboard Draft space Overview page with the Space actions menu open and the Edit option
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Overview**, then click **Actions** > **Promote**. **Actions** > **Promote** opens the Promote page, which lists the changes to promote. Click **Promote**, type ``promote`` in the confirmation dialog, and click **Promote**. This promotes the created assets from the **Draft** user space to the **Test** user space.
+#. Go to **Ruleset management** > **Overview** and select **Space actions** > **Promote**. The Promote page lists the changes to promote. Click **Promote**, type ``promote`` in the confirmation dialog, and click **Promote**. This moves the assets from the **Draft** space to the **Test** space.
+
+   .. thumbnail:: /images/poc/block-malicious-actor-promote-page.png
+      :title: Promote page of the Draft space
+      :alt: Wazuh dashboard Promote page listing the integration, decoders, KVDB, and rules to promote from the Draft space to the Test space
+      :align: center
+      :width: 80%
 
    .. thumbnail:: /images/poc/block-malicious-actor-promote-dialog.png
       :title: Promote confirmation dialog
-      :alt: Wazuh dashboard Promote to test space dialog listing the space and integration to promote, with a field to type promote to confirm
+      :alt: Wazuh dashboard confirmation dialog to promote the entities to the Test space, with promote typed in the confirmation field
       :align: center
       :width: 80%
 
-#. Select the **Test** space, then click **Actions** > **Promote**. **Actions** > **Promote** opens the Promote page, which lists the changes to promote. Click **Promote**, type ``promote`` in the confirmation dialog, and click **Promote**. This promotes the created assets from the **Test** user space to the **Custom** user space. Wait a few minutes for the changes to apply before you test them.
+#. Select the **Test** space, select **Space actions** > **Promote**, and confirm the promotion to move the assets to the **Custom** space. Wait a few minutes for the changes to apply.
 
-Detector
-~~~~~~~~
+   .. thumbnail:: /images/poc/block-malicious-actor-promote-test-page.png
+      :title: Promote page of the Test space
+      :alt: Wazuh dashboard Promote page listing the integration, decoders, KVDB, and rules to promote from the Test space to the Custom space
+      :align: center
+      :width: 80%
 
-#. Navigate to **Ruleset management** > **Detectors,** then click **Create detector**.
+   .. thumbnail:: /images/poc/block-malicious-actor-promote-test-dialog.png
+      :title: Promote to the Custom space dialog
+      :alt: Wazuh dashboard confirmation dialog to promote the entities to the Custom space, with promote typed in the confirmation field
+      :align: center
+      :width: 80%
 
-#. Set the value of the **Name** field to ``http_detector``, then click the **Data source** drop-down and select ``wazuh-events-v5-network-activity`` as the **indexes/aliases**.
+Create the detector
+~~~~~~~~~~~~~~~~~~~
 
-#. Change the space to **Custom** in the **Rules** section, then select ``custom_http`` from the **Integration** drop-down.
+#. Go to **Ruleset management** > **Detectors** and click **Create detector**.
+
+#. Enter ``http_detector`` as the **Name**. In the **Data source** drop-down, select ``wazuh-events-v5-network-activity``.
+
+#. In the **Rules** section, change the space to **Custom** and select ``custom_http`` in the **Integration** drop-down.
 
 #. Click **Create detector**.
 
    .. thumbnail:: /images/poc/block-malicious-actor-detector-config.png
       :title: Detector configuration
-      :alt: Wazuh dashboard details of the http_detector detector using the custom_http integration and the wazuh-events-v5-network-activity data source
+      :alt: Wazuh dashboard http_detector page showing the detector details and its two active rules
       :align: center
       :width: 80%
 
-Active response
-~~~~~~~~~~~~~~~~
+Create the Active Response
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Navigate to **Explore** > **Active Responses,** then click **Create active response**. Fill in the following parameters:
+#. Go to **Explore** > **Active Responses** and click **Create active response**.
 
-   +----------------------+--------------------------------------------------------------+
-   | Field                | Value                                                        |
-   +======================+==============================================================+
-   | ``Name``             | ``block_traffic``                                            |
-   +----------------------+--------------------------------------------------------------+
-   | ``Description``      | ``Adds a referenced IP address to the firewall's blocklist`` |
-   +----------------------+--------------------------------------------------------------+
-   | ``Executable``       | ``block-ip``                                                 |
-   +----------------------+--------------------------------------------------------------+
-   | ``Type``             | ``Stateful``                                                 |
-   +----------------------+--------------------------------------------------------------+
-   | ``Stateful timeout`` | ``60 (seconds)``                                             |
-   +----------------------+--------------------------------------------------------------+
-   | ``Location``         | ``Local``                                                    |
-   +----------------------+--------------------------------------------------------------+
+#. Fill in the following fields.
+
+   +------------------+--------------------------------------------------------------+
+   | Field            | Value                                                        |
+   +==================+==============================================================+
+   | Name             | ``block_traffic``                                            |
+   +------------------+--------------------------------------------------------------+
+   | Description      | ``Adds a referenced IP address to the firewall's blocklist`` |
+   +------------------+--------------------------------------------------------------+
+   | Executable       | ``block-ip``                                                 |
+   +------------------+--------------------------------------------------------------+
+   | Type             | Stateful                                                     |
+   +------------------+--------------------------------------------------------------+
+   | Stateful timeout | ``60`` (seconds)                                             |
+   +------------------+--------------------------------------------------------------+
+   | Location         | Local                                                        |
+   +------------------+--------------------------------------------------------------+
 
    .. thumbnail:: /images/poc/block-malicious-actor-active-response-form.png
       :title: Active response form
-      :alt: Wazuh dashboard Create active response form showing the Executable, Type, Stateful timeout and Location fields
+      :alt: Wazuh dashboard Create active response form with the block_traffic name, the block-ip executable, and a stateful timeout of 60 seconds
       :align: center
       :width: 80%
 
-#. Click **Create** to create the Active Response.
+#. Click **Create**.
 
    .. thumbnail:: /images/poc/block-malicious-actor-active-response-config.png
       :title: Active response configuration
-      :alt: Wazuh dashboard Active responses page showing the block_traffic active response
+      :alt: Wazuh dashboard Active responses list showing the block_traffic active response
       :align: center
       :width: 80%
 
-#. Run ``curl http://<WEBSERVER_IP>`` once from the RHEL endpoint. Wait about two minutes, then check that a finding with ``wazuh.integration.name: custom_http`` appears in **Threat intelligence** > **Threat Hunting** > **Findings**. If no finding appears, check that the assets are in the Custom space and that ``http_detector`` is active in **Ruleset management** > **Detectors**. The Field list of the monitor offers ``service.type`` only after such a finding exists.
+Create the Active Response monitor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Navigate to **Explore** > **Alerting**. Switch to the **Monitors** tab, then select **Create Monitor**. Fill in the following parameters:
+The monitor needs at least one ``custom_http`` finding, because its **Field** list offers ``service.type`` only after such a finding exists.
 
-   +-----------------------------+----------------------------------------+
-   | Field                       | Value                                  |
-   +=============================+========================================+
-   | ``Monitor name``            | ``apache_malicious_ip_monitor``        |
-   +-----------------------------+----------------------------------------+
-   | ``Monitor type``            | ``Active Response monitor``            |
-   +-----------------------------+----------------------------------------+
-   | ``Monitor defining method`` | ``Visual editor``                      |
-   +-----------------------------+----------------------------------------+
-   | ``Frequency``               | ``By interval``                        |
-   +-----------------------------+----------------------------------------+
-   | ``Run every``               | ``1 Minute(s)``                        |
-   +-----------------------------+----------------------------------------+
-   | ``Index``                   | ``wazuh-findings-v5-network-activity`` |
-   +-----------------------------+----------------------------------------+
-   | ``Query name``              | ``apache_malicious_ip_query``          |
-   +-----------------------------+----------------------------------------+
-   | ``Field``                   | ``service.type is apache``             |
-   +-----------------------------+----------------------------------------+
+#. From the RHEL endpoint, send one request to a web server. Replace ``<WEBSERVER_IP>`` with the IP address of the Ubuntu or Windows endpoint:
+
+   .. code-block:: console
+
+      $ curl http://<WEBSERVER_IP>
+
+#. Wait about two minutes. Then go to **Threat intelligence** > **Threat Hunting** > **Findings** and check that a finding with ``wazuh.integration.name: custom_http`` appears.
+
+   If no finding appears, check that the assets are in the **Custom** space and that ``http_detector`` is active in **Ruleset management** > **Detectors**.
+
+#. Go to **Explore** > **Alerting**, select the **Monitors** tab, and click **Create monitor**.
+
+#. Fill in the following fields.
+
+   +-------------------------+----------------------------------------+
+   | Field                   | Value                                  |
+   +=========================+========================================+
+   | Monitor name            | ``apache_malicious_ip_monitor``        |
+   +-------------------------+----------------------------------------+
+   | Monitor type            | Active Response monitor                |
+   +-------------------------+----------------------------------------+
+   | Monitor defining method | Visual editor                          |
+   +-------------------------+----------------------------------------+
+   | Frequency               | By interval                            |
+   +-------------------------+----------------------------------------+
+   | Run every               | 1 Minute(s)                            |
+   +-------------------------+----------------------------------------+
+   | Index                   | ``wazuh-findings-v5-network-activity`` |
+   +-------------------------+----------------------------------------+
+   | Query name              | ``apache_malicious_ip_query``          |
+   +-------------------------+----------------------------------------+
+   | Field                   | ``service.type`` is ``apache``         |
+   +-------------------------+----------------------------------------+
 
    .. thumbnail:: /images/poc/block-malicious-actor-monitor-type.png
       :title: Monitor type
-      :alt: Wazuh dashboard Create monitor page showing the Monitor type options, including Active Response monitor
+      :alt: Wazuh dashboard Create monitor page with the Active Response monitor type selected
       :align: center
       :width: 80%
 
-#. In the **Triggers** section, click **Add trigger** and fill in the following parameters:
+   .. thumbnail:: /images/poc/block-malicious-actor-monitor-form.png
+      :title: Monitor configuration form
+      :alt: Wazuh dashboard Create monitor page with the apache_malicious_ip_monitor details filled in
+      :align: center
+      :width: 80%
 
-   +-----------------------------+---------------------------------+
-   | Field                       | Value                           |
-   +=============================+=================================+
-   | ``Trigger name``            | ``apache_malicious_ip_trigger`` |
-   +-----------------------------+---------------------------------+
-   | ``Severity level``          | ``1 (Highest)``                 |
-   +-----------------------------+---------------------------------+
-   | ``Specify queries or tags`` | ``apache_malicious_ip_query``   |
-   +-----------------------------+---------------------------------+
+#. In the **Triggers** section, click **Add trigger** and fill in the following fields.
 
-#. In the **Actions** subsection, click **Add active response** and fill in the following parameters:
+   +-------------------------+---------------------------------+
+   | Field                   | Value                           |
+   +=========================+=================================+
+   | Trigger name            | ``apache_malicious_ip_trigger`` |
+   +-------------------------+---------------------------------+
+   | Severity level          | 1 (Highest)                     |
+   +-------------------------+---------------------------------+
+   | Specify queries or tags | ``apache_malicious_ip_query``   |
+   +-------------------------+---------------------------------+
 
-   +---------------------+--------------------------------+
-   | Field               | Value                          |
-   +=====================+================================+
-   | ``Action name``     | ``apache_malicious_ip_action`` |
-   +---------------------+--------------------------------+
-   | ``Active response`` | ``block_traffic``              |
-   +---------------------+--------------------------------+
+#. In the **Actions** subsection, click **Add active response** and fill in the following fields.
 
-#. Click **Create** to create the monitor.
+   +-----------------+--------------------------------+
+   | Field           | Value                          |
+   +=================+================================+
+   | Action name     | ``apache_malicious_ip_action`` |
+   +-----------------+--------------------------------+
+   | Active response | ``block_traffic``              |
+   +-----------------+--------------------------------+
+
+#. Click **Create**.
 
    .. thumbnail:: /images/poc/block-malicious-actor-monitor-config.png
       :title: Monitor configuration
-      :alt: Wazuh dashboard monitor configuration showing the apache_malicious_ip_trigger trigger and the apache_malicious_ip_action action that runs block_traffic
+      :alt: Wazuh dashboard page of the apache_malicious_ip_monitor Active Response monitor with its trigger
       :align: center
       :width: 80%
+
+.. _poc_block_attack_emulation:
 
 Attack emulation
 ----------------
 
-Access any of the web servers from the RHEL endpoint using the corresponding IP address. Replace ``<WEBSERVER_IP>`` with the appropriate value and execute the following command from the attacker endpoint:
+#. From the RHEL endpoint, send a request to one of the web servers:
 
-.. code-block:: console
+   .. code-block:: console
 
-   $ curl http://<WEBSERVER_IP>
+      $ curl http://<WEBSERVER_IP>
 
-The first connections from the attacker endpoint to the victim's web servers succeed. Within about two minutes, the Active Response monitor runs and the Wazuh Active Response module blocks any further connection from the attacker endpoint to the web servers for 60 seconds.
+   The first requests succeed. Within about two minutes, the Active Response monitor runs. Wazuh then blocks further connections from the RHEL endpoint to the web server.
 
-Wait about two minutes, then run the request again from the attacker endpoint:
+#. Wait about one minute, then send the request again:
 
-.. code-block:: console
+   .. code-block:: console
 
-   $ curl --max-time 10 http://<WEBSERVER_IP>
+      $ curl --max-time 10 http://<WEBSERVER_IP>
 
-While the block is active, the request fails with: ``curl: (28) Connection timed out after 10001 milliseconds``
+   While the block is active, the request fails with ``curl: (28) Connection timed out after 10001 milliseconds``. If the request succeeds, the monitor hasn't run yet. Wait 30 seconds and send it again.
 
-To see the block on the victim endpoint:
+#. Check the block on the victim endpoint with the command in the following table.
 
--  **Ubuntu**: ``sudo iptables -L INPUT -n | grep <RHEL_IP>`` shows a DROP rule for the attacker IP address.
--  **Windows**: ``netsh advfirewall firewall show rule name="WAZUH ACTIVE RESPONSE BLOCKED IP"``
+   +----------+----------------------------------------------------------------------------------+----------------------------------------------------+
+   | Endpoint | Command                                                                          | Result                                             |
+   +==========+==================================================================================+====================================================+
+   | Ubuntu   | ``sudo iptables -L INPUT -n | grep <RHEL_IP>``                                   | A ``DROP`` rule for the RHEL IP address.           |
+   +----------+----------------------------------------------------------------------------------+----------------------------------------------------+
+   | Windows  | ``netsh advfirewall firewall show rule name="WAZUH ACTIVE RESPONSE BLOCKED IP"`` | The firewall rule that blocks the RHEL IP address. |
+   +----------+----------------------------------------------------------------------------------+----------------------------------------------------+
 
-After 60 seconds the Wazuh agent removes the rule and the request succeeds again.
+When the block expires, the Wazuh agent removes the rule and requests succeed again. The block lasts 60 seconds, the Active Response stateful timeout, after the last Active Response command. Each new finding for the same IP address sends the command again and restarts the timer. The block lasts longer while the RHEL endpoint keeps sending requests.
 
-Visualize the findings
------------------------
+View the findings
+-----------------
 
-You can visualize the findings in the Wazuh dashboard. To do this, go to **Threat intelligence** > **Threat Hunting**, select **Findings**, and add the following filter in the search bar: ``wazuh.integration.name: custom_http``.
+You see the finding ``Apache: Successful HTTP connection from malicious IP`` for requests from the RHEL endpoint, and ``Active response blocked IP - <RHEL_IP>`` when Active Response blocks it.
 
--  Ubuntu:
+In the Wazuh dashboard, go to **Threat intelligence** > **Threat Hunting**, select **Findings**, and enter ``wazuh.integration.name: custom_http`` in the search bar.
+
+-  Ubuntu endpoint
 
    .. thumbnail:: /images/poc/block-malicious-actor-ubuntu-findings.png
-      :alt: Wazuh dashboard Threat Hunting showing the Apache: Successful HTTP connection from malicious IP and Active response blocked IP findings for the Ubuntu 24.04 agent
-      :title: Blocking a known malicious actor Ubuntu findings
+      :title: Findings for the Ubuntu endpoint
+      :alt: Wazuh dashboard Threat Hunting Findings tab showing the Apache: Successful HTTP connection from malicious IP and Active response blocked IP findings for the Ubuntu 24.04 agent
       :align: center
       :width: 80%
 
--  Windows:
+-  Windows endpoint
 
    .. thumbnail:: /images/poc/block-malicious-actor-windows-findings.png
-      :alt: Wazuh dashboard Threat Hunting showing the Apache: Successful HTTP connection from malicious IP finding for the Windows 11 agent
-      :title: Blocking a known malicious actor Windows findings
+      :title: Findings for the Windows endpoint
+      :alt: Wazuh dashboard Threat Hunting Findings tab showing the Apache: Successful HTTP connection from malicious IP and Active response blocked IP findings for the Windows 11 agent
       :align: center
       :width: 80%
+
+Troubleshooting
+---------------
+
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Check                              | How                                                                                                                          |
++====================================+==============================================================================================================================+
+| The assets are in the Custom space | **Ruleset management** > **Decoders**, **KVDBs**, and **Rules** list them in the **Custom** space.                           |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| The detector is active             | ``http_detector`` is active in **Ruleset management** > **Detectors**.                                                       |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| The KVDB has the attacker          | The ``malicious_IPs`` KVDB has ``<RHEL_IP>`` with the value ``malicious``.                                                   |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| The monitor runs                   | ``apache_malicious_ip_monitor`` is enabled in **Explore** > **Alerting** > **Monitors**.                                     |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| The block is active                | Ubuntu: ``sudo iptables -L INPUT -n``. Windows: the netsh command from :ref:`Attack emulation <poc_block_attack_emulation>`. |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+
+Clean up
+--------
+
+Each block expires 60 seconds after the last Active Response command.
+
+To stop blocking the RHEL endpoint, delete the ``apache_malicious_ip_monitor`` monitor in **Explore** > **Alerting** > **Monitors**.
+
+To stop Apache on the Windows endpoint, press **Ctrl** + **C** in the PowerShell terminal where it runs.

@@ -165,18 +165,24 @@ Using the RESTful API
       {
          "data": {
             "affected_items": [
-               {
-                  "agent": "008",
-                  "task_id": 3
-               }
+               "008"
             ],
             "total_affected_items": 1,
             "total_failed_items": 0,
-            "failed_items": []
+            "failed_items": [],
+            "nodes": {
+               "node01": {
+                  "affected_items": [
+                     "008"
+                  ]
+               }
+            }
          },
          "message": "All upgrade tasks were created",
          "error": 0
       }
+
+   The ``nodes`` object lists the Wazuh agents affected on each Wazuh manager node.
 
    The ``agents_list`` parameter in the :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` and :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` endpoints allows the value ``all``. When this value is set, an upgrade request will be sent to all Wazuh agents.
 

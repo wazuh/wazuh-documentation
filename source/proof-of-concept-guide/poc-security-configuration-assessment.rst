@@ -3,32 +3,31 @@
 .. meta::
    :description: The Wazuh Security Configuration Assessment module evaluates monitored endpoints against hardening standards like CIS benchmarks. Learn more about this in this PoC.
 
-Security configuration assessment
+Security Configuration Assessment
 =================================
 
-The Wazuh Security Configuration Assessment (SCA) module continuously evaluates monitored endpoints against security policies and hardening standards (such as CIS benchmarks). It identifies misconfigurations, missing patches, weak settings, and policy violations, then provides remediation guidance. This use case shows how to view the results of the default SCA policy on a Linux endpoint, create and deploy a custom SCA policy, test the policy with simulated insecure configurations, and review results and remediation steps in the Wazuh dashboard. Regular configuration assessments help reduce your attack surface and support compliance with standards such as PCI DSS, HIPAA, or NIST.
+The :doc:`Wazuh Security Configuration Assessment (SCA) module </user-manual/capabilities/sec-config-assessment/index>` checks monitored endpoints against security policies and hardening standards, such as the `CIS benchmarks <https://www.cisecurity.org/cis-benchmarks>`__. It reports misconfigurations and weak settings, and gives remediation steps for each failed check. Regular assessments reduce your attack surface and support compliance with standards such as PCI DSS, HIPAA, and NIST.
 
-Infrastructure
---------------
+In this use case, you review the default CIS policy results on the Ubuntu endpoint. Then you add a custom web server hardening policy, test it with insecure NGINX settings, and fix them.
 
-+--------------+------------------------------------------------------+
-| Endpoint     | Description                                          |
-+==============+======================================================+
-| Ubuntu 24.04 | Monitored endpoint where SCA policies are evaluated. |
-+--------------+------------------------------------------------------+
+Endpoints
+---------
+
++--------------+----------------------------------------------------+
+| Endpoint     | Role                                               |
++==============+====================================================+
+| Ubuntu 24.04 | Wazuh evaluates the SCA policies on this endpoint. |
++--------------+----------------------------------------------------+
 
 Configuration
 -------------
 
-SCA is enabled by default in Wazuh |WAZUH_CURRENT_MAJOR|. Built-in policies typically need no changes.
+SCA is enabled by default, and the built-in policies need no changes.
 
-Ubuntu endpoint
-^^^^^^^^^^^^^^^
+Check the default SCA policy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Default SCA policy
-~~~~~~~~~~~~~~~~~~
-
-#. On the Ubuntu endpoint, check ``/var/ossec/etc/ossec.conf`` to validate that SCA is enabled:
+#. On the Ubuntu endpoint, check that the ``<sca>`` block in ``/var/ossec/etc/ossec.conf`` has ``<enabled>yes</enabled>``:
 
    .. code-block:: xml
 
@@ -47,32 +46,34 @@ Default SCA policy
 
    .. note::
 
-      You can adjust the interval to reduce or increase the scan frequency. This is optional.
+      Optionally, change ``<interval>`` to scan more or less often.
 
-#. Explore the built-in policy. Wazuh provides the CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0 policy out of the box:
-
-   .. code-block:: console
-
-      # cat /var/ossec/ruleset/sca/cis_ubuntu24-04.yml
-
-   You can view the full list of :doc:`available SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>` in the Wazuh documentation. On your Wazuh dashboard, go to **Endpoint security** > **Configuration Assessment** and select the Ubuntu endpoint to view the results of the default SCA check.
-
-Custom SCA policy
-~~~~~~~~~~~~~~~~~
-
-You can also configure custom SCA policies to meet your individual use cases. Follow the steps below to configure a custom SCA policy.
-
-#. Create a new directory ``/var/ossec/etc/custom-sca-files/`` to save your custom policy files:
+#. Review the built-in CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0 policy:
 
    .. code-block:: console
 
-      # mkdir -p /var/ossec/etc/custom-sca-files
+      $ sudo cat /var/ossec/ruleset/sca/cis_ubuntu24-04.yml
+
+#. In the Wazuh dashboard, go to **Endpoint security** > **Configuration Assessment** and select the Ubuntu endpoint to view the results of the default policy.
+
+See the full list of :doc:`available SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>`.
+
+Add a custom SCA policy
+^^^^^^^^^^^^^^^^^^^^^^^
+
+You can write :ref:`custom SCA policies <sca_creating_custom_policies>` for your own requirements. The following policy checks basic hardening settings of NGINX and Apache web servers.
+
+#. Create a directory for custom policy files:
+
+   .. code-block:: console
+
+      $ sudo mkdir -p /var/ossec/etc/custom-sca-files
 
    .. note::
 
-      We recommend placing custom SCA policies in a dedicated directory (instead of ``/var/ossec/ruleset/sca/``) to prevent them from being overwritten during agent or ruleset updates, and to keep your custom policies cleanly separated from the built-in ones.
+      Keep custom policies in their own directory instead of ``/var/ossec/ruleset/sca/``. Agent or ruleset updates can overwrite files in that directory, and a separate directory keeps your policies apart from the built-in ones.
 
-#. Create a new SCA policy file ``custom-web-hardening.yml`` in the ``/var/ossec/etc/custom-sca-files/`` directory and add the following policy to it:
+#. Create the policy file ``/var/ossec/etc/custom-sca-files/custom-web-hardening.yml`` with the following content:
 
    .. code-block:: yaml
 
@@ -85,10 +86,10 @@ You can also configure custom SCA policies to meet your individual use cases. Fo
         name: "Custom Web Server Hardening"
         description: "Checks for basic secure configuration of web servers (Nginx/Apache)."
         references:
-          - https://documentation.wazuh.com/5.0/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
 
       requirements:
-        title: "Check that a web server is present on the system"
+        name: "Check that a web server is present on the system"
         description: "This policy applies to endpoints with Nginx or Apache installed."
         condition: any
         rules:
@@ -98,17 +99,16 @@ You can also configure custom SCA policies to meet your individual use cases. Fo
       checks:
 
         - id: 10010
-          title: "Nginx - ensure worker processes are not running as root"
+          name: "Nginx - ensure worker processes are not running as root"
           description: "Nginx worker processes (not the master) must run under a dedicated non-privileged user."
-          rationale: "Worker processes handle untrusted external requests directly; running them as root removes the privilege separation nginx's architecture is designed to provide."
+          rationale: "Worker processes handle untrusted external requests directly; running them as root removes the privilege separation that the nginx architecture provides."
           remediation: "Set 'user www-data;' (or your intended non-root user) in /etc/nginx/nginx.conf, then run 'nginx -t && systemctl reload nginx'."
           condition: none
           rules:
             - 'c:ps -C nginx -o user=,args= -> r:^root\s+nginx: worker'
 
-
         - id: 10011
-          title: "Nginx - ensure autoindex is not enabled"
+          name: "Nginx - ensure autoindex is not enabled"
           description: "Directory listing must be disabled to prevent information disclosure."
           rationale: "Exposing directory contents helps attackers map the filesystem and discover unintended files."
           remediation: "Set 'autoindex off;' in /etc/nginx/nginx.conf, then run 'nginx -t && systemctl reload nginx'."
@@ -117,57 +117,48 @@ You can also configure custom SCA policies to meet your individual use cases. Fo
             - 'f:/etc/nginx/nginx.conf -> r:^\s*autoindex\s+on'
 
         - id: 10012
-          title: "Nginx - ensure server_tokens is set to off"
+          name: "Nginx - ensure server_tokens is set to off"
           description: "Nginx must not disclose its version number in the Server header or default error pages."
-          rationale: "Version disclosure aids attackers in fingerprinting the server for known CVEs. Nginx's own default is 'on', so an absent directive is also insecure."
+          rationale: "Version disclosure aids attackers in fingerprinting the server for known CVEs. The Nginx default is 'on', so an absent directive is also insecure."
           remediation: "Set 'server_tokens off;' inside the http {} block in /etc/nginx/nginx.conf, then run 'nginx -t && systemctl reload nginx'."
           condition: all
           rules:
             - 'f:/etc/nginx/nginx.conf -> r:^\s*server_tokens\s+off;'
 
         - id: 10013
-          title: "Apache - ensure directory indexing is not enabled"
+          name: "Apache - ensure directory indexing is not enabled"
           description: "Directory listing must be disabled to prevent information disclosure."
           rationale: "Exposing directory contents helps attackers map the filesystem and discover unintended files."
-          remediation: "Remove 'Indexes' from the 'Options' directive in /etc/apache2/apache2.conf (e.g. 'Options FollowSymLinks' instead of 'Options Indexes FollowSymLinks'), then reload Apache."
+          remediation: "Remove 'Indexes' from the 'Options' directive in /etc/apache2/apache2.conf (for example, 'Options FollowSymLinks' instead of 'Options Indexes FollowSymLinks'), then reload Apache."
           condition: none
           rules:
             - 'f:/etc/apache2/apache2.conf -> r:Options\s+.*Indexes'
 
         - id: 10014
-          title: "Apache - ensure ServerTokens is set to Prod"
+          name: "Apache - ensure ServerTokens is set to Prod"
           description: "Apache must not disclose detailed version/module/OS information in the Server header."
-          rationale: "Non-'Prod' settings leak OS, module, and version details useful for targeted exploitation. Apache's default is 'Full', so an absent directive is also insecure."
+          rationale: "Non-'Prod' settings leak OS, module, and version details useful for targeted exploitation. The Apache default is 'Full', so an absent directive is also insecure."
           remediation: "Set 'ServerTokens Prod' in /etc/apache2/apache2.conf (or conf-enabled/security.conf), then reload Apache."
           condition: all
           rules:
             - 'f:/etc/apache2/apache2.conf -> r:^\s*ServerTokens\s+Prod\s*$'
 
         - id: 10015
-          title: "Apache - ensure ServerSignature is set to Off"
+          name: "Apache - ensure ServerSignature is set to Off"
           description: "Apache must not append version/OS info to auto-generated error pages and directory listings."
-          rationale: "Even with ServerTokens minimized, ServerSignature can still leak version details on generated pages. Apache's default is 'On'."
+          rationale: "Even with ServerTokens minimized, ServerSignature can still leak version details on generated pages. The Apache default is 'On'."
           remediation: "Set 'ServerSignature Off' in /etc/apache2/apache2.conf (or conf-enabled/security.conf), then reload Apache."
           condition: all
           rules:
             - 'f:/etc/apache2/apache2.conf -> r:^\s*ServerSignature\s+Off\s*$'
 
-   The policy targets endpoints with NGINX or Apache installed. It runs only on a system where the nginx or apache2 package is installed. In this test, only NGINX is installed, so the Apache checks (10013 to 10015) don't evaluate an Apache configuration.
-
-   -  Check ID ``10010`` flags a FAIL if the NGINX worker processes run as the root user.
-   -  Check ID ``10011`` flags a FAIL if NGINX directory listing is enabled.
-   -  Check ID ``10012`` flags a FAIL if the NGINX server exposes version details in HTTP response headers.
-   -  Check ID ``10013`` flags a FAIL if the Apache directory listing is enabled.
-   -  Check ID ``10014`` flags a FAIL if the Apache server exposes version details in HTTP response headers.
-   -  Check ID ``10015`` flags a FAIL if the Apache server adds version and OS details to auto-generated error pages and directory listings.
-
 #. Change the file ownership so that the Wazuh agent can read it:
 
    .. code-block:: console
 
-      # chown wazuh:wazuh /var/ossec/etc/custom-sca-files/custom-web-hardening.yml
+      $ sudo chown wazuh:wazuh /var/ossec/etc/custom-sca-files/custom-web-hardening.yml
 
-#. Enable the policy file by adding the following lines within the ``<sca>`` block of the Wazuh agent configuration file at ``/var/ossec/etc/ossec.conf``:
+#. Enable the policy. Add the following lines inside the ``<sca>`` block of ``/var/ossec/etc/ossec.conf``:
 
    .. code-block:: xml
 
@@ -179,113 +170,154 @@ You can also configure custom SCA policies to meet your individual use cases. Fo
 
    .. code-block:: console
 
-      # systemctl restart wazuh-agent
+      $ sudo systemctl restart wazuh-agent
+
+The policy runs only on endpoints where the ``nginx`` or ``apache2`` package is installed. The following table lists its checks.
+
++----------+------------------------------------------------------------------------------------------+
+| Check ID | Fails when                                                                               |
++==========+==========================================================================================+
+| 10010    | NGINX worker processes run as the root user.                                             |
++----------+------------------------------------------------------------------------------------------+
+| 10011    | NGINX directory listing is enabled.                                                      |
++----------+------------------------------------------------------------------------------------------+
+| 10012    | NGINX exposes version details in HTTP response headers.                                  |
++----------+------------------------------------------------------------------------------------------+
+| 10013    | Apache directory listing is enabled.                                                     |
++----------+------------------------------------------------------------------------------------------+
+| 10014    | Apache exposes version details in HTTP response headers.                                 |
++----------+------------------------------------------------------------------------------------------+
+| 10015    | Apache adds version and OS details to auto-generated error pages and directory listings. |
++----------+------------------------------------------------------------------------------------------+
+
+In this test, only NGINX is installed, so the Apache checks (10013 to 10015) don't evaluate an Apache configuration.
+
+Verify data ingestion
+---------------------
+
+SCA scans when the agent starts. NGINX isn't installed yet, so the agent skips the custom policy because its requirements aren't met. Check that the agent loaded the policy:
+
+.. code-block:: console
+
+   $ sudo grep 'Policy "custom_web_hardening" skipped' /var/ossec/logs/ossec.log
+
+.. note::
+
+   If Apache is installed on the endpoint, for example from a web attack use case, the agent doesn't skip the custom policy and the command prints nothing. Apache also uses port 80, which NGINX needs. Restore the lab snapshot, or remove Apache with ``sudo apt purge -y apache2`` and restart the Wazuh agent with ``sudo systemctl restart wazuh-agent``.
 
 Test the configuration
 ----------------------
 
-#. Install NGINX on the monitored Ubuntu endpoint:
+#. Install NGINX on the Ubuntu endpoint:
 
    .. code-block:: console
 
-      # apt update
-      # apt install nginx
+      $ sudo apt update
+      $ sudo apt install -y nginx
 
-#. Run the following commands to simulate insecure configurations:
-
-   .. code-block:: console
-
-      # sed -i 's/# server_tokens off;/server_tokens on;/' /etc/nginx/nginx.conf 2>/dev/null || true
-      # sed -i '/^http {/a\    autoindex on;' /etc/nginx/nginx.conf
-      # sed -i 's/^user .*/user root;/' /etc/nginx/nginx.conf
-      # systemctl restart nginx
-
-#. Restart the Wazuh agent to force a fresh SCA scan:
+#. Apply insecure NGINX settings. These commands expose the NGINX version, enable directory listing, and run the worker processes as root:
 
    .. code-block:: console
 
-      # systemctl restart wazuh-agent
+      $ sudo sed -i 's/# server_tokens off;/server_tokens on;/' /etc/nginx/nginx.conf 2>/dev/null || true
+      $ sudo sed -i '/^http {/a\    autoindex on;' /etc/nginx/nginx.conf
+      $ sudo sed -i 's/^user .*/user root;/' /etc/nginx/nginx.conf
+      $ sudo systemctl restart nginx
 
-Visualize the SCA checks
-------------------------
+#. Restart the Wazuh agent to run a new SCA scan:
 
-You can visualize the SCA checks on the Wazuh dashboard. To see the SCA check results, perform the following on the Wazuh dashboard:
+   .. code-block:: console
 
-#. Navigate to **Endpoint security** > **Configuration Assessment**.
+      $ sudo systemctl restart wazuh-agent
 
-#. Select the Ubuntu agent and inspect both the default ``CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.`` and ``Custom Web Server Hardening`` SCA policies.
+View the findings
+-----------------
+
+You see a ``Wazuh SCA check failed - <CHECK_TITLE>`` finding for checks 10010, 10011, and 10012. After you fix the settings in :ref:`Clean up <poc_sca_clean_up>`, you see a ``Wazuh SCA check passed - <CHECK_TITLE>`` finding for each one. ``<CHECK_TITLE>`` is the ``title`` value of the check in the policy file.
+
+#. In the Wazuh dashboard, go to **Endpoint security** > **Configuration Assessment**.
+
+#. Select the Ubuntu agent. The list shows the default ``CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.`` policy and the ``Custom Web Server Hardening`` policy.
 
    .. thumbnail:: /images/poc/sca-checks-overview.png
       :title: SCA checks overview
-      :alt: Wazuh dashboard Configuration Assessment Inventory tab for the Ubuntu agent listing CIS Ubuntu Linux 24.04 LTS Benchmark checks and their results
+      :alt: Wazuh dashboard Configuration Assessment dashboard for the Ubuntu agent showing the results of the CIS Ubuntu Linux 24.04 LTS Benchmark and Custom Web Server Hardening policies
       :align: center
       :width: 80%
 
-#. Click **+ Add filter**. Then filter by ``policy.name``.
-
-#. In the **Operator** field, select ``is``.
-
-#. In the **Value** field, select ``CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.``. Inspect the information under **Dashboard** and **Inventory**.
+#. Click **+ Add filter** and filter by ``policy.name``. Set **Operator** to ``is`` and **Value** to ``CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.`` (the final period is part of the policy name). Review the **Dashboard** and **Inventory** tabs.
 
    .. thumbnail:: /images/poc/sca-cis-ubuntu-dashboard.png
       :title: CIS Ubuntu Linux 24.04 LTS Benchmark dashboard
-      :alt: Wazuh dashboard Configuration Assessment Dashboard tab filtered by the CIS Ubuntu Linux 24.04 LTS Benchmark policy, showing passed, failed, and not applicable checks
+      :alt: Wazuh dashboard Configuration Assessment dashboard filtered by the CIS Ubuntu Linux 24.04 LTS Benchmark policy
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/poc/sca-cis-ubuntu-inventory.png
-      :title: CIS Ubuntu Linux 24.04 LTS Benchmark inventory
-      :alt: Wazuh dashboard Configuration Assessment Inventory tab filtered by the CIS Ubuntu Linux 24.04 LTS Benchmark policy, listing its checks
-      :align: center
-      :width: 80%
-
-#. Remove the previous ``policy.name`` filter. Click **+ Add filter**. Then filter by ``policy.name``.
-
-#. In the **Operator** field, select ``is``.
-
-#. In the **Value** field, select ``Custom Web Server Hardening``. Inspect the information under **Dashboard** and **Inventory**.
+#. Change the filter value to ``Custom Web Server Hardening`` and review the **Dashboard** and **Inventory** tabs.
 
    .. thumbnail:: /images/poc/sca-custom-policy-dashboard.png
       :title: Custom Web Server Hardening dashboard
-      :alt: Wazuh dashboard Configuration Assessment Dashboard tab filtered by the Custom Web Server Hardening policy, showing failed and not applicable checks
+      :alt: Wazuh dashboard Configuration Assessment dashboard filtered by the Custom Web Server Hardening policy, with three failed checks
       :align: center
       :width: 80%
 
    .. thumbnail:: /images/poc/sca-custom-policy-inventory.png
       :title: Custom Web Server Hardening inventory
-      :alt: Wazuh dashboard Configuration Assessment Inventory tab filtered by the Custom Web Server Hardening policy, listing checks 10010 to 10015 and their results
+      :alt: Wazuh dashboard Configuration Assessment inventory listing the six checks of the Custom Web Server Hardening policy and their results
       :align: center
       :width: 80%
 
-The custom policy appears alongside the built-in CIS policies. Failed checks clearly show why they failed and how to fix them, which demonstrates the value of tailoring assessments to your environment. Expand a failed check to see the remediation steps in the ``check.remediation`` field.
+Each failed check shows why it failed and how to fix it. Expand a failed check to see the remediation steps in the ``check.remediation`` field.
 
 .. thumbnail:: /images/poc/sca-custom-policy-details.png
    :title: Custom Web Server Hardening check details
-   :alt: Wazuh dashboard check details panel for a failed Custom Web Server Hardening check, with the check.remediation field highlighted
+   :alt: Details panel of a failed Custom Web Server Hardening check showing the remediation steps in the check.remediation field
    :align: center
    :width: 80%
 
-Follow the steps below to remediate the findings and update the SCA check:
+Troubleshooting
+---------------
 
-#. Run the following commands to remediate the insecure configurations:
++------------------------------------------+------------------------------------------------------------------------------------------------------------------------+
+| Check                                    | How                                                                                                                    |
++==========================================+========================================================================================================================+
+| The scan ran after the change            | A ``sca: INFO: Scan ended`` message is newer than the agent restart.                                                   |
++------------------------------------------+------------------------------------------------------------------------------------------------------------------------+
+| The policy loaded before the change      | Run the steps in order. If NGINX already had the insecure settings when the policy loaded, the scan raises no finding. |
++------------------------------------------+------------------------------------------------------------------------------------------------------------------------+
+| The policy is loaded                     | The ``<policies>`` block is in the ``<sca>`` block, and the policy file is owned by ``wazuh``.                         |
++------------------------------------------+------------------------------------------------------------------------------------------------------------------------+
+| NGINX runs                               | ``systemctl is-active nginx`` prints ``active``. If not, check that port 80 is free.                                   |
++------------------------------------------+------------------------------------------------------------------------------------------------------------------------+
+| The ``wazuh-sca`` integration is enabled | **Ruleset management** > **Overview** shows it enabled. With it off, Wazuh drops the events without any message.       |
++------------------------------------------+------------------------------------------------------------------------------------------------------------------------+
+
+.. _poc_sca_clean_up:
+
+Clean up
+--------
+
+Fix the insecure settings and check that the SCA results change:
+
+#. Restore secure NGINX settings:
 
    .. code-block:: console
 
-      # sed -i 's/server_tokens on;/server_tokens off;/' /etc/nginx/nginx.conf 2>/dev/null || true
-      # sed -i 's/autoindex on;/autoindex off;/' /etc/nginx/nginx.conf
-      # sed -i 's/^user .*/user www-data;/' /etc/nginx/nginx.conf
-      # systemctl restart nginx
+      $ sudo sed -i 's/server_tokens on;/server_tokens off;/' /etc/nginx/nginx.conf 2>/dev/null || true
+      $ sudo sed -i 's/autoindex on;/autoindex off;/' /etc/nginx/nginx.conf
+      $ sudo sed -i 's/^user .*/user www-data;/' /etc/nginx/nginx.conf
+      $ sudo systemctl restart nginx
 
-#. Restart the Wazuh agent to force a fresh SCA scan:
+#. Restart the Wazuh agent to run a new SCA scan:
 
    .. code-block:: console
 
-      # systemctl restart wazuh-agent
+      $ sudo systemctl restart wazuh-agent
 
-Check that the remediation worked. Go to **Endpoint security** > **Configuration Assessment**, select the Ubuntu agent, and filter by the ``Custom Web Server Hardening`` policy. Checks ``10010``, ``10011``, and ``10012`` now pass.
+#. Go to **Endpoint security** > **Configuration Assessment**, select the Ubuntu agent, and filter by the ``Custom Web Server Hardening`` policy. Checks 10010, 10011, and 10012 now pass.
 
-.. thumbnail:: /images/poc/sca-custom-policy-resolved.png
-   :title: Custom Web Server Hardening resolved checks
-   :alt: Wazuh dashboard Configuration Assessment Inventory tab showing the Custom Web Server Hardening checks 10010, 10011, and 10012 as passed after remediation
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/poc/sca-custom-policy-resolved.png
+      :title: Custom Web Server Hardening resolved checks
+      :alt: Wazuh dashboard Configuration Assessment inventory where the NGINX checks of the Custom Web Server Hardening policy pass
+      :align: center
+      :width: 80%
