@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh module for Docker identifies security incidents across containers and alerts in real time. Learn more about this in this PoC.
+   :description: The Wazuh module for Docker collects Docker events, such as image pulls and container creation and removal, to identify security incidents across containers. Learn more about this in this PoC.
 
 Monitoring Docker events
 ========================

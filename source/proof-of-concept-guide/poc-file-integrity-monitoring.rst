@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh File Integrity Monitoring system watches for modification of files in selected directories and triggers alerts when these files are modified. Learn more about it in this PoC.
+   :description: The Wazuh File Integrity Monitoring module detects the creation, modification, and deletion of files in monitored directories and shows the user and process behind each change. Learn more about it in this PoC.
 
 File integrity monitoring
 =========================
@@ -140,7 +140,7 @@ You see one finding for each change, for example ``Wazuh FIM - File created - <F
 
    .. note::
 
-      Findings appear a few minutes after each change. The Wazuh agents report real-time and who-data changes right away, and the ``wazuh-fim`` detector creates the findings on its next scheduled run.
+      Findings appear a few minutes after each change. The Wazuh agents report real-time and who-data changes right away, and the ``wazuh-fim`` detector creates the findings on its next run, every minute in the default content.
 
 You see findings for the file creation, modification, and deletion on both endpoints.
 
