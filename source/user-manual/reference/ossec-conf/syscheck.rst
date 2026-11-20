@@ -813,7 +813,7 @@ this parameter is ignored.
 
 **interval**
 
-Specifies the initial time interval between every inventory synchronization. If the synchronization fails the value is duplicated until it reaches the value of ``max_interval``. If the synchronization succeds the value is restored.
+Specifies the initial time interval between every inventory synchronization. If a synchronization is still in progress when the next one is due, the agent skips it and doubles the interval, up to the value of ``max_interval``. After a synchronization succeeds, the interval returns to this initial value.
 
 +--------------------+-----------------------------------------------------------------------+
 | **Default value**  | 5m                                                                    |
