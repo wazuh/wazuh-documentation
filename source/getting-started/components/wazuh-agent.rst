@@ -57,7 +57,7 @@ The Wazuh agent communicates with the Wazuh manager through the HTTPS agent API 
 
 Wazuh 4.x agents use the legacy AES-encrypted TCP or UDP channel on port 1514. The ``<legacy>`` block of the ``<remote>`` section in the Wazuh manager configuration controls this channel, and the configuration the installer generates enables it.
 
-The Wazuh agent enrolls with the Wazuh manager before it can send data. Enrollment provides the Wazuh agent with a unique authentication key. The Wazuh agent uses this key to generate the bearer tokens that authenticate its requests.
+The Wazuh agent enrolls with the Wazuh manager before it can send data. Enrollment provides the Wazuh agent with a unique client key. The Wazuh agent uses this key to generate the bearer tokens that authenticate its requests.
 
 Next step
 ---------

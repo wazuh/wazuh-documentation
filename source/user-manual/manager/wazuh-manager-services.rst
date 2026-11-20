@@ -39,11 +39,11 @@ The ``wazuh-manager`` :doc:`systemd unit <service-sandbox>` confines every daemo
 Agent enrollment service
 ------------------------
 
-The agent enrollment service registers Wazuh agents with the Wazuh manager through the ``wazuh-manager-authd`` daemon. It receives enrollment requests, validates credentials, generates the agent key, and stores the resulting entry in the ``client.keys`` file and in Wazuh DB.
+The agent enrollment service registers Wazuh agents with the Wazuh manager through the ``wazuh-manager-authd`` daemon. It receives enrollment requests, validates credentials, generates the client key, and stores the resulting entry in the ``client.keys`` file and in Wazuh DB.
 
 Wazuh 5.x agents enroll over HTTPS through the ``POST /enroll`` endpoint of the agent connection service on port ``1517``. The endpoint forwards requests to the same ``wazuh-manager-authd`` daemon through its local socket. This method ensures that all enrollment requests use the same validation path. Port ``1515`` remains supported for legacy Wazuh 4.x agents.
 
-When a Wazuh agent starts, it contacts the Wazuh manager to begin enrollment. A Wazuh 5.x agent uses an enrollment token that you create on the Wazuh manager. Legacy Wazuh 4.x agents use port ``1515`` and the shared enrollment password, which is required by default. The Wazuh manager generates the password at first startup and stores it in the ``/etc/wazuh-manager/authd.pass`` file. After successful enrollment, the Wazuh manager generates a unique agent key. The Wazuh agent uses this key to sign the bearer tokens that authenticate its subsequent requests.
+When a Wazuh agent starts, it contacts the Wazuh manager to begin enrollment. A Wazuh 5.x agent uses an enrollment token that you create on the Wazuh manager. Legacy Wazuh 4.x agents use port ``1515`` and the shared enrollment password, which is required by default. The Wazuh manager generates the password at first startup and stores it in the ``/etc/wazuh-manager/authd.pass`` file. After successful enrollment, the Wazuh manager generates a unique client key. The Wazuh agent uses this key to sign the bearer tokens that authenticate its subsequent requests.
 
 Enrollment tokens
 ^^^^^^^^^^^^^^^^^
@@ -128,7 +128,7 @@ For all the options, see :ref:`auth <reference_wazuh_manager_conf_auth>`.
 
 .. note::
 
-   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager with ``systemctl restart wazuh-manager`` to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
 
 .. _agent_connection_service:
 
@@ -205,7 +205,7 @@ You can find more configuration options in the :doc:`remote </user-manual/refere
 
 .. note::
 
-   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager with ``systemctl restart wazuh-manager`` to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
 
 .. _vulnerability_detection_service:
 
@@ -246,7 +246,7 @@ You can find more configuration options in the :doc:`vulnerability detection </u
 
 .. note::
 
-   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager with ``systemctl restart wazuh-manager`` to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
 
 .. _cluster_service:
 
@@ -297,4 +297,4 @@ You can learn more about the configuration options in the :doc:`cluster </user-m
 
 .. note::
 
-   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager with ``systemctl restart wazuh-manager`` to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
