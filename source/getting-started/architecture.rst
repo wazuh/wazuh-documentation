@@ -70,11 +70,11 @@ In a multi-node deployment, Wazuh manager nodes form a cluster and communicate w
 
 The master node coordinates cluster operations. It handles Wazuh agent enrollment and deletion requests and manages the shared configuration groups. The master node synchronizes the following data with the worker nodes:
 
--  Wazuh agent registration keys
+-  Wazuh agent client keys
 -  Enrollment password and enrollment tokens
 -  Shared configuration and agent group assignments
 
-When an enrollment request arrives at a worker node, the worker forwards it to the master node. The master validates the request, assigns the agent ID, and generates the agent key. The worker returns the enrollment response to the Wazuh agent, while the cluster synchronizes the agent registration data with the worker nodes.
+When an enrollment request arrives at a worker node, the worker forwards it to the master node. The master validates the request, assigns the agent ID, and generates the client key. The worker returns the enrollment response to the Wazuh agent, while the cluster synchronizes the agent registration data with the worker nodes.
 
 Wazuh dashboard - Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
