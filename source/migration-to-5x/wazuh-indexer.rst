@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Recreate the supported Wazuh indexer configuration and security settings, and keep access to Wazuh 4.x indexed data, when migrating from Wazuh 4.x to Wazuh 5.x.
+   :description: Recreate the supported Wazuh indexer configuration and security settings, and keep access to Wazuh 4.x indexed data, when transitioning from Wazuh 4.x to Wazuh 5.x.
 
 Wazuh indexer
 =============
 
-Wazuh 5.x introduces changes to the Wazuh indexer cluster configuration, security settings, and index management. Deploy a new Wazuh indexer and recreate the supported configuration and security settings from the Wazuh 4.x deployment.
+Wazuh 5.x introduces changes to the Wazuh indexer cluster configuration, security settings, and index management. Deploy a new Wazuh indexer and recreate the supported configuration and security settings from the Wazuh 4.x deployment. For Docker or Kubernetes deployments, see :doc:`Docker and Kubernetes deployments <docker-kubernetes-deployments>`.
 
 You can recreate the following Wazuh indexer configuration and security settings in Wazuh 5.x:
 
@@ -23,7 +23,7 @@ Wazuh 4.x indexed data isn't migrated. The following sections describe how to re
 Wazuh indexer configuration
 ---------------------------
 
-Wazuh 5.x indexer stores its configuration under ``/etc/wazuh-indexer/``. The following configuration files and directories are commonly reviewed during the migration.
+Wazuh 5.x indexer stores its configuration under ``/etc/wazuh-indexer/``. The following configuration files and directories are commonly reviewed during the transition.
 
 +---------------------------------------------+--------------------------------------------------------------------------------------------------------+
 | Path                                        | Purpose                                                                                                |
@@ -51,8 +51,8 @@ Wazuh 5.x indexer stores its configuration under ``/etc/wazuh-indexer/``. The fo
 
    Don't copy the Wazuh 4.x configuration files into the Wazuh 5.x deployment. Recreate the settings that you need in the Wazuh 5.x files.
 
-Migrate the Wazuh indexer configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Recreate the Wazuh indexer configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Perform the following steps on every Wazuh indexer node of the new Wazuh 5.x cluster.
 
@@ -62,7 +62,7 @@ Perform the following steps on every Wazuh indexer node of the new Wazuh 5.x clu
 
       # systemctl stop wazuh-indexer
 
-#. Copy your custom Wazuh 4.x settings, such as ``cluster.routing.allocation.disk.watermark.*``, into the Wazuh 5.x files. Update or remove the settings that changed in Wazuh 5.x:
+#. Recreate your custom Wazuh 4.x settings, such as ``cluster.routing.allocation.disk.watermark.*``, into the Wazuh 5.x files. Update or remove the settings that changed in Wazuh 5.x:
 
    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | Setting                                                                                                                                                                                                      | Wazuh 5.x change                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -73,7 +73,7 @@ Perform the following steps on every Wazuh indexer node of the new Wazuh 5.x clu
    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | ``cluster.initial_master_nodes``                                                                                                                                                                             | Renamed to ``cluster.initial_cluster_manager_nodes``, which the Wazuh 5.x ``opensearch.yml`` already sets. Copy the node list to the new setting and don't add the old one.                                                                                                                                                                                                                                                                                                                                                                                  |
    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | ``plugins.security.ssl.transport.enforce_hostname_verification``, ``plugins.security.ssl.transport.resolve_hostname``                                                                                        | Renamed to ``transport.ssl.enforce_hostname_verification`` and ``transport.ssl.resolve_hostname``, which the Wazuh 5.x ``opensearch.yml`` already sets. Don't add the Wazuh 4.x settings: the Wazuh indexer doesn't start if ``opensearch.yml`` defines both the old and the new name of a setting. ``transport.ssl.enforce_hostname_verification`` is ``true`` in Wazuh 5.x (it was ``false`` in Wazuh 4.x), so each node certificate must include the node address in its subject alternative names. ``transport.ssl.resolve_hostname`` remains ``false``. |
+   | ``plugins.security.ssl.transport.enforce_hostname_verification``, ``plugins.security.ssl.transport.resolve_hostname``                                                                                        | Renamed to ``transport.ssl.enforce_hostname_verification`` and ``transport.ssl.resolve_hostname``, which the Wazuh 5.x ``opensearch.yml`` already sets. Don't add the Wazuh 4.x settings: the Wazuh indexer doesn't start if ``opensearch.yml`` defines both the old and the new name of a setting. ``transport.ssl.enforce_hostname_verification`` is ``true`` in Wazuh 5.x (it was ``false`` in Wazuh 4.x). Each node certificate must include the node address in its subject alternative names. ``transport.ssl.resolve_hostname`` remains ``false``.    |
    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | ``plugins.security.authcz.admin_dn``, ``plugins.security.nodes_dn``                                                                                                                                          | The distinguished name (DN) attribute order differs. Keep the values that the Wazuh 5.x package generated. In a cluster, add the DN of every node to ``plugins.security.nodes_dn`` on every node.                                                                                                                                                                                                                                                                                                                                                            |
    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -123,7 +123,7 @@ Wazuh indexer security configuration
 
 The Wazuh indexer security configuration controls authentication, authorization, user management, and access permissions.
 
-During the migration, review the existing Wazuh 4.x security configuration and recreate the required users, roles, role mappings, authentication providers, and security settings manually in the corresponding Wazuh 5.x files.
+During the transition, review the existing Wazuh 4.x security configuration and recreate the required users, roles, role mappings, authentication providers, and security settings manually in the corresponding Wazuh 5.x files.
 
 The security configuration is stored under ``/etc/wazuh-indexer/opensearch-security/``. For the file formats, see :doc:`Security </user-manual/wazuh-indexer/security>`.
 
@@ -151,7 +151,7 @@ The security configuration is stored under ``/etc/wazuh-indexer/opensearch-secur
 
 .. note::
 
-   Before migrating the security settings, export the active Wazuh 4.x security configuration. The files on disk might not reflect the active configuration because the effective security configuration is stored in the Wazuh indexer security index.
+   Before recreating the security settings, export the active Wazuh 4.x security configuration. The files on disk might not reflect the active configuration because the effective security configuration is stored in the Wazuh indexer security index.
 
 Run the following commands on a Wazuh 4.x indexer node to export the active security configuration:
 
@@ -162,7 +162,7 @@ Run the following commands on a Wazuh 4.x indexer node to export the active secu
    # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup $BACKUP_DIRECTORY -icl -nhnv"
    # chmod 600 $BACKUP_DIRECTORY/*
 
-The ``-icl`` option ignores the cluster name, and the ``-nhnv`` option turns off host name verification. Review every exported file. Recreate your custom entries of ``internal_users.yml``, ``roles.yml``, ``roles_mapping.yml``, and ``action_groups.yml`` in the Wazuh 5.x files, and compare ``config.yml`` for authentication backends. Keep ``nodes_dn.yml`` and ``allowlist.yml`` as Wazuh 5.x has them. Don't recreate the Wazuh 4.x default users ``logstash``, ``readall``, ``kibanaro``, ``snapshotrestore``, and ``anomalyadmin``.
+The ``-icl`` option ignores the cluster name, and the ``-nhnv`` option turns off host name verification. Review every exported file. Recreate your custom entries of ``internal_users.yml``, ``roles.yml``, ``roles_mapping.yml``, and ``action_groups.yml`` in the Wazuh 5.x files, and compare ``config.yml`` for authentication backends. Keep ``nodes_dn.yml`` and ``allowlist.yml`` as Wazuh 5.x has them. The export also writes ``whitelist.yml``, the earlier name of ``allowlist.yml``. Wazuh 5.x doesn't use this file, and you don't need to recreate it. Don't recreate the Wazuh 4.x default users ``logstash``, ``readall``, ``kibanaro``, ``snapshotrestore``, and ``anomalyadmin``.
 
 Before applying the recreated security configuration, verify that the recreated roles reference valid permissions and that the role mappings reference users and roles defined in the Wazuh 5.x security configuration.
 
@@ -181,7 +181,7 @@ Apply the security configuration
 
 After you recreate the required security configuration, apply the changes to the Wazuh indexer. Make the same changes to the files in ``/etc/wazuh-indexer/opensearch-security/`` on every Wazuh indexer node.
 
-#. If you use single sign-on (SSO), configure it before you apply the security configuration. In ``config.yml``, set ``kibana_url`` to the Wazuh 5.x dashboard address, and add the dashboard redirect and ACS URLs on the identity provider (IdP). To keep Wazuh 4.x sign-in working during the migration, create a second IdP client with its own ``sp.entity_id``. Copy the SAML metadata files to every Wazuh indexer node, and add the SSO settings to ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` on the Wazuh 5.x dashboard. For more information, see :doc:`Single sign-on </user-manual/user-administration/single-sign-on/index>`.
+#. If you use single sign-on (SSO), configure it before you apply the security configuration. In ``config.yml``, set ``kibana_url`` to the Wazuh 5.x dashboard address, and add the dashboard redirect and ACS URLs on the identity provider (IdP). To keep Wazuh 4.x sign-in working during the transition, create a second IdP client with its own ``sp.entity_id``. Copy the SAML metadata files to every Wazuh indexer node, and add the SSO settings to ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` on the Wazuh 5.x dashboard. For more information, see :doc:`Single sign-on </user-manual/user-administration/single-sign-on/index>`.
 
 #. Make sure that the Wazuh indexer service is running on every node:
 
@@ -189,7 +189,7 @@ After you recreate the required security configuration, apply the changes to the
 
       # systemctl start wazuh-indexer
 
-#. Apply the security configuration. Run the script once, from a single node whose files contain all the changes, after the Wazuh indexer service is running on every node. The Wazuh indexer stores the security configuration in its security index, so the change reaches every node:
+#. Apply the security configuration. Run the script once, from a single node whose files contain all the changes, after the Wazuh indexer service is running on every node. The Wazuh indexer stores the security configuration in its security index, and the change reaches every node:
 
    .. code-block:: console
 
@@ -206,4 +206,4 @@ After you recreate the required security configuration, apply the changes to the
 Indexed data
 ------------
 
-Wazuh 4.x indexed data isn't migrated to Wazuh 5.x. Wazuh 5.x uses new index schemas, and there is no reindex path from Wazuh 4.x data. To keep access to historical data, keep the Wazuh 4.x environment after the migration. Stop sending data to the Wazuh 4.x indexer, and optionally mark the Wazuh 4.x indices read-only. Keep the Wazuh 4.x dashboard connected to the Wazuh 4.x indexer to search the data. Decommission the Wazuh 4.x environment when your retention period ends.
+Wazuh 4.x indexed data isn't migrated to Wazuh 5.x. Wazuh 5.x uses new index schemas, and there is no reindex path from Wazuh 4.x data. To keep access to historical data, keep the Wazuh 4.x environment after the transition. Stop sending data to the Wazuh 4.x indexer, and optionally mark the Wazuh 4.x indices read-only. Keep the Wazuh 4.x dashboard connected to the Wazuh 4.x indexer to search the data. Decommission the Wazuh 4.x environment when your retention period ends.
