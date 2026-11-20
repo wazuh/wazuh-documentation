@@ -39,11 +39,11 @@ The ``wazuh-manager`` :doc:`systemd unit <service-sandbox>` confines every daemo
 Agent enrollment service
 ------------------------
 
-The agent enrollment service registers Wazuh agents with the Wazuh manager through the ``wazuh-manager-authd`` daemon. It receives enrollment requests, validates credentials, generates the agent key, and stores the resulting entry in the ``client.keys`` file and in Wazuh DB.
+The agent enrollment service registers Wazuh agents with the Wazuh manager through the ``wazuh-manager-authd`` daemon. It receives enrollment requests, validates credentials, generates the client key, and stores the resulting entry in the ``client.keys`` file and in Wazuh DB.
 
 Wazuh 5.x agents enroll over HTTPS through the ``POST /enroll`` endpoint of the agent connection service on port ``1517``. The endpoint forwards requests to the same ``wazuh-manager-authd`` daemon through its local socket. This method ensures that all enrollment requests use the same validation path. Port ``1515`` remains supported for legacy Wazuh 4.x agents.
 
-When a Wazuh agent starts, it contacts the Wazuh manager to begin enrollment. A Wazuh 5.x agent uses an enrollment token that you create on the Wazuh manager. Legacy Wazuh 4.x agents use port ``1515`` and the shared enrollment password, which is required by default. The Wazuh manager generates the password at first startup and stores it in the ``/etc/wazuh-manager/authd.pass`` file. After successful enrollment, the Wazuh manager generates a unique agent key. The Wazuh agent uses this key to sign the bearer tokens that authenticate its subsequent requests.
+When a Wazuh agent starts, it contacts the Wazuh manager to begin enrollment. A Wazuh 5.x agent uses an enrollment token that you create on the Wazuh manager. Legacy Wazuh 4.x agents use port ``1515`` and the shared enrollment password, which is required by default. The Wazuh manager generates the password at first startup and stores it in the ``/etc/wazuh-manager/authd.pass`` file. After successful enrollment, the Wazuh manager generates a unique client key. The Wazuh agent uses this key to sign the bearer tokens that authenticate its subsequent requests.
 
 Enrollment tokens
 ^^^^^^^^^^^^^^^^^
@@ -67,6 +67,8 @@ To enroll a Wazuh agent using a token, set the ``WAZUH_ENROLLMENT_TOKEN`` variab
 .. code-block:: console
 
    # /var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE>
+
+Replace ``<TOKEN_FILE>`` with the path to a file that holds the enrollment token, for example a file that you saved with ``--create-enrollment-token > <TOKEN_FILE>``.
 
 For installation instructions, see the :doc:`Wazuh agent installation </installation-guide/wazuh-agent/index>` guide.
 
@@ -107,7 +109,7 @@ Where:
 -  ``<port>`` specifies the TCP port number for listening to legacy Wazuh 4.x agent enrollment connections. The default value is ``1515``. The allowed value is any port number between ``1`` and ``65535``.
 -  ``<use_source_ip>`` defines whether to register a Wazuh agent with its source IP address instead of ``any``. The allowed values are ``yes`` and ``no``. When the value is ``no``, the Wazuh agent can connect to the Wazuh manager even if the source IP used for enrollment changes. However, when the value is ``yes``, the Wazuh agent cannot connect to the Wazuh manager if the source IP address changes.
 -  ``<purge>`` specifies whether the ``client.keys`` file keeps a record of removed Wazuh agents. When the value is ``no``, the file keeps each removed Wazuh agent as an entry marked as removed. When the value is ``yes``, the Wazuh manager removes the entry without leaving a trace. The installer sets the value to ``yes``, and the value is ``no`` when the option is absent. The possible values are ``yes`` and ``no``.
--  ``<use_password>`` determines the use of shared password authentication. When the option is absent, the value is ``no``. The configuration that the installer generates sets it to ``yes``. When the value is ``no``, this option is disabled. When the value is set to ``yes``, a shared password is read from the ``/etc/wazuh-manager/authd.pass`` file.
+-  ``<use_password>`` determines the use of shared password authentication. When the option is absent, the value is ``no``. The configuration that the installer generates sets it to ``yes``. When the value is ``no``, this option is disabled. When the value is set to ``yes``, a shared password is read from the ``/etc/wazuh-manager/authd.pass`` file. If you write the password in this file yourself, it must be at least 16 characters long. With a shorter password, the master node doesn't start, and ``wazuh-manager-control check`` reports the error.
 -  ``<ciphers>`` sets the TLS 1.3 cipher suites that the agent enrollment service accepts on port ``1515``. The default value is ``TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256``.
 -  ``<ssl_agent_ca>`` specifies the path to the CA certificate used to verify clients. Use an absolute path to a file in ``/etc/wazuh-manager/certs``.
 -  ``<ssl_verify_host>`` toggles source host verification on and off when a CA certificate is specified. The agent enrollment service checks that the agent certificate names the source address, first in its Subject Alternative Names and then in its Common Name field. The default value is ``no``. The allowed values are ``yes`` and ``no``.
@@ -126,7 +128,7 @@ For all the options, see :ref:`auth <reference_wazuh_manager_conf_auth>`.
 
 .. note::
 
-   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager with ``systemctl restart wazuh-manager`` to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
 
 .. _agent_connection_service:
 
@@ -203,7 +205,7 @@ You can find more configuration options in the :doc:`remote </user-manual/refere
 
 .. note::
 
-   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager with ``systemctl restart wazuh-manager`` to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
 
 .. _vulnerability_detection_service:
 
@@ -231,16 +233,20 @@ Enable or disable the service and tune the CVE feed download using the ``<vulner
 
 Where:
 
--  ``<enabled>`` specifies whether the vulnerability detection service is enabled. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
+-  ``<enabled>`` specifies whether the vulnerability detection service is enabled. The default value is ``yes``. The allowed values are ``yes`` and ``no``. In a Wazuh manager cluster, the master node decides. A worker node applies the master node value in place of its own.
 -  ``<feed-update-interval>`` specifies the time interval for periodic feed updates. The default value is ``60m`` (one hour). The allowed value is a positive number that contains a suffix character indicating a time unit, such as ``s`` (seconds), ``m`` (minutes), ``h`` (hours), and ``d`` (days). The minimum is ``1s``. The Wazuh manager doesn't start with a value of ``0``.
 
 The ``<vulnerability-detection>`` block does not configure a scan interval. Scan frequency follows the rate at which Wazuh agents synchronize their inventory.
+
+In a Wazuh manager cluster, vulnerability detection is enabled or disabled for the whole cluster. A worker node applies the master node ``<enabled>`` value. When its own ``<enabled>`` value differs from the last value it received from the master node, ``wazuh-manager-modulesd`` applies the master node value at startup and logs a warning in ``/var/wazuh-manager/logs/wazuh-manager.log``. When the master node value changes while the worker node runs, the worker node logs a warning in ``/var/wazuh-manager/logs/cluster.log`` and reloads once. To enable or disable vulnerability detection, change ``<enabled>`` on the master node, then reload every node, for example with the ``PUT /cluster/reload`` endpoint of the Wazuh manager API.
+
+When a Wazuh manager node starts with vulnerability detection enabled after running with it disabled, it scans every Wazuh agent once from the stored inventory. This scan indexes the findings but generates no alerts for vulnerabilities that the Wazuh agents already had. The Wazuh manager logs ``Vulnerability scan finished after vulnerability detection was enabled`` when the scan completes.
 
 You can find more configuration options in the :doc:`vulnerability detection </user-manual/reference/wazuh-manager-conf/vulnerability-detection>` section of the reference guide.
 
 .. note::
 
-   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager with ``systemctl restart wazuh-manager`` to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
 
 .. _cluster_service:
 
@@ -282,7 +288,7 @@ Where:
 -  ``<node_name>`` specifies the name of the current Wazuh manager node. Each node must have a unique name.
 -  ``<key>`` specifies a unique 32-character key used to encrypt the communication between the Wazuh manager nodes. It must be the same on the master node and worker nodes. The installer writes a random key. To set your own, run ``openssl rand -hex 16`` and replace ``<CLUSTER_ENCRYPTION_KEY>`` with the output. Copy the master node key to every worker node.
 -  ``<node_type>`` specifies the role of the Wazuh manager node. It can be either ``master`` or ``worker``. Set it to ``worker`` on worker nodes.
--  ``<port>`` specifies the port to use for the Wazuh manager cluster communications. The default value is ``1516``.
+-  ``<port>`` specifies the port to use for the Wazuh manager cluster communications. The master node listens on it, and each worker node connects to the master node on its own ``<port>`` value, so set the same port on every node. The default value is ``1516``.
 -  ``<bind_addr>`` specifies the IP address the master node listens on for worker node connections (``0.0.0.0`` or a specific IP address). Worker nodes ignore this option. The default value is ``127.0.0.1``. Worker nodes can't connect to a master node that listens on ``127.0.0.1``. On the master node of a multi-node cluster, set it to an address that the worker nodes can reach, such as its address on the management network, or to ``0.0.0.0``. Avoid ``0.0.0.0`` on an endpoint whose other interfaces face Wazuh agents or users.
 -  ``<node>`` specifies the address of the master node within the ``<nodes>`` block. Specify this value in all Wazuh manager nodes, including the master node itself. Replace ``<MASTER_NODE_IP>`` with the IP address or a DNS name of the master node. The installer sets it to ``127.0.0.1``.
 -  ``<hidden>`` has no effect in Wazuh 5.0. The Wazuh manager accepts the option only for configuration compatibility. Allowed values are ``yes`` and ``no``. The default value is ``no``.
@@ -291,4 +297,4 @@ You can learn more about the configuration options in the :doc:`cluster </user-m
 
 .. note::
 
-   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager with ``systemctl restart wazuh-manager`` to apply changes. Before you restart it, run ``/var/wazuh-manager/bin/wazuh-manager-control check`` to check the file and the credentials.

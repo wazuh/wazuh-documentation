@@ -40,8 +40,6 @@ Wazuh dashboard installation
 
    When the installation finishes, the assistant prints the address of the Wazuh dashboard, the username, the command that shows the password, and how to enroll agents:
 
-   The command output looks similar to this:
-
    .. code-block:: none
       :class: output
 
@@ -123,7 +121,7 @@ After every component is installed and running, each component stores the passwo
 
    The passwords of the Wazuh indexer and Wazuh manager stay in ``local.env`` and ``export/credentials.env`` in their configuration directories, readable by ``root`` only.
 
-#. On each Wazuh dashboard node, remove the two passwords from ``/etc/wazuh-dashboard/local.env``. The Wazuh dashboard keeps them in its keystore. Skip this step on an all-in-one host, which has no such file:
+#. On each Wazuh dashboard node, remove the two passwords from ``/etc/wazuh-dashboard/local.env``. The Wazuh dashboard keeps them in its keystore. Skip this step on a host installed with the quickstart (``-a``), which has no such file:
 
    .. code-block:: console
 
@@ -143,10 +141,10 @@ After every component is installed and running, each component stores the passwo
 
 Editing ``local.env`` after installation doesn't change any password. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation. In a distributed deployment, after you change the ``kibanaserver`` or ``wazuh-internal-client`` password, also update the keystore of each Wazuh dashboard node where you didn't run the Wazuh passwords tool, as described in :ref:`Update the Wazuh dashboard nodes <update_wazuh_dashboard_configuration>`.
 
-Disable Wazuh updates
+Wazuh package updates
 ---------------------
 
-The installation assistant installs the Wazuh packages from downloaded files and doesn't add a Wazuh package repository, so there is no repository to disable.
+The installation assistant installs the Wazuh packages from downloaded files and doesn't add a Wazuh package repository, so the package manager doesn't upgrade them.
 
 Next steps
 ----------

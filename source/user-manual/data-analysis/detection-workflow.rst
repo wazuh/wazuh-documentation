@@ -203,7 +203,7 @@ Each space has one root decoder, the entry point for parsing every event in that
 
 Make sure the space selector reads **Draft** and follow these steps to set the root decoder of the space.
 
-#. Go to **Ruleset Management** > **Overview** > **Actions** > **Edit**.
+#. Go to **Ruleset Management** > **Overview** > **Space actions** > **Edit**.
 
 #. In **Edit Draft**, confirm the status is **Enabled**, select ``decoder/core-wazuh-message/0`` under **Root decoder**, and click **Save**.
 
@@ -303,7 +303,7 @@ In the draft space, you create and refine your integrations, decoders, and rules
 
 Make sure the space selector reads **Draft**, and follow these steps to promote the content from draft to test.
 
-#. Go to **Ruleset Management** > **Overview**, and click **Actions** > **Promote**.
+#. Go to **Ruleset Management** > **Overview**, and click **Space actions** > **Promote**.
 
    .. thumbnail:: /images/manual/data-analysis/security-analytics-promotion.jpg
       :title: Promote the content
@@ -438,7 +438,7 @@ Make sure the space selector reads **Test**, then follow these steps to promote 
 
 #. Go to **Ruleset Management** > **Overview**.
 
-#. Click **Actions** > **Promote**, type ``promote`` to confirm, and click **Promote**.
+#. Click **Space actions** > **Promote**, type ``promote`` to confirm, and click **Promote**.
 
    .. thumbnail:: /images/manual/data-analysis/security-analytics-apache-promotion.jpg
       :title: Promote the Apache integration

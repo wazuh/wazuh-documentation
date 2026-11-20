@@ -13,6 +13,8 @@ You need root user privileges to run all the commands described below.
 Wazuh manager cluster installation
 ----------------------------------
 
+Follow these steps on every Wazuh manager node. For a Wazuh manager cluster, install the master node first.
+
 #. Download the Wazuh installation assistant. Skip this step if the Wazuh installation assistant is already in your working directory:
 
    .. code-block:: console
@@ -60,8 +62,6 @@ Wazuh manager cluster installation
 
 Your Wazuh manager is now successfully installed.
 
-On the master node, the Wazuh manager log starts with ``WARNING: dashboard client pair not generated: /etc/wazuh-manager/ca has no key; provision it externally in /etc/wazuh-manager/export``. This is expected, because ``/etc/wazuh-manager/ca`` holds only the root CA certificate. Nothing uses that pair, and you don't need to do anything.
-
 To check the Wazuh manager API, run these commands on the master node. The API runs only on the master node. The first command prints the password of the ``wazuh`` API user, and the second asks for it:
 
 .. code-block:: console
@@ -74,7 +74,7 @@ The output is a token.
 Testing the Wazuh manager cluster
 ---------------------------------
 
-On the master node, run the following command. The output lists every node of the cluster:
+After you install every Wazuh manager node, run the following command on the master node. The output lists every node of the cluster:
 
 .. code-block:: console
 
@@ -89,16 +89,16 @@ The command output looks similar to this:
    manager    master  5.0.0    <WAZUH_MASTER_ADDRESS>
    manager-2  worker  5.0.0    <WAZUH_WORKER_ADDRESS>
 
-With a single Wazuh manager, the output lists one node, ``node01``, with the address ``127.0.0.1``.
+With a single Wazuh manager, the output lists one node, ``node01``, the default name of a Wazuh manager without a cluster, with the address ``127.0.0.1``.
 
-Disable Wazuh updates
+Wazuh package updates
 ---------------------
 
-The installation assistant installs the Wazuh packages from downloaded files and doesn't add a Wazuh package repository, so there is no repository to disable.
+The installation assistant installs the Wazuh packages from downloaded files and doesn't add a Wazuh package repository, so the package manager doesn't upgrade them.
 
 Next steps
 ----------
 
 -  For a single Wazuh manager, everything is set. Continue with :doc:`Installing the Wazuh dashboard <../wazuh-dashboard/installation-assistant>` using the assisted installation method.
 
--  For a Wazuh manager cluster, repeat this process on every Wazuh manager node. Replace ``manager`` with that node's name in ``config.yml``, for example ``manager-2``. Install the master node first.
+-  For a Wazuh manager cluster, continue with the Wazuh dashboard after every Wazuh manager node is installed. On each node, replace ``manager`` with that node's name in ``config.yml``, for example ``manager-2``.

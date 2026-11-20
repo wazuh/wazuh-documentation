@@ -19,11 +19,11 @@ The table below describes the log files and their storage location on the Wazuh 
    * - ``/var/wazuh-manager/logs/wazuh-manager.log``
      - Stores all Wazuh manager logs in plaintext.
    * - ``/var/wazuh-manager/logs/wazuh-manager.json``
-     - Stores all Wazuh manager logs in JSON.
+     - Stores all Wazuh manager logs in JSON when ``<log_format>`` includes ``json``. With the default ``plain`` value, the file stays empty.
    * - ``/var/wazuh-manager/logs/api.log``
      - Stores the Wazuh manager API logs in plaintext.
    * - ``/var/wazuh-manager/logs/api.json``
-     - Stores the Wazuh manager API logs in JSON.
+     - Stores the Wazuh manager API logs in JSON when the ``logs.format`` option in ``/var/wazuh-manager/api/configuration/api.yaml`` includes ``json``. With the default ``plain`` value, the file isn't created.
    * - ``/var/wazuh-manager/logs/cluster.log``
      - Stores all Wazuh cluster logs in plaintext.
 

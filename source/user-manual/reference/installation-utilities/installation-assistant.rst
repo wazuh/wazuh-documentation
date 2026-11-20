@@ -50,10 +50,11 @@ Options list
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -o, --overwrite                                     | Overwrites previously installed components. This will erase all the existing configuration   |
 |                                                     | and data. On a Wazuh dashboard host, this removes ``/etc/wazuh-dashboard``, including the    |
-|                                                     | Wazuh dashboard CA in ``ca/`` and the keystore. With ``-a``, the reinstalled Wazuh dashboard |
-|                                                     | creates a new CA, so browsers must trust the new ``/etc/wazuh-dashboard/export/ca.pem``.     |
-|                                                     | With ``-wd``, the assistant places the pair from ``wazuh-install-files.tar`` again, so       |
-|                                                     | browsers keep trusting ``root-ca.pem``.                                                      |
+|                                                     | Wazuh dashboard CA in ``ca/`` and the keystore. With ``-a``, the Wazuh indexer, Wazuh        |
+|                                                     | manager, and Wazuh dashboard create new CAs and new passwords. Browsers must trust the new   |
+|                                                     | ``/etc/wazuh-dashboard/export/ca.pem``, and every Wazuh agent must enroll again with a new   |
+|                                                     | token. With ``-wd``, the assistant places the pair from ``wazuh-install-files.tar`` again,   |
+|                                                     | so browsers keep trusting ``root-ca.pem``.                                                   |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -of, --offline-installation                         | Performs an offline installation. This option must be used with -a, -wm, -s, -wi, or -wd.    |
 +-----------------------------------------------------+----------------------------------------------------------------------------------------------+
