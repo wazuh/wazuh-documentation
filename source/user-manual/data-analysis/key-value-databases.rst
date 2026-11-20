@@ -10,7 +10,7 @@ Key-Value Databases (KVDBs)
 
 Key-Value Databases (KVDBs) let the Wazuh normalization engine store reusable key-value maps that decoders and other assets can query during event processing. They are intended for lookup data that changes independently of the parsing logic, such as normalization tables, default field sets, blocklists, or reference tables.
 
-During event processing, decoders and rules can call KVDB :ref:`helper functions <reference_helper_functions>` to look up, match, or merge data from a named database. The database name is passed as an argument to the helper function. The lookup happens inline as part of the normalization or filtering stage of the processing pipeline.
+During event processing, decoders and filters can call KVDB :ref:`helper functions <reference_helper_functions>` to look up, match, or merge data from a named database. The database name is passed as an argument to the helper function. The lookup happens inline as part of the normalization or filtering stage of the processing pipeline.
 
 A KVDB is a named dictionary of **key** and **value** entries, where:
 
@@ -136,6 +136,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
         - "https://documentation.wazuh.com/"
         supports: []
         title: "Wazuh message decoder"
+      check: "regex_match($event.original, '\"query_name\":.*\"srcaddr\":')"
       normalize:
       - map:
         - _tmp_json: "parse_json($event.original)"
@@ -155,6 +156,8 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
    -  ``id: "c8d31738-281e-4183-a5f3-fd02dea3bc25"`` - Stable UUID used by the content system (the content manager, the space policies, and the Wazuh indexer) to uniquely track this decoder version, independent of its human-readable name. When you create a decoder, Wazuh assigns it a new random UUID and replaces any ``id`` you write. Use the ``name`` to refer to the decoder.
 
    -  ``enabled: true`` - Marks the decoder as active; if set to ``false``, the decoder stays in the content but is skipped, so it never evaluates events.
+
+   -  ``check: "regex_match($event.original, '\"query_name\":.*\"srcaddr\":')"`` - Limits the root decoder to Route53 Resolver query logs. A root decoder without a check accepts every agent event, so if you promote this example to the custom space, Wazuh indexes every event a second time.
 
    -  ``metadata.author: "Wazuh, Inc."`` - Informational field indicating who created or maintains the decoder asset; it has no impact on runtime behavior.
 
@@ -311,9 +314,9 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset Management** > **Overview** > **Actions** > **Edit**, confirm the status is **Enabled**, select ``decoder/test-wazuh-message/0`` as the **Root decoder** and click **Save**.
+#. Navigate to **Ruleset Management** > **Overview** > **Space actions** > **Edit**, confirm the status is **Enabled**, select ``decoder/test-wazuh-message/0`` as the **Root decoder** and click **Save**.
 
-#. Navigate to **Ruleset Management** > **Overview** > **Actions** and click on **Promote**. Review the list of changes, which includes the decoders and the KVDB you created, and confirm the promotion. Promotion moves all the changes in the space together.
+#. Navigate to **Ruleset Management** > **Overview** > **Space actions** and click on **Promote**. Review the list of changes, which includes the decoders and the KVDB you created, and confirm the promotion. Promotion moves all the changes in the space together.
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-promote-test-integration.png
       :title: Promote the test integration

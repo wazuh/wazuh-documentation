@@ -3,8 +3,8 @@
 .. meta::
    :description: Follow these steps to enroll a macOS endpoint through the Wazuh agent configuration method.
 
-macOS
-=====
+Enroll a macOS endpoint through agent configuration
+===================================================
 
 Follow these steps to enroll a macOS endpoint through the Wazuh agent configuration method.
 

@@ -22,8 +22,7 @@ Commands
 +-------------------+----------------------------------------------------------------------------------------------+
 | stop              | Stops the Wazuh agent services.                                                              |
 +-------------------+----------------------------------------------------------------------------------------------+
-| restart           | Restarts the Wazuh agent services. On a Linux agent that systemd manages, this leaves the    |
-|                   | Wazuh agent stopped: use ``systemctl restart wazuh-agent`` instead.                          |
+| restart           | Restarts the Wazuh agent services.                                                           |
 +-------------------+----------------------------------------------------------------------------------------------+
 | reload            | Reloads the Wazuh agent configuration.                                                       |
 +-------------------+----------------------------------------------------------------------------------------------+
@@ -32,6 +31,10 @@ Commands
 | info [-v -r -t]   | Displays information about the Wazuh agent installation. Specify only one option to display  |
 |                   | the version (-v), revision (-r), or installation type (-t).                                  |
 +-------------------+----------------------------------------------------------------------------------------------+
+
+.. note::
+
+   On a Linux agent where the ``wazuh-agent`` systemd unit is active, ``stop``, ``restart``, and ``reload`` run ``systemctl <COMMAND> wazuh-agent`` so that systemd keeps supervising the Wazuh agent. Before a restart, ``wazuh-control`` tests the configuration. To run these commands in ``wazuh-control`` itself, set ``WAZUH_CONTROL_SKIP_SYSTEMD=1``, for example ``WAZUH_CONTROL_SKIP_SYSTEMD=1 /var/ossec/bin/wazuh-control restart``. On a Wazuh agent that systemd manages, this can leave the Wazuh agent stopped.
 
 Examples
 --------

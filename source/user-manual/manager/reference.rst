@@ -165,7 +165,7 @@ The Wazuh manager provides a set of command-line interface (CLI) tools for manag
    * - ``rbac_control``
      - Seed the RBAC database, change the passwords of the default Wazuh manager API users, or reset the RBAC database.
    * - ``wazuh-manager-conf``
-     - Validates and retrieves the Wazuh manager configuration. Run ``/var/wazuh-manager/bin/wazuh-manager-conf validate`` to check ``/etc/wazuh-manager/wazuh-manager.conf`` before restarting the Wazuh manager. It prints nothing when the file is valid and exits with status ``0``. Otherwise, it prints the invalid option and exits with status ``1``. Run ``/var/wazuh-manager/bin/wazuh-manager-conf get <OPTION>`` to print a specific option, such as ``cluster.key``, or ``/var/wazuh-manager/bin/wazuh-manager-conf dump`` to print the entire configuration.
+     - Validates and retrieves the Wazuh manager configuration. Run ``/var/wazuh-manager/bin/wazuh-manager-conf validate`` to check ``/etc/wazuh-manager/wazuh-manager.conf`` before restarting the Wazuh manager. When the file is valid, it prints ``/etc/wazuh-manager/wazuh-manager.conf: configuration is valid.`` and exits with status ``0``. Otherwise, it prints every invalid option it finds, one line each, and exits with status ``1``. Run ``/var/wazuh-manager/bin/wazuh-manager-conf get <OPTION>`` to print a specific option, such as ``cluster.key``, or ``/var/wazuh-manager/bin/wazuh-manager-conf dump`` to print the entire configuration.
    * - ``wazuh-manager-resolve-credentials``
      - Resolves, issues, and validates Wazuh manager credentials and certificates. The package runs this command during installation, upgrades, and every startup. Use the ``--check`` option to perform a read-only check.
    * - ``wazuh-manager-certs``

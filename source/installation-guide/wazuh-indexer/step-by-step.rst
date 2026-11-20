@@ -26,7 +26,7 @@ The installation process is divided into four stages:
 Wazuh indexer nodes installation
 --------------------------------
 
-Run this stage on every Wazuh indexer node. Install the package only on the first node at this stage, as it generates the certificates and passwords for the entire deployment. Install the package on the remaining nodes later, in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`, after you place the root CA and the passwords. A node that installs the package with nothing placed creates its own root CA and passwords. Its certificate then does not chain to the cluster's root CA, and placing files afterwards does not reconfigure it.
+On the first Wazuh indexer node, follow this whole stage. On the other nodes, follow only Installing package dependencies and Adding the Wazuh repository, then go to :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`. Install the package only on the first node at this stage, as it generates the certificates and passwords for the entire deployment. Install the package on the remaining nodes later, in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`, after you place the root CA and the passwords. A node that installs the package with nothing placed creates its own root CA and passwords. Its certificate then does not chain to the cluster's root CA, and placing files afterwards does not reconfigure it.
 
 Installing package dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -39,7 +39,7 @@ Installing package dependencies
 
          .. code-block:: console
 
-            # apt-get install -y iproute2 openssl passwd
+            # apt-get update && apt-get install -y iproute2 openssl passwd
 
       .. group-tab:: Yum
 
@@ -212,7 +212,7 @@ Wazuh uses certificates to establish confidentiality and encrypt communications 
 
 Run this stage once, on the first Wazuh indexer node, after its package is installed. It creates the certificates of every node and packs them, with the passwords every node needs, into ``wazuh-certificates.tar``.
 
-For an all-in-one installation, skip this stage and :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`. The Wazuh indexer package already issued its certificates.
+For an all-in-one installation, skip this stage and go to :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`. The Wazuh indexer package already issued its certificates.
 
 .. _wazuh_indexer_generating_certificates:
 
@@ -391,7 +391,7 @@ Deploying certificates
       # chown root:root /etc/wazuh-indexer/certs/admin.pem /etc/wazuh-indexer/certs/admin-key.pem
       # chmod 0600 /etc/wazuh-indexer/certs/admin.pem /etc/wazuh-indexer/certs/admin-key.pem
 
-   The certificates tool issues each certificate with the node name from ``config.yml`` as CN. Run the following command to display the certificate subject in the format that ``plugins.security.nodes_dn`` expects:
+   The certificates tool issues each certificate with the node name that you set in ``config.yml`` on the first node as its Common Name (CN). Run the following command to display the certificate subject in the format that ``plugins.security.nodes_dn`` expects:
 
    .. code-block:: console
 
@@ -546,7 +546,7 @@ Before you initialize the cluster, check on every Wazuh indexer node that its ce
 
 .. code-block:: console
 
-   # openssl verify -CAfile /etc/wazuh-indexer/certs/root-ca.pem /etc/wazuh-indexer/certs/indexer.pem
+   # openssl verify -CAfile /etc/wazuh-indexer/ca/root-ca.pem /etc/wazuh-indexer/certs/indexer.pem
 
 The command prints ``/etc/wazuh-indexer/certs/indexer.pem: OK``. If it prints ``verification failed``, the certificate comes from another root CA. Create the certificates again as described in :ref:`Generating the SSL certificates <wazuh_indexer_generating_certificates>`.
 
