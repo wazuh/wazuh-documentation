@@ -28,13 +28,13 @@ The following terms are used across the Wazuh 5.0 data analysis documentation:
 
 -  **Filter**: An asset that keeps or drops events before decoding (pre-filter) or after it (post-filter). See :ref:`Filters <data_analysis_filters>`.
 
--  **KVDB**: Key-value database: a named set of key-value pairs that decoders and rules look up to match or enrich events. See :ref:`Key-Value Databases (KVDBs) <data_analysis_kvdb>`.
+-  **KVDB**: Key-value database: a named set of key-value pairs that decoders and filters look up to match or enrich events. See :ref:`Key-Value Databases (KVDBs) <data_analysis_kvdb>`.
 
 -  **Event**: A normalized event: the WCS document that the normalization engine produces from a raw log and indexes in ``wazuh-events-v5-<category>``. See :ref:`Events <data_analysis_events>`.
 
 -  **Unclassified event**: An event that no decoder of the policy accepts. Wazuh indexes it only when the **Index unclassified events** setting of the space is on.
 
--  **Discarded event**: An event that a filter or a decoder marks to be dropped. Wazuh indexes it only when the **Index discarded events** setting of the space is on.
+-  **Discarded event**: An event that a decoder marks as discarded with the ``discard_event`` helper. When the **Index discarded events** setting of the space is on, Wazuh indexes a ``wazuh.space.event_discarded: true`` marker instead of the event content. Events that a filter rejects are always dropped.
 
 -  **Rule**: A detection rule in Sigma format with Wazuh extensions. The detection engine evaluates it against indexed events. See :ref:`Rules <data_analysis_rules>`.
 
