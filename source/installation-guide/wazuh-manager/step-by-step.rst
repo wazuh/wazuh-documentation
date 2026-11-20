@@ -106,7 +106,7 @@ Do this **before installing the package**. The package then uses these passwords
 
    Without these two passwords, the Wazuh manager package generates its own, and the values in ``credentials.env`` don't work. On any other host, including a dedicated Wazuh manager node and the other Wazuh indexer nodes, follow this section in full.
 
-   Make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
+   On those hosts, make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
 
 #. Replace ``<MANAGER_NODE_NAME>`` with your Wazuh manager node certificate name, the same used in ``config.yml`` when creating the certificates. In our case, the node name is ``manager``. Then extract the archive, and place the passwords:
 
@@ -128,7 +128,7 @@ Do this **before installing the package**. The package then uses these passwords
 
       # echo 'WAZUH_MANAGER_REMOTED_CERT_SANS=IP:<WAZUH_MANAGER_ADDRESS>,DNS:<LOAD_BALANCER_NAME>' >> /etc/wazuh-manager/local.env
 
-   The package always adds ``localhost``, ``127.0.0.1``, and ``::1``. For the Wazuh manager API certificate, set ``WAZUH_MANAGER_APID_CERT_SANS`` the same way. The address in the ``url`` setting of the Wazuh dashboard must be in that certificate.
+   The package always adds ``localhost``, ``127.0.0.1``, and ``::1``. For the Wazuh manager API certificate, set ``WAZUH_MANAGER_APID_CERT_SANS`` the same way. The address in the ``wazuh_core.hosts.default.url`` setting of the Wazuh dashboard, in ``/etc/wazuh-dashboard/opensearch_dashboards.yml``, must be in that certificate.
 
 #. On each worker node of a Wazuh manager cluster, place the master node's root CA. Install the master node first. Every node then issues its certificates from the same root CA, so the Wazuh agents trust every node. Skip this step on the master node and on a single Wazuh manager. On the master node, pack the root CA and its private key:
 
