@@ -30,12 +30,15 @@ Installing Logstash
 
 Perform the following steps to install Logstash and the required plugins. Ensure your `Logstash and OpenSearch versions are compatible <https://opensearch.org/docs/latest/tools/index/#compatibility-matrices>`__.
 
-#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html>`__.
+#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/docs/reference/logstash/installing-logstash>`__ 9.5.6, the version the integration is tested with.
 #. Install the `logstash-input-opensearch plugin <https://github.com/opensearch-project/logstash-input-opensearch>`__ and the `logstash-output-opensearch plugin <https://github.com/opensearch-project/logstash-output-opensearch>`__ using the following command. These plugins allow reading the data from the Wazuh indexer into the Logstash pipeline and writing the data into OpenSearch.
 
    .. code-block:: console
 
-      $ sudo /usr/share/logstash/bin/logstash-plugin install logstash-input-opensearch logstash-output-opensearch
+      $ sudo env LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 1.0.0 logstash-input-opensearch
+      $ sudo env LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 2.1.1 logstash-output-opensearch
+
+   The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
 
 #. Copy the Wazuh indexer and OpenSearch root certificates on the Logstash server.
 
@@ -65,6 +68,24 @@ Create a ``/etc/logstash/templates/`` directory and download the template as ``w
 
    # mkdir /etc/logstash/templates
    # curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-template.json
+
+Load the template into OpenSearch:
+
+.. code-block:: console
+
+   # curl -X PUT "https://<OPENSEARCH_ADDRESS>:9200/_index_template/wazuh" -H 'Content-Type: application/json' -d @/etc/logstash/templates/wazuh.json --cacert </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem -u <OPENSEARCH_USERNAME>
+
+Load the template before Logstash writes its first event. An index that already exists keeps its mappings until the next daily index.
+
+``<OPENSEARCH_ADDRESS>`` must match a name in the OpenSearch certificate.
+
+The ``logstash-output-opensearch`` plugin can't install index templates on Logstash 9, so Logstash doesn't manage the template.
+
+Check that the template exists:
+
+.. code-block:: console
+
+   # curl "https://<OPENSEARCH_ADDRESS>:9200/_index_template/wazuh" --cacert </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem -u <OPENSEARCH_USERNAME>
 
 In OpenSearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
 
@@ -198,10 +219,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
                index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
                cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
                ssl => true
-               template => "/etc/logstash/templates/wazuh.json"
-               template_name => "wazuh"
-               template_overwrite => true
-               legacy_template => false
+               manage_template => false
              }
          }
 
@@ -216,17 +234,20 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
          
          For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
-         If you aren't using composable index templates and the _index_template API, remove the `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__ parameter.
-
 Running Logstash
 ^^^^^^^^^^^^^^^^
 
 #. Once you have everything set, run Logstash from CLI with your configuration:
 
+   Run the command as the ``logstash`` user. Logstash 9 doesn't run as root, and that user must own the log files that earlier commands created as root:
+
    .. code-block:: console
 
       $ sudo systemctl stop logstash
-      $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-opensearch.conf --path.settings /etc/logstash/
+      $ sudo chown -R logstash:logstash /var/log/logstash
+      $ sudo -E -u logstash /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-opensearch.conf --path.settings /etc/logstash/
+
+   ``sudo -E`` passes ``LOGSTASH_KEYSTORE_PASS`` to Logstash, so run the command in the shell where you exported it. Without it, Logstash reports that the keystore is not valid.
 
    Make sure to use your own paths for the Logstash executable, the pipeline, and the configuration files.
 
@@ -263,12 +284,14 @@ We use Logstash to forward security data in the ``/var/ossec/logs/alerts/alerts.
 
 Perform the following steps to install Logstash and the required plugin.
 
-#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html>`__ on the Wazuh server.
+#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/docs/reference/logstash/installing-logstash>`__ 9.5.6, the version the integration is tested with, on the Wazuh server.
 #. Run the following command to install the `logstash-output-opensearch plugin <https://github.com/opensearch-project/logstash-output-opensearch>`__. This plugin allows Logstash to write the data into OpenSearch.
 
    .. code-block:: console
 
-      $ sudo /usr/share/logstash/bin/logstash-plugin install logstash-output-opensearch
+      $ sudo env LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 2.1.1 logstash-output-opensearch
+
+   The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
 
 #. Copy the OpenSearch root certificate to the Wazuh server. You can add the certificate to any directory of your choice. In our case, we add it in the ``/etc/logstash/opensearch-certs`` directory.
 
@@ -293,6 +316,24 @@ Create a ``/etc/logstash/templates/`` directory and download the template as ``w
 
    # mkdir /etc/logstash/templates
    # curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-template.json
+
+Load the template into OpenSearch:
+
+.. code-block:: console
+
+   # curl -X PUT "https://<OPENSEARCH_ADDRESS>:9200/_index_template/wazuh" -H 'Content-Type: application/json' -d @/etc/logstash/templates/wazuh.json --cacert </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem -u <OPENSEARCH_USERNAME>
+
+Load the template before Logstash writes its first event. An index that already exists keeps its mappings until the next daily index.
+
+``<OPENSEARCH_ADDRESS>`` must match a name in the OpenSearch certificate.
+
+The ``logstash-output-opensearch`` plugin can't install index templates on Logstash 9, so Logstash doesn't manage the template.
+
+Check that the template exists:
+
+.. code-block:: console
+
+   # curl "https://<OPENSEARCH_ADDRESS>:9200/_index_template/wazuh" --cacert </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem -u <OPENSEARCH_USERNAME>
 
 In OpenSearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
 
@@ -404,10 +445,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
                index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
                cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
                ssl => true
-               template => "/etc/logstash/templates/wazuh.json"
-               template_name => "wazuh"
-               template_overwrite => true
-               legacy_template => false
+               manage_template => false
              }
          }
 
@@ -420,8 +458,6 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
          
          For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
-         If you aren't using composable index templates and the _index_template API, remove the `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__ parameter.
-
 #. By default the ``/var/ossec/logs/alerts/alerts.json`` file is owned by the ``wazuh`` user with restrictive permissions. You must add the ``logstash`` user to the ``wazuh`` group so it can read the file when running Logstash as a service:
 
    .. code-block:: console
@@ -433,10 +469,15 @@ Running Logstash
 
 #. Once you have everything set, run Logstash from CLI with your configuration:
 
+   Run the command as the ``logstash`` user. Logstash 9 doesn't run as root, and that user must own the log files that earlier commands created as root:
+
    .. code-block:: console
 
       $ sudo systemctl stop logstash
-      $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-opensearch.conf --path.settings /etc/logstash/
+      $ sudo chown -R logstash:logstash /var/log/logstash
+      $ sudo -E -u logstash /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-opensearch.conf --path.settings /etc/logstash/
+
+   ``sudo -E`` passes ``LOGSTASH_KEYSTORE_PASS`` to Logstash, so run the command in the shell where you exported it. Without it, Logstash reports that the keystore is not valid.
 
    Make sure to use your own paths for the executable, the pipeline, and the configuration files.
 

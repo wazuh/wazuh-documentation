@@ -171,3 +171,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
          .. code-block:: console
 
             # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+
+.. note::
+
+   If ``/var/ossec/etc/ossec.conf`` was modified, the upgrade keeps it and saves the new default as ``/var/ossec/etc/ossec.conf.new``. Compare both files and add any settings you need.
