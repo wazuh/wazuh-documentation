@@ -590,6 +590,11 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/capabilities/malware-detection/fim-threat-detection-rules.html',
     '5.0': '/user-manual/capabilities/malware-detection/fim-threat-intelligence.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/deployment-options/docker/upgrading-wazuh-docker.html',
+    '5.0': '/migration-to-5x/docker-kubernetes-deployments.html#docker-deployments',
   }
 );
 
@@ -787,6 +792,7 @@ removedUrls['5.0'] = [
   '/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-upgrade.html',
   '/deployment-options/docker/changing-default-password.html',
+  '/deployment-options/docker/upgrading-wazuh-docker.html',
   '/deployment-options/deploying-with-ansible/guide/install-ansible.html',
   '/deployment-options/deploying-with-ansible/roles/wazuh-agent.html',
   '/deployment-options/deploying-with-ansible/roles/wazuh-dashboard.html',

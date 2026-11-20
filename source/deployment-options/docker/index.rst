@@ -33,5 +33,4 @@ Content
    wazuh-container
    build-docker-images-locally
    container-usage
-   upgrading-wazuh-docker
    uninstalling-wazuh-docker
