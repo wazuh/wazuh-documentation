@@ -16,7 +16,7 @@ Before running a use case, review its structure and prepare the required lab env
 How each use case is organized
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Every use case follows the same structure, making it easy to find the information you need. Each use case includes the following sections:
+Every use case follows the same structure, making it easy to find the information you need. Each use case includes the following sections. Verify data ingestion and Clean up appear only in the use cases that need them:
 
 -  **Endpoints**: Lists the lab endpoints required for the use case and describes the role of each one.
 -  **Configuration**: Describes the changes to make on the endpoints and in the Wazuh dashboard.
