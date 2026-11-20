@@ -11,18 +11,6 @@ This section guides you through the upgrade process of the Wazuh indexer, the Wa
 -  **All-in-one deployments:** Execute all commands and configuration actions on the same node since all components run on a single system.
 -  **Multi-node cluster deployments:** Run commands and apply configurations on the respective node where the component being upgraded is located.
 
-.. warning::
-
-   Downgrading to version 4.11 and earlier is not possible. Since version 4.12.0, Wazuh uses a newer version of Apache Lucene.
-
-   Apache Lucene does not support downgrades, meaning once you upgrade to Wazuh 4.12.0 or later, you cannot roll back to 4.11 and earlier versions without a fresh installation of the indexer.
-
-   To avoid data loss, create an :ref:`index snapshot <migrating_indices_take_snapshots>` before upgrading. For more details, refer to the `Opensearch documentation <https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/rolling-upgrade/>`__.
-
-.. warning::
-
-   Starting with Wazuh 4.14.1, JSON fields named ``user`` are mapped to ``dstuser`` during event decoding. This change may affect custom dashboards, searches, integrations, and scripts that reference ``data.user``. Review and update any custom content to use ``data.dstuser`` before upgrading.
-
 .. note::
 
    Since Wazuh 5.0, the following Rootcheck configuration options and database files have been removed:
@@ -60,7 +48,7 @@ Perform the steps below before upgrading any of the Wazuh components. In case Wa
    .. image:: /images/upgrade-guide/saved-objects-export.png
       :alt: Wazuh dashboard Saved objects page with an index pattern selected and the Export and Export all objects buttons highlighted
 
-#. Stop the Filebeat and Wazuh dashboard services if installed in the node:
+#. Stop the Wazuh dashboard service if installed in the node:
 
    .. tabs::
 
@@ -68,14 +56,12 @@ Perform the steps below before upgrading any of the Wazuh components. In case Wa
 
          .. code-block:: console
 
-            # systemctl stop filebeat
             # systemctl stop wazuh-dashboard
 
       .. tab:: SysV init
 
          .. code-block:: console
 
-            # service filebeat stop
             # service wazuh-dashboard stop
 
 Upgrading the Wazuh indexer
@@ -100,7 +86,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
       Security Admin v7
       Will connect to 127.0.0.1:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.2
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -121,8 +107,6 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
          SUCC: Configuration for 'tenants' stored in /etc/wazuh-indexer/opensearch-security/tenants.yml
       Will retrieve '/nodesdn' into /etc/wazuh-indexer/opensearch-security/nodes_dn.yml
          SUCC: Configuration for 'nodesdn' stored in /etc/wazuh-indexer/opensearch-security/nodes_dn.yml
-      Will retrieve '/whitelist' into /etc/wazuh-indexer/opensearch-security/whitelist.yml
-         SUCC: Configuration for 'whitelist' stored in /etc/wazuh-indexer/opensearch-security/whitelist.yml
       Will retrieve '/allowlist' into /etc/wazuh-indexer/opensearch-security/allowlist.yml
          SUCC: Configuration for 'allowlist' stored in /etc/wazuh-indexer/opensearch-security/allowlist.yml
       Will retrieve '/audit' into /etc/wazuh-indexer/opensearch-security/audit.yml
@@ -245,6 +229,8 @@ Perform the following steps on each Wazuh indexer node to upgrade them. Upgrade 
 
             When prompted, choose to replace the ``/etc/wazuh-indexer/jvm.options`` file with the updated version.
 
+            If prompted about the ``/etc/wazuh-indexer/opensearch.yml`` file, keep your current version. Replacing it removes the node and certificate settings of your installation.
+
 #. Manually reapply any custom settings to the ``/etc/wazuh-indexer/jvm.options`` file from your backup file.
 
 #. Restart the Wazuh indexer service.
@@ -272,7 +258,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
       Security Admin v7
       Will connect to 127.0.0.1:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.3
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -294,13 +280,11 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
          SUCC: Configuration for 'tenants' created or updated
       Will update '/nodesdn' with /etc/wazuh-indexer/opensearch-security/nodes_dn.yml
          SUCC: Configuration for 'nodesdn' created or updated
-      Will update '/whitelist' with /etc/wazuh-indexer/opensearch-security/whitelist.yml
-         SUCC: Configuration for 'whitelist' created or updated
       Will update '/audit' with /etc/wazuh-indexer/opensearch-security/audit.yml
          SUCC: Configuration for 'audit' created or updated
       Will update '/allowlist' with /etc/wazuh-indexer/opensearch-security/allowlist.yml
          SUCC: Configuration for 'allowlist' created or updated
-      SUCC: Expected 10 config types for node {"updated_config_types":["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","actiongroups","config","internalusers"],"updated_config_size":10,"message":null} is 10 (["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","actiongroups","config","internalusers"]) due to: null
+      SUCC: Expected 9 config types for node {"updated_config_types":["allowlist","tenants","rolesmapping","nodesdn","audit","roles","actiongroups","config","internalusers"],"updated_config_size":9,"message":null} is 9 (["allowlist","tenants","rolesmapping","nodesdn","audit","roles","actiongroups","config","internalusers"]) due to: null
       Done with success
 
 #. Check that the newly upgraded Wazuh indexer nodes are in the cluster.
@@ -391,15 +375,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 Upgrading the Wazuh server
 --------------------------
 
-When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node. Start with the master node to reduce server downtime. To successfully upgrade the Wazuh server, follow these steps in order:
-
-#. :ref:`Upgrade the Wazuh manager <upgrading_wazuh_manager>`.
-#. :ref:`Configure the vulnerability detection <configuring_vulnerability_detection>`. (if required based on the version you are upgrading from).
-#. :ref:`Configure Filebeat <configuring_filebeat>`.
-
-.. note::
-
-   Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system.
+When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node. Start with the master node to reduce server downtime.
 
 .. _upgrading_wazuh_manager:
 
@@ -424,7 +400,7 @@ Upgrading the Wazuh manager
 
    .. note::
 
-      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in the :doc:`/user-manual/index`.
+      If the ``/etc/wazuh-manager/wazuh-manager.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in the :doc:`/user-manual/index`.
 
 #. Run the following command on the Wazuh manager node(s) to start the Wazuh manager service if you stopped it earlier:
 
@@ -444,205 +420,15 @@ Upgrading the Wazuh manager
 
             # service wazuh-manager start
 
-Configuring CDB lists
-^^^^^^^^^^^^^^^^^^^^^
-
-When upgrading from Wazuh 4.12.x or earlier, follow these steps to configure the newly added CDB lists.
-
-#. Edit the ``/var/ossec/etc/ossec.conf`` file and update the ``<ruleset>`` block with the CDB lists highlighted below. 
-
-   .. code-block:: xml
-      :emphasize-lines: 9-11
-
-      <ruleset>
-          <!-- Default ruleset -->
-          <decoder_dir>ruleset/decoders</decoder_dir>
-          <rule_dir>ruleset/rules</rule_dir>
-          <rule_exclude>0215-policy_rules.xml</rule_exclude>
-          <list>etc/lists/audit-keys</list>
-          <list>etc/lists/amazon/aws-eventnames</list>
-          <list>etc/lists/security-eventchannel</list>
-          <list>etc/lists/malicious-ioc/malware-hashes</list>
-          <list>etc/lists/malicious-ioc/malicious-ip</list>
-          <list>etc/lists/malicious-ioc/malicious-domains</list>
-          <!-- User-defined ruleset -->
-          <decoder_dir>etc/decoders</decoder_dir>
-          <rule_dir>etc/rules</rule_dir>
-      </ruleset>
-
-#. Restart the Wazuh manager to apply the configuration changes
-
-   .. include:: /_templates/common/restart_manager.rst
-
-.. _configuring_vulnerability_detection:
-
-Configuring the vulnerability detection and indexer connector
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The Wazuh Inventory Harvester and Vulnerability Detection modules rely on the :doc:`indexer connector </user-manual/reference/ossec-conf/indexer>` setting to forward system inventory data and detected vulnerabilities to the Wazuh indexer.
-
-If upgrading from version 4.8.x or later, skip the vulnerability detection and indexer connector configurations and proceed to :ref:`configuring_filebeat`. No action is needed as the vulnerability detection and indexer connector blocks are already configured.
-
-When upgrading from Wazuh version 4.7.x or earlier, follow these steps to configure the vulnerability detection and indexer connector blocks.
-
-#. Update the configuration file
-
-   Edit the ``/var/ossec/etc/ossec.conf`` file to include the new ``<vulnerability-detection>`` block. Remove the old ``<vulnerability-detector>`` block if it exists.
-
-   The updated configuration enables the Wazuh Vulnerability Detection module to index vulnerabilities and alerts, with the vulnerability feed refreshing every 60 minutes. Add the following block to the configuration file:
-
-   .. code-block:: xml
-
-      <vulnerability-detection>
-         <enabled>yes</enabled>
-         <index-status>yes</index-status>
-         <feed-update-interval>60m</feed-update-interval>
-      </vulnerability-detection>
-
-#. Configure the indexer block
-
-   #. Ensure the ``<indexer>`` block contains the details of your Wazuh indexer host. During the upgrade, a default ``<indexer>`` configuration is added under ``<ossec_conf>`` if none exists in ``/var/ossec/etc/ossec.conf``. By default, the configuration includes one host with the IP address ``0.0.0.0``:
-
-      .. code-block:: xml
-         :emphasize-lines: 4
-
-         <indexer>
-            <enabled>yes</enabled>
-            <hosts>
-               <host>https://0.0.0.0:9200</host>
-            </hosts>
-            <ssl>
-               <certificate_authorities>
-                  <ca>/etc/filebeat/certs/root-ca.pem</ca>
-               </certificate_authorities>
-               <certificate>/etc/filebeat/certs/filebeat.pem</certificate>
-               <key>/etc/filebeat/certs/filebeat-key.pem</key>
-            </ssl>
-         </indexer>
-
-      Replace ``0.0.0.0`` with the IP address or hostname of your Wazuh indexer node. You can find this value in the Filebeat configuration file at ``/etc/filebeat/filebeat.yml``. Ensure that the ``<certificate>`` and ``<key>`` names match the files located in ``/etc/filebeat/certs/``.
-
-   #. If using a Wazuh indexer cluster, add a ``<host>`` entry in the Wazuh manager ``/var/ossec/etc/ossec.conf`` file for each node in the cluster. For example, for a two-node configuration:
-
-      .. code-block:: xml
-
-         <hosts>
-            <host>https://10.0.0.1:9200</host>
-            <host>https://10.0.0.2:9200</host>
-         </hosts>
-
-      The Wazuh server will prioritize reporting to the first indexer node in the list and switch to the next available node if it becomes unavailable.
-
-#. Store Wazuh indexer credentials
-
-   Save the Wazuh indexer username and password into the Wazuh manager keystore using the :doc:`Wazuh-keystore </user-manual/reference/tools/wazuh-keystore>` tool:
-
-   .. code-block:: console
-
-      # echo '<INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
-      # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
-
-   If you have forgotten your Wazuh indexer password, refer to the :doc:`password management guide </user-manual/user-administration/password-management>` to reset it.
-
-#. Restart the Wazuh manager to apply the configuration changes
-
-   .. include:: /_templates/common/restart_manager.rst
-
-.. _configuring_filebeat:
-
-Configuring Filebeat
-^^^^^^^^^^^^^^^^^^^^
-
-When upgrading Wazuh, you must also update the Wazuh Filebeat module and the alerts template to ensure compatibility with the latest Wazuh indexer version. Follow these steps to configure Filebeat properly:
-
-#. Download the Wazuh module for Filebeat:
-
-   .. code-block:: console
-
-      # curl -s https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/filebeat/wazuh-filebeat-|WAZUH_FILEBEAT|.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
-
-#. Download the alerts template:
-
-   .. code-block:: console
-
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
-      # chmod go+r /etc/filebeat/wazuh-template.json
-
-#. Backup the ``/etc/filebeat/filebeat.yml`` file to preserve your custom Filebeat configuration settings. Create a copy of the file using the following command:
-
-   .. code-block:: console
-
-      # cp /etc/filebeat/filebeat.yml  /etc/filebeat/filebeat.yml.old
-
-#. Upgrade Filebeat to the latest version:
-
-   .. tabs::
-
-      .. group-tab:: Yum
-
-         .. code-block:: console
-
-            # yum upgrade filebeat
-
-      .. group-tab:: APT
-
-         .. code-block:: console
-
-            # apt-get install filebeat
-
-#. Restore your custom Filebeat configuration settings:
-
-   .. code-block:: console
-
-      # cp /etc/filebeat/filebeat.yml.old  /etc/filebeat/filebeat.yml
-
-#. Restart Filebeat:
-
-   .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
-
-#. Upload the new Wazuh template and pipelines for Filebeat:
-
-   .. code-block:: console
-
-      # filebeat setup --pipelines
-      # filebeat setup --index-management -E output.logstash.enabled=false
-
-#. If you are upgrading from Wazuh versions v4.8.x or v4.9.x, manually update the ``wazuh-states-vulnerabilities-*`` mappings using the following command. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and ``<USERNAME>`` with the values applicable to your deployment.
-
-   Skip this step if upgrading from other versions.
-
-   .. code-block:: bash
-
-      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/wazuh-states-vulnerabilities-*/_mapping"  -u <USERNAME> -k -H 'Content-Type: application/json' -d'
-      {
-        "properties": {
-          "vulnerability": {
-            "properties": {
-              "under_evaluation": {
-                "type": "boolean"
-              },
-              "scanner": {
-                "properties": {
-                  "source": {
-                    "type": "keyword",
-                    "ignore_above": 1024
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      '
-
 Upgrading the Wazuh dashboard
 -----------------------------
 
-#. Back up the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your settings. For example, create a copy of the file using the following command:
+#. Back up the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` and ``/etc/wazuh-dashboard/node.options`` files to save your settings. For example, create a copy of the files using the following commands:
 
    .. code-block:: console
 
       # cp /etc/wazuh-dashboard/opensearch_dashboards.yml /etc/wazuh-dashboard/opensearch_dashboards.yml.old
+      # cp /etc/wazuh-dashboard/node.options /etc/wazuh-dashboard/node.options.old
 
 #. Upgrade the Wazuh dashboard.
 
@@ -662,15 +448,9 @@ Upgrading the Wazuh dashboard
 
          .. note::
 
-            When prompted, choose to replace the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the updated version.
+            When prompted, choose to replace the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` and ``/etc/wazuh-dashboard/node.options`` files with the updated versions.
 
-#. Manually reapply any configuration changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file. Ensure that the values of ``server.ssl.key`` and ``server.ssl.certificate`` match the files located in ``/etc/wazuh-dashboard/certs/``.
-
-#. If you are upgrading from Wazuh versions 4.7 and earlier, ensure the value of ``uiSettings.overrides.defaultRoute`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file is set to ``/app/wz-home`` as shown below:
-
-   .. code-block:: yaml
-
-      uiSettings.overrides.defaultRoute: /app/wz-home
+#. Manually reapply any configuration changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` and ``/etc/wazuh-dashboard/node.options`` files. Ensure that the values of ``server.ssl.key`` and ``server.ssl.certificate`` match the files located in ``/etc/wazuh-dashboard/certs/``.
 
 #. Restart the Wazuh dashboard:
 
