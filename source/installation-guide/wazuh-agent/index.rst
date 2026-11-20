@@ -16,12 +16,12 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
    :width: 100%
    :widths: 50 50
 
-   * - Log collector
-     - Command execution
+   * - Log data collection
+     - Command monitoring
    * - File integrity monitoring (FIM)
      - Security configuration assessment (SCA)
    * - System inventory
-     - Malware detection
+     - Malware detection (Rootcheck)
    * - Active response
      - Container security
    * - Cloud security
@@ -47,7 +47,7 @@ Go to **Agents management** > **Summary** and click **Deploy new agent**.
    :title: Deploy new agent button
    :alt: Deploy new agent button
 
-Then follow the steps on the Wazuh dashboard. The wizard creates the enrollment token for you. Enter a Wazuh manager address that the Wazuh agents can reach and that is in the agent listener certificate of the Wazuh manager, as :ref:`Generate the enrollment token <generate_enrollment_token>` describes. For any other address, the Wazuh dashboard shows ``API error: ERR_BAD_REQUEST - Enrollment token refused: address not in certificate SAN``. To fix it, see :ref:`Enrollment token refused: address not in certificate SAN <enrollment_token_refused_address_not_in_certificate_san>`.
+Then follow the steps on the Wazuh dashboard. The wizard creates the enrollment token for you. Enter a Wazuh manager address that the Wazuh agents can reach and that is in the Subject Alternative Name (SAN) list of the agent listener certificate of the Wazuh manager, as :ref:`Generate the enrollment token <generate_enrollment_token>` describes. For any other address, the Wazuh dashboard shows ``API error: ERR_BAD_REQUEST - Enrollment token refused: address not in certificate SAN``. To fix it, see :ref:`Enrollment token refused: address not in certificate SAN <enrollment_token_refused_address_not_in_certificate_san>`.
 
 .. thumbnail:: /images/installation/deploy-new-agent-from-ui-options.png
    :align: center
@@ -258,7 +258,7 @@ To enroll the agent again, run these commands on the endpoint. Replace ``<ENROLL
 
 On Windows, you can also use **Manage** > **Enroll** in the agent GUI. It asks you to confirm that the agent gets a new ID.
 
-The agent gets a new ID and the new CA, and keeps its name.
+The agent gets a new ID, trusts the CA of the new Wazuh manager, and keeps its name.
 
 In the first minute after the start, the agent log can show ``credential rejected (401); re-enrolling.`` and ``Manager unreachable``, and the agent can be listed as disconnected while the Wazuh manager node loads the new key. The agent enrolls again by itself and connects. If it's still disconnected after a minute, check the agent log: ``/var/ossec/logs/ossec.log`` on Linux, ``/Library/Ossec/logs/ossec.log`` on macOS, or ``C:\Program Files (x86)\ossec-agent\ossec.log`` on Windows.
 
