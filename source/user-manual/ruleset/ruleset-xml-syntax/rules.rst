@@ -51,7 +51,7 @@ Below, you can find a description of the XML labels used to configure rules.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | :ref:`rules_protocol`   | Any :doc:`regular expression <regex>`.                        | Compares a regular expression representing a protocol with a value decoded as ``protocol``.          |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| :ref:`rules_hostname`   | Any :doc:`regular expression <regex>`.                        | Compares a regular expression representing a hostname with a value pre-decoded as ``hostname``.      |
+| :ref:`rules_hostname`   | Any :doc:`regular expression <regex>`.                        | Compares the pattern with the event hostname, which can vary by event origin.                        |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `time`_                 | Any time range. e.g. (hh:mm-hh:mm)                            | Checks if the event was generated during that time range.                                            |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -906,7 +906,17 @@ If the ``protocol`` label is declared multiple times within the rule, the follow
 hostname
 ^^^^^^^^
 
-Used as a requirement to trigger a rule, it compares a regular expression representing a hostname with a value decoded as ``hostname``.
+Used as a requirement to trigger a rule, it compares a regular expression
+representing a hostname with the hostname value available to the analysis
+engine. For events received from an agent, this is the registered agent name.
+For manager-originated events, it is the hostname extracted by the pre-decoder
+when available, or the manager hostname as a fallback.
+
+.. note::
+
+   Plain input to ``wazuh-logtest`` is manager-originated. A hostname
+   condition can therefore behave differently there than it does for an event
+   received through an agent.
 
 +--------------------+---------------------------------------------------------------+
 | Default Value      | n/a                                                           |
