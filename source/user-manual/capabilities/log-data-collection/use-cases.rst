@@ -29,7 +29,7 @@ For example, perform the following steps to monitor Sysmon events using the ``Mi
 
    .. code-block:: powershell
 
-      wget -Uri https://wazuh.com/resources/blog/emulation-of-attack-techniques-and-detection-with-wazuh/sysmonconfig.xml -OutFile <SYSMON_EXECUTABLE_PATH>\sysmonconfig.xml
+      > wget -Uri https://wazuh.com/resources/blog/emulation-of-attack-techniques-and-detection-with-wazuh/sysmonconfig.xml -OutFile <SYSMON_EXECUTABLE_PATH>\sysmonconfig.xml
 
 #. Switch to the folder containing the Sysmon executable. Run the command below to install and start Sysmon:
 
