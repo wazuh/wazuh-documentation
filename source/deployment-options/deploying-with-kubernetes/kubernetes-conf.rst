@@ -16,7 +16,7 @@ Before you begin to deploy Wazuh, ensure that the following prerequisites are me
 Kubernetes cluster
 ^^^^^^^^^^^^^^^^^^
 
--  A running Kubernetes cluster with ``kubectl`` configured for communication, Kustomize support for applying manifests (included in ``kubectl`` version 1.23 and later), and the ``git``, ``curl``, and ``openssl`` utilities installed.
+-  A running Kubernetes cluster with ``kubectl`` configured for communication, Kustomize support for applying manifests (included in ``kubectl`` version 1.21 and later), and the ``git``, ``curl``, and ``openssl`` utilities installed.
 -  A container network interface (CNI) plugin that enforces Kubernetes network policies. On Amazon EKS, enable network policy support in the Amazon VPC CNI add-on before deploying.
 
 .. note::
@@ -74,7 +74,7 @@ A StatefulSet manages pods based on identical container specifications. Unlike D
 
 StatefulSets are useful for stateful applications, such as databases that persist data. The Wazuh manager and Wazuh indexer components maintain their states, so we use StatefulSets to ensure state persistence across pod restarts.
 
-Deployments are intended for stateless applications and are lightweight. Traefik doesn't need to maintain state, so it runs as a Deployment. The Wazuh dashboard also runs as a Deployment, with one replica. It keeps its configuration directory and keystore on the ``wazuh-dashboard-config`` persistent volume claim.
+Deployments are intended for stateless applications and are lightweight. :ref:`Traefik <kubernetes-apply-traefik>` doesn't need to maintain state, and runs as a Deployment. The Wazuh dashboard also runs as a Deployment, with one replica. It keeps its configuration directory and keystore on the ``wazuh-dashboard-config`` persistent volume claim.
 
 Persistent volumes (PV) are storage resources in the cluster. They have a lifecycle independent of any individual pod that uses them. This API object captures storage implementation details for NFS, iSCSI, or cloud-provider-specific storage systems.
 
