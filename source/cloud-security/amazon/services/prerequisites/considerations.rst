@@ -22,7 +22,7 @@ Filtering
 
 If the S3 bucket holds a long history of logs organized by date, you can filter which logs Wazuh reads. There are multiple configuration options to do so:
 
--  ``only_logs_after``: Allows filtering logs produced after a given date. The date format must be ``YYYY-MMM-DD``. For example, ``2018-AUG-21`` filters logs generated on or after August 21, 2018. The month abbreviation isn't case sensitive, so 2018-Aug-21 also works.
+-  ``only_logs_after``: Allows filtering logs produced after a given date. The date format must be ``YYYY-MMM-DD``. For example, ``2018-AUG-21`` filters logs generated on or after August 21, 2018. The month abbreviation isn't case sensitive, so ``2018-Aug-21`` also works.
 -  ``aws_account_id``: This option only works on CloudTrail, VPC, and Config buckets. If you have logs from multiple accounts, you can filter which ones Wazuh reads. You can specify multiple IDs separating them by commas.
 -  ``regions``: Works only with CloudTrail, VPC, Config buckets, and Inspector service. Use it to filter which regions Wazuh reads when you have logs from multiple regions. Separate multiple regions with commas.
 -  ``path``: If your logs are stored in a given path in an S3 bucket, this option can be specified. For example, to read logs stored in the directory ``vpclogs/``, it is necessary to specify the path ``vpclogs`` in the Wazuh module for AWS configuration. It can also be specified with ``/`` or ``\``.
