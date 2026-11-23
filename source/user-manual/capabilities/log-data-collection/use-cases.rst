@@ -29,7 +29,7 @@ For example, perform the following steps to monitor Sysmon events using the ``Mi
 
    .. code-block:: powershell
 
-      > wget -Uri https://wazuh.com/resources/blog/emulation-of-attack-techniques-and-detection-with-wazuh/sysmonconfig.xml -OutFile <SYSMON_EXECUTABLE_PATH>\sysmonconfig.xml
+      wget -Uri https://wazuh.com/resources/blog/emulation-of-attack-techniques-and-detection-with-wazuh/sysmonconfig.xml -OutFile <SYSMON_EXECUTABLE_PATH>\sysmonconfig.xml
 
 #. Switch to the folder containing the Sysmon executable. Run the command below to install and start Sysmon:
 
@@ -56,7 +56,7 @@ For example, perform the following steps to monitor Sysmon events using the ``Mi
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 Trigger a Sysmon event
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -70,16 +70,11 @@ Trigger a Sysmon event
 Visualize the event
 ^^^^^^^^^^^^^^^^^^^^^^
 
-#. Navigate to **Explore** > **Discover** and filter on the event:
-
-   Where
-
-   -  ``event.dataset`` is ``sysmon``
-   -  ``process.executable`` is ``C:\Windows\System32\whoami.exe``
+#. Navigate to **Explore** > **Discover** in the Wazuh dashboard and filter on the event where ``event.dataset`` is ``sysmon`` and ``process.executable`` is ``C:\Windows\System32\whoami.exe``.
 
    .. thumbnail:: /images/manual/log-data-collection/sysmon-event-triggered.png
       :title: Image showing a triggered Sysmon event
-      :alt: Image showing a triggered Sysmon event
+      :alt: Discover in the Wazuh dashboard showing a Sysmon event from the WindowsServer2022 agent for C:\Windows\System32\whoami.exe.
       :align: center
       :width: 80%
 
@@ -114,12 +109,38 @@ Follow the steps below to configure a monitored Linux endpoint as an rsyslog rel
 
       module(load="imudp")
       input(type="imudp" port="514" ruleset="remote")
+
       template(name="TraditionalSyslogFormat" type="string"
                string="%timegenerated% %HOSTNAME% %syslogtag%%msg:::sp-if-no-1st-sp%%msg%\n")
+
       ruleset(name="remote") {
           action(type="omfile" file="/var/log/remote.log" template="TraditionalSyslogFormat")
           stop
       }
+
+   The ``TraditionalSyslogFormat`` template writes the tag of an RFC 3164 message with its process ID and colon, such as ``sshd[2301]:``. The Wazuh decoders need the colon to classify the message. Messages in RFC 5424 format reach the file without it and stay unclassified. Configure your devices to send syslog in RFC 3164 format.
+
+   If a device sends only RFC 5424, receive its messages on a second UDP port with a template that adds the colon. Add the following to ``/etc/rsyslog.d/10-remote.conf``, and send only RFC 5424 messages to port ``5514``:
+
+   .. code-block:: none
+
+      input(type="imudp" port="5514" ruleset="remote-rfc5424")
+
+      template(name="RFC5424Format" type="string"
+               string="%timegenerated% %HOSTNAME% %syslogtag%:%msg:::sp-if-no-1st-sp%%msg%\n")
+
+      ruleset(name="remote-rfc5424") {
+          action(type="omfile" file="/var/log/remote.log" template="RFC5424Format")
+          stop
+      }
+
+   Allow inbound UDP traffic on port ``5514`` in the same way as port ``514`` in step 7.
+
+   To test it, send an RFC 5424 test message to port ``5514`` with the ``logger`` command:
+
+   .. code-block:: console
+
+      $ logger -n <RSYSLOG_SERVER_IP> -P 5514 -d -t sshd -i "Failed password for invalid user admin from 203.0.113.47 port 50155 ssh2"
 
 #. Create the destination log:
 
@@ -155,7 +176,7 @@ Follow the steps below to configure a monitored Linux endpoint as an rsyslog rel
       UNCONN 0      0            0.0.0.0:514        0.0.0.0:*
       UNCONN 0      0               [::]:514           [::]:*
 
-   Allow inbound UDP traffic on port 514 from your network devices at every point in the path: the host firewall (if enabled, for example ``ufw``), and any cloud security group, network ACL, or upstream firewall in front of the relay. Confirm the relay is receiving before moving on:
+   Allow inbound UDP traffic on port 514 from your network devices at every point in the path: the host firewall (if enabled, for example ufw), and any cloud security group, network ACL, or upstream firewall in front of the relay. If ufw is enabled on the relay, allow UDP port 514 from your network:
 
    .. code-block:: console
 
@@ -183,26 +204,43 @@ Test log injection from an rsyslog client
 
 Perform the following steps from another Linux endpoint on the same network as the rsyslog relay:
 
-#. Send a test message directly to the relay IP address with the ``logger`` command:
+#. Send an OpenSSH-format test message to the relay IP address with the ``logger`` command:
 
    .. code-block:: console
 
-      $ logger -n <RSYSLOG_SERVER_IP> -P 514 -d "TEST-RSYSLOG direct to remote.log from a monitored Wazuh agent"
+      $ logger --rfc3164 -n <RSYSLOG_SERVER_IP> -P 514 -d -t sshd -i "Failed password for invalid user admin from 203.0.113.47 port 50155 ssh2"
+
+   The ``-d`` option sends the message over UDP, and ``--rfc3164`` sends it in the traditional syslog format that the relay template writes.
+
+#. On the rsyslog relay, check that rsyslog wrote the message to ``/var/log/remote.log``:
+
+   .. code-block:: console
+
+      $ sudo tail -n 1 /var/log/remote.log
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      <TIMESTAMP> <CLIENT_HOSTNAME> sshd[<PID>]: Failed password for invalid user admin from 203.0.113.47 port 50155 ssh2
+
+   rsyslog can hold back a message that repeats the previous one until a different message arrives. Change the message text when you send a test message again.
 
 Visualize the event
 ^^^^^^^^^^^^^^^^^^^^^^
 
-#. Navigate to the **Explore** > **Discover** page on the Wazuh dashboard and use the filter to view the log:
+#. Navigate to **Explore** > **Discover** in the Wazuh dashboard and filter on the event where ``wazuh.protocol.location`` is ``/var/log/remote.log``.
 
-   Where:
-
-   ``wazuh.protocol.location`` is ``/var/log/remote.log``
+   The event shows ``wazuh.integration.name`` ``system-auth``, ``wazuh.integration.category`` ``system-activity``, and the decoders ``decoder/core-wazuh-message/0``, ``decoder/syslog/0``, and ``decoder/system-auth/0``. Wazuh also generates the ``Failed authentication attempt - admin`` finding.
 
    .. thumbnail:: /images/manual/log-data-collection/rsyslog-log-collection-linux.png
       :title: Image showing log collection on a monitored Linux endpoint
-      :alt: Image showing log collection on a monitored Linux endpoint
+      :alt: Discover in the Wazuh dashboard showing events relayed through rsyslog from /var/log/remote.log, with the integration name, category, and decoders columns.
       :align: center
       :width: 80%
+
+   Wazuh indexes a relayed message when an integration decoder classifies it. For devices that no Wazuh integration covers, create a :doc:`custom decoder </user-manual/data-analysis/decoders>`, or enable :ref:`unclassified event storage <wazuh_indexer_indices_enabling_unclassified_events_storage>`, to see their messages in **Discover**.
 
 Configuring a custom socket output on a macOS endpoint
 -----------------------------------------------------------
@@ -273,7 +311,7 @@ Perform the following steps on the same monitored endpoint:
 
       custom_syslog: TEST-SOCKET forwarding to custom_socket from a monitored Wazuh agent (macOS)
 
-#. Verify that the agent shows an established connection to the socket at the moment it forwards a log line:
+#. Verify that the Wazuh agent is connected to the socket:
 
    .. code-block:: console
 
@@ -284,22 +322,18 @@ Perform the following steps on the same monitored endpoint:
    .. code-block:: none
       :class: output
 
-      nc           1234 root    3u  unix 0x0000000000000000      0t0      - /var/run/custom.sock
-      wazuh-agentd 5678 root   12u  unix 0x0000000000000000      0t0      - /var/run/custom.sock
+      nc        1234 root    3u  unix 0x0000000000000000      0t0      /var/run/custom.sock
+      nc        1234 root    4u  unix 0x0000000000000000      0t0      /var/run/custom.sock
 
-   The ``custom_syslog`` prefix confirms the ``<prefix>`` tag applied, and the second ``lsof`` line confirms the agent (not just the ``nc`` listener) held a connection to ``custom_socket`` at write time.
+   The ``custom_syslog`` prefix confirms the ``<prefix>`` tag applied. The first ``lsof`` line is the ``nc`` listener. The second line is the connection that ``nc`` accepted from the Wazuh agent. The agent opens it when it forwards the first log line and keeps it open until the agent stops.
 
 Visualize the event
 ^^^^^^^^^^^^^^^^^^^^^^
 
-#. Navigate to the **Explore** > **Discover** page on the Wazuh dashboard and use the filter to view the monitored log file:
-
-   Where:
-
-   ``wazuh.protocol.location`` is ``/var/log/socket-test.log``
+#. Navigate to **Explore** > **Discover** in the Wazuh dashboard and filter on the event where ``wazuh.protocol.location`` is ``/var/log/socket-test.log``. The test line matches no integration decoder, so Wazuh indexes it only when :ref:`unclassified event storage <wazuh_indexer_indices_enabling_unclassified_events_storage>` is on. If it is off, switch it on as described in :ref:`Monitoring a single log file <monitoring_single_log_file>`, wait about 2 minutes, and inject the line again.
 
    .. thumbnail:: /images/manual/log-data-collection/custom-socket-log-collection-macos.png
       :title: Image showing a monitored log file
-      :alt: Image showing a monitored log file
+      :alt: Discover in the Wazuh dashboard showing the TEST-SOCKET line from the macOS agent in the wazuh-events-v5-unclassified index.
       :align: center
       :width: 80%
