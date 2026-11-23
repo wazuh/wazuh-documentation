@@ -27,7 +27,7 @@ Follow the steps below on your AWS console to create an AWS policy that allows r
       :align: center
       :width: 80%
 
-#. Click **Policies** > **Create policy**
+#. Click **Policies** > **Create policy**.
 
    .. thumbnail:: /images/cloud-security/aws/config-aws-policy/create-policy-1.png
       :title: Create policy
