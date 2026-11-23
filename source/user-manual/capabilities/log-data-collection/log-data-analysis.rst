@@ -122,7 +122,7 @@ Rule matching and findings visualization
 
 In this phase, detectors in the Wazuh indexer compare normalized events against the rules and generate findings. Each finding combines the matched rule metadata with the normalized event data, providing the context needed to investigate the activity. In the Wazuh dashboard, analysts filter for related findings during triage and can review affected assets, event fields, ATT&CK mappings, and compliance information.
 
-By default, detectors generate findings for rules of every level: ``informational``, ``low``, ``medium``, ``high``, and ``critical``. In this scenario, the log triggers a ``High`` finding.
+By default, detectors generate findings for rules of every level: ``informational``, ``low``, ``medium``, ``high``, and ``critical``. In this scenario, the log triggers a ``high`` finding.
 
 In the **Log test** result, click the **Detection** tab, then click the rule title, **Malware file detected - {{file.path}}**, to view its details. To open the rule on the **Rules** page, click **View this rule**.
 
