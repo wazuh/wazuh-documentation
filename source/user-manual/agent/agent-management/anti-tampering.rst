@@ -25,6 +25,8 @@ Enable anti-tampering via centralized configuration
 
 Use centralized agent configuration to enable anti-tampering on multiple agents. The agent configuration file for each agent group is located at ``/etc/wazuh-manager/shared/<AGENT_GROUP_NAME>/agent.conf`` on the Wazuh manager.
 
+You can also edit this file from the Wazuh dashboard: go to **Agents management** > **Groups**, select the group, and click **Edit group configuration**.
+
 For example, add the following to the ``/etc/wazuh-manager/shared/default/agent.conf`` file on the Wazuh manager to enable anti-tampering for all Linux endpoints in the ``default`` group:
 
 .. code-block:: xml
