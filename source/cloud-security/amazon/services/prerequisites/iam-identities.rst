@@ -72,7 +72,7 @@ Wazuh requires an AWS IAM user with the necessary permissions to collect log dat
          :align: center
          :width: 80%
 
-   #. Assign a username and click **Next**.
+   #. Assign a username, for example ``Wazuh-AWS-user``, and click **Next**. The examples in this documentation use this name.
 
       .. thumbnail:: /images/cloud-security/aws/config-iam-identities/create-IAM-user-2.png
          :title: Create user - next

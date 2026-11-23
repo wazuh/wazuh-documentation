@@ -8,7 +8,7 @@ Enable AWS integration on the Wazuh dashboard
 
 An integration is a logical grouping of decoders, key-value databases (KVDBs), and rules that belong to a common log source or product. Integrations are the unit at which content is organized, enabled, and ordered. The AWS integrations are disabled by default. You must enable them before you configure any AWS service; otherwise, Wazuh doesn't generate findings from the AWS logs it collects. Follow these steps to enable them.
 
-#. Navigate to the **Ruleset Management** > **Overview** page and make sure you are in the **Standard** space.
+#. Navigate to the **Ruleset Management** > **Overview** page and make sure you are in the **Standard** space. The Standard space holds the official Wazuh detection content.
 
 #. Search for ``aws`` and click **aws** to open the integration.
 

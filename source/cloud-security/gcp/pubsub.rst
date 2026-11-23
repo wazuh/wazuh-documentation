@@ -13,7 +13,7 @@ Wazuh integrates with the Google Cloud Pub/Sub messaging and ingestion service u
 -  VPC Flow Logs
 -  VPC firewall Rules Logging
 
-Once Wazuh collects these events, it processes them using its detection rules and displays the appropriate alerts on the Wazuh dashboard.
+The Wazuh manager decodes these events and stores them in the Wazuh indexer. The Wazuh indexer then evaluates them against its :doc:`detection rules </user-manual/data-analysis/index>` and generates findings, which you can view on the Wazuh dashboard.
 
 The data flow between Google Cloud Pub/Sub and Wazuh is shown below. Visit this `Google Cloud documentation <https://cloud.google.com/pubsub/docs/pubsub-basics>`__ to learn more about the Pub/Sub service.
 
@@ -264,7 +264,7 @@ Follow the next steps to configure the Wazuh module for Google Cloud Pub/Sub on 
 Visualizing Google Cloud events on the Wazuh dashboard
 ---------------------------------------------------------
 
-Navigate to **Cloud Security** > **Google Cloud** to view Google Cloud events and analytics on the Wazuh dashboard.
+Navigate to **Cloud security** > **Google Cloud** to view Google Cloud events and analytics on the Wazuh dashboard.
 
 .. thumbnail:: /images/cloud-security/gcp/gcp-dashboard.png
    :title: Google Cloud events on the Wazuh dashboard
