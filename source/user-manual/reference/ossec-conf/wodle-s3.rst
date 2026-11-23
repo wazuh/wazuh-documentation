@@ -925,6 +925,23 @@ Usage example for ``CloudTrail`` fetched events:
 
     <discard_regex field="userIdentity.principalId">EXAMPLE6E4XEGITWATV6R</discard_regex>
 
+Usage example for ``Amazon Security Hub`` subscriber events:
+
+The AWS module processes Security Hub events before applying ``discard_regex``.
+The available top-level fields are ``source``, ``detail_type`` and ``finding``.
+Use the processed field names (with case-sensitive paths), rather than the
+original EventBridge names such as ``detail-type`` or ``detail.findings``.
+For example, the following configuration discards findings with a matching
+note text or events with the specified event type:
+
+.. code-block:: xml
+
+    <subscriber type="security_hub">
+        <sqs_name>security-hub-queue</sqs_name>
+        <discard_regex field="finding.Note.Text">example finding note</discard_regex>
+        <discard_regex field="detail_type">Security Hub Findings - Imported</discard_regex>
+    </subscriber>
+
 Usage example only for plain text logs:
 
 .. code-block:: console

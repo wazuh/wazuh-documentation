@@ -19,8 +19,8 @@ You need to perform the following to set up the integration that allows you to r
    -  :ref:`Enabling Amazon Security Hub <enabling_security_hub>`. There are two methods to enable Amazon Security Hub in your environment. Please see the :ref:`enabling Security Hub <enabling_security_hub>` section.
    -  :ref:`Creating a Firehose stream <creating_firehose_stream>`: The Amazon EventBridge is a serverless event bus service that makes it easy to connect applications using events from AWS services, integrated SaaS applications, and custom sources in real-time. EventBridge needs a target such as the Firehose stream. It triggers the target when it receives an event matching an event pattern defined in the rule.
    -  :ref:`Integrating Security Hub with EventBridge <integrating_security_hub_with_eventbridge>`: EventBridge allows storing Security Hub findings and insights in S3 buckets.
-   -  :ref:`Enabling an Amazon S3 bucket to include event notifications <s3_with_event_notifications>`: The bucket sends notifications to the queue for every Security Hub object creation event.
    -  :ref:`Enabling an Amazon SQS queue <simple_queue_service>`: The Amazon Simple Queue Service (SQS) is a message queuing service that enables decoupled communication between AWS components. The Wazuh module for AWS will query the SQS for notifications of created logs in S3 and generate alerts from Security Hub logs.
+   -  :ref:`Enabling an Amazon S3 bucket to include event notifications <s3_with_event_notifications>`: The bucket sends notifications to the queue for every Security Hub object creation event.
 
 #. Configure the Wazuh module for AWS to receive Amazon Security Hub events.
 
@@ -133,19 +133,6 @@ The AWS documentation provides steps to configure an EventBridge rule for AWS Se
 -  `Creating an event rule for automatically sent findings <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-all-findings.html#securityhub-cwe-all-findings-predefined-pattern>`__
 -  `Defining a rule for using custom actions to send findings and insight results <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html#securityhub-cwe-define-rule>`__
 
-.. _s3_with_event_notifications:
-
-Amazon S3 bucket with event notifications
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Follow the steps below to configure an S3 bucket that reports the creation of events.
-
-#. Configure an S3 bucket as defined in the :doc:`configuring an AWS  S3 Bucket <../prerequisites/S3-bucket>` section. Provide the name you decided in the previous section.
-#. Go to **Event notifications** inside the **Properties** tab. Select **Create event notification**.
-#. Select **All object create** events in **Event Types**. This generates notifications for any event that creates an object in the bucket.
-#. Select **SQS queue** in the **Destination** section.
-#. Select **Choose** from your SQS queues. Then, choose the queue you created previously.
-
 .. _simple_queue_service:
 
 Amazon Simple Queue Service
@@ -171,7 +158,7 @@ In this case, it acknowledges new events to pull from the S3 bucket.
             "Service": "s3.amazonaws.com"
           },
           "Action": "SQS:SendMessage",
-          "Resource": "arn:aws:sqs:<REGION>:<AWS_ACCOUNT_ID>:<AWS_ACCOUNT_ID>:<YOUR_SQS_QUEUE_NAME>",
+          "Resource": "arn:aws:sqs:<REGION>:<AWS_ACCOUNT_ID>:<YOUR_SQS_QUEUE_NAME>",
           "Condition": {
             "StringEquals": {
               "aws:SourceAccount": "<AWS_ACCOUNT_ID>"
@@ -199,6 +186,19 @@ In this case, it acknowledges new events to pull from the S3 bucket.
    -  ``"aws:SourceArn"`` is the ARN of the Amazon S3 bucket created for your Amazon Security Hub logs.
 
 #. You can set your access policy to accept S3 notifications from different account IDs and apply different conditions. For more information, see `managing access in Amazon SQS <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`__.
+
+.. _s3_with_event_notifications:
+
+Amazon S3 bucket with event notifications
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Follow the steps below to configure an S3 bucket that reports the creation of events.
+
+#. Configure an S3 bucket as defined in the :doc:`configuring an AWS  S3 Bucket <../prerequisites/S3-bucket>` section. Provide the name of the bucket you selected or created when configuring the Firehose stream.
+#. Go to **Event notifications** inside the **Properties** tab. Select **Create event notification**.
+#. Select **All object create** events in **Event Types**. This generates notifications for any event that creates an object in the bucket.
+#. Select **SQS queue** in the **Destination** section.
+#. Select **Choose** from your SQS queues. Then, choose the queue you created previously.
 
 Wazuh configuration
 -------------------
@@ -255,7 +255,7 @@ You can perform the following configuration on the Wazuh server or Linux-based W
 
       .. code-block:: console
 
-         # Systemctl restart Wazuh-agent
+         # systemctl restart wazuh-agent
 
 Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference to learn more about the available settings. Configure the following fields to set the queue and authentication configuration. For more information, check the :ref:`subscriber’s <subscribers>` reference.
 
