@@ -54,7 +54,7 @@ Using a centralized configuration from the Wazuh manager
 
 The Wazuh manager enables centralized distribution of configuration settings to multiple monitored endpoints in the same operating system or group. You can use the centralized configuration to configure log collection across agent groups. Configuration settings in the ``agent.conf`` file on the Wazuh manager take precedence over those in the Wazuh agent ``ossec.conf`` file.
 
-You can manage the centralized configuration from a Wazuh group.
+You can manage the centralized configuration from a Wazuh group. For the ``agent.conf`` syntax, agent filters, and configuration precedence, see :doc:`Centralized configuration for Wazuh agents </user-manual/reference/centralized-configuration>`.
 
 .. thumbnail:: /images/manual/log-data-collection/centralized-configuration-group.gif
    :title: Managing the centralized configuration from a Wazuh group
