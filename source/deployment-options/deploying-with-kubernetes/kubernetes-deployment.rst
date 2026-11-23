@@ -29,6 +29,8 @@ Clone the Wazuh Kubernetes repository for the necessary services and pods:
    $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV| --depth=1
    $ cd wazuh-kubernetes
 
+.. _kubernetes-apply-traefik:
+
 Apply Traefik ingress controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -247,6 +249,8 @@ You can adjust cluster resources by editing patch files in ``envs/eks/`` or ``en
         tls:
           passthrough: true
 
+   The ``ip-allowlist`` middleware controls which source addresses can reach the Wazuh dashboard through Traefik. It's defined in ``wazuh/base/middleware.yaml`` and allows all addresses (``0.0.0.0/0``) by default. To restrict access, replace ``0.0.0.0/0`` in the ``sourceRange`` list with your trusted address ranges before you apply the manifests.
+
    Run the command ``kubectl -n traefik get svc`` to get the FQDN of the load balancer created for the Traefik service.
 
 #. Deploy the Wazuh Kubernetes cluster using the ``kustomization`` file:
@@ -435,7 +439,7 @@ The Wazuh images ship with no default passwords. Each deployment generates its o
 Apply all manifests
 ~~~~~~~~~~~~~~~~~~~
 
-The Wazuh Kubernetes cluster manifest for other cluster types is located in ``envs/local-env``.
+The Wazuh Kubernetes cluster manifest for a local cluster is located in ``envs/local-env``.
 
 You can adjust cluster resources by editing patch files in ``envs/local-env/``. These files override specific values in the base manifests for each environment, such as CPU, memory, and storage for persistent volumes.
 
@@ -613,7 +617,7 @@ The command output looks similar to this:
    wazuh-manager-master-0            1/1     Running   3 (15h ago)   18h
    wazuh-manager-worker-0            1/1     Running   1 (16h ago)   18h
 
-Run the command below to confirm the Wazuh agent enrollment password string for Wazuh 4.x agents connecting on port ``1515``. Wazuh 5.x agents use an enrollment token instead.
+Run the command below to confirm the Wazuh agent enrollment password string. Wazuh 4.x agents enroll with it on port ``1515``. Wazuh 5.x agents can also enroll with it on port ``1517``, but an enrollment token is the recommended method.
 
 .. code-block:: console
 
@@ -911,6 +915,14 @@ This is the most common approach for full-cluster monitoring. Each node runs one
       NAME                READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
       wazuh-agent-t2fwl   1/1     Running   0          21m   10.42.0.9   server   <none>           <none>
 
+   Check that the Wazuh agent enrolled. On the Wazuh dashboard, go to **Agents management** > **Summary** and confirm that the Wazuh agent appears as **Active**. If the pod is running but the Wazuh agent doesn't appear, check the Wazuh agent log:
+
+   .. code-block:: console
+
+      $ kubectl -n wazuh-daemonset exec <POD_NAME> -c wazuh-agent -- tail -n 50 /var/ossec/logs/ossec.log
+
+   Replace ``<POD_NAME>`` with the pod name from the previous command.
+
 Deploying the Wazuh agent as a Sidecar
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1087,6 +1099,12 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
 
       NAME                           READY   STATUS     RESTARTS   AGE
       tomcat-wazuh-agent-0   2/2     Running           0          18s
+
+   Check that the Wazuh agent enrolled. On the Wazuh dashboard, go to **Agents management** > **Summary** and confirm that the Wazuh agent appears as **Active**. If the pod is running but the Wazuh agent doesn't appear, check the Wazuh agent log:
+
+   .. code-block:: console
+
+      $ kubectl -n wazuh-sidecar exec tomcat-wazuh-agent-0 -c wazuh-agent -- tail -n 50 /var/ossec/logs/ossec.log
 
 Next steps
 ----------
