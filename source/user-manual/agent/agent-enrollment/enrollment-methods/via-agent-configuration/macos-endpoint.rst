@@ -8,6 +8,8 @@ Enroll a macOS endpoint through agent configuration
 
 Follow these steps to enroll a macOS endpoint through the Wazuh agent configuration method.
 
+The Wazuh agent must already be installed without ``WAZUH_ENROLLMENT_TOKEN``, as described in :doc:`Installing without a token </user-manual/agent/agent-enrollment/deployment-variables/installing-without-token>`. See :doc:`Enrollment through agent configuration <index>` for the other requirements.
+
 #. Launch the terminal, obtain root access, edit the Wazuh agent configuration file ``/Library/Ossec/etc/ossec.conf``, and make the following changes:
 
    #. Add the Wazuh manager IP address or fully qualified domain name (FQDN). For Wazuh 5.0 agents, replace the ``MANAGER_IP`` placeholder that the package writes in ``<endpoint>``. Set ``<WAZUH_MANAGER_ADDRESS>`` to the IP address or FQDN only. The Wazuh agent adds the default port, ``1517``, and path, ``wazuh-manager``. The setting depends on the Wazuh agent version:

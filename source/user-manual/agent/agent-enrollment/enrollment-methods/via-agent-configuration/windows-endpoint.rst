@@ -8,6 +8,8 @@ Enroll a Windows endpoint through agent configuration
 
 Follow these steps to enroll a Windows endpoint through the Wazuh agent configuration method.
 
+The Wazuh agent must already be installed without ``WAZUH_ENROLLMENT_TOKEN``, as described in :doc:`Installing without a token </user-manual/agent/agent-enrollment/deployment-variables/installing-without-token>`. See :doc:`Enrollment through agent configuration <index>` for the other requirements.
+
 The Wazuh agent is a 32-bit application. Its installation directory depends on the Windows operating system architecture:
 
 -  On a 64-bit Windows operating system, Windows installs the Wazuh agent in ``C:\Program Files (x86)\ossec-agent``
