@@ -6,7 +6,7 @@
 Monitoring Google Cloud Storage buckets
 =======================================
 
-Google Cloud Storage offers `usage logs and storage logs <https://cloud.google.com/storage/docs/access-logs>`__, also known as access logs, as CSV files you can download. Usage logs provide information on all requests made to a specified bucket and are created hourly. Storage logs provide information about that bucket's storage consumption for the last day and are created daily. Once set up, usage logs and storage logs are automatically created as new objects in the specified bucket. The Wazuh module for Google Cloud Storage buckets collects these logs and processes events using defined :doc:`threat detection rules and decoders </user-manual/data-analysis/index>`.
+Google Cloud Storage offers `usage logs and storage logs <https://cloud.google.com/storage/docs/access-logs>`__, also known as access logs, as CSV files you can download. Usage logs provide information on all requests made to a specified bucket and are created hourly. Storage logs provide information about that bucket's storage consumption for the last day and are created daily. Once set up, usage logs and storage logs are automatically created as new objects in the specified bucket. The Wazuh module for Google Cloud Storage buckets collects these logs and sends them to the Wazuh manager, which stores them in the Wazuh indexer. In Wazuh 5.0, these logs don't generate findings. See :ref:`Visualizing the events on the Wazuh dashboard <gcp_storage_visualizing_events>`.
 
 Configuring Google Cloud Storage buckets
 ----------------------------------------
@@ -105,10 +105,12 @@ Perform the following steps to configure the Wazuh module for Google Cloud Stora
 
       # systemctl restart wazuh-agent
 
+.. _gcp_storage_visualizing_events:
+
 Visualizing the events on the Wazuh dashboard
 -----------------------------------------------
 
-Navigate to **Cloud Security** > **Google Cloud**, and click the **Findings** tab. Apply the following filter to view findings generated from Google Cloud Storage bucket events.
+Navigate to **Cloud security** > **Google Cloud**, and click the **Findings** tab. Apply the following filter to view findings generated from Cloud Storage audit logs.
 
 #. Click **+ Add filter**. Then filter by ``service.name``.
 #. In the Operator field, select ``is``.
@@ -160,7 +162,7 @@ Where:
 
 -  ``<name>``: Contains the name of the Google Cloud Storage bucket from which logs are read.
 -  ``<credentials_file>``: Contains the path to the Google Cloud credentials file.
--  ``<only_logs_after>``: Parses logs from a specific date onwards. It must follow the ``YYYY-MMM-DD`` format.
+-  ``<only_logs_after>``: Parses logs from a specific date onwards. It must follow the ``YYYY-MMM-DD`` format. The month abbreviation isn't case-sensitive, so ``2021-JUN-01`` and ``2021-Jun-01`` are both valid.
 -  ``<remove_from_bucket>``: Sets whether the logs are removed from the Google Cloud Storage bucket once they are read. The possible values are ``no`` and ``yes``.
 
 .. note::
@@ -188,7 +190,7 @@ Wazuh ignores any date in the file name and uses only the creation date to deter
 Older logs
 ^^^^^^^^^^^
 
-The Wazuh module for Cloud Storage buckets identifies new logs using the key of the last processed log object. This key includes the datetime stamp. When the ``<only_logs_after>`` option date is set to a datetime earlier than previous module executions, the system will ignore older logs.
+The Wazuh module for Cloud Storage buckets identifies new logs using the creation time of the last processed log object. When the ``<only_logs_after>`` option date is set to a datetime earlier than previous module executions, the system will ignore older logs.
 
 Logging level
 ^^^^^^^^^^^^^^
@@ -198,7 +200,7 @@ You can configure the verbosity level of the Google Cloud integration log using 
 Reparse
 ^^^^^^^^
 
-The reparse option re-fetches all Google Cloud Storage bucket logs from the integration start date to the present.
+The reparse option processes again the Google Cloud Storage bucket logs created on or after the ``only_logs_after`` date, including logs that the module already processed. Without ``only_logs_after``, it processes only the logs created since 00:00 UTC on the current day.
 
 .. warning::
 
@@ -212,5 +214,5 @@ To fetch and process older logs, manually run the ``/var/ossec/wodles/gcloud/gcl
 
 Where:
 
--  ``--only_logs_after`` parameter specifies the date from which the tool processes logs. If you don't provide an ``only_logs_after`` value, the module uses the date of the first file processed.
+-  ``--only_logs_after`` parameter specifies the date from which the tool processes logs. If you don't provide an ``only_logs_after`` value, the tool processes only the logs created since 00:00 UTC on the current day.
 -  ``--log_level 2`` parameter provides verbose output. This is useful for showing the script works, especially when handling a large amount of data.

@@ -11,13 +11,14 @@ The Google Cloud integration runs on a Wazuh agent. Install the required depende
 Python
 ------
 
-The Google Cloud integration is compatible with Python 3.8 and later. This documentation uses Python 3.11 or later for the configuration examples.
+The Google Cloud integration is compatible with Python 3.8 – 3.14. Later Python versions might also work, but we can't guarantee they are compatible. This documentation uses Python 3.11 or later for the configuration examples.
 
 If Python 3 is not installed on the monitored endpoint, use the following commands to install it.
 
 .. note::
 
-   Python 3.8 and 3.9 have reached end of support. Python 3.10 reaches end of support in October 2026. We recommend using Python 3.11 or later.
+   -  Python 3.8 and 3.9 have reached end of support. Python 3.10 reached end of support in October 2026.
+   -  We recommend using Python 3.11 or later.
 
 .. tabs::
 
@@ -68,7 +69,7 @@ On Debian and Ubuntu, first install the ``typing_extensions`` package with ``--i
 
    # sudo pip3 install --break-system-packages --ignore-installed typing_extensions
 
-Run the following command to install the required dependencies for Python 3.11–3.13:
+Run the following command to install the required dependencies for Python 3.11–3.14:
 
 .. code-block:: console
 
