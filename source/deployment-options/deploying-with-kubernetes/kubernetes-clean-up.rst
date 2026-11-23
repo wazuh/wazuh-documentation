@@ -38,7 +38,7 @@ Follow the steps below to delete all deployments, services, and volumes.
 
             $ kubectl delete -k envs/eks/
 
-      .. group-tab:: Other cluster types
+      .. group-tab:: Local cluster
 
          .. code-block:: console
 
@@ -57,7 +57,7 @@ Follow the steps below to delete all deployments, services, and volumes.
       $ kubectl delete -k traefik/runtime/
       $ kubectl delete -f traefik/crd/kubernetes-crd-definition-v1.yml
 
-   On other cluster types, only the Traefik CRDs were applied. Delete them with the following command:
+   On a local cluster, only the Traefik CRDs were applied. Delete them with the following command:
 
    .. code-block:: console
 
@@ -74,11 +74,14 @@ Follow the steps below to delete all deployments, services, and volumes.
    .. code-block:: none
       :class: output
 
-      NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS        CLAIM                                                         STORAGECLASS             REASON    AGE
-      pvc-024466da-f7c5-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Released      wazuh/wazuh-manager-worker-wazuh-manager-worker-1-0           gp2-encrypted-retained             6d
-      pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac   30Gi       RWO            Retain           Bound         wazuh/wazuh-indexer-wazuh-indexer-0                           gp2-encrypted-retained             6d
-      pvc-fb821971-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Released      wazuh/wazuh-manager-master-wazuh-manager-master-0             gp2-encrypted-retained             6d
-      pvc-ffe7bf66-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Released      wazuh/wazuh-manager-worker-wazuh-manager-worker-0-0           gp2-encrypted-retained             6d
+      NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                                               STORAGECLASS    VOLUMEATTRIBUTESCLASS   REASON   AGE
+      pvc-fb821971-f7c4-11e8-b9b8-022ada63b4ac   50Gi       RWO            Retain           Released   wazuh/wazuh-manager-master-wazuh-manager-master-0   wazuh-storage   <unset>                          4m26s
+      pvc-024466da-f7c5-11e8-b9b8-022ada63b4ac   50Gi       RWO            Retain           Released   wazuh/wazuh-manager-worker-wazuh-manager-worker-1   wazuh-storage   <unset>                          4m26s
+      pvc-5d1e7a2c-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Released   wazuh/wazuh-indexer-wazuh-indexer-1                 wazuh-storage   <unset>                          4m26s
+      pvc-6e2f8b3d-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Released   wazuh/wazuh-indexer-wazuh-indexer-2                 wazuh-storage   <unset>                          4m26s
+      pvc-ffe7bf66-f7c4-11e8-b9b8-022ada63b4ac   50Gi       RWO            Retain           Released   wazuh/wazuh-manager-worker-wazuh-manager-worker-0   wazuh-storage   <unset>                          4m26s
+      pvc-7f309c4e-f7c4-11e8-b9b8-022ada63b4ac   1Gi        RWO            Retain           Released   wazuh/wazuh-dashboard-config                        wazuh-storage   <unset>                          4m26s
+      pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Released   wazuh/wazuh-indexer-wazuh-indexer-0                 wazuh-storage   <unset>                          4m26s
 
    On EKS, a Retain reclaim policy is common. Volumes typically transition to the Released state rather than being removed automatically, preserving the underlying data until you explicitly delete the volumes.
 
@@ -107,7 +110,7 @@ Follow the steps below to delete all deployments, services, and volumes.
    .. code-block:: console
 
       $ pkill -f 'kubectl -n wazuh port-forward'
-      $ sudo rm -rf wazuh/config/credentials wazuh/wazuh-certificates wazuh/config/indexer/certs wazuh/config/manager/certs wazuh/config/dashboard/certs wazuh/config/root-ca/certs
+      $ sudo rm -rf wazuh/config/credentials wazuh/wazuh-certificates wazuh/config/indexer/certs wazuh/config/manager/certs wazuh/config/dashboard/certs wazuh/config/root-ca/certs wazuh/config.yml wazuh/wazuh-certs-tool.sh wazuh/wazuh-certificates-tool.log
       $ sudo rm -rf wazuh/wazuh-ca
 
 #. Also delete the Wazuh agent manifests you created in :ref:`Wazuh agent deployment on Kubernetes <kubernetes-wazuh-agent-deployment>`. They hold the enrollment token in clear text. Run this command in the directory where you created them:

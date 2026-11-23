@@ -145,6 +145,10 @@ Example:
    USER_ENABLE_ACTIVE_RESPONSE="y"
    USER_AGENT_MANAGER_IP="10.0.0.2"
 
+.. note::
+
+   The installer doesn't enroll or start the Wazuh agent. After the installation, enroll it as described in :doc:`Enrollment through agent configuration </user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/index>`, and then start it.
+
 .. _unattended_installation_manager:
 
 Manager

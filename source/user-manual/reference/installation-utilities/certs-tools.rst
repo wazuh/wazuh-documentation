@@ -12,6 +12,14 @@ The certs-tool is used by running the ``wazuh-certs-tool.sh`` script, as root, a
 
 You can download the Wazuh certs tool here: `wazuh-certs-tool.sh <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh>`__. The downloaded file is named ``wazuh-certs-tool-<VERSION>-<REVISION>.sh``. Rename it to ``wazuh-certs-tool.sh`` before you run the commands on this page.
 
+Download the ``config.yml`` template to the same directory as the script:
+
+.. code-block:: console
+
+   # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yml
+
+Edit ``config.yml`` and replace the node names and IP addresses with those of your Wazuh indexer, Wazuh manager, and Wazuh dashboard nodes. The Wazuh indexer package also installs the tool and a template in ``/usr/share/wazuh-indexer/tools/``, as used in the :ref:`step-by-step installation <wazuh_indexer_generating_certificates>`.
+
 Options list
 --------------
 
