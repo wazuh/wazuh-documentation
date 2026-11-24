@@ -37,7 +37,10 @@ A monitored command can point to a custom script. Every script must meet these c
 -  The script exists at the configured path on each monitored endpoint.
 -  The script is executable and declares a valid interpreter.
 
+
+.. _command_monitoring_requirements_remote_command_execution:
+
 Remote command execution
 -------------------------
 
-By default, Wazuh agents reject commands distributed through the centralized configuration. To run commands defined in a :ref:`centralized configuration <command_monitoring_centralized_configuration>` file, you must enable remote command execution on every target endpoint.
+By default, Wazuh agents reject commands distributed through the centralized configuration. To run commands defined in a :ref:`centralized configuration <command_monitoring_centralized_configuration>` file, you must enable remote command execution on every target endpoint. To enable it, add ``wazuh_command.remote_commands=1`` to the ``local_internal_options.conf`` file of the Wazuh agent, and restart the Wazuh agent. The :ref:`Configuration <command_monitoring_configuration_files>` section lists the location of this file on each operating system.
