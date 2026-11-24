@@ -415,7 +415,7 @@ Run these steps as root on the Wazuh manager node, after installing the package 
 
       # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check
 
-   The output includes ``resolve-credentials: check: no problem found``. A ``(<N> warnings)`` suffix means only Wazuh indexer material that the clock refuses was reported, where ``<N>`` is the number of warnings.
+   The output includes ``resolve-credentials: check: no problem found``. A ``(<N> warnings)`` suffix means that the check found only warnings, which refuse nothing. A warning reports Wazuh indexer material that the clock refuses, or a malformed line in ``export/credentials.env`` before ``rbac.db`` is seeded. In the suffix, ``<N>`` is the number of warnings.
 
 Where:
 
