@@ -44,9 +44,9 @@ Examples of resources are "agent 001", "agents in group default", and "node of a
 
 **Effect** can only be "allow" or "deny", depending on the effective permission to be applied.
 
-Secret values have actions of their own, so permission to read or change a configuration does not reveal them. Without ``cluster:read_secrets`` on the answering node, ``GET /cluster/local/config``, the ``GET /cluster/{node_id}/configuration`` endpoints, ``GET /groups/{group_id}/configuration``, and ``GET /groups/{group_id}/files/{file_name}`` show the enrollment password, the cluster key, and other credential values as ``*****``. ``PUT /cluster/{node_id}/configuration`` also requires ``cluster:read_secrets`` to set a new cluster key or change the indexer section.
+Secret values have actions of their own, so permission to read or change a configuration does not reveal them. Without ``cluster:read_secrets`` on the answering node, :api-ref:`GET /cluster/local/config <operation/api.controllers.cluster_controller.get_config>`, the :api-ref:`GET /cluster/{node_id}/configuration <operation/api.controllers.cluster_controller.get_configuration_node>` endpoints, :api-ref:`GET /groups/{group_id}/configuration <operation/api.controllers.agent_controller.get_group_config>`, and :api-ref:`GET /groups/{group_id}/files/{file_name} <operation/api.controllers.agent_controller.get_group_file>` show the enrollment password, the cluster key, and other credential values as ``*****``. ``PUT /cluster/{node_id}/configuration`` also requires ``cluster:read_secrets`` to set a new cluster key or change the indexer section.
 
-``GET /agents/{agent_id}/key`` returns the key of an agent only to a user with ``agent:read_secrets`` on that agent, and ``agent:read`` does not grant it. Two default policies grant these actions: ``secrets_read_nodes`` grants ``cluster:read_secrets`` on ``node:id:*``, and ``secrets_read_agents`` grants ``agent:read_secrets`` on ``agent:id:*``. Only the ``administrator`` role includes them.
+:api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>` returns the key of an agent only to a user with ``agent:read_secrets`` on that agent, and ``agent:read`` does not grant it. Two default policies grant these actions: ``secrets_read_nodes`` grants ``cluster:read_secrets`` on ``node:id:*``, and ``secrets_read_agents`` grants ``agent:read_secrets`` on ``agent:id:*``. Only the ``administrator`` role includes them.
 
 .. note::
 
@@ -60,4 +60,4 @@ You can configure RBAC in Wazuh in two distinct and opposite modes: **black** an
 -  **White mode**: The system forbids all actions by default. The administrator configures roles to grant permissions.
 -  **Black mode**: The system allows all actions by default. The administrator configures roles to restrict permissions.
 
-A policy whose effect parameter is allow permits its actions in both black and white modes. Conversely, setting the effect to ``deny`` prohibits it in both modes. Therefore, the RBAC mode only affects actions that are not specified within each policy. It is recommended to use white mode in production for maximum security.
+A policy whose effect parameter is allow permits its actions in both black and white modes. Conversely, setting the effect to ``deny`` prohibits it in both modes. Therefore, the RBAC mode only affects actions that are not specified within each policy. We recommend white mode in production for maximum security.

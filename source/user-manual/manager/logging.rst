@@ -53,11 +53,11 @@ Log compression and rotation
 
 Log files can quickly accumulate and consume significant disk space on the Wazuh manager endpoint. The Wazuh manager compresses logs during rotation to reduce disk usage and maintain system performance.
 
-The Wazuh manager rotates ``wazuh-manager.log`` and ``wazuh-manager.json`` daily, shortly after midnight, and whenever either file exceeds 512 MB. By default, it compresses rotated files with ``gzip`` and retains them for 31 days. The files are stored in ``/var/wazuh-manager/logs/wazuh/<YEAR>/<MONTH>/`` with the names ``wazuh-<DAY>.log.gz`` and ``wazuh-<DAY>.json.gz``. If a file rotates more than once in a day, the Wazuh manager appends a ``-<NNN>`` counter to each additional filename.
+The Wazuh manager rotates ``wazuh-manager.log`` and ``wazuh-manager.json`` daily, shortly after midnight, and whenever either file reaches 512 MB. By default, it compresses rotated files with ``gzip`` and retains them for 31 days. The files are stored in ``/var/wazuh-manager/logs/wazuh/<YEAR>/<MONTH>/`` with the names ``wazuh-<DAY>.log.gz`` and ``wazuh-<DAY>.json.gz``. If a file rotates more than once in a day, the Wazuh manager appends a ``-<NNN>`` counter to each additional filename.
 
 The Wazuh manager API and cluster daemons rotate ``api.log`` and ``cluster.log`` daily at midnight. Each daemon creates a new file with the original filename and continues writing to it. The Wazuh manager does not delete the rotated ``api.log`` and ``cluster.log`` files.
 
-The Wazuh manager API can also rotate ``api.log`` based on file size. Configure this behavior with the ``logs.max_size`` option in ``/var/wazuh-manager/api/configuration/api.yaml``.
+Instead of the daily rotation, the Wazuh manager API can rotate ``api.log`` by file size. To enable it, set the ``logs.max_size`` option in ``/var/wazuh-manager/api/configuration/api.yaml``.
 
 Each daemon stores the compressed ``api.log`` and ``cluster.log`` files in nested directories in the format ``.../<FILENAME>/<YEAR>/<MONTH>/``, where:
 

@@ -51,7 +51,7 @@ The ``cURL`` command for each request contains the following fields:
 | ``-k``                                                                                                     | Skip certificate verification. Use it when the client does not trust the Wazuh manager CA.                 |
 +------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
 
--  All endpoints except ``POST /security/user/authenticate``, ``POST /security/user/authenticate/run_as``, ``DELETE /security/user/authenticate``, and ``PUT /security/user/revoke`` accept the ``pretty`` parameter to convert the JSON response to a human-readable format.
+-  All endpoints except :api-ref:`POST /security/user/authenticate <operation/api.controllers.security_controller.login_user>`, :api-ref:`POST /security/user/authenticate/run_as <operation/api.controllers.security_controller.run_as_login>`, :api-ref:`DELETE /security/user/authenticate <operation/api.controllers.security_controller.logout_user>`, and :api-ref:`PUT /security/user/revoke <operation/api.controllers.security_controller.revoke_all_tokens>` accept the ``pretty`` parameter to convert the JSON response to a human-readable format.
 
 Response format
 ---------------
@@ -109,7 +109,7 @@ Common HTTP status codes
 +------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | 401  | Unauthorized          | Invalid credentials on login, or a missing, invalid, or expired JWT                                                                                                         |
 +------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 403  | Forbidden             | Valid token with insufficient RBAC permissions, or a client IP address blocked after too many failed logins (error ``6000``)                                                |
+| 403  | Forbidden             | Valid token with insufficient RBAC permissions, or a user blocked from a client IP address after too many failed logins (error ``6000``)                                    |
 +------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | 404  | Not Found             | Endpoint, resource, or cluster node does not exist                                                                                                                          |
 +------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -123,12 +123,14 @@ Common HTTP status codes
 +------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 -  All responses include an HTTP status code: 2xx (success), 4xx (client error), or 5xx (server error).
--  List endpoints, such as ``GET /agents``, return HTTP ``200`` with only the items the user is allowed to read, and no items if the user can't read any. A request that names a specific resource the user can't access, such as ``GET /agents?agents_list=001``, returns HTTP ``403``.
+-  List endpoints, such as :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>`, return HTTP ``200`` with only the items the user is allowed to read, and no items if the user can't read any. A request that names a specific resource the user can't access, such as ``GET /agents?agents_list=001``, returns HTTP ``403``.
 
 Useful query parameters
 -----------------------
 
 These parameters are accepted by most list-type endpoints. The Wazuh manager API limits their values: ``q`` and ``search`` accept up to 1024 characters, ``select`` up to 100 fields, ``limit`` up to 100000, and ``offset`` up to 2147483647. A value over a limit returns HTTP ``400`` with a message that names the parameter.
+
+.. |PUT_AGENTS_UPGRADE| replace:: :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`
 
 +----------------------------+--------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+
 | Parameter                  | Description                                                              | Recommended Use                                                                             |
@@ -139,7 +141,7 @@ These parameters are accepted by most list-type endpoints. The Wazuh manager API
 +----------------------------+--------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+
 | ``offset=N``               | Skip the first N items (for pagination)                                  | Combine with ``limit`` for large result sets                                                |
 +----------------------------+--------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+
-| ``wait_for_complete=true`` | Disable request timeout (useful for long operations like agent upgrades) | For requests that can take longer than the request timeout, such as ``PUT /agents/upgrade`` |
+| ``wait_for_complete=true`` | Disable request timeout (useful for long operations like agent upgrades) | For requests that can take longer than the request timeout, such as |PUT_AGENTS_UPGRADE|    |
 +----------------------------+--------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+
 
 -  By default, responses that contain data collections return a maximum of 500 elements. You can use the ``offset`` and ``limit`` parameters to iterate through large collections. The ``limit`` parameter allows for up to 100,000 items. However, we recommend not exceeding the default limit of 500 items to avoid unexpected behaviors like timeouts and excessively large responses. Use with caution.
@@ -233,7 +235,7 @@ The command output looks similar to this:
            "registerIP": "any",
            "ip": "192.168.71.11",
            "id": "001",
-           "name": "Ubuntu",
+           "name": "Ubuntu-24.04",
            "status": "disconnected",
            "dateAdd": "2026-10-01T21:49:19+00:00"
          }

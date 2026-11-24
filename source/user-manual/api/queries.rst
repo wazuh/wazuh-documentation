@@ -55,10 +55,10 @@ The command output looks similar to this:
                "os": {
                   "major": "24",
                   "name": "Ubuntu",
-                  "version": "24.04.4 LTS (Noble Numbat)"
+                  "version": "24.04.5 LTS (Noble Numbat)"
                },
-               "id": "021",
-               "name": "Ubuntu"
+               "id": "001",
+               "name": "Ubuntu-24.04"
             }
          ],
          "total_affected_items": 1,
@@ -87,10 +87,10 @@ The command output looks similar to this:
                "os": {
                   "major": "24",
                   "name": "Ubuntu",
-                  "version": "24.04.4 LTS (Noble Numbat)"
+                  "version": "24.04.5 LTS (Noble Numbat)"
                },
-               "id": "021",
-               "name": "Ubuntu"
+               "id": "001",
+               "name": "Ubuntu-24.04"
             }
          ],
          "total_affected_items": 1,
@@ -101,11 +101,11 @@ The command output looks similar to this:
       "error": 0
    }
 
-An example of using the OR (``,``) operator and LIKE AS (``~``) can be filtering agents whose operating system name contains ``ubuntu`` or ``macos``:
+The following query uses the OR (``,``) and contains (``~``) operators. It gets the Wazuh agents whose operating system name contains ``ubuntu`` or ``windows``:
 
 .. code-block:: console
 
-   # curl -G --data-urlencode "q=os.name~ubuntu,os.name~macos" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
+   # curl -G --data-urlencode "q=os.name~ubuntu,os.name~windows" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
 
 The command output looks similar to this:
 
@@ -115,23 +115,23 @@ The command output looks similar to this:
    {
       "data": {
          "affected_items": [
-            {
-               "os": {
-                  "major": "15",
-                  "name": "macOS",
-                  "version": "15.6.1"
-               },
-               "id": "020",
-               "name": "macOS"
-            },
             {
                "os": {
                   "major": "24",
                   "name": "Ubuntu",
-                  "version": "24.04.4 LTS (Noble Numbat)"
+                  "version": "24.04.5 LTS (Noble Numbat)"
                },
-               "id": "021",
-               "name": "Ubuntu"
+               "id": "001",
+               "name": "Ubuntu-24.04"
+            },
+            {
+               "os": {
+                  "major": "10",
+                  "name": "Microsoft Windows 11 Pro",
+                  "version": "10.0.26200.9711"
+               },
+               "id": "002",
+               "name": "Windows-11"
             }
          ],
          "total_affected_items": 2,
@@ -142,11 +142,11 @@ The command output looks similar to this:
       "error": 0
    }
 
-The following example combines multiple operators. It gets the Wazuh agents with an ID lower than ``021`` whose operating system name contains ``windows`` or ``macos``:
+The following example combines multiple operators. It gets the Wazuh agents with an ID lower than ``003`` whose operating system name contains ``windows`` or ``ubuntu``:
 
 .. code-block:: console
 
-   # curl -G --data-urlencode "q=id<021;(os.name~windows,os.name~macos)" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
+   # curl -G --data-urlencode "q=id<003;(os.name~windows,os.name~ubuntu)" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
 
 The command output looks similar to this:
 
@@ -158,21 +158,21 @@ The command output looks similar to this:
          "affected_items": [
             {
                "os": {
+                  "major": "24",
+                  "name": "Ubuntu",
+                  "version": "24.04.5 LTS (Noble Numbat)"
+               },
+               "id": "001",
+               "name": "Ubuntu-24.04"
+            },
+            {
+               "os": {
                   "major": "10",
                   "name": "Microsoft Windows 11 Pro",
                   "version": "10.0.26200.9711"
                },
-               "id": "019",
-               "name": "Windows"
-            },
-            {
-               "os": {
-                  "major": "15",
-                  "name": "macOS",
-                  "version": "15.6.1"
-               },
-               "id": "020",
-               "name": "macOS"
+               "id": "002",
+               "name": "Windows-11"
             }
          ],
          "total_affected_items": 2,
@@ -183,11 +183,11 @@ The command output looks similar to this:
       "error": 0
    }
 
-The following query gets agents with an ID higher than ``0`` that run on Windows or whose operating system major version is either ``15`` or ``18``:
+The following query gets agents with an ID higher than ``0`` that run on Windows or whose operating system major version is ``22`` or ``24``:
 
 .. code-block:: console
 
-   # curl -G --data-urlencode "q=id>0;(os.name~windows,(os.major=15,os.major=18))" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
+   # curl -G --data-urlencode "q=id>0;(os.name~windows,(os.major=22,os.major=24))" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
 
 The command output looks similar to this:
 
@@ -199,21 +199,21 @@ The command output looks similar to this:
          "affected_items": [
             {
                "os": {
+                  "major": "24",
+                  "name": "Ubuntu",
+                  "version": "24.04.5 LTS (Noble Numbat)"
+               },
+               "id": "001",
+               "name": "Ubuntu-24.04"
+            },
+            {
+               "os": {
                   "major": "10",
                   "name": "Microsoft Windows 11 Pro",
                   "version": "10.0.26200.9711"
                },
-               "id": "019",
-               "name": "Windows"
-            },
-            {
-               "os": {
-                  "major": "15",
-                  "name": "macOS",
-                  "version": "15.6.1"
-               },
-               "id": "020",
-               "name": "macOS"
+               "id": "002",
+               "name": "Windows-11"
             }
          ],
          "total_affected_items": 2,

@@ -171,8 +171,9 @@ These keys let you set the passwords and certificate names yourself, instead of 
 |                                     |                                                                        | indexer runs on this host. Otherwise the start refuses with            |
 |                                     |                                                                        | ``MISSING``.                                                           |
 +-------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| ``WAZUH_MANAGER_NODE_NAME``         | Common name and first DNS name of both server pairs, and the CA common | The host name up to its first dot                                      |
-|                                     | name ``wazuh-manager-<NODE_NAME>`` when the CA is minted. It must be a |                                                                        |
+| ``WAZUH_MANAGER_NODE_NAME``         | Common name of both server pairs, their first DNS name when the pair's | The host name up to its first dot                                      |
+|                                     | SAN list is unset, and the CA common name                              |                                                                        |
+|                                     | ``wazuh-manager-<NODE_NAME>`` when the CA is minted. It must be a      |                                                                        |
 |                                     | valid DNS name of at most 64 characters, or at most 50 when the CA is  |                                                                        |
 |                                     | minted.                                                                |                                                                        |
 +-------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
