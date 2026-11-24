@@ -17,7 +17,7 @@ Protect script files and directories
 Verify script integrity
 -------------------------
 
-The Command module compares the hash of the executed file against the values you configure and ignores the output when they don't match.
+The Command module compares the hash of the executed file against the values you configure and doesn't run the command when they don't match.
 
 -  Set the ``verify_md5``, ``verify_sha1``, and ``verify_sha256`` options for every script the Command module runs.
 -  Verification covers only the first argument of the ``command`` option. Make the script the first argument. Otherwise, the check validates the interpreter instead of the script.
@@ -27,7 +27,7 @@ The Command module compares the hash of the executed file against the values you
 Control remote command execution
 ------------------------------------
 
-Remote command execution is disabled on the Wazuh agents for security reasons.
+Remote command execution is disabled by default on Wazuh agents for security reasons.
 
 -  Enable ``wazuh_command.remote_commands`` only on the endpoints that need it.
 -  Anyone with write access to the shared ``agent.conf`` file can run commands on every endpoint in the Wazuh agent group. Restrict access to the Wazuh manager and its configuration accordingly.

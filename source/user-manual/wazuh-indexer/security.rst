@@ -131,7 +131,7 @@ The following example shows the structure of the ``internal_users.yml`` configur
 
 .. note::
 
-   The password hashes are generated for each installation. The passwords are stored in ``/etc/wazuh-indexer/export/credentials.env``. On the Wazuh manager, the password of the ``wazuh-manager`` user is stored in the keystore, in the ``/var/wazuh-manager/queue/keystore/`` directory.
+   The password hashes are generated for each installation. The passwords are stored in ``/etc/wazuh-indexer/export/credentials.env``.
 
 The following table describes the main elements of the configuration file:
 
@@ -156,7 +156,7 @@ The following table describes the main elements of the configuration file:
 +-------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Default internal users
-""""""""""""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~
 
 The default ``internal_users.yml`` file includes the following reserved internal user accounts.
 
@@ -192,7 +192,7 @@ The Security plugin stores role definitions in the following configuration file:
 
 .. code-block:: none
 
-   # /etc/wazuh-indexer/opensearch-security/roles.yml
+   /etc/wazuh-indexer/opensearch-security/roles.yml
 
 This file contains the security roles used by the Wazuh indexer. This includes roles provided by the underlying OpenSearch Security plugin and additional roles required by Wazuh components and plugins. During installation, these definitions are loaded into the security index and are used to authorize authenticated users.
 
@@ -350,7 +350,7 @@ The following table describes the most commonly used fields.
 +-----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Default role mappings
-"""""""""""""""""""""
+~~~~~~~~~~~~~~~~~~~~~
 
 The default ``roles_mapping.yml`` file contains role mappings provided by both the OpenSearch Security plugin and the Wazuh platform.
 
@@ -457,7 +457,12 @@ The Security plugin records security-relevant activity as audit events, such as 
 Audit log storage
 ^^^^^^^^^^^^^^^^^
 
-The ``/etc/wazuh-indexer/opensearch.yml`` file installed by the Wazuh indexer package sends audit events to the ``security-auditlogs`` data stream.
+The ``/etc/wazuh-indexer/opensearch.yml`` file installed by the Wazuh indexer package sends audit events to the ``security-auditlogs`` data stream with these settings:
+
+.. code-block:: yaml
+
+   plugins.security.audit.type: internal_opensearch_data_stream
+   plugins.security.audit.config.data_stream.name: security-auditlogs
 
 The Security plugin creates the data stream when it records the first audit event. Only users with access to the ``security-auditlogs`` data stream can read the events. By default, this is the ``admin`` user. The data stream name is outside the ``wazuh-*`` pattern on purpose, because the Wazuh dashboard reads ``wazuh-*`` indices on behalf of every dashboard user.
 
@@ -489,7 +494,7 @@ The audit events include the body of REST requests. The security REST API doesn'
 Viewing audit events
 ^^^^^^^^^^^^^^^^^^^^
 
-To view audit events in the Wazuh dashboard, log in as a user with access to the ``security-auditlogs`` data stream, such as ``admin``. Create an index pattern for ``security-auditlogs*`` with ``@timestamp`` as the time field, and open it in Discover. To create the index pattern, go to **Dashboard management** > **Dashboards Management** > **Index patterns** and click **Create index pattern**. Enter ``security-auditlogs*``, select ``@timestamp`` as the time field, and click **Create index pattern**. Then go to **Explore** > **Discover** and select ``security-auditlogs*``.
+To view audit events in the Wazuh dashboard, log in as a user with access to the ``security-auditlogs`` data stream, such as ``admin``. The Wazuh dashboard creates the ``security-auditlogs*`` index pattern, with ``@timestamp`` as the time field. Go to **Explore** > **Discover** and select ``security-auditlogs*``.
 
 You can also query the data stream from **Dev Tools**. For example, the following request returns the 20 most recent failed logins:
 

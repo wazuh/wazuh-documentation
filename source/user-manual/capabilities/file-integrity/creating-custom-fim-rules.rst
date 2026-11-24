@@ -28,7 +28,7 @@ Fields are information that the Wazuh decoder extracts from events the Wazuh man
 FIM findings: fields correspondence
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following table shows a subset of FIM event fields and their corresponding Wazuh Common Schema (WCS) fields as they appear in a finding. Refer to `WCS fields <https://github.com/wazuh/wazuh-indexer-plugins/blob/main/wcs/stateless/events/main/docs/fields.csv>`__ for the complete list.
+The following table shows a subset of FIM event fields and their corresponding Wazuh Common Schema (WCS) fields as they appear in a finding. Refer to `WCS fields <https://github.com/wazuh/wazuh-indexer-plugins/blob/5.0.0/wcs/stateless/events/main/docs/fields.csv>`__ for the complete list.
 
 +--------------------------+-----------------------------------+---------------------------------------------+
 | FIM event field          | WCS field                         | Field description                           |
@@ -65,8 +65,13 @@ The following table shows a subset of FIM event fields and their corresponding W
 |                          |                                   | On Windows, the access control list (ACL)   |
 |                          |                                   | of the file.                                |
 +--------------------------+-----------------------------------+---------------------------------------------+
-| ``mode``                 | ``event.reason``                  | How the FIM module detected the change:     |
-|                          |                                   | scheduled, realtime, or whodata.            |
+| ``mode``                 | ``event.reason``                  | For created and deleted files, how the      |
+|                          |                                   | FIM module detected the change:             |
+|                          |                                   | ``scheduled``, ``realtime``, or             |
+|                          |                                   | ``whodata``.                                |
+|                          |                                   | For modified files, each changed            |
+|                          |                                   | attribute with its old and new values, for  |
+|                          |                                   | example, ``file.size: 6 -> 12``.            |
 +--------------------------+-----------------------------------+---------------------------------------------+
 | ``attributes``           | ``file.attributes``               | File attributes (system‑dependent).         |
 +--------------------------+-----------------------------------+---------------------------------------------+
@@ -105,7 +110,9 @@ The following table shows a subset of FIM event fields and their corresponding W
 +--------------------------+-----------------------------------+---------------------------------------------+
 | ``audit.audit_name``     | ``user.name``                     | Login name of the user who started the      |
 |                          |                                   | session, for example, the user who ran      |
-|                          |                                   | ``sudo``. Linux who-data mode only.         |
+|                          |                                   | ``sudo``. On Windows, it holds the same     |
+|                          |                                   | user as ``process.real_user.name``.         |
+|                          |                                   | Who-data mode only.                         |
 +--------------------------+-----------------------------------+---------------------------------------------+
 | ``audit.effective_name`` | ``user.effective.name``           | Effective user of the process. Linux        |
 |                          |                                   | who-data mode only.                         |
@@ -264,6 +271,10 @@ Wazuh rules define the detection logic for identifying relevant security activit
 
    The ``documentation`` and ``supports`` keys are optional. You can leave them empty, as in this example, or delete them.
 
+   .. note::
+
+      The ``logsource.product`` field must hold the same value as ``metadata.title`` from the integration it belongs to. In our case, this is ``wazuh-fim-custom``.
+
 #. Click **Create rule** to complete the rule creation process.
 
    .. thumbnail:: /images/manual/fim/create-rule.png
@@ -278,6 +289,12 @@ Promote the rule from the draft to the test space
 In the draft space, you create and refine your integrations, decoders, and rules. Promoting this rule to the test space allows you to validate it before introducing it to production. Make sure the space selector reads **Draft**, then follow these steps to promote the content.
 
 #. Go to **Ruleset management** → **Overview**, and click **Space actions** → **Promote**. The **Promote** page lists every pending change in the Draft space, not only this rule.
+
+   .. thumbnail:: /images/manual/fim/space-actions-promote.png
+      :title: Space actions
+      :alt: Ruleset management Overview with the Space actions menu open and the Promote option
+      :align: center
+      :width: 80%
 
    .. thumbnail:: /images/manual/fim/promote-draft.png
      :title: Promote draft
@@ -378,14 +395,22 @@ Perform the following steps to configure the Wazuh FIM module to monitor file de
 Test the configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Create a text file with Notepad and save the file in the ``C:\test`` directory as ``hello.txt``.
+#. Sign in to the Windows endpoint as a regular user. In PowerShell, create the ``hello.txt`` file in the ``C:\test`` directory:
 
-#. Delete the ``hello.txt`` file with Windows File Explorer.
+   .. code-block:: powershell
+
+      > Set-Content -Path C:\test\hello.txt -Value "hello"
+
+#. Delete the file:
+
+   .. code-block:: powershell
+
+      > Remove-Item -Path C:\test\hello.txt
 
 Visualize the findings
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when files are deleted in the monitored directory.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard. The custom rule generates the finding ``Wazuh FIM - Monitored file deleted by test with powershell.exe``. The out-of-the-box rule also generates ``Wazuh FIM - File deleted - c:\test\hello.txt``.
 
 .. thumbnail:: /images/manual/fim/deleted-file-finding.png
   :title: Deleted file finding
@@ -393,47 +418,66 @@ Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings**
   :align: center
   :width: 80%
 
+.. thumbnail:: /images/manual/fim/deleted-file-finding-expanded.png
+   :title: Deleted file finding expanded
+   :alt: Document details of the Wazuh FIM - Monitored file deleted by test with powershell.exe finding
+   :align: center
+   :width: 80%
+
 You can see the finding fields in the data below:
 
 .. code-block:: json
-   :emphasize-lines: 6-7, 29-31
+   :emphasize-lines: 6-11, 42-44
 
    {
      "_index": ".ds-wazuh-findings-v5-system-activity-000001",
-     "_id": "Y9dsTZ8BL87M59AH6yRc",
+     "_id": "k5utRTHa4asi1vVZkf9K_g",
      "_score": null,
      "_source": {
        "process": {
-         "name": "explorer.exe",
-         "pid": 5052
+         "real_user": {
+           "name": "test",
+           "id": "S-1-5-21-1349147258-1164413856-2138503564-1000"
+         },
+         "name": "powershell.exe",
+         "pid": 1488,
+         "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
        },
-       "@timestamp": "2026-07-10T19:06:10.438Z",
+       "@timestamp": "2026-11-13T00:16:37.252108582Z",
        "file": {
-         "inode": "0",
-         "mode": "whodata",
-         "owner": "wazuh-vm",
-         "path": "c:\\test\\hello.txt",
-         "uid": "S-1-5-21-3494786958-4119424836-2404692206-1002",
+         "owner": "test",
          "extension": "txt",
-         "size": 6,
+         "mtime": "2026-11-13T00:13:36.000Z",
+         "directory": "c:\\test",
+         "inode": "0",
+         "mode": [
+           "{\"S-1-5-18\":{\"name\":\"SYSTEM\",\"allowed\":[\"delete\",\"read_control\",\"write_dac\",\"write_owner\",\"synchronize\",\"read_data\",\"write_data\",\"append_data\",\"read_ea\",\"write_ea\",\"execute\",\"read_attributes\",\"write_attributes\"]}}",
+           "{\"S-1-5-32-544\":{\"name\":\"Administrators\",\"allowed\":[\"delete\",\"read_control\",\"write_dac\",\"write_owner\",\"synchronize\",\"read_data\",\"write_data\",\"append_data\",\"read_ea\",\"write_ea\",\"execute\",\"read_attributes\",\"write_attributes\"]}}",
+           "{\"S-1-5-32-545\":{\"name\":\"Users\",\"allowed\":[\"read_control\",\"synchronize\",\"read_data\",\"read_ea\",\"execute\",\"read_attributes\"]}}",
+           "{\"S-1-5-21-1349147258-1164413856-2138503564-1000\":{\"name\":\"test\",\"allowed\":[\"delete\",\"read_control\",\"write_dac\",\"write_owner\",\"synchronize\",\"read_data\",\"write_data\",\"append_data\",\"read_ea\",\"write_ea\",\"execute\",\"read_attributes\",\"write_attributes\"]}}"
+         ],
+         "path": "c:\\test\\hello.txt",
+         "uid": "S-1-5-21-1349147258-1164413856-2138503564-1000",
+         "size": 7,
+         "name": "hello.txt",
          "attributes": [
            "ARCHIVE"
          ],
-         "directory": "c:\\test",
+         "device": "2",
          "hash": {
-           "sha1": "5800776d9b531d82e2b62aea4051a968e05b9156",
-           "sha256": "7dd91e07f0341646d53f6938278a4d3e87961fabea066f7e6f40b7398f3b0b0f",
-           "md5": "ad2d611e4b060351732574b64aeaeed7"
+           "sha1": "aa5916ae7fd159a18b1b72ea905c757207e26689",
+           "sha256": "cd2eca3535741f27a8ae40c31b0c41d4057a7a7b912b33b9aed86485d1c84676",
+           "md5": "af5597c29467a96523a70787c319f4db"
          }
        },
        "related": {
          "user": [
-           "wazuh-vm"
+           "test"
          ],
          "hash": [
-           "ad2d611e4b060351732574b64aeaeed7",
-           "5800776d9b531d82e2b62aea4051a968e05b9156",
-           "7dd91e07f0341646d53f6938278a4d3e87961fabea066f7e6f40b7398f3b0b0f"
+           "af5597c29467a96523a70787c319f4db",
+           "aa5916ae7fd159a18b1b72ea905c757207e26689",
+           "cd2eca3535741f27a8ae40c31b0c41d4057a7a7b912b33b9aed86485d1c84676"
          ]
        },
        "data_stream": {
@@ -451,20 +495,20 @@ You can see the finding fields in the data below:
          },
          "agent": {
            "host": {
-             "hostname": "WINDOWS-11",
+             "hostname": "WIN-SERVER-2022",
              "os": {
-               "name": "Microsoft Windows 11 Pro",
+               "name": "Microsoft Windows Server 2022 Datacenter",
                "type": "windows",
-               "version": "10.0.26200.8655",
+               "version": "10.0.20348.5773",
                "platform": "windows"
              },
              "architecture": "x86_64"
            },
-           "name": "Windows-11",
+           "name": "WindowsServer2022",
            "groups": [
              "default"
            ],
-           "id": "003",
+           "id": "002",
            "version": "v5.0.0"
          },
          "integration": {
@@ -476,7 +520,6 @@ You can see the finding fields in the data below:
            "category": "system-activity"
          },
          "rule": {
-           "sigma_id": "c06abe18-8ffe-484f-861f-522f1ef89699",
            "level": "medium",
            "compliance": {
              "iso_27001": [
@@ -555,8 +598,8 @@ You can see the finding fields in the data below:
                ]
              }
            },
-           "id": "c06abe18-8ffe-484f-861f-522f1ef89699",
-           "title": "Wazuh FIM - Monitored file deleted by wazuh-vm with explorer.exe",
+           "id": "d45e8063-5f89-4493-8d23-3b7fc3ed3eb9",
+           "title": "Wazuh FIM - Monitored file deleted by test with powershell.exe",
            "tags": [
              "medium",
              "wazuh-fim-custom",
@@ -568,15 +611,17 @@ You can see the finding fields in the data below:
            "status": "stable"
          },
          "event": {
-           "id": "531ae9e6-812f-4814-a812-491374ab8f55"
+           "id": "e0ce6bd3-3ab3-45a5-a594-d293d019440f"
          },
          "space": {
            "name": "standard"
          }
        },
        "event": {
-         "original": "{\"collector\":\"file\",\"module\":\"fim\",\"data\":{\"event\":{\"created\":\"2026-07-10T19:06:10.348Z\",\"type\":\"deleted\"},\"file\":{\"size\":6,\"permissions\":[\"{\\\"S-1-5-32-544\\\":{\\\"name\\\":\\\"Administrators\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"write_dac\\\",\\\"write_owner\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\",\"{\\\"S-1-5-18\\\":{\\\"name\\\":\\\"SYSTEM\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"write_dac\\\",\\\"write_owner\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\",\"{\\\"S-1-5-32-545\\\":{\\\"name\\\":\\\"Users\\\",\\\"allowed\\\":[\\\"read_control\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"read_ea\\\",\\\"execute\\\",\\\"read_attributes\\\"]}}\",\"{\\\"S-1-5-11\\\":{\\\"name\\\":\\\"Authenticated Users\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\"],\"uid\":\"S-1-5-21-3494786958-4119424836-2404692206-1002\",\"owner\":\"wazuh-vm\",\"inode\":\"0\",\"device\":\"2\",\"mtime\":\"2026-07-10T19:01:15.000Z\",\"hash\":{\"md5\":\"ad2d611e4b060351732574b64aeaeed7\",\"sha1\":\"5800776d9b531d82e2b62aea4051a968e05b9156\",\"sha256\":\"7dd91e07f0341646d53f6938278a4d3e87961fabea066f7e6f40b7398f3b0b0f\"},\"attributes\":[\"ARCHIVE\"],\"path\":\"c:\\\\test\\\\hello.txt\",\"mode\":\"whodata\",\"audit\":{\"user_id\":\"S-1-5-21-3494786958-4119424836-2404692206-1002\",\"user_name\":\"wazuh-vm\",\"process_name\":\"C:\\\\Windows\\\\explorer.exe\",\"process_id\":5052}}}}",
+         "reason": "whodata",
+         "original": "{\"collector\":\"file\",\"module\":\"fim\",\"data\":{\"event\":{\"created\":\"2026-11-13T00:16:27.289Z\",\"type\":\"deleted\"},\"file\":{\"size\":7,\"permissions\":[\"{\\\"S-1-5-18\\\":{\\\"name\\\":\\\"SYSTEM\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"write_dac\\\",\\\"write_owner\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\",\"{\\\"S-1-5-32-544\\\":{\\\"name\\\":\\\"Administrators\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"write_dac\\\",\\\"write_owner\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\",\"{\\\"S-1-5-32-545\\\":{\\\"name\\\":\\\"Users\\\",\\\"allowed\\\":[\\\"read_control\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"read_ea\\\",\\\"execute\\\",\\\"read_attributes\\\"]}}\",\"{\\\"S-1-5-21-1349147258-1164413856-2138503564-1000\\\":{\\\"name\\\":\\\"test\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"write_dac\\\",\\\"write_owner\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\"],\"uid\":\"S-1-5-21-1349147258-1164413856-2138503564-1000\",\"owner\":\"test\",\"inode\":\"0\",\"device\":\"2\",\"mtime\":\"2026-11-13T00:13:36.000Z\",\"hash\":{\"md5\":\"af5597c29467a96523a70787c319f4db\",\"sha1\":\"aa5916ae7fd159a18b1b72ea905c757207e26689\",\"sha256\":\"cd2eca3535741f27a8ae40c31b0c41d4057a7a7b912b33b9aed86485d1c84676\"},\"attributes\":[\"ARCHIVE\"],\"path\":\"c:\\\\test\\\\hello.txt\",\"mode\":\"whodata\",\"audit\":{\"user_id\":\"S-1-5-21-1349147258-1164413856-2138503564-1000\",\"user_name\":\"test\",\"process_name\":\"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\",\"process_id\":1488}}}}",
          "kind": "event",
+         "created": "2026-11-13T00:16:27.289Z",
          "action": "deleted",
          "index": ".ds-wazuh-events-v5-system-activity-000001",
          "category": [
@@ -586,20 +631,11 @@ You can see the finding fields in the data below:
            "deletion"
          ],
          "dataset": "wazuh.fim",
-         "doc_id": "JtdsTZ8BL87M59AHfCQm",
+         "doc_id": "M0JD0qEB348XT2D6rUg9",
          "outcome": "success"
-       },
-       "user": {
-         "name": "wazuh-vm",
-         "id": "S-1-5-21-3494786958-4119424836-2404692206-1002"
        }
      },
-     "fields": {
-       "@timestamp": [
-         "2026-07-10T19:06:10.438Z"
-       ]
-     },
      "sort": [
-       1783710370438
+       1794528997252108582
      ]
    }

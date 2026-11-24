@@ -15,7 +15,7 @@ Key capabilities
 
 The Alerting module provides the following capabilities:
 
--  **Multiple monitor types:** Supports query-level, bucket-level, document-level, and the Wazuh-specific Active Response monitor.
+-  **Multiple monitor types:** Supports query-level, bucket-level, cluster metrics, document-level, and the Wazuh-specific Active Response monitors.
 -  **Flexible triggers:** Define trigger conditions using OpenSearch Query DSL queries, aggregation results, or per-document matching with percolate queries.
 -  **Notification actions:** Deliver alerts through notification channels configured in the Notifications module, including Slack, Microsoft Teams, email, webhooks, Amazon SNS, PagerDuty, and other supported destinations.
 -  **Workflows:** Combine multiple monitors into composite workflows to support advanced detection and monitoring scenarios.
@@ -490,17 +490,17 @@ General settings
 
 General settings control module-wide behavior, including role-based access control, action throttling, and cross-cluster monitoring.
 
-+-----------------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
-| Setting                                                         | Type      | Default   | Description                                                                                            |
-+=================================================================+===========+===========+========================================================================================================+
-| ``plugins.alerting.filter_by_backend_roles``                    | Boolean   | ``false`` | Restricts access to alerting resources based on backend roles configured by the Security plugin.       |
-+-----------------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.action_throttle_max_value``                  | TimeValue | ``24h``   | Specifies the maximum notification throttle interval that can be configured for an alert action.       |
-+-----------------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.cross_cluster_monitoring_enabled``           | Boolean   | ``true``  | Enables monitors to query indices located on remote clusters configured for cross-cluster search.      |
-+-----------------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.notification_context_results_allowed_roles`` | List      | ``[]``    | Specifies the backend roles allowed to view monitor query results in the notification message context. |
-+-----------------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------+-----------+------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Setting                                                         | Type      | Default          | Description                                                                                                                                                                                                                                                                                                                                                                                                                   |
++=================================================================+===========+==================+===============================================================================================================================================================================================================================================================================================================================================================================================================================+
+| ``plugins.alerting.filter_by_backend_roles``                    | Boolean   | ``false``        | Restricts access to alerting resources based on backend roles configured by the Security plugin.                                                                                                                                                                                                                                                                                                                              |
++-----------------------------------------------------------------+-----------+------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.action_throttle_max_value``                  | TimeValue | ``24h``          | Specifies the maximum notification throttle interval that can be configured for an alert action.                                                                                                                                                                                                                                                                                                                              |
++-----------------------------------------------------------------+-----------+------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.cross_cluster_monitoring_enabled``           | Boolean   | ``true``         | Enables monitors to query indices located on remote clusters configured for cross-cluster search.                                                                                                                                                                                                                                                                                                                             |
++-----------------------------------------------------------------+-----------+------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.notification_context_results_allowed_roles`` | List      | ``[]`` (not set) | Security roles, not backend roles, allowed to view monitor query results (``ctx.results``) in the notification message context. While the setting isn't set, the notifications of every monitor include them. Once it's set, the results are included only when the security roles of the monitor owner include at least one listed role. Setting it explicitly to an empty list removes the results from every notification. |
++-----------------------------------------------------------------+-----------+------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Update dynamic settings
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -521,11 +521,11 @@ Run the following command from a terminal on a host that can communicate with th
      "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings" \
      -H "Content-Type: application/json" \
      -d '{
-     "persistent": {
-       "plugins.alerting.monitor.max_monitors": 20,
-       "plugins.alerting.alert_history_max_age": "60d"
-     }
-   }'
+       "persistent": {
+         "plugins.alerting.monitor.max_monitors": 20,
+         "plugins.alerting.alert_history_max_age": "60d"
+       }
+     }'
 
 **Output**
 
