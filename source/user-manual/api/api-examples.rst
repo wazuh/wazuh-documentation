@@ -35,10 +35,10 @@ The command output looks similar to this:
       "data": {
          "title": "Wazuh API REST",
          "api_version": "5.0.0",
-         "revision": "rc2",
+         "revision": "rc3",
          "license_name": "GPL 2.0",
-         "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc2/LICENSE",
-         "hostname": "ubuntu-QEMU-Virtual-Machine",
+         "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc3/LICENSE",
+         "hostname": "ip-10-42-1-79",
          "timestamp": "2026-09-26T12:25:02Z"
       },
       "error": 0
@@ -88,6 +88,8 @@ The command output looks similar to this:
 DELETE
 ^^^^^^
 
+The following ``DELETE`` request removes several Wazuh agent groups in one call. Create two test groups first so that the example deletes no group in use.
+
 #. Create two disposable groups:
 
    .. code-block:: console
@@ -97,7 +99,7 @@ DELETE
         -H "Content-Type: application/json" \
         -d '{"group_id":"<WAZUH_GROUP_A>"}'
 
-      curl -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/groups" \
+      # curl -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/groups" \
         -H "Authorization: Bearer $TOKEN" \
         -H "Content-Type: application/json" \
         -d '{"group_id":"<WAZUH_GROUP_B>"}'
@@ -320,5 +322,6 @@ The script runs in Windows PowerShell 5.1, which the powershell command starts o
 
       affected_items                                   total_affected_items total_failed_items failed_items
       --------------                                   -------------------- ------------------ ------------
-      {@{lastKeepAlive=2026-10-04T21:24:28+00:00; id=009},  2                    0                  {}
-      @{lastKeepAlive=2026-10-05T09:45:21+00:00; id=010}}
+      {}                                0                  0 {}
+
+   The preceding response shows that no Wazuh agents are disconnected.
