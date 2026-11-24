@@ -28,7 +28,7 @@ Daemons
      - The Wazuh agent communication gateway serves the HTTPS agent API on port ``1517`` and forwards agent events to the Wazuh normalization engine. The legacy AES-encrypted TCP/UDP channel on port ``1514`` serves Wazuh 4.x agents.
    * - Wazuh DB
      - ``wazuh-manager-db``
-     - SQLite-based database daemon for the Wazuh agent and global state.
+     - SQLite database daemon that holds the Wazuh agent registry and group assignments in ``global.db`` and answers MITRE ATT&CK lookups from ``mitre.db``.
    * - Auth
      - ``wazuh-manager-authd``
      - The Wazuh agent enrollment service owns all enrollment logic. It receives enrollment requests through the HTTPS ``POST /enroll`` endpoint and, for legacy Wazuh 4.x agents, through TLS port ``1515``.
@@ -151,7 +151,7 @@ The Wazuh manager provides a set of command-line interface (CLI) tools for manag
    * - Binary
      - Purpose
    * - ``wazuh-manager-control``
-     - The Wazuh manager service control script is used to start, stop, restart, reload, and check the status of all daemons, and show version information.
+     - Starts, stops, restarts, and reloads all Wazuh manager daemons, checks their status, and shows version information.
    * - ``wazuh-manager-keystore``
      - Manage secrets in the encrypted keystore (AES-256, RocksDB).
    * - ``verify-agent-conf``
