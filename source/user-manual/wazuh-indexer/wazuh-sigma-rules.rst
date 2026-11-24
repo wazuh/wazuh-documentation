@@ -25,7 +25,7 @@ When a detector is created, it can reference either Standard rules or Custom rul
 Rule structure
 --------------
 
-The Wazuh Sigma rule consists of the following components:
+A Wazuh Sigma rule consists of the following components:
 
 +--------------+---------------------------------------------------------------------------------------------------+
 | Component    | Description                                                                                       |
@@ -214,18 +214,18 @@ These mappings are displayed in Security Analytics findings and can be used for 
 Compliance mapping
 ------------------
 
-Rules can be mapped to supported compliance frameworks. Supported frameworks include:
+Rules can be mapped to supported compliance frameworks in the top-level ``compliance`` block. Each key holds a list of requirement IDs as strings, for example ``pci_dss: ["10.2.4", "10.2.5"]``. The Content Manager module rejects a rule with an unknown framework key. Supported frameworks and their keys are:
 
--  PCI DSS
--  GDPR
--  HIPAA
--  NIST 800-53
--  NIST 800-171
--  ISO 27001
--  CMMC
--  FedRAMP
--  NIS2
--  TSC
+-  PCI DSS: ``pci_dss``
+-  GDPR: ``gdpr``
+-  HIPAA: ``hipaa``
+-  NIST 800-53: ``nist_800_53``
+-  NIST 800-171: ``nist_800_171``
+-  ISO 27001: ``iso_27001``
+-  CMMC: ``cmmc``
+-  FedRAMP: ``fedramp``
+-  NIS2: ``nis2``
+-  TSC: ``tsc``
 
 Compliance mappings are included in enriched findings and can be used to support compliance reporting requirements.
 
@@ -264,7 +264,7 @@ Rules can exist in one of the following states:
 +------------------+----------------------------------------------+
 | ``stable``       | Production-ready rule.                       |
 +------------------+----------------------------------------------+
-| ``deprecated``   | Replaced by another rule, or covered by one. |
+| ``deprecated``   | Replaced by, or covered by, another rule.    |
 +------------------+----------------------------------------------+
 | ``unsupported``  | Cannot be used in its current state.         |
 +------------------+----------------------------------------------+
