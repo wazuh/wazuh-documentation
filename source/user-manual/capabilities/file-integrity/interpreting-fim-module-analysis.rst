@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh dashboard displays FIM events whenever a monitored file is added, modified, or deleted. Learn more about it in this section.
+   :description: The Wazuh dashboard shows the files and registry entries that the FIM module monitors and the findings generated when they change.
 
 Interpreting FIM scans
 =======================
 
-The Wazuh dashboard displays FIM events whenever a monitored file is added, modified, or deleted. To view them, go to **Endpoint security** > **File Integrity Monitoring** on the Wazuh dashboard. Results appear in the following tabs:
+The Wazuh dashboard shows the files and registry entries that the FIM module monitors, and the findings generated when they change. To view them, go to **Endpoint security** > **File Integrity Monitoring** on the Wazuh dashboard. Results appear in the following tabs:
 
 -  :ref:`Dashboard <dashboard>`
 -  :ref:`Inventory <inventory>`
@@ -17,7 +17,7 @@ The Wazuh dashboard displays FIM events whenever a monitored file is added, modi
 Dashboard
 ---------
 
-The **Dashboard** tab summarizes the current state of the files that the FIM module monitors, for all monitored endpoints or a single endpoint you select.
+The **Dashboard** tab summarizes the current state of the files that the FIM module monitors, for all monitored endpoints or a single endpoint you select. Changes to monitored files appear in the **Findings** tab.
 
 The image below shows the **Dashboard** tab for all monitored endpoints.
 
@@ -40,7 +40,7 @@ The image below shows the **Dashboard** tab for an Ubuntu endpoint.
 Inventory
 ---------
 
-This section displays an inventory of all files the FIM module has indexed, including each file's path, modification date, owner, UID, and size.
+This section displays an inventory of all files the FIM module has indexed, including each file's path, modification date, owner, UID, and size. For Windows endpoints, the **Registry keys** and **Registry values** tabs list the monitored registry entries.
 
 The image below shows the file inventory of an Ubuntu endpoint.
 
@@ -75,7 +75,7 @@ On Windows endpoints, the file path in a finding is in lowercase, for example ``
 
 .. thumbnail:: /images/manual/fim/findings.png
    :title: Findings
-   :alt: FIM Findings tab with a histogram and a table of file created and modified events for an Ubuntu endpoint
+   :alt: FIM Findings tab with a histogram and a table of findings for Windows and Ubuntu endpoints
    :align: center
    :width: 80%
 
@@ -94,6 +94,6 @@ If a change to a monitored file doesn't appear in the **Findings** tab, check th
 
 #. The configuration reached the Wazuh agent. The ``<directories>`` option names the path you changed, and the directory exists on the endpoint. If you use centralized configuration, the Wazuh agent belongs to the group whose ``agent.conf`` file holds the block.
 #. The first scan ended. The Wazuh agent log contains ``(6009): File integrity monitoring scan ended.`` Changes made before this message become part of the baseline. Repeat the change after it.
-#. Who-data started, if the directory uses ``whodata="yes"``. On Linux with the eBPF provider, the log contains ``(6048)``. On Windows, it contains ``(6019)``.
+#. Who-data started, if the directory uses ``whodata="yes"``. On Linux with the eBPF provider, the log contains ``(6048)``. On Linux with the audit provider and on Windows, it contains ``(6019)``. If the log contains ``(6913)`` instead, who-data didn't start, and the FIM module monitors the directory in real time. On Linux, install and start the audit daemon as described in :ref:`Requirements <who_data_audit_requirements>`.
 #. The filter matches the finding. On Windows endpoints, the ``file.path`` value in a finding is in lowercase.
 #. The ``wazuh-fim`` integration is enabled in **Ruleset management** → **Overview**.

@@ -143,7 +143,7 @@ Configuring Let's Encrypt SSL certificates on the Wazuh dashboard
 
 The Let's Encrypt certificate installation on the Wazuh dashboard is now ready, and you can proceed to access it by using the configured fully qualified domain name.
 
-.. thumbnail:: /images/configuring-third-party-certs/lets-encrypt-wazuh-dashboard.jpg
+.. thumbnail:: /images/configuring-third-party-certs/lets-encrypt-wazuh-dashboard.png
    :title: Wazuh dashboard
    :alt: Wazuh dashboard login page served with the Let's Encrypt certificate
    :align: center
