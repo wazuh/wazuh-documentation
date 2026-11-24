@@ -70,8 +70,9 @@ Perform the following steps to create the credentials file:
 
    Transfer the credentials file to the Wazuh agent used for the integration. We recommend transferring the credentials file to ``/var/ossec/wodles/gcloud/``.
 
-   Change the file ownership of the credentials file:
+   Change the file ownership and permissions of the credentials file. The file contains a private key, so only the root user can write it and only the wazuh group can read it:
 
    .. code-block:: console
 
       # chown root:wazuh /var/ossec/wodles/gcloud/<AUTHENTICATION_FILE_NAME>.json
+      # chmod 640 /var/ossec/wodles/gcloud/<AUTHENTICATION_FILE_NAME>.json

@@ -6,9 +6,9 @@
 Enabling the Google Cloud integration
 ======================================
 
-The GCP integration containing the Wazuh ruleset for Google Cloud is disabled by default. Follow the steps below to enable the GCP integration.
+The Google Cloud integration (gcp) containing the Wazuh ruleset for Google Cloud is disabled by default. Follow the steps below to enable it.
 
-#. On the Wazuh dashboard, navigate to **Security Analytics** > **Overview** and search for ``gcp``. Select the GCP integration, then click on the **Action** icon to view the integration details.
+#. On the Wazuh dashboard, navigate to **Ruleset Management** > **Overview**, make sure you are in the **Standard** space, and search for ``gcp``. Select the gcp integration, then click on the **Action** icon to view the integration details.
 
    .. thumbnail:: /images/cloud-security/gcp/gcp-enable-integration-search.png
       :title: Search for the GCP integration on the Wazuh dashboard
@@ -16,7 +16,7 @@ The GCP integration containing the Wazuh ruleset for Google Cloud is disabled by
       :align: center
       :width: 80%
 
-#. Select **Enable** from the **Actions** drop-down menu to enable the GCP integration.
+#. Select **Enable** from the **Actions** drop-down menu to enable the Google Cloud integration.
 
    .. thumbnail:: /images/cloud-security/gcp/gcp-enable-integration-action.png
       :title: Enable the GCP integration
