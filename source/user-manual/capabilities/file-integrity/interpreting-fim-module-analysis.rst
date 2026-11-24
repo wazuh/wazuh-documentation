@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh dashboard shows the files and registry entries that the FIM module monitors, and the findings generated when they change. Learn more about it in this section.
+   :description: The Wazuh dashboard shows the files and registry entries that the FIM module monitors and the findings generated when they change.
 
 Interpreting FIM scans
 =======================
