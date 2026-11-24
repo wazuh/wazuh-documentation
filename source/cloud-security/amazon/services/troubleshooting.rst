@@ -75,7 +75,7 @@ To verify log processing for any bucket or service, check the ``wazuh-events-v5*
 The following event processing workflow shows how Wazuh processes logs from the Wazuh module for AWS and displays the resulting findings on the Wazuh dashboard:
 
 #. **Log collection:** The Wazuh module for AWS retrieves logs from the configured AWS services according to its configuration. See :doc:`considerations for the Wazuh module for AWS configuration </cloud-security/amazon/services/prerequisites/considerations>` for information about filtering the logs.
-#. **Log normalization:** The module sends the collected logs to the Wazuh manager. There, the data analysis engine uses decoders to parse, normalize, and enrich the raw events into structured data that follows the Wazuh Common Schema (WCS).
+#. **Log normalization:** The module sends the collected logs to the Wazuh manager. There, the Wazuh normalization engine uses decoders to parse, normalize, and enrich the raw events into structured data that follows the Wazuh Common Schema (WCS).
 #. **Rule matching:** The Wazuh manager forwards the normalized events to the Wazuh indexer. Detectors on the indexer evaluate the events against the configured detection rules at regular intervals. When an event matches a rule, the indexer generates a finding and enriches it with event and rule metadata.
 #. **Finding indexing:** The Wazuh indexer indexes and stores the generated findings, making them available for search and investigation.
 #. **Finding visualization:** The Wazuh dashboard retrieves the indexed findings from the Wazuh indexer, allowing users to search, filter, analyze, and investigate them.
@@ -161,7 +161,7 @@ First of all, review ``ERROR`` or ``WARNING`` messages in the ``/var/ossec/logs/
 
    When running, the Wazuh module for AWS requests AWS for the logs corresponding to the date indicated using the :ref:`only_logs_after <only_logs_aws_buckets>` parameter. If this parameter is not specified, it tries to obtain the logs corresponding to the day of execution. Make sure you are specifying a value for :ref:`only_logs_after <only_logs_aws_buckets>` and that there is data available for that particular date. Check the :doc:`considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about how to properly filter the logs using the ``only_logs_after`` parameter.
 
--  Check if the events are being sent to the analysis engine.
+-  Check if the events are being sent to the engine.
 
    Events that don't match any rule don't raise findings, but they still appear in Discover. See the :ref:`Checking if logs are being processed <aws_events_processed>` section to check whether the AWS logs reach the analysis engine.
 
@@ -187,7 +187,7 @@ The ``Interval overtaken`` message is present in the ``/var/ossec/logs/ossec.log
 Solution
 ~~~~~~~~
 
-Not an issue but a warning. The warning means the last execution took longer than the configured interval. It is important to note that the next run doesn't start until the previous one finishes.
+This is a warning, not an error. It means the last execution took longer than the configured interval. It is important to note that the next run doesn't start until the previous one finishes.
 
 Error codes reference
 ---------------------
