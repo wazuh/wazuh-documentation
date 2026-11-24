@@ -6,7 +6,7 @@
 Monitoring disk space utilization
 ==================================
 
-In this use case, we configure the Command module to check the usage of the root partition on a Linux endpoint every five minutes. Wazuh generates a finding when usage reaches 80%.
+In this use case, you configure the Command module to check the usage of the root partition on a Linux endpoint every five minutes. Wazuh generates a finding when usage reaches ``80%``.
 
 Configuration
 --------------
@@ -14,7 +14,7 @@ Configuration
 Linux endpoint
 ^^^^^^^^^^^^^^^
 
-#. Create a Bash script named ``disk-usage.sh`` in the ``/usr/local/bin/`` directory. The script prints a warning line only when the root partition usage reaches the threshold of 80%:
+#. Create a Bash script named ``disk-usage.sh`` in the ``/usr/local/bin/`` directory with the following command. The script prints a warning line only when the root partition usage reaches the threshold of 80%:
 
    .. code-block:: bash
 
@@ -71,7 +71,7 @@ Linux endpoint
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-Perform the steps below to create a rule to analyze the event received from the monitored Linux endpoint. The default ``decoder/wazuh-wodle/0`` decoder decodes the command output, including its ``tags`` and ``process.io.text``. If you haven't already done so, perform step 1 of the :ref:`Wazuh dashboard <command_monitoring_configuration_example_wazuh_dashboard>` section under Example configuration.
+Perform the steps below to create a rule to analyze the event received from the monitored Linux endpoint. The default ``decoder/wazuh-command-monitoring/0`` decoder decodes the command output, including its ``tags`` and ``process.io.text``. If you haven't already done so, perform step 1 of the :ref:`Wazuh dashboard <command_monitoring_configuration_example_wazuh_dashboard>` section under :ref:`Example configuration <command_monitoring_example_configuration>`.
 
 #. Navigate to **Ruleset management** > **Detection** > **Rules** and perform the following to create a detection rule.
 
@@ -99,7 +99,7 @@ Perform the steps below to create a rule to analyze the event received from the 
                - disk-usage
          metadata:
            title: Wazuh CM - Disk usage of the root partition exceeds 80%
-           author: Security team lead
+           author: Security team
            description: Detects when the disk usage of the root partition reaches 80%
            references:
              - ''
@@ -115,7 +115,13 @@ Perform the steps below to create a rule to analyze the event received from the 
            nist_800_53:
              - AU-6
 
-#. Navigate to **Ruleset management** > **Overview**, select the space **Draft** and click **Actions** > **Promote** to promote the rule to the ``Test`` space.
+   .. thumbnail:: /images/manual/command-monitoring/create-rule-disk.png
+      :title: Creating a detection rule
+      :alt: Creating a detection rule
+      :align: center
+      :width: 80%
+
+#. Navigate to **Ruleset management** > **Overview**, select the space **Draft** and click **Space actions** > **Promote** to promote the rule to the ``Test`` space. On the **Promote** page, click **Promote**. In the confirmation dialog, type ``promote`` and click **Promote**.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-draft-disk.png
       :title: Promoting the detection rule to Test
@@ -123,7 +129,7 @@ Perform the steps below to create a rule to analyze the event received from the 
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Overview**, select the space **Test** and click **Actions** > **Promote** to promote the rule to the ``Custom`` space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Test** and click **Space actions** > **Promote** to promote the rule to the ``Custom`` space. On the **Promote** page, click **Promote**. In the confirmation dialog, type ``promote`` and click **Promote**.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-test-disk.png
       :title: Promoting the detection rule to Custom
@@ -131,7 +137,7 @@ Perform the steps below to create a rule to analyze the event received from the 
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Detection** > **Detectors** to create a detector that applies the detection rule and generates findings.
+#. Navigate to **Ruleset management** > **Detection** > **Detectors** to create a detector that applies the detection rule and generates findings. A detector applies only the Custom-space rules that exist when you create it. To use an existing command-integration detector instead, edit it and add this rule under **Selected rules** > **Manage**.
 
    -  Click **Create detector**, fill the required fields, and click **Create detector**:
 
@@ -150,7 +156,7 @@ Perform the steps below to create a rule to analyze the event received from the 
 Test the configuration
 ------------------------
 
-Perform the steps below on the monitored Ubuntu endpoint.
+Perform the steps below on the monitored Ubuntu endpoint. These steps fill the root partition, so run them only on a test endpoint.
 
 #. Check the size of the root partition:
 
@@ -162,18 +168,19 @@ Perform the steps below on the monitored Ubuntu endpoint.
 
    .. code-block:: none
       :class: output
-      :emphasize-lines: 3
+      :emphasize-lines: 2
 
-      Filesystem                        1024-blocks      Used Available Capacity Mounted on
-      tmpfs                                  201500      1012    200488       1% /run
-      /dev/mapper/ubuntu--vg-ubuntu--lv    31811408   4745136  25424800      16% /
-      tmpfs                                 1007484         0   1007484       0% /dev/shm
-      tmpfs                                    5120         0      5120       0% /run/lock
-      /dev/sda2                             1992552    104804   1766508       6% /boot
-      vagrant                             732556284 244033372 488522912      34% /vagrant
-      tmpfs                                  201496        16    201480       1% /run/user/1000
+      Filesystem      1024-blocks    Used Available Capacity Mounted on
+      /dev/root          30394432 2495540  27882508       9% /
+      tmpfs                975852       0    975852       0% /dev/shm
+      tmpfs                390344     908    389436       1% /run
+      tmpfs                  5120       0      5120       0% /run/lock
+      efivarfs                128       4       120       3% /sys/firmware/efi/efivars
+      /dev/nvme0n1p16      901520  116216    722176      14% /boot
+      /dev/nvme0n1p15      106832    6250    100582       6% /boot/efi
+      tmpfs                195168      12    195156       1% /run/user/1000
 
-#. Fill the disk to cross the threshold with the command below. Replace ``<SIZE>`` with enough space to raise the usage of the ``/`` partition above 80%, based on the output of the previous step. For example, ``20G`` for the disk shown above:
+#. Fill the root partition above the 80% threshold with the command below. Replace ``<SIZE>`` with a size larger than 80% of the root partition minus its used space, from the previous output. For example, ``21G`` works on a 30 GB root partition with about 2.5 GB used:
 
    .. code-block:: console
 
@@ -183,27 +190,21 @@ Perform the steps below on the monitored Ubuntu endpoint.
 
    .. code-block:: console
 
-      # df -P
+      # df -P /
 
    The command output looks similar to this:
 
    .. code-block:: none
       :class: output
-      :emphasize-lines: 3
+      :emphasize-lines: 2
 
-      Filesystem                        1024-blocks      Used Available Capacity Mounted on
-      tmpfs                                  201500      1012    200488       1% /run
-      /dev/mapper/ubuntu--vg-ubuntu--lv    31811408  25717728   4452208      86% /
-      tmpfs                                 1007484         0   1007484       0% /dev/shm
-      tmpfs                                    5120         0      5120       0% /run/lock
-      /dev/sda2                             1992552    104804   1766508       6% /boot
-      vagrant                             732556284 244031132 488525152      34% /vagrant
-      tmpfs                                  201496        16    201480       1% /run/user/1000
+      Filesystem     1024-blocks     Used Available Capacity Mounted on
+      /dev/root         30394432 24515652   5862396      81% /
 
-Visualize the findings
-------------------------
+View the findings
+-------------------
 
-Navigate to **Threat Intelligence** > **Threat Hunting** > **Findings** on the Wazuh dashboard to view the generated finding when the disk usage of the ``/`` partition exceeds 80%.
+Navigate to **Threat intelligence** > **Threat Hunting**, then select the **Findings** tab on the Wazuh dashboard to view the generated finding when the disk usage of the ``/`` partition exceeds ``80%``.
 
 .. thumbnail:: /images/manual/command-monitoring/dashboard-disk-usage-finding.png
    :title: Generated finding
@@ -211,7 +212,7 @@ Navigate to **Threat Intelligence** > **Threat Hunting** > **Findings** on the W
    :align: center
    :width: 80%
 
-After visualizing the findings, remove the ``/tmp/big_file`` file on the monitored endpoint to regain your disk space:
+After you view the findings, remove the ``/tmp/big_file`` file on the monitored endpoint to regain your disk space:
 
 .. code-block:: console
 
