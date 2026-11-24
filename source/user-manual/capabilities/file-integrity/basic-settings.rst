@@ -15,7 +15,7 @@ This section covers the common FIM configuration options used for file integrity
 Real-time monitoring
 ---------------------
 
-The ``realtime`` option enables real-time monitoring of file changes in configured directories on Windows, Linux, and macOS endpoints.
+The ``realtime`` option enables real-time monitoring of file changes in configured directories on Windows and Linux endpoints.
 
 To enable real-time monitoring, set the ``realtime`` option of the ``directories`` option to ``yes``. The allowed values for the ``realtime`` option are ``yes`` and ``no``. Real-time detection pauses during scheduled FIM scans and resumes once they finish.
 
@@ -126,11 +126,11 @@ The following example shows how to disable SHA-1 hash calculation for a monitore
 Scheduled scans
 ----------------
 
-To modify the FIM scan schedule, configure the ``frequency`` option in the Wazuh FIM module. This option is global and defines the interval between scheduled scans for all monitored files and directories. You can also schedule scans for a specific time or day of the week using the ``scan_time`` and ``scan_day`` options. Scheduled scans help prevent finding floods when monitoring frequently updated files, such as log files.
+To modify the FIM scan schedule, configure the ``<frequency>`` option in the Wazuh FIM module. This option is global and defines the interval between scheduled scans for all monitored files and directories. You can also schedule scans for a specific time or day of the week using the ``scan_time`` and ``scan_day`` options. Scheduled scans help prevent finding floods when monitoring frequently updated files, such as log files.
 
 By default, the FIM module runs scans every 12 hours (43200 seconds). The following example configures the FIM module to run scans every 15 minutes (900 seconds).
 
-#. Modify the ``frequency`` option in the Wazuh agent configuration file to change the default FIM scan frequency:
+#. Modify the ``<frequency>`` option in the default ``<syscheck>`` block of the Wazuh agent configuration file to change the default FIM scan frequency:
 
    -  Linux: ``/var/ossec/etc/ossec.conf``
    -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
@@ -184,7 +184,7 @@ Use the ``report_changes`` option with caution, as enabling it copies every moni
 -  ``/Library/Ossec/queue/diff/*`` on macOS.
 -  ``C:\Program Files (x86)\ossec-agent\queue\diff\file\*`` on Windows.
 
-The Wazuh agent clears these copies when it restarts, so the first change to each monitored file after a restart shows ``Unable to calculate diff due to no previous data stored for this file.`` instead of the changed content. Later changes show the content. The following configuration sets up the FIM module to report file changes. Replace ``<FILEPATH_OF_MONITORED_FILE>`` with your own file path.
+The Wazuh agent clears these copies when it restarts, so after a restart, the first change to a file that the FIM module already monitored shows ``Unable to calculate diff due to no previous data stored for this file.`` instead of the changed content. Later changes show the content. The changed content appears in the ``file.diff`` field of the finding and in the ``content_changes`` field inside ``event.original``. The following configuration sets up the FIM module to report file changes. Replace ``<FILEPATH_OF_MONITORED_FILE>`` with your own file path.
 
 #. Add the following settings inside the ``<ossec_config>`` block of the Wazuh agent configuration file:
 
