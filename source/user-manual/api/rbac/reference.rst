@@ -264,6 +264,7 @@ cluster:read
 -  :api-ref:`GET /cluster/{node_id}/daemons/remoted/tls <operation/api.controllers.cluster_controller.get_remoted_tls_node>` (:ref:`node:id <api_rbac_reference_resources>`)
 -  :api-ref:`PUT /cluster/reload <operation/api.controllers.cluster_controller.put_reload>` (:ref:`node:id <api_rbac_reference_resources>`)
 -  :api-ref:`PUT /cluster/restart <operation/api.controllers.cluster_controller.put_restart>` (:ref:`node:id <api_rbac_reference_resources>`)
+-  :api-ref:`PUT /cluster/{node_id}/configuration <operation/api.controllers.cluster_controller.update_configuration>` (:ref:`node:id <api_rbac_reference_resources>`)
 
 .. _api_rbac_reference_cluster_read_secrets:
 
@@ -887,7 +888,7 @@ Default rules
 wui_elastic_admin
 ^^^^^^^^^^^^^^^^^
 
-Administrator permissions for the elastic users of the Wazuh dashboard.
+Administrator permissions for a Wazuh dashboard user whose authorization context has the ``username`` value ``elastic``.
 
 .. code-block:: yaml
 
@@ -900,7 +901,7 @@ Administrator permissions for the elastic users of the Wazuh dashboard.
 wui_opensearch_admin
 ^^^^^^^^^^^^^^^^^^^^
 
-Administrator permissions for the OpenSearch users of the Wazuh dashboard.
+Administrator permissions for the ``admin`` user of the Wazuh indexer when it logs in to the Wazuh dashboard.
 
 .. code-block:: yaml
 

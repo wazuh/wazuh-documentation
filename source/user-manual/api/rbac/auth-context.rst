@@ -11,7 +11,7 @@ An authorization context is data a user sends at login, which the Wazuh manager 
 Authorization context login method
 ----------------------------------
 
-The authorization context login method (:api-ref:`POST /security/user/authenticate/run_as <operation/api.controllers.security_controller.run_as_login>`) lets a trusted user log in and receive a different, dynamically-assigned set of permissions. The new set replaces the fixed permissions tied to their own role. The user includes a custom piece of data called the authorization context in their login request (for example, a name and department). The Wazuh manager checks this data against a set of rules you've defined, and grants whatever role each matching rule points to. An empty authorization context ({}) matches no rule, so its token has no roles.
+The authorization context login method (:api-ref:`POST /security/user/authenticate/run_as <operation/api.controllers.security_controller.run_as_login>`) lets a trusted user log in and receive a different, dynamically-assigned set of permissions. The new set replaces the fixed permissions tied to their own role. The user includes a custom piece of data called the authorization context in their login request (for example, a name and department). The Wazuh manager checks this data against the security rules that you define, and grants whatever role each matching rule points to. An empty authorization context ({}) matches no rule, so its token has no roles.
 
 To use this method, you must first allow a user to use the authorization context. Details on creating and enabling a user for the authorization context are in the :ref:`RBAC configuration <api_rbac_configuration_create_a_new_user>` section. Once you have established the necessary security rules, you must send an authorization context containing all the required information. The system verifies the authorization context against the security rules and grants the associated permissions.
 
@@ -55,7 +55,7 @@ Below are example log entries for both methods, so you can see the difference:
    .. code-block:: none
       :class: output
 
-      eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNzkyNzY1MDIzLCJuYmZfbXMiOjE3OTI3NjUwMjMwMzEsImV4cCI6MTc5Mjc2NTkyMywic3ViIjoid2F6dWgtaW50ZXJuYWwtY2xpZW50IiwicnVuX2FzIjp0cnVlLCJyYmFjX3JvbGVzIjpbXSwicmJhY19tb2RlIjoid2hpdGUiLCJoYXNoX2F1dGhfY29udGV4dCI6IjY2YTI4ZWZiNWY4ZGIyZTkzZGEyYjVmYjEwN2JlYzM1In0.ATuIhrgIglW5iNYjdvAaZgqWBuKU7scPHrcgXE72PYSNduK02xgDfOjQcmgcW2TsfL24XIa9ct6TF0rSkfIlNxzSAcd468-K23hFdak6VRQnAj0ohylfIu9ZRave_nSt9pl_6xYKX9xQ2NYZf0fZUw-6JLGS_rWjompB-2gXVoX2DYWF
+      eyJhbGciXXXXXXXXXXXXXXXXJ9.eyJpc3MiXXXXXXXXXXXXXXXXXXXXX9pl_6xYKX9xQ2NYZf0fZUw-6JLGS_rWjompB-2gXVoX2DYWF
 
 #. Check the API log for the corresponding log entries using the following command:
 
@@ -89,7 +89,7 @@ Rules and roles
 
 A rule defines logical and search operations that apply to an incoming authorization context. When the Wazuh manager API processes an authentication request through an authorization context, it checks all rules against it. It grants the user any roles associated with the rules that yield an affirmative result.
 
-Let's use the following authorization context to illustrate each operation within the rules and how it matches up to the examples:
+The following authorization context illustrates each operation in the rules and how it matches the examples:
 
 .. code-block:: json
 
@@ -130,7 +130,7 @@ The search operations in the rules are used to search in the authorization conte
        }
    }
 
--  ``FIND``: This operation is a recursive ``MATCH``, up to eight levels deep, of the authorization context. ``MATCH`` searches the structure only at the root of the authorization context. In the ``FIND`` case, the operation searches the structure up to eight levels deep. If the authorization context is nested more deeply, the role is not granted. In the following example, you can omit the key auth, because the ``FIND`` operation searches for the key ``office`` inside all the authorization contexts:
+-  ``FIND``: This operation is a recursive ``MATCH``, up to eight levels deep, of the authorization context. ``MATCH`` searches the structure only at the root of the authorization context. In the ``FIND`` case, the operation also searches the nested objects, down to a key inside eight nested objects below the root. A key nested more deeply never matches, and the role is not granted. In the following example, you can omit the key auth, because the ``FIND`` operation searches for the key ``office`` inside all the authorization contexts:
 
 .. code-block:: json
 
@@ -404,4 +404,4 @@ Example 2
        }
    }
 
-This context does not satisfy the rule. ``MATCH`` searches only at the root of the authorization context, and this context holds office under auth. The first ``MATCH`` clause of the outermost ``AND`` operation therefore fails. The ``FIND`` operation meets the criteria with the help of the regular expression matching. The concluding ``OR`` operation fails too. Its ``MATCH$`` clause looks for the name Wazuh and the office 20 at the root of the context, where the name is First_example and there is no office key, and neither clause of the nested ``OR`` operation matches. An ``AND`` operation is true only when all its clauses are true, so the rule does not match. The login gets no role from this rule.
+This context does not satisfy the rule. ``MATCH`` searches only at the root of the authorization context, and this context holds office under auth. The first ``MATCH`` clause of the outermost ``AND`` operation therefore fails. The ``FIND`` operation meets the criteria with the help of the regular expression matching. The concluding ``OR`` operation fails too. Its ``MATCH$`` clause looks for the name Wazuh and the office 20 at the root of the context. There, the name is First_example and there is no office key. Neither clause of the nested ``OR`` operation matches. An ``AND`` operation is true only when all its clauses are true, so the rule does not match. The login gets no role from this rule.
