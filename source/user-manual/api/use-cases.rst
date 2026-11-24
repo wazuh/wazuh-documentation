@@ -28,8 +28,8 @@ Use the Wazuh manager API to retrieve the current status of all Wazuh manager da
 Follow these steps to retrieve the Wazuh daemon status:
 
 #. Navigate to **Server management** > **Dev Tools** to open the Wazuh manager API Console.
-#. Set the method and endpoint to ``GET /cluster/<NODE_ID>/status``, where ``<NODE_ID>`` is the name of the Wazuh manager node. You can get the node name with ``GET /cluster/local/info``.
-#. Click the play button to execute the request. A response similar to the following is returned:
+#. Set the method and endpoint to ``GET /cluster/<NODE_ID>/status``, where ``<NODE_ID>`` is the name of the Wazuh manager node. You can get the node name with :api-ref:`GET /cluster/local/info <operation/api.controllers.cluster_controller.get_cluster_node>`.
+#. Click **Send request**, the play icon on the request line. The Wazuh manager API returns a response similar to the following:
 
    .. thumbnail:: /images/manual/api/retrieve-wazuh-manager-daemon-status.png
       :title: Retrieve the Wazuh manager daemon status
@@ -50,71 +50,71 @@ Follow these steps to retrieve the Wazuh daemon status:
                 "ready": true,
                 "running": true,
                 "spaces": {
-                  "custom": {
-                    "available": true,
-                    "enabled": true,
-                    "status": "ready",
-                    "hash": "612518d566f89c806f39f6b1852535312f5e840e08670e388543ca5f3ac12fc2",
-                    "last_successful_update": 1792075878
-                  },
                   "standard": {
                     "available": true,
                     "enabled": true,
                     "status": "ready",
-                    "hash": "67b5c5a77bd0d60b674170291a85cec03767c6d6c2512de9c4094ffcb44ebe43",
-                    "last_successful_update": 1792141956
+                    "hash": "4d4c932690ee59e3001242b53c884142bf26009e97de1f81dcb21f2600bed2f8",
+                    "last_successful_update": 1795513664
+                  },
+                  "custom": {
+                    "available": false,
+                    "enabled": false,
+                    "status": "ready",
+                    "hash": "",
+                    "last_successful_update": 0
                   }
                 },
                 "ioc": {
+                  "hash_sha256": {
+                    "available": true,
+                    "status": "ready",
+                    "hash": "d5628a5aacc74e804d4d098dda94b88845b27ac514e21edae4510fac8c6e5ac9",
+                    "last_successful_update": 1795514663
+                  },
                   "connection": {
                     "available": true,
                     "status": "ready",
-                    "hash": "5930276f2375b03cd4c9964f9a4f62059e1a0a9395afb3c726bbe9ce9b06c36b",
-                    "last_successful_update": 1790792515
+                    "hash": "77322bb39d7cd028ca65a5bc96f5f6023f5ed1437d458269bc6b518b6c324a42",
+                    "last_successful_update": 1795514507
                   },
                   "hash_sha1": {
                     "available": true,
                     "status": "ready",
-                    "hash": "464f52d41b3d8a7fc37c9a7876affbee99bd7db0298923fa753d914f9ddcb9d2",
-                    "last_successful_update": 1791578471
-                  },
-                  "url_full": {
-                    "available": true,
-                    "status": "ready",
-                    "hash": "7e2bc89c6130487bb508998961f827c5a901bae9b0a50fa8c051ba1f0fdafb47",
-                    "last_successful_update": 1791915251
+                    "hash": "aa4ddfe0a3cfcf5c1414234269899193a0aea6ed0a7432a4d44a368a6df8737e",
+                    "last_successful_update": 1795514652
                   },
                   "url_domain": {
                     "available": true,
                     "status": "ready",
-                    "hash": "066b294c7ab0582126778d4d9a154bceb249d1e9f364b2b1d6a82027c5f499bd",
-                    "last_successful_update": 1792437225
+                    "hash": "a3fd426e63f8b031dd4847269a5e7060ee0167d8398ab1cfdc0139d6a20692ff",
+                    "last_successful_update": 1795514645
                   },
-                  "hash_sha256": {
+                  "url_full": {
                     "available": true,
                     "status": "ready",
-                    "hash": "c97799701a881ed6d0c9821eef3ef6c5b04d2f40057bcd3d654683db78534466",
-                    "last_successful_update": 1791915293
+                    "hash": "0bf762ef949d53210dff67a18532eb262ad191b181e2fd4b9968d67e136d73a6",
+                    "last_successful_update": 1795514537
                   },
                   "hash_md5": {
                     "available": true,
                     "status": "ready",
-                    "hash": "5ffd996f08a08bca3e441bbd406b1ccc8f9536716efaa4cfb82d2c57b04d377c",
-                    "last_successful_update": 1791915291
+                    "hash": "0e6f7700d6d6910410032e5f343b60051b4b04610d2379228448fb1d1fb31b6e",
+                    "last_successful_update": 1795514649
                   }
                 },
                 "geo": {
                   "asn": {
                     "available": true,
                     "status": "ready",
-                    "hash": "5a80bc4d5d9d7d60037d195ae547172e",
-                    "last_successful_update": 1792419413
+                    "hash": "f635e293e2129a591bf8c69978662037",
+                    "last_successful_update": 1795513571
                   },
                   "city": {
                     "available": true,
                     "status": "ready",
-                    "hash": "a14e3b6ba4d67ea2bbf54f66b1257da3",
-                    "last_successful_update": 1792246439
+                    "hash": "234dac66f57614f2d7de20ab60c398fc",
+                    "last_successful_update": 1795513571
                   }
                 }
               },
@@ -127,7 +127,7 @@ Follow these steps to retrieve the Wazuh daemon status:
                 "running": true,
                 "keystore": {
                   "readable": true,
-                  "agents_loaded": 12,
+                  "agents_loaded": 2,
                   "entries_skipped": 0
                 },
                 "enrollment_password": {
@@ -139,15 +139,15 @@ Follow these steps to retrieve the Wazuh daemon status:
                 "running": true
               },
               "wazuh-manager-modulesd": {
-                "ready": true,
+                "ready": false,
                 "running": true,
                 "modules": {
                   "vulnerability-detector": {
-                    "available": true,
+                    "available": false,
                     "enabled": true,
-                    "last_successful_update": 1792500481,
-                    "offset": 1141562,
-                    "status": "ready"
+                    "last_successful_update": 0,
+                    "offset": 0,
+                    "status": "updating"
                   },
                   "inventory-sync": {
                     "available": true
@@ -171,7 +171,7 @@ Follow these steps to retrieve the Wazuh daemon status:
                 "ready": true,
                 "running": true
               },
-              "ready": true
+              "ready": false
             }
           ],
           "total_affected_items": 1,
@@ -191,7 +191,7 @@ Follow these steps to retrieve Wazuh daemon statistics:
 
 #. Navigate to **Server management** > **Dev Tools** to open the Wazuh manager API Console.
 #. Set the method and endpoint to ``GET /cluster/<NODE_ID>/daemons/stats``, where ``<NODE_ID>`` is the name of the Wazuh manager node.
-#. Click the play button to execute the request. A response similar to the following is returned:
+#. Click **Send request**, the play icon on the request line. The Wazuh manager API returns a response similar to the following:
 
    .. thumbnail:: /images/manual/api/retrieve-wazuh-manager-daemon-statistics.png
       :title: Retrieve Wazuh manager daemon statistics
@@ -208,8 +208,8 @@ Follow these steps to retrieve Wazuh daemon statistics:
         "data": {
           "affected_items": [
             {
-              "uptime": "2026-10-20T11:48:00+00:00",
-              "timestamp": "2026-10-20T12:57:05+00:00",
+              "uptime": "2026-11-24T10:01:19+00:00",
+              "timestamp": "2026-11-24T10:11:35+00:00",
               "name": "wazuh-manager-remoted",
               "metrics": {
                 "bytes": {
@@ -255,11 +255,9 @@ Follow these steps to retrieve Wazuh daemon statistics:
                   "processed": 0
                 },
                 "http_server": {
-                  "timestamp": "2026-10-20T12:57:05Z",
+                  "timestamp": "2026-11-24T10:11:35Z",
                   "responses": {
                     "stateless": {
-                      "total": 263,
-                      "2xx": 263,
                       "400": 0,
                       "403": 0,
                       "409": 0,
@@ -267,23 +265,23 @@ Follow these steps to retrieve Wazuh daemon statistics:
                       "429": 0,
                       "500": 0,
                       "503": 0,
+                      "total": 20,
+                      "2xx": 20,
                       "other": 0
                     },
                     "stateful": {
-                      "total": 2,
-                      "2xx": 2,
                       "400": 0,
                       "403": 0,
                       "409": 0,
                       "413": 0,
                       "429": 0,
                       "500": 0,
-                      "503": 0,
+                      "503": 14,
+                      "total": 15,
+                      "2xx": 1,
                       "other": 0
                     },
                     "stats": {
-                      "total": 0,
-                      "2xx": 0,
                       "400": 0,
                       "403": 0,
                       "409": 0,
@@ -291,11 +289,11 @@ Follow these steps to retrieve Wazuh daemon statistics:
                       "429": 0,
                       "500": 0,
                       "503": 0,
+                      "total": 0,
+                      "2xx": 0,
                       "other": 0
                     },
                     "config": {
-                      "total": 0,
-                      "2xx": 0,
                       "400": 0,
                       "403": 0,
                       "409": 0,
@@ -303,11 +301,11 @@ Follow these steps to retrieve Wazuh daemon statistics:
                       "429": 0,
                       "500": 0,
                       "503": 0,
+                      "total": 2,
+                      "2xx": 2,
                       "other": 0
                     },
                     "enroll": {
-                      "total": 0,
-                      "2xx": 0,
                       "400": 0,
                       "403": 0,
                       "409": 0,
@@ -315,11 +313,11 @@ Follow these steps to retrieve Wazuh daemon statistics:
                       "429": 0,
                       "500": 0,
                       "503": 0,
+                      "total": 0,
+                      "2xx": 0,
                       "other": 0
                     },
                     "cacerts": {
-                      "total": 0,
-                      "2xx": 0,
                       "400": 0,
                       "403": 0,
                       "409": 0,
@@ -327,27 +325,29 @@ Follow these steps to retrieve Wazuh daemon statistics:
                       "429": 0,
                       "500": 0,
                       "503": 0,
+                      "total": 0,
+                      "2xx": 0,
                       "other": 0
                     }
                   },
                   "latency": {
                     "stateless": {
-                      "count": 263,
-                      "sum": 1796452,
-                      "min": 795,
-                      "max": 59904,
-                      "p50": 5632,
-                      "p90": 11264,
-                      "p99": 36864
+                      "count": 20,
+                      "sum": 43482,
+                      "min": 475,
+                      "max": 6716,
+                      "p50": 960,
+                      "p90": 6656,
+                      "p99": 6656
                     },
                     "stateful": {
-                      "count": 2,
-                      "sum": 77574,
-                      "min": 30571,
-                      "max": 47003,
-                      "p50": 45056,
-                      "p90": 45056,
-                      "p99": 45056
+                      "count": 15,
+                      "sum": 118709,
+                      "min": 691,
+                      "max": 87818,
+                      "p50": 2304,
+                      "p90": 5632,
+                      "p99": 87818
                     },
                     "enroll": {
                       "count": 0,
@@ -360,19 +360,23 @@ Follow these steps to retrieve Wazuh daemon statistics:
                     }
                   },
                   "auth_rejections": {
-                    "total": 15,
+                    "total": 0,
                     "unknown_agent": 0,
                     "invalid_signature": 0,
                     "bad_token": 0,
                     "identity_mismatch": 0,
-                    "clock_skew": 15,
+                    "clock_skew": 0,
                     "unusable_key": 0,
                     "address_not_allowed": 0,
                     "enrollment_key_unavailable": 0,
                     "payload_mismatch": 0,
                     "body_too_large": 0,
                     "bad_encoding": 0,
-                    "malformed": 0
+                    "malformed": 0,
+                    "token_unknown": 0,
+                    "token_expired": 0,
+                    "token_revoked": 0,
+                    "agent_busy": 0
                   },
                   "enrollment": {
                     "accepted": 0,
@@ -394,32 +398,32 @@ Follow these steps to retrieve Wazuh daemon statistics:
                     }
                   },
                   "control": {
-                    "startup": 0,
-                    "notify": 747,
-                    "shutdown": 0,
+                    "startup": 2,
+                    "notify": 124,
+                    "shutdown": 2,
                     "rejected": 0,
                     "wdb_error": 0,
-                    "task_fetch": 747,
+                    "task_fetch": 124,
                     "task_fetch_error": 0,
-                    "registry_agents": 3,
+                    "registry_agents": 2,
                     "wdb_latency": {
-                      "count": 252,
-                      "sum": 510083,
-                      "min": 212,
-                      "max": 31427,
-                      "p50": 1152,
-                      "p90": 4608,
-                      "p99": 13312
+                      "count": 153,
+                      "sum": 69848,
+                      "min": 110,
+                      "max": 13703,
+                      "p50": 176,
+                      "p90": 960,
+                      "p99": 5632
                     }
                   },
                   "keystore": {
-                    "agents": 12,
+                    "agents": 2,
                     "entries_skipped": 0,
                     "reloads_total": 1,
                     "reload_failures_total": 0
                   },
                   "downstream": {
-                    "downstream_5xx": 0,
+                    "downstream_5xx": 14,
                     "route_mismatch": 0,
                     "errors": {
                       "connect": 0,
@@ -445,14 +449,14 @@ Follow these steps to retrieve Wazuh daemon statistics:
                     "connections_max": 256
                   },
                   "downloads": {
-                    "started": 0,
+                    "started": 1,
                     "rejected": 0,
                     "not_found": 0,
                     "open_error": 0,
-                    "bytes_total": 0
+                    "bytes_total": 15485689
                   },
                   "tls": {
-                    "cert_expiry_days": 3630,
+                    "cert_expiry_days": 3649,
                     "ca_matches_leaf": 1
                   },
                   "cacerts": {
@@ -485,43 +489,91 @@ Follow these steps to retrieve Wazuh daemon statistics:
                   "name": "server.events.received",
                   "type": "counter",
                   "enabled": true,
-                  "value": 2064
+                  "value": 363
                 },
                 {
                   "name": "server.bytes.received",
                   "type": "counter",
                   "enabled": true,
-                  "value": 4406958
-                },
-                {
-                  "name": "agent.cache.entries",
-                  "type": "pull",
-                  "enabled": true,
-                  "value": 2
+                  "value": 143658
                 },
                 {
                   "name": "agent.cache.evictions",
                   "type": "counter",
                   "enabled": true,
-                  "value": 7
+                  "value": 1
                 },
                 {
                   "name": "agent.cache.insertions",
                   "type": "counter",
                   "enabled": true,
-                  "value": 9
+                  "value": 2
                 },
                 {
                   "name": "agent.cache.hits",
                   "type": "counter",
                   "enabled": true,
-                  "value": 254
+                  "value": 18
+                },
+                {
+                  "name": "router.events.id_failed",
+                  "type": "counter",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "agent.cache.entries",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 1
+                },
+                {
+                  "name": "router.events.malformed",
+                  "type": "counter",
+                  "enabled": true,
+                  "value": 0
                 },
                 {
                   "name": "router.events.processed",
                   "type": "counter",
                   "enabled": true,
-                  "value": 2064
+                  "value": 363
+                },
+                {
+                  "name": "indexer.events.requeued",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "indexer.queue.size",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "indexer.events.dropped",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "indexer.events.deduplicated",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "router.queue.usage.percent",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
+                },
+                {
+                  "name": "router.queue.bytes.usage.percent",
+                  "type": "pull",
+                  "enabled": true,
+                  "value": 0
                 },
                 {
                   "name": "indexer.queue.usage.percent",
@@ -545,19 +597,7 @@ Follow these steps to retrieve Wazuh daemon statistics:
                   "name": "router.eps.30m",
                   "type": "pull",
                   "enabled": true,
-                  "value": 0.7083333333333334
-                },
-                {
-                  "name": "router.queue.usage.percent",
-                  "type": "pull",
-                  "enabled": true,
-                  "value": 0
-                },
-                {
-                  "name": "router.queue.bytes.usage.percent",
-                  "type": "pull",
-                  "enabled": true,
-                  "value": 0
+                  "value": 0.20166666666666666
                 },
                 {
                   "name": "router.queue.bytes.used",
@@ -575,57 +615,16 @@ Follow these steps to retrieve Wazuh daemon statistics:
                   "name": "router.eps.1m",
                   "type": "pull",
                   "enabled": true,
-                  "value": 0.6833333333333333
+                  "value": 0.016666666666666666
                 },
                 {
                   "name": "router.eps.5m",
                   "type": "pull",
                   "enabled": true,
-                  "value": 0.6666666666666666
-                },
-                {
-                  "name": "indexer.queue.size",
-                  "type": "pull",
-                  "enabled": true,
-                  "value": 0
-                },
-                {
-                  "name": "indexer.events.dropped",
-                  "type": "pull",
-                  "enabled": true,
-                  "value": 0
+                  "value": 0.27
                 }
               ],
               "spaces": [
-                {
-                  "name": "custom",
-                  "metrics": [
-                    {
-                      "name": "events.discarded",
-                      "type": "counter",
-                      "enabled": true,
-                      "value": 0
-                    },
-                    {
-                      "name": "events.unclassified",
-                      "type": "counter",
-                      "enabled": true,
-                      "value": 0
-                    },
-                    {
-                      "name": "events.discarded.prefilter",
-                      "type": "counter",
-                      "enabled": true,
-                      "value": 0
-                    },
-                    {
-                      "name": "events.discarded.postfilter",
-                      "type": "counter",
-                      "enabled": true,
-                      "value": 0
-                    }
-                  ]
-                },
                 {
                   "name": "standard",
                   "metrics": [
@@ -633,7 +632,7 @@ Follow these steps to retrieve Wazuh daemon statistics:
                       "name": "events.unclassified",
                       "type": "counter",
                       "enabled": true,
-                      "value": 47
+                      "value": 122
                     },
                     {
                       "name": "events.discarded.postfilter",
@@ -657,53 +656,47 @@ Follow these steps to retrieve Wazuh daemon statistics:
                 }
               ],
               "name": "wazuh-manager-analysisd",
-              "uptime": "2026-10-20T11:47:59.651Z",
-              "timestamp": "2026-10-20T12:57:05.602Z"
+              "uptime": "2026-11-24T10:01:18.351Z",
+              "timestamp": "2026-11-24T10:11:35.754Z"
             },
             {
-              "uptime": "2026-10-20T11:47:59+00:00",
-              "timestamp": "2026-10-20T12:57:05+00:00",
+              "uptime": "2026-11-24T10:01:18+00:00",
+              "timestamp": "2026-11-24T10:11:35+00:00",
               "name": "wazuh-manager-db",
               "metrics": {
                 "queries": {
-                  "received": 805,
+                  "received": 365,
                   "received_breakdown": {
-                    "global": 812,
+                    "global": 365,
                     "global_breakdown": {
                       "db": {
                         "backup": 0,
-                        "sql": 285,
-                        "vacuum": 0,
-                        "commit": 0,
-                        "get_fragmentation": 0
+                        "sql": 133,
+                        "commit": 0
                       },
                       "tables": {
                         "agent": {
                           "delete-agent": 0,
-                          "disconnect-agents": 13,
-                          "find-agent": 0,
-                          "get-agent-info": 0,
+                          "disconnect-agents": 3,
+                          "get-agent-info": 5,
                           "get-agents-by-connection-status": 0,
                           "get-all-agents": 1,
-                          "get-distinct-groups": 251,
-                          "get-groups-integrity": 0,
+                          "get-distinct-groups": 62,
                           "recalculate-agent-group-hashes": 0,
                           "insert-agent": 0,
-                          "reset-agents-connection": 1,
                           "select-agent-group": 126,
                           "set-agent-groups": 0,
                           "sync-agent-groups-get": 0,
                           "sync-agent-info-get": 0,
                           "sync-agent-info-set": 0,
-                          "update-agent-data": 126,
-                          "update-connection-status": 0,
-                          "update-status-code": 0,
+                          "update-agent-data": 23,
+                          "update-connection-status": 2,
+                          "update-status-code": 2,
                           "update-keepalive": 0,
                           "set-agent-credentials": 0
                         },
                         "belongs": {
-                          "get-group-agents": 0,
-                          "select-group-belong": 0
+                          "get-group-agents": 0
                         },
                         "group": {
                           "delete-group": 0,
@@ -722,51 +715,45 @@ Follow these steps to retrieve Wazuh daemon statistics:
                   }
                 },
                 "time": {
-                  "execution": 908,
+                  "execution": 41,
                   "execution_breakdown": {
-                    "global": 908,
+                    "global": 41,
                     "global_breakdown": {
                       "db": {
-                        "open": 9,
+                        "open": 1,
                         "backup": 0,
-                        "sql": 75,
-                        "vacuum": 0,
-                        "commit": 0,
-                        "get_fragmentation": 0
+                        "sql": 9,
+                        "commit": 0
                       },
                       "tables": {
                         "agent": {
                           "delete-agent": 0,
-                          "disconnect-agents": 3,
-                          "find-agent": 0,
+                          "disconnect-agents": 0,
                           "get-agent-info": 0,
                           "get-agents-by-connection-status": 0,
-                          "get-all-agents": 18,
-                          "get-distinct-groups": 452,
-                          "get-groups-integrity": 0,
+                          "get-all-agents": 0,
+                          "get-distinct-groups": 5,
                           "recalculate-agent-group-hashes": 0,
                           "insert-agent": 0,
-                          "reset-agents-connection": 0,
-                          "select-agent-group": 36,
+                          "select-agent-group": 4,
                           "set-agent-groups": 0,
                           "sync-agent-groups-get": 0,
                           "sync-agent-info-get": 0,
                           "sync-agent-info-set": 0,
-                          "update-agent-data": 267,
+                          "update-agent-data": 18,
                           "update-connection-status": 0,
                           "update-status-code": 0,
                           "update-keepalive": 0,
                           "set-agent-credentials": 0
                         },
                         "belongs": {
-                          "get-group-agents": 0,
-                          "select-group-belong": 0
+                          "get-group-agents": 0
                         },
                         "group": {
                           "delete-group": 0,
-                          "find-group": 1,
+                          "find-group": 0,
                           "insert-agent-group": 0,
-                          "select-groups": 41
+                          "select-groups": 0
                         }
                       }
                     },
@@ -800,7 +787,7 @@ Follow these steps to retrieve the last 100 log messages generated by the Wazuh 
 
 #. Navigate to **Server management** > **Dev Tools** to open the Wazuh manager API Console.
 #. Set the method and endpoint to ``GET /cluster/<NODE_ID>/logs?limit=100``, where ``<NODE_ID>`` is the name of the Wazuh manager node.
-#. Click the play button to execute the request. A response similar to the following is returned:
+#. Click **Send request**, the play icon on the request line. The Wazuh manager API returns a response similar to the following:
 
    .. thumbnail:: /images/manual/api/retrieve-wazuh-manager-logs.png
       :title: Retrieve Wazuh manager logs
@@ -817,607 +804,607 @@ Follow these steps to retrieve the last 100 log messages generated by the Wazuh 
         "data": {
           "affected_items": [
             {
-              "timestamp": "2026-10-20T14:48:01Z",
+              "timestamp": "2026-11-24T10:11:29Z",
               "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " IndexerDownloader: Consumer 'cti:catalog:consumer:vulnerabilities' in index '.wazuh-cti-consumers' is ready. Starting feed download."
+              "description": "IndexerDownloader: Slice 0 (1/2) in progress — 207500 documents so far, cursor '1334911', 609s elapsed"
             },
             {
-              "timestamp": "2026-10-20T14:48:01Z",
+              "timestamp": "2026-11-24T10:11:27Z",
               "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " IndexerDownloader: Starting incremental update from offset 1141562"
+              "description": "IndexerDownloader: Slice 1 (2/2) in progress — 207100 documents so far, cursor '1334830', 607s elapsed"
             },
             {
-              "timestamp": "2026-10-20T14:48:01Z",
+              "timestamp": "2026-11-24T10:10:27Z",
               "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " IndexerDownloader: Incremental update download phase complete — 0 documents, new cursor: '1141562'"
+              "description": "IndexerDownloader: Slice 0 (1/2) in progress — 205100 documents so far, cursor '1325576', 547s elapsed"
             },
             {
-              "timestamp": "2026-10-20T14:48:01Z",
+              "timestamp": "2026-11-24T10:10:25Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 1 (2/2) in progress — 204700 documents so far, cursor '1325503', 545s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:09:32Z",
+              "tag": "wazuh-manager-authd",
+              "level": "warning",
+              "description": "Enrollment token address '10.42.1.79' is an IP address: the token stops working if the manager's address changes. Use a DNS name if the manager's IP address can change."
+            },
+            {
+              "timestamp": "2026-11-24T10:09:32Z",
+              "tag": "wazuh-manager-remoted:token-key-source",
+              "level": "info",
+              "description": "Enrollment token store reloaded from '/etc/wazuh-manager/enrollment_tokens.json' (2 token(s) with a credential)."
+            },
+            {
+              "timestamp": "2026-11-24T10:09:32Z",
+              "tag": "wazuh-manager-authd",
+              "level": "info",
+              "description": "Enrollment token 'FxgwdDGavnlgKvnVDMnoYA' minted for '10.42.1.79' (expires 1795558172, max_uses 10, credential yes), description Wazuh agent enrollment"
+            },
+            {
+              "timestamp": "2026-11-24T10:09:26Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 0 (1/2) in progress — 200800 documents so far, cursor '1305486', 486s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:09:25Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 1 (2/2) in progress — 200400 documents so far, cursor '1305139', 485s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:09:21Z",
+              "tag": "wazuh-manager-remoted:forwarder",
+              "level": "warning",
+              "description": "The inventory sync server answered HTTP 503 for 8 request(s) in the last 114 s; answering 503."
+            },
+            {
+              "timestamp": "2026-11-24T10:08:23Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 1 (2/2) in progress — 195700 documents so far, cursor '1272558', 423s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:08:23Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 0 (1/2) in progress — 196100 documents so far, cursor '1273635', 423s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:07:27Z",
+              "tag": "wazuh-manager-remoted:forwarder",
+              "level": "warning",
+              "description": "The inventory sync server answered HTTP 503 for 4 request(s) in the last 366 s; answering 503."
+            },
+            {
+              "timestamp": "2026-11-24T10:07:23Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 0 (1/2) in progress — 193300 documents so far, cursor '1261745', 363s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:07:21Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 1 (2/2) in progress — 192800 documents so far, cursor '1260020', 361s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:06:22Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 0 (1/2) in progress — 186900 documents so far, cursor '1214287', 302s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:06:21Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 1 (2/2) in progress — 186500 documents so far, cursor '1213811', 301s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:05:21Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 0 (1/2) in progress — 168300 documents so far, cursor '1107861', 241s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:05:20Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 1 (2/2) in progress — 167900 documents so far, cursor '1107413', 240s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:04:23Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "[IOC::Sync] Synchronized IOC type 'hash_sha256'"
+            },
+            {
+              "timestamp": "2026-11-24T10:04:20Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 1 (2/2) in progress — 146200 documents so far, cursor '933357', 180s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:04:20Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 0 (1/2) in progress — 146600 documents so far, cursor '933426', 180s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:04:12Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "[IOC::Sync] Synchronized IOC type 'hash_sha1'"
+            },
+            {
+              "timestamp": "2026-11-24T10:04:12Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "[IOC::Sync] Changes detected for IOC type 'hash_sha256', updating..."
+            },
+            {
+              "timestamp": "2026-11-24T10:04:09Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "[IOC::Sync] Synchronized IOC type 'hash_md5'"
+            },
+            {
+              "timestamp": "2026-11-24T10:04:09Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "[IOC::Sync] Changes detected for IOC type 'hash_sha1', updating..."
+            },
+            {
+              "timestamp": "2026-11-24T10:04:05Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "[IOC::Sync] Synchronized IOC type 'url_domain'"
+            },
+            {
+              "timestamp": "2026-11-24T10:04:05Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "[IOC::Sync] Changes detected for IOC type 'hash_md5', updating..."
+            },
+            {
+              "timestamp": "2026-11-24T10:03:20Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 1 (2/2) in progress — 107900 documents so far, cursor '725510', 120s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:03:20Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 0 (1/2) in progress — 108300 documents so far, cursor '725299', 120s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:02:20Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 0 (1/2) in progress — 56500 documents so far, cursor '613600', 60s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:02:20Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
+              "level": "info",
+              "description": "IndexerDownloader: Slice 1 (2/2) in progress — 56600 documents so far, cursor '614665', 60s elapsed"
+            },
+            {
+              "timestamp": "2026-11-24T10:02:17Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "[IOC::Sync] Synchronized IOC type 'url_full'"
+            },
+            {
+              "timestamp": "2026-11-24T10:02:17Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "[IOC::Sync] Changes detected for IOC type 'url_domain', updating..."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:47Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "[IOC::Sync] Synchronized IOC type 'connection'"
+            },
+            {
+              "timestamp": "2026-11-24T10:01:47Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "[IOC::Sync] Changes detected for IOC type 'url_full', updating..."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:20Z",
               "tag": "wazuh-manager-modulesd:vulnerability-scanner",
               "level": "info",
-              "description": " Feed update process completed (changed=false)."
+              "description": "CVE feed not yet available — per-agent scans deferred until initial load completes."
             },
             {
-              "timestamp": "2026-10-20T14:48:01Z",
-              "tag": "wazuh-manager-modulesd:vulnerability-scanner",
-              "level": "info",
-              "description": " CVE feed fully loaded — per-agent scans unblocked."
-            },
-            {
-              "timestamp": "2026-10-20T14:15:42Z",
-              "tag": "wazuh-manager-remoted:endpoints",
-              "level": "warning",
-              "description": " Rejected 2 request(s) in the last 90 s whose token fell outside the accepted time window (stale_token). Check clock synchronization between the agents and the manager; the window is set by 'jwt_max_age' and 'jwt_clock_skew' (remoted internal options)."
-            },
-            {
-              "timestamp": "2026-10-20T14:10:53Z",
-              "tag": "wazuh-manager-remoted:endpoints",
-              "level": "warning",
-              "description": " Rejected 2 request(s) in the last 90 s whose token fell outside the accepted time window (stale_token). Check clock synchronization between the agents and the manager; the window is set by 'jwt_max_age' and 'jwt_clock_skew' (remoted internal options)."
-            },
-            {
-              "timestamp": "2026-10-20T13:59:07Z",
-              "tag": "wazuh-manager-remoted:endpoints",
-              "level": "warning",
-              "description": " Rejected 2 request(s) in the last 90 s whose token fell outside the accepted time window (stale_token). Check clock synchronization between the agents and the manager; the window is set by 'jwt_max_age' and 'jwt_clock_skew' (remoted internal options)."
-            },
-            {
-              "timestamp": "2026-10-20T13:56:15Z",
-              "tag": "wazuh-manager-remoted:endpoints",
-              "level": "warning",
-              "description": " Rejected 3 request(s) in the last 90 s whose token fell outside the accepted time window (stale_token). Check clock synchronization between the agents and the manager; the window is set by 'jwt_max_age' and 'jwt_clock_skew' (remoted internal options)."
-            },
-            {
-              "timestamp": "2026-10-20T13:50:31Z",
-              "tag": "wazuh-manager-remoted:endpoints",
-              "level": "warning",
-              "description": " Rejected 1 request(s) in the last 90 s whose token fell outside the accepted time window (stale_token). Check clock synchronization between the agents and the manager; the window is set by 'jwt_max_age' and 'jwt_clock_skew' (remoted internal options)."
-            },
-            {
-              "timestamp": "2026-10-20T13:49:37Z",
-              "tag": "wazuh-manager-modulesd:inventory-sync-server:sync",
-              "level": "info",
-              "description": " Deletion of agent 013 state documents completed (wazuh-states-*)."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:01Z",
-              "tag": "wazuh-manager-modulesd:task-manager:http",
-              "level": "info",
-              "description": " task manager server bound to 'queue/sockets/task-http.sock' (mode 0660, 2 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 8388608 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:01Z",
-              "tag": "wazuh-manager-modulesd:task-manager:http",
-              "level": "info",
-              "description": " Listening on 'queue/sockets/task-http.sock'"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:01Z",
-              "tag": "wazuh-manager-modulesd:task-manager",
-              "level": "info",
-              "description": " Task manager started: 4 executor workers, database 'queue/tasks/tasks.db'"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:01Z",
-              "tag": "wazuh-manager-modulesd:inventory-sync-server:server",
-              "level": "info",
-              "description": " inventory sync server bound to 'queue/sockets/inventory-sync-http.sock' (mode 0660, 4 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:01Z",
-              "tag": "wazuh-manager-modulesd:inventory-sync-server",
-              "level": "info",
-              "description": " inventory sync server listening on 'queue/sockets/inventory-sync-http.sock' (routes: GET /, GET /metrics, /stateful, /stats, /config, /_internal/agents/delete and /_internal/vd/scan; 2 sync worker(s))."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:01Z",
-              "tag": "wazuh-manager-modulesd:inventory-sync-server",
-              "level": "info",
-              "description": " The indexer is reachable; inventory documents can be delivered."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:01Z",
-              "tag": "wazuh-manager-remoted:vd-client",
-              "level": "warning",
-              "description": " Failed to query VD offset: status=0 (1 occurrence(s) in the last 90 s)."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:01Z",
+              "timestamp": "2026-11-24T10:01:20Z",
               "tag": "wazuh-manager-modulesd:vulnerability-scanner:server",
               "level": "info",
-              "description": " vulnerability detector server bound to 'queue/sockets/vd-http.sock' (mode 0660, 2 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=3600 write=10 drain=2)."
+              "description": "vulnerability detector server bound to 'queue/sockets/vd-http.sock' (mode 0660, 2 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=3600 write=10 drain=2)."
             },
             {
-              "timestamp": "2026-10-20T13:48:01Z",
+              "timestamp": "2026-11-24T10:01:20Z",
               "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " IndexerDownloader: Consumer 'cti:catalog:consumer:vulnerabilities' in index '.wazuh-cti-consumers' is ready. Starting feed download."
+              "description": "IndexerDownloader: Consumer 'cti:catalog:consumer:vulnerabilities' in index '.wazuh-cti-consumers' is ready. Starting feed download."
             },
             {
-              "timestamp": "2026-10-20T13:48:01Z",
+              "timestamp": "2026-11-24T10:01:20Z",
               "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " IndexerDownloader: Starting incremental update from offset 1141562"
+              "description": "IndexerDownloader: Global-map documents present in '.wazuh-threatintel-vulnerabilities'. Starting initial load."
             },
             {
-              "timestamp": "2026-10-20T13:48:01Z",
+              "timestamp": "2026-11-24T10:01:20Z",
               "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " IndexerDownloader: Incremental update download phase complete — 0 documents, new cursor: '1141562'"
+              "description": "IndexerDownloader: Starting initial full load (slices=2)"
             },
             {
-              "timestamp": "2026-10-20T13:48:01Z",
-              "tag": "wazuh-manager-modulesd:vulnerability-scanner",
-              "level": "info",
-              "description": " Feed update process completed (changed=false)."
+              "timestamp": "2026-11-24T10:01:20Z",
+              "tag": "wazuh-manager-remoted:forwarder",
+              "level": "warning",
+              "description": "The inventory sync server answered HTTP 503 for 1 request(s) so far; answering 503."
             },
             {
-              "timestamp": "2026-10-20T13:48:01Z",
-              "tag": "wazuh-manager-modulesd:vulnerability-scanner",
-              "level": "info",
-              "description": " CVE feed fully loaded — per-agent scans unblocked."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " Schema initialized"
+              "description": "[IOC::Sync] Changes detected for IOC type 'connection', updating..."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " HLP initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Scheduler initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Indexer Connector initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Stream logger initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Builder initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Content Manager CRUD Service initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Raw Event Indexer initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Orchestrator initialized and started with event queue size: 131072, events per second: unlimited, max bytes: 33554432."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Content Manager Sync Service initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " IOC Sync Service initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Dumper Events initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Remote engine's server initialized and started"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Engine started"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Scheduler started"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " [CMSync] Event processing is now active"
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:communication",
               "level": "info",
-              "description": " Starting remoted module (port=1517, cluster='wazuh', workerNode=false)."
+              "description": "Starting remoted module (port=1517, cluster='wazuh', workerNode=false)."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-remoted:keystore",
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-remoted:client-keys",
               "level": "info",
-              "description": " Loaded 12 agent key(s) from '/etc/wazuh-manager/client.keys'."
+              "description": "Loaded 2 agent key(s) from '/etc/wazuh-manager/client.keys'."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:downstream",
               "level": "info",
-              "description": " Downstream UDS client started (4 I/O thread(s))."
+              "description": "Downstream UDS client started (4 I/O thread(s))."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:downstream",
               "level": "info",
-              "description": " Downstream UDS client started (1 I/O thread(s))."
+              "description": "Downstream UDS client started (1 I/O thread(s))."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:downstream",
               "level": "info",
-              "description": " Downstream UDS client started (1 I/O thread(s))."
+              "description": "Downstream UDS client started (1 I/O thread(s))."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-remoted:password-key-source",
+              "level": "info",
+              "description": "Enrollment password loaded from '/etc/wazuh-manager/authd.pass'."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:downstream",
               "level": "info",
-              "description": " Downstream UDS client started (1 I/O thread(s))."
+              "description": "Downstream UDS client started (1 I/O thread(s))."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-remoted:passwordKeySource",
-              "level": "info",
-              "description": " Enrollment password loaded from '/etc/wazuh-manager/authd.pass'."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-remoted:tokenKeySource",
-              "level": "info",
-              "description": " Enrollment token store loaded from '/etc/wazuh-manager/enrollment_tokens.json' (12 token(s) with a credential)."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:downstream",
               "level": "info",
-              "description": " Downstream UDS client started (1 I/O thread(s))."
+              "description": "Downstream UDS client started (1 I/O thread(s))."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-remoted:token-key-source",
+              "level": "info",
+              "description": "Enrollment token store loaded from '/etc/wazuh-manager/enrollment_tokens.json' (1 token(s) with a credential)."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:http-server",
               "level": "info",
-              "description": " HTTP server listening on https://0.0.0.0:1517 (4 I/O thread(s), 8 worker thread(s), max body 10485760 bytes, in-flight budget 268435456 bytes, max 256 connection(s))."
+              "description": "HTTP server listening on https://0.0.0.0:1517 (4 I/O thread(s), 8 worker thread(s), max body 10485760 bytes, in-flight budget 268435456 bytes, max 256 connection(s))."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:http-server",
               "level": "info",
-              "description": " All HTTP endpoints are served under the global prefix '/wazuh-manager' (e.g. https://0.0.0.0:1517/wazuh-manager/stateless); unprefixed paths answer 404; agents must send and sign the full prefixed target."
+              "description": "All HTTP endpoints are served under the global prefix '/wazuh-manager' (e.g. https://0.0.0.0:1517/wazuh-manager/stateless); unprefixed paths answer 404; agents must send the full prefixed target."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:communication",
               "level": "info",
-              "description": " remoted HTTP server started."
+              "description": "remoted HTTP server started."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:remoted-module:admin",
               "level": "info",
-              "description": " remoted admin server bound to 'queue/sockets/remote-admin-http.sock' (mode 0660, 2 I/O thread(s), 2 concurrent accept(s), max 64 connection(s), 16 reserved for control, 48 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
+              "description": "remoted admin server bound to 'queue/sockets/remote-admin-http.sock' (mode 0660, 2 I/O thread(s), 2 concurrent accept(s), max 64 connection(s), 16 reserved for control, 48 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:communication",
               "level": "info",
-              "description": " remoted admin server listening on 'queue/sockets/remote-admin-http.sock' (routes: GET /, GET /metrics, GET /status, and GET /tls)."
+              "description": "remoted admin server listening on 'queue/sockets/remote-admin-http.sock' (routes: GET /, GET /metrics, GET /status, and GET /tls)."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted",
               "level": "info",
-              "description": " Started (pid: 1241435). Listening on port 1514/TCP (secure)."
+              "description": "Started (pid: 45110). Listening on port 1514/TCP (secure)."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted:communication",
               "level": "info",
-              "description": " remoted module worker thread running."
+              "description": "remoted module worker thread running."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-remoted",
               "level": "info",
-              "description": " legacy_task_delivery: poller thread started (startup delay 65s, poll interval 900s)"
+              "description": "legacy_task_delivery: poller thread started (startup delay 65s, poll interval 900s)"
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-modulesd",
               "level": "info",
-              "description": " Started (pid: 1241515)."
+              "description": "Started (pid: 45191)."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-modulesd:control",
               "level": "info",
-              "description": " Starting control thread."
+              "description": "Starting control thread."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-modulesd:database",
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-modulesd:content-updater",
               "level": "info",
-              "description": " Started (pid: 1241515)."
+              "description": "Started (pid: 45191)."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-modulesd:vulnerability-scanner",
               "level": "info",
-              "description": " Started (pid: 1241515)."
+              "description": "Started (pid: 45191)."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-modulesd:keystore-server",
               "level": "info",
-              "description": " Started (pid: 1241515)."
+              "description": "Started (pid: 45191)."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-modulesd:content-updater",
-              "level": "info",
-              "description": " Started (pid: 1241515)."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-modulesd:inventory-sync-server",
-              "level": "info",
-              "description": " Started (pid: 1241515)."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-modulesd:inventory-sync-server",
-              "level": "info",
-              "description": " Dispatching start; the module binds its socket asynchronously and reports under its own tag."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
-              "tag": "wazuh-manager-modulesd:inventory-sync-server",
-              "level": "info",
-              "description": " Starting inventory sync server (cluster='wazuh')."
-            },
-            {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-modulesd:keystore-server",
               "level": "info",
-              "description": " keystore server listening on 'queue/sockets/keystore.sock'."
+              "description": "keystore server listening on 'queue/sockets/keystore.sock'."
             },
             {
-              "timestamp": "2026-10-20T13:48:00Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-modulesd:inventory-sync-server",
               "level": "info",
-              "description": " inventory sync server worker thread running."
+              "description": "Started (pid: 45191)."
             },
             {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-authd",
-              "level": "info",
-              "description": " 12 enrollment token(s) loaded from '/etc/wazuh-manager/enrollment_tokens.json'."
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-authd",
-              "level": "info",
-              "description": " Started (pid: 1241186)."
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-authd",
-              "level": "info",
-              "description": " Using the existing enrollment password from '/etc/wazuh-manager/authd.pass'. To rotate the password, delete the file and restart."
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-authd",
-              "level": "info",
-              "description": " Accepting connections on port 1515. Shared-password enrollment is required."
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-authd",
-              "level": "info",
-              "description": " Raising the agent id counter from 12 to 13: ids that were handed out are never reused."
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-db",
-              "level": "info",
-              "description": " Started (pid: 1241194)."
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-db",
-              "level": "info",
-              "description": " wazuh-db HTTP server bound to 'queue/sockets/wdb-http.sock' (mode 0660, 4 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Store initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Content Manager initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " KVDB initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " IOC initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " GEO initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:47:59Z",
-              "tag": "wazuh-manager-analysisd",
-              "level": "info",
-              "description": " Fast metrics initialized"
-            },
-            {
-              "timestamp": "2026-10-20T13:47:52Z",
-              "tag": "wazuh-manager-modulesd:content-updater",
-              "level": "info",
-              "description": " Module finished."
-            },
-            {
-              "timestamp": "2026-10-20T13:47:52Z",
-              "tag": "wazuh-manager-modulesd:keystore-server",
-              "level": "info",
-              "description": " keystore server stopped."
-            },
-            {
-              "timestamp": "2026-10-20T13:47:52Z",
-              "tag": "wazuh-manager-modulesd:keystore-server",
-              "level": "info",
-              "description": " Module finished."
-            },
-            {
-              "timestamp": "2026-10-20T13:47:52Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-modulesd:inventory-sync-server",
               "level": "info",
-              "description": " Stopping inventory sync server."
+              "description": "Dispatching start; the module binds its socket asynchronously and reports under its own tag."
             },
             {
-              "timestamp": "2026-10-20T13:47:52Z",
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
+              "level": "info",
+              "description": "Starting inventory sync server (cluster='wazuh')."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-modulesd:database",
+              "level": "info",
+              "description": "Started (pid: 45191)."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-modulesd:inventory-sync-server",
+              "level": "info",
+              "description": "inventory sync server worker thread running."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-modulesd:task-manager:http",
+              "level": "info",
+              "description": "task manager server bound to 'queue/sockets/task-http.sock' (mode 0660, 2 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 8388608 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-modulesd:task-manager:http",
+              "level": "info",
+              "description": "Listening on 'queue/sockets/task-http.sock'"
+            },
+            {
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-modulesd:task-manager",
+              "level": "info",
+              "description": "Task manager started: 4 executor workers, database 'queue/tasks/tasks.db'"
+            },
+            {
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-modulesd:inventory-sync-server:server",
               "level": "info",
-              "description": " inventory sync server is no longer accepting on 'queue/sockets/inventory-sync-http.sock'; 0 deferred replies still outstanding, 0 pre-handler connection(s) answered 503."
+              "description": "inventory sync server bound to 'queue/sockets/inventory-sync-http.sock' (mode 0660, 4 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
             },
             {
-              "timestamp": "2026-10-20T13:47:52Z",
-              "tag": "wazuh-manager-modulesd:inventory-sync-server:server",
-              "level": "info",
-              "description": " inventory sync server fully stopped."
-            },
-            {
-              "timestamp": "2026-10-20T13:47:52Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-modulesd:inventory-sync-server",
               "level": "info",
-              "description": " inventory sync server worker thread finished."
+              "description": "inventory sync server listening on 'queue/sockets/inventory-sync-http.sock' (routes: GET /, GET /metrics, /stateful, /stats, /config, /_internal/agents/delete and /_internal/vd/scan; 2 sync worker(s))."
             },
             {
-              "timestamp": "2026-10-20T13:47:52Z",
+              "timestamp": "2026-11-24T10:01:19Z",
               "tag": "wazuh-manager-modulesd:inventory-sync-server",
               "level": "info",
-              "description": " inventory sync server stopped."
+              "description": "The indexer is reachable; inventory documents can be delivered."
             },
             {
-              "timestamp": "2026-10-20T13:47:52Z",
-              "tag": "wazuh-manager-modulesd:inventory-sync-server",
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-remoted:vd-client",
+              "level": "warning",
+              "description": "Failed to query VD offset: status=0 (1 occurrence(s) so far)."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:19Z",
+              "tag": "wazuh-manager-modulesd:vulnerability-scanner",
               "level": "info",
-              "description": " Module finished."
+              "description": "The local feed database is incomplete at startup: required global maps are missing. Clearing updater state to force a clean rebuild."
             },
             {
-              "timestamp": "2026-10-20T13:47:52Z",
+              "timestamp": "2026-11-24T10:01:18Z",
+              "tag": "wazuh-manager-authd",
+              "level": "info",
+              "description": "1 enrollment token(s) loaded from '/etc/wazuh-manager/enrollment_tokens.json'."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:18Z",
+              "tag": "wazuh-manager-authd",
+              "level": "info",
+              "description": "Started (pid: 44885)."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:18Z",
+              "tag": "wazuh-manager-authd",
+              "level": "info",
+              "description": "Using the existing enrollment password from '/etc/wazuh-manager/authd.pass'. To rotate the password, delete the file and restart."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:18Z",
+              "tag": "wazuh-manager-authd",
+              "level": "info",
+              "description": "Accepting connections on port 1515. Shared-password enrollment is required."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:18Z",
+              "tag": "wazuh-manager-db",
+              "level": "info",
+              "description": "Started (pid: 44894)."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:18Z",
+              "tag": "wazuh-manager-db",
+              "level": "info",
+              "description": "wazuh-db HTTP server bound to 'queue/sockets/wdb-http.sock' (mode 0660, 4 I/O thread(s), 2 concurrent accept(s), max 1024 connection(s), 64 reserved for control, 960 data session(s), 268435456 byte in-flight budget, 268152832 byte body cap, 282624 byte per-request overhead; timeouts s: header=10 body=30 response=300 write=10 drain=2)."
+            },
+            {
+              "timestamp": "2026-11-24T10:01:18Z",
               "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " [RemoteConfig] Shutdown requested"
+              "description": "Store initialized"
             },
             {
-              "timestamp": "2026-10-20T13:47:52Z",
+              "timestamp": "2026-11-24T10:01:18Z",
               "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " [Stream logger] Shutdown requested"
+              "description": "Content Manager initialized"
             },
             {
-              "timestamp": "2026-10-20T13:47:52Z",
+              "timestamp": "2026-11-24T10:01:18Z",
               "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " [indexer-connector] Shutdown requested"
+              "description": "KVDB initialized"
             },
             {
-              "timestamp": "2026-10-20T13:47:52Z",
+              "timestamp": "2026-11-24T10:01:18Z",
               "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " [indexer-connector] Shutdown initiated"
+              "description": "IOC initialized"
             },
             {
-              "timestamp": "2026-10-20T13:47:52Z",
+              "timestamp": "2026-11-24T10:01:18Z",
               "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " [Scheduler] Requesting scheduler shutdown..."
+              "description": "GEO initialized"
             },
             {
-              "timestamp": "2026-10-20T13:47:52Z",
+              "timestamp": "2026-11-24T10:01:18Z",
               "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " [Scheduler] Scheduler stopped."
+              "description": "Fast metrics initialized"
             },
             {
-              "timestamp": "2026-10-20T13:47:50Z",
+              "timestamp": "2026-11-24T10:01:18Z",
               "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " [Server] Event services stopped"
+              "description": "Schema initialized"
             },
             {
-              "timestamp": "2026-10-20T13:47:50Z",
+              "timestamp": "2026-11-24T10:01:18Z",
               "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " [Server] API services stopped"
+              "description": "HLP initialized"
             },
             {
-              "timestamp": "2026-10-20T13:47:50Z",
+              "timestamp": "2026-11-24T10:01:18Z",
               "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " [Geo::Manager] Shutdown requested"
+              "description": "Scheduler initialized"
             },
             {
-              "timestamp": "2026-10-20T13:47:50Z",
+              "timestamp": "2026-11-24T10:01:18Z",
               "tag": "wazuh-manager-analysisd",
               "level": "info",
-              "description": " [IOC::Sync] Shutdown requested"
+              "description": "Indexer Connector initialized"
+            },
+            {
+              "timestamp": "2026-11-24T10:01:18Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "Stream logger initialized"
+            },
+            {
+              "timestamp": "2026-11-24T10:01:18Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "Builder initialized"
+            },
+            {
+              "timestamp": "2026-11-24T10:01:18Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "Content Manager CRUD Service initialized"
+            },
+            {
+              "timestamp": "2026-11-24T10:01:18Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "Raw Event Indexer initialized"
+            },
+            {
+              "timestamp": "2026-11-24T10:01:18Z",
+              "tag": "wazuh-manager-analysisd",
+              "level": "info",
+              "description": "Orchestrator initialized and started with event queue size: 131072, events per second: unlimited, max bytes: 33554432."
             }
           ],
-          "total_affected_items": 903,
+          "total_affected_items": 1200,
           "total_failed_items": 0,
           "failed_items": []
         },
@@ -1436,9 +1423,9 @@ Follow these steps to restart the Wazuh manager cluster nodes:
 
 #. Navigate to **Server management** > **Dev Tools** to open the Wazuh manager API Console.
 #. Set the method and endpoint to ``PUT /cluster/restart``.
-#. Click the play button to execute the request. A response similar to the following is returned:
+#. Click **Send request**, the play icon on the request line. The Wazuh manager API returns a response similar to the following:
 
-   .. thumbnail:: /images/manual/api/restart-wazuh-manager-cluster.jpg
+   .. thumbnail:: /images/manual/api/restart-wazuh-manager-cluster.png
       :title: Restart Wazuh manager cluster
       :alt: Restart Wazuh manager cluster
       :align: center
@@ -1452,25 +1439,17 @@ Follow these steps to restart the Wazuh manager cluster nodes:
       {
         "data": {
           "affected_items": [
-            "node01",
-            "worker01"
+            "node01"
           ],
-          "total_affected_items": 2,
+          "total_affected_items": 1,
           "total_failed_items": 0,
-          "failed_items": [],
-          "nodes": {
-            "worker01": {
-              "affected_items": [
-                "worker01"
-              ]
-            }
-          }
+          "failed_items": []
         },
         "message": "Restart request sent to all specified nodes",
         "error": 0
       }
 
-The preceding output lists the Wazuh manager nodes that received the restart request. The restart takes about 10 seconds on a single node, and Dev Tools returns an ``ECONNREFUSED`` error until it finishes. Then run ``GET /cluster/<NODE_ID>/status`` to confirm that the Wazuh manager daemons are running again. On a multi-node cluster, worker nodes can take a minute or more to reconnect to the master node. Until a worker node reconnects, ``GET /cluster/<NODE_ID>/status`` for that node returns error ``1730``. Run ``GET /cluster/nodes`` to confirm that every node is connected.
+The preceding output lists the Wazuh manager nodes that received the restart request. The restart takes about 10 seconds on a single node, and Dev Tools returns an ``ECONNREFUSED`` error until it finishes. Then run :api-ref:`GET /cluster/<NODE_ID>/status <operation/api.controllers.cluster_controller.get_status_node>` to confirm that the Wazuh manager daemons are running again. On a multi-node cluster, worker nodes can take a minute or more to reconnect to the master node. Until a worker node reconnects, ``GET /cluster/<NODE_ID>/status`` for that node returns error ``1730``. Run :api-ref:`GET /cluster/nodes <operation/api.controllers.cluster_controller.get_cluster_nodes>` to confirm that every node is connected.
 
 Wazuh agent operations
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -1496,11 +1475,11 @@ Follow these steps to generate a key for enrolling a new Wazuh agent:
    Where:
 
    -  ``UBUNTU_AGENT_01`` is a unique name for the Wazuh agent.
-   -  This request adds a Wazuh agent with this name to the Wazuh manager and returns its client key. The Wazuh agent shows as never connected until an endpoint uses the key. If a Wazuh agent with the same name or IP address already exists, the request fails with error ``1706``. To replace it, set ``force.enabled`` to ``true`` in the request body. By default, the Wazuh manager then replaces it only if it has been disconnected and registered for more than one hour.
+   -  This request adds a Wazuh agent with this name to the Wazuh manager and returns its client key. The Wazuh agent shows as never connected until an endpoint uses the key. If a Wazuh agent with the same name already exists, the request fails with error ``1705``. If one with the same IP address exists, it fails with error ``1706``. To replace it, set ``force.enabled`` to ``true`` in the request body. By default, the Wazuh manager then replaces it only if it has been disconnected and registered for more than one hour.
 
-#. Click the play button to execute the request. The Wazuh manager responds with the ID and client key of the new Wazuh agent:
+#. Click **Send request**, the play icon on the request line. The Wazuh manager responds with the ID and client key of the new Wazuh agent:
 
-   .. thumbnail:: /images/manual/api/generate-wazuh-agent-enrollment-key.jpg
+   .. thumbnail:: /images/manual/api/generate-wazuh-agent-enrollment-key.png
       :title: Generate Wazuh agent enrollment key
       :alt: Generate Wazuh agent enrollment key
       :align: center
@@ -1513,13 +1492,13 @@ Follow these steps to generate a key for enrolling a new Wazuh agent:
 
       {
         "data": {
-          "id": "017",
-          "key": "MDE3IFVCVU5UVV9BR0VOVF8wMSBhbnkgNjM5N2IzNDkwODE5MzdjN2Q0Njk2ZmM1NTk2N2UwMDJmOTViZjcyNjA3MTMxZTkxNjYxYTFjNzA3MDZjOGMwZA=="
+          "id": "004",
+          "key": "MDA0IFVCVU5UVV9BR0VOVF8wMSBhbnkgNjM5N2IzNDkwODE5MzdjN2Q0Njk2ZmM1NTk2N2UwMDJmOTViZjcyNjA3MTMxZTkxNjYxYTFjNzA3MDZjOGMwZA=="
         },
         "error": 0
       }
 
-The preceding output shows the ID and client key of the new Wazuh agent. To use the key on a Linux endpoint, run ``/var/ossec/bin/manage_agents`` as root, enter ``I`` to import a key, and paste the key value from the output when prompted. Don't pass the key with the ``-i`` option, because other processes can read command-line arguments and the shell saves them in its history. Then set ``<endpoint>`` in the ``<manager>`` section of ``/var/ossec/etc/ossec.conf`` to the Wazuh manager IP address, and start the Wazuh agent. To enroll a new Wazuh agent without a key, use an enrollment token, as shown in the next section. A Wazuh agent added this way has no copy of the Wazuh manager CA, so it doesn't verify the Wazuh manager certificate. To install the CA, run ``wazuh-agent-auth --certs-only`` with an enrollment token.
+The preceding output shows the ID and client key of the new Wazuh agent. To use the key on a Linux endpoint, run ``/var/ossec/bin/``\ :doc:`manage_agents </user-manual/reference/tools/manage-agents>` as root, enter ``I`` to import a key, and paste the key value from the output when prompted. Don't pass the key with the ``-i`` option, because other processes can read command-line arguments and the shell saves them in its history. Then set ``<endpoint>`` in the ``<manager>`` section of ``/var/ossec/etc/ossec.conf`` to the Wazuh manager IP address, and start the Wazuh agent. To enroll a new Wazuh agent without a key, use an enrollment token, as shown in the next section. A Wazuh agent added this way has no copy of the Wazuh manager CA, so it doesn't verify the Wazuh manager certificate. To install the CA, run ``wazuh-agent-auth --certs-only`` with an enrollment token.
 
 Enrolling a Wazuh agent with an enrollment token
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1542,12 +1521,18 @@ Install the Wazuh agent package on the endpoint first. Then follow these steps t
 
    Where:
 
-   -  ``<WAZUH_MANAGER_IP_ADDRESS>`` is the IP address or FQDN of the Wazuh manager. It must match a name in the certificate of the Wazuh manager HTTPS listener. Otherwise, the request fails with error ``1768``, "Enrollment token refused", with the detail ``address not in certificate SAN``. To list those names, run ``GET /cluster/<NODE_ID>/daemons/remoted/tls`` and read ``listener.sans`` in the response. On an all-in-one installation, the names are the hostname and private IP address of the Wazuh manager, plus the loopback addresses. A default installation might not include a public address, so Wazuh agents outside the Wazuh manager network must use one of these names. To use another address, see :ref:`Enrollment token refused: address not in certificate SAN <agent_enrollment_token_refused_san>`.
+   -  ``<WAZUH_MANAGER_IP_ADDRESS>`` is the IP address or FQDN of the Wazuh manager. It must match a name in the certificate of the Wazuh manager HTTPS listener. Otherwise, the request fails with error ``1768``, "Enrollment token refused", with the detail ``address not in certificate SAN``. To list those names, run :api-ref:`GET /cluster/<NODE_ID>/daemons/remoted/tls <operation/api.controllers.cluster_controller.get_remoted_tls_node>` and read ``listener.sans`` in the response. On an all-in-one installation, the names are the hostname and private IP address of the Wazuh manager, plus the loopback addresses. A default installation might not include a public address, so Wazuh agents outside the Wazuh manager network must use one of these names. To use another address, see :ref:`Enrollment token refused: address not in certificate SAN <agent_enrollment_token_refused_san>`.
    -  ``ttl`` is how long the token stays valid; for example, ``12h``.
-   -  ``max_uses`` is the number of Wazuh agents that can enroll with the token.
+   -  ``max_uses`` is the number of Wazuh agents that can enroll with the token. The default, ``0``, allows unlimited uses, and the default ``ttl`` is 30 days.
    -  ``description`` is an optional label that helps you identify the token.
 
-#. Click the play button to execute the request.
+#. Click **Send request**, the play icon on the request line. The Wazuh manager API returns a response similar to the following:
+
+   .. thumbnail:: /images/manual/api/create-wazuh-agent-enrollment-token.png
+      :title: Create a Wazuh agent enrollment token
+      :alt: Create a Wazuh agent enrollment token
+      :align: center
+      :width: 80%
 
    The command output looks similar to this:
 
@@ -1556,11 +1541,11 @@ Install the Wazuh agent package on the endpoint first. Then follow these steps t
 
       {
         "data": {
-          "token": "eyJ2ZXIiOjEsImFkciI6IjE5Mi4xNjguNzEuMTUiLCJwaW4iOiJJZzlnaWU5UGJ0VTFKV3Z4VjFUUlU1TWpyVXIwNk90dGVUMnhQQmJ4YjlFIiwia2V5IjoiSTZjdkVUb085bWhPQlIzWVQxODg1V1MzWkZlVm9YOVNWQk56cnM2aVV3NCJ9",
-          "id": "I6cvEToO9mhOBR3YT1885Q",
-          "address": "192.168.71.15",
-          "expires": "2026-10-24T02:55:30+00:00",
-          "pin_hex": "220f6089ef4f6ed535256bf15754d1539323ad4af4e8eb6d793db13c16f16fd1"
+          "token": "eyJ2ZXIiOjXXXXXXXXXX0xb05LeTdlZEdlOFRPMXRmWSJ9",
+          "id": "BScUoAzDO2foKqDNyV5kKw",
+          "address": "10.42.1.79",
+          "expires": "2026-11-24T22:15:34+00:00",
+          "pin_hex": "7e0a20c1126a21bd40121834dd51acd5c042e527a48e9610f3ed06c0dbf1c191"
         },
         "error": 0
       }
@@ -1675,7 +1660,13 @@ Run the following commands in PowerShell as an administrator.
 
       > Remove-Item "$env:TEMP\wazuh-enrollment.tok"
 
-To list the enrollment tokens, run ``GET /agents/enrollment-tokens``. The response shows each token's ID, expiry date, and number of uses, but not the token itself. To revoke a token before it expires, run ``DELETE /agents/enrollment-tokens/<TOKEN_ID>``.
+To list the enrollment tokens, run :api-ref:`GET /agents/enrollment-tokens <operation/api.controllers.agent_controller.get_enrollment_tokens>`. The response shows each token's ID, expiry date, and number of uses, but not the token itself. To revoke a token before it expires, run :api-ref:`DELETE /agents/enrollment-tokens/<TOKEN_ID> <operation/api.controllers.agent_controller.delete_enrollment_token>`.
+
+.. thumbnail:: /images/manual/api/list-wazuh-agent-enrollment-tokens.png
+   :title: List the Wazuh agent enrollment tokens
+   :alt: List the Wazuh agent enrollment tokens
+   :align: center
+   :width: 80%
 
 Querying the Wazuh agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1688,9 +1679,9 @@ The ``/agents`` endpoint returns information about the enrolled Wazuh agents. Fo
 
       GET /agents?status=disconnected,pending,never_connected&select=ip,name
 
-#. Click the play button to execute the request. This returns information about the IP and enrolled name of all inactive Wazuh agents:
+#. Click **Send request**, the play icon on the request line. The Wazuh manager API returns information about the IP and enrolled name of all inactive Wazuh agents:
 
-   .. thumbnail:: /images/manual/api/query-wazuh-agents.jpg
+   .. thumbnail:: /images/manual/api/query-wazuh-agents.png
       :title: Querying the Wazuh agents
       :alt: Querying the Wazuh agents
       :align: center
@@ -1705,9 +1696,9 @@ The ``/agents`` endpoint returns information about the enrolled Wazuh agents. Fo
         "data": {
           "affected_items": [
             {
-              "id": "017",
+              "ip": "any",
               "name": "UBUNTU_AGENT_01",
-              "ip": "any"
+              "id": "004"
             }
           ],
           "total_affected_items": 1,
@@ -1729,15 +1720,15 @@ Wazuh agents can be restarted using the Wazuh manager API from the Wazuh dashboa
 
    .. code-block:: none
 
-      PUT /agents/021/restart
+      PUT /agents/001/restart
 
    Where:
 
-   -  ``021`` is the ID of the Wazuh agent that is to be restarted.
+   -  ``001`` is the ID of the Wazuh agent to restart.
 
-#. Click the play button to execute the request. A response similar to the following is received:
+#. Click **Send request**, the play icon on the request line. The Wazuh manager API returns a response similar to the following:
 
-   .. thumbnail:: /images/manual/api/restart-wazuh-agent-remotely.jpg
+   .. thumbnail:: /images/manual/api/restart-wazuh-agent-remotely.png
       :title: Restart a Wazuh agent remotely
       :alt: Restart a Wazuh agent remotely
       :align: center
@@ -1751,7 +1742,7 @@ Wazuh agents can be restarted using the Wazuh manager API from the Wazuh dashboa
       {
         "data": {
           "affected_items": [
-            "021"
+            "001"
           ],
           "total_affected_items": 1,
           "total_failed_items": 0,
@@ -1759,7 +1750,7 @@ Wazuh agents can be restarted using the Wazuh manager API from the Wazuh dashboa
           "nodes": {
             "node01": {
               "affected_items": [
-                "021"
+                "001"
               ]
             }
           }
@@ -1779,13 +1770,13 @@ To upgrade a Wazuh agent, you can use the ``/agents/upgrade`` endpoint. You can 
 
    .. code-block:: none
 
-      PUT /agents/upgrade?agents_list=023
+      PUT /agents/upgrade?agents_list=001
 
    Where:
 
-   -  ``023`` is the ID of the Wazuh agent to upgrade. The ``agents_list`` parameter accepts a comma-separated list of Wazuh agent IDs. You can also use ``all`` to send the request to all Wazuh agents.
+   -  ``001`` is the ID of the Wazuh agent to upgrade. The ``agents_list`` parameter accepts a comma-separated list of Wazuh agent IDs. You can also use ``all`` to send the request to all Wazuh agents.
 
-#. Click the play button to execute the request.
+#. Click **Send request**, the play icon on the request line. The Wazuh manager API returns a response similar to the following:
 
    The command output looks similar to this:
 
@@ -1795,7 +1786,7 @@ To upgrade a Wazuh agent, you can use the ``/agents/upgrade`` endpoint. You can 
       {
         "data": {
           "affected_items": [
-            "023"
+            "001"
           ],
           "total_affected_items": 1,
           "total_failed_items": 0,
@@ -1803,7 +1794,7 @@ To upgrade a Wazuh agent, you can use the ``/agents/upgrade`` endpoint. You can 
           "nodes": {
             "node01": {
               "affected_items": [
-                "023"
+                "001"
               ]
             }
           }
@@ -1812,7 +1803,7 @@ To upgrade a Wazuh agent, you can use the ``/agents/upgrade`` endpoint. You can 
         "error": 0
       }
 
-The preceding output shows the upgrade task created for the Wazuh agent. The response doesn't report whether the upgrade succeeds. To check the result, run ``GET /agents?agents_list=023&select=version,status`` until the Wazuh agent reports the new version.
+The preceding output shows the upgrade task created for the Wazuh agent. The response doesn't report whether the upgrade succeeds. To check the result, run ``GET /agents?agents_list=001&select=version,status`` until the Wazuh agent reports the new version.
 
 Using an authenticated terminal
 -------------------------------
@@ -1822,11 +1813,13 @@ The following use cases demonstrate how to manage Wazuh agents using the Wazuh m
 Prerequisites
 ^^^^^^^^^^^^^
 
-Your terminal must reach port 55000 on the Wazuh manager. Generate a JWT to authenticate with the Wazuh manager API by making a cURL request. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager. Replace ``<USER>`` with the Wazuh manager API user ``wazuh`` by default, and ``<PASSWORD>`` with its password:
+Your terminal must reach port 55000 on the Wazuh manager. After an all-in-one installation with the :doc:`installation assistant </user-manual/reference/installation-utilities/installation-assistant>`, such as the :doc:`Quickstart </quickstart>`, the Wazuh manager API accepts connections only from the Wazuh manager itself. To send requests from another host, change ``host`` as described in :ref:`Change the default host and port <api_securing_api_change_the_default_host_and_port>`.
+
+Generate a JWT to authenticate with the Wazuh manager API by making a cURL request. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or fully qualified domain name (FQDN) of the Wazuh manager. Replace ``<USER>`` with the Wazuh manager API user ``wazuh`` by default, and ``<PASSWORD>`` with its password:
 
 .. code-block:: console
 
-   # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+   # TOKEN=$(curl -s -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
 
 Run ``echo $TOKEN`` to confirm that the token was generated:
 
@@ -1839,7 +1832,7 @@ The command output looks similar to this:
 .. code-block:: none
    :class: output
 
-   eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNzkyNzY3MzI5LCJuYmZfbXMiOjE3OTI3NjczMjk0MDUsImV4cCI6MTc5Mjc2ODIyOSwic3ViIjoid2F6dWgiLCJydW5fYXMiOmZhbHNlLCJyYmFjX3JvbGVzIjpbMV0sInJiYWNfbW9kZSI6IndoaXRlIn0.AVqR66Xjm2nbB4wryL9T6g4xattuIy7oKQHfyN1NO42fgtcpeff4TKsuO2Fe5XRFvTy5NPc1cnuhJ1Z0R6uCMyskATedb60RbrFrlS6tGMqzogePJOo87NQdrL7Ju3Ek2R0ndrWvO6m1debmfBTJKstFYLCdP8gHCa0w9YLHqdsvGzjz
+   eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eXXXXXXXXXXXXXXXXdsvGzjz
 
 The following requests use this token to authenticate with the Wazuh manager API. The token expires after 900 seconds by default. When a request returns ``401``, run the first command again to get a new token.
 
@@ -1867,7 +1860,9 @@ Using the Wazuh manager API, you can delete specific Wazuh agents, or every Wazu
 
       # curl -k -X DELETE "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?agents_list=<AGENT_ID>&status=all&older_than=1&pretty=true" -H "Authorization: Bearer $TOKEN"
 
-This request deletes every Wazuh agent that matches the filters.
+   .. warning::
+
+      This request deletes every Wazuh agent that matches the filters. Check the ``agents_list`` value before you run it, because ``all`` deletes every Wazuh agent.
 
 Where:
 
@@ -1912,18 +1907,17 @@ You can use the ``/agents/summary`` endpoint to return a summary of the availabl
       {
         "data": {
           "status": {
-            "active": 8,
+            "active": 2,
             "disconnected": 0,
-            "never_connected": 1,
-            "pending": 2
+            "never_connected": 0,
+            "pending": 0
           },
           "os": {
-            "debian": 8,
-            "ubuntu": 3
+            "ubuntu": 1,
+            "windows": 1
           },
           "groups": {
-            "default": 11,
-            "test": 5
+            "default": 2
           }
         },
         "error": 0
