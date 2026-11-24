@@ -78,7 +78,7 @@ To back up the deployment, stop the stack with ``docker compose stop``, so that 
 -  The named volumes of the stack, which ``docker volume ls`` lists. In the multi-node stack, they include ``wazuh-cluster-key``, the key that the Wazuh manager nodes share.
 -  ``config/credentials/``: the passwords of the deployment.
 -  ``config/*/certs/``: the certificates that the containers mount.
--  ``wazuh-ca/``: the root CA and its private key. Git doesn't ignore this directory, so ``git clean -fd`` in the clone deletes it.
+-  ``wazuh-ca/``: the root CA and its private key. Git ignores this directory, so ``git clean -fd`` in the clone keeps it, but ``git clean -fdx`` deletes it.
 
 To back up a single-node deployment, run the following commands as root from ``wazuh-docker/single-node/``. The one-off containers use the ``ubuntu:24.04`` image, because the Wazuh images don't include ``tar``. The last two commands restrict the backup to root and start the stack again:
 
@@ -189,21 +189,21 @@ For the Wazuh indexer, run:
 
    # docker compose cp wazuh.indexer:/usr/share/wazuh-indexer/config/opensearch.yml ./opensearch.yml
 
-These commands use the service names of the single-node stack. Edit the file, then add its line to the volumes section of the service: the first line for ``wazuh.dashboard``, the second one for ``wazuh.indexer``.
-
-.. code-block:: yaml
-
-   - ./opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
-   - ./opensearch.yml:/usr/share/wazuh-indexer/config/opensearch.yml
-
-To use your own ``opensearch.yml`` or ``opensearch_dashboards.yml``, mount it in the ``volumes`` section of the service, at ``/usr/share/wazuh-indexer/config/opensearch.yml`` or ``/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml``. The mounted file must be owned by ``root``, with group ``101`` and mode ``0640``. Run the following commands on the Docker host before you start the stack or apply the change. Replace ``<FILE>`` with the path of your file:
+These commands use the service names of the single-node stack. The container uses the file only if it's owned by ``root``, with group ``101`` and mode ``0640``. A copy from ``docker compose cp`` has group ``root``. Run the following commands on the Docker host. Replace ``<FILE>`` with the path of your file:
 
 .. code-block:: console
 
    # chown 0:101 <FILE>
    # chmod 640 <FILE>
 
-Otherwise, the container won't start, and Docker will restart it in a loop. ``docker compose logs <SERVICE>`` shows ``UNSAFE <PATH>: <REASON>``. A file you copy out of the container with ``docker compose cp`` has group ``root``. With that file, the Wazuh dashboard container also restarts in a loop, with no ``UNSAFE`` line. Instead, ``docker compose logs wazuh.dashboard`` shows ``Error: ENOENT: no such file or directory, open '/etc/wazuh-dashboard/opensearch_dashboards.yml'``. Run the ``chown`` and ``chmod`` commands above on the copy. The container keeps the owner and mode of the mounted file. Settings in the ``environment`` section of the service take precedence over the same settings in the file. At every start, the Wazuh dashboard container also writes the following settings into its file, from the environment variable in brackets or, when that variable is not set, from its default value: ``server.host`` (``SERVER_HOST``), ``server.port`` (``SERVER_PORT``), ``opensearch.hosts`` (``OPENSEARCH_HOSTS``), ``opensearch.ssl.verificationMode`` (``OPENSEARCH_SSL_VERIFICATION_MODE``), ``opensearch.requestHeadersAllowlist`` (``OPENSEARCH_REQUEST_HEADERS_ALLOWLIST``), ``opensearch_security.multitenancy.enabled`` (``OPENSEARCH_SECURITY_MULTITENANCY_ENABLED``), ``opensearch_security.readonly_mode.roles`` (``OPENSEARCH_SECURITY_READONLY_MODE_ROLES``), ``server.ssl.enabled`` (``SERVER_SSL_ENABLED``), ``server.ssl.key`` (``SERVER_SSL_KEY``), ``server.ssl.certificate`` (``SERVER_SSL_CERTIFICATE``), ``opensearch.ssl.certificateAuthorities`` (``OPENSEARCH_SSL_CERTIFICATE_AUTHORITIES``), ``uiSettings.overrides.defaultRoute`` (``UI_SETTINGS_OVERRIDES_DEFAULT_ROUTE``), ``opensearch_security.cookie.ttl`` (``OPENSEARCH_SECURITY_COOKIE_TTL``), ``opensearch_security.session.ttl`` (``OPENSEARCH_SECURITY_SESSION_TTL``), ``opensearch_security.session.keepalive`` (``OPENSEARCH_SECURITY_SESSION_KEEPALIVE``), and the url, port, username, run_as, and ca of every ``wazuh_core.hosts`` entry (``WAZUH_API_URL``, ``API_PORT``, ``API_USERNAME``, ``RUN_AS``, and ``WAZUH_API_CA``). To change one of these settings, set its variable in the environment section of the service, not in the file.
+Edit the file, then mount it: add its line to the ``volumes`` section of the service, the first line for ``wazuh.dashboard``, the second one for ``wazuh.indexer``:
+
+.. code-block:: yaml
+
+   - ./opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
+   - ./opensearch.yml:/usr/share/wazuh-indexer/config/opensearch.yml
+
+If the mounted file has another owner, group, or mode, the container doesn't start, and Docker restarts it in a loop. ``docker compose logs <SERVICE>`` shows ``UNSAFE <PATH>: <REASON>``. With group ``root``, the Wazuh dashboard container shows no ``UNSAFE`` line. Instead, ``docker compose logs wazuh.dashboard`` shows ``Error: ENOENT: no such file or directory, open '/etc/wazuh-dashboard/opensearch_dashboards.yml'``. The container keeps the owner and mode of the mounted file. Settings in the ``environment`` section of the service take precedence over the same settings in the file. At every start, the Wazuh dashboard container also writes each of the following settings into its file when its environment variable, in brackets, is set: ``server.host`` (``SERVER_HOST``), ``server.port`` (``SERVER_PORT``), ``opensearch.hosts`` (``OPENSEARCH_HOSTS``), ``opensearch.ssl.verificationMode`` (``OPENSEARCH_SSL_VERIFICATION_MODE``), ``opensearch.requestHeadersAllowlist`` (``OPENSEARCH_REQUEST_HEADERS_ALLOWLIST``), ``opensearch_security.multitenancy.enabled`` (``OPENSEARCH_SECURITY_MULTITENANCY_ENABLED``), ``opensearch_security.readonly_mode.roles`` (``OPENSEARCH_SECURITY_READONLY_MODE_ROLES``), ``server.ssl.enabled`` (``SERVER_SSL_ENABLED``), ``server.ssl.key`` (``SERVER_SSL_KEY``), ``server.ssl.certificate`` (``SERVER_SSL_CERTIFICATE``), ``opensearch.ssl.certificateAuthorities`` (``OPENSEARCH_SSL_CERTIFICATE_AUTHORITIES``), ``uiSettings.overrides.defaultRoute`` (``UI_SETTINGS_OVERRIDES_DEFAULT_ROUTE``), ``opensearch_security.cookie.ttl`` (``OPENSEARCH_SECURITY_COOKIE_TTL``), ``opensearch_security.session.ttl`` (``OPENSEARCH_SECURITY_SESSION_TTL``), ``opensearch_security.session.keepalive`` (``OPENSEARCH_SECURITY_SESSION_KEEPALIVE``), and the url, port, username, run_as, and ca of every ``wazuh_core.hosts`` entry (``WAZUH_API_URL``, ``API_PORT``, ``API_USERNAME``, ``RUN_AS``, and ``WAZUH_API_CA``). When the variable isn't set, the container keeps the value in the file. The ``docker-compose.yml`` file of each stack sets ``SERVER_HOST``, ``OPENSEARCH_HOSTS``, ``WAZUH_API_URL``, ``SERVER_SSL_KEY``, ``SERVER_SSL_CERTIFICATE``, ``OPENSEARCH_SSL_CERTIFICATE_AUTHORITIES``, and ``WAZUH_API_CA``, so the container writes those settings at every start. The exception is ``opensearch.ssl.verificationMode``. The container writes it at every start, from ``OPENSEARCH_SSL_VERIFICATION_MODE`` or, when that variable isn't set, as ``full``. To change one of these settings, set its variable in the environment section of the service, not in the file.
 
 To apply the change, run the following command from the directory of your stack:
 

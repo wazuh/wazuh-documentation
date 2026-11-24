@@ -14,6 +14,7 @@ The following configuration and management capabilities are covered in this sect
 -  :ref:`Active response <dashboard_configurations_active_response>`
 -  :ref:`Notifications and alerts <dashboard_configurations_notifications>`
 -  :ref:`Multi-tenancy <dashboard_configurations_multitenancy>`
+-  :ref:`Installing OpenSearch Dashboards plugins <dashboard_configurations_plugins>`
 -  :ref:`Creating a custom dashboard <creating_custom_dashboards>`
 
 .. _dashboard_configurations_ruleset_management:
@@ -763,6 +764,30 @@ An alerting monitor queries Wazuh data and runs actions when specific conditions
       :title: Create the alerting monitor
       :alt: Create the alerting monitor
 
+   .. thumbnail:: /images/wazuh-dashboard/configurations/email-alerting-monitor-select-data.png
+      :align: center
+      :width: 80%
+      :title: Select data and Query
+      :alt: Select data and Query sections of the alerting monitor, with wazuh-findings-v5-system-activity as the index and the event.action is authentication-failure query condition
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/email-alerting-monitor-trigger.png
+      :align: center
+      :width: 80%
+      :title: Trigger
+      :alt: Triggers section of the alerting monitor with the Failed authentication trigger, its severity level, and its trigger condition
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/email-alerting-monitor-action.png
+      :align: center
+      :width: 80%
+      :title: Action
+      :alt: Actions section of the alerting monitor with the email channel, the message subject, the message body, and Per alert selected in Perform action
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/email-alerting-monitor-created.png
+      :align: center
+      :width: 80%
+      :title: Alerting monitor created
+      :alt: Overview page of the created alerting monitor, showing its monitor details, the trigger, and the history
+
 The **Monitor type** field offers these options:
 
 +----------------------------+----------------------------------------------------------------------+
@@ -1002,6 +1027,105 @@ On the **Mapped users** tab of the role, click **Manage mapping** to add users. 
    :width: 80%
    :title: Select your tenant
    :alt: Select your tenant dialog with Choose from custom selected and team-a listed in Select a custom tenant
+
+.. _dashboard_configurations_plugins:
+
+Installing OpenSearch Dashboards plugins
+----------------------------------------
+
+The Wazuh dashboard is based on OpenSearch Dashboards, and the Wazuh indexer is based on OpenSearch. You can add OpenSearch Dashboards plugins, such as Anomaly Detection, to the Wazuh dashboard.
+
+A plugin must be built for the exact OpenSearch Dashboards version of the Wazuh dashboard. Many plugins also need a matching OpenSearch plugin on every Wazuh indexer node. For example, Anomaly Detection needs the ``opensearch-anomaly-detection`` plugin.
+
+Run the following command on the Wazuh dashboard host to check the OpenSearch Dashboards version. The version follows the ``@`` sign, for example ``alertingDashboards@3.6.0.0`` for OpenSearch Dashboards 3.6.0:
+
+.. code-block:: console
+
+   # /usr/share/wazuh-dashboard/bin/opensearch-dashboards-plugin list --allow-root
+
+Run the following command to check the OpenSearch version of the Wazuh indexer. The ``number`` field of the output holds the version:
+
+.. code-block:: console
+
+   # curl -k -u admin:<WAZUH_INDEXER_ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200
+
+Replace ``<WAZUH_INDEXER_ADMIN_PASSWORD>`` with the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh-indexer/export/credentials.env`` on a Wazuh indexer node. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml``.
+
+The following steps install Anomaly Detection on Wazuh 5.0.0, which uses OpenSearch Dashboards 3.6.0 and OpenSearch 3.6.0. For another version, replace 3.6.0 in the commands.
+
+Installing the plugin on the Wazuh indexer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Run the following commands on each Wazuh indexer node, one node at a time. Before you continue with the next node, wait until the cluster health is green.
+
+.. code-block:: console
+
+   # /usr/share/wazuh-indexer/bin/opensearch-plugin install --batch org.opensearch.plugin:opensearch-anomaly-detection:3.6.0.0
+   # systemctl restart wazuh-indexer
+
+The ``--batch`` option accepts the permissions that the plugin requests. Remove the option to review the permissions before you accept them.
+
+Installing the plugin on the Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+OpenSearch publishes OpenSearch Dashboards plugins inside the OpenSearch Dashboards bundle, not as separate files. Run the following commands on the Wazuh dashboard host.
+
+#. Download the OpenSearch Dashboards bundle of the same version and extract the plugin from it:
+
+   .. code-block:: console
+
+      # curl -fsSo opensearch-dashboards-3.6.0-linux-x64.tar.gz https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/3.6.0/opensearch-dashboards-3.6.0-linux-x64.tar.gz
+      # tar -xzf opensearch-dashboards-3.6.0-linux-x64.tar.gz opensearch-dashboards-3.6.0/plugins/anomalyDetectionDashboards
+
+#. Package the plugin in the layout that the plugin tool expects. The ``zip`` command is in the ``zip`` package of your distribution.
+
+   .. code-block:: console
+
+      # mkdir -p plugin/opensearch-dashboards
+      # mv opensearch-dashboards-3.6.0/plugins/anomalyDetectionDashboards plugin/opensearch-dashboards/
+      # cd plugin && zip -qr ../anomalyDetectionDashboards-3.6.0.zip opensearch-dashboards && cd ..
+
+#. Install the plugin and restart the Wazuh dashboard. The ``/usr/share/wazuh-dashboard`` directory belongs to root, so the command needs the ``--allow-root`` option.
+
+   .. code-block:: console
+
+      # /usr/share/wazuh-dashboard/bin/opensearch-dashboards-plugin install file://$PWD/anomalyDetectionDashboards-3.6.0.zip --allow-root
+      # systemctl restart wazuh-dashboard
+
+#. On the Wazuh dashboard, open the menu and select **OpenSearch Plugins** > **Anomaly Detection**.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/plugins-anomaly-detection.png
+      :align: center
+      :width: 80%
+      :title: Anomaly Detection
+      :alt: Anomaly Detection page on the Wazuh dashboard, showing the Detectors section
+
+.. note::
+
+   A plugin built for another OpenSearch Dashboards version stops the Wazuh dashboard from starting. The journal then shows ``Plugin "<PLUGIN_ID>" is version "<VERSION>", but used OpenSearch Dashboards version is "3.6.0"``. After an upgrade that changes the OpenSearch Dashboards version, install the matching version of each plugin.
+
+Removing a plugin
+^^^^^^^^^^^^^^^^^
+
+Delete the objects that the plugin created, such as Anomaly Detection detectors, before you remove it. Then remove the plugin from the Wazuh dashboard:
+
+.. code-block:: console
+
+   # /usr/share/wazuh-dashboard/bin/opensearch-dashboards-plugin remove anomalyDetectionDashboards --allow-root
+   # systemctl restart wazuh-dashboard
+
+Remove the plugin from each Wazuh indexer node, one node at a time:
+
+.. code-block:: console
+
+   # /usr/share/wazuh-indexer/bin/opensearch-plugin remove opensearch-anomaly-detection
+   # systemctl restart wazuh-indexer
+
+The ``.opendistro-anomaly-detectors`` index stays after you remove Anomaly Detection. Delete it if you don't need it:
+
+.. code-block:: console
+
+   # curl -k -u admin:<WAZUH_INDEXER_ADMIN_PASSWORD> -X DELETE https://<WAZUH_INDEXER_IP_ADDRESS>:9200/.opendistro-anomaly-detectors
 
 .. _creating_custom_dashboards:
 

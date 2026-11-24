@@ -150,6 +150,8 @@ Run command immediately when service is started.
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
 
+.. _wodle_command_interval:
+
 interval
 ^^^^^^^^
 
@@ -161,6 +163,8 @@ Time between commands executions.
 | **Allowed values**   | A positive number that should contain a suffix character indicating a time unit, such as, s  |
 |                      | (seconds), m (minutes), h (hours), d (days), M (months).                                     |
 +----------------------+----------------------------------------------------------------------------------------------+
+
+.. _wodle_command_day:
 
 day
 ^^^
@@ -175,6 +179,8 @@ Day of the month to run the scan.
 
 .. note::
    When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
+
+.. _wodle_command_wday:
 
 wday
 ^^^^
@@ -196,6 +202,8 @@ Day of the week to run the scan. This option is **not compatible** with the day 
 
 .. note::
    When the ``wday`` option is set, the interval value must be a multiple of weeks. By default, the interval is set to a week.
+
+.. _wodle_command_time:
 
 time
 ^^^^
