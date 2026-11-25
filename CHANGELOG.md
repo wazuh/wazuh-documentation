@@ -1,6 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [v4.14.11]
+
+### Added
+
+- Added a note on the launchd resource limits that can make the Wazuh agent miss macOS ULS events under high CPU load, and how to remove them, to the *Log data collection* documentation. ([#10717](https://github.com/wazuh/wazuh-documentation/pull/10717))
+- Added the `rootcheck.max_pid` internal option, updated the `rootcheck.sleep` description, and added a note to the `check_pids` setting, in the *Reference* documentation. ([#10805](https://github.com/wazuh/wazuh-documentation/pull/10805))
+
+### Fixed
+
+- Corrected the description of the files that the Wazuh manager pushes to the agents in a group, noting that the manager skips files whose names start with a dot and binary files, in the *Centralized configuration* reference documentation. ([#10780](https://github.com/wazuh/wazuh-documentation/pull/10780))
+- Updated the *Rootkits behavior detection* documentation to state that rootcheck checks process IDs up to `rootcheck.max_pid` on Linux, and added a note on checking higher process IDs to the *Detecting hidden processes* proof of concept. ([#10888](https://github.com/wazuh/wazuh-documentation/pull/10888))
+
 ## [v4.14.10]
 
 ### Added

@@ -1047,11 +1047,20 @@ Rootcheck
 ---------
 
 +--------------------------+----------------+-------------------------------------------------------------------------------+
-|    **rootcheck.sleep**   | Description    | Number of milliseconds to sleep after reading one PID or suspicious port.     |
+|    **rootcheck.sleep**   | Description    | Number of milliseconds to sleep after reading one suspicious port, and after  |
+|                          |                | reading one PID on systems other than Linux.                                  |
 +                          +----------------+-------------------------------------------------------------------------------+
 |                          | Default value  | 50                                                                            |
 +                          +----------------+-------------------------------------------------------------------------------+
 |                          | Allowed values | Any integer between 0 and 1000.                                               |
++--------------------------+----------------+-------------------------------------------------------------------------------+
+|    **rootcheck.max_pid** | Description    | Highest PID checked by the hidden process check. Linux only. PIDs above this  |
+|                          |                | value are not checked. Use 4194304 to check the whole PID range, at a higher  |
+|                          |                | CPU cost per scan.                                                            |
++                          +----------------+-------------------------------------------------------------------------------+
+|                          | Default value  | 32768                                                                         |
++                          +----------------+-------------------------------------------------------------------------------+
+|                          | Allowed values | Any integer between 32768 and 4194304.                                        |
 +--------------------------+----------------+-------------------------------------------------------------------------------+
 
 Security Configuration Assessment

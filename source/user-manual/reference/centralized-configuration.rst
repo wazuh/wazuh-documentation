@@ -52,7 +52,12 @@ Agents can be grouped together in order to send them a unique centralized config
 .. note::
     Check the :doc:`agent_groups manual <./tools/agent-groups>` to learn how to add groups and assign agents to them.
 
-The manager pushes all files included in the group folder to the agents belonging to this group. For example, all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to the ``default`` group.
+The manager pushes the files in the group folder to the agents belonging to this group. For example, the files in ``/var/ossec/etc/shared/default`` are pushed to all agents belonging to the ``default`` group. The manager skips these files:
+
+-  Files whose names start with a dot. The manager skips them without logging anything.
+-  Binary files. The manager logs ``wazuh-remoted: ERROR: Invalid shared file '<path>'. Ignoring it.`` The ``GET /groups/{group_id}/files`` endpoint of the Wazuh server API still lists these files.
+
+Any other file is pushed, within the limits listed in this section.
 
 In case an agent is assigned to multiple groups, all the files contained in each group folder will be merged into one, and subsequently sent to the agents, being the last one the group with the highest priority.
 
