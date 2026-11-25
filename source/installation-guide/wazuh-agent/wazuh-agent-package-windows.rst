@@ -56,7 +56,7 @@ Before you start, create an enrollment token on the Wazuh manager, as described 
 
                .. code-block:: ps1con
 
-                  > Start-Service wazuhsvc
+                  > Start-Service WazuhSvc
 
          #. Check that the Wazuh agent is enrolled and connected. In PowerShell, run:
 

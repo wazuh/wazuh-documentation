@@ -333,7 +333,7 @@ Configuring the Wazuh manager master node
    Then edit the following settings in the ``/etc/wazuh-manager/wazuh-manager.conf`` file and configure the necessary parameters:
 
    .. code-block:: xml
-      :emphasize-lines: 5,9
+      :emphasize-lines: 5,7,9
 
       <cluster>
         <name>wazuh</name>
@@ -341,7 +341,7 @@ Configuring the Wazuh manager master node
         <node_type>master</node_type>
         <key><CLUSTER_KEY></key>
         <port>1516</port>
-        <bind_addr>0.0.0.0</bind_addr>
+        <bind_addr><WAZUH_MASTER_IP></bind_addr>
         <nodes>
             <node><WAZUH_MASTER_ADDRESS></node>
         </nodes>
@@ -361,7 +361,8 @@ Configuring the Wazuh manager master node
    +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`port <reference_wazuh_manager_conf_cluster_port>`           | It indicates the destination port for cluster communication.                                                                                                                                                                                  |
    +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bind_addr <reference_wazuh_manager_conf_cluster_bind_addr>` | It is the network IP to which the node is bound to listen for incoming requests (0.0.0.0 to listen on all interfaces.).                                                                                                                       |
+   | :ref:`bind_addr <reference_wazuh_manager_conf_cluster_bind_addr>` | The IP address on which the master node listens for connections from the worker nodes. Replace ``<WAZUH_MASTER_IP>`` with the master node's IP address on the network that the worker nodes use to reach it. Allow 1516/TCP on that address   |
+   |                                                                   | only from the other Wazuh manager nodes.                                                                                                                                                                                                      |
    +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`nodes <reference_wazuh_manager_conf_cluster_nodes>`         | It is the address of the ``master node`` and can be either an IP or a DNS. This parameter must be specified in all nodes, including the master itself. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node. |
    +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -415,6 +416,8 @@ Configuring the Wazuh manager worker nodes
    | :ref:`node_type <reference_wazuh_manager_conf_cluster_node_type>` | Specifies the role of the node. It has to be set as ``worker``.                                                                                                                 |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`key <reference_wazuh_manager_conf_cluster_key>`             | The ``<CLUSTER_KEY>`` value you created on the master node (the package wrote a different random key on this node). It must be the same on every node.                          |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bind_addr <reference_wazuh_manager_conf_cluster_bind_addr>` | Keep ``0.0.0.0``. Only the master node listens on the cluster port, so the worker nodes don't need a specific address.                                                          |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`nodes <reference_wazuh_manager_conf_cluster_nodes>`         | Specifies the address of the ``master node``. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node, the same value you set on the master node. |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
