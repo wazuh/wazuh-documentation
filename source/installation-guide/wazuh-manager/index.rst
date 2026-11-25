@@ -156,7 +156,7 @@ A Wazuh agent connects to one address only: the address of its enrollment token,
 Adding the address after the installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-These steps are for an all-in-one server installed with the :doc:`Quickstart </quickstart>`. The Wazuh manager reissues the certificates from its own certificate authority, so agents enrolled before the change keep trusting it. Run the following steps on this server:
+These steps are for an all-in-one server installed with the :doc:`Quickstart </quickstart>`, and for the master node of a step-by-step installation, for example to add the addresses of the worker nodes. The Wazuh manager reissues the certificates from its own certificate authority, so agents enrolled before the change keep trusting it. Run the following steps on that node:
 
 #. Stop the Wazuh manager and check that none of its processes are still running:
 

@@ -105,7 +105,7 @@ Complete the following steps on the Wazuh manager master node to generate the en
 
          IP Address:192.168.33.142, DNS:manager
 
-   To enroll a Wazuh agent on that node, use the node's address from the list. A token for any other address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
+   To enroll a Wazuh agent on that node, use the node's address from the list. A token for any other address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``. In a cluster, this is the master node's certificate. To create tokens for a worker node's address, add it to the master node's certificate first.
 
    If an address that agents use isn't in the list, add it to the Wazuh manager certificate first, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. Examples are a load balancer, a NAT address, or a public name.
 
