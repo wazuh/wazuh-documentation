@@ -82,11 +82,10 @@ On any other host, including a dedicated Wazuh manager node and the other Wazuh 
 
    Make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
 
-#. Replace ``<MANAGER_NODE_NAME>`` with your Wazuh manager node certificate name, the same used in ``config.yml`` when creating the certificates. In our case, the node name is ``manager``. Then extract the archive, and place the passwords:
+#. Extract the archive and place the passwords:
 
    .. code-block:: console
 
-      # NODE_NAME=<MANAGER_NODE_NAME>
       # umask 022
       # mkdir wazuh-certificates
       # tar -xf wazuh-certificates.tar -C wazuh-certificates

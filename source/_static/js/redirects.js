@@ -158,6 +158,7 @@ newUrls['5.0'] = [
   '/proof-of-concept-guide/poc-security-configuration-assessment.html',
   '/proof-of-concept-guide/detect-web-attack-xss.html',
   '/proof-of-concept-guide/detect-known-malicious-file.html',
+  '/proof-of-concept-guide/detect-vulnerable-driver-loading.html',
   '/wazuh-cti/index.html',
   '/wazuh-cti/how-it-works.html',
   '/wazuh-cti/managing-wazuh-cti.html',
