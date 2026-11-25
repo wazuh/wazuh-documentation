@@ -6,7 +6,7 @@
 Installing the Wazuh manager from sources
 =========================================
 
-The Wazuh manager is the core component of the Wazuh server that processes and analyzes security data from Wazuh agents and other sources. It normalizes and enriches this data and forwards it to the Wazuh indexer, which evaluates it against detection rules and generates findings. It also includes the services for the Wazuh agent enrollment and connection.
+The Wazuh manager is the core component of Wazuh that processes and analyzes security data from Wazuh agents and other sources. It normalizes and enriches this data and forwards it to the Wazuh indexer, which evaluates it against detection rules and generates findings. It also includes the services for the Wazuh agent enrollment and connection.
 
 This section covers installing dependencies, downloading and compiling the source code, running the installation wizard, and uninstalling the manager if needed.
 
