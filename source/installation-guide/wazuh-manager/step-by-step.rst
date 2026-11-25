@@ -375,6 +375,14 @@ Configuring the Wazuh manager master node
 
       # systemctl restart wazuh-manager
 
+#. Check that the master node listens on the cluster port. The output shows the address you set in ``<bind_addr>``:
+
+   .. code-block:: console
+
+      # ss -tlnp | grep 1516
+
+   If there is no output, check ``/var/wazuh-manager/logs/cluster.log``. ``Could not start master: could not bind on any address`` means that ``<bind_addr>`` isn't an address of this host. The restart still succeeds, so this check is the only sign.
+
 .. _wazuh_server_worker_nodes:
 
 Configuring the Wazuh manager worker nodes
@@ -414,13 +422,15 @@ Configuring the Wazuh manager worker nodes
    | :ref:`nodes <reference_wazuh_manager_conf_cluster_nodes>`         | Specifies the address of the ``master node``. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node, the same value you set on the master node. |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-#. Restart the Wazuh manager:
+#. Restart the Wazuh manager. If you haven't started it on this node yet, start it and enable it at boot with ``systemctl enable --now wazuh-manager`` instead:
 
    .. code-block:: console
 
       # systemctl restart wazuh-manager
 
 Repeat these configuration steps for every Wazuh manager worker node in your cluster.
+
+To enroll Wazuh agents through a worker node's address, add that address to the agent listener certificate of the master node, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. You create enrollment tokens on the master node, and it accepts only addresses in its own certificate.
 
 Testing the Wazuh manager cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -444,6 +454,8 @@ An example output of the command looks as follows:
 Note that the IP addresses ``10.0.0.3``, ``10.0.0.4``, and ``10.0.0.5`` are used as examples.
 
 The Wazuh manager API listens only on the master node, so port 55000 on a worker node doesn't answer.
+
+To see which node processes an agent's data, check the ``wazuh.cluster.node`` field of its events on the Wazuh dashboard.
 
 Disable Wazuh updates
 ---------------------
