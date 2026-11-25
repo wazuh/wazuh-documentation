@@ -16,7 +16,7 @@ It handles:
 -  The password of the ``wazuh-manager`` user on the Wazuh indexer. It's never generated: it's supplied, or read from the Wazuh indexer on the same host, and stored in the keystore.
 -  The Wazuh manager CA in ``/etc/wazuh-manager/ca``, published as ``/etc/wazuh-manager/export/ca.pem``.
 -  The agent listener pair (``certs/remoted.pem``) and the Wazuh manager API pair (``certs/apid.pem``).
--  The Wazuh indexer CA (``certs/indexer-ca.pem``), and a client pair only when the configuration names one, imported from the Wazuh indexer on the same host or staged by you.
+-  The Wazuh indexer CA (``certs/indexer-ca.pem``), imported from the Wazuh indexer on the same host or staged by you. When ``<indexer><ssl>`` names a client certificate and key, it checks them too.
 
 It never replaces a file you staged, never issues a certificate again when one is in place, and never repairs an owner or a mode: an entry with the wrong owner or mode is refused.
 
