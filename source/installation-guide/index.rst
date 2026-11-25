@@ -27,6 +27,10 @@ For more deployment flexibility and customization, install the Wazuh central com
 
 Before you start, choose the name and IP address of every Wazuh indexer, Wazuh manager, and Wazuh dashboard node. You create the certificates and passwords for all of them on one host, usually the first Wazuh indexer node. Then you copy one archive to every other node. With the assisted method, the archive also holds each Wazuh manager node's agent listener and Wazuh manager API certificates, and each Wazuh dashboard node's certificate. With the step-by-step method, the Wazuh manager and Wazuh dashboard packages issue these certificates themselves, and each Wazuh dashboard node takes only its two passwords and the root CA from the archive.
 
+.. note::
+
+   Keep the clocks of all Wazuh hosts synchronized, for example, with NTP or ``chrony``. Unsynchronized clocks cause certificate validation errors and timestamp mismatches between alerts and the Wazuh dashboard.
+
 +--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
 | **I want to...**                           | **Use**                                                                                                                   | **Typical time**                                   |
 +============================================+===========================================================================================================================+====================================================+
