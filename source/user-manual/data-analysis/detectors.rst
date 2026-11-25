@@ -75,7 +75,7 @@ To silence a specific Standard rule:
 Example: Silencing a rule that is generating false positives
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Suppose the standard ``windows`` integration's "Event log cleared via command line" rule is generating false positives in your environment. You cannot disable it, so you replace the detector that runs it:
+Suppose the standard ``windows`` integration's "Windows event log cleared - {{user.name}}" rule is generating false positives in your environment. You cannot disable it, so you replace the detector that runs it:
 
 #. Go to **Ruleset Management** > **Detection** > **Detectors** and set the space selector to **Standard**. Search and select the ``windows`` detector, then select **Stop detector** from its **Actions** menu.
 
@@ -105,7 +105,7 @@ Suppose the standard ``windows`` integration's "Event log cleared via command li
       :align: center
       :width: 80%
 
-#. In **Selected rules**, keep every rule from Standard space selected and deselect "Event log cleared via command line".
+#. In **Selected rules**, keep every rule from Standard space selected and deselect "Windows event log cleared - {{user.name}}".
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-detector-select-rules.png
       :title: Deselect the rule
