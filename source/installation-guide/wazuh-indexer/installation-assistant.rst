@@ -21,7 +21,7 @@ The Wazuh indexer installation process is divided into three stages:
 
 .. note::
 
-   You need root user privileges to run all the commands described below.
+   You need root user privileges to run all the commands described below. The commands use ``curl``. If ``curl`` isn't installed, install it with your package manager, for example, ``apt-get install curl`` or ``yum install curl``.
 
 Before you start, choose the name and IP address of every Wazuh indexer, Wazuh manager, and Wazuh dashboard node. You create the certificates and passwords for all of them on one host, usually the first Wazuh indexer node. Then you copy one archive to every other node.
 
