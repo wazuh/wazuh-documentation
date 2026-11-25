@@ -185,13 +185,11 @@ Installing the Wazuh manager
 
    Release candidate packages carry the version of the final release, ``|WAZUH_CURRENT|-|WAZUH_MANAGER_PKG_REV|``. Only their file names show the RC stage, for example ``wazuh-manager_|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|_|WAZUH_MANAGER_x64_DEB|.deb``, so ``dpkg -l`` and ``rpm -q`` show ``|WAZUH_CURRENT|-|WAZUH_MANAGER_PKG_REV|``.
 
-#. The installation prints the certificates that the package issued, with their addresses. On a host without the Wazuh indexer, it also prints MISSING lines for ``indexer-ca.pem`` and ``indexer-connector.pem``, and ``Credential resolution is incomplete``. This is expected. Place the Wazuh indexer root CA and this node's client certificate for the Wazuh indexer. They are in the directory where you extracted ``wazuh-certificates.tar``. Skip this step on the first Wazuh indexer node:
+#. The installation prints the certificates that the package issued, with their addresses. On a host without the Wazuh indexer, it also prints a MISSING line for ``indexer-ca.pem`` and ``Credential resolution is incomplete``. This is expected. Place the Wazuh indexer root CA. It's in the directory where you extracted ``wazuh-certificates.tar``:
 
    .. code-block:: console
 
       # install -m 0640 -o root -g wazuh-manager wazuh-certificates/root-ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
-      # install -m 0640 -o root -g wazuh-manager wazuh-certificates/$NODE_NAME.pem /etc/wazuh-manager/certs/indexer-connector.pem
-      # install -m 0640 -o root -g wazuh-manager wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
 
 #. Remove the extracted files. They hold private keys:
 
@@ -258,12 +256,10 @@ Configuring the Wazuh indexer connection
            <certificate_authorities>
              <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
            </certificate_authorities>
-           <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
-           <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
          </ssl>
        </indexer>
 
-   -  Replace ``127.0.0.1`` with the address of your Wazuh indexer node. It's the node's ``ip`` value in ``config.yml`` and its ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml`` on that node. Edit only the ``<host>`` value: the ``<ssl>`` block already points to the certificate files in ``/etc/wazuh-manager/certs``. If the Wazuh indexer runs on this host and you left ``network.host`` at the package default, keep ``127.0.0.1``.
+   -  Replace ``127.0.0.1`` with the address of your Wazuh indexer node. It's the node's ``ip`` value in ``config.yml`` and its ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml`` on that node. Edit only the ``<host>`` value: the ``<ssl>`` block already points to the Wazuh indexer CA in ``/etc/wazuh-manager/certs``. If the Wazuh indexer runs on this host and you left ``network.host`` at the package default, keep ``127.0.0.1``.
 
    If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entry for each one of your Wazuh indexer nodes. For example, in a two-node configuration:
 

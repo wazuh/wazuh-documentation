@@ -57,8 +57,8 @@ Options list
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -wi, --wazuh-indexer-certificates                                                   | Creates the Wazuh indexer certificates.                                                      |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -wm, --wazuh-manager-certificates                                                   | Creates the Wazuh manager certificates: the Wazuh indexer client pair (<name>.pem), the      |
-|                                                                                     | agent listener pair (<name>-remoted.pem) and the Wazuh manager API pair (<name>-apid.pem).   |
+| -wm, --wazuh-manager-certificates                                                   | Creates the Wazuh manager certificates: the agent listener pair (<name>-remoted.pem) and the |
+|                                                                                     | Wazuh manager API pair (<name>-apid.pem).                                                    |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -tmp, --cert_tmp_path </path/to/tmp_dir>                                            | Uses this directory to create the certificates, instead of a new one with a random name in   |
 |                                                                                     | /tmp. The directory must not exist, or must be an empty directory owned by root. Must be     |
@@ -109,8 +109,6 @@ Run the tool again on the node that holds ``root-ca.key``, with the ``config.yml
 | Wazuh indexer   | ``<node>.pem``, ``<node>-key.pem``                 | ``/etc/wazuh-indexer/certs/indexer.pem``, ``indexer-key.pem``                     | ``root:wazuh-indexer``, ``0640``   |
 +-----------------+----------------------------------------------------+-----------------------------------------------------------------------------------+------------------------------------+
 | Wazuh indexer   | ``admin.pem``, ``admin-key.pem``                   | ``/etc/wazuh-indexer/certs/admin.pem``, ``admin-key.pem``                         | ``root:root``, ``0600``            |
-+-----------------+----------------------------------------------------+-----------------------------------------------------------------------------------+------------------------------------+
-| Wazuh manager   | ``<node>.pem``, ``<node>-key.pem``                 | ``/etc/wazuh-manager/certs/indexer-connector.pem``, ``indexer-connector-key.pem`` | ``root:wazuh-manager``, ``0640``   |
 +-----------------+----------------------------------------------------+-----------------------------------------------------------------------------------+------------------------------------+
 | Wazuh manager   | ``<node>-remoted.pem``, ``<node>-remoted-key.pem`` | ``/etc/wazuh-manager/certs/remoted.pem``, ``remoted-key.pem``                     | ``root:wazuh-manager``, ``0640``   |
 +-----------------+----------------------------------------------------+-----------------------------------------------------------------------------------+------------------------------------+

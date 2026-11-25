@@ -76,11 +76,10 @@ Path to one or more CA certificates used to verify the Indexer's TLS certificate
 certificate
 ~~~~~~~~~~~~
 
-Path to the client certificate presented by the Wazuh manager when mutual TLS authentication is enabled. The path must exist on disk at startup time.
+Optional. Path to a client certificate that the Wazuh manager presents to the Wazuh indexer. The Wazuh manager authenticates with the ``wazuh-manager`` password, and the Wazuh indexer doesn't require a client certificate, so the installer leaves this setting empty. Set it together with ``key``. If set, the path must exist on disk at startup time.
 
 +--------------------+----------------------------------------------------------------------------------------+
-| **Default value**  | None (The installer sets this automatically to                                         |
-|                    | /etc/wazuh-manager/certs/indexer-connector.pem)                                        |
+| **Default value**  | None                                                                                   |
 +--------------------+----------------------------------------------------------------------------------------+
 | **Allowed values** | Absolute path to a PEM-encoded certificate directly in /etc/wazuh-manager/certs        |
 |                    | (existence checked at startup)                                                         |
@@ -89,11 +88,10 @@ Path to the client certificate presented by the Wazuh manager when mutual TLS au
 key
 ~~~~
 
-Path to the private key corresponding to ``certificate``. Required if ``certificate`` is specified. Path must exist on disk at startup time.
+Optional. Path to the private key of ``certificate``. Set both or neither. If set, the path must exist on disk at startup time.
 
 +----------------------+------------------------------------------------------------------------------------------+
-| **Default value**    | None (The installer sets this automatically to                                           |
-|                      | /etc/wazuh-manager/certs/indexer-connector-key.pem)                                      |
+| **Default value**    | None                                                                                     |
 +----------------------+------------------------------------------------------------------------------------------+
 | **Allowed values**   | Absolute path to a PEM-encoded private key directly in /etc/wazuh-manager/certs          |
 |                      | (existence checked at startup)                                                           |
@@ -114,8 +112,6 @@ Single node:
        <certificate_authorities>
          <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
        </certificate_authorities>
-       <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
-       <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
      </ssl>
    </indexer>
 
@@ -133,8 +129,6 @@ Multi-node cluster:
        <certificate_authorities>
          <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
        </certificate_authorities>
-       <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
-       <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
      </ssl>
    </indexer>
 
@@ -147,9 +141,9 @@ The Wazuh manager authenticates to the Wazuh indexer with the username and passw
 #. ``/etc/wazuh-manager/local.env``.
 #. ``/etc/wazuh-indexer/export/credentials.env``, when the Wazuh indexer is installed on the same host.
 
-When the Wazuh indexer is on the same host, the resolver also imports its CA and the client pair it issued for the Wazuh manager into ``/etc/wazuh-manager/certs/indexer-ca.pem``, ``indexer-connector.pem`` and ``indexer-connector-key.pem``. When the Wazuh indexer is on another host, copy them there yourself.
+When the Wazuh indexer is on the same host, the resolver also imports its CA into ``/etc/wazuh-manager/certs/indexer-ca.pem``. When the Wazuh indexer is on another host, copy the CA there yourself.
 
-If the password or these files are missing, the Wazuh manager doesn't start, and ``wazuh-manager-control`` prints a ``MISSING`` line that names the missing item, then ``Unresolved credentials. Exiting``. With ``-j``, its JSON output has error 21. See :doc:`wazuh-manager-control </user-manual/reference/tools/wazuh-manager-control>` in Tools.
+If the password or the CA is missing, the Wazuh manager doesn't start, and ``wazuh-manager-control`` prints a ``MISSING`` line that names the missing item, then ``Unresolved credentials. Exiting``. With ``-j``, its JSON output has error 21. See :doc:`wazuh-manager-control </user-manual/reference/tools/wazuh-manager-control>` in Tools.
 
 The resolver never replaces a password already in the keystore. After you change the ``wazuh-manager`` password on the Wazuh indexer, write the new one with ``wazuh-manager-keystore`` and restart the Wazuh manager:
 
@@ -162,14 +156,12 @@ The resolver never replaces a password already in the keystore. After you change
 Verifying connectivity
 ------------------------
 
-Run the following command as root to verify connectivity to the Wazuh indexer. It uses the same CA certificate, client certificate, and ``wazuh-manager`` password, read from the keystore, as the Wazuh manager. Replace ``<WAZUH_INDEXER_ADDRESS>`` with a Wazuh indexer address from the output of ``/var/wazuh-manager/bin/wazuh-manager-conf get indexer.hosts``:
+Run the following command as root to verify connectivity to the Wazuh indexer. It uses the same CA certificate and ``wazuh-manager`` password, read from the keystore, as the Wazuh manager. Replace ``<WAZUH_INDEXER_ADDRESS>`` with a Wazuh indexer address from the output of ``/var/wazuh-manager/bin/wazuh-manager-conf get indexer.hosts``:
 
 .. code-block:: console
-   :emphasize-lines: 5
+   :emphasize-lines: 3
 
    # curl --cacert /etc/wazuh-manager/certs/indexer-ca.pem \
-        --cert   /etc/wazuh-manager/certs/indexer-connector.pem \
-        --key    /etc/wazuh-manager/certs/indexer-connector-key.pem \
         -u "wazuh-manager:$(/var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password -g)" \
         https://<WAZUH_INDEXER_ADDRESS>:9200/_cluster/health
 

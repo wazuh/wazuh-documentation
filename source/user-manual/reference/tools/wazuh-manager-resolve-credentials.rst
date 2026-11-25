@@ -16,7 +16,7 @@ It handles:
 -  The password of the ``wazuh-manager`` user on the Wazuh indexer. It's never generated: it's supplied, or read from the Wazuh indexer on the same host, and stored in the keystore.
 -  The Wazuh manager CA in ``/etc/wazuh-manager/ca``, published as ``/etc/wazuh-manager/export/ca.pem``.
 -  The agent listener pair (``certs/remoted.pem``) and the Wazuh manager API pair (``certs/apid.pem``).
--  The Wazuh indexer CA and client pair (``certs/indexer-ca.pem``, ``certs/indexer-connector.pem``), imported from the Wazuh indexer on the same host or staged by you.
+-  The Wazuh indexer CA (``certs/indexer-ca.pem``), imported from the Wazuh indexer on the same host or staged by you. When ``<indexer><ssl>`` names a client certificate and key, it checks them too.
 
 It never replaces a file you staged, never issues a certificate again when one is in place, and never repairs an owner or a mode: an entry with the wrong owner or mode is refused.
 
@@ -77,8 +77,9 @@ Each problem is one line on standard error, in the form ``KIND <path or key>: <r
 | UNSAFE  | An entry root can't trust: a wrong owner or mode, a link, or a directory where a file        |
 |         | belongs.                                                                                     |
 +---------+----------------------------------------------------------------------------------------------+
-| WARNING | The Wazuh indexer CA or client pair is expired or not valid yet. The start goes on, and the  |
-|         | Wazuh indexer connection fails until the material is renewed.                                |
+| WARNING | The Wazuh indexer CA, or a client pair you set in <indexer><ssl>, is expired or not valid    |
+|         | yet. The start goes on, and the Wazuh indexer connection fails until the material is         |
+|         | renewed.                                                                                     |
 +---------+----------------------------------------------------------------------------------------------+
 
 Values you supply
