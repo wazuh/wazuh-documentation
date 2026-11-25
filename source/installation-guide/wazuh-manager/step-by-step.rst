@@ -20,7 +20,7 @@ The installation process is divided into two stages:
 Wazuh manager node installation
 -------------------------------
 
-Follow these steps to install a single-node or multi-node cluster Wazuh manager.
+Follow these steps to install a single-node or multi-node cluster Wazuh manager. In a multi-node cluster, install the master node first, then each worker node. You set the cluster configuration of each node before its first start, so you install each node only once.
 
 .. _wazuh_manager_adding_the_repository:
 
@@ -104,14 +104,7 @@ On any other host, including a dedicated Wazuh manager node and the other Wazuh 
 
    The package always adds ``localhost``, ``127.0.0.1``, and ``::1``. For the Wazuh manager API certificate, set ``WAZUH_MANAGER_APID_CERT_SANS`` the same way. The address in the ``url`` setting of the Wazuh dashboard must be in that certificate.
 
-#. On each worker node of a Wazuh manager cluster, place the master node's root CA. Install the master node first. Every node then issues its certificates from the same root CA, so the Wazuh agents trust every node. Skip this step on the master node and on a single Wazuh manager. On the master node, pack the root CA and its private key:
-
-   .. code-block:: console
-
-      # tar -cf manager-ca.tar -C /etc/wazuh-manager/ca root-ca.pem root-ca.key
-      # chmod 600 manager-ca.tar
-
-   Copy ``manager-ca.tar`` to the working directory of the worker node, and run these commands there:
+#. On each worker node of a Wazuh manager cluster, place the master node's root CA. Every node then issues its certificates from the same root CA, so the Wazuh agents trust every node. Skip this step on the master node and on a single Wazuh manager. Install the master node first. At the end of its installation, you create ``manager-ca.tar`` on it, as :ref:`Starting the Wazuh manager <wazuh_manager_starting>` describes. Copy ``manager-ca.tar`` to the working directory of the worker node, and run these commands there:
 
    .. code-block:: console
 
@@ -122,7 +115,7 @@ On any other host, including a dedicated Wazuh manager node and the other Wazuh 
       # chmod 0400 /etc/wazuh-manager/ca/root-ca.key
       # rm -f manager-ca.tar
 
-   The file holds the root CA private key. Remove it from the master node too when every worker node has its copy. To add a Wazuh manager node to the cluster later, repeat this step on the new node before you install its package. Don't issue its certificates with the ``-wm`` option of the certificates tool. The tool signs them with the root CA of the archive, which isn't the root CA of this Wazuh manager cluster. Procedures that add a Wazuh manager node with the certificates tool apply only to assisted installations.
+   The file holds the root CA private key. You remove it from the master node after the last worker node is installed, as :ref:`Testing the Wazuh manager cluster <wazuh_manager_testing_cluster>` describes. To add a Wazuh manager node to the cluster later, repeat this step on the new node before you install its package. Don't issue its certificates with the ``-wm`` option of the certificates tool. The tool signs them with the root CA of the archive, which isn't the root CA of this Wazuh manager cluster. Procedures that add a Wazuh manager node with the certificates tool apply only to assisted installations.
 
 #. **Recommended action**: If no other Wazuh components will be installed on this node, remove the ``wazuh-certificates.tar`` file.
 
@@ -225,7 +218,7 @@ The agent listener certificate, ``/etc/wazuh-manager/certs/remoted.pem``, lists 
 Configuring the Wazuh indexer connection
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If the Wazuh indexer runs on this host and you left ``network.host`` at the package default, for example on an all-in-one host, skip this section and go to :ref:`Starting the Wazuh manager <wazuh_manager_starting>`.
+If the Wazuh indexer runs on this host and you left ``network.host`` at the package default, for example on an all-in-one host, skip this section and go to :ref:`Setting the cluster configuration <wazuh_manager_setting_cluster>`.
 
 #. Edit ``/etc/wazuh-manager/wazuh-manager.conf`` file to configure the indexer connection. Do it on the master node and on every worker node, as the cluster does not synchronize this block. By default, the indexer settings configure one host. It's set to ``127.0.0.1``:
 
@@ -257,6 +250,26 @@ If the Wazuh indexer runs on this host and you left ``network.host`` at the pack
       </hosts>
 
    The Wazuh manager prioritizes reporting to the first Wazuh indexer node in the list. It switches to the next node if it is unavailable.
+
+.. _wazuh_manager_setting_cluster:
+
+Setting the cluster configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Skip this section for a single Wazuh manager node. In a Wazuh manager cluster, set the ``<cluster>`` block now, before the first start. Each node then starts as part of the cluster.
+
+The package writes a single-node ``<cluster>`` block on every node: ``node_type`` is ``master``, the key is random, and ``bind_addr`` and the node address are ``127.0.0.1``. Edit that block instead of adding a second one.
+
+#. On the master node, create the cluster key and keep the output. You use the same value on the master node and on every worker node. Skip this step on the worker nodes:
+
+   .. code-block:: console
+
+      # openssl rand -hex 16
+
+#. Edit the ``<cluster>`` block in ``/etc/wazuh-manager/wazuh-manager.conf``:
+
+   -  On the master node, set the values that :ref:`Configuring the Wazuh manager master node <wazuh_server_master_node>` describes.
+   -  On each worker node, set the values that :ref:`Configuring the Wazuh manager worker nodes <wazuh_server_worker_nodes>` describes. Use the cluster key that you created on the master node.
 
 .. _wazuh_manager_starting:
 
@@ -292,29 +305,42 @@ Starting the Wazuh manager
 
    The output is a line that ends in ``INFO: The indexer is reachable; inventory documents can be delivered.`` If the command prints nothing, wait a minute and run it again. If it still prints nothing, or it prints ``No configured indexer host is currently reachable``, check the ``<indexer>`` block. Also check that this host can reach port 9200/TCP of the Wazuh indexer.
 
-Your Wazuh manager node is now successfully installed. Repeat this stage of the installation process for every Wazuh manager node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh manager single-node cluster, everything is set, and you can proceed directly with :doc:`Installing the Wazuh dashboard <../wazuh-dashboard/step-by-step>` step-by-step.
+#. On the master node of a Wazuh manager cluster, check that it listens on the cluster port. The output shows the address you set in ``<bind_addr>``:
+
+   .. code-block:: console
+
+      # ss -tlnp | grep 1516
+
+   If there is no output, check ``/var/wazuh-manager/logs/cluster.log``. ``Could not start master: could not bind on any address`` means that ``<bind_addr>`` isn't an address of this host. The start still succeeds, so this check is the only sign.
+
+#. Back up the ``/etc/wazuh-manager/ca`` directory securely. It holds the root CA private key that this node uses to issue its certificates. Keep the directory owned by ``root:root``, back it up with its node, and never copy it to a Wazuh dashboard node.
+
+#. On the master node of a Wazuh manager cluster, pack the root CA and its private key for the worker nodes:
+
+   .. code-block:: console
+
+      # tar -cf manager-ca.tar -C /etc/wazuh-manager/ca root-ca.pem root-ca.key
+      # chmod 600 manager-ca.tar
+
+   Copy ``manager-ca.tar`` and the cluster key to each worker node before you install it. The worker node uses them in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>` and :ref:`Setting the cluster configuration <wazuh_manager_setting_cluster>`.
+
+Your Wazuh manager node is now successfully installed. In a Wazuh manager cluster, repeat this stage on each worker node. After the last worker node, test the cluster on the master node, as :ref:`Testing the Wazuh manager cluster <wazuh_manager_testing_cluster>` describes. If you want a Wazuh manager single-node cluster, everything is set, and you can proceed directly with :doc:`Installing the Wazuh dashboard <../wazuh-dashboard/step-by-step>` step-by-step.
 
 Cluster configuration for multi-node deployment
 -----------------------------------------------
 
-After you install the Wazuh manager on every node, configure the master node first, then each worker node, and then test the cluster. Each node already has the master node's root CA, its own certificates, and the same passwords from :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`.
+This section describes the ``<cluster>`` block of the master node and of the worker nodes. You set it on each node in :ref:`Setting the cluster configuration <wazuh_manager_setting_cluster>`, before the first start. After you install the last worker node, test the cluster. Each node already has the master node's root CA, its own certificates, and the same passwords from :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`.
 
 Only the master node runs the Wazuh manager API. The Wazuh dashboard connects to it with the passwords from the archive, as :ref:`Configuring the Wazuh dashboard <wazuh_dashboard_configuring>` describes.
 
-The package writes a single-node ``<cluster>`` block on every node: ``node_type`` is ``master``, the key is random, and ``bind_addr`` and the node address are ``127.0.0.1``. Edit that block on each node instead of adding a second one. ``node_name`` is the node's name in the cluster and doesn't need to match its name in ``config.yml``.
+If you change the block on a node that already runs, restart the Wazuh manager on that node. ``node_name`` is the node's name in the cluster and doesn't need to match its name in ``config.yml``.
 
 .. _wazuh_server_master_node:
 
 Configuring the Wazuh manager master node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. On the master node, create the cluster key and keep the output. You use the same value on the master node and on every worker node:
-
-   .. code-block:: console
-
-      # openssl rand -hex 16
-
-   Then edit the following settings in the ``/etc/wazuh-manager/wazuh-manager.conf`` file and configure the necessary parameters:
+#. On the master node, set the following values in the ``<cluster>`` block of the ``/etc/wazuh-manager/wazuh-manager.conf`` file. Replace ``<CLUSTER_KEY>`` with the key you created with ``openssl rand -hex 16``:
 
    .. code-block:: xml
       :emphasize-lines: 5,7,9
@@ -353,19 +379,11 @@ Configuring the Wazuh manager master node
    | :ref:`hidden <reference_wazuh_manager_conf_cluster_hidden>`       | Has no effect in Wazuh 5.0. Keep the default, ``no``.                                                                                                                                                                                         |
    +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-#. Restart the Wazuh manager:
+#. If the Wazuh manager already runs on the master node, restart it. Then run the cluster port check in :ref:`Starting the Wazuh manager <wazuh_manager_starting>`:
 
    .. code-block:: console
 
       # systemctl restart wazuh-manager
-
-#. Check that the master node listens on the cluster port. The output shows the address you set in ``<bind_addr>``:
-
-   .. code-block:: console
-
-      # ss -tlnp | grep 1516
-
-   If there is no output, check ``/var/wazuh-manager/logs/cluster.log``. ``Could not start master: could not bind on any address`` means that ``<bind_addr>`` isn't an address of this host. The restart still succeeds, so this check is the only sign.
 
 .. _wazuh_server_worker_nodes:
 
@@ -406,18 +424,26 @@ Configuring the Wazuh manager worker nodes
    | :ref:`nodes <reference_wazuh_manager_conf_cluster_nodes>`         | Specifies the address of the ``master node``. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node, the same value you set on the master node. |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-#. Restart the Wazuh manager. If you haven't started it on this node yet, start it and enable it at boot with ``systemctl enable --now wazuh-manager`` instead:
+#. If the Wazuh manager already runs on this node, restart it. On a new worker node, start it and enable it at boot with ``systemctl enable --now wazuh-manager``, as :ref:`Starting the Wazuh manager <wazuh_manager_starting>` describes:
 
    .. code-block:: console
 
       # systemctl restart wazuh-manager
 
-Repeat these configuration steps for every Wazuh manager worker node in your cluster.
+Use the same values on every worker node, except ``node_name``.
 
 To enroll Wazuh agents through a worker node's address, add that address to the agent listener certificate of the master node, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. You create enrollment tokens on the master node, and it accepts only addresses in its own certificate.
 
+.. _wazuh_manager_testing_cluster:
+
 Testing the Wazuh manager cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+After you install the last worker node, remove ``manager-ca.tar`` from the master node. It holds the root CA private key:
+
+.. code-block:: console
+
+   # rm -f manager-ca.tar
 
 On any Wazuh manager node, run the following command to verify that the Wazuh cluster is enabled and all the nodes are connected:
 

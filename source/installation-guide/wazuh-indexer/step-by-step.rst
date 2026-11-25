@@ -172,7 +172,7 @@ On the first Wazuh indexer node, the package uses the three passwords created in
 
    # grep '^WAZUH_INDEXER_' /etc/wazuh-indexer/export/credentials.env | sort -u
 
-The other Wazuh indexer nodes get the same three passwords from ``wazuh-certificates.tar`` in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`, before their package is installed. So they never generate their own. Keep the file until all components are installed and running, then remove it as described in :ref:`Securing your Wazuh installation <wazuh_dashboard_securing_installation>`.
+The other Wazuh indexer nodes get the same three passwords from ``wazuh-certificates.tar`` in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`, before their package is installed. So they never generate their own. Remove the file from each node at the end of that node's installation, as each section describes.
 
 Passwords are generated once. Reinstalling, restarting, or upgrading the Wazuh indexer does not change them, and neither does removing this file. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation.
 
@@ -412,7 +412,7 @@ Configuring the Wazuh indexer
    The package ships a working single-node configuration: one node named ``node-1``, listening on all interfaces.
 
    -  All-in-one installation: leave ``opensearch.yml`` as the package wrote it and go to step 2.
-   -  Any deployment that created its certificates with ``config.yml``, including a single Wazuh indexer node with the Wazuh manager and Wazuh dashboard on other hosts: set every value below, on every node, with the names and addresses in ``config.yml``.
+   -  Any deployment that created its certificates with ``config.yml``, including a single Wazuh indexer node with the Wazuh manager and Wazuh dashboard on other hosts: set the values below on every node, with the names and addresses in ``config.yml``. On a single Wazuh indexer node, leave ``discovery.seed_hosts`` commented.
 
    #. ``network.host``: Sets the address of this node for both HTTP and transport traffic. The node will bind to this address and will also use it as its publish address. Accepts an IP address or a hostname.
 
@@ -498,6 +498,18 @@ Starting the service
 
                # update-rc.d wazuh-indexer defaults 95 10
                # service wazuh-indexer start
+
+#. On every Wazuh indexer node **except the first**, check that the node doesn't hold a root CA private key. Only the first Wazuh indexer node must hold it, in ``/etc/wazuh-indexer/ca``:
+
+   .. code-block:: console
+
+      # ls -A /etc/wazuh-indexer/ca 2>/dev/null
+
+   If the command lists ``root-ca.key``, remove the key. Never run this on the first Wazuh indexer node:
+
+   .. code-block:: console
+
+      # rm -f /etc/wazuh-indexer/ca/root-ca.key
 
 Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
