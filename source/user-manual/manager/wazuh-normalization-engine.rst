@@ -104,7 +104,7 @@ The pre-enrichment stage performs the following actions:
         }
       }
 
--  **Discarded events filter**: The discarded events filter decides whether discarded events continue through the pipeline. A discarded event is an event that a decoder marks with the ``discard_events`` :doc:`helper function </user-manual/data-analysis/helper-functions>`, which sets the ``wazuh.space.event_discarded`` field to ``true``. This behavior is controlled by the ``index_discarded_events`` setting of the policy.
+-  **Discarded events filter**: The discarded events filter decides whether discarded events continue through the pipeline. A discarded event is an event that a decoder marks with the ``discard_event`` :doc:`helper function </user-manual/data-analysis/helper-functions>`, which sets the ``wazuh.space.event_discarded`` field to ``true``. This behavior is controlled by the ``index_discarded_events`` setting of the policy.
 -  **Cleanup of decoder temporary variables**: Decoders can only map fields that belong to the WCS or to temporary variables. Temporary variables are used to store intermediate values that help decoders share information while processing an event. After decoding is complete, all temporary variables are automatically removed. This cleanup step always runs at the end of pre-enrichment and requires no user configuration. As a result, only WCS-compliant fields remain in the event, ensuring it can be successfully indexed by the Wazuh indexer.
 
 .. _enrichment:
@@ -241,7 +241,7 @@ A default Wazuh manager installation includes the two outputs shown in the table
      - Writes processed events to a local file on the Wazuh manager
      - Disabled
 
-The output stage operates as a broadcaster. It dispatches the processed event independently to every active output, allowing multiple destinations to receive the same processed event. The ``file-output-integrations.yml`` output writes each event to ``/var/wazuh-manager/logs/<SPACE>-wazuh-events-v5/<YEAR>/<MONTH>/wazuh-<SPACE>-wazuh-events-v5-<DAY>.json``, for example in the ``standard-wazuh-events-v5`` directory for the standard space. It compresses the files and keeps 90 files for each space.
+The output stage operates as a broadcaster. It dispatches the processed event independently to every active output, allowing multiple destinations to receive the same processed event. The ``file-output-integrations.yml`` output writes each event to ``/var/wazuh-manager/logs/<SPACE>-wazuh-events-v5/<YEAR>/<MONTH>/wazuh-<SPACE>-wazuh-events-v5-<DAY>.json``, for example in the ``standard-wazuh-events-v5`` directory for the standard space. It compresses rotated files and deletes the oldest ones beyond 90 files or 20 GiB for each space.
 
 .. thumbnail:: /images/manual/wazuh-server/event-flow-on-output.png
    :title: Event flow on output

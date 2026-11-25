@@ -28,54 +28,95 @@ Fields are information that the Wazuh decoder extracts from events the Wazuh man
 FIM findings: fields correspondence
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following table shows a subset of FIM event fields and their corresponding Wazuh Common Schema (WCS) fields as they appear in a finding. Refer to `WCS fields <https://github.com/wazuh/wazuh-indexer-plugins/blob/main/wcs/stateless/events/main/docs/fields.csv>`__ for the complete list.
+The following table shows a subset of FIM event fields and their corresponding Wazuh Common Schema (WCS) fields as they appear in a finding. Refer to `WCS fields <https://github.com/wazuh/wazuh-indexer-plugins/blob/5.0.0/wcs/stateless/events/main/docs/fields.csv>`__ for the complete list.
 
-+--------------------+-----------------------------------+---------------------------------------------+
-| Field Name         | WCS field                         | Field description                           |
-+====================+===================================+=============================================+
-| ``agent.id``       | ``wazuh.agent.id``                | Unique identifier of the Wazuh agent.       |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``agent.name``     | ``wazuh.agent.name``              | Name assigned to the agent.                 |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``agent.version``  | ``wazuh.agent.version``           | Version of the Wazuh agent.                 |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``agent.arch``     | ``wazuh.agent.host.architecture`` | Host system architecture.                   |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``cluster.name``   | ``wazuh.cluster.name``            | Name of the Wazuh cluster.                  |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``cluster.node``   | ``wazuh.cluster.node``            | Cluster node where the event originated.    |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``path``           | ``file.path``                     | Absolute path of the monitored file.        |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``size``           | ``file.size``                     | File size in bytes.                         |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``mtime``          | ``file.mtime``                    | Last modification timestamp.                |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``inode``          | ``file.inode``                    | Inode number of the file.                   |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``uid``            | ``file.uid``                      | User ID of the file owner.                  |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``owner``          | ``file.owner``                    | Username of the file owner.                 |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``gid``            | ``file.gid``                      | Group ID of the file.                       |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``group``          | ``file.group``                    | Group name owning the file.                 |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``permissions``    | ``file.mode``                     | File permissions, for example rw-r--r--.    |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``attributes``     | ``file.attributes``               | File attributes (system‑dependent).         |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``device``         | ``file.device``                   | Device associated with the file.            |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``md5``            | ``file.hash.md5``                 | MD5 hash of the file contents.              |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``sha1``           | ``file.hash.sha1``                | SHA‑1 hash of the file contents.            |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``sha256``         | ``file.hash.sha256``              | SHA‑256 hash of the file contents.          |
-+--------------------+-----------------------------------+---------------------------------------------+
-| ``created``        | ``event.created``                 | Time when the FIM module detected the       |
-|                    |                                   | change.                                     |
-+--------------------+-----------------------------------+---------------------------------------------+
++--------------------------+-----------------------------------+---------------------------------------------+
+| FIM event field          | WCS field                         | Field description                           |
++==========================+===================================+=============================================+
+| ``agent.id``             | ``wazuh.agent.id``                | Unique identifier of the Wazuh agent.       |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``agent.name``           | ``wazuh.agent.name``              | Name assigned to the agent.                 |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``agent.version``        | ``wazuh.agent.version``           | Version of the Wazuh agent.                 |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``agent.arch``           | ``wazuh.agent.host.architecture`` | Host system architecture.                   |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``cluster.name``         | ``wazuh.cluster.name``            | Name of the Wazuh cluster.                  |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``cluster.node``         | ``wazuh.cluster.node``            | Cluster node where the event originated.    |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``path``                 | ``file.path``                     | Absolute path of the monitored file.        |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``size``                 | ``file.size``                     | File size in bytes.                         |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``mtime``                | ``file.mtime``                    | Last modification timestamp.                |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``inode``                | ``file.inode``                    | Inode number of the file.                   |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``uid``                  | ``file.uid``                      | User ID of the file owner.                  |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``owner``                | ``file.owner``                    | Username of the file owner.                 |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``gid``                  | ``file.gid``                      | Group ID of the file.                       |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``group``                | ``file.group``                    | Group name owning the file.                 |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``permissions``          | ``file.mode``                     | File permissions, for example, rw-r--r--.   |
+|                          |                                   | On Windows, the access control list (ACL)   |
+|                          |                                   | of the file.                                |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``mode``                 | ``event.reason``                  | For created and deleted files, how the      |
+|                          |                                   | FIM module detected the change:             |
+|                          |                                   | ``scheduled``, ``realtime``, or             |
+|                          |                                   | ``whodata``.                                |
+|                          |                                   | For modified files, each changed            |
+|                          |                                   | attribute with its old and new values, for  |
+|                          |                                   | example, ``file.size: 6 -> 12``.            |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``attributes``           | ``file.attributes``               | File attributes (system‑dependent).         |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``device``               | ``file.device``                   | Device associated with the file.            |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``md5``                  | ``file.hash.md5``                 | MD5 hash of the file contents.              |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``sha1``                 | ``file.hash.sha1``                | SHA‑1 hash of the file contents.            |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``sha256``               | ``file.hash.sha256``              | SHA‑256 hash of the file contents.          |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``created``              | ``event.created``                 | Time when the FIM module detected the       |
+|                          |                                   | change.                                     |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``type``                 | ``event.action``                  | Type of change: created, modified, or       |
+|                          |                                   | deleted.                                    |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.user_name``      | ``process.real_user.name``        | Name of the user who ran the process that   |
+|                          |                                   | changed the file. Who-data mode only.       |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.user_id``        | ``process.real_user.id``          | ID of that user. On Windows, it holds the   |
+|                          |                                   | user's security identifier (SID). Who-data  |
+|                          |                                   | mode only.                                  |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.process_name``   | ``process.executable``            | Process that changed the file. It holds the |
+|                          |                                   | full path on Windows and in Linux audit     |
+|                          |                                   | mode, and only the process name in Linux    |
+|                          |                                   | eBPF mode. Who-data mode only.              |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.process_name``   | ``process.name``                  | File name of the process that changed the   |
+|                          |                                   | file, for example, ``powershell.exe``.      |
+|                          |                                   | Who-data mode only.                         |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.process_id``     | ``process.pid``                   | ID of the process that changed the file.    |
+|                          |                                   | Who-data mode only.                         |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.audit_name``     | ``user.name``                     | Login name of the user who started the      |
+|                          |                                   | session, for example, the user who ran      |
+|                          |                                   | ``sudo``. On Windows, it holds the same     |
+|                          |                                   | user as ``process.real_user.name``.         |
+|                          |                                   | Who-data mode only.                         |
++--------------------------+-----------------------------------+---------------------------------------------+
+| ``audit.effective_name`` | ``user.effective.name``           | Effective user of the process. Linux        |
+|                          |                                   | who-data mode only.                         |
++--------------------------+-----------------------------------+---------------------------------------------+
 
 Custom FIM rules example
 ----------------------------
@@ -110,7 +151,7 @@ An integration is a logical grouping of decoders, KVDBs, and rules that belong t
 
 #. Go to **Ruleset management** → **Overview** → **Integrations** → **Actions** → **Create**. Make sure the space selector reads Draft.
 
-#. In the form, enter the following values that we use in this example. Make sure the integration is **Enabled**, then click **Create integration**:
+#. In the form, enter the following values. Make sure the integration is **Enabled**, then click **Create integration**:
 
    -  **Title**: ``wazuh-fim-custom``
    -  **Category**: ``System Activity``
@@ -153,16 +194,16 @@ Wazuh rules define the detection logic for identifying relevant security activit
           event.action: deleted
       metadata:
         title: Wazuh FIM - Monitored file deleted by {{process.real_user.name}} with {{process.name}}
-        author: Wazuh, Inc.
+        author: Security Team
         description: >-
           Detects file deletion events reported by Wazuh File Integrity Monitoring
           (FIM). A monitored file was removed, which could indicate unauthorized
           deletion, anti-forensics activity, or data destruction.
         references:
         - >-
-          https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/index.html
+          https://documentation.wazuh.com/5.0-rc/user-manual/capabilities/file-integrity/index.html
         - >-
-          https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/syscheck.html
+          https://documentation.wazuh.com/5.0-rc/user-manual/reference/ossec-conf/syscheck.html
         documentation: ''
         supports:
         - ''
@@ -226,6 +267,14 @@ Wazuh rules define the detection logic for identifying relevant security activit
         - CC7.2
         - CC7.3
 
+   The rule title uses two fields that the FIM module fills only in who-data mode: ``process.real_user.name``, the user who ran the process, and ``process.name``, the process that deleted the file. For this reason, the Windows endpoint configuration below monitors ``C:\test`` with ``whodata="yes"``. On Linux, ``process.real_user.name`` holds the real user of the process, which is ``root`` when a user runs the command with ``sudo``. The login user is in ``user.name``.
+
+   The ``documentation`` and ``supports`` keys are optional. You can leave them empty, as in this example, or delete them.
+
+   .. note::
+
+      The ``logsource.product`` field must hold the same value as ``metadata.title`` from the integration it belongs to. In our case, this is ``wazuh-fim-custom``.
+
 #. Click **Create rule** to complete the rule creation process.
 
    .. thumbnail:: /images/manual/fim/create-rule.png
@@ -239,7 +288,13 @@ Promote the rule from the draft to the test space
 
 In the draft space, you create and refine your integrations, decoders, and rules. Promoting this rule to the test space allows you to validate it before introducing it to production. Make sure the space selector reads **Draft**, then follow these steps to promote the content.
 
-#. Go to **Ruleset management** → **Overview**, and click **Actions** → **Promote**.
+#. Go to **Ruleset management** → **Overview**, and click **Space actions** → **Promote**. The **Promote** page lists every pending change in the Draft space, not only this rule.
+
+   .. thumbnail:: /images/manual/fim/space-actions-promote.png
+      :title: Space actions
+      :alt: Ruleset management Overview with the Space actions menu open and the Promote option
+      :align: center
+      :width: 80%
 
    .. thumbnail:: /images/manual/fim/promote-draft.png
      :title: Promote draft
@@ -247,7 +302,7 @@ In the draft space, you create and refine your integrations, decoders, and rules
      :align: center
      :width: 80%
 
-#. Click **Promote**, type the confirmation message when prompted, and click **Promote** again.
+#. Click **Promote**, type ``promote`` in the confirmation dialog, and click **Promote** again.
 
    .. thumbnail:: /images/manual/fim/promote-draft-confirmation.png
      :title: Promote confirmation
@@ -258,11 +313,11 @@ In the draft space, you create and refine your integrations, decoders, and rules
 Promote the rule from test to custom
 """"""""""""""""""""""""""""""""""""""
 
-Promoting your rule makes it available for use in production environments, where the Wazuh data analysis engine can process and analyze incoming events. Make sure the space selector reads **Test**, then follow these steps to promote the rule.
+Promoting your rule makes it available in production, where detectors can use it to analyze incoming events. Make sure the space selector reads **Test**, then follow these steps to promote the rule.
 
 #. Go to **Ruleset management → Overview**.
 
-#. Click **Actions** → **Promote**, type the confirmation message, and click **Promote**.
+#. Click **Space actions** → **Promote**, then click **Promote**. Type ``promote`` in the confirmation dialog, and click **Promote** again.
 
    .. thumbnail:: /images/manual/fim/promote-test.png
      :title: Promote test
@@ -276,12 +331,12 @@ Promoting your rule makes it available for use in production environments, where
      :align: center
      :width: 80%
 
-#. After promotion, the integration becomes active and is used by the Wazuh data analysis engine to process incoming FIM events and trigger findings when rule conditions are met. Promotion can take a few minutes to take effect. If the rule doesn't appear in the rule list of the detector, wait and reload the page.
+#. After promotion, the integration becomes active, and detectors can use its rules to generate findings from incoming FIM events. Promotion can take a few minutes to take effect. Changes apply to events within about 2 minutes. If the rule doesn't appear in the rule list of the detector, wait and reload the page.
 
 Create a detector
 """"""""""""""""""""
 
-A detector is the scheduled job that executes your rule. It scans indexed events from monitored endpoints at a defined interval, applies the selected rules, and generates findings when matches occur. Follow these steps to create a detector.
+A detector is the scheduled job that executes your rule. It scans indexed events from monitored endpoints at a defined interval, applies the selected rules, and generates findings when matches occur. Follow these steps to create a detector. Create the detector before you run the test. The detector checks only the events indexed after it starts.
 
 #. Go to **Ruleset management** → **Detection** → **Detectors** → **Create detector**.
 
@@ -323,7 +378,7 @@ Perform the following steps to configure the Wazuh FIM module to monitor file de
 
       > mkdir C:\test
 
-#. Edit the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the Wazuh agent. Add the ``C:\test`` directory for monitoring inside the ``<ossec_config>`` block:
+#. Edit the Wazuh agent configuration file ``C:\Program Files (x86)\ossec-agent\ossec.conf``. Add the ``C:\test`` directory for monitoring inside the ``<ossec_config>`` block:
 
    .. code-block:: xml
 
@@ -340,14 +395,22 @@ Perform the following steps to configure the Wazuh FIM module to monitor file de
 Test the configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Create a text file with Notepad and save the file in the ``C:\test`` directory as ``hello.txt``.
+#. Sign in to the Windows endpoint as a regular user. In PowerShell, create the ``hello.txt`` file in the ``C:\test`` directory:
 
-#. Delete the ``hello.txt`` file with Windows File Explorer.
+   .. code-block:: powershell
+
+      > Set-Content -Path C:\test\hello.txt -Value "hello"
+
+#. Delete the file:
+
+   .. code-block:: powershell
+
+      > Remove-Item -Path C:\test\hello.txt
 
 Visualize the findings
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Navigate to **Endpoint security** → **File Integrity Monitoring → Findings** on the Wazuh dashboard to view the finding generated when files are deleted in the monitored directory.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard. The custom rule generates the finding ``Wazuh FIM - Monitored file deleted by test with powershell.exe``. The out-of-the-box rule also generates ``Wazuh FIM - File deleted - c:\test\hello.txt``.
 
 .. thumbnail:: /images/manual/fim/deleted-file-finding.png
   :title: Deleted file finding
@@ -355,47 +418,66 @@ Navigate to **Endpoint security** → **File Integrity Monitoring → Findings**
   :align: center
   :width: 80%
 
+.. thumbnail:: /images/manual/fim/deleted-file-finding-expanded.png
+   :title: Deleted file finding expanded
+   :alt: Document details of the Wazuh FIM - Monitored file deleted by test with powershell.exe finding
+   :align: center
+   :width: 80%
+
 You can see the finding fields in the data below:
 
 .. code-block:: json
-   :emphasize-lines: 6-7, 29-31
+   :emphasize-lines: 6-11, 42-44
 
    {
      "_index": ".ds-wazuh-findings-v5-system-activity-000001",
-     "_id": "Y9dsTZ8BL87M59AH6yRc",
+     "_id": "k5utRTHa4asi1vVZkf9K_g",
      "_score": null,
      "_source": {
        "process": {
-         "name": "explorer.exe",
-         "pid": 5052
+         "real_user": {
+           "name": "test",
+           "id": "S-1-5-21-1349147258-1164413856-2138503564-1000"
+         },
+         "name": "powershell.exe",
+         "pid": 1488,
+         "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
        },
-       "@timestamp": "2026-07-10T19:06:10.438Z",
+       "@timestamp": "2026-11-13T00:16:37.252108582Z",
        "file": {
-         "inode": "0",
-         "mode": "whodata",
-         "owner": "wazuh-vm",
-         "path": "c:\\test\\hello.txt",
-         "uid": "S-1-5-21-3494786958-4119424836-2404692206-1002",
+         "owner": "test",
          "extension": "txt",
-         "size": 6,
+         "mtime": "2026-11-13T00:13:36.000Z",
+         "directory": "c:\\test",
+         "inode": "0",
+         "mode": [
+           "{\"S-1-5-18\":{\"name\":\"SYSTEM\",\"allowed\":[\"delete\",\"read_control\",\"write_dac\",\"write_owner\",\"synchronize\",\"read_data\",\"write_data\",\"append_data\",\"read_ea\",\"write_ea\",\"execute\",\"read_attributes\",\"write_attributes\"]}}",
+           "{\"S-1-5-32-544\":{\"name\":\"Administrators\",\"allowed\":[\"delete\",\"read_control\",\"write_dac\",\"write_owner\",\"synchronize\",\"read_data\",\"write_data\",\"append_data\",\"read_ea\",\"write_ea\",\"execute\",\"read_attributes\",\"write_attributes\"]}}",
+           "{\"S-1-5-32-545\":{\"name\":\"Users\",\"allowed\":[\"read_control\",\"synchronize\",\"read_data\",\"read_ea\",\"execute\",\"read_attributes\"]}}",
+           "{\"S-1-5-21-1349147258-1164413856-2138503564-1000\":{\"name\":\"test\",\"allowed\":[\"delete\",\"read_control\",\"write_dac\",\"write_owner\",\"synchronize\",\"read_data\",\"write_data\",\"append_data\",\"read_ea\",\"write_ea\",\"execute\",\"read_attributes\",\"write_attributes\"]}}"
+         ],
+         "path": "c:\\test\\hello.txt",
+         "uid": "S-1-5-21-1349147258-1164413856-2138503564-1000",
+         "size": 7,
+         "name": "hello.txt",
          "attributes": [
            "ARCHIVE"
          ],
-         "directory": "c:\\test",
+         "device": "2",
          "hash": {
-           "sha1": "5800776d9b531d82e2b62aea4051a968e05b9156",
-           "sha256": "7dd91e07f0341646d53f6938278a4d3e87961fabea066f7e6f40b7398f3b0b0f",
-           "md5": "ad2d611e4b060351732574b64aeaeed7"
+           "sha1": "aa5916ae7fd159a18b1b72ea905c757207e26689",
+           "sha256": "cd2eca3535741f27a8ae40c31b0c41d4057a7a7b912b33b9aed86485d1c84676",
+           "md5": "af5597c29467a96523a70787c319f4db"
          }
        },
        "related": {
          "user": [
-           "wazuh-vm"
+           "test"
          ],
          "hash": [
-           "ad2d611e4b060351732574b64aeaeed7",
-           "5800776d9b531d82e2b62aea4051a968e05b9156",
-           "7dd91e07f0341646d53f6938278a4d3e87961fabea066f7e6f40b7398f3b0b0f"
+           "af5597c29467a96523a70787c319f4db",
+           "aa5916ae7fd159a18b1b72ea905c757207e26689",
+           "cd2eca3535741f27a8ae40c31b0c41d4057a7a7b912b33b9aed86485d1c84676"
          ]
        },
        "data_stream": {
@@ -413,20 +495,20 @@ You can see the finding fields in the data below:
          },
          "agent": {
            "host": {
-             "hostname": "WINDOWS-11",
+             "hostname": "WIN-SERVER-2022",
              "os": {
-               "name": "Microsoft Windows 11 Pro",
+               "name": "Microsoft Windows Server 2022 Datacenter",
                "type": "windows",
-               "version": "10.0.26200.8655",
+               "version": "10.0.20348.5773",
                "platform": "windows"
              },
              "architecture": "x86_64"
            },
-           "name": "Windows-11",
+           "name": "WindowsServer2022",
            "groups": [
              "default"
            ],
-           "id": "003",
+           "id": "002",
            "version": "v5.0.0"
          },
          "integration": {
@@ -438,7 +520,6 @@ You can see the finding fields in the data below:
            "category": "system-activity"
          },
          "rule": {
-           "sigma_id": "c06abe18-8ffe-484f-861f-522f1ef89699",
            "level": "medium",
            "compliance": {
              "iso_27001": [
@@ -517,8 +598,8 @@ You can see the finding fields in the data below:
                ]
              }
            },
-           "id": "c06abe18-8ffe-484f-861f-522f1ef89699",
-           "title": "Wazuh FIM - Monitored file deleted by wazuh-vm with explorer.exe",
+           "id": "d45e8063-5f89-4493-8d23-3b7fc3ed3eb9",
+           "title": "Wazuh FIM - Monitored file deleted by test with powershell.exe",
            "tags": [
              "medium",
              "wazuh-fim-custom",
@@ -530,15 +611,17 @@ You can see the finding fields in the data below:
            "status": "stable"
          },
          "event": {
-           "id": "531ae9e6-812f-4814-a812-491374ab8f55"
+           "id": "e0ce6bd3-3ab3-45a5-a594-d293d019440f"
          },
          "space": {
            "name": "standard"
          }
        },
        "event": {
-         "original": "{\"collector\":\"file\",\"module\":\"fim\",\"data\":{\"event\":{\"created\":\"2026-07-10T19:06:10.348Z\",\"type\":\"deleted\"},\"file\":{\"size\":6,\"permissions\":[\"{\\\"S-1-5-32-544\\\":{\\\"name\\\":\\\"Administrators\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"write_dac\\\",\\\"write_owner\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\",\"{\\\"S-1-5-18\\\":{\\\"name\\\":\\\"SYSTEM\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"write_dac\\\",\\\"write_owner\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\",\"{\\\"S-1-5-32-545\\\":{\\\"name\\\":\\\"Users\\\",\\\"allowed\\\":[\\\"read_control\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"read_ea\\\",\\\"execute\\\",\\\"read_attributes\\\"]}}\",\"{\\\"S-1-5-11\\\":{\\\"name\\\":\\\"Authenticated Users\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\"],\"uid\":\"S-1-5-21-3494786958-4119424836-2404692206-1002\",\"owner\":\"wazuh-vm\",\"inode\":\"0\",\"device\":\"2\",\"mtime\":\"2026-07-10T19:01:15.000Z\",\"hash\":{\"md5\":\"ad2d611e4b060351732574b64aeaeed7\",\"sha1\":\"5800776d9b531d82e2b62aea4051a968e05b9156\",\"sha256\":\"7dd91e07f0341646d53f6938278a4d3e87961fabea066f7e6f40b7398f3b0b0f\"},\"attributes\":[\"ARCHIVE\"],\"path\":\"c:\\\\test\\\\hello.txt\",\"mode\":\"whodata\",\"audit\":{\"user_id\":\"S-1-5-21-3494786958-4119424836-2404692206-1002\",\"user_name\":\"wazuh-vm\",\"process_name\":\"C:\\\\Windows\\\\explorer.exe\",\"process_id\":5052}}}}",
+         "reason": "whodata",
+         "original": "{\"collector\":\"file\",\"module\":\"fim\",\"data\":{\"event\":{\"created\":\"2026-11-13T00:16:27.289Z\",\"type\":\"deleted\"},\"file\":{\"size\":7,\"permissions\":[\"{\\\"S-1-5-18\\\":{\\\"name\\\":\\\"SYSTEM\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"write_dac\\\",\\\"write_owner\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\",\"{\\\"S-1-5-32-544\\\":{\\\"name\\\":\\\"Administrators\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"write_dac\\\",\\\"write_owner\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\",\"{\\\"S-1-5-32-545\\\":{\\\"name\\\":\\\"Users\\\",\\\"allowed\\\":[\\\"read_control\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"read_ea\\\",\\\"execute\\\",\\\"read_attributes\\\"]}}\",\"{\\\"S-1-5-21-1349147258-1164413856-2138503564-1000\\\":{\\\"name\\\":\\\"test\\\",\\\"allowed\\\":[\\\"delete\\\",\\\"read_control\\\",\\\"write_dac\\\",\\\"write_owner\\\",\\\"synchronize\\\",\\\"read_data\\\",\\\"write_data\\\",\\\"append_data\\\",\\\"read_ea\\\",\\\"write_ea\\\",\\\"execute\\\",\\\"read_attributes\\\",\\\"write_attributes\\\"]}}\"],\"uid\":\"S-1-5-21-1349147258-1164413856-2138503564-1000\",\"owner\":\"test\",\"inode\":\"0\",\"device\":\"2\",\"mtime\":\"2026-11-13T00:13:36.000Z\",\"hash\":{\"md5\":\"af5597c29467a96523a70787c319f4db\",\"sha1\":\"aa5916ae7fd159a18b1b72ea905c757207e26689\",\"sha256\":\"cd2eca3535741f27a8ae40c31b0c41d4057a7a7b912b33b9aed86485d1c84676\"},\"attributes\":[\"ARCHIVE\"],\"path\":\"c:\\\\test\\\\hello.txt\",\"mode\":\"whodata\",\"audit\":{\"user_id\":\"S-1-5-21-1349147258-1164413856-2138503564-1000\",\"user_name\":\"test\",\"process_name\":\"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\",\"process_id\":1488}}}}",
          "kind": "event",
+         "created": "2026-11-13T00:16:27.289Z",
          "action": "deleted",
          "index": ".ds-wazuh-events-v5-system-activity-000001",
          "category": [
@@ -548,20 +631,11 @@ You can see the finding fields in the data below:
            "deletion"
          ],
          "dataset": "wazuh.fim",
-         "doc_id": "JtdsTZ8BL87M59AHfCQm",
+         "doc_id": "M0JD0qEB348XT2D6rUg9",
          "outcome": "success"
-       },
-       "user": {
-         "name": "wazuh-vm",
-         "id": "S-1-5-21-3494786958-4119424836-2404692206-1002"
        }
      },
-     "fields": {
-       "@timestamp": [
-         "2026-07-10T19:06:10.438Z"
-       ]
-     },
      "sort": [
-       1783710370438
+       1794528997252108582
      ]
    }

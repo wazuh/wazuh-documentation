@@ -28,7 +28,7 @@ Daemons
      - The Wazuh agent communication gateway serves the HTTPS agent API on port ``1517`` and forwards agent events to the Wazuh normalization engine. The legacy AES-encrypted TCP/UDP channel on port ``1514`` serves Wazuh 4.x agents.
    * - Wazuh DB
      - ``wazuh-manager-db``
-     - SQLite-based database daemon for the Wazuh agent and global state.
+     - SQLite database daemon that holds the Wazuh agent registry and group assignments in ``global.db`` and answers MITRE ATT&CK lookups from ``mitre.db``.
    * - Auth
      - ``wazuh-manager-authd``
      - The Wazuh agent enrollment service owns all enrollment logic. It receives enrollment requests through the HTTPS ``POST /enroll`` endpoint and, for legacy Wazuh 4.x agents, through TLS port ``1515``.
@@ -151,7 +151,7 @@ The Wazuh manager provides a set of command-line interface (CLI) tools for manag
    * - Binary
      - Purpose
    * - ``wazuh-manager-control``
-     - The Wazuh manager service control script is used to start, stop, restart, reload, and check the status of all daemons, and show version information.
+     - Starts, stops, restarts, and reloads all Wazuh manager daemons, checks their status, and shows version information.
    * - ``wazuh-manager-keystore``
      - Manage secrets in the encrypted keystore (AES-256, RocksDB).
    * - ``verify-agent-conf``
@@ -165,7 +165,7 @@ The Wazuh manager provides a set of command-line interface (CLI) tools for manag
    * - ``rbac_control``
      - Seed the RBAC database, change the passwords of the default Wazuh manager API users, or reset the RBAC database.
    * - ``wazuh-manager-conf``
-     - Validates and retrieves the Wazuh manager configuration. Run ``/var/wazuh-manager/bin/wazuh-manager-conf validate`` to check ``/etc/wazuh-manager/wazuh-manager.conf`` before restarting the Wazuh manager. It prints nothing when the file is valid and exits with status ``0``. Otherwise, it prints the invalid option and exits with status ``1``. Run ``/var/wazuh-manager/bin/wazuh-manager-conf get <OPTION>`` to print a specific option, such as ``cluster.key``, or ``/var/wazuh-manager/bin/wazuh-manager-conf dump`` to print the entire configuration.
+     - Validates and retrieves the Wazuh manager configuration. Run ``/var/wazuh-manager/bin/wazuh-manager-conf validate`` to check ``/etc/wazuh-manager/wazuh-manager.conf`` before restarting the Wazuh manager. When the file is valid, it prints ``/etc/wazuh-manager/wazuh-manager.conf: configuration is valid.`` and exits with status ``0``. Otherwise, it prints every invalid option it finds, one line each, and exits with status ``1``. Run ``/var/wazuh-manager/bin/wazuh-manager-conf get <OPTION>`` to print a specific option, such as ``cluster.key``, or ``/var/wazuh-manager/bin/wazuh-manager-conf dump`` to print the entire configuration.
    * - ``wazuh-manager-resolve-credentials``
      - Resolves, issues, and validates Wazuh manager credentials and certificates. The package runs this command during installation, upgrades, and every startup. Use the ``--check`` option to perform a read-only check.
    * - ``wazuh-manager-certs``

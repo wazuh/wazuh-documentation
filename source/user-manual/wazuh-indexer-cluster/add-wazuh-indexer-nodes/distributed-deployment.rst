@@ -37,11 +37,13 @@ Use the root CA of the deployment to issue the certificate for the new node, so 
 
 #. Copy the certificate archive of the deployment to this directory, and extract it to obtain the existing certificates.
 
-   -  If the certificate archive is ``wazuh-certificates.tar``, use this command:
+   -  If the certificate archive is ``wazuh-certificates.tar``, use these commands. This archive holds no passwords, so the last two commands copy them from the first Wazuh indexer node:
 
       .. code-block:: console
 
          # mkdir wazuh-install-files && tar -xf ./wazuh-certificates.tar -C wazuh-install-files
+         # install -m 0600 /dev/null wazuh-install-files/credentials.env
+         # grep '^WAZUH_INDEXER_' /etc/wazuh-indexer/export/credentials.env > wazuh-install-files/credentials.env
 
    -  If the certificate archive is ``wazuh-install-files.tar``, use this command:
 
@@ -49,13 +51,13 @@ Use the root CA of the deployment to issue the certificate for the new node, so 
 
          # tar -xf ./wazuh-install-files.tar
 
-#. Download the certificates tool to this directory and run it to create the certificate for the new Wazuh indexer node. The tool reads ``config.yml`` from its own directory, and signs the certificate with the root CA in the directory set in ``WAZUH_CA_DIR``. Replace ``<CA_DIRECTORY>`` with the absolute path of the directory that holds ``root-ca.key``, for example, ``/etc/wazuh-indexer/ca``. Without this variable, the tool creates a new root CA, and the certificate of the new node doesn't chain to the root CA of the cluster.
+#. Copy the certificates tool, ``/usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh``, from the Wazuh indexer package to this directory and run it to create the certificate for the new Wazuh indexer node. The tool reads ``config.yml`` from its own directory, and signs the certificate with the root CA in the directory set in ``WAZUH_CA_DIR``. Replace ``<CA_DIRECTORY>`` with the absolute path of the directory that holds ``root-ca.key``, for example, ``/etc/wazuh-indexer/ca``. Without this variable, the tool creates a new root CA, and the certificate of the new node doesn't chain to the root CA of the cluster.
 
    .. code-block:: console
       :emphasize-lines: 2
 
-      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
-      # WAZUH_CA_DIR=<CA_DIRECTORY> bash wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A
+      # cp /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh .
+      # WAZUH_CA_DIR=<CA_DIRECTORY> bash wazuh-certs-tool.sh -A
 
 #. Copy the newly created certificates to the ``wazuh-install-files`` folder, making sure not to replace the existing admin certificates:
 
@@ -63,17 +65,17 @@ Use the root CA of the deployment to issue the certificate for the new node, so 
 
       # cp wazuh-certificates/<NEW_WAZUH_INDEXER_NODE_NAME>* wazuh-install-files
 
-#. Compress the certificates that the new node requires and the passwords, taken from the complete set assembled in ``wazuh-install-files``, and copy the archive to the new Wazuh indexer node. You can use the ``scp`` utility to copy the archive securely:
+#. Compress the certificates that the new node requires and the passwords, taken from the complete set assembled in ``wazuh-install-files``, together with ``root-ca.key`` from ``<CA_DIRECTORY>``, and copy the archive to the new Wazuh indexer node. You can use the ``scp`` utility to copy the archive securely:
 
    .. code-block:: console
 
-      # tar -cvf ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar -C ./wazuh-install-files/ ./<NEW_WAZUH_INDEXER_NODE_NAME>.pem ./<NEW_WAZUH_INDEXER_NODE_NAME>-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem ./credentials.env
+      # tar -cvf ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar -C ./wazuh-install-files/ ./<NEW_WAZUH_INDEXER_NODE_NAME>.pem ./<NEW_WAZUH_INDEXER_NODE_NAME>-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem ./credentials.env -C <CA_DIRECTORY> ./root-ca.key
       # chmod 600 ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar
       # scp ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar <TARGET_USERNAME>@<TARGET_IP>:
 
    .. note::
 
-      The new archive is named after the new node so that the original archive is not overwritten. It holds the private key of the new node and the Wazuh indexer passwords, so remove it from both hosts after the new node is installed. The root CA private key, ``root-ca.key``, isn't in any archive. It stays in its CA directory. Keep a backup of that directory in secure storage. You need it to issue the certificate of every node added later.
+      The new archive is named after the new node so that the original archive is not overwritten. It holds the private keys of the new node and of the root CA, and the Wazuh indexer passwords, so remove it from both hosts after the new node is installed. The root CA private key, ``root-ca.key``, is in this archive too, so that every Wazuh indexer node has a copy in ``/etc/wazuh-indexer/ca``. Keep a backup of that directory in secure storage. You need it to issue the certificate of every node added later.
 
 Configuring existing components to connect with the new node
 ------------------------------------------------------------
@@ -102,7 +104,7 @@ Configuring existing components to connect with the new node
 
       The ``cluster.initial_cluster_manager_nodes`` setting is only used the first time an indexer cluster starts. For consistency, keep it aligned with the list across all Wazuh indexer nodes. Still, the settings that allow the new node to join a running cluster are ``discovery.seed_hosts`` and ``plugins.security.nodes_dn``.
 
-#. Restart the existing Wazuh indexer nodes one at a time to apply the changes. Restarting the nodes one by one keeps the cluster available while the change is applied:
+#. Restart the existing Wazuh indexer nodes one at a time to apply the changes. Wait for the cluster to return to a green state before you restart the next node. With three or more cluster-manager-eligible nodes, the cluster stays available during the restarts. With fewer than three, the cluster can be unavailable while a node restarts:
 
    .. code-block:: console
 

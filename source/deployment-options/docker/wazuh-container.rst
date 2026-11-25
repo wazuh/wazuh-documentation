@@ -192,6 +192,8 @@ Below are the steps for deploying the Wazuh central components in :ref:`single-n
 
    If you already tried to start the other stack while this one was running, also run ``docker compose down`` in the other stack's directory before you start it. Otherwise, Docker can start its Wazuh manager without a network, and the stack doesn't work.
 
+   Each stack creates its own root CA, in the ``wazuh-ca/`` directory of the stack. Wazuh agents enrolled with one stack don't connect to the other, and their logs show ``Could not verify the manager's certificate``. To connect a Wazuh agent container to the stack you switch to, enroll it again. Create an enrollment token on that stack and put it in the ``docker-compose.yml`` file of the Wazuh agent, as described in :ref:`Wazuh agent <docker-wazuh-agent>`. Then run ``docker compose down -v`` and ``docker compose up -d`` from ``wazuh-docker/wazuh-agent/``. The ``-v`` flag deletes the stored enrollment. Without it, the Wazuh agent keeps its old settings and ignores the new token.
+
 .. _deploying-central-components:
 
 Deploying the central components
@@ -208,7 +210,7 @@ Follow the steps below to deploy the Wazuh central components. Steps that differ
 Cloning the repository
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Perform the following to clone the Wazuh Docker repository:
+Perform the following to clone the Wazuh Docker repository. If you already cloned the same release, for example, in :doc:`Building Docker images locally <build-docker-images-locally>`, skip to step 2. Running ``git clone`` again in the same directory stops with ``fatal: destination path 'wazuh-docker' already exists and is not an empty directory.``
 
 #. Clone the `Wazuh Docker <https://github.com/wazuh/wazuh-docker>`__ repository to your system:
 
@@ -239,7 +241,7 @@ Prepare the certificates
 
 Secure communication between Wazuh components requires the use of certificates. Follow the steps below to prepare and generate the certificates:
 
-#. Use the certificate creation tool from Wazuh 5.0.0 RC 2. Earlier versions don't create the Wazuh manager API certificates (``apid``) that each Wazuh manager node needs. If you already ran the certificate creation script with an earlier version, run ``rm -rf wazuh-certificates/`` before you run it again. Run the following command to download the tool:
+#. Run the following command to download the certificate creation tool of Wazuh |WAZUH_CURRENT|:
 
    .. code-block:: console
 
@@ -337,7 +339,7 @@ Run the credentials creation script:
 
    # bash ../tools/utils/deployment/credentials-conf.sh
 
-The script writes a random password for each account to ``config/credentials/indexer.env``, ``config/credentials/manager.env``, and ``config/credentials/dashboard.env``. The stack does not start without these files. Keep them, because they are the only record of your passwords. Don't edit them after the first start: an edit doesn't change the passwords, and the files then no longer match your deployment. To change a password later, see :ref:`docker_changing_password`.
+The script writes a random password for each account to ``config/credentials/indexer.env``, ``config/credentials/manager.env``, and ``config/credentials/dashboard.env``. The stack does not start without these files. If the files already exist, the script stops with ``credentials already exist`` and doesn't replace them. To replace them, add ``--force``, but only if you haven't started the stack yet. A started stack keeps the passwords it was first given. Keep them, because they are the only record of your passwords. Don't edit them after the first start: an edit doesn't change the passwords, and the files then no longer match your deployment. To change a password later, see :ref:`docker_changing_password`.
 
 Deployment
 ~~~~~~~~~~
@@ -464,6 +466,8 @@ Log in to the Wazuh dashboard with the ``admin`` username. The password is the `
 
 If the browser can't connect, or shows ``server is not ready yet``, wait until ``docker compose ps`` shows the ``wazuh.dashboard`` container as ``(healthy)``, then reload the page.
 
+.. _docker-wazuh-agent:
+
 Wazuh agent
 -----------
 
@@ -494,7 +498,7 @@ You need root user privileges to run the commands below. If you use Docker as a 
 
             # docker compose exec wazuh.master /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <DOCKER_HOST_IP>
 
-   The first line of the output is the enrollment token. Copy it. The token expires after 30 days, and any number of Wazuh agents can use it until then. You can also use the token to enroll a Wazuh agent installed from packages. Pass it in ``WAZUH_ENROLLMENT_TOKEN`` when you :doc:`install the Wazuh agent </installation-guide/wazuh-agent/index>`.
+   The first line of the output is the enrollment token. Copy it. The lines after it describe the token. When ``<DOCKER_HOST_IP>`` is an IP address, the last line is ``WARNING: the token address '<DOCKER_HOST_IP>' is an IP address: the token stops working if the manager's address changes. Use a DNS name if the manager's IP address can change.`` The token works while the Docker host keeps this address. To use a DNS name that resolves to the Docker host instead, add it with ``--agent-san`` as described below, and pass it to ``--address``. The token expires after 30 days, and any number of Wazuh agents can use it until then. You can also use the token to enroll a Wazuh agent installed from packages. Pass it in ``WAZUH_ENROLLMENT_TOKEN`` when you :doc:`install the Wazuh agent </installation-guide/wazuh-agent/index>`.
 
    If the command returns ``address not in certificate SAN``, the address isn't in the Wazuh manager agent listener certificate. Use an address you passed with ``--agent-san``, or add the address. To add it, run the following commands from the ``single-node`` or ``multi-node`` directory. Pass every address agents use, and every ``--api-san`` address you added, because the script creates the certificates again from ``config.yml`` and these options:
 
@@ -572,6 +576,15 @@ You need root user privileges to run the commands below. If you use Docker as a 
             # docker compose up
 
 #. Verify from your Wazuh dashboard that the Wazuh agent deployment was successful and visible. Navigate to **Agents management** > **Summary**, and you should see the Wazuh agent container active on your dashboard.
+
+If the Wazuh agent doesn't appear, run ``docker compose logs wazuh.agent`` from ``wazuh-docker/wazuh-agent/``. If the Wazuh manager refused the token, for example, because it was revoked, the logs show ``A new enrollment token is needed.`` The container keeps the settings stored in its volume, so a new token alone doesn't help. Create a new token as in step 1, put it in ``docker-compose.yml``, and run the following commands:
+
+.. code-block:: console
+
+   # docker compose down -v
+   # docker compose up -d
+
+The Wazuh agent then enrolls with the new token.
 
 Next steps
 ----------

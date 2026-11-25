@@ -16,12 +16,12 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
    :width: 100%
    :widths: 50 50
 
-   * - Log collector
-     - Command execution
+   * - Log data collection
+     - Command monitoring
    * - File integrity monitoring (FIM)
      - Security configuration assessment (SCA)
    * - System inventory
-     - Malware detection
+     - Malware detection (Rootcheck)
    * - Active response
      - Container security
    * - Cloud security
@@ -47,7 +47,7 @@ Go to **Agents management** > **Summary** and click **Deploy new agent**.
    :title: Deploy new agent button
    :alt: Deploy new agent button
 
-Then follow the steps on the Wazuh dashboard. The wizard creates the enrollment token for you. Enter a Wazuh manager address that the Wazuh agents can reach and that is in the agent listener certificate of the Wazuh manager, as :ref:`Generate the enrollment token <generate_enrollment_token>` describes. For any other address, the Wazuh dashboard shows ``API error: ERR_BAD_REQUEST - Enrollment token refused: address not in certificate SAN``. To fix it, see :ref:`Enrollment token refused: address not in certificate SAN <enrollment_token_refused_address_not_in_certificate_san>`.
+Then follow the steps on the Wazuh dashboard. The wizard creates the enrollment token for you. Enter a Wazuh manager address that the Wazuh agents can reach and that is in the Subject Alternative Name (SAN) list of the agent listener certificate of the Wazuh manager, as :ref:`Generate the enrollment token <generate_enrollment_token>` describes. For any other address, the Wazuh dashboard shows ``API error: ERR_BAD_REQUEST - Enrollment token refused: address not in certificate SAN``. To fix it, see :ref:`Enrollment token refused: address not in certificate SAN <enrollment_token_refused_address_not_in_certificate_san>`.
 
 .. thumbnail:: /images/installation/deploy-new-agent-from-ui-options.png
    :align: center
@@ -105,11 +105,11 @@ Complete the following steps on the Wazuh manager master node to generate the en
 
          IP Address:192.168.33.142, DNS:manager
 
-   To enroll a Wazuh agent on that node, use the node's address from the list. A token for any other address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
+   To enroll a Wazuh agent on that node, use the node's address from the list. A token for any other address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``. In a cluster, this is the master node's certificate. To create tokens for a worker node's address, add it to the master node's certificate first.
 
    If an address that agents use isn't in the list, add it to the Wazuh manager certificate first, as :ref:`Agent connection address <wazuh_manager_agent_connection_address>` describes. Examples are a load balancer, a NAT address, or a public name.
 
-#. Run the following command to create an enrollment token. Replace ``<WAZUH_MANAGER_ADDRESS>`` with an address from that list that the endpoints can resolve and reach. With an IP address, enrollment works, but the command prints a warning, because the token stops working if the Wazuh manager's IP address changes. Use a DNS name if agents must verify the Wazuh manager by name or its IP address can change.
+#. Run the following command to create an enrollment token. Replace ``<WAZUH_MANAGER_ADDRESS>`` with an address from that list that the endpoints can resolve and reach. Use the Wazuh manager's IP address or a DNS name that resolves to it. The entries ``localhost``, ``127.0.0.1``, and ``::1`` are loopback addresses, which point each endpoint back to itself. With an IP address, enrollment works, but the command prints a warning, because the token stops working if the Wazuh manager's IP address changes. Use a DNS name if agents must verify the Wazuh manager by name or its IP address can change.
 
    .. code-block:: console
 
@@ -152,7 +152,19 @@ Complete the following steps on the Wazuh manager master node to generate the en
 
    Replace ``<TOKEN_ID>`` with the token's ``id`` value.
 
-   You can also create, list, and revoke tokens in the Wazuh dashboard, under **Agents management** > **Enrollment tokens**. Click **Create token**, enter an address from the list, and click **Create**. The dashboard shows the token only once.
+   You can also create, list, and revoke tokens in the Wazuh dashboard, under **Agents management** > **Enrollment tokens**. Click **Create token**. The **Address** list shows the names in the Wazuh manager agent listener certificate. Select one that endpoints can resolve and reach, and click **Create**. The dashboard shows the token only once.
+
+   .. thumbnail:: /images/installation/enrollment-tokens-list.png
+      :title: Enrollment tokens list
+      :alt: Enrollment tokens list
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/installation/create-enrollment-token.png
+      :title: Create enrollment token
+      :alt: Create enrollment token
+      :align: center
+      :width: 80%
 
 #. Copy the token. You pass it as ``WAZUH_ENROLLMENT_TOKEN`` when you install the Wazuh agent, as the section for your operating system describes. The installation doesn't start the Wazuh agent. The agent enrolls with the Wazuh manager when it first starts.
 
@@ -258,7 +270,7 @@ To enroll the agent again, run these commands on the endpoint. Replace ``<ENROLL
 
 On Windows, you can also use **Manage** > **Enroll** in the agent GUI. It asks you to confirm that the agent gets a new ID.
 
-The agent gets a new ID and the new CA, and keeps its name.
+The agent gets a new ID, trusts the CA of the new Wazuh manager, and keeps its name.
 
 In the first minute after the start, the agent log can show ``credential rejected (401); re-enrolling.`` and ``Manager unreachable``, and the agent can be listed as disconnected while the Wazuh manager node loads the new key. The agent enrolls again by itself and connects. If it's still disconnected after a minute, check the agent log: ``/var/ossec/logs/ossec.log`` on Linux, ``/Library/Ossec/logs/ossec.log`` on macOS, or ``C:\Program Files (x86)\ossec-agent\ossec.log`` on Windows.
 

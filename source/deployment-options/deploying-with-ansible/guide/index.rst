@@ -163,9 +163,7 @@ Run the playbook
 
    .. note::
 
-      Access the Wazuh dashboard at ``https://<AIO_PUBLIC_IP>`` and log in as ``admin``. The playbook generates a random password for this user during the first run and does not use a default password.
-
-      Run the following command on the Ansible control node to read it:
+      Access the Wazuh dashboard at ``https://<AIO_PUBLIC_IP>`` and log in as ``admin``. The playbook generates a random password for this user during the first run and does not use a default password. Run the following command on the Ansible control node to read it:
 
       .. code-block:: console
 
@@ -403,9 +401,7 @@ Run the playbook
 
    .. note::
 
-      Access the Wazuh dashboard at ``https://<DASHBOARD_PUBLIC_IP>`` and log in as ``admin``. The playbook generates a random password for this user during the first run and does not use a default password.
-
-      Run the following command on the Ansible control node to read it. Replace ``<CLONE_DIRECTORY>`` with the directory of the clone you ran ``wazuh-distributed.yml`` from, for example ``/etc/ansible/roles/wazuh-ansible``:
+      Access the Wazuh dashboard at ``https://<DASHBOARD_PUBLIC_IP>`` and log in as ``admin``. The playbook generates a random password for this user during the first run and does not use a default password. Run the following command on the Ansible control node to read it. Replace ``<CLONE_DIRECTORY>`` with the directory of the clone you ran ``wazuh-distributed.yml`` from, for example ``/etc/ansible/roles/wazuh-ansible``:
 
       .. code-block:: console
 
@@ -474,7 +470,7 @@ After you change the ``kibanaserver`` or ``wazuh-internal-client`` password, upd
    # echo 'WAZUH_MANAGER_WUI_PASSWORD=<NEW_WUI_PASSWORD>' >> /etc/wazuh-dashboard/local.env
    # systemctl restart wazuh-dashboard
 
-In an all-in-one deployment, skip the ``sed`` and ``echo`` commands. The Wazuh dashboard reads the new password from ``/etc/wazuh-manager/export/credentials.env``. For ``kibanaserver``, remove ``opensearch.password`` and set ``WAZUH_INDEXER_KIBANASERVER_PASSWORD`` instead.
+In an all-in-one deployment, skip the ``sed`` and ``echo`` commands. The Wazuh passwords tool already writes the new passwords to ``/etc/wazuh-dashboard/local.env`` on that host. For ``kibanaserver``, remove ``opensearch.password`` and set ``WAZUH_INDEXER_KIBANASERVER_PASSWORD`` instead.
 
 The files in ``deployment-credentials`` hold the passwords in plain text. Restrict access to them. To read a password, open the corresponding file for the Wazuh user. For example, run the following command to read the password of the ``wazuh`` user:
 
@@ -510,9 +506,9 @@ To use your own root CA in a Wazuh cluster deployment, place its ``root-ca.pem``
 
 Each clone of the Wazuh Ansible repository holds one deployment. To deploy another environment, clone the repository into another directory and run the playbook from there. The passwords of that deployment are in the ``deployment-credentials`` directory of that clone, so read them there, not in ``/etc/ansible/roles/wazuh-ansible/``.
 
-Running the playbook again from the same directory keeps the passwords, the root CA, and the certificates. It leaves the installed Wazuh packages as they are and doesn't write ``local.env`` again. It restarts a service only when its configuration changes.
+Running the playbook again from the same directory keeps the passwords, the root CA, and the certificates. It leaves the installed Wazuh packages as they are and doesn't write ``local.env`` again. It doesn't download an installed package again, including the release candidate packages installed with ``-e "source=prerelease"``. It restarts a service only when its configuration changes.
 
-To add a Wazuh indexer node to a Wazuh cluster deployment, add the node to the inventory and to the ``wi_cluster`` group, and add it to ``instances``, ``wazuh_indexer_hosts``, and ``indexer_cluster_nodes`` in the playbook. Then run the playbook again for the whole inventory, without ``--limit``. The playbook issues the certificates of the new node from the root CA of the deployment and keeps the certificates of the existing nodes. It adds the new node to the configuration of the Wazuh manager and Wazuh dashboard, and restarts those services.
+To add a Wazuh indexer node to a Wazuh cluster deployment, add the node to the inventory and to the ``wi_cluster`` group, and add it to ``instances``, ``wazuh_indexer_hosts``, and ``indexer_cluster_nodes`` in the playbook. Then run the playbook again for the whole inventory, without ``--limit``. The existing Wazuh indexer nodes accept the new node only when their ``plugins.security.nodes_dn`` setting lists it, and the playbook writes that list from ``instances``. The existing Wazuh indexer nodes restart at the same time to read the new list, so the Wazuh indexer cluster is unavailable until they join it again. The security configuration of the cluster, with its users, roles, and passwords, is kept. If you limit the run to the new node, the run stops before it loads anything and asks for a run with every Wazuh indexer node. A later run with ``--limit`` to Wazuh indexer nodes that are already installed keeps every node of ``instances`` in that list, so it does not restart them. The playbook issues the certificates of the new node from the root CA of the deployment and keeps the certificates of the existing nodes. It adds the new node to the configuration of the Wazuh manager and Wazuh dashboard, and restarts those services.
 
 To change the passwords, see :doc:`Password management </user-manual/user-administration/password-management>`.
 
@@ -573,7 +569,7 @@ The command output looks similar to this:
    pin: <CA_PIN>
    credential: yes
 
-If ``<WAZUH_MANAGER_ADDRESS>`` is an IP address, the command also prints ``WARNING: the token address '<WAZUH_MANAGER_ADDRESS>' is an IP address: the token stops working if the manager's address changes.`` The token still works.
+If ``<WAZUH_MANAGER_ADDRESS>`` is an IP address, the command also prints ``WARNING: the token address '<WAZUH_MANAGER_ADDRESS>' is an IP address: the token stops working if the manager's address changes. Use a DNS name if the manager's IP address can change.`` The token still works.
 
 Copy the first line, ``<ENROLLMENT_TOKEN>``. The token is valid for 30 days and can be used to enroll several agents until it expires.
 
@@ -642,6 +638,12 @@ The ``/etc/ansible/roles/wazuh-ansible/wazuh-agent.yml`` file contains the neces
 
    ---
 
+   - name: Configure package URLs
+     hosts: agents
+     gather_facts: false
+     roles:
+       - role: package-urls
+
    - name: Deploy Wazuh agent(s)
      hosts: agents
      strategy: free
@@ -650,8 +652,6 @@ The ``/etc/ansible/roles/wazuh-ansible/wazuh-agent.yml`` file contains the neces
        # Verification posture: full (CA + hostname), certificate (CA only), system
        # (OS trust store) or none. Empty leaves it unset.
        wazuh_ssl_verification: ""
-     roles:
-       - role: package-urls
      tasks:
        - name: Include wazuh-agent role for Linux/MacOS hosts
          when: ansible_facts.system == "Linux" or ansible_facts.system == "Darwin"
@@ -671,7 +671,7 @@ The ``/etc/ansible/roles/wazuh-ansible/wazuh-agent.yml`` file contains the neces
 
 -  ``hosts:`` specifies the Ansible inventory group that contains the endpoints where the Wazuh agent will be installed. The playbook targets the ``agents`` group, so the inventory uses the same group name.
 -  ``wazuh_enrollment_token``: is the enrollment token generated on the Wazuh manager. The role passes it to the agent installer as ``WAZUH_ENROLLMENT_TOKEN``.
--  ``roles:`` runs the ``package-urls`` role, which downloads the list of Wazuh package URLs that the ``wazuh-agent`` role uses.
+-  ``Configure package URLs``: a separate play that runs the ``package-urls`` role before the agent play. The role downloads the list of Wazuh package URLs that the ``wazuh-agent`` role uses, once per run, on the Ansible control node. The play targets the ``agents`` group, so it also runs when you use ``--limit``.
 -  ``tasks:`` includes the ``wazuh-agent`` role on Linux, macOS, and Windows hosts. On Linux and macOS hosts, the role runs with root privileges.
 
 .. _ansible_agent_prepare:
@@ -685,6 +685,12 @@ Replace the value of ``wazuh_enrollment_token`` in the ``/etc/ansible/roles/wazu
 
    ---
 
+   - name: Configure package URLs
+     hosts: agents
+     gather_facts: false
+     roles:
+       - role: package-urls
+
    - name: Deploy Wazuh agent(s)
      hosts: agents
      strategy: free
@@ -693,8 +699,6 @@ Replace the value of ``wazuh_enrollment_token`` in the ``/etc/ansible/roles/wazu
        # Verification posture: full (CA + hostname), certificate (CA only), system
        # (OS trust store) or none. Empty leaves it unset.
        wazuh_ssl_verification: ""
-     roles:
-       - role: package-urls
      tasks:
        - name: Include wazuh-agent role for Linux/MacOS hosts
          when: ansible_facts.system == "Linux" or ansible_facts.system == "Darwin"
@@ -798,4 +802,4 @@ In the clone on the Ansible control node, ``deployment-credentials`` holds the p
 
 Wazuh agents enrolled with the removed deployment do not reconnect to a new one, even one deployed from the same clone. :doc:`Remove the Wazuh agent </installation-guide/uninstalling-wazuh/agent>` from each endpoint, generate an enrollment token on the new deployment, and store it in place of the old one, as :ref:`Generate an enrollment token <ansible_agent_token>` describes. Then run the agent playbook again.
 
-The playbooks don't upgrade a deployment. Between 5.x releases, upgrade each component as its documentation describes. You can't upgrade a Wazuh manager 4.x, or a 5.0.0 RC 1 or earlier pre-release, in place. Deploy Wazuh 5.0 on new hosts, and move your Wazuh agents and configuration as the :doc:`Migration guide </migration-to-5x/index>` describes.
+The playbooks don't upgrade a deployment. Between 5.x releases, upgrade each component as its documentation describes. You can't upgrade a Wazuh manager 4.x, or a 5.0.0 RC 1 or earlier pre-release, in place. Deploy Wazuh 5.0 on new hosts, and move your Wazuh agents and configuration as :doc:`/transitioning/index` describes. The playbooks don't manage the rest of the configuration, so make the configuration changes that guide describes in the configuration files on each host. Later runs of the playbook keep these changes, except for the settings the roles write: ``network.host``, ``node.name``, the cluster discovery settings, and ``plugins.security.nodes_dn`` in ``opensearch.yml``, the JVM heap size, the Wazuh indexer hosts and the cluster node settings in ``wazuh-manager.conf``, and ``opensearch.hosts`` and the Wazuh manager URL in ``opensearch_dashboards.yml``. The playbook resets these settings and restarts the services whose files it changed.

@@ -25,6 +25,7 @@ These are some of the messages you can find:
 -  ``MISSING /etc/wazuh-dashboard/certs/indexer-ca.pem: no CA to verify the indexer with``. The Wazuh dashboard has no CA certificate for the Wazuh indexer. On a single host, it copies ``/etc/wazuh-indexer/export/ca.pem``, so check that this file exists. On a separate host, copy that file from the Wazuh indexer node to ``/etc/wazuh-dashboard/certs/indexer-ca.pem``, with owner root, group wazuh-dashboard, and mode ``0640``.
 -  ``MISSING WAZUH_INDEXER_KIBANASERVER_PASSWORD (the indexer's kibanaserver account)``. The Wazuh dashboard has no password for the kibanaserver user. On a single host, it reads it from ``/etc/wazuh-indexer/export/credentials.env``. On a separate host, copy the WAZUH_INDEXER_KIBANASERVER_PASSWORD line from that file on the Wazuh indexer node to ``/etc/wazuh-dashboard/local.env``, owned by root with mode ``0600``.
 -  ``EACCES: permission denied``, followed by a file name. The Wazuh dashboard cannot read that file. Set it to owner ``root``, group ``wazuh-dashboard``, and mode ``0640``.
+-  ``resolve-credentials: warning: /etc/wazuh-dashboard/local.env is group- or world-readable; it holds passwords``. The Wazuh dashboard still starts and reads the file. Run ``chmod 600 /etc/wazuh-dashboard/local.env`` so that only root can read it.
 
 After you fix the cause, clear the failed state and start the Wazuh dashboard:
 

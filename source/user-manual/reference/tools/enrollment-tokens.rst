@@ -39,7 +39,7 @@ The token has these parts:
 -  **Trust anchor**: Either a pin or the CA itself. The pin is the SHA-256 digest of the CA certificate's public key. With ``--embed-ca``, the token carries the CA certificates instead.
 -  **Credential**: The token ID followed by the token secret. The agent uses it to prove it holds the token.
 
-A token minted with ``--no-credential`` has no credential. It only tells the agent where to connect and which CA to trust. The token text carries no token ID, so it cannot authenticate an enrollment. The agent enrolls only if the Wazuh manager configuration allows enrollment without a credential.
+A token minted with ``--no-credential`` has no credential. It only tells the agent where to connect and which CA to trust. The token text carries no token ID, so it cannot authenticate an enrollment. Instead, the Wazuh agent presents the enrollment password from its own ``authd.pass`` file, ``/var/ossec/etc/authd.pass`` on Linux, when it has one. It verifies the Wazuh manager against the CA in the token before it sends the password. Without that file, the agent enrolls only if the Wazuh manager doesn't require the enrollment password.
 
 The token itself isn't signed, and it reveals the credential to anyone who reads it. Distribute it through a trusted channel.
 

@@ -36,5 +36,16 @@ This example configures the FIM module to monitor a file and directory. Replace 
 
 .. note::
 
-   If you specify a directory both in a centralized configuration and in the configuration file of the Wazuh agent, the centralized configuration takes precedence and overrides the local configuration. The FIM module does not support monitoring UNC network paths or mapped network drives on Windows. Only local file system paths are supported. This applies to all FIM modes: scheduled, real-time, and whodata.
+   If you specify a directory both in a centralized configuration and in the configuration file of the Wazuh agent, the centralized configuration takes precedence and overrides the local configuration.
 
+   The FIM module does not support monitoring UNC network paths or mapped network drives on Windows. Only local file system paths are supported. This applies to all FIM modes: scheduled, real-time, and whodata.
+
+   The Wazuh agent reads only the settings inside the ``<ossec_config>`` block. A ``<syscheck>`` block outside it stops the Wazuh agent with the error ``(1230): Invalid element in the configuration: 'syscheck'.``
+
+To apply FIM settings to a group of Wazuh agents from the Wazuh dashboard, go to **Agents management** > **Groups** and click the **Edit group configuration** icon of the group. Add the ``<syscheck>`` block inside the ``<agent_config>`` block and click **Save**. Each Wazuh agent in the group receives the new configuration and reloads it automatically. See :doc:`centralized configuration </user-manual/reference/centralized-configuration>`.
+
+.. thumbnail:: /images/manual/fim/edit-group-configuration.png
+   :title: Edit group configuration
+   :alt: agent.conf of the default group in the Wazuh dashboard with a syscheck block inside the agent_config block
+   :align: center
+   :width: 80%

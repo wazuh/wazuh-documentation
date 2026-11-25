@@ -16,7 +16,7 @@ The following diagram shows a Wazuh indexer cluster.
 
 .. thumbnail:: /images/getting-started/indexer-cluster.png
    :title: Wazuh indexer
-   :alt: Wazuh indexer
+   :alt: Wazuh indexer cluster with three nodes, primary and replica shards, and an extract of a finding document
    :align: center
    :width: 80%
 

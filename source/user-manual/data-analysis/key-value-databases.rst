@@ -20,37 +20,38 @@ A KVDB is a named dictionary of **key** and **value** entries, where:
 
 This keeps large or frequently updated lookup data outside the decoder itself, making assets easier to maintain and reuse.
 
-The following table shows the Wazuh KVDB transformation functions:
+The following table shows the Wazuh KVDB map functions:
 
 +------------------------------+-----------------------------------------------------------+--------------------------------------+--------------------------------------------------------------------------------------------------+
 | Function                     | Signature                                                 | Purpose                              | Example                                                                                          |
 +==============================+===========================================================+======================================+==================================================================================================+
-| Transformation functions (used in the map/normalize stage)                                                                                                                                                                         |
+| Map functions (used in the map/normalize stage)                                                                                                                                                                                    |
 +------------------------------+-----------------------------------------------------------+--------------------------------------+--------------------------------------------------------------------------------------------------+
-| ``kvdb_get``                 | ``field: kvdb_get(db_name, key)``                         | Retrieves the value of a given key   | .. code-block:: yaml                                                                             |
+| ``kvdb_lookup``              | ``field: kvdb_lookup(db_name, key)``                      | Retrieves the value of a given key   | .. code-block:: yaml                                                                             |
 |                              |                                                           | from the specified KVDB. If the key  |                                                                                                  |
 |                              |                                                           | exists, its value is stored in the   |    normalize:                                                                                    |
 |                              |                                                           | target field.                        |      - map:                                                                                      |
-|                              |                                                           |                                      |          - event.category: kvdb_get('event_categories', $event.code)                             |
+|                              |                                                           |                                      |          - event.category: kvdb_lookup('event_categories', $event.code)                          |
 +------------------------------+-----------------------------------------------------------+--------------------------------------+--------------------------------------------------------------------------------------------------+
-| ``kvdb_get_array``           | ``field: kvdb_get_array(db_name, key)``                   | Retrieves an array value stored      | .. code-block:: yaml                                                                             |
-|                              |                                                           | under the given key in the specified |                                                                                                  |
-|                              |                                                           | KVDB and assigns it to the target    |    normalize:                                                                                    |
+| ``kvdb_lookup_append``       | ``field: kvdb_lookup_append(db_name, keys)``              | Looks up each key of the keys array  | .. code-block:: yaml                                                                             |
+|                              |                                                           | in the specified KVDB and appends    |                                                                                                  |
+|                              |                                                           | the values to the target array       |    normalize:                                                                                    |
 |                              |                                                           | field.                               |      - map:                                                                                      |
-|                              |                                                           |                                      |          - user.roles: kvdb_get_array('user_roles_db', $user.name)                               |
+|                              |                                                           |                                      |          - user.roles: kvdb_lookup_append('user_roles_db', $_role_keys)                          |
 +------------------------------+-----------------------------------------------------------+--------------------------------------+--------------------------------------------------------------------------------------------------+
-| ``kvdb_get_merge``           | ``field: kvdb_get_merge(db_name, key)``                   | Look up a key's value in the         | .. code-block:: yaml                                                                             |
+| ``kvdb_lookup_merge``        | ``field: kvdb_lookup_merge(db_name, key)``                | Look up a key's value in the         | .. code-block:: yaml                                                                             |
 |                              |                                                           | specified KVDB. If the key exists    |                                                                                                  |
 |                              |                                                           | and the value type is compatible     |    normalize:                                                                                    |
-|                              |                                                           | with the target field, it performs a |      - map:                                                                                      |
-|                              |                                                           | shallow merge for objects or         |          - event: kvdb_get_merge('event_defaults_by_code', $event.code)                          |
-|                              |                                                           | concatenation for arrays.            |                                                                                                  |
+|                              |                                                           | with the target field, it merges     |      - map:                                                                                      |
+|                              |                                                           | objects one level deep and adds to   |          - event: kvdb_lookup_merge('event_defaults_by_code', $event.code)                       |
+|                              |                                                           | arrays only the items that the       |                                                                                                  |
+|                              |                                                           | target doesn't already have.         |                                                                                                  |
 +------------------------------+-----------------------------------------------------------+--------------------------------------+--------------------------------------------------------------------------------------------------+
-| ``kvdb_get_merge_recursive`` | ``field: kvdb_get_merge_recursive(db_name, key)``         | Performs a deep (recursive) merge of | .. code-block:: yaml                                                                             |
+| ``kvdb_lookup_merge (deep)`` | ``field: kvdb_lookup_merge(db_name, key, 'deep')``        | Performs a deep (recursive) merge of | .. code-block:: yaml                                                                             |
 |                              |                                                           | the KVDB value into the target       |                                                                                                  |
 |                              |                                                           | field, rather than a shallow merge.  |    normalize:                                                                                    |
 |                              |                                                           | Useful when the stored value         |      - map:                                                                                      |
-|                              |                                                           | contains nested objects that should  |          - host: kvdb_get_merge_recursive('host_inventory', $host.id)                            |
+|                              |                                                           | contains nested objects that should  |          - host: kvdb_lookup_merge('host_inventory', $host.id, 'deep')                           |
 |                              |                                                           | be fully merged into the event       |                                                                                                  |
 |                              |                                                           | document.                            |                                                                                                  |
 +------------------------------+-----------------------------------------------------------+--------------------------------------+--------------------------------------------------------------------------------------------------+
@@ -61,21 +62,21 @@ The following table shows the Wazuh KVDB transformation functions:
 |                              |                                                           |                                      |          - auditd.permissions: kvdb_decode_bitmask('audit_db', 'permission_flags', $auditd.mask) |
 +------------------------------+-----------------------------------------------------------+--------------------------------------+--------------------------------------------------------------------------------------------------+
 
-The following table shows the Wazuh KVDB filter functions:
+The following table shows the Wazuh KVDB check functions:
 
 +------------------------------+-----------------------------------------------------------+--------------------------------------+--------------------------------------------------------------------------------------------------+
-| Filter functions (used in the check stage)                                                                                                                                                                                         |
+| Check functions (used in the check stage)                                                                                                                                                                                          |
 +==============================+===========================================================+======================================+==================================================================================================+
-| ``kvdb_match``               | ``field: kvdb_match(db_name)``                            | Checks whether the string value      | .. code-block:: yaml                                                                             |
+| ``in_kvdb``                  | ``field: in_kvdb(db_name)``                               | Checks whether the string value      | .. code-block:: yaml                                                                             |
 |                              |                                                           | stored in the target field exists as |                                                                                                  |
 |                              |                                                           | a key in the specified KVDB. The     |    check:                                                                                        |
-|                              |                                                           | filter succeeds (passes the event)   |      - source.ip: kvdb_match('known_malicious_ips')                                              |
-|                              |                                                           | if the key is found.                 |                                                                                                  |
+|                              |                                                           | check succeeds (passes the event) if |      - source.ip: in_kvdb('known_malicious_ips')                                                 |
+|                              |                                                           | the key is found.                    |                                                                                                  |
 +------------------------------+-----------------------------------------------------------+--------------------------------------+--------------------------------------------------------------------------------------------------+
-| ``kvdb_not_match``           | ``field: kvdb_not_match(db_name)``                        | The inverse of ``kvdb_match``. The   | .. code-block:: yaml                                                                             |
-|                              |                                                           | filter succeeds if the target        |                                                                                                  |
-|                              |                                                           | field's value does not exist as a    |    check:                                                                                        |
-|                              |                                                           | key in the specified KVDB.           |      - wazuh.agent.id: kvdb_not_match('unauthorized_agents')                                     |
+| ``not_in_kvdb``              | ``field: not_in_kvdb(db_name)``                           | The inverse of ``in_kvdb``. The      | .. code-block:: yaml                                                                             |
+|                              |                                                           | check succeeds if the target field's |                                                                                                  |
+|                              |                                                           | value does not exist as a key in the |    check:                                                                                        |
+|                              |                                                           | specified KVDB.                      |      - wazuh.agent.id: not_in_kvdb('unauthorized_agents')                                        |
 +------------------------------+-----------------------------------------------------------+--------------------------------------+--------------------------------------------------------------------------------------------------+
 
 Example
@@ -96,7 +97,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
 
 #. Specify the **Integration**, **Title** and **Author**. Add a ``key`` and ``value`` in the **Content** section.
 
-   The **Title** must be ``test_KVDB``. The title is the KVDB name, and the decoder created in step 4 looks it up with ``kvdb_get('test_KVDB', $source.ip)``.
+   The **Title** must be ``test_KVDB``. The title is the KVDB name, and the decoder created in step 4 looks it up with ``kvdb_lookup('test_KVDB', $source.ip)``.
 
    In this example:
 
@@ -135,6 +136,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
         - "https://documentation.wazuh.com/"
         supports: []
         title: "Wazuh message decoder"
+      check: "regex_match($event.original, '\"query_name\":.*\"srcaddr\":')"
       normalize:
       - map:
         - _tmp_json: "parse_json($event.original)"
@@ -154,6 +156,8 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
    -  ``id: "c8d31738-281e-4183-a5f3-fd02dea3bc25"`` - Stable UUID used by the content system (the content manager, the space policies, and the Wazuh indexer) to uniquely track this decoder version, independent of its human-readable name. When you create a decoder, Wazuh assigns it a new random UUID and replaces any ``id`` you write. Use the ``name`` to refer to the decoder.
 
    -  ``enabled: true`` - Marks the decoder as active; if set to ``false``, the decoder stays in the content but is skipped, so it never evaluates events.
+
+   -  ``check: "regex_match($event.original, '\"query_name\":.*\"srcaddr\":')"`` - Limits the root decoder to Route53 Resolver query logs. A root decoder without a check accepts every agent event, so if you promote this example to the custom space, Wazuh indexes every event a second time.
 
    -  ``metadata.author: "Wazuh, Inc."`` - Informational field indicating who created or maintains the decoder asset; it has no impact on runtime behavior.
 
@@ -202,7 +206,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
           tcp: "6"
           udp: "17"
       check:
-      - _tmp_json: "keys_exist_in_list([\"version\", \"account_id\", \"region\", \"vpc_id\"\
+      - _tmp_json: "has_only_keys([\"version\", \"account_id\", \"region\", \"vpc_id\"\
           , \"query_timestamp\", \"query_name\", \"query_type\", \"query_class\", \"rcode\"\
           , \"answers\", \"srcaddr\", \"srcport\", \"transport\", \"srcids\", \"firewall_rule_action\"\
           , \"firewall_rule_group_id\", \"firewall_domain_list_id\"])"
@@ -225,21 +229,21 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
         - event.category: "array_append(network)"
         - event.start: "parse_date($_tmp_json.query_timestamp, ISO8601Z)"
         - event.type: "array_append(protocol)"
-        - network.transport: "downcase($_tmp_json.transport)"
-        - network.iana_number: "get_key_in($netiana_map, $network.transport)"
+        - network.transport: "lowercase($_tmp_json.transport)"
+        - network.iana_number: "lookup($netiana_map, $network.transport)"
         - network.protocol: "dns"
         - source.address: "$_tmp_json.srcaddr"
         - source.ip: "$_tmp_json.srcaddr"
         - source.port: "parse_long($_tmp_json.srcport)"
         - network.type: "ip_version($source.ip)"
         - related.ip: "array_append($source.ip)"
-        - threat.feed.description: "kvdb_get('test_KVDB', $source.ip)"
-      - check: "string_equal($_tmp.firewall_action, BLOCK)"
+        - threat.feed.description: "kvdb_lookup('test_KVDB', $source.ip)"
+      - check: "string_eq($_tmp.firewall_action, BLOCK)"
         map:
         - event.action: "dns-response"
         - event.type: "array_append(denied)"
         - event.outcome: "failure"
-      - check: "string_equal($_tmp.firewall_action, ALERT)"
+      - check: "string_eq($_tmp.firewall_action, ALERT)"
         map:
         - event.kind: "alert"
         - event.category: "array_append(intrusion_detection)"
@@ -302,7 +306,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
 
    Where:
 
-   -  ``- threat.feed.description: "kvdb_get('test_KVDB', $source.ip)"`` - extracts the ``source.ip`` value and compares it with the key in the KVDB we created. If it finds a match, it enriches the normalized event.
+   -  ``- threat.feed.description: "kvdb_lookup('test_KVDB', $source.ip)"`` - extracts the ``source.ip`` value and compares it with the key in the KVDB we created. If it finds a match, it enriches the normalized event.
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-create-test-decoder.png
       :title: Create the second decoder
@@ -310,9 +314,9 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset Management** > **Overview** > **Actions** > **Edit**, confirm the status is **Enabled**, select ``decoder/test-wazuh-message/0`` as the **Root decoder** and click **Save**.
+#. Navigate to **Ruleset Management** > **Overview** > **Space actions** > **Edit**, confirm the status is **Enabled**, select ``decoder/test-wazuh-message/0`` as the **Root decoder** and click **Save**.
 
-#. Navigate to **Ruleset Management** > **Overview** > **Actions** and click on **Promote**. Review the list of changes, which includes the decoders and the KVDB you created, and confirm the promotion. Promotion moves all the changes in the space together.
+#. Navigate to **Ruleset Management** > **Overview** > **Space actions** and click on **Promote**. Review the list of changes, which includes the decoders and the KVDB you created, and confirm the promotion. Promotion moves all the changes in the space together.
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-promote-test-integration.png
       :title: Promote the test integration

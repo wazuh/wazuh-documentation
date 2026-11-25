@@ -15,7 +15,7 @@ indexer
       <indexer>
       </indexer>
 
-The Indexer Connector configuration ``<indexer>`` establishes TLS-secured connections to one or more Indexer nodes for data indexing and feed synchronization.
+The ``<indexer>`` section configures the connection between the Wazuh manager and one or more Wazuh indexer nodes for data indexing and feed synchronization.
 
 Options
 -------
@@ -23,12 +23,14 @@ Options
 - `hosts`_
 - `ssl`_
 
-``<hosts>`` is required. ``<ssl>`` is optional and only needed for TLS-protected connections to the Wazuh indexer.
+``<hosts>`` is required. ``<ssl>`` is optional. It sets the CA certificates that the Wazuh manager uses to verify the Wazuh indexer certificate, and the client certificate and key that the Wazuh manager presents for mutual TLS.
+
+When a host uses ``https://`` and ``<certificate_authorities>`` isn't set, the Wazuh manager verifies the Wazuh indexer certificate against the first system CA bundle it finds, for example ``/etc/ssl/certs/ca-certificates.crt`` or ``/etc/pki/tls/certs/ca-bundle.crt``. The Wazuh manager presents a client certificate only when both ``certificate`` and ``key`` are set.
 
 hosts
 ^^^^^
 
-List of Indexer node URLs. Each node is specified with a ``<host>`` child element.
+List of Wazuh indexer node URLs. Each node is specified with a ``<host>`` child element.
 
 host
 ~~~~~
@@ -38,9 +40,8 @@ Specifies the URLs of the Wazuh indexer nodes. Define each node in a separate ``
 +--------------------+----------------------------------------+
 | **Required**       | yes                                    |
 +--------------------+----------------------------------------+
-| **Allowed values** | A URL in one of the following formats: |
-|                    | - ``http://<address>:<port>``          |
-|                    | - ``https://<address>:<port>``         |
+| **Allowed values** | ``http://<address>:<port>`` or         |
+|                    | ``https://<address>:<port>``           |
 +--------------------+----------------------------------------+
 
 Both schemes are accepted. Use ``https://`` for TLS-protected deployments.
@@ -61,7 +62,7 @@ Configuration options for the TLS/SSL parameters.
 certificate_authorities
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Path to one or more CA certificates used to verify the Indexer's TLS certificate. Each CA is listed with a ``<ca>`` child element.
+Path to one or more CA certificates used to verify the Wazuh indexer TLS certificate. Each CA is listed with a ``<ca>`` child element.
 
 ``ca`` — CA certificate file path. The path must exist on disk at startup time.
 

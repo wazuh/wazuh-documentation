@@ -28,7 +28,7 @@ Installing package dependencies
 
          .. code-block:: console
 
-            # apt-get install -y tar curl
+            # apt-get update && apt-get install -y tar curl gnupg apt-transport-https
 
       .. group-tab:: Yum
 
@@ -49,61 +49,32 @@ Adding the Wazuh repository
 
    If the Wazuh repository is already configured and enabled on this host (for example on the Wazuh indexer host), skip these steps.
 
+Run the following command to import the GPG key and add the Wazuh repository. On APT, the command also updates the package information.
+
 .. tabs::
 
    .. group-tab:: APT
 
-      #. Install the following packages if missing:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # apt-get update && apt-get install -y gnupg apt-transport-https curl
-
-      #. Install the GPG key:
-
-         .. code-block:: console
-
-            # curl -s https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/ unstable main" | tee /etc/apt/sources.list.d/wazuh.list
-
-      #. Update the package information:
-
-         .. code-block:: console
-
-            # apt-get update
+         # curl -fsS https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && \
+           chmod 644 /usr/share/keyrings/wazuh.gpg && \
+           echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/ unstable main" | tee /etc/apt/sources.list.d/wazuh.list && \
+           apt-get update
 
    .. group-tab:: Yum
 
-      #. Import the GPG key:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
+         # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH && \
+           echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
 
    .. group-tab:: DNF
 
-      #. Import the GPG key:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
+         # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH && \
+           echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
 
 .. _wazuh_dashboard_deploying_certificates:
 
@@ -112,9 +83,11 @@ Deploying certificates and passwords
 
 Do this **before installing the package**. The package then uses these passwords and CA certificates instead of generating its own, and issues this node's certificate.
 
-.. note::
+If the Wazuh indexer and Wazuh manager are already installed on this host, for example an all-in-one host, skip this section and go to :ref:`Installing the Wazuh dashboard <wazuh_dashboard_installing_package>`. Don't extract the archive or place any files manually. The Wazuh dashboard package retrieves the passwords and certificates from their export directories during installation and issues its own certificate.
 
-   If the Wazuh indexer and Wazuh manager are already installed on this host, skip this section. Do not extract the archive or place any files manually. The Wazuh dashboard package retrieves the passwords and certificates from their export directories during installation and issues its own certificate.
+On any other host, follow the steps below.
+
+.. note::
 
    Make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
 
@@ -159,6 +132,8 @@ Do this **before installing the package**. The package then uses these passwords
 
       # rm -f ./wazuh-certificates.tar
 
+.. _wazuh_dashboard_installing_package:
+
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -184,7 +159,9 @@ Installing the Wazuh dashboard
 
             # dnf -y install wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
-   Release candidate packages carry the version of the final release, ``|WAZUH_CURRENT|-|WAZUH_DASHBOARD_PKG_REV|``. Only their file names show the RC stage, for example ``wazuh-dashboard_|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|_|WAZUH_DASHBOARD_x64_DEB|.deb``, so ``dpkg -l`` and ``rpm -q`` show ``|WAZUH_CURRENT|-|WAZUH_DASHBOARD_PKG_REV|``.
+   Release candidate packages carry the version of the final release, ``|WAZUH_CURRENT|-|WAZUH_DASHBOARD_PKG_REV|``. ``|WAZUH_CURRENT|`` is the version and ``-|WAZUH_DASHBOARD_PKG_REV|`` is the package revision, not the release candidate number. Only their file names show the RC stage, for example ``wazuh-dashboard_|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|_|WAZUH_DASHBOARD_x64_DEB|.deb``, so ``dpkg -l`` and ``rpm -q`` show ``|WAZUH_CURRENT|-|WAZUH_DASHBOARD_PKG_REV|``.
+
+   To check which release candidate the repository holds before you install, read the file name with ``apt-cache show wazuh-dashboard | grep Filename`` on APT, ``repoquery --location wazuh-dashboard`` on Yum (from the ``yum-utils`` package), or ``dnf repoquery --location wazuh-dashboard`` on DNF.
 
 .. _wazuh_dashboard_configuring:
 
@@ -193,7 +170,9 @@ Configuring the Wazuh dashboard
 
 #. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file. The package ships it pre-filled with single-host values, so change only ``opensearch.hosts`` and ``wazuh_core.hosts.default.url``, and leave the rest of the file as shipped:
 
-   #. ``server.host``: The package sets ``0.0.0.0``, which accepts connections on every address of the host. You don't need to change it.
+   .. note::
+
+      ``server.host``: The package sets ``0.0.0.0``, which accepts connections on every address of the host. You don't need to change it.
 
    #. ``opensearch.hosts``: The package sets ``https://localhost:9200``. Replace it with the URL of the Wazuh indexer node, using the address you set in ``network.host`` in :ref:`Configuring the Wazuh indexer <wazuh_indexer_configuring>`. If you set ``network.host`` to one IP address, the Wazuh indexer listens only on that address. Then ``localhost`` fails, even when the Wazuh indexer runs on this host. If you left the package default, ``https://localhost:9200`` works.
 
@@ -215,7 +194,7 @@ Configuring the Wazuh dashboard
 
    #. ``wazuh_core.hosts.default.url``: The Wazuh manager master node. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node. If the Wazuh manager master node is on this host, keep the shipped value, ``https://localhost``.
 
-   #. Edit the block that the package shipped, and don't add a second one or a password line. The host in ``url`` must be in the Wazuh manager API certificate. To list its addresses, run this command on the master node:
+      Edit the block that the package shipped, and don't add a second one or a password line. The host in ``url`` must be in the Wazuh manager API certificate. To list its addresses, run this command on the master node:
 
       .. code-block:: console
 
@@ -232,16 +211,16 @@ Configuring the Wazuh dashboard
              run_as: true
              ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
 
-      On a host with firewalld, open port 443/TCP for the browsers:
+#. On a host with firewalld, open port 443/TCP for the browsers:
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # firewall-cmd --permanent --add-port=443/tcp
-         # firewall-cmd --reload
+      # firewall-cmd --permanent --add-port=443/tcp
+      # firewall-cmd --reload
 
-      .. note::
+   .. note::
 
-         Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and make sure the necessary ports are open.
+      Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and make sure the necessary ports are open.
 
 Starting the Wazuh dashboard service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

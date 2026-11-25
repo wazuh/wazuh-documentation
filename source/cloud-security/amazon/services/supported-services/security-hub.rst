@@ -21,8 +21,8 @@ You need to perform the following to set up the configuration that allows you to
    -  :ref:`Enabling Security Hub CSPM <enabling_security_hub>`. There are two methods to enable AWS Security Hub CSPM in your environment. See the :ref:`Enabling Security Hub CSPM <enabling_security_hub>` section.
    -  :ref:`Creating a Firehose stream <creating_firehose_stream>`: Amazon Data Firehose delivers streaming data to destinations such as an S3 bucket. The EventBridge rule uses the Firehose stream as its target and sends it each event that matches the rule's event pattern.
    -  :ref:`Integrating Security Hub CSPM with EventBridge <integrating_security_hub_with_eventbridge>`: EventBridge allows storing Security Hub CSPM findings and insights in S3 buckets.
-   -  :ref:`Amazon S3 bucket with event notifications <s3_with_event_notifications>`: The bucket sends notifications to the queue for every Security Hub CSPM object creation event.
-   -  :ref:`Amazon Simple Queue Service <simple_queue_service>`: The Amazon Simple Queue Service (SQS) is a message queuing service that enables decoupled communication between AWS components. The Wazuh module for AWS queries the SQS queue for notifications of new logs in S3 and processes those Security Hub CSPM logs.
+   -  :ref:`Amazon S3 bucket with event notifications <s3_with_event_notifications>`: The bucket sends notifications to an Amazon Simple Queue Service (SQS) queue for every Security Hub CSPM object creation event.
+   -  :ref:`Amazon Simple Queue Service <simple_queue_service>`: Amazon SQS is a message queuing service that enables decoupled communication between AWS components. The Wazuh module for AWS queries the SQS queue for notifications of new logs in S3 and processes those Security Hub CSPM logs.
 
 #. Configure the Wazuh module for AWS to receive AWS Security Hub CSPM events.
 

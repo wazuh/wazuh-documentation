@@ -18,10 +18,10 @@ Community and support
 How to install Wazuh
 --------------------
 
-The Wazuh solution is composed of three :doc:`central platform components <components/index>` and a single universal :doc:`agent </installation-guide/wazuh-agent/index>`. To install Wazuh in your infrastructure, refer to the following sections of our documentation:
+The Wazuh solution is composed of three :doc:`central platform components <components/index>` and a single universal :doc:`agent <components/wazuh-agent>`. To install Wazuh in your infrastructure, refer to the following sections of our documentation:
 
--  The :doc:`Quickstart </quickstart>` provides an automated way to install Wazuh on a single server in just a few minutes.
--  The :doc:`Installation guide </installation-guide/index>` provides instructions on how to install each central component and how to deploy the Wazuh agents.
+-  The :doc:`quickstart </quickstart>` provides an automated way to install Wazuh on a single server in just a few minutes.
+-  The :doc:`installation guide </installation-guide/index>` provides instructions on how to install each central component and how to deploy the Wazuh agents.
 
 Screenshots of Wazuh dashboards
 -------------------------------
@@ -50,6 +50,12 @@ The following screenshots show dashboards of some of the Wazuh capabilities, inc
      - .. thumbnail:: ../images/getting-started/fim-dashboard.png
           :title: File integrity monitoring
           :alt: File integrity monitoring
+   * - .. thumbnail:: ../images/getting-started/cti-explorer-dashboard.png
+          :title: CTI Explorer
+          :alt: CTI Explorer
+     - .. thumbnail:: ../images/getting-started/cti-feed-dashboard.png
+          :title: CTI Feed
+          :alt: CTI Feed
    * - .. thumbnail:: ../images/getting-started/regulatory-compliance-hipaa.png
           :title: Regulatory compliance - HIPAA
           :alt: Regulatory compliance - HIPAA
@@ -59,9 +65,15 @@ The following screenshots show dashboards of some of the Wazuh capabilities, inc
    * - .. thumbnail:: ../images/getting-started/case-management-dashboard.png
           :title: Case management
           :alt: Case management
-     - .. thumbnail:: ../images/getting-started/mitre-attack-dashboard.png
+     - .. thumbnail:: ../images/getting-started/case-management-cases.png
+          :title: Case management - Cases
+          :alt: Case management - Cases
+   * - .. thumbnail:: ../images/getting-started/mitre-attack-dashboard.png
           :title: MITRE ATT&CK
           :alt: MITRE ATT&CK
+     - .. thumbnail:: ../images/getting-started/incident-response-dashboard.png
+          :title: Incident response
+          :alt: Incident response
 
 .. toctree::
    :hidden:
