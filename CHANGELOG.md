@@ -55,6 +55,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Removed the `<options>` line, which has no effect on PagerDuty incidents, from the PagerDuty example in the *integration* reference documentation. ([#10803](https://github.com/wazuh/wazuh-documentation/pull/10803))
 - **Post-release**: Corrected the synchronization description in the *File integrity monitoring* documentation, which now says that the Wazuh server inventory updates by default rather than always in the *How it works*, *Advanced settings*, and *Windows Registry monitoring* pages, and refers to the "registry inventory" instead of the "file inventory" in the *Windows Registry monitoring* page. ([#10135](https://github.com/wazuh/wazuh-documentation/pull/10135)) ([#10815](https://github.com/wazuh/wazuh-documentation/pull/10815))
 - **Post-release**: Added `--ignore-installed` to the Python 3.8–3.10 pip command of the *Microsoft Azure* documentation, so it installs next to the packages the system manages, such as the RPM `chardet` on Amazon Linux 2023. ([#10846](https://github.com/wazuh/wazuh-documentation/pull/10846))
+- **Post-release**: Added a note that `curl` must be installed to the *Wazuh indexer installation assistant* and *Quickstart* documentation, and a note about synchronizing the clocks of all Wazuh hosts to the *Installation guide* documentation. ([#10881](https://github.com/wazuh/wazuh-documentation/pull/10881))
 
 ## [v4.14.9]
 
