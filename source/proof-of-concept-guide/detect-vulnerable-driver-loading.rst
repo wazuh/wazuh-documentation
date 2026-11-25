@@ -335,7 +335,7 @@ You emulate the BYOVD loading step with a benign driver. Like a threat actor, yo
 View the findings
 -----------------
 
-You see the finding Known vulnerable driver loaded - ``C:\Windows\Temp\byovd-test.sys``.
+You see the finding ``Known vulnerable driver loaded - C:\Windows\Temp\byovd-test.sys``.
 
 #. In the Wazuh dashboard, go to **Threat intelligence** > **Threat Hunting** and click the **Findings** tab.
 
@@ -368,7 +368,7 @@ The finding includes these fields to start an investigation:
 -  ``file.code_signature.subject_name`` and ``file.code_signature.valid``: The signer and the signature state. A valid signature doesn't make a vulnerable driver safe.
 -  ``wazuh.agent.name``: The endpoint that loaded the driver.
 
-The test driver has a valid Microsoft signature, so the standard Unsigned kernel driver loaded rule raises no finding for it. The emulation also raises two standard findings for the new service, outside the ``event.action: driver-loaded`` search. The first is ``Kernel driver service created with sc.exe (Sysmon)``, followed by the ``sc.exe`` command line. The second is ``System service installed - byovdtest``.
+The test driver has a valid Microsoft signature, so the standard ``Unsigned kernel driver loaded`` rule raises no finding for it. The emulation also raises two standard findings for the new service, outside the ``event.action: driver-loaded`` search. The first is ``Kernel driver service created with sc.exe (Sysmon)``, followed by the ``sc.exe`` command line. The second is ``System service installed - byovdtest``.
 
 Troubleshooting
 ---------------
