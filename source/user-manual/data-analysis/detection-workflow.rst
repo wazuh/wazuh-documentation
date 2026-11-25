@@ -723,7 +723,7 @@ The following example generates an alert when an IP address has at least five fa
 -  Failed authentication attempt - {{user.name}} (``1e487526-76e8-52c4-8741-0119d86dfda1``)
 -  Successful user authentication - {{user.name}} (``a5ff9fd1-0239-54f9-8dab-70fb09d69423``)
 
-You can find the ID of any rule on the **Ruleset Management** > **Rules** page.
+You can find the ID of any rule on the **Ruleset Management** > **Detection** > **Rules** page.
 
 Create the monitor
 ^^^^^^^^^^^^^^^^^^
