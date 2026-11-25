@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - Added the *Installation Assistant*, *Certs tool*, *Wazuh passwords tool*, *wazuh-manager-certs*, *wazuh-manager-resolve-credentials* and *resolve-credentials* documentation to the *Reference* section. ([#10047](https://github.com/wazuh/wazuh-documentation/pull/10047)) ([#10416](https://github.com/wazuh/wazuh-documentation/pull/10416)) ([#10499](https://github.com/wazuh/wazuh-documentation/pull/10499)) ([#10540](https://github.com/wazuh/wazuh-documentation/pull/10540)) ([#10675](https://github.com/wazuh/wazuh-documentation/pull/10675)) ([#10690](https://github.com/wazuh/wazuh-documentation/pull/10690)) ([#10840](https://github.com/wazuh/wazuh-documentation/pull/10840))
 - Added a note to the *Regulatory compliance* index page stating that the rule and control mappings are indicative and require an independent qualified assessor for formal certification, and updated the list of supported frameworks. ([#10191](https://github.com/wazuh/wazuh-documentation/pull/10191)) ([#10321](https://github.com/wazuh/wazuh-documentation/pull/10321)) ([#10708](https://github.com/wazuh/wazuh-documentation/pull/10708))
 - Added the *Detecting a known malicious file* use case to the *Proof of concept guide*. ([#10833](https://github.com/wazuh/wazuh-documentation/pull/10833))
+- Added the *Detecting vulnerable driver loading* use case to the *Proof of concept guide*. ([#10909](https://github.com/wazuh/wazuh-documentation/pull/10909))
 
 ### Changed
 
