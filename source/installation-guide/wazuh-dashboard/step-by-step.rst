@@ -334,7 +334,7 @@ Once every component is installed and running, each component stores the passwor
       # curl --cacert /etc/wazuh-dashboard/export/ca.pem -u admin https://localhost/api/status
       # curl --cacert /etc/wazuh-dashboard/export/ca.pem -u admin -H 'osd-xsrf: true' -H 'Content-Type: application/json' -X POST https://localhost/api/check-api -d '{"id":"default"}'
 
-   The first output includes ``"state":"green"``. The second includes the name of the Wazuh manager master node, for example ``"node":"master-node"``.
+   The first output includes ``"state":"green"``. The second includes the name of the Wazuh manager cluster, for example ``"cluster":"wazuh"``.
 
 #. Securely store the five passwords. The ``credentials.env`` file in the working directory of the first Wazuh indexer node holds all five.
 
