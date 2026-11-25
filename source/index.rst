@@ -32,7 +32,7 @@ Index
    cloud-security/monitoring
    compliance/index
    proof-of-concept-guide/index
-   migration-to-5x/index
+   transitioning/index
 
 ..
    upgrade-guide/index
