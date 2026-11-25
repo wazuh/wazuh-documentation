@@ -31,61 +31,33 @@ Adding the Wazuh repository
 
    If the Wazuh repository is already configured and enabled on this host (for example on the Wazuh indexer host), skip these steps.
 
+Run the following command to import the GPG key and add the Wazuh repository. On APT, the command also installs the packages it needs and updates the package information.
+
 .. tabs::
 
    .. group-tab:: APT
 
-      #. Install the following packages if missing:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # apt-get update && apt-get install -y gnupg apt-transport-https curl
-
-      #. Install the GPG key:
-
-         .. code-block:: console
-
-            # curl -s https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/ unstable main" | tee /etc/apt/sources.list.d/wazuh.list
-
-      #. Update the package information:
-
-         .. code-block:: console
-
-            # apt-get update
+         # apt-get update && apt-get install -y gnupg apt-transport-https curl && \
+           curl -fsS https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && \
+           chmod 644 /usr/share/keyrings/wazuh.gpg && \
+           echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/ unstable main" | tee /etc/apt/sources.list.d/wazuh.list && \
+           apt-get update
 
    .. group-tab:: Yum
 
-      #. Import the GPG key:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
+         # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH && \
+           echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
 
    .. group-tab:: DNF
 
-      #. Import the GPG key:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
+         # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH && \
+           echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
 
 .. _wazuh_manager_deploying_certificates:
 
@@ -94,17 +66,19 @@ Deploying certificates and passwords
 
 Do this **before installing the package**. The package then uses these passwords instead of generating its own, and issues this node's agent listener and Wazuh manager API certificates.
 
+If this host is also the first Wazuh indexer node, for example an all-in-one host: the Wazuh manager package retrieves the Wazuh indexer password and certificates from ``/etc/wazuh-indexer/export`` during installation. Place only the two Wazuh manager API passwords. Run these commands in the working directory that holds the ``credentials.env`` file you created in :ref:`Creating the passwords <wazuh_indexer_creating_passwords>`:
+
+.. code-block:: console
+
+   # install -d -m 0750 /etc/wazuh-manager
+   # install -m 0600 /dev/null /etc/wazuh-manager/local.env
+   # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=' credentials.env > /etc/wazuh-manager/local.env
+
+Without these two passwords, the Wazuh manager package generates its own, and the values in ``credentials.env`` don't work. Then go to :ref:`Installing the Wazuh manager <wazuh_manager_installing_package>`.
+
+On any other host, including a dedicated Wazuh manager node and the other Wazuh indexer nodes, follow the steps below.
+
 .. note::
-
-   If this host is the first Wazuh indexer node, for example an all-in-one host, the Wazuh manager package retrieves the Wazuh indexer password and certificates from ``/etc/wazuh-indexer/export`` during installation. Skip this section, but first place the two Wazuh manager API passwords. Run these commands in the working directory that holds the ``credentials.env`` file you created in :ref:`Creating the passwords <wazuh_indexer_creating_passwords>`:
-
-   .. code-block:: console
-
-      # install -d -m 0750 /etc/wazuh-manager
-      # install -m 0600 /dev/null /etc/wazuh-manager/local.env
-      # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=' credentials.env > /etc/wazuh-manager/local.env
-
-   Without these two passwords, the Wazuh manager package generates its own, and the values in ``credentials.env`` don't work. On any other host, including a dedicated Wazuh manager node and the other Wazuh indexer nodes, follow this section in full.
 
    Make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
 
@@ -161,6 +135,8 @@ Do this **before installing the package**. The package then uses these passwords
 Installing the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+If this host is also the first Wazuh indexer node, for example an all-in-one host, only step 1 applies. Then go to :ref:`Checking the agent listener certificate <wazuh_manager_checking_listener_certificate>`.
+
 #. Install the Wazuh manager package:
 
    .. tabs::
@@ -183,9 +159,11 @@ Installing the Wazuh manager
 
             # dnf -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-   Release candidate packages carry the version of the final release, ``|WAZUH_CURRENT|-|WAZUH_MANAGER_PKG_REV|``. Only their file names show the RC stage, for example ``wazuh-manager_|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|_|WAZUH_MANAGER_x64_DEB|.deb``, so ``dpkg -l`` and ``rpm -q`` show ``|WAZUH_CURRENT|-|WAZUH_MANAGER_PKG_REV|``.
+   Release candidate packages carry the version of the final release, ``|WAZUH_CURRENT|-|WAZUH_MANAGER_PKG_REV|``. ``|WAZUH_CURRENT|`` is the version and ``-|WAZUH_MANAGER_PKG_REV|`` is the package revision, not the release candidate number. Only their file names show the RC stage, for example ``wazuh-manager_|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|_|WAZUH_MANAGER_x64_DEB|.deb``, so ``dpkg -l`` and ``rpm -q`` show ``|WAZUH_CURRENT|-|WAZUH_MANAGER_PKG_REV|``.
 
-#. The installation prints the certificates that the package issued, with their addresses. On a host without the Wazuh indexer, it also prints MISSING lines for ``indexer-ca.pem`` and ``indexer-connector.pem``, and ``Credential resolution is incomplete``. This is expected. Place the Wazuh indexer root CA and this node's client certificate for the Wazuh indexer. They are in the directory where you extracted ``wazuh-certificates.tar``. Skip this step on the first Wazuh indexer node:
+   To check which release candidate the repository holds before you install, read the file name with ``apt-cache show wazuh-manager | grep Filename`` on APT, ``repoquery --location wazuh-manager`` on Yum (from the ``yum-utils`` package), or ``dnf repoquery --location wazuh-manager`` on DNF.
+
+#. The installation prints the certificates that the package issued, with their addresses. On a host without the Wazuh indexer, it also prints MISSING lines for ``indexer-ca.pem`` and ``indexer-connector.pem``, and ``Credential resolution is incomplete``. This is expected. Place the Wazuh indexer root CA and this node's client certificate for the Wazuh indexer. They are in the directory where you extracted ``wazuh-certificates.tar``:
 
    .. code-block:: console
 
@@ -202,6 +180,8 @@ Installing the Wazuh manager
    .. note::
 
       Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and make sure the necessary ports are open.
+
+.. _wazuh_manager_checking_listener_certificate:
 
 Checking the agent listener certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -245,6 +225,8 @@ The agent listener certificate, ``/etc/wazuh-manager/certs/remoted.pem``, lists 
 Configuring the Wazuh indexer connection
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+If the Wazuh indexer runs on this host and you left ``network.host`` at the package default, for example on an all-in-one host, skip this section and go to :ref:`Starting the Wazuh manager <wazuh_manager_starting>`.
+
 #. Edit ``/etc/wazuh-manager/wazuh-manager.conf`` file to configure the indexer connection. Do it on the master node and on every worker node, as the cluster does not synchronize this block. By default, the indexer settings configure one host. It's set to ``127.0.0.1``:
 
    .. code-block:: xml
@@ -263,7 +245,7 @@ Configuring the Wazuh indexer connection
          </ssl>
        </indexer>
 
-   -  Replace ``127.0.0.1`` with the address of your Wazuh indexer node. It's the node's ``ip`` value in ``config.yml`` and its ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml`` on that node. Edit only the ``<host>`` value: the ``<ssl>`` block already points to the certificate files in ``/etc/wazuh-manager/certs``. If the Wazuh indexer runs on this host and you left ``network.host`` at the package default, keep ``127.0.0.1``.
+   -  Replace ``127.0.0.1`` with the address of your Wazuh indexer node. It's the node's ``ip`` value in ``config.yml`` and its ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml`` on that node. Edit only the ``<host>`` value: the ``<ssl>`` block already points to the certificate files in ``/etc/wazuh-manager/certs``.
 
    If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entry for each one of your Wazuh indexer nodes. For example, in a two-node configuration:
 
@@ -275,6 +257,8 @@ Configuring the Wazuh indexer connection
       </hosts>
 
    The Wazuh manager prioritizes reporting to the first Wazuh indexer node in the list. It switches to the next node if it is unavailable.
+
+.. _wazuh_manager_starting:
 
 Starting the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
