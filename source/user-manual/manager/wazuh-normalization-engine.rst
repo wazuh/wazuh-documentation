@@ -633,3 +633,33 @@ The Wazuh normalization engine manages the following spaces:
 -  **Custom**: An independent space for user-defined or user-modified content. Users manage this space through the Wazuh indexer, and CMSync propagates any changes to the Wazuh normalization engine.
 
 When Wazuh starts, the normalization engine triggers an initial synchronization to pull both spaces from the Wazuh indexer. This initial synchronization makes all assets available before the engine builds security policies and defines routes. After this initial load, subsequent synchronization cycles run periodically to keep the local state up to date. When both spaces are available and synchronized, the Wazuh normalization engine processes all incoming events through each active operational graph.
+
+.. _event_queue:
+
+Event queue
+-----------
+
+The Wazuh normalization engine holds incoming events in an input queue until it can process them. When events arrive faster than the engine processes them, the queue fills up and the engine drops new events. To tune the queue, add the following internal options to the ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file, one ``analysisd.<OPTION>=<VALUE>`` line each, and restart the Wazuh manager with ``systemctl restart wazuh-manager``.
+
+The following table lists the options, their default values, and their allowed values.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 10 15 40
+
+   * - Option
+     - Default
+     - Allowed values
+     - Description
+   * - ``analysisd.event_queue_size``
+     - 131072
+     - 8192 to 2147483647
+     - Maximum number of events waiting in the input queue. When the queue is full, the engine drops new events. A value outside the allowed range stops the engine at start.
+   * - ``analysisd.event_queue_eps``
+     - 0
+     - 0 or a positive integer
+     - Maximum number of events per second that the engine takes from the input queue. 0 means unlimited. Above this rate, the queue fills up and the engine drops new events.
+   * - ``analysisd.event_queue_max_bytes``
+     - 33554432 (32 MB)
+     - 0 or a positive integer, in bytes
+     - Maximum total size of the events waiting in the input queue. 0 means unlimited. When the limit is reached, the engine drops new events.
