@@ -269,6 +269,14 @@ Starting the Wazuh dashboard service
 
    Save the output as ``ca.pem`` on the computer that runs the browser. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
 
+#. Remove the two passwords from ``/etc/wazuh-dashboard/local.env``. The package copied them into the Wazuh dashboard keystore when you installed it. Later starts read them only when the keystore is empty. Keep ``WAZUH_DASHBOARD_CERT_SANS`` if you set it. Skip this step on a host without that file, such as an all-in-one host:
+
+   .. code-block:: console
+
+      # sed -i -E '/^(WAZUH_INDEXER_KIBANASERVER_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=/d' /etc/wazuh-dashboard/local.env
+
+#. Back up the ``/etc/wazuh-dashboard/ca`` directory securely. It holds the root CA private key of the Wazuh dashboard package. With this CA, a new certificate is trusted by the browsers that already imported ``export/ca.pem``. Removing the RPM package deletes it.
+
 .. _wazuh_dashboard_troubleshooting_install:
 
 Troubleshooting Wazuh dashboard installation and startup
@@ -313,7 +321,7 @@ For the other messages, see :ref:`Wazuh dashboard does not start <wazuh_dashboar
 Securing your Wazuh installation
 --------------------------------
 
-Once every component is installed and running, each component stores the passwords it needs in its own keystore or database. The components don't need ``local.env`` or ``export/credentials.env`` after installation, and deleting them doesn't affect running or restarted components. If you keep them, keep them readable by root only. The components check them at every start and refuse to start if one has the wrong owner or permissions. Every node got its passwords from the ``credentials.env`` file you created in :ref:`Creating the passwords <wazuh_indexer_creating_passwords>`. The first Wazuh indexer node read it directly, and the other nodes got it through ``wazuh-certificates.tar``.
+Once every component is installed and running, each component stores the passwords it needs in its own keystore or database. The components don't need ``local.env`` or ``export/credentials.env`` after installation, and deleting them doesn't affect running or restarted components. If you keep them, keep them readable by root only. The components check them at every start and refuse to start if one has the wrong owner or permissions. Every node got its passwords from the ``credentials.env`` file you created in :ref:`Creating the passwords <wazuh_indexer_creating_passwords>`. The first Wazuh indexer node read it directly, and the other nodes got it through ``wazuh-certificates.tar``. Each node's own cleanup and backups are part of its installation. The steps below need every component installed.
 
 #. Log in to the Wazuh dashboard. A successful login shows that the Wazuh dashboard reaches the Wazuh indexer. Then open the menu and go to **Dashboard management** > **Server API**. In the **API connection** card, the **Host** is the address of the Wazuh manager master node, and the **Status** is **Online**. This shows that the Wazuh dashboard reaches the Wazuh manager. If the **Status** is **Offline**, check that the ``wazuh-manager`` service runs on the master node and that the Wazuh dashboard host reaches port ``55000/TCP``. Also check that the Wazuh manager API certificate lists the address in the **Host** field. To list the addresses in the certificate, run this command on the master node:
 
@@ -338,29 +346,11 @@ Once every component is installed and running, each component stores the passwor
 
 #. Securely store the five passwords. The ``credentials.env`` file in the working directory of the first Wazuh indexer node holds all five.
 
-#. Remove the ``credentials.env`` you created on the first Wazuh indexer node and any ``wazuh-certificates.tar`` left behind, on every node. The passwords of each component stay in ``local.env`` and ``export/credentials.env`` in its configuration directory, readable by ``root`` only:
+#. On the first Wazuh indexer node, remove the ``credentials.env`` file you created. Each component keeps its passwords in its keystore or in its configuration directory, readable by ``root`` only:
 
    .. code-block:: console
 
-      # rm -f ./credentials.env ./wazuh-certificates.tar
-
-#. On each Wazuh dashboard node, remove the two passwords from ``/etc/wazuh-dashboard/local.env``. The Wazuh dashboard keeps them in its keystore. Keep ``WAZUH_DASHBOARD_CERT_SANS`` if you set it. Skip this step on a host without that file, such as an all-in-one host:
-
-   .. code-block:: console
-
-      # sed -i -E '/^(WAZUH_INDEXER_KIBANASERVER_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD)=/d' /etc/wazuh-dashboard/local.env
-
-#. Only the first Wazuh indexer node must hold the Wazuh indexer root CA private key, in ``/etc/wazuh-indexer/ca``. Back up this directory securely: you need the key to add nodes or renew certificates. Every Wazuh manager node and every Wazuh dashboard node also keeps the root CA private key of its package, in ``/etc/wazuh-manager/ca`` or ``/etc/wazuh-dashboard/ca``. Back them up too. Keep each ``/etc/wazuh-manager/ca`` directory owned by ``root:root``, back it up with its node, and never copy it to a Wazuh dashboard node. With the Wazuh dashboard CA, a new certificate is trusted by the browsers that already imported ``export/ca.pem``, and removing the RPM package deletes it. Run the following command on every Wazuh indexer node to check:
-
-   .. code-block:: console
-
-      # ls -A /etc/wazuh-indexer/ca 2>/dev/null
-
-   If the command lists ``root-ca.key`` on a Wazuh indexer node other than the first one, remove the key there. Never run this on the first Wazuh indexer node:
-
-   .. code-block:: console
-
-      # rm -f /etc/wazuh-indexer/ca/root-ca.key
+      # rm -f ./credentials.env
 
 Editing ``local.env`` after installation doesn't change any password. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation.
 

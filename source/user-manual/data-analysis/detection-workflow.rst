@@ -87,7 +87,7 @@ Make sure the space selector reads **Draft** and follow these steps to create a 
 
 #. After creating the integration, it will appear in the integrations list.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-custom-integration-list.jpg
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-custom-integration-list.png
       :title: Custom integration list
       :alt: Custom integration list
       :align: center
@@ -327,11 +327,13 @@ Make sure the space selector reads **Draft**, and follow these steps to promote 
 
 #. After promotion, the integration appears in the **Test** space.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-promoted-list.jpg
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-promoted-list.png
       :title: Promoted integration in the Test space
       :alt: Promoted integration in the Test space
       :align: center
       :width: 80%
+
+.. _data_analysis_validate_log_test:
 
 Validate the content with a log test
 ------------------------------------
@@ -354,13 +356,13 @@ Follow these steps to validate with **Log test**.
 
    When decoding succeeds, the **Normalization** section of the **Test Result** shows the decoded event, and the **Detection** section shows the custom rule that matched it.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-logtest-normalization.jpg
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-logtest-normalization.png
       :title: Log test normalization result
       :alt: Log test normalization result
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-logtest-detection.jpg
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-logtest-detection.png
       :title: Log test detection result
       :alt: Log test detection result
       :align: center
@@ -469,7 +471,7 @@ Follow these steps to create a detector.
 
 #. Go to **Ruleset Management** > **Detection** > **Detectors** > **Create detector**.
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-detectors-list.jpg
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-detectors-list.png
       :title: Detectors list
       :alt: Detectors list
       :align: center
@@ -489,7 +491,7 @@ Follow these steps to create a detector.
 
    -  **Run every**: 2 minutes
 
-   .. thumbnail:: /images/manual/data-analysis/security-analytics-create-custom-detectors.jpg
+   .. thumbnail:: /images/manual/data-analysis/security-analytics-create-custom-detectors.png
       :title: Create a custom detector
       :alt: Create a custom detector
       :align: center
@@ -549,7 +551,7 @@ A finding is a security record generated when an event matches a detection rule 
 
 #. In the image below, you see the findings generated from the events.
 
-   .. thumbnail:: /images/manual/data-analysis/wazuh-dashboard-findings.jpg
+   .. thumbnail:: /images/manual/data-analysis/wazuh-dashboard-findings.png
       :title: Findings on the Wazuh dashboard
       :alt: Findings on the Wazuh dashboard
       :align: center
@@ -557,7 +559,7 @@ A finding is a security record generated when an event matches a detection rule 
 
 #. Expand the finding to see more information about the event.
 
-   .. thumbnail:: /images/manual/data-analysis/wazuh-dashboard-expand-findings.jpg
+   .. thumbnail:: /images/manual/data-analysis/wazuh-dashboard-expand-findings.png
       :title: Expanded finding on the Wazuh dashboard
       :alt: Expanded finding on the Wazuh dashboard
       :align: center
@@ -709,3 +711,183 @@ A single finding contains the complete enriched record, including the matched ru
    }
 
 This completes the workflow. You have created custom detection content, validated it, promoted it to production, and verified that it generates findings in the dashboard.
+
+Correlate findings across events
+--------------------------------
+
+Wazuh rules evaluate each event on its own. To detect activity that spans several events, such as a successful login after multiple failed logins from the same source, create a per bucket monitor in the Alerting module that queries the ``wazuh-findings-v5-*`` indices. The monitor groups recent findings by fields such as ``source.ip`` and generates an alert when a group meets the trigger condition.
+
+The following example generates an alert when an IP address has at least five failed login findings followed by a successful login finding on the same Wazuh agent within 10 minutes. It uses these rules from the Standard space:
+
+-  Failed authentication attempt (``53f2fc4b-15e7-5ba0-ade4-e6231195bb35``)
+-  Failed authentication attempt - {{user.name}} (``1e487526-76e8-52c4-8741-0119d86dfda1``)
+-  Successful user authentication - {{user.name}} (``a5ff9fd1-0239-54f9-8dab-70fb09d69423``)
+
+You can find the ID of any rule on the **Ruleset Management** > **Detection** > **Rules** page.
+
+Create the monitor
+^^^^^^^^^^^^^^^^^^
+
+#. Navigate to **Explore** > **Alerting**, select the **Monitors** tab, and click **Create monitor**.
+
+#. Enter a name in **Monitor name**, for example ``Successful login after multiple failed logins``. Select **Per bucket monitor** and **Extraction query editor**.
+
+   .. thumbnail:: /images/manual/data-analysis/alerting-create-monitor.png
+      :title: Create a per bucket monitor
+      :alt: Create a per bucket monitor
+      :align: center
+      :width: 80%
+
+#. Under **Schedule**, keep **By interval** and set **Run every** to ``1`` **Minute(s)**.
+
+#. Under **Select data**, enter ``wazuh-findings-v5-*`` in **Indexes** and press **Enter**.
+
+#. Replace the content of **Define extraction query** with the following query and click **Run**. The response shows one bucket for each pair of source IP address and Wazuh agent with matching findings in the last 10 minutes.
+
+   .. code-block:: json
+
+      {
+        "size": 0,
+        "query": {
+          "bool": {
+            "filter": [
+              {
+                "range": {
+                  "@timestamp": {
+                    "gte": "{{period_end}}||-10m",
+                    "lte": "{{period_end}}",
+                    "format": "epoch_millis"
+                  }
+                }
+              },
+              {
+                "terms": {
+                  "wazuh.rule.id": [
+                    "53f2fc4b-15e7-5ba0-ade4-e6231195bb35",
+                    "1e487526-76e8-52c4-8741-0119d86dfda1",
+                    "a5ff9fd1-0239-54f9-8dab-70fb09d69423"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "aggregations": {
+          "composite_agg": {
+            "composite": {
+              "sources": [
+                { "source_ip": { "terms": { "field": "source.ip" } } },
+                { "agent_name": { "terms": { "field": "wazuh.agent.name" } } }
+              ]
+            },
+            "aggs": {
+              "failed": {
+                "filter": {
+                  "terms": {
+                    "wazuh.rule.id": [
+                      "53f2fc4b-15e7-5ba0-ade4-e6231195bb35",
+                      "1e487526-76e8-52c4-8741-0119d86dfda1"
+                    ]
+                  }
+                },
+                "aggs": { "first_failure": { "min": { "field": "@timestamp" } } }
+              },
+              "succeeded": {
+                "filter": {
+                  "term": { "wazuh.rule.id": "a5ff9fd1-0239-54f9-8dab-70fb09d69423" }
+                },
+                "aggs": { "last_success": { "max": { "field": "@timestamp" } } }
+              }
+            }
+          }
+        }
+      }
+
+   .. thumbnail:: /images/manual/data-analysis/alerting-extraction-query.png
+      :title: Extraction query and response
+      :alt: Extraction query and response
+      :align: center
+      :width: 80%
+
+   The query works as follows:
+
+   -  The ``range`` filter selects the findings generated in the 10 minutes before each monitor run.
+   -  The ``terms`` filter selects the findings of the three rules.
+   -  The ``composite_agg`` aggregation groups the findings by ``source.ip`` and ``wazuh.agent.name``.
+   -  The ``failed`` and ``succeeded`` sub-aggregations count the failed and successful logins of each group, and record the time of the first failed login and of the last successful login.
+
+#. Click **Add trigger**, enter a name in **Trigger name**, for example ``Failed logins followed by a successful login``, and select a **Severity level**.
+
+#. Replace the content of **Trigger condition** with the following condition. The trigger fires for each group with at least five failed logins and a successful login that happened after the first failed login.
+
+   .. code-block:: json
+
+      {
+        "buckets_path": {
+          "failed": "failed._count",
+          "succeeded": "succeeded._count",
+          "first_failure": "failed>first_failure",
+          "last_success": "succeeded>last_success"
+        },
+        "parent_bucket_path": "composite_agg",
+        "script": {
+          "source": "params.failed >= 5 && params.succeeded >= 1 && params.last_success > params.first_failure",
+          "lang": "painless"
+        },
+        "gap_policy": "skip"
+      }
+
+   .. thumbnail:: /images/manual/data-analysis/alerting-trigger-condition.png
+      :title: Trigger condition
+      :alt: Trigger condition
+      :align: center
+      :width: 80%
+
+#. Optionally, click **Add notification** to send the alert to a notification channel.
+
+#. Click **Create**. The monitor page shows the monitor settings, its trigger, and its history.
+
+   .. thumbnail:: /images/manual/data-analysis/alerting-monitor-details.png
+      :title: Monitor details
+      :alt: Monitor details
+      :align: center
+      :width: 80%
+
+Test the monitor
+^^^^^^^^^^^^^^^^
+
+#. Run the following command on another endpoint to attempt six SSH logins with a user that doesn't exist on a monitored Linux endpoint. Replace ``<LINUX_ENDPOINT_IP>`` with the IP address of the monitored endpoint.
+
+   .. code-block:: bash
+
+      for i in $(seq 1 6); do ssh -o BatchMode=yes nonexistentuser@<LINUX_ENDPOINT_IP> true; done
+
+#. From the same endpoint, log in to the monitored endpoint with a valid account. Replace ``<USER>`` with the account name.
+
+   .. code-block:: bash
+
+      ssh <USER>@<LINUX_ENDPOINT_IP>
+
+#. Wait for the next monitor run and open the monitor page. The **History** timeline shows the trigger as **Triggered**, and the **Alerts** table shows an active alert.
+
+   .. thumbnail:: /images/manual/data-analysis/alerting-monitor-alert-history.png
+      :title: Triggered monitor with an active alert
+      :alt: Triggered monitor with an active alert
+      :align: center
+      :width: 80%
+
+#. Navigate to **Explore** > **Alerting** > **Alerts** to view the alerts of all monitors. Click the alert count to see the trigger details.
+
+   .. thumbnail:: /images/manual/data-analysis/alerting-alerts-by-triggers.png
+      :title: Alerts by triggers
+      :alt: Alerts by triggers
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/manual/data-analysis/alerting-alert-details.png
+      :title: Alert details
+      :alt: Alert details
+      :align: center
+      :width: 80%
+
+The alert stays active while the trigger condition is met, and its state changes to **Completed** when the findings fall outside the 10-minute window.

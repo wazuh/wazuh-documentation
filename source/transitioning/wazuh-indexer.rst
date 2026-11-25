@@ -103,7 +103,7 @@ Perform the following steps on every Wazuh indexer node of the new Wazuh 5.x clu
    .. code-block:: console
       :emphasize-lines: 1
 
-      # curl -k -u <USERNAME>:<PASSWORD> \
+      # curl --cacert /etc/wazuh-indexer/export/ca.pem -u <USERNAME>:<PASSWORD> \
         https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
 
    Where:
