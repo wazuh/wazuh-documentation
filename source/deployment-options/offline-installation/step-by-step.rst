@@ -208,11 +208,7 @@ Install and configure the Wazuh manager on each manager node. Before installing 
       -  libc6 (2.18 or later)
       -  passwd
 
-#. Place the passwords before installing the package. Replace ``<MANAGER_NODE_NAME>`` with the name of the node as defined in ``config.yml``, for example, ``manager``.
-
-   .. code-block:: console
-
-      # NODE_NAME=<MANAGER_NODE_NAME>
+#. Place the passwords before installing the package.
 
    .. code-block:: console
 
