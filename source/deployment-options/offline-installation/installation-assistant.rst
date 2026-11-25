@@ -88,6 +88,10 @@ Install the following dependencies from your local package mirror, installation 
       INFO: For more information, see https://documentation.wazuh.com/5.0/installation-guide/wazuh-agent/index.html
       INFO: Installation finished.
 
+   .. note::
+
+      Without Internet access, the **Deploy new agent** wizard of the Wazuh dashboard doesn't work, because its commands download the Wazuh agent from ``packages.wazuh.com``. Use the wizard or the ``--create-enrollment-token`` command only to create the enrollment token. Then install the Wazuh agent package that you copied to the endpoint, as :doc:`Install Wazuh agents on hosts without Internet access <install-agents>` describes.
+
 #. Access the Wazuh web interface with your ``admin`` user credentials. This is the administrator account for the Wazuh indexer, and it allows you to access the Wazuh dashboard.
 
    -  **URL**: ``https://<WAZUH_DASHBOARD_ADDRESS>``
@@ -288,6 +292,10 @@ Install the following dependencies on the Wazuh dashboard node, besides the :ref
       INFO:     sudo /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
       INFO: For more information, see https://documentation.wazuh.com/5.0/installation-guide/wazuh-agent/index.html
       INFO: Installation finished.
+
+   .. note::
+
+      Without Internet access, the **Deploy new agent** wizard of the Wazuh dashboard doesn't work, because its commands download the Wazuh agent from ``packages.wazuh.com``. Use the wizard or the ``--create-enrollment-token`` command only to create the enrollment token. Then install the Wazuh agent package that you copied to the endpoint, as :doc:`Install Wazuh agents on hosts without Internet access <install-agents>` describes.
 
    You have now installed and configured Wazuh.
 
