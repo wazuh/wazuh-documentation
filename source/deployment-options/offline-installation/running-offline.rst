@@ -8,15 +8,22 @@ Running Wazuh offline
 
 The Wazuh indexer loads the ruleset, the IOC data, and the vulnerability content from snapshots in its package. The Wazuh manager loads its GeoIP databases from its own package. So threat detection and vulnerability detection work without an Internet connection. The detection content isn't updated automatically while the deployment has no Internet access. To update it, see :ref:`Updating the content offline <offline_installation_updating_content>`.
 
--  The Wazuh manager discards incoming events until it logs ``Event processing is now active``. In tests, this took up to about 4 minutes on the first start, and a few seconds after a restart. Vulnerability detection starts when the Wazuh manager logs ``CVE feed fully loaded``. The first load takes from a few minutes to about 2 hours, depending on the host. Run the following command on a Wazuh manager node to check both:
+-  After the first start, the Wazuh indexer loads the content bundled in its package, such as the ruleset and the IOC data. Until it finishes, it answers content update requests with HTTP ``409`` and ``A content update is already in progress.`` Detections are complete only after this load. The Wazuh indexer logs ``Synchronization completed for consumer`` in ``/var/log/wazuh-indexer/wazuh-cluster.log`` for each content type. You can also run the ``.wazuh-cti-consumers`` query in :ref:`Updating the content offline <offline_installation_updating_content>` and check that each content type shows ``ready``.
+-  The Wazuh manager discards incoming events until it logs ``[CMSync] Event processing is now active``. In tests, this took up to about 4 minutes on the first start, and a few seconds after a restart. Vulnerability detection starts when the Wazuh manager logs ``CVE feed fully loaded``, followed by ``per-agent scans unblocked``. Until then, it can log ``CVE feed not yet available``. The first load takes from a few minutes to about 2 hours, depending on the host. Run the following command on a Wazuh manager node to check both:
 
    .. code-block:: console
 
       # grep -E 'Event processing is now active|CVE feed fully loaded' /var/wazuh-manager/logs/wazuh-manager.log
 
--  After each start, and then every 6 minutes, the Wazuh manager tries to download a GeoIP manifest. Each failed try logs a ``Cannot download manifest`` warning.
--  The Wazuh engine, which runs with the Wazuh indexer, also tries to download the GeoIP manifest from ``api.pre.cloud.wazuh.com`` when it starts and every 6 minutes. Each failed try logs a ``Cannot download manifest`` warning in ``/var/log/wazuh-indexer/wazuh-engine.log``. It keeps using the GeoIP databases of the Wazuh indexer package.
--  The Wazuh indexer tries to update its content from Wazuh CTI when it starts and on its update schedule. It logs ``WARN`` and ``ERROR`` lines in ``/var/log/wazuh-indexer/wazuh-cluster.log``, such as ``Could not reach catalog URL``. These messages are expected. Each Wazuh dashboard login also adds ``Couldn't obtain catalog plans from CTI`` and ``Unexpected error during version check`` to that file, and the Wazuh dashboard logs ``Cannot get available updates from indexer``. These are expected too. Don't turn the updates off with the ``plugins.content_manager.catalog`` settings, or the Wazuh indexer loads no content.
+-  After each start, and then every 6 minutes, the Wazuh manager tries to download a GeoIP manifest. Each failed try logs a ``[Geo::Manager] Cannot download manifest from '<URL>': <REASON>`` warning.
+-  The Wazuh engine, which runs with the Wazuh indexer, also tries to download the GeoIP manifest from ``api.pre.cloud.wazuh.com`` when it starts and every 6 minutes. Each failed try logs a ``[Geo::Manager] Cannot download manifest from '<URL>': <REASON>`` warning in ``/var/log/wazuh-indexer/wazuh-engine.log``. It keeps using the GeoIP databases of the Wazuh indexer package.
+-  The Wazuh indexer tries to update its content from Wazuh CTI when it starts and on its update schedule. It logs ``WARN`` and ``ERROR`` lines in ``/var/log/wazuh-indexer/wazuh-cluster.log``, such as ``Could not reach catalog URL``. These messages are expected. Each Wazuh dashboard login also adds ``Couldn't obtain catalog plans from CTI`` and ``Unexpected error during version check`` to that file, and the Wazuh dashboard logs ``[ERROR]: Cannot get available updates from indexer``. These are expected too. Don't turn the updates off with the ``plugins.content_manager.catalog`` settings, or the Wazuh indexer loads no content.
+
+   The Wazuh indexer may also log these expected messages:
+
+   -  ``CTI API request [<REQUEST>] failed (<REASON>); retrying in <N>s (attempt <N>/<N>).``
+   -  ``retrying the startup sync once in <N> ms``
+
 -  Optionally, set ``plugins.content_manager.telemetry.enabled: false`` in ``/etc/wazuh-indexer/opensearch.yml``. It stops only the daily update-check ping and its log lines.
 -  If the deployment gets Internet access later, allow outbound HTTPS on port 443/TCP from the Wazuh indexer and Wazuh manager nodes to ``api.pre.cloud.wazuh.com``. The Wazuh indexer downloads ruleset, IOC, and vulnerability content updates from it, and the Wazuh manager and the Wazuh indexer nodes download GeoIP database updates from it.
 
@@ -71,7 +78,7 @@ The Wazuh indexer doesn't update its content automatically when the deployment h
 
    .. code-block:: console
 
-      # curl -s -o <FILE> "$(curl -s "<RESOURCE>" | python3 -c 'import json,sys; print(json.load(sys.stdin)["data"]["last_snapshot_link"])')"
+      # curl -sSf -o <FILE> "$(curl -sSf "<RESOURCE>" | python3 -c 'import json,sys; print(json.load(sys.stdin)["data"]["last_snapshot_link"])')"
 
 #. Copy the files to every Wazuh indexer node, and place them in the snapshots directory:
 
@@ -85,7 +92,7 @@ The Wazuh indexer doesn't update its content automatically when the deployment h
 
       # curl --cacert /etc/wazuh-indexer/export/ca.pem -u admin -X POST "https://<WAZUH_INDEXER_ADDRESS>:9200/_plugins/_content_manager/update?offline=true"
 
-   The response shows ``"status":202`` when the Wazuh indexer accepts the request. A ``409`` response means another content update is still running, for example, right after the Wazuh indexer starts. Wait a few minutes and send the request again.
+   The response shows ``"status":202`` when the Wazuh indexer accepts the request. A ``409`` response with ``A content update is already in progress.`` means another content update is still running. After the first start, this lasts until the Wazuh indexer loads its bundled content. Send the request again after the Wazuh indexer logs ``Synchronization completed for consumer`` for each content type, or after the query in the next step shows ``ready`` for each content type.
 
 #. Check that each content type shows ``ready``. Loading the vulnerability content takes a few minutes. Use the same address as in the previous step:
 
