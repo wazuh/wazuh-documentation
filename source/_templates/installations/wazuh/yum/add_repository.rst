@@ -8,7 +8,7 @@
 
 #. Add the repository:
 
-   -  For RHEL-compatible systems version 8 and earlier, use the following command:
+   -  For RHEL-compatible systems version 7 and earlier, use the following command:
 
       .. code-block:: console
 
@@ -22,7 +22,7 @@
          protect=1
          EOF
 
-   -  For RHEL-compatible systems version 9 and later, use the following command:
+   -  For RHEL-compatible systems version 8 and later, use the following command:
 
       .. code-block:: console
 

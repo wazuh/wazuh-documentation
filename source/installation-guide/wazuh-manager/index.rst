@@ -111,21 +111,21 @@ Required ports
 
 The Wazuh manager uses the following ports.
 
-+--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
-| Port               | From                                                                              | Purpose                                    |
-+====================+===================================================================================+============================================+
-| 1517/TCP           | Wazuh 5.x agents, load balancer                                                   | Agent enrollment and connection over HTTPS |
-+--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
-| 1516/TCP           | Other Wazuh manager nodes                                                         | Cluster communication, multi-node only     |
-+--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
-| 55000/TCP          | Wazuh dashboard, API clients, and agents removing themselves under anti-tampering | Wazuh manager API, master node             |
-+--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
-| 1514/TCP           | Wazuh 4.x agents                                                                  | Legacy agent connection                    |
-+--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
-| 1515/TCP           | Wazuh 4.x agents                                                                  | Legacy enrollment                          |
-+--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
-| 9200/TCP, outbound | This Wazuh manager                                                                | Connection to the Wazuh indexer            |
-+--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
++--------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------+
+| Port               | From                                                                              | Purpose                                                           |
++====================+===================================================================================+===================================================================+
+| 1517/TCP           | Wazuh 5.x agents, load balancer                                                   | Agent enrollment and connection over HTTPS                        |
++--------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------+
+| 1516/TCP           | Wazuh manager worker nodes                                                        | Cluster communication, on the master node of a multi-node cluster |
++--------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------+
+| 55000/TCP          | Wazuh dashboard, API clients, and agents removing themselves under anti-tampering | Wazuh manager API, master node                                    |
++--------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------+
+| 1514/TCP           | Wazuh 4.x agents                                                                  | Legacy agent connection                                           |
++--------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------+
+| 1515/TCP           | Wazuh 4.x agents                                                                  | Legacy enrollment                                                 |
++--------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------+
+| 9200/TCP, outbound | This Wazuh manager                                                                | Connection to the Wazuh indexer                                   |
++--------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------+
 
 If no Wazuh 4.x agents connect to this Wazuh manager, you can keep 1514 and 1515 closed. You can also disable them in ``/etc/wazuh-manager/wazuh-manager.conf`` with ``<remote><legacy><enabled>`` and ``<auth><disabled>``.
 
@@ -156,7 +156,7 @@ A Wazuh agent connects to one address only: the address of its enrollment token,
 Adding the address after the installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-These steps are for an all-in-one server installed with the :doc:`Quickstart </quickstart>`. The Wazuh manager reissues the certificates from its own certificate authority, so agents enrolled before the change keep trusting it. Run the following steps on this server:
+These steps are for an all-in-one server installed with the :doc:`Quickstart </quickstart>`, and for the master node of a step-by-step installation, for example to add the addresses of the worker nodes. The Wazuh manager reissues the certificates from its own certificate authority, so agents enrolled before the change keep trusting it. Run the following steps on that node:
 
 #. Stop the Wazuh manager and check that none of its processes are still running:
 
