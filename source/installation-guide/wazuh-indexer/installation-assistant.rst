@@ -19,7 +19,9 @@ The installation process is divided into three stages.
 
 #. Cluster initialization
 
-.. note:: You need root user privileges to run all the commands described below.
+.. note::
+
+   You need root user privileges to run all the commands described below. The commands use ``curl``. If ``curl`` isn't installed, install it with your package manager, for example, ``apt-get install curl`` or ``yum install curl``.
 
 Initial configuration
 ---------------------
