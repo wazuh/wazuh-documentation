@@ -57,6 +57,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added `--ignore-installed` to the Python 3.8–3.10 pip command of the *Microsoft Azure* documentation, so it installs next to the packages the system manages, such as the RPM `chardet` on Amazon Linux 2023. ([#10846](https://github.com/wazuh/wazuh-documentation/pull/10846))
 - **Post-release**: Corrected the RHEL-compatible system versions for the `protect=1` and `priority=1` repository commands in the Yum steps of the *Installing the Wazuh indexer step by step*, *Installing the Wazuh server step by step*, *Installing the Wazuh dashboard step by step*, *Deploying Wazuh agents on Linux endpoints* and *Wazuh central components* documentation. ([#10879](https://github.com/wazuh/wazuh-documentation/pull/10879))
 - **Post-release**: Added a note on writing `>`, `&` and `<` in a command, and on XML entities not being decoded, to the `command` option of the *localfile* reference documentation. ([#10880](https://github.com/wazuh/wazuh-documentation/pull/10880))
+- **Post-release**: Added a note that `curl` must be installed to the *Wazuh indexer installation assistant* and *Quickstart* documentation, and a note about synchronizing the clocks of all Wazuh hosts to the *Installation guide* documentation. ([#10881](https://github.com/wazuh/wazuh-documentation/pull/10881))
 
 ## [v4.14.9]
 

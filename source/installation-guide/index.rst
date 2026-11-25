@@ -25,6 +25,10 @@ You can check our :doc:`Quickstart </quickstart>` documentation to perform an al
 
 For more deployment flexibility and customization, install the Wazuh central components by starting with the :doc:`Wazuh indexer <wazuh-indexer/index>` deployment. This deployment method supports both an all-in-one installation and installing components on separate hosts.
 
+.. note::
+
+   Keep the clocks of all Wazuh hosts synchronized, for example, with NTP or ``chrony``. Unsynchronized clocks cause certificate validation errors and timestamp mismatches between alerts and the Wazuh dashboard.
+
 Follow this installation workflow:
 
 .. raw:: html

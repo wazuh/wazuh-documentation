@@ -56,6 +56,10 @@ Installing Wazuh
 
 #. Download and run the Wazuh installation assistant.
 
+   .. note::
+
+      The command uses ``curl``. If ``curl`` isn't installed, install it with your package manager, for example, ``sudo apt-get install curl`` or ``sudo yum install curl``.
+
    .. code-block:: console
 
       $ curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
