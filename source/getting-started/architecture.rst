@@ -50,11 +50,9 @@ Wazuh 5.0 changes the agent-manager communication transport. A Wazuh 5.x agent c
 Wazuh agent - Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh agent collects security data from monitored endpoints and forwards it to the :doc:`Wazuh manager <components/wazuh-manager>`, where the :doc:`normalization engine </user-manual/manager/wazuh-normalization-engine>` transforms and enriches the data. A Wazuh 5.x agent uses an HTTPS channel for communication with the Wazuh manager. The channel carries enrollment, event reporting, state synchronization, control messages, and file downloads. The Wazuh manager serves this channel on port ``1517/TCP``. The listener requires a TLS certificate and private key.
+The Wazuh agent collects security data from monitored endpoints and forwards it to the :doc:`Wazuh manager <components/wazuh-manager>`, where the :doc:`Wazuh normalization engine </user-manual/manager/wazuh-normalization-engine>` transforms and enriches the data. A Wazuh 5.x agent uses an HTTPS channel for communication with the Wazuh manager. The channel carries enrollment, event reporting, state synchronization, control messages, and file downloads. The Wazuh manager serves this channel on port ``1517/TCP``. The Wazuh agent also enrolls through this channel.
 
-A Wazuh 5.x agent enrolls through the same HTTPS channel using the ``POST /enroll`` endpoint. The endpoint acts as a bridge to the enrollment service, authenticates the request, and relays it to that service. After enrollment, the Wazuh agent authenticates subsequent requests using a bearer token.
-
-For Wazuh 4.x agents, the Wazuh manager provides the agent communication service on port ``1514/TCP`` by default, or on ``1514/UDP`` when you enable it. The service receives AES-encrypted messages, including keepalive messages and event data. Wazuh 4.x agents enroll through the enrollment service on port ``1515/TCP`` over TLS. The installer enables these legacy services in the ``<remote><legacy>`` section of the Wazuh manager configuration. You can disable them after all Wazuh agents run Wazuh 5.x.
+Wazuh 4.x agents connect to the Wazuh manager on port 1514 and enroll on port 1515/TCP. You can disable these legacy services after all Wazuh agents run Wazuh 5.x.
 
 Wazuh manager - Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -66,33 +64,21 @@ The Wazuh indexer indexes and stores the received documents, enabling the queryi
 Wazuh manager - Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In a multi-node deployment, Wazuh manager nodes form a cluster and communicate with each other over port ``1516/TCP`` by default. A Wazuh manager cluster consists of one master node and one or more worker nodes. All nodes use the shared key configured in the ``<cluster><key>`` setting of the :doc:`Wazuh manager configuration file </user-manual/reference/wazuh-manager-conf/index>` to encrypt cluster communication. A worker node with a different key can't connect to the master node.
+In a multi-node deployment, Wazuh manager nodes form a cluster and communicate with each other over port ``1516/TCP`` by default. A Wazuh manager cluster consists of one master node and one or more worker nodes. All nodes share a key that encrypts cluster communication.
 
-The master node coordinates cluster operations. It handles Wazuh agent enrollment and deletion requests and manages the shared configuration groups. The master node synchronizes the following data with the worker nodes:
-
--  Wazuh agent client keys
--  Enrollment password and enrollment tokens
--  Shared configuration and agent group assignments
-
-When an enrollment request arrives at a worker node, the worker forwards it to the master node. The master validates the request, assigns the agent ID, and generates the client key. The worker returns the enrollment response to the Wazuh agent, while the cluster synchronizes the agent registration data with the worker nodes.
+The master node coordinates cluster operations. It handles Wazuh agent enrollment and synchronizes the Wazuh agent keys and shared configuration with the worker nodes.
 
 Wazuh dashboard - Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Wazuh dashboard queries the Wazuh manager API to retrieve information and perform management operations. It displays configuration and status information about the :doc:`Wazuh manager <components/wazuh-manager>` and enrolled :doc:`Wazuh agents <components/wazuh-agent>`. It also performs operations such as agent enrollment, group assignment, and remote upgrades. The Wazuh manager API listens on port ``55000/TCP`` by default and exposes a REST interface over HTTPS. Only the master node runs the Wazuh manager API.
 
-The Wazuh manager API uses JSON Web Tokens (JWTs) for authentication. The Wazuh dashboard sends the API username and password to the ``POST /security/user/authenticate`` endpoint, which returns a signed JWT. The dashboard includes this token in the ``Authorization`` header of subsequent API requests. Tokens expire after 900 seconds by default.
-
-The Wazuh dashboard authenticates as the ``wazuh-internal-client`` user with ``run_as`` enabled. For requests on behalf of a logged-in user, the Wazuh dashboard authenticates through ``POST /security/user/authenticate/run_as`` and sends that user's authorization context. The Wazuh manager API then applies the role-based access control (RBAC) roles mapped to that user.
-
-The Wazuh dashboard verifies the Wazuh manager API certificate using the Wazuh manager certificate authority (CA) at ``/etc/wazuh-dashboard/certs/manager-ca.pem``. This file is a copy of ``/etc/wazuh-manager/export/ca.pem`` from the master node. The API address configured in the Wazuh dashboard must match a name or IP address in the Wazuh manager API certificate. If the Wazuh manager CA is missing, the Wazuh dashboard still starts and displays Wazuh indexer data. However, it can't connect to the Wazuh manager API.
-
-RBAC authorizes each authenticated request based on the user's assigned permissions. RBAC supports permissions for specific resources and actions and operates in allowlist mode by default. In this mode, the API denies actions that the user's roles don't explicitly permit. In a Wazuh manager cluster, the Distributed API (DAPI) layer coordinates API requests across cluster nodes.
+The Wazuh manager API authenticates every request and applies role-based access control (RBAC), so each user can perform only the actions that their roles allow.
 
 Wazuh dashboard - Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh dashboard queries the Wazuh indexer to retrieve indexed security data for its visualizations, tables, and findings. It sends search, aggregation, and management requests to the Wazuh indexer REST API over HTTPS on port ``9200/TCP`` by default. The Wazuh indexer processes each request and returns the matching documents, which the Wazuh dashboard renders. This communication is encrypted with TLS and authenticated with Wazuh indexer credentials. The Wazuh dashboard connects to the Wazuh indexer as the ``kibanaserver`` user and verifies its certificate using the Wazuh indexer CA at ``/etc/wazuh-dashboard/certs/indexer-ca.pem``. The Wazuh dashboard cannot start if this CA file is missing.
+The Wazuh dashboard queries the Wazuh indexer to retrieve indexed security data for its visualizations, tables, and findings. It sends search, aggregation, and management requests to the Wazuh indexer REST API over HTTPS on port ``9200/TCP`` by default. The Wazuh indexer processes each request and returns the matching documents, which the Wazuh dashboard renders. This communication is encrypted with TLS and authenticated with Wazuh indexer credentials.
 
 .. _default_ports:
 
@@ -114,10 +100,7 @@ Wazuh components communicate through several services, each with a specific defa
 |                 | 1516/TCP           | Wazuh cluster protocol, encrypted with | Wazuh manager cluster communication                          |
 |                 |                    | the cluster key                        |                                                              |
 +                 +--------------------+----------------------------------------+--------------------------------------------------------------+
-|                 | 55000/TCP          | HTTPS, TLS                             | Wazuh manager API (master node only). After the              |
-|                 |                    |                                        | :ref:`Quickstart <quickstart_installing_wazuh>` or an        |
-|                 |                    |                                        | offline all-in-one installation, the API listens only on     |
-|                 |                    |                                        | ``127.0.0.1`` and ``::1``                                    |
+|                 | 55000/TCP          | HTTPS, TLS                             | Wazuh manager API (master node only)                         |
 +-----------------+--------------------+----------------------------------------+--------------------------------------------------------------+
 | Wazuh indexer   | 9200/TCP           | HTTPS, TLS                             | Wazuh indexer API                                            |
 +                 +--------------------+----------------------------------------+--------------------------------------------------------------+
