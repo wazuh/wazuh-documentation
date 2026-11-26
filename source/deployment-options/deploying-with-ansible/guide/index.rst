@@ -135,7 +135,9 @@ Run the playbook
 
    .. code-block:: console
 
-      # ansible-playbook wazuh-aio.yml -K
+      # ansible-playbook wazuh-aio.yml -e "source=prerelease" -K
+
+   The ``-e "source=prerelease"`` option installs the release candidate packages from the pre-release repository. Omit it to install a published release.
 
    The ``-K`` option makes Ansible ask for the ``BECOME password``, which is the sudo password of ``<USERNAME>`` on the targets. Press **Enter** if ``<USERNAME>`` can use sudo without a password.
 
@@ -373,7 +375,9 @@ Run the playbook
 
    .. code-block:: console
 
-      # ansible-playbook wazuh-distributed.yml -K
+      # ansible-playbook wazuh-distributed.yml -e "source=prerelease" -K
+
+   The ``-e "source=prerelease"`` option installs the release candidate packages from the pre-release repository. Omit it to install a published release.
 
 #. Check the status of each service on the nodes that run it.
 
@@ -446,7 +450,9 @@ Each password must have 12 to 64 characters from ``A-Z a-z 0-9 . , _ + : @ % ^ =
 
 .. code-block:: console
 
-   # ansible-playbook wazuh-aio.yml -e @credentials-overrides.yml --ask-vault-pass -K
+   # ansible-playbook wazuh-aio.yml -e "source=prerelease" -e @credentials-overrides.yml --ask-vault-pass -K
+
+The ``-e "source=prerelease"`` option installs the release candidate packages from the pre-release repository. Omit it to install a published release.
 
 The playbook does not change passwords. To change a password, see :doc:`Password management </user-manual/user-administration/password-management>`. After you change a password with the Wazuh passwords tool, write the new value to the file of its key on the Ansible control node. In a Wazuh cluster deployment, later runs of the playbook use the ``admin`` and ``wazuh`` users to check the Wazuh indexer and the Wazuh manager API, and stop if either password is rejected. In an all-in-one deployment, the next run copies the new passwords to ``deployment-credentials`` itself. If the tool generated the new password, read it from ``/etc/wazuh-indexer/export/credentials.env`` or ``/etc/wazuh-manager/export/credentials.env`` on the host where you ran the tool. For example, after you change the ``admin`` password, run:
 
@@ -513,7 +519,7 @@ To use your own root CA in a Wazuh cluster deployment, place its ``root-ca.pem``
 
 Each clone of the Wazuh Ansible repository holds one deployment. To deploy another environment, clone the repository into another directory and run the playbook from there. The passwords of that deployment are in the ``deployment-credentials`` directory of that clone, so read them there, not in ``/etc/ansible/roles/wazuh-ansible/``.
 
-Running the playbook again from the same directory keeps the passwords, the root CA, and the certificates. It leaves the installed Wazuh packages as they are and doesn't write ``local.env`` again. It doesn't download an installed package again. It restarts a service only when its configuration changes.
+Running the playbook again from the same directory keeps the passwords, the root CA, and the certificates. It leaves the installed Wazuh packages as they are and doesn't write ``local.env`` again. It doesn't download an installed package again, including the release candidate packages installed with ``-e "source=prerelease"``. It restarts a service only when its configuration changes.
 
 To add a Wazuh indexer node to a Wazuh cluster deployment, add the node to the inventory and to the ``wi_cluster`` group, and add it to ``instances``, ``wazuh_indexer_hosts``, and ``indexer_cluster_nodes`` in the playbook. Then run the playbook again for the whole inventory, without ``--limit``. The existing Wazuh indexer nodes accept the new node only when their ``plugins.security.nodes_dn`` setting lists it, and the playbook writes that list from ``instances``. The existing Wazuh indexer nodes restart at the same time to read the new list, so the Wazuh indexer cluster is unavailable until they join it again. The security configuration of the cluster, with its users, roles, and passwords, is kept. If you limit the run to the new node, the run stops before it loads anything and asks for a run with every Wazuh indexer node. A later run with ``--limit`` to Wazuh indexer nodes that are already installed keeps every node of ``instances`` in that list, so it does not restart them. The playbook issues the certificates of the new node from the root CA of the deployment and keeps the certificates of the existing nodes. It adds the new node to the configuration of the Wazuh manager and Wazuh dashboard, and restarts those services.
 
@@ -778,7 +784,9 @@ Run the playbook
 
    .. code-block:: console
 
-      # ansible-playbook wazuh-agent.yml --ask-vault-pass -K
+      # ansible-playbook wazuh-agent.yml -e "source=prerelease" --ask-vault-pass -K
+
+   The ``-e "source=prerelease"`` option installs the release candidate packages from the pre-release repository. Omit it to install a published release.
 
    .. note::
 
