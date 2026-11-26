@@ -13,7 +13,7 @@ A worker node raises the number of Wazuh agents a distributed deployment serves,
 In a distributed deployment, the Wazuh indexer, Wazuh manager, and Wazuh dashboard run on separate endpoints. Where the private key of the root certificate authority (CA), ``root-ca.key``, stays depends on the installation method:
 
 -  **Installation assistant deployment**: In the ``wazuh-ca`` directory next to ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh``, on the endpoint where you ran ``--generate-config-files``, or in the directory set in ``WAZUH_CA_DIR``.
--  **Step-by-step deployment**: In ``/etc/wazuh-indexer/ca`` on the first Wazuh indexer node. This root CA issues the Wazuh indexer client certificate of each Wazuh manager node. If ``/etc/wazuh-manager/ca`` on the master node also holds ``root-ca.key``, the Wazuh manager nodes issue their agent listener and Wazuh manager API certificates from that CA.
+-  **Step-by-step deployment**: In ``/etc/wazuh-indexer/ca`` on the first Wazuh indexer node. This root CA also signed the Wazuh indexer certificates. If ``/etc/wazuh-manager/ca`` on the master node also holds ``root-ca.key``, the Wazuh manager nodes issue their agent listener and Wazuh manager API certificates from that CA.
 
 You issue the certificates of the new node on that endpoint, from that root CA. A node issued from another root CA doesn't work in the cluster. If no endpoint holds root-ca.key, see :ref:`Missing root CA <wazuh_manager_cluster_missing_root_ca>`.
 
@@ -46,7 +46,7 @@ If the deployment has a single Wazuh manager node, its ``<cluster>`` block still
 Issue the certificates for the new node
 ---------------------------------------
 
-The Wazuh certificates tool issues three pairs from the root CA for each Wazuh manager node. They are the agent listener pair, the Wazuh manager API pair, and the Wazuh indexer client pair.
+The Wazuh certificates tool issues two pairs from the root CA for each Wazuh manager node. They are the agent listener pair and the Wazuh manager API pair.
 
 Complete these steps on the endpoint that holds ``root-ca.key``.
 
@@ -194,8 +194,6 @@ Complete the first step on the master node and the rest on the new node, in the 
             # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD|WAZUH_INDEXER_MANAGER_PASSWORD)=' wazuh-certificates/credentials.env > /etc/wazuh-manager/local.env
             # install -m 0640 wazuh-certificates/root-ca.pem /etc/wazuh-manager/certs/root-ca.pem
             # install -m 0640 wazuh-certificates/root-ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
-            # install -m 0640 wazuh-certificates/$NODE_NAME.pem /etc/wazuh-manager/certs/indexer-connector.pem
-            # install -m 0640 wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
             # install -m 0640 wazuh-certificates/$NODE_NAME-remoted.pem /etc/wazuh-manager/certs/remoted.pem
             # install -m 0640 wazuh-certificates/$NODE_NAME-remoted-key.pem /etc/wazuh-manager/certs/remoted-key.pem
             # install -m 0640 wazuh-certificates/$NODE_NAME-apid.pem /etc/wazuh-manager/certs/apid.pem
@@ -215,7 +213,7 @@ Complete the first step on the master node and the rest on the new node, in the 
             # scp manager-ca.tar "<USER>@<NEW_NODE_IP>:"
             # rm -f manager-ca.tar
 
-         On the new node, in the directory that holds both archives, place the root CA, the passwords, and the Wazuh indexer client certificate:
+         On the new node, in the directory that holds both archives, place the root CA, the passwords, and the Wazuh indexer CA:
 
          .. code-block:: console
 
@@ -233,11 +231,9 @@ Complete the first step on the master node and the rest on the new node, in the 
             # grep -E '^(WAZUH_MANAGER_API_PASSWORD|WAZUH_MANAGER_WUI_PASSWORD|WAZUH_INDEXER_MANAGER_PASSWORD)=' wazuh-certificates/credentials.env > /etc/wazuh-manager/local.env
             # echo 'WAZUH_MANAGER_REMOTED_CERT_SANS=IP:<NEW_NODE_IP>,DNS:<LOAD_BALANCER_NAME>' >> /etc/wazuh-manager/local.env
             # install -m 0640 wazuh-certificates/root-ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
-            # install -m 0640 wazuh-certificates/$NODE_NAME.pem /etc/wazuh-manager/certs/indexer-connector.pem
-            # install -m 0640 wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
             # rm -rf wazuh-certificates wazuh-certificates.tar manager-ca.tar
 
-         -  Replace ``<NEW_NODE_IP>`` with the IP address of the new node and ``<LOAD_BALANCER_NAME>`` with the address that Wazuh agents use to reach the load balancer. Without a load balancer, leave out the ``WAZUH_MANAGER_REMOTED_CERT_SANS`` line. You issue the agent listener and Wazuh manager API certificates in step 6.
+         -  Replace ``<NEW_NODE_IP>`` with the IP address of the new node and ``<LOAD_BALANCER_NAME>`` with the address that Wazuh agents use to reach the load balancer. Without a load balancer, leave out the ``WAZUH_MANAGER_REMOTED_CERT_SANS`` line. The package issues the agent listener and Wazuh manager API certificates from the root CA of the master node when you install it in step 5. These commands use only ``root-ca.pem`` and ``credentials.env`` from ``wazuh-certificates.tar``, not the pairs in it.
 
 #. Install the Wazuh manager package at the version that step 1 printed.
 
@@ -262,9 +258,9 @@ Complete the first step on the master node and the rest on the new node, in the 
             # dnf -y install "wazuh-manager-<VERSION>-<REVISION>"
 
    -  Replace ``<VERSION>-<REVISION>`` with the output of step 1. To check that your repository has that version, run ``apt-cache madison wazuh-manager`` or ``yum --showduplicates list wazuh-manager``. The master refuses a worker with another version (error ``3031``).
-   -  On RPM-based systems, the installation prints ``UNSAFE /etc/wazuh-manager/certs/<FILE>.pem: group is root, not wazuh-manager`` for the files you placed. The next step fixes it.
+   -  The package gives the files you placed in ``/etc/wazuh-manager/certs/`` owner ``root:wazuh-manager`` and mode ``0640`` before its credential check runs, on DEB and RPM alike.
 
-#. Give the staged certificates the ``wazuh-manager`` group, and run the credential resolver again:
+#. Make sure the staged certificates have the ``wazuh-manager`` group, and run the credential resolver again:
 
    .. code-block:: console
 
@@ -273,13 +269,13 @@ Complete the first step on the master node and the rest on the new node, in the 
       # chmod 640 /etc/wazuh-manager/certs/*.pem
       # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --upgrade -H /var/wazuh-manager
 
-   If you used the step-by-step variant in step 4, replace the last command with this one. It issues the agent listener and Wazuh manager API certificates from the root CA of the master node:
+   If you used the step-by-step variant in step 4, replace the last command with this one. It checks the agent listener and Wazuh manager API certificates that the package issued from the root CA of the master node:
 
    .. code-block:: console
 
       # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install -H /var/wazuh-manager
 
-   -  The resolver runs during the installation, before the staged files have the ``wazuh-manager`` group, so it runs again here. The installation assistant runs the same commands after it installs a Wazuh manager node.
+   -  The package already sets this owner and mode before its own resolver run. These commands confirm it, and the resolver prints ``kept`` for each certificate.
 
 #. Check the credentials:
 
@@ -288,6 +284,8 @@ Complete the first step on the master node and the rest on the new node, in the 
       # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check -H /var/wazuh-manager
 
    The command ends with ``check: no problem found``.
+
+   If you used the step-by-step variant, remove the CA private key from the new node with ``rm -f /etc/wazuh-manager/ca/root-ca.key``. The node needs ``root-ca.key`` only to issue its certificates. Without it, the node validates them against ``root-ca.pem`` at every start.
 
 .. _wazuh_manager_cluster_configure_the_new_node_as_a_worker_2:
 
@@ -321,8 +319,6 @@ Complete the first step on the master node and the rest on the new node.
           <certificate_authorities>
             <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
           </certificate_authorities>
-          <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
-          <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
         </ssl>
       </indexer>
 
@@ -364,7 +360,7 @@ Complete the first step on the master node and the rest on the new node.
 
       # /var/wazuh-manager/bin/wazuh-manager-conf validate
 
-   -  The command prints nothing when the file is valid.
+   -  The command prints ``/etc/wazuh-manager/wazuh-manager.conf: configuration is valid``.
 
 #. Enable and start the Wazuh manager service:
 

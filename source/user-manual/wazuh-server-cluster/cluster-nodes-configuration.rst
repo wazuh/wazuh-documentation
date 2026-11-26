@@ -74,7 +74,7 @@ The master node keeps the cluster key that every worker node must use. Configure
       -  ``<key>`` is the 32-character cluster key. Replace ``<CLUSTER_KEY>`` with the key from step 1.
       -  ``<port>`` is the TCP port the master node listens on for worker nodes. The default value is ``1516``.
       -  ``<bind_addr>`` is the address the master node listens on. Replace ``<MASTER_BIND_ADDRESS>`` with an address the worker nodes reach, or ``0.0.0.0``. The default value ``127.0.0.1`` accepts only local connections.
-      -  ``<node>`` is the address of the master node. Replace ``<MASTER_NODE_ADDRESS>`` with its IP address or DNS name. The values ``localhost``, ``0.0.0.0``, and ``127.0.1.1`` aren't valid.
+      -  ``<node>`` is the address of the master node. Replace ``<MASTER_NODE_ADDRESS>`` with its IP address or DNS name. The values ``localhost``, ``0.0.0.0``, and ``127.0.1.1`` aren't valid. The cluster daemon refuses them at start with error 3004, and ``wazuh-manager-conf validate`` doesn't check them.
       -  ``<hidden>`` has no effect. The installer writes it, and you can leave it as it is.
 
 #. Validate the configuration file:
@@ -83,7 +83,7 @@ The master node keeps the cluster key that every worker node must use. Configure
 
       # /var/wazuh-manager/bin/wazuh-manager-conf validate
 
-   -  The command prints nothing when the configuration is valid.
+   -  The command prints ``/etc/wazuh-manager/wazuh-manager.conf: configuration is valid``.
 
 #. Restart the Wazuh manager to apply the changes:
 

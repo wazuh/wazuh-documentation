@@ -41,7 +41,7 @@ Agent status and group assignments travel through the node databases instead of 
 -  **Agent information**: Every 10 seconds, each worker node sends the status, last keep-alive, and metadata of its agents to the master node.
 -  **Agent groups**: Every 10 seconds, the master node sends new group assignments to every worker node. Each worker node checks its table against the master node and requests a full copy when the checksums keep differing.
 
-The ``wazuh-manager-remoted`` daemon on each node caches the group membership of its agents. It refreshes the cache from the local database every 60 seconds by default. A group change can take up to one more minute to reach the agents of a node.
+The ``wazuh-manager-remoted`` daemon on each node caches the group membership of its agents. It reads a changed membership from the local database on the agent's next notify, at most once per second by default. On a worker node, the change first waits for the next agent-groups synchronization from the master node, up to 10 seconds.
 
 Data the cluster doesn't synchronize
 ------------------------------------
