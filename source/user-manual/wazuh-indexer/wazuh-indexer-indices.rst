@@ -323,7 +323,7 @@ Change the minimum age for deletion
 
 Run the following steps on a Wazuh indexer node to create custom retention policies for events and findings. The commands use ``jq``. Install it first if the node doesn't have it, for example with ``apt install jq`` or ``yum install jq``.
 
-#. Copy the default events policy. In the copy, set the minimum age for deletion to ``<MINIMUM_AGE>``, for example ``365d`` for 365 days, and the template priority to 1, so that new event indices use it:
+#. Copy the default events policy. In the copy, set the minimum age for deletion to ``<MINIMUM_AGE_FOR_DELETION>``, for example ``365d`` for 365 days, and the template priority to 1, so that new event indices use it:
 
    .. code-block:: bash
       :emphasize-lines: 1, 5, 6
@@ -332,8 +332,8 @@ Run the following steps on a Wazuh indexer node to create custom retention polic
         'https://localhost:9200/_plugins/_ism/policies/stream-events-policy' \
         | jq '{policy: (.policy
             | del(.policy_id, .last_updated_time, .schema_version, .error_notification)
-            | .description = "Custom events policy: keeps events for at least <MINIMUM_AGE>."
-            | .states[0].transitions[0].conditions.min_index_age = "<MINIMUM_AGE>"
+            | .description = "Custom events policy: keeps events for at least <MINIMUM_AGE_FOR_DELETION>."
+            | .states[0].transitions[0].conditions.min_index_age = "<MINIMUM_AGE_FOR_DELETION>"
             | .ism_template[].priority = 1)}' > custom-events-policy.json
 
 #. Store the copy as ``custom-events-policy``:
