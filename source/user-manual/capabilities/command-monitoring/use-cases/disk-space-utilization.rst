@@ -18,7 +18,7 @@ Linux endpoint
 
    .. code-block:: bash
 
-      # tee /usr/local/bin/disk-usage.sh > /dev/null << 'EOF'
+      tee /usr/local/bin/disk-usage.sh > /dev/null << 'EOF'
       #!/bin/bash
       THRESHOLD=80
       USAGE=$(df -P / | awk 'NR==2 {gsub("%",""); print $5}')

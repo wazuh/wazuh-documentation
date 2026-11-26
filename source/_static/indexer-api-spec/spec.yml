@@ -7,7 +7,7 @@ info:
 
     # Authentication
 
-    Wazuh indexer API endpoints require authentication to be used. There are multiple options on what authentication mechanism to use including basic HTTP authentication and JSON Web Token (JWT). More information can be seen in [Logging into the Wazuh indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/getting-started.html#logging-into-the-wazuh-indexer-api).
+    Wazuh indexer API endpoints require authentication to be used. There are multiple options on what authentication mechanism to use including basic HTTP authentication and JSON Web Token (JWT). More information can be seen in [Logging into the Wazuh indexer API](getting-started.html#logging-into-the-wazuh-indexer-api).
   version: 1.0.0
 
 servers:
