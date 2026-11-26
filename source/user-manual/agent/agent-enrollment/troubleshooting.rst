@@ -29,62 +29,30 @@ Verifying communication with the Wazuh manager
 
 In some scenarios, the Wazuh agent may be unable to enroll or establish a connection with the Wazuh manager because the necessary ports on the Wazuh manager are unreachable.
 
-The default ports on the Wazuh manager depend on the agent version:
-
--  **Wazuh 5.0 agents**: 1517/TCP (HTTPS) - used for both enrollment and agent communication.
--  **Wazuh 4.x agents**: 1515/TCP for enrollment and 1514/TCP for agent communication.
--  55000/TCP only if you enroll agents through the Wazuh manager API, or for agents with anti-tampering that remove themselves.
+The Wazuh manager listens on 1517/TCP (HTTPS) for both enrollment and agent communication, and on 55000/TCP for the Wazuh manager API, which you need only if you enroll agents through it or for agents with anti-tampering that remove themselves.
 
 On Linux and macOS systems (with netcat installed) open a terminal and run the following commands. Replace ``<WAZUH_MANAGER_ADDRESS>`` with your Wazuh manager IP address or fully qualified domain name (FQDN).
-
-For a Wazuh 5.0 agent:
 
 .. code-block:: console
 
    # nc -zv <WAZUH_MANAGER_ADDRESS> 1517
 
-For a Wazuh 4.x agent:
-
-.. code-block:: console
-
-   # nc -zv <WAZUH_MANAGER_ADDRESS> 1514
-   # nc -zv <WAZUH_MANAGER_ADDRESS> 1515
-
-If you enroll through the Wazuh manager API, also run ``nc -zv <WAZUH_MANAGER_ADDRESS> 55000``, whatever the Wazuh agent version.
+If you enroll through the Wazuh manager API, also run ``nc -zv <WAZUH_MANAGER_ADDRESS> 55000``.
 
 If there is connectivity, the output should be a connection success message:
-
-For a Wazuh 5.0 agent:
 
 .. code-block:: none
    :class: output
 
    Connection to <WAZUH_MANAGER_ADDRESS> 1517 port [tcp/*] succeeded!
 
-For a Wazuh 4.x agent:
-
-.. code-block:: none
-   :class: output
-
-   Connection to <WAZUH_MANAGER_ADDRESS> 1514 port [tcp/*] succeeded!
-   Connection to <WAZUH_MANAGER_ADDRESS> 1515 port [tcp/*] succeeded!
-
 On Windows, open a PowerShell terminal and run the following commands:
-
-For a Wazuh 5.0 agent:
 
 .. code-block:: pwsh-session
 
    > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 1517)
 
-For a Wazuh 4.x agent:
-
-.. code-block:: pwsh-session
-
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 1514)
-   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 1515)
-
-If you enroll through the Wazuh manager API, also run ``(new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 55000)``, whatever the Wazuh agent version.
+If you enroll through the Wazuh manager API, also run ``(new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_ADDRESS>", 55000)``.
 
 If there is connectivity, there is no output. Otherwise, an error is shown:
 
@@ -97,21 +65,16 @@ If there is connectivity, there is no output. Otherwise, an error is shown:
 
    If ports appear reachable at the network level but the connection still fails, check whether the manager's remoted listener is bound to the loopback interface only. Both ``<remote><https><bind_addr>`` (1517) and ``<remote><legacy><local_ip>`` (1514) in ``wazuh-manager.conf`` default to ``0.0.0.0``, which accepts connections from any host. If either one is set to ``127.0.0.1``, the listener rejects connections from any other host. Set them to ``0.0.0.0`` to accept remote agents.
 
+.. _enrollment_authentication_error:
+
 Authentication error
 --------------------
 
 The ``client.keys`` file stores the data used to authenticate the Wazuh agent and the Wazuh manager. The Wazuh agent may be unable to authenticate with the Wazuh manager if the ``client.keys`` on the Wazuh manager and the Wazuh agent are different.
 
-**Location**: Wazuh manager log file at ``/var/wazuh-manager/logs/wazuh-manager.log``.
+**Location**: Wazuh agent log file
 
 **Error log**:
-
-.. code-block:: none
-   :class: output
-
-   2026/10/04 22:44:48 wazuh-manager-remoted: WARNING: (1404): Authentication error. Wrong key or corrupt payload. Message received from agent '007' at 'any'.
-
-This log applies to Wazuh 4.x agents. For Wazuh 5.0 agents, the Wazuh manager logs nothing. Check the Wazuh agent log instead:
 
 .. code-block:: none
    :class: output
@@ -131,6 +94,8 @@ Windows       ``"C:\Program Files (x86)\ossec-agent\client.keys"``
 
 Also, verify that each agent has a unique client key stored in the Wazuh manager ``/etc/wazuh-manager/client.keys`` file. Duplicate keys can arise if you previously deleted agents with the highest IDs or copied the ``client.keys`` file between agents.
 
+.. _enrollment_invalid_agent_name:
+
 Invalid agent name for enrollment
 ---------------------------------
 
@@ -147,16 +112,9 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
 
    2026/10/27 22:41:24 wazuh-agentd: ERROR: Enrollment rejected by the manager: duplicate agent. Duplicate name
 
-**Wazuh manager log** (Wazuh 4.x agents only; for Wazuh 5.0 agents, the Wazuh manager logs nothing):
-
-.. code-block:: none
-   :class: output
-
-   2026/10/27 22:41:23 wazuh-manager-authd: WARNING: Duplicate name '<AGENT_NAME>', rejecting enrollment. Agent '<ID>' can't be replaced since it is not disconnected.
-
 **Resolution**: If you are enrolling the same endpoint again, remove the existing Wazuh agent on the Wazuh manager first, as :doc:`Remove agents </user-manual/agent/agent-management/remove-agents>` describes, or wait until the Wazuh manager's :ref:`\<auth\>\<force\> <reference_wazuh_manager_conf_auth_force>` settings allow replacing it. By default, the existing Wazuh agent must have been disconnected for more than 1 hour and registered more than 1 hour ago. The Wazuh agent gets a new ID.
 
-If it's a different endpoint, ensure the Wazuh agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<agent><enrollment><agent_name>`` section (Wazuh 5.0 agents) or ``<client><enrollment><agent_name>`` section (Wazuh 4.x agents) of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
+If it's a different endpoint, ensure the Wazuh agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<agent><enrollment><agent_name>`` section of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
 
 -  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
 -  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
@@ -192,8 +150,6 @@ The ``wazuh-manager-authd --create-enrollment-token`` command:
 
    ERROR 9025: Enrollment token refused: address not in certificate SAN
 
-The Wazuh manager API, ``POST /agents/enrollment-tokens``: error ``1768``, "Enrollment token refused", with the detail ``address not in certificate SAN``.
-
 The Wazuh dashboard:
 
 .. code-block:: none
@@ -207,11 +163,9 @@ The Wazuh dashboard:
 
    # openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
 
-Or query the Wazuh manager API with ``GET /cluster/<NODE_ID>/daemons/remoted/tls`` and read ``listener.sans`` in the response.
-
 Create the token for an address in that list. A DNS name must match a DNS entry, and an IP address must match an IP Address entry. If the IP address of the Wazuh manager can change, use a DNS name.
 
-If the Wazuh agents must use an address that isn't in the list, issue the agent listener certificate again with that address. List every address the Wazuh agents use in the same run, because the new certificate replaces the old one. See :ref:`Agent connection address <wazuh_manager_agent_connection_address>` for the installation guide methods, :ref:`Reissue the Wazuh manager certificates <vm_reissue_manager_certificates>` for the virtual machine, the ``--agent-san`` option in :doc:`Wazuh Docker deployment </deployment-options/docker/wazuh-container>` and :doc:`Kubernetes deployment </deployment-options/deploying-with-kubernetes/kubernetes-deployment>`, and for an Ansible deployment, the ``wazuh_manager_ips``, ``extra_ips`` and ``agent_san`` options in :ref:`Deployment with Ansible <ansible_agent_token>`. These options take effect only when the Wazuh manager is first deployed: running the playbook again keeps the existing certificate. Then create the token again.
+If the Wazuh agents must use an address that isn't in the list, issue the agent listener certificate again with that address. List every address the Wazuh agents use in the same run, because the new certificate replaces the old one. See :ref:`Agent connection address <wazuh_manager_agent_connection_address>` in the installation guide, or the certificate options of your deployment method: virtual machine, Docker, Kubernetes, or Ansible. Then create the token again.
 
 Unable to read CA certificate file
 ----------------------------------
@@ -243,8 +197,7 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
 
 **Resolution**:
 
--  Wazuh 5.0 agents: Ensure the certificate authority file exists and is readable at the path set in ``<ssl><certificate_authorities>`` in the Wazuh agent configuration file (``ossec.conf``). If ``<certificate_authorities>`` is not set, the Wazuh agent uses the trust anchor ``etc/certs/root-ca.pem`` in its installation directory, which is installed when the Wazuh agent enrolls with an enrollment token.
--  Wazuh 4.x agents: Ensure the certificate authority file is in the location specified in the ``<server_ca_path>`` section of the Wazuh agent configuration file (``ossec.conf``).
+-  Ensure the certificate authority file exists and is readable at the path set in ``<ssl><certificate_authorities>`` in the Wazuh agent configuration file (``ossec.conf``). If ``<certificate_authorities>`` is not set, the Wazuh agent uses the trust anchor ``etc/certs/root-ca.pem`` in its installation directory, which is installed when the Wazuh agent enrolls with an enrollment token.
 
 You can find the ``ossec.conf`` file at the following locations:
 
