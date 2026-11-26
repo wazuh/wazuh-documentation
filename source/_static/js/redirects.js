@@ -204,6 +204,7 @@ newUrls['5.0'] = [
   '/user-manual/capabilities/active-response/migrating-active-response-scripts.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-web-attacks.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malicious-file.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/isolating-linux-endpoint.html',
   '/cloud-security/gcp/prerequisites/requirements.html',
   '/cloud-security/gcp/prerequisites/enabling-integration.html',
   '/cloud-security/gcp/pubsub.html',
