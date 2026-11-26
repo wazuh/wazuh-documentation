@@ -17,7 +17,7 @@ The Wazuh SCA module scans monitored endpoints to detect misconfigurations and e
 - Running processes
 - The contents of files, command output, and registry value data
 
-For example, the SCA module can assess whether you need to change password-related configuration, remove unnecessary software, disable unnecessary services, or audit the TCP/IP stack configuration. SCA policies are written in YAML, a human-readable format that is easy to understand. Wazuh ships with a set of out-of-the-box policies based mostly on the CIS benchmarks, a well-established standard for endpoint hardening. You can also write your own policies or extend existing ones to fit your needs.
+For example, the SCA module can assess whether you need to change password-related configuration, remove unnecessary software, disable unnecessary services, or audit the TCP/IP stack configuration. SCA policies are written in YAML, a human-readable format. Wazuh ships with a set of out-of-the-box policies based mostly on the CIS benchmarks, a well-established standard for endpoint hardening. You can also write your own policies or extend existing ones to fit your needs.
 
 .. toctree::
    :maxdepth: 2
