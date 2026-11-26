@@ -8,9 +8,7 @@ Common criteria 7.2
 
 The TSC **Common Criteria CC7.2** specifies the monitoring of system components for anomalies. It states, "*The entity monitors system components and the operation of those components for anomalies that are indicative of malicious acts, natural disasters, and errors affecting the entity's ability to meet its objectives; anomalies are analyzed to determine whether they represent security events.*"
 
-This criterion requires the entity to detect anomalies on its systems and analyze them to determine whether they are security events. Collecting and analyzing log data from the monitored components supports this requirement.
-
-Wazuh helps meet the CC7.2 requirement by providing capabilities that detect anomalies on monitored systems. An example is log data analysis. The Wazuh Logcollector module retrieves and centralizes log data from different sources, such as operating systems, applications, network devices, and security appliances. Once Wazuh collects the log data, it applies various analysis techniques to extract valuable insights and detect potential security issues. This is done by matching the received data with the Wazuh out-of-the-box decoders and rules.
+Wazuh helps meet the CC7.2 requirement by providing capabilities that detect anomalies on monitored systems. An example is log data analysis. The Wazuh Logcollector module retrieves and centralizes log data from different sources, such as operating systems, applications, network devices, and security appliances.
 
 Use case: Collecting and analyzing logs across multiple endpoints
 --------------------------------------------------------------------

@@ -8,13 +8,11 @@ Log data analysis
 
 Log messages from devices, systems, and applications often carry evidence of an attack. The Wazuh Logcollector module receives logs through text files or Windows event logs. It can also directly receive logs via remote syslog, which is useful for firewalls and other such devices.
 
-Wazuh agents use the Logcollector module to collect events from monitored endpoints and applications. The Wazuh agents forward these events to the Wazuh manager, where the normalization engine processes them. The Wazuh manager then sends the normalized data to the Wazuh indexer for rule matching and indexing. This processed data supports threat detection, prevention, and active response.
-
 The Logcollector module helps to meet the following PCI DSS requirement:
 
 -  **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control mandates logging and monitoring user activities by employees, contractors, consultants, vendors, third parties, and other authorized users for a specified period.
 
-To help meet this requirement, the Wazuh agent uses the Logcollector module to collect endpoint logs or receive syslog messages from network and other syslog-enabled devices. The Wazuh manager normalization engine decodes the logs to extract the relevant fields, then forwards the normalized events to the Wazuh indexer. The detection engine in the Wazuh indexer evaluates them against the ruleset and triggers a finding when an event matches a rule. Refer to :ref:`rules <data_analysis_rules_compliance>` for more information.
+Wazuh helps meet this requirement with the :doc:`log data analysis </user-manual/capabilities/log-data-collection/index>` capability, which collects endpoint logs and syslog messages from network devices, and triggers a finding when an event matches a rule. Refer to :ref:`rules <data_analysis_rules_compliance>` for more information.
 
 Wazuh indexes decoded events whether or not they trigger a finding. To also keep the events that no integration decodes, see :ref:`enabling unclassified events storage <pci_dss_unclassified_events>`.
 
@@ -86,56 +84,7 @@ This rule triggers a finding after the detection engine analyzes the system logs
 PCI DSS requirement 10.5.1
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-PCI DSS requirement 10.5.1 mandates that you retain audit log history for at least 12 months, with the most recent 3 months immediately available for analysis. To meet it, keep events and findings for at least 365 days with custom retention policies, and turn on the storage of unclassified events so that Wazuh also keeps the events that no integration decodes.
-
-By default, Wazuh deletes an events backing index once it has rolled over and is older than 1 hour, and a findings backing index once it has rolled over and is older than 90 days. See :ref:`Data stream lifecycle <wazuh_indexer_indices_data_stream_lifecycle>` for the defaults. Don't edit the default policies. Wazuh rewrites them when the Wazuh indexer cluster restarts or is upgraded.
-
-Keep events and findings for at least 12 months
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Run the following steps on a Wazuh indexer node to create custom retention policies for events and findings. The commands use ``jq``. Install it first if the node doesn't have it, for example with ``apt install jq`` or ``yum install jq``.
-
-#. Copy the default events policy. In the copy, set the minimum age for deletion to 365 days and the template priority to 1, so that new event indices use it:
-
-   .. code-block:: bash
-      :emphasize-lines: 1
-
-      curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> \
-        'https://localhost:9200/_plugins/_ism/policies/stream-events-policy' \
-        | jq '{policy: (.policy
-            | del(.policy_id, .last_updated_time, .schema_version, .error_notification)
-            | .description = "Custom events policy: keeps events for at least 365 days."
-            | .states[0].transitions[0].conditions.min_index_age = "365d"
-            | .ism_template[].priority = 1)}' > custom-events-policy.json
-
-#. Store the copy as ``custom-events-policy``:
-
-   .. code-block:: console
-      :emphasize-lines: 1
-
-      # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X PUT \
-        'https://localhost:9200/_plugins/_ism/policies/custom-events-policy' \
-        -H 'Content-Type: application/json' -d @custom-events-policy.json
-
-#. Move the existing events indices to ``custom-events-policy``:
-
-   .. code-block:: console
-      :emphasize-lines: 1
-
-      # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X POST \
-        'https://localhost:9200/_plugins/_ism/change_policy/.ds-wazuh-events-v5-*' \
-        -H 'Content-Type: application/json' -d '{"policy_id": "custom-events-policy"}'
-
-#. Check that every events index uses ``custom-events-policy``. The change applies at the next ISM run, every 5 minutes by default, and can take two runs or more. Don't restart the Wazuh indexer cluster until every index shows ``custom-events-policy`` and a step name:
-
-   .. code-block:: console
-      :emphasize-lines: 1
-
-      # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> \
-        'https://localhost:9200/_plugins/_ism/explain/.ds-wazuh-events-v5-*' \
-        | jq -r 'to_entries[] | select(.value | type == "object") | [.key, .value.policy_id, (.value.step.name // "pending")] | @tsv'
-
-#. Repeat steps 1 to 4 for findings. In the commands, replace ``stream-events-policy`` with ``stream-findings-policy``, ``custom-events-policy`` with ``custom-findings-policy``, including the ``custom-events-policy.json`` file name, and ``.ds-wazuh-events-v5-*`` with ``.ds-wazuh-findings-v5-*``. You can also change the policy description to mention findings.
+PCI DSS requirement 10.5.1 mandates that you retain audit log history for at least 12 months, with the most recent 3 months immediately available for analysis. By default, Wazuh deletes events 1 hour and findings 90 days after their backing index rolls over. To meet the requirement, raise the minimum age for deletion of the ``wazuh-events-v5-*`` and ``wazuh-findings-v5-*`` data streams to at least 365 days, as described in :ref:`Change the minimum age for deletion <wazuh_indexer_indices_change_retention>`. To also keep events that no integration decodes, :ref:`enable the storage of unclassified events <pci_dss_unclassified_events>`.
 
 .. _pci_dss_unclassified_events:
 
@@ -144,7 +93,7 @@ Enable the storage of unclassified events
 
 Wazuh indexes decoded events in ``wazuh-events-v5-<category>`` whether or not a rule matches. An event is unclassified when the decoder that matched it belongs to an integration in the **Unclassified** category, such as ``wazuh-core``. Wazuh drops these events unless you turn on **Index unclassified events**.
 
-Unclassified event indexing is configured per :doc:`space </user-manual/data-analysis/space>`. When it's turned on, Wazuh stores unclassified events in the :ref:`wazuh-events-v5-unclassified <wazuh_indexer_indices_data_streams>` index. The Wazuh agents' events are processed in the **Standard** space by default. A space also has an **Index discarded events** setting, which applies to events that a decoder marks as discarded. When it's turned on, Wazuh replaces the content of each discarded event with the ``wazuh.space.event_discarded: true`` marker before indexing it. Events that a filter rejects are always dropped. You don't need it for this requirement. See :doc:`Space </user-manual/data-analysis/space>` for more information about both settings.
+Unclassified event indexing is configured per :doc:`space </user-manual/data-analysis/space>`. When it's turned on, Wazuh stores unclassified events in the :ref:`wazuh-events-v5-unclassified <wazuh_indexer_indices_data_streams>` index. The Wazuh agents' events are processed in the **Standard** space by default. See :doc:`Space </user-manual/data-analysis/space>` for more information.
 
 #. Navigate to **Ruleset Management** > **Overview**. Select **Standard** in **Space**, then select **Actions** > **Edit**.
 

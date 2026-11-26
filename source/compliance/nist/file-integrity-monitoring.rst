@@ -10,11 +10,11 @@ The Wazuh File Integrity Monitoring (FIM) module monitors an endpoint filesystem
 
 The Wazuh File Integrity Monitoring module assists you in meeting the following NIST 800-53 controls:
 
--  **CM-6 Configuration settings:** "*Configuration settings are the parameters that can be changed in the hardware, software, or firmware components of the system that affect the security and privacy posture or functionality of the system. Information technology products for which configuration settings can be defined include mainframe computers, servers, workstations, operating systems, mobile devices, input/output devices, protocols, and applications. Parameters that impact the security posture of systems include registry settings; account, file, or directory permission settings; and settings for functions, protocols, ports, services, and remote connections.*"
+-  **CM-6 Configuration settings:** Define secure configuration settings for the hardware, software, and firmware in your systems, and keep every component set to those values.
 
--  **SI-4 System monitoring:** "*System monitoring includes external and internal monitoring. External monitoring includes the observation of events occurring at external interfaces to the system. Internal monitoring includes the observation of events occurring within the system. Organizations monitor systems by observing audit activities in real-time or by observing other system aspects such as access patterns, characteristics of access, and other actions. The monitoring objectives guide and inform the determination of the events. System monitoring capabilities are achieved through a variety of tools and techniques, including intrusion detection and prevention systems, malicious code protection software, scanning tools, audit record monitoring software, and network monitoring software.*"
+-  **SI-4 System monitoring:** Monitor your systems at their boundaries and internally to detect attacks, signs of attacks, and unauthorized use.
 
-These NIST 800-53 controls require you to maintain secure configuration settings and monitor system changes in your infrastructure. The Wazuh FIM module helps you monitor the creation, modification, and deletion of files, directories, and Windows registry keys. This helps you meet the NIST 800-53 controls that require monitoring changes to files and folders.
+The Wazuh FIM module helps you monitor the creation, modification, and deletion of files, directories, and Windows registry keys. This helps you meet the NIST 800-53 controls that require monitoring changes to files and folders.
 
 Use cases
 ---------

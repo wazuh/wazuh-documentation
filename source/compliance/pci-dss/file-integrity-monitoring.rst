@@ -8,13 +8,13 @@ File integrity monitoring
 
 File integrity monitoring is performed by comparing the cryptographic checksum and other attributes of a known file against those of the modified file.
 
-The Wazuh File Integrity Monitoring (FIM) module stores checksums and other attributes of monitored files in a dedicated database on the monitored endpoint. During scans, it compares the current file checksums and attributes with the previously stored values to identify additions, modifications, and deletions. When changes occur, the Wazuh agent reports them to the Wazuh manager, which processes and forwards them to the Wazuh indexer for rule matching and indexing. If an event matches a detection rule, Wazuh generates a security finding.
+The Wazuh File Integrity Monitoring (FIM) module stores checksums and other attributes of monitored files in a dedicated database on the monitored endpoint. During scans, it compares the current file checksums and attributes with the previously stored values to identify additions, modifications, and deletions.
 
 The Wazuh FIM module helps to meet the following PCI DSS requirement.
 
 -  **Requirement 11 - Test Security of Systems and Networks Regularly**: Vulnerabilities are being discovered continually by malicious individuals and researchers, and being introduced by new software. System components, processes, and bespoke and custom software must be tested frequently to verify that security controls continue to reflect a changing environment.
 
-This requirement aims to verify that systems and networks are regularly tested to confirm their security status. These tests include vulnerability scans and file integrity monitoring. The :doc:`Wazuh FIM </user-manual/capabilities/file-integrity/index>` module supports this requirement by detecting modifications and deletions of monitored files. File integrity monitoring helps organizations identify unauthorized changes to critical files and assess whether security controls remain effective.
+The :doc:`Wazuh FIM </user-manual/capabilities/file-integrity/index>` module supports this requirement by detecting modifications and deletions of monitored files. File integrity monitoring helps organizations identify unauthorized changes to critical files and assess whether security controls remain effective.
 
 Use case
 --------
