@@ -18,14 +18,14 @@ In Wazuh 5.x, Wazuh consolidates the firewall-specific active response scripts u
 
 The ``block-ip`` executable attempts to use the available firewall mechanisms in a predefined order. If a firewall method is unavailable or unsupported on the endpoint, the executable automatically proceeds to the next available method. This approach removes the need to select or configure a firewall-specific script for each endpoint.
 
+Active responses act on finding fields, such as ``source.ip`` and ``user.name``, that can come from logs that local users or remote clients write. For example, any local user can run the ``logger`` command to write an authentication failure log for any user name, and the resulting finding carries that name in ``user.name``, which ``disable-account`` acts on. Keep monitor queries as narrow as possible, exclude trusted addresses with the ``allowlist`` option described in :ref:`Excluding IP addresses from active responses <active_response_allowlist>`, and prefer stateful active responses for ``block-ip`` and ``disable-account``, so that Wazuh reverts the action after the timeout.
+
 .. _active_response_default_scripts_linux_unix:
 
 Linux and Unix-based endpoints
 --------------------------------
 
-The table below lists out-of-the-box active response scripts for:
-
--  Linux/Unix endpoints, located in the Wazuh agent ``/var/ossec/active-response/bin`` directory.
+The table below lists the out-of-the-box active response scripts for Linux/Unix endpoints, located in the Wazuh agent ``/var/ossec/active-response/bin`` directory.
 
 .. |block-ip| replace:: `block-ip <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/src/active-response/src/block-ip-unix.c>`__
 .. |disable-account| replace:: `disable-account <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/src/active-response/src/disable-account.c>`__
@@ -45,16 +45,19 @@ The table below lists out-of-the-box active response scripts for:
 macOS endpoints
 -----------------
 
-The table below lists out-of-the-box active response scripts for:
-
--  macOS endpoints, located in the Wazuh agent ``/Library/Ossec/active-response/bin`` directory.
+The table below lists the out-of-the-box active response scripts for macOS endpoints, located in the Wazuh agent ``/Library/Ossec/active-response/bin`` directory.
 
 .. |block-ip-macos| replace:: `block-ip <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/src/active-response/src/block-ip-macos.c>`__
 
 +----------------------+----------------------------------------------------------------------------------------------------+
 | Name of script       | Description                                                                                        |
 +======================+====================================================================================================+
-| |block-ip-macos|     | Blocks or unblocks an IP address. On macOS, it tries pf and then ``/etc/hosts.deny``.              |
+| |block-ip-macos|     | Blocks or unblocks an IP address. On macOS, it tries pf and then a blackhole route. It uses pf     |
+|                      | only when pf is enabled and has a ``wazuh_fwtable`` table with rules that block the addresses in   |
+|                      | it.                                                                                                |
++----------------------+----------------------------------------------------------------------------------------------------+
+| |disable-account|    | Disables or re-enables a user account, using ``pwpolicy -disableuser``/``pwpolicy -enableuser`` on |
+|                      | macOS.                                                                                             |
 +----------------------+----------------------------------------------------------------------------------------------------+
 
 .. _active_response_default_scripts_windows:

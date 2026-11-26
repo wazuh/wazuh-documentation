@@ -74,7 +74,7 @@ An active response script receives a JSON message with the following structure:
 
 The message contains the following fields:
 
--  ``wazuh.active_response``: Provides metadata about the active response, including its name, executable, execution location, extra arguments, response type, and, for stateful responses, the timeout in seconds. The ``agent_id`` field is set only when the location is **Defined agent**. Otherwise, it's ``null``. The ``extra_arguments`` field contains the Extra arguments value of the active response configuration, as text. Wazuh doesn't pass them to the script as command-line arguments.
+-  ``wazuh.active_response``: Provides metadata about the active response, including its name, executable, execution location, extra arguments, response type, and, for stateful responses, the timeout in seconds. The ``agent_id`` field is set only when the location is **Defined agent**. Otherwise, it's ``null``. The ``extra_arguments`` field contains the Extra arguments value of the active response configuration, as text, or ``null`` when the active response has none. Wazuh doesn't pass them to the script as command-line arguments. The ``stateful_timeout`` field is ``null`` for a stateless active response.
 
 -  ``wazuh.agent``: Identifies the Wazuh agent that executes the active response.
 

@@ -6,7 +6,7 @@
 Blocking web attacks with active response
 ==============================================
 
-In this use case, we simulate a Cross-Site Scripting (XSS) attack against a web server running on an Ubuntu endpoint. Wazuh detects the attack and evaluates the resulting finding against the configured Alerting monitor. When the finding meets the monitor conditions, Wazuh runs the ``block-ip`` script on the Ubuntu endpoint to block the attacker's IP address.
+In this use case, you simulate a Cross-Site Scripting (XSS) attack against a web server running on an Ubuntu endpoint. Wazuh detects the attack and evaluates the resulting finding against the configured Alerting monitor. When the finding meets the monitor conditions, Wazuh runs the ``block-ip`` script on the Ubuntu endpoint to block the attacker's IP address.
 
 Infrastructure
 -----------------
@@ -172,6 +172,8 @@ Then create an Alerting monitor that runs the active response when a finding mat
 Attack emulation
 -------------------
 
+Wait at least one minute after you create the monitor, so that it runs once before the attack. The monitor doesn't evaluate findings indexed before its first run.
+
 Perform the following attack emulation from the RHEL 9.0 endpoint:
 
 Replace ``<WEBSERVER_IP_ADDRESS>`` with the Ubuntu IP address and execute the following command from the attacker endpoint:
@@ -182,7 +184,7 @@ Replace ``<WEBSERVER_IP_ADDRESS>`` with the Ubuntu IP address and execute the fo
 
 The attacker endpoint connects to the victim's web servers the first time. This triggers a web attack finding and then triggers the ``block-ip`` active response to block any successive connections.
 
-Run the attack command again after two minutes. The attacker IP is now blocked:
+The active response can take more than two minutes to reach the endpoint. After the ``/var/ossec/logs/active-responses.log`` file on the Ubuntu endpoint shows the ``block-ip`` entries described in :ref:`Visualize the findings <active_response_blocking_web_attacks_findings>`, run the attack command again. The attacker IP is now blocked:
 
 .. code-block:: console
 
@@ -194,6 +196,8 @@ The command output looks similar to this:
    :class: output
 
    curl: (28) Failed to connect to 192.168.56.118 port 80 after 134781 ms: Couldn't connect to server
+
+.. _active_response_blocking_web_attacks_findings:
 
 Visualize the findings
 --------------------------

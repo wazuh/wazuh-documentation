@@ -6,7 +6,7 @@
 Removing a malicious file with active response
 ====================================================
 
-In this use case, we download a malicious test file to a Windows 11 endpoint. Wazuh file integrity monitoring detects the file, and Wazuh matches its hash against known malicious indicators. Wazuh then evaluates the resulting ``Malicious hash detected`` finding against the configured Alerting monitor. When the finding meets the monitor conditions, Wazuh runs a custom ``remove-file`` script on the endpoint to delete the file.
+In this use case, you download a malicious test file to a Windows 11 endpoint. Wazuh file integrity monitoring detects the file, and Wazuh matches its hash against known malicious indicators. Wazuh then evaluates the resulting ``Malicious hash detected`` finding against the configured Alerting monitor. When the finding meets the monitor conditions, Wazuh runs a custom ``remove-file`` script on the endpoint to delete the file.
 
 Infrastructure
 -----------------
@@ -14,8 +14,8 @@ Infrastructure
 +------------------+----------------------------------------------------------------------------------------------------+
 | Endpoint         | Description                                                                                        |
 +==================+====================================================================================================+
-| **Windows 11**   | We download a test malware file to this victim endpoint. This endpoint requires an installed Wazuh |
-|                  | agent enrolled with the Wazuh manager.                                                             |
+| **Windows 11**   | You download a test malware file to this victim endpoint. This endpoint requires an installed      |
+|                  | Wazuh agent enrolled with the Wazuh manager.                                                       |
 +------------------+----------------------------------------------------------------------------------------------------+
 
 Configuration
@@ -36,7 +36,7 @@ Perform the following steps to configure the Wazuh agent to monitor filesystem c
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 #. Create a ``remove-file.py`` file in the ``C:\Users\public`` directory and add the following script to it:
 
@@ -53,6 +53,7 @@ Perform the following steps to configure the Wazuh agent to monitor filesystem c
       import sys
       import json
       import datetime
+      import hashlib
       from pathlib import PureWindowsPath, PurePosixPath
       import platform
 
@@ -66,6 +67,14 @@ Perform the following steps to configure the Wazuh agent to monitor filesystem c
           with open(LOG_FILE, mode="a") as log_file:
               ar_name_posix = str(PurePosixPath(PureWindowsPath(ar_name[ar_name.find("active-response"):])))
               log_file.write(str(datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')) + " " + ar_name_posix + ": " + msg + "\n")
+
+
+      def file_hash(path, algorithm):
+          digest = hashlib.new(algorithm)
+          with open(path, mode="rb") as f:
+              for chunk in iter(lambda: f.read(65536), b""):
+                  digest.update(chunk)
+          return digest.hexdigest()
 
 
       def main(argv):
@@ -99,10 +108,26 @@ Perform the following steps to configure the Wazuh agent to monitor filesystem c
               write_debug_file(argv[0], "No file.path present in the active response payload")
               sys.exit(OS_INVALID)
 
+          # Refuse a path that resolves somewhere else, for example through a junction or a symbolic link
+          real_path = os.path.realpath(file_path)
+          if os.path.normcase(real_path) != os.path.normcase(os.path.abspath(file_path)):
+              write_debug_file(argv[0], "Path resolves to " + real_path + ", not removing: " + file_path)
+              sys.exit(OS_INVALID)
+
+          # Refuse a file whose hash differs from the hash in the finding
+          hashes = data.get("file", {}).get("hash") or {}
+          algorithm = next((a for a in ("sha256", "sha1", "md5") if hashes.get(a)), None)
+          if not algorithm:
+              write_debug_file(argv[0], "No file.hash present in the active response payload, not removing: " + file_path)
+              sys.exit(OS_INVALID)
+
           write_debug_file(argv[0], "Removing file: " + file_path)
 
           try:
-              os.remove(file_path)
+              if file_hash(real_path, algorithm) != hashes[algorithm].lower():
+                  write_debug_file(argv[0], "File hash differs from the finding, not removing: " + file_path)
+                  sys.exit(OS_INVALID)
+              os.remove(real_path)
               write_debug_file(argv[0], "Removed file: " + file_path)
           except FileNotFoundError:
               write_debug_file(argv[0], "File not found, nothing to remove: " + file_path)
@@ -120,6 +145,8 @@ Perform the following steps to configure the Wazuh agent to monitor filesystem c
 
       if __name__ == "__main__":
           main(sys.argv)
+
+   Before it removes the file, the script checks that ``file.path`` doesn't resolve to another location, for example through a directory junction that a user creates after the detection, and that the file hash still matches the hash in the finding. The Wazuh agent runs the script as the Local System account, so any active response that deletes or changes a path taken from a finding needs similar checks.
 
 #. Install Python 3 for Windows from `https://www.python.org/downloads/windows/ <https://www.python.org/downloads/windows/>`__ and select **Add python.exe to PATH** during the installation. Then open a new PowerShell window with administrator privileges and install PyInstaller:
 
