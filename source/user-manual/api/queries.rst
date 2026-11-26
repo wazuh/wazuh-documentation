@@ -35,11 +35,11 @@ Some agent endpoints also accept filter parameters in addition to ``q``. In Wazu
 Examples
 --------
 
-For example, to filter Ubuntu Wazuh agents with a major version higher than 18, use the following query. Remember that the value of the parameter ``q`` is being encoded with ``--data-urlencode``:
+For example, to filter Ubuntu Wazuh agents with a major version higher than 20, use the following query. Remember that the value of the parameter ``q`` is being encoded with ``--data-urlencode``:
 
 .. code-block:: console
 
-   # curl -G --data-urlencode "q=os.name=ubuntu;os.major>18" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
+   # curl -G --data-urlencode "q=os.name=ubuntu;os.major>20" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
 
 The command output looks similar to this:
 
@@ -67,11 +67,11 @@ The command output looks similar to this:
       "error": 0
    }
 
-The same field can be used multiple times to get a more accurate result. For example, filtering Ubuntu agents with a major version higher than 18 but lower than 30:
+The same field can be used multiple times to get a more accurate result. For example, filtering Ubuntu agents with a major version higher than 20 but lower than 30:
 
 .. code-block:: console
 
-   # curl -G --data-urlencode "q=os.name=ubuntu;os.major>18;os.major<30" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
+   # curl -G --data-urlencode "q=os.name=ubuntu;os.major>20;os.major<30" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
 
 The command output looks similar to this:
 
