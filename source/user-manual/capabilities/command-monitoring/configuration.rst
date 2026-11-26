@@ -238,7 +238,7 @@ Wazuh must analyze the command output to generate findings on the Wazuh dashboar
 
 #. Navigate to **Ruleset management** > **Overview** and perform the following to create an integration:
 
-   -  Select the space **Draft**
+   -  Select the :ref:`space <data_analysis_space>` **Draft**
 
    -  Under **Integrations**, click **Actions** > **Create** and fill in the required fields and click **Create integration**:
 
