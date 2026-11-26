@@ -261,6 +261,8 @@ Follow the next steps to configure the Wazuh module for Google Cloud Pub/Sub on 
 
       # systemctl restart wazuh-agent
 
+If a pull fails with an aborted, internal, unavailable, or unknown error, the Pub/Sub client library retries it with backoff for up to 60 seconds. If the pull exceeds a Pub/Sub quota, such as the pull subscriber throughput per region, the run stops and the Wazuh agent logs an error. The module acknowledges messages only after it sends them, so messages that it didn't collect stay in the subscription and are pulled in the next run.
+
 Visualizing Google Cloud events on the Wazuh dashboard
 ---------------------------------------------------------
 
