@@ -118,6 +118,7 @@ newUrls['5.0'] = [
   '/user-manual/agent/agent-management/list-agents.html',
   '/user-manual/agent/agent-management/upgrade-agents-remotely.html',
   '/user-manual/agent/agent-enrollment/deployment-variables/installing-without-token.html',
+  '/user-manual/agent/agent-enrollment/enrolling-4x-agents.html',
   '/user-manual/wazuh-dashboard/wazuh-dashboard-configurations.html',
   '/user-manual/wazuh-dashboard/credentials.html',
   '/user-manual/manager/wazuh-manager-architecture.html',

@@ -8,7 +8,7 @@ Enroll Wazuh agents with password authentication
 
 Password authentication requires a shared password during enrollment. The Wazuh manager accepts the enrollment request only when the Wazuh agent provides the configured password.
 
-Wazuh 5.0 agents enroll with an enrollment token by default. See the :doc:`Wazuh manager identity verification </user-manual/agent/agent-enrollment/security-options/manager-identity-verification>` section. Password authentication is used by Wazuh 4.x agents, and by Wazuh 5.0 agents that have the password stored in the file set in ``<enrollment><authorization_pass_path>``.
+Wazuh agents enroll with an enrollment token by default. See the :doc:`Wazuh manager identity verification </user-manual/agent/agent-enrollment/security-options/manager-identity-verification>` section. Password authentication is used by Wazuh agents that have the password stored in the file set in ``<enrollment><authorization_pass_path>``.
 
 Follow the steps below to configure password authentication on different operating systems:
 
@@ -115,7 +115,7 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
 
       -rw-r-----. 1 root wazuh   33 Jul 10 16:39 authd.pass
 
-#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``/var/ossec/etc/authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file. For Wazuh 4.x agents, use ``<client>`` instead of ``<agent>``.
+#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``/var/ossec/etc/authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file.
 
    .. code-block:: xml
       :emphasize-lines: 4
@@ -128,9 +128,7 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
         </agent>
       </ossec_config>
 
-#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``. The setting depends on the Wazuh agent version:
-
-   **Wazuh 5.0 agents**:
+#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``.
 
    .. code-block:: xml
       :emphasize-lines: 4
@@ -143,20 +141,6 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
         </agent>
       </ossec_config>
 
-   **Wazuh 4.x agents**:
-
-   .. code-block:: xml
-      :emphasize-lines: 4
-
-      <ossec_config>
-        <client>
-          <server>
-            <address><WAZUH_MANAGER_ADDRESS></address>
-            ...
-          </server>
-        </client>
-      </ossec_config>
-
    This will allow the Wazuh agent to enroll in the specified Wazuh manager.
 
 #. Restart the Wazuh agent to make the changes effective:
@@ -167,7 +151,7 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
-   .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
+   .. thumbnail:: /images/manual/agent/linux-password-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Linux
       :alt: Check newly enrolled Wazuh agent - Linux
       :align: center
@@ -199,7 +183,7 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
       > Set-Content -Path "C:\Program Files (x86)\ossec-agent\authd.pass" -Value "<CUSTOM_PASSWORD>" -Encoding ascii
 
-#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``C:\Program Files (x86)\ossec-agent\authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file. For Wazuh 4.x agents, use ``<client>`` instead of ``<agent>``.
+#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``C:\Program Files (x86)\ossec-agent\authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file.
 
    .. code-block:: xml
       :emphasize-lines: 4
@@ -212,9 +196,7 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
         </agent>
       </ossec_config>
 
-#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. The setting depends on the Wazuh agent version:
-
-   **Wazuh 5.0 agents**:
+#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
 
    .. code-block:: xml
       :emphasize-lines: 4
@@ -225,20 +207,6 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
             <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
         </agent>
-      </ossec_config>
-
-   **Wazuh 4.x agents**:
-
-   .. code-block:: xml
-      :emphasize-lines: 4
-
-      <ossec_config>
-        <client>
-          <server>
-            <address><WAZUH_MANAGER_ADDRESS></address>
-            ...
-          </server>
-        </client>
       </ossec_config>
 
    This will allow the Wazuh agent to enroll in the specified Wazuh manager.
@@ -262,7 +230,7 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
-   .. thumbnail:: /images/manual/agent/windows-check-newly-enrolled.png
+   .. thumbnail:: /images/manual/agent/windows-password-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Windows
       :alt: Check newly enrolled Wazuh agent - Windows
       :align: center
@@ -293,7 +261,7 @@ Follow the steps below to enroll a macOS endpoint with password authentication:
 
       -rw-r-----  1 root  wazuh  33 Jul 09 20:26 /Library/Ossec/etc/authd.pass
 
-#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``/Library/Ossec/etc/authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file. For Wazuh 4.x agents, use ``<client>`` instead of ``<agent>``.
+#. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``/Library/Ossec/etc/authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file.
 
    .. code-block:: xml
       :emphasize-lines: 4
@@ -306,9 +274,7 @@ Follow the steps below to enroll a macOS endpoint with password authentication:
         </agent>
       </ossec_config>
 
-#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file ``/Library/Ossec/etc/ossec.conf``. The setting depends on the Wazuh agent version:
-
-   **Wazuh 5.0 agents**:
+#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file ``/Library/Ossec/etc/ossec.conf``.
 
    .. code-block:: xml
       :emphasize-lines: 4
@@ -319,20 +285,6 @@ Follow the steps below to enroll a macOS endpoint with password authentication:
             <endpoint><WAZUH_MANAGER_ADDRESS></endpoint>
           </manager>
         </agent>
-      </ossec_config>
-
-   **Wazuh 4.x agents**:
-
-   .. code-block:: xml
-      :emphasize-lines: 4
-
-      <ossec_config>
-        <client>
-          <server>
-            <address><WAZUH_MANAGER_ADDRESS></address>
-            ...
-          </server>
-        </client>
       </ossec_config>
 
    This will allow the Wazuh agent to enroll in the specified Wazuh manager.
