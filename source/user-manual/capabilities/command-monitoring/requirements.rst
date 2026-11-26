@@ -21,7 +21,7 @@ As a result, command monitoring configurations are not portable across operating
 Permissions
 -----------
 
-Monitored commands run with the privileges of the Wazuh agent. The agent runs as the ``root`` user on Linux and macOS endpoints, and as the ``Local System account`` on Windows endpoints.
+Monitored commands run with the privileges of the Wazuh agent. The Command module runs as the ``root`` user and the ``wazuh`` group on Linux and macOS endpoints, and as the ``Local System account`` on Windows endpoints.
 
 You need root or administrator privileges to complete the configuration tasks:
 

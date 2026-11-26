@@ -16,7 +16,7 @@ The following use cases demonstrate how to manage the Wazuh manager and Wazuh ag
 Wazuh manager operations
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can use the Wazuh manager API to check the status, statistics, and logs of the Wazuh manager and to restart it. Review the :api-ref:`API manager reference <tag/Cluster>` for more information on managing the Wazuh manager using the Wazuh manager API.
+You can use the Wazuh manager API to check the status, statistics, and logs of the Wazuh manager and to restart it. Review the :api-ref:`Wazuh manager API reference <tag/Cluster>` for more information on managing the Wazuh manager using the Wazuh manager API.
 
 The following use cases show how to check and restart the Wazuh manager.
 
@@ -254,10 +254,13 @@ Install the Wazuh agent package on the endpoint first. Then follow these steps t
 
    Where:
 
-   -  ``<WAZUH_MANAGER_IP_ADDRESS>`` is the IP address or FQDN of the Wazuh manager. It must match a name in the certificate of the Wazuh manager HTTPS listener. Otherwise, the request fails with error ``1768``, "Enrollment token refused", with the detail ``address not in certificate SAN``. To list those names, run :api-ref:`GET /cluster/<NODE_ID>/daemons/remoted/tls <operation/api.controllers.cluster_controller.get_remoted_tls_node>` and read ``listener.sans`` in the response. On an all-in-one installation, the names are the hostname and private IP address of the Wazuh manager, plus the loopback addresses. A default installation might not include a public address, so Wazuh agents outside the Wazuh manager network must use one of these names. To use another address, see :ref:`Enrollment token refused: address not in certificate SAN <agent_enrollment_token_refused_san>`.
+   -  ``<WAZUH_MANAGER_IP_ADDRESS>`` is the IP address or FQDN of the Wazuh manager. It must match a name in the certificate of the Wazuh manager HTTPS listener, or the request fails with error ``1768``. To list those names, run :api-ref:`GET /cluster/<NODE_ID>/daemons/remoted/tls <operation/api.controllers.cluster_controller.get_remoted_tls_node>` and read ``listener.sans`` in the response. On an all-in-one installation, the names are the hostname and private IP address of the Wazuh manager, plus the loopback addresses. A default installation might not include a public address, so Wazuh agents outside the Wazuh manager network must use one of these names.
    -  ``ttl`` is how long the token stays valid; for example, ``12h``.
    -  ``max_uses`` is the number of Wazuh agents that can enroll with the token. The default, ``0``, allows unlimited uses, and the default ``ttl`` is 30 days.
    -  ``description`` is an optional label that helps you identify the token.
+   -  ``port`` and ``prefix`` are optional. They set the listener port and URL prefix that the token carries, when these differ from the configured ones.
+   -  ``embed_ca`` is optional, ``false`` by default. Set it to ``true`` to put the CA certificate in the token instead of its fingerprint.
+   -  ``no_credential`` is optional, ``false`` by default. Set it to ``true`` to create a token with only the Wazuh manager address and the CA fingerprint. This token can't authenticate an enrollment.
 
 #. Click **Send request**, the play icon on the request line. The Wazuh manager API returns a response similar to the following:
 
@@ -402,7 +405,7 @@ To list the enrollment tokens, run :api-ref:`GET /agents/enrollment-tokens <oper
 Querying the Wazuh agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``/agents`` endpoint returns information about the enrolled Wazuh agents. For example, you can query for all inactive Wazuh agents. This is useful for troubleshooting Wazuh agent health issues.
+The ``/agents`` endpoint returns information about the enrolled Wazuh agents. For example, you can query for all inactive Wazuh agents. This query helps you troubleshoot Wazuh agent health issues.
 
 #. Navigate to **Server management** > **Dev Tools**, then paste the following query:
 
@@ -443,7 +446,7 @@ The preceding output shows the ID, name, and IP address of each Wazuh agent that
 Restarting a Wazuh agent remotely
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Wazuh agents can be restarted using the Wazuh manager API from the Wazuh dashboard. Follow these steps to restart a Wazuh agent.
+You can restart Wazuh agents with the Wazuh manager API from the Wazuh dashboard. Follow these steps to restart a Wazuh agent.
 
 #. Navigate to **Server management** > **Dev Tools**, then paste the following query:
 
@@ -552,7 +555,7 @@ Run ``echo $TOKEN`` to confirm that the token was generated:
 
    # echo $TOKEN
 
-The command output looks similar to this:
+The output is similar to the following:
 
 .. code-block:: none
    :class: output
@@ -593,7 +596,7 @@ Where:
 
 -  ``<AGENT_ID>`` is the ID of the Wazuh agent. You can also pass a comma-separated list of Wazuh agent IDs, or ``all``. ``status=all`` deletes the Wazuh agents, regardless of their connection status. This parameter is required. ``older_than=1`` includes Wazuh agents whose last keepalive is older than one second. Without it, only Wazuh agents whose last keepalive is older than seven days are deleted.
 
-The command output looks similar to this:
+A response similar to the following is expected when the command runs:
 
 .. code-block:: json
    :class: output
@@ -624,7 +627,7 @@ You can use the ``/agents/summary`` endpoint to return a summary of the availabl
 
       # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents/summary?pretty=true" -H "Authorization: Bearer $TOKEN"
 
-   The command output looks similar to this:
+   A response similar to the following is expected when the command runs:
 
    .. code-block:: json
       :class: output
