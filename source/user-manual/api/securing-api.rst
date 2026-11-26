@@ -17,7 +17,7 @@ The passwords are stored in ``/etc/wazuh-manager/export/credentials.env`` on the
 
    # sed -n 's/^WAZUH_MANAGER_API_PASSWORD=//p' /etc/wazuh-manager/export/credentials.env
 
-Securing the Wazuh manager API is crucial after installing the Wazuh manager.
+We recommend that you secure the Wazuh manager API right after you install the Wazuh manager.
 
 .. note::
 

@@ -260,7 +260,7 @@ The ``index_unclassified_events`` setting is ``false`` by default. To enable it,
    :emphasize-lines: 1,2,6,7
 
    curl -sk -u admin:<ADMIN_PASSWORD> -X PUT \
-     "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_plugins/_content_manager/policy/standard" \
+     "https://<INDEXER_ADDRESS>:9200/_plugins/_content_manager/policy/standard" \
      -H 'Content-Type: application/json' \
      -d '{
        "resource": {
@@ -272,7 +272,7 @@ The ``index_unclassified_events`` setting is ``false`` by default. To enable it,
        }
      }'
 
-Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the IP address of the Wazuh indexer and ``<ADMIN_PASSWORD>`` with the password of the Wazuh indexer ``admin`` user. The request also sets the ``enrichments``, ``filters``, ``enabled``, and ``index_discarded_events`` fields of the policy. Replace ``<CURRENT_ENRICHMENTS>`` and ``<CURRENT_FILTER_IDS>`` with the current values in the policy, because the request replaces the ``enrichments`` list and rejects a ``filters`` list that differs from the current one. Keep the current values of ``enabled`` and ``index_discarded_events``. In the ``draft`` space, the request also requires the ``author``, ``description``, ``documentation``, and ``references`` fields in ``resource.metadata``.
+Replace ``<INDEXER_ADDRESS>`` with the IP address or DNS name of the Wazuh indexer and ``<ADMIN_PASSWORD>`` with the password of the Wazuh indexer ``admin`` user. The request also sets the ``enrichments``, ``filters``, ``enabled``, and ``index_discarded_events`` fields of the policy. Replace ``<CURRENT_ENRICHMENTS>`` and ``<CURRENT_FILTER_IDS>`` with the current values in the policy, because the request replaces the ``enrichments`` list and rejects a ``filters`` list that differs from the current one. Keep the current values of ``enabled`` and ``index_discarded_events``. In the ``draft`` space, the request also requires the ``author``, ``description``, ``documentation``, and ``references`` fields in ``resource.metadata``.
 
 To view these events in **Discover**, select an index pattern that matches ``wazuh-events-v5-unclassified*`` to view unclassified events, or ``wazuh-events-v5-*`` to view all indexed events.
 
@@ -594,7 +594,7 @@ The following JSON object provides an example of a WCS definition:
 Content management
 ------------------
 
-Content management keeps the processing content of the Wazuh normalization engine in step with the Wazuh indexer. The content includes:
+Content management keeps the processing content of the Wazuh normalization engine in step with the Wazuh indexer. Decoders and filters are assets, the smallest units of a security policy. The content includes:
 
 -  **Policy configuration**: The list of integrations (ordered by evaluation priority) and policy-level settings.
 -  **Integrations**: Logical groups of decoders (and optionally key-value databases, or KVDBs) for each log source.

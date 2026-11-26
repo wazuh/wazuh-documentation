@@ -62,7 +62,7 @@ Perform the following steps to configure the Command module to run a batch scrip
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 Linux endpoint
 ^^^^^^^^^^^^^^^
