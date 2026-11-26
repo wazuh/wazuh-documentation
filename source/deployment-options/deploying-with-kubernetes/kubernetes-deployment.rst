@@ -162,7 +162,6 @@ Perform the steps below to generate the required certificates for the deployment
       Detected dashboard nodes: dashboard
       Generating certificates
       26/10/2026 10:20:41 INFO: Verbose logging redirected to /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-certificates-tool.log
-      26/10/2026 10:20:41 WARNING: The IP 98.92.152.55 of dashboard node dashboard is public. Make sure it is meant to be reachable from outside your network.
       26/10/2026 10:20:41 INFO: Generating the root certificate in /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-ca.
       26/10/2026 10:20:41 WARNING: There is no root CA in /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-ca, so a new one is created. The certificates issued from it do not chain to the root CA of any existing deployment. To add nodes to an existing deployment, stop here and run the tool where its root CA is, or set WAZUH_CA_DIR to a directory with a copy of that root CA and its key.
       26/10/2026 10:20:42 INFO: Generating Admin certificates.
@@ -302,7 +301,7 @@ The storage class provisioner varies by cluster.
 
 #. Edit the ``envs/local-env/storage-class.yaml`` file to set the provisioner that matches your cluster type.
 
-   The provisioner column displays ``k8s.io/minikube-hostpath``.
+   In the example output, the PROVISIONER column shows ``k8s.io/minikube-hostpath``, which means that the cluster runs on Minikube.
 
    On Minikube, comment out ``provisioner: microk8s.io/hostpath`` and uncomment ``provisioner: k8s.io/minikube-hostpath``:
 
@@ -379,7 +378,6 @@ Perform the steps below to generate the required certificates for the deployment
       Detected dashboard nodes: dashboard
       Generating certificates
       26/10/2026 10:20:41 INFO: Verbose logging redirected to /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-certificates-tool.log
-      26/10/2026 10:20:41 WARNING: The IP 98.92.152.55 of dashboard node dashboard is public. Make sure it is meant to be reachable from outside your network.
       26/10/2026 10:20:41 INFO: Generating the root certificate in /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-ca.
       26/10/2026 10:20:41 WARNING: There is no root CA in /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-ca, so a new one is created. The certificates issued from it do not chain to the root CA of any existing deployment. To add nodes to an existing deployment, stop here and run the tool where its root CA is, or set WAZUH_CA_DIR to a directory with a copy of that root CA and its key.
       26/10/2026 10:20:42 INFO: Generating Admin certificates.
@@ -497,6 +495,8 @@ You can adjust cluster resources by editing patch files in ``envs/local-env/``. 
 
       $ kubectl -n wazuh port-forward service/wazuh-agents --address <KUBERNETES_HOST_IP_ADDRESS> 1517:1517 > /tmp/wazuh-agent-port-forward.log 2>&1 &
       $ kubectl -n wazuh port-forward service/wazuh-api 55000:55000 > /tmp/wazuh-api-port-forward.log 2>&1 &
+
+   The second command makes the Wazuh manager API reachable on this machine at ``https://localhost:55000``, for scripts and API requests. Skip it if you don't use the Wazuh manager API.
 
    .. note::
 
@@ -617,7 +617,7 @@ The command output looks similar to this:
    wazuh-manager-master-0            1/1     Running   3 (15h ago)   18h
    wazuh-manager-worker-0            1/1     Running   1 (16h ago)   18h
 
-Run the command below to confirm the Wazuh agent enrollment password string. Wazuh 4.x agents enroll with it on port ``1515``. Wazuh 5.x agents can also enroll with it on port ``1517``, but an enrollment token is the recommended method.
+If you enroll Wazuh agents with the enrollment password, read it with the command below. Wazuh 4.x agents enroll with it on port ``1515``. Wazuh 5.x agents can also enroll with it on port ``1517``, but an enrollment token is the recommended method.
 
 .. code-block:: console
 
@@ -626,7 +626,7 @@ Run the command below to confirm the Wazuh agent enrollment password string. Waz
 Wazuh indexer
 ~~~~~~~~~~~~~
 
-Run the command below from the root of the ``wazuh-kubernetes`` repository. The output shows ``"status" : "green"``.
+Run the command below from the root of the ``wazuh-kubernetes`` repository. The output shows ``"status" : "green"``. Right after the deployment, it can show ``"status" : "yellow"`` for a few minutes while the Wazuh indexer creates its indices. If it does, run the command again after a few minutes.
 
 .. code-block:: console
 
@@ -735,6 +735,14 @@ Follow the steps below to enroll a Wazuh agent outside the cluster in a Wazuh ma
       $ sudo systemctl enable wazuh-agent
       $ sudo systemctl start wazuh-agent
 
+   Check that the Wazuh agent is enrolled and connected. The command prints ``status='connected'``:
+
+   .. code-block:: console
+
+      $ sudo grep ^status /var/ossec/var/run/wazuh-agentd.state
+
+   On the Wazuh dashboard, go to **Agents management** > **Summary** and confirm that the Wazuh agent appears as **Active**.
+
 .. _kubernetes-wazuh-agent-deployment:
 
 Wazuh agent deployment on Kubernetes
@@ -744,7 +752,7 @@ The Wazuh agent can be deployed directly within your Kubernetes environment to m
 
 There are two main deployment models for Wazuh agents in Kubernetes:
 
--  **DaemonSet deployment** where one Wazuh agent runs on each node to monitor the node and all containers on that node.
+-  **DaemonSet deployment** where one Wazuh agent runs on each node.
 -  **Sidecar deployment** where the Wazuh agent runs as a companion container alongside a specific application pod to monitor that application only.
 
 Allow agent traffic to the Wazuh manager
@@ -783,7 +791,7 @@ The ``wazuh`` namespace denies all ingress traffic by default (``default-deny-al
 Deploying the Wazuh agent as a DaemonSet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is the most common approach for full-cluster monitoring. Each node runs one agent, ensuring complete coverage without manual intervention when new nodes are added.
+This is the most common approach for full-cluster monitoring. Each node runs one Wazuh agent, and new nodes get one automatically. The example manifest mounts the node's ``/var/log`` directory, but the Wazuh agent doesn't read it: each Wazuh agent reports on its own container, and its system inventory and configuration assessment describe the Wazuh agent image. To collect the logs of the node and its containers, add ``<localfile>`` entries for the paths under ``/var/log`` to the Wazuh agent configuration.
 
 #. Create the Wazuh agent DaemonSet manifest ``wazuh-agent-daemonset.yaml``:
 
@@ -915,7 +923,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
       NAME                READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
       wazuh-agent-t2fwl   1/1     Running   0          21m   10.42.0.9   server   <none>           <none>
 
-   Check that the Wazuh agent enrolled. On the Wazuh dashboard, go to **Agents management** > **Summary** and confirm that the Wazuh agent appears as **Active**. If the pod is running but the Wazuh agent doesn't appear, check the Wazuh agent log:
+   Check that the Wazuh agent is enrolled. On the Wazuh dashboard, go to **Agents management** > **Summary** and confirm that the Wazuh agent appears as **Active**. If the pod is running but the Wazuh agent doesn't appear, check the Wazuh agent log:
 
    .. code-block:: console
 
@@ -1100,7 +1108,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
       NAME                           READY   STATUS     RESTARTS   AGE
       tomcat-wazuh-agent-0   2/2     Running           0          18s
 
-   Check that the Wazuh agent enrolled. On the Wazuh dashboard, go to **Agents management** > **Summary** and confirm that the Wazuh agent appears as **Active**. If the pod is running but the Wazuh agent doesn't appear, check the Wazuh agent log:
+   Check that the Wazuh agent is enrolled. On the Wazuh dashboard, go to **Agents management** > **Summary** and confirm that the Wazuh agent appears as **Active**. If the pod is running but the Wazuh agent doesn't appear, check the Wazuh agent log:
 
    .. code-block:: console
 
