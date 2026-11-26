@@ -77,7 +77,7 @@ Complete these steps on the existing node.
       -  :ref:`<key> <reference_wazuh_manager_conf_cluster_key>` is the cluster key. Replace ``<CLUSTER_KEY>`` with the value that step 1 printed.
       -  :ref:`<port> <reference_wazuh_manager_conf_cluster_port>` is the TCP port the master listens on for workers. The default is ``1516``.
       -  ``<bind_addr>`` is the address the master listens on. ``0.0.0.0`` accepts workers on every interface. The default ``127.0.0.1`` accepts local connections only.
-      -  ``<node>`` is the address of the master node. Replace ``<MASTER_NODE_IP>`` with the IP address or DNS name of this node. The values ``localhost``, ``0.0.0.0``, and ``127.0.1.1`` are refused.
+      -  ``<node>`` is the address of the master node. Replace ``<MASTER_NODE_IP>`` with the IP address or DNS name of this node. The values ``localhost``, ``0.0.0.0``, and ``127.0.1.1`` aren't valid. The cluster daemon refuses them at start with error 3004, and ``wazuh-manager-conf validate`` doesn't check them.
       -  :ref:`<hidden> <reference_wazuh_manager_conf_cluster_hidden>` has no effect. The schema accepts it for compatibility.
 
 #. Edit the ``/etc/wazuh-indexer/opensearch.yml`` file and set ``network.host`` to the IP address of this node:
@@ -100,8 +100,6 @@ Complete these steps on the existing node.
           <certificate_authorities>
             <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
           </certificate_authorities>
-          <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
-          <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
         </ssl>
       </indexer>
 
@@ -119,7 +117,7 @@ Complete these steps on the existing node.
 
       # /var/wazuh-manager/bin/wazuh-manager-conf validate
 
-   -  The command prints nothing when the file is valid.
+   -  The command prints ``/etc/wazuh-manager/wazuh-manager.conf: configuration is valid``.
 
 #. Restart the Wazuh indexer, the Wazuh manager, and the Wazuh dashboard:
 
@@ -160,11 +158,11 @@ Complete these steps on the existing node.
 
    -  The new node uses the private key to issue its own agent listener and Wazuh manager API certificates from this CA.
 
-#. Copy the Wazuh indexer CA and the client pair that the Wazuh indexer issued for the Wazuh manager:
+#. Copy the Wazuh indexer CA:
 
    .. code-block:: console
 
-      # cp /etc/wazuh-indexer/export/ca.pem /etc/wazuh-indexer/export/manager-client.pem /etc/wazuh-indexer/export/manager-client-key.pem /root/new-manager-node/
+      # cp /etc/wazuh-indexer/export/ca.pem /root/new-manager-node/
 
 #. Write the passwords of the deployment into a ``local.env`` file for the new node:
 
@@ -272,15 +270,13 @@ Complete the first step on the existing node and the rest on the new node, in th
             # dnf -y install "wazuh-manager-<VERSION>-<REVISION>"
 
    -  Replace ``<VERSION>-<REVISION>`` with the output of step 1. To check that your repository has that version, run ``apt-cache madison wazuh-manager`` or ``yum --showduplicates list wazuh-manager``. The master refuses a worker with another version (error ``3031``).
-   -  During the installation, the package prints ``MISSING /etc/wazuh-manager/certs/indexer-ca.pem`` and ``MISSING /etc/wazuh-manager/certs/indexer-connector.pem``. The next step places these files.
+   -  During the installation, the package prints ``MISSING /etc/wazuh-manager/certs/indexer-ca.pem``. The next step places this file.
 
-#. Place the Wazuh indexer CA and client pair under the names the package expects:
+#. Place the Wazuh indexer CA under the name the package expects:
 
    .. code-block:: console
 
       # install -m 0640 -o root -g wazuh-manager new-manager-node/ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
-      # install -m 0640 -o root -g wazuh-manager new-manager-node/manager-client.pem /etc/wazuh-manager/certs/indexer-connector.pem
-      # install -m 0640 -o root -g wazuh-manager new-manager-node/manager-client-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
 
 #. Check that the agent listener certificate of the new node chains to the deployment CA:
 
@@ -329,8 +325,6 @@ Complete these steps on the new node.
           <certificate_authorities>
             <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
           </certificate_authorities>
-          <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
-          <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
         </ssl>
       </indexer>
 
@@ -372,7 +366,7 @@ Complete these steps on the new node.
 
       # /var/wazuh-manager/bin/wazuh-manager-conf validate
 
-   -  The command prints nothing when the file is valid.
+   -  The command prints ``/etc/wazuh-manager/wazuh-manager.conf: configuration is valid``.
 
 #. Enable and start the Wazuh manager service:
 
