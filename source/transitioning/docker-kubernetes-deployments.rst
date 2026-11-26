@@ -345,6 +345,8 @@ When you no longer need the Wazuh 4.x data, remove the Wazuh 4.x volumes and ima
    # docker compose down -v
    # docker image rm wazuh/wazuh-manager:<WAZUH_4X_TAG> wazuh/wazuh-indexer:<WAZUH_4X_TAG> wazuh/wazuh-dashboard:<WAZUH_4X_TAG>
 
+.. _migration_kubernetes_deployments:
+
 Kubernetes deployments
 ----------------------
 
