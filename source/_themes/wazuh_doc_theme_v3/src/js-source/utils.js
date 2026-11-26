@@ -137,6 +137,7 @@ const useApiRedoc = (compareVersion(DOCUMENTATION_OPTIONS.VERSION, minVersionRed
 const newTabNodes = [
   'user-manual/api/reference',
   'cloud-service/apis/reference',
+  'user-manual/indexer-api/reference',
 ];
 
 /* Open external links in a new tab ========================================= */
