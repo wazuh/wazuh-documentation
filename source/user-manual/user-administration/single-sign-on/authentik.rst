@@ -175,7 +175,7 @@ authentik configuration
 Wazuh indexer configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+Edit the Wazuh indexer security configuration files.
 
 #. Back up the Wazuh indexer security configuration files, then export the configuration that the Wazuh indexer is using. The export overwrites these files with the active configuration, including changes made in the Wazuh dashboard:
 
@@ -300,8 +300,6 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag sets the address of the Wazuh indexer node. On an all-in-one deployment, the Wazuh indexer listens on ``127.0.0.1``, so keep ``localhost``. On a distributed deployment, replace ``localhost`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml``.
-
    The command output must be similar to the following:
 
    .. code-block:: none
@@ -365,7 +363,7 @@ Wazuh dashboard configuration
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up this file before you carry out the configuration.
 
    .. code-block:: yaml
 
@@ -553,7 +551,7 @@ authentik configuration
 Wazuh indexer configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+Edit the Wazuh indexer security configuration files.
 
 #. Back up the Wazuh indexer security configuration files, then export the configuration that the Wazuh indexer is using. The export overwrites these files with the active configuration, including changes made in the Wazuh dashboard:
 
@@ -713,7 +711,7 @@ Wazuh dashboard configuration
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up this file before you carry out the configuration.
 
    .. code-block:: yaml
 
