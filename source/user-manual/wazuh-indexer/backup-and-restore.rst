@@ -28,7 +28,7 @@ This section explains how to create a backup of your Wazuh indexer configuration
 Preparing the backup
 ^^^^^^^^^^^^^^^^^^^^
 
-#. Export the current Wazuh indexer security configuration into ``/etc/wazuh-indexer/opensearch-security/``, so that the backup includes it. This command overwrites the YAML files in that directory with the configuration stored in the cluster:
+#. Export the current Wazuh indexer security configuration into ``/etc/wazuh-indexer/opensearch-security/``, so that the backup includes it. The Wazuh indexer must be running. The script authenticates with the admin certificate, ``admin.pem`` and ``admin-key.pem``, which it finds in the same directory as the root CA certificate. In the command, ``-backup`` sets the export directory, ``-icl`` ignores the cluster name, and ``-nhnv`` turns off hostname verification. ``-icl`` and ``-nhnv`` are the script defaults, and you repeat them because ``--options`` replaces the defaults. This command overwrites the YAML files in that directory with the configuration stored in the cluster:
 
    .. code-block:: console
 
@@ -120,7 +120,7 @@ Perform the following steps to restore Wazuh indexer files on the new server.
       :emphasize-lines: 2
 
       # systemctl start wazuh-indexer
-      # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> "https://localhost:9200/_cluster/health?pretty"
+      # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> "https://127.0.0.1:9200/_cluster/health?pretty"
 
    Load the restored security configuration into the cluster. Until you do, the restored files under ``/etc/wazuh-indexer/opensearch-security/`` aren't used, and the cluster keeps the users, roles, and role mappings it already had:
 

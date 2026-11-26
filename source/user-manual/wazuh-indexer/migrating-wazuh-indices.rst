@@ -157,7 +157,7 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
 
 .. note::
 
-   It is necessary to have performed the steps in the :ref:`Set up snapshot repository <migrating_wazuh_indices_setup_snapshot_repository>` section on the destination Wazuh cluster before proceeding to **Restore snapshot**.
+   Perform the steps in the :ref:`Set up snapshot repository <migrating_wazuh_indices_setup_snapshot_repository>` section on the destination Wazuh cluster before you restore the snapshot.
 
 #. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Snapshots**, and select **Refresh** to reload the Snapshots page. The snapshot in the repository location ``/var/lib/wazuh-indexer/backup`` will show on the destination Wazuh dashboard.
 #. Select the snapshot and click **Restore**.
@@ -204,7 +204,7 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
 Using a shared file system (NFS)
 --------------------------------
 
-To migrate Wazuh indices, we also use a Network File System (NFS) to create a shared file system for the snapshot repository. A dedicated endpoint is used to install and configure NFS, and the source and destination Wazuh indexer nodes are connected to the shared file system. This allows the destination Wazuh indexer node to access the snapshots and restore it to complete the Wazuh indices migration. Mount the shared file system at the same path on every Wazuh indexer node, and list that path in ``path.repo``. An ``fs`` repository on a cluster must be one shared file system mounted at the same path on every node. Use a location outside ``/etc/wazuh-indexer``, ``/usr/share/wazuh-indexer``, ``/var/lib/wazuh-indexer``, and ``/var/log/wazuh-indexer``, which the Wazuh indexer package manages. This guide uses ``/mnt/snapshots``.
+To migrate Wazuh indices, you can also use a Network File System (NFS) to create a shared file system for the snapshot repository. A dedicated endpoint is used to install and configure NFS, and the source and destination Wazuh indexer nodes are connected to the shared file system. This allows the destination Wazuh indexer node to access the snapshots and restore it to complete the Wazuh indices migration. Mount the shared file system at the same path on every Wazuh indexer node, and list that path in ``path.repo``. An ``fs`` repository on a cluster must be one shared file system mounted at the same path on every node. Use a location outside ``/etc/wazuh-indexer``, ``/usr/share/wazuh-indexer``, ``/var/lib/wazuh-indexer``, and ``/var/log/wazuh-indexer``, which the Wazuh indexer package manages. This guide uses ``/mnt/snapshots``.
 
 NFS server
 ^^^^^^^^^^
@@ -289,7 +289,7 @@ Perform the following steps on the source and destination Wazuh indexer nodes to
 
             # apt -y install nfs-common
 
-#. Mount the shared directory ``/mnt/snapshots`` on the Wazuh indexer node(s). Replace the ``<NFS_SERVER_IP>`` variable with the IP address of the NFS server:
+#. Mount the shared directory ``/mnt/snapshots`` on the Wazuh indexer nodes. Replace the ``<NFS_SERVER_IP>`` variable with the IP address of the NFS server:
 
    .. code-block:: console
 
@@ -363,7 +363,7 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
 
 .. note::
 
-   It is necessary to have performed the steps in the :ref:`Set up snapshot repository <migrating_wazuh_indices_setup_snapshot_repository_nfs>` section on the destination Wazuh cluster before proceeding to **Restore snapshot**.
+   Perform the steps in the :ref:`Set up snapshot repository <migrating_wazuh_indices_setup_snapshot_repository_nfs>` section on the destination Wazuh cluster before you restore the snapshot.
 
 #. Click the **upper left menu ☰** > **Indexer management** > **Snapshot Management** > **Snapshots**, and select **Refresh** to reload the Snapshots page. The snapshot in the repository location ``/mnt/snapshots`` will show on the destination Wazuh dashboard.
 #. Select the snapshot and click **Restore**.

@@ -8,7 +8,7 @@ Security Analytics module
 
 The Security Analytics module is a component of the Wazuh indexer that evaluates incoming events against :doc:`Wazuh Sigma rules </user-manual/wazuh-indexer/wazuh-sigma-rules>` to generate findings.
 
-It generates findings when events match Sigma rules and correlates related findings across detectors. The module runs within the Wazuh indexer. In the Wazuh dashboard, this module appears as Ruleset Management, its user-facing name. Security Analytics is its internal name, which is why its settings use the ``plugins.security_analytics`` prefix, its API uses ``/_plugins/_security_analytics/``, and its raw indices use ``.opensearch-sap-*``.
+It generates findings when events match Sigma rules and correlates related findings across detectors. The module runs within the Wazuh indexer. In the Wazuh dashboard, this module appears as Ruleset management, its user-facing name. Security Analytics is its internal name, which is why its settings use the ``plugins.security_analytics`` prefix, its API uses ``/_plugins/_security_analytics/``, and its raw indices use ``.opensearch-sap-*``.
 
 Detectors
 ---------
@@ -64,7 +64,7 @@ The enriched finding includes:
 | ``wazuh.rule`` metadata | Rule name, severity level, compliance mappings, and MITRE ATT&CK information. |
 +-------------------------+-------------------------------------------------------------------------------+
 
-Enriched findings are stored in indices matching the ``wazuh-findings-v5-<category>*`` pattern, where ``<category>`` represents the log category associated with the triggering event.
+Enriched findings are stored in indices matching the ``wazuh-findings-v5-<CATEGORY>*`` pattern, where ``<CATEGORY>`` represents the log category associated with the triggering event.
 
 Finding workflow
 ^^^^^^^^^^^^^^^^
@@ -253,7 +253,7 @@ Detector behavior
 
 .. note::
 
-   Setting ``enriched_findings_index_enabled`` to ``false`` disables the Wazuh enriched findings pipeline, so no ``wazuh-findings-v5-<category>*`` documents are produced. Raw Security Analytics module findings are written to ``.opensearch-sap-<category>-findings-*`` only when ``plugins.alerting.alert_finding_enabled`` is ``true`` (default ``false``). With the default, disabling enriched findings means that no finding is stored.
+   Setting ``enriched_findings_index_enabled`` to ``false`` disables the Wazuh enriched findings pipeline, so no ``wazuh-findings-v5-<CATEGORY>*`` documents are produced. Raw Security Analytics module findings are written to ``.opensearch-sap-<CATEGORY>-findings-*`` only when ``plugins.alerting.alert_finding_enabled`` is ``true`` (default ``false``). With the default, disabling enriched findings means that no finding is stored.
 
 Updating a setting at runtime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -377,8 +377,8 @@ The request body contains one or more findings to update.
    {
      "findings": [
        {
-         "_id": "<finding-document-id>",
-         "_index": "<finding-index-name>",
+         "_id": "<FINDING_DOCUMENT_ID>",
+         "_index": "<FINDING_INDEX_NAME>",
          "case": {
            "status": "acknowledged",
            "comments": [
