@@ -72,7 +72,7 @@ The role performs the following tasks:
 -  **Import variables:** Loads shared variables from ``/etc/ansible/roles/wazuh-ansible/roles/vars/main.yml`` and ``/etc/ansible/roles/wazuh-ansible/roles/vars/artifact_urls.yaml``.
 -  **Validate config path:** Verifies that the ``local_configs_path`` directory exists on the Ansible control node before deployment begins.
 -  **Provide credentials:** Runs the ``wazuh-credentials`` role and writes the Wazuh manager passwords and the names of its certificates to ``/etc/wazuh-manager/local.env`` on the node before the package is installed.
--  **Stage certificates:** In a Wazuh cluster deployment, copies the root CA certificate to ``/etc/wazuh-manager/ca`` before the package is installed. It also copies the agent listener (``remoted.pem``), Wazuh manager API (``apid.pem``), and indexer connector certificates, and the root CA certificate as ``root-ca.pem`` and ``indexer-ca.pem``, to ``/etc/wazuh-manager/certs``. In an all-in-one deployment, the package creates its root CA and certificates itself.
+-  **Stage certificates:** In a Wazuh cluster deployment, copies the root CA certificate to ``/etc/wazuh-manager/ca`` before the package is installed. It also copies the agent listener (``remoted.pem``) and Wazuh manager API (``apid.pem``) certificates, and the root CA certificate as ``root-ca.pem`` and ``indexer-ca.pem``, to ``/etc/wazuh-manager/certs``. In an all-in-one deployment, the package creates its root CA and certificates itself.
 -  **Create download directory:** Creates the package download directory on the target node before downloading installation packages.
 -  **Download package (RHEL):** Downloads the ``.rpm`` package for supported ``x86_64`` and ``aarch64`` RHEL architectures.
 -  **Install package (RHEL):** Installs the downloaded ``.rpm`` package using dnf.
@@ -81,7 +81,8 @@ The role performs the following tasks:
 -  **Reload systemd:** Reloads the ``systemd`` daemon after installation.
 -  **Configure the Wazuh manager:** Edits ``/etc/wazuh-manager/wazuh-manager.conf`` on the target node to set the Wazuh indexer hosts, the node name, the node type, and the bind address. In a cluster, it also sets the cluster key, which it generates once on the Ansible control node, and the master node address.
 -  **Hand the certificates to the service:** In a Wazuh cluster deployment, after the package is installed, gives ``/etc/wazuh-manager/certs`` to ``root:wazuh-manager`` and runs ``wazuh-manager-resolve-credentials`` ``--upgrade``, which issues no certificate.
--  **Start service:** Enables and restarts the Wazuh manager service.
+-  **Check indexer trust:** Stops the run if ``wazuh-manager.conf`` doesn't verify the Wazuh indexer with ``certs/indexer-ca.pem``.
+-  **Start service:** Enables and starts the Wazuh manager service. It restarts the service only when the package was installed or its configuration changed.
 -  **Verify API:** On the master node, authenticates to the Wazuh manager API as ``wazuh`` with the deployment password and runs a cluster health check. On a worker node, runs ``cluster_control -l``.
 -  **Remove installation files:** Deletes the package download directory on the target node.
 
@@ -93,7 +94,7 @@ This role installs and configures the Wazuh dashboard on the target node. It sup
 The role performs the following tasks:
 
 -  **Import variables:** Loads shared variables from ``/etc/ansible/roles/wazuh-ansible/roles/vars/main.yml`` and ``/etc/ansible/roles/wazuh-ansible/roles/vars/artifact_urls.yaml``.
--  **Install dependencies:** Checks that the ``local_configs_path`` directory exists on the Ansible control node, installs ``libcap`` on RHEL-based systems or ``tar``, ``curl``, and ``libcap2-bin`` on Debian-based systems, which the Wazuh dashboard package itself doesn't need, and downloads the ``.rpm`` or ``.deb`` package, using the ``dependencies.yml`` task file. On Debian-based systems, it also restarts the services that ``needrestart`` reports, including SSH.
+-  **Install dependencies:** Checks that the ``local_configs_path`` directory exists on the Ansible control node. Installs ``libcap`` on RHEL-based systems or ``tar``, ``curl``, and ``libcap2-bin`` on Debian-based systems, which the Wazuh dashboard package itself doesn't need. Downloads the ``.rpm`` or ``.deb`` package, using the ``dependencies.yml`` task file. On Debian-based systems, it also restarts the services that ``needrestart`` reports, including SSH.
 -  **Provide credentials:** Runs the ``wazuh-credentials`` role and writes the Wazuh dashboard passwords and the names of its certificate to ``/etc/wazuh-dashboard/local.env`` on the node before the package is installed.
 -  **Stage certificates:** In a Wazuh cluster deployment, copies the dashboard certificate, and the root CA certificate as ``indexer-ca.pem`` and ``manager-ca.pem``, to ``/etc/wazuh-dashboard/certs`` with mode ``0640`` before the package is installed. In an all-in-one deployment, the package creates its certificate and imports the root CAs of the Wazuh indexer and Wazuh manager from the host, so the playbook installs the Wazuh manager first. The package checks ``local.env`` and these files at every start, not only at installation.
 -  **Install package (RHEL):** Installs the ``.rpm`` package using ``dnf``.
@@ -102,7 +103,7 @@ The role performs the following tasks:
 -  **Configure OpenSearch hosts:** Updates ``opensearch_dashboards.yml`` with Wazuh indexer cluster nodes.
 -  **Configure manager URL:** Configures the Wazuh manager URL in ``opensearch_dashboards.yml``. The address must be in the Wazuh manager API certificate of the master node. The role leaves ``opensearch.ssl.certificateAuthorities`` and ``wazuh_core.hosts.default.ca`` as the package ships them.
 -  **Check the CAs:** Stops the run if ``opensearch_dashboards.yml`` doesn't verify the Wazuh indexer with ``certs/indexer-ca.pem`` and the Wazuh manager API with ``certs/manager-ca.pem``.
--  **Start service:** Enables and restarts the Wazuh dashboard service.
+-  **Start service:** Enables and starts the Wazuh dashboard service. It restarts the service only when the package was installed or its configuration changed.
 -  **Verify service:** Waits until the Wazuh dashboard login page returns HTTP 200. It doesn't check the Wazuh manager API connection. To check it, run the following command on the Wazuh dashboard host. Replace ``<CA_FILE>`` with ``/etc/wazuh-dashboard/export/ca.pem`` in an all-in-one deployment, or with ``/etc/wazuh-dashboard/certs/indexer-ca.pem``, the root CA of the deployment, in a Wazuh cluster deployment. The command asks for the ``admin`` password. Its output includes the name of the Wazuh manager master node, for example ``"node":"manager"``:
 
    .. code-block:: console
