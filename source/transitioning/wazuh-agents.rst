@@ -33,9 +33,11 @@ The following table compares the two methods:
 +----------------------------------------------+----------------------------------------+-------------------------------------+
 | ``agent.conf`` of custom groups              | Migrated                               | Migrated                            |
 +----------------------------------------------+----------------------------------------+-------------------------------------+
-| Other files in group folders                 | Not migrated                           | Migrated                            |
+| Other files in group folders                 | SCA policies that ``agent.conf`` loads | Migrated                            |
+|                                              | are migrated. Other files aren't.      |                                     |
 +----------------------------------------------+----------------------------------------+-------------------------------------+
-| Customized default ``agent.conf``            | Merge by hand                          | Merge by hand                       |
+| Customized default ``agent.conf``            | Merged into the Wazuh 5.x              | Manual                              |
+|                                              | default group                          |                                     |
 +----------------------------------------------+----------------------------------------+-------------------------------------+
 | Enrollment password                          | Optional, with ``--with-password``     | Optional, by copying ``authd.pass`` |
 +----------------------------------------------+----------------------------------------+-------------------------------------+
@@ -47,14 +49,13 @@ The following table compares the two methods:
 Migrate agent registrations with the migration tool
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ``wazuh-migrate-identity.py`` tool migrates agent registrations and keys, custom agent groups and their ``agent.conf`` files, and, optionally, the enrollment password and the Wazuh manager API users, roles, and policies. It recreates them through the Wazuh 5.x manager API and verifies the result.
+The ``wazuh-migrate-identity.py`` tool migrates agent registrations and keys, custom agent groups, their ``agent.conf`` files and the SCA policy files that they load, the settings of a customized default ``agent.conf``, and, optionally, the enrollment password and the Wazuh manager API users, roles, and policies. It recreates them through the Wazuh 5.x manager API and verifies the result.
 
 Limitations
 ~~~~~~~~~~~
 
 -  Registration dates: The tool sets each migrated agent's registration date to the time of import. To preserve the original dates, migrate agent registrations manually.
--  Group files: The tool migrates only ``agent.conf`` files from group folders. It doesn't migrate other files, such as SCA policies, which Wazuh 5.x agents still run. Copy the files that you need from ``/var/ossec/etc/shared/<GROUP>/`` on the Wazuh 4.x manager to ``/etc/wazuh-manager/shared/<GROUP>/`` on the Wazuh 5.x manager, owned by ``wazuh-manager``.
--  Customized default configuration: The tool doesn't migrate a customized ``shared/default/agent.conf``. Manually merge its settings into the Wazuh 5.x default group.
+-  Group files: The tool migrates the ``agent.conf`` file of each group and the SCA policy files that it loads. It doesn't migrate other files in group folders, and the export names each file that it leaves behind. Copy the files that you need from ``/var/ossec/etc/shared/<GROUP>/`` on the Wazuh 4.x manager to ``/etc/wazuh-manager/shared/<GROUP>/`` on the Wazuh 5.x manager, owned by ``wazuh-manager``.
 -  Unsupported options: After import, review each migrated group folder and remove any ``agent.conf`` options that Wazuh 5.x doesn't support, such as ``<labels>``, ``<scan_on_start>``, and ``<check_files>``.
 
 Prerequisites
@@ -102,7 +103,7 @@ Wazuh 4.x manager
 
    .. code-block:: console
 
-      # curl -fsSLO https://raw.githubusercontent.com/wazuh/wazuh/5.0.0/tools/migration/wazuh-migrate-identity.py
+      # curl -fsSLO https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/tools/migration/wazuh-migrate-identity.py
       # chmod +x wazuh-migrate-identity.py
 
 #. Stop the Wazuh 4.x manager. The tool doesn't export the data while the Wazuh manager is running:
@@ -154,7 +155,7 @@ Perform the following steps on the master node in the Wazuh manager cluster. The
 
    .. code-block:: console
 
-      # curl -fsSLO https://raw.githubusercontent.com/wazuh/wazuh/5.0.0/tools/migration/wazuh-migrate-identity.py
+      # curl -fsSLO https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/tools/migration/wazuh-migrate-identity.py
       # chmod +x wazuh-migrate-identity.py
 
 #. Preview the import. Use the same options as for the export:
@@ -281,14 +282,14 @@ Wazuh 5.x manager
       BEGIN;
       INSERT OR REPLACE INTO agent
         (id, name, ip, register_ip, internal_key, os_name, os_version, os_major, os_minor, os_type, os_platform, os_arch,
-         version, date_add, last_keepalive, `group`, sync_status, connection_status,
+         version, date_add, last_keepalive, `group`, group_hash, group_sync_status, sync_status, connection_status,
          disconnection_time, status_code)
       SELECT id, name, ip, register_ip, internal_key, os_name, os_version, os_major, os_minor,
              CASE WHEN lower(os_platform) = 'windows' THEN 'windows'
                   WHEN lower(os_platform) = 'darwin' THEN 'macos'
                   WHEN os_platform IS NULL THEN NULL ELSE 'linux' END,
-             os_platform, os_arch, version, date_add, last_keepalive, `group`, sync_status,
-             'disconnected', 0, 0
+             os_platform, os_arch, version, date_add, last_keepalive, `group`, group_hash, group_sync_status, sync_status,
+             'disconnected', 0, status_code
       FROM old.agent WHERE id > 0;
       INSERT OR IGNORE INTO `group` (name) SELECT name FROM old.`group`;
       INSERT OR REPLACE INTO belongs (id_agent, id_group, priority)

@@ -18,7 +18,7 @@ Deploy Wazuh 5.x as a new stack instead of upgrading the Wazuh 4.x Docker deploy
 Transition to Wazuh 5.x
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-This procedure connects your Wazuh agents to Wazuh 5.x without enrolling them again. You export the Wazuh agent registrations from the Wazuh 4.x stack, deploy a Wazuh 5.x stack prepared for the transition, and import the registrations into it. After the import, you connect the Wazuh agents to the Wazuh 5.x manager and check that they reconnect with their existing identities. The ``wazuh-migrate-identity.py`` tool handles the export and the import. Along with the registrations, it carries over the custom groups and their ``agent.conf`` files and, optionally, the Wazuh manager API users, roles, and policies.
+This procedure connects your Wazuh agents to Wazuh 5.x without enrolling them again. You export the Wazuh agent registrations from the Wazuh 4.x stack, deploy a Wazuh 5.x stack prepared for the transition, and import the registrations into it. After the import, you connect the Wazuh agents to the Wazuh 5.x manager and check that they reconnect with their existing identities. The ``wazuh-migrate-identity.py`` tool handles the export and the import. Along with the registrations, it carries over the custom groups, their ``agent.conf`` files and the SCA policy files that they load, the settings of a customized default ``agent.conf``, and, optionally, the Wazuh manager API users, roles, and policies.
 
 Prerequisites
 ~~~~~~~~~~~~~
@@ -71,7 +71,7 @@ Export the Wazuh agent registrations from Wazuh 4.x
 
    .. code-block:: console
 
-      # curl -fsSLo <WAZUH_4X_DIRECTORY>/wazuh-docker/single-node/wazuh-migrate-identity.py https://raw.githubusercontent.com/wazuh/wazuh/v5.0.0/tools/migration/wazuh-migrate-identity.py
+      # curl -fsSLo <WAZUH_4X_DIRECTORY>/wazuh-docker/single-node/wazuh-migrate-identity.py https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/tools/migration/wazuh-migrate-identity.py
       # mkdir <WAZUH_4X_DIRECTORY>/wazuh-docker/single-node/wazuh-4x-bundle
 
 #. Preview the export. The command runs the tool in a one-off container of your Wazuh 4.x manager image, with the Wazuh 4.x volumes mounted read-only:
@@ -120,7 +120,7 @@ Deploy Wazuh 5.x for the transition
 
       # mkdir -p <WAZUH_5X_DIRECTORY>
       # cd <WAZUH_5X_DIRECTORY>
-      # git clone https://github.com/wazuh/wazuh-docker.git -b v5.0.0
+      # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|
       # cd wazuh-docker/single-node/
 
 #. Set a Docker Compose project name for the Wazuh 5.x stack. Do this before you run any ``docker compose`` command in this directory:
@@ -151,10 +151,10 @@ Deploy Wazuh 5.x for the transition
    .. code-block:: none
       :class: output
 
-      NAME                      IMAGE                             STATUS                    PORTS
-      wazuh-5-wazuh.dashboard   wazuh/wazuh-dashboard:5.0.0-rc2   Up 22 seconds (healthy)   0.0.0.0:443->443/tcp, [::]:443->443/tcp
-      wazuh-5-wazuh.indexer     wazuh/wazuh-indexer:5.0.0-rc2     Up 58 seconds (healthy)   9200/tcp
-      wazuh-5-wazuh.manager     wazuh/wazuh-manager:5.0.0-rc2     Up 37 seconds (healthy)   1514-1517/tcp, 55000/tcp
+      NAME                          IMAGE                         STATUS                    PORTS
+      single-node-wazuh.dashboard   wazuh/wazuh-dashboard:5.0.0   Up 22 seconds (healthy)   0.0.0.0:443->443/tcp, [::]:443->443/tcp
+      single-node-wazuh.indexer     wazuh/wazuh-indexer:5.0.0     Up 58 seconds (healthy)   9200/tcp
+      single-node-wazuh.manager     wazuh/wazuh-manager:5.0.0     Up 37 seconds (healthy)   1514-1517/tcp, 55000/tcp
 
 Import the Wazuh agent registrations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -324,11 +324,18 @@ Wazuh 5.x uses new configuration files. Recreate the settings you need as descri
 
 On a multi-node deployment, the Wazuh manager files are on the ``master-wazuh-etc`` and ``master-wazuh-api-configuration`` volumes, and the indexer files are ``wazuh1.indexer.yml`` to ``wazuh3.indexer.yml``.
 
-A file that you mount into the Wazuh 5.x indexer or dashboard must be owned by ``root``, group ``101``, with mode ``0640``. Otherwise, the container stops with ``UNSAFE <PATH>``. Validate the Wazuh manager configuration before you restart the Wazuh manager. If the configuration is valid, the command doesn't print any output:
+A file that you mount into the Wazuh 5.x indexer or dashboard must be owned by ``root``, group ``101``, with mode ``0640``. Otherwise, the container stops with ``UNSAFE <PATH>``. Validate the Wazuh manager configuration before you restart the Wazuh manager. If the configuration is valid, the command prints ``configuration is valid``.
 
 .. code-block:: console
 
    # docker compose exec wazuh.manager /var/wazuh-manager/bin/wazuh-manager-conf validate
+
+The command output looks similar to this:
+
+.. code-block:: none
+   :class: output
+
+   /etc/wazuh-manager/wazuh-manager.conf: configuration is valid.
 
 The Wazuh 4.x dashboard checked only the certificate chain of the Wazuh indexer. The Wazuh 5.x dashboard also verifies the Wazuh indexer hostname, because ``OPENSEARCH_SSL_VERIFICATION_MODE`` defaults to ``full``. If you keep the default ``OPENSEARCH_HOSTS`` value, no change is needed. If you change it, check that every host it lists is in the Wazuh indexer certificate. Run this command from ``<WAZUH_5X_DIRECTORY>/wazuh-docker/single-node/``:
 
@@ -376,7 +383,7 @@ The Wazuh 5.x manifests use the ``wazuh`` namespace and the same workload names 
 Transition to Wazuh 5.x
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-This procedure connects your Wazuh agents to Wazuh 5.x without enrolling them again. You export the Wazuh agent registrations from the Wazuh 4.x deployment, deploy a Wazuh 5.x deployment prepared for the transition, and import the registrations into it. After the import, you connect the Wazuh agents to the Wazuh 5.x manager and check that they reconnect with their existing identities. The ``wazuh-migrate-identity.py`` tool handles the export and the import. Along with the registrations, it carries over the custom groups and their ``agent.conf`` files and, optionally, the Wazuh manager API users, roles, and policies.
+This procedure connects your Wazuh agents to Wazuh 5.x without enrolling them again. You export the Wazuh agent registrations from the Wazuh 4.x deployment, deploy a Wazuh 5.x deployment prepared for the transition, and import the registrations into it. After the import, you connect the Wazuh agents to the Wazuh 5.x manager and check that they reconnect with their existing identities. The ``wazuh-migrate-identity.py`` tool handles the export and the import. Along with the registrations, it carries over the custom groups, their ``agent.conf`` files and the SCA policy files that they load, the settings of a customized default ``agent.conf``, and, optionally, the Wazuh manager API users, roles, and policies.
 
 Prerequisites
 ~~~~~~~~~~~~~
@@ -406,7 +413,7 @@ Export the Wazuh agent registrations from Wazuh 4.x
 
    .. code-block:: console
 
-      $ curl -fsSLo wazuh-migrate-identity.py https://raw.githubusercontent.com/wazuh/wazuh/v5.0.0/tools/migration/wazuh-migrate-identity.py
+      $ curl -fsSLo wazuh-migrate-identity.py https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/tools/migration/wazuh-migrate-identity.py
       $ kubectl -n wazuh create configmap wazuh-migrate-identity --from-file=wazuh-migrate-identity.py
 
 #. Create a one-off pod of your Wazuh 4.x manager image. It mounts the master claim read-only, with the same subPaths as the Wazuh 4.x manager, and the migration tool:
@@ -602,11 +609,18 @@ Wazuh 5.x uses new configuration files. Recreate the settings you need as descri
 -  ``opensearch_dashboards.yml`` (ConfigMap ``dashboard-conf``): set the settings as environment variables in ``dashboard-deploy.yaml``, such as ``OPENSEARCH_HOSTS`` and ``WAZUH_API_URL``.
 -  The ``indexer-cred``, ``dashboard-cred``, and ``wazuh-api-cred`` Secrets: Wazuh 5.x takes the credentials from ``wazuh/config/credentials/*.env``.
 
-Validate the Wazuh manager configuration before you restart the Wazuh manager. If the configuration is valid, the command doesn't print any output:
+Validate the Wazuh manager configuration before you restart the Wazuh manager. If the configuration is valid, the command prints ``configuration is valid``.
 
 .. code-block:: console
 
    $ kubectl -n wazuh-5 exec wazuh-manager-master-0 -c wazuh-manager -- /var/wazuh-manager/bin/wazuh-manager-conf validate
+
+The command output looks similar to this:
+
+.. code-block:: none
+   :class: output
+
+   /etc/wazuh-manager/wazuh-manager.conf: configuration is valid.
 
 Indexed data
 ^^^^^^^^^^^^
