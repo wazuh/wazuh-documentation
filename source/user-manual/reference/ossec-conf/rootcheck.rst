@@ -119,6 +119,10 @@ check_pids
 
 Enable or disable checking for hidden processes.
 
+.. note::
+
+   On Linux, the hidden process check only checks PIDs up to ``rootcheck.max_pid`` (``32768`` by default). See :ref:`Internal configuration <reference_internal_options>`.
+
 +----------------------+-----------+
 | **Default value**    | yes       |
 +----------------------+-----------+

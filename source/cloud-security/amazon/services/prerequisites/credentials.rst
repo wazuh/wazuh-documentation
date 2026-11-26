@@ -67,7 +67,7 @@ The ``/root/.aws/config`` file specifies the AWS region for each profile:
    [profile prod]
    region = us-east-1
 
-After setting up the profiles, define which one the Wazuh module for AWS uses to collect logs. Configure this inside the ``<wodle name="aws-s3">`` block of the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent. The example below configures the module to pull AWS CloudTrail logs from the specified bucket using the ``prod`` profile.
+After setting up the profiles, define which one the Wazuh module for AWS uses to collect logs. Configure this inside the ``<wodle name="aws-s3">`` block of the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent. The example below configures the module to pull AWS CloudTrail logs from the specified bucket using the ``prod`` profile. The Wazuh module for AWS is a wodle, a Wazuh module configured with a ``<wodle>`` block. See the :doc:`aws-s3 reference </user-manual/reference/ossec-conf/wodle-s3>` for all its options.
 
 .. code-block:: xml
    :emphasize-lines: 2
@@ -88,7 +88,7 @@ Save the changes and restart the Wazuh agent service to apply the changes:
 IAM roles
 ^^^^^^^^^
 
-An `IAM role <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html>`__ is an identity within your AWS account with specific permissions. It is similar to an IAM user but is not associated with a specific person. Trusted entities can also use IAM roles to interact with different AWS services.  AWS services, applications running on Amazon EC2 instances, and IAM users can assume an IAM role.
+An `IAM role <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html>`__ is an identity within your AWS account with specific permissions. It is similar to an IAM user but is not associated with a specific person. Trusted entities can also use IAM roles to interact with different AWS services. AWS services, applications running on Amazon EC2 instances, and IAM users can assume an IAM role.
 
 .. note::
 
@@ -128,7 +128,7 @@ This section shows how to create a sample IAM role with read-only permissions to
       :align: center
       :width: 80%
 
-#. Give the role a descriptive name and click **Create role**.
+#. Give the role a descriptive name, for example ``Wazuh-IAM-Role``, and click **Create role**. The examples in this section use this name.
 
    .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/assign-name-to-role-and-create-role.png
       :title: Name and create the role
@@ -145,6 +145,10 @@ This section shows how to create a sample IAM role with read-only permissions to
       :width: 80%
 
 #. Switch to **JSON** view and edit the policy to allow the `sts:AssumeRole <https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html>`__ action on the new role. The IAM user gets this permission because the same policy is attached to its user group.
+
+   .. warning::
+
+      This change applies to every user, group, and role that the policy is attached to. If the policy is shared with other identities, create a dedicated policy for the Wazuh role instead.
 
    .. code-block:: json
       :emphasize-lines: 13,14,15

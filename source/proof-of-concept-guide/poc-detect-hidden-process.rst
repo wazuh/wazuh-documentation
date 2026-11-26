@@ -6,21 +6,27 @@
 Detecting hidden processes
 ==========================
 
-Rootkit detection helps identify stealthy, kernel-level compromises that evade standard system monitoring tools. The Wazuh Rootcheck module performs periodic scans on a monitored endpoint to detect signs of rootkits, hidden processes, and other host-based anomalies. In this use case, we show how Wazuh detects hidden processes created by a rootkit on a Linux endpoint. You deploy a kernel-mode rootkit on an Ubuntu endpoint. This rootkit hides itself from the kernel module list. It also hides selected processes from the ``ps`` utility. However, Wazuh detects the hidden processes by comparing the results of the ``kill()``, ``getsid()``, and ``getpgid()`` system calls with the entries in ``/proc``.
+Rootkits hide malicious activity from standard system tools. The :doc:`Wazuh Rootcheck module </user-manual/capabilities/malware-detection/rootkit-detection>` scans monitored endpoints periodically to detect rootkits, hidden processes, and other anomalies.
 
-Infrastructure
---------------
+In this use case, you load the `Diamorphine kernel-mode rootkit <https://github.com/m0nad/Diamorphine>`__ on the Ubuntu endpoint. It hides itself from the kernel module list and hides selected processes from the ``ps`` command. Wazuh still detects the hidden processes. It compares the results of the ``kill()``, ``getsid()``, and ``getpgid()`` system calls with the ``ps`` output and the entries in ``/proc``.
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------+
-| Endpoint     | Description                                                                                                               |
-+==============+===========================================================================================================================+
-| Ubuntu 24.04 | On this endpoint, download, compile, and load a rootkit. Then configure the Wazuh Rootcheck module for anomaly detection. |
-+--------------+---------------------------------------------------------------------------------------------------------------------------+
+Endpoints
+---------
+
++--------------+-------------------------------------------------------------------------------------------+
+| Endpoint     | Role                                                                                      |
++==============+===========================================================================================+
+| Ubuntu 24.04 | You build and load the rootkit on this endpoint, and the Wazuh Rootcheck module scans it. |
++--------------+-------------------------------------------------------------------------------------------+
+
+.. warning::
+
+   This use case loads a rootkit into the kernel. Use a disposable lab endpoint.
 
 Configuration
 -------------
 
-Perform the following steps on the Ubuntu endpoint to emulate rootkit-like process-hiding behavior. The Wazuh agent runs a Rootcheck scan based on the set ``<frequency>`` and detects the rootkit behavior.
+Run these steps on the Ubuntu endpoint.
 
 #. Switch to the root user and update the package lists:
 
@@ -29,16 +35,15 @@ Perform the following steps on the Ubuntu endpoint to emulate rootkit-like proce
       $ sudo su
       # apt update
 
-#. Install the packages required for building the rootkit:
+#. Install the packages needed to build the rootkit:
 
    .. code-block:: console
 
       # apt -y install gcc git make linux-headers-$(uname -r)
 
-#. For this use case, configure the Wazuh agent to run rootcheck scans every 2 minutes. In the ``/var/ossec/etc/ossec.conf`` file, set the ``frequency`` option in the ``<rootcheck>`` section to ``120``:
+#. Configure Rootcheck to scan every 2 minutes. In ``/var/ossec/etc/ossec.conf``, set ``<frequency>`` to ``120`` in the ``<rootcheck>`` block:
 
    .. code-block:: xml
-      :emphasize-lines: 11
 
       <rootcheck>
         <disabled>no</disabled>
@@ -52,6 +57,9 @@ Perform the following steps on the Ubuntu endpoint to emulate rootkit-like proce
 
         <frequency>120</frequency>
         <skip_nfs>yes</skip_nfs>
+
+        <ignore>/var/lib/containerd</ignore>
+        <ignore>/var/lib/docker/overlay2</ignore>
       </rootcheck>
 
 #. Restart the Wazuh agent to apply the changes:
@@ -60,25 +68,36 @@ Perform the following steps on the Ubuntu endpoint to emulate rootkit-like proce
 
       # systemctl restart wazuh-agent
 
+Verify data ingestion
+---------------------
+
+Rootcheck scans when the agent starts and then every 2 minutes. Check that a scan ended:
+
+.. code-block:: console
+
+   # grep "Rootcheck scan ended" /var/ossec/logs/ossec.log
+
+.. _poc_hidden_process_attack_emulation:
+
 Attack emulation
 ----------------
 
-Perform the following steps on the monitored Ubuntu 24.04 endpoint:
+Run these steps as root on the Ubuntu endpoint.
 
-#. Fetch the Diamorphine rootkit source code from GitHub:
+#. Download the Diamorphine rootkit source code:
 
    .. code-block:: console
 
       # git clone https://github.com/m0nad/Diamorphine
 
-#. Navigate to the Diamorphine directory and compile the source code:
+#. Go to the Diamorphine directory and compile the source code:
 
    .. code-block:: console
 
       # cd Diamorphine
       # make
 
-   Newer kernels rename PROC_ROOT_INO to PROCFS_ROOT_INO. If make fails with a PROC_ROOT_INO error, update the source code and compile again:
+   Newer kernels rename ``PROC_ROOT_INO`` to ``PROCFS_ROOT_INO``. If ``make`` fails with a ``PROC_ROOT_INO`` error, update the source code and compile again:
 
    .. code-block:: console
 
@@ -91,13 +110,11 @@ Perform the following steps on the monitored Ubuntu 24.04 endpoint:
 
       # insmod diamorphine.ko
 
-   The Diamorphine kernel-level rootkit is now installed on the Ubuntu endpoint.
-
    .. note::
 
-      Depending on the environment, the module sometimes fails to load or function properly. If you receive the error ``insmod: ERROR: could not insert module diamorphine.ko: Invalid parameters`` in the last step, restart the Linux endpoint and try again. It might take several tries.
+      If ``insmod`` fails with ``insmod: ERROR: could not insert module diamorphine.ko: Invalid parameters``, restart the endpoint and try again. It can take several tries.
 
-#. Send the kill signal ``63`` to the PID of any process running on the Ubuntu endpoint. This unhides the Diamorphine rootkit. By default, Diamorphine hides itself, so it does not appear in the output of the ``lsmod`` command. Try it out:
+#. Diamorphine hides itself, so ``lsmod`` doesn't show it. Send signal 63 to any PID to unhide it, then check again:
 
    .. code-block:: console
 
@@ -105,18 +122,14 @@ Perform the following steps on the monitored Ubuntu 24.04 endpoint:
       # kill -63 <ANY_PID>
       # lsmod | grep diamorphine
 
-   Replace ``<ANY_PID>`` with any number. Diamorphine intercepts signal 63 for any PID, whether or not the process exists.
-
-   The command output looks similar to this:
+   Replace ``<ANY_PID>`` with any number. Diamorphine intercepts signal 63 for any PID, whether or not the process exists, and switches the module between hidden and visible. The first ``lsmod`` command returns no output, and the second one shows the module:
 
    .. code-block:: none
       :class: output
 
       diamorphine            16384  0
 
-   The first lsmod command returns no output, and the second one shows the Diamorphine module. In the case of Diamorphine, any kill signal ``63`` sent to any process, whether it exists or not, toggles the Diamorphine kernel module to hide or unhide.
-
-#. Run the following commands to see how the ``rsyslogd`` process is first visible and then no longer visible. This rootkit allows you to hide selected processes from the ``ps`` command. Sending a kill signal ``31`` hides or unhides any process:
+#. Find the PID of the ``rsyslogd`` process:
 
    .. code-block:: console
 
@@ -127,48 +140,67 @@ Perform the following steps on the monitored Ubuntu 24.04 endpoint:
    .. code-block:: none
       :class: output
 
-      root       732  0.0  0.7 214452  3572 ?        Ssl  14:53   0:00 /usr/sbin/rsyslogd -n
+      syslog     732  0.0  0.7 214452  3572 ?        Ssl  14:53   0:00 /usr/sbin/rsyslogd -n -iNONE
+
+#. Hide ``rsyslogd`` by sending it signal 31, then check that ``ps`` no longer shows it. Replace ``<PID_OF_RSYSLOGD>`` with the PID from the previous step:
 
    .. code-block:: console
 
       # kill -31 <PID_OF_RSYSLOGD>
       # ps auxw | grep rsyslogd | grep -v grep
 
-   -  Replace ``<PID_OF_RSYSLOGD>`` with the PID retrieved from the previous command.
+The last command returns no output. The next Rootcheck scan creates a finding about the hidden ``rsyslogd`` process.
 
-   The last command returns no output. The next Rootcheck scan runs and generates a finding about the ``rsyslogd`` process, which was hidden by the Diamorphine rootkit.
+.. note::
 
-Visualize the findings
------------------------
+   On Linux, rootcheck checks PIDs up to ``rootcheck.max_pid`` (``32768`` by default). The ``rsyslogd`` process usually has a low PID. If you hide a process with a higher PID, add ``rootcheck.max_pid=4194304`` to ``/var/ossec/etc/local_internal_options.conf`` and restart the Wazuh agent before the next scan. See :ref:`Internal configuration <reference_internal_options>`.
 
-You can visualize the findings in the Wazuh dashboard. To do this:
+View the findings
+-----------------
 
-#. Navigate to the **Threat intelligence** > **Threat Hunting** dashboard and add the following filter in the search bar to query the findings.
+You see a Rootcheck finding about the hidden ``rsyslogd`` process.
 
-   -  ``wazuh.integration.name: wazuh-rootcheck``
+#. In the Wazuh dashboard, go to **Threat intelligence** > **Threat Hunting** and enter ``wazuh.integration.name: wazuh-rootcheck`` in the search bar.
 
    .. thumbnail:: /images/poc/hidden-processes-findings.png
       :title: Hidden processes findings
-      :alt: Wazuh dashboard Threat Hunting Findings tab filtered by wazuh.integration.name wazuh-rootcheck, showing Wazuh Rootcheck findings
+      :alt: Wazuh dashboard Threat Hunting Findings tab showing the Rootcheck findings about the hidden process on the Ubuntu 24.04 agent
       :align: center
       :width: 80%
 
-Click the magnifying glass icon to view the details of the findings.
+#. Click the magnifying glass icon to see the details of a finding.
 
-.. thumbnail:: /images/poc/hidden-processes-finding-details.png
-   :title: Hidden processes finding details
-   :alt: Wazuh dashboard document details panel for a Wazuh Rootcheck finding about a process hidden from proc
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/poc/hidden-processes-finding-details.png
+      :title: Hidden processes finding details
+      :alt: Document details of the Rootcheck finding about a process hidden from proc, with the possible kernel level rootkit message
+      :align: center
+      :width: 80%
 
-If you run the same ``kill -31`` command as before against ``rsyslogd``, the ``rsyslogd`` process becomes visible again. The subsequent rootcheck scan no longer generates findings about this event.
+Troubleshooting
+---------------
 
-To remove the rootkit, make the module visible, then unload it:
++------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| Check                                          | How                                                                                                              |
++================================================+==================================================================================================================+
+| A scan ran after the process was hidden        | A ``Rootcheck scan ended`` message is newer than the ``kill -31`` command.                                       |
++------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| The process is hidden                          | ``ps auxw | grep rsyslogd | grep -v grep`` returns no output.                                                    |
++------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| The rootkit is loaded                          | After ``kill -63 <ANY_PID>``, ``lsmod | grep diamorphine`` shows the module. Run ``kill -63`` again to hide it.  |
++------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| The ``wazuh-rootcheck`` integration is enabled | **Ruleset management** > **Overview** shows it enabled. With it off, Wazuh drops the events without any message. |
++------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
 
-.. code-block:: console
+Clean up
+--------
 
-   # kill -63 <ANY_PID>
-   # lsmod | grep diamorphine
-   # rmmod diamorphine
+#. Make ``rsyslogd`` visible again with the same ``kill -31 <PID_OF_RSYSLOGD>`` command. The next Rootcheck scan no longer reports it.
 
-If ``lsmod`` shows no output, the module is still hidden: run ``kill -63 <ANY_PID>`` again. You can also restart the endpoint, because Diamorphine doesn't persist across reboots.
+#. Unload the rootkit module. The module must be visible, and it already is if you ran step 4 of :ref:`Attack emulation <poc_hidden_process_attack_emulation>`:
+
+   .. code-block:: console
+
+      # lsmod | grep diamorphine
+      # rmmod diamorphine
+
+If ``lsmod`` shows no output, the module is hidden. Run ``kill -63 <ANY_PID>`` once, then run the commands again. You can also restart the endpoint, because Diamorphine doesn't persist across reboots.

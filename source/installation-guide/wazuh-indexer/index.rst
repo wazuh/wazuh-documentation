@@ -74,7 +74,7 @@ Requirements
 
 Check the recommended operating systems and hardware requirements for the Wazuh indexer installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
-On Debian and Ubuntu, the Wazuh indexer package needs ``iproute2``, ``openssl``, and ``passwd``. On Red Hat Enterprise Linux and Amazon Linux, it needs ``iproute``, ``openssl``, and ``shadow-utils``. It opens no firewall port: open the ports in :ref:`Required ports <wazuh_indexer_required_ports>` yourself. You can't install it over a Wazuh indexer 4.x. The package refuses with ``Upgrade from Wazuh indexer versions prior to 5.x is not supported.`` To move from 4.x, see the :doc:`migration guide </migration-to-5x/index>`.
+On Debian and Ubuntu, the Wazuh indexer package needs ``iproute2``, ``openssl``, and ``passwd``. On Red Hat Enterprise Linux and Amazon Linux, it needs ``iproute``, ``openssl``, and ``shadow-utils``. It opens no firewall port: open the ports in :ref:`Required ports <wazuh_indexer_required_ports>` yourself. You can't install it over a Wazuh indexer 4.x. The package refuses with ``Upgrade from Wazuh indexer versions prior to 5.x is not supported.`` To move from 4.x, see :doc:`/transitioning/index`.
 
 Recommended operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -141,7 +141,7 @@ You can install the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one hos
 
 The :doc:`Quickstart </quickstart>` is the fastest way to install them on one host. With the installation assistant, follow the assisted installation sections of the Wazuh indexer, Wazuh manager, and Wazuh dashboard on that host, in that order. :ref:`Initial configuration <wazuh_indexer_assisted_initial_configuration>` says which ``config.yml`` values to use and which step to skip for an all-in-one installation.
 
-With the step-by-step method, follow their step-by-step sections on that host, in the same order. Each section says which steps to skip when the components share a host. The install order doesn't matter on one host, but the Wazuh dashboard refuses to start until the Wazuh indexer and the Wazuh manager are installed. It then takes its passwords and CA certificates from them, and its ``url``, ``https://localhost``, is in the Wazuh manager API certificate. If the Wazuh dashboard already failed to start, run ``systemctl reset-failed wazuh-dashboard`` and start it again.
+With the step-by-step method, follow their step-by-step sections on that host, in the same order. Each section says which steps to skip when the components share a host. The install order doesn't matter on one host, but the Wazuh dashboard refuses to start until the Wazuh indexer and the Wazuh manager are installed. It then takes its passwords and CA certificates from them, and the Wazuh dashboard's ``wazuh_core.hosts.default.url``, ``https://localhost``, is in the Wazuh manager API certificate. If the Wazuh dashboard already failed to start, run ``systemctl reset-failed wazuh-dashboard`` and start it again.
 
 .. toctree::
    :hidden:

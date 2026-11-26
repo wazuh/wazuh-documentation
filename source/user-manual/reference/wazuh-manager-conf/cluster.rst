@@ -38,11 +38,12 @@ name
 
 Specifies the name of the cluster this node belongs to. All nodes in the same cluster must use the same value.
 
-+----------------------+------------+
-| **Default value**    | wazuh      |
-+----------------------+------------+
-| **Allowed values**   | Any name   |
-+----------------------+------------+
++----------------------+--------------------------------------------------------------------------+
+| **Default value**    | wazuh                                                                    |
++----------------------+--------------------------------------------------------------------------+
+| **Allowed values**   | Letters, digits, ``_`` and ``-``. Validation accepts a name with a       |
+|                      | space, but then no worker node can join the cluster.                     |
++----------------------+--------------------------------------------------------------------------+
 
 .. _reference_wazuh_manager_conf_cluster_node_name:
 
@@ -51,11 +52,13 @@ node_name
 
 Specifies the name of the current node of the cluster. Each node of the cluster must have a unique name. If two nodes share the same name, one of them will be rejected.
 
-+----------------------+------------+
-| **Default value**    | node01     |
-+----------------------+------------+
-| **Allowed values**   | Any name   |
-+----------------------+------------+
++----------------------+--------------------------------------------------------------------------+
+| **Default value**    | node01                                                                   |
++----------------------+--------------------------------------------------------------------------+
+| **Allowed values**   | Letters, digits, ``_`` and ``-``. Validation accepts other characters,   |
+|                      | but the master node refuses a worker node whose name has them (error     |
+|                      | 3060).                                                                   |
++----------------------+--------------------------------------------------------------------------+
 
 .. _reference_wazuh_manager_conf_cluster_node_type:
 
@@ -96,11 +99,13 @@ To share the key across the cluster, read it on the master node:
 
    # sed -n '/<cluster>/,/<\/cluster>/s|.*<key>\(.*\)</key>.*|\1|p' /etc/wazuh-manager/wazuh-manager.conf
 
-Then set that value on each worker node and restart the manager. Both ``sed`` commands read and change only the ``<key>`` inside ``<cluster>``. The file has two other ``<key>`` elements, in ``<remote><https>`` and ``<indexer><ssl>``:
+Then set that value on each worker node and restart the manager. Both ``sed`` commands read and change only the ``<key>`` inside ``<cluster>``. The file has two other ``<key>`` elements, in ``<remote><https>`` and ``<indexer><ssl>``. The ``read`` command asks for the key without echoing it, so the key doesn't appear in the command history:
 
 .. code-block:: console
 
-   # sed -i '/<cluster>/,/<\/cluster>/s|<key>.*</key>|<key>PASTE_MASTER_KEY_HERE</key>|' /etc/wazuh-manager/wazuh-manager.conf
+   # read -rs CLUSTER_KEY
+   # sed -i "/<cluster>/,/<\/cluster>/s|<key>.*</key>|<key>${CLUSTER_KEY}</key>|" /etc/wazuh-manager/wazuh-manager.conf
+   # unset CLUSTER_KEY
    # systemctl restart wazuh-manager
 
 Treat the cluster key as a credential. Do not include it in scripts, source control, documentation examples, or command history.
@@ -136,7 +141,7 @@ Specifies the IP address on which the master node listens for connections from w
 nodes
 ^^^^^
 
-Lists all master nodes in the cluster using the ``<node>`` tag for each one.
+Address of the master node, set in a ``<node>`` element.
 
 +----------------------+---------------------------------------------------+
 | **Default value**    | 127.0.0.1                                         |
@@ -151,7 +156,7 @@ The current cluster only allows one master node. Therefore, this list must have 
 hidden
 ^^^^^^
 
-This option has no effect. No component reads it.
+This option has no effect. No component reads it. The installer adds ``<hidden>no</hidden>`` to the generated configuration file. You can leave it or remove it.
 
 +----------------------+-----------+
 | **Default value**    | no        |
@@ -174,16 +179,15 @@ Master node
      <name>wazuh</name>
      <node_name>master-node</node_name>
      <node_type>master</node_type>
-     <key>c98b62a9b6169ac5f67dfe55b73a8d2a</key>
+     <key><CLUSTER_KEY></key>
      <port>1516</port>
      <bind_addr>0.0.0.0</bind_addr>
      <nodes>
        <node><WAZUH_MASTER_ADDRESS></node>
      </nodes>
-     <hidden>no</hidden>
    </cluster>
 
-Replace ``<WAZUH_MASTER_ADDRESS>`` with the actual IP address of the master node.
+Replace ``<CLUSTER_KEY>`` with the cluster key and ``<WAZUH_MASTER_ADDRESS>`` with the actual IP address of the master node.
 
 Worker node
 ^^^^^^^^^^^^
@@ -194,16 +198,15 @@ Worker node
      <name>wazuh</name>
      <node_name>worker-node-01</node_name>
      <node_type>worker</node_type>
-     <key>c98b62a9b6169ac5f67dfe55b73a8d2a</key>
+     <key><CLUSTER_KEY></key>
      <port>1516</port>
      <bind_addr>0.0.0.0</bind_addr>
      <nodes>
        <node><WAZUH_MASTER_ADDRESS></node>
      </nodes>
-     <hidden>no</hidden>
    </cluster>
 
-Replace ``<WAZUH_MASTER_ADDRESS>`` with the actual IP address of the master node, and use a unique ``node_name`` for each worker.
+Replace ``<CLUSTER_KEY>`` with the key of the master node and ``<WAZUH_MASTER_ADDRESS>`` with the actual IP address of the master node, and use a unique ``node_name`` for each worker.
 
 Applying configuration changes
 --------------------------------

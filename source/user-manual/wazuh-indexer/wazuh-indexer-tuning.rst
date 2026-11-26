@@ -29,6 +29,8 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
 
       .. group-tab:: Systemd
 
+         The ``wazuh-indexer`` service unit already sets ``LimitMEMLOCK=infinity``. The following steps are needed only if ``systemctl show wazuh-indexer -p LimitMEMLOCK`` shows another value.
+
          #. Create a new directory for the file that specifies the system limits:
 
             .. code-block:: console
@@ -55,7 +57,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
 
             MAX_LOCKED_MEMORY=unlimited
 
-#. Edit the ``/etc/wazuh-indexer/jvm.options`` file and change the JVM flags. Set a Wazuh indexer heap size value to limit memory usage. JVM heap limits prevent the ``OutOfMemory`` exception if the Wazuh indexer tries to allocate more memory than is available due to the configuration in the previous step. The recommended value is half of the system RAM. For example, set the size as follows for a system with 8 GB of RAM.
+#. Edit the ``/etc/wazuh-indexer/jvm.options`` file and change the JVM flags. Set a Wazuh indexer heap size value to limit memory usage. JVM heap limits prevent the ``OutOfMemory`` exception if the Wazuh indexer tries to allocate more memory than is available because of the memory locking configured in the previous steps. Set the heap to no more than half of the system RAM, or a quarter of it when the Wazuh manager or the Wazuh dashboard runs on the same host. Don't set it above about 32 GB, above that size, the JVM can't use compressed object pointers, which wastes memory. For example, set the size as follows for a system with 8 GB of RAM. The Wazuh installation assistant already sets both values to half of the system RAM, or to a quarter of it on an all-in-one deployment. A step-by-step installation keeps the package default of ``1g``.
 
    .. code-block:: none
 
@@ -64,8 +66,8 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
 
    Where the total heap space:
 
-   -  ``-Xms4g`` - initial size is set to 4Gb of RAM.
-   -  ``-Xmx4g`` - maximum size is to 4Gb of RAM.
+   -  ``-Xms4g`` - initial size is set to 4 GB of RAM.
+   -  ``-Xmx4g`` - maximum size is set to 4 GB of RAM.
 
    .. note::
 
@@ -110,10 +112,28 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
         }
       }
 
-#. If the output is ``false``, the request has failed, and the following line appears in the ``/var/log/wazuh-indexer/wazuh-cluster.log`` file:
+#. If the output is ``false``, memory locking failed, and the following line appears in the ``/var/log/wazuh-indexer/wazuh-cluster.log`` file. On a node bound to a non-loopback address, the Wazuh indexer doesn't start, and the line follows ``bootstrap checks failed``:
 
    **Output**
 
    .. code-block:: none
 
-      Unable to lock JVM Memory
+      memory locking requested for opensearch process but memory is not locked
+
+Virtual memory
+--------------
+
+The Wazuh indexer uses memory-mapped files to store its indices and needs ``vm.max_map_count`` set to at least ``262144``. The Wazuh indexer packages set this value in ``/usr/lib/sysctl.d/wazuh-indexer.conf``. To check the current value, run the following command:
+
+.. code-block:: console
+
+   # sysctl vm.max_map_count
+
+When the Wazuh indexer runs in a container, set the value on the host.
+
+Shards and replicas
+-------------------
+
+Every Wazuh index template sets one primary shard (``number_of_shards: 1``), ``number_of_replicas: 0``, and ``auto_expand_replicas: 0-1``. Each index and data stream backing index therefore has one primary shard, and it gets one replica when the cluster has two or more Wazuh indexer nodes. The Wazuh data streams roll over when the primary shard reaches 20 GB or the backing index holds 200 million documents, as described in :ref:`Data stream lifecycle <wazuh_indexer_indices_data_stream_lifecycle>`.
+
+The Setup module writes the Wazuh index templates and the default ISM policies again each time a node becomes the cluster manager. Changes made directly to them are lost after a restart or an upgrade.

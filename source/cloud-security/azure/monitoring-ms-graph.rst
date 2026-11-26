@@ -144,6 +144,19 @@ A description of the current production version of the Microsoft Graph API is in
 
 Alternatively, you can test the API directly in `Microsoft Graph Explorer <https://developer.microsoft.com/graph/graph-explorer>`__.
 
+.. _ms_graph_enable_azure_integration:
+
+Enable the Azure integration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Microsoft Graph decoders belong to the azure integration, which also processes the events of the Wazuh module for Azure. This integration is disabled by default. Enable it before you configure the Wazuh module for Microsoft Graph. While the integration is disabled, the Wazuh manager receives the Microsoft Graph events but discards them without generating findings, and enabling the integration later doesn't recover them.
+
+#. On the Wazuh dashboard, navigate to **Ruleset Management** \> **Overview** and make sure you are in the **Standard** space.
+#. Search for ``azure`` and click **azure** to open the integration.
+#. On the integration page, click **Actions** \> **Enable**.
+
+If you already enabled the azure integration for the Wazuh module for Azure, skip this step.
+
 .. _ms_graph_wazuh_agent:
 
 Wazuh agent
@@ -197,7 +210,7 @@ Next, set the necessary configurations to allow the Wazuh module for Microsoft G
 
    .. note::
 
-      Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
+      To collect from several tenants, add one ``api_auth`` block per tenant inside the same ``<ms-graph>`` block. The ``<resource>`` blocks apply to every tenant. To learn more about the Wazuh module for Microsoft Graph options, including <page_size> and <time_delay>, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
 
 Use case
 --------
@@ -220,9 +233,9 @@ Enable Microsoft Defender for Office 365, then send a malicious email to an addr
 #. Toggle the **Standard protection is off** button under **Standard protection** from **off** to **on**.
 #. Click on **Manage protection settings** and follow the prompt to set up the policies.
 
-When Microsoft Defender for Office 365 detects a malicious email event, it generates a log similar to the following. You can view this event using the **Alerts** tab of the Microsoft Defender portal. For example:
+When Microsoft Defender for Office 365 detects a malicious email event, it generates a log similar to the following. You can view this event using the **Alerts** tab of the Microsoft Defender portal.
 
-The command output looks similar to this:
+Sample alert:
 
 .. code-block:: json
    :class: output

@@ -6,7 +6,7 @@
 Cluster configuration
 =====================
 
-A default Wazuh indexer installation includes the ``/etc/wazuh-indexer/opensearch.yml`` configuration file. Edit this file on every node in the Wazuh indexer cluster and configure the following settings. The node names, IP addresses, and certificate Distinguished Names must match the values defined in the ``config.yml`` file used to :ref:`create the certificates <certificates_creation>` during the Wazuh indexer installation.
+A default Wazuh indexer installation includes the ``/etc/wazuh-indexer/opensearch.yml`` configuration file. Edit this file on every node in the Wazuh indexer cluster and configure the following settings. The distinguished names in ``plugins.security.nodes_dn`` must match the node certificates exactly, and the address of each node must be in the subject alternative names of its certificate. For certificates created with the certificates tool or the installation assistant, use the node names and IP addresses defined in ``config.yml``. For a certificate the Wazuh indexer package created, the CN is the host name of the node.
 
 +-------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Setting                                   | Description                                                                                                                                                                                                                                                                     |
@@ -19,7 +19,7 @@ A default Wazuh indexer installation includes the ``/etc/wazuh-indexer/opensearc
 +-------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``discovery.seed_hosts``                  | List of the addresses of the cluster manager eligible nodes. Each element can be either an IP address or a hostname. You may leave this setting commented for a single-node deployment. For multi-node configurations, set the addresses of each cluster manager eligible node. |
 +-------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``plugins.security.nodes_dn``             | List of the distinguished names of the certificates of every Wazuh indexer cluster node.                                                                                                                                                                                        |
+| ``plugins.security.nodes_dn``             | List of the distinguished names of the certificates of every Wazuh indexer cluster node. The package writes only the distinguished name of its own node's certificate, so add the other nodes by hand.                                                                          |
 +-------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 The following example shows the configuration of the first node of a three-node cluster:
@@ -52,7 +52,7 @@ Configure the Wazuh manager and dashboard components of an existing deployment t
 Wazuh manager
 ^^^^^^^^^^^^^
 
-#. The Wazuh manager connects to the Wazuh indexer as the ``wazuh-manager`` user, and sets that username itself. If the password of the ``wazuh-manager`` user changes, save the new password in the Wazuh manager keystore on every Wazuh manager node, then restart the Wazuh manager. The Wazuh manager never replaces a password it already stored:
+#. The Wazuh manager connects to the Wazuh indexer as the ``wazuh-manager`` user, and sets that username itself. If the password of the ``wazuh-manager`` user changes, save the new password in the Wazuh manager keystore on every Wazuh manager node that does not run the Wazuh indexer, then restart the Wazuh manager. On a host that also runs the Wazuh indexer, the Wazuh passwords tool updates the keystore, and the Wazuh manager replaces the stored password at startup with ``WAZUH_INDEXER_MANAGER_PASSWORD`` from ``/etc/wazuh-indexer/export/credentials.env``:
 
    .. code-block:: console
 
@@ -95,9 +95,9 @@ Certificates deployment
 
 Wazuh uses certificates to establish confidentiality and encrypt communications between its central components and between the Wazuh indexer cluster nodes. The Wazuh indexer package of the first node creates the root CA of the deployment in ``/etc/wazuh-indexer/ca``. Every certificate of the cluster must be issued from this root CA.
 
-Create and deploy the certificates as the :doc:`Wazuh indexer step-by-step installation </installation-guide/wazuh-indexer/step-by-step>` describes. Run the certificates tool on the first Wazuh indexer node with ``WAZUH_CA_DIR=/etc/wazuh-indexer/ca``. On every other node, place the passwords, the root CA certificate, and the certificates of the node before you install the Wazuh indexer package. Otherwise, the package creates its own root CA, certificates, and passwords.
+Create and deploy the certificates as the :doc:`Wazuh indexer step-by-step installation </installation-guide/wazuh-indexer/step-by-step>` describes. Run the certificates tool, ``/usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh``, on the first Wazuh indexer node with ``WAZUH_CA_DIR=/etc/wazuh-indexer/ca``. On every other node, place the passwords, the root CA certificate and its private key, and the certificates of the node before you install the Wazuh indexer package. Otherwise, the package creates its own root CA, certificates, and passwords.
 
-Keep ``root-ca.key`` in ``/etc/wazuh-indexer/ca`` on the first node, and back up that directory. You need it to add nodes or renew certificates.
+Copy ``root-ca.key`` from ``/etc/wazuh-indexer/ca`` on the first node to the same directory on every other Wazuh indexer node before you install the package there. Copy it over a secure channel, and to Wazuh indexer nodes only. The package uses it to issue the client certificates of the Wazuh manager and the Wazuh dashboard. Back up that directory. You need it to add nodes or renew certificates.
 
 .. _wazuh_indexer_cluster_tuning:
 
@@ -108,7 +108,7 @@ A Wazuh indexer installed from the package reserves 1 GB of JVM heap regardless 
 
 Set the JVM heap size on every Wazuh indexer node, including nodes added to the cluster later, before starting the Wazuh indexer service for the first time.
 
-#. Edit ``/etc/wazuh-indexer/jvm.options`` on every node and set the initial and maximum heap size to half of the node's RAM. The values must be identical so the JVM does not resize the heap at runtime:
+#. Edit ``/etc/wazuh-indexer/jvm.options`` on every node and set the initial and maximum heap size to half of the node's RAM, or to a quarter of it when the Wazuh manager or the Wazuh dashboard runs on the same host. Do not set it above about 32 GB, where the JVM stops using compressed object pointers. The values must be identical so the JVM does not resize the heap at runtime:
 
    .. code-block:: none
 
@@ -163,6 +163,8 @@ Set the JVM heap size on every Wazuh indexer node, including nodes added to the 
       # printf '[Service]\nLimitMEMLOCK=infinity\n' | tee /etc/systemd/system/wazuh-indexer.service.d/wazuh-indexer.conf
       # systemctl daemon-reload
 
+   Confirm that ``vm.max_map_count`` is at least ``262144`` with ``sysctl vm.max_map_count``. The Wazuh indexer package sets it to ``262144`` in ``/usr/lib/sysctl.d/wazuh-indexer.conf``.
+
    .. note::
 
       Apply these settings before starting the Wazuh indexer service. If the service is already running, restart the nodes one at a time and wait for the cluster to return to a green state between restarts.
@@ -193,10 +195,8 @@ Apply the :ref:`Wazuh indexer cluster tuning <wazuh_indexer_cluster_tuning>` set
 The Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``. Wazuh 5.0 has no default passwords. The installation generates the passwords for the ``admin``, ``kibanaserver``, and ``wazuh-manager`` users and stores them in ``/etc/wazuh-indexer/export/credentials.env``. Change a password with the Wazuh password tool on any Wazuh indexer node. The password must have between 12 and 64 characters, use only A-Z, a-z, 0-9, and ``. , _ + : @ % ^ = ~ -``, and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.
 
 .. code-block:: console
-   :emphasize-lines: 2
 
-   # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
-   # printf '%s\n' '<NEW_PASSWORD>' | bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u admin -p
+   # printf '%s\n' '<NEW_PASSWORD>' | /usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh -u admin -p
 
 .. note::
 

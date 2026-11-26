@@ -24,8 +24,9 @@ For example, Wazuh sends the following message to the ``block-ip`` active respon
        "active_response": {
          "name": "block-ip",
          "executable": "block-ip",
+         "extra_arguments": null,
          "location": "all",
-         "agent_id": "001",
+         "agent_id": null,
          "type": "stateless"
        },
        "agent": {
@@ -33,6 +34,7 @@ For example, Wazuh sends the following message to the ``block-ip`` active respon
          "name": "test-agent"
        }
      },
+
      "source": {
        "ip": "192.168.1.100"
      },
@@ -54,6 +56,7 @@ An active response script receives a JSON message with the following structure:
        "active_response": {
          "name": "",
          "executable": "",
+         "extra_arguments": "",
          "location": "",
          "agent_id": "",
          "type": "",
@@ -71,13 +74,13 @@ An active response script receives a JSON message with the following structure:
 
 The message contains the following fields:
 
--  ``wazuh.active_response``: Provides metadata about the active response, including its name, executable, execution location, response type, and, for stateful responses, the timeout in seconds.
+-  ``wazuh.active_response``: Provides metadata about the active response, including its name, executable, execution location, extra arguments, response type, and, for stateful responses, the timeout in seconds. The ``agent_id`` field is set only when the location is **Defined agent**. Otherwise, it's ``null``. The ``extra_arguments`` field contains the Extra arguments value of the active response configuration, as text. Wazuh doesn't pass them to the script as command-line arguments.
 
 -  ``wazuh.agent``: Identifies the Wazuh agent that executes the active response.
 
--  ``source``, ``user``, ``wazuh.rule.id``, and other top-level WCS fields: Contain relevant data from the finding that triggers the response. For example, ``source.ip`` identifies the source IP address associated with the finding.
+-  ``source``, ``user``, ``wazuh.rule.id``, and other top-level WCS fields: Contain relevant data from the finding that triggers the response. The message includes all the fields of that finding. For example, ``source.ip`` identifies the source IP address associated with the finding.
 
--  ``command``: Specifies the action that the script must perform. The ``enable`` value initiates the response, while ``disable`` reverts it.
+-  ``command``: Specifies the action that the script must perform. The ``enable`` value initiates the response, while ``disable`` reverts it. Stateful scripts also receive ``continue`` or ``abort`` in reply to the ``check_keys`` message described in :ref:`Stateful active response <active_response_stateful>`.
 
 A stateless or stateful active response script must handle this message differently, depending on its type.
 
@@ -96,10 +99,13 @@ Wazuh allows you to program stateless custom active responses in any programming
 
 #. Extract the necessary information for its execution.
 
+.. _active_response_stateful:
+
 Stateful active response
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A stateful active response performs an action and reverts or stops its action after a specified period.
+
 You can develop stateful custom active responses in any programming language supported by the endpoint. The script must perform the following operations:
 
 #. Read the JSON message from ``STDIN``.
@@ -115,6 +121,8 @@ You can develop stateful custom active responses in any programming language sup
 #. Extract the information required to perform and control the action. For example, the ``block-ip`` script uses the ``source.ip`` field to identify the IP address to block or unblock.
 
 #. Generate or extract the key required to identify the active response in JSON format. For example, the key can contain the IP address that the script blocks.
+
+#. Write a ``check_keys`` message that contains the keys to STDOUT, then read the reply from STDIN. Wazuh schedules the ``disable`` command only after it receives the keys. If the reply is ``continue``, perform the action. If the reply is ``abort``, the response is already active for these keys, so exit without repeating the action.
 
 .. toctree::
    :maxdepth: 2

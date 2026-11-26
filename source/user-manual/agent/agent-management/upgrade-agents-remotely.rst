@@ -12,10 +12,6 @@ You can upgrade Wazuh agents remotely from the Wazuh manager. The Wazuh manager 
 
 WPK files are archive files used for distributing and installing updates or new versions of the Wazuh agent on various operating systems. Wazuh provides access to an updated WPK repository for each new release. The following tables list the available WPK files.
 
-.. note::
-
-   Direct upgrades to Wazuh agent |WAZUH_CURRENT| are supported from Wazuh agent 4.14.0 or later. Upgrade earlier Wazuh agents to a 4.14.x release first, and then to |WAZUH_CURRENT|. Otherwise the upgrade request returns error ``1819``.
-
 WPK List
 --------
 
@@ -29,6 +25,10 @@ WPK List
 .. |WPK_Windows| replace:: `wazuh_agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_WINDOWS|/wpk/windows/wazuh_agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk>`__
 .. |WPK_macOS_Intel| replace:: `wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_intel64.pkg.wpk <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OSX|/wpk/macos/pkg/intel64/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_intel64.pkg.wpk>`__
 .. |WPK_macOS_ARM64| replace:: `wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_arm64.pkg.wpk <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OSX|/wpk/macos/pkg/arm64/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_arm64.pkg.wpk>`__
+
+.. note::
+
+   Direct upgrades to Wazuh agent |WAZUH_CURRENT| are supported from Wazuh agent 4.14.0 or later. Upgrade earlier Wazuh agents to a 4.14.x release first, and then to |WAZUH_CURRENT|. Otherwise the upgrade request returns error ``1819``.
 
 Linux
 ^^^^^

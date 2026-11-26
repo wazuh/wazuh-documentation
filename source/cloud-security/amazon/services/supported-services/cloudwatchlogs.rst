@@ -97,7 +97,7 @@ Configure Wazuh to process Amazon CloudWatch logs
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
-        <interval>5m</interval>
+        <interval>10m</interval>
         <run_on_start>yes</run_on_start>
         <service type="cloudwatchlogs">
           <aws_profile>default</aws_profile>
@@ -106,7 +106,7 @@ Configure Wazuh to process Amazon CloudWatch logs
         </service>
       </wodle>
 
-   You must specify at least one AWS log group to read logs from. You can add multiple regions by separating them with commas. If no region is specified, the Wazuh module for AWS looks for the log group in every available region.
+   You must specify at least one AWS log group to read logs from. You can add multiple regions by separating them with commas. If no region is specified, the Wazuh module for AWS uses the region set for the ``aws_profile`` profile in the AWS configuration file. If that profile has no region, the module looks for the log group in every available region.
 
    .. note::
 

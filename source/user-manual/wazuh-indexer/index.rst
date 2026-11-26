@@ -11,7 +11,7 @@ The Wazuh indexer is the storage, search, and analysis component of the Wazuh pl
 The Wazuh indexer provides the following capabilities:
 
 -  Manage detection content, including rules, decoders, integrations, policies, and threat intelligence feeds.
--  Detects threats by evaluating events against Sigma rules and generating findings for investigation.
+-  Detect threats by evaluating events against Sigma rules and generating findings for investigation.
 -  Store and search security data by indexing events, findings, metrics, and endpoint state information.
 -  Support security operations through alerting, notifications, reporting, and active response orchestration.
 -  Manage data lifecycles by automatically creating indices, rolling over data streams, and enforcing retention policies.

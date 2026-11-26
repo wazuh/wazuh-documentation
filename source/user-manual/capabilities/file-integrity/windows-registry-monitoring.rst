@@ -34,11 +34,11 @@ The Wazuh manager processes the Windows Registry events it receives from the Waz
 Configuration
 -------------
 
-To configure the FIM module, specify the registry keys that FIM must monitor for creation, modification, and deletion. You can do this similarly to how you list directories and files, but using the label ``<windows_registry>`` instead.
+To configure the FIM module, specify the registry keys that FIM must monitor for creation, modification, and deletion. You can do this similarly to how you list directories and files, but using the ``<windows_registry>`` option instead. By default, the FIM module monitors the 32-bit registry view. Keys under ``HKEY_LOCAL_MACHINE\SOFTWARE`` have a separate 64-bit view, so add ``arch="64bit"`` or ``arch="both"`` to monitor them.
 
 You can modify the default FIM configuration on the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the Wazuh agent to specify the Windows Registry keys to monitor. You can also configure this capability remotely by using centralized configuration.
 
-The FIM module supports several configuration options for monitoring Windows Registry entries. For example, you can enable all the basic checks with the ``check_all`` attribute, or find the information about the specific change made to a registry entry with the ``report_changes`` attribute. You can find a list of all the supported attributes and options in the ``windows_registry`` section of the documentation.
+The FIM module supports several configuration options for monitoring Windows Registry entries. For example, you can enable all the basic checks with the ``check_all`` attribute, or find the information about the specific change made to a registry entry with the ``report_changes`` attribute. You can find a list of all the supported attributes and options in the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` section of the documentation.
 
 In this guide, you can see different configuration options that you can apply to monitor the Windows Registry.
 
@@ -49,18 +49,40 @@ You can specify the Windows Registry keys to monitor using the ``windows_registr
 
 -  ``check_all``: The allowed values for the ``check_all`` option are ``yes`` and ``no``. This option is enabled by default. Records:
 
-   -  Registry size
+   -  Value size
+   -  Value type
+   -  Owner, group, and permissions of the key
    -  Last modification date
    -  MD5, SHA-1, and SHA-256 hash sums
 
--  ``check_sum``: Records the MD5, SHA-1, and SHA-256 hashes of the Windows Registry values. The allowed values for the ``check_sum`` option are ``yes`` and ``no``.
--  ``check_mtime``: The ``check_mtime`` option allows the FIM module to record the modification time of the Windows Registry keys and values. The allowed values for the ``check_mtime`` option are ``yes`` and ``no``.
+-  ``check_sum``: Records the MD5, SHA-1, and SHA-256 hashes of the Windows Registry values. The allowed values for the ``check_sum`` option are ``yes`` and ``no``. This option is enabled by default.
+-  ``check_mtime``: The ``check_mtime`` option allows the FIM module to record the modification time of the Windows Registry keys and values. The allowed values for the ``check_mtime`` option are ``yes`` and ``no``. This option is enabled by default.
 
 The following example shows how to configure different attribute checks for monitored Windows Registry keys:
 
 -  Record the last modification date and all the hashes of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey1`` registry key.
 -  Disable the recording of hashes (MD5, SHA-1, and SHA-256) of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey2`` registry key.
 -  Disable the recording of the modification time of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey3`` registry key.
+
+Before you start, create the three test keys with one value each. Run this command in PowerShell as an administrator:
+
+.. code-block:: powershell
+
+   > 'TestKey1','TestKey2','TestKey3' | ForEach-Object { New-Item -Path "HKLM:\Software\Classes\batfile\$_" -Force; New-ItemProperty -Path "HKLM:\Software\Classes\batfile\$_" -Name Test -Value test -Force }
+
+After you restart the Wazuh agent in step 2, the three keys and their values appear in **Endpoint security** > **File Integrity Monitoring** > **Inventory**, on the **Registry keys** and **Registry values** tabs.
+
+.. thumbnail:: /images/manual/fim/registry-keys-inventory.png
+   :title: Registry keys inventory
+   :alt: Registry keys tab of the FIM inventory listing the three test keys
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/manual/fim/registry-values-inventory.png
+   :title: Registry values inventory
+   :alt: Registry values tab of the FIM inventory listing the test values
+   :align: center
+   :width: 80%
 
 #. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the following settings inside the ``<ossec_config>`` block:
 
@@ -87,7 +109,7 @@ You can configure the maximum recursion level allowed for a Windows Registry ent
 
 .. note::
 
-   This 512 limit applies specifically to ``<windows_registry>`` (Windows Registry monitoring). The ``recursion_level`` attribute for ``<directories>`` is different and supports a lower range. See :ref:`Recursion level <recursion_level_directories>`.
+   This 512 limit applies specifically to ``<windows_registry>`` (Windows Registry monitoring). The ``recursion_level`` option for ``<directories>`` is different and supports a lower range. See :ref:`Recursion level <recursion_level_directories>`.
 
 Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` to 3.
 
@@ -105,7 +127,7 @@ Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM
 
       > Restart-Service -Name WazuhSvc
 
-When using the following registry structure and ``recursion_level="3"``, FIM generates findings for the keys down to ``level_3``, which include ``Subkey_0``, ``Subkey_1``, and ``Subkey_2``, and for the values they contain. It doesn't generate findings for ``Subkey_3``, ``level_4``, or any key below them, because they are four levels below ``HKEY_LOCAL_MACHINE\SYSTEM\Setup``.
+When using the following registry structure and ``recursion_level="3"``, FIM generates findings for the keys down to ``level_3``, which include ``Subkey_0``, ``Subkey_1``, and ``Subkey_2``, and for the values they contain. It doesn't generate findings for ``Subkey_3``, ``level_4``, or any key below them, because they are four levels below ``HKEY_LOCAL_MACHINE\SYSTEM\Setup``. Each subkey counts as a level, like a directory. Values work like files: FIM reports the values in ``level_3``, but not the subkeys inside it.
 
 .. code-block:: none
 
@@ -124,7 +146,7 @@ When using the following registry structure and ``recursion_level="3"``, FIM gen
 
 To disable the recursion and generate findings only for the registry values in the monitored registry, you need to set the ``recursion_level`` value to 0.
 
-Wazuh sets ``recursion_level`` to the default value defined by ``syscheck.default_max_depth`` in the internal options configuration file.
+If you don't set ``recursion_level``, the FIM module uses ``512`` for Windows Registry entries.
 
 .. _reporting-changes-in-registry-values:
 
@@ -134,9 +156,11 @@ Reporting changes in registry values
 To report the exact content changed in a Windows Registry value, you can configure the FIM module with the ``report_changes`` option of the ``windows_registry`` option. The allowed values are ``yes`` and ``no``, and the supported registry value types are:
 
 -  ``REG_SZ``
+-  ``REG_EXPAND_SZ``
 -  ``REG_MULTI_SZ``
 -  ``REG_DWORD``
 -  ``REG_DWORD_BIG_ENDIAN``
+-  ``REG_QWORD``
 
 You must use the ``report_changes`` option with caution. Wazuh copies the data of every monitored registry value to the ``C:\Program Files (x86)\ossec-agent\queue\diff\registry`` folder, and this increases storage usage.
 
@@ -161,7 +185,7 @@ Follow these steps to configure the FIM module to report changes made to ``HKEY_
 
    .. note::
 
-      The ``frequency`` option is a global setting that defines the scan interval for all registry keys monitored in scheduled mode.
+      The ``<frequency>`` option is a global setting that defines the scan interval for all registry keys monitored in scheduled mode.
 
 #. Restart the Wazuh agent to apply the configuration:
 
@@ -179,7 +203,7 @@ Follow these steps to configure the FIM module to report changes made to ``HKEY_
 
 #. Wait for *5* minutes, which is the time configured for the FIM scan.
 
-Navigate to **Endpoint security** → **File Integrity Monitoring → Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects a modification of the monitored registry value.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects a modification of the monitored registry value.
 
 .. thumbnail:: /images/manual/fim/modification-of-the-monitored-registry-value.png
    :title: Modification of the monitored registry value
@@ -187,7 +211,7 @@ Navigate to **Endpoint security** → **File Integrity Monitoring → Findings**
    :align: center
    :width: 80%
 
-Expand the finding to see the changed fields.
+Expand the finding. The ``event.reason`` field lists the changed attributes, and the ``content_changes`` entry in the ``event.original`` field shows the old and new data of the value.
 
 .. thumbnail:: /images/manual/fim/changed-fields-expanded-alert.png
    :title: Changed fields expanded finding
@@ -236,24 +260,22 @@ Use case description
 Configuration
 ^^^^^^^^^^^^^
 
-Wazuh monitors the startup registry keys by default, without requiring any special user action or configuration. The FIM module's default scan frequency is 43200 seconds (12 hours), so changes to these keys might not generate a finding for up to 12 hours.
+Wazuh monitors the startup registry keys by default, without requiring any special user action or configuration. The FIM module's default scan frequency is ``43200`` seconds (12 hours), so changes to these keys may not appear as a finding for up to 12 hours.
 
-Modify the ``frequency`` option in the following configuration of the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file to lower the scan frequency to 300 seconds (5 minutes) for this use case:
+In the default ``<syscheck>`` block of the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file, change the ``<frequency>`` value from ``43200`` to ``300`` to scan every 5 minutes for this use case. The default ``<syscheck>`` block already monitors the ``Run`` and ``RunOnce`` keys with ``arch="both"``, so you change only the frequency. The ``<frequency>`` option is global, so the FIM module also scans the monitored directories every 5 minutes. The ``arch`` attribute sets the registry view to monitor: ``32bit`` (default), ``64bit``, or ``both``.
 
-.. code-block:: xml
+Restart the Wazuh agent using PowerShell to apply the changes:
 
-   <syscheck>
-     <frequency>300</frequency>
-     <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run</windows_registry>
-     <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce</windows_registry>
-   </syscheck>
+.. code-block:: powershell
+
+   > Restart-Service -Name WazuhSvc
 
 Test the configuration
 ^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
 
-   You must carry this out in a sandbox environment. Delete the added registry keys after running the test.
+   You must carry this out in a sandbox environment. After the test, delete the ``DemoValue`` value from the ``Run`` and ``RunOnce`` keys. Don't delete the keys.
 
 #. Open Registry Editor, then add the string value name ``DemoValue`` and registry value data ``cmd`` to the ``HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run`` key.
 
@@ -276,7 +298,7 @@ Test the configuration
 Visualize the finding
 ^^^^^^^^^^^^^^^^^^^^^
 
-Navigate to **Endpoint security** → **File Integrity Monitoring → Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes in the Windows startup registries.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes in the Windows startup registries.
 
 .. thumbnail:: /images/manual/fim/changed-windows-startup-registries.png
    :title: Changes in the Windows startup registries

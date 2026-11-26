@@ -15,14 +15,14 @@ Deploy Wazuh with the official Wazuh Docker images. Each stack runs all its cont
 
 Start with :doc:`Wazuh Docker deployment <wazuh-container>`, which covers the requirements, both stacks, and the Wazuh agent container. Use :doc:`Building Docker images locally <build-docker-images-locally>` only if you need custom images.
 
-Wazuh provides official Docker images you can use to streamline the deployment of its components. These include:
+The stacks and the Wazuh agent container use the following official Wazuh Docker images:
 
 -  `wazuh-manager <https://hub.docker.com/r/wazuh/wazuh-manager>`__
 -  `wazuh-indexer <https://hub.docker.com/r/wazuh/wazuh-indexer>`__
 -  `wazuh-dashboard <https://hub.docker.com/r/wazuh/wazuh-dashboard>`__
 -  `wazuh-agent <https://hub.docker.com/r/wazuh/wazuh-agent>`__
 
-You can find all available Wazuh Docker images on `Docker Hub <https://hub.docker.com/u/wazuh>`__.
+This guide uses the ``|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|`` tag of each image. The ``docker-compose.yml`` files of the Wazuh Docker repository release you clone already set this tag. `Docker Hub <https://hub.docker.com/u/wazuh>`__ lists every tag of each image.
 
 Content
 -------
@@ -33,5 +33,4 @@ Content
    wazuh-container
    build-docker-images-locally
    container-usage
-   upgrading-wazuh-docker
    uninstalling-wazuh-docker
