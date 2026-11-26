@@ -7,7 +7,10 @@ FROM python:3.10-alpine
 
 COPY --chown=1000:1000 requirements.txt ./
 
-RUN python -m pip install --requirement requirements.txt && python -m pip install sphinx-autobuild==2021.3.14
+# pythonmonkey is only used by the redirects-map tool and has no musl wheel, so it is skipped here
+RUN grep -v pythonmonkey requirements.txt > docker-requirements.txt \
+    && python -m pip install --requirement docker-requirements.txt \
+    && python -m pip install sphinx-autobuild==2021.3.14
 
 EXPOSE 8000
 
