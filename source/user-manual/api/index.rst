@@ -8,7 +8,7 @@ Wazuh manager API
 
 The Wazuh manager API is an open source RESTful API that enables secure interaction with the Wazuh manager component. You can interact with it using the built-in API console in the Wazuh dashboard, cURL, or any program that makes web requests.
 
-The Wazuh dashboard relies on the Wazuh manager API to remotely manage the Wazuh manager infrastructure. You can use the Wazuh manager API to perform common tasks such as adding and restarting Wazuh agents, managing agent groups, and managing the Wazuh manager cluster. The Wazuh manager API has no File Integrity Monitoring (FIM) endpoint in Wazuh 5.0. Wazuh 5.0 stores the FIM state of each agent in the Wazuh indexer, in the wazuh-states-fim-files, wazuh-states-fim-registry-keys, and wazuh-states-fim-registry-values indices.
+The Wazuh dashboard relies on the Wazuh manager API to remotely manage the Wazuh manager infrastructure. You can use the Wazuh manager API to perform common tasks such as adding and restarting Wazuh agents, managing agent groups, and managing the Wazuh manager cluster.
 
 Here is a list of the Wazuh manager API capabilities:
 
