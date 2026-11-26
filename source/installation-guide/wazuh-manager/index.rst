@@ -153,6 +153,8 @@ A Wazuh agent connects to one address only: the address of its enrollment token,
    Assisted installation <installation-assistant>
    Step-by-step installation <step-by-step>
 
+.. _wazuh_manager_adding_address_after_installation:
+
 Adding the address after the installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
