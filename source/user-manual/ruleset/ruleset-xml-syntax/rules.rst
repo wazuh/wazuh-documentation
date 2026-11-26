@@ -916,7 +916,9 @@ when available, or the manager hostname as a fallback.
 
    Plain input to ``wazuh-logtest`` is manager-originated. A hostname
    condition can therefore behave differently there than it does for an event
-   received through an agent.
+   received through an agent. To test a rule for agent events, send a sample
+   event through an enrolled agent and check the rule result on the manager.
+   Use the registered agent name in the hostname pattern.
 
 +--------------------+---------------------------------------------------------------+
 | Default Value      | n/a                                                           |
