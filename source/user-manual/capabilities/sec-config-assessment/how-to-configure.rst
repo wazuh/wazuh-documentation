@@ -10,9 +10,9 @@ The Wazuh SCA module is enabled by default on Wazuh agents, allowing security co
 
 The SCA module is configured in the Wazuh agent configuration file under the ``<sca>`` section. By default, the configuration file is located in the following paths:
 
-- Linux and other Unix-based systems: ``/var/ossec/etc/ossec.conf``.
-- Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
-- macOS: ``/Library/Ossec/etc/ossec.conf``.
+- Linux and other Unix-based systems: ``/var/ossec/etc/ossec.conf``
+- Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
+- macOS: ``/Library/Ossec/etc/ossec.conf``
 
 The following example shows the SCA configuration with the available configuration options. You can modify these options to customize how the Wazuh agent performs security configuration assessments. Place the ``<sca>`` block inside the ``<ossec_config>`` block of the file.
 
@@ -121,7 +121,7 @@ Restart the Wazuh agent to apply the change. If the ``<sca>`` block is outside t
 
       .. code-block:: pwsh-session
 
-         > Restart-Service -Name wazuh
+         > Restart-Service -Name WazuhSvc
 
    .. group-tab:: macOS
 
@@ -129,7 +129,7 @@ Restart the Wazuh agent to apply the change. If the ``<sca>`` block is outside t
 
          # /Library/Ossec/bin/wazuh-control restart
 
-After the restart, the Wazuh agent deletes the results of the disabled policy from the Wazuh indexer, so the policy leaves the **Inventory** tab.
+After the restart, the Wazuh agent deletes the results of the disabled policy from the Wazuh indexer. The policy then leaves the **Inventory** tab.
 
 Managing SCA policies using centralized configuration
 -------------------------------------------------------
@@ -154,7 +154,7 @@ You can enable this feature to push policy files to Wazuh agents in defined grou
 
             > notepad "C:\Program Files (x86)\ossec-agent\local_internal_options.conf"
 
-         Append the command ``sca.remote_commands=1``.
+         Append the line ``sca.remote_commands=1`` to the file.
 
       .. group-tab:: macOS
 
@@ -405,7 +405,7 @@ the evaluation of its rules.
 
 .. note::
 
-   -  The ``id`` field under the ``policy`` and ``checks`` sections must be unique across policy files. To avoid conflicts with the check IDs of the default policies, start the check IDs of your custom policies at 100000.
+   -  The ``id`` field under the ``policy`` and ``checks`` section must be unique across policy files. To avoid conflicts with the check IDs of the default policies, start the check IDs of your custom policies at 100000.
    -  The ``regex_type`` field is ignored. The Wazuh agent evaluates every rule with PCRE2.
    -  A check can use ``title`` instead of ``name``. The SCA module stores the value as ``name``.
 
@@ -449,7 +449,7 @@ There are certain situations in which the aforementioned aggregators are evaluat
    |           ``none``           |      no     |     yes     |         no        |     Passed         |
    +------------------------------+-------------+-------------+-------------------+--------------------+
 
-\*: This result does not affect the final result.
+\*: This result doesn't affect the final result.
 
 Rules
 ~~~~~
@@ -489,7 +489,7 @@ The operators for content checking are shown in the content comparison operators
    +======================================+==========================================================================================+============================================================+
    | Literal comparison, exact match      | *by omission (the absence of an operator signifies a literal comparison or exact match)* | ``f:/file -> CONTENT``                                     |
    +--------------------------------------+------------------------------------------------------------------------------------------+------------------------------------------------------------+
-   | Lightweight Regular expression match | ``r:``                                                                                   | ``f:/file -> r:REGEX``                                     |
+   | Regular expression match (PCRE2)     | ``r:``                                                                                   | ``f:/file -> r:REGEX``                                     |
    +--------------------------------------+------------------------------------------------------------------------------------------+------------------------------------------------------------+
    | Numeric comparison (integers)        | ``n:``                                                                                   | ``f:/file -> n:REGEX_WITH_CAPTURE_GROUP compare <= VALUE`` |
    +--------------------------------------+------------------------------------------------------------------------------------------+------------------------------------------------------------+
@@ -591,8 +591,7 @@ Examples of content checks:
 Examples
 """""""""
 
-The following sections cover each rule type, illustrating them with several examples. It is also recommended to check the actual policies and, for minimalistic although complete examples, the `SCA test suite policies
-<https://github.com/wazuh/wazuh-qa/tree/master/tests/legacy/test_sca/test_basic_usage/data>`_.
+The following sections cover each rule type, illustrating them with several examples. For complete examples, check the default policies in ``/var/ossec/ruleset/sca/`` on a Wazuh agent.
 
 .. rubric:: Rule syntax for files
 
