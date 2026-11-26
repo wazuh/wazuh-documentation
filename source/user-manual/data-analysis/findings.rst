@@ -14,8 +14,6 @@ The Wazuh normalization engine converts raw logs into Wazuh Common Schema docume
 
 Findings preserve the original source log in ``event.original`` while adding structured fields such as ``event.category``, ``event.type``, ``event.action``, and integration-specific schema fields. When enrichment is enabled, findings can also include geo/ASN context and threat intelligence matches, for example, under ``source.geo``, ``source.as``, and ``wazuh.threat``.
 
-The detection engine stores each finding in the ``wazuh-findings-v5-<category>`` data stream that matches the category of the event that triggered it.
-
 Conceptually, the flow is:
 
 **raw log → decoder (Wazuh manager) → normalized event → events data stream → detector rule match (Wazuh indexer) → finding**
