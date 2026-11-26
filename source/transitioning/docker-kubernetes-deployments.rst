@@ -151,10 +151,10 @@ Deploy Wazuh 5.x for the transition
    .. code-block:: none
       :class: output
 
-      NAME                          IMAGE                             STATUS                    PORTS
-      single-node-wazuh.dashboard   wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|   Up 22 seconds (healthy)   0.0.0.0:443->443/tcp, [::]:443->443/tcp
-      single-node-wazuh.indexer     wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|     Up 58 seconds (healthy)   9200/tcp
-      single-node-wazuh.manager     wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|     Up 37 seconds (healthy)   1514-1517/tcp, 55000/tcp
+      NAME                          IMAGE                         STATUS                    PORTS
+      single-node-wazuh.dashboard   wazuh/wazuh-dashboard:5.0.0   Up 22 seconds (healthy)   0.0.0.0:443->443/tcp, [::]:443->443/tcp
+      single-node-wazuh.indexer     wazuh/wazuh-indexer:5.0.0     Up 58 seconds (healthy)   9200/tcp
+      single-node-wazuh.manager     wazuh/wazuh-manager:5.0.0     Up 37 seconds (healthy)   1514-1517/tcp, 55000/tcp
 
 Import the Wazuh agent registrations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
