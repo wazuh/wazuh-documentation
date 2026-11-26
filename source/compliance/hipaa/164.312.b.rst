@@ -8,9 +8,7 @@ HIPAA § 164.312(b) - Audit controls
 
 The HIPAA § 164.312(b) requirement states, "*A covered entity or business associate must, in accordance with § 164.306, implement hardware, software, and/or procedural mechanisms that record and examine activity in information systems that contain or use electronic protected health information.*"
 
-This requirement mandates logging activity on systems containing health data, including authentication events, failures, and file read, write, or modification actions.
-
-Wazuh helps meet this requirement by providing capabilities to record and examine activity in information systems that contain or use electronic protected health information (ePHI). An example is log data analysis. The Wazuh Logcollector module collects events from monitored endpoints and applications, including systems that store or process ePHI. Wazuh agents forward these events to the Wazuh manager, where the normalization engine processes them. The Wazuh manager then sends the normalized data to the Wazuh indexer for rule matching and indexing. This enables organizations to analyze activity involving systems that contain or use ePHI and support the review of audit information. See the :doc:`data analysis </user-manual/data-analysis/index>` section for more information.
+Wazuh helps meet this requirement with the :doc:`log data analysis </user-manual/capabilities/log-data-collection/index>` capability, which records and examines activity on systems that contain or use electronic protected health information (ePHI). See the :doc:`data analysis </user-manual/data-analysis/index>` section for more information.
 
 Use case: Collecting and analyzing logs across multiple endpoints
 ---------------------------------------------------------------------

@@ -12,7 +12,7 @@ The Wazuh Active Response module helps to meet the following PCI DSS requirement
 
 -  **Requirement 11 - Test Security of Systems and Networks Regularly**: Vulnerabilities are being discovered continually by malicious individuals and researchers, and being introduced by new software. System components, processes, and bespoke and custom software must be tested frequently to verify security controls continue to reflect a changing environment.
 
-This requirement mandates regular testing of systems and networks to detect and respond to security issues and potential intrusions. With the Wazuh Active Response module, you can respond to intrusions and unauthorized file changes. More details on configuring the Wazuh Active Response module are available in the :doc:`active response </user-manual/capabilities/active-response/index>` documentation section.
+With the Wazuh Active Response module, you can respond to intrusions and unauthorized file changes. More details on configuring the Wazuh Active Response module are available in the :doc:`active response </user-manual/capabilities/active-response/index>` documentation section.
 
 Use case
 --------

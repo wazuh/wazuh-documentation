@@ -312,6 +312,59 @@ The ISM policy below keeps matching indices in the hot state while they receive 
      }
    }
 
+.. _wazuh_indexer_indices_change_retention:
+
+Change the minimum age for deletion
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. warning::
+
+   Don't edit the default policies. Wazuh rewrites them when the Wazuh indexer cluster restarts or is upgraded.
+
+Run the following steps on a Wazuh indexer node to create custom retention policies for events and findings. The commands use ``jq``. Install it first if the node doesn't have it, for example with ``apt install jq`` or ``yum install jq``.
+
+#. Copy the default events policy. In the copy, set the minimum age for deletion to ``<MINIMUM_AGE_FOR_DELETION>``, for example ``365d`` for 365 days, and the template priority to 1, so that new event indices use it:
+
+   .. code-block:: bash
+      :emphasize-lines: 1, 5, 6
+
+      curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> \
+        'https://localhost:9200/_plugins/_ism/policies/stream-events-policy' \
+        | jq '{policy: (.policy
+            | del(.policy_id, .last_updated_time, .schema_version, .error_notification)
+            | .description = "Custom events policy: keeps events for at least <MINIMUM_AGE_FOR_DELETION>."
+            | .states[0].transitions[0].conditions.min_index_age = "<MINIMUM_AGE_FOR_DELETION>"
+            | .ism_template[].priority = 1)}' > custom-events-policy.json
+
+#. Store the copy as ``custom-events-policy``:
+
+   .. code-block:: console
+      :emphasize-lines: 1
+
+      # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X PUT \
+        'https://localhost:9200/_plugins/_ism/policies/custom-events-policy' \
+        -H 'Content-Type: application/json' -d @custom-events-policy.json
+
+#. Move the existing events indices to ``custom-events-policy``:
+
+   .. code-block:: console
+      :emphasize-lines: 1
+
+      # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X POST \
+        'https://localhost:9200/_plugins/_ism/change_policy/.ds-wazuh-events-v5-*' \
+        -H 'Content-Type: application/json' -d '{"policy_id": "custom-events-policy"}'
+
+#. Check that every events index uses ``custom-events-policy``. The change applies at the next ISM run, every 5 minutes by default, and can take two runs or more. Don't restart the Wazuh indexer cluster until every index shows ``custom-events-policy`` and a step name:
+
+   .. code-block:: console
+      :emphasize-lines: 1
+
+      # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> \
+        'https://localhost:9200/_plugins/_ism/explain/.ds-wazuh-events-v5-*' \
+        | jq -r 'to_entries[] | select(.value | type == "object") | [.key, .value.policy_id, (.value.step.name // "pending")] | @tsv'
+
+#. Repeat steps 1 to 4 for findings. In the commands, replace ``stream-events-policy`` with ``stream-findings-policy``, ``custom-events-policy`` with ``custom-findings-policy``, including the ``custom-events-policy.json`` file name, and ``.ds-wazuh-events-v5-*`` with ``.ds-wazuh-findings-v5-*``. You can also change the policy description to mention findings.
+
 .. _wazuh_indexer_indices_enabling_unclassified_events_storage:
 
 Enabling unclassified events storage

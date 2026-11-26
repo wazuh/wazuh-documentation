@@ -8,9 +8,7 @@ Common criteria 7.1
 
 The TSC **common criteria CC7.1** states that: *“To meet its objectives, the entity uses detection and monitoring procedures to identify (1) changes to configurations that result in the introduction of new vulnerabilities, and (2) susceptibilities to newly discovered vulnerabilities”.* This control indicates the depth and rigor required to monitor configuration changes. It ensures that changes do not introduce new vulnerabilities or make the system more susceptible to them.
 
-Meeting CC7.1 helps keep monitored systems at a high level of security assurance. CC7.1 helps prevent misconfiguration flaws and ensures continuous monitoring to quickly identify vulnerabilities.
-
-Wazuh supports CC7.1 by correlating endpoint inventory using the :doc:`IT Hygiene </user-manual/capabilities/system-inventory/index>` and vulnerability detection capabilities. The Syscollector module gathers operating system and installed package information from monitored endpoints, while Wazuh CTI supplies curated vulnerability data derived from supported vendor advisories and the National Vulnerability Database (NVD). The Wazuh Vulnerability Scanner module uses curated vulnerability data from Wazuh CTI to identify known vulnerabilities affecting installed operating systems and software packages. This helps organizations detect and monitor exposures introduced by configuration changes or newly disclosed vulnerabilities.
+Wazuh supports CC7.1 by correlating endpoint inventory using the :doc:`IT Hygiene </user-manual/capabilities/system-inventory/index>` and vulnerability detection capabilities. Wazuh helps meet this requirement with the :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` capability, which uses curated Wazuh CTI data to detect known vulnerabilities in the operating systems and software packages installed on monitored endpoints.
 
 Use case: Detecting vulnerabilities on an Ubuntu endpoint
 -------------------------------------------------------------

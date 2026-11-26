@@ -10,11 +10,11 @@ The Wazuh log data analysis module collects and analyzes logs from multiple sour
 
 The Wazuh log data analysis module helps you comply with the following NIST 800-53 controls:
 
--  **IA-4 Identifier management:** "*Common device identifiers include Media Access Control (MAC) addresses, Internet Protocol (IP) addresses, or device-unique token identifiers. The management of individual identifiers is not applicable to shared system accounts. Typically, individual identifiers are the usernames of the system accounts assigned to those individuals. In such instances, the account management activities of AC-2 use account names provided by IA-4. Identifier management also addresses individual identifiers not necessarily associated with system accounts. Preventing the reuse of identifiers implies preventing the assignment of previously used individual, group, role, service, or device identifiers to different individuals, groups, roles, services, or devices.*"
+-  **IA-4 Identifier management:** Give every user and device a unique identifier, such as a user name or a MAC or IP address, so that you can trace activity back to it.
 
--  **SI-4 System monitoring:** "*System monitoring includes external and internal monitoring. External monitoring includes the observation of events occurring at external interfaces to the system. Internal monitoring includes the observation of events occurring within the system. Organizations monitor systems by observing audit activities in real-time or by observing other system aspects such as access patterns, characteristics of access, and other actions. The monitoring objectives guide and inform the determination of the events. System monitoring capabilities are achieved through a variety of tools and techniques, including intrusion detection and prevention systems, malicious code protection software, scanning tools, audit record monitoring software, and network monitoring software.*"
+-  **SI-4 System monitoring:** Monitor your systems at their boundaries and internally to detect attacks, signs of attacks, and unauthorized use.
 
-The above NIST 800-53 controls require you to monitor system activities in your organization. Analysis of these activities helps you keep track of security incidents and occurrences within your infrastructure. The Wazuh log data analysis module analyzes logs and generates findings when it detects suspicious activities.
+The Wazuh log data analysis module analyzes logs and generates findings when it detects suspicious activities.
 
 Use case
 --------

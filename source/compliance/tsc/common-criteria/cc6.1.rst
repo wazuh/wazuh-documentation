@@ -15,37 +15,7 @@ Use case: Maintaining asset inventory on a Windows endpoint
 
 Wazuh helps meet the architecture, infrastructure, and security software aspects of the **common criteria CC6.1** using the :doc:`IT Hygiene </user-manual/capabilities/system-inventory/index>` capability. IT Hygiene collects inventory data from monitored endpoints, such as hardware, operating system, packages, processes, ports, users, and services.
 
-Windows endpoint
-^^^^^^^^^^^^^^^^^
-
-In this use case, we show how to use the Wazuh Syscollector module to collect system information on a Windows 11 endpoint. This module collects information about the users, applications, services, ports, and protocols running on an endpoint.
-
-#. Open the Wazuh agent configuration file ``C:\Program Files (x86)\ossec-agent\ossec.conf`` on your monitored Windows endpoint, and inspect the ``syscollector`` block to verify that you have the same configuration as below:
-
-   .. code-block:: xml
-
-      <!-- System inventory -->
-      <wodle name="syscollector">
-        <disabled>no</disabled>
-        <interval>1h</interval>
-        <scan_on_start>yes</scan_on_start>
-        <hardware>yes</hardware>
-        <os>yes</os>
-        <network>yes</network>
-        <packages>yes</packages>
-        <ports all="yes">yes</ports>
-        <processes>yes</processes>
-        <users>yes</users>
-        <groups>yes</groups>
-        <services>yes</services>
-        <browser_extensions>yes</browser_extensions>
-        <!-- Database synchronization settings -->
-        <synchronization>
-          <enabled>yes</enabled>
-          <interval>5m</interval>
-          <integrity_interval>24h</integrity_interval>
-        </synchronization>
-      </wodle>
+The Syscollector module is enabled by default on the Wazuh agent and collects users, applications, services, ports, and protocols from the endpoint every hour. See :doc:`System inventory configuration </user-manual/capabilities/system-inventory/configuration>` to change the scan interval or the data it collects.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^

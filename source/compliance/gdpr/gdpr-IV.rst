@@ -15,9 +15,9 @@ Chapter IV, Article 30, Head 1 (g)
 
 This article requires that organizations document, inventory, and audit data processing activities. This helps keep a record of all data processing activities.
 
-Wazuh stores information about system events. Each event enters through the root decoder ``decoder/core-wazuh-message/0``, which belongs to the ``wazuh-core`` integration in the unclassified category. If an integration can process the event, it changes the category of the event and sends it to the matching index. Events that no integration processes remain unclassified. Decoded events are indexed whether or not a rule matches.
+Wazuh stores information about system events. Decoded events are indexed whether or not a rule matches.
 
-You can enable the **Index unclassified events** and **Index discarded events** settings of a :doc:`space </user-manual/data-analysis/space>` to store these events. A space is where Wazuh keeps its detection content, such as decoders, rules, and integrations. Unclassified events are events that no decoder accepts. Discarded events are events that a decoder marks as discarded. When **Index discarded events** is on, Wazuh replaces the content of each discarded event with the ``wazuh.space.event_discarded: true`` marker before indexing it. Events that a filter rejects are always dropped. When this is configured, Wazuh indexes unclassified events into the ``wazuh-events-v5-unclassified`` index. This gives you a record of events that no integration processes, including those that do not trigger a finding. These records help with activities such as data audits and threat hunting.
+You can enable the **Index unclassified events** and **Index discarded events** settings of a :doc:`space </user-manual/data-analysis/space>` to store unclassified and discarded events. A space is where Wazuh keeps its detection content, such as decoders, rules, and integrations. Unclassified events are events that no decoder accepts. Discarded events are events that a decoder marks as discarded. When **Index discarded events** is on, Wazuh replaces the content of each discarded event with the ``wazuh.space.event_discarded: true`` marker before indexing it. Events that a filter rejects are always dropped. When this is configured, Wazuh indexes unclassified events into the ``wazuh-events-v5-unclassified`` index. This gives you a record of events that no integration processes, including those that do not trigger a finding. These records help with activities such as data audits and threat hunting.
 
 Use case: Store all logs generated from an endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,7 +145,7 @@ The SMTP sender defines the mail server that sends the notifications.
 
 #. Type the port of your SMTP server in **Port**. The default value is 465.
 
-#. Select an **Encryption method**.
+#. Select **SSL/TLS** (usually port 465) or **STARTTLS** (usually port 587) in **Encryption method**. Select **None** only in a test environment.
 
 #. Click **Create**.
 
@@ -158,22 +158,6 @@ The SMTP sender defines the mail server that sends the notifications.
    .. note::
 
       SSL/TLS and STARTTLS require you to add the sender account credentials to the Wazuh indexer keystore.
-
-The **Encryption method** field offers three options:
-
-+--------------+------------------------------------------------------------------------+
-| Option       | Description                                                            |
-+==============+========================================================================+
-| **SSL/TLS**  | Encrypts the connection to the SMTP server. Use this option when your  |
-|              | server supports implicit TLS, usually on port 465.                     |
-+--------------+------------------------------------------------------------------------+
-| **STARTTLS** | Upgrades a plain connection to an encrypted one. Use this option when  |
-|              | your server supports STARTTLS, usually on port 587.                    |
-+--------------+------------------------------------------------------------------------+
-| **None**     | Sends mail without encryption. Use this option only in a test          |
-|              | environment, because it does not protect the credentials or the        |
-|              | message content.                                                       |
-+--------------+------------------------------------------------------------------------+
 
 Configure the recipient group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -232,19 +216,6 @@ The email channel binds the sender and the recipients. The alerting monitor send
       :alt: Create channel page with an Email channel using the SMTP sender and the GDPR-notification recipient group
       :align: center
       :width: 80%
-
-The **Sender type** field offers two options:
-
-+-----------------+------------------------------------------------------------------------+
-| Option          | Description                                                            |
-+=================+========================================================================+
-| **SMTP sender** | Uses your own SMTP server. Use this option in most environments.       |
-+-----------------+------------------------------------------------------------------------+
-| **SES sender**  | Uses Amazon Simple Email Service (SES). Use this option when you run   |
-|                 | Wazuh on Amazon Web Services (AWS) and send mail through SES. An SES   |
-|                 | sender needs an AWS region and a role Amazon Resource Name (ARN)       |
-|                 | instead of a host and port.                                            |
-+-----------------+------------------------------------------------------------------------+
 
 Create the alerting monitor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -310,39 +281,9 @@ The alerting monitor watches your findings for failed authentication attempts. W
       :align: center
       :width: 80%
 
-The **Monitor type** field offers these options:
-
-+--------------------------+------------------------------------------------------------------------+
-| Option                   | Description                                                            |
-+==========================+========================================================================+
-| **Per document monitor** | Generates an alert for each document that matches the query. Use this  |
-|                          | option to alert on each failed authentication finding.                 |
-+--------------------------+------------------------------------------------------------------------+
-| **Per query monitor**    | Runs a query and generates an alert when the results match the trigger |
-|                          | criteria. Use this option to alert when failed authentications exceed  |
-|                          | a threshold in a time window, such as a brute force attempt.           |
-+--------------------------+------------------------------------------------------------------------+
-
-The **Perform action** field controls how often Wazuh sends the notification:
-
-+-------------------+------------------------------------------------------------------------+
-| Option            | Description                                                            |
-+===================+========================================================================+
-| **Per alert**     | Sends one email for each matching finding. Use this option to notify   |
-|                   | on every failed authentication.                                        |
-+-------------------+------------------------------------------------------------------------+
-| **Per execution** | Sends one email for each monitor run, regardless of how many findings  |
-|                   | match. Use this option to receive a single summary notification for    |
-|                   | each interval.                                                         |
-+-------------------+------------------------------------------------------------------------+
-
 .. note::
 
-   On a busy endpoint, the **Per alert** option can generate frequent emails. To reduce the volume, use a **Per query monitor** with a threshold instead. With **Per alert** selected, **Send test message** in the action reports success but doesn't send an email unless a finding matches the monitor's query. To test email delivery, use **Send test message** on the email channel instead.
-
-.. note::
-
-   The **Monitor defining method** offers two options. The **Visual editor** lets you build the query with fields and values. The **Extraction query editor** lets you write the query in raw query syntax. Use the extraction query editor for conditions that the visual editor cannot express.
+   On a busy endpoint, the **Per alert** option can generate frequent emails. To reduce the volume, use a **Per query monitor** with a threshold instead. With **Per alert** selected, **Send test message** in the action reports success but doesn't send an email unless a finding matches the monitor's query. To test email delivery, use **Send test message** on the email channel instead. For the other monitor types, triggers, and channel options, see :doc:`Alerting module </user-manual/wazuh-indexer/modules/alerting>` and :doc:`Notifications module </user-manual/wazuh-indexer/modules/notifications>`.
 
 Verify the configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -433,128 +374,36 @@ A medium severity finding on the Wazuh dashboard shows that a file was modified 
 Wazuh dashboard
 ~~~~~~~~~~~~~~~
 
-Create a custom rule to increase the severity of file modification in the directory ``/customers/personal_data`` from medium to critical. You create the integration, decoders, and rule in the **Draft** space, then promote them to the **Test** space and then to the **Custom** space, where Wazuh uses them to process events. The **Standard** space holds the built-in, read-only Wazuh content. An integration groups related decoders and rules. The root decoder is the first decoder that processes every event. A detector applies the rules of an integration to an index of events to generate findings. See :doc:`Space </user-manual/data-analysis/space>` for more information.
+Create a custom rule that raises file modification findings in ``/customers/personal_data`` from medium to critical. The standard FIM decoders already extract the file path and the type of change, so you only need a custom integration, the rule, and a detector. Make sure the space selector reads **Draft**.
 
-Create decoder and integration
-""""""""""""""""""""""""""""""
+#. Go to **Ruleset management** > **Overview** > **Integrations** > **Actions** > **Create**. Enter ``gdpr-personal-data`` in **Title**, select **System Activity** in **Category**, type an author name, and click **Create integration**.
 
-The two decoders that need to exist in your custom space are ``decoder/core-wazuh-message/0`` and ``decoder/wazuh-fim/0``. ``decoder/core-wazuh-message/0`` is the Wazuh root decoder, and ``decoder/wazuh-fim/0`` decodes FIM-related events.
+#. Go to **Ruleset management** > **Rules** > **Actions** > **Create**, select **YAML Editor**, choose the ``gdpr-personal-data`` integration, paste the following rule, and click **Create rule**:
 
-#. Click the menu icon, then navigate to **Ruleset Management** > **Decoders**.
+   .. code-block:: yaml
 
-#. Switch to **Standard** in **Space**.
+      logsource:
+        product: gdpr-personal-data
+      level: critical
+      status: experimental
+      enabled: true
+      detection:
+        condition: selection
+        selection:
+          event.dataset: wazuh.fim
+          event.action: modified
+          file.path|contains: /customers/personal_data
+      metadata:
+        title: Personal data file modified - {{file.path}}
+        author: Security Team
+        description: Detects changes to files in the /customers/personal_data directory.
+      compliance:
+        gdpr:
+          - IV_35.1
 
-#. Search for ``decoder/core-wazuh-message/0``. Switch to the **YAML** tab and copy the decoder contents.
+#. Promote the content from **Draft** to **Test**, then from **Test** to **Custom**, and create a detector for the ``gdpr-personal-data`` integration on the ``wazuh-events-v5-system-activity`` index in the **Custom** space.
 
-#. Close the tab and switch to **Draft** in **Space**.
-
-#. Click the dropdown under **Actions** and select **+ Create**.
-
-#. In the **Integration** section, click **Create integration**.
-
-#. Give it a title and select **System Activity** under **Category**. Type the author name in **Author** and click **Create integration**.
-
-#. Switch to the **YAML Editor** tab and paste the copied decoder contents from the standard space into the decoder section.
-
-#. Click **Create decoder**.
-
-#. Switch to **Standard** in **Space**, search for ``decoder/wazuh-fim/0``, and copy its contents from the **YAML** tab. Close the tab, switch to **Draft** in **Space**, click the dropdown under **Actions**, and select **+ Create**.
-
-#. In the **Integration** section, select the previously created integration.
-
-#. Switch to the **YAML Editor** tab, paste the copied ``decoder/wazuh-fim/0`` contents into the decoder section, and click **Create decoder**.
-
-#. Click **Overview** in the left pane, click the **Actions** dropdown, and select **Edit**.
-
-#. In the **Settings** section, under **Root Decoder**, select the created root decoder ``decoder/core-wazuh-message/0`` and click **Save**.
-
-#. In **Overview**, select **Draft** in **Space**.
-
-#. Click the dropdown under **Actions** and select **Promote** to promote the decoders from **Draft** space to **Test**. In the prompt, type ``promote`` and click **Promote**.
-
-#. Switch to **Test** in **Space**, click the dropdown under **Actions**, and select **Promote** to promote the decoders from **Test** space to **Custom**. In the prompt, type ``promote`` and click **Promote**.
-
-   .. thumbnail:: /images/compliance/gdpr/create-decoders-integration.gif
-      :title: Create decoders and integration
-      :alt: Ruleset management Decoders page in the Custom space with the custom Wazuh File Integrity Monitoring decoder
-      :align: center
-      :width: 80%
-
-   .. note::
-
-      If ``decoder/core-wazuh-message/0`` is already the root decoder of your custom space, skip the steps that copy it and set it as the root decoder.
-
-Create custom rule
-""""""""""""""""""
-
-The file modification rule already exists out of the box. To change the severity of file modification findings in your directory of choice, you need to create a custom rule to achieve this.
-
-#. Click the menu icon, then navigate to **Ruleset Management** > **Rules**.
-
-#. Switch to **Standard** in **Space**.
-
-#. Search for FIM in the search bar.
-
-#. The search returns the built-in FIM rules. Click the magnifying glass icon to view the rule titled ``Wazuh FIM - File modified - {{file.path}}``.
-
-#. Switch to the **YAML** tab and copy the rule contents.
-
-#. Close the tab and switch to **Draft** in **Space**.
-
-#. Click the dropdown under **Actions** and select **+ Create**.
-
-#. Switch to the **YAML Editor** tab, select the integration created previously, and paste the copied file modification rule from the standard space into the rule section. In the YAML, change ``logsource.product`` to the title of your integration. Wazuh rejects the rule if they differ.
-
-#. In the YAML, add ``IV_35.1`` to the ``gdpr`` list under the ``compliance`` field, so that the critical finding maps to Article 35.
-
-#. Switch back to the **Visual Editor** tab for better visualization of the copied rule.
-
-#. In the dropdown under **Rule level (severity)**, select **Critical**.
-
-#. In the **Detection** section, under **selection**, click **Add map**.
-
-#. Type ``file.path`` in **Key**. Under **Modifier**, select **contains** and type the monitored directory ``/customers/personal_data`` in **Value**.
-
-#. Click **Create rule**.
-
-#. Click **Overview** in the left pane and select **Draft** in **Space**.
-
-#. Click the dropdown under **Actions** and select **Promote** to promote the rule from **Draft** space to **Test**. In the prompt, type ``promote`` and click **Promote**.
-
-#. Switch to **Test** in **Space**, click the dropdown under **Actions**, and select **Promote** to promote the rule from **Test** space to **Custom**. In the prompt, type ``promote`` and click **Promote**.
-
-   .. thumbnail:: /images/compliance/gdpr/create-custom-rule.gif
-      :title: Create custom rule
-      :alt: Ruleset management Rules page in the Custom space with the critical Wazuh FIM file modified rule
-      :align: center
-      :width: 80%
-
-Create detector
-""""""""""""""""
-
-To generate a finding on the Wazuh dashboard, a corresponding detector must exist in your custom space to handle your custom rules.
-
-#. Click the menu icon, then navigate to **Ruleset Management** > **Detectors**.
-
-#. Click **+ Create detector**.
-
-#. Enter a name for the detector in **Name**.
-
-#. Add a description in **Description**. This is optional.
-
-#. Under **Data source**, click the drop-down and select ``wazuh-events-v5-system-activity`` in **Select indexes/aliases**.
-
-#. Switch to **Custom** in **Space**.
-
-#. Select the previously created integration under **Integration**.
-
-#. Click **Create detector**.
-
-   .. thumbnail:: /images/compliance/gdpr/create-detector.gif
-      :title: Create detector
-      :alt: fim-custom detector details with its data source, schedule, and the active custom FIM rule
-      :align: center
-      :width: 80%
+For details on each step, see :ref:`Create a security analytics detection workflow <data_analysis_detection_workflow>`.
 
 Ubuntu endpoint
 ~~~~~~~~~~~~~~~

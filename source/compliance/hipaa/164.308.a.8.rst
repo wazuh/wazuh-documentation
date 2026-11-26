@@ -8,8 +8,6 @@ HIPAA § 164.308(a)(8) - Evaluation
 
 The HIPAA § 164.308(a)(8) requirement states, "*A covered entity or business associate must, in accordance with § 164.306, perform a periodic technical and nontechnical evaluation, based initially upon the standards implemented under this rule and, subsequently, in response to environmental or operational changes affecting the security of electronic protected health information, that establishes the extent to which a covered entity's or business associate's security policies and procedures meet the requirements of this subpart.*"
 
-This requirement mandates regularly reviewing systems containing health information to ensure compliance with security policies.
-
 Wazuh helps meet this requirement by providing several modules. One of these modules is the Security Configuration Assessment (SCA) module, which is enabled by default on your Wazuh installation and performs scans to determine if monitored endpoints meet secure configuration and hardening policies. These scans assess the endpoint configuration using SCA policy files that contain rules tested against the endpoint's actual configuration.
 
 Use case: Security Configuration Assessment scan

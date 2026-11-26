@@ -8,8 +8,6 @@ HIPAA § 164.308(a)(5)(ii)(B) - Protection from malicious software
 
 The HIPAA § 164.308(a)(5)(ii)(B) requirement states, "*Procedures for guarding against, detecting, and reporting malicious software.*"
 
-This requirement mandates covered entities and business associates to implement policies and procedures for guarding against, detecting, and reporting malicious software.
-
 Wazuh supports this requirement by providing several capabilities that support malware detection. They include the following:
 
 -  Malware detection dashboard

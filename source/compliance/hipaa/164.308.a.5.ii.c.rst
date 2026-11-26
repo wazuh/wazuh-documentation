@@ -8,9 +8,7 @@ HIPAA § 164.308(a)(5)(ii)(C) - Log-in monitoring
 
 The HIPAA § 164.308(a)(5)(ii)(C) requirement states, "*Procedures for monitoring log-in attempts and reporting discrepancies.*"
 
-This requirement mandates monitoring log-in attempts to systems that contain electronic protected health information and reporting discrepancies.
-
-Wazuh helps meet this requirement through its log data analysis capability. The Logcollector module, which runs on the Wazuh agent, collects events from monitored endpoints and applications. The Wazuh agents forward these events to the Wazuh manager, where the normalization engine processes them. The Wazuh manager then sends the normalized data to the Wazuh indexer. The Wazuh indexer matches the normalized data against configured detection rules and indexes the resulting events. This process enables organizations to monitor authentication activity and identify suspicious or unauthorized access attempts.
+Wazuh helps meet this requirement with the :doc:`log data analysis </user-manual/capabilities/log-data-collection/index>` capability, which generates findings for successful and failed log-in attempts.
 
 Use case: SSH authentication
 -------------------------------
