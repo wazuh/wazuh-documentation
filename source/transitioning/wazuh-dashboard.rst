@@ -134,8 +134,9 @@ Perform the following steps to recreate the Wazuh dashboard configuration in Waz
    +----------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | ``reports.csv.maxRows``    | Maximum rows allowed in exported CSV files.                                                                                                                           |
    +----------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | ``wazuh.updates.disabled`` | Disables the check for updates. The default is ``true``, which means the Wazuh dashboard doesn't check for updates. In Advanced settings, On means that the check is  |
-   |                            | disabled.                                                                                                                                                             |
+   | ``check_updates.enabled``  | Replaces ``wazuh.updates.disabled``, with the meaning inverted. Enables the check for updates (**Check for updates** in Advanced settings). The default is ``false``, |
+   |                            | which means the Wazuh dashboard doesn't check for updates. The Wazuh 4.x value isn't carried over. If you had update notifications enabled in Wazuh 4.x, turn on      |
+   |                            | **Check for updates**.                                                                                                                                                |
    +----------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 #. Restart the Wazuh dashboard service:

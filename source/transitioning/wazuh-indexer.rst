@@ -119,7 +119,7 @@ Perform the following steps on every Wazuh indexer node of the new Wazuh 5.x clu
 .. _migration_wazuh_indexer_security_configuration:
 
 Wazuh indexer security configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------
 
 The Wazuh indexer security configuration controls authentication, authorization, user management, and access permissions.
 
@@ -177,7 +177,7 @@ Rewrite document-level security (DLS) and field-level security (FLS) with the Wa
 .. _migration_apply_security_configuration:
 
 Apply the security configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------
 
 After you recreate the required security configuration, apply the changes to the Wazuh indexer. Make the same changes to the files in ``/etc/wazuh-indexer/opensearch-security/`` on every Wazuh indexer node.
 

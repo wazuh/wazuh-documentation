@@ -200,11 +200,16 @@ Connect the Wazuh agents to Wazuh 5.x
 
 Follow the steps below to configure the Wazuh 5.x stack to accept connections from the Wazuh agents. The Wazuh agents then reconnect with their existing keys, without enrolling again.
 
-#. Start the stack without the ``docker-compose.migration.yml`` file. Docker recreates the Wazuh manager container with its ports published, which also removes the copies in ``/tmp``:
+#. Stop the Wazuh manager with a 120-second timeout, then start the stack without the ``docker-compose.migration.yml`` file. Docker recreates the Wazuh manager container with its ports published and removes the copies in ``/tmp``. On a multi-node deployment, stop ``wazuh.master`` instead:
 
    .. code-block:: console
 
+      # docker compose stop -t 120 wazuh.manager
       # docker compose up -d
+
+   .. note::
+
+      The Wazuh manager saves the imported group memberships to its database only when it stops cleanly, which takes about a minute. By default, Docker kills a container 10 seconds after asking it to stop. With a plain ``docker compose up -d`` or ``restart``, every Wazuh agent can end up in the ``default`` group only.
 
 #. If you used ``--with-rbac``, set the ``wazuh`` and ``wazuh-internal-client`` passwords back to the values in ``config/credentials/manager.env``. After the import, both users have their Wazuh 4.x passwords, and the Wazuh dashboard can't connect to the Wazuh manager API. The ``wazuh-internal-client`` user is the Wazuh 4.x ``wazuh-wui`` user:
 
@@ -324,6 +329,14 @@ A file that you mount into the Wazuh 5.x indexer or dashboard must be owned by `
 .. code-block:: console
 
    # docker compose exec wazuh.manager /var/wazuh-manager/bin/wazuh-manager-conf validate
+
+The Wazuh 4.x dashboard checked only the certificate chain of the Wazuh indexer. The Wazuh 5.x dashboard also verifies the Wazuh indexer hostname, because ``OPENSEARCH_SSL_VERIFICATION_MODE`` defaults to ``full``. If you keep the default ``OPENSEARCH_HOSTS`` value, no change is needed. If you change it, check that every host it lists is in the Wazuh indexer certificate. Run this command from ``<WAZUH_5X_DIRECTORY>/wazuh-docker/single-node/``:
+
+.. code-block:: console
+
+   # openssl x509 -in config/wazuh_indexer/certs/wazuh.indexer.pem -noout -ext subjectAltName
+
+On a multi-node deployment, check ``config/wazuh1_indexer/certs/wazuh1.indexer.pem`` to ``config/wazuh3_indexer/certs/wazuh3.indexer.pem`` the same way.
 
 Indexed data
 ^^^^^^^^^^^^
