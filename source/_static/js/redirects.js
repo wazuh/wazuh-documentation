@@ -207,6 +207,7 @@ newUrls['5.0'] = [
   '/user-manual/capabilities/active-response/ar-use-cases/isolating-linux-endpoint.html',
   '/cloud-security/gcp/prerequisites/requirements.html',
   '/cloud-security/gcp/prerequisites/enabling-integration.html',
+  '/cloud-security/gcp/prerequisites/proxy.html',
   '/cloud-security/gcp/pubsub.html',
   '/cloud-security/gcp/cloud-storage-buckets.html',
   '/cloud-security/amazon/services/prerequisites/enabling-integration.html',
