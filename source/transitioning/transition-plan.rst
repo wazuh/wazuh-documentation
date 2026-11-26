@@ -10,7 +10,7 @@ Before transitioning to Wazuh 5.x, review the supported transition scenarios, li
 
 .. note::
 
-   This guide covers package-based Wazuh deployments, all-in-one and distributed. The all-in-one steps also apply to a Wazuh 4.x virtual machine (OVA), which is an all-in-one installation. For Docker or Kubernetes deployments of Wazuh 4.x, see :doc:`Docker and Kubernetes deployments <docker-kubernetes-deployments>`.
+   This guide covers package-based Wazuh deployments, all-in-one and distributed. You can't upgrade a Wazuh 4.x virtual machine (OVA) or Amazon Machine Image (AMI) in place. Deploy a Wazuh 5.x virtual machine or AMI, then transition the Wazuh agents and settings as this guide describes for an all-in-one deployment. For Ansible deployments, deploy Wazuh 5.x with the Wazuh 5.0 playbooks, then follow this guide. The Wazuh 5.0 roles have no variables for the Wazuh manager configuration. They only set the Wazuh indexer hosts and the cluster settings in ``wazuh-manager.conf``, and keep your other changes to the file. For Docker or Kubernetes deployments of Wazuh 4.x, see :doc:`Docker and Kubernetes deployments <docker-kubernetes-deployments>`.
 
 Transition scope
 ----------------
