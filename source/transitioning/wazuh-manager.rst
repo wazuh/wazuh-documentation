@@ -12,10 +12,8 @@ Deploy a new Wazuh manager and recreate the supported configuration from the Waz
 
 You can recreate the following Wazuh manager configuration in Wazuh 5.x:
 
--  Wazuh manager configuration
--  Internal configuration options
--  Wazuh manager API configuration
--  Cluster configuration
+-  :ref:`Wazuh manager configuration <migration_wazuh_manager_configuration>` (``wazuh-manager.conf``)
+-  :ref:`Other configuration files <migration_other_configuration_files>`: internal options, Wazuh manager API, and cluster configuration
 
 In Wazuh 5.x, the Wazuh content management system manages custom detection content. Recreate custom rules, decoders, and CDB lists there instead of copying files into the Wazuh manager installation. Wazuh 5.x stores CDB lists as key-value databases (KVDBs). Refer to the :doc:`Data analysis </user-manual/data-analysis/data-analysis-components>` documentation to learn how to create and manage custom rules, decoders, and lists. Wazuh 5.x decoders write only Wazuh Common Schema (WCS) fields and temporary fields.
 
@@ -95,12 +93,15 @@ Wazuh 5.x removes, relocates, or changes the following Wazuh 4.x sections and op
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``<vulnerability-detector>``    | Wazuh 4.4 to 4.7 setting. Not supported. Remove it from the Wazuh 5.x configuration.                                                                                                                                                                                                                                                                                                                               |
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<indexer>``                   | Wazuh 5.x doesn't support ``<enabled>``. The certificate paths point to the files in ``/etc/wazuh-manager/certs/``. The files are ``indexer-ca.pem``, ``indexer-connector.pem``, and ``indexer-connector-key.pem``. Keep the Wazuh 5.x ``<ssl>`` paths. Don't use the Wazuh 4.x ``/etc/filebeat/certs``/ paths. If the Wazuh 4.x configuration has no ``<indexer>`` block, keep the Wazuh 5.x ``<indexer>`` block. |
+| ``<indexer>``                   | Wazuh 5.x doesn't support ``<enabled>``. The certificate paths point to the files in ``/etc/wazuh-manager/certs/``. The Wazuh manager trusts the Wazuh indexer through ``indexer-ca.pem``, and logs in with its user and password. Set ``<certificate>`` and ``<key>`` (``indexer-connector.pem`` and ``indexer-connector-key.pem``) only if your Wazuh indexer requires client certificates. Keep the Wazuh 5.x   |
+|                                 | ``<ssl>`` paths. Don't use the Wazuh 4.x ``/etc/filebeat/certs``/ paths. If the Wazuh 4.x configuration has no ``<indexer>`` block, keep the Wazuh 5.x ``<indexer>`` block.                                                                                                                                                                                                                                        |
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``<cluster>``                   | Wazuh 5.x doesn't support ``<disabled>``. Every Wazuh 5.x manager runs as a cluster node. Wazuh 5.x requires ``<key>``. The key must have 32 alphanumeric characters and can't be empty. Keep the ``<name>``, ``<node_name>``, ``<node_type>``, ``<key>``, and ``<nodes>`` values of the Wazuh 5.x cluster. Don't copy them from Wazuh 4.x.                                                                        |
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``<agent-upgrade>``             | Moved to the ``<task-manager>`` section as ``<upgrade_enabled>`` and ``<wpk_repository>``. The Wazuh manager doesn't start if ``wazuh-manager.conf`` contains ``<agent-upgrade>``.                                                                                                                                                                                                                                 |
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. _migration_other_configuration_files:
 
 Other configuration files
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -144,13 +145,20 @@ Perform the following steps to recreate the Wazuh manager configuration in the W
 
 #. Review and update any settings affected by changes in Wazuh 5.x, including renamed file paths and manager-side capabilities.
 
-#. Validate the recreated configuration. The command reports every option that Wazuh 5.x doesn't support, each with its location in the file. Fix them and run the command again until it reports no errors before you start the Wazuh manager. If the configuration is valid, the command doesn't print any output:
+#. Validate the recreated configuration. The command reports every option that Wazuh 5.x doesn't support, each with its location in the file. Fix them and run the command again until it reports no errors before you start the Wazuh manager. If the configuration is valid, the command prints ``configuration is valid``.
 
    .. code-block:: console
 
       # /var/wazuh-manager/bin/wazuh-manager-conf -f /etc/wazuh-manager/wazuh-manager.conf validate
 
-#. Check the configuration and the credentials. The Wazuh manager doesn't start without the Wazuh indexer CA and client certificate in ``/etc/wazuh-manager/certs/`` and the Wazuh indexer password in its keystore, which the :ref:`installation <wazuh_manager_deploying_certificates>` sets up. The command reports each missing item:
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      /etc/wazuh-manager/wazuh-manager.conf: configuration is valid.
+
+#. Check the configuration and the credentials. The Wazuh manager doesn't start without the Wazuh indexer CA in ``/etc/wazuh-manager/certs/`` and the Wazuh indexer password in its keystore, which the :ref:`installation <wazuh_manager_deploying_certificates>` sets up. The command reports each missing item:
 
    .. code-block:: console
 
