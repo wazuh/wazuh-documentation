@@ -84,6 +84,24 @@ Wazuh agent
 
    Check the :doc:`Wazuh module for Azure </user-manual/reference/ossec-conf/wodle-azure-logs>` reference page to learn more about the parameters available and how to use them.
 
+   To collect Application Gateway access logs and Web Application Firewall (WAF) logs, create a diagnostic setting on the application gateway, select the ``ApplicationGatewayAccessLog`` and ``ApplicationGatewayFirewallLog`` categories, and select Archive to a storage account. Azure Monitor writes these logs to the ``insights-logs-applicationgatewayaccesslog`` and ``insights-logs-applicationgatewayfirewalllog`` containers. Add a ``<container>`` block for each container inside the ``<storage>`` block:
+
+   .. code-block:: xml
+
+      <container name="insights-logs-applicationgatewayaccesslog">
+         <blobs>.json</blobs>
+         <content_type>json_inline</content_type>
+         <time_offset>24h</time_offset>
+      </container>
+
+      <container name="insights-logs-applicationgatewayfirewalllog">
+         <blobs>.json</blobs>
+         <content_type>json_inline</content_type>
+         <time_offset>24h</time_offset>
+      </container>
+
+   The ``azure`` integration decodes these logs, and a WAF log with the ``Blocked`` action generates the Cloud firewall or WAF connection denied or blocked finding. Collect these logs through Azure Storage, not Azure Log Analytics. The Log Analytics tables for these logs, ``AGWAccessLogs``, ``AGWFirewallLogs``, and ``AzureDiagnostics``, use different field names, and the ``azure`` integration has no decoder for them, so the Wazuh manager discards these events.
+
 #. Restart the Wazuh agent to apply the configuration changes:
 
    .. code-block:: console
