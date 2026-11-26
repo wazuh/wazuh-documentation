@@ -1,5 +1,16 @@
 {%- extends "!wazuh_doc_theme_v3/redoc-master.html" -%}
 
+{%- block css %}
+{{ super() }}
+<style>
+  /* The Wazuh indexer API has no tracked version number: hide the spec's
+     placeholder version badge next to the title. */
+  .api-info h1 span {
+    display: none;
+  }
+</style>
+{% endblock css %}
+
 {% block body %}
 {{ super() }}
 {% endblock %}
