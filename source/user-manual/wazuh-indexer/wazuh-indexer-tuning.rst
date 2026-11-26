@@ -94,7 +94,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
 
    .. code-block:: console
 
-      # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> "https://<INDEXER_IP_ADDRESS>:9200/_nodes?filter_path=**.mlockall&pretty"
+      # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> "https://<WAZUH_INDEXER_IP>:9200/_nodes?filter_path=**.mlockall&pretty"
 
    **Output**
 

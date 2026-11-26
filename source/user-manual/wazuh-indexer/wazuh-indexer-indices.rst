@@ -28,11 +28,11 @@ The following table lists the Wazuh data streams and the type of information eac
 +==================================+==============================================================================================================================================+
 | ``wazuh-events-raw-v5``          | Stores incoming events before processing and normalization, when raw event indexing is enabled. Raw event indexing is disabled by default.   |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| ``wazuh-events-v5-<category>``   | Stores normalized and categorized events using the Wazuh Common Schema (WCS).                                                                |
+| ``wazuh-events-v5-<CATEGORY>``   | Stores normalized and categorized events using the Wazuh Common Schema (WCS).                                                                |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 | ``wazuh-events-v5-unclassified`` | Stores events that could not be assigned to a category.                                                                                      |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| ``wazuh-findings-v5-<category>`` | Stores findings generated when Security Analytics detectors match Sigma rules.                                                               |
+| ``wazuh-findings-v5-<CATEGORY>`` | Stores findings generated when Security Analytics detectors match Sigma rules.                                                               |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 | ``wazuh-active-responses``       | Stores active response execution requests.                                                                                                   |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -52,14 +52,14 @@ Event data streams
 
 Events collected from monitored endpoints pass through several stages before becoming searchable security data.
 
-When an event arrives, Wazuh normalizes it according to the Wazuh Common Schema and routes it to the appropriate category-specific data stream. When unclassified event indexing is enabled for the space (see :ref:`Content spaces <wazuh_indexer_content_manager_content_spaces>`), events that cannot be categorized go to the unclassified data stream. When raw event indexing is enabled, Wazuh also stores the original event in the raw events data stream. Raw event indexing is disabled by default, and you enable it with the Setup module settings API, as described in :ref:`Update settings <wazuh_indexer_setup_update_settings>`. The event data streams are ``wazuh-events-raw-v5``, ``wazuh-events-v5-<category>``, and ``wazuh-events-v5-unclassified``.
+When an event arrives, Wazuh normalizes it according to the Wazuh Common Schema and routes it to the appropriate category-specific data stream. When unclassified event indexing is enabled for the space (see :ref:`Content spaces <wazuh_indexer_content_manager_content_spaces>`), events that cannot be categorized go to the unclassified data stream. When raw event indexing is enabled, Wazuh also stores the original event in the raw events data stream. Raw event indexing is disabled by default, and you enable it with the Setup module settings API, as described in :ref:`Update settings <wazuh_indexer_setup_update_settings>`. The event data streams are ``wazuh-events-raw-v5``, ``wazuh-events-v5-<CATEGORY>``, and ``wazuh-events-v5-unclassified``.
 
 Findings data streams
 ^^^^^^^^^^^^^^^^^^^^^
 
 The Security Analytics module stores detector findings in category-specific findings data streams.
 
-A finding is generated when an event matches a Sigma detection rule. Each finding contains the detection result, the triggering event, rule metadata, and investigation information such as case status, analyst comments, and tags. Findings are stored using the ``wazuh-findings-v5-<category>`` index pattern.
+A finding is generated when an event matches a Sigma detection rule. Each finding contains the detection result, the triggering event, rule metadata, and investigation information such as case status, analyst comments, and tags. Findings are stored using the ``wazuh-findings-v5-<CATEGORY>`` index pattern.
 
 Active response data stream
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -180,7 +180,7 @@ Vulnerability detection provides visibility into software vulnerabilities affect
 
 The Wazuh agent collects inventory data such as installed packages, operating system details, and hardware information from monitored endpoints. The collected data is sent to the Wazuh manager, which synchronizes the inventory state with the Wazuh indexer and runs vulnerability detection on it.
 
-The Vulnerability Scanner retrieves CVE feeds from the Wazuh indexer through the Content Manager and Indexer Connector. It then correlates the vulnerability information with the inventory data collected from monitored endpoints to identify affected systems and software packages. Vulnerability state information is stored as global state data in the ``wazuh-states-vulnerabilities`` index and can be queried and visualized from the Wazuh dashboard.
+The Wazuh manager reads CVE feeds from the Wazuh indexer in the ``.wazuh-threatintel-vulnerabilities`` index, where the Content Manager module stores them. It then correlates the vulnerability information with the inventory data collected from monitored endpoints to identify affected systems and software packages. Vulnerability state information is stored as global state data in the ``wazuh-states-vulnerabilities`` index and can be queried and visualized from the Wazuh dashboard.
 
 File integrity monitoring
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -277,7 +277,7 @@ To check whether a backing index has rolled over, run the following in **Dev Too
 
 .. code-block:: none
 
-   GET _plugins/_ism/explain/<index>
+   GET _plugins/_ism/explain/<INDEX_NAME>
 
 A response with ``"step": {"name": "attempt_rollover", "step_status": "condition_not_met"}`` and ``"rolled_over": false`` means the index hasn't met a rollover condition and isn't eligible for deletion yet.
 
@@ -482,11 +482,11 @@ Check which version each index runs. **Policy managed indexes** show the stored 
 Enabling unclassified events storage
 ------------------------------------
 
-Wazuh agent collects logs from endpoints and forwards them to the Wazuh manager. The Wazuh manager normalizes, decodes, and enriches events and sends them to the Wazuh indexer for rule matching, indexing, and security analytics. The Wazuh dashboard allows teams to view and investigate findings, search historical events, and manage the platform. Events that match detection rules generate findings. Events that cannot be decoded or classified are stored in the ``wazuh-events-v5-unclassified`` index when unclassified event indexing is enabled for the relevant space.
+The Wazuh agent collects logs from endpoints and forwards them to the Wazuh manager. The Wazuh manager normalizes, decodes, and enriches events and sends them to the Wazuh indexer for rule matching, indexing, and security analytics. The Wazuh dashboard allows teams to view and investigate findings, search historical events, and manage the platform. Events that match detection rules generate findings. Events that cannot be decoded or classified are stored in the ``wazuh-events-v5-unclassified`` index when unclassified event indexing is enabled for the relevant space.
 
 Unclassified event indexing is configured per space, and it applies only to the events that the space processes. Agent events that no integration of the Wazuh ruleset classifies are processed by the Standard space, so enable the setting in the Standard space to store them. To store unclassified events that your own content processes, enable it in the Draft space and promote it to the Custom space. Follow the steps below to enable the storage of unclassified events:
 
-#. Navigate to the **Ruleset management** > **Overview**, select the space you want to enable unclassified events for, click the **Space actions** drop-down menu, and select **Edit**:
+#. Navigate to **Ruleset management** > **Overview**, select the space you want to enable unclassified events for, click the **Space actions** drop-down menu, and select **Edit**:
 
    .. thumbnail:: /images/manual/wazuh-indexer/security-analytics-edit-space.png
       :title: Edit a Security Analytics space
@@ -542,6 +542,9 @@ The response lists the index templates whose names start with ``wazuh-`` and the
                  },
                  "refresh_interval": "2s",
                  "number_of_shards": "1",
+                 "translog": {
+                   "durability": "async"
+                 },
                  "auto_expand_replicas": "0-1",
                  "plugins": {
                    "index_state_management": {

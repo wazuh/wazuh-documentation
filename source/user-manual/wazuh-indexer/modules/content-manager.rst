@@ -136,11 +136,21 @@ After validation succeeds, Content Manager applies the changes to the target spa
 Promotion workflow
 ^^^^^^^^^^^^^^^^^^
 
+Content moves through the Draft, Test, and Custom spaces in that order, one space at a time. The Custom space is the last one and can't be promoted. The Standard space can't be promoted either. Each promotion goes through the following steps:
+
+#. **Preview:** ``GET /_plugins/_content_manager/promote?space=<SPACE>`` lists the resources that the promotion adds, updates, or deletes in the next space. It doesn't change any content.
+#. **Promotion request:** ``POST /_plugins/_content_manager/promote`` sends the source space and the changes from the preview.
+#. **Validation:** the Wazuh Engine that ships with the Wazuh indexer validates the target space with the changes applied. It runs when the changes include decoders, KVDBs, or filters, or when the target space already holds them. Content that fails validation isn't promoted.
+#. **Apply:** the Content Manager module writes the changes to the target space. If a write fails, the module reverts the changes, as described in :ref:`Rollback protection <wazuh_indexer_content_manager_rollback_protection>`.
+#. **Security Analytics sync:** the module adds, updates, or deletes the matching integrations and rules in the Security Analytics module. If this step fails, the module logs the error and doesn't revert the promotion.
+
 .. thumbnail:: /images/manual/wazuh-indexer/content-promotion-workflow.png
    :title: Content promotion workflow
    :alt: Content promotion workflow
    :align: center
    :width: 80%
+
+.. _wazuh_indexer_content_manager_rollback_protection:
 
 Rollback protection
 ^^^^^^^^^^^^^^^^^^^
