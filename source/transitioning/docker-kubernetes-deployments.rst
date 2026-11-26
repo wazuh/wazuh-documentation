@@ -71,7 +71,7 @@ Export the Wazuh agent registrations from Wazuh 4.x
 
    .. code-block:: console
 
-      # curl -fsSLo <WAZUH_4X_DIRECTORY>/wazuh-docker/single-node/wazuh-migrate-identity.py https://raw.githubusercontent.com/wazuh/wazuh/v5.0.0/tools/migration/wazuh-migrate-identity.py
+      # curl -fsSLo <WAZUH_4X_DIRECTORY>/wazuh-docker/single-node/wazuh-migrate-identity.py https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/tools/migration/wazuh-migrate-identity.py
       # mkdir <WAZUH_4X_DIRECTORY>/wazuh-docker/single-node/wazuh-4x-bundle
 
 #. Preview the export. The command runs the tool in a one-off container of your Wazuh 4.x manager image, with the Wazuh 4.x volumes mounted read-only:
@@ -120,7 +120,7 @@ Deploy Wazuh 5.x for the transition
 
       # mkdir -p <WAZUH_5X_DIRECTORY>
       # cd <WAZUH_5X_DIRECTORY>
-      # git clone https://github.com/wazuh/wazuh-docker.git -b v5.0.0
+      # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|
       # cd wazuh-docker/single-node/
 
 #. Set a Docker Compose project name for the Wazuh 5.x stack. Do this before you run any ``docker compose`` command in this directory:
@@ -151,10 +151,10 @@ Deploy Wazuh 5.x for the transition
    .. code-block:: none
       :class: output
 
-      NAME                          IMAGE                         STATUS                    PORTS
-      single-node-wazuh.dashboard   wazuh/wazuh-dashboard:5.0.0   Up 22 seconds (healthy)   0.0.0.0:443->443/tcp, [::]:443->443/tcp
-      single-node-wazuh.indexer     wazuh/wazuh-indexer:5.0.0     Up 58 seconds (healthy)   9200/tcp
-      single-node-wazuh.manager     wazuh/wazuh-manager:5.0.0     Up 37 seconds (healthy)   1514-1517/tcp, 55000/tcp
+      NAME                          IMAGE                             STATUS                    PORTS
+      single-node-wazuh.dashboard   wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|   Up 22 seconds (healthy)   0.0.0.0:443->443/tcp, [::]:443->443/tcp
+      single-node-wazuh.indexer     wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|     Up 58 seconds (healthy)   9200/tcp
+      single-node-wazuh.manager     wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|     Up 37 seconds (healthy)   1514-1517/tcp, 55000/tcp
 
 Import the Wazuh agent registrations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -413,7 +413,7 @@ Export the Wazuh agent registrations from Wazuh 4.x
 
    .. code-block:: console
 
-      $ curl -fsSLo wazuh-migrate-identity.py https://raw.githubusercontent.com/wazuh/wazuh/v5.0.0/tools/migration/wazuh-migrate-identity.py
+      $ curl -fsSLo wazuh-migrate-identity.py https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/tools/migration/wazuh-migrate-identity.py
       $ kubectl -n wazuh create configmap wazuh-migrate-identity --from-file=wazuh-migrate-identity.py
 
 #. Create a one-off pod of your Wazuh 4.x manager image. It mounts the master claim read-only, with the same subPaths as the Wazuh 4.x manager, and the migration tool:

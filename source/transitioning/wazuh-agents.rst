@@ -103,7 +103,7 @@ Wazuh 4.x manager
 
    .. code-block:: console
 
-      # curl -fsSLO https://raw.githubusercontent.com/wazuh/wazuh/v5.0.0/tools/migration/wazuh-migrate-identity.py
+      # curl -fsSLO https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/tools/migration/wazuh-migrate-identity.py
       # chmod +x wazuh-migrate-identity.py
 
 #. Stop the Wazuh 4.x manager. The tool doesn't export the data while the Wazuh manager is running:
@@ -155,7 +155,7 @@ Perform the following steps on the master node in the Wazuh manager cluster. The
 
    .. code-block:: console
 
-      # curl -fsSLO https://raw.githubusercontent.com/wazuh/wazuh/v5.0.0/tools/migration/wazuh-migrate-identity.py
+      # curl -fsSLO https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/tools/migration/wazuh-migrate-identity.py
       # chmod +x wazuh-migrate-identity.py
 
 #. Preview the import. Use the same options as for the export:
