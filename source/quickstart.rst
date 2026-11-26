@@ -13,13 +13,12 @@ Install the Wazuh manager, Wazuh indexer, and Wazuh dashboard on one server with
 Requirements
 ------------
 
-This all-in-one deployment is enough for up to 100 endpoints and 90 days of findings. For more, use a :doc:`distributed deployment </installation-guide/index>`.
+This all-in-one deployment is enough for up to 100 endpoints and 90 days of :doc:`findings </user-manual/data-analysis/findings>`. For more, use a :doc:`distributed deployment </installation-guide/index>`.
 
 Hardware
 ^^^^^^^^
 
 .. table::
-   :align: center
 
    +------------+---------+---------+-----------------------+
    | **Agents** | **CPU** | **RAM** | **Storage (90 days)** |
@@ -37,7 +36,6 @@ Operating system
 A 64-bit Linux server (x86_64/AMD64 or AARCH64/ARM64) with one of these systems:
 
 .. table::
-   :align: center
 
    +--------------------------+--------------------------+
    | **Operating system**     | **Versions**             |
