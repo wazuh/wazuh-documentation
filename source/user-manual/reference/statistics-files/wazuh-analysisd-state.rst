@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The wazuh-analysisd.state file can be useful when benchmarking our Wazuh manager analysis engine in highly loaded environments. Learn more about it here.
+  :description: Learn what the counters and queues in the wazuh-analysisd.state file mean and how to calculate an event rate.
 
 .. _wazuh_analysisd_state_file:
 
@@ -14,6 +14,10 @@ It can be useful when benchmarking our Wazuh manager analysis engine in highly l
 
 By default, this file is updated every 5 seconds. This interval can be changed by modifying the ``analysisd.state_interval`` value from the :ref:`internal configuration <reference_internal_options>` file.
 
+The file shows statistics for one manager. ``events_received`` counts valid messages read by analysisd. ``total_events_decoded`` adds the decoded event groups, and ``events_processed`` counts events that reach rule matching. ``alerts_written`` counts alerts written to disk. These counters measure different steps, so their values need not match. The queue usage and size fields show the current state of each queue.
+
+To estimate events per second, take two readings of the same event counter. Subtract the first value from the second, then divide by the number of seconds between readings. For a cluster, calculate the rate on each manager and add the results.
+
 Below there is an example of the content of the file:
 
 .. code-block:: pkgconfig
@@ -25,34 +29,30 @@ Below there is an example of the content of the file:
 
     # Syscheck events decoded
     syscheck_events_decoded='49'
-    syscheck_edps='6'
 
     # Syscollector events decoded
     syscollector_events_decoded='11'
-    syscollector_edps='7'
 
     # Rootcheck events decoded
     rootcheck_events_decoded='48'
-    rootcheck_edps='3'
 
     # Security configuration assessment events decoded
     sca_events_decoded='0'
-    sca_edps='0'
 
-    # Hostinfo events decoded
-    hostinfo_events_decoded='3'
-    hostinfo_edps='0'
+    # Winevt events decoded
+    winevt_events_decoded='3'
+
+    # Database synchronization messages dispatched
+    dbsync_messages_dispatched='0'
 
     # Other events decoded
-    other_events_decoded='23'
-    other_events_edps='2'
+    other_events_decoded='73'
 
     # Events processed (Rule matching)
-    events_processed='19'
-    events_edps='2'
+    events_processed='180'
 
     # Events received
-    events_received='10'
+    events_received='200'
 
     # Events dropped
     events_dropped='1'
@@ -95,6 +95,18 @@ Below there is an example of the content of the file:
 
     # Hostinfo queue size
     hostinfo_queue_size='16384'
+
+    # Winevt queue
+    winevt_queue_usage='0.03'
+
+    # Winevt queue size
+    winevt_queue_size='16384'
+
+    # Database synchronization message queue
+    dbsync_queue_usage='0.02'
+
+    # Database synchronization message queue size
+    dbsync_queue_size='16384'
 
     # Upgrade module message queue
     upgrade_queue_usage='0.01'
