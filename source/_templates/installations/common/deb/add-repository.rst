@@ -4,7 +4,7 @@
 
     .. code-block:: console
 
-      # apt-get install gnupg apt-transport-https
+      # apt-get install gnupg
 
 #. Install the GPG key.
 
