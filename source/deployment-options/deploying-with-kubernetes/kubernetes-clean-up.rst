@@ -10,8 +10,6 @@ When you no longer need your Wazuh Kubernetes deployment, or you want a fresh de
 
 This section deletes the Wazuh workloads, Services, Secrets, network policies, and persistent volumes. It also deletes the Traefik ingress controller and the Wazuh agent examples. Run every command from the root of the ``wazuh-kubernetes`` repository.
 
-Follow the steps below to delete all deployments, services, and volumes.
-
 #. Remove the Wazuh agent deployment (if you deployed the example).
 
    .. code-block:: console
@@ -24,11 +22,9 @@ Follow the steps below to delete all deployments, services, and volumes.
 
       $ minikube ssh -- sudo rm -rf /var/lib/wazuh
 
-#. Remove the entire cluster
+#. Remove the Wazuh deployment.
 
-   The Wazuh deployment uses `StatefulSet <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>`__ objects, a Deployment, Services, network policies, persistent volume claims, and Secrets that hold its certificates and credentials.
-
-   To delete your Wazuh cluster, run the following command from the repository directory.
+   To delete the Wazuh deployment, run the following command from the repository directory.
 
    .. tabs::
 
@@ -83,13 +79,13 @@ Follow the steps below to delete all deployments, services, and volumes.
       pvc-7f309c4e-f7c4-11e8-b9b8-022ada63b4ac   1Gi        RWO            Retain           Released   wazuh/wazuh-dashboard-config                        wazuh-storage   <unset>                          4m26s
       pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Released   wazuh/wazuh-indexer-wazuh-indexer-0                 wazuh-storage   <unset>                          4m26s
 
-   On EKS, a Retain reclaim policy is common. Volumes typically transition to the Released state rather than being removed automatically, preserving the underlying data until you explicitly delete the volumes.
+   On EKS, the ``wazuh-storage`` class uses the Retain reclaim policy. The volumes move to the Released state and keep their data until you delete them.
 
-   On a local cluster, the default StorageClass uses a Delete reclaim policy, which is intended to remove volumes automatically. However, this behavior depends on the storage provisioner.
+   On a local cluster, the ``wazuh-storage`` class uses the default Delete reclaim policy, which is intended to remove volumes automatically. However, this behavior depends on the storage provisioner.
 
    .. note::
 
-      A volume still bound to a claim cannot be deleted. Delete the claim or its namespace first. The "Remove the entire cluster" step above already does this for a full cleanup.
+      A volume still bound to a claim cannot be deleted. Delete the claim or its namespace first. The "Remove the Wazuh deployment" step above already does this for a full cleanup.
 
    Run the command below to explicitly delete the volumes.
 
@@ -97,15 +93,11 @@ Follow the steps below to delete all deployments, services, and volumes.
 
       $ kubectl delete persistentvolume <PV_NAME>
 
-   Replace ``<PV_NAME>`` with the name of the persistent volume, for example ``pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac``.
+   Replace ``<PV_NAME>`` with the name of the persistent volume, for example, ``pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac``.
 
    Repeat the ``kubectl delete`` command to delete all Wazuh-related persistent volumes.
 
-   .. warning::
-
-      Do not forget to delete the volumes manually where necessary.
-
-#. Stop the port-forwards and remove the local files. Keep ``wazuh/wazuh-ca/`` if you plan to redeploy with the same CA. In that case, skip the last command. These local files hold the passwords, the cluster key, and the private keys in clear text, so delete them unless you plan to restore the volumes. ``wazuh/wazuh-ca/`` is owned by ``root`` with mode ``0700``, so removing it needs ``sudo``.
+   Stop the port-forwards and remove the local files. Keep ``wazuh/wazuh-ca/`` if you plan to redeploy with the same CA. In that case, skip the last command. These local files hold the passwords, the cluster key, and the private keys in clear text, so delete them unless you plan to restore the volumes. ``wazuh/wazuh-ca/`` is owned by ``root`` with mode ``0700``, so removing it needs ``sudo``.
 
    .. code-block:: console
 
@@ -113,19 +105,19 @@ Follow the steps below to delete all deployments, services, and volumes.
       $ sudo rm -rf wazuh/config/credentials wazuh/wazuh-certificates wazuh/config/indexer/certs wazuh/config/manager/certs wazuh/config/dashboard/certs wazuh/config/root-ca/certs wazuh/config.yml wazuh/wazuh-certs-tool.sh wazuh/wazuh-certificates-tool.log
       $ sudo rm -rf wazuh/wazuh-ca
 
-#. Also delete the Wazuh agent manifests you created in :ref:`Wazuh agent deployment on Kubernetes <kubernetes-wazuh-agent-deployment>`. They hold the enrollment token in clear text. Run this command in the directory where you created them:
+   Also delete the Wazuh agent manifests you created in :ref:`Wazuh agent deployment on Kubernetes <kubernetes-wazuh-agent-deployment>`. They hold the enrollment token in clear text. Run this command in the directory where you created them:
 
    .. code-block:: console
 
       $ rm -f wazuh-agent-daemonset.yaml wazuh-agent-sidecar.yaml allow-agents-to-manager-np.yaml
 
-#. If you created a Minikube cluster only for this deployment, remove it with its images and volumes:
+   If you created a Minikube cluster only for this deployment, remove it with its images and volumes:
 
    .. code-block:: console
 
       $ minikube delete
 
-#. If you pre-loaded the Wazuh images, also remove them from the Docker host:
+   If you pre-loaded the Wazuh images, also remove them from the Docker host:
 
    .. code-block:: console
 
