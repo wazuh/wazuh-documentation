@@ -398,7 +398,7 @@ Use the :api-ref:`POST /security/users/{user_id}/roles <tag/Security/operation/a
 
 The :api-ref:`POST /security/users/{user_id}/roles <tag/Security/operation/api.controllers.security_controller.set_user_role>` endpoint features an optional ``position`` parameter to set the order of role application, which is crucial when roles contain conflicting policies. For more details, see :ref:`priority of roles and policies <api_rbac_configuration_priority_of_roles_and_policies>`.
 
-For example, the following request assigns the "team-alpha" role, with ``role_id`` 100, to the user "``alpha-member-1"``. Replace ``<USER_ID>`` with the user ID returned when you created the user (100 in this example, if it is the first user you created):
+For example, the following request assigns the "team-alpha" role, with ``role_id`` 100, to the user "``alpha-member-1"``. Replace ``<USER_ID>`` with the ``id`` value returned when you created ``alpha-member-1``. The first user you create gets ID ``100``, and each later user gets the next ID. If you ran the ``POST`` example in :doc:`Practical examples </user-manual/api/api-examples>` first, the ID is ``101``:
 
 .. code-block:: console
 
@@ -520,7 +520,7 @@ The command output looks similar to this:
 -  Policy ``policy-deny-read`` (``ID: 101``) deny read on ``agent:id:001``
 -  Policy ``customer_x_agents`` (``ID: 100``) allow read on ``agent:id:001``
 
-This example assumes that the role and both policies already exist. You want the ``allow`` policy to win. Assign the ``deny`` policy first (lower priority, position 0) and the ``allow`` policy second (higher priority, position 1).
+This example assumes that the role and both policies already exist. Create ``example_role`` with :api-ref:`POST /security/roles <operation/api.controllers.security_controller.add_role>` and ``policy-deny-read`` with :api-ref:`POST /security/policies <operation/api.controllers.security_controller.add_policy>`, as shown in the earlier sections. Replace ``101`` with the IDs that the Wazuh manager API returns. You want the ``allow`` policy to win. Assign the ``deny`` policy first (lower priority, position 0) and the ``allow`` policy second (higher priority, position 1).
 
 #. Assign the deny policy at position 0 (lower priority):
 
@@ -600,4 +600,4 @@ This example assumes that the role and both policies already exist. You want the
 
 .. note::
 
-   The position parameter only applies when first assigning a policy to a role. It does not allow reordering or changing the position of policies that are already linked.
+   The position parameter only applies when first assigning a policy to a role. It does not move a policy that is already linked. To reorder a policy, unlink it from the role and link it again at the new position.

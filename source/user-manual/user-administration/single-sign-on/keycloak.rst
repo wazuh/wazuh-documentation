@@ -15,7 +15,7 @@ Learn how to create administrator and read-only roles on Keycloak and map them w
    :depth: 1
    :backlinks: none
 
-Setup Keycloak single sign-on with administrator role
+Set up Keycloak single sign-on with administrator role
 ------------------------------------------------------
 
 Follow these steps to integrate Keycloak IdP with Wazuh for single sign-on and grant administrator role to the authenticated Keycloak users on the Wazuh platform:
@@ -31,7 +31,7 @@ Keycloak configuration
 
 #. Create a new realm.
 
-   Log in to the Keycloak admin console, click on **Manage** **realms** > **Create realm**. Input a name in the **Realm name** field; in our case, this is named ``Wazuh``. Click on **Create** to apply this configuration.
+   Log in to the Keycloak admin console and click **Manage realms** > **Create realm**. Enter a name in the **Realm name** field. In our case, the name is ``Wazuh``. Click **Create** to apply this configuration.
 
    .. thumbnail:: /images/single-sign-on/keycloak/01-create-realm-form.png
       :title: Create a new realm
@@ -213,7 +213,7 @@ Keycloak configuration
 
 #. Note the necessary parameters from the SAML settings of Keycloak.
 
-   #. The parameters already obtained during the integration are
+   #. The parameters already obtained during the integration are:
 
       -  ``sp.entity_id``: ``wazuh-saml``
       -  ``roles_key``: ``Roles``
@@ -269,19 +269,20 @@ Keycloak configuration
 Wazuh indexer configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+Edit the Wazuh indexer security configuration files.
 
-#. Backup the existing Wazuh indexer security configuration files:
+#. Back up the Wazuh indexer security configuration files, then export the configuration that the Wazuh indexer is using. The export overwrites these files with the active configuration, including changes made in the Wazuh dashboard:
 
    .. code-block:: console
 
+      # cp -a /etc/wazuh-indexer/opensearch-security /root/opensearch-security-backup-$(date +%Y%m%d%H%M%S)
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
 
 #. Generate a 64-character long random key using the following command.
 
    .. code-block:: console
 
-      openssl rand -hex 32
+      # openssl rand -hex 32
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
@@ -351,7 +352,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag sets the address of the Wazuh indexer node. On an all-in-one deployment, the Wazuh indexer listens on ``127.0.0.1``, so keep ``localhost``. On a distributed deployment, replace ``localhost`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml``.
 
    The command output must be similar to the following:
 
@@ -398,8 +399,6 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
-
    The command output must be similar to the following:
 
    .. code-block:: console
@@ -433,7 +432,7 @@ Wazuh dashboard configuration
 
       wazuh_core.hosts:
         default:
-          url: https://127.0.0.1
+          url: https://localhost
           port: 55000
           username: wazuh-internal-client
           run_as: true
@@ -451,7 +450,7 @@ Wazuh dashboard configuration
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``administrator``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field:** ``backend_roles``
+      -  **Auth context field:** ``backend_roles``
       -  **Search operation:** ``FIND``
       -  **Value:** Assign the value of the realm role in Keycloak configuration. In our case, this is ``wazuh-admins``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*.
@@ -463,7 +462,7 @@ Wazuh dashboard configuration
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up this file before you carry out the configuration.
 
    .. code-block:: console
 
@@ -481,10 +480,12 @@ Wazuh dashboard configuration
 
    To test the configuration, go to your Wazuh dashboard URL and log in with your Keycloak account.
 
-Setup Keycloak single sign-on with read-only role
--------------------------------------------------
+Set up Keycloak single sign-on with read-only role
+--------------------------------------------------
 
 Follow these steps to integrate Keycloak IdP with Wazuh for single sign-on and grant read-only role to the authenticated Keycloak users on the Wazuh platform:
+
+If you already completed Set up Keycloak single sign-on with administrator role, use the same ``Wazuh`` realm and ``wazuh-saml`` client. Skip steps 1, 2, 3, 7, and 8 of Keycloak configuration, and start at step 4, Create a new role. Skip Wazuh indexer configuration, because the ``saml_auth_domain`` is already in place. In Wazuh dashboard configuration, complete steps 1 and 2 only.
 
 #. :ref:`configuration_keycloak_ro`
 #. :ref:`indexer_configuration_keycloak_ro`
@@ -497,7 +498,7 @@ Keycloak configuration
 
 #. Create a new realm.
 
-   Log in to the Keycloak admin console, click on **Manage** **realms** > **Create realm**. Input a name in the **Realm name** field; in our case, this is named ``Wazuh``. Click on **Create** to apply this configuration.
+   Log in to the Keycloak admin console and click **Manage realms** > **Create realm**. Enter a name in the **Realm name** field. In our case, the name is ``Wazuh``. Click **Create** to apply this configuration.
 
    .. thumbnail:: /images/single-sign-on/keycloak/01-create-realm-form.png
       :title: Create a new realm
@@ -679,7 +680,7 @@ Keycloak configuration
 
 #. Note the necessary parameters from the SAML settings of Keycloak.
 
-   #. The parameters already obtained during the integration are
+   #. The parameters already obtained during the integration are:
 
       -  ``sp.entity_id``: ``wazuh-saml``
       -  ``roles_key``: ``Roles``
@@ -689,7 +690,7 @@ Keycloak configuration
    #. To obtain the remaining parameters
 
       #. Navigate to **Clients** and select the name of your client. In our case, this is **wazuh-saml**.
-      #. Navigate to **Action** > **Download adaptor config**, and ensure the Format option is **mod-auth-mellon**.
+      #. Navigate to **Action** > **Download adapter config**, and ensure the Format option is **mod-auth-mellon**.
       #. Click on **Download** to download the remaining files.
 
       .. thumbnail:: /images/single-sign-on/keycloak/19-download-adaptor-config-dialog.png
@@ -735,19 +736,20 @@ Keycloak configuration
 Wazuh indexer configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+Edit the Wazuh indexer security configuration files.
 
-#. Backup the existing Wazuh indexer security configuration files:
+#. Back up the Wazuh indexer security configuration files, then export the configuration that the Wazuh indexer is using. The export overwrites these files with the active configuration, including changes made in the Wazuh dashboard:
 
    .. code-block:: console
 
+      # cp -a /etc/wazuh-indexer/opensearch-security /root/opensearch-security-backup-$(date +%Y%m%d%H%M%S)
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
 
 #. Generate a 64-character long random key using the following command.
 
    .. code-block:: console
 
-      openssl rand -hex 32
+      # openssl rand -hex 32
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
@@ -755,11 +757,10 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    .. code-block:: console
 
-      chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/idp-metadata.xml
-
-      chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/sp-metadata.xml
-      chmod 640 /etc/wazuh-indexer/opensearch-security/idp-metadata.xml
-      chmod 640 /etc/wazuh-indexer/opensearch-security/sp-metadata.xml
+      # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/idp-metadata.xml
+      # chown root:wazuh-indexer /etc/wazuh-indexer/opensearch-security/sp-metadata.xml
+      # chmod 640 /etc/wazuh-indexer/opensearch-security/idp-metadata.xml
+      # chmod 640 /etc/wazuh-indexer/opensearch-security/sp-metadata.xml
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
@@ -817,7 +818,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag sets the address of the Wazuh indexer node. On an all-in-one deployment, the Wazuh indexer listens on ``127.0.0.1``, so keep ``localhost``. On a distributed deployment, replace ``localhost`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml``.
 
    The command output must be similar to the following:
 
@@ -869,7 +870,7 @@ Wazuh dashboard configuration
 
       wazuh_core.hosts:
         default:
-          url: https://127.0.0.1
+          url: https://localhost
           port: 55000
           username: wazuh-internal-client
           run_as: true
@@ -887,7 +888,7 @@ Wazuh dashboard configuration
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``readonly``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field:** ``backend_roles``
+      -  **Auth context field:** ``backend_roles``
       -  **Search operation:** ``FIND``
       -  **Value:** Assign the value of the **Role name** field in Keycloak configuration. In our case, the backend role is ``wazuh-readonly``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
@@ -899,7 +900,7 @@ Wazuh dashboard configuration
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up this file before you carry out the configuration.
 
    .. code-block:: console
 
@@ -911,7 +912,7 @@ Wazuh dashboard configuration
 
    .. code-block:: console
 
-      systemctl restart wazuh-dashboard
+      # systemctl restart wazuh-dashboard
 
 #. Test the configuration.
 

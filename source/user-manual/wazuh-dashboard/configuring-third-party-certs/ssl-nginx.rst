@@ -52,6 +52,7 @@ Installing the NGINX software on the Wazuh dashboard
             # systemctl start firewalld
             # firewall-cmd --permanent --add-port=443/tcp
             # firewall-cmd --permanent --add-port=80/tcp
+            # firewall-cmd --reload
 
       .. group-tab:: APT
 
@@ -140,6 +141,8 @@ Configure the proxy and the certificates
           username: wazuh-internal-client
           run_as: true
           ca: '/etc/wazuh-dashboard/certs/manager-ca.pem'
+
+   Keep the ``wazuh_core.hosts`` block. The Wazuh dashboard verifies the Wazuh manager API with ``manager-ca.pem``, a copy of ``/etc/wazuh-manager/export/ca.pem`` from the Wazuh manager master node, and the ``url`` host must be a subject alternative name of the Wazuh manager API certificate, ``/etc/wazuh-manager/certs/apid.pem``. Changing the Wazuh dashboard certificate doesn't need a Wazuh manager restart.
 
 #. On APT systems, remove the NGINX default site with the ``unlink`` command. Then create the ``/etc/nginx/conf.d/wazuh.conf`` file:
 

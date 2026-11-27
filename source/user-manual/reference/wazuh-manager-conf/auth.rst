@@ -72,7 +72,7 @@ Enables IPv6 support for the enrollment service.
 use_source_ip
 ^^^^^^^^^^^^^^
 
-Register agents using their source IP address of the enrollment request instead of ``any``.
+Registers agents with the source IP address of their enrollment request instead of registering them with the address ``any``.
 
 +----------------------+-----------+
 | **Default value**    | no        |
@@ -85,11 +85,11 @@ purge
 
 Controls whether a deleted or replaced agent's old entry is kept as an audit trail. When an agent is removed - including the implicit removal when another agent forces it out via re-enrollment - the active ``client.keys`` entry is always deleted regardless of this setting. ``purge`` decides whether that deleted entry is also retained as a ``!``-prefixed placeholder line in ``client.keys`` (for example ``001 !oldname 1.2.3.4 <key>``), which keeps a record of the old ID/name/IP so it isn't reused. By default, the placeholder is kept; ``yes`` suppresses it, removing the entry with no trace.
 
-+----------------------+-----------+
-| **Default value**    | no        |
-+----------------------+-----------+
-| **Allowed values**   | yes, no   |
-+----------------------+-----------+
++----------------------+-------------------------------------+
+| **Default value**    | no (the installer sets it to yes)   |
++----------------------+-------------------------------------+
+| **Allowed values**   | yes, no                             |
++----------------------+-------------------------------------+
 
 use_password
 ^^^^^^^^^^^^^
@@ -114,7 +114,7 @@ A Wazuh 5.0 agent still sends the enrollment password when the file set in ``<en
 
    $ sudo cat /etc/wazuh-manager/authd.pass
 
-Then write it to the agent's password file. The Wazuh agent daemon (``wazuh-agentd``) runs as the ``wazuh`` user, so the file must be readable by that user:
+Then, on the Wazuh agent, write it to the agent's password file. The Wazuh agent daemon (``wazuh-agentd``) runs as the ``wazuh`` user, so the file must be readable by that user:
 
 .. code-block:: console
 
@@ -124,12 +124,12 @@ Then write it to the agent's password file. The Wazuh agent daemon (``wazuh-agen
 
 For the full procedure, including Windows and macOS agents, see :doc:`Using password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>`.
 
-**Password rotation**: The generated password persists across restarts. To rotate it (for example after a security incident), delete ``/etc/wazuh-manager/authd.pass`` on the master and restart ``wazuh-manager-authd``. ``wazuh-manager-authd`` generates a new random password, persists it, and distributes it to workers automatically. It logs the reuse of an existing password at ``INFO`` level on every start.
+**Password rotation**: The generated password persists across restarts. To rotate it (for example after a security incident), delete ``/etc/wazuh-manager/authd.pass`` on the :ref:`master node <reference_wazuh_manager_conf_cluster_node_type>` and restart the Wazuh manager with ``systemctl restart wazuh-manager``. ``wazuh-manager-authd`` generates a new random password, persists it, and distributes it to workers automatically. It logs the reuse of an existing password at ``INFO`` level on every start.
 
 remote_enrollment
 ^^^^^^^^^^^^^^^^^^
 
-Master switch for all remote (network) self-enrollment - both this daemon's own TCP/TLS listener on port 1515 and the HTTPS ``POST /enroll`` bridge served by ``remoted_module``. Disabling it turns off both at once; use ``legacy_enrollment`` to turn off only port 1515 while keeping ``/enroll``. Either way, the local socket (``queue/sockets/auth.sock``) used by ``manage_agents``/the API stays available regardless of this setting.
+Master switch for all remote (network) self-enrollment - both this daemon's own TCP/TLS listener on port 1515 and the HTTPS ``POST /enroll`` endpoint, which ``wazuh-manager-remoted`` serves on the ``<remote><https>`` port and forwards to ``wazuh-manager-authd``. Disabling it turns off both at once; use ``legacy_enrollment`` to turn off only port 1515 while keeping ``/enroll``. Either way, the local socket (``queue/sockets/auth.sock``) used by ``manage_agents``/the API stays available regardless of this setting.
 
 +----------------------+-----------+
 | **Default value**    | yes       |
@@ -244,7 +244,7 @@ Allow forced re-enrollment (overwrite an existing agent entry).
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
 
-force / key_mismatch
+force/key_mismatch
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Force re-enrollment when an agent reconnects with a key that does not match what the manager has stored.
@@ -255,7 +255,7 @@ Force re-enrollment when an agent reconnects with a key that does not match what
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
 
-force / disconnected_time
+force/disconnected_time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Minimum time an agent must have been disconnected before it can be forcibly re-enrolled. The ``enabled`` attribute gates this check. The value is the duration; ``enabled`` controls whether the check is active.
@@ -273,7 +273,7 @@ Minimum time an agent must have been disconnected before it can be forcibly re-e
    <!-- Disable the check entirely -->
    <disconnected_time enabled="no">0</disconnected_time>
 
-force / after_registration_time
+force/after_registration_time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Minimum time since an agent was last registered before a forced re-enrollment is permitted. This prevents an agent from being replaced immediately after its initial enrollment.

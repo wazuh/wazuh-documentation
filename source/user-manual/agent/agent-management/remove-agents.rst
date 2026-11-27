@@ -21,7 +21,7 @@ Remove agents using the Wazuh dashboard
 You can remove Wazuh agents directly from the Wazuh dashboard.
 
 #. In the Wazuh dashboard, go to **Agents management** > **Summary**.
-#. In the **Actions** column, click the selection icon for the Wazuh agent that you want to remove.
+#. In the **Actions** column, click the actions icon for the Wazuh agent that you want to remove.
 #. Select **Remove**.
 #. When prompted, click **Remove**.
 

@@ -160,7 +160,7 @@ Wazuh agent
 
 You need to authorize the Wazuh module for Azure to access your Azure Log Analytics. For more information on setting up authorization, see the :ref:`authentication <configure_azure_credentials>` section.
 
-#. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf`` of the Wazuh agent.
+#. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf`` of the Wazuh agent, inside an ``<ossec_config>`` block.
 
    .. code-block:: xml
       :emphasize-lines: 6, 7, 11
@@ -185,6 +185,8 @@ You need to authorize the Wazuh module for Azure to access your Azure Log Analyt
 
    -  ``<auth_path>`` is the full path of the file holding the ``application_id`` and ``application_key``, created in the authentication section.
    -  ``<tenantdomain>`` is the tenant domain name. You can obtain this from the **Overview** section in Microsoft Entra ID. Replace ``<YOUR_TENANT_DOMAIN>`` with your tenant domain.
+   -  ``<tag>`` is a label added to the collected events to identify the request that produced them.
+   -  ``<query>`` is the Log Analytics query to run. In this example, ``AuditLogs`` returns the Microsoft Entra ID audit log records.
    -  ``<workspace>`` is the workspace ID that you need for authentication. Replace ``<WORKSPACE_ID>`` with your workspace ID.
    -  ``<time_offset>`` is the timeframe, counted backward. In this case, it downloads all logs from the past 24 hours.
 
@@ -237,7 +239,7 @@ Follow the steps outlined below to create a user on Microsoft Entra ID:
 Visualizing the findings on the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once set up, you can check the results in the **Wazuh dashboard**.
+Once set up, you can check the results in the **Wazuh dashboard**, in the **Findings** tab of **Threat Hunting**.
 
 .. thumbnail:: /images/cloud-security/azure/results-in-wazuh-dashboard.png
    :alt: Threat Hunting Findings tab in the Wazuh dashboard, showing Azure alerts including the new user creation event

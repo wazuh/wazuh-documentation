@@ -53,11 +53,9 @@ Communication with the Wazuh manager
 
 The Wazuh agent communicates with the :doc:`Wazuh manager <wazuh-manager>` to send collected data and security events. It also sends operational data, including its configuration and status. The Wazuh agent retrieves pending tasks from the Wazuh manager through the same channel, including upgrades, configuration changes, and Active Response commands.
 
-The Wazuh agent communicates with the Wazuh manager through the HTTPS agent API on port 1517. TLS encrypts the communication, and the Wazuh agent authenticates requests using a signed bearer token. The Wazuh agent sends events in batches and queues them locally when the Wazuh manager is unreachable. Local queuing helps prevent event loss during temporary connection failures and reduces repeated connection attempts.
+The Wazuh agent communicates with the Wazuh manager over an encrypted and authenticated HTTPS connection on port 1517. The Wazuh agent sends events in batches and queues them locally when the Wazuh manager is unreachable. Local queuing helps prevent event loss during temporary connection failures and reduces repeated connection attempts. Wazuh 4.x agents use a legacy channel on port 1514.
 
-Wazuh 4.x agents use the legacy AES-encrypted TCP or UDP channel on port 1514. The ``<legacy>`` block of the ``<remote>`` section in the Wazuh manager configuration controls this channel, and the configuration the installer generates enables it.
-
-The Wazuh agent enrolls with the Wazuh manager before it can send data. Enrollment provides the Wazuh agent with a unique authentication key. The Wazuh agent uses this key to generate the bearer tokens that authenticate its requests.
+The Wazuh agent enrolls with the Wazuh manager before it can send data. Enrollment provides the Wazuh agent with a unique client key. The Wazuh agent uses this key to authenticate its requests.
 
 Next step
 ---------

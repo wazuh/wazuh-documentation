@@ -104,7 +104,7 @@ The pre-enrichment stage performs the following actions:
         }
       }
 
--  **Discarded events filter**: The discarded events filter decides whether discarded events continue through the pipeline. A discarded event is an event that a decoder marks with the ``discard_events`` :doc:`helper function </user-manual/data-analysis/helper-functions>`, which sets the ``wazuh.space.event_discarded`` field to ``true``. This behavior is controlled by the ``index_discarded_events`` setting of the policy.
+-  **Discarded events filter**: The discarded events filter decides whether discarded events continue through the pipeline. A discarded event is an event that a decoder marks with the ``discard_event`` :doc:`helper function </user-manual/data-analysis/helper-functions>`, which sets the ``wazuh.space.event_discarded`` field to ``true``. This behavior is controlled by the ``index_discarded_events`` setting of the policy.
 -  **Cleanup of decoder temporary variables**: Decoders can only map fields that belong to the WCS or to temporary variables. Temporary variables are used to store intermediate values that help decoders share information while processing an event. After decoding is complete, all temporary variables are automatically removed. This cleanup step always runs at the end of pre-enrichment and requires no user configuration. As a result, only WCS-compliant fields remain in the event, ensuring it can be successfully indexed by the Wazuh indexer.
 
 .. _enrichment:
@@ -241,7 +241,7 @@ A default Wazuh manager installation includes the two outputs shown in the table
      - Writes processed events to a local file on the Wazuh manager
      - Disabled
 
-The output stage operates as a broadcaster. It dispatches the processed event independently to every active output, allowing multiple destinations to receive the same processed event. The ``file-output-integrations.yml`` output writes each event to ``/var/wazuh-manager/logs/<SPACE>-wazuh-events-v5/<YEAR>/<MONTH>/wazuh-<SPACE>-wazuh-events-v5-<DAY>.json``, for example in the ``standard-wazuh-events-v5`` directory for the standard space. It compresses the files and keeps 90 files for each space.
+The output stage operates as a broadcaster. It dispatches the processed event independently to every active output, allowing multiple destinations to receive the same processed event. The ``file-output-integrations.yml`` output writes each event to ``/var/wazuh-manager/logs/<SPACE>-wazuh-events-v5/<YEAR>/<MONTH>/wazuh-<SPACE>-wazuh-events-v5-<DAY>.json``, for example in the ``standard-wazuh-events-v5`` directory for the standard space. It compresses rotated files and deletes the oldest ones beyond 90 files or 20 GiB for each space.
 
 .. thumbnail:: /images/manual/wazuh-server/event-flow-on-output.png
    :title: Event flow on output
@@ -260,7 +260,7 @@ The ``index_unclassified_events`` setting is ``false`` by default. To enable it,
    :emphasize-lines: 1,2,6,7
 
    curl -sk -u admin:<ADMIN_PASSWORD> -X PUT \
-     "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_plugins/_content_manager/policy/standard" \
+     "https://<INDEXER_ADDRESS>:9200/_plugins/_content_manager/policy/standard" \
      -H 'Content-Type: application/json' \
      -d '{
        "resource": {
@@ -272,7 +272,7 @@ The ``index_unclassified_events`` setting is ``false`` by default. To enable it,
        }
      }'
 
-Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the IP address of the Wazuh indexer and ``<ADMIN_PASSWORD>`` with the password of the Wazuh indexer ``admin`` user. The request also sets the ``enrichments``, ``filters``, ``enabled``, and ``index_discarded_events`` fields of the policy. Replace ``<CURRENT_ENRICHMENTS>`` and ``<CURRENT_FILTER_IDS>`` with the current values in the policy, because the request replaces the ``enrichments`` list and rejects a ``filters`` list that differs from the current one. Keep the current values of ``enabled`` and ``index_discarded_events``. In the ``draft`` space, the request also requires the ``author``, ``description``, ``documentation``, and ``references`` fields in ``resource.metadata``.
+Replace ``<INDEXER_ADDRESS>`` with the IP address or DNS name of the Wazuh indexer and ``<ADMIN_PASSWORD>`` with the password of the Wazuh indexer ``admin`` user. The request also sets the ``enrichments``, ``filters``, ``enabled``, and ``index_discarded_events`` fields of the policy. Replace ``<CURRENT_ENRICHMENTS>`` and ``<CURRENT_FILTER_IDS>`` with the current values in the policy, because the request replaces the ``enrichments`` list and rejects a ``filters`` list that differs from the current one. Keep the current values of ``enabled`` and ``index_discarded_events``. In the ``draft`` space, the request also requires the ``author``, ``description``, ``documentation``, and ``references`` fields in ``resource.metadata``.
 
 To view these events in **Discover**, select an index pattern that matches ``wazuh-events-v5-unclassified*`` to view unclassified events, or ``wazuh-events-v5-*`` to view all indexed events.
 
@@ -594,7 +594,7 @@ The following JSON object provides an example of a WCS definition:
 Content management
 ------------------
 
-Content management keeps the processing content of the Wazuh normalization engine in step with the Wazuh indexer. The content includes:
+Content management keeps the processing content of the Wazuh normalization engine in step with the Wazuh indexer. Decoders and filters are assets, the smallest units of a security policy. The content includes:
 
 -  **Policy configuration**: The list of integrations (ordered by evaluation priority) and policy-level settings.
 -  **Integrations**: Logical groups of decoders (and optionally key-value databases, or KVDBs) for each log source.
@@ -633,3 +633,33 @@ The Wazuh normalization engine manages the following spaces:
 -  **Custom**: An independent space for user-defined or user-modified content. Users manage this space through the Wazuh indexer, and CMSync propagates any changes to the Wazuh normalization engine.
 
 When Wazuh starts, the normalization engine triggers an initial synchronization to pull both spaces from the Wazuh indexer. This initial synchronization makes all assets available before the engine builds security policies and defines routes. After this initial load, subsequent synchronization cycles run periodically to keep the local state up to date. When both spaces are available and synchronized, the Wazuh normalization engine processes all incoming events through each active operational graph.
+
+.. _event_queue:
+
+Event queue
+-----------
+
+The Wazuh normalization engine holds incoming events in an input queue until it can process them. When events arrive faster than the engine processes them, the queue fills up and the engine drops new events. To tune the queue, add the following internal options to the ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file, one ``analysisd.<OPTION>=<VALUE>`` line each, and restart the Wazuh manager with ``systemctl restart wazuh-manager``.
+
+The following table lists the options, their default values, and their allowed values.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 10 15 40
+
+   * - Option
+     - Default
+     - Allowed values
+     - Description
+   * - ``analysisd.event_queue_size``
+     - 131072
+     - 8192 to 2147483647
+     - Maximum number of events waiting in the input queue. When the queue is full, the engine drops new events. A value outside the allowed range stops the engine at start.
+   * - ``analysisd.event_queue_eps``
+     - 0
+     - 0 or a positive integer
+     - Maximum number of events per second that the engine takes from the input queue. 0 means unlimited. Above this rate, the queue fills up and the engine drops new events.
+   * - ``analysisd.event_queue_max_bytes``
+     - 33554432 (32 MB)
+     - 0 or a positive integer, in bytes
+     - Maximum total size of the events waiting in the input queue. 0 means unlimited. When the limit is reached, the engine drops new events.

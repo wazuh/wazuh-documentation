@@ -30,6 +30,8 @@ Endpoint security
 
 This section of the Wazuh dashboard provides dashboards for endpoint security capabilities, including configuration assessment, malware detection, and file integrity monitoring.
 
+.. _wazuh_dashboard_navigating_the_wazuh_dashboard_configuration_assessment:
+
 Configuration Assessment
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -68,6 +70,8 @@ Threat intelligence
 
 This section of the Wazuh dashboard provides dashboards for threat intelligence capabilities, including threat hunting, MITRE ATT\&CK analysis, vulnerability detection, and case management. The **CTI Explorer** and **CTI Feed** pages show the content that Wazuh CTI delivers and its synchronization state.
 
+.. _wazuh_dashboard_navigating_the_wazuh_dashboard_threat_hunting:
+
 Threat Hunting
 ~~~~~~~~~~~~~~
 
@@ -78,6 +82,8 @@ This dashboard provides visibility into security events and suspicious activity 
    :width: 80%
    :title: Threat Hunting
    :alt: Threat Hunting
+
+.. _wazuh_dashboard_navigating_the_wazuh_dashboard_vulnerability_detection:
 
 Vulnerability Detection
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,10 +96,14 @@ This dashboard shows detected vulnerabilities, affected endpoints, severity leve
    :title: Vulnerability detection
    :alt: Vulnerability detection
 
+.. _wazuh_dashboard_navigating_the_wazuh_dashboard_case_management:
+
 Case Management
 ~~~~~~~~~~~~~~~
 
 This dashboard shows investigation cases by status, severity, and priority on its **Cases** tab.
+
+.. _wazuh_dashboard_navigating_the_wazuh_dashboard_mitre_att_ck:
 
 MITRE ATT\&CK
 ~~~~~~~~~~~~~
@@ -154,6 +164,8 @@ This dashboard shows IT hygiene data, including system inventory information, in
    :title: IT Hygiene
    :alt: IT Hygiene
 
+.. _wazuh_dashboard_navigating_the_wazuh_dashboard_regulatory_compliance:
+
 Regulatory Compliance
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -164,6 +176,8 @@ This dashboard shows compliance monitoring data mapped to regulatory frameworks:
    :width: 80%
    :title: Regulatory compliance
    :alt: Regulatory compliance
+
+.. _wazuh_dashboard_navigating_the_wazuh_dashboard_incident_response:
 
 Incident Response
 ~~~~~~~~~~~~~~~~~
@@ -186,6 +200,8 @@ This section shows dashboards for monitoring cloud workloads, cloud service acti
    :width: 80%
    :title: Cloud security
    :alt: Cloud security
+
+.. _wazuh_dashboard_navigating_the_wazuh_dashboard_ruleset_management:
 
 Ruleset management
 ^^^^^^^^^^^^^^^^^^

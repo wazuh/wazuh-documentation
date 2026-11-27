@@ -43,7 +43,9 @@ The following sections show how to request the client key on different operating
 
 .. note::
 
-   The Wazuh manager API administrator user is ``wazuh``. Its password is generated during installation and stored as ``WAZUH_MANAGER_API_PASSWORD`` in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager. To read it, run ``grep WAZUH_MANAGER_API_PASSWORD /etc/wazuh-manager/export/credentials.env`` as root. To change it, see :doc:`Password management </user-manual/user-administration/password-management>`.
+   The Wazuh manager API administrator user is ``wazuh``. Its password is generated during installation and stored as ``WAZUH_MANAGER_API_PASSWORD`` in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager master node. To read it, run ``grep WAZUH_MANAGER_API_PASSWORD /etc/wazuh-manager/export/credentials.env`` as root. A password changed later isn't written to that file, which keeps the previous value. To change it, see :doc:`Password management </user-manual/user-administration/password-management>`.
+
+To verify the Wazuh manager API certificate, copy ``/etc/wazuh-manager/export/ca.pem`` from the Wazuh manager master node to the endpoint, for example as ``/root/wazuh-manager-ca.pem``. The address you connect to must be one of the certificate's subject alternative names.
 
 Linux/Unix and macOS
 --------------------
@@ -52,7 +54,7 @@ Linux/Unix and macOS
 
    .. code-block:: console
 
-      # TOKEN=$(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
+      # TOKEN=$(curl -u <WAZUH_MANAGER_API_USER>:<WAZUH_MANAGER_API_PASSWORD> --cacert /root/wazuh-manager-ca.pem -X POST "https://<WAZUH_MANAGER_ADDRESS>:55000/security/user/authenticate?raw=true")
 
    Confirm that the command generated the token successfully:
 
@@ -75,7 +77,7 @@ Linux/Unix and macOS
 
    .. code-block:: console
 
-      # curl -k -X POST -d '{"name":"<AGENT_NAME>"}' "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN"
+      # curl --cacert /root/wazuh-manager-ca.pem -X POST -d '{"name":"<AGENT_NAME>"}' "https://<WAZUH_MANAGER_ADDRESS>:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN"
 
    The output includes the client key and agent ID:
 
@@ -97,31 +99,11 @@ Follow these steps to send a Wazuh agent enrollment request from a Windows endpo
 
 #. Open PowerShell with administrative privileges.
 
-#. If the Wazuh manager API uses publicly trusted certificates, move to step 3. If the Wazuh manager API uses a self-signed SSL/TLS certificate, run the following function in PowerShell to ignore certificate validation errors:
+#. If the Wazuh manager API uses a self-signed certificate, import the Wazuh manager CA certificate that you copied to the endpoint into the trusted root store. Replace ``<CA_FILE>`` with the path to the copied ``ca.pem`` file:
 
    .. code-block:: powershell
 
-      function Ignore-SelfSignedCerts {
-          add-type @"
-              using System.Net;
-              using System.Security.Cryptography.X509Certificates;
-              public class PolicyCert : ICertificatePolicy {
-                  public PolicyCert() {}
-                  public bool CheckValidationResult(
-                      ServicePoint sPoint, X509Certificate cert,
-                      WebRequest wRequest, int certProb) {
-                      return true;
-                  }
-              }
-      "@
-          [System.Net.ServicePointManager]::CertificatePolicy = new-object PolicyCert
-          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
-      }
-      Ignore-SelfSignedCerts
-
-   .. note::
-
-      This function exists only in the PowerShell session where you run it.
+      > Import-Certificate -FilePath <CA_FILE> -CertStoreLocation Cert:\LocalMachine\Root
 
 #. Encode the Wazuh manager API credentials in Base64 and assign it to the ``$base64AuthInfo`` variable. Replace ``<WAZUH_MANAGER_API_USER>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with the Wazuh manager API credentials:
 
@@ -166,29 +148,11 @@ Follow these steps to send a Wazuh agent enrollment request from a Windows endpo
 
    .. code-block:: powershell
 
-      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Bearer {0}" -f $TOKEN)} -Method POST -ContentType "application/json" -Uri https://<WAZUH_MANAGER_ADDRESS>:55000/agents -Body $AgentName
+      > Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Bearer {0}" -f $TOKEN)} -Method POST -ContentType "application/json" -Uri https://<WAZUH_MANAGER_ADDRESS>:55000/agents -Body $AgentName | Select-Object -Expand Content
 
    The output looks like this:
 
    .. code-block:: none
       :class: output
 
-      StatusCode        : 200
-      StatusDescription : OK
-      Content           : {"data": {"id": "005", "key": "MDA1IFRlc3QyIGFueSAwOTFhZWIyN2IyMDM0Y2U5NzVkNTQxMzNhNTUxZmVmZmRjYmI3
-                          Yjk1Y2E0ODk0MzY4OWJhNGJmNGE0Mjk4NDE0"}, "error": 0}
-      RawContent        : HTTP/1.1 200 OK
-                          strict-transport-security: max-age=63072000; includeSubdomains
-                          x-frame-options: deny
-                          x-xss-protection: 0
-                          x-content-type-options: nosniff
-                          content-security-policy: none
-                          referrer-po...
-      Forms             :
-      Headers           : {[strict-transport-security, max-age=63072000; includeSubdomains], [x-frame-options, deny],
-                          [x-xss-protection, 0], [x-content-type-options, nosniff]...}
-      Images            : {}
-      InputFields       : {}
-      Links             : {}
-      ParsedHtml        :
-      RawContentLength  : 150
+      {"data": {"id": "005", "key": "MDA1IFRlc3QyIGFueSAwOTFhZWIyN2IyMDM0Y2U5NzVkNTQxMzNhNTUxZmVmZmRjYmI3Yjk1Y2E0ODk0MzY4OWJhNGJmNGE0Mjk4NDE0"}, "error": 0}

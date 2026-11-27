@@ -45,25 +45,21 @@ For this use case, configure Wazuh to detect changes to files in the ``/root/cre
 
 **On the agent**
 
-#. Switch to the root user with ``sudo su``, then check whether the Audit daemon is installed on your endpoint.
+#. Switch to the root user with ``sudo su``, then install the Audit daemon (``auditd``). Who-data monitoring uses ``auditd`` to find out who made each change.
+
+   On Ubuntu and other Debian-based systems, the ``auditd`` package already includes the ``af_unix`` plugin that who-data monitoring needs:
 
    .. code-block:: console
 
-      # auditctl -v
+      # apt-get install auditd
 
-   If the Audit daemon is installed, the output shows its version, for example, ``auditctl version 3.1.2``. You need this version in a later step. In Red Hat-based systems, Auditd is commonly installed by default. If it's not installed, install it using the following command:
-
-   .. code-block:: console
-
-      # yum install audit
-
-   For Debian-based systems, use the following command:
+   On Red Hat-based systems, also install the ``audispd-plugins`` package, which provides the ``af_unix`` plugin:
 
    .. code-block:: console
 
-      # apt install auditd
+      # yum install audit audispd-plugins
 
-   For audit version 3.1.1 and later, restart the audit service. On Red Hat-based systems, first install the ``audispd-af_unix`` plugin with ``yum install audispd-plugins``. On Debian-based systems, the ``auditd`` package already includes the plugin:
+   Restart the Audit service:
 
    .. code-block:: console
 

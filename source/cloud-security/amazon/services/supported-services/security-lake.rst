@@ -76,7 +76,7 @@ Verifying events are flowing into S3 bucket
 Follow these steps in your AWS account to verify that Parquet files are flowing into your configured S3 buckets.
 
 #. In your AWS console, navigate to the **Amazon S3** service.
-#. Navigate to the **Buckets** section, and click the S3 bucket name that Security Lake created for each applicable region. These bucket names start with the prefix ``aws-security-data-lake`` .
+#. Navigate to the **Buckets** section, and click the S3 bucket name that Security Lake created for each applicable region. These bucket names start with the prefix ``aws-security-data-lake``.
 #. In each applicable bucket, navigate to the **Objects** tab. Click through the directories to verify that Security Lake has available events flowing into the S3 bucket. Check that new files with the ``.gz.parquet`` extension appear.
 
    -  If you enabled Security Lake on more than one AWS account, check if you see each applicable account number listed. Check that Parquet files exist inside each account.
@@ -99,9 +99,7 @@ Follow these steps to modify the Security Lake subscriber role. You have to asso
 #. In your Amazon IAM service, navigate to the **Roles** page.
 #. In the **Roles** page, select the subscriber role that Security Lake created when you created the subscriber.
 #. In the **Summary** page, navigate to the **Trust relationships** tab to modify the Trusted entity policy.
-#. Modify the Trusted entity policy with the following updates:
-
-   -  In the trust policy, set the AWS principal to the ARN of the IAM user that you associate with the role. The Wazuh module for AWS can then assume the role with the access keys of this user. See the following trust policy example:
+#. Modify the Trusted entity policy: set the AWS principal to the ARN of the IAM user that you associate with the role. The Wazuh module for AWS can then assume the role with the access keys of this user. See the following trust policy example:
 
    .. code-block:: json
       :emphasize-lines: 8,14
@@ -129,7 +127,7 @@ Follow these steps to modify the Security Lake subscriber role. You have to asso
 
    .. note::
 
-      ``<ACCOUNT_ID>``, ``<USERNAME>`` and ``<EXTERNAL_ID>`` are placeholders.  Replace them with the appropriate values.
+      Replace ``<ACCOUNT_ID>`` with your AWS account ID, ``<USERNAME>`` with the IAM user associated with the role, and ``<EXTERNAL_ID>`` with the external ID you entered when you created the Security Lake subscriber.
 
 Granting user permission to switch roles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

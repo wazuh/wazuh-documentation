@@ -116,7 +116,7 @@ Run these steps as root on one host of your deployment, for example, your first 
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --generate-config-files -id -as <ALTERNATE_ADDRESS>
 
-   If clients will reach the Wazuh manager API through an address the host cannot know, add it with ``-ap|--api-san <MANAGER_API_ADDRESS>``. To use both options together, run:
+   If clients will reach the Wazuh manager API through an address the host cannot know, add it with ``-ap|--api-san <MANAGER_API_ADDRESS>``. This option adds the address to the Wazuh manager API certificate and makes the API listen on all network interfaces. To use both options together, run:
 
    .. code-block:: console
 
@@ -235,10 +235,10 @@ Run the following command on a Wazuh indexer node to print the Wazuh indexer adm
       ip             heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                                        cluster_manager name
       192.168.33.135           37          98  15    0.70    0.99     0.79 dimr      cluster_manager,data,ingest,remote_cluster_client *               indexer
 
-Disable Wazuh updates
+Wazuh package updates
 ---------------------
 
-The installation assistant installs the Wazuh packages from downloaded files and doesn't add a Wazuh package repository, so there is no repository to disable.
+The installation assistant installs the Wazuh packages from downloaded files and doesn't add a Wazuh package repository, so the package manager doesn't upgrade them.
 
 Next steps
 ----------

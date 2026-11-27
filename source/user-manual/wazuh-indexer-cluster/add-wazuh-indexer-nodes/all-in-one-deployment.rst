@@ -33,21 +33,21 @@ Perform the following steps on the existing all-in-one node.
           - name: <NEW_WAZUH_INDEXER_NODE_NAME>
             ip: "<NEW_WAZUH_INDEXER_IP>"
 
-#. Download the certificates tool to this directory and run it to create the certificate for the new Wazuh indexer node. The tool reads ``config.yml`` from its own directory, and signs the certificate with the root CA in the directory set in ``WAZUH_CA_DIR``. Without this variable, the tool creates a new root CA, and the certificate of the new node doesn't chain to the root CA of the cluster:
+#. Copy the certificates tool, ``/usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh``, from the Wazuh indexer package to this directory and run it to create the certificate for the new Wazuh indexer node. The tool reads ``config.yml`` from its own directory, and signs the certificate with the root CA in the directory set in ``WAZUH_CA_DIR``. Without this variable, the tool creates a new root CA, and the certificate of the new node doesn't chain to the root CA of the cluster:
 
    .. code-block:: console
 
-      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
-      # WAZUH_CA_DIR=/etc/wazuh-indexer/ca bash wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A
+      # cp /usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh .
+      # WAZUH_CA_DIR=/etc/wazuh-indexer/ca bash wazuh-certs-tool.sh -A
 
-#. Pack the certificates of the new node with the root CA certificate and the Wazuh indexer passwords, and copy the archive to the new Wazuh indexer node. You can use the ``scp`` utility to copy the archive securely:
+#. Pack the certificates of the new node with the root CA certificate and private key, and the Wazuh indexer passwords, and copy the archive to the new Wazuh indexer node. You can use the ``scp`` utility to copy the archive securely:
 
    .. code-block:: console
       :emphasize-lines: 3,4,5
 
       # install -m 0600 /dev/null wazuh-certificates/credentials.env
       # grep '^WAZUH_INDEXER_' /etc/wazuh-indexer/export/credentials.env > wazuh-certificates/credentials.env
-      # tar -cvf ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar -C ./wazuh-certificates/ ./<NEW_WAZUH_INDEXER_NODE_NAME>.pem ./<NEW_WAZUH_INDEXER_NODE_NAME>-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem ./credentials.env
+      # tar -cvf ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar -C ./wazuh-certificates/ ./<NEW_WAZUH_INDEXER_NODE_NAME>.pem ./<NEW_WAZUH_INDEXER_NODE_NAME>-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem ./credentials.env -C /etc/wazuh-indexer/ca ./root-ca.key
       # chmod 600 ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar
       # scp ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar <TARGET_USERNAME>@<TARGET_IP>:
 
@@ -58,7 +58,7 @@ Perform the following steps on the existing all-in-one node.
    -  ``<TARGET_USERNAME>`` with the SSH login username on the new Wazuh indexer node.
    -  ``<TARGET_IP>`` with the IP address of the new Wazuh indexer node.
 
-   The archive holds the private key of the new node and the Wazuh indexer passwords. Remove it from both hosts after the new node is installed.
+   The archive holds the private keys of the new node and of the root CA, and the Wazuh indexer passwords. Remove it from both hosts after the new node is installed.
 
 Configuring existing components to connect with the new node
 ------------------------------------------------------------

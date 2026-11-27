@@ -12,6 +12,8 @@ Detectors evaluate normalized events against a defined set of rules to identify 
 
 Detectors fall outside the space promotion logic because they can only be under the custom or standard space. Wazuh includes several built-in detectors that run predefined rule sets out of the box at configured intervals, enabling organizations to begin monitoring for common threats immediately. Users can also create and customize their own detectors, defining detection logic and execution schedules to meet their security, operational, and compliance requirements.
 
+Wazuh provides one standard detector for each integration, created from the CTI content. Standard detectors have no alerting triggers: they record findings, but they don't raise alerts or call notification channels. You can stop and start a standard detector, but you can't change its other settings or delete it.
+
 .. thumbnail:: /images/manual/data-analysis/ruleset-management-detectors.png
    :title: Detectors
    :alt: Detectors
@@ -56,6 +58,8 @@ Disabling or tuning a Standard rule
 
 Standard content is read-only because Wazuh continuously syncs it from the CTI feed (see :doc:`Space <space>`), so you cannot edit or disable a Standard rule directly. To stop it from generating findings, exclude it through a detector instead.
 
+You can also stop or start a standard detector with the Wazuh indexer API. Send ``PUT /_plugins/_security_analytics/detectors/<DETECTOR_ID>`` with the detector body and change only ``enabled``. Any other change, and any ``DELETE`` request, returns ``400 Bad Request``. Write ``last_update_time`` and ``enabled_time`` as epoch milliseconds: a ``GET`` request returns them as ISO 8601 strings, and sending them back unchanged fails with ``Malformed detector request body``. The request needs the ``cluster:admin/opensearch/securityanalytics/detector/write`` permission, which only the ``all_access`` role has by default.
+
 To silence a specific Standard rule:
 
 #. Go to **Ruleset Management** > **Detection** > **Rules**, set the space selector to **Standard**, and open the rule you want to silence. Note its Integration field, content in the standard space can have more than one similarly named integration (for example, ``windows`` and ``windows-rules``), so confirm you have the right one before proceeding.
@@ -63,6 +67,10 @@ To silence a specific Standard rule:
 #. Go to **Ruleset Management** > **Detection** > **Detectors**, apply a filter for content in the standard space, and open the detector that covers that integration.
 
 #. From the detector's **Actions** menu, select **Stop detector**.
+
+   .. warning::
+
+      A stopped detector produces no findings, and the events indexed while it's stopped are never evaluated later. Starting it again resumes detection only from that moment, so create the replacement detector right after you stop the original.
 
 #. Back on the **Detectors** page, click **Create detector**.
 

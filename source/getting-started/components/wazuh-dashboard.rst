@@ -32,10 +32,16 @@ The **Home** > **Overview** page is the default landing page. It summarizes Wazu
    :align: center
    :width: 80%
 
+.. thumbnail:: /images/getting-started/dashboard-quick-access.png
+   :title: Quick access menu
+   :alt: Quick access menu
+   :align: center
+   :width: 80%
+
 The Wazuh pages are grouped into these menus:
 
 -  **Endpoint security**: **Configuration Assessment**, **Malware Detection**, and **File Integrity Monitoring**
--  **Threat intelligence**: **Threat Hunting**, **MITRE ATT&CK**, **Vulnerability Detection**, and **Case Management**
+-  **Threat intelligence**: **Threat Hunting**, **MITRE ATT&CK**, **Vulnerability Detection**, **Case Management**, **CTI Explorer**, and **CTI Feed**
 -  **Security operations**: **IT Hygiene**, **Regulatory Compliance**, and **Incident Response**
 -  **Cloud security**: **Docker**, **Amazon Web Services**, **Google Cloud**, **GitHub**, **Office 365**, and **Microsoft Graph API**
 
@@ -48,6 +54,14 @@ The Wazuh pages are grouped into these menus:
 .. thumbnail:: /images/getting-started/dashboard-menus-operations-cloud.png
    :title: Security operations and cloud security pages
    :alt: Security operations and cloud security pages
+   :align: center
+   :width: 80%
+
+**CTI Explorer** lets you search the indicators of compromise (IoCs) and vulnerability records that the Wazuh Cyber Threat Intelligence (CTI) feed delivers, and check a domain, URL, IP address, file hash, or CVE ID against them. **CTI Feed** shows the Wazuh CTI subscription, whether each feed is up to date, and how much content each feed delivered, and lets you request a sync.
+
+.. thumbnail:: /images/getting-started/dashboard-cti-explorer.png
+   :title: CTI Explorer
+   :alt: CTI Explorer
    :align: center
    :width: 80%
 
@@ -89,6 +103,12 @@ The **Indexer management** menu contains **Dev Tools**, a console to send reques
 
 The **Dashboard management** menu contains **Dashboards Management**, **Health Check**, **Server API**, and **About**. **Health Check** runs checks on the Wazuh dashboard setup, such as the Wazuh manager API connection, certificates, and index patterns. **Server API** shows and manages the connection to the Wazuh manager API.
 
+.. thumbnail:: /images/getting-started/dashboard-health-check.png
+   :title: Health Check
+   :alt: Health Check
+   :align: center
+   :width: 80%
+
 Ruleset management
 ------------------
 
@@ -109,7 +129,13 @@ The **Ruleset management** menu contains the following pages:
    :align: center
    :width: 80%
 
-The Wazuh dashboard sends this content to the Content Manager REST API of the Wazuh indexer. You can use **Log test** to check custom decoders and rules before you rely on them.
+.. thumbnail:: /images/getting-started/dashboard-ruleset-detectors.png
+   :title: Detectors
+   :alt: Detectors
+   :align: center
+   :width: 80%
+
+You can use **Log test** to check custom decoders and rules before you rely on them.
 
 .. thumbnail:: /images/getting-started/dashboard-log-test.png
    :title: Log test
@@ -131,6 +157,12 @@ The **Agents management** menu contains the following pages:
 .. thumbnail:: /images/getting-started/dashboard-agents-management.png
    :title: Agents management menu
    :alt: Agents management menu
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/getting-started/dashboard-enrollment-tokens.png
+   :title: Enrollment tokens
+   :alt: Enrollment tokens
    :align: center
    :width: 80%
 
@@ -166,7 +198,7 @@ The Wazuh dashboard includes an AI Assistant that you open from the **Home** men
    :align: center
    :width: 80%
 
-The Wazuh dashboard encrypts the AI provider API keys that the AI Assistant stores. The Wazuh dashboard package generates the ``wazuh_ai_assistant.encryptionKey`` encryption key in the Wazuh dashboard keystore if it is not defined in either the keystore or ``opensearch_dashboards.yml``.
+The Wazuh dashboard encrypts the AI provider API keys that the AI Assistant stores.
 
 Next steps
 ----------

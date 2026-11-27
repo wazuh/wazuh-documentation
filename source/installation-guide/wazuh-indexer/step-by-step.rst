@@ -8,7 +8,7 @@ Installing the Wazuh indexer step-by-step
 
 Install and configure the Wazuh indexer as a single-node or multi-node cluster by following these step-by-step instructions. The Wazuh indexer is a scalable search and analytics engine. It stores and indexes the events that the Wazuh manager forwards, so you can analyze them in near real time.
 
-Before you start, choose a name and an IP address for every Wazuh indexer, manager, and dashboard node. You create the certificates and passwords for all nodes on the first Wazuh indexer node. Then you copy one archive to each of the other nodes. Each Wazuh manager node takes only its passwords and its client certificate for the Wazuh indexer from the archive. The Wazuh manager package issues the node's agent listener and Wazuh manager API certificates. Each Wazuh dashboard node takes only its two passwords and the root CA from the archive.
+Before you start, choose a name and an IP address for every Wazuh indexer, manager, and dashboard node. You create the certificates and passwords for all nodes on the first Wazuh indexer node. Then you copy one archive to each of the other nodes. Each Wazuh manager node takes only its passwords and the root CA from the archive. The Wazuh manager package issues the node's agent listener and Wazuh manager API certificates. Each Wazuh dashboard node takes only its two passwords and the root CA from the archive.
 
 For an all-in-one deployment, see :ref:`All-in-one deployment <wazuh_indexer_all_in_one_deployment>` before you start.
 
@@ -26,7 +26,7 @@ The installation process is divided into four stages:
 Wazuh indexer nodes installation
 --------------------------------
 
-Run this stage on every Wazuh indexer node. Install the package only on the first node at this stage, as it generates the certificates and passwords for the entire deployment. Install the package on the remaining nodes later, in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`, after you place the root CA and the passwords. A node that installs the package with nothing placed creates its own root CA and passwords. Its certificate then does not chain to the cluster's root CA, and placing files afterwards does not reconfigure it.
+On the first Wazuh indexer node, follow this whole stage. On the other nodes, follow only Installing package dependencies and Adding the Wazuh repository, then go to :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`. Install the package only on the first node at this stage, as it generates the certificates and passwords for the entire deployment. Install the package on the remaining nodes later, in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`, after you place the root CA and the passwords. A node that installs the package with nothing placed creates its own root CA and passwords. Its certificate then does not chain to the cluster's root CA, and placing files afterwards does not reconfigure it.
 
 Installing package dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -250,7 +250,7 @@ Generating the SSL certificates
 
    For a **Wazuh manager cluster**, uncomment ``node_type`` in every manager entry. Set ``master`` on one node and ``worker`` on all others. For a single Wazuh manager, leave ``node_type`` commented. When two components share a host, give both entries that host's IP address.
 
-   Each node needs an ``ip``, a ``dns``, or both, and each accepts a list. The node's certificate includes its name and every ``ip`` and ``dns`` value. In the step-by-step installation, a Wazuh manager node uses only its client certificate for the Wazuh indexer, and a Wazuh dashboard node uses none. The Wazuh manager and Wazuh dashboard packages issue their own server certificates. If a node has only a ``dns`` name, use that name wherever these sections ask for its address, for example ``network.host``.
+   Each node needs an ``ip``, a ``dns``, or both, and each accepts a list. The node's certificate includes its name and every ``ip`` and ``dns`` value. In the step-by-step installation, Wazuh manager and Wazuh dashboard nodes use none of the certificates created for them, because each package issues its own. The Wazuh manager and Wazuh dashboard packages issue their own server certificates. If a node has only a ``dns`` name, use that name wherever these sections ask for its address, for example ``network.host``.
 
    The shipped file also has commented examples for a node with several addresses and for a TLS-terminating load balancer. For more about certificates, see :ref:`Certificates deployment <wazuh_indexer_cluster_certificates_deployment>`.
 
@@ -368,7 +368,7 @@ For an all-in-one installation, skip this section and go to step 2 of :ref:`Conf
       # chown root:root /etc/wazuh-indexer/certs/admin.pem /etc/wazuh-indexer/certs/admin-key.pem
       # chmod 0600 /etc/wazuh-indexer/certs/admin.pem /etc/wazuh-indexer/certs/admin-key.pem
 
-   The certificates tool issues each certificate with the node name from ``config.yml`` as CN. Run the following command to display the certificate subject in the format that ``plugins.security.nodes_dn`` expects:
+   The certificates tool issues each certificate with the node name that you set in ``config.yml`` on the first node as its Common Name (CN). Run the following command to display the certificate subject in the format that ``plugins.security.nodes_dn`` expects:
 
    .. code-block:: console
 
@@ -538,7 +538,7 @@ Before you initialize the cluster, check on every Wazuh indexer node that its ce
 
 .. code-block:: console
 
-   # openssl verify -CAfile /etc/wazuh-indexer/certs/root-ca.pem /etc/wazuh-indexer/certs/indexer.pem
+   # openssl verify -CAfile /etc/wazuh-indexer/ca/root-ca.pem /etc/wazuh-indexer/certs/indexer.pem
 
 The command prints ``/etc/wazuh-indexer/certs/indexer.pem: OK``. If it prints ``verification failed``, the certificate comes from another root CA. Create the certificates again as described in :ref:`Generating the SSL certificates <wazuh_indexer_generating_certificates>`.
 

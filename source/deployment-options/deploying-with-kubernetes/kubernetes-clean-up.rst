@@ -26,7 +26,7 @@ Follow the steps below to delete all deployments, services, and volumes.
 
 #. Remove the entire cluster
 
-   The Wazuh manager cluster deployment uses different `StatefulSet <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>`__ elements, as well as ConfigMaps and services.
+   The Wazuh deployment uses `StatefulSet <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>`__ objects, a Deployment, Services, network policies, persistent volume claims, and Secrets that hold its certificates and credentials.
 
    To delete your Wazuh cluster, run the following command from the repository directory.
 
@@ -124,3 +124,9 @@ Follow the steps below to delete all deployments, services, and volumes.
    .. code-block:: console
 
       $ minikube delete
+
+#. If you pre-loaded the Wazuh images, also remove them from the Docker host:
+
+   .. code-block:: console
+
+      $ docker rmi wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV| wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV| wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|

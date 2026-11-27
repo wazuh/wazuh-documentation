@@ -41,7 +41,7 @@ Options
 disabled
 ^^^^^^^^
 
-Disable the Syscollector wodle.
+Disable the Syscollector wodle. Setting this option to ``yes`` removes the agent's inventory data and its vulnerabilities from the Wazuh indexer. Setting a scan option, such as ``processes``, to ``no`` removes the data of that scan. When set in ``agent.conf``, this applies to every agent of the group. Enabling the scan again fills the data at the next scan.
 
 +----------------------+-----------+
 | **Default value**    | no        |
@@ -86,7 +86,7 @@ Maximum number of events per second the Syscollector wodle sends.
 notify_first_scan
 ^^^^^^^^^^^^^^^^^
 
-Specifies whether the first scan reports stateless events.
+Specifies whether the agent's first scan after installation generates a finding for every item it finds, such as every installed package, service, user, and group. On a typical server, this is several hundred findings per agent. Later scans generate findings for changes only.
 
 +--------------------+---------+
 | **Default value**  | no      |
@@ -108,7 +108,7 @@ Enables the hardware scan.
 os
 ^^
 
-Enables the OS scan.
+Enables the OS scan. Vulnerability detection needs ``os`` and ``packages``, and ``hotfixes`` on Windows. Setting any of them to ``no`` stops vulnerability detection for the agent and removes its vulnerabilities from the Wazuh indexer.
 
 +----------------------+-----------+
 | **Default value**    | yes       |
@@ -130,7 +130,7 @@ Enables the network scan.
 packages
 ^^^^^^^^
 
-Enables the scan of the packages.
+Enables the scan of the packages. Vulnerability detection needs ``os`` and ``packages``, and ``hotfixes`` on Windows. Setting any of them to ``no`` stops vulnerability detection for the agent and removes its vulnerabilities from the Wazuh indexer.
 
 +----------------------+-----------+
 | **Default value**    | yes       |
@@ -171,7 +171,7 @@ Enables the scan of the processes.
 hotfixes
 ^^^^^^^^
 
-Enables the hotfixes scan. It reports the Windows updates installed.
+Enables the hotfixes scan. It reports the Windows updates installed. Vulnerability detection on Windows needs this scan: setting it to ``no`` stops vulnerability detection for the agent and removes its vulnerabilities from the Wazuh indexer.
 
 +----------------------+-----------+
 | **Default value**    | yes       |

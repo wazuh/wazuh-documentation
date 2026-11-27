@@ -18,7 +18,7 @@ Learn about Wazuh manager identity verification steps in the sections below:
 Prerequisites
 -------------
 
-You need a certificate authority to sign certificates for the Wazuh manager and Wazuh agents. In the absence of an already configured certificate authority, run the following command on the Wazuh manager to use it as the certificate authority:
+The Wazuh manager creates its own CA at installation and signs its certificates with it. Wazuh agents can verify the Wazuh manager with this CA, ``/etc/wazuh-manager/certs/root-ca.pem``, or with an enrollment token, as described in the next section. You need another certificate authority only to sign the Wazuh manager certificate with your own CA, as in :ref:`the procedure below <manager-identity-validation>`. To create one, run the following command:
 
 .. code-block:: console
 
@@ -29,23 +29,55 @@ The root certificate is created and saved as the ``rootCA.pem`` file. It is vali
 Wazuh agent enrollment with a token
 -----------------------------------
 
-Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment token, a string that you create on the Wazuh manager in step 1. The token carries the Wazuh manager address, the enrollment credential, and a pin of the certificate authority (CA) that signs the Wazuh manager certificate. The pin identifies that CA, so the Wazuh agent accepts no other. During enrollment, the Wazuh agent installs that CA as its trust anchor, the CA it trusts from then on, and verifies the Wazuh manager certificate against it, including the hostname. You don't need to copy a CA file to the endpoint or edit the ``ossec.conf`` file.
+Wazuh agents verify the identity of the Wazuh manager using an enrollment token, a string that you create on the Wazuh manager in step 1. The token carries the Wazuh manager address, the enrollment credential, and a pin of the certificate authority (CA) that signs the Wazuh manager certificate. The pin identifies that CA, so the Wazuh agent accepts no other. During enrollment, the Wazuh agent installs that CA as its trust anchor, the CA it trusts from then on, and verifies the Wazuh manager certificate against it, including the hostname. You don't need to copy a CA file to the endpoint or edit the ``ossec.conf`` file.
 
-#. Create a token on the Wazuh manager for the address the Wazuh agents connect to. In a cluster, run this command on the master node. The address must be included in the subject alternative names (SAN) of the Wazuh manager certificate:
+#. Create a token on the Wazuh manager for the address the Wazuh agents connect to, using the Wazuh dashboard or the command line. The address must be included in the subject alternative names (SAN) of the Wazuh manager certificate.
 
-   .. code-block:: console
+   -  Using the Wazuh dashboard:
 
-      # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
+      Click the upper-left menu icon and navigate to **Agents management** > **Enrollment tokens**. Click **Create token**.
 
-   If the address isn't in the SAN, the command fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``. Use an address that ``openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName`` lists, or reissue the Wazuh manager certificate with that address.
+      .. thumbnail:: /images/manual/agent/enrollment-tokens-list.png
+         :title: Enrollment tokens
+         :alt: Enrollment tokens
+         :align: center
+         :width: 80%
 
-   The token is displayed only once. Store it securely, as no command retrieves it later. Tokens expire after 30 days by default. Use ``--ttl`` to change this.
+      In **Address**, select the address the Wazuh agents connect to. The list shows the names in the Wazuh manager certificate. Optionally, set **Lifetime** (30d by default), **Enrollments allowed** (0 for unlimited), and a **Description** that identifies the token in the list.
 
-   By default, the Wazuh agent downloads the CA from the Wazuh manager and installs it only if it matches the pin in the token. To include the CA certificate in the token instead, so the Wazuh agent doesn't download it, add the ``--embed-ca`` option:
+      **Embed CA** carries the CA certificate in the token instead of its pin, so the Wazuh agent doesn't download it from the Wazuh manager. **Without credential** creates a token that has only the address and the CA pin and can't authenticate an enrollment, so leave it off to enroll Wazuh agents.
 
-   .. code-block:: console
+      .. thumbnail:: /images/manual/agent/enrollment-token-create.png
+         :title: Create enrollment token
+         :alt: Create enrollment token
+         :align: center
+         :width: 80%
 
-      # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS> --embed-ca
+      Click **Create**. In **Enrollment token created**, click the copy icon next to **Token**. The token is shown only once, so store it securely. You pass it to the installer in ``WAZUH_ENROLLMENT_TOKEN``, as shown in step 2 and in :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>`.
+
+      .. thumbnail:: /images/manual/agent/enrollment-token-created.png
+         :title: Enrollment token created
+         :alt: Enrollment token created
+         :align: center
+         :width: 80%
+
+   -  Using the command line:
+
+      Run this command on the Wazuh manager. In a cluster, run it on the master node:
+
+      .. code-block:: console
+
+         # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
+
+      If the address isn't in the SAN, the command fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``. Use an address that ``openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName`` lists, or reissue the Wazuh manager certificate with that address.
+
+      The token is displayed only once. Store it securely, as no command retrieves it later. Tokens expire after 30 days by default. Use ``--ttl`` to change this.
+
+      By default, the Wazuh agent downloads the CA from the Wazuh manager and installs it only if it matches the pin in the token. To include the CA certificate in the token instead, so the Wazuh agent doesn't download it, add the ``--embed-ca`` option:
+
+      .. code-block:: console
+
+         # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS> --embed-ca
 
 #. On each endpoint, install the Wazuh agent with the token.
 
@@ -82,7 +114,7 @@ Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment to
 
       # /var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE>
 
-   If the Wazuh agent already has a key, add ``--force-enroll``. The Wazuh agent is enrolled again and gets a new ID. The Wazuh manager replaces the existing Wazuh agent only as its ``<auth><force>`` settings allow. By default, the existing Wazuh agent must have been disconnected for more than 1 hour and registered more than 1 hour ago. Otherwise the Wazuh manager refuses the enrollment as a duplicate name or IP address (error 9008 or 9007), and ``wazuh-agent-auth`` exits with code 4. To enroll the Wazuh agent again right away, remove it on the Wazuh manager first, as :doc:`Remove agents </user-manual/agent/agent-management/remove-agents>` describes.
+   If the Wazuh agent already has a key, add ``--force-enroll``. The Wazuh agent is enrolled again and gets a new ID. By default, the Wazuh manager refuses the enrollment as a duplicate unless the existing Wazuh agent was registered and has been disconnected for more than 1 hour. To enroll the Wazuh agent again right away, remove it on the Wazuh manager first, as :doc:`Remove agents </user-manual/agent/agent-management/remove-agents>` describes.
 
 #. Start the Wazuh agent:
 
@@ -145,7 +177,7 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
 
    -  ``C`` is the country where the organization making this request is domiciled.
    -  ``CN`` is the common name on the certificate. This should be the IP address or FQDN of the Wazuh manager. This field is not optional.
-   -  ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. It should be included to allow the enrollment of the Wazuh agents with a SAN certificate.
+   -  ``subjectAltName`` lists the names and addresses of the Wazuh manager. It's required: the Wazuh manager doesn't start with a certificate that has no subject alternative names. If you add an ``extendedKeyUsage`` line, include ``serverAuth``.
    -  ``DNS.1`` and ``DNS.2`` refer to the additional identities that the certificate should be valid for. In this case, the Wazuh manager DNS names are wazuh and wazuh.com.
    -  ``IP.1`` is the IP address of the Wazuh manager. If ``<WAZUH_MANAGER_ADDRESS>`` is an FQDN, replace this line with ``DNS.3 = <WAZUH_MANAGER_ADDRESS>``.
 
@@ -201,7 +233,7 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
 
    Without this step the manager keeps using its default certificate (``/etc/wazuh-manager/certs/remoted.pem``) and never loads the one you just created.
 
-   The ``<auth><ssl_manager_cert>`` setting covers port 1515 only. For Wazuh 5.0 agents (port 1517), also set the certificate and key in the ``<https>`` block of the ``<remote>`` section:
+   The ``<auth><ssl_manager_cert>`` setting covers port 1515 only. For port 1517, also set the certificate and key in the ``<https>`` block of the ``<remote>`` section:
 
    .. code-block:: xml
 
@@ -227,8 +259,6 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
 
 #. Obtain root access, modify the Wazuh agent configuration file located at ``/var/ossec/etc/ossec.conf``, and include the following:
 
-   **Wazuh 5.0 agents**:
-
    .. code-block:: xml
       :emphasize-lines: 4,7
 
@@ -244,22 +274,6 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
         </agent>
       </ossec_config>
 
-   **Wazuh 4.x agents**:
-
-   .. code-block:: xml
-      :emphasize-lines: 4,7
-
-      <ossec_config>
-        <client>
-          <server>
-            <address><WAZUH_MANAGER_ADDRESS></address>
-          </server>
-          <enrollment>
-            <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
-          </enrollment>
-        </client>
-      </ossec_config>
-
 #. Restart the Wazuh agent to make the changes effective:
 
    .. code-block:: console
@@ -268,7 +282,7 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
-   .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled-web-server.png
+   .. thumbnail:: /images/manual/agent/linux-manager-verification-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Linux
       :alt: Check newly enrolled Wazuh agent - Linux
       :align: center
@@ -288,8 +302,6 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
 #. Using an administrator account, modify the Wazuh agent configuration file located at ``C:\Program Files (x86)\ossec-agent\ossec.conf`` and include the following:
 
-   **Wazuh 5.0 agents**:
-
    .. code-block:: xml
       :emphasize-lines: 4,7
 
@@ -303,22 +315,6 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
             <verification_mode>full</verification_mode>
           </ssl>
         </agent>
-      </ossec_config>
-
-   **Wazuh 4.x agents**:
-
-   .. code-block:: xml
-      :emphasize-lines: 4,7
-
-      <ossec_config>
-        <client>
-          <server>
-            <address><WAZUH_MANAGER_ADDRESS></address>
-          </server>
-          <enrollment>
-            <server_ca_path>C:\<PATH_TO>\rootCA.pem</server_ca_path>
-          </enrollment>
-        </client>
       </ossec_config>
 
 #. Restart the Wazuh agent to make the changes effective.
@@ -340,7 +336,7 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
-   .. thumbnail:: /images/manual/agent/windows-check-newly-enrolled.png
+   .. thumbnail:: /images/manual/agent/windows-manager-verification-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Windows
       :alt: Check newly enrolled Wazuh agent - Windows
       :align: center
@@ -355,8 +351,6 @@ Follow the steps below to enroll a macOS endpoint by using certificates to verif
 
 #. Modify the Wazuh agent configuration file located at ``/Library/Ossec/etc/ossec.conf`` with root access and include the following:
 
-   **Wazuh 5.0 agents**:
-
    .. code-block:: xml
       :emphasize-lines: 4,7
 
@@ -370,22 +364,6 @@ Follow the steps below to enroll a macOS endpoint by using certificates to verif
             <verification_mode>full</verification_mode>
           </ssl>
         </agent>
-      </ossec_config>
-
-   **Wazuh 4.x agents**:
-
-   .. code-block:: xml
-      :emphasize-lines: 4,7
-
-      <ossec_config>
-        <client>
-          <server>
-            <address><WAZUH_MANAGER_ADDRESS></address>
-          </server>
-          <enrollment>
-            <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
-          </enrollment>
-        </client>
       </ossec_config>
 
 #. Restart the Wazuh agent to make the changes effective.

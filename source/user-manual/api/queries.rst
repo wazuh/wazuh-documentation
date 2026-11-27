@@ -28,6 +28,8 @@ Advanced filtering is possible using the Wazuh manager API queries. Queries are 
 
    Reserved characters need to be percent-encoded, especially semicolons (``;`` → ``%3B`` ). You can use ``--data-urlencode`` inside cURL to make the process easier.
 
+A date field also accepts a timestamp with a UTC offset, such as ``2026-01-01T00:00:00+00:00``, with every operator. The Wazuh manager API converts it to UTC before it compares it, so you can reuse a timestamp from a response. Encode ``+`` as ``%2B`` in the URL, or it is read as a space. ``--data-urlencode`` encodes it for you.
+
 Comparisons are not case-sensitive. For example, ``os.name=ubuntu`` matches ``Ubuntu``. The ``<`` and ``>`` operators compare text character by character, so for ``os.major``, ``os.minor``, and ``os.version``, ``9`` is greater than ``18``. Use them only with values that have the same number of digits. The Wazuh manager API validates the whole query and rejects a query that doesn't follow this syntax, such as a fragment after a separator that isn't a complete term, with error ``1407``.
 
 Some agent endpoints also accept filter parameters in addition to ``q``. In Wazuh 5.0, :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>`, :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>`, :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`, and :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` no longer accept ``manager_host`` and ``node_name``. They accept ``os.arch``, ``os.major``, ``os.minor``, and ``os.type`` instead. :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` also no longer accepts ``group_config_status``.
@@ -53,10 +55,10 @@ The command output looks similar to this:
                "os": {
                   "major": "24",
                   "name": "Ubuntu",
-                  "version": "24.04.4 LTS (Noble Numbat)"
+                  "version": "24.04.5 LTS (Noble Numbat)"
                },
-               "id": "021",
-               "name": "Ubuntu"
+               "id": "001",
+               "name": "Ubuntu-24.04"
             }
          ],
          "total_affected_items": 1,
@@ -85,10 +87,10 @@ The command output looks similar to this:
                "os": {
                   "major": "24",
                   "name": "Ubuntu",
-                  "version": "24.04.4 LTS (Noble Numbat)"
+                  "version": "24.04.5 LTS (Noble Numbat)"
                },
-               "id": "021",
-               "name": "Ubuntu"
+               "id": "001",
+               "name": "Ubuntu-24.04"
             }
          ],
          "total_affected_items": 1,
@@ -99,11 +101,11 @@ The command output looks similar to this:
       "error": 0
    }
 
-An example of using the OR (``,``) operator and LIKE AS (``~``) can be filtering agents whose operating system name contains ``ubuntu`` or ``macos``:
+The following query uses the OR (``,``) and contains (``~``) operators. It gets the Wazuh agents whose operating system name contains ``ubuntu`` or ``windows``:
 
 .. code-block:: console
 
-   # curl -G --data-urlencode "q=os.name~ubuntu,os.name~macos" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
+   # curl -G --data-urlencode "q=os.name~ubuntu,os.name~windows" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
 
 The command output looks similar to this:
 
@@ -113,23 +115,23 @@ The command output looks similar to this:
    {
       "data": {
          "affected_items": [
-            {
-               "os": {
-                  "major": "15",
-                  "name": "macOS",
-                  "version": "15.6.1"
-               },
-               "id": "020",
-               "name": "macOS"
-            },
             {
                "os": {
                   "major": "24",
                   "name": "Ubuntu",
-                  "version": "24.04.4 LTS (Noble Numbat)"
+                  "version": "24.04.5 LTS (Noble Numbat)"
                },
-               "id": "021",
-               "name": "Ubuntu"
+               "id": "001",
+               "name": "Ubuntu-24.04"
+            },
+            {
+               "os": {
+                  "major": "10",
+                  "name": "Microsoft Windows 11 Pro",
+                  "version": "10.0.26200.9711"
+               },
+               "id": "002",
+               "name": "Windows-11"
             }
          ],
          "total_affected_items": 2,
@@ -140,11 +142,11 @@ The command output looks similar to this:
       "error": 0
    }
 
-The following example combines multiple operators. It gets the Wazuh agents with an ID lower than ``021`` whose operating system name contains ``windows`` or ``macos``:
+The following example combines multiple operators. It gets the Wazuh agents with an ID lower than ``003`` whose operating system name contains ``windows`` or ``ubuntu``:
 
 .. code-block:: console
 
-   # curl -G --data-urlencode "q=id<021;(os.name~windows,os.name~macos)" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
+   # curl -G --data-urlencode "q=id<003;(os.name~windows,os.name~ubuntu)" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
 
 The command output looks similar to this:
 
@@ -156,21 +158,21 @@ The command output looks similar to this:
          "affected_items": [
             {
                "os": {
+                  "major": "24",
+                  "name": "Ubuntu",
+                  "version": "24.04.5 LTS (Noble Numbat)"
+               },
+               "id": "001",
+               "name": "Ubuntu-24.04"
+            },
+            {
+               "os": {
                   "major": "10",
                   "name": "Microsoft Windows 11 Pro",
                   "version": "10.0.26200.9711"
                },
-               "id": "019",
-               "name": "Windows"
-            },
-            {
-               "os": {
-                  "major": "15",
-                  "name": "macOS",
-                  "version": "15.6.1"
-               },
-               "id": "020",
-               "name": "macOS"
+               "id": "002",
+               "name": "Windows-11"
             }
          ],
          "total_affected_items": 2,
@@ -181,11 +183,11 @@ The command output looks similar to this:
       "error": 0
    }
 
-The following query gets agents with an ID higher than ``0`` that run on Windows or whose operating system major version is either ``15`` or ``18``:
+The following query gets agents with an ID higher than ``0`` that run on Windows or whose operating system major version is ``22`` or ``24``:
 
 .. code-block:: console
 
-   # curl -G --data-urlencode "q=id>0;(os.name~windows,(os.major=15,os.major=18))" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
+   # curl -G --data-urlencode "q=id>0;(os.name~windows,(os.major=22,os.major=24))" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.major" -H "Authorization: Bearer $TOKEN"
 
 The command output looks similar to this:
 
@@ -197,21 +199,21 @@ The command output looks similar to this:
          "affected_items": [
             {
                "os": {
+                  "major": "24",
+                  "name": "Ubuntu",
+                  "version": "24.04.5 LTS (Noble Numbat)"
+               },
+               "id": "001",
+               "name": "Ubuntu-24.04"
+            },
+            {
+               "os": {
                   "major": "10",
                   "name": "Microsoft Windows 11 Pro",
                   "version": "10.0.26200.9711"
                },
-               "id": "019",
-               "name": "Windows"
-            },
-            {
-               "os": {
-                  "major": "15",
-                  "name": "macOS",
-                  "version": "15.6.1"
-               },
-               "id": "020",
-               "name": "macOS"
+               "id": "002",
+               "name": "Windows-11"
             }
          ],
          "total_affected_items": 2,

@@ -24,11 +24,9 @@ The resolver handles the following credentials:
 | Agent listener and Wazuh manager API certificate pairs      | Issued at installation or staged by you                         | ``/etc/wazuh-manager/certs/remoted.pem`` and ``apid.pem``, with their |
 |                                                             |                                                                 | keys                                                                  |
 +-------------------------------------------------------------+-----------------------------------------------------------------+-----------------------------------------------------------------------+
-| Wazuh dashboard client pair, on a master node only          | Issued when the CA private key is present, or staged by you     | ``/etc/wazuh-manager/export/dashboard-client.pem``, with its key.     |
-|                                                             |                                                                 | Nothing uses it yet.                                                  |
-+-------------------------------------------------------------+-----------------------------------------------------------------+-----------------------------------------------------------------------+
-| Wazuh indexer CA and client pair                            | Imported from a Wazuh indexer on the same host or staged by you | ``/etc/wazuh-manager/certs/indexer-ca.pem`` and                       |
-|                                                             |                                                                 | ``indexer-connector.pem``, with its key                               |
+| Wazuh indexer CA, and a client pair only when the           | Imported from a Wazuh indexer on the same host or staged by you | ``/etc/wazuh-manager/certs/indexer-ca.pem``, and the client pair      |
+| configuration names one                                     |                                                                 | under the names that ``<certificate>`` and ``<key>`` in the           |
+|                                                             |                                                                 | ``<indexer>`` block set                                               |
 +-------------------------------------------------------------+-----------------------------------------------------------------+-----------------------------------------------------------------------+
 
 The resolver stores all credentials and certificates under ``/etc/wazuh-manager``. It does not change file ownership or permissions, reissue an existing server certificate pair, or replace manually staged material. To change the Wazuh indexer password after installation, see :doc:`Wazuh indexer connector </user-manual/manager/wazuh-indexer-connector>`.
@@ -93,7 +91,7 @@ Progress messages are written to standard output and use the ``resolve-credentia
 |             | where a file belongs.                                                  |                                                                  |
 +-------------+------------------------------------------------------------------------+------------------------------------------------------------------+
 | ``WARNING`` | Wazuh indexer material that only the clock refuses (expired or not     | ``resolve-credentials: WARNING:                                  |
-|             | valid yet). It doesn't refuse the start, but the Wazuh indexer         | /etc/wazuh-manager/certs/indexer-connector.pem: expired on ...`` |
+|             | valid yet). It doesn't refuse the start, but the Wazuh indexer         | /etc/wazuh-manager/certs/indexer-ca.pem: expired on ...``        |
 |             | connection fails until you renew the material or fix the clock.        |                                                                  |
 +-------------+------------------------------------------------------------------------+------------------------------------------------------------------+
 
@@ -128,13 +126,6 @@ The following table lists the required owner and permissions for each entry. Eve
 | ``export/ca.pem``                                                     | ``root:root``          | ``0644``                                                  | Copy of ``ca/root-ca.pem``, used by clients to verify the Wazuh      |
 |                                                                       |                        |                                                           | manager API                                                          |
 +-----------------------------------------------------------------------+------------------------+-----------------------------------------------------------+----------------------------------------------------------------------+
-| ``export/dashboard-client.pem``                                       | ``root:root``          | ``0644``                                                  | Wazuh dashboard client certificate, issued on a master node for a    |
-|                                                                       |                        |                                                           | future import                                                        |
-+-----------------------------------------------------------------------+------------------------+-----------------------------------------------------------+----------------------------------------------------------------------+
-| ``export/dashboard-client-key.pem``                                   | ``root:root``          | ``0600``                                                  | Its private key                                                      |
-+-----------------------------------------------------------------------+------------------------+-----------------------------------------------------------+----------------------------------------------------------------------+
-| ``export/.dashboard-client.issued``                                   | ``root:root``          | ``0600``                                                  | Marker: fingerprints of the pair the resolver issued                 |
-+-----------------------------------------------------------------------+------------------------+-----------------------------------------------------------+----------------------------------------------------------------------+
 | ``/etc/wazuh-manager/certs/``                                         | ``root:wazuh-manager`` | ``0750`` exactly                                          | TLS material the daemons read                                        |
 +-----------------------------------------------------------------------+------------------------+-----------------------------------------------------------+----------------------------------------------------------------------+
 | ``certs/root-ca.pem``                                                 | ``root:wazuh-manager`` | ``0640`` exactly                                          | The agents' CA bundle. Written only when absent.                     |
@@ -145,7 +136,9 @@ The following table lists the required owner and permissions for each entry. Eve
 +-----------------------------------------------------------------------+------------------------+-----------------------------------------------------------+----------------------------------------------------------------------+
 | ``certs/indexer-ca.pem``                                              | ``root:wazuh-manager`` | ``0640`` exactly                                          | The CA the Wazuh indexer connector trusts                            |
 +-----------------------------------------------------------------------+------------------------+-----------------------------------------------------------+----------------------------------------------------------------------+
-| ``certs/indexer-connector.pem``, ``certs/indexer-connector-key.pem``  | ``root:wazuh-manager`` | ``0640`` exactly                                          | Client pair the Wazuh manager presents to the Wazuh indexer          |
+| ``certs/indexer-connector.pem``, ``certs/indexer-connector-key.pem``  | ``root:wazuh-manager`` | ``0640`` exactly                                          | Client pair the Wazuh manager presents to the Wazuh indexer, only    |
+|                                                                       |                        |                                                           | when ``<certificate>`` and ``<key>`` in the ``<indexer>`` block name |
+|                                                                       |                        |                                                           | these files                                                          |
 +-----------------------------------------------------------------------+------------------------+-----------------------------------------------------------+----------------------------------------------------------------------+
 | ``certs/.indexer-ca.imported``, ``certs/.indexer-connector.imported`` | ``root:wazuh-manager`` | ``0640``                                                  | Markers: these files were imported, not staged                       |
 +-----------------------------------------------------------------------+------------------------+-----------------------------------------------------------+----------------------------------------------------------------------+
@@ -178,8 +171,9 @@ These keys let you set the passwords and certificate names yourself, instead of 
 |                                     |                                                                        | indexer runs on this host. Otherwise the start refuses with            |
 |                                     |                                                                        | ``MISSING``.                                                           |
 +-------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| ``WAZUH_MANAGER_NODE_NAME``         | Common name and first DNS name of both server pairs, and the CA common | The host name up to its first dot                                      |
-|                                     | name ``wazuh-manager-<NODE_NAME>`` when the CA is minted. It must be a |                                                                        |
+| ``WAZUH_MANAGER_NODE_NAME``         | Common name of both server pairs, their first DNS name when the pair's | The host name up to its first dot                                      |
+|                                     | SAN list is unset, and the CA common name                              |                                                                        |
+|                                     | ``wazuh-manager-<NODE_NAME>`` when the CA is minted. It must be a      |                                                                        |
 |                                     | valid DNS name of at most 64 characters, or at most 50 when the CA is  |                                                                        |
 |                                     | minted.                                                                |                                                                        |
 +-------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
@@ -365,15 +359,16 @@ Run these steps as root:
 Trust a remote Wazuh indexer
 ----------------------------
 
-The Wazuh indexer connector trusts ``certs/indexer-ca.pem`` and presents ``certs/indexer-connector.pem`` with its key. When the Wazuh indexer runs on the same host, the resolver imports these files from ``/etc/wazuh-indexer/export/``. When the Wazuh indexer runs on another host, there is nothing to import, so you stage the files yourself.
+The Wazuh indexer connector trusts ``certs/indexer-ca.pem``. It presents a client certificate only when ``<certificate>`` and ``<key>`` in the ``<indexer>`` block name one, for a Wazuh indexer that requires client certificates. When the Wazuh indexer runs on the same host, the resolver imports the CA from ``/etc/wazuh-indexer/export/``. If you configure a client pair, stage it yourself, because the Wazuh indexer doesn't publish one. When the Wazuh indexer runs on another host, there is nothing to import, so you stage the files yourself.
 
-A marker file in ``certs/`` decides how the resolver treats each file.
+A marker file in ``certs/`` decides how the resolver treats the CA, and a client pair configured under the default names ``indexer-connector.pem`` and ``indexer-connector-key.pem``.
 
 +------------------------------------------+------------------------------------------------------------------------+
 | State in certs/                          | What happens                                                           |
 +==========================================+========================================================================+
-| Absent                                   | Imported from ``/etc/wazuh-indexer/export/`` when the Wazuh indexer is |
-|                                          | on this host, with the marker written first. Otherwise ``MISSING``.    |
+| Absent                                   | Imported from ``/etc/wazuh-indexer/export/`` when the Wazuh indexer on |
+|                                          | this host publishes it, with the marker written first. Otherwise       |
+|                                          | ``MISSING``.                                                           |
 +------------------------------------------+------------------------------------------------------------------------+
 | Present with its marker (imported)       | Imported again when the Wazuh indexer files change. Kept when they     |
 |                                          | don't change or when the export is gone.                               |
@@ -386,8 +381,8 @@ A marker file in ``certs/`` decides how the resolver treats each file.
 The staged files must meet these requirements:
 
 -  ``indexer-ca.pem`` holds only CA certificates within their validity window.
--  ``indexer-connector.pem`` is issued by the Wazuh indexer CA for this node, either directly or through intermediate CAs that follow the leaf in the file.
--  The leaf isn't a CA, matches its key, and carries an ``extendedKeyUsage`` with ``clientAuth``.
+-  When you configure a client pair, ``indexer-connector.pem`` is issued by the Wazuh indexer CA for this node, either directly or through intermediate CAs that follow the leaf in the file.
+-  The client certificate isn't a CA, matches its key, and carries an ``extendedKeyUsage`` with ``clientAuth``.
 
 Run these steps as root on the Wazuh manager node, after installing the package and before the first start:
 
@@ -397,13 +392,13 @@ Run these steps as root on the Wazuh manager node, after installing the package 
 
       # install -m 0640 -o root -g wazuh-manager <INDEXER_CA_FILE> /etc/wazuh-manager/certs/indexer-ca.pem
 
-#. Stage the client certificate the Wazuh indexer CA issued for this node.
+#. Optional: if the Wazuh indexer requires client certificates, stage the client certificate the Wazuh indexer CA issued for this node.
 
    .. code-block:: console
 
       # install -m 0640 -o root -g wazuh-manager <CLIENT_CERT_FILE> /etc/wazuh-manager/certs/indexer-connector.pem
 
-#. Stage its private key.
+#. Optional: stage its private key.
 
    .. code-block:: console
 
@@ -411,7 +406,7 @@ Run these steps as root on the Wazuh manager node, after installing the package 
 
 #. Set ``WAZUH_INDEXER_MANAGER_PASSWORD`` in ``/etc/wazuh-manager/local.env``. See :ref:`Provide values with local.env <manager_credentials_local_env>`.
 
-#. In ``/etc/wazuh-manager/wazuh-manager.conf``, change the ``<indexer><hosts><host>`` value from ``https://127.0.0.1:9200`` to ``https://<INDEXER_ADDRESS>:9200``.
+#. In ``/etc/wazuh-manager/wazuh-manager.conf``, change the ``<indexer><hosts><host>`` value from ``https://127.0.0.1:9200`` to ``https://<INDEXER_ADDRESS>:9200``. If you staged a client pair in steps 2 and 3, also add ``<certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>`` and ``<key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>`` to the ``<ssl>`` block of ``<indexer>``. Without these options, the Wazuh manager doesn't present the pair.
 
    Where ``<INDEXER_ADDRESS>`` is the IP address or DNS name of the Wazuh indexer node. For the other connector options, see :doc:`Wazuh indexer connector </user-manual/manager/wazuh-indexer-connector>`.
 
@@ -421,16 +416,16 @@ Run these steps as root on the Wazuh manager node, after installing the package 
 
       # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check
 
-   The output includes ``resolve-credentials: check: no problem found``. A ``(<N> warnings)`` suffix means only Wazuh indexer material that the clock refuses was reported, where ``<N>`` is the number of warnings.
+   The output includes ``resolve-credentials: check: no problem found``. A ``(<N> warnings)`` suffix means that the check found only warnings, which refuse nothing. A warning reports Wazuh indexer material that the clock refuses, or a malformed line in ``export/credentials.env`` before ``rbac.db`` is seeded. In the suffix, ``<N>`` is the number of warnings.
 
 Where:
 
 -  ``<INDEXER_CA_FILE>`` is the Wazuh indexer CA certificate, for example the Wazuh indexer ``export/ca.pem``.
--  ``<CLIENT_CERT_FILE>`` and ``<CLIENT_KEY_FILE>`` are this node's certificate and key issued by the Wazuh indexer CA, for example from ``wazuh-install-files.tar`` when you used the installation assistant.
+-  ``<CLIENT_CERT_FILE>`` and ``<CLIENT_KEY_FILE>`` are this node's certificate and key issued by the Wazuh indexer CA, needed only for a Wazuh indexer that requires client certificates. Issue them with the Wazuh indexer CA and the ``clientAuth`` extended key usage. After an all-in-one installation with the installation assistant, the Wazuh indexer CA is in ``/etc/wazuh-indexer/ca/``.
 
-When the Wazuh indexer on the same host publishes its CA but no client pair, the resolver imports the CA and reports ``MISSING /etc/wazuh-manager/certs/indexer-connector.pem``. This case is typical after a deployment with the installation assistant. Stage the pair as in steps 2 and 3, then start the Wazuh manager.
+When the Wazuh indexer on the same host publishes its CA but no client pair, as after a deployment with the installation assistant, the resolver imports the CA and the Wazuh manager starts. A client pair is required only if you configure one. If you do, stage it as in steps 2 and 3, then start the Wazuh manager.
 
-Every run of ``--install``, ``--upgrade``, and ``--prestart`` names the client pair in place, for example ``resolve-credentials: /etc/wazuh-manager/certs/indexer-connector.pem: DN CN=wazuh-manager,OU=Wazuh,O=Wazuh; SANs none``.
+When a client pair is configured, every run of ``--install``, ``--upgrade``, and ``--prestart`` names it, for example ``resolve-credentials: /etc/wazuh-manager/certs/indexer-connector.pem: DN CN=wazuh-manager,OU=Wazuh,O=Wazuh; SANs none``.
 
 Cluster nodes
 -------------
@@ -495,7 +490,7 @@ When the installation output reports that credential resolution is incomplete, f
 
 -  When the CA, the agents' CA bundle, or a server pair is missing, or an entry is ``INVALID`` or ``UNSAFE``, run ``/var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install -H /var/wazuh-manager`` as root.
 -  When a server pair is missing with the reason ``no CA key to issue it``, stage this node's pairs in ``/etc/wazuh-manager/certs`` and start the Wazuh manager. The node doesn't need the CA private key.
--  When only the Wazuh indexer password, CA, or client pair is missing, supply them and start the Wazuh manager. The start completes them.
+-  When only the Wazuh indexer password, the Wazuh indexer CA, or a configured client pair is missing, supply them and start the Wazuh manager. The start completes them.
 
 Back up credentials
 -------------------
@@ -545,11 +540,11 @@ The ``--clear`` mode refuses while any Wazuh manager daemon runs. It removes the
 -  The two server pairs and ``certs/root-ca.pem``
 -  The Wazuh indexer files that carry an import marker, and their markers
 -  The CA in ``ca/``, only when its mint marker is there
--  The contents of ``export/``, except a Wazuh dashboard client pair you provided
+-  The contents of ``export/``
 -  ``rbac.db``
 -  The keystore contents
 
-It keeps a CA you staged, Wazuh indexer files you staged, a Wazuh dashboard client pair you provided, and ``local.env``. It prints a ``kept`` line for each one. A successful run ends with ``resolve-credentials: cleared; the next --install resolves from nothing``.
+It keeps a CA you staged, Wazuh indexer files you staged, and ``local.env``. It prints a ``kept`` line for each one. A successful run ends with ``resolve-credentials: cleared; the next --install resolves from nothing``.
 
 .. warning::
 

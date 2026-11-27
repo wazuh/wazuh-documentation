@@ -8,84 +8,25 @@
 Enrichment
 ==========
 
-The security enrichment stage in the Wazuh 5.0 data analysis engine runs after decoding and before post-filtering, augmenting normalized events with contextual information such as geolocation and autonomous system number (ASN) attributes and threat intelligence matches. Enrichment is strictly schema-driven: only fields defined in the Wazuh Common Schema (WCS) are considered, ensuring additional context remains indexable and consistent.
-
-Security enrichment is implemented as two consecutive pipeline stages inside each policy:
-
--  Pre-enrichment: control and preparation.
-
--  Enrichment: context providers, such as geolocation and indicators of compromise (IOC).
+Enrichment adds context to normalized events. Geo enrichment adds the geographic location and autonomous system number (ASN) of IP addresses, and IOC enrichment adds threat intelligence matches from the Wazuh Cyber Threat Intelligence (CTI) feed. To turn them on, select them in the settings of the space, as shown at the end of this section. Enrichment only adds fields defined in the Wazuh Common Schema (WCS).
 
 .. _data_analysis_pre_enrichment:
 
 Pre-enrichment
 --------------
 
-Pre-enrichment is the first part of the security enrichment process and executes immediately after the decoding stage. It finalizes the decoded event, attaches policy context, and determines eligibility for further enrichment.
-
-Pre-enrichment runs in the following order:
-
-#. Space enrichment
-
-#. Discarded-events filter
-
-#. Cleanup of decoder temporary variables
-
-Space enrichment
-^^^^^^^^^^^^^^^^
-
-The normalization engine annotates each event with the space from which the policy is being executed. This allows downstream components (dashboards, routing, reporting) to differentiate Wazuh standard security policies from custom user-defined security policies at the event level.
-
-Conceptually, pre-enrichment ensures that every event is annotated with the following field:
-
-.. code-block:: json
-
-   {
-     "wazuh": {
-       "space": {
-         "name": "standard|custom"
-       }
-     }
-   }
-
-This field is later used by outputs and analytics to slice data per content space and identify which security policy pipeline produced a specific document. Log test results show ``test``, because Log test runs the content of the test space.
-
-Discarded events filter
-^^^^^^^^^^^^^^^^^^^^^^^
-
-The discarded-events filter decides whether events that have been marked as "discarded" by a decoder are allowed to continue into enrichment and outputs. Decoders mark an event as discarded with the ``discard_event`` helper. Events that a filter rejects are always dropped and never reach this filter. When **Index discarded events** is on, the event continues with only the ``wazuh.space.event_discarded: true`` marker, not its original content. The **Index discarded events** setting of the space controls this behavior. To change it, go to **Ruleset Management** > **Overview**, select the draft or standard space, and click **Actions** > **Edit**:
-
--  If discarded-events indexing is enabled, discarded events still traverse the remainder of the pipeline and can be indexed for observability and troubleshooting.
-
--  If discarded-events indexing is disabled and the event is marked as discarded, the pipeline stops at pre-enrichment, and the event is dropped. Otherwise, events proceed normally.
-
-This decision is implemented using a helper condition (see the :ref:`helper functions <reference_helper_functions>` reference) so that the "discard or keep" semantics can be centrally enforced and consistently reused across policies.
-
-Cleanup of decoder temporary variables
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Decoders in the normalization engine can write to temporary variables during event processing. Temporary variables are fields whose names start with ``_`` (for example, ``_raw_message``, ``_parsed_ts``). These fields act as scratch space for intermediate parsing results and cross-decoder communication while the event traverses the decoder tree.
-
-At the end of pre-enrichment, the normalization engine performs a mandatory cleanup step that removes all temporary variables from the event. After this cleanup:
-
--  Every remaining field is guaranteed to belong to the Wazuh Common Schema.
-
--  The event is safe to send to the Wazuh indexer, which only accepts schema-conformant fields.
-
-This invariant is critical for avoiding ingestion failures and keeping the index mappings stable over time.
+Pre-enrichment runs right after decoding: it tags each event with its space in ``wazuh.space.name``, removes temporary fields whose names start with ``_``, and drops events that a decoder marked as discarded unless **Index discarded events** is on. To change that setting, go to **Ruleset Management** > **Overview**, select the draft or standard space, and click **Space actions** > **Edit**.
 
 Enrichment
 ----------
 
-Once pre-enrichment completes and the event has been validated, the normalization engine enters the enrichment stage. At this point, the event is already normalized, schema-compliant, and annotated with its space, so enrichment can focus purely on adding contextual data without affecting pipeline control flow.
-
-Enrichments are defined in the policy document as an ordered array, and each configured enrichment is evaluated sequentially for every event. You choose them in the settings of the space, as shown at the end of this section. The available enrichments are:
+The available enrichments are:
 
 -  Geo enrichment (geo/ASN lookups)
 
 -  IOC enrichment (threat intelligence / CTI matching): one for each indicator type in the Wazuh CTI feed, such as IP addresses, domain names, URLs, and file hashes. The space settings list every type the feed provides.
 
-Unlike pre-enrichment, the enrichment stage does not decide whether an event should continue in the pipeline. It only adds context when lookups or matches succeed. Events continue even if no enrichment applies.
+Enrichment only adds context when lookups or matches succeed. Events continue even if no enrichment applies.
 
 Geo enrichment
 ^^^^^^^^^^^^^^

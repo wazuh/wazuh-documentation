@@ -19,11 +19,11 @@ You can run scheduled scans with the FIM module to detect file modifications. In
 Use case description
 ---------------------
 
-+-----------------+----------------------------------------------------------------------------+
-| Endpoint        | Description                                                                |
-+=================+============================================================================+
-| **macOS Tahoe** | The FIM module monitors a file on this endpoint within specific intervals. |
-+-----------------+----------------------------------------------------------------------------+
++-------------------+----------------------------------------------------------------------------+
+| Endpoint          | Description                                                                |
++===================+============================================================================+
+| **macOS Sequoia** | The FIM module monitors a file on this endpoint within specific intervals. |
++-------------------+----------------------------------------------------------------------------+
 
 Configuration
 -------------
@@ -42,13 +42,13 @@ Perform the following steps to configure the FIM module to monitor a ``user_deta
 
    .. note::
 
-      The ``frequency`` option is a global setting that defines the scan interval for all files and directories monitored in scheduled mode.
+      The ``<frequency>`` option is a global setting that defines the scan interval for all files and directories monitored in scheduled mode.
 
 #. Restart the Wazuh agent to apply the configuration:
 
    .. code-block:: console
 
-      /Library/Ossec/bin/wazuh-control restart
+      # /Library/Ossec/bin/wazuh-control restart
 
 Test the configuration
 -----------------------
@@ -58,7 +58,7 @@ Test the configuration
 Visualize the finding
 ----------------------
 
-Navigate to **Endpoint security** → **File Integrity Monitoring** → **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes to the ``user_details.txt`` file.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes to the ``user_details.txt`` file.
 
 .. thumbnail:: /images/manual/fim/changes-user-details-file.png
    :title: Changes to the user_details.txt file

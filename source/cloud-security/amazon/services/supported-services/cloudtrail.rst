@@ -179,6 +179,8 @@ Configure Wazuh to process AWS CloudTrail logs
 
       # systemctl restart wazuh-agent
 
+If the trail records many events, the Wazuh agent might not be able to send all of them to the Wazuh manager. The message ``Agent buffer is full: Events may be lost.`` in ``/var/ossec/logs/ossec.log`` means that some events were lost. To reduce what the module reads, use the options described in :ref:`Filtering <aws_filtering>`, such as ``regions`` or ``path``, or the ``discard_regex`` option of the :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>`. If the message still appears, raise the size of the event batch of the Wazuh agent, for example to 4MB, by adding ``<batch><size>4MB</size></batch>`` inside the ``<agent>`` block of ``/var/ossec/etc/ossec.conf``, and restart the Wazuh agent. Keep the size at 5MB or less, unless you also raise the request size limits of the Wazuh manager.
+
 .. _cloudtrail-use-cases:
 
 CloudTrail use cases
@@ -376,11 +378,11 @@ Below are some use cases for IAM events.
 Create a user account
 ~~~~~~~~~~~~~~~~~~~~~
 
-When a user creates a new user account in IAM, CloudTrail generates an event. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the Wazuh manager for analysis. When a user account is created, the New user account ``<USERNAME>`` created finding is shown on the Wazuh dashboard. If the new user has no permissions, the AWS IAM user created without permissions assignment finding is also shown. You can see the username of the created user, the time it was created, and who created it.
+When a user creates a new user account in IAM, CloudTrail generates an event. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the Wazuh manager for analysis. When a user account is created, the New user account created finding is shown on the Wazuh dashboard. You can see the username of the created user, the time it was created, and who created it.
 
 .. thumbnail:: /images/cloud-security/aws/iam/1-create-a-user-account.png
-   :title: New user account created and AWS IAM user created without permissions assignment findings
-   :alt: New user account created and AWS IAM user created without permissions assignment findings
+   :title: New user account created finding
+   :alt: New user account created finding
    :align: center
    :width: 80%
 

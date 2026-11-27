@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh helps meet the TSC common criteria CC8.1 requirement by providing capabilities for configuration assessment, vulnerability detection, IT hygiene, and file integrity monitoring.
+   :description: Wazuh helps meet the TSC common criteria CC8.1 requirement with security configuration assessment, vulnerability detection, IT hygiene, file integrity monitoring, log data analysis, and the threat detection ruleset.
 
 Common criteria 8.1
 =====================
 
 The TSC **Common Criterion CC8.1** addresses change management. It states that: “*The entity authorizes, designs, develops or acquires, configures, documents, tests, approves, and implements changes to infrastructure, data, software, and procedures to meet its objectives.*” To support CC8.1, an organization should maintain defined change-management processes and evidence showing that relevant changes were reviewed, tested, approved, implemented, and monitored in accordance with those processes.
 
-Wazuh helps meet the **TSC common criteria CC8.1** requirement by providing several capabilities for security configuration assessment, vulnerability detection, IT Hygiene, and file integrity monitoring.
+Wazuh helps meet the **TSC common criteria CC8.1** requirement with security configuration assessment, vulnerability detection, IT Hygiene, file integrity monitoring, log data analysis, and the threat detection ruleset.
 
 Use case: Monitoring installed packages using the IT Hygiene capability
 ----------------------------------------------------------------------------
@@ -55,7 +55,7 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-#. Switch to the **Inventory** tab and filter using the following parameters: ``package.name: "7-Zip 19.00 (x64)"``
+#. Switch to the **Inventory** tab, switch on Advanced filters, and enter the following query: ``package.name: "7-Zip 19.00 (x64)"``
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/vulnerability-detection-inventory-7zip-filter.png
       :title: Vulnerability Detection inventory filtered by 7-Zip

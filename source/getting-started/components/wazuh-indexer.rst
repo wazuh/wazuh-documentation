@@ -8,7 +8,7 @@ Wazuh indexer
 
 The Wazuh indexer is a highly scalable, full-text search and analytics engine. It serves as the central data store for the Wazuh platform. It indexes and stores security events, findings, vulnerability data, and system inventory. Purpose-built plugins provide access control, reporting, threat detection, and content management. Managed content includes rules, decoders, integrations, key-value databases (KVDBs), and indicators of compromise (IoCs). Near real-time search and analytics help security teams investigate threats, monitor compliance, and gain visibility into their infrastructure.
 
-The Wazuh indexer includes the Security Analytics module, which provides threat detection and analysis. Its detectors apply Sigma-based rules to identify threats, anomalies, and suspicious activity in the monitored environment. The Content Manager module manages the ruleset (rules, decoders, integrations, and KVDBs), synchronizes it from Wazuh Cyber Threat Intelligence (CTI), and deploys it. You manage both from **Ruleset management** in the Wazuh dashboard. The Wazuh manager has a separate content manager that only downloads the vulnerability feed from the Wazuh indexer for vulnerability detection.
+The Wazuh indexer includes the Security Analytics module, which provides threat detection and analysis. Its detectors apply Sigma-based rules to identify threats, anomalies, and suspicious activity in the monitored environment. The Content Manager module manages the ruleset (rules, decoders, integrations, and KVDBs), synchronizes it from Wazuh Cyber Threat Intelligence (CTI), and deploys it. You manage both from **Ruleset management** in the Wazuh dashboard.
 
 You can deploy the Wazuh indexer as a single node for development and small environments. For production workloads that need high availability and horizontal scalability, deploy a multi-node cluster.
 
@@ -16,7 +16,7 @@ The following diagram shows a Wazuh indexer cluster.
 
 .. thumbnail:: /images/getting-started/indexer-cluster.png
    :title: Wazuh indexer
-   :alt: Wazuh indexer
+   :alt: Wazuh indexer cluster with three nodes, primary and replica shards, and an extract of a finding document
    :align: center
    :width: 80%
 
@@ -24,7 +24,7 @@ The Wazuh indexer stores data as JSON documents. Each document maps a set of key
 
 An index is a collection of related documents. The Wazuh indexer distributes documents across containers called shards and spreads the shards across cluster nodes. This distribution provides redundancy against hardware failures and increases query capacity as you add nodes. Wazuh stores different event types in separate indices and data streams.
 
-The Wazuh indexer is well-suited for time-sensitive use cases like security analytics and infrastructure monitoring, as it is a near real-time search platform. Wazuh events and findings become searchable within about 2 seconds of indexing, because their index templates set a 2-second refresh interval.
+The Wazuh indexer is well-suited for time-sensitive use cases like security analytics and infrastructure monitoring, as it is a near real-time search platform. Wazuh events and findings become searchable within about 2 seconds of indexing.
 
 The Wazuh indexer also includes built-in features that make storing and searching data more efficient. These features include index rollups, alerting, notifications, and Index State Management (ISM).
 

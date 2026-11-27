@@ -17,7 +17,7 @@ The passwords are stored in ``/etc/wazuh-manager/export/credentials.env`` on the
 
    # sed -n 's/^WAZUH_MANAGER_API_PASSWORD=//p' /etc/wazuh-manager/export/credentials.env
 
-Securing the Wazuh manager API is crucial after installing the Wazuh manager.
+We recommend that you secure the Wazuh manager API right after you install the Wazuh manager.
 
 .. note::
 
@@ -83,12 +83,14 @@ Alternatively, change the passwords with the Wazuh manager API request :api-ref:
 
    .. warning::
 
-      Changing the ``wazuh-internal-client`` user password breaks the Wazuh dashboard connection. After changing it, store the new password in the ``wazuh_core.hosts.default.password`` entry of the Wazuh dashboard keystore, ``/etc/wazuh-dashboard/opensearch_dashboards.keystore``. See the :ref:`Update the wazuh-internal-client password <update_wazuh_internal_client_password>` section of the Password management documentation for details.
+      Changing the ``wazuh-internal-client`` user password breaks the Wazuh dashboard connection. After you change it, store the new password in the ``wazuh_core.hosts.default.password`` entry of the Wazuh dashboard keystore, ``/etc/wazuh-dashboard/opensearch_dashboards.keystore``, and restart the Wazuh dashboard. See the :ref:`Update the wazuh-internal-client password <update_wazuh_internal_client_password>` section of the Password management documentation for details.
+
+.. _api_securing_api_change_the_default_host_and_port:
 
 Change the default host and port
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-By default, the ``host`` is set to ``['0.0.0.0', '::']``, allowing the Wazuh manager API to accept incoming connections on all available network interfaces.
+The Wazuh manager package sets ``host`` to ``['0.0.0.0', '::']``, so the Wazuh manager API accepts connections on all network interfaces. An all-in-one installation with the :doc:`installation assistant </user-manual/reference/installation-utilities/installation-assistant>`, such as the :doc:`Quickstart </quickstart>`, sets ``host: ['127.0.0.1', '::1']`` instead, unless you install with ``-ap`` or ``--api-san``. The Wazuh manager API then accepts connections only from the Wazuh manager itself. To reach it from other hosts, set ``host: ['0.0.0.0', '::']`` and restart the Wazuh manager.
 
 To restrict access, edit the Wazuh manager API configuration in ``/var/wazuh-manager/api/configuration/api.yaml``. For example, the following setting makes the Wazuh manager API accept connections only on the loopback interface of the Wazuh manager. With this setting, a Wazuh dashboard on another host can no longer reach the Wazuh manager API:
 
@@ -120,8 +122,8 @@ The default limit is 300 requests per minute for each client address. Adjust it 
 Limit login attempts
 ^^^^^^^^^^^^^^^^^^^^
 
-To protect against brute-force attacks, the Wazuh manager API counts the failed login attempts from each IP address. When an address reaches ``max_login_attempts`` failed attempts (50 by default), the API rejects further login requests from that address with HTTP ``403`` ("Limit of login attempts reached"). The count and the block are cleared ``block_time`` seconds (300 by default) after the first failed attempt from that address. Successful logins do not count toward this limit.
+To protect against brute-force attacks, the Wazuh manager API counts the failed login attempts of each user from each IP address. When a user reaches ``max_login_attempts`` failed attempts (50 by default) from an address, the API rejects the logins of that user from that address with HTTP ``403`` and error ``6000``. Other users can still log in from that address until it reaches ten times ``max_login_attempts`` failed attempts across all users. The count and the block are cleared ``block_time`` seconds (300 by default) after the first failed attempt. Successful logins do not count toward this limit.
 
-To adjust these limits, edit the ``max_login_attempts`` and/or ``block_time`` settings in ``/var/wazuh-manager/api/configuration/api.yaml``.
+To adjust these limits, edit the ``max_login_attempts`` setting, the ``block_time`` setting, or both in ``/var/wazuh-manager/api/configuration/api.yaml``.
 
 For the complete configuration guide, see :ref:`Wazuh manager API configuration file <api_configuration_wazuh_manager_api_configuration_file>`.

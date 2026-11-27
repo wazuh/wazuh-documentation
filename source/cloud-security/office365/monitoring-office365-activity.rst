@@ -13,7 +13,7 @@ This section describes how to monitor the Office 365 audit log for your organiza
 -  User activity in SharePoint Online and OneDrive for Business.
 -  User activity in Exchange Online (Exchange mailbox audit logging).
 -  Administrator activity in SharePoint Online.
--  Administrator activity in Azure Active Directory (the directory service for Office 365).
+-  Administrator activity in Microsoft Entra ID, formerly Azure Active Directory (the directory service for Office 365).
 -  Administrator activity in Exchange Online (Exchange admin audit logging).
 -  User and administrator activity in:
 
@@ -66,18 +66,14 @@ The following list shows the available plans and their corresponding API endpoin
 
       https://manage.office365.us/api/v1.0/{tenant_id}/activity/feed/{operation}
 
--  Department of Defense (DoD) government plan
-
-   .. code-block:: none
-
-      https://manage.protection.apps.mil/api/v1.0/{tenant_id}/activity/feed/{operation}
+The Wazuh module for Office 365 supports these three plans, set with the ``<api_type>`` option as ``commercial``, ``gcc``, or ``gcc-high``.
 
 Activities
 ~~~~~~~~~~
 
 Office 365 subscription plans can include different features and services, so the available activities can vary depending on your specific plan. The following are categories of activities that you might find in the Office 365 Management API, depending on common Office 365 plans and services:
 
--  Azure Entra ID activities: Events related to the creation, modification, or deletion of users and groups in Azure Entra ID. This also includes sign-ins, authentication events, and role assignments and changes.
+-  Microsoft Entra ID activities: Events related to the creation, modification, or deletion of users and groups in Microsoft Entra ID. This also includes sign-ins, authentication events, and role assignments and changes.
 -  Exchange Online activities: This includes email-related activities, mailbox permission changes, and changes to email properties, attachments, and folders.
 -  SharePoint Online activities: This category includes events related to sharing documents and sites, changes to user access rights and permissions, and file and folder operations.
 -  Microsoft Teams activities: Activities relating to channel and team management, message and chat operations, and meeting-related events.
@@ -107,7 +103,11 @@ Where:
 
 Perform the following steps to manually list the available content.
 
-#. Use the PowerShell script below to generate an access token. Create a file ``AccessToken.ps1`` and paste the following content into it. Replace ``<YOUR_APPLICATION_ID>``, ``<YOUR_CLIENT_SECRET>``, and ``<YOUR_TENANT_ID>`` with the values collected during the application registration:
+.. note::
+
+   The API returns content only for a content type that has an active subscription in the tenant. The Wazuh module for Office 365 starts the subscription for each content type you configure in ``<subscriptions>`` when it runs. To list content before you configure Wazuh, start the subscription yourself with a ``POST`` request to ``https://manage.office.com/api/v1.0/<TENANT_ID>/activity/feed/subscriptions/start?contentType=<CONTENT_TYPE>``, using the same access token.
+
+#. Use the PowerShell script below to generate an access token. Create a file ``AccessToken.ps1`` and paste the following content into it. Replace ``<YOUR_CLIENT_ID>``, ``<YOUR_CLIENT_SECRET>``, and ``<YOUR_TENANT_ID>`` with the values collected during the application registration:
 
    .. code-block:: powershell
 
@@ -152,7 +152,7 @@ Perform the following steps to manually list the available content.
    .. code-block:: none
       :class: output
 
-      contentUri        : https://manage.office.com/api/v1.0/<Tenant_ID>/activity/feed/audit/
+      contentUri        : https://manage.office.com/api/v1.0/<TENANT_ID>/activity/feed/audit/
                           20240129073247100003384$20*********081955691028239
                           $audit_azureactivedirectory$Audit_AzureActiveDirectory$emea0010
       contentId         : 20240129073247100003384$20*********081955691028239$audit_azureactivedirectory$Audit_AzureActiveDirectory$emea0010
@@ -181,7 +181,7 @@ Wazuh must authenticate to the Office 365 Management API to connect and pull aud
 You need the following to access the audit logs of Office 365 with Wazuh:
 
 -  **The application (client) ID:** The unique ID of the application created in the Azure portal to pull logs from Office 365.
--  **The directory (tenant) ID:** The tenant ID, which is the same as the organization ID, identifies which Azure Active Directory instance the application belongs to.
+-  **The directory (tenant) ID:** The tenant ID, which is the same as the organization ID, identifies which Microsoft Entra ID instance the application belongs to.
 -  **The client secret:** A shared secret known to both the application and the authorization server.
 
 Setting up Office 365 for monitoring
@@ -262,7 +262,7 @@ The application requires a client secret to authenticate.
 Enabling API permissions
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The application requires specific API permissions to request Office 365 activity events. The required permissions relate to the `https://manage.office.com <https://manage.office.com>`__ resource.
+The application requires specific API permissions to request Office 365 activity events. The required permissions relate to the Office 365 resource.
 
 Perform the following steps to configure the application permissions:
 
@@ -296,7 +296,18 @@ Perform the following steps to configure the application permissions:
 Setting up Wazuh for Office 365 monitoring
 ------------------------------------------
 
-This section describes how to configure Wazuh to monitor Office 365 environments. The configuration process includes integrating with the Office 365 APIs for log collection, enabling the dashboard visualization module for Office 365 events, and rule correlation.
+This section describes how to configure Wazuh to monitor Office 365 environments. The configuration process includes enabling the Office 365 integration, configuring the Wazuh module for Office 365 to collect logs from the Office 365 APIs, and viewing the findings on the Wazuh dashboard.
+
+Enabling the Office 365 integration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``o365`` integration is disabled by default. Enable it before you configure the Wazuh module for Office 365. While the integration is disabled, the Wazuh manager receives the Office 365 events but discards them without generating findings, and enabling the integration later doesn't recover them.
+
+#. On the Wazuh dashboard, navigate to **Ruleset Management** > **Overview** and make sure you are in the **Standard** space.
+
+#. Search for ``o365`` and click **o365** to open the integration.
+
+#. Click **Actions** > **Enable**.
 
 Configuring Wazuh with Office 365 APIs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -330,19 +341,20 @@ Perform the following steps to configure the Wazuh agent to pull audit logs from
    Where:
 
    -  ``<enabled>`` enables the Wazuh module for Office 365. The allowed values for this option are ``yes`` and ``no``.
-   -  ``<interval>`` defines the time interval between each execution of the Wazuh module for Office 365. The allowed value is any positive number that contains a suffix character indicating a time unit, such as ``s`` (seconds), ``m`` (minutes), ``h`` (hours), and ``d`` (days). The default interval for the module execution, if not specified, is ``10m``.
+   -  ``<interval>`` defines the time interval between each execution of the Wazuh module for Office 365. The allowed value is any positive number that contains a suffix character indicating a time unit, such as ``s`` (seconds), ``m`` (minutes), ``h`` (hours), and ``d`` (days). The default interval for the module execution, if not specified, is ``1m``, and the maximum value is ``1d``.
    -  ``<curl_max_size>`` specifies the maximum size allowed for the Microsoft API response. The allowed value is any positive number that contains a suffix character indicating a size unit, such as ``b/B`` (bytes), ``k/K`` (kilobytes), ``m/M`` (megabytes), and ``g/G`` (gigabytes). The default value is ``1M``.
    -  ``<only_future_events>`` configures the Wazuh module for Office 365 to collect only events generated after you start the Wazuh agent when the value is set to ``yes``. When the value is set to ``no``, it also collects events generated before you start the Wazuh agent. The default value is ``yes``, and the allowed values are ``yes`` and ``no``.
-   -  The ``<api_auth>`` block configures the credentials for the authentication with the Office 365 REST API. The tags ``<tenant_id>``, ``<client_id>``, ``<client_secret>``, and ``<api_type>`` are configuration tags within ``<api_auth>``.
+   -  The ``<api_auth>`` block configures the credentials for the authentication with the Office 365 REST API. The tags ``<tenant_id>``, ``<client_id>``, ``<client_secret>`` or ``<client_secret_path>``, and ``<api_type>`` are configuration tags within ``<api_auth>``.
 
       -  ``<tenant_id>`` specifies the tenant ID of the application registered in Azure. The allowed value is any string. Replace the variable ``<YOUR_TENANT_ID>`` with the tenant ID of your application registered in Azure.
       -  ``<client_id>`` specifies the client ID of the application registered in Azure. The allowed value is any string. Replace the variable ``<YOUR_CLIENT_ID>`` with the client ID of your application registered in Azure.
       -  ``<client_secret>`` specifies the client secret value of the application registered in Azure. Replace the variable ``<YOUR_CLIENT_SECRET>`` with the client secret of your application registered in Azure.
+      -  ``<client_secret_path>`` specifies the path to a file that contains the client secret. Use it instead of ``<client_secret>`` so the secret isn't stored in the ``ossec.conf`` file. You can't set both options in the same ``<api_auth>`` block, and the file must exist when the Wazuh agent starts.
       -  ``<api_type>`` specifies the type of Office 365 subscription plan used by the tenant. The allowed subscriptions are ``commercial``, ``gcc``, and ``gcc-high``.
 
    -  The ``<subscriptions>`` block configures the internal options in the Office 365 REST API.
 
-      -  ``<subscription>`` specifies the content types from which Wazuh collects audit logs. The subscription types that can be configured include ``Audit.AzureActiveDirectory``, ``Audit.Exchange``, ``Audit.SharePoint``, ``Audit.General``, and ``DLP.All``.
+      -  ``<subscription>`` specifies the content types from which Wazuh collects audit logs. The :doc:`subscription types </user-manual/reference/ossec-conf/office365-module>` that can be configured include ``Audit.AzureActiveDirectory``, ``Audit.Exchange``, ``Audit.SharePoint``, ``Audit.General``, and ``DLP.All``.
 
    For more information about the configuration options, see the :doc:`Wazuh module for Office 365 reference guide </user-manual/reference/ossec-conf/office365-module>`.
 
@@ -434,10 +446,10 @@ For example, the following configuration pulls only the ``Audit.AzureActiveDirec
 
 Replace ``<YOUR_TENANT_ID>``, ``<YOUR_CLIENT_ID>``, and ``<YOUR_CLIENT_SECRET>`` with the organization's credentials for the tenant.
 
-Enabling dashboard visualization for the Office 365 module
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Visualizing Office 365 events on the Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh module for Office 365 has a dedicated visualization on the Wazuh dashboard that provides detailed information about the events that occur in Office 365. The module provides three visualization options: **Panel**, **Dashboard**, and **Events**. Navigate to **Cloud security** > **Office 365** on the Wazuh dashboard to view this information.
+The Wazuh module for Office 365 has a dedicated visualization on the Wazuh dashboard that provides detailed information about the events that occur in Office 365. The module provides three visualization options: **Panel**, **Dashboard**, and **Findings**. Navigate to **Cloud security** > **Office 365** on the Wazuh dashboard to view this information.
 
 Dashboard
 ~~~~~~~~~
@@ -461,10 +473,10 @@ This **Panel** tab provides detailed information about the events that occurred,
    :align: center
    :width: 80%
 
-Events
-~~~~~~
+Findings
+~~~~~~~~
 
-The **Events** tab shows the findings generated by events that occur in the Office 365 environment. Here you can see details such as the agent name, the event type, the IP address of the user performing the action, and other fields.
+The **Findings** tab shows the findings generated by events that occur in the Office 365 environment. Here you can see details such as the agent name, the event type, the IP address of the user performing the action, and other fields.
 
 This tab also provides the following functionality:
 
@@ -473,8 +485,8 @@ This tab also provides the following functionality:
 -  Complete details of the generated finding, including the full log, matched decoder, and others.
 
 .. thumbnail:: /images/cloud-security/office365/events-visualization-option.png
-   :title: Events visualization option
-   :alt: Events visualization option
+   :title: Findings visualization option
+   :alt: Findings visualization option
    :align: center
    :width: 80%
 
@@ -528,14 +540,14 @@ Ubuntu endpoint
 Microsoft Azure portal
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Perform the following actions to create an Azure Active Directory login event.
+Perform the following actions to create a Microsoft Entra ID sign-in event.
 
 #. Log in to your `Azure portal <https://portal.azure.com>`__. A user sign-in is the activity Wazuh detects in this use case.
 
 Wazuh dashboard
 ~~~~~~~~~~~~~~~
 
-#. Navigate to **Cloud security** > **Office 365** on your Wazuh dashboard, then click the **Findings** tab to view the generated findings.
+#. Navigate to **Cloud security** > **Office 365** on your Wazuh dashboard, then click the **Findings** tab to view the generated findings. Each sign-in generates a finding titled **Successful user authentication - <USER_NAME>**.
 
    .. thumbnail:: /images/cloud-security/office365/office-365-log-in-generated-alerts.png
       :title: Office 365 log in generated findings
@@ -627,7 +639,7 @@ Perform the following actions to create and delete a test user account.
 Wazuh dashboard
 ~~~~~~~~~~~~~~~
 
-#. Navigate to **Cloud security** > **Office 365** on your Wazuh dashboard, then click the **Findings** tab to view the generated findings.
+#. Navigate to **Cloud security** > **Office 365** on your Wazuh dashboard, then click the **Findings** tab to view the generated findings. Creating the user generates the **New user account created** finding, and deleting it generates the **User account <USER_NAME> deleted** finding.
 
    .. thumbnail:: /images/cloud-security/office365/azure-create-delete-account-alerts.png
       :title: Azure create and delete account findings

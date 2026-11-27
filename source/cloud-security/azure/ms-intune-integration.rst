@@ -25,6 +25,7 @@ Configuration
 
 Perform the following steps to integrate Microsoft Intune with Wazuh:
 
+-  Enable the **azure** integration, which holds the Microsoft Intune decoders and rules. Follow the steps in :ref:`Enable the Azure integration <ms_graph_enable_azure_integration>`. While the integration is disabled, the Wazuh manager discards the Microsoft Intune events without generating findings.
 -  Configure the Microsoft Graph API permissions.
 -  Configure the Wazuh agent.
 
@@ -102,11 +103,9 @@ Use case
 Monitor managed device compliance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Microsoft Intune managed-device records describe the enrollment, compliance, and configuration state of each device under management. Wazuh collects Microsoft Azure managed-device inventory data through the Wazuh module for Microsoft Graph using the ``deviceManagement`` resource and ``managedDevices`` relationship. It then processes these events using out-of-the-box decoders, KVDBs, and detection rules.
+Microsoft Intune managed-device records describe the enrollment, compliance, and configuration state of each device under management. Wazuh collects Microsoft Azure managed-device inventory data through the Wazuh module for Microsoft Graph using the ``deviceManagement`` resource and ``managedDevices`` relationship. It then processes these events using out-of-the-box decoders, KVDBs, and detection rules. Decoder names in the events end in a version number, for example decoder/ms-graph/0 is version 0 of the ms-graph decoder.
 
 This use case shows a Microsoft Intune-managed device that Wazuh reports as out of compliance, with disk encryption disabled:
-
-The command output looks similar to this:
 
 .. code-block:: json
    :class: output
@@ -186,8 +185,6 @@ The Wazuh agent retrieves the event and sends it to the Wazuh manager. The event
 
 The ``azure-intune-device`` decoder normalizes the Microsoft Intune event into the following relevant fields:
 
-The command output looks similar to this:
-
 .. code-block:: json
    :class: output
 
@@ -232,8 +229,8 @@ The command output looks similar to this:
       },
       "wazuh": {
          "protocol": {
-            "location": "-",
-            "queue": 1
+            "location": "ms-graph",
+            "queue": 49
          },
          "event": {
             "id": "49314b83-6262-47c4-9e19-5e554baba029"
@@ -267,7 +264,7 @@ The command output looks similar to this:
       }
    }
 
-The normalized event matches the built-in ruleset management rule created and generates a finding with the ``wazuh.rule.title``: Intune non-compliant managed device.
+The normalized event matches a built-in rule and generates a finding whose ``wazuh.rule.title`` is ``Intune non-compliant managed device``.
 
 You can view the finding on the Wazuh dashboard by navigating to **Cloud security \> Microsoft Graph API**:
 

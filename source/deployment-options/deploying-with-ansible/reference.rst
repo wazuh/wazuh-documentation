@@ -25,19 +25,19 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/vars/mai
      - Parsed JSON object read from ``VERSION.json`` in the playbook directory.
    * - ``wazuh_full_version``
      - ``{{ wazuh_version_data.version }}``
-     - The full Wazuh version string (e.g., ``|WAZUH_CURRENT_ANSIBLE|``) extracted from ``wazuh_version_data``.
+     - The full Wazuh version string (for example, ``|WAZUH_CURRENT_ANSIBLE|``) extracted from ``wazuh_version_data``.
    * - ``wazuh_major_minor_version``
      - ``{{ wazuh_version_data.version.split('.')[0:2] | join('.') }}``
-     - The major and minor version components only (e.g., ``|WAZUH_CURRENT_MINOR_ANSIBLE|``), derived from ``wazuh_full_version``.
+     - The major and minor version components only (for example, ``|WAZUH_CURRENT_MINOR_ANSIBLE|``), derived from ``wazuh_full_version``.
    * - ``wazuh_major_version``
      - ``{{ wazuh_version_data.version.split('.')[0] }}.x``
-     - The major version string in X.x format (e.g., ``|WAZUH_CURRENT_MAJOR|``), used in package repository URL paths.
+     - The major version string in X.x format (for example, ``|WAZUH_CURRENT_MAJOR|``), used in package repository URL paths.
    * - ``wazuh_package_revision``
      - ``1``
      - The package revision number is appended to package filenames. Increment the value when a new package revision is released for the same version.
    * - ``wazuh_stage``
      - ``{{ wazuh_version_data.stage }}``
-     - The release stage of the current version (e.g., ``alpha``, ``beta``, ``rc``, ``stable``). The ``package-urls`` role uses it to build the pre-release URL of the artifact URL definitions file.
+     - The release stage of the current version (for example, ``alpha``, ``beta``, ``rc``, ``stable``). The ``package-urls`` role uses it to build the pre-release URL of the artifact URL definitions file.
    * - ``local_configs_path``
      - ``{{ playbook_dir }}/deployment-config-files``
      - Path on the control node to the directory that holds the deployment configuration files: the cluster key and, in a Wazuh cluster deployment, the root CA of the deployment and the certificates issued from it, in its ``wazuh-ca`` subdirectory. The Wazuh credentials role creates it. The Wazuh manager and Wazuh dashboard roles stop if it does not exist.
@@ -48,7 +48,7 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/vars/mai
 Package-urls
 ------------
 
-These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/package-urls/defaults/main.yml`` and control where the artifact URL definitions file is retrieved.
+These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/package-urls/defaults/main.yml`` and control where the artifact URL definitions file is retrieved, and how each Wazuh package is verified before it is installed.
 
 .. list-table::
    :header-rows: 1
@@ -66,6 +66,24 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/package-
    * - ``package_urls_file_uri_prerelease``
      - ``packages-staging.xdrsiem.wazuh.info/pre-release/{{ wazuh_major_version }}/artifact-urls/artifact_urls_{{ wazuh_full_version }}-{{ wazuh_stage }}.yaml``
      - The URL of the artifact URL definitions file, without the ``https://`` prefix, that the role downloads when ``source`` is ``prerelease``.
+   * - ``wazuh_gpg_key_url``
+     - ``https://packages.wazuh.com/key/GPG-KEY-WAZUH``
+     - The URL of the Wazuh GPG key. Before a Linux target node installs a Wazuh package, the role downloads this key to the node and checks that the package is signed with it. For nodes without internet access, set it to a mirror or to a ``file://`` path on the target node.
+   * - ``wazuh_gpg_key_fingerprints``
+     - ``["0DCFCA5547B19D2A6099506096B3EE5F29111145"]``
+     - The list of accepted fingerprints of the Wazuh GPG key. The role trusts the downloaded key only if it holds a single primary key whose fingerprint is in this list.
+   * - ``wazuh_skip_package_signature_check``
+     - ``false``
+     - Set to ``true`` to install Wazuh packages without checking their signature. Use it only for unsigned development packages. When the value is ``false``, the run stops if a package is not signed by Wazuh.
+   * - ``wazuh_windows_signer_name``
+     - ``Wazuh, Inc``
+     - The signer name that the Authenticode signature of the Wazuh agent MSI package must carry. Windows must also trust the signature.
+   * - ``wazuh_windows_signer_eku``
+     - Empty
+     - An optional extended key usage (EKU) OID that the signer certificate of the Wazuh agent MSI package must also carry. An empty value skips this check.
+   * - ``wazuh_macos_signer_team_id``
+     - ``KLZK8P68R5``
+     - The Apple team ID that the Developer ID Installer signature of the Wazuh agent PKG package must carry.
 
 Wazuh credentials
 -----------------
@@ -88,6 +106,12 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/wazuh-cr
    * - ``wazuh_ca_path``
      - ``{{ local_configs_path }}/wazuh-ca``
      - Directory on the Ansible control node where the root CA of a Wazuh cluster deployment is kept: ``root-ca.pem`` and its private key, ``root-ca.key``. The role creates them during the first run if they are not there and never replaces them, so you can place your own root CA there before the first run. It also holds the certificates issued from the root CA, those of each host in ``issued/<INVENTORY_HOST>/``. Back up this directory. It is the only record of the root CA and its private key, which never leaves the Ansible control node. Not used in an all-in-one deployment.
+   * - ``wazuh_service_settle_seconds``
+     - ``5``
+     - The number of seconds that a Wazuh service must stay active after it starts before the role continues. If the service stops in that time, the run fails and shows the reason that the pre-start check of the package reported.
+   * - ``wazuh_credentials_aio``
+     - ``{{ single_node | default(false) | bool }}``
+     - Whether the deployment is an all-in-one deployment. It follows ``single_node``. In an all-in-one deployment, the packages create their root CAs and certificates and generate the passwords you don't supply. Otherwise, the role creates one root CA on the Ansible control node and issues every certificate there.
 
 Wazuh indexer
 -------------
@@ -106,7 +130,16 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/wazuh-in
      - When set to ``true``, it configures the Wazuh indexer as a single-node cluster. It is set to ``false`` for multi-node deployments.
    * - ``wazuh_indexer_security_init_force``
      - ``false``
-     - When set to ``true``, the run loads the security configuration files of the first Wazuh indexer node of the play into the cluster again with ``indexer-security-init.sh``, even if the cluster already has one. This replaces the internal users, roles, role mappings, and passwords of the cluster with those of the files. By default, the role loads the configuration only on a new cluster, when no node of the play has it. If no node reports it and one of them was installed by an earlier run, the run stops instead. After a first run that stopped before the upload, run the playbook again with this variable set to ``true``.
+     - When set to ``true``, the run loads the security configuration files of the first Wazuh indexer node of the play into the cluster again with ``indexer-security-init.sh``, even if the cluster already has one. This replaces the internal users, roles, role mappings, and passwords of the cluster with those of the files. By default, the role loads the configuration only on a new cluster. In a Wazuh cluster deployment, that is when the cluster has no security index. In an all-in-one deployment, that is when the node doesn't report the configuration loaded, and the run stops instead if the node was installed by an earlier run. After an all-in-one first run that stopped before the upload, run the playbook again with this variable set to ``true``.
+   * - ``wazuh_indexer_security_init_timeout``
+     - ``600``
+     - The number of seconds that ``indexer-security-init.sh`` can run before the role stops it and the run fails. Without a limit, the script waits indefinitely for a cluster with a cluster manager, for example when the other Wazuh indexer nodes reject this node.
+   * - ``wazuh_indexer_api_retries``
+     - ``24``
+     - The number of attempts, 5 seconds apart, of each wait on the Wazuh indexer API: for the cluster manager and the security index before the security initialization, and for a healthy cluster after it.
+   * - ``wazuh_indexer_restart_retries``
+     - ``60``
+     - The number of attempts, 10 seconds apart, of the wait after a Wazuh indexer node of a running cluster restarts, before the next node restarts. The node must join the cluster again, and the cluster must be as healthy as before the restart. It also sets the attempts of the wait for a stopped node to join the cluster before the first restart. When a wait ends without that, the run stops, and the remaining nodes restart on the next run.
    * - ``instances``
      - .. code-block:: yaml
 
@@ -123,7 +156,7 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/wazuh-in
        -  **Names:** the ``name`` of a Wazuh manager or Wazuh dashboard entry must match that node's ``manager_node_name`` or ``dashboard_node_name``. The roles copy certificate files by those names.
    * - ``wazuh_indexer_package_download_path``
      - ``/tmp/wazuh-indexer``
-     - Defines the path on the target node where the Wazuh indexer package file will be downloaded before installation.
+     - Defines the path on the target node where the role downloads the Wazuh indexer package file before installation.
    * - ``wazuh_indexer_package_name``
      - ``wazuh-indexer-{{ wazuh_full_version }}-{{ wazuh_package_revision }}``
      - This is the base filename of the Wazuh indexer package to download and install.
@@ -158,10 +191,10 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/wazuh-ma
           wazuh_indexer_hosts:
             - host: "{{ hostvars[inventory_hostname].private_ip }}"
               port: 9200
-     - The list of Wazuh indexer hosts that this manager node will connect to. Each entry specifies a host address and the port to use for the connection.
+     - The list of Wazuh indexer hosts that this manager node connects to. Each entry specifies a host address and the port to use for the connection.
    * - ``wazuh_manager_package_download_path``
      - ``/tmp/wazuh-manager``
-     - The path on the target node where the Wazuh manager package file will be downloaded before installation.
+     - The path on the target node where the role downloads the Wazuh manager package file before installation.
    * - ``wazuh_manager_package_name``
      - ``wazuh-manager-{{ wazuh_full_version }}-{{ wazuh_package_revision }}``
      - The base filename of the Wazuh manager package to download and install.
@@ -227,7 +260,7 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/wazuh-da
      - Defines the list of IP addresses or hostnames of the Wazuh indexer nodes. The Wazuh dashboard uses this list to configure the ``opensearch.hosts`` entries in ``opensearch_dashboards.yml``.
    * - ``wazuh_dashboard_package_download_path``
      - ``/tmp/wazuh-dashboard``
-     - Defines the path on the target node where the Wazuh dashboard package file will be downloaded before installation.
+     - Defines the path on the target node where the role downloads the Wazuh dashboard package file before installation.
    * - ``wazuh_dashboard_package_name``
      - ``wazuh-dashboard-{{ wazuh_full_version }}-{{ wazuh_package_revision }}``
      - The base filename of the Wazuh dashboard package to download and install.
@@ -246,13 +279,22 @@ These variables are defined in ``/etc/ansible/roles/wazuh-ansible/roles/wazuh-ag
      - Description
    * - ``wazuh_agent_package_download_path``
      - ``/tmp/wazuh-agent``
-     - Defines the path on the Linux or macOS target node where the Wazuh agent package file will be downloaded before installation.
+     - Defines the path on the Linux or macOS target node where the role downloads the Wazuh agent package file before installation.
    * - ``wazuh_agent_win_package_download_path``
      - ``C:\Temp\wazuh-agent``
-     - Defines the path on the Windows target node where the Wazuh agent package file will be downloaded before installation.
+     - Defines the path on the Windows target node where the role downloads the Wazuh agent package file before installation.
    * - ``wazuh_agent_package_name``
      - ``wazuh-agent-{{ wazuh_full_version }}-{{ wazuh_package_revision }}``
      - The base filename of the Wazuh agent package to download and install.
+   * - ``wazuh_agent_install_path``
+     - ``/var/ossec``
+     - Installation directory of the Wazuh agent on Linux. No task reads it, and it doesn't change where the package installs the Wazuh agent.
+   * - ``wazuh_agent_macos_install_path``
+     - ``/Library/Ossec``
+     - Installation directory of the Wazuh agent on macOS. The role uses it only to name the location of the Wazuh agent log in the error it shows when the Wazuh agent doesn't stay running. It doesn't change where the package installs the Wazuh agent.
+   * - ``wazuh_agent_win_install_path``
+     - ``{{ ansible_facts.env['ProgramFiles(x86)'] | default('C:\Program Files (x86)', true) }}\ossec-agent``
+     - Installation directory of the Wazuh agent on Windows. The role uses it only to name the location of the Wazuh agent log in the error it shows when the Wazuh agent doesn't stay running. It doesn't change where the package installs the Wazuh agent.
    * - ``wazuh_enrollment_token``
      - ``<Your Wazuh Agent Enrollment Token>``, in ``wazuh-agent.yml``. Replace it with your token.
      - The enrollment token generated on the Wazuh manager. The role passes it to the Wazuh agent installer as ``WAZUH_ENROLLMENT_TOKEN``. The variable is set in the ``wazuh-agent.yml`` playbook, not in ``defaults/main.yml``. The role stops before installing anything if the value is empty or still holds the placeholder.

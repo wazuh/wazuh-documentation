@@ -27,7 +27,7 @@ Kubernetes cluster
 
       $ minikube start --cpus=4 --memory=6144 --cni=calico
 
-   To install ``kubectl`` and Minikube, see `Install and set up kubectl on Linux <https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/>`__ and `minikube start <https://minikube.sigs.k8s.io/docs/start/>`__. Minikube also needs a driver, such as Docker.
+   To install ``kubectl`` and Minikube, see `Install and set up kubectl on Linux <https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/>`__ and `minikube start <https://minikube.sigs.k8s.io/docs/start/>`__. Minikube also needs a driver, such as Docker. To install Docker, see `Install Docker Engine <https://docs.docker.com/engine/install/>`__ and `Manage Docker as a non-root user <https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user>`__.
 
 Storage class
 ^^^^^^^^^^^^^

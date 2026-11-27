@@ -72,7 +72,7 @@ Requirements
 
 Check the recommended operating systems and hardware requirements for the Wazuh manager installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
-The Wazuh manager package doesn't install on a host that has a Wazuh manager 4.x, even a fresh one: :doc:`migrate </migration-to-5x/index>` instead. The Wazuh manager doesn't start until it has the Wazuh indexer password and certificates.
+The Wazuh manager package doesn't install on a host that has a Wazuh manager 4.x, even a fresh one: :doc:`migrate </transitioning/index>` instead. The Wazuh manager doesn't start until it has the Wazuh indexer password and certificates.
 
 .. _supported_operating_systems:
 
@@ -152,6 +152,8 @@ A Wazuh agent connects to one address only: the address of its enrollment token,
 
    Assisted installation <installation-assistant>
    Step-by-step installation <step-by-step>
+
+.. _wazuh_manager_adding_address_after_installation:
 
 Adding the address after the installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

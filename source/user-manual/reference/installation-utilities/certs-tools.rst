@@ -57,12 +57,14 @@ Options list
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -wi, --wazuh-indexer-certificates                                                   | Creates the Wazuh indexer certificates.                                                      |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -wm, --wazuh-manager-certificates                                                   | Creates the Wazuh manager certificates: the Wazuh indexer client pair (<name>.pem), the      |
-|                                                                                     | agent listener pair (<name>-remoted.pem) and the Wazuh manager API pair (<name>-apid.pem).   |
+| -wm, --wazuh-manager-certificates                                                   | Creates the Wazuh manager certificates, signed by the root CA: the agent listener            |
+|                                                                                     | (<name>-remoted.pem) and Wazuh manager API (<name>-apid.pem) pairs. The listener and API     |
+|                                                                                     | pairs are optional. When none are in place at installation, the Wazuh manager issues its own |
+|                                                                                     | pairs with its own CA.                                                                       |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -tmp, --cert_tmp_path </path/to/tmp_dir>                                            | Uses this directory to create the certificates, instead of a new one with a random name in   |
 |                                                                                     | /tmp. The directory must not exist, or must be an empty directory owned by root. Must be     |
-|                                                                                     | used along with one of these options: -a, -A, -ca, -wi, -wd, -wm                             |
+|                                                                                     | used along with one of these options: -a, -A, -ca, -wi, -wd, -wm, -lb                        |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 
 Root CA
@@ -78,7 +80,7 @@ An existing root CA is validated and reused, never replaced. To use a root CA cr
 
 .. code-block:: console
 
-   # sudo WAZUH_CA_DIR=/path/to/ca bash wazuh-certs-tool.sh -A
+   # WAZUH_CA_DIR=/path/to/ca bash wazuh-certs-tool.sh -A
 
 Back up the CA directory in a safe place. When there is no root CA in the CA directory, ``-A``, ``-ca`` and ``--generate-config-files`` create a new one and log a warning. That's expected for a new deployment, but the nodes of an existing deployment only trust the root CA they were issued from. To issue certificates for an existing deployment, run the tool on the node that holds its root CA, or point ``WAZUH_CA_DIR`` at a copy of it.
 
@@ -94,7 +96,7 @@ Repeat the option once per address:
 
 .. code-block:: console
 
-   # sudo bash wazuh-certs-tool.sh -A --agent-san wazuh.example.com --api-san api.example.com
+   # bash wazuh-certs-tool.sh -A --agent-san wazuh.example.com --api-san api.example.com
 
 A proxy that terminates the agents' TLS sessions presents its own certificate. Declare it in the ``load_balancer`` section of ``config.yml`` and create it with ``-lb``. A passthrough load balancer needs ``--agent-san`` instead.
 
@@ -109,8 +111,6 @@ Run the tool again on the node that holds ``root-ca.key``, with the ``config.yml
 | Wazuh indexer   | ``<node>.pem``, ``<node>-key.pem``                 | ``/etc/wazuh-indexer/certs/indexer.pem``, ``indexer-key.pem``                     | ``root:wazuh-indexer``, ``0640``   |
 +-----------------+----------------------------------------------------+-----------------------------------------------------------------------------------+------------------------------------+
 | Wazuh indexer   | ``admin.pem``, ``admin-key.pem``                   | ``/etc/wazuh-indexer/certs/admin.pem``, ``admin-key.pem``                         | ``root:root``, ``0600``            |
-+-----------------+----------------------------------------------------+-----------------------------------------------------------------------------------+------------------------------------+
-| Wazuh manager   | ``<node>.pem``, ``<node>-key.pem``                 | ``/etc/wazuh-manager/certs/indexer-connector.pem``, ``indexer-connector-key.pem`` | ``root:wazuh-manager``, ``0640``   |
 +-----------------+----------------------------------------------------+-----------------------------------------------------------------------------------+------------------------------------+
 | Wazuh manager   | ``<node>-remoted.pem``, ``<node>-remoted-key.pem`` | ``/etc/wazuh-manager/certs/remoted.pem``, ``remoted-key.pem``                     | ``root:wazuh-manager``, ``0640``   |
 +-----------------+----------------------------------------------------+-----------------------------------------------------------------------------------+------------------------------------+

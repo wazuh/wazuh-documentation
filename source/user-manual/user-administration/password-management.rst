@@ -19,13 +19,15 @@ The Wazuh manager API has two default users:
 -  ``wazuh``: The default administrator user for the Wazuh manager API.
 -  ``wazuh-internal-client``: Service account that the Wazuh dashboard uses to connect to the Wazuh manager API. It isn't a user for logging in to the Wazuh dashboard.
 
-There are no default passwords. The Wazuh packages generate random passwords when you install them. The Wazuh indexer saves the passwords of its users in ``/etc/wazuh-indexer/export/credentials.env``, and the Wazuh manager master node saves the passwords of the Wazuh manager API users in ``/etc/wazuh-manager/export/credentials.env``. See :ref:`Where the passwords are saved <passwords_where_saved>` for more details.
+There are no default passwords. The Wazuh packages generate random passwords when you install them. See :ref:`Where the passwords are saved <passwords_where_saved>` for more details.
 
-The tool is located at ``/usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh``. You can also download it by running the following command:
+The Wazuh passwords tool is located at ``/usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh`` on every Wazuh indexer node. The commands on this page run the tool from the current directory. On a Wazuh indexer node, change to the tool directory first:
 
 .. code-block:: console
 
-   # curl -so wazuh-passwords-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+   # cd /usr/share/wazuh-indexer/tools/
+
+On a host without the Wazuh indexer, such as a Wazuh manager master node in a distributed deployment, copy ``wazuh-passwords-tool.sh`` there from a Wazuh indexer node.
 
 The tool requires root privileges.
 
@@ -85,7 +87,7 @@ To read a new password, run the following command on the host where you ran the 
 Change the password for a Wazuh indexer user
 ---------------------------------------------
 
-Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``. To change the password for a Wazuh indexer user, run the script with the ``-u`` option and pass the new password to the ``-p`` option through standard input. Passwords for Wazuh indexer users and Wazuh manager API users must contain 12 to 64 characters, using only ``A``-``Z``, ``a``-``z``, ``0``-``9``, and the symbols ``. , _ + : @ % ^ = ~ -``. They must include at least one uppercase letter, one lowercase letter, one number, and one of the previously mentioned symbols. This rule applies to the passwords you set with the tool or at installation. When you change a Wazuh manager API password with ``rbac_control`` or the Wazuh manager API, the Wazuh manager API accepts a wider set: 12 to 64 printable ASCII characters with at least one letter and one number.
+To change the password for a Wazuh indexer user, run the script with the ``-u`` option and pass the new password to the ``-p`` option through standard input. Passwords for Wazuh indexer users and Wazuh manager API users must contain 12 to 64 characters, using only ``A``-``Z``, ``a``-``z``, ``0``-``9``, and the symbols ``. , _ + : @ % ^ = ~ -``. They must include at least one uppercase letter, one lowercase letter, one number, and one of the previously mentioned symbols. This rule applies to the passwords you set with the tool or at installation.
 
 .. code-block:: console
 
@@ -94,7 +96,7 @@ Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/inte
 Where:
 
 -  ``<USER>`` is the name of the user whose password you want to change: ``admin``, ``kibanaserver``, or ``wazuh-manager``.
--  ``<PASSWORD>`` is the new password. If you omit ``-p``, the tool generates a random password and saves it in the credentials files of the host.
+-  ``<PASSWORD>`` is the new password.
 
 .. note::
 
@@ -117,8 +119,6 @@ The command output looks similar to this:
    INFO: The password of the Wazuh indexer user admin was changed.
    INFO: WAZUH_INDEXER_ADMIN_PASSWORD was updated in: /etc/wazuh-indexer/export/credentials.env.
 
-When you change the ``kibanaserver`` or ``wazuh-manager`` password and the Wazuh dashboard or Wazuh manager is installed on the same host, the tool also writes the new password to the Wazuh dashboard or Wazuh manager keystore and restarts that service. For nodes on other hosts, see :ref:`Change the passwords in a distributed environment <passwords_distributed>`.
-
 .. _change_password_api_user:
 
 Change the password for a Wazuh manager API user
@@ -133,11 +133,11 @@ The tool changes the Wazuh manager API passwords with ``rbac_control`` on the Wa
 Where:
 
 -  ``<USER>`` is the name of the API user whose password you want to change: ``wazuh`` or ``wazuh-internal-client``.
--  ``<PASSWORD>`` is the new password. If you omit ``-p``, the tool generates a random password and saves it in the credentials files of the host.
+-  ``<PASSWORD>`` is the new password.
 
 .. note::
 
-   Run this command on the **Wazuh manager master node** for distributed deployments.
+   Run this command on the **Wazuh manager master node** for distributed deployments. If that node has no Wazuh indexer, copy the tool there first, as described at the start of this page.
 
 For example, run the following command to change the password of the ``wazuh`` user to ``Secr3tP4ssw.rd``:
 
@@ -152,10 +152,6 @@ The command output looks similar to this:
 
    INFO: The password of the Wazuh API user wazuh was changed.
    INFO: WAZUH_MANAGER_API_PASSWORD was updated in: /etc/wazuh-manager/export/credentials.env.
-
-When you change the ``wazuh-internal-client`` password, and the Wazuh dashboard is installed on the same host, the tool also writes the new password to the Wazuh dashboard keystore and restarts the Wazuh dashboard.
-
-You can also change a Wazuh manager API password with ``/var/wazuh-manager/bin/rbac_control change-password`` on a Wazuh manager node. ``rbac_control`` doesn't update ``/etc/wazuh-manager/export/credentials.env``, which keeps the previous value, so update the key there too.
 
 .. note::
 
@@ -214,7 +210,7 @@ Read the new password in the ``export/credentials.env`` file of the node where y
 Update the Wazuh manager nodes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform these steps on every Wazuh manager node after you change the ``wazuh-manager`` password. Replace ``<WAZUH_MANAGER_PASSWORD>`` with the ``WAZUH_INDEXER_MANAGER_PASSWORD`` value:
+Perform these steps on every Wazuh manager node after you change the ``wazuh-manager`` password. Replace ``<WAZUH_MANAGER_PASSWORD>`` with the ``WAZUH_INDEXER_MANAGER_PASSWORD`` value. Run the ``sed`` command only if the node has a ``/etc/wazuh-manager/local.env`` file:
 
 .. code-block:: console
    :emphasize-lines: 2,3
@@ -235,7 +231,7 @@ Until you update the keystore and restart the service, the Wazuh manager logs ``
 Update the Wazuh dashboard nodes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform these steps on every Wazuh dashboard node after you change the ``kibanaserver`` or ``wazuh-internal-client`` password. You need them even with a single Wazuh dashboard node when it isn't on the host where you ran the tool. This ensures the Wazuh dashboard can authenticate with the Wazuh indexer and Wazuh manager API using the updated credentials.
+Perform these steps on every Wazuh dashboard node after you change the ``kibanaserver`` or ``wazuh-internal-client`` password. You need them even with a single Wazuh dashboard node when it isn't on the host where you ran the tool.
 
 Update the kibanaserver password
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -245,6 +241,25 @@ When you change the ``kibanaserver`` password, update the ``opensearch.password`
 .. code-block:: console
 
    # echo '<KIBANASERVER_PASSWORD>' | OSD_PATH_CONF=/etc/wazuh-dashboard /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
+
+Give the keystore back to the ``wazuh-dashboard`` group:
+
+.. code-block:: console
+
+   # chown root:wazuh-dashboard /etc/wazuh-dashboard/opensearch_dashboards.keystore
+   # chmod 640 /etc/wazuh-dashboard/opensearch_dashboards.keystore
+
+If the node has a ``/etc/wazuh-dashboard/local.env`` file, update the same key there too:
+
+.. code-block:: console
+
+   # sed -i 's|^WAZUH_INDEXER_KIBANASERVER_PASSWORD=.*|WAZUH_INDEXER_KIBANASERVER_PASSWORD=<KIBANASERVER_PASSWORD>|' /etc/wazuh-dashboard/local.env
+
+Restart the Wazuh dashboard to apply the changes.
+
+.. include:: /_templates/common/restart_dashboard.rst
+
+To verify the change, log in to the Wazuh dashboard.
 
 .. _update_wazuh_internal_client_password:
 
@@ -268,12 +283,13 @@ If the node has a ``/etc/wazuh-dashboard/local.env`` file, update the same key t
 
 .. code-block:: console
 
-   # sed -i 's|^WAZUH_INDEXER_KIBANASERVER_PASSWORD=.*|WAZUH_INDEXER_KIBANASERVER_PASSWORD=<KIBANASERVER_PASSWORD>|' /etc/wazuh-dashboard/local.env
    # sed -i 's|^WAZUH_MANAGER_WUI_PASSWORD=.*|WAZUH_MANAGER_WUI_PASSWORD=<WAZUH_WUI_PASSWORD>|' /etc/wazuh-dashboard/local.env
 
 Restart the Wazuh dashboard to apply the changes.
 
 .. include:: /_templates/common/restart_dashboard.rst
+
+To verify the change, log in to the Wazuh dashboard.
 
 .. _passwords_all_distributed:
 
@@ -284,9 +300,11 @@ Change all passwords in a distributed deployment
 
 #. On the Wazuh manager master node, run the tool with ``-a``. It changes the ``wazuh`` and ``wazuh-internal-client`` passwords.
 
-#. On every Wazuh manager node, update the keystore and the ``/etc/wazuh-manager/local.env`` file with the ``WAZUH_INDEXER_MANAGER_PASSWORD`` value of the Wazuh indexer node, and restart the Wazuh manager, as described in :ref:`Update the Wazuh manager nodes <update_wazuh_manager_nodes>`.
+#. On every Wazuh manager node, update the keystore and, if the node has one, the ``/etc/wazuh-manager/local.env`` file with the ``WAZUH_INDEXER_MANAGER_PASSWORD`` value of the Wazuh indexer node, and restart the Wazuh manager, as described in :ref:`Update the Wazuh manager nodes <update_wazuh_manager_nodes>`.
 
 #. On every Wazuh dashboard node, write ``opensearch.password`` with the ``WAZUH_INDEXER_KIBANASERVER_PASSWORD`` value of the Wazuh indexer node and ``wazuh_core.hosts.default.password`` with the ``WAZUH_MANAGER_WUI_PASSWORD`` value of the Wazuh manager master node. Then restart the Wazuh dashboard once.
+
+#. To verify the changes, log in to the Wazuh dashboard.
 
 Add or reinstall nodes after a password change
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

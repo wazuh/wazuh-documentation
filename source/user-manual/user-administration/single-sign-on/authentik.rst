@@ -8,15 +8,15 @@ authentik
 
 `authentik <https://goauthentik.io/>`_ is an open source Identity Provider (IdP) for modern SSO. It supports SAML, OAuth2/OIDC, LDAP, RADIUS, and more. In this guide, we integrate the authentik IdP to authenticate users into the Wazuh platform.
 
-Learn how to create administrator and read-only roles on authentik and map them to Wazuh roles in the sections below.
+Learn how to create administrator and read-only roles on authentik and map them to Wazuh roles in the sections below. These steps use authentik 2026.8.
 
 .. contents::
    :local:
    :depth: 1
    :backlinks: none
 
-Setup authentik single sign-on with administrator role
-------------------------------------------------------
+Set up authentik single sign-on with administrator role
+-------------------------------------------------------
 
 Follow these steps to integrate authentik IdP with Wazuh for single sign-on and grant administrator access to the authenticated authentik users:
 
@@ -115,7 +115,7 @@ authentik configuration
 
          -  **Property Mappings**: add the Property Mapping you created in the previous section.
          -  **NameID Property Mapping**: select ``authentik default SAML Mapping: Username``. Wazuh uses this value as the username.
-         -  **EntityID/Issuer override**: ``wazuh-saml``. Leave other values as default and click **Next** to proceed to the next step.
+         -  **EntityID/Issuer override**: ``wazuh-saml``. This value must match ``idp.entity_id`` in ``/etc/wazuh-indexer/opensearch-security/config.yml``. Leave other values as default and click **Next** to proceed to the next step.
 
    #. **Configure Bindings**: Leave as default and click **Next** to proceed to the next step.
    #. **Review and Submit Application**: Review the configuration and click **Create Application**, then click **Finish**.
@@ -175,12 +175,13 @@ authentik configuration
 Wazuh indexer configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+Edit the Wazuh indexer security configuration files.
 
-#. Backup the existing Wazuh indexer security configuration files:
+#. Back up the Wazuh indexer security configuration files, then export the configuration that the Wazuh indexer is using. The export overwrites these files with the active configuration, including changes made in the Wazuh dashboard:
 
    .. code-block:: console
 
+      # cp -a /etc/wazuh-indexer/opensearch-security /root/opensearch-security-backup-$(date +%Y%m%d%H%M%S)
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
 
 #. Generate a 64-character long random key using the following command.
@@ -252,7 +253,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag sets the address of the Wazuh indexer node. On an all-in-one deployment, the Wazuh indexer listens on ``127.0.0.1``, so keep ``localhost``. On a distributed deployment, replace ``localhost`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml``.
 
    The command output must be similar to the following:
 
@@ -299,8 +300,6 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
-
    The command output must be similar to the following:
 
    .. code-block:: none
@@ -334,7 +333,7 @@ Wazuh dashboard configuration
 
       wazuh_core.hosts:
         default:
-          url: https://127.0.0.1
+          url: https://localhost
           port: 55000
           username: wazuh-internal-client
           run_as: true
@@ -352,7 +351,7 @@ Wazuh dashboard configuration
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``administrator``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field:** ``backend_roles``
+      -  **Auth context field:** ``backend_roles``
       -  **Search operation:** ``FIND``
       -  **Value:** Assign the yield value configured in the authentik property mapping configuration. In our case, this is ``wazuh-admins``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *administrator*. If another identity provider already maps this backend role, the Wazuh dashboard rejects the new role mapping with error ``4005`` because the rule already exists. The existing role mapping also applies to authentik users.
@@ -364,7 +363,7 @@ Wazuh dashboard configuration
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up this file before you carry out the configuration.
 
    .. code-block:: yaml
 
@@ -380,8 +379,8 @@ Wazuh dashboard configuration
 
 #. To test the configuration, go to your Wazuh dashboard URL and log in with your authentik account.
 
-Setup authentik single sign-on with read-only role
---------------------------------------------------
+Set up authentik single sign-on with read-only role
+---------------------------------------------------
 
 Follow these steps to integrate authentik IdP with Wazuh for single sign-on and grant read-only role to the authenticated authentik users on the Wazuh platform:
 
@@ -492,7 +491,7 @@ authentik configuration
 
          -  **Property Mappings**: add the Property Mapping you created in the previous section.
          -  **NameID Property Mapping**: select ``authentik default SAML Mapping: Username``. Wazuh uses this value as the username.
-         -  **EntityID/Issuer override**: ``wazuh-saml``. Leave other values as default and click **Next** to proceed to the next step.
+         -  **EntityID/Issuer override**: ``wazuh-saml``. This value must match ``idp.entity_id`` in ``/etc/wazuh-indexer/opensearch-security/config.yml``. Leave other values as default and click **Next** to proceed to the next step.
 
    #. **Configure Bindings**: Leave as default and click **Next** to proceed to the next step.
    #. **Review and Submit Application**: Review the configuration and click **Create Application**, then click **Finish**.
@@ -552,12 +551,13 @@ authentik configuration
 Wazuh indexer configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+Edit the Wazuh indexer security configuration files.
 
-#. Backup the existing Wazuh indexer security configuration files:
+#. Back up the Wazuh indexer security configuration files, then export the configuration that the Wazuh indexer is using. The export overwrites these files with the active configuration, including changes made in the Wazuh dashboard:
 
    .. code-block:: console
 
+      # cp -a /etc/wazuh-indexer/opensearch-security /root/opensearch-security-backup-$(date +%Y%m%d%H%M%S)
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
 
 #. Generate a 64-character long random key using the following command.
@@ -629,7 +629,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag sets the address of the Wazuh indexer node. On an all-in-one deployment, the Wazuh indexer listens on ``127.0.0.1``, so keep ``localhost``. On a distributed deployment, replace ``localhost`` with the ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml``.
 
    The command output must be similar to the following:
 
@@ -681,7 +681,7 @@ Wazuh dashboard configuration
 
       wazuh_core.hosts:
         default:
-          url: https://127.0.0.1
+          url: https://localhost
           port: 55000
           username: wazuh-internal-client
           run_as: true
@@ -699,7 +699,7 @@ Wazuh dashboard configuration
       -  **Role mapping name**: Assign a name to the role mapping.
       -  **Roles**: Select ``readonly``.
       -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field:** ``backend_roles``
+      -  **Auth context field:** ``backend_roles``
       -  **Search operation:** ``FIND``
       -  **Value:** Assign the yield value configured in the authentik property mapping configuration. In our case, this is ``wazuh-readonly``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*. If another identity provider already maps this backend role, the Wazuh dashboard rejects the new role mapping with error ``4005`` because the rule already exists. The existing role mapping also applies to authentik users.
@@ -711,7 +711,7 @@ Wazuh dashboard configuration
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up this file before you carry out the configuration.
 
    .. code-block:: yaml
 

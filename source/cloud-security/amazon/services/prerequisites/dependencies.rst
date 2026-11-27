@@ -13,7 +13,7 @@ Install the following dependencies on the Linux endpoint where the Wazuh agent r
 Python
 ------
 
-The Wazuh module for AWS is compatible with Python 3.8–3.14. Later `Python versions <https://www.python.org/downloads/>`__ might also work, but we can't guarantee they're compatible. If you do not have Python 3 already installed, run the following command on the Wazuh agent endpoint.
+The Wazuh module for AWS is compatible with Python 3.8–3.15. Later `Python versions <https://www.python.org/downloads/>`__ might also work, but we can't guarantee they're compatible. If you do not have Python 3 already installed, run the following command on the Wazuh agent endpoint.
 
 .. tabs::
 
@@ -28,6 +28,20 @@ The Wazuh module for AWS is compatible with Python 3.8–3.14. Later `Python ver
       .. code-block:: console
 
          # apt-get update && apt-get install python3
+
+.. note::
+
+   On Amazon Linux 2 and other systems based on Red Hat Enterprise Linux 7, the ``python3`` package installs a Python version earlier than 3.8, which the Wazuh module for AWS doesn't support. Install Python 3.8 instead. For example, on Amazon Linux 2:
+
+   .. code-block:: console
+
+      # amazon-linux-extras enable python3.8 && yum install python38 python38-pip
+
+   Use ``pip3.8`` instead of ``pip3`` in the commands below. Then make the module run with Python 3.8 by changing the first line of the ``/var/ossec/wodles/aws/aws-s3`` script:
+
+   .. code-block:: console
+
+      # sed -i '1s|^#!/usr/bin/env python3$|#!/usr/bin/env python3.8|' /var/ossec/wodles/aws/aws-s3
 
 You can install the required modules with pip, the Python package manager. Most UNIX distributions have this tool available in their software repositories. If pip isn't installed, run the following command on the Wazuh agent endpoint to install it.
 
@@ -49,7 +63,7 @@ We recommend using pip ``19.3`` or later to simplify the installation of the dep
 
 .. code-block:: console
 
-   $ pip3 --version
+   # pip3 --version
 
 An example output is as follows.
 
@@ -68,7 +82,7 @@ If your pip version is earlier than ``19.3``, run the following command to upgra
 
          # pip3 install --upgrade pip
 
-   .. group-tab:: Python 3.11–3.14
+   .. group-tab:: Python 3.11–3.15
 
       .. code-block:: console
 
@@ -97,6 +111,8 @@ Run the following command on the Wazuh agent endpoint to install the dependencie
 
          # pip3 install boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
 
+      On Python 3.8, replace ``numpy==1.26.0`` with ``numpy==1.24.4`` in this command. NumPy 1.26.0 requires Python 3.9 or later.
+
    .. group-tab:: Python 3.11–3.12
 
       .. code-block:: console
@@ -107,11 +123,11 @@ Run the following command on the Wazuh agent endpoint to install the dependencie
 
          If you're using a virtual environment, remove the ``--break-system-packages`` parameter from the command above.
 
-   .. group-tab:: Python 3.13–3.14
+   .. group-tab:: Python 3.13–3.15
 
       .. code-block:: console
 
-         # pip3 install --break-system-packages "numpy==2.3.3" "pyarrow==22.0.0" "boto3==1.34.135"
+         # pip3 install --break-system-packages "numpy==2.5.2" "pyarrow==26.0.0" "boto3==1.34.135"
 
       .. note::
 

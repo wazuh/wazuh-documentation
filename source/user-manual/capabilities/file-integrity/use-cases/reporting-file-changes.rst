@@ -63,7 +63,7 @@ Test the configuration
 Visualize the findings
 -----------------------
 
-Navigate to **Endpoint security** → **File Integrity Monitoring** → **Findings** on the Wazuh dashboard to view the findings. You can see four findings related to the monitored directory.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the findings. You can see four findings: a File created finding and a File modified finding for each of the ``appreport.conf`` and ``private-file.conf`` files.
 
 .. thumbnail:: /images/manual/fim/alerts-related-monitored-directory.png
    :title: Findings related to the monitored directory
@@ -71,7 +71,7 @@ Navigate to **Endpoint security** → **File Integrity Monitoring** → **Findin
    :align: center
    :width: 80%
 
-Expand the finding for the ``appreport.conf`` to see information about the changes made to the file. In the image below, under the **event.original** field, you see the content added to the file.
+Expand the finding for the ``appreport.conf`` file. The ``file.diff`` field shows the content added to the file. For ``private-file.conf``, ``file.diff`` shows that the diff was truncated because of the ``nodiff`` setting.
 
 .. thumbnail:: /images/manual/fim/content-added-to-the-file.png
   :title: Content added to the file
@@ -79,7 +79,7 @@ Expand the finding for the ``appreport.conf`` to see information about the chang
   :align: center
   :width: 80%
 
-Expand the finding for the ``private-file.conf`` file to see information about the changes made to the file. In the image below, under the **event.original** field, you see that FIM does not report the content added to the file.
+Expand the finding for the ``private-file.conf`` file to see information about the changes made to the file. In the image below, in the ``file.diff`` field, you see that FIM does not report the content added to the file.
 
 .. thumbnail:: /images/manual/fim/alert-for-the-private-file-conf.png
    :title: Finding for the private-file.conf file

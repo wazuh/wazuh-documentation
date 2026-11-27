@@ -11,7 +11,9 @@ The Wazuh manager API runs inside the Wazuh manager service and listens on port 
 Prerequisites
 -------------
 
-The steps in this guide target Wazuh |WAZUH_CURRENT|, in an all-in-one or a distributed deployment. The credential and configuration steps need root access on the Wazuh manager. The command-line examples use cURL, and the Wazuh agent examples need at least one enrolled Wazuh agent. You can run the cURL commands and scripts on the Wazuh manager or on any host that reaches it on port 55000. The installation generates the password of the ``wazuh`` user and stores it in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager, as ``WAZUH_MANAGER_API_PASSWORD``.
+The steps in this guide target Wazuh |WAZUH_CURRENT|, in an all-in-one or a distributed deployment. The credential and configuration steps need root access on the Wazuh manager. The command-line examples use cURL, and the Wazuh agent examples need at least one enrolled Wazuh agent. You can run the cURL commands and scripts on the Wazuh manager or on any endpoint that reaches it on port 55000. The installation generates the password of the ``wazuh`` user and stores it in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager, as ``WAZUH_MANAGER_API_PASSWORD``.
+
+After an all-in-one installation with the :doc:`installation assistant </user-manual/reference/installation-utilities/installation-assistant>`, such as the :doc:`Quickstart </quickstart>`, the Wazuh manager API accepts connections only from the Wazuh manager itself. To send requests from another endpoint, change ``host`` as described in :ref:`Change the default host and port <api_securing_api_change_the_default_host_and_port>`.
 
 Start and stop the Wazuh manager API
 ------------------------------------
@@ -24,13 +26,15 @@ The Wazuh manager API is automatically installed and runs as part of the Wazuh m
 
       .. code-block:: console
 
-         # systemctl start/status/stop/restart wazuh-manager
+         # systemctl <ACTION> wazuh-manager
 
    .. group-tab:: SysV init
 
       .. code-block:: console
 
-         # service wazuh-manager start/status/stop/restart
+         # service wazuh-manager <ACTION>
+
+Replace ``<ACTION>`` with ``start``, ``status``, ``stop``, or ``restart``.
 
 To check whether a Wazuh manager node is ready to process events, send :api-ref:`GET /cluster/{node_id}/status <operation/api.controllers.cluster_controller.get_status_node>`. In Wazuh 5.0, it reports for each Wazuh manager daemon whether it is running and ready.
 
@@ -50,13 +54,21 @@ You can interact with the Wazuh manager API through the built-in API console in 
 
 #. In the **API Console**:
 
-   -  Type the HTTP method (GET, POST, PUT, or DELETE) followed by the endpoint, such as ``GET /cluster/nodes`` or ``GET /cluster/<NODE_NAME>/info``.
+   -  Enter the HTTP method (``GET``, ``POST``, ``PUT``, or ``DELETE``) at the start of a new line in the editor.
+   -  Enter the endpoint, such as ``/cluster/nodes`` or ``/cluster/<NODE_NAME>/info``.
    -  Add any query parameters, such as ``?pretty=true``.
-   -  Click **Play**.
+
+   .. thumbnail:: /images/manual/api/api-console-query-suggestions.png
+      :title: Query parameter suggestions in the API console
+      :alt: Query parameter suggestions in the API console
+      :align: center
+      :width: 80%
+
+   -  Click **Send request**, the play icon at the end of the request line.
 
 All requests are automatically authenticated using your current dashboard session. See :doc:`Wazuh manager API requests and responses </user-manual/api/requests-responses>` to learn more about the basic concepts.
 
-.. thumbnail:: /images/manual/api/api-console-execution.gif
+.. thumbnail:: /images/manual/api/api-console-execution.png
    :title: Execute API request in console
    :alt: Execute API request in console
    :align: center
@@ -67,20 +79,20 @@ All requests are automatically authenticated using your current dashboard sessio
 Authentication
 --------------
 
-All endpoints except ``POST /security/user/authenticate`` and ``POST /security/user/authenticate/run_as`` require authentication using a JSON Web Token (JWT). These two endpoints use HTTP basic authentication. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object.
+All endpoints except :api-ref:`POST /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and :api-ref:`POST /security/user/authenticate/run_as <operation/api.controllers.security_controller.run_as_login>` require authentication using a JSON Web Token (JWT). These two endpoints use HTTP basic authentication. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object.
 
 .. _api_getting_started_authenticate_the_wazuh_manager_api_from_the_command_line:
 
 Authenticate the Wazuh manager API from the command line
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To ensure secure access, all Wazuh manager API endpoints require authentication. Follow the steps outlined in the :api-ref:`POST /security/user/authenticate <operation/api.controllers.security_controller.login_user>` reference guide to obtain a token necessary for accessing the API endpoints:
+Every Wazuh manager API endpoint except the two login endpoints requires a JWT. Obtain a token from :api-ref:`POST /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and send it with each request.
 
 #. Run the following command to authenticate with the Wazuh manager API and store the returned JWT in the ``TOKEN`` variable, replacing ``<WAZUH_API_USER>`` and ``<WAZUH_API_PASSWORD>`` with your credentials.
 
    .. code-block:: console
 
-      # TOKEN=$(curl -u <WAZUH_API_USER>:<WAZUH_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+      # TOKEN=$(curl -s -u <WAZUH_API_USER>:<WAZUH_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
 
    .. note::
 
@@ -99,7 +111,7 @@ To ensure secure access, all Wazuh manager API endpoints require authentication.
    .. code-block:: none
       :class: output
 
-      eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNzkxOTg2NjIzLCJuYmZfbXMiOjE3OTE5ODY2MjM4ODUsImV4cCI6MTc5MTk4NzUyMywic3ViIjoid2F6dWgiLCJydW5fYXMiOmZhbHNlLCJyYmFjX3JvbGVzIjpbMV0sInJiYWNfbW9kZSI6IndoaXRlIn0.AeKHOdYaBEW4U-kZiHMXlYwVzSAHOdOQdPdDJ874450WdligB3PWxc2Jrz2WuUVWHOUBHDn05iyi42UQwWZN0IRPAa0OG7arhv0w2psqOWwHU8OnDs-RH7QAnwpFe47_tGeH0rweikwRmT-nS09u-x3uh3SaTNfydQnnqOa5VUyryDQ0
+      eyJhXXXXXXX5cCJ9.eyJpc3MXXXXXXXXXXXXXXXXXXXXG7arhdQnnqOa5VUyryDQ0
 
    If the authentication fails, the output either displays an error message or remains blank. In such cases, double-check your user credentials and make sure you have network connectivity to the Wazuh manager API.
 
@@ -126,10 +138,10 @@ To ensure secure access, all Wazuh manager API endpoints require authentication.
          "data": {
             "title": "Wazuh API REST",
             "api_version": "5.0.0",
-            "revision": "rc2",
+            "revision": "rc3",
             "license_name": "GPL 2.0",
-            "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc2/LICENSE",
-            "hostname": "ubuntu-QEMU-Virtual-Machine",
+            "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc3/LICENSE",
+            "hostname": "ip-10-42-1-79",
             "timestamp": "2026-09-23T07:30:59Z"
          },
          "error": 0
@@ -137,9 +149,9 @@ To ensure secure access, all Wazuh manager API endpoints require authentication.
 
 It sends an authenticated GET request to the root endpoint of the Wazuh manager API. The API returns basic API info (title, version, revision, hostname, timestamp) in a human-readable (pretty-printed) format.
 
-To end a session, send :api-ref:`DELETE /security/user/authenticate <operation/api.controllers.security_controller.logout_user>` with the token. The request invalidates every token of the current user. For a token from ``POST /security/user/authenticate/run_as``, the request invalidates only the tokens granted for the same authorization context.
+To end a session, send :api-ref:`DELETE /security/user/authenticate <operation/api.controllers.security_controller.logout_user>` with the token. The request invalidates every token of the current user. For a token from :api-ref:`POST /security/user/authenticate/run_as <operation/api.controllers.security_controller.run_as_login>`, the request invalidates only the tokens granted for the same authorization context.
 
-A token expires after 900 seconds by default. Request a new token when it expires. To change the lifetime, use ``PUT /security/config``. This change revokes all existing tokens. After 50 failed login attempts from an IP address, the Wazuh manager API rejects login requests from that address with HTTP ``403`` and error ``6000`` until 300 seconds have passed since its first failed attempt.
+A token expires after 900 seconds by default. Request a new token when it expires. To change the lifetime, use :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`. This change revokes all existing tokens. After 50 failed login attempts for one user from one IP address, the Wazuh manager API blocks that user from that address. It answers with HTTP ``403`` and error ``6000``. The block lasts until 300 seconds have passed since the first failed attempt. After 500 failed attempts across all users, the address is blocked for every user.
 
 Authenticate the Wazuh manager API with scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -243,7 +255,7 @@ You can authenticate to the Wazuh manager API and obtain a JWT using a Python sc
 
       Login request ...
 
-      eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNzkwMTY5MjEwLCJuYmZfbXMiOjE3OTAxNjkyMTAwMTksImV4cCI6MTc5MDE3MDExMCwic3ViIjoid2F6dWgiLCJydW5fYXMiOmZhbHNlLCJyYmFjX3JvbGVzIjpbMV0sInJiYWNfbW9kZSI6IndoaXRlIn0.AcFXKKtz39b6mIyYSufP2w_BBVjWrBycvfA3gE4EYKwN7nZkOhG5DJlnHXSwpvOc7jcvAQP_vOgrCR9QsBCvUTAdAfHemlEDBU4tpZbnRv7Gamn4CN-Z4qEr8lPriROzYe4S4Z-jkYO37Hj_4NirGQPeenL23IbWnzzgYJ8wc8kdki1H
+      eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXgrCR9QsBCvUTAdAfHemlEDBU4tpZbnRv7Gamn4CN-Z4qEr8lPriROzYe4S4Z-jkYO37Hj_4NirGQPeenL23IbWnzzgYJ8wc8kdki1H
 
       - API calls with the token ...
 
@@ -252,10 +264,10 @@ You can authenticate to the Wazuh manager API and obtain a JWT using a Python sc
          "data": {
             "title": "Wazuh API REST",
             "api_version": "5.0.0",
-            "revision": "rc2",
+            "revision": "rc3",
             "license_name": "GPL 2.0",
-            "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc2/LICENSE",
-            "hostname": "ubuntu-QEMU-Virtual-Machine",
+            "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc3/LICENSE",
+            "hostname": "ip-10-42-1-79",
             "timestamp": "2026-09-23T13:13:30Z"
          },
          "error": 0
@@ -265,11 +277,11 @@ You can authenticate to the Wazuh manager API and obtain a JWT using a Python sc
       {
          "data": {
             "connection": {
-               "active": 1,
+               "active": 2,
                "disconnected": 0,
                "never_connected": 0,
                "pending": 0,
-               "total": 1
+               "total": 2
             }
          },
          "error": 0
@@ -338,10 +350,10 @@ You can also authenticate to the Wazuh manager API using a Bash script. The foll
          "data": {
             "title": "Wazuh API REST",
             "api_version": "5.0.0",
-            "revision": "rc2",
+            "revision": "rc3",
             "license_name": "GPL 2.0",
-            "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc2/LICENSE",
-            "hostname": "ubuntu-QEMU-Virtual-Machine",
+            "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-rc3/LICENSE",
+            "hostname": "ip-10-42-1-79",
             "timestamp": "2026-09-23T13:36:02Z"
          },
          "error": 0
@@ -352,9 +364,10 @@ You can also authenticate to the Wazuh manager API using a Bash script. The foll
       {
          "data": {
             "affected_items": [
-               "ubuntu"
+               "ubuntu",
+               "windows"
             ],
-            "total_affected_items": 1,
+            "total_affected_items": 2,
             "total_failed_items": 0,
             "failed_items": []
          },

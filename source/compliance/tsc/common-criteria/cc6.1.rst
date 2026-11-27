@@ -47,6 +47,8 @@ In this use case, we show how to use the Wazuh Syscollector module to collect sy
         </synchronization>
       </wodle>
 
+#. If you change this block, restart the Wazuh agent to apply the change. Run ``Restart-Service -Name WazuhSvc`` in PowerShell as an administrator. This block only turns on inventory collection. The Vulnerability Scanner module on the Wazuh manager uses the package inventory to detect vulnerabilities and is enabled by default.
+
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 

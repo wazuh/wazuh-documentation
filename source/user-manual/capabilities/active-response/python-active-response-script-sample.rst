@@ -39,11 +39,11 @@ Configuring the Python active response script sample
 
 Use the ``custom-ar.py`` Python script below as an example of a custom active response on Linux, macOS, and Windows endpoints.
 
-The script demonstrates the active response lifecycle by creating a file named ``ar-test-result.txt`` in the Wazuh agent directory when the response receives an ``enable`` command. The file contains the rule ID that triggers the response:
+The script demonstrates the active response lifecycle by creating a file named ``ar-test-result.txt`` in the Wazuh agent installation directory (``/var/ossec`` on Linux, ``/Library/Ossec`` on macOS, and ``C:\Program Files (x86)\ossec-agent`` on Windows) when the response receives an ``enable`` command. The file contains the rule ID that triggers the response:
 
 ``Active response triggered by rule ID: <['RULE_ID']>``
 
-For a stateful active response, Wazuh sends a ``disable`` command after the configured timeout. The script then removes ``ar-test-result.txt``, demonstrating how the response reverts its action.
+For a stateful active response, Wazuh sends a disable command after the configured timeout. The script then removes ``ar-test-result.txt``, demonstrating how the response reverts its action. To check this behavior, set Type to Stateful in the active response, trigger it, and confirm that ar-test-result.txt is removed after the Stateful timeout. The active response log on the endpoint shows the ``check_keys`` message and the disable command.
 
 The script also writes execution and error information to the active response log on the endpoint.
 
@@ -72,6 +72,8 @@ The script also writes execution and error information to the active response lo
 
    ENABLE_COMMAND = 0
    DISABLE_COMMAND = 1
+   CONTINUE_COMMAND = 2
+   ABORT_COMMAND = 3
    OS_SUCCESS = 0
    OS_INVALID = -1
 
@@ -116,6 +118,33 @@ The script also writes execution and error information to the active response lo
 
        return msg
 
+   def send_keys_and_check_message(argv, keys):
+       # Send the keys to Wazuh. Wazuh adds a stateful response to its
+       # timeout list only after it receives this message on STDOUT.
+       keys_msg = json.dumps({"version": 1, "origin": {"name": argv[0], "module": "active-response"}, "command": "check_keys", "parameters": {"keys": keys}})
+       write_debug_file(argv[0], keys_msg)
+       print(keys_msg)
+       sys.stdout.flush()
+
+       # Wazuh replies with "continue" for new keys or "abort" if they are already active
+       input_str = sys.stdin.readline()
+       write_debug_file(argv[0], input_str)
+
+       try:
+           data = json.loads(input_str)
+       except ValueError:
+           write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
+           return OS_INVALID
+
+       action = data.get("command")
+       if action == "continue":
+           return CONTINUE_COMMAND
+       if action == "abort":
+           return ABORT_COMMAND
+
+       write_debug_file(argv[0], "Invalid value of 'command'")
+       return OS_INVALID
+
    def main(argv):
        write_debug_file(argv[0], "Started")
 
@@ -130,6 +159,17 @@ The script also writes execution and error information to the active response lo
            rule_id = alert.get("wazuh", {}).get("rule", {}).get("id", "unknown")
            keys = [rule_id]
            """ End Custom Key """
+
+           action = send_keys_and_check_message(argv, keys)
+
+           # If necessary, abort execution
+           if action != CONTINUE_COMMAND:
+               if action == ABORT_COMMAND:
+                   write_debug_file(argv[0], "Aborted")
+                   sys.exit(OS_SUCCESS)
+               else:
+                   write_debug_file(argv[0], "Invalid command")
+                   sys.exit(OS_INVALID)
 
            """ Start Custom Action Enable """
            with open("ar-test-result.txt", mode="a") as test_file:
@@ -156,7 +196,7 @@ The script also writes execution and error information to the active response lo
 Linux/Unix custom active response configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Copy the ``custom-ar.py`` script to ``/var/ossec/active-response/bin/custom-ar`` on the monitored endpoint. Then, set the required permissions and ownership:
+The script runs with ``/usr/bin/python3``, so the endpoint needs Python 3. Save the script above as ``custom-ar.py`` in your current directory and copy it to ``/var/ossec/active-response/bin/custom-ar`` on the monitored endpoint. Then, set the required permissions and ownership:
 
 .. code-block:: console
 
@@ -167,7 +207,7 @@ Copy the ``custom-ar.py`` script to ``/var/ossec/active-response/bin/custom-ar``
 macOS custom active response configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Copy the ``custom-ar.py`` script to ``/Library/Ossec/active-response/bin/custom-ar`` on the monitored endpoint. Then, set the required permissions and ownership:
+The script runs with ``/usr/bin/python3``. On macOS, ``/usr/bin/python3`` runs the Python 3 of the Xcode Command Line Tools, so install them first with ``xcode-select --install``. To use another Python 3 installation, change the first line of the script to its path. Save the script above as ``custom-ar.py`` in your current directory and copy it to ``/Library/Ossec/active-response/bin/custom-ar`` on the monitored endpoint. Then, set the required permissions and ownership:
 
 .. code-block:: console
 
@@ -183,11 +223,12 @@ The Wazuh agent for Windows executes active response scripts through executable 
 Method 1: Convert the script to an executable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Open PowerShell with administrator privileges and install PyInstaller:
+#. Install Python 3 for Windows from `https://www.python.org/downloads/windows/ <https://www.python.org/downloads/windows/>`__ and select **Add python.exe to PATH** during the installation. Then open a new PowerShell window with administrator privileges and install PyInstaller:
 
    .. code-block:: powershell
 
       > pip install pyinstaller
+      > cd C:\Users\Public
       > pyinstaller --version
 
 #. Use PowerShell with user privileges to convert ``custom-ar.py`` into an executable:
@@ -196,7 +237,7 @@ Method 1: Convert the script to an executable
 
       > pyinstaller -F <PATH_TO_CUSTOM-AR.PY>
 
-   PyInstaller creates the ``custom-ar.exe`` executable in the ``dist\`` folder of the script's directory.
+   PyInstaller creates the ``custom-ar.exe`` executable in the ``dist\`` folder of the current directory.
 
 #. Copy the ``custom-ar.exe`` executable file to the ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` directory on the monitored endpoint.
 
@@ -214,16 +255,16 @@ Use a batch launcher when you want the Wazuh active response module to execute a
       set "ARPATH=%programfiles(x86)%\ossec-agent\active-response\bin\"
       set "script=custom-ar.py"
 
-      <PYTHON_ABSOLUTE_PATH> "%ARPATH%%script%"
+      "<PYTHON_ABSOLUTE_PATH>" "%ARPATH%%script%"
 
-   Where ``<PYTHON_ABSOLUTE_PATH>`` is the absolute path of the ``python.exe`` executable.
+   Where ``<PYTHON_ABSOLUTE_PATH>`` is the absolute path of the ``python.exe`` executable. Keep the quotes, because the path usually contains spaces, such as ``C:\Program Files\Python312\python.exe``.
 
 #. Move the ``custom-ar.py`` script to the ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` directory.
 
 Configuring the active response on the Wazuh dashboard
 ----------------------------------------------------------
 
-Configure the active response on the Wazuh dashboard to run when a suspicious file triggers the specified detection condition.
+Configure the active response on the Wazuh dashboard to run when a finding matches the monitor condition.
 
 #. On the Wazuh dashboard, create the active response configuration as described in :doc:`configuration`, with the following settings:
 
@@ -234,7 +275,7 @@ Configure the active response on the Wazuh dashboard to run when a suspicious fi
    +------------------------+--------------------+
    | **Executable**         | ``custom-ar``      |
    +------------------------+--------------------+
-   | **Type**               | ``stateful``       |
+   | **Type**               | ``Stateful``       |
    +------------------------+--------------------+
    | **Stateful timeout**   | ``60``             |
    +------------------------+--------------------+
@@ -250,11 +291,11 @@ Configure the active response on the Wazuh dashboard to run when a suspicious fi
    +------------------------+--------------------+
    | **Executable**         | ``launcher.cmd``   |
    +------------------------+--------------------+
-   | **Type**               | ``stateful``       |
+   | **Type**               | ``Stateful``       |
    +------------------------+--------------------+
    | **Stateful timeout**   | ``60``             |
    +------------------------+--------------------+
    | **Location**           | ``Local``          |
    +------------------------+--------------------+
 
-#. Create a monitor of type **Active response**, a trigger, and an active response action to invoke this configuration when a finding matches your chosen condition. See :doc:`Use cases <ar-use-cases/index>` for a complete walkthrough of this pattern.
+#. Create an Active Response monitor with a trigger and an active response action to invoke this configuration when a finding matches your chosen condition. See :doc:`Use cases <ar-use-cases/index>` for a complete walkthrough of this pattern.
