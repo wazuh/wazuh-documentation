@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- **Post-release**: Added a note about Windows event channel logs and the *Testing rules for Windows event channel logs* section to the *Testing decoders and rules* documentation. ([#10740](https://github.com/wazuh/wazuh-documentation/pull/10740))
 - Added the `analysisd.rule_tree_memory_warning` and `analysisd.rule_tree_memory_limit` internal options and a section on the rule tree memory thresholds to the *Internal configuration* reference documentation. ([#10397](https://github.com/wazuh/wazuh-documentation/pull/10397))
 - **Post-release**: Added the *Using the Wazuh dashboard* method to the *Upgrading the Wazuh agent* documentation, and a paragraph on the automatic removal of disconnected agents with the `monitord.delete_old_agents` internal option to the *Removing agents* documentation. ([#10694](https://github.com/wazuh/wazuh-documentation/pull/10694))
 - **Post-release**: Added the two-tenant example and the multi-tenant behavior to the *ms-graph* reference and *Microsoft Graph API setup* documentation, the daemons that accept `-t` to *Verifying configuration*, and a note on running `agent_control` in a cluster to the *agent_control* reference. ([#10778](https://github.com/wazuh/wazuh-documentation/pull/10778))
