@@ -15,6 +15,8 @@ Who-data monitoring
 
 The who-data functionality lets the FIM module identify who modified a monitored file, capturing the user and the program or process responsible.
 
+.. _file_integrity_advanced_settings_who_data_monitoring_on_linux:
+
 Who-data monitoring on Linux
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
