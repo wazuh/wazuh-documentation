@@ -136,7 +136,7 @@ To collect the DNS queries made to the Google DNS service, we use DNS policies t
 
    .. code-block:: none
 
-      $ gcloud dns policies create enable-dns-logging --enable-logging --description="Enable DNS logging" --networks=wazuh-dev-net
+      gcloud dns policies create enable-dns-logging --enable-logging --description="Enable DNS logging" --networks=wazuh-dev-net
 
    To enable logging for a network that has an existing DNS policy, run the ``dns policies update`` command:
 
@@ -153,7 +153,7 @@ To collect the DNS queries made to the Google DNS service, we use DNS policies t
 
    .. code-block:: none
 
-      $ gcloud dns policies update enable-dns-logging --enable-logging --networks=wazuh-dev-net
+      gcloud dns policies update enable-dns-logging --enable-logging --networks=wazuh-dev-net
 
 Exporting DNS queries logs to Pub/Sub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
