@@ -430,6 +430,27 @@ Refer to the :doc:`changing the default password of Wazuh users <changing-defaul
 
    To determine when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to repeatedly send queries to the Wazuh indexer API (port 9200). You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or ``Wazuh dashboard server is not ready yet`` until the Wazuh indexer is started. Then the setup process continues normally. It takes about one minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
 
+
+Troubleshooting dashboard configuration permissions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When deploying the single-node or multi-node stack, attempting to save settings through the Wazuh dashboard UI (such as enabling **Remember server address** during agent enrollment) may trigger an error similar to:
+
+.. code-block:: none
+
+   3021 - Error setting configuration: EACCES: permission denied, open '/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml'
+
+This occurs because the volume mounted at ``/usr/share/wazuh-dashboard/data`` on the host lacks write permissions for the container's internal ``wazuh-dashboard`` user.
+
+To resolve this issue, set the appropriate ownership and permissions inside the dashboard container:
+
+.. code-block:: console
+
+   # docker compose exec -u 0 wazuh.dashboard chown -R wazuh-dashboard:wazuh-dashboard /usr/share/wazuh-dashboard/data
+   # docker compose exec -u 0 wazuh.dashboard chmod -R 775 /usr/share/wazuh-dashboard/data
+
+Alternatively, disable the **Remember server address** toggle in the deployment interface. The generated deployment command will still include the specified manager address without writing changes to ``wazuh.yml``.
+
 Wazuh agent
 -----------
 
