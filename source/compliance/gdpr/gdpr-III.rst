@@ -24,7 +24,7 @@ To confirm that no modification or deletion of restricted data occurred during a
 
 .. thumbnail:: /images/compliance/gdpr/syscheck-no-alerts.png
    :title: File modification finding visualization within specific time frame
-   :alt: GDPR Findings tab showing the file modification finding within a specific time range
+   :alt: Threat Hunting Findings tab showing the file modification finding within a specific time range
    :align: center
    :width: 80%
 
