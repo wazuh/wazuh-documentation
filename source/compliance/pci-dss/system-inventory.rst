@@ -24,7 +24,7 @@ PCI DSS requirement 2.2.4
 
 PCI DSS requirement 2.2.4 mandates keeping only necessary services, protocols, daemons, and functions enabled and removing unnecessary functionality. The Syscollector and :doc:`SCA <configuration-assessment>` modules support the requirement by identifying unnecessary processes, services, and configurations that can increase the attack surface.
 
-The Wazuh Syscollector module collects information about running processes on monitored endpoints. You can use this information to identify unnecessary processes and determine whether they are required for an endpoint to operate. The Wazuh Syscollector module is enabled with all available scans by default in all compatible systems. You can view system inventory information in the **IT Hygiene** and **PCI DSS** dashboards on the Wazuh dashboard.
+The Wazuh Syscollector module collects information about running processes on monitored endpoints. You can use this information to identify unnecessary processes and determine whether they are required for an endpoint to operate. The Wazuh Syscollector module is enabled with all available scans by default in all compatible systems. You can view this information in the **IT Hygiene** dashboard on the Wazuh dashboard.
 
 IT Hygiene dashboard
 ~~~~~~~~~~~~~~~~~~~~~
