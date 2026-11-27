@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
 - Added the *Using Wazuh for FedRAMP compliance* documentation to *Regulatory compliance*. ([#10973](https://github.com/wazuh/wazuh-documentation/pull/10973))
 - Added the *Using Wazuh for ISO 27001 compliance* documentation to *Regulatory compliance*. ([#10974](https://github.com/wazuh/wazuh-documentation/pull/10974))
 - Added the *Using Wazuh for NIST 800-171 compliance* documentation to *Regulatory compliance*. ([#10975](https://github.com/wazuh/wazuh-documentation/pull/10975))
+- Added the *Using Wazuh for CMMC compliance* documentation to *Regulatory compliance*. ([#10976](https://github.com/wazuh/wazuh-documentation/pull/10976))
 
 ### Changed
 
