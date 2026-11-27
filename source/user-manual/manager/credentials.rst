@@ -91,7 +91,7 @@ Progress messages are written to standard output and use the ``resolve-credentia
 |             | where a file belongs.                                                  |                                                                  |
 +-------------+------------------------------------------------------------------------+------------------------------------------------------------------+
 | ``WARNING`` | Wazuh indexer material that only the clock refuses (expired or not     | ``resolve-credentials: WARNING:                                  |
-|             | valid yet). It doesn't refuse the start, but the Wazuh indexer         | /etc/wazuh-manager/certs/indexer-connector.pem: expired on ...`` |
+|             | valid yet). It doesn't refuse the start, but the Wazuh indexer         | /etc/wazuh-manager/certs/indexer-ca.pem: expired on ...``        |
 |             | connection fails until you renew the material or fix the clock.        |                                                                  |
 +-------------+------------------------------------------------------------------------+------------------------------------------------------------------+
 
@@ -359,7 +359,7 @@ Run these steps as root:
 Trust a remote Wazuh indexer
 ----------------------------
 
-The Wazuh indexer connector trusts ``certs/indexer-ca.pem``. It presents a client certificate only when ``<certificate>`` and ``<key>`` in the ``<indexer>`` block name one, for a Wazuh indexer that requires client certificates. When the Wazuh indexer runs on the same host, the resolver imports the CA, and a configured client pair that the Wazuh indexer publishes, from ``/etc/wazuh-indexer/export/``. When the Wazuh indexer runs on another host, there is nothing to import, so you stage the files yourself.
+The Wazuh indexer connector trusts ``certs/indexer-ca.pem``. It presents a client certificate only when ``<certificate>`` and ``<key>`` in the ``<indexer>`` block name one, for a Wazuh indexer that requires client certificates. When the Wazuh indexer runs on the same host, the resolver imports the CA from ``/etc/wazuh-indexer/export/``. If you configure a client pair, stage it yourself, because the Wazuh indexer doesn't publish one. When the Wazuh indexer runs on another host, there is nothing to import, so you stage the files yourself.
 
 A marker file in ``certs/`` decides how the resolver treats the CA, and a client pair configured under the default names ``indexer-connector.pem`` and ``indexer-connector-key.pem``.
 

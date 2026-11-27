@@ -39,7 +39,7 @@ Configuring the Python active response script sample
 
 Use the ``custom-ar.py`` Python script below as an example of a custom active response on Linux, macOS, and Windows endpoints.
 
-The script demonstrates the active response lifecycle by creating a file named ``ar-test-result.txt`` in the Wazuh agent directory when the response receives an ``enable`` command. The file contains the rule ID that triggers the response:
+The script demonstrates the active response lifecycle by creating a file named ``ar-test-result.txt`` in the Wazuh agent installation directory (``/var/ossec`` on Linux, ``/Library/Ossec`` on macOS, and ``C:\Program Files (x86)\ossec-agent`` on Windows) when the response receives an ``enable`` command. The file contains the rule ID that triggers the response:
 
 ``Active response triggered by rule ID: <['RULE_ID']>``
 
@@ -196,7 +196,7 @@ The script also writes execution and error information to the active response lo
 Linux/Unix custom active response configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Save the script above as ``custom-ar.py`` in your current directory and copy it to ``/var/ossec/active-response/bin/custom-ar`` on the monitored endpoint. Then, set the required permissions and ownership:
+The script runs with ``/usr/bin/python3``, so the endpoint needs Python 3. Save the script above as ``custom-ar.py`` in your current directory and copy it to ``/var/ossec/active-response/bin/custom-ar`` on the monitored endpoint. Then, set the required permissions and ownership:
 
 .. code-block:: console
 
@@ -207,7 +207,7 @@ Save the script above as ``custom-ar.py`` in your current directory and copy it 
 macOS custom active response configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Save the script above as ``custom-ar.py`` in your current directory and copy it to ``/Library/Ossec/active-response/bin/custom-ar`` on the monitored endpoint. Then, set the required permissions and ownership:
+The script runs with ``/usr/bin/python3``. On macOS, ``/usr/bin/python3`` runs the Python 3 of the Xcode Command Line Tools, so install them first with ``xcode-select --install``. To use another Python 3 installation, change the first line of the script to its path. Save the script above as ``custom-ar.py`` in your current directory and copy it to ``/Library/Ossec/active-response/bin/custom-ar`` on the monitored endpoint. Then, set the required permissions and ownership:
 
 .. code-block:: console
 

@@ -6,7 +6,7 @@
 Certificates deployment
 =======================
 
-Each Wazuh manager node presents its own TLS certificates to the Wazuh agents, to the Wazuh manager API clients, and to the Wazuh indexer. All nodes must use certificates from one root certificate authority (CA), so an agent trusts every node it reaches.
+Each Wazuh manager node presents its own TLS certificates to the Wazuh agents and to the Wazuh manager API clients. All nodes must use certificates from one root certificate authority (CA), so an agent trusts every node it reaches.
 
 The cluster connection between nodes doesn't use these certificates. The shared cluster key protects it. The cluster doesn't replicate certificates either, so you provide them on every node.
 
@@ -25,8 +25,6 @@ Every node keeps its TLS files in ``/etc/wazuh-manager/certs/``. The following t
 | ``root-ca.pem``                                             | CA bundle that Wazuh agents trust. The agent listener serves it to the agents.               | The root CA of the Wazuh manager. |
 +-------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------------------------+
 | ``indexer-ca.pem``                                          | CA that the node trusts for the Wazuh indexer.                                               | The Wazuh indexer.                |
-+-------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------------------------+
-| ``indexer-connector.pem`` and ``indexer-connector-key.pem`` | Client certificate that the node presents to the Wazuh indexer.                              | The Wazuh indexer.                |
 +-------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------------------------+
 
 Shared root CA
@@ -94,7 +92,7 @@ Replace ``<NODE_NAME>`` with the name of the node in ``config.yml``.
 Options of the wazuh-certs-tool.sh script
 -----------------------------------------
 
-The ``wazuh-certs-tool.sh`` script issues the certificates of every Wazuh central component from the ``config.yml`` file in the directory of the script. It writes them to the ``wazuh-certificates/`` directory beside the script. The Wazuh indexer package installs the script as ``/usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh``, with a ``config.yml`` template beside it. It creates three pairs for each Wazuh manager node in that file. They serve the agent listener, the Wazuh manager API, and the connection to the Wazuh indexer.
+The ``wazuh-certs-tool.sh`` script issues the certificates of every Wazuh central component from the ``config.yml`` file in the directory of the script. It writes them to the ``wazuh-certificates/`` directory beside the script. The Wazuh indexer package installs the script as ``/usr/share/wazuh-indexer/tools/wazuh-certs-tool.sh``, with a ``config.yml`` template beside it. It creates two pairs for each Wazuh manager node in that file. They serve the agent listener and the Wazuh manager API.
 
 The script reads the root CA from its CA directory, or from the directory in the ``WAZUH_CA_DIR`` variable. It never copies the CA private key to the output directory. The script must run as ``root``.
 
@@ -180,7 +178,7 @@ Complete these steps on the endpoint that holds the root CA, then on each Wazuh 
 
 #. Copy ``root-ca.pem`` and the files of each node from the ``/usr/share/wazuh-indexer/tools/wazuh-certificates/`` directory to that node, before you install the Wazuh manager package on it.
 
-   -  Each node needs ``<NODE_NAME>-remoted.pem``, ``<NODE_NAME>-remoted-key.pem``, ``<NODE_NAME>-apid.pem``, ``<NODE_NAME>-apid-key.pem``, ``<NODE_NAME>.pem``, and ``<NODE_NAME>-key.pem``. ``<NODE_NAME>`` is the ``name`` value of the node in ``config.yml``.
+   -  Each node needs ``<NODE_NAME>-remoted.pem``, ``<NODE_NAME>-remoted-key.pem``, ``<NODE_NAME>-apid.pem``, and ``<NODE_NAME>-apid-key.pem``. ``<NODE_NAME>`` is the ``name`` value of the node in ``config.yml``.
    -  After you copy the files, remove the ``/usr/share/wazuh-indexer/tools/wazuh-certificates/`` directory. It holds the private keys of every node, and the script stops on its next run while the directory exists.
 
 #. Install the files on the node, in the directory that holds them:
@@ -193,14 +191,12 @@ Complete these steps on the endpoint that holds the root CA, then on each Wazuh 
       # install -m 0644 root-ca.pem /etc/wazuh-manager/ca/root-ca.pem
       # install -m 0640 root-ca.pem /etc/wazuh-manager/certs/root-ca.pem
       # install -m 0640 root-ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
-      # install -m 0640 <NODE_NAME>.pem /etc/wazuh-manager/certs/indexer-connector.pem
-      # install -m 0640 <NODE_NAME>-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
       # install -m 0640 <NODE_NAME>-remoted.pem /etc/wazuh-manager/certs/remoted.pem
       # install -m 0640 <NODE_NAME>-remoted-key.pem /etc/wazuh-manager/certs/remoted-key.pem
       # install -m 0640 <NODE_NAME>-apid.pem /etc/wazuh-manager/certs/apid.pem
       # install -m 0640 <NODE_NAME>-apid-key.pem /etc/wazuh-manager/certs/apid-key.pem
 
-   -  The ``indexer-ca.pem`` line applies when the same root CA signed the Wazuh indexer certificates. At installation, the package sets ``/etc/wazuh-manager/`` to owner ``root:wazuh-manager`` and mode ``0770``. On RPM-based systems, its credential check runs before the certificate files you placed have the ``wazuh-manager`` group, and it reports them as ``UNSAFE``. After the installation, set their owner and mode and run ``wazuh-manager-resolve-credentials --upgrade``, as described in :ref:`Add a Wazuh manager node to distributed deployments <wazuh_manager_cluster_add_a_wazuh_manager_node_to_distributed_deployments>`.
+   -  The ``indexer-ca.pem`` line applies when the same root CA signed the Wazuh indexer certificates. At installation, the package sets ``/etc/wazuh-manager/`` to owner ``root:wazuh-manager`` and mode ``0770``. It also gives the certificate files you placed owner ``root:wazuh-manager`` and mode ``0640`` before its credential check runs.
 
    The Wazuh manager also needs the Wazuh indexer password ``WAZUH_INDEXER_MANAGER_PASSWORD`` in ``/etc/wazuh-manager/local.env``. Place it with the Wazuh manager API passwords before you install the package, as described in :ref:`Add a Wazuh manager node to distributed deployments <wazuh_manager_cluster_add_a_wazuh_manager_node_to_distributed_deployments>`. Without it, the Wazuh manager doesn't start, and its journal shows ``MISSING WAZUH_INDEXER_MANAGER_PASSWORD``.
 
@@ -304,10 +300,10 @@ Fix a node that created its own CA
 
 When the Wazuh manager package finds no CA and no certificates at installation, it creates a CA for the node. The cluster connection doesn't use these certificates, so the node can still join the cluster. However, Wazuh agents that trust the root CA of the deployment reject its certificates. Replace its credentials before agents connect to it.
 
-The installation output names the CA that the package created, for example ``resolve-credentials: CA CN=wazuh-manager-<NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US: minted``. The package doesn't create a CA in these other cases. It reports them instead:
+The installation output names the CA that the package created, for example ``resolve-credentials: CA CN=wazuh-manager-<HOSTNAME>,OU=Wazuh,O=Wazuh,L=California,C=US: minted``, where ``<HOSTNAME>`` is the host name of the node. The package doesn't create a CA in these other cases. It reports them instead:
 
 -  **Node certificates without the CA**: The installation reports ``MISSING /etc/wazuh-manager/ca/root-ca.pem: stage the CA that issued the pairs``. Place ``root-ca.pem`` of the deployment in ``/etc/wazuh-manager/ca/``.
--  **CA certificate without its key, and no node certificates**: The installation prints ``The CA in /etc/wazuh-manager/ca has no key, so no server certificate could be issued.`` Issue the node certificates where ``root-ca.key`` is. Then place them in ``/etc/wazuh-manager/certs/`` and start the Wazuh manager.
+-  **CA certificate without its key, and no node certificates**: The installation prints ``The CA in /etc/wazuh-manager/ca was staged without its key, so no server certificate was issued here.`` Issue the node certificates where ``root-ca.key`` is. Then place them in ``/etc/wazuh-manager/certs/`` and start the Wazuh manager.
 
 Check these prerequisites before you start:
 
@@ -337,7 +333,7 @@ Complete these steps on the new node.
 
       # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --clear -H /var/wazuh-manager
 
-   The command removes the CA that the node created, its agent listener and Wazuh manager API pairs, and ``/etc/wazuh-manager/certs/root-ca.pem``. It also removes the Wazuh manager API database and the keystore contents. It keeps ``local.env`` and the Wazuh indexer files you placed. The output ends with ``resolve-credentials: cleared; the next --install resolves from nothing``.
+   The command removes the CA that the node created, its agent listener and Wazuh manager API pairs, and ``/etc/wazuh-manager/certs/root-ca.pem``. It also removes the Wazuh manager API database, the keystore contents, and the contents of ``/etc/wazuh-manager/export/``. It keeps ``local.env`` and the Wazuh indexer files you placed. The output ends with ``resolve-credentials: cleared; the next --install resolves from nothing``.
 
 #. Place the files of the deployment, as the installation task of your procedure describes.
 

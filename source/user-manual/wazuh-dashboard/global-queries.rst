@@ -57,6 +57,8 @@ Navigate to **Endpoint security** > **Configuration Assessment** on the Wazuh da
    :title: Security Configuration Assessment on the Wazuh dashboard
    :alt: Security Configuration Assessment on the Wazuh dashboard
 
+.. _wazuh_dashboard_global_queries_searching_findings_and_events_with_dql:
+
 Searching findings and events with DQL
 --------------------------------------
 

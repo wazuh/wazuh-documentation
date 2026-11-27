@@ -25,95 +25,54 @@ Add the Wazuh repository to download the official packages.
 
 Use the tab of your system's package manager: Use DNF on Red Hat Enterprise Linux 8 or later and compatible systems, and Yum on systems without DNF. Use ZYpp on SUSE, and APT on Debian and Ubuntu.
 
+Run the following command to import the GPG key and add the Wazuh repository. On APT and ZYpp, the command also updates the package information.
+
 .. tabs::
 
    .. group-tab:: APT
 
-      #. Install the following packages if missing:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # apt-get update && apt-get install -y gnupg apt-transport-https curl
-
-      #. Install the GPG key:
-
-         .. code-block:: console
-
-            # curl -s https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/apt/ unstable main" | tee /etc/apt/sources.list.d/wazuh.list
-
-      #. Update the package information:
-
-         .. code-block:: console
-
-            # apt-get update
+         # apt-get update && apt-get install -y gnupg apt-transport-https curl && \
+           curl -fsS https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && \
+           chmod 644 /usr/share/keyrings/wazuh.gpg && \
+           echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/apt/ unstable main" | tee /etc/apt/sources.list.d/wazuh.list && \
+           apt-get update
 
    .. group-tab:: Yum
 
-      #. Import the GPG key:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
+         # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH && \
+           echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
 
    .. group-tab:: DNF
 
-      #. Import the GPG key:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
+         # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH && \
+           echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
 
    .. group-tab:: ZYpp
 
-      #. Import the GPG key:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
-            [wazuh]
-            gpgcheck=1
-            gpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
-            enabled=1
-            name=Wazuh repository
-            baseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/yum/
-            EOF
-
-      #. Refresh the repository:
-
-         .. code-block:: console
-
-            # zypper refresh
+         # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH && \
+           cat > /etc/zypp/repos.d/wazuh.repo <<\EOF && zypper refresh
+         [wazuh]
+         gpgcheck=1
+         gpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
+         enabled=1
+         name=Wazuh repository
+         baseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/yum/
+         EOF
 
 Deploy a Wazuh agent
 --------------------
 
 Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
-#. Select your package manager and run the following command. Replace ``<ENROLLMENT_TOKEN>`` with the token you created in :ref:`Generate the enrollment token <generate_enrollment_token>`. Replace ``<AGENT_NAME>`` with a name that no other agent uses, for example, the endpoint's host name. If you omit ``WAZUH_AGENT_NAME``, the agent enrolls under the host name. The Wazuh manager refuses a name that another agent already uses.
+#. Select your package manager and run the following command. Replace ``<ENROLLMENT_TOKEN>`` with the token you created in :ref:`Generate the enrollment token <generate_enrollment_token>`. Replace ``<AGENT_NAME>`` with a name that no other agent uses, for example, the endpoint's host name. If you omit ``WAZUH_AGENT_NAME``, the agent enrolls under the host name. The Wazuh manager refuses a name that another agent already uses. To set other options, such as the agent group, add more variables to this command. See :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>`.
 
    .. tabs::
 
@@ -141,7 +100,7 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
             # WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' zypper install -y wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
 
-#. For additional deployment options such as agent group, see the :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>` section. Enable and start the Wazuh agent service:
+#. Enable and start the Wazuh agent service:
 
    .. tabs::
 

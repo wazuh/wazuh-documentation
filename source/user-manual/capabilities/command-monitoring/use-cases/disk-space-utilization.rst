@@ -145,7 +145,7 @@ Perform the steps below to create a rule to analyze the event received from the 
       -  **Select indexes/aliases**: wazuh-events-v5-system-activity (this must match the integration category you configured earlier, ``System Activity``)
       -  **Space**: Custom
       -  **Integration**: command-integration
-      -  **Run every**: 2 minutes.
+      -  **Run every**: 2 minutes
 
    .. thumbnail:: /images/manual/command-monitoring/create-detector-disk.png
       :title: Creating a detector

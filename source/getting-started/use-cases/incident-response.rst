@@ -36,7 +36,7 @@ Responding to malware activity
 
 Wazuh detects malware-related activity using capabilities such as :doc:`file integrity monitoring </user-manual/capabilities/file-integrity/index>`, threat intelligence, and security event analysis. Security teams can investigate the resulting findings and configure :doc:`Active Response </user-manual/capabilities/active-response/index>` to perform predefined actions when specific detection rules are triggered.
 
-For example, an organization can configure a response to remove a known malicious file or block an associated source address. The **Threat Hunting** section on the Wazuh dashboard below shows the removal of the EICAR file downloaded to a Windows endpoint.
+For example, an organization can configure a response to remove a known malicious file or block an associated source address. The **Threat Hunting** section on the Wazuh dashboard below shows the :doc:`removal of the EICAR file </user-manual/capabilities/active-response/ar-use-cases/removing-malicious-file>` downloaded to a Windows endpoint.
 
 .. thumbnail:: /images/getting-started/use-cases/incident-response/eicar-file-removal-finding.png
    :title: Threat Hunting section showing the removal of the EICAR file downloaded to a monitored endpoint
@@ -44,7 +44,7 @@ For example, an organization can configure a response to remove a known maliciou
    :align: center
    :width: 80%
 
-The **Incident Response** section on the Wazuh dashboard shows the active response action that is triggered to remove the suspicious file.
+The :ref:`Incident Response <wazuh_dashboard_navigating_the_wazuh_dashboard_incident_response>` section on the Wazuh dashboard shows the active response action that removes the suspicious file.
 
 .. thumbnail:: /images/getting-started/use-cases/incident-response/file-removal-response.png
    :title: Incident Response section showing the active response action that removed the suspicious file
@@ -55,9 +55,9 @@ The **Incident Response** section on the Wazuh dashboard shows the active respon
 Containing threats with Active Response
 ---------------------------------------
 
-Wazuh Active Response automatically executes configured actions when a detection rule matches specified activity. It can block a malicious IP address, disable a user account, or execute a custom script on the affected endpoint, depending on the configuration. Predefined containment actions reduce the time between threat detection and response, helping security teams contain threats more quickly.
+Wazuh Active Response automatically executes configured actions when a detection rule matches specified activity. It :doc:`blocks a malicious IP address, disables a user account on Linux endpoints </user-manual/capabilities/active-response/default-active-response-scripts>`, or runs a custom script, based on its configuration. Predefined containment actions reduce the time between threat detection and response, helping security teams contain threats more quickly.
 
-The **Threat Hunting** section on the Wazuh dashboard below shows the detection of a cross-site scripting attack against a monitored Ubuntu endpoint.
+The **Threat Hunting** section on the Wazuh dashboard below shows the detection of a :doc:`cross-site scripting attack </user-manual/capabilities/active-response/ar-use-cases/blocking-web-attacks>` against a monitored Ubuntu endpoint.
 
 .. thumbnail:: /images/getting-started/use-cases/incident-response/cross-site-scripting-finding.png
    :title: Threat Hunting section showing a cross-site scripting attack detected on an Ubuntu endpoint
@@ -65,7 +65,7 @@ The **Threat Hunting** section on the Wazuh dashboard below shows the detection 
    :align: center
    :width: 80%
 
-The **Incident Response** section on the Wazuh dashboard shows the active response action that is triggered to block the IP address of the endpoint that initiated the attack.
+The **Incident Response** section on the Wazuh dashboard shows the active response action that blocks the IP address of the attacking endpoint.
 
 .. thumbnail:: /images/getting-started/use-cases/incident-response/ip-block-response.png
    :title: Incident Response section showing the active response action that blocked the attacking IP address
@@ -108,4 +108,3 @@ Automating incident response workflows
 Organizations can create :ref:`custom detection rules <data_analysis_create_custom_rule>` and associate them with active response actions to automate repetitive response tasks. This process allows security teams to define specific actions for known threats while retaining control over which detections trigger automated responses.
 
 Predefined automated tasks allow security teams to handle recurring response actions consistently and focus manual investigation on incidents that require further analysis.
-

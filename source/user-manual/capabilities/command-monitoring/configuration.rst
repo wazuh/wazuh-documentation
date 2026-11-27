@@ -146,7 +146,7 @@ The table below shows the location of the Wazuh agent configuration file on each
 The centralized configuration file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use the centralized configuration file to manage a group of monitored endpoints remotely. The Wazuh manager distributes the commands to monitor to the Wazuh agents through the ``Remoted`` daemon. You can enable this functionality by adding the commands to the :doc:`centralized configuration </user-manual/reference/centralized-configuration>` (``agent.conf``) file using the Wazuh dashboard. Go to **Agents management** > **Groups**, select the group, and open the **Files** tab. Click **Edit group configuration**, add the ``<wodle name="command">`` block inside ``<agent_config>``, and click **Save**.
+Use the centralized configuration file to manage a group of monitored endpoints remotely. The Wazuh manager distributes the commands to monitor to the Wazuh agents through the ``wazuh-manager-remoted`` daemon. You can enable this functionality by adding the commands to the :doc:`centralized configuration </user-manual/reference/centralized-configuration>` (``agent.conf``) file using the Wazuh dashboard. Go to **Agents management** > **Groups**, select the group, and open the **Files** tab. Click **Edit group configuration**, add the ``<wodle name="command">`` block inside ``<agent_config>``, and click **Save**.
 
 By default, the Wazuh agents cannot accept remote commands configured on the Wazuh manager. Remote command execution is disabled on Wazuh agents for security reasons. You must explicitly configure Wazuh agents to accept remote commands from the Wazuh manager.
 
@@ -170,9 +170,7 @@ The table below shows the location of the Wazuh agent ``local_internal_options.c
 | macOS    | ``/Library/Ossec/etc/local_internal_options.conf``                 |
 +----------+--------------------------------------------------------------------+
 
-The configurations below show how to enable and disable remote command execution on Linux endpoints.
-
-.. note:: You must restart the Wazuh agent to apply the changes.
+The configurations below show how to enable and disable remote command execution on Linux endpoints. On Windows and macOS endpoints, make the same change in the file at the location in the table above.
 
 -  To enable the Wazuh agent to accept remote commands from the Wazuh manager, add the configuration below to the ``/var/ossec/etc/local_internal_options.conf`` file on the Linux endpoint:
 
@@ -185,6 +183,10 @@ The configurations below show how to enable and disable remote command execution
    .. code-block:: ini
 
       wazuh_command.remote_commands=0
+
+.. note::
+
+   After you change the setting, you must restart the Wazuh agent to apply the changes. Run ``systemctl restart wazuh-agent`` on Linux, ``Restart-Service -Name WazuhSvc`` in PowerShell as an administrator on Windows, or ``/Library/Ossec/bin/wazuh-control restart`` on macOS.
 
 .. _command_monitoring_example_configuration:
 
@@ -236,7 +238,7 @@ Wazuh must analyze the command output to generate findings on the Wazuh dashboar
 
 #. Navigate to **Ruleset management** > **Overview** and perform the following to create an integration:
 
-   -  Select the space **Draft**
+   -  Select the :ref:`space <data_analysis_space>` **Draft**
 
    -  Under **Integrations**, click **Actions** > **Create** and fill in the required fields and click **Create integration**:
 
@@ -331,7 +333,7 @@ Wazuh must analyze the command output to generate findings on the Wazuh dashboar
       -  **Select indexes/aliases**: wazuh-events-v5-system-activity (this must match the integration category you configured earlier, ``System Activity``)
       -  **Space**: Custom
       -  **Integration**: command-integration
-      -  **Run every**: 2 minutes.
+      -  **Run every**: 2 minutes
 
    .. thumbnail:: /images/manual/command-monitoring/create-detector.png
       :title: Creating a detector

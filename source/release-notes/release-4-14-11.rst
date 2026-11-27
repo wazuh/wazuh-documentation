@@ -3,8 +3,8 @@
 .. meta::
    :description: Wazuh 4.14.11 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.14.11 Release notes - TBD
-===========================
+4.14.11 Release notes - 25 November 2026
+========================================
 
 This section lists the changes in version 4.14.11. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -22,7 +22,7 @@ Wazuh agent
 ^^^^^^^^^^^
 
 -  `#32502 <https://github.com/wazuh/wazuh/issues/32502>`__ Added a workflow that validates the FIM eBPF whodata events of every syscall on several kernels and filesystems.
--  `#41313 <https://github.com/wazuh/wazuh/issues/41313>`__ Limited the rootcheck hidden-process check on Linux to PIDs up to 32768 by default. The new ``rootcheck.max_pid`` internal option raises the limit up to 4194304.
+-  `#41313 <https://github.com/wazuh/wazuh/issues/41313>`__ `#41693 <https://github.com/wazuh/wazuh/pull/41693>`__ Limited the rootcheck hidden-process check on Linux to PIDs up to 32768 by default. The new ``rootcheck.max_pid`` internal option raises the limit up to 4194304.
 -  `#41441 <https://github.com/wazuh/wazuh/issues/41441>`__ Removed the ``df -P`` command from the default ``ossec.conf`` of Linux and Solaris agents and of the manager.
 
 Wazuh dashboard

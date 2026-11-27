@@ -13,7 +13,7 @@ This requirement specifies monitoring files and directories containing healthcar
 Use cases: Detect file changes and deletion
 -----------------------------------------------
 
-The use cases in this section are performed on an Ubuntu 26.04 endpoint. Use a virtual machine or a dedicated lab environment for these use cases.
+The use cases in this section are performed on an Ubuntu 24.04 endpoint. Use a virtual machine or a dedicated lab environment for these use cases.
 
 Detect file changes
 ^^^^^^^^^^^^^^^^^^^^^

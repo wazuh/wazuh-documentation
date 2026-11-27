@@ -58,8 +58,6 @@ The following configuration block shows the default configuration:
          <certificate_authorities>
            <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
          </certificate_authorities>
-         <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
-         <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
        </ssl>
      </indexer>
      <!-- Configuration for wazuh-manager-authd -->
