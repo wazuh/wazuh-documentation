@@ -6,7 +6,7 @@
     
 -#}
 
-{% if is_latest_release and theme_breadcrumb_root_title == 'Documentation' %}
+{% if (is_latest_release or is_prerelease) and theme_breadcrumb_root_title == 'Documentation' %}
 
   {%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
   
