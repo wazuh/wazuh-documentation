@@ -64,7 +64,7 @@ These pods contain a worker node of the Wazuh cluster. They will receive the age
 +-------------------------------+-------------+
 | Image                         | Controller  |
 +===============================+=============+
-| wazuh/wazuh-manager           | StatefulSet |
+| wazuh/wazuh-worker           | StatefulSet |
 +-------------------------------+-------------+
 
 **Wazuh indexer**
