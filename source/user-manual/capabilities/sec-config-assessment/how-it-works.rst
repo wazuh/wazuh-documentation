@@ -6,23 +6,17 @@
 How it works
 ============
 
-The Wazuh agent performs SCA scans using policy files. Each policy file defines the security configuration checks to run on monitored endpoints. During a scan, the Wazuh agent evaluates endpoint settings against the rules defined in each policy to determine whether they follow the expected security configuration.
+The Wazuh agent runs SCA scans using policy files. Each policy file defines the checks to run on the endpoint. During a scan, the Wazuh agent evaluates the endpoint settings against the rules in each policy.
 
-By default, the Wazuh agent runs scans for every policy (``.yaml`` or ``.yml`` files) present in the ruleset directory. This directory can be found in the following locations on every operating system that runs the Wazuh agent:
-
-- Linux and Unix-based agents: ``/var/ossec/ruleset/sca``.
-- Windows agents: ``C:\Program Files (x86)\ossec-agent\ruleset\sca``.
-- macOS agents: ``/Library/Ossec/ruleset/sca``.
+By default, the Wazuh agent scans every policy file (``.yaml`` or ``.yml``) in its ruleset directory. It installs only the policy for its operating system. For the ruleset directory on each operating system, see :ref:`Enabling and disabling policies <sca_enabling_and_disabling_policies>`.
 
 After each scan, the following happens:
 
 #. The Wazuh agent synchronizes the SCA results with the Wazuh manager.
-#. The Wazuh manager processes the scan results and sends the SCA state data to the Wazuh indexer where it is stored in the ``wazuh-states-sca`` index.
-#. The Wazuh dashboard queries this index to provide centralized visibility into endpoint compliance status and security configuration findings.
+#. The Wazuh manager processes the scan results and sends the SCA state data to the ``wazuh-states-sca`` index in the Wazuh indexer.
+#. The Wazuh dashboard shows the SCA results and findings from this index.
 
-To optimize synchronization, the Wazuh agent tracks the current state of each SCA check and sends only the updates required to keep the manager synchronized. When no changes are detected between scans, the agent sends a scan summary instead of generating new SCA events.
-
-The sequence diagram below depicts the integrity and findings flow.
+The following diagram shows the integrity and findings flow.
 
 .. thumbnail:: /images/sca/sca-sequence-diagram.png
    :title: SCA module integrity and findings flow
@@ -33,17 +27,17 @@ The sequence diagram below depicts the integrity and findings flow.
 Understanding SCA scan results
 -------------------------------
 
-SCA scan results appear as findings with SCA scan data when a check's status changes between scans. Wazuh agents send only the events necessary to keep the SCA state synchronized, which avoids potential event flooding. The exception is a policy update, described in :ref:`Integrity mechanisms <sca_integrity_mechanisms>`.
+Wazuh generates a finding when the result of a check changes between scans. The exception is a policy update, described in :ref:`Integrity mechanisms <sca_integrity_mechanisms>`.
 
-Any given check event has three possible results:
+Each check has one of three results:
 
 - Passed: The endpoint configuration satisfies the conditions defined in the check.
-- Failed: The endpoint configuration does not satisfy the conditions defined in the check.
-- Not applicable: The check cannot be evaluated, for example, because a required file, command output, or registry value is unavailable or it does not apply to the operating system or software.
+- Failed: The endpoint configuration doesn't satisfy the conditions defined in the check.
+- Not applicable: The check can't be evaluated, for example, because a required file, command output, or registry value is unavailable.
 
 The set of rules and the :ref:`check's <sca_policy_file_checks_section>` condition field (``all``, ``any``, or ``none``) determine this result.
 
-The Wazuh dashboard shows the **Overall score** of each SCA policy. The score is the percentage of applicable checks that passed. It equals the passed checks divided by the sum of passed and failed checks. Checks with the Not applicable result don't count toward the score. For example, 119 passed checks and 118 failed checks give a score of 50.211%.
+The Wazuh dashboard shows the **Overall score** of each SCA policy. The score is the percentage of applicable checks that passed. Checks with the Not applicable result don't count toward the score. For example, 119 passed checks and 118 failed checks give a score of 50.211%.
 
 On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** to view the scan summaries for the Wazuh agents.
 
@@ -53,7 +47,7 @@ On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Asse
    :align: center
    :width: 80%
 
-The **Inventory** tab under the **Configuration Assessment** dashboard provides the current SCA state for monitored endpoints. It displays the SCA policies evaluated on each endpoint and their individual checks, and the check result.
+The **Inventory** tab lists the SCA policies evaluated on each endpoint, their checks, and the result of each check.
 
 .. thumbnail:: /images/sca/sca-inventory.png
    :title: SCA inventory
@@ -61,7 +55,7 @@ The **Inventory** tab under the **Configuration Assessment** dashboard provides 
    :align: center
    :width: 80%
 
-The **Findings** tab under the **Configuration Assessment** dashboard displays the SCA findings generated when the result of a check changes between scans.
+The **Findings** tab shows the findings generated when a check result changes between scans.
 
 .. thumbnail:: /images/sca/sca-findings.png
    :title: SCA findings
@@ -72,7 +66,7 @@ The **Findings** tab under the **Configuration Assessment** dashboard displays t
 Example: Firewall check on an Ubuntu 24.04 endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Ubuntu 24.04 endpoint to view its SCA results. The policy name on the Wazuh dashboard is **CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.** and is stored in the ``/var/ossec/ruleset/sca/cis_ubuntu24-04.yml`` file. The highlighted result shows check ``35622``, which verifies that the ufw service is enabled and active.
+On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory** and select the Ubuntu 24.04 endpoint to view its SCA results. The policy file is ``/var/ossec/ruleset/sca/cis_ubuntu24-04.yml``. The highlighted result shows check ``35622``, which verifies that the ufw service is enabled and active.
 
 .. thumbnail:: /images/sca/sca-scans-ubuntu-endpoint.png
    :title: SCA scans for an Ubuntu 24.04 endpoint
@@ -80,7 +74,7 @@ On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Asse
    :align: center
    :width: 80%
 
-You can expand each scan result to display additional information. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory**. Click **Inspect details** to see more information on the scan result.
+Click **Inspect details** to see more information on the scan result.
 
 .. thumbnail:: /images/sca/configuration-assessment-additional-information.png
    :title: Expanded SCA check result
@@ -88,7 +82,7 @@ You can expand each scan result to display additional information. On the Wazuh 
    :align: center
    :width: 80%
 
-The YAML definition for check ``35622`` is shown below.
+The following excerpt from the ``cis_ubuntu24-04.yml`` policy file shows the condition and rules of check ``35622``:
 
 .. code-block:: yaml
 
@@ -162,186 +156,12 @@ The YAML definition for check ``35622`` is shown below.
        - "c:systemctl is-active ufw -> r:^active"
        - 'c:ufw status -> r:Status:\s+active'
 
-Evaluating each check updates its state document in the ``wazuh-states-sca`` index. The following document is the state of check ``35624`` (Ensure ufw default deny firewall policy), another ufw check of the same policy, on the same endpoint, before the remediation:
-
-.. code-block:: json
-
-   {
-     "_index": "wazuh-states-sca",
-     "_id": "wazuh_001_df2a260fa770213aae66425d556cabefcb127024",
-     "_score": 0.0,
-     "_source": {
-       "checksum": {
-         "hash": {
-           "sha1": "177b0f068287c3476071f2d5b123c1830de3b1bf"
-         }
-       },
-       "wazuh": {
-         "cluster": {
-           "name": "wazuh"
-         },
-         "agent": {
-           "host": {
-             "hostname": "ip-10-89-1-225",
-             "os": {
-               "name": "Ubuntu",
-               "type": "linux",
-               "version": "24.04.5 LTS (Noble Numbat)",
-               "platform": "ubuntu"
-             },
-             "architecture": "x86_64"
-           },
-           "name": "Ubuntu24",
-           "groups": [
-             "default"
-           ],
-           "id": "001",
-           "version": "v5.0.0"
-         }
-       },
-       "check": {
-         "result": "Failed",
-         "reason": "Rules not satisfied (condition 'all'):\nc:ufw status verbose -> r:^Default: && r:deny\\s+\\(incoming\\)|reject\\s+\\(incoming\\)\nc:ufw status verbose -> r:^Default: && r:deny\\s+\\(outgoing\\)|reject\\s+\\(outgoing\\)\nc:ufw status verbose -> r:^Default: && r:deny\\s+\\(routed\\)|reject\\s+\\(routed\\)",
-         "remediation": "Run the following commands to implement a default deny policy:\n\n```\n# ufw default deny incoming\n# ufw default deny outgoing\n# ufw default deny routed.\n```\n",
-         "condition": "all",
-         "compliance": {
-           "iso_27001": [
-             "A.8.20",
-             "A.8.21",
-             "A.8.15"
-           ],
-           "hipaa": [
-             "164.312.e.1",
-             "164.312.b",
-             "164.308.a.8"
-           ],
-           "pci_dss": [
-             "1.2.1",
-             "1.4.1"
-           ],
-           "tsc": [
-             "CC6.6",
-             "CC6.1",
-             "CC6.2",
-             "CC6.3",
-             "CC6.4",
-             "CC6.5",
-             "CC6.7",
-             "CC6.8",
-             "CC7.1",
-             "CC7.2",
-             "CC7.3",
-             "CC7.4",
-             "CC7.5",
-             "CC4.1",
-             "CC4.2"
-           ],
-           "nis2": [
-             "21.2.e",
-             "21.2.i",
-             "21.2.a"
-           ],
-           "nist_800_171": [
-             "3.1.20",
-             "3.4.7",
-             "3.13.1",
-             "3.13.6"
-           ],
-           "fedramp": [
-             "SC-7"
-           ],
-           "nist_800_53": [
-             "SC-7"
-           ],
-           "cmmc": [
-             "AC.L2-3.1.20",
-             "CM.L2-3.4.7",
-             "SC.L2-3.13.1",
-             "SC.L2-3.13.6"
-           ],
-           "gdpr": [
-             "IV_32.1.a",
-             "IV_32.1.b",
-             "IV_32.1.c",
-             "IV_32.1.d",
-             "IV_32.2",
-             "IV_32.3",
-             "IV_32.4"
-           ]
-         },
-         "name": "Ensure ufw default deny firewall policy.",
-         "description": "A default deny policy on connections ensures that any unconfigured network usage will be rejected. Note: Any port or protocol without a explicit allow before the default deny will be blocked.",
-         "mitre": {
-           "subtechnique": {
-             "name": [
-               "Internal Proxy",
-               "External Proxy"
-             ],
-             "id": [
-               "T1090.001",
-               "T1090.002"
-             ]
-           },
-           "technique": {
-             "name": [
-               "Network Service Discovery",
-               "Proxy",
-               "External Remote Services"
-             ],
-             "id": [
-               "T1046",
-               "T1090",
-               "T1133"
-             ]
-           },
-           "tactic": {
-             "name": [
-               "Initial Access",
-               "Persistence",
-               "Discovery",
-               "Command and Control"
-             ],
-             "id": [
-               "TA0001",
-               "TA0003",
-               "TA0007",
-               "TA0011"
-             ]
-           }
-         },
-         "rules": [
-           "c:dpkg -s ufw -> r:Status: install ok installed",
-           "c:ufw status verbose -> r:^Default: && r:deny\\s+\\(incoming\\)|reject\\s+\\(incoming\\)",
-           "c:ufw status verbose -> r:^Default: && r:deny\\s+\\(outgoing\\)|reject\\s+\\(outgoing\\)",
-           "c:ufw status verbose -> r:^Default: && r:deny\\s+\\(routed\\)|reject\\s+\\(routed\\)"
-         ],
-         "id": "35624",
-         "rationale": "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to allow list acceptable usage than to deny list unacceptable usage."
-       },
-       "state": {
-         "document_version": 2,
-         "modified_at": "2026-11-05T13:04:09.874Z"
-       },
-       "policy": {
-         "file": "cis_ubuntu24-04.yml",
-         "references": [
-           "https://www.cisecurity.org/cis-benchmarks/"
-         ],
-         "name": "CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0.",
-         "description": "This document provides prescriptive guidance for establishing a secure configuration posture for Ubuntu Linux 24.04 LTS based on CIS benchmark for Ubuntu Linux 24.04 LTS.",
-         "id": "cis_ubuntu24-04"
-       }
-     }
-   }
-
 Remediation
 ~~~~~~~~~~~
 
-On this endpoint, check ``35622`` is **Failed** because ufw is inactive. The output of the command ``ufw status`` is ``Status: inactive``. Check ``35622`` needs the ufw service to be enabled and active, and ``ufw status`` to show ``Status: active``. The remediation in the scan result quotes the CIS benchmark text. Some of its commands, such as ``systemctl --now enable ufw.service active`` and ``ufw enable``, aren't valid as written. Use the steps below instead of pasting them.
+Check ``35622`` fails because ufw is inactive (``ufw status`` returns ``Status: inactive``). Some commands in the remediation of the scan result, such as ``systemctl --now enable ufw.service active`` and ``ufw enable``, aren't valid as written. Use the following steps instead, which keep the endpoint connected to the Wazuh manager:
 
-The steps below adapt the remediation that Wazuh suggests so that the endpoint keeps its connection to the Wazuh manager:
-
-#. Run the following commands on the monitored endpoint. They allow SSH, DNS, and the Wazuh agent connections to the Wazuh manager, then set the default deny policy and turn on ``ufw``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address of your Wazuh manager, and add an allow rule for any other connection the endpoint needs. Without these allow rules, the default deny policy cuts the endpoint off from the Wazuh manager and from remote access:
+#. Run the following commands on the monitored endpoint. They allow SSH, DNS, and the Wazuh agent connections to the Wazuh manager, then set the default deny policy and turn on ``ufw``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address of your Wazuh manager, and add an allow rule for any other connection the endpoint needs:
 
    .. code-block:: console
 
@@ -359,7 +179,7 @@ The steps below adapt the remediation that Wazuh suggests so that the endpoint k
 
       # systemctl restart wazuh-agent
 
-The scan result for check ``35622`` changes to **Passed** at the next SCA synchronization, usually 5 to 15 minutes after the restart, as shown in the image below:
+The scan result for check ``35622`` changes to **Passed** at the next SCA synchronization, usually 5 to 15 minutes after the restart:
 
 .. thumbnail:: /images/sca/configuration-assessment-scan-result.png
    :title: Check 35622 passed after remediation
@@ -372,4 +192,4 @@ The scan result for check ``35622`` changes to **Passed** at the next SCA synchr
 Integrity mechanisms
 ---------------------
 
-Wazuh keeps the SCA results on the Wazuh agent and in the Wazuh indexer in sync. The Wazuh agent stores the results in a local database and sends the changes to the Wazuh manager after each scan. When a policy file changes, Wazuh discards the stored results for that policy and scans it again. You then get a finding for every check in the policy. Every 24 hours by default, set by ``integrity_interval``, the Wazuh agent sends a checksum of its results, and the Wazuh manager compares it with the results in the Wazuh indexer. If they differ, for example after a network issue, the Wazuh agent sends all its results again.
+Wazuh keeps the SCA results on the Wazuh agent and in the Wazuh indexer in sync. The Wazuh agent stores the results in a local database and sends the changes to the Wazuh manager after each scan. When a policy file changes, Wazuh discards the stored results for that policy and scans it again. You then get a finding for every check in the policy. Every 24 hours by default, set by ``integrity_interval``, the Wazuh agent sends a checksum of its results. The Wazuh manager compares it with the results in the Wazuh indexer. If they differ, for example after a network issue, the Wazuh agent sends all its results again.
