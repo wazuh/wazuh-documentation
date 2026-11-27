@@ -125,8 +125,10 @@ Install the plugins:
 
 .. code-block:: bash
 
-   /usr/share/logstash/bin/logstash-plugin install --version 1.0.0 logstash-input-opensearch
-   /usr/share/logstash/bin/logstash-plugin install --version 2.1.1 logstash-output-opensearch
+   LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 1.0.0 logstash-input-opensearch
+   LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 2.1.1 logstash-output-opensearch
+
+The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
 
 Copy the pipeline files to a dedicated folder, in this order:
 
