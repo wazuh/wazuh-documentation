@@ -17,7 +17,7 @@ Using the ``list`` option will list all hosts already included.
 
   # /var/ossec/agentless/register_host.sh list
 
-Using the ``add`` option will specify a new device to be added to the manager. ``NOPASS`` may be entered as the password to use public key authentication rather than using a password.  For Cisco devices, such as routers or firewalls, ``enablepass`` should be used to specify the enable password.
+Using the ``add`` option will specify a new device to be added to the manager. ``NOPASS`` (case sensitive) may be entered as the password to use public key authentication rather than using a password.  For Cisco devices, such as routers or firewalls, ``enablepass`` should be used to specify the enable password.
 
 .. code-block:: console
 
