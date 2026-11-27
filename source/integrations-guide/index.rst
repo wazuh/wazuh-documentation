@@ -34,19 +34,19 @@ Elasticsearch and OpenSearch, or ``wazuh-*`` indexes through the HTTP Event Coll
 
 The pipeline consists of the following files, in this order. All the integrations share the first two files.
 
-+-------------------------------------------------------------------+------------------------------------------------------------------------+
-| File                                                              | Purpose                                                                |
-+===================================================================+========================================================================+
-| ``integrations/logstash/pipeline/wazuh-indexer-input.conf``       | Reads the documents to export from the Wazuh indexer, on a schedule.   |
-+-------------------------------------------------------------------+------------------------------------------------------------------------+
-| ``integrations/logstash/pipeline/wazuh-source.conf``              | Identifies the source of every document: events, findings, or custom,  |
-|                                                                   | and its category.                                                      |
-+-------------------------------------------------------------------+------------------------------------------------------------------------+
-| ``integrations/logstash/pipeline/wazuh-data-stream.conf``         | Names the destination data stream of every document. Elasticsearch and |
-|                                                                   | OpenSearch only.                                                       |
-+-------------------------------------------------------------------+------------------------------------------------------------------------+
-| ``<INTEGRATION>/logstash/pipeline/indexer-to-<INTEGRATION>.conf`` | Writes the documents to the destination.                               |
-+-------------------------------------------------------------------+------------------------------------------------------------------------+
++--------------------------------------------------------------------------------+------------------------------------------------------------------------+
+| File                                                                           | Purpose                                                                |
++================================================================================+========================================================================+
+| ``integrations/logstash/pipeline/wazuh-indexer-input.conf``                    | Reads the documents to export from the Wazuh indexer, on a schedule.   |
++--------------------------------------------------------------------------------+------------------------------------------------------------------------+
+| ``integrations/logstash/pipeline/wazuh-source.conf``                           | Identifies the source of every document: events, findings, or custom,  |
+|                                                                                | and its category.                                                      |
++--------------------------------------------------------------------------------+------------------------------------------------------------------------+
+| ``integrations/logstash/pipeline/wazuh-data-stream.conf``                      | Names the destination data stream of every document. Elasticsearch and |
+|                                                                                | OpenSearch only.                                                       |
++--------------------------------------------------------------------------------+------------------------------------------------------------------------+
+| ``integrations/<INTEGRATION>/logstash/pipeline/indexer-to-<INTEGRATION>.conf`` | Writes the documents to the destination.                               |
++--------------------------------------------------------------------------------+------------------------------------------------------------------------+
 
 The pipelines read every setting from environment variables or from the `Logstash keystore
 <https://www.elastic.co/docs/reference/logstash/keystore>`__, so you don't need to edit any pipeline file to
