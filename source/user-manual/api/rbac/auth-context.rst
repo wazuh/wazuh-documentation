@@ -27,7 +27,7 @@ The command below demonstrates how to authenticate a user using the authorizatio
 
 .. code-block:: none
 
-   # curl -k -u <WAZUH_API_USER>:<WAZUH_API_PASSWORD> -X POST https://localhost:55000/security/user/authenticate/run_as -H 'content-type: application/json' -d '{
+   curl -k -u <WAZUH_API_USER>:<WAZUH_API_PASSWORD> -X POST https://localhost:55000/security/user/authenticate/run_as -H 'content-type: application/json' -d '{
            "name": "Initial_auth",
            "auth": {
                    "name": "Bill",
