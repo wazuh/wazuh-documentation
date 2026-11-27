@@ -22,7 +22,7 @@ ruleset folder:
 
 .. warning::
     The contents of the aforementioned **default ruleset folders are neither kept across installations nor updates**.
-    If you wish to modify or add new policies, place then under an alternative folder.
+    If you wish to modify or add new policies, place them under an alternative folder.
 
 To enable a policy file that's outside the default folder, add a line like
 
