@@ -771,7 +771,7 @@ Follow the steps below to query the system inventory indices from the command li
 
    .. code-block:: bash
 
-      # curl -k -u "<WAZUH_INDEXER_USERNAME>" "https://<WAZUH_INDEXER_IP>:9200/wazuh-states-inventory-packages/_search?pretty" \
+      curl -k -u "<WAZUH_INDEXER_USERNAME>" "https://<WAZUH_INDEXER_IP>:9200/wazuh-states-inventory-packages/_search?pretty" \
       -H 'Content-Type: application/json' \
       -d '
       {
@@ -865,7 +865,7 @@ Follow the steps below to query the system inventory indices from the command li
 
    .. code-block:: bash
 
-      # curl -k -u "<WAZUH_INDEXER_USERNAME>" "https://<WAZUH_INDEXER_IP>:9200/wazuh-states-inventory-packages/_search?pretty" \
+      curl -k -u "<WAZUH_INDEXER_USERNAME>" "https://<WAZUH_INDEXER_IP>:9200/wazuh-states-inventory-packages/_search?pretty" \
       -H 'Content-Type: application/json' \
       -d '
       {
