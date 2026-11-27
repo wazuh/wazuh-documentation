@@ -151,6 +151,10 @@ Run these steps as root on the Ubuntu endpoint.
 
 The last command returns no output. The next Rootcheck scan creates a finding about the hidden ``rsyslogd`` process.
 
+.. note::
+
+   On Linux, rootcheck checks PIDs up to ``rootcheck.max_pid`` (``32768`` by default). The ``rsyslogd`` process usually has a low PID. If you hide a process with a higher PID, add ``rootcheck.max_pid=4194304`` to ``/var/ossec/etc/local_internal_options.conf`` and restart the Wazuh agent before the next scan. See :ref:`Internal configuration <reference_internal_options>`.
+
 View the findings
 -----------------
 

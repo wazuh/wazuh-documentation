@@ -12,7 +12,9 @@ This backup procedure includes the Wazuh indexer configuration, certificates, se
 
 .. note::
 
-   This backup only restores the Wazuh indexer configuration files. To back up and restore indexed data, use Wazuh indexer snapshots.
+   This backup only restores the Wazuh indexer configuration files. To back up and restore indexed data, use Wazuh indexer snapshots, as described in :doc:`Migrating Wazuh indices </user-manual/wazuh-indexer/migrating-wazuh-indices>`.
+
+.. _backup_and_restore_creating_a_backup:
 
 Creating a backup
 -----------------
@@ -26,7 +28,7 @@ This section explains how to create a backup of your Wazuh indexer configuration
 Preparing the backup
 ^^^^^^^^^^^^^^^^^^^^
 
-#. Export the current Wazuh indexer security configuration into ``/etc/wazuh-indexer/opensearch-security/``, so that the backup includes it. This command overwrites the YAML files in that directory with the configuration stored in the cluster:
+#. Export the current Wazuh indexer security configuration into ``/etc/wazuh-indexer/opensearch-security/``, so that the backup includes it. The Wazuh indexer must be running. The script authenticates with the admin certificate, ``admin.pem`` and ``admin-key.pem``, which it finds in the same directory as the root CA certificate. In the command, ``-backup`` sets the export directory, ``-icl`` ignores the cluster name, and ``-nhnv`` turns off hostname verification. ``-icl`` and ``-nhnv`` are the script defaults, and you repeat them because ``--options`` replaces the defaults. This command overwrites the YAML files in that directory with the configuration stored in the cluster:
 
    .. code-block:: console
 
@@ -68,11 +70,13 @@ Backing up the Wazuh indexer
 Restoring Wazuh from backup
 ---------------------------
 
-This guide explains how to restore a backup of your Wazuh indexer configuration files. Restoring Wazuh files can be useful when migrating your Wazuh installation to a different system. To carry out this restore process, you first need to back up the necessary files. Creating a backup documentation provides a guide that you can follow in creating a backup of the Wazuh indexer files.
+This guide explains how to restore a backup of your Wazuh indexer configuration files. Restoring Wazuh files can be useful when migrating your Wazuh installation to a different system. To carry out this restore process, you first need to back up the necessary files. The :ref:`Creating a backup <backup_and_restore_creating_a_backup>` section describes how to create it.
 
 .. note::
 
-   This guide is designed specifically for restoration from a backup of the same version. For multi-node deployments, restore the corresponding backup on each Wazuh indexer node. You need root user privileges to run all the commands described below.
+   This guide is designed specifically for restoration from a backup of the same version.
+
+   For multi-node deployments, restore the corresponding backup on each Wazuh indexer node. You need root user privileges to run all the commands described below.
 
 Preparing the data restoration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -84,12 +88,13 @@ Preparing the data restoration
       # mv wazuh-indexer-backup.tar.gz /
       # cd /
 
-#. Decompress the backup files and change the current working directory to the directory based on the date and time of the backup files:
+#. Decompress the backup files, and change the current working directory to the backup folder. ``tar`` stores the paths without the leading ``/``, so the folder is extracted under ``/`` at the path it had on the original host, for example ``/root/wazuh_files_backup/<DATE_TIME>``. Run ``tar -tzf wazuh-indexer-backup.tar.gz | head -1`` to print that path, and replace ``<BACKUP_FOLDER>`` with it:
 
    .. code-block:: console
+      :emphasize-lines: 2
 
       # tar -xzvf wazuh-indexer-backup.tar.gz
-      # cd ~/wazuh_files_backup/<DATE_TIME>
+      # cd /<BACKUP_FOLDER>
 
 Restoring Wazuh indexer files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -112,11 +117,12 @@ Perform the following steps to restore Wazuh indexer files on the new server.
 #. Start the Wazuh indexer service and check that the cluster status in the output is green. If the output is ``OpenSearch Security not initialized.``, or the status is ``red`` or ``yellow`` while shards are still recovering, wait a few seconds and run the ``curl`` command again:
 
    .. code-block:: console
+      :emphasize-lines: 2
 
       # systemctl start wazuh-indexer
-      # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> "https://localhost:9200/_cluster/health?pretty"
+      # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> "https://127.0.0.1:9200/_cluster/health?pretty"
 
-#. Load the restored security configuration into the cluster. Until you do, the restored files under ``/etc/wazuh-indexer/opensearch-security/`` aren't used, and the cluster keeps the users, roles, and role mappings it already had:
+   Load the restored security configuration into the cluster. Until you do, the restored files under ``/etc/wazuh-indexer/opensearch-security/`` aren't used, and the cluster keeps the users, roles, and role mappings it already had:
 
    .. code-block:: console
 

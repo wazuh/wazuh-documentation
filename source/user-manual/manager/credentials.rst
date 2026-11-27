@@ -91,7 +91,7 @@ Progress messages are written to standard output and use the ``resolve-credentia
 |             | where a file belongs.                                                  |                                                                  |
 +-------------+------------------------------------------------------------------------+------------------------------------------------------------------+
 | ``WARNING`` | Wazuh indexer material that only the clock refuses (expired or not     | ``resolve-credentials: WARNING:                                  |
-|             | valid yet). It doesn't refuse the start, but the Wazuh indexer         | /etc/wazuh-manager/certs/indexer-connector.pem: expired on ...`` |
+|             | valid yet). It doesn't refuse the start, but the Wazuh indexer         | /etc/wazuh-manager/certs/indexer-ca.pem: expired on ...``        |
 |             | connection fails until you renew the material or fix the clock.        |                                                                  |
 +-------------+------------------------------------------------------------------------+------------------------------------------------------------------+
 
@@ -171,8 +171,9 @@ These keys let you set the passwords and certificate names yourself, instead of 
 |                                     |                                                                        | indexer runs on this host. Otherwise the start refuses with            |
 |                                     |                                                                        | ``MISSING``.                                                           |
 +-------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| ``WAZUH_MANAGER_NODE_NAME``         | Common name and first DNS name of both server pairs, and the CA common | The host name up to its first dot                                      |
-|                                     | name ``wazuh-manager-<NODE_NAME>`` when the CA is minted. It must be a |                                                                        |
+| ``WAZUH_MANAGER_NODE_NAME``         | Common name of both server pairs, their first DNS name when the pair's | The host name up to its first dot                                      |
+|                                     | SAN list is unset, and the CA common name                              |                                                                        |
+|                                     | ``wazuh-manager-<NODE_NAME>`` when the CA is minted. It must be a      |                                                                        |
 |                                     | valid DNS name of at most 64 characters, or at most 50 when the CA is  |                                                                        |
 |                                     | minted.                                                                |                                                                        |
 +-------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
@@ -358,7 +359,7 @@ Run these steps as root:
 Trust a remote Wazuh indexer
 ----------------------------
 
-The Wazuh indexer connector trusts ``certs/indexer-ca.pem``. It presents a client certificate only when ``<certificate>`` and ``<key>`` in the ``<indexer>`` block name one, for a Wazuh indexer that requires client certificates. When the Wazuh indexer runs on the same host, the resolver imports the CA, and a configured client pair that the Wazuh indexer publishes, from ``/etc/wazuh-indexer/export/``. When the Wazuh indexer runs on another host, there is nothing to import, so you stage the files yourself.
+The Wazuh indexer connector trusts ``certs/indexer-ca.pem``. It presents a client certificate only when ``<certificate>`` and ``<key>`` in the ``<indexer>`` block name one, for a Wazuh indexer that requires client certificates. When the Wazuh indexer runs on the same host, the resolver imports the CA from ``/etc/wazuh-indexer/export/``. If you configure a client pair, stage it yourself, because the Wazuh indexer doesn't publish one. When the Wazuh indexer runs on another host, there is nothing to import, so you stage the files yourself.
 
 A marker file in ``certs/`` decides how the resolver treats the CA, and a client pair configured under the default names ``indexer-connector.pem`` and ``indexer-connector-key.pem``.
 
@@ -415,7 +416,7 @@ Run these steps as root on the Wazuh manager node, after installing the package 
 
       # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --check
 
-   The output includes ``resolve-credentials: check: no problem found``. A ``(<N> warnings)`` suffix means only Wazuh indexer material that the clock refuses was reported, where ``<N>`` is the number of warnings.
+   The output includes ``resolve-credentials: check: no problem found``. A ``(<N> warnings)`` suffix means that the check found only warnings, which refuse nothing. A warning reports Wazuh indexer material that the clock refuses, or a malformed line in ``export/credentials.env`` before ``rbac.db`` is seeded. In the suffix, ``<N>`` is the number of warnings.
 
 Where:
 

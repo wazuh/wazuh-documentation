@@ -15,9 +15,9 @@ Chapter IV, Article 30, Head 1 (g)
 
 This article requires that organizations document, inventory, and audit data processing activities. This helps keep a record of all data processing activities.
 
-Wazuh stores information about system events. Each event enters through the root decoder ``decoder/core-wazuh-message/0``, which belongs to the ``wazuh-core`` integration in the unclassified category. If an integration can process the event, it changes the category of the event and sends it to the matching index. Events that no integration processes remain unclassified. Decoded events are indexed whether or not a rule matches.
+Wazuh stores information about system events. Each event enters through the root decoder ``decoder/core-wazuh-message/0``, which belongs to the ``wazuh-core`` integration in the ``unclassified`` category. If an integration can process the event, it changes the category of the event and sends it to the matching index. Events that no integration processes remain unclassified. Decoded events are indexed whether or not a rule matches.
 
-You can enable the **Index unclassified events** and **Index discarded events** settings of a :doc:`space </user-manual/data-analysis/space>` to store these events. A space is where Wazuh keeps its detection content, such as decoders, rules, and integrations. Unclassified events are events that no decoder accepts. Discarded events are events that a decoder marks as discarded. When **Index discarded events** is on, Wazuh replaces the content of each discarded event with the ``wazuh.space.event_discarded: true`` marker before indexing it. Events that a filter rejects are always dropped. When this is configured, Wazuh indexes unclassified events into the ``wazuh-events-v5-unclassified`` index. This gives you a record of events that no integration processes, including those that do not trigger a finding. These records help with activities such as data audits and threat hunting.
+You can enable the **Index unclassified events** and **Index discarded events** settings of a space to store these events. A :doc:`space </user-manual/data-analysis/space>` is where Wazuh keeps its detection content, such as decoders, rules, and integrations. Unclassified events are events that no decoder accepts. Discarded events are events that a decoder marks as discarded. When **Index discarded events** is on, Wazuh replaces the content of each discarded event with the ``wazuh.space.event_discarded: true`` marker before indexing it. Events that a filter rejects are always dropped. When this is configured, Wazuh indexes unclassified events into the ``wazuh-events-v5-unclassified`` index. This gives you a record of events that no integration processes, including those that do not trigger a finding. These records help with activities such as data audits and threat hunting.
 
 Use case: Store all logs generated from an endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -37,7 +37,7 @@ Wazuh dashboard
 
    .. thumbnail:: /images/compliance/gdpr/index-unclassified-events-settings.png
       :title: Store all logs generated from an endpoint
-      :alt: Edit Standard space panel with Index unclassified events turned on
+      :alt: Edit Standard space panel with Index unclassified events and Index discarded events turned on
       :align: center
       :width: 80%
 
@@ -69,9 +69,9 @@ This article requires you to ensure the ongoing confidentiality, integrity, avai
 Use case: Detect invalid SSH login attempts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, the Wazuh agent on an Ubuntu 24.04 endpoint collects authentication logs from journald. When an invalid user attempts to log in over Secure Shell (SSH), the log is evaluated against the ruleset and generates a finding.
+In this use case, the Wazuh agent on an Ubuntu 24.04 endpoint collects authentication logs from ``journald``. When an invalid user attempts to log in over Secure Shell (SSH), the log is evaluated against the ruleset and generates a finding.
 
-The Wazuh agent reads authentication events from journald by default through the Linux integration. No extra configuration is required to collect these events.
+The Wazuh agent reads authentication events from ``journald`` by default through the Linux integration. No extra configuration is required to collect these events.
 
 To generate a finding, attempt an SSH login to the monitored endpoint from a different host. Use a username that doesn't exist on the endpoint. Replace ``<INVALID_USER>`` with that username and ``<ENDPOINT_IP>`` with the IP address of the Ubuntu endpoint:
 
@@ -79,11 +79,11 @@ To generate a finding, attempt an SSH login to the monitored endpoint from a dif
 
    $ ssh <INVALID_USER>@<ENDPOINT_IP>
 
-When Wazuh detects the invalid login attempt, two findings appear in **Threat intelligence** > **Threat Hunting** > **Findings** tab on the Wazuh dashboard: SSH authentication failure and Failed authentication attempt - ``<INVALID_USER>``.
+When Wazuh detects the invalid login attempt, findings appear in **Threat intelligence** > **Threat Hunting** > **Findings** tab on the Wazuh dashboard, including ``Failed authentication attempt - <INVALID_USER>`` and ``SSH connection closed before authentication - <SOURCE_IP>``.
 
 .. thumbnail:: /images/compliance/gdpr/invalid-ssh-login-attempt1.png
    :title: Invalid SSH login attempts findings
-   :alt: GDPR Findings tab listing failed authentication attempt findings for an invalid SSH user
+   :alt: Threat Hunting Findings tab listing the failed authentication findings for an invalid SSH user
    :align: center
    :width: 80%
 
@@ -143,7 +143,7 @@ The SMTP sender defines the mail server that sends the notifications.
 
 #. Type the hostname or IP address of your SMTP server in **Host**.
 
-#. Type the port of your SMTP server in **Port**. The default value is 465.
+#. Type the port of your SMTP server in **Port**. The default value is ``465``.
 
 #. Select an **Encryption method**.
 
@@ -165,10 +165,10 @@ The **Encryption method** field offers three options:
 | Option       | Description                                                            |
 +==============+========================================================================+
 | **SSL/TLS**  | Encrypts the connection to the SMTP server. Use this option when your  |
-|              | server supports implicit TLS, usually on port 465.                     |
+|              | server supports implicit TLS, usually on port ``465``.                 |
 +--------------+------------------------------------------------------------------------+
 | **STARTTLS** | Upgrades a plain connection to an encrypted one. Use this option when  |
-|              | your server supports STARTTLS, usually on port 587.                    |
+|              | your server supports STARTTLS, usually on port ``587``.                |
 +--------------+------------------------------------------------------------------------+
 | **None**     | Sends mail without encryption. Use this option only in a test          |
 |              | environment, because it does not protect the credentials or the        |
@@ -261,7 +261,7 @@ The alerting monitor watches your findings for failed authentication attempts. W
 
 #. Select **Visual editor** in **Monitor defining method**.
 
-#. Set **Frequency** to **By interval** and set **Run every** to 1 minute under **Schedule**.
+#. Set **Frequency** to **By interval** and set **Run every** to ``1`` minute under **Schedule**.
 
 #. Under **Select data**, select ``wazuh-findings-v5-system-activity`` in **Index**.
 
@@ -277,7 +277,7 @@ The alerting monitor watches your findings for failed authentication attempts. W
 
 #. Type a name in **Trigger name**.
 
-#. Select a level in **Severity level**. Level 1 is the highest.
+#. Select a level in **Severity level**. Level ``1`` is the highest.
 
 #. Under **Trigger conditions**, in **Specify queries or tags**, select the name of the query.
 
@@ -294,19 +294,21 @@ The alerting monitor watches your findings for failed authentication attempts. W
    .. code-block:: none
 
       A failed authentication attempt was detected on a monitored endpoint.
+
       Trigger: {{ctx.trigger.name}}
       Severity: {{ctx.trigger.severity}}
       Monitor: {{ctx.monitor.name}}
       Detected between {{ctx.periodStart}} and {{ctx.periodEnd}} UTC.
+
       Review the finding in the Wazuh dashboard for the source IP, user, and host details.
 
 #. Select **Per alert** in **Perform action**.
 
 #. Click **Create**.
 
-   .. thumbnail:: /images/compliance/gdpr/create-alerting-monitor.gif
+   .. thumbnail:: /images/compliance/gdpr/create-alerting-monitor.png
       :title: Create the alerting monitor
-      :alt: failed-authentication-email alerting monitor overview with its trigger and alert history
+      :alt: Create monitor page with the monitor details, query, trigger, and email notification action
       :align: center
       :width: 80%
 
@@ -426,7 +428,7 @@ A medium severity finding on the Wazuh dashboard shows that a file was modified 
 
 .. thumbnail:: /images/compliance/gdpr/file-modification-medium-finding.png
    :title: File modification medium finding visualization
-   :alt: GDPR Findings tab with a medium level Wazuh FIM file modified finding highlighted
+   :alt: Threat Hunting Findings tab with a medium level Wazuh FIM file modified finding
    :align: center
    :width: 80%
 
@@ -474,7 +476,7 @@ The two decoders that need to exist in your custom space are ``decoder/core-wazu
 
 #. Switch to **Test** in **Space**, click the dropdown under **Space actions**, and select **Promote** to promote the decoders from **Test** space to **Custom**. In the prompt, type ``promote`` and click **Promote**.
 
-   .. thumbnail:: /images/compliance/gdpr/create-decoders-integration.gif
+   .. thumbnail:: /images/compliance/gdpr/create-decoders-integration.png
       :title: Create decoders and integration
       :alt: Ruleset management Decoders page in the Custom space with the custom Wazuh File Integrity Monitoring decoder
       :align: center
@@ -523,7 +525,7 @@ The file modification rule already exists out of the box. To change the severity
 
 #. Switch to **Test** in **Space**, click the dropdown under **Space actions**, and select **Promote** to promote the rule from **Test** space to **Custom**. In the prompt, type ``promote`` and click **Promote**.
 
-   .. thumbnail:: /images/compliance/gdpr/create-custom-rule.gif
+   .. thumbnail:: /images/compliance/gdpr/create-custom-rule.png
       :title: Create custom rule
       :alt: Ruleset management Rules page in the Custom space with the critical Wazuh FIM file modified rule
       :align: center
@@ -550,9 +552,9 @@ To generate a finding on the Wazuh dashboard, a corresponding detector must exis
 
 #. Click **Create detector**.
 
-   .. thumbnail:: /images/compliance/gdpr/create-detector.gif
+   .. thumbnail:: /images/compliance/gdpr/create-detector.png
       :title: Create detector
-      :alt: fim-custom detector details with its data source, schedule, and the active custom FIM rule
+      :alt: Create detector page with the fim-custom name, the system activity data source, and the Custom space integration
       :align: center
       :width: 80%
 
@@ -569,7 +571,7 @@ A critical finding shows that a sensitive file was modified in the monitored dir
 
 .. thumbnail:: /images/compliance/gdpr/file-modification-critical-finding.png
    :title: File modification critical finding visualization
-   :alt: GDPR Findings tab with a critical Wazuh FIM file modified finding from the custom rule
+   :alt: Threat Hunting Findings tab with a medium and a critical Wazuh FIM file modified finding
    :align: center
    :width: 80%
 
@@ -585,4 +587,4 @@ Wazuh helps meet this article of the GDPR by providing security measures such as
 -  :doc:`Vulnerability detection </user-manual/capabilities/vulnerability-detection/index>`.
 -  :doc:`Security configuration assessment </user-manual/capabilities/sec-config-assessment/index>`.
 -  Malware detection.
--  Active response.
+-  :doc:`Active response </user-manual/capabilities/active-response/index>`.

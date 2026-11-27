@@ -50,7 +50,7 @@ By default, the module retries a failed initialization task once. If the retry a
 Replica configuration
 ^^^^^^^^^^^^^^^^^^^^^
 
-When configured, the Setup module applies ``cluster.default_number_of_replicas`` as a persistent cluster setting. This gives Wazuh-managed indices a consistent default replica count across the cluster without requiring individual index configuration.
+If ``cluster.default_number_of_replicas`` is set in ``/etc/wazuh-indexer/opensearch.yml``, the Setup module copies it into the persistent cluster settings when the node becomes the cluster manager. It affects only indices that don't set their own replica count. Wazuh indices use ``auto_expand_replicas: 0-1`` instead.
 
 Configuration
 -------------
@@ -79,10 +79,12 @@ The Setup module exposes REST API endpoints under ``/_plugins/_setup/``.
 
    All API requests require authentication.
 
+.. _wazuh_indexer_setup_update_settings:
+
 Update settings
 ^^^^^^^^^^^^^^^
 
-Update settings are stored in the ``.wazuh-settings`` index on the Wazuh indexer. Currently, the Wazuh indexer API supports the ``engine.index_raw_events`` setting, which controls whether raw events are indexed into the ``wazuh-events-raw-v5`` data stream. The default value is ``false``, so Wazuh does not index raw events until you enable the setting. Indexed raw events are deleted as described in :doc:`Event template retention </user-manual/wazuh-indexer/index-templates-reference>`. To read the current value, query the ``.wazuh-settings`` index:
+The Wazuh indexer stores the values set with this API in the ``.wazuh-settings`` index. Currently, the Wazuh indexer API supports the ``engine.index_raw_events`` setting, which controls whether raw events are indexed into the ``wazuh-events-raw-v5`` data stream. The default value is ``false``, so Wazuh does not index raw events until you enable the setting. Indexed raw events are deleted as described in :doc:`Event template retention </user-manual/wazuh-indexer/index-templates-reference>`. To read the current value, query the ``.wazuh-settings`` index:
 
 **Request**
 
@@ -143,6 +145,7 @@ Where:
 Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node and ``<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
 
 .. code-block:: console
+   :emphasize-lines: 1,2
 
    curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>  -X PUT \
    "https://<WAZUH_INDEXER_IP>:9200/_plugins/_setup/settings" \
@@ -159,28 +162,16 @@ Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node and
    :class: output
 
    // Success
-   {
-     "message": "Settings updated successfully.",
-     "status": 200
-   }
+   { "message": "Settings updated successfully.", "status": 200 }
 
    // Missing field
-   {
-     "message": "Missing required field: 'engine.index_raw_events'.",
-     "status": 400
-   }
+   { "message": "Missing required field: 'engine.index_raw_events'.", "status": 400 }
 
    // Invalid type
-   {
-     "message": "Field 'engine.index_raw_events' must be of type boolean.",
-     "status": 400
-   }
+   { "message": "Field 'engine.index_raw_events' must be of type boolean.", "status": 400 }
 
    // Settings updates disabled
-   {
-     "message": "Setup settings updates are disabled on this deployment.",
-     "status": 403
-   }
+   { "message": "Setup settings updates are disabled on this deployment.", "status": 403 }
 
 The status codes in the responses have the following meanings:
 

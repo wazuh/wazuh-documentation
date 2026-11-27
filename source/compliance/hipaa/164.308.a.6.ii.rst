@@ -12,13 +12,201 @@ This requirement mandates identifying suspected or known security incidents, res
 
 Wazuh helps meet this requirement by providing several security monitoring and incident response modules. One of these modules is the Wazuh :doc:`Active Response </user-manual/capabilities/active-response/index>` module, which automates response actions when security findings meet configured conditions. Wazuh Active Response can execute predefined or custom scripts on monitored endpoints to mitigate detected threats. For example, it can block malicious IP addresses, terminate malicious processes, or perform other configured response actions when a security finding triggers an active response.
 
-Use case: Block a known malicious actor
-------------------------------------------
+Use case: Block a web attack with active response
+-----------------------------------------------------
 
-In this example, the Wazuh Active Response module blocks malicious IP addresses from accessing web resources on a web server monitored by a Wazuh agent. See :doc:`Blocking a known malicious actor </proof-of-concept-guide/block-malicious-actor-ip-reputation>` for more information. The custom rules in this proof of concept have no compliance mapping, so their findings do not appear under this requirement by default. To list the findings under § 164.308(a)(6)(ii) in the **Controls** tab, add the ``164.308.a.6.ii`` value to the ``hipaa`` list under the ``compliance`` field of each custom rule.
+In this use case, Wazuh detects a Cross-Site Scripting (XSS) attack on an Apache web server that runs on a monitored Ubuntu 24.04 endpoint. An active response then blocks the IP address of the attacker. You need a second endpoint with HTTP access to the web server to run the attack.
 
-.. thumbnail:: /images/compliance/hipaa/block-malicious-actor-poc.png
-   :title: Threat Hunting findings - blocked malicious actor
-   :alt: Threat Hunting findings - blocked malicious actor
+Ubuntu endpoint
+^^^^^^^^^^^^^^^^
+
+Perform the following steps to install an Apache web server and monitor its logs with the Wazuh agent.
+
+#. Update local packages and install the Apache web server:
+
+   .. code-block:: console
+
+      $ sudo apt update
+      $ sudo apt install apache2
+
+#. If a firewall is enabled, allow external access to web ports:
+
+   .. code-block:: console
+
+      $ sudo ufw app list
+      $ sudo ufw allow 'Apache'
+      $ sudo ufw status
+
+#. Check that the Apache web server is running:
+
+   .. code-block:: console
+
+      $ sudo systemctl status apache2
+
+#. Add the following configuration to the Wazuh agent ``/var/ossec/etc/ossec.conf`` file to monitor the Apache access log:
+
+   .. code-block:: xml
+
+      <localfile>
+         <log_format>syslog</log_format>
+         <location>/var/log/apache2/access.log</location>
+      </localfile>
+
+#. Restart the Wazuh agent to apply the changes:
+
+   .. code-block:: console
+
+      $ sudo systemctl restart wazuh-agent
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^^
+
+Perform the following steps to create an active response that blocks the source IP address of a web attack.
+
+#. Open the menu (☰) and go to **Explore** > **Active Responses**.
+
+#. Click **Create active response** and fill in the form with the following values. The ``block-ip`` executable adds firewall rules that drop traffic from the source IP address of the finding. The **Local** location runs it on the endpoint that generated the finding. The **Stateless** type runs it once and never reverts it.
+
+   +------------+---------------+
+   | Field      | Value         |
+   +============+===============+
+   | Name       | web_attack_ar |
+   +------------+---------------+
+   | Executable | block-ip      |
+   +------------+---------------+
+   | Location   | Local         |
+   +------------+---------------+
+   | Type       | Stateless     |
+   +------------+---------------+
+
+   .. thumbnail:: /images/compliance/hipaa/web-attack-ar-create-response.png
+      :title: Create active response form
+      :alt: Create active response form
+      :align: center
+      :width: 80%
+
+#. Click **Create** to save the active response.
+
+#. Go to **Explore** > **Alerting**, switch to the **Monitors** tab, and click **Create monitor**.
+
+#. Fill in the following values. The filter selects findings tagged ``attack.t1189``, the MITRE ATT&CK technique of the ``Cross site scripting strings`` rule. Don't filter on ``wazuh.rule.id``, because rule IDs change when the ruleset is updated.
+
+   +-------------------------+--------------------------------+
+   | Field                   | Value                          |
+   +=========================+================================+
+   | Monitor name            | web_attack_ar_monitor          |
+   +-------------------------+--------------------------------+
+   | Monitor type            | Active Response monitor        |
+   +-------------------------+--------------------------------+
+   | Monitor defining method | Visual editor                  |
+   +-------------------------+--------------------------------+
+   | Frequency               | By interval                    |
+   +-------------------------+--------------------------------+
+   | Run every               | 1 Minute(s)                    |
+   +-------------------------+--------------------------------+
+   | Index                   | wazuh-findings-v5-applications |
+   +-------------------------+--------------------------------+
+   | Query name              | web_attack_ar_query            |
+   +-------------------------+--------------------------------+
+   | Field                   | wazuh.rule.tags                |
+   +-------------------------+--------------------------------+
+   | Operator                | is                             |
+   +-------------------------+--------------------------------+
+   | Value                   | attack.t1189                   |
+   +-------------------------+--------------------------------+
+
+   .. thumbnail:: /images/compliance/hipaa/web-attack-ar-monitor.png
+      :title: Create monitor form
+      :alt: Create monitor form
+      :align: center
+      :width: 80%
+
+#. In the **Triggers** section, click **Add trigger** and fill in the following values:
+
+   +-------------------------+-----------------------+
+   | Field                   | Value                 |
+   +=========================+=======================+
+   | Trigger name            | web_attack_ar_trigger |
+   +-------------------------+-----------------------+
+   | Severity level          | 1 (Highest)           |
+   +-------------------------+-----------------------+
+   | Specify queries or tags | web_attack_ar_query   |
+   +-------------------------+-----------------------+
+
+   .. thumbnail:: /images/compliance/hipaa/web-attack-ar-trigger.png
+      :title: Add trigger form
+      :alt: Add trigger form
+      :align: center
+      :width: 80%
+
+#. In the **Actions** subsection, click **Add active response** and fill in the following values:
+
+   +-----------------+----------------------+
+   | Field           | Value                |
+   +=================+======================+
+   | Action name     | web_attack_ar_action |
+   +-----------------+----------------------+
+   | Active response | web_attack_ar        |
+   +-----------------+----------------------+
+
+   .. thumbnail:: /images/compliance/hipaa/web-attack-ar-action.png
+      :title: Add active response action form
+      :alt: Add active response action form
+      :align: center
+      :width: 80%
+
+#. Click **Create** to save the monitor.
+
+Attack emulation
+^^^^^^^^^^^^^^^^^^
+
+Perform the following steps from the second endpoint.
+
+#. Replace ``<WEBSERVER_IP_ADDRESS>`` with the IP address of the Ubuntu endpoint and run the following command:
+
+   .. code-block:: console
+
+      $ curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" "http://<WEBSERVER_IP_ADDRESS>/index.html?q=<script>document.cookie</script>"
+
+   The first request reaches the web server. It generates a web attack finding, which triggers the ``block-ip`` active response.
+
+#. Wait three minutes, then run the command again to confirm that the Ubuntu endpoint blocks the attacker:
+
+   .. code-block:: console
+
+      $ curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" "http://<WEBSERVER_IP_ADDRESS>/index.html?q=<script>document.cookie</script>"
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      curl: (28) Failed to connect to <WEBSERVER_IP_ADDRESS> port 80 after 134781 ms: Couldn't connect to server
+
+   On the Ubuntu endpoint, run ``sudo iptables -S INPUT | grep <ATTACKER_IP>`` to check the block. Replace ``<ATTACKER_IP>`` with the IP address of the attacker endpoint. The output shows the DROP rule that the active response added.
+
+Visualize the findings
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Open the menu (☰) and go to **Threat intelligence** > **Threat Hunting**. Add the filter ``event.dataset:apache-access`` to see the web attack findings.
+
+.. thumbnail:: /images/compliance/hipaa/web-attack-threat-hunting-findings.png
+   :title: Threat Hunting findings - web attack
+   :alt: Threat Hunting findings - web attack
    :align: center
    :width: 80%
+
+To see the triggered active response, go to **Security operations** > **Incident Response** and switch to the **Responses** tab.
+
+.. thumbnail:: /images/compliance/hipaa/web-attack-ar-responses.png
+   :title: Incident Response Responses tab - triggered active response
+   :alt: Incident Response Responses tab - triggered active response
+   :align: center
+   :width: 80%
+
+After the test, remove the firewall rules on the Ubuntu endpoint. The active response is stateless, so it never removes them:
+
+.. code-block:: console
+
+   $ sudo iptables -D INPUT -s <ATTACKER_IP> -j DROP
+   $ sudo iptables -D FORWARD -s <ATTACKER_IP> -j DROP

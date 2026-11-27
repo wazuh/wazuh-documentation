@@ -1016,7 +1016,12 @@ The ``rootcheck.*`` internal options configure the Rootcheck module.
 +-----------------------+-------------------------------------------------------------------------------+-----------------+-----------------------------------+
 | Setting               | Description                                                                   | Default value   | Allowed values                    |
 +=======================+===============================================================================+=================+===================================+
-| **rootcheck.sleep**   | Sleep time, in milliseconds, between iterations of the Rootcheck scan loop.   | 50              | Any integer between 0 and 1000.   |
+| **rootcheck.sleep**   | Milliseconds to sleep after reading one suspicious port, and after reading    | 50              | Any integer between 0 and 1000.   |
+|                       | one PID on systems other than Linux.                                          |                 |                                   |
++-----------------------+-------------------------------------------------------------------------------+-----------------+-----------------------------------+
+| **rootcheck.max_pid** | Highest PID checked by the hidden process check. Linux only. PIDs above this  | 32768           | Any integer between 32768 and     |
+|                       | value aren't checked. Use 4194304 to check the whole PID range, at a higher   |                 | 4194304.                          |
+|                       | CPU cost per scan.                                                            |                 |                                   |
 +-----------------------+-------------------------------------------------------------------------------+-----------------+-----------------------------------+
 
 .. _internal_options_sca:

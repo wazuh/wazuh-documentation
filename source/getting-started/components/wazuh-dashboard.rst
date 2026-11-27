@@ -57,7 +57,7 @@ The Wazuh pages are grouped into these menus:
    :align: center
    :width: 80%
 
-**CTI Explorer** lets you search the indicators of compromise (IoCs) and vulnerability records that the Wazuh CTI feed delivers, and check a domain, URL, IP address, file hash, or CVE ID against them. **CTI Feed** shows the Wazuh CTI subscription, whether each feed is up to date, and how much content each feed delivered, and lets you request a sync.
+**CTI Explorer** lets you search the indicators of compromise (IoCs) and vulnerability records that the Wazuh Cyber Threat Intelligence (CTI) feed delivers, and check a domain, URL, IP address, file hash, or CVE ID against them. **CTI Feed** shows the Wazuh CTI subscription, whether each feed is up to date, and how much content each feed delivered, and lets you request a sync.
 
 .. thumbnail:: /images/getting-started/dashboard-cti-explorer.png
    :title: CTI Explorer
@@ -135,7 +135,7 @@ The **Ruleset management** menu contains the following pages:
    :align: center
    :width: 80%
 
-The Wazuh dashboard sends this content to the Content Manager REST API of the Wazuh indexer. You can use **Log test** to check custom decoders and rules before you rely on them.
+You can use **Log test** to check custom decoders and rules before you rely on them.
 
 .. thumbnail:: /images/getting-started/dashboard-log-test.png
    :title: Log test
@@ -198,7 +198,7 @@ The Wazuh dashboard includes an AI Assistant that you open from the **Home** men
    :align: center
    :width: 80%
 
-The Wazuh dashboard encrypts the AI provider API keys that the AI Assistant stores. The Wazuh dashboard package generates the ``wazuh_ai_assistant.encryptionKey`` encryption key in the Wazuh dashboard keystore if it is not defined in either the keystore or ``opensearch_dashboards.yml``.
+The Wazuh dashboard encrypts the AI provider API keys that the AI Assistant stores.
 
 Next steps
 ----------

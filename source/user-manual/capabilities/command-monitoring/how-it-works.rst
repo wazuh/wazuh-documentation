@@ -10,7 +10,7 @@ The Wazuh command monitoring capability works on all endpoints where the Wazuh a
 
 The steps below describe the sequence of actions from when you configure command monitoring to when the Wazuh dashboard displays a finding:
 
--  You add the desired command to the Wazuh agent configuration file or remotely through the Wazuh dashboard.
+-  You add the desired command to the Wazuh agent configuration file or remotely through the Wazuh dashboard. To distribute commands from the Wazuh dashboard, you must first enable remote command execution on the Wazuh agent, as described in :ref:`Requirements <command_monitoring_requirements_remote_command_execution>`.
 -  The Wazuh agent reads the configuration and executes the command on the endpoint at the set interval.
 -  The Wazuh agent forwards the structured command output to the Wazuh manager for decoding, enrichment, and normalization.
 -  The Wazuh manager sends the structured event to the Wazuh indexer, which applies detection rules to generate findings. You must create a detection rule for the command output first. Visit the :ref:`Create a custom rule <data_analysis_create_custom_rule>` section for the steps.
@@ -24,6 +24,6 @@ The image below shows the components involved in the command monitoring process.
   :align: center
   :width: 80%
 
-Wazuh provides a default decoder, ``decoder/wazuh-wodle/0``, that decodes events from monitored commands into a standardized format (:ref:`Wazuh Common Schema <wazuh_common_schema>`). This lets the detection engine process command output without additional configuration.
+Wazuh provides a default decoder, ``decoder/wazuh-command-monitoring/0``, that decodes events from monitored commands into a standardized format (:ref:`Wazuh Common Schema <wazuh_common_schema>`). The default decoder lets Wazuh process command output without additional configuration.
 
 To extract custom fields from your command output, you must create a custom decoder. Visit the :doc:`Create a security analytics detection workflow </user-manual/data-analysis/detection-workflow>` section for more information.

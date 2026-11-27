@@ -205,6 +205,8 @@ See the :doc:`authorization context </user-manual/api/rbac/auth-context>` sectio
 Edit allow_run_as
 -----------------
 
+**Optional:** Complete this step only if users log in with an authorization context to get roles from security rules. Otherwise, skip to :ref:`Assign policies to roles <api_rbac_configuration_assign_policies_to_roles>`.
+
 By default, newly created users have the ``allow_run_as`` parameter set to ``false``. As a result, they cannot authenticate using an authorization context, which is required for automatic role assignment based on rules.
 
 To enable authorization context login for a user, set ``allow_run_as`` to ``true`` using the :api-ref:`PUT /security/users/{user_id}/run_as <operation/api.controllers.security_controller.edit_run_as>` endpoint. Replace ``<USER_ID>`` with the actual ID of the user. To enable the parameter, you also need ``security:update`` on all roles (``role:id:*``), because a user with ``allow_run_as`` enabled can obtain any role that a rule maps. To disable it, you need only ``security:edit_run_as``. The change revokes the existing tokens of the user.
@@ -235,6 +237,8 @@ The command output looks similar to this:
      "message": "Parameter allow_run_as has been enabled for the user",
      "error": 0
    }
+
+.. _api_rbac_configuration_assign_policies_to_roles:
 
 Assign policies to roles
 ------------------------
@@ -279,6 +283,8 @@ This approach simplifies permission management for all members of "team-alpha". 
 
 Create a new rule
 -----------------
+
+**Optional:** Complete this step and :ref:`Assign rules to roles <api_rbac_configuration_assign_rules_to_roles>` only if users log in with an authorization context. Otherwise, skip to :ref:`Assign roles to a user <api_rbac_configuration_assign_roles_to_a_user>`.
 
 You create security rules by sending a POST request to the :api-ref:`/security/rules <operation/api.controllers.security_controller.add_rule>` endpoint. Security rules check whether the ``auth_context`` provided during login matches specific conditions. If the authorization context matches a rule, the system automatically assigns the associated role(s) to the user for that login session only.
 
@@ -342,6 +348,8 @@ The command output looks similar to this:
 
 Refer to the :ref:`Wazuh manager API RBAC rules <api_rbac_auth_context_rules_and_roles>` section for more information about creating rules.
 
+.. _api_rbac_configuration_assign_rules_to_roles:
+
 Assign rules to roles
 ---------------------
 
@@ -381,6 +389,8 @@ The command output looks similar to this:
       "error": 0
    }
 
+.. _api_rbac_configuration_assign_roles_to_a_user:
+
 Assign roles to a user
 ----------------------
 
@@ -388,7 +398,7 @@ Use the :api-ref:`POST /security/users/{user_id}/roles <tag/Security/operation/a
 
 The :api-ref:`POST /security/users/{user_id}/roles <tag/Security/operation/api.controllers.security_controller.set_user_role>` endpoint features an optional ``position`` parameter to set the order of role application, which is crucial when roles contain conflicting policies. For more details, see :ref:`priority of roles and policies <api_rbac_configuration_priority_of_roles_and_policies>`.
 
-For example, the following request assigns the "team-alpha" role, with ``role_id`` 100, to the user "``alpha-member-1"``. Replace ``<USER_ID>`` with the user ID returned when you created the user (100 in this example, if it is the first user you created):
+For example, the following request assigns the "team-alpha" role, with ``role_id`` 100, to the user "``alpha-member-1"``. Replace ``<USER_ID>`` with the ``id`` value returned when you created ``alpha-member-1``. The first user you create gets ID ``100``, and each later user gets the next ID. If you ran the ``POST`` example in :doc:`Practical examples </user-manual/api/api-examples>` first, the ID is ``101``:
 
 .. code-block:: console
 
@@ -487,131 +497,16 @@ To see the final policies applied to the current user, use the :api-ref:`GET /se
 
 The command output looks similar to this:
 
-.. code-block:: json
+.. code-block:: none
    :class: output
 
    {
       "data": {
-         "agent:create": {
-            "*:*:*": "allow"
-         },
-         "group:create": {
-            "*:*:*": "allow"
-         },
-         "agent:uninstall": {
-            "*:*:*": "allow"
-         },
-         "enrollment_token:create": {
-            "*:*:*": "allow"
-         },
-         "enrollment_token:read": {
-            "*:*:*": "allow"
-         },
-         "enrollment_token:delete": {
-            "*:*:*": "allow"
-         },
          "agent:read": {
             "agent:id:*": "allow",
             "agent:group:*": "allow"
          },
-         "agent:delete": {
-            "agent:id:*": "allow",
-            "agent:group:*": "allow"
-         },
-         "agent:modify_group": {
-            "agent:id:*": "allow",
-            "agent:group:*": "allow"
-         },
-         "agent:restart": {
-            "agent:id:*": "allow",
-            "agent:group:*": "allow"
-         },
-         "agent:reload": {
-            "agent:id:*": "allow",
-            "agent:group:*": "allow"
-         },
-         "agent:upgrade": {
-            "agent:id:*": "allow",
-            "agent:group:*": "allow"
-         },
-         "agent:scan_vulnerability": {
-            "agent:id:*": "allow",
-            "agent:group:*": "allow"
-         },
-         "group:read": {
-            "group:id:*": "allow"
-         },
-         "group:delete": {
-            "group:id:*": "allow"
-         },
-         "group:update_config": {
-            "group:id:*": "allow"
-         },
-         "group:modify_assignments": {
-            "group:id:*": "allow"
-         },
-         "security:create": {
-            "*:*:*": "allow"
-         },
-         "security:create_user": {
-            "*:*:*": "allow"
-         },
-         "security:read_config": {
-            "*:*:*": "allow"
-         },
-         "security:update_config": {
-            "*:*:*": "allow"
-         },
-         "security:revoke": {
-            "*:*:*": "allow"
-         },
-         "security:edit_run_as": {
-            "*:*:*": "allow"
-         },
-         "security:read": {
-            "role:id:*": "allow",
-            "policy:id:*": "allow",
-            "user:id:*": "allow",
-            "rule:id:*": "allow"
-         },
-         "security:update": {
-            "role:id:*": "allow",
-            "policy:id:*": "allow",
-            "user:id:*": "allow",
-            "rule:id:*": "allow"
-         },
-         "security:delete": {
-            "role:id:*": "allow",
-            "policy:id:*": "allow",
-            "user:id:*": "allow",
-            "rule:id:*": "allow"
-         },
-         "cluster:status": {
-            "*:*:*": "allow"
-         },
-         "cluster:update_config": {
-            "*:*:*": "allow",
-            "node:id:*": "allow"
-         },
-         "cluster:restart": {
-            "*:*:*": "allow",
-            "node:id:*": "allow"
-         },
-         "cluster:read_api_config": {
-            "node:id:*": "allow"
-         },
-         "cluster:read": {
-            "node:id:*": "allow"
-         },
-         "mitre:read": {
-            "*:*:*": "allow"
-         },
-         "cluster:read_secrets": {
-            "node:id:*": "allow"
-         },
-         "agent:read_secrets": {
-            "agent:id:*": "allow"
-         },
+         ...
          "rbac_mode": "white"
       },
       "message": "Current user processed policies information was returned",
@@ -625,7 +520,7 @@ The command output looks similar to this:
 -  Policy ``policy-deny-read`` (``ID: 101``) deny read on ``agent:id:001``
 -  Policy ``customer_x_agents`` (``ID: 100``) allow read on ``agent:id:001``
 
-This example assumes that the role and both policies already exist. You want the ``allow`` policy to win. Assign the ``deny`` policy first (lower priority, position 0) and the ``allow`` policy second (higher priority, position 1).
+This example assumes that the role and both policies already exist. Create ``example_role`` with :api-ref:`POST /security/roles <operation/api.controllers.security_controller.add_role>` and ``policy-deny-read`` with :api-ref:`POST /security/policies <operation/api.controllers.security_controller.add_policy>`, as shown in the earlier sections. Replace ``101`` with the IDs that the Wazuh manager API returns. You want the ``allow`` policy to win. Assign the ``deny`` policy first (lower priority, position 0) and the ``allow`` policy second (higher priority, position 1).
 
 #. Assign the deny policy at position 0 (lower priority):
 
@@ -705,4 +600,4 @@ This example assumes that the role and both policies already exist. You want the
 
 .. note::
 
-   The position parameter only applies when first assigning a policy to a role. It does not allow reordering or changing the position of policies that are already linked.
+   The position parameter only applies when first assigning a policy to a role. It does not move a policy that is already linked. To reorder a policy, unlink it from the role and link it again at the new position.

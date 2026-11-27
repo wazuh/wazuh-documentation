@@ -13,6 +13,8 @@ Wazuh dashboard
 
 Configure active response commands and their triggers from the Wazuh dashboard. First, create an active response. Then create an Alerting monitor that runs the active response when a finding matches your conditions.
 
+.. _active_response_creating:
+
 Creating an active response
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -46,11 +48,13 @@ Follow these steps to create an active response:
 
    -  **Stateful timeout**: Specifies how long, in seconds, a stateful active response remains active before it automatically reverts the action. The default is 180 seconds.
 
-#. Click **Create** to save the configuration.
+#. Click **Create** to save the configuration. By default, the Wazuh indexer accepts up to 10 active responses. The ``plugins.notifications.max_active_responses`` dynamic setting of the Wazuh indexer changes this limit.
 
 .. note::
 
-   Restarting a Wazuh manager is not required after creating or modifying an active response configuration. The Wazuh manager automatically distributes the updated active response configuration to the agents where the active response is configured to run.
+   Restarting the Wazuh manager is not required after creating or modifying an active response configuration. The Wazuh manager automatically distributes the updated active response configuration to the agents where the active response is configured to run.
+
+.. _active_response_creating_monitor:
 
 Creating a monitor
 ^^^^^^^^^^^^^^^^^^
@@ -65,7 +69,7 @@ Active Response monitors have the following requirements:
 
 .. note::
 
-   If you create the monitor with the Alerting API instead of the Wazuh dashboard, set the ``message_template`` of the active response action to ``{{ctx.alerts.0.related_doc_ids}}``. The Wazuh dashboard sets this value for you. Without it, the active response doesn't run, although the monitor still generates an alert.
+   If you create the monitor with the Alerting API instead of the Wazuh dashboard, set the ``message_template`` of the active response action to ``{{ctx.alerts.0.related_doc_ids}}``. The Wazuh dashboard sets this value for you. With any other value, the active response doesn't run, although the monitor still generates an alert.
 
 You can define the monitor with the **Visual editor** or the **Extraction query editor**. The following table compares both methods:
 
@@ -356,7 +360,7 @@ Monitored endpoint
 
 Wazuh provides out-of-the-box active response scripts for performing common response actions on monitored endpoints. These scripts are included with the Wazuh agent and do not require additional scripts to be deployed on the endpoint.
 
-For example, the ``block-ip`` script blocks or unblocks network access from a specified IP address using supported firewall mechanisms available on the endpoint. On Linux endpoints, Wazuh also provides the ``disable-account`` script to disable or re-enable user accounts.
+For example, the ``block-ip`` script blocks or unblocks network access from a specified IP address using supported firewall mechanisms available on the endpoint. On Linux and macOS endpoints, Wazuh also provides the ``disable-account`` script to disable or re-enable user accounts.
 
 See the :doc:`Default active response scripts <default-active-response-scripts>` section for a complete list of the available scripts, the actions they perform, and the operating systems they support.
 
@@ -369,7 +373,7 @@ Linux/Unix
 
 #. Add your custom active response script or executable to the ``/var/ossec/active-response/bin`` directory on Linux/Unix endpoints.
 
-#. Change the script permissions and ownership as shown below:
+#. Change the script permissions and ownership to match the default active response scripts, which belong to the ``root`` user and the ``wazuh`` group. The Wazuh agent runs active response scripts as ``root``:
 
    .. code-block:: console
 
@@ -381,7 +385,7 @@ macOS
 
 #. Add your custom active response script or executable to the ``/Library/Ossec/active-response/bin`` directory on macOS endpoints.
 
-#. Change the script permissions and ownership as shown below:
+#. Change the script permissions and ownership to match the default active response scripts, which belong to the ``root`` user and the ``wazuh`` group. The Wazuh agent runs active response scripts as ``root``:
 
    .. code-block:: console
 
@@ -392,6 +396,8 @@ Windows
 ^^^^^^^
 
 Add your custom active response script or executable to the ``C:\Program Files (x86)\ossec-agent\active-response\bin`` directory on Windows endpoints.
+
+.. _active_response_allowlist:
 
 Excluding IP addresses from active responses
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -408,7 +414,7 @@ Each ``allowlist`` option takes one IPv4 or IPv6 address or CIDR range:
      <allowlist>10.99.0.0/16</allowlist>
    </active-response>
 
-The Wazuh agent configuration file is ``/var/ossec/etc/ossec.conf`` on Linux/Unix, ``/Library/Ossec/etc/ossec.conf`` on macOS, and ``C:\Program Files (x86)\ossec-agent\ossec.conf`` on Windows. Restart the Wazuh agent to apply the change. Host names, ``any``, and negated values, such as ``!192.168.56.10``, are configuration errors, and the Wazuh agent doesn't start. The ``allowlist`` option replaces the ``white_list`` option of the Wazuh 4.x manager configuration.
+The Wazuh agent configuration file is ``/var/ossec/etc/ossec.conf`` on Linux/Unix, ``/Library/Ossec/etc/ossec.conf`` on macOS, and ``C:\Program Files (x86)\ossec-agent\ossec.conf`` on Windows. Restart the Wazuh agent to apply the change. The restart also reverts every stateful active response that is still active on the endpoint. Host names, ``any``, and negated values, such as ``!192.168.56.10``, are configuration errors, and the Wazuh agent doesn't start. The ``allowlist`` option replaces the ``white_list`` option of the Wazuh 4.x manager configuration.
 
 When the Wazuh agent skips an active response because of an excluded address, it writes a warning such as the following to its log file:
 

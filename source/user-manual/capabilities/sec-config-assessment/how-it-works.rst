@@ -22,18 +22,18 @@ After each scan, the following happens:
 
 To optimize synchronization, the Wazuh agent tracks the current state of each SCA check and sends only the updates required to keep the manager synchronized. When no changes are detected between scans, the agent sends a scan summary instead of generating new SCA events.
 
-The sequence diagram below depicts the integrity and alerting flow.
+The sequence diagram below depicts the integrity and findings flow.
 
 .. thumbnail:: /images/sca/sca-sequence-diagram.png
-   :title: SCA module integrity and alerting flow
-   :alt: SCA module integrity and alerting flow
+   :title: SCA module integrity and findings flow
+   :alt: SCA module integrity and findings flow
    :align: center
    :width: 80%
 
 Understanding SCA scan results
 -------------------------------
 
-SCA scan results appear as findings with SCA scan data when a check's status changes between scans. Wazuh agents send only the events necessary to keep the SCA state synchronized, which avoids potential event flooding. The exception is a policy update, described in :ref:`Integrity of policy files <sca_integrity_policy_files>`.
+SCA scan results appear as findings with SCA scan data when a check's status changes between scans. Wazuh agents send only the events necessary to keep the SCA state synchronized, which avoids potential event flooding. The exception is a policy update, described in :ref:`Integrity mechanisms <sca_integrity_mechanisms>`.
 
 Any given check event has three possible results:
 
@@ -80,7 +80,7 @@ On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Asse
    :align: center
    :width: 80%
 
-You can expand each scan result to display additional information. On the Wazuh dashboard, navigate to the **Endpoint security** > **Configuration Assessment** > **Inventory**. Click on **Inspect details** to see more information on the scan result.
+You can expand each scan result to display additional information. On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration Assessment** > **Inventory**. Click **Inspect details** to see more information on the scan result.
 
 .. thumbnail:: /images/sca/configuration-assessment-additional-information.png
    :title: Expanded SCA check result
@@ -337,7 +337,7 @@ Evaluating each check updates its state document in the ``wazuh-states-sca`` ind
 Remediation
 ~~~~~~~~~~~
 
-On this endpoint, check ``35622`` is **Failed** because ufw is inactive, so the output of the command ``ufw status`` is ``Status: inactive``. Check ``35622`` needs the ufw service to be enabled and active, and ``ufw status`` to show ``Status: active``. The remediation in the scan result quotes the CIS benchmark text. Some of its commands, such as ``systemctl --now enable ufw.service active`` and ``ufw enable.``, aren't valid as written, so use the steps below instead of pasting them.
+On this endpoint, check ``35622`` is **Failed** because ufw is inactive. The output of the command ``ufw status`` is ``Status: inactive``. Check ``35622`` needs the ufw service to be enabled and active, and ``ufw status`` to show ``Status: active``. The remediation in the scan result quotes the CIS benchmark text. Some of its commands, such as ``systemctl --now enable ufw.service active`` and ``ufw enable``, aren't valid as written. Use the steps below instead of pasting them.
 
 The steps below adapt the remediation that Wazuh suggests so that the endpoint keeps its connection to the Wazuh manager:
 
@@ -367,56 +367,9 @@ The scan result for check ``35622`` changes to **Passed** at the next SCA synchr
    :align: center
    :width: 80%
 
+.. _sca_integrity_mechanisms:
+
 Integrity mechanisms
 ---------------------
 
-Wazuh uses two integrity mechanisms to keep the SCA states on the Wazuh agent and the Wazuh manager synchronized. These mechanisms ensure the integrity of the policy files and scan results.
-
-.. _sca_integrity_policy_files:
-
-Integrity of policy files
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This integrity mechanism keeps policy files and scan results aligned. When it detects a change in a policy file, SCA invalidates the results stored in the database for that policy and requests a new scan to generate new results.
-
-When the hash of a policy file changes, Wazuh performs the following recovery steps:
-
-#. The Wazuh manager flushes its stored data for that SCA policy.
-#. The Wazuh agent sends the new scan results of the SCA policy.
-#. The Wazuh manager processes the new scan results, updates the SCA state in its local database and synchronizes the updated state with the Wazuh indexer.
-
-.. note::
-
-   When a policy file changes, Wazuh generates findings for every check in the policy, not only for checks whose result changed. This is the exception to the usual behavior: the Wazuh manager has flushed its data for the policy, so resending every result makes sure that no check result is missing.
-
-Integrity of the scan results
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-To illustrate how Wazuh maintains the integrity of scan results, consider an example where the Wazuh agent and Wazuh manager databases differ. This scenario can happen when there's a network issue.
-
-The table below shows an example of the SCA state stored in the Wazuh agent and Wazuh manager databases.
-
-.. table:: States stored in the Wazuh agent and Wazuh manager databases
-   :widths: auto
-
-   +----------+------------------+--------------------+
-   | Check ID | Agent-side state | Manager-side state |
-   +==========+==================+====================+
-   | 1000     | Passed           | Passed             |
-   +----------+------------------+--------------------+
-   | 1001     | Failed           | Failed             |
-   +----------+------------------+--------------------+
-   | 1002     | Failed           | Missing            |
-   +----------+------------------+--------------------+
-   | 1003     | Passed           | Passed             |
-   +----------+------------------+--------------------+
-
-Each side computes a SHA256 hash over the check results it stores for the policy. In this example, the hashes are:
-
-.. code-block:: none
-
-   Wazuh agent:   1642AB1DC478052AC3556B5E700CD82ADB69728008301882B9CBEE0696FF2C84
-   Wazuh manager: B43037CA28D95A69B6F9E03FCD826D2B253A6BB1B6AD28C4AE57A3A766ACE610
-
-Since the two hashes don't match, the Wazuh manager requests the latest scan data from the Wazuh agent and refreshes its database with the newly received status information.
-
+Wazuh keeps the SCA results on the Wazuh agent and in the Wazuh indexer in sync. The Wazuh agent stores the results in a local database and sends the changes to the Wazuh manager after each scan. When a policy file changes, Wazuh discards the stored results for that policy and scans it again. You then get a finding for every check in the policy. Every 24 hours by default, set by ``integrity_interval``, the Wazuh agent sends a checksum of its results, and the Wazuh manager compares it with the results in the Wazuh indexer. If they differ, for example after a network issue, the Wazuh agent sends all its results again.

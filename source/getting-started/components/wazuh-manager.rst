@@ -28,18 +28,11 @@ Components
 
 The Wazuh manager components perform functions such as agent enrollment, agent identity validation, and secure communication with Wazuh agents.
 
--  **Agent enrollment service:** Registers new Wazuh agents and provides each agent with a unique client key. Wazuh 5.x agents enroll through the HTTPS agent API with an enrollment token or the shared enrollment password. The default configuration requires the shared password for agents that enroll without a token. A TLS listener on port 1515 serves legacy Wazuh 4.x agents and supports certificate-based agent identity verification.
+-  **Agent enrollment service:** Registers new Wazuh agents and provides each agent with a unique client key. Wazuh 5.x agents enroll with an enrollment token or the enrollment password. A separate legacy service enrolls Wazuh 4.x agents.
 
--  **Agent connection service:** Manages communication between Wazuh agents and the Wazuh manager through the HTTPS agent API. After enrollment, the service authenticates each request with a bearer token that the Wazuh agent signs with its key. The ``GET /``, ``GET /cacerts``, and ``POST /enroll`` endpoints don't require a bearer token. The service receives events and inventory data from Wazuh agents and delivers pending tasks, such as configuration updates and upgrades, when Wazuh agents request them.
+-  **Agent connection service:** Manages communication between Wazuh agents and the Wazuh manager through the HTTPS agent API. The service receives events and inventory data from Wazuh agents and delivers pending tasks, such as configuration updates and upgrades, when Wazuh agents request them.
 
--  **Normalization engine:** Transforms raw data received from Wazuh agents into standardized schema documents. It decodes and enriches this data with threat intelligence. The normalization engine includes a built-in standard policy that covers all supported log sources and integrations. It synchronizes its content, such as decoders, integrations, and policies, with the Wazuh indexer. Each incoming event travels through the following ordered stages inside a policy:
-
-   -  **Pre-filter** *(optional)*: Evaluated before decoding. If configured, events that do not satisfy the filter conditions are discarded immediately, avoiding unnecessary decoding work. If no pre-filter is configured, all events proceed to the decoding stage unconditionally.
-   -  **Decoding**: Decoders normalize and extract fields from the raw event, mapping them to the Wazuh Common Schema (WCS). This stage is mandatory as every event must traverse the decoder tree.
-   -  **Pre-enrichment**: Runs on every event after decoding. It adds the policy space to the event, drops events marked as discarded unless the policy indexes them, and removes temporary decoder variables.
-   -  **Enrichment** *(optional)*: This stage involves plugins that augment the normalized event with additional context after pre-enrichment. Built-in plugins include GeoIP geolocation and indicator of compromise (IoC) matching. Enrichment can be fully disabled at the policy level. When disabled, the normalized event is passed directly to the next stage.
-   -  **Post-filter** *(optional)*: Evaluated after enrichment, or after pre-enrichment if enrichment is disabled. If configured, events that do not satisfy the filter conditions are discarded before reaching the outputs. If no post-filter is configured, all events are forwarded unconditionally.
-   -  **Outputs** *(optional)*: Sends the final processed events to configured destinations, such as the Wazuh indexer or other downstream components. If no outputs are configured, processing ends after the last filter.
+-  **Normalization engine:** Transforms raw data received from Wazuh agents into standardized schema documents. It decodes and enriches this data with threat intelligence. The normalization engine includes a built-in standard policy that covers all supported log sources and integrations. It synchronizes its content, such as decoders, integrations, and policies, with the Wazuh indexer. Each event goes through decoding, enrichment such as GeoIP geolocation and IoC matching, and optional filters before the Wazuh manager sends it to the configured outputs.
 
 -  **Content manager:** Downloads the vulnerability feed from the Wazuh indexer and makes it available to the Vulnerability Scanner, its only consumer. The content manager is separate from the Content Manager module of the Wazuh indexer, which manages the ruleset.
 
@@ -49,9 +42,9 @@ The Wazuh manager components perform functions such as agent enrollment, agent i
 
 -  **Indexer connector:** Forwards events from the Wazuh normalization engine to the Wazuh indexer.
 
--  **Wazuh DB:** Keeps the Wazuh agent records and agent state in SQLite databases on each node. The ``wazuh-manager-db`` daemon provides this service.
+-  **Wazuh DB:** Keeps the Wazuh agent records and agent state in SQLite databases on each node.
 
--  **Modules daemon:** Runs the manager-side modules in the ``wazuh-manager-modulesd`` daemon. These modules include:
+-  **Modules daemon:** Runs the manager-side modules. These modules include:
 
    -  **Vulnerability Scanner:** Detects vulnerabilities in the software inventory collected from Wazuh agents.
    -  **Inventory synchronization:** Receives Wazuh agent state data, such as system inventory, and indexes it in the Wazuh indexer.

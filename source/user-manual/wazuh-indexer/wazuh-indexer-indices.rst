@@ -28,11 +28,11 @@ The following table lists the Wazuh data streams and the type of information eac
 +==================================+==============================================================================================================================================+
 | ``wazuh-events-raw-v5``          | Stores incoming events before processing and normalization, when raw event indexing is enabled. Raw event indexing is disabled by default.   |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| ``wazuh-events-v5-<category>``   | Stores normalized and categorized events using the Wazuh Common Schema (WCS).                                                                |
+| ``wazuh-events-v5-<CATEGORY>``   | Stores normalized and categorized events using the Wazuh Common Schema (WCS).                                                                |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 | ``wazuh-events-v5-unclassified`` | Stores events that could not be assigned to a category.                                                                                      |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| ``wazuh-findings-v5-<category>`` | Stores findings generated when Security Analytics detectors match Sigma rules.                                                               |
+| ``wazuh-findings-v5-<CATEGORY>`` | Stores findings generated when Security Analytics detectors match Sigma rules.                                                               |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 | ``wazuh-active-responses``       | Stores active response execution requests.                                                                                                   |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -52,14 +52,14 @@ Event data streams
 
 Events collected from monitored endpoints pass through several stages before becoming searchable security data.
 
-When an event arrives, Wazuh normalizes it according to the Wazuh Common Schema and routes it to the appropriate category-specific data stream. When unclassified event indexing is enabled for the space, events that cannot be categorized go to the unclassified data stream. When raw event indexing is enabled, Wazuh also stores the original event in the raw events data stream. Raw event indexing is disabled by default, and you enable it with the Setup module settings API. The event data streams are ``wazuh-events-raw-v5``, ``wazuh-events-v5-<category>``, and ``wazuh-events-v5-unclassified``.
+When an event arrives, Wazuh normalizes it according to the Wazuh Common Schema and routes it to the appropriate category-specific data stream. When unclassified event indexing is enabled for the space (see :ref:`Content spaces <wazuh_indexer_content_manager_content_spaces>`), events that cannot be categorized go to the unclassified data stream. When raw event indexing is enabled, Wazuh also stores the original event in the raw events data stream. Raw event indexing is disabled by default, and you enable it with the Setup module settings API, as described in :ref:`Update settings <wazuh_indexer_setup_update_settings>`. The event data streams are ``wazuh-events-raw-v5``, ``wazuh-events-v5-<CATEGORY>``, and ``wazuh-events-v5-unclassified``.
 
 Findings data streams
 ^^^^^^^^^^^^^^^^^^^^^
 
 The Security Analytics module stores detector findings in category-specific findings data streams.
 
-A finding is generated when an event matches a Sigma detection rule. Each finding contains the detection result, the triggering event, rule metadata, and investigation information such as case status, analyst comments, and tags. Findings are stored using the ``wazuh-findings-v5-<category>`` index pattern.
+A finding is generated when an event matches a Sigma detection rule. Each finding contains the detection result, the triggering event, rule metadata, and investigation information such as case status, analyst comments, and tags. Findings are stored using the ``wazuh-findings-v5-<CATEGORY>`` index pattern.
 
 Active response data stream
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -105,7 +105,8 @@ This provides a complete audit trail linking response actions to the events that
 +--------------------------------------------+------------------------------------------------------------------------------------------+
 | ``wazuh.cluster.*``                        | Cluster information.                                                                     |
 +--------------------------------------------+------------------------------------------------------------------------------------------+
-| ``wazuh.space.name``                       | Wazuh space or tenant information.                                                       |
+| ``wazuh.space.name``                       | Space of the Wazuh Engine policy that processed the event: ``standard`` for the Wazuh    |
+|                                            | ruleset, ``custom`` for user content promoted to production.                             |
 +--------------------------------------------+------------------------------------------------------------------------------------------+
 
 .. _wazuh_indexer_indices_stateful_indices:
@@ -177,9 +178,9 @@ Vulnerability detection
 
 Vulnerability detection provides visibility into software vulnerabilities affecting monitored endpoints. It identifies vulnerable packages and applications by correlating endpoint inventory information with vulnerability data from the Wazuh Cyber Threat Intelligence (CTI) service. Security teams use the results to prioritize remediation and monitor their vulnerability posture.
 
-The Wazuh agent collects inventory data such as installed packages, operating system details, and hardware information from monitored endpoints. The collected data is sent to the Wazuh manager, where the ``wazuh-manager-remoted`` daemon publishes it to the Router ``inventory-states`` topic. The Inventory Sync module synchronizes the inventory state with the Wazuh indexer through the Indexer Connector and triggers the Vulnerability Scanner module.
+The Wazuh agent collects inventory data such as installed packages, operating system details, and hardware information from monitored endpoints. The collected data is sent to the Wazuh manager, which synchronizes the inventory state with the Wazuh indexer and runs vulnerability detection on it.
 
-The Vulnerability Scanner retrieves CVE feeds from the Wazuh indexer through the Content Manager and Indexer Connector. It then correlates the vulnerability information with the inventory data collected from monitored endpoints to identify affected systems and software packages. Vulnerability state information is stored as global state data in the ``wazuh-states-vulnerabilities`` index and can be queried and visualized from the Wazuh dashboard.
+The Wazuh manager reads CVE feeds from the Wazuh indexer in the ``.wazuh-threatintel-vulnerabilities`` index, where the Content Manager module stores them. It then correlates the vulnerability information with the inventory data collected from monitored endpoints to identify affected systems and software packages. Vulnerability state information is stored as global state data in the ``wazuh-states-vulnerabilities`` index and can be queried and visualized from the Wazuh dashboard.
 
 File integrity monitoring
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -217,7 +218,8 @@ The Content Manager module stores detection content and threat intelligence data
 +----------------------------------------+-----------------------------------------------------------------------------------+
 | ``wazuh-threatintel-policies``         | Routing policies.                                                                 |
 +----------------------------------------+-----------------------------------------------------------------------------------+
-| ``wazuh-threatintel-filters``          | Wazuh Engine filters that route events for classification.                        |
+| ``wazuh-threatintel-filters``          | Wazuh Engine filters. A filter runs before decoding (``pre-filter``) or before    |
+|                                        | output (``post-filter``) and can mark events as discarded.                        |
 +----------------------------------------+-----------------------------------------------------------------------------------+
 | ``wazuh-threatintel-enrichments``      | Indicators of Compromise (IoC).                                                   |
 +----------------------------------------+-----------------------------------------------------------------------------------+
@@ -275,7 +277,7 @@ To check whether a backing index has rolled over, run the following in **Dev Too
 
 .. code-block:: none
 
-   GET _plugins/_ism/explain/<index>
+   GET _plugins/_ism/explain/<INDEX_NAME>
 
 A response with ``"step": {"name": "attempt_rollover", "step_status": "condition_not_met"}`` and ``"rolled_over": false`` means the index hasn't met a rollover condition and isn't eligible for deletion yet.
 
@@ -291,9 +293,9 @@ The following diagram illustrates the lifecycle of a data stream:
 
    Data stream rollover and retention are managed automatically through :ref:`Index State Management (ISM) <index_state_management>` policies. Don't edit the default policies. To change retention, see :ref:`Managing data retention <wazuh_indexer_indices_managing_data_retention>`.
 
-Each lifecycle policy moves an index through two stages during its lifetime. When an index is first created, it enters the active stage, where it accepts new data. It remains in this stage until one of the configured rollover conditions, such as primary shard size or document count, is met. At that point, Wazuh creates a new active index, and the previous index stops accepting new data.
+Each lifecycle policy moves an index through two states during its lifetime. When an index is first created, it enters the hot state, where it accepts new data. It remains in this state until one of the configured rollover conditions, such as primary shard size or document count, is met. At that point, Wazuh creates a new active index, and the previous index stops accepting new data.
 
-The previous index moves to the delete stage once its minimum age for deletion has passed since the rollover, and Wazuh permanently removes it. If the deletion fails, Wazuh automatically retries the operation up to three times with increasing delays between attempts.
+The previous index moves to the ``delete`` state once its minimum age for deletion has passed since the rollover, and Wazuh permanently removes it. If the deletion fails, Wazuh automatically retries the operation up to three times with increasing delays between attempts.
 
 The ISM policy below keeps matching indices in the hot state while they receive data. It rolls them over when they reach 200 million documents or a 20 GB primary shard size. Once the minimum age has passed since the rollover, the policy moves the index to the delete state and removes it. Failed actions are retried up to three times using exponential backoff. The following example shows a simplified version of the ``stream-findings-policy`` default policy. Other default policies differ only in the deletion age, index patterns and, for the AI assistant sessions and audit log policies, an additional ``min_index_age`` rollover condition and a ``min_index_age`` deletion condition, counted from the creation of the index, instead of ``min_rollover_age``. All default policies use an ``ism_template`` priority of ``0``, so a custom policy with a higher priority takes precedence for new backing indices.
 
@@ -368,7 +370,7 @@ The Wazuh indexer ships default ISM policies that control the retention of its d
 Default ISM policies
 ^^^^^^^^^^^^^^^^^^^^
 
-The seven policies in the Data stream lifecycle table are Wazuh's default ISM policies. The Wazuh indexer writes them again every time it starts, including after an upgrade, so that each release can deliver updated policies. This replaces any change made to a default policy, whether through the Wazuh dashboard or the ISM API. The policies are rewritten a few minutes after the Wazuh indexer starts, not immediately, so an edit may appear to persist right after a restart. ISM can't mark a policy as read-only, so nothing prevents the edit in the first place.
+The seven policies in the Data stream lifecycle table are Wazuh's default ISM policies. The Wazuh indexer writes them again every time it starts, including after an upgrade, so that each release can deliver updated policies. This replaces any change made to a default policy, whether through the Wazuh dashboard or the ISM API. The policies are rewritten shortly after the Wazuh indexer starts, usually within a minute or two, not immediately, so an edit may appear to persist for a short time after a restart. ISM can't mark a policy as read-only, so nothing prevents the edit in the first place.
 
 .. _wazuh_indexer_indices_creating_custom_retention_policy:
 
@@ -480,11 +482,11 @@ Check which version each index runs. **Policy managed indexes** show the stored 
 Enabling unclassified events storage
 ------------------------------------
 
-Wazuh agent collects logs from endpoints and forwards them to the Wazuh manager. The Wazuh manager normalizes, decodes, and enriches events and sends them to the Wazuh indexer for rule matching, indexing, and security analytics. The Wazuh dashboard allows teams to view and investigate findings, search historical events, and manage the platform. Events that match detection rules generate findings. Events that cannot be decoded or classified are stored in the ``wazuh-events-v5-unclassified`` index when unclassified event indexing is enabled for the relevant space.
+The Wazuh agent collects logs from endpoints and forwards them to the Wazuh manager. The Wazuh manager normalizes, decodes, and enriches events and sends them to the Wazuh indexer for rule matching, indexing, and security analytics. The Wazuh dashboard allows teams to view and investigate findings, search historical events, and manage the platform. Events that match detection rules generate findings. Events that cannot be decoded or classified are stored in the ``wazuh-events-v5-unclassified`` index when unclassified event indexing is enabled for the relevant space.
 
-Unclassified event indexing is configured per space. You can enable unclassified event indexing in the Draft or Standard space. Follow the steps below to enable the storage of unclassified events:
+Unclassified event indexing is configured per space, and it applies only to the events that the space processes. Agent events that no integration of the Wazuh ruleset classifies are processed by the Standard space, so enable the setting in the Standard space to store them. To store unclassified events that your own content processes, enable it in the Draft space and promote it to the Custom space. Follow the steps below to enable the storage of unclassified events:
 
-#. Navigate to the **Ruleset management** > **Overview**, select the space you want to enable unclassified events for, click the **Actions** drop-down menu, and select **Edit**:
+#. Navigate to **Ruleset management** > **Overview**, select the space you want to enable unclassified events for, click the **Space actions** drop-down menu, and select **Edit**:
 
    .. thumbnail:: /images/manual/wazuh-indexer/security-analytics-edit-space.png
       :title: Edit a Security Analytics space
@@ -500,7 +502,7 @@ Unclassified event indexing is configured per space. You can enable unclassified
       :align: center
       :width: 80%
 
-If you edited the Draft space, promote the change to apply it. Click **Actions** > **Promote**, review the changes on the **Promote** page, and click **Promote**. In the confirmation dialog, type ``promote`` and click **Promote**. Then select the **Test** space and promote again the same way, so that the change reaches the **Custom** space. The **Standard** space can't be promoted, so changes to it are saved directly.
+If you edited the Draft space, promote the change to apply it. Click **Space actions** > **Promote**, review the changes on the **Promote** page, and click **Promote**. In the confirmation dialog, type ``promote`` and click **Promote**. Then select the **Test** space and promote again the same way, so that the change reaches the **Custom** space. The **Standard** space can't be promoted, so changes to it are saved directly.
 
 Verifying index templates
 -------------------------
@@ -513,7 +515,7 @@ To verify that the Wazuh templates are installed, query the Wazuh indexer from t
 
    GET /_index_template/wazuh-*
 
-The response lists the index templates whose names start with ``wazuh-`` and the index patterns associated with each template. To list every index template, including the stateful index templates (``wazuh-states-*``) and internal ones such as ``settings``, run ``GET _cat/templates?v&s=name``.
+The response lists the index templates whose names start with ``wazuh-`` and the index patterns associated with each template. To list every index template, including the stateful index templates (named ``states-*``, for the ``wazuh-states-*`` indices) and internal ones such as ``settings``, run ``GET _cat/templates?v&s=name``.
 
 .. code-block:: none
    :class: output
@@ -540,6 +542,9 @@ The response lists the index templates whose names start with ``wazuh-`` and the
                  },
                  "refresh_interval": "2s",
                  "number_of_shards": "1",
+                 "translog": {
+                   "durability": "async"
+                 },
                  "auto_expand_replicas": "0-1",
                  "plugins": {
                    "index_state_management": {
@@ -562,8 +567,5 @@ The response lists the index templates whose names start with ``wazuh-`` and the
                  },
                  "number_of_replicas": "0"
                }
-             }
-           }
-         }
-       }
-       ...
+             },
+   . . .

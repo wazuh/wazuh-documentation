@@ -39,7 +39,7 @@ If your pip version is less than 19.3, run the following command to upgrade the 
 
          # pip3 install --upgrade pip
 
-   .. group-tab:: Python 3.11–3.13
+   .. group-tab:: Python 3.11–3.15
 
       .. code-block:: console
 

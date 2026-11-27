@@ -28,6 +28,12 @@ Perform the following steps to configure the FIM module to monitor SSH key modif
 
 This configuration uses who-data monitoring in audit mode, which needs the audit daemon on the endpoint. See :ref:`Requirements <who_data_audit_requirements>` in *Who-data monitoring on Linux*.
 
+The FIM module expands the wildcard in ``/home/*/.ssh/authorized_keys`` to the files that exist when the Wazuh agent starts and at each scheduled scan. Make sure the ``authorized_keys`` file of the user exists before you restart the Wazuh agent. If it doesn't, create it as root, replacing ``<USER_NAME>`` with the name of the user:
+
+.. code-block:: console
+
+   # su - <USER_NAME> -c 'mkdir -m 700 -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys'
+
 #. Edit the ``/var/ossec/etc/ossec.conf`` configuration file and add ``authorized_keys`` for monitoring inside the ``<ossec_config>`` block:
 
    .. code-block:: xml

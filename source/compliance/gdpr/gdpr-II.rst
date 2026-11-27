@@ -13,7 +13,7 @@ Chapter II, Article 5, Head 1 (f)
 
 **Principles relating to the processing of personal data, Head 1 (f)**: *“Personal data shall be processed in a manner that ensures appropriate security of the personal data, including protection against unauthorized or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organizational measures (integrity and confidentiality).”*
 
-This article requires confidentiality and integrity in the processing of user data. The Wazuh File Integrity Monitoring (FIM) module helps with this requirement by monitoring files and folders. The FIM module generates a finding when it detects a file creation, modification, or deletion event. The module stores the cryptographic checksums and other attributes of a file, and compares them against the current values. The FIM detections are Sigma rules. The file modification and deletion rules map to ``II_5.1.f`` through the ``compliance.gdpr`` field.
+This article requires confidentiality and integrity in the processing of user data. The Wazuh File Integrity Monitoring (FIM) module helps with this requirement by monitoring files and folders. The FIM module generates a finding when it detects a file creation, modification, or deletion event. The module stores the cryptographic checksums and other attributes of a file and compares them against the current values. The FIM detections are :doc:`Sigma rules </user-manual/data-analysis/rules>`. The file modification and deletion rules map to ``II_5.1.f`` through the ``compliance.gdpr`` field.
 
 Use case: Detect file changes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -78,7 +78,7 @@ On the Wazuh dashboard, navigate to **Threat intelligence** > **Threat Hunting**
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-mod.png
    :title: File modification finding visualization
-   :alt: GDPR Findings tab filtered to a Wazuh FIM file modified finding on /root/personal_data/subject_data.txt
+   :alt: Threat Hunting Findings tab filtered to a Wazuh FIM file modified finding on /root/personal_data/subject_data.txt
    :align: center
    :width: 80%
 
@@ -175,17 +175,11 @@ Ubuntu endpoint
       # touch /root/personal_data/subject_data.txt
       # echo "User01= user03_ID" >> /root/personal_data/subject_data.txt
 
-#. Install ``auditd`` so that the Linux Auditing System provides information about who made changes in a monitored directory:
+#. Install the Audit daemon (``auditd``) and restart the Audit service. Who-data monitoring uses ``auditd`` to find out who made each change. It reads the audit events directly, so you don't need to collect the auditd log file. On Ubuntu 24.04, the ``auditd`` package already includes the ``af_unix`` plugin that who-data monitoring needs:
 
    .. code-block:: console
 
       # apt-get install auditd
-
-   For Audit 3.1.1 and later, install the ``audispd`` af_unix plugin and restart the Audit service.
-
-   .. code-block:: console
-
-      # apt-get install audispd-plugins
       # service auditd restart
 
 #. If you followed a previous use case on this page, remove its ``<directories>`` line for ``/root/personal_data`` first. Add the highlighted configuration to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:

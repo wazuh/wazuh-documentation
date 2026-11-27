@@ -146,11 +146,11 @@ Wazuh indexes decoded events in ``wazuh-events-v5-<category>`` whether or not a 
 
 Unclassified event indexing is configured per :doc:`space </user-manual/data-analysis/space>`. When it's turned on, Wazuh stores unclassified events in the :ref:`wazuh-events-v5-unclassified <wazuh_indexer_indices_data_streams>` index. The Wazuh agents' events are processed in the **Standard** space by default. A space also has an **Index discarded events** setting, which applies to events that a decoder marks as discarded. When it's turned on, Wazuh replaces the content of each discarded event with the ``wazuh.space.event_discarded: true`` marker before indexing it. Events that a filter rejects are always dropped. You don't need it for this requirement. See :doc:`Space </user-manual/data-analysis/space>` for more information about both settings.
 
-#. Navigate to **Ruleset Management** > **Overview**. Select **Standard** in **Space**, then select **Actions** > **Edit**.
+#. Navigate to **Ruleset Management** > **Overview**. Select **Standard** in **Space**, then select **Space actions** > **Edit**.
 
    .. thumbnail:: /images/compliance/pci/security-analytics-edit-space.png
       :title: Edit a space in Ruleset management
-      :alt: Ruleset management Overview with the Standard space selected and the Actions menu open on Edit
+      :alt: Ruleset management Overview with the Standard space selected and the Space actions menu open on Edit
       :align: center
       :width: 80%
 

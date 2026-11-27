@@ -52,6 +52,7 @@ Installing the NGINX software on the Wazuh dashboard
             # systemctl start firewalld
             # firewall-cmd --permanent --add-port=443/tcp
             # firewall-cmd --permanent --add-port=80/tcp
+            # firewall-cmd --reload
 
       .. group-tab:: APT
 

@@ -22,10 +22,10 @@ The Wazuh agent packages for Linux, macOS, and Windows read the same variables. 
 | Variable                      | Description                                                                           | Default                              |
 +===============================+=======================================================================================+======================================+
 | ``WAZUH_ENROLLMENT_TOKEN``    | The enrollment token created on the Wazuh manager with ``wazuh-manager-authd          | None. Without a token, the Wazuh     |
-|                               | --create-enrollment-token``. The installer sets the Wazuh manager address from        | agent is installed but not enrolled. |
-|                               | the token. On its first start, the Wazuh agent installs the CA as its trust           |                                      |
-|                               | anchor, enrolls, and deletes the token. See the :doc:`Wazuh manager identity          |                                      |
-|                               | verification                                                                          |                                      |
+|                               | --create-enrollment-token`` or in the Wazuh dashboard. The installer sets the         | agent is installed but not enrolled. |
+|                               | Wazuh manager address from the token. On its first start, the Wazuh agent             |                                      |
+|                               | installs the CA as its trust anchor, enrolls, and deletes the token. See the          |                                      |
+|                               | :doc:`Wazuh manager identity verification                                             |                                      |
 |                               | </user-manual/agent/agent-enrollment/security-options/manager-identity-verification>` |                                      |
 |                               | section.                                                                              |                                      |
 +-------------------------------+---------------------------------------------------------------------------------------+--------------------------------------+

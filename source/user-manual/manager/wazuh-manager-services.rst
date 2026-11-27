@@ -56,6 +56,8 @@ You can create an enrollment token on the Wazuh manager using the following comm
 
    # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <ADDRESS>
 
+Replace ``<ADDRESS>`` with the DNS name or IP address that Wazuh agents use to reach the Wazuh manager.
+
 You can also create tokens using the ``/agents/enrollment-tokens`` endpoint of the Wazuh manager API. The ``wazuh-manager-authd`` command also supports listing, displaying, revoking, and purging tokens through the ``--list-enrollment-tokens``, ``--show-token``, ``--revoke-enrollment-token``, and ``--purge-enrollment-tokens`` options.
 
 Specify the address that the Wazuh agent uses to connect to the Wazuh manager. The enrollment service validates this address against the :ref:`Subject Alternative Names (SANs) <manager_credentials_sans>` in the Wazuh manager certificate. It rejects tokens that specify an address not included in the certificate.
@@ -109,7 +111,7 @@ Where:
 -  ``<port>`` specifies the TCP port number for listening to legacy Wazuh 4.x agent enrollment connections. The default value is ``1515``. The allowed value is any port number between ``1`` and ``65535``.
 -  ``<use_source_ip>`` defines whether to register a Wazuh agent with its source IP address instead of ``any``. The allowed values are ``yes`` and ``no``. When the value is ``no``, the Wazuh agent can connect to the Wazuh manager even if the source IP used for enrollment changes. However, when the value is ``yes``, the Wazuh agent cannot connect to the Wazuh manager if the source IP address changes.
 -  ``<purge>`` specifies whether the ``client.keys`` file keeps a record of removed Wazuh agents. When the value is ``no``, the file keeps each removed Wazuh agent as an entry marked as removed. When the value is ``yes``, the Wazuh manager removes the entry without leaving a trace. The installer sets the value to ``yes``, and the value is ``no`` when the option is absent. The possible values are ``yes`` and ``no``.
--  ``<use_password>`` determines the use of shared password authentication. When the option is absent, the value is ``no``. The configuration that the installer generates sets it to ``yes``. When the value is ``no``, this option is disabled. When the value is set to ``yes``, a shared password is read from the ``/etc/wazuh-manager/authd.pass`` file. If you write the password in this file yourself, it must be at least 16 characters long. With a shorter password, the master node doesn't start, and ``wazuh-manager-control check`` reports the error.
+-  ``<use_password>`` determines the use of shared password authentication. When the option is absent, the value is ``no``. The configuration that the installer generates sets it to ``yes``. When the value is ``no``, this option is disabled. When the value is set to ``yes``, a shared password is read from the ``/etc/wazuh-manager/authd.pass`` file. If you write the password in this file yourself, its first line must be 16 to 4095 bytes long. A non-ASCII character counts as more than one byte. With a shorter password, the master node doesn't start, and ``wazuh-manager-control check`` reports the error.
 -  ``<ciphers>`` sets the TLS 1.3 cipher suites that the agent enrollment service accepts on port ``1515``. The default value is ``TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256``.
 -  ``<ssl_agent_ca>`` specifies the path to the CA certificate used to verify clients. Use an absolute path to a file in ``/etc/wazuh-manager/certs``.
 -  ``<ssl_verify_host>`` toggles source host verification on and off when a CA certificate is specified. The agent enrollment service checks that the agent certificate names the source address, first in its Subject Alternative Names and then in its Common Name field. The default value is ``no``. The allowed values are ``yes`` and ``no``.
@@ -180,7 +182,7 @@ Where:
 
 **HTTPS options**
 
--  ``<https>`` specifies the configuration parameters for the HTTPS listener. All options are optional; an absent ``<https>`` block (or an absent individual option) falls back to the default values listed below, so the listener works without any configuration.
+-  ``<https>`` specifies the configuration parameters for the HTTPS listener. All options are optional. When the ``<https>`` block or one of its options is absent, the listener uses the default values listed below.
 -  ``<port>`` specifies the HTTPS listening port. The default port value is ``1517``. The allowed value is any port number between ``1`` and ``65535``.
 -  ``<bind_addr>`` specifies the address the HTTPS listener binds to. The default value is ``0.0.0.0``. The allowed values are any valid IPv4 or IPv6 address.
 -  ``<global_prefix>`` specifies the URL path prefix every HTTPS endpoint is served under. The default path is ``/wazuh-manager/``.
@@ -195,7 +197,7 @@ Where:
 -  ``<port>`` specifies the listening port for Wazuh agent connections. The default port is ``1514``. The allowed value is any port number between ``1`` and ``65535``.
 -  ``<protocol>`` specifies communication protocol(s) to accept from Wazuh agents. The default value is ``tcp``. The allowed values are ``tcp``, ``udp``, or ``tcp,udp``.
 -  ``<local_ip>`` binds ``wazuh-manager-remoted`` to a specific local IP address. The default value is ``0.0.0.0``. The allowed values are any valid IPv4 or IPv6 address.
--  ``<queue_size>`` specifies the message queue size for incoming agent messages. The default value is ``131072``. The allowed value is any positive integer.
+-  ``<queue_size>`` specifies the message queue size for incoming agent messages. The default value is ``131072``. The allowed values are integers from ``1`` to ``134217728``. A value above ``262144`` logs the warning ``Queue size is very high. The application may run out of memory.`` When the queue is full, the Wazuh manager discards incoming messages and logs an ``Input queue discarded`` warning at most once every 90 seconds.
 
 **Agents options**
 
@@ -240,7 +242,7 @@ The ``<vulnerability-detection>`` block does not configure a scan interval. Scan
 
 In a Wazuh manager cluster, vulnerability detection is enabled or disabled for the whole cluster. A worker node applies the master node ``<enabled>`` value. When its own ``<enabled>`` value differs from the last value it received from the master node, ``wazuh-manager-modulesd`` applies the master node value at startup and logs a warning in ``/var/wazuh-manager/logs/wazuh-manager.log``. When the master node value changes while the worker node runs, the worker node logs a warning in ``/var/wazuh-manager/logs/cluster.log`` and reloads once. To enable or disable vulnerability detection, change ``<enabled>`` on the master node, then reload every node, for example with the ``PUT /cluster/reload`` endpoint of the Wazuh manager API.
 
-When a Wazuh manager node starts with vulnerability detection enabled after running with it disabled, it scans every Wazuh agent once from the stored inventory. This scan indexes the findings but generates no alerts for vulnerabilities that the Wazuh agents already had. The Wazuh manager logs ``Vulnerability scan finished after vulnerability detection was enabled`` when the scan completes.
+When a Wazuh manager node starts with vulnerability detection enabled after running with it disabled, it scans every Wazuh agent once from the stored inventory. This scan indexes the findings but sends no vulnerability events for vulnerabilities that the Wazuh agents already had. The Wazuh manager logs ``Vulnerability scan finished after vulnerability detection was enabled`` when the scan completes.
 
 You can find more configuration options in the :doc:`vulnerability detection </user-manual/reference/wazuh-manager-conf/vulnerability-detection>` section of the reference guide.
 

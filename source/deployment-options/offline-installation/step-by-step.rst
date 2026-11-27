@@ -208,11 +208,7 @@ Install and configure the Wazuh manager on each manager node. Before installing 
       -  libc6 (2.18 or later)
       -  passwd
 
-#. Place the passwords before installing the package. Replace ``<MANAGER_NODE_NAME>`` with the name of the node as defined in ``config.yml``, for example, ``manager``.
-
-   .. code-block:: console
-
-      # NODE_NAME=<MANAGER_NODE_NAME>
+#. Place the passwords before installing the package.
 
    .. code-block:: console
 
@@ -264,13 +260,11 @@ Install and configure the Wazuh manager on each manager node. Before installing 
 
             # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-manager*.deb
 
-#. Place the Wazuh indexer root CA and this node's client certificate for the Wazuh indexer. The installation printed ``MISSING`` lines for them, which is expected. Skip this step on a host with the Wazuh indexer:
+#. Place the Wazuh indexer root CA. The installation printed a ``MISSING`` line for it, which is expected. Skip this step on a host with the Wazuh indexer:
 
    .. code-block:: console
 
       # install -m 0640 -o root -g wazuh-manager wazuh-install-files/root-ca.pem /etc/wazuh-manager/certs/indexer-ca.pem
-      # install -m 0640 -o root -g wazuh-manager wazuh-install-files/$NODE_NAME.pem /etc/wazuh-manager/certs/indexer-connector.pem
-      # install -m 0640 -o root -g wazuh-manager wazuh-install-files/$NODE_NAME-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
 
 #. Check the credentials. The check must end with ``no problem found``:
 

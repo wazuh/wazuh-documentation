@@ -12,15 +12,9 @@ Make sure that your environment meets these requirements before you enroll a Waz
 
 #. An installed Wazuh agent on the endpoint that you want to enroll.
 
-#. Outbound connectivity from the Wazuh agent to the Wazuh manager services. The ports required depend on the agent version:
+#. Outbound connectivity from the Wazuh agent to the Wazuh manager on 1517/TCP (HTTPS) for both enrollment and agent communication.
 
-   -  Wazuh 5.0 agents: 1517/TCP (HTTPS) for both enrollment and ongoing agent communication.
-   -  Wazuh 4.x agents:
-
-      -  1514/TCP for agent communication.
-      -  1515/TCP for enrollment via agent configuration.
-
-   -  55000/TCP only if you enroll agents through the Wazuh manager API, or for agents with anti-tampering that remove themselves. Only the master node serves the Wazuh manager API.
+#. 55000/TCP only if you enroll agents through the Wazuh manager API, or for agents with anti-tampering that remove themselves. Only the master node serves the Wazuh manager API.
 
 .. note::
 
@@ -55,13 +49,6 @@ Linux packages are available for x86_64 and aarch64 unless stated otherwise.
 .. note::
 
    The Wazuh agent might also install on Red Hat Enterprise Linux 6, Red Hat Enterprise Linux 7 (aarch64), CentOS 6 and 8, Oracle Linux 6, Amazon Linux 1, Debian 7, 8, and 9, Windows 7 and 8, Windows 11 (ARM64), and Windows Server 2008 R2. Wazuh doesn't test these versions, and some capabilities might not work on them.
-
-.. note::
-
-   Wazuh 4.x agents can enroll with and connect to Wazuh 5.0 managers. However, some agent-side components are not fully supported until the agent is upgraded to Wazuh 5.0. This affects File Integrity Monitoring (FIM), Security Configuration Assessment (SCA), System Inventory, Active Response, and Vulnerability Detection.
-
-   We recommend upgrading Wazuh 4.x agents to Wazuh 5.0 after enrollment to ensure full compatibility with Wazuh 5.0 functionality. For more information, see :ref:`Upgrade agents remotely <upgrade_agents_remotely>`.
-
 
 .. note::
 

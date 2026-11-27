@@ -26,4 +26,5 @@ Learn about the different enrollment options and the information required for Wa
    enrollment-methods/index
    security-options/index
    deployment-variables/index
+   enrolling-4x-agents
    troubleshooting

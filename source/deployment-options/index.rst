@@ -57,7 +57,7 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
    <h3>From sources</h3>
 
--  :doc:`Installing the Wazuh server from sources <wazuh-from-sources/index>`: Installing Wazuh from sources means installing the Wazuh manager without using a package manager. You compile the source code and copy the binaries to your computer instead.
+-  :doc:`Installing Wazuh from sources <wazuh-from-sources/index>`: Installing Wazuh from sources means installing the Wazuh manager or the Wazuh agent without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
 ..
    .. note::

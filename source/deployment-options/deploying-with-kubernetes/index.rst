@@ -10,6 +10,8 @@ Deployment on Kubernetes
 
 In this section, we provide an overview of the :doc:`Wazuh Kubernetes architecture <kubernetes-conf>`. It also describes how to :doc:`deploy Wazuh central components on Amazon EKS and local Kubernetes clusters <kubernetes-deployment>`. We also include steps for :ref:`enrolling and deploying a Wazuh agent on Kubernetes <kubernetes-deploying-wazuh-agent>` and how to :doc:`clean up <kubernetes-clean-up>` both clusters and volumes.
 
+To transition a Wazuh 4.x deployment on Kubernetes to Wazuh 5.x, see :ref:`Kubernetes deployments <migration_kubernetes_deployments>` in the Transitioning from 4.x to 5.x documentation.
+
 .. toctree::
    :maxdepth: 1
    :hidden:
