@@ -8,7 +8,7 @@
 Available SCA policies
 =======================
 
-The table below shows the SCA policies that Wazuh provides by default. The Wazuh agent installs only the policy file for the endpoint's operating system. The application policies, such as those for Apache, MySQL, Microsoft SQL Server, and web vulnerabilities, aren't installed by default. To use one, add its policy file to the endpoint as a custom policy:
+The following table shows the SCA policies that Wazuh provides by default. The Wazuh agent installs only the policy file for the endpoint's operating system. The application policies, such as those for Apache, MySQL, Microsoft SQL Server, and web vulnerabilities, aren't installed by default. The application policy files are in the |ruleset-sca-link| directory of the Wazuh repository. To use one, add it to the endpoint as a custom policy.
 
 .. table:: Available SCA policies
    :widths: auto
@@ -23,7 +23,7 @@ The table below shows the SCA policies that Wazuh provides by default. The Wazuh
    +----------------------------------+--------------------------------------------------------------+----------------------------------+
    | ``cis_win2012r2``                | CIS Microsoft Windows Server 2012 R2 Benchmark v3.0.0        | Windows Server 2012 R2           |
    +----------------------------------+--------------------------------------------------------------+----------------------------------+
-   | ``cis_win2012_non_r2``           | CIS Microsoft Windows Server 2012 (non-R2) Benchmark v3.0.0. | Windows Server 2012 non R2       |
+   | ``cis_win2012_non_r2``           | CIS Microsoft Windows Server 2012 (non-R2) Benchmark v3.0.0. | Windows Server 2012 (non-R2)     |
    +----------------------------------+--------------------------------------------------------------+----------------------------------+
    | ``cis_win2016``                  | CIS Microsoft Windows Server 2016 Benchmark v2.0.0           | Windows Server 2016              |
    +----------------------------------+--------------------------------------------------------------+----------------------------------+
@@ -161,3 +161,5 @@ The table below shows the SCA policies that Wazuh provides by default. The Wazuh
    +----------------------------------+--------------------------------------------------------------+----------------------------------+
    | ``sca_distro_independent_linux`` | CIS Distribution Independent Linux Benchmark v2.0.0.         | Distribution Independent Linux   |
    +----------------------------------+--------------------------------------------------------------+----------------------------------+
+
+.. |ruleset-sca-link| replace:: `ruleset/sca <https://github.com/wazuh/wazuh/tree/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/ruleset/sca>`__
