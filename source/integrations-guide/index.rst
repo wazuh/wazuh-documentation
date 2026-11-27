@@ -10,9 +10,9 @@ The Wazuh integrations export the data stored in the Wazuh indexer to third-part
 pipeline reads the events and findings data streams of the :doc:`Wazuh Common Schema (WCS) </user-manual/wazuh-indexer/wazuh-common-schema>` and delivers
 them to the following platforms:
 
--  Elasticsearch
--  OpenSearch
--  Splunk
+-  :doc:`Elasticsearch <elastic-stack/index>`
+-  :doc:`OpenSearch <opensearch/index>`
+-  :doc:`Splunk <splunk/index>`
 
 The integration files are in the ``integrations`` folder of the ``wazuh-indexer-plugins`` repository. Clone
 the repository at the tag that matches the version of your Wazuh indexer, for example:
