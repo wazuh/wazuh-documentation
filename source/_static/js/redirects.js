@@ -80,6 +80,8 @@ removedUrls['x.y'] = [
 /* Pages added in 5.0 */
 
 newUrls['5.0'] = [
+  '/compliance/nis2/index.html',
+  '/compliance/fedramp/index.html',
   '/compliance/tsc/common-criteria/cc6.8.html',
   '/compliance/tsc/common-criteria/cc7.2.html',
   '/compliance/hipaa/164.308.a.1.ii.a.html',
@@ -90,6 +92,10 @@ newUrls['5.0'] = [
   '/compliance/hipaa/164.312.b.html',
   '/compliance/hipaa/164.312.c.2.html',
   '/compliance/hipaa/164.308.a.5.ii.c.html',
+  '/compliance/iso-27001/index.html',
+  '/compliance/iso-27001/organizational-controls.html',
+  '/compliance/iso-27001/people-controls.html',
+  '/compliance/iso-27001/technological-controls.html',
   '/compliance/nist-800-171/index.html',
   '/compliance/nist-800-171/security-requirements.html',
   '/compliance/nist-800-171/dashboard.html',
