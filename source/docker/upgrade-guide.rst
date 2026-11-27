@@ -18,9 +18,9 @@ Then proceed and attach it to the current cluster by modifying the docker-compos
 .. code-block:: yaml
 
   volumes:
-  migration:
-    external:
-      name: migration
+    migration:
+      external:
+        name: migration
 
   services:
     wazuh:
