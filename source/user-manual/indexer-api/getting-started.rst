@@ -6,59 +6,21 @@
 Getting started
 ===============
 
-This guide provides the essential information you need to use the Wazuh indexer API.
-
 In the examples, replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the credentials of a Wazuh indexer user that has the permissions the request needs, such as ``admin``. Run the examples on the Wazuh indexer node, and replace ``<WAZUH_INDEXER_IP>`` with the ``network.host`` value of its ``/etc/wazuh-indexer/opensearch.yml`` file. On an all-in-one deployment, this value is ``127.0.0.1``.
-
-Starting and stopping the Wazuh indexer API
--------------------------------------------
-
-By default, the Wazuh indexer API is included in the Wazuh indexer installation. You can manage or monitor the Wazuh indexer API by running the ``systemctl`` or ``service`` commands with the Wazuh indexer service.
-
-.. tabs::
-
-   .. group-tab:: Systemd
-
-      .. code-block:: console
-
-         # systemctl restart wazuh-indexer
-
-   .. group-tab:: SysV init
-
-      .. code-block:: console
-
-         # service wazuh-indexer restart
-
-Replace ``restart`` with ``start``, ``stop``, or ``status`` to run the other actions.
 
 .. _logging_into_wazuh_indexer_api:
 
 Logging into the Wazuh indexer API
 ----------------------------------
 
-You must authenticate to use the Wazuh indexer API. The Wazuh indexer supports several authentication methods, and you can select the one that best meets your requirements. When you log in to the Wazuh dashboard with a user that has the appropriate privileges, you can use the Wazuh indexer API from the dashboard. The following sections describe options to access the Wazuh indexer API from scripts or the command line.
+You must authenticate to use the Wazuh indexer API. The following sections describe options to access the Wazuh indexer API from scripts or the command line.
 
 HTTP basic authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-HTTP basic authentication is one of the simplest methods of accessing the Wazuh indexer API. The client sends a username and password with every request in the ``Authorization`` header of the HTTP request. This method is straightforward to implement and compatible with most tools and systems. However, it's less secure because the credentials travel with every request.
+With HTTP basic authentication, the client sends a username and password in the ``Authorization`` header of every request. It is the simplest method and is on by default. To keep the password out of each request, use a JSON Web Token (JWT) instead.
 
-HTTP basic authentication is enabled by default. Its settings are in the ``basic_internal_auth_domain`` section of the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. The default settings are the following:
-
-.. code-block:: yaml
-
-   basic_internal_auth_domain:
-     description: "Authenticate via HTTP Basic against internal users database"
-     http_enabled: true
-     transport_enabled: true
-     order: 4
-     http_authenticator:
-       type: basic
-       challenge: true
-     authentication_backend:
-       type: intern
-
-The following example uses ``curl`` to connect and authenticate with HTTP basic authentication:
+HTTP basic authentication is enabled by default. The following example uses ``curl`` to connect and authenticate with HTTP basic authentication:
 
 .. code-block:: console
 
@@ -92,7 +54,7 @@ The command output looks similar to this:
 JSON Web Token (JWT)
 ^^^^^^^^^^^^^^^^^^^^
 
-A JSON Web Token (JWT) is another method of authenticating to the Wazuh indexer API. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object.
+A JWT lets you authenticate without sending your password on every request.
 
 You can use JWTs in the following ways:
 
@@ -128,11 +90,7 @@ On-behalf-of token authentication isn't enabled by default. Its settings are in 
 
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-f /etc/wazuh-indexer/opensearch-security/config.yml -icl -nhnv"
 
-   The ``indexer-security-init.sh`` script runs ``securityadmin.sh`` with the admin certificate and reads the address and port from ``/etc/wazuh-indexer/opensearch.yml``. Alternatively, you can run ``securityadmin.sh`` directly:
-
-   .. code-block:: console
-
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h <WAZUH_INDEXER_IP> -nhnv
+   The output ends with ``Done with success``. It can also show the warning ``It makes no sense to specify -cd as well as -f``, which you can ignore.
 
 #. Run the following command to fetch a JWT. Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password:
 
@@ -260,7 +218,7 @@ The external JWT settings are in the ``jwt_auth_domain`` section under the ``aut
 Using the Wazuh indexer API via the Wazuh dashboard
 ---------------------------------------------------
 
-You can run Wazuh indexer API requests directly in the Wazuh dashboard web user interface (WUI). From the Wazuh dashboard, you can use the API to perform searches, manage index settings, view document details, and retrieve insights without command-line access. You must log in with a user that has the appropriate privileges. For example, the default ``admin`` user has administrator privileges.
+You can run Wazuh indexer API requests in **Dev Tools** in the Wazuh dashboard. You must log in with a user that has the appropriate privileges. For example, the default ``admin`` user has administrator privileges.
 
 To open the Wazuh indexer API console, click the upper-left menu icon and go to **Indexer management** > **Dev Tools**.
 
@@ -270,7 +228,7 @@ To open the Wazuh indexer API console, click the upper-left menu icon and go to 
    :align: center
    :width: 100%
 
-The console has two panes. The left pane collects the API request, and the right pane displays the result. In the left pane, enter the HTTP method, request endpoint, and any query parameters, then click the **Send request** button, the play icon at the top right of the request, to run the request. See :ref:`Understanding the Wazuh indexer API request and response <indexer_api_request_response>` to learn more about the basic concepts.
+The console has two panes. The left pane collects the API request, and the right pane displays the result. In the left pane, enter the HTTP method, request endpoint, and any query parameters. Then click **Send request**, the play icon at the top right of the request. See :ref:`Understanding the Wazuh indexer API request and response <indexer_api_request_response>` to learn more about the basic concepts.
 
 .. thumbnail:: /images/manual/indexer-api/access-wazuh-indexer-api-console.png
    :title: Access the Wazuh indexer API console
@@ -281,7 +239,7 @@ The console has two panes. The left pane collects the API request, and the right
 Using the Wazuh indexer API via the command line
 ------------------------------------------------
 
-You can also access the Wazuh indexer API from a terminal with any client that sends HTTP requests, such as ``curl``. The Wazuh indexer API listens for incoming requests on TCP port ``9200`` and requires authentication, such as a username and password, to authorize each request.
+You can also access the Wazuh indexer API from a terminal with any client that sends HTTP requests, such as ``curl``. The Wazuh indexer API listens for incoming requests on TCP port ``9200``.
 
 The following example uses ``curl`` to check the health status of the Wazuh indexer cluster:
 
@@ -319,12 +277,12 @@ The output is similar to the following. The number of shards depends on your dep
 Using the Wazuh indexer API via a script
 ----------------------------------------
 
-Scripts are a convenient way to interact with the Wazuh indexer API when you need automation. You can use any programming language that can send HTTP requests. This section shows how to use Python and Bash with the Wazuh indexer API. With scripts, you can build custom workflows that integrate Wazuh indexer data into broader security operations, automate repetitive tasks, or quickly retrieve data for analysis and reporting.
+Use a script to run Wazuh indexer API requests on a schedule or from your own tools. Any language that sends HTTPS requests works. This section shows Python and Bash.
 
 Using Python
 ^^^^^^^^^^^^
 
-The Python ``requests`` library sends HTTP requests to the Wazuh indexer API endpoints. A Python script can handle authentication and parse and manipulate the Wazuh indexer responses. The following ``check_wazuh_indexer_health.py`` script queries the Wazuh indexer health status. Save the following script as ``check_wazuh_indexer_health.py:``
+The Python ``requests`` library sends HTTP requests to the Wazuh indexer API endpoints. The following ``check_wazuh_indexer_health.py`` script queries the Wazuh indexer health status. Save the following script as ``check_wazuh_indexer_health.py:``
 
 .. code-block:: python3
    :emphasize-lines: 5,11,12
@@ -366,7 +324,7 @@ The Python ``requests`` library sends HTTP requests to the Wazuh indexer API end
    except Exception as e:
        print("Error connecting to Wazuh indexer:", e)
 
-Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the correct credentials. Follow these steps to run the script.
+Follow these steps to run the script.
 
 #. Install the Python ``requests`` module. On Ubuntu and Debian, install it from the distribution packages:
 
@@ -416,7 +374,7 @@ You can also interact with the Wazuh indexer API using a Bash script. A Bash scr
       PASSWORD="<WAZUH_INDEXER_PASSWORD>"
 
       # Make the API request using basic authentication
-      response=$(curl -s -k -u "$USERNAME:$PASSWORD" "$FULL_URL")
+      response=$(curl -s -f -k -u "$USERNAME:$PASSWORD" "$FULL_URL")
 
       # Check if the request was successful
       if [ $? -eq 0 ]; then
@@ -475,20 +433,12 @@ You can also interact with the Wazuh indexer API using a Bash script. A Bash scr
         "active_shards_percent_as_number": 100.0
       }
 
-   .. note::
-
-      In a production environment, we recommend that you use environment variables or a secrets manager to protect the authentication credentials from exposure. See :doc:`Securing the Wazuh indexer API <securing-indexer-api>` for more information.
-
 .. _indexer_api_request_response:
 
 Understanding the Wazuh indexer API request and response
 --------------------------------------------------------
 
-A standard Wazuh indexer API request has three essential components:
-
--  The request method: ``GET``, ``POST``, ``PUT``, or ``DELETE``
--  The API URL, which specifies the endpoint
--  User credentials for authentication and authorization
+Each Wazuh indexer API request carries an HTTP method, an endpoint, and credentials, and each response returns JSON with an HTTP status code.
 
 The following is an example cURL request:
 
@@ -528,15 +478,6 @@ Example response without errors (HTTP status code 200). The request is ``GET`` `
      "user_name" : "admin",
      "has_api_access" : true,
      "disabled_endpoints" : { }
-   }
-
-Example response that reports a resource not found (HTTP status code 404). The request is ``GET _plugins/_security/api/actiongroups/admin``:
-
-.. code-block:: json
-
-   {
-     "status" : "NOT_FOUND",
-     "message" : "actiongroup 'admin' not found."
    }
 
 Example response that reports a permission denied error (HTTP status code 403):
@@ -645,7 +586,7 @@ The output is similar to the following:
 POST
 ^^^^
 
-In this example, you send a POST request to the ``_search`` endpoint to list the events indexed within a time range in the event data streams. The query uses a ``range`` filter on the ``@timestamp`` field and returns the matching documents without changing them. Replace ``<START_TIMESTAMP>`` and ``<END_TIMESTAMP>`` with dates and times in ISO 8601 format, for example, ``2026-10-01T00:00:00Z`` and ``2026-10-02T00:00:00Z``:
+In this example, you send a POST request to the ``_search`` endpoint to list the events indexed within a time range. The query uses a ``range`` filter on the ``@timestamp`` field and returns the matching documents without changing them. Replace ``<START_TIMESTAMP>`` and ``<END_TIMESTAMP>`` with dates and times in ISO 8601 format, for example, ``2026-10-01T00:00:00Z`` and ``2026-10-02T00:00:00Z``:
 
 .. code-block:: bash
    :emphasize-lines: 1,5,6
@@ -661,7 +602,7 @@ In this example, you send a POST request to the ``_search`` endpoint to list the
      }
    }'
 
-The query targets all the ``wazuh-events-v5-*`` data streams with the wildcard ``*``. The ``range`` query returns only the documents with a timestamp after ``<START_TIMESTAMP>`` and up to ``<END_TIMESTAMP>``. The output is similar to the following:
+The output is similar to the following:
 
 .. code-block:: none
    :class: output
@@ -776,7 +717,7 @@ The Wazuh indexer returns HTTP status code 404, and the output shows ``"found" :
 Practical examples of Wazuh indexer API access tools
 ----------------------------------------------------
 
-This section shows how to send requests to the Wazuh indexer API with cURL, Python scripts and Bash scripts. These examples are a foundation for more advanced use cases.
+This section shows how to send requests to the Wazuh indexer API with cURL, Python scripts, and Bash scripts.
 
 The Python and Bash examples query the ``wazuh-events-v5-*`` data streams for authentication events. They use the following Wazuh Common Schema (WCS) fields:
 
@@ -784,12 +725,12 @@ The Python and Bash examples query the ``wazuh-events-v5-*`` data streams for au
 -  ``event.outcome``: The result of the event, ``success`` or ``failure``.
 -  ``user.name``: The name of the user.
 
-These queries return results only after a Wazuh agent sends authentication logs, for example, from a monitored Linux endpoint. The Wazuh manager doesn't collect the logs of its own host, so a new installation has no events or findings until a Wazuh agent reports. Without matching events, the requests succeed and return empty results.
+These queries return results only after a Wazuh agent sends authentication logs, for example, from a monitored Linux endpoint. A new installation has no events or findings until a Wazuh agent reports. Without matching events, the requests succeed and return empty results.
 
 cURL
 ^^^^
 
-cURL is a command-line tool for sending HTTP and HTTPS requests. It comes preinstalled on most Linux, macOS, and Windows endpoints, so you can interact directly with the Wazuh indexer API from the command line. In the examples, you store the Wazuh indexer credentials or JWT as environment variables and interact with different endpoints. For detailed instructions on authentication, see :ref:`Logging into the Wazuh indexer API <logging_into_wazuh_indexer_api>`.
+In the examples, you store the Wazuh indexer credentials or JWT as environment variables and interact with different endpoints. For detailed instructions on authentication, see :ref:`Logging into the Wazuh indexer API <logging_into_wazuh_indexer_api>`.
 
 .. note::
 
@@ -840,7 +781,7 @@ To authenticate with a JWT instead, replace ``-u`` ``"$WAZUH_INDEXER_USER:$WAZUH
 Python
 ^^^^^^
 
-You can use a Python script to retrieve information about documents from any index in the Wazuh indexer. In this example, you query the ``wazuh-events-v5-*`` data streams to find the top three (3) users with the most successful logins on monitored endpoints. The script authenticates to the Wazuh indexer API with a JWT. Then, it makes a POST request to retrieve the required information.
+In this example, you query the ``wazuh-events-v5-*`` data streams to find the top three (3) users with the most successful logins on monitored endpoints. The script authenticates to the Wazuh indexer API with a JWT.
 
 #. Save the following Python script as ``top_successful_login.py``:
 
@@ -944,12 +885,6 @@ Follow these steps.
    .. code-block:: console
 
       # export JWT_AUTH_TOKEN="<WAZUH_INDEXER_JWT>"
-
-#. Verify that the token is exported:
-
-   .. code-block:: console
-
-      # echo $JWT_AUTH_TOKEN
 
 #. Save the following script as ``top_failed_login.sh``:
 

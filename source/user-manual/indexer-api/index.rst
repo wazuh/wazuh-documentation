@@ -6,7 +6,7 @@
 Wazuh indexer API
 =================
 
-The Wazuh indexer API is an open source RESTful API that allows interaction with the Wazuh indexer from the Wazuh dashboard, a command-line tool such as cURL, or any script or program capable of making web requests. The Wazuh indexer API provides endpoints for managing and querying data within the Wazuh indexer. Using this API, you can search events and findings, manage indexes and data streams, and handle data related to security detections and compliance reports. The Wazuh indexer API supports automation and scalability, offering a flexible approach to accessing and analyzing data for security insights, obtaining operational metrics, and reporting.
+The Wazuh indexer API is an open source RESTful API. You can use it from the Wazuh dashboard, from cURL, or from any script that sends web requests. Using this API, you can search events and findings, manage indexes and data streams, and handle data related to security detections and compliance reports. The Wazuh indexer API supports automation and scalability, offering a flexible approach to accessing and analyzing data for security insights, obtaining operational metrics, and reporting.
 
 The Wazuh indexer API capabilities include the following:
 
@@ -25,7 +25,7 @@ The Wazuh indexer API capabilities include the following:
 
 Refer to the :doc:`Wazuh indexer API reference <reference>` for details about all the Wazuh indexer API endpoints. Take a look at the :doc:`Wazuh indexer API use cases <use-case>` for practical examples of how you can use the Wazuh indexer API.
 
-The Wazuh indexer stores time-based data in data streams and the current state of monitored endpoints in stateful indexes. A data stream is a named resource that holds append-only, time-based data in backing indexes. The examples in this guide query the following index patterns:
+The Wazuh indexer stores time-based data in data streams and the current state of monitored endpoints in stateful indexes. The examples in this guide query the following index patterns:
 
 +----------------------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Index pattern**                | **Type**     | **Content**                                                                                                                             |

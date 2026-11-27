@@ -6,14 +6,14 @@
 Use cases
 =========
 
-The following use cases demonstrate practical applications of the Wazuh indexer API. You can find details about all available API requests in the :doc:`Reference <reference>` section.
+Each use case below answers one question with the Wazuh indexer API, from your riskiest users to the endpoints a CVE affects. For all available requests, see the :doc:`Wazuh indexer API reference <reference>`.
 
-The results of the queries in this section depend on the data in your Wazuh indexer. The Wazuh manager doesn't collect the logs of its own host, so a new installation has no events, findings, or vulnerability data until a Wazuh agent reports. Until then, the requests succeed but return no documents.
+The results of the queries in this section depend on the data in your Wazuh indexer. A new installation has no events, findings, or vulnerability data until a Wazuh agent reports. Until then, the requests succeed but return no documents.
 
 Exploring findings
 ------------------
 
-Wazuh stores findings in the ``wazuh-findings-v5-*`` data streams in the Wazuh indexer. A finding is an event that matches a detection rule, enriched with the rule metadata and the full triggering event. In this use case, you use the ``_search`` endpoint to identify the riskiest users. The query searches all findings and aggregates the ``user.name`` field to identify the top three (3) users associated with findings.
+Wazuh stores findings in the ``wazuh-findings-v5-*`` data streams in the Wazuh indexer. A finding is an event that matches a detection rule, enriched with the rule metadata and the full triggering event. In this use case, you use the ``_search`` endpoint to identify the riskiest users. The query searches all findings and aggregates the ``user.name`` field to find the three users with the most findings.
 
 Follow these steps.
 
@@ -37,7 +37,7 @@ Follow these steps.
         }
       }
 
-   The response identifies three different users and their number of findings. This information helps security analysts and threat hunters prioritize their defense and discovery efforts. The output is similar to the following:
+   The response identifies three different users and their number of findings. The output is similar to the following:
 
    .. code-block:: json
       :class: output
@@ -81,12 +81,12 @@ Follow these steps.
         }
       }
 
-You can group findings by other fields in the same way, for example, ``wazuh.rule.title`` for the detection rule, ``wazuh.rule.level`` for the severity, or ``wazuh.agent.name`` for the Wazuh agent.
+You can group findings by other fields in the same way. For example, use ``wazuh.rule.title`` for the detection rule, ``wazuh.rule.level`` for the severity, or ``wazuh.agent.name`` for the Wazuh agent.
 
 Getting information about the Wazuh indexer configuration
 ---------------------------------------------------------
 
-You can retrieve details about the Wazuh indexer through the Wazuh indexer API, such as configuration settings, status, and logs. The following example retrieves the current security (authentication) configuration of the Wazuh indexer.
+The following example retrieves the current security (authentication) configuration of the Wazuh indexer.
 
 #. On the Wazuh dashboard, go to **Indexer management** > **Dev Tools**.
 
@@ -178,7 +178,7 @@ You can retrieve details about the Wazuh indexer through the Wazuh indexer API, 
 Run a report on cluster health and statistics
 ---------------------------------------------
 
-Tracking the Wazuh indexer health and node statistics helps you identify and resolve performance issues promptly. This use case shows how to interact with the Wazuh indexer API from a script to generate a report.
+This use case shows how to interact with the Wazuh indexer API from a script to generate a report.
 
 #. Export your Wazuh indexer credentials as environment variables:
 
@@ -189,7 +189,7 @@ Tracking the Wazuh indexer health and node statistics helps you identify and res
 
    Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
 
-#. Create a file named ``indexer_check_report.sh`` with the following content. The script requires ``jq``:
+#. Create a file named ``indexer_check_report.sh`` with the following content. The script requires ``jq`` (install the ``jq`` package if it's missing):
 
    .. code-block:: bash
       :emphasize-lines: 4
@@ -328,20 +328,21 @@ Tracking the Wazuh indexer health and node statistics helps you identify and res
 Query vulnerability data
 ------------------------
 
-You can also query vulnerability detection data with the Wazuh indexer API. Wazuh stores vulnerability data in the ``wazuh-states-vulnerabilities`` index. You can query the index for any vulnerability data. The following example searches for the CVE ``CVE-2026-98164`` to identify any affected monitored endpoint. Run it in **Indexer management** > **Dev Tools**:
+Wazuh stores vulnerability data in the ``wazuh-states-vulnerabilities`` index. The following example searches for a CVE to identify the affected monitored endpoints. Replace ``<CVE_ID>`` with the CVE ID, for example, ``CVE-2026-98164``. Run it in **Indexer management** > **Dev Tools**:
 
 .. code-block:: none
+   :emphasize-lines: 5
 
    GET /wazuh-states-vulnerabilities/_search
    {
      "query": {
        "term": {
-         "vulnerability.id": "CVE-2026-98164"
+         "vulnerability.id": "<CVE_ID>"
        }
      }
    }
 
-In the query result, the ``hits.total.value`` key shows the number of affected endpoints. In the following example, the value **2** means that two (2) monitored endpoints are affected by the CVE. The agent information is in the ``wazuh.agent`` fields.
+In the query result, the ``hits.total.value`` key shows the number of matching documents. Each document is one vulnerable package on a monitored endpoint, so an endpoint can match more than once. The agent information is in the ``wazuh.agent`` fields. The following output shows the first document.
 
 .. code-block:: json
    :class: output
@@ -434,79 +435,6 @@ In the query result, the ``hits.total.value`` key shows the number of affected e
                }
              }
            }
-         },
-         {
-           "_index": "wazuh-states-vulnerabilities",
-           "_id": "001_92b0a6df08a7f0a0680de013a157519adc2f428a_CVE-2026-98164",
-           "_score": 1,
-           "_source": {
-             "host": {
-               "os": {
-                 "full": "Ubuntu 24.04.3 LTS (Noble Numbat)",
-                 "kernel": "6.8.0-86-generic",
-                 "name": "Ubuntu",
-                 "platform": "ubuntu",
-                 "type": "linux",
-                 "version": "24.04.3"
-               }
-             },
-             "package": {
-               "architecture": "amd64",
-               "description": "Signed kernel image generic",
-               "name": "linux-image-6.8.0-147-generic",
-               "path": null,
-               "size": 15112192,
-               "type": "deb",
-               "version": "6.8.0-147.147"
-             },
-             "state": {
-               "document_version": 1
-             },
-             "vulnerability": {
-               "category": "Packages",
-               "detected_at": "2026-10-16T06:59:00.871Z",
-               "id": "CVE-2026-98164",
-               "published_at": "2026-09-29T13:17:53Z",
-               "scanner": {
-                 "condition": "Package default status",
-                 "reference": "https://cti.wazuh.com/vulnerabilities/cves/CVE-2026-98164",
-                 "source": "Canonical Security Tracker",
-                 "vendor": "Wazuh"
-               },
-               "score": {
-                 "base": 5.5,
-                 "version": "3.1"
-               },
-               "severity": "Medium",
-               "under_evaluation": false
-             },
-             "wazuh": {
-               "agent": {
-                 "groups": [
-                   "default"
-                 ],
-                 "host": {
-                   "architecture": "x86_64",
-                   "hostname": "wazuh-VirtualBox",
-                   "os": {
-                     "name": "Ubuntu",
-                     "platform": "ubuntu",
-                     "type": "linux",
-                     "version": "24.04.3 LTS (Noble Numbat)"
-                   }
-                 },
-                 "id": "001",
-                 "name": "aio-selfagent",
-                 "version": "v5.0.0"
-               },
-               "cluster": {
-                 "name": "wazuh"
-               },
-               "schema": {
-                 "version": "1.0.0"
-               }
-             }
-           }
          }
        ]
      }
@@ -515,7 +443,7 @@ In the query result, the ``hits.total.value`` key shows the number of affected e
 Threat hunting
 --------------
 
-The Wazuh indexer API is helpful during threat hunting exercises where you have to query external systems. This use case extracts source IP addresses from findings and checks them against AbuseIPDB. You generate a report that shows whether each source IP address has a bad reputation in AbuseIPDB. Follow these steps.
+During threat hunting, you can check Wazuh findings against an outside source. This use case pulls the source IP addresses from findings and checks each one against AbuseIPDB. You generate a report that shows whether each source IP address has a bad reputation in AbuseIPDB. Follow these steps.
 
 #. `Sign up <https://www.abuseipdb.com/register?plan=free>`__ for a free AbuseIPDB account. After you log in, create an API key in **Account** > **API**.
 
@@ -529,7 +457,7 @@ The Wazuh indexer API is helpful during threat hunting exercises where you have 
 
    Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password. Replace ``<ABUSEIPDB_KEY>`` with the AbuseIPDB API key from step 1.
 
-#. Create a script called ``ip_reputation_check.sh`` with the following content. The script requires ``jq``:
+#. Create a script called ``ip_reputation_check.sh`` with the following content. The script requires ``jq`` (install the ``jq`` package if it's missing):
 
    .. code-block:: bash
       :emphasize-lines: 4
@@ -620,8 +548,3 @@ The Wazuh indexer API is helpful during threat hunting exercises where you have 
       :alt: AbuseIPDB report for source IPs
       :align: center
       :width: 100%
-
-Conclusion
-----------
-
-These examples show practical applications of the Wazuh indexer API. Explore the :doc:`Wazuh indexer API reference <reference>` to discover the full range of available Wazuh indexer API requests.

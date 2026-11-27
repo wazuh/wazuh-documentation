@@ -9,7 +9,7 @@ Configuration
 Wazuh indexer API configuration file
 ------------------------------------
 
-The Wazuh indexer API configuration is in the ``/etc/wazuh-indexer/opensearch.yml`` file on each Wazuh indexer node.
+The Wazuh indexer API configuration is in the ``/etc/wazuh-indexer/opensearch.yml`` file on each Wazuh indexer node. The file also holds the cluster, TLS, and path settings of the node.
 
 For more information on each available setting, see :ref:`Wazuh indexer API configuration options <configuration_options>`. The following are the default settings of the ``/etc/wazuh-indexer/opensearch.yml`` file in an all-in-one deployment. The installation fills in the ``network.host``, ``node.name``, and distinguished name (DN) values for each node. ``<NODE_CERTIFICATE_CN>`` is the common name (CN) of the node certificate, ``/etc/wazuh-indexer/certs/indexer.pem``.
 
@@ -130,7 +130,7 @@ The following table describes the main settings of this file.
 
 .. warning::
 
-   When you run a Wazuh indexer cluster, the nodes don't share their ``/etc/wazuh-indexer/opensearch.yml`` configuration file. Each node keeps its own Wazuh indexer API configuration. If you change the configuration file on one node, you must update the configuration on each of the other nodes to keep the cluster consistent. Don't overwrite the node-specific values, such as ``network.host``, ``node.name``, and ``plugins.security.nodes_dn``, on each node.
+   When you run a Wazuh indexer cluster, the nodes don't share their ``/etc/wazuh-indexer/opensearch.yml`` configuration file. If you change the configuration file on one node, you must update the configuration on each of the other nodes to keep the cluster consistent. Don't overwrite the node-specific values, such as ``network.host``, ``node.name``, and ``plugins.security.nodes_dn``, on each node.
 
 Restart the Wazuh indexer
 -------------------------
@@ -265,19 +265,20 @@ logger
 path
 ^^^^
 
-+-----------------+--------------------+------------------------------+--------------------------------------------------------------------------------------------+
-| **Sub-fields**  | **Allowed values** | **Default value**            | **Description**                                                                            |
-+=================+====================+==============================+============================================================================================+
-| ``data``        | Any valid path     | ``/var/lib/wazuh-indexer``   | The directory where the Wazuh indexer stores its data.                                     |
-+-----------------+--------------------+------------------------------+--------------------------------------------------------------------------------------------+
-| ``logs``        | Any valid path     | ``/var/log/wazuh-indexer``   | The directory where the Wazuh indexer stores its log files.                                |
-+-----------------+--------------------+------------------------------+--------------------------------------------------------------------------------------------+
-| ``shared_data`` | Any valid path     | ``""``                       | The directory where the Wazuh indexer stores shared data files.                            |
-+-----------------+--------------------+------------------------------+--------------------------------------------------------------------------------------------+
-| ``home``        | Any valid path     | ``/usr/share/wazuh-indexer`` | The root directory of the Wazuh indexer core files and directories.                        |
-+-----------------+--------------------+------------------------------+--------------------------------------------------------------------------------------------+
-| ``repo``        | Any valid path     | ``[]``                       | The directories where the Wazuh indexer stores repository data for snapshots and restores. |
-+-----------------+--------------------+------------------------------+--------------------------------------------------------------------------------------------+
++-----------------+--------------------+----------------------------------------+--------------------------------------------------------------------------------------------+
+| **Sub-fields**  | **Allowed values** | **Default value**                      | **Description**                                                                            |
++=================+====================+========================================+============================================================================================+
+| ``data``        | Any valid path     | ``/var/lib/wazuh-indexer``             | The directory where the Wazuh indexer stores its data.                                     |
++-----------------+--------------------+----------------------------------------+--------------------------------------------------------------------------------------------+
+| ``logs``        | Any valid path     | ``/var/log/wazuh-indexer``             | The directory where the Wazuh indexer stores its log files.                                |
++-----------------+--------------------+----------------------------------------+--------------------------------------------------------------------------------------------+
+| ``shared_data`` | Any valid path     | ``""``                                 | The directory where the Wazuh indexer stores shared data files.                            |
++-----------------+--------------------+----------------------------------------+--------------------------------------------------------------------------------------------+
+| ``home``        | Any valid path     | ``/usr/share/wazuh-indexer``           | The root directory of the Wazuh indexer core files and directories.                        |
++-----------------+--------------------+----------------------------------------+--------------------------------------------------------------------------------------------+
+| ``repo``        | Any valid path     | ``["/var/lib/wazuh-indexer/backup"]``  | The directories where the Wazuh indexer stores repository data for snapshots and restores. |
+|                 |                    | in the default ``opensearch.yml`` file |                                                                                            |
++-----------------+--------------------+----------------------------------------+--------------------------------------------------------------------------------------------+
 
 search
 ^^^^^^
