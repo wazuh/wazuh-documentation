@@ -112,9 +112,6 @@ language = 'en-US'
 # This pattern also affects html_static_path and html_extra_path .
 exclude_patterns = [
     'redirects.js',
-    'getting-started/use-cases/cloud-workload-protection.rst',
-    'getting-started/use-cases/malware-detection.rst',
-    'getting-started/use-cases/posture-management.rst',
     'deployment-options/amazon-machine-images/**',
     'deployment-options/deploying-with-puppet/**',
     'user-manual/capabilities/agentless-monitoring/**',
@@ -142,7 +139,7 @@ exclude_patterns = [
     'proof-of-concept-guide/detect-web-attack-shellshock.rst',
     'proof-of-concept-guide/leveraging-llms-for-alert-enrichment.rst',
     'upgrade-guide/**',
-    'integrations-guide/**',
+    'integrations-guide/amazon-security-lake/**',
     'migration-guide/**',
     'cloud-service/**',
     'development/**',

@@ -15,7 +15,7 @@ Wazuh supports this requirement using the vulnerability detection capability. Th
 Use case: Detect vulnerabilities
 ----------------------------------
 
-This use case detects vulnerabilities on an Ubuntu 26.04 endpoint. The Syscollector and Vulnerability Scanner modules are enabled by default on the Ubuntu endpoint and the Wazuh manager, respectively. Make sure the endpoint has at least one installed package with a known vulnerability. Vulnerabilities appear on the Wazuh dashboard after the Wazuh agent sends its first inventory to the Wazuh manager and the Vulnerability Scanner module analyzes it. If all packages on the endpoint are up to date, the **Inventory** tab shows no vulnerabilities.
+This use case detects vulnerabilities on an Ubuntu 24.04 endpoint. The Syscollector and Vulnerability Scanner modules are enabled by default on the Ubuntu endpoint and the Wazuh manager, respectively. Make sure the endpoint has at least one installed package with a known vulnerability. Vulnerabilities appear on the Wazuh dashboard after the Wazuh agent sends its first inventory to the Wazuh manager and the Vulnerability Scanner module analyzes it. If all packages on the endpoint are up to date, the **Inventory** tab shows no vulnerabilities.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^

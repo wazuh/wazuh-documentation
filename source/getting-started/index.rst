@@ -6,9 +6,11 @@
 Getting started with Wazuh
 ==========================
 
-Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. Wazuh helps individuals and organizations of all sizes to protect their data assets against security threats and is widely used worldwide, from small businesses to large enterprises.
+Wazuh is a free and open source security platform that unifies XDR (Extended Detection and Response) and SIEM (Security Information and Event Management) capabilities. It protects workloads across on-premises, virtualized, containerized, and cloud environments. Wazuh helps individuals and organizations of all sizes protect their data assets against security threats. Organizations worldwide use the platform, from small businesses to large enterprises.
 
-This guide provides an overview of the Wazuh platform, including its :doc:`components <components/index>` and :doc:`architecture <architecture>`.
+Wazuh components are licensed under the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`__ (GPLv2), the `GNU Affero General Public License, version 3 <https://www.gnu.org/licenses/agpl-3.0.en.html>`__ (AGPLv3), and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`__ (ALv2).
+
+This guide provides an overview of the Wazuh platform, including its :doc:`components <components/index>`, :doc:`architecture <architecture>`, and common :doc:`use cases <use-cases/index>`.
 
 Community and support
 ---------------------
@@ -18,10 +20,47 @@ Community and support
 How to install Wazuh
 --------------------
 
-The Wazuh solution is composed of three :doc:`central platform components <components/index>` and a single universal :doc:`agent <components/wazuh-agent>`. To install Wazuh in your infrastructure, refer to the following sections of our documentation:
+Wazuh consists of three :doc:`central platform components <components/index>` and a single universal :doc:`agent <components/wazuh-agent>`.
 
--  The :doc:`quickstart </quickstart>` provides an automated way to install Wazuh on a single server in just a few minutes.
--  The :doc:`installation guide </installation-guide/index>` provides instructions on how to install each central component and how to deploy the Wazuh agents.
+Install Wazuh on your own infrastructure with one of the following options:
+
+-  The :doc:`Quickstart </quickstart>` uses the :doc:`Wazuh installation assistant </user-manual/reference/installation-utilities/installation-assistant>` to install all the central components on one endpoint in just a few minutes.
+-  The :doc:`Installation guide </installation-guide/index>` shows how to install each central component on one or more endpoints and how to deploy Wazuh agents.
+
+Building with AI and LLMs
+-------------------------
+
+You can use large language models (LLMs) to assist in building, managing, and troubleshooting your Wazuh deployment. To support accurate and efficient AI-assisted workflows, Wazuh provides plain text documentation and machine-readable guidance optimized for LLM consumption.
+
+Plain text documentation (.md)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Every page of the Wazuh documentation has a plain text Markdown version. To get it, replace ``.html`` with ``.md`` in the page URL.
+
+For example:
+
+-  **HTML page**: https://documentation.wazuh.com/5.0-rc/quickstart.html
+-  **Markdown version**: https://documentation.wazuh.com/5.0-rc/quickstart.md
+
+We recommend the Markdown version when you work with LLMs because it provides:
+
+-  **Cleaner content**: Complete documentation text with minimal formatting noise and no navigation elements.
+-  **Full visibility**: Content hidden behind tabs or expandable sections on the web page is rendered linearly.
+-  **Structural clarity**: Headings, lists, and code blocks preserve document hierarchy for better parsing.
+-  **Efficient context sharing**: You can copy and paste entire guides into an LLM without losing structure or meaning.
+
+AI agent standard (/llms.txt)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh hosts an ``/llms.txt`` file at the root of the documentation domain. This file follows an emerging standard to guide AI tools and agents on how to retrieve and prioritize Wazuh documentation content. It also instructs agents to prefer the ``current`` documentation version unless another version is explicitly required.
+
+The file is at https://documentation.wazuh.com/llms.txt.
+
+Markdown versions of key pages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+-  `Quickstart <https://documentation.wazuh.com/5.0-rc/quickstart.md>`__
+-  `User manual <https://documentation.wazuh.com/5.0-rc/user-manual/index.md>`__
 
 Screenshots of Wazuh dashboards
 -------------------------------

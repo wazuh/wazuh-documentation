@@ -18,3 +18,4 @@ Complete the following prerequisites:
    gcloud-python-script
    enabling-integration
    credentials
+   proxy

@@ -140,6 +140,10 @@ main {
   .no-select,
   .gp {
     user-select: none;
+
+    &.in-heredoc {
+      user-select: auto;
+    }
   }
 
   td.code {

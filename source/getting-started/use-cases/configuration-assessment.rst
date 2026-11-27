@@ -28,7 +28,7 @@ Wazuh SCA policies
 
 The Wazuh SCA module uses policies written in YAML format. Each policy contains :ref:`checks <sca_policy_file_checks_section>`, and each check contains one or more rules. These rules examine endpoint attributes such as files, directories, Windows registry keys, and running processes. In Wazuh 5.0, the module evaluates regular expressions in rules with Perl Compatible Regular Expressions (PCRE2). Each check has a unique numeric ``id``, and its ``name`` field is the canonical check name.
 
-Each check can include compliance metadata in a ``compliance`` object with the ``cmmc``, ``fedramp``, ``gdpr``, ``hipaa``, ``iso_27001``, ``nis2``, ``nist_800_171``, ``nist_800_53``, ``pci_dss``, or ``tsc`` object. MITRE ATT&CK data is stored separately in the ``mitre`` object, which contains ``tactic``, ``technique``, and ``subtechnique`` keys.
+Each check can include compliance metadata in a ``compliance`` object. The object lists the mapped requirements under one key per framework, such as ``pci_dss``, ``hipaa``, ``gdpr``, ``nist_800_53``, and ``cmmc``. MITRE ATT&CK data is stored separately in the ``mitre`` object, which contains ``tactic``, ``technique``, and ``subtechnique`` keys.
 
 By default, the Wazuh agent scans every policy file with a ``.yaml`` or ``.yml`` extension in the ``ruleset/sca`` directory. The ruleset directory is located at the following paths:
 
@@ -41,7 +41,7 @@ Wazuh also lets you :ref:`create custom policies <sca_creating_custom_policies>`
 Viewing SCA results
 -------------------
 
-The Wazuh dashboard has a **Configuration Assessment** section that allows you to view SCA scan results for each monitored endpoint.
+The Wazuh dashboard has a :ref:`Configuration Assessment <wazuh_dashboard_navigating_the_wazuh_dashboard_configuration_assessment>` section that allows you to view SCA scan results for each monitored endpoint.
 
 .. thumbnail:: /images/getting-started/use-cases/sca/sca-scan-results.png
    :title: Configuration Assessment section of the Wazuh dashboard showing SCA scan results for monitored endpoints
@@ -61,25 +61,25 @@ By using the Wazuh SCA module, you can identify and remediate misconfigurations 
 Interpreting SCA results
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following Wazuh dashboard image shows the results of the policy based on the CIS Benchmark for Ubuntu Linux 22.04 LTS. The scan evaluated 207 checks on the Ubuntu 22.04 endpoint: 92 passed, 104 failed, and 11 were not applicable. The dashboard shows a score of 46.939%, calculated as the 92 passed checks divided by the 196 applicable checks.
+The following Wazuh dashboard image shows the results of the policy based on the CIS Benchmark for Ubuntu Linux 24.04 LTS. The scan evaluated 237 checks on the Ubuntu 24.04 endpoint: 121 passed, 116 failed, and 42 were not applicable. The dashboard shows a score of 51.055%, calculated as the 121 passed checks divided by the 237 applicable checks.
 
 .. thumbnail:: /images/getting-started/use-cases/sca/cis-ubuntu-22-04-policy-results.png
-   :title: SCA results for the CIS Ubuntu Linux 22.04 LTS policy showing 92 passed, 104 failed, and 11 not applicable checks
-   :alt: SCA results for the CIS Ubuntu Linux 22.04 LTS policy showing 92 passed, 104 failed, and 11 not applicable checks
+   :title: SCA results for the CIS Ubuntu Linux 24.04 LTS policy showing 121 passed, 116 failed, and 42 not applicable checks
+   :alt: SCA results for the CIS Ubuntu Linux 24.04 LTS policy showing 121 passed, 116 failed, and 42 not applicable checks
    :align: center
    :width: 80%
 
-The following images show check ``28653`` of the CIS Benchmark policy for Ubuntu Linux 22.04 LTS in the **Inventory** tab, then its description, rationale, and remediation steps in the check details.
+The following images show check ``35646`` of the CIS Benchmark policy for Ubuntu Linux 24.04 LTS in the **Inventory** tab. They also show its description, rationale, and remediation steps in the check details.
 
 .. thumbnail:: /images/getting-started/use-cases/sca/sca-check-28653-description.png
-   :title: SCA check 28653 in the Inventory tab
-   :alt: SCA check 28653 in the Inventory tab
+   :title: SCA check 35646 in the Inventory tab
+   :alt: SCA check 35646 in the Inventory tab
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/getting-started/use-cases/sca/sca-check-28653-remediation.png
-   :title: Remediation steps for SCA check 28653 in the CIS Ubuntu Linux 22.04 LTS policy
-   :alt: Remediation steps for SCA check 28653 in the CIS Ubuntu Linux 22.04 LTS policy
+   :title: Remediation steps for SCA check 35646 in the CIS Ubuntu Linux 24.04 LTS policy
+   :alt: Remediation steps for SCA check 35646 in the CIS Ubuntu Linux 24.04 LTS policy
    :align: center
    :width: 80%
 
@@ -101,7 +101,7 @@ Enforcing internal security policies with custom checks
 
 Industry benchmarks might not cover requirements specific to your organization, such as required agent software, prohibited services, or internal password policies. You can create :ref:`custom SCA policies <sca_creating_custom_policies>` in YAML. Each check contains rules that use Perl Compatible Regular Expressions (PCRE2) to evaluate files, directories, processes, registry keys, and command output.
 
-Store custom policies in an administrator-managed directory outside the package-managed ruleset directory, and reference the directory in the SCA configuration. A custom policy assigned through shared agent groups applies the same organizational requirements to every endpoint in the group. Command rules in a shared policy run only when the ``sca.remote_commands`` internal option is enabled on the Wazuh agent.
+Store custom policies in an administrator-managed directory outside the package-managed ruleset directory, and reference the directory in the SCA configuration. A custom policy assigned through :doc:`shared agent groups </user-manual/agent/agent-management/grouping-agents>` applies the same organizational requirements to every endpoint in the group. Command rules in a shared policy run only when the ``sca.remote_commands`` :ref:`internal option <internal_options_sca>` is enabled on the Wazuh agent.
 
 For example, the custom SCA policy ``process_check`` checks whether Netcat is running on an endpoint and marks the check as **Failed** when it is detected. The **Configuration Assessment** section of the Wazuh dashboard displays the policy and its check, as shown below.
 
@@ -131,4 +131,3 @@ The two images below show the failed check in the **Inventory** tab and its mapp
    :alt: SCA check details with the mapped compliance requirements
    :align: center
    :width: 80%
-

@@ -23,8 +23,8 @@ Filtering
 If the S3 bucket holds a long history of logs organized by date, you can filter which logs Wazuh reads. There are multiple configuration options to do so:
 
 -  ``only_logs_after``: Allows filtering logs produced after a given date. The date format must be ``YYYY-MMM-DD``. For example, ``2018-AUG-21`` filters logs generated on or after August 21, 2018. The month abbreviation isn't case sensitive, so ``2018-Aug-21`` also works.
--  ``aws_account_id``: This option only works on CloudTrail, VPC, and Config buckets. If you have logs from multiple accounts, you can filter which ones Wazuh reads. You can specify multiple IDs separating them by commas.
--  ``regions``: Works only with CloudTrail, VPC, Config buckets, and Inspector service. Use it to filter which regions Wazuh reads when you have logs from multiple regions. Separate multiple regions with commas.
+-  ``aws_account_id``: This option only works on CloudTrail, VPC, Config, GuardDuty, ALB, CLB, and NLB buckets. If you have logs from multiple accounts, you can filter which ones Wazuh reads. You can specify multiple IDs separating them by commas.
+-  ``regions``: Works only with CloudTrail, VPC, Config, GuardDuty, ALB, CLB, and NLB buckets, and the Inspector service. Use it to filter which regions Wazuh reads when you have logs from multiple regions. Separate multiple regions with commas.
 -  ``path``: If your logs are stored in a given path in an S3 bucket, this option can be specified. For example, to read logs stored in the directory ``vpclogs/``, it is necessary to specify the path ``vpclogs`` in the Wazuh module for AWS configuration. It can also be specified with ``/`` or ``\``.
 -  ``aws_organization_id``: This option works on CloudTrail, Config, VPC, and GuardDuty buckets. If you have configured an organization, you need to specify the name of the AWS organization by using this parameter.
 
@@ -104,7 +104,7 @@ With this configuration in ``/var/ossec/etc/ossec.conf``, the Wazuh module for A
 Reparse
 -------
 
-The reparse option fetches and processes every log from the starting point until the present. The ``only_logs_after`` value sets the time for the starting point. If you don't provide an ``only_logs_after`` value, the Wazuh module for AWS uses the date of the first log processed as the starting point. This process might generate duplicate findings.
+The reparse option fetches and processes every log from the starting point until the present. The ``only_logs_after`` value sets the time for the starting point. If you don't provide an ``only_logs_after`` value, the Wazuh module for AWS uses 00:00 UTC of the current day as the starting point. This process might generate duplicate findings.
 
 To collect and process older logs loaded into the S3 bucket, you need to run the Wazuh module for AWS manually using the ``--reparse`` option. The following example runs the Wazuh module for AWS manually using the ``--reparse`` option on a Wazuh agent.
 
@@ -163,7 +163,7 @@ Wazuh supports additional configuration options found in the ``/root/.aws/config
 -  ``region``: The region of the profile. It maps to the Boto3 region_name option.
 -  ``signature_version``: The signature version used to sign requests. The default value is s3v4.
 -  ``<PROFILE_NAME>.s3.<KEY>``: The Amazon S3 settings. They map to the Boto3 s3 option.
--  ``<PROFILE_NAME>.proxy.<KEY>``: The proxy settings. host, port, username, and password map to the Boto3 proxies option, and ``ca_bundle``, ``client_cert``, and ``use_forwarding_for_https`` map to the ``proxies_config`` option.
+-  ``<PROFILE_NAME>.proxy.<KEY>``: The proxy settings. host, port, username, and password map to the Boto3 proxies option, and ``ca_bundle``, ``client_cert``, and ``use_forwarding_for_https`` map to the ``proxies_config`` option. These keys don't take effect in this version (wazuh/wazuh#41860), and while they're set, the module also ignores the ``HTTPS_PROXY`` environment variable. To use a proxy, leave them out and set ``HTTPS_PROXY`` in the environment of the Wazuh agent service instead.
 -  ``max_attempts`` and ``retry_mode``: The retry settings. They map to the Boto3 retries option. The defaults are 10 and standard.
 
 The Wazuh module for AWS ignores other keys in the profile.

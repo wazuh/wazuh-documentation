@@ -11,7 +11,7 @@ The Wazuh manager API runs inside the Wazuh manager service and listens on port 
 Prerequisites
 -------------
 
-The steps in this guide target Wazuh |WAZUH_CURRENT|, in an all-in-one or a distributed deployment. The credential and configuration steps need root access on the Wazuh manager. The command-line examples use cURL, and the Wazuh agent examples need at least one enrolled Wazuh agent. You can run the cURL commands and scripts on the Wazuh manager or on any endpoint that reaches it on port 55000.
+The steps in this guide target Wazuh |WAZUH_CURRENT|, in an all-in-one or a distributed deployment. The credential and configuration steps need root access on the Wazuh manager. The command-line examples use cURL, and the Wazuh agent examples need at least one enrolled Wazuh agent. You can run the cURL commands and scripts on the Wazuh manager or on any endpoint that reaches it on port 55000. The installation generates the password of the ``wazuh`` user and stores it in ``/etc/wazuh-manager/export/credentials.env`` on the Wazuh manager, as ``WAZUH_MANAGER_API_PASSWORD``.
 
 After an all-in-one installation with the :doc:`installation assistant </user-manual/reference/installation-utilities/installation-assistant>`, such as the :doc:`Quickstart </quickstart>`, the Wazuh manager API accepts connections only from the Wazuh manager itself. To send requests from another endpoint, change ``host`` as described in :ref:`Change the default host and port <api_securing_api_change_the_default_host_and_port>`.
 

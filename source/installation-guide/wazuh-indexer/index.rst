@@ -74,7 +74,7 @@ Requirements
 
 Check the recommended operating systems and hardware requirements for the Wazuh indexer installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
-On Debian and Ubuntu, the Wazuh indexer package needs ``iproute2``, ``openssl``, and ``passwd``. On Red Hat Enterprise Linux and Amazon Linux, it needs ``iproute``, ``openssl``, and ``shadow-utils``. It opens no firewall port: open the ports in :ref:`Required ports <wazuh_indexer_required_ports>` yourself. You can't install it over a Wazuh indexer 4.x. The package refuses with ``Upgrade from Wazuh indexer versions prior to 5.x is not supported.`` To move from 4.x, see :doc:`/migration-to-5x/index`.
+On Debian and Ubuntu, the Wazuh indexer package needs ``iproute2``, ``openssl``, and ``passwd``. On Red Hat Enterprise Linux and Amazon Linux, it needs ``iproute``, ``openssl``, and ``shadow-utils``. It opens no firewall port: open the ports in :ref:`Required ports <wazuh_indexer_required_ports>` yourself. You can't install it over a Wazuh indexer 4.x. The package refuses with ``Upgrade from Wazuh indexer versions prior to 5.x is not supported.`` To move from 4.x, see :doc:`/transitioning/index`.
 
 Recommended operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

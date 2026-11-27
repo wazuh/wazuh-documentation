@@ -331,12 +331,12 @@ The Wazuh indexer uses these credentials only when the SMTP sender uses SSL/TLS 
 
       # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X POST "https://127.0.0.1:9200/_nodes/reload_secure_settings"
 
-SMTP authentication credentials are stored as secure settings in the Wazuh indexer keystore using the following keys, where ``<account_name>`` is the name of the configured SMTP sender:
+SMTP authentication credentials are stored as secure settings in the Wazuh indexer keystore using the following keys, where ``<ACCOUNT_NAME>`` is the name of the configured SMTP sender:
 
 .. code-block:: none
 
-   opensearch.notifications.core.email.<account_name>.username
-   opensearch.notifications.core.email.<account_name>.password
+   opensearch.notifications.core.email.<ACCOUNT_NAME>.username
+   opensearch.notifications.core.email.<ACCOUNT_NAME>.password
 
 Set both the username and the password. If neither is set for the account, the Wazuh indexer connects to the SMTP server without authenticating. If only one is set, it authenticates with an empty value for the other, and the SMTP server rejects the login.
 

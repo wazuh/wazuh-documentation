@@ -163,6 +163,8 @@ Each use case is independent. Restore your lab snapshot before you start a new o
 +-------------------------------------------+-----------------------------------------------------------------------------------------------------------+-----------------------+
 | |poc_block_malicious_actor_ip_reputation| | Flag an IP address as malicious and block it automatically with Active Response.                          | Ubuntu, Windows, RHEL |
 +-------------------------------------------+-----------------------------------------------------------------------------------------------------------+-----------------------+
+| |poc_detect_vulnerable_driver_loading|    | Detect a known vulnerable driver load with Sysmon and a custom rule of driver hashes.                     | Windows               |
++-------------------------------------------+-----------------------------------------------------------------------------------------------------------+-----------------------+
 
 .. |poc_file_integrity_monitoring| replace:: :doc:`File integrity monitoring <poc-file-integrity-monitoring>`
 .. |poc_vulnerability_detection| replace:: :doc:`Vulnerability detection <poc-vulnerability-detection>`
@@ -175,6 +177,7 @@ Each use case is independent. Restore your lab snapshot before you start a new o
 .. |poc_detect_hidden_process| replace:: :doc:`Detecting hidden processes <poc-detect-hidden-process>`
 .. |poc_detect_known_malicious_file| replace:: :doc:`Detecting a known malicious file <detect-known-malicious-file>`
 .. |poc_block_malicious_actor_ip_reputation| replace:: :doc:`Blocking a known malicious actor <block-malicious-actor-ip-reputation>`
+.. |poc_detect_vulnerable_driver_loading| replace:: :doc:`Detecting vulnerable driver loading <detect-vulnerable-driver-loading>`
 
 .. toctree::
    :hidden:
@@ -191,6 +194,7 @@ Each use case is independent. Restore your lab snapshot before you start a new o
    poc-detect-hidden-process
    detect-known-malicious-file
    block-malicious-actor-ip-reputation
+   detect-vulnerable-driver-loading
 
 .. Pages not yet updated for this release - kept out of the build until refreshed
 ..

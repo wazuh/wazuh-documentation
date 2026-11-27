@@ -54,14 +54,14 @@ Once the certificates have been created and copied to the new Wazuh indexer node
 
       .. group-tab:: YUM
 
-         -  For RHEL-compatible systems version 8 and earlier, use the following command:
+         -  For RHEL-compatible systems version 7 and earlier, use the following command:
 
             .. code-block:: console
 
                # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
                # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
 
-         -  For RHEL-compatible systems version 9 and later, use the following command:
+         -  For RHEL-compatible systems version 8 and later, use the following command:
 
             .. code-block:: console
 

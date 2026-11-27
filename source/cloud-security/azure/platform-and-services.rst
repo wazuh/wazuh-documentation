@@ -40,6 +40,8 @@ Without these resources, application registration and permission grants can succ
 Wazuh
 ^^^^^
 
+.. _azure_platform_and_services_enable_the_microsoft_azure_integration:
+
 Enable the Microsoft Azure integration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -88,13 +90,15 @@ You need the libraries below to set up your Wazuh agent endpoint and monitor you
 
    .. group-tab:: Python 3.11
 
+      PyPI has no prebuilt wheel of ``cffi`` 1.14.4 for Python 3.10 and later, so pip builds it from source. The build needs the ``libffi`` headers and a C compiler. Install them before you run the command: ``apt-get update && apt-get install -y libffi-dev build-essential python3-dev`` on APT-based systems, or ``yum install -y libffi-devel gcc python3-devel`` on Yum-based systems.
+
       .. code-block:: console
 
-         # pip3 install --break-system-packages azure-storage-blob==12.20.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.14.0 python-dateutil==2.8.1 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.18 SQLAlchemy==2.0.23 pytz==2020.1
+         # pip3 install --break-system-packages --ignore-installed azure-core==1.38.0 azure-storage-blob==12.20.0 python-dateutil==2.8.1 requests==2.33.1 SQLAlchemy==2.0.23 pytz==2020.1
 
       If you use a virtual environment, remove the ``--break-system-packages`` parameter from the above command.
 
-   .. group-tab:: Python 3.12–3.13
+   .. group-tab:: Python 3.12–3.15
 
       #. Install the system-level package libffi.
 
@@ -116,7 +120,7 @@ You need the libraries below to set up your Wazuh agent endpoint and monitor you
 
          .. code-block:: console
 
-            # pip3 install --break-system-packages azure-storage-blob==12.20.0 SQLAlchemy==2.0.36 pytz==2020.1 six==1.17.0
+            # pip3 install --break-system-packages --ignore-installed azure-core==1.38.0 azure-storage-blob==12.20.0 requests==2.33.1 SQLAlchemy==2.0.31 python-dateutil==2.8.1 pytz==2020.1
 
       If you use a virtual environment, remove the ``--break-system-packages`` parameter from the above command.
 
@@ -300,6 +304,21 @@ To authenticate your Microsoft Azure environment to Wazuh, store your credential
       # grep azure-logs /var/ossec/logs/ossec.log
 
 For more information on ``<auth_path>``, look at the :doc:`Wazuh module for Azure </user-manual/reference/ossec-conf/wodle-azure-logs>` reference page.
+
+The Wazuh module for Azure keeps track of the logs it has already collected and doesn't collect them again. The first run of each request or container collects the logs from the period set in ``<time_offset>``, or from 00:00 UTC of the current day if ``<time_offset>`` isn't set. Later runs collect only the logs that are newer than the last log collected. If you increase ``<time_offset>``, the next run also collects the older logs in the new period that it hasn't collected yet.
+
+To collect logs again, including logs already collected, run the ``/var/ossec/wodles/azure/azure-logs`` script manually with the ``--reparse`` option. For Log Analytics and Graph requests, it collects every log from the period set with the time offset option. For Storage containers, it collects every blob in the container. Reparsing generates duplicate findings. For example, the following command collects the Log Analytics audit logs of the last 7 days again:
+
+.. code-block:: console
+
+   # /var/ossec/wodles/azure/azure-logs --log_analytics --la_auth_path /var/ossec/wodles/credentials/<LOG_ANALYTICS_CREDENTIALS> --la_tenant_domain <YOUR_TENANT_DOMAIN> --la_tag azure-auditlogs --la_query "AuditLogs" --workspace <WORKSPACE_ID> --la_time_offset 7d --reparse
+
+If the Wazuh agent reaches the internet through a proxy, set the ``HTTPS_PROXY`` environment variable for the Wazuh agent service. The Wazuh module for Azure sends its Log Analytics, Graph, and Storage requests through that proxy. Create the ``/etc/systemd/system/wazuh-agent.service.d/proxy.conf`` file with the following content, replacing ``<PROXY_ADDRESS>`` and ``<PROXY_PORT>`` with your proxy values, then run ``systemctl daemon-reload`` and restart the Wazuh agent. The variable applies to every module of the Wazuh agent.
+
+.. code-block:: ini
+
+   [Service]
+   Environment="HTTPS_PROXY=http://<PROXY_ADDRESS>:<PROXY_PORT>"
 
 .. toctree::
    :hidden:

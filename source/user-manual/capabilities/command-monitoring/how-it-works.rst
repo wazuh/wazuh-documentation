@@ -24,6 +24,6 @@ The image below shows the components involved in the command monitoring process.
   :align: center
   :width: 80%
 
-Wazuh provides a default decoder, ``decoder/wazuh-command-monitoring/0``, that decodes events from monitored commands into a standardized format (:ref:`Wazuh Common Schema <wazuh_common_schema>`). The default decoder lets the detection engine process command output without additional configuration.
+Wazuh provides a default decoder, ``decoder/wazuh-command-monitoring/0``, that decodes events from monitored commands into a standardized format (:ref:`Wazuh Common Schema <wazuh_common_schema>`). The default decoder lets Wazuh process command output without additional configuration.
 
 To extract custom fields from your command output, you must create a custom decoder. Visit the :doc:`Create a security analytics detection workflow </user-manual/data-analysis/detection-workflow>` section for more information.

@@ -197,7 +197,7 @@ Where:
 -  ``<port>`` specifies the listening port for Wazuh agent connections. The default port is ``1514``. The allowed value is any port number between ``1`` and ``65535``.
 -  ``<protocol>`` specifies communication protocol(s) to accept from Wazuh agents. The default value is ``tcp``. The allowed values are ``tcp``, ``udp``, or ``tcp,udp``.
 -  ``<local_ip>`` binds ``wazuh-manager-remoted`` to a specific local IP address. The default value is ``0.0.0.0``. The allowed values are any valid IPv4 or IPv6 address.
--  ``<queue_size>`` specifies the message queue size for incoming agent messages. The default value is ``131072``. The allowed value is any positive integer.
+-  ``<queue_size>`` specifies the message queue size for incoming agent messages. The default value is ``131072``. The allowed values are integers from ``1`` to ``134217728``. A value above ``262144`` logs the warning ``Queue size is very high. The application may run out of memory.`` When the queue is full, the Wazuh manager discards incoming messages and logs an ``Input queue discarded`` warning at most once every 90 seconds.
 
 **Agents options**
 

@@ -8,7 +8,7 @@ Installing the Wazuh indexer step-by-step
 
 Install and configure the Wazuh indexer as a single-node or multi-node cluster by following these step-by-step instructions. The Wazuh indexer is a scalable search and analytics engine. It stores and indexes the events that the Wazuh manager forwards, so you can analyze them in near real time.
 
-Before you start, choose a name and an IP address for every Wazuh indexer, manager, and dashboard node. You create the certificates and passwords for all nodes on the first Wazuh indexer node. Then you copy one archive to each of the other nodes. Each Wazuh manager node takes only its passwords and its client certificate for the Wazuh indexer from the archive. The Wazuh manager package issues the node's agent listener and Wazuh manager API certificates. Each Wazuh dashboard node takes only its two passwords and the root CA from the archive.
+Before you start, choose a name and an IP address for every Wazuh indexer, manager, and dashboard node. You create the certificates and passwords for all nodes on the first Wazuh indexer node. Then you copy one archive to each of the other nodes. Each Wazuh manager node takes only its passwords and the root CA from the archive. The Wazuh manager package issues the node's agent listener and Wazuh manager API certificates. Each Wazuh dashboard node takes only its two passwords and the root CA from the archive.
 
 For an all-in-one deployment, see :ref:`All-in-one deployment <wazuh_indexer_all_in_one_deployment>` before you start.
 
@@ -39,7 +39,7 @@ Installing package dependencies
 
          .. code-block:: console
 
-            # apt-get update && apt-get install -y iproute2 openssl passwd
+            # apt-get update && apt-get install -y iproute2 openssl passwd gnupg apt-transport-https curl
 
       .. group-tab:: Yum
 
@@ -56,61 +56,32 @@ Installing package dependencies
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Run the following command to import the GPG key and add the Wazuh repository. On APT, the command also updates the package information.
+
 .. tabs::
 
    .. group-tab:: APT
 
-      #. Install the following packages if missing:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # apt-get update && apt-get install -y gnupg apt-transport-https curl
-
-      #. Install the GPG key:
-
-         .. code-block:: console
-
-            # curl -s https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/ unstable main" | tee /etc/apt/sources.list.d/wazuh.list
-
-      #. Update the package information:
-
-         .. code-block:: console
-
-            # apt-get update
+         # curl -fsS https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && \
+           chmod 644 /usr/share/keyrings/wazuh.gpg && \
+           echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/ unstable main" | tee /etc/apt/sources.list.d/wazuh.list && \
+           apt-get update
 
    .. group-tab:: Yum
 
-      #. Import the GPG key:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
+         # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH && \
+           echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
 
    .. group-tab:: DNF
 
-      #. Import the GPG key:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
-
-      #. Add the repository:
-
-         .. code-block:: console
-
-            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
+         # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH && \
+           echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
 
 .. _wazuh_indexer_creating_passwords:
 
@@ -143,7 +114,7 @@ On the **first Wazuh indexer node** only, create the five deployment passwords b
       WAZUH_MANAGER_WUI_PASSWORD="$(wazuh_generate_password)"
       EOF
 
-#. ``WAZUH_MANAGER_API_PASSWORD`` is the password of the ``wazuh`` user of the Wazuh manager API, the one you use in API requests. ``WAZUH_MANAGER_WUI_PASSWORD`` is the password of ``wazuh-internal-client``, the user that the Wazuh dashboard uses.
+   ``credentials.env`` holds the passwords of the five default users. You log in to the Wazuh dashboard as ``admin`` with ``WAZUH_INDEXER_ADMIN_PASSWORD``. Learn what each user is for in :doc:`Password management </user-manual/user-administration/password-management>`.
 
 #. Copy the Wazuh indexer passwords from ``credentials.env`` to ``/etc/wazuh-indexer/local.env`` on this node. The following commands create the directory and file with the required permissions, then copy only the Wazuh indexer credentials:
 
@@ -188,7 +159,9 @@ Installing the Wazuh indexer
 
             # dnf -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
 
-   Release candidate packages carry the version of the final release, ``|WAZUH_CURRENT|-|WAZUH_INDEXER_PKG_REV|``. Only their file names show the RC stage, for example ``wazuh-indexer_|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_x64_DEB|.deb``, so ``dpkg -l`` and ``rpm -q`` show ``|WAZUH_CURRENT|-|WAZUH_INDEXER_PKG_REV|``.
+   Release candidate packages carry the version of the final release, ``|WAZUH_CURRENT|-|WAZUH_INDEXER_PKG_REV|``. ``|WAZUH_CURRENT|`` is the version and ``-|WAZUH_INDEXER_PKG_REV|`` is the package revision, not the release candidate number. Only their file names show the RC stage, for example ``wazuh-indexer_|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_x64_DEB|.deb``, so ``dpkg -l`` and ``rpm -q`` show ``|WAZUH_CURRENT|-|WAZUH_INDEXER_PKG_REV|``.
+
+   To check which release candidate the repository holds before you install, read the file name with ``apt-cache show wazuh-indexer | grep Filename`` on APT, ``repoquery --location wazuh-indexer`` on Yum (from the ``yum-utils`` package), or ``dnf repoquery --location wazuh-indexer`` on DNF.
 
 Checking the passwords
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -199,7 +172,7 @@ On the first Wazuh indexer node, the package uses the three passwords created in
 
    # grep '^WAZUH_INDEXER_' /etc/wazuh-indexer/export/credentials.env | sort -u
 
-The other Wazuh indexer nodes get the same three passwords from ``wazuh-certificates.tar`` in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`, before their package is installed. So they never generate their own. Keep the file until all components are installed and running, then remove it as described in :ref:`Securing your Wazuh installation <wazuh_dashboard_securing_installation>`.
+The other Wazuh indexer nodes get the same three passwords from ``wazuh-certificates.tar`` in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`, before their package is installed. So they never generate their own. Remove the file from each node at the end of that node's installation, as each section describes.
 
 Passwords are generated once. Reinstalling, restarting, or upgrading the Wazuh indexer does not change them, and neither does removing this file. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation.
 
@@ -212,7 +185,7 @@ Wazuh uses certificates to establish confidentiality and encrypt communications 
 
 Run this stage once, on the first Wazuh indexer node, after its package is installed. It creates the certificates of every node and packs them, with the passwords every node needs, into ``wazuh-certificates.tar``.
 
-For an all-in-one installation, skip this stage and go to :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`. The Wazuh indexer package already issued its certificates.
+For an all-in-one installation, skip this stage, :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`, and step 1 of :ref:`Configuring the Wazuh indexer <wazuh_indexer_configuring>`. Go to step 2 of :ref:`Configuring the Wazuh indexer <wazuh_indexer_configuring>`, the heap size. The Wazuh indexer package already issued its certificates.
 
 .. _wazuh_indexer_generating_certificates:
 
@@ -277,9 +250,11 @@ Generating the SSL certificates
 
    For a **Wazuh manager cluster**, uncomment ``node_type`` in every manager entry. Set ``master`` on one node and ``worker`` on all others. For a single Wazuh manager, leave ``node_type`` commented. When two components share a host, give both entries that host's IP address.
 
-   Each node needs an ``ip``, a ``dns``, or both, and each accepts a list. The node's certificate includes its name and every ``ip`` and ``dns`` value. In the step-by-step installation, a Wazuh manager node uses only its client certificate for the Wazuh indexer, and a Wazuh dashboard node uses none. The Wazuh manager and Wazuh dashboard packages issue their own server certificates. If a node has only a ``dns`` name, use that name wherever these sections ask for its address, for example ``network.host``.
+   Each node needs an ``ip``, a ``dns``, or both, and each accepts a list. The node's certificate includes its name and every ``ip`` and ``dns`` value. In the step-by-step installation, Wazuh manager and Wazuh dashboard nodes use none of the certificates created for them, because each package issues its own. The Wazuh manager and Wazuh dashboard packages issue their own server certificates. If a node has only a ``dns`` name, use that name wherever these sections ask for its address, for example ``network.host``.
 
    The shipped file also has commented examples for a node with several addresses and for a TLS-terminating load balancer. For more about certificates, see :ref:`Certificates deployment <wazuh_indexer_cluster_certificates_deployment>`.
+
+   In the step-by-step installation, ignore the ``--agent-san`` comment: the Wazuh manager package issues its agent listener certificate. Add a passthrough load balancer's address with ``WAZUH_MANAGER_REMOTED_CERT_SANS`` when you install each Wazuh manager node, as described in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`.
 
    Run the tool to create the certificates. ``WAZUH_CA_DIR`` makes it sign them with the root CA that the package created in ``/etc/wazuh-indexer/ca``. Without it, the tool creates a second root CA, which the Wazuh manager and Wazuh dashboard don't trust. The tool writes the certificates to ``wazuh-certificates/``, beside it:
 
@@ -340,12 +315,14 @@ Packing and copying the archive
 Wazuh indexer nodes configuration
 ---------------------------------
 
-Follow these steps on every Wazuh indexer node.
+Follow these steps on every Wazuh indexer node. For an all-in-one installation, skip :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>` and go to step 2 of :ref:`Configuring the Wazuh indexer <wazuh_indexer_configuring>`, the heap size.
 
 .. _wazuh_indexer_deploying_certificates:
 
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
+
+For an all-in-one installation, skip this section and go to step 2 of :ref:`Configuring the Wazuh indexer <wazuh_indexer_configuring>`, the heap size.
 
 .. note::
 
@@ -432,7 +409,10 @@ Configuring the Wazuh indexer
 
 #. Edit ``/etc/wazuh-indexer/opensearch.yml`` and replace the following values:
 
-   The package ships a working single-node configuration: one node named ``node-1``, listening on all interfaces. On a single node, these values are optional. Set ``network.host`` to listen on one address only, and if you rename the node, change ``cluster.initial_cluster_manager_nodes`` to match. A multi-node cluster needs every value, on every node.
+   The package ships a working single-node configuration: one node named ``node-1``, listening on all interfaces.
+
+   -  All-in-one installation: leave ``opensearch.yml`` as the package wrote it and go to step 2.
+   -  Any deployment that created its certificates with ``config.yml``, including a single Wazuh indexer node with the Wazuh manager and Wazuh dashboard on other hosts: set the values below on every node, with the names and addresses in ``config.yml``. On a single Wazuh indexer node, leave ``discovery.seed_hosts`` commented.
 
    #. ``network.host``: Sets the address of this node for both HTTP and transport traffic. The node will bind to this address and will also use it as its publish address. Accepts an IP address or a hostname.
 
@@ -450,7 +430,7 @@ Configuring the Wazuh indexer
          #- "node-2"
          #- "node-3"
 
-   #. ``discovery.seed_hosts``: List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. You may leave this setting commented if you are configuring the Wazuh indexer as a single-node. For multi-node configurations, uncomment this setting and set the addresses of each master-eligible node.
+   #. ``discovery.seed_hosts``: List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. With a single Wazuh indexer node, leave this setting commented. For a multi-node cluster, uncomment this setting and set the addresses of each master-eligible node.
 
       .. code-block:: yaml
 
@@ -459,7 +439,7 @@ Configuring the Wazuh indexer
          #  - "<WAZUH_INDEXER_2_ADDRESS>"
          #  - "<WAZUH_INDEXER_3_ADDRESS>"
 
-   #. ``plugins.security.nodes_dn``: the Distinguished Names (DNs) of the certificates of all Wazuh indexer nodes. The package writes this node's DN, so a single node needs no change. In a multi-node cluster, each node knows only its own DN. On every node, list one line per Wazuh indexer node in ``config.yml``. On the first node, also replace the line with the host name that the package wrote. Each entry is ``C=US,L=California,O=Wazuh,OU=Wazuh,CN=`` followed by the node's name in ``config.yml``. Keep the fields in this order, because the Security plugin compares each entry as an exact string. The ``openssl`` command in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>` prints this node's subject in that form, so you can check it:
+   #. ``plugins.security.nodes_dn``: the Distinguished Names (DNs) of the certificates of all Wazuh indexer nodes. In a multi-node cluster, each node knows only its own DN. On every node, list one line per Wazuh indexer node in ``config.yml``. On the first node, also replace the line with the host name that the package wrote. Each entry is ``C=US,L=California,O=Wazuh,OU=Wazuh,CN=`` followed by the node's name in ``config.yml``. Keep the fields in this order, because the Security plugin compares each entry as an exact string. The ``openssl`` command in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>` prints this node's subject in that form, so you can check it:
 
       .. code-block:: yaml
          :emphasize-lines: 2-3
@@ -518,6 +498,18 @@ Starting the service
 
                # update-rc.d wazuh-indexer defaults 95 10
                # service wazuh-indexer start
+
+#. On every Wazuh indexer node **except the first**, check that the node doesn't hold a root CA private key. Only the first Wazuh indexer node must hold it, in ``/etc/wazuh-indexer/ca``:
+
+   .. code-block:: console
+
+      # ls -A /etc/wazuh-indexer/ca 2>/dev/null
+
+   If the command lists ``root-ca.key``, remove the key. Never run this on the first Wazuh indexer node:
+
+   .. code-block:: console
+
+      # rm -f /etc/wazuh-indexer/ca/root-ca.key
 
 Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 

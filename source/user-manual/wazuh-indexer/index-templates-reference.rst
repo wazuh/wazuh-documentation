@@ -274,7 +274,7 @@ The following workflow illustrates the process:
 Verifying deployed templates
 ----------------------------
 
-List the templates whose names start with ``wazuh-``. To list every index template, including the ``states-*`` and internal templates, run ``GET _cat/templates?v&s=name``:
+In **Indexer management** > **Dev Tools**, list the templates whose names start with ``wazuh-``. To list every index template, including the ``states-*`` and internal templates, run ``GET _cat/templates?v&s=name``:
 
 .. code-block:: none
 
@@ -284,7 +284,7 @@ View a specific template:
 
 .. code-block:: none
 
-   GET /_index_template/<template-name>
+   GET /_index_template/<TEMPLATE_NAME>
 
 List lifecycle policies:
 

@@ -11,7 +11,7 @@ The Google Cloud integration runs on a Wazuh agent. Install the required depende
 Python
 ------
 
-The Google Cloud integration is compatible with Python 3.8 – 3.14. Later Python versions might also work, but we can't guarantee they are compatible. This documentation uses Python 3.11 or later for the configuration examples.
+The Google Cloud integration is compatible with Python 3.8 – 3.15. Later Python versions might also work, but we can't guarantee they are compatible. This documentation uses Python 3.11 or later for the configuration examples.
 
 If Python 3 is not installed on the monitored endpoint, use the following commands to install it.
 
@@ -67,14 +67,14 @@ On Debian and Ubuntu, first install the ``typing_extensions`` package with ``--i
 
 .. code-block:: console
 
-   # sudo pip3 install --break-system-packages --ignore-installed typing_extensions
+   # pip3 install --break-system-packages --ignore-installed typing_extensions
 
-Run the following command to install the required dependencies for Python 3.11–3.14:
+Run the following command to install the required dependencies. On Python 3.8–3.10, remove the ``--break-system-packages`` option:
 
 .. code-block:: console
 
-   # sudo pip3 install --break-system-packages google-cloud-pubsub==2.7.1 "google-cloud-storage>=2.14.0" pytz==2020.1 setuptools==68.0.0
+   # pip3 install --break-system-packages google-api-core==2.19.2 google-cloud-pubsub==2.21.5 google-cloud-storage==2.19.0 pytz==2020.1
 
 .. note::
 
-   When using a virtual environment, remove the ``--break-system-packages`` option from the command.
+   When using a virtual environment, remove the ``--break-system-packages`` option from the command, and update the shebang of the ``/var/ossec/wodles/gcloud/gcloud`` script to the interpreter of your virtual environment, for example ``#!/<PATH_TO_YOUR_VIRTUAL_ENVIRONMENT>/bin/python3``.

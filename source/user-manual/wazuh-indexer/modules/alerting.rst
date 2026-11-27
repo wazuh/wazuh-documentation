@@ -23,7 +23,7 @@ The Alerting module provides the following capabilities:
 -  **Comments and collaboration:** Add comments to alerts to support investigation and operational workflows. Comments are off by default. Turn them on with ``plugins.alerting.comments_enabled``.
 -  **Role-based access control (RBAC):** Control access to monitors, alerts, workflows, and notification destinations.
 -  **Cross-cluster monitoring:** Monitor indices stored on remote clusters connected through cross-cluster search.
--  **REST API support:** Manage monitors, workflows, alerts, findings, and comments programmatically.
+-  **REST API support:** Manage monitors, workflows, alerts, findings, and comments programmatically. To check that monitors run on schedule on each node, use ``GET /_plugins/_alerting/stats``, or ``GET /_plugins/_alerting/stats/<METRIC>`` with ``jobs_info`` or ``job_scheduling_metrics``.
 -  **Dashboard integration**: Create, manage, and monitor alerts from the Wazuh dashboard.
 
 Monitor types
@@ -319,21 +319,7 @@ The Alerting module includes a Wazuh-specific Active Response monitor type for a
 
 When an Active Response monitor is triggered, it writes execution requests to the ``wazuh-active-responses`` data stream. The Wazuh manager retrieves these requests and distributes the corresponding Active Response actions to agents. Each execution request contains a reference to the event that triggered the response.
 
-Active Response monitors have the following requirements:
-
-+------------------------+----------------------------------------------------------------------------------------------+
-| Requirement            | Description                                                                                  |
-+========================+==============================================================================================+
-| Target indices         | Must match the ``wazuh-findings-v5-*`` index pattern.                                        |
-+------------------------+----------------------------------------------------------------------------------------------+
-| Schedule               | Maximum execution interval of 1 minute (60,000 milliseconds).                                |
-+------------------------+----------------------------------------------------------------------------------------------+
-| Schedule type          | Must be an interval schedule. Cron schedules are not supported.                              |
-+------------------------+----------------------------------------------------------------------------------------------+
-| Trigger type           | Only ``DocumentLevelTrigger`` is supported.                                                  |
-+------------------------+----------------------------------------------------------------------------------------------+
-| Action execution scope | Every action must use the ``per_alert`` execution scope. ``per_execution`` is not supported. |
-+------------------------+----------------------------------------------------------------------------------------------+
+See :ref:`Active Response monitors <alerting_active_response_monitors>` for the Active Response monitor requirements.
 
 Default monitors
 ----------------
@@ -510,7 +496,7 @@ Most Alerting module settings can be updated dynamically without restarting the 
 The following example updates two Alerting module settings:
 
 -  ``plugins.alerting.monitor.max_monitors``: Sets the maximum number of monitors in the cluster to 20.
--  ``plugins.alerting.alert_history_max_age``: Extends the maximum age of alert history indices to 60d.
+-  ``plugins.alerting.alert_history_max_age``: Rolls over the alert history index when it is older than 60d.
 
 Run the following command from a terminal on a host that can communicate with the Wazuh indexer REST API. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node and ``<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
 

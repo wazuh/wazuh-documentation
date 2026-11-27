@@ -50,7 +50,7 @@ The Wazuh manager verifies the certificate presented by the Wazuh agent during W
 
 The difference between these validation methods is that the certificate in the former method can be reused on multiple agents, while the certificate created in the latter can only be used on the Wazuh agent whose IP address was specified during certificate generation.
 
-Host validation is off by default. Turn it on in the Wazuh manager configuration, as step 5 shows: ``<verification_mode>full</verification_mode>`` for Wazuh 5.0 agents, and ``<ssl_verify_host>yes</ssl_verify_host>`` for Wazuh 4.x agents. Wazuh 5.0 agents must have their IP address as an IP entry in the SAN, because the common name isn't checked. Wazuh 4.x agents can have it in the SAN or as the common name.
+Host validation is off by default. Turn it on in the Wazuh manager configuration, as step 5 shows: ``<verification_mode>full</verification_mode>``. Wazuh agents must have their IP address as an IP entry in the SAN, because the common name isn't checked.
 
 Wazuh manager configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -102,19 +102,9 @@ Wazuh manager configuration
 
 #. Ensure that the ``rootCA.pem`` file is in the ``/etc/wazuh-manager/`` directory on the Wazuh manager.
 
-#. Update the ``/etc/wazuh-manager/wazuh-manager.conf`` file with the location of the ``rootCA.pem`` file to enable the use of certificates. Uncomment the ``<auth><ssl_agent_ca>`` section and specify the path to the ``rootCA.pem`` file on the Wazuh manager.
+#. Update the ``/etc/wazuh-manager/wazuh-manager.conf`` file with the location of the ``rootCA.pem`` file to enable the use of certificates.
 
-   .. code-block:: xml
-      :emphasize-lines: 3
-
-      <auth>
-         ...
-         <ssl_agent_ca>/etc/wazuh-manager/rootCA.pem</ssl_agent_ca>
-      </auth>
-
-   For Wazuh agent verification with host validation, also add ``<ssl_verify_host>yes</ssl_verify_host>`` to the ``<auth>`` section.
-
-   ``<ssl_agent_ca>`` applies only to Wazuh 4.x agents, which enroll on port 1515. Wazuh 5.0 agents enroll and connect on port 1517. For them, set the CA and the ``<verification_mode>`` option in the ``<https>`` block of the ``<remote>`` section:
+   Wazuh agents enroll and connect on port 1517. Set the CA and the ``<verification_mode>`` option in the ``<https>`` block of the ``<remote>`` section:
 
    .. code-block:: xml
 
@@ -126,9 +116,9 @@ Wazuh manager configuration
          </https>
       </remote>
 
-   These settings apply to all the traffic on port 1517, not only to enrollment. Every Wazuh 5.0 agent then needs a certificate signed by this CA, or the Wazuh manager refuses its connection. ``certificate`` is also the mode the Wazuh manager uses when ``<ca>`` is set without a ``<verification_mode>``, and it logs a warning when it does. See :ref:`reference_wazuh_manager_conf_remote` for the allowed values.
+   These settings apply to all the traffic on port 1517, not only to enrollment. Every Wazuh agent then needs a certificate signed by this CA, or the Wazuh manager refuses its connection. ``certificate`` is also the mode the Wazuh manager uses when ``<ca>`` is set without a ``<verification_mode>``, and it logs a warning when it does. See :ref:`reference_wazuh_manager_conf_remote` for the allowed values.
 
-   For Wazuh agent verification with host validation, set ``<verification_mode>full</verification_mode>`` in the ``<https>`` block. The Wazuh manager then refuses, with HTTP 403, a Wazuh 5.0 agent whose certificate doesn't list the address it connects from. Behind a load balancer or proxy that terminates TLS, that address is the proxy's. The address must be an IP entry in the subject alternative name of the certificate of the Wazuh agent. The CN isn't checked.
+   For Wazuh agent verification with host validation, set ``<verification_mode>full</verification_mode>`` in the ``<https>`` block. The Wazuh manager then refuses, with HTTP 403, a Wazuh agent whose certificate doesn't list the address it connects from. Behind a load balancer or proxy that terminates TLS, that address is the proxy's. The address must be an IP entry in the subject alternative name of the certificate of the Wazuh agent. The CN isn't checked.
 
    .. note::
 
@@ -156,8 +146,6 @@ Follow these steps to enroll a Linux/Unix endpoint by using certificates for age
 
 #. Modify the Wazuh agent configuration file located at ``/var/ossec/etc/ossec.conf``, and include the following:
 
-   **Wazuh 5.0 agents**:
-
    .. code-block:: xml
       :emphasize-lines: 4
 
@@ -173,23 +161,6 @@ Follow these steps to enroll a Linux/Unix endpoint by using certificates for age
         </agent>
       </ossec_config>
 
-   **Wazuh 4.x agents**:
-
-   .. code-block:: xml
-      :emphasize-lines: 4,7,8
-
-      <ossec_config>
-        <client>
-          <server>
-            <address><WAZUH_MANAGER_ADDRESS></address>
-          </server>
-          <enrollment>
-            <agent_certificate_path>/var/ossec/etc/sslagent.cert</agent_certificate_path>
-            <agent_key_path>/var/ossec/etc/sslagent.key</agent_key_path>
-          </enrollment>
-        </client>
-      </ossec_config>
-
 #. Restart the Wazuh agent to make the changes effective:
 
    .. code-block:: console
@@ -198,7 +169,7 @@ Follow these steps to enroll a Linux/Unix endpoint by using certificates for age
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
-   .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
+   .. thumbnail:: /images/manual/agent/linux-agent-verification-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Linux
       :alt: Check newly enrolled Wazuh agent - Linux
       :align: center
@@ -218,8 +189,6 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
 #. Using an administrator account, modify the Wazuh agent configuration file located at ``C:\Program Files (x86)\ossec-agent\ossec.conf`` and include the following:
 
-   **Wazuh 5.0 agents**:
-
    .. code-block:: xml
       :emphasize-lines: 4
 
@@ -233,23 +202,6 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
             <key>/<PATH_TO>/sslagent.key</key>
           </ssl>
         </agent>
-      </ossec_config>
-
-   **Wazuh 4.x agents**:
-
-   .. code-block:: xml
-      :emphasize-lines: 4,7,8
-
-      <ossec_config>
-        <client>
-          <server>
-            <address><WAZUH_MANAGER_ADDRESS></address>
-          </server>
-          <enrollment>
-            <agent_certificate_path>/<PATH_TO>/sslagent.cert</agent_certificate_path>
-            <agent_key_path>/<PATH_TO>/sslagent.key</agent_key_path>
-          </enrollment>
-        </client>
       </ossec_config>
 
 #. Restart the Wazuh agent to make the changes effective.
@@ -271,7 +223,7 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
-   .. thumbnail:: /images/manual/agent/windows-check-newly-enrolled.png
+   .. thumbnail:: /images/manual/agent/windows-agent-verification-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Windows
       :alt: Check newly enrolled Wazuh agent - Windows
       :align: center
@@ -286,8 +238,6 @@ Follow these steps to enroll a macOS endpoint by using certificates for Wazuh ag
 
 #. Launch the terminal, obtain root access, edit the Wazuh agent configuration file located at ``/Library/Ossec/etc/ossec.conf``, and include the following:
 
-   **Wazuh 5.0 agents**:
-
    .. code-block:: xml
       :emphasize-lines: 4
 
@@ -301,23 +251,6 @@ Follow these steps to enroll a macOS endpoint by using certificates for Wazuh ag
             <key>/<PATH_TO>/sslagent.key</key>
           </ssl>
         </agent>
-      </ossec_config>
-
-   **Wazuh 4.x agents**:
-
-   .. code-block:: xml
-      :emphasize-lines: 4,7,8
-
-      <ossec_config>
-        <client>
-          <server>
-            <address><WAZUH_MANAGER_ADDRESS></address>
-          </server>
-          <enrollment>
-            <agent_certificate_path>/<PATH_TO>/sslagent.cert</agent_certificate_path>
-            <agent_key_path>/<PATH_TO>/sslagent.key</agent_key_path>
-          </enrollment>
-        </client>
       </ossec_config>
 
 #. Restart the Wazuh agent to make the changes effective:

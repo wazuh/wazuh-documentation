@@ -49,7 +49,7 @@ SI-4 System monitoring requires you to observe suspicious activity on your syste
       :align: center
       :width: 80%
 
-#. Expand the **Windows Credential Manager credentials listed or dumped** finding.
+#. Expand the ``Windows Credential Manager listed (Security)`` finding.
 
    The finding shows the command in ``process.command_line``, the user in ``user.name``, and the Windows event ID 4688.
 

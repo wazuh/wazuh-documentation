@@ -36,13 +36,13 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-   Each finding shows the title of the Wazuh rule that detected the event. For example, the image below shows details for the triggered finding: ``Secret or credential accessed from vault``.
+   Each finding shows the title of the Wazuh rule that detected the event. For example, the image below shows details for the triggered finding: ``Failed authentication attempt``.
 
 #. Switch to the **Findings** tab and click a finding to view details.
 
-   .. thumbnail:: /images/compliance/tsc/common-criteria/vault-secret-finding-details.png
-      :title: Secret or credential accessed from vault finding details
-      :alt: Secret or credential accessed from vault finding details
+   .. thumbnail:: /images/compliance/tsc/common-criteria/failed-authentication-finding-details.png
+      :title: Failed authentication attempt finding details
+      :alt: Failed authentication attempt finding details
       :align: center
       :width: 80%
 

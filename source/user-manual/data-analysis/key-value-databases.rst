@@ -149,31 +149,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
       :align: center
       :width: 80%
 
-   This is the root decoder. In this decoder:
-
-   -  ``name: "decoder/test-wazuh-message/0"`` - Logical identifier of the decoder asset; it is what gets recorded in ``wazuh.integration.decoders`` when this decoder accepts an event.
-
-   -  ``id: "c8d31738-281e-4183-a5f3-fd02dea3bc25"`` - Stable UUID used by the content system (the content manager, the space policies, and the Wazuh indexer) to uniquely track this decoder version, independent of its human-readable name. When you create a decoder, Wazuh assigns it a new random UUID and replaces any ``id`` you write. Use the ``name`` to refer to the decoder.
-
-   -  ``enabled: true`` - Marks the decoder as active; if set to ``false``, the decoder stays in the content but is skipped, so it never evaluates events.
-
-   -  ``check: "regex_match($event.original, '\"query_name\":.*\"srcaddr\":')"`` - Limits the root decoder to Route53 Resolver query logs. A root decoder without a check accepts every agent event, so if you promote this example to the custom space, Wazuh indexes every event a second time.
-
-   -  ``metadata.author: "Wazuh, Inc."`` - Informational field indicating who created or maintains the decoder asset; it has no impact on runtime behavior.
-
-   -  ``metadata.date: "2026-06-16T10:01:28Z"`` - Creation timestamp of this decoder asset version, used for documentation and content management, not for event processing logic.
-
-   -  ``metadata.modified: "2026-06-16T10:01:28Z"`` - Last modification timestamp of the decoder definition; helps tooling and humans understand version freshness.
-
-   -  ``metadata.description`` - Human-readable summary describing the decoder's purpose: here, that it parses the Wazuh message format's location part and enriches agent-originated events with host information. This text is purely descriptive.
-
-   -  ``metadata.documentation`` - Optional field intended to hold a URL or extended text with detailed docs for the asset; empty here, so it contributes nothing at runtime.
-
-   -  ``metadata.references`` - List of external references (here, Wazuh documentation URL) associated with the decoder, again only for human/contextual use.
-
-   -  ``metadata.supports`` - Array for declaring supported platforms, products, or variants if needed; empty means no specific constraints are declared.
-
-   -  ``metadata.title: "Wazuh message decoder"`` - Human-friendly title for UI and documentation; not involved in evaluation.
+   This is the root decoder. Its ``check`` limits it to Route53 Resolver query logs. Without a check, a root decoder accepts every Wazuh agent event, so promoting it to the custom space indexes each event a second time. Wazuh replaces the ``id`` with a new UUID when you create the decoder, so use the ``name`` to refer to it.
 
    .. thumbnail:: /images/manual/data-analysis/ruleset-management-root-decoder.png
       :title: Root decoder
@@ -184,7 +160,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
 #. Create another decoder using the same integration you assigned in the previous root decoder, using the following content:
 
    .. code-block:: yaml
-      :emphasize-lines: 52
+      :emphasize-lines: 27
 
       ---
       name: "decoder/test-aws-route53-resolver-logs/0"
@@ -200,11 +176,6 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
         title: "AWS Route53 Resolver Query Logs JSON decoder."
       parents:
       - "decoder/test-wazuh-message/0"
-      definitions:
-        netiana_map:
-          icmp: "1"
-          tcp: "6"
-          udp: "17"
       check:
       - _tmp_json: "has_only_keys([\"version\", \"account_id\", \"region\", \"vpc_id\"\
           , \"query_timestamp\", \"query_name\", \"query_type\", \"query_class\", \"rcode\"\
@@ -212,95 +183,14 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
           , \"firewall_rule_group_id\", \"firewall_domain_list_id\"])"
       normalize:
       - map:
-        - cloud.instance.id: "$_tmp_json.srcids.instance"
-        - _tmp.firewall_action: "$_tmp_json.firewall_rule_action"
-        - rule.ruleset: "$_tmp_json.firewall_rule_group_id"
-        - rule.id: "$_tmp_json.firewall_domain_list_id"
         - cloud.provider: "aws"
-        - cloud.account.id: "$_tmp_json.account_id"
-        - cloud.instance.id: "$_tmp_json.srcids.instance"
-        - cloud.region: "$_tmp_json.region"
         - dns.question.name: "$_tmp_json.query_name"
-        - dns.question.class: "$_tmp_json.query_class"
-        - dns.question.type: "$_tmp_json.query_type"
-        - dns.response_code: "$_tmp_json.rcode"
         - event.kind: "event"
         - event.action: "dns-query"
-        - event.category: "array_append(network)"
-        - event.start: "parse_date($_tmp_json.query_timestamp, ISO8601Z)"
-        - event.type: "array_append(protocol)"
-        - network.transport: "lowercase($_tmp_json.transport)"
-        - network.iana_number: "lookup($netiana_map, $network.transport)"
-        - network.protocol: "dns"
-        - source.address: "$_tmp_json.srcaddr"
         - source.ip: "$_tmp_json.srcaddr"
-        - source.port: "parse_long($_tmp_json.srcport)"
-        - network.type: "ip_version($source.ip)"
-        - related.ip: "array_append($source.ip)"
         - threat.feed.description: "kvdb_lookup('test_KVDB', $source.ip)"
-      - check: "string_eq($_tmp.firewall_action, BLOCK)"
-        map:
-        - event.action: "dns-response"
-        - event.type: "array_append(denied)"
-        - event.outcome: "failure"
-      - check: "string_eq($_tmp.firewall_action, ALERT)"
-        map:
-        - event.kind: "alert"
-        - event.category: "array_append(intrusion_detection)"
-      - check: "$dns.response_code == NOERROR"
-        map:
-        - event.outcome: "success"
-      - check: "$dns.response_code != NOERROR"
-        map:
-        - event.outcome: "failure"
-      - check: "exists($_tmp_json.answers.0)"
-        map:
-        - _tmp.answer.data: "$_tmp_json.answers.0.Rdata"
-        - _tmp.answer.type: "$_tmp_json.answers.0.Type"
-        - _tmp.answer.class: "$_tmp_json.answers.0.Class"
-        - dns.answers: "array_append($_tmp.answer)"
-      - check: "exists($_tmp_json.answers.1)"
-        map:
-        - _tmp.answer.data: "$_tmp_json.answers.1.Rdata"
-        - _tmp.answer.type: "$_tmp_json.answers.1.Type"
-        - _tmp.answer.class: "$_tmp_json.answers.1.Class"
-        - dns.answers: "array_append($_tmp.answer)"
-      - check: "exists($_tmp_json.answers.2)"
-        map:
-        - _tmp.answer.data: "$_tmp_json.answers.2.Rdata"
-        - _tmp.answer.type: "$_tmp_json.answers.2.Type"
-        - _tmp.answer.class: "$_tmp_json.answers.2.Class"
-        - dns.answers: "array_append($_tmp.answer)"
-      - check: "exists($_tmp_json.answers.3)"
-        map:
-        - _tmp.answer.data: "$_tmp_json.answers.3.Rdata"
-        - _tmp.answer.type: "$_tmp_json.answers.3.Type"
-        - _tmp.answer.class: "$_tmp_json.answers.3.Class"
-        - dns.answers: "array_append($_tmp.answer)"
-      - check: "exists($_tmp_json.answers.4)"
-        map:
-        - _tmp.answer.data: "$_tmp_json.answers.4.Rdata"
-        - _tmp.answer.type: "$_tmp_json.answers.4.Type"
-        - _tmp.answer.class: "$_tmp_json.answers.4.Class"
-        - dns.answers: "array_append($_tmp.answer)"
-      - check: "exists($_tmp_json.answers.5)"
-        map:
-        - _tmp.answer.data: "$_tmp_json.answers.5.Rdata"
-        - _tmp.answer.type: "$_tmp_json.answers.5.Type"
-        - _tmp.answer.class: "$_tmp_json.answers.5.Class"
-        - dns.answers: "array_append($_tmp.answer)"
-      - check: "exists($_tmp_json.answers.6)"
-        map:
-        - _tmp.answer.data: "$_tmp_json.answers.6.Rdata"
-        - _tmp.answer.type: "$_tmp_json.answers.6.Type"
-        - _tmp.answer.class: "$_tmp_json.answers.6.Class"
-        - dns.answers: "array_append($_tmp.answer)"
-      - check: "$dns.question.type != PTR"
-        map:
-        - related.hosts: "array_append($dns.question.name)"
       - map:
         - _tmp_json: "delete()"
-        - _tmp: "delete()"
       enabled: true
       id: "74867107-90d9-4b20-be20-d0cce62c9e0c"
 

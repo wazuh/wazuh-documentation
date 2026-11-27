@@ -12,7 +12,7 @@ The Wazuh SCA module helps to meet the following PCI DSS requirements:
 
 -  **Requirement 2 - Apply Secure Configurations to All System Components**: This requirement mandates applying secure configurations to system components to reduce exposure to vendor defaults commonly exploited by malicious individuals. Default passwords and settings are widely known and easily obtained. Secure configurations such as changing default credentials, removing unnecessary software and accounts, and disabling unused services reduce the available attack surface.
 
--  **Requirement 8 - Identify Users and Authenticate Access to System Components**: This requirement mandates systems identify users or processes by linking them to a unique identifier, such as a user, system, or application ID. These IDs establish an individual's or process's identity by assigning a unique identifier to each, distinguishing one user or process from another. When each user or process can be uniquely identified, actions taken under that identity can be traced to a known, authorized user or process.
+-  **Requirement 8 - Identify Users and Authenticate Access to System Components**: This requirement mandates that systems identify users or processes by linking them to a unique identifier, such as a user, system, or application ID. These IDs establish an individual's or process's identity by assigning a unique identifier to each, distinguishing one user or process from another. When each user or process can be uniquely identified, actions taken under that identity can be traced to a known, authorized user or process.
 
 To achieve the above requirements, SCA runs assessment checks. These checks determine whether password settings need adjustment, unnecessary software or services must be removed, or the TCP/IP stack configuration requires auditing to strengthen system security. Sources of system hardening standards accepted by the industry include, but are not limited to:
 
@@ -42,7 +42,7 @@ To view the check result, restart the Wazuh agent to trigger a new SCA scan with
 
 .. thumbnail:: /images/compliance/pci/sca-ip-forwarding-disabled-01.png
    :title: SCA check for ip forwarding disabled
-   :alt: Configuration Assessment Inventory tab with check 35608, Ensure ip forwarding is disabled, passed
+   :alt: Configuration Assessment Inventory tab with check 35608, Ensure ip forwarding is disabled, failed
    :align: center
    :width: 80%
 
