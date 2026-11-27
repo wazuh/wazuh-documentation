@@ -15,7 +15,7 @@ Wazuh helps meet this requirement through its log data analysis capability. The 
 Use case: SSH authentication
 -------------------------------
 
-In this use case, Wazuh monitors SSH authentication activity on an Ubuntu 26.04 endpoint and generates findings for successful and failed authentication.
+In this use case, Wazuh monitors SSH authentication activity on an Ubuntu 24.04 endpoint and generates findings for successful and failed authentication.
 
 Ubuntu endpoint
 ^^^^^^^^^^^^^^^^

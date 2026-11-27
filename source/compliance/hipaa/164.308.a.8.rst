@@ -15,7 +15,7 @@ Wazuh helps meet this requirement by providing several modules. One of these mod
 Use case: Security Configuration Assessment scan
 -----------------------------------------------------
 
-In this use case, the SCA module evaluates a monitored Ubuntu 26.04 endpoint against the CIS Benchmark for Ubuntu Linux 26.04. SCA scans provide a mechanism to regularly assess the endpoint's security controls and identify configurations that require remediation. You can track these events and actions on the Wazuh dashboard:
+In this use case, the SCA module evaluates a monitored Ubuntu 24.04 endpoint against the CIS Benchmark for Ubuntu Linux 24.04. SCA scans provide a mechanism to regularly assess the endpoint's security controls and identify configurations that require remediation. You can track these events and actions on the Wazuh dashboard:
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
@@ -28,7 +28,7 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-#. The **Dashboard** tab shows an overview of the top 5 SCA agents, policies, checks, MITRE tactics, number of passed, failed, not applicable checks, and an overall score.
+#. The **Dashboard** tab shows an overview of the top 5 SCA agents, policies, checks, MITRE tactics, the number of passed, failed, and not applicable checks, and an overall score.
 
    .. thumbnail:: /images/compliance/hipaa/configuration-assessment-dashboard-tab.png
       :title: Configuration Assessment Dashboard tab
@@ -36,7 +36,7 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-#. The **Inventory** tab shows the current SCA state for monitored endpoints. It displays the SCA policies evaluated on each endpoint and their individual checks, and the check result.
+#. The **Inventory** tab shows the current SCA state for monitored endpoints. It displays the SCA policies evaluated on each endpoint, their individual checks, and the check result.
 
    .. thumbnail:: /images/compliance/hipaa/configuration-assessment-inventory-tab.png
       :title: Configuration Assessment Inventory tab
