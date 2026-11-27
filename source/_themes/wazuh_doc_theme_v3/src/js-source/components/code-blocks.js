@@ -65,6 +65,8 @@ if ( $('.document').length > 0 ) {
     const regex = /\s+$/g;
     const blockCode = $(this);
 
+    markHeredocPrompts(blockCode);
+
     /* Process prompts: gp elements */
     const gpElements = blockCode.find('.gp');
     gpElements.each(function() {
@@ -145,7 +147,7 @@ if ( $('.document').length > 0 ) {
   function filterCodeBlock(code, parent) {
     const codeClone = code.clone(true);
     const heredocs = findHeredocs(code);
-    removePrompts(codeClone, heredocs);
+    codeClone.find('.gp:not(.in-heredoc)').empty();
     let data = codeClone.text();
     const codeType = getCodeBlockType(parent).toLowerCase();
 
@@ -185,26 +187,23 @@ if ( $('.document').length > 0 ) {
   }
 
   /**
-   * Removes the prompts marked by the lexer, except on heredoc content lines,
+   * Marks with the class in-heredoc the prompts found on heredoc content lines,
    * where a leading # (e.g. #!/bin/bash or a comment) is part of the content
-   * @param {Obj} code jQuery object containing the cloned code block
-   * @param {array} heredocs Heredocs found in the code block, described by their start and finish lines
+   * so it must be selectable and copied
+   * @param {Obj} code jQuery object containing the code block
    */
-  function removePrompts(code, heredocs) {
+  function markHeredocPrompts(code) {
+    const heredocs = findHeredocs(code);
     const walker = document.createTreeWalker(code.get(0), NodeFilter.SHOW_TEXT);
-    const prompts = [];
     let line = 0;
     while (walker.nextNode()) {
       const node = walker.currentNode;
       const inHeredoc = heredocs.some(({start, finish}) => start <= line && finish >= line);
-      if ($(node.parentNode).closest('.gp').length && !inHeredoc) {
-        prompts.push(node);
+      if (inHeredoc) {
+        $(node.parentNode).closest('.gp').addClass('in-heredoc');
       }
       line += (node.nodeValue.match(/\n/g) || []).length;
     }
-    prompts.forEach((node) => {
-      node.nodeValue = '';
-    });
   }
 
   /**
