@@ -254,6 +254,8 @@ Below, we show the full data of a finding triggered when a Docker container is p
      }
    }
 
+.. _container_security_use_cases_monitoring_container_runtime_logs:
+
 Monitoring container runtime logs
 ---------------------------------
 
@@ -503,6 +505,8 @@ Below, we show the full data of the finding. The ``wazuh.protocol.location`` fie
        }
      }
    }
+
+.. _container_security_use_cases_detecting_suspicious_activity_in_docker_containers:
 
 Detecting suspicious activity in Docker containers
 --------------------------------------------------

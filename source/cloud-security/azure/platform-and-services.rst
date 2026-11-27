@@ -40,6 +40,8 @@ Without these resources, application registration and permission grants can succ
 Wazuh
 ^^^^^
 
+.. _azure_platform_and_services_enable_the_microsoft_azure_integration:
+
 Enable the Microsoft Azure integration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

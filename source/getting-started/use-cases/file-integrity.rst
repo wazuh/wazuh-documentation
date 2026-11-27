@@ -10,16 +10,16 @@ File integrity monitoring (FIM) tracks changes to files and directories by detec
 
 The Wazuh :doc:`file integrity monitoring </user-manual/capabilities/file-integrity/index>` capability monitors configured files and directories and records file creation, modification, and deletion events. When a monitored file changes, Wazuh compares its checksum against a previously recorded baseline and generates a finding if it detects a mismatch.
 
-The FIM module supports real-time monitoring and scheduled scans, allowing you to monitor files according to their sensitivity and operational requirements.
+The FIM module supports :ref:`real-time monitoring <real_time_monitoring>` and :ref:`scheduled scans <scheduled_scans>`, allowing you to monitor files according to their sensitivity and operational requirements.
 
 Viewing FIM scan results
 ------------------------
 
 The Wazuh dashboard provides a **File Integrity Monitoring** section that displays file integrity events from monitored endpoints. It shows the synchronized file inventory for each endpoint and an overview of FIM activity across the environment. It also lists individual findings with details such as the agent name, file path, and type of change.
 
-The :doc:`Wazuh FIM dashboard </user-manual/capabilities/file-integrity/interpreting-fim-module-analysis>` contains three tabs for viewing FIM results, including **Dashboard**, **Inventory**, and **Findings**.
+The :doc:`Wazuh FIM dashboard </user-manual/capabilities/file-integrity/interpreting-fim-module-analysis>` contains three tabs for viewing FIM results: **Dashboard**, **Inventory**, and **Findings**.
 
--  **Dashboard**: Shows an overview of the events triggered by the FIM module for all monitored endpoints. You can also streamline it to show the events for a selected monitored endpoint.
+-  **Dashboard**: Shows an overview of the events triggered by the FIM module for all monitored endpoints. You can also filter it to show the events for a selected monitored endpoint.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-dashboard-tab.png
       :title: Dashboard tab of the File Integrity Monitoring section showing an overview of FIM events
@@ -27,7 +27,7 @@ The :doc:`Wazuh FIM dashboard </user-manual/capabilities/file-integrity/interpre
       :align: center
       :width: 80%
 
--  **Inventory:** Displays all files indexed by the FIM module. Each entry includes information such as the file name, last modification date, owner, user ID, and file size.
+-  **Inventory**: Displays all files indexed by the FIM module. Each entry includes information such as the file name, last modification date, owner, user ID, and file size.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-inventory-tab.png
       :title: Inventory tab of the File Integrity Monitoring section listing monitored files and their metadata
@@ -58,7 +58,7 @@ The following image shows an example of a finding generated when a monitored fil
    :align: center
    :width: 80%
 
-The *who-data* metadata in the finding shows that the ``root`` user ran the ``chmod`` command that changed the permissions of the ``/etc/ufw/user.rules`` file.
+The :ref:`who-data <file_integrity_advanced_settings_who_data_monitoring_on_linux>` :ref:`metadata <file_integrity_advanced_settings_who_data_monitoring_on_linux>` in the finding shows that the ``root`` user ran the ``chmod`` command that changed the permissions of the ``/etc/ufw/user.rules`` file.
 
 .. thumbnail:: /images/getting-started/use-cases/fim/who-data-in-a-fim-finding.png
    :title: FIM finding details showing who-data for a chmod command run by the root user on /etc/ufw/user.rules
@@ -73,11 +73,11 @@ The FIM module works with other Wazuh capabilities to detect and respond to malw
 
 The following combinations are available:
 
--  **FIM and threat intelligence:** The Wazuh normalization engine compares file hashes from FIM events against indicators of compromise from Wazuh Cyber Threat Intelligence (CTI). Custom decoders can also check hashes against your own key-value databases (KVDBs). When a file hash matches an indicator, Wazuh adds the threat context to the event.
--  **FIM and Active Response:** The :doc:`Alerting module </user-manual/wazuh-indexer/modules/alerting>` in the Wazuh indexer matches FIM findings and triggers an Active Response channel. This notification channel defines the executable to run and the target Wazuh agents. The Wazuh manager sends the response to the Wazuh agent as a task, and the agent runs the channel executable. A custom executable can delete a malicious file, which contains the threat immediately and reduces the Mean Time to Respond (MTTR).
+-  **FIM and threat intelligence:** The Wazuh normalization engine :doc:`compares file hashes from FIM events </user-manual/capabilities/malware-detection/fim-threat-intelligence>` against indicators of compromise from Wazuh Cyber Threat Intelligence (CTI). Custom decoders can also check hashes against your own key-value databases (KVDBs). When a file hash matches an indicator, Wazuh adds the threat context to the event.
+-  **FIM and Active Response:** The :doc:`Alerting module </user-manual/wazuh-indexer/modules/alerting>` in the Wazuh indexer matches FIM findings and triggers an :doc:`Active Response </user-manual/capabilities/active-response/index>` channel. This notification channel defines the executable to run and the target Wazuh agents. The Wazuh manager sends the response to the Wazuh agent as a task, and the agent runs the channel executable. A custom executable can delete a malicious file, which contains the threat immediately and reduces the Mean Time to Respond (MTTR).
 -  **FIM and YARA:** A custom Active Response executable can run a YARA scan when FIM detects that a file was created or modified.
 
-For example, the **File Integrity Monitoring** section of the Wazuh dashboard shows the detection and removal of the EICAR file. The file was in the ``C:\Users\<USER>\Downloads`` directory on a monitored Windows endpoint.
+For example, the **File Integrity Monitoring** section of the Wazuh dashboard shows the :doc:`detection and removal of the EICAR file </user-manual/capabilities/active-response/ar-use-cases/removing-malicious-file>`. The file was in the ``C:\Users\<USER>\Downloads`` directory on a monitored Windows endpoint.
 
 .. thumbnail:: /images/getting-started/use-cases/fim/eicar-file-detection-and-removal.png
    :title: File Integrity Monitoring section showing the detection and removal of the EICAR test file on a Windows endpoint
@@ -128,4 +128,3 @@ The finding details show the corresponding compliance requirement.
    :alt: FIM finding details showing the mapped PCI DSS 11.5.2 requirement
    :align: center
    :width: 80%
-
