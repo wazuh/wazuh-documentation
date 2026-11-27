@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - Added the *Detecting a known malicious file* use case to the *Proof of concept guide*. ([#10833](https://github.com/wazuh/wazuh-documentation/pull/10833))
 - Added the *Detecting vulnerable driver loading* use case to the *Proof of concept guide*. ([#10909](https://github.com/wazuh/wazuh-documentation/pull/10909))
 - Added the *Using Wazuh for NIS2 compliance* documentation in *Regulatory compliance*. ([#10972](https://github.com/wazuh/wazuh-documentation/pull/10972))
+- Added the *Using Wazuh for FedRAMP compliance* documentation to *Regulatory compliance*. ([#10973](https://github.com/wazuh/wazuh-documentation/pull/10973))
 
 ### Changed
 
