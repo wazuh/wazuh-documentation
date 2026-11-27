@@ -80,6 +80,8 @@ removedUrls['x.y'] = [
 /* Pages added in 5.0 */
 
 newUrls['5.0'] = [
+  '/compliance/nis2/index.html',
+  '/compliance/fedramp/index.html',
   '/compliance/tsc/common-criteria/cc6.8.html',
   '/compliance/tsc/common-criteria/cc7.2.html',
   '/compliance/hipaa/164.308.a.1.ii.a.html',
