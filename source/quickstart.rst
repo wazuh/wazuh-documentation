@@ -62,7 +62,7 @@ Run the installation assistant:
 
 .. code-block:: console
 
-   $ curl -sO https://packages.wazuh.com/5.0/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
+   $ curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release
 
 When it finishes, the assistant prints the address of the Wazuh dashboard and the admin credentials:
 
