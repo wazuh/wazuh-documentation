@@ -50,7 +50,7 @@ Follow these steps to view the HIPAA-related data on the Wazuh dashboard:
       :align: center
       :width: 80%
 
-Wazuh has standard policies that include decoders, Key-Value Databases (KVDBs), and rules that detect attacks, system errors, security misconfigurations, and policy violations. By default, these rules map to the associated HIPAA requirements. In Wazuh 5.0, :doc:`rules </user-manual/data-analysis/rules>` use the Sigma format. You can map a custom rule to one or more HIPAA requirements. To do this, add the requirement to the ``hipaa`` list under the ``compliance`` field of the rule. For example:
+Wazuh includes standard decoders, Key-Value Databases (KVDBs), and rules that detect threats, system errors, security misconfigurations, and policy violations across monitored systems and applications. By default, these rules map to the associated HIPAA requirements. In Wazuh 5.0, :doc:`rules </user-manual/data-analysis/rules>` use the Sigma format. Wazuh 5.0 doesn't use XML rules. You can map a custom rule to one or more HIPAA requirements. To do this, add the requirement to the ``hipaa`` list under the ``compliance`` field of the rule. For example:
 
 .. code-block:: yaml
 

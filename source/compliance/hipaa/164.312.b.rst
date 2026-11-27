@@ -42,7 +42,7 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-#. Switch to the **Findings** tab and click a finding to view details. In this example, the image shows the details of a Sudo command executed finding, which maps to HIPAA § 164.312(b).
+#. Switch to the **Findings** tab and click a finding to view details. In this example, the image shows the details of a ``Sudo command executed`` finding, which maps to HIPAA § 164.312(b).
 
    .. thumbnail:: /images/compliance/hipaa/threat-hunting-sudo-finding-details.png
       :title: Threat Hunting finding details - Sudo command executed

@@ -14,19 +14,19 @@ Wazuh supports this requirement by providing several capabilities that support m
 
 -  Malware detection dashboard
 -  Threat detection ruleset
--  Rootkit detection
+-  :doc:`Rootkit detection </user-manual/capabilities/malware-detection/rootkit-detection>`
 
 The Wazuh malware detection capability helps meet this requirement using out-of-the-box rules, threat intelligence enrichments, and :doc:`key-value databases (KVDBs) </user-manual/data-analysis/key-value-databases>`.
 
 Use case: Rootkit detection
 ------------------------------
 
-In this example, the Wazuh Rootcheck component detects abnormal behavior on monitored endpoints, including potential rootkits and other indicators of compromise. This supports HIPAA § 164.308(a)(5)(ii)(B) by detecting malicious software that can compromise the security of systems and electronic protected health information. Follow these steps to detect the Diamorphine rootkit on an Ubuntu 26.04 endpoint.
+In this example, the Wazuh :doc:`Rootcheck </user-manual/capabilities/malware-detection/rootkit-detection>` component detects abnormal behavior on monitored endpoints, including potential rootkits and other indicators of compromise. This supports HIPAA § 164.308(a)(5)(ii)(B) by detecting malicious software that can compromise the security of systems and electronic protected health information. Follow these steps to detect the Diamorphine rootkit on an Ubuntu 24.04 endpoint.
 
 Configuration
 ^^^^^^^^^^^^^^
 
-Follow these steps on the Ubuntu 26.04 endpoint to emulate rootkit-like process-hiding behavior. The Wazuh agent runs a Rootcheck scan based on the set ``<frequency>`` and detects the rootkit behavior.
+Follow these steps on the Ubuntu 24.04 endpoint to emulate rootkit-like process-hiding behavior. The Wazuh agent runs a Rootcheck scan based on the set ``<frequency>`` and detects the rootkit behavior.
 
 #. Switch to the root user and refresh package lists:
 
@@ -52,9 +52,12 @@ Follow these steps on the Ubuntu 26.04 endpoint to emulate rootkit-like process-
          <check_pids>yes</check_pids>
          <check_ports>yes</check_ports>
          <check_if>yes</check_if>
+
          <!-- Frequency that rootcheck is executed - every 12 hours by default -->
          <frequency>120</frequency>
+
          <skip_nfs>yes</skip_nfs>
+
          <ignore>/var/lib/containerd</ignore>
          <ignore>/var/lib/docker/overlay2</ignore>
       </rootcheck>
@@ -68,7 +71,7 @@ Follow these steps on the Ubuntu 26.04 endpoint to emulate rootkit-like process-
 Attack emulation
 ^^^^^^^^^^^^^^^^^^
 
-Perform the following steps on the monitored Ubuntu 26.04 endpoint to emulate the attack:
+Perform the following steps on the monitored Ubuntu 24.04 endpoint to emulate the attack:
 
 #. Fetch the Diamorphine rootkit source code from GitHub:
 
@@ -139,7 +142,7 @@ Perform the following steps on the monitored Ubuntu 26.04 endpoint to emulate th
 
       # rmmod diamorphine
 
-#. Navigate to the **Threat intelligence** > **Threat Hunting** dashboard and add the following filter in the search bar to query the findings:
+#. Navigate to the **Threat intelligence** > **Threat Hunting** dashboard and add the following filter in the search bar to query the findings.
 
    -  ``wazuh.integration.name: wazuh-rootcheck``
 
