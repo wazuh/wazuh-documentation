@@ -51,7 +51,7 @@ Below, you can find a description of the XML labels used to configure rules.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | :ref:`rules_protocol`   | Any :doc:`regular expression <regex>`.                        | Compares a regular expression representing a protocol with a value decoded as ``protocol``.          |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| :ref:`rules_hostname`   | Any :doc:`regular expression <regex>`.                        | Compares a regular expression representing a hostname with a value pre-decoded as ``hostname``.      |
+| :ref:`rules_hostname`   | Any :doc:`regular expression <regex>`.                        | Compares a regular expression with the event hostname used by analysisd (see below).                 |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `time`_                 | Any time range. e.g. (hh:mm-hh:mm)                            | Checks if the event was generated during that time range.                                            |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -906,7 +906,22 @@ If the ``protocol`` label is declared multiple times within the rule, the follow
 hostname
 ^^^^^^^^
 
-Used as a requirement to trigger a rule, it compares a regular expression representing a hostname with a value decoded as ``hostname``.
+Used as a requirement to trigger a rule, it compares a regular expression representing a hostname with the event hostname value used by the analysis engine.
+
+.. note::
+
+   The value checked by ``hostname`` depends on how Wazuh receives the event:
+
+   - For events received from an agent, the rule condition is evaluated against the registered agent name. It does not use the hostname parsed from the event's syslog header.
+   - For manager-originated events, including input pasted into ``wazuh-logtest``, the condition uses the hostname extracted by the pre-decoder when available. Otherwise, it uses the manager's local hostname.
+
+   As a result, a rule tested with plain ``wazuh-logtest`` can behave differently when the same event is received from an agent. To test a rule in an agent context, pass an agent-style location to ``wazuh-logtest`` using ``-l``:
+
+   .. code-block:: console
+
+      /var/ossec/bin/wazuh-logtest -l '[AGENT_ID] (AGENT_NAME) AGENT_IP->LOCATION'
+
+   Replace the placeholders with the agent ID, registered name, IP address, and log source. See `Wazuh issue #35178 <https://github.com/wazuh/wazuh/issues/35178>`_ for details about this behavior.
 
 +--------------------+---------------------------------------------------------------+
 | Default Value      | n/a                                                           |
