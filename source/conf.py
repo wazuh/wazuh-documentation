@@ -139,7 +139,7 @@ exclude_patterns = [
     'proof-of-concept-guide/detect-web-attack-shellshock.rst',
     'proof-of-concept-guide/leveraging-llms-for-alert-enrichment.rst',
     'upgrade-guide/**',
-    'integrations-guide/**',
+    'integrations-guide/amazon-security-lake/**',
     'migration-guide/**',
     'cloud-service/**',
     'development/**',

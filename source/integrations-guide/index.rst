@@ -1,155 +1,323 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: In this integration guide, you can find how to integrate your Wazuh deployment with Elastic Stack, OpenSearch, and Splunk.
+   :description: Learn how to export the Wazuh events and findings data streams from the Wazuh indexer to Elasticsearch, OpenSearch, and Splunk.
 
 Integrations guide: Elastic, OpenSearch, Splunk, Amazon Security Lake
 =====================================================================
 
-Wazuh offers extensive compatibility and robust integration features that allow users to connect it with other security solutions and platforms. Integrating Wazuh with other security solutions enables users to manage Wazuh data in diverse ways.
+The Wazuh integrations export the data stored in the Wazuh indexer to third-party platforms. A Logstash
+pipeline reads the events and findings data streams of the :doc:`Wazuh Common Schema (WCS) </user-manual/wazuh-indexer/wazuh-common-schema>` and delivers
+them to the following platforms:
 
-Elastic, OpenSearch, and Splunk are software platforms designed for search, analytics, and data management. They are used to collect, index, search, and analyze large volumes of data in real-time and historical contexts.
+-  Elasticsearch
+-  OpenSearch
+-  Splunk
 
-Amazon Security Lake is a service designed to help organizations collect, manage, and analyze security data from various sources. Its primary purpose is to centralize security data, making it easier to detect, investigate, and respond to security threats.
+The integration files are in the ``integrations`` folder of the ``wazuh-indexer-plugins`` repository. Clone
+the repository at the tag that matches the version of your Wazuh indexer, for example:
 
-Up to Wazuh v4.5, the following integrated applications allow users to manage Wazuh and its security data using third-party platforms:
+.. code-block:: bash
 
--  `Wazuh for Splunk – Version 4.5 <https://documentation.wazuh.com/4.5/deployment-options/splunk/splunk-app.html>`__
--  `Wazuh for Elastic – Version 4.5 <https://documentation.wazuh.com/4.5/deployment-options/elastic-stack/index.html>`__
+   git clone --depth 1 --branch v|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV| https://github.com/wazuh/wazuh-indexer-plugins.git
+   cd wazuh-indexer-plugins
 
-However, from version 4.6, we will not develop these integrated applications any longer. We will only support them with critical security updates. In this document, we describe new methods of integrating your Wazuh deployment with the following third-party security platforms:
+Run the commands in this guide from the ``wazuh-indexer-plugins`` folder.
 
--  :doc:`Elastic Stack <elastic-stack/index>`
--  :doc:`OpenSearch <opensearch/index>`
--  :doc:`Splunk <splunk/index>`
--  :doc:`Amazon Security Lake <amazon-security-lake/index>`
+Architecture
+------------
 
-Integration methods
--------------------
+Every integration is a Logstash pipeline. On a schedule, the pipeline reads the ``wazuh-events-v5-*`` and
+``wazuh-findings-v5-*`` data streams, and optionally custom data streams, from the Wazuh indexer. It
+identifies the source of each document and writes it to the destination: ``logs-wazuh.*`` data streams in
+Elasticsearch and OpenSearch, or ``wazuh-*`` indexes through the HTTP Event Collector (HEC) in Splunk.
 
-We describe how to configure the following integration alternatives for each of the security platforms mentioned above:
+The pipeline consists of the following files, in this order. All the integrations share the first two files.
 
--  Wazuh indexer integration
--  Wazuh server integration
++-------------------------------------------------------------------+------------------------------------------------------------------------+
+| File                                                              | Purpose                                                                |
++===================================================================+========================================================================+
+| ``integrations/logstash/pipeline/wazuh-indexer-input.conf``       | Reads the documents to export from the Wazuh indexer, on a schedule.   |
++-------------------------------------------------------------------+------------------------------------------------------------------------+
+| ``integrations/logstash/pipeline/wazuh-source.conf``              | Identifies the source of every document: events, findings, or custom,  |
+|                                                                   | and its category.                                                      |
++-------------------------------------------------------------------+------------------------------------------------------------------------+
+| ``integrations/logstash/pipeline/wazuh-data-stream.conf``         | Names the destination data stream of every document. Elasticsearch and |
+|                                                                   | OpenSearch only.                                                       |
++-------------------------------------------------------------------+------------------------------------------------------------------------+
+| ``<INTEGRATION>/logstash/pipeline/indexer-to-<INTEGRATION>.conf`` | Writes the documents to the destination.                               |
++-------------------------------------------------------------------+------------------------------------------------------------------------+
 
-Additionally, we demonstrate how to import the provided dashboards for these platforms.
+The pipelines read every setting from environment variables or from the `Logstash keystore
+<https://www.elastic.co/docs/reference/logstash/keystore>`__, so you don't need to edit any pipeline file to
+deploy an integration.
 
-.. _wazuh_indexer_integration:
+.. _integrations_what_is_exported:
 
-Wazuh indexer integration
-^^^^^^^^^^^^^^^^^^^^^^^^^
+What is exported
+----------------
 
-.. thumbnail:: /images/integrations/indexer-integration-diagram.png
-   :title: Wazuh indexer integration diagram
-   :alt: Wazuh indexer integration diagram
-   :align: center
-   :width: 80%
+By default, the integrations export the findings and events data streams, ``wazuh-findings-v5-*`` and
+``wazuh-events-v5-*``. To export other data streams, set ``WAZUH_EXPORT_INDICES`` to a comma-separated list of
+data stream names or patterns:
 
-The Wazuh agent collects security data from monitored endpoints. These data are analyzed by the Wazuh server and indexed in the Wazuh indexer. The Wazuh indexer integration forwards analyzed security data from the Wazuh indexer to the third-party security platform indexer in the form of indexes. Indexes are collections of documents with similar properties.
++-------------------------------+----------------------------------------------------------------+
+| Scenario                      | ``WAZUH_EXPORT_INDICES``                                       |
++===============================+================================================================+
+| Findings and events (default) | ``wazuh-findings-v5-*,wazuh-events-v5-*``                      |
++-------------------------------+----------------------------------------------------------------+
+| Findings only                 | ``wazuh-findings-v5-*``                                        |
++-------------------------------+----------------------------------------------------------------+
+| Events only                   | ``wazuh-events-v5-*``                                          |
++-------------------------------+----------------------------------------------------------------+
+| Custom data streams           | Their names or patterns, alone or with the above. For example, |
+|                               | ``wazuh-findings-v5-*,my-stream``.                             |
++-------------------------------+----------------------------------------------------------------+
 
-Wazuh indexer integration requires a running Wazuh indexer and uses `Logstash <https://www.elastic.co/logstash/>`__ as a :ref:`data forwarder <data_forwarders>` for forwarding alerts to a third-party security platform. Logstash forwards the alerts generated after querying the Wazuh indexer. This integration requires that you install Logstash on a dedicated server or on the server hosting the third-party indexer.
-
-We recommend the Wazuh indexer integration if you want to continue analyzing security data in Wazuh and archive it in a data lake for storage or out-of-band analysis. The Wazuh indexer and third-party platform indexer both create indexes for the same alerts. This integration results in the redundancy of indexes which can lead to high resource costs.
-
-.. _wazuh_server_integration:
-
-Wazuh server integration
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. thumbnail:: /images/integrations/server-integration-diagram.png
-   :title: Wazuh server integration diagram
-   :alt: Wazuh server integration diagram
-   :align: center
-   :width: 80%
-
-The Wazuh agent collects security data from monitored endpoints. The Wazuh server analyzes the data and generates alerts on the Wazuh dashboard. Wazuh stores security alerts locally in the ``/var/ossec/logs/alerts/alerts.log`` and ``/var/ossec/logs/alerts/alerts.json`` alerts files. The Wazuh server integration operates by reading the ``/var/ossec/logs/alerts/alerts.json`` file and forwarding the alerts to the third-party platform using a :ref:`data forwarder <data_forwarders>`.
-
-We recommend Wazuh server integration over indexer integration if you don’t have enough resources for hosting both the third-party security platform indexer and the Wazuh indexer. This is particularly relevant for users operating Wazuh at a large scale, generating numerous alerts.
-
-To implement the Wazuh server integration, a data forwarder must be installed on the same system as the Wazuh server. In multi-node configurations, the data forwarder should be installed on each Wazuh server node.
+The read-only user that Logstash uses must have read access to every data stream in the list. See
+:ref:`integrations_wazuh_indexer_user`.
 
 .. note::
 
-   To make sure Wazuh logs the alerts to ``/var/ossec/logs/alerts/alerts.json``, check that the :ref:`global_jsonout_output` option in the Wazuh server configuration ``/var/ossec/etc/ossec.conf`` file is set to ``yes``.
+   **Findings embed their event.** A finding is a copy of the event that matched a rule, plus the rule
+   (``wazuh.rule.*``) and a reference to the event (``event.doc_id`` and ``event.index``). If you
+   export both events and findings, the destination stores every matched event twice. This uses more
+   storage and, on platforms licensed by volume, more licenses. Export events only if the destination
+   needs the events that matched no rule.
 
-Integration considerations
---------------------------
+The integrations export documents as they are stored in the Wazuh indexer, as WCS documents. The Elasticsearch
+and OpenSearch integrations add the ``data_stream`` fields that name the destination data stream.
 
-.. _data_forwarders:
+.. _integrations_destination_of_every_source:
 
-Data forwarders
-^^^^^^^^^^^^^^^
+Destination of every source
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Third-party security platforms typically have a dedicated data collector or data forwarder which is required for implementing these integrations. These forwarders facilitate the data flow from the Wazuh indexer or server to the third-party security platforms.
+The destination keeps every source separate:
 
-In the Wazuh indexer integration alternative, the forwarder executes periodic queries to the Wazuh indexer. These queries are performed in blocks, with the time range of each query matching the specified query period. Consequently, there may be a delay in the arrival of alerts at the destination, depending on the frequency set for querying new alerts.
++----------------------------------+-------------------------------------------------+--------------------------------------------------------------------+
+| Source                           | Elasticsearch and OpenSearch data stream        | Splunk index, sourcetype, and source                               |
++==================================+=================================================+====================================================================+
+| ``wazuh-findings-v5-<CATEGORY>`` | ``logs-wazuh.findings.<CATEGORY>-<NAMESPACE>``  | ``wazuh-findings``, ``wazuh:findings``, and the source data stream |
++----------------------------------+-------------------------------------------------+--------------------------------------------------------------------+
+| ``wazuh-events-v5-<CATEGORY>``   | ``logs-wazuh.events.<CATEGORY>-<NAMESPACE>``    | ``wazuh-events``, ``wazuh:events``, and the source data stream     |
++----------------------------------+-------------------------------------------------+--------------------------------------------------------------------+
+| Any other data stream            | ``logs-wazuh.custom.<DATA_STREAM>-<NAMESPACE>`` | ``wazuh-custom``, ``wazuh:custom``, and the source data stream     |
++----------------------------------+-------------------------------------------------+--------------------------------------------------------------------+
 
-.. thumbnail:: /images/integrations/indexer-queries-diagram.png
-   :title: Wazuh indexer queries diagram
-   :alt: Wazuh indexer queries diagram
-   :align: center
-   :width: 80%
+Export window
+-------------
 
-In the Wazuh server integration, the forwarder periodically checks the Wazuh alerts file. If it detects changes since the last read, it loads all the new alerts and sends them to the third-party platform.
+Logstash searches the Wazuh indexer on a schedule. Events and findings are stored in append-only data streams,
+so every run reads the documents whose ``@timestamp`` falls in the following time window:
 
-Similarly, checking for new alerts periodically means that the alerts reach the destination with a delay. This delay depends on the frequency established to check for new alerts.
+.. code-block:: none
 
-.. thumbnail:: /images/integrations/alerts-file-checking-diagram.png
-   :title: Alerts file checking diagram
-   :alt: Alerts file checking diagram
-   :align: center
-   :width: 80%
+   [now - WAZUH_EXPORT_DELAY - WAZUH_EXPORT_LOOKBACK, now - WAZUH_EXPORT_DELAY)
 
-We discuss the data forwarders that we use in the integration alternatives.
+Both ends of the window are rounded down to the minute. With the default settings, Logstash runs every minute
+and reads a one-minute window that ends five minutes before the current time. For example, the run at 10:06
+reads from 10:00 to 10:01, and the run at 10:07 reads from 10:01 to 10:02. Consecutive runs read consecutive
+windows, so Logstash reads every document once.
 
-There are several ways to ingest data into third-party indexers, which include using `content sources <https://www.elastic.co/guide/en/workplace-search/current/workplace-search-content-sources.html>`__, `Elastic Agent <https://www.elastic.co/guide/en/observability/current/deploy-agent-to-send-data.html>`__, `Beats <https://www.elastic.co/guide/en/observability/current/deploy-beats-to-send-data.html>`__, or `Logstash <https://www.elastic.co/logstash/>`__. Each method has different trade-offs and use cases. In this documentation, we consider only Logstash and Splunk Forwarder and explain our considerations.
+.. _integrations_export_delay:
 
-Logstash
-~~~~~~~~
+Export delay
+^^^^^^^^^^^^
 
-`Elastic Logstash <https://www.elastic.co/logstash/>`__ is a free and open server-side data processing pipeline that ingests data from multiple sources, transforms it, and then sends it to your desired destination. Logstash has an Apache 2.0 license base and non-open source extensions under the x-pack denomination. Logstash supports scheduling queries at intervals of up to a second.
+The ``@timestamp`` field is the time the Wazuh engine received the event, and a finding carries the
+``@timestamp`` of its event. However, the Ruleset Management detectors write findings on their own schedule,
+every ``plugins.content_manager.security_analytics.detector_interval`` minutes, 2 by default. As a result, a
+finding is indexed up to one detector interval plus the detector run duration after its ``@timestamp``.
 
-Logstash supports reading data from indexes using  an input plugin and supports transformations with an output plugin. In summary, Logstash is the most compatible data forwarder for the Wazuh indexer and server integrations.
+The scheduled export never reads a document that is indexed after the run that covers its window. To avoid
+this, keep the delay longer than the following sum:
 
-Splunk Forwarder
-~~~~~~~~~~~~~~~~
+.. code-block:: none
 
-`Splunk forwarder <https://www.splunk.com/en_us/download/universal-forwarder.html>`__ is a powerful data collection and forwarding tool provided by Splunk. It serves as an agent that collects data from various sources, transforms it if necessary, and sends it to the Splunk indexing infrastructure for further analysis and visualization.
+   WAZUH_EXPORT_DELAY > longest detector interval + detector run time + refresh interval
 
-The Splunk forwarder supports data collection from diverse sources such as log files, metrics, network devices, and APIs. It provides robust mechanisms to parse, filter, and enrich the collected data before sending it to the Splunk indexers. This enables users to extract relevant information, apply custom formatting, and enhance the data's overall quality and usefulness.
+The default delay of 5 minutes covers the default detector interval with a margin. Increase the delay if you
+increase the detector interval, or if the detectors fall behind under load. The delay is also the export
+latency: Logstash reads a document between ``WAZUH_EXPORT_DELAY`` and ``WAZUH_EXPORT_DELAY +
+WAZUH_EXPORT_LOOKBACK`` after its ``@timestamp``.
 
-Redistributable dashboards
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _integrations_interruptions:
 
-In this guide you can find configuration steps to set your integration and use the dashboards we provide for third-party security platforms. These dashboards help you get insights from your security data using these platforms.
+Interruptions
+^^^^^^^^^^^^^
 
--  :ref:`elastic_dashboards`
--  :ref:`openSearch_dashboards`
--  :ref:`splunk_dashboards`
+The export doesn't keep a checkpoint. While Logstash or the Wazuh indexer is down, it doesn't export the
+missed windows. To export a missed time range, run ``wazuh-indexer-backfill.conf`` once in place of
+``wazuh-indexer-input.conf``, and set the range in ``WAZUH_BACKFILL_FROM`` and ``WAZUH_BACKFILL_TO``, in ISO
+8601 format and UTC.
 
-.. _capacity_planning:
+.. _integrations_duplicates:
 
-Capacity planning
-^^^^^^^^^^^^^^^^^
+Duplicates
+^^^^^^^^^^
 
-When integrating Wazuh with other security solutions, you need to carefully plan your storage resources and escalation needs beforehand. While the details on capacity planning are out of the scope of this guide, here are a few considerations.
+-  Elasticsearch and OpenSearch: The exported document uses the source document ID, and the destination
+   drops documents it already has. Reading a window twice, during a backfill or after a restart, adds
+   no duplicates. This check only covers the backing index that holds the document. A copy written
+   after the destination data stream rolls over is stored as a new document.
+-  Splunk: Splunk keeps every copy it receives, so give a backfill only the missing range. Every event
+   carries the ID of its source document in the ``wazuh_document_id`` indexed field. Use this field to
+   remove duplicates at search time, for example, ```wazuh_findings` | dedup wazuh_document_id``.
 
-When using the Wazuh indexer integration, you need to put the following points into consideration:
+.. _integrations_security:
 
--  The disk space available on the third-party endpoint.
--  The network bandwidth the third-party indexer needs to ingest the collected data.
--  The network bandwidth the data forwarder uses to forward the security data.
--  The scalability of the data forwarder infrastructure to read all the data from the Wazuh indexer and forward it to the third-party security platform.
+Security
+--------
 
-When using the Wazuh server integration, you need to put the following points into consideration:
+The integrations need two users, and neither needs administrator privileges: a read-only user on the Wazuh
+indexer, described below, and a writer user on the destination, described in the section of each integration.
+Logstash connects to the Wazuh indexer on port ``9200``, and to the destination on its own port: ``9200`` for
+Elasticsearch and OpenSearch, and ``8088`` for the Splunk HEC.
 
--  The disk space each Wazuh server must have to forward the data.
--  The network bandwidth the Wazuh server and the third-party security platform need to receive and forward the security data respectively. 
--  The additional CPU/RAM resources the data forwarder requires to work.
--  The disk space on the destination platform to accommodate the forwarded data it receives.
+.. _integrations_wazuh_indexer_user:
 
-After the integration, you might have the same data in both Wazuh and third-party security platforms. To minimize the amount of duplicated data, you can archive the data from the Wazuh server or indexer for storage or later analysis. Also, you need to plan backups and recovery of data in case of failure. 
+Wazuh indexer user
+^^^^^^^^^^^^^^^^^^
 
+Logstash reads from the Wazuh indexer with a read-only user. Using a Wazuh indexer user with permission to
+manage security, create a role that can search the exported data streams, and a user mapped to that role. For
+example, with the security REST API:
+
+.. code-block:: bash
+   :emphasize-lines: 1,9,10,11
+
+   curl --cacert root-ca.pem -u admin -X PUT "https://<WAZUH_INDEXER_IP>:9200/_plugins/_security/api/roles/wazuh-export" \
+     -H 'Content-Type: application/json' -d '{
+     "description": "Read-only access to export the Wazuh events and findings data streams",
+     "cluster_permissions": ["cluster:monitor/main", "indices:data/read/scroll", "indices:data/read/scroll/clear"],
+     "index_permissions": [
+       { "index_patterns": ["wazuh-events-v5-*", "wazuh-findings-v5-*"], "allowed_actions": ["read"] }
+     ]
+   }'
+   curl --cacert root-ca.pem -u admin -X PUT "https://<WAZUH_INDEXER_IP>:9200/_plugins/_security/api/internalusers/wazuh-export" \
+     -H 'Content-Type: application/json' -d '{"password": "<WAZUH_EXPORT_PASSWORD>"}'
+   curl --cacert root-ca.pem -u admin -X PUT "https://<WAZUH_INDEXER_IP>:9200/_plugins/_security/api/rolesmapping/wazuh-export" \
+     -H 'Content-Type: application/json' -d '{"users": ["wazuh-export"]}'
+
+To export custom data streams, add them to ``index_patterns``.
+
+.. _integrations_tls_credentials:
+
+TLS and credentials
+^^^^^^^^^^^^^^^^^^^
+
+All connections use TLS and are verified against the CA certificate of each side, set in ``WAZUH_INDEXER_CA``,
+``ELASTIC_CA``, ``OPENSEARCH_CA``, and ``SPLUNK_CA``. If a side uses a certificate from a public certificate
+authority, such as Elastic Cloud, set its CA setting to the CA bundle of the operating system, for example,
+``/etc/ssl/certs/ca-certificates.crt``.
+
+Store the passwords and the HEC token in the `Logstash keystore
+<https://www.elastic.co/docs/reference/logstash/keystore>`__, not in environment variables.
+
+Settings
+--------
+
+The following settings apply to the shared pipeline files. The section of each integration lists the settings
+of its output. Set them in the environment of the Logstash service, in ``/etc/default/logstash`` on Debian and
+Ubuntu or ``/etc/sysconfig/logstash`` on Red Hat, and store the secrets in the Logstash keystore.
+
+The defaults for the settings marked required only fit the repository's development environments. Set them in
+every deployment.
+
++----------------------------+-------------------------------------------+-----------------------------------------------------------------------+
+| Setting                    | Default                                   | Description                                                           |
++============================+===========================================+=======================================================================+
+| ``WAZUH_INDEXER_HOST``     | required                                  | Wazuh indexer node, in ``host:port`` format. It takes one node. To    |
+|                            |                                           | spread the reads over a cluster, point it to a load balancer, or list |
+|                            |                                           | the nodes in ``hosts`` of ``wazuh-indexer-input.conf``.               |
++----------------------------+-------------------------------------------+-----------------------------------------------------------------------+
+| ``WAZUH_INDEXER_USERNAME`` | required                                  | Read-only user that Logstash exports with.                            |
++----------------------------+-------------------------------------------+-----------------------------------------------------------------------+
+| ``WAZUH_INDEXER_PASSWORD`` | required                                  | Password of that user.                                                |
++----------------------------+-------------------------------------------+-----------------------------------------------------------------------+
+| ``WAZUH_INDEXER_CA``       | required                                  | CA certificate of the Wazuh indexer.                                  |
++----------------------------+-------------------------------------------+-----------------------------------------------------------------------+
+| ``WAZUH_EXPORT_INDICES``   | ``wazuh-findings-v5-*,wazuh-events-v5-*`` | Comma-separated data streams or patterns to export.                   |
++----------------------------+-------------------------------------------+-----------------------------------------------------------------------+
+| ``WAZUH_EXPORT_LOOKBACK``  | ``1m``                                    | Length of the window that every run reads. Keep it equal to the       |
+|                            |                                           | interval of the schedule.                                             |
++----------------------------+-------------------------------------------+-----------------------------------------------------------------------+
+| ``WAZUH_EXPORT_DELAY``     | ``5m``                                    | How far behind the current time the window ends. See                  |
+|                            |                                           | :ref:`integrations_export_delay`.                                     |
++----------------------------+-------------------------------------------+-----------------------------------------------------------------------+
+| ``WAZUH_EXPORT_SCHEDULE``  | ``* * * * *``                             | Cron schedule of the runs.                                            |
++----------------------------+-------------------------------------------+-----------------------------------------------------------------------+
+| ``WAZUH_EXPORT_NAMESPACE`` | ``default``                               | Namespace of the destination data streams. Elasticsearch and          |
+|                            |                                           | OpenSearch only.                                                      |
++----------------------------+-------------------------------------------+-----------------------------------------------------------------------+
+| ``WAZUH_BACKFILL_FROM``,   |                                           | Time range to read, in ISO 8601 format.                               |
+| ``WAZUH_BACKFILL_TO``      |                                           | ``wazuh-indexer-backfill.conf`` only.                                 |
++----------------------------+-------------------------------------------+-----------------------------------------------------------------------+
+
+Sizing
+------
+
+-  Logstash: The integrations are tested with a 1 GB heap and the default number of workers and batch
+   size. Size the persisted queue (``queue.max_bytes``) for the longest destination outage that
+   Logstash must absorb: export rate × outage duration.
+-  Destination: Every exported document is written once. Exporting both findings and events stores
+   every matched event twice. See :ref:`integrations_what_is_exported`.
+
+Several integrations
+^^^^^^^^^^^^^^^^^^^^
+
+To export to several destinations, run one pipeline per integration, each in its own folder and with its own
+``pipeline.id`` in ``pipelines.yml``. Every pipeline reads the Wazuh indexer independently, so the read load
+adds up.
+
+Monitoring
+----------
+
+The Logstash monitoring API reports, for every pipeline, the documents read, written, and waiting in the
+queue:
+
+.. code-block:: bash
+
+   curl -s "http://localhost:9600/_node/stats/pipelines/<PIPELINE_ID>?pretty"
+
+-  ``events.in`` and ``events.out`` grow with every run. If ``events.in`` stops growing, the runs are
+   failing. Check the Logstash log for errors of the ``wazuh-indexer`` input.
+-  ``queue.events_count`` grows while the destination doesn't accept documents.
+
+Upgrading
+---------
+
+Upgrade the integration every time you upgrade the Wazuh indexer. Run these steps from the
+``wazuh-indexer-plugins`` folder of the new version:
+
+#. Install the index template again and, for OpenSearch, the ISM policy, as described in the
+   integration section. A new template applies only to backing indices created after it. To apply it
+   immediately, roll over every data stream with ``POST <DATA_STREAM>/_rollover``.
+#. Replace the pipeline files and restart Logstash.
+#. Import the dashboards again with ``overwrite=true``. For Splunk, install the new package of the
+   Splunk app instead: ``splunk install app wazuh_integration.tgz -update 1``.
+
+.. _integrations_compatibility:
+
+Compatibility
+-------------
+
+The integrations are tested with the following versions:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Wazuh indexer
+     - Logstash
+     - Elasticsearch
+     - OpenSearch
+     - Splunk
+   * - |WAZUH_CURRENT|
+     - 8.19.23
+     - 9.5.4
+     - 3.9.0
+     - 10.6.0
 
 .. toctree::
    :hidden:
@@ -157,4 +325,3 @@ After the integration, you might have the same data in both Wazuh and third-part
    elastic-stack/index
    opensearch/index
    splunk/index
-   amazon-security-lake/index

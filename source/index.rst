@@ -32,11 +32,11 @@ Index
    cloud-security/monitoring
    compliance/index
    proof-of-concept-guide/index
+   Integrations guide <integrations-guide/index>
    transitioning/index
 
 ..
    upgrade-guide/index
-   Integrations guide <integrations-guide/index>
    migration-guide/index
    Wazuh Cloud service <cloud-service/index>
    development/index
