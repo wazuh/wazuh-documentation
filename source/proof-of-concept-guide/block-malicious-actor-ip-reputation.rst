@@ -24,15 +24,15 @@ How it works
 Endpoints
 ---------
 
-+--------------+--------------------------------------------------------------------------------+
-| Endpoint     | Role                                                                           |
-+==============+================================================================================+
-| RHEL 9.0     | Attacker. Its IP address is in the malicious IP KVDB.                          |
-+--------------+--------------------------------------------------------------------------------+
-| Ubuntu 24.04 | Victim running an Apache web server. Active Response blocks the attacker here. |
-+--------------+--------------------------------------------------------------------------------+
-| Windows 11   | Victim running an Apache web server. Active Response blocks the attacker here. |
-+--------------+--------------------------------------------------------------------------------+
++---------------------+--------------------------------------------------------------------------------+
+| Endpoint            | Role                                                                           |
++=====================+================================================================================+
+| RHEL 9.0            | Attacker. Its IP address is in the malicious IP KVDB.                          |
++---------------------+--------------------------------------------------------------------------------+
+| Ubuntu 24.04        | Victim running an Apache web server. Active Response blocks the attacker here. |
++---------------------+--------------------------------------------------------------------------------+
+| Windows Server 2022 | Victim running an Apache web server. Active Response blocks the attacker here. |
++---------------------+--------------------------------------------------------------------------------+
 
 Configuration
 -------------
@@ -414,7 +414,7 @@ Create the detector
 
 #. Go to **Ruleset management** > **Detectors** and click **Create detector**.
 
-#. Enter ``http_detector`` as the **Name**. In the **Data source** drop-down, select ``wazuh-events-v5-network-activity``.
+#. Enter ``http_detector`` as the **Name** and select ``wazuh-events-v5-network-activity`` in the **Select indexes/aliases** drop-down, in the **Data source** section.
 
 #. In the **Rules** section, change the space to **Custom** and select ``custom_http`` in the **Integration** drop-down.
 
@@ -625,3 +625,5 @@ Each block expires 60 seconds after the last Active Response command.
 To stop blocking the RHEL endpoint, delete the ``apache_malicious_ip_monitor`` monitor in **Explore** > **Alerting** > **Monitors**.
 
 To stop Apache on the Windows endpoint, press **Ctrl** + **C** in the PowerShell terminal where it runs.
+
+To remove the detection content you created, such as the ``custom_http`` integration, the ``http_detector`` detector, and the ``block_traffic`` Active Response, restore your lab snapshot of the Wazuh server.

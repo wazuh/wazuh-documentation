@@ -233,7 +233,7 @@ Test the configuration
 View the findings
 -----------------
 
-You see a ``Wazuh SCA check failed - <CHECK_TITLE>`` finding for checks 10010, 10011, and 10012. After you fix the settings in :ref:`Clean up <poc_sca_clean_up>`, you see a ``Wazuh SCA check passed - <CHECK_TITLE>`` finding for each one. ``<CHECK_TITLE>`` is the ``title`` value of the check in the policy file.
+You see a ``Wazuh SCA check failed - <CHECK_TITLE>`` finding for checks 10010, 10011, and 10012. After you fix the settings in :ref:`Clean up <poc_sca_clean_up>`, you see a ``Wazuh SCA check passed - <CHECK_TITLE>`` finding for each one. ``<CHECK_TITLE>`` is the ``name`` value of the check in the policy file.
 
 #. In the Wazuh dashboard, go to **Endpoint security** > **Configuration Assessment**.
 
