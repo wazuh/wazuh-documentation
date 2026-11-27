@@ -86,6 +86,7 @@ $('.desktop-search-form .header-search .form-control').on('focus', function(e){ 
 
         /* Change icon */
       $('.desktop-search-form .header-search svg').addClass('d-none');
+      $('.desktop-search-form .header-search button[type="submit"]').attr('tabindex', '-1');
       $('.desktop-search-form .header-search .btn-close').removeClass('d-none');
 
       /* Expand search bar */
@@ -104,6 +105,7 @@ $('.desktop-search-form .header-search .form-control').on('focus', function(e){ 
 $('.desktop-search-form .header-search .btn-close').on('click', function(e){  /* Search bar close button clicked */
     $('.desktop-search-form .header-search .btn-close').addClass('d-none');
     $('.desktop-search-form .header-search svg').removeClass('d-none');
+    $('.desktop-search-form .header-search button[type="submit"]').removeAttr('tabindex');
     searchbar.removeClass('expanded').addClass('collapsed');
     mainmenu.removeClass('collapsed').addClass('expanded');
     nav.removeClass('d-none');
@@ -137,6 +139,7 @@ const useApiRedoc = (compareVersion(DOCUMENTATION_OPTIONS.VERSION, minVersionRed
 const newTabNodes = [
   'user-manual/api/reference',
   'cloud-service/apis/reference',
+  'user-manual/indexer-api/reference',
 ];
 
 /* Open external links in a new tab ========================================= */
