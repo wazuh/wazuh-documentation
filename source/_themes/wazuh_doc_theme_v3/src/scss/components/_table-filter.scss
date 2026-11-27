@@ -1,0 +1,561 @@
+/* -----------------------------------------------------------------------------
+  Component: Table filter
+
+  Search and filter bar for reference pages with large tables, such as the
+  WCS field reference. Every part except the search box is optional, and so is
+  the label above the search box (without it, use the .table-filter-search box
+  alone in place of the .table-filter-field label):
+
+  <div class="table-filter" role="search">
+    <label class="table-filter-field">
+      <span class="table-filter-label">Search</span>
+      <span class="table-filter-search">
+        <input type="search" class="table-filter-input" placeholder="Search 88 fields">
+        <span class="table-filter-count" aria-live="polite"></span>
+      </span>
+    </label>
+    <div class="table-filter-selects">
+      <label class="table-filter-select">
+        <span class="table-filter-label">Type</span>
+        <select>...</select>
+        <span class="table-filter-sizer" aria-hidden="true">
+          <span>All</span><span>Option 1</span>...
+        </span>
+      </label>
+    </div>
+    <div class="table-filter-actions">
+      <button type="button" class="table-filter-btn table-filter-expand" title="Expand all">
+        <span class="table-filter-btn-text">Expand all</span>
+      </button>
+      <button type="button" class="table-filter-btn table-filter-collapse" title="Collapse all">
+        <span class="table-filter-btn-text">Collapse all</span>
+      </button>
+    </div>
+  </div>
+
+  Below 992px of screen width (lg), the search box and each dropdown take a
+  full row, and the buttons share the last row in equal columns. From 992px,
+  the layout follows the width of the bar itself (container queries), so the
+  bar fits any column:
+  - Narrow: the same rows as below 992px.
+  - From 36rem: the search box takes the first row; the dropdowns and the
+    buttons share the second one.
+  - From 44rem: everything fits on one line, with icon-only buttons.
+  - From 56rem: the buttons show their text too.
+
+  Each dropdown is as wide as its longest option (or its label, if wider), so
+  the selected value never gets cut off. The hidden sizer must repeat the text
+  of every option for this, because a styled select is only as wide as its
+  selected option.
+
+  Each label shows above its box, and the boxes and the buttons line up along
+  their bottom edge, so a bar can mix controls with and without a label.
+
+  All the text in the bar uses the site's font, size and weight, the open list
+  of a dropdown too (where the browser supports styling it), and the dropdown
+  arrow is drawn like the arrows of the buttons.
+----------------------------------------------------------------------------- */
+
+$table-filter-height: 46px;
+$table-filter-gap: 8px;
+$table-filter-padding: 10px;
+$table-filter-chevron-space: 36px;
+// The dropdown arrow draws at the size of the left menu's arrows (10.5px wide).
+$table-filter-arrow-size: 21px;
+
+// Icons drawn with the text color (mask), so they follow the button state.
+$table-filter-icon-expand: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 15 5 5 5-5M7 9l5-5 5 5'/%3E%3C/svg%3E");
+$table-filter-icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 9.5 5 5 5-5'/%3E%3C/svg%3E");
+$table-filter-icon-collapse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 20 5-5 5 5M7 4l5 5 5-5'/%3E%3C/svg%3E");
+
+.table-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $table-filter-gap;
+  align-items: flex-end;
+  margin: 1.5rem 0 1.25rem;
+  font-size: 16px; // Same as the body text
+  font-weight: 500;
+  line-height: 19px;
+  container-type: inline-size;
+
+  input,
+  select,
+  option,
+  button {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+}
+
+/* Shared look: the bordered, rounded box of the site's search box */
+.table-filter-search,
+.table-filter-select select,
+.table-filter-actions {
+  box-sizing: border-box;
+  height: $table-filter-height;
+  border: 2px solid;
+  border-radius: $rounded-corners;
+  transition: border-color .15s;
+}
+
+// Label on top of its control
+.table-filter-label {
+  display: block;
+  min-width: 0;
+  margin-bottom: 6px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Search box -------------------------------------------------------------- */
+
+// .table-filter-field holds the label and the search box.
+.table-filter-search,
+.table-filter-field {
+  flex: 1 1 100%;
+  min-width: 0;
+
+  @include media-min(lg) {
+    @container (min-width: 44rem) {
+      flex: 1 1 9.5rem;
+    }
+  }
+}
+
+.table-filter-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+}
+
+.table-filter-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  // Search icon
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 9px;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    content: "";
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 22px 22px;
+    transform: translateY(-50%);
+  }
+}
+
+.table-filter-input {
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  min-width: 0;
+  padding: 0 $table-filter-padding 0 38px;
+  text-overflow: ellipsis;
+  background: transparent;
+  border: none;
+  border-radius: calc(#{$rounded-corners} - 2px);
+  appearance: none;
+  &:focus {
+    outline: none;
+  }
+  &::-webkit-search-cancel-button {
+    cursor: pointer;
+  }
+}
+
+.table-filter-count {
+  flex: none;
+  padding-right: 12px;
+  font-size: 14px;
+  white-space: nowrap;
+  &:empty {
+    display: none;
+  }
+}
+
+/* Dropdowns --------------------------------------------------------------- */
+
+.table-filter-selects {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  gap: $table-filter-gap;
+
+  @include media-min(lg) {
+    @container (min-width: 36rem) {
+      flex: none;
+      flex-wrap: nowrap;
+    }
+  }
+}
+
+// The label takes the first row. The select, the sizer and the arrow share the
+// second one, and the column takes the width of the widest of them: the label
+// or the longest option.
+.table-filter-select {
+  position: relative;
+  display: grid;
+  flex: 1 1 100%;
+  grid-template-rows: auto $table-filter-height;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+  margin: 0;
+  cursor: pointer;
+
+  > select,
+  > .table-filter-sizer,
+  &::after {
+    grid-area: 2 / 1;
+  }
+
+  // Down arrow, drawn like the icons of the buttons
+  &::after {
+    z-index: 1;
+    align-self: center;
+    justify-self: end;
+    width: $table-filter-arrow-size;
+    height: $table-filter-arrow-size;
+    margin-right: 7px;
+    pointer-events: none;
+    content: "";
+    background-color: currentcolor;
+    mask-image: $table-filter-icon-chevron;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: $table-filter-arrow-size $table-filter-arrow-size;
+  }
+
+  @include media-min(lg) {
+    @container (min-width: 36rem) {
+      flex: none;
+    }
+  }
+
+  select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    // Centers the value: (46px - 2 × 2px borders - 19px line) / 2
+    padding: 11px $table-filter-chevron-space 11px $table-filter-padding;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: inherit;
+    cursor: pointer;
+    background: transparent;
+    appearance: none;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+// Browsers that support customizable selects show the open list with the
+// site's font and colors instead of the system ones.
+@supports (appearance: base-select) {
+  .table-filter-select {
+    select,
+    ::picker(select) {
+      appearance: base-select;
+    }
+
+    select::picker-icon {
+      display: none;
+    }
+
+    ::picker(select) {
+      box-sizing: border-box;
+      min-width: anchor-size(width);
+      padding: 4px;
+      margin-top: 4px;
+      border: 2px solid;
+      border-radius: $rounded-corners;
+    }
+
+    option {
+      gap: 8px;
+      padding: 8px 10px;
+      white-space: nowrap;
+      cursor: pointer;
+      border-radius: calc(#{$rounded-corners} - 4px);
+      &::checkmark {
+        display: none;
+      }
+    }
+  }
+}
+
+// Invisible, zero height: it only gives the box its width (its padding
+// includes the 2px borders of the select).
+.table-filter-sizer {
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  height: 0;
+  padding: 0 calc(#{$table-filter-chevron-space} + 2px) 0 calc(#{$table-filter-padding} + 2px);
+  overflow: hidden;
+  white-space: nowrap;
+  visibility: hidden;
+}
+
+/* Expand all and Collapse all buttons ------------------------------------- */
+
+.table-filter-actions {
+  display: flex;
+  flex: 1 1 100%;
+  overflow: hidden;
+
+  @include media-min(lg) {
+    @container (min-width: 36rem) {
+      flex: none;
+      margin-left: auto;
+    }
+  }
+}
+
+.table-filter-btn {
+  display: inline-flex;
+  flex: 1 1 50%;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  padding: 0 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: background-color .15s, color .15s;
+
+  & + & {
+    border-left: 2px solid;
+  }
+
+  &::before {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    content: "";
+    background-color: currentcolor;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 18px 18px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @include media-min(lg) {
+    @container (min-width: 36rem) {
+      flex: none;
+      width: 40px;
+      padding: 0;
+    }
+  }
+  @include media-min(lg) {
+    @container (min-width: 56rem) {
+      width: auto;
+      padding: 0 12px;
+    }
+  }
+}
+
+.table-filter-expand::before {
+  mask-image: $table-filter-icon-expand;
+}
+
+.table-filter-collapse::before {
+  mask-image: $table-filter-icon-collapse;
+}
+
+// The text stays readable by screen readers when only the icon shows.
+.table-filter-btn-text {
+  @include media-min(lg) {
+    @container (min-width: 36rem) and (max-width: 55.99rem) {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.light-theme {
+  .table-filter {
+    color-scheme: light;
+  }
+
+  .table-filter-search,
+  .table-filter-select select,
+  .table-filter-actions {
+    color: $light-color-main-text;
+    background-color: $light-color-base-space;
+    border-color: $light-color-border-details;
+    &:hover {
+      border-color: $light-color-border-deeper;
+    }
+    &:focus-within {
+      border-color: $light-color-primary-lighter;
+    }
+  }
+
+  .table-filter-search::before {
+    background-image: url("#{$ico-path}svg-icons.svg#search-lt");
+  }
+
+  .table-filter-input {
+    color: $light-color-main-text;
+    &::placeholder {
+      color: $light-color-input-placeholder;
+      opacity: 1;
+    }
+  }
+
+  .table-filter-count,
+  .table-filter-label {
+    color: $light-color-shaded-text;
+  }
+
+  .table-filter-select {
+    &::after {
+      background-color: $light-color-primary;
+    }
+    select {
+      color: $light-color-main-text;
+    }
+    option {
+      color: $light-color-main-text;
+      background-color: $light-color-base-space;
+    }
+    ::picker(select) {
+      color: $light-color-main-text;
+      background-color: $light-color-base-space;
+      border-color: $light-color-border-details;
+    }
+    option:hover,
+    option:focus-visible {
+      background-color: $light-color-highlight-background;
+      outline: none;
+    }
+    option:checked {
+      color: $light-color-primary;
+    }
+  }
+
+  .table-filter-btn {
+    color: $light-color-primary;
+    & + .table-filter-btn {
+      border-left-color: $light-color-border-details;
+    }
+    &:hover {
+      color: $light-color-primary-alt;
+      background-color: $light-color-highlight-background;
+    }
+    &:focus-visible {
+      background-color: $light-color-highlight-background;
+      box-shadow: inset 0 0 0 2px $light-color-primary-lighter;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .table-filter {
+    color-scheme: dark;
+  }
+
+  .table-filter-search,
+  .table-filter-select select,
+  .table-filter-actions {
+    color: $dark-color-main-text;
+    background-color: $dark-color-sidebar-space;
+    border-color: $dark-color-shaded-text;
+    &:hover {
+      border-color: $dark-color-border-deeper;
+    }
+    &:focus-within {
+      border-color: $dark-color-primary-lighter;
+    }
+  }
+
+  .table-filter-search::before {
+    background-image: url("#{$ico-path}svg-icons.svg#search-dt");
+  }
+
+  .table-filter-input {
+    color: $dark-color-main-text;
+    &::placeholder {
+      color: $dark-color-input-placeholder;
+      opacity: 1;
+    }
+  }
+
+  .table-filter-count,
+  .table-filter-label {
+    color: $dark-color-shaded-text-lighter;
+  }
+
+  .table-filter-select {
+    &::after {
+      background-color: $dark-color-primary;
+    }
+    select {
+      color: $dark-color-main-text;
+    }
+    option {
+      color: $dark-color-main-text;
+      background-color: $dark-color-sidebar-space;
+    }
+    ::picker(select) {
+      color: $dark-color-main-text;
+      background-color: $dark-color-sidebar-space;
+      border-color: $dark-color-shaded-text;
+    }
+    option:hover,
+    option:focus-visible {
+      background-color: $dark-color-base-space;
+      outline: none;
+    }
+    option:checked {
+      color: $dark-color-primary;
+    }
+  }
+
+  .table-filter-btn {
+    color: $dark-color-primary;
+    & + .table-filter-btn {
+      border-left-color: $dark-color-shaded-text;
+    }
+    &:hover {
+      color: $dark-color-primary-lighter;
+      background-color: $dark-color-base-space;
+    }
+    &:focus-visible {
+      background-color: $dark-color-base-space;
+      box-shadow: inset 0 0 0 2px $dark-color-primary-lighter;
+    }
+  }
+}
