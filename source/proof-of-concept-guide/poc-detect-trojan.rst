@@ -63,9 +63,9 @@ Attack emulation
 
 #. Replace the original system binary ``/usr/bin/w`` with the following shell script:
 
-   .. code-block:: bash
+   .. code-block:: console
 
-      sudo tee /usr/bin/w << EOF
+      $ sudo tee /usr/bin/w << EOF
       #!/bin/bash
       echo "`date` this is evil" > /tmp/trojan_created_file
       echo 'test for /usr/bin/w trojaned file' >> /tmp/trojan_created_file
