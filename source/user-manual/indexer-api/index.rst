@@ -25,7 +25,7 @@ The Wazuh indexer API capabilities include the following:
 
 Refer to the :doc:`Wazuh indexer API reference <reference>` for details about all the Wazuh indexer API endpoints. Take a look at the :doc:`Wazuh indexer API use cases <use-case>` for practical examples of how you can use the Wazuh indexer API.
 
-The Wazuh indexer stores time-based data in data streams and the current state of monitored endpoints in stateful indexes. The examples in this guide query the following index patterns:
+The Wazuh indexer stores time-based data in data streams and the current state of monitored endpoints in stateful indexes. A data stream is a named resource that holds append-only, time-based data in backing indexes. The examples in this guide query the following index patterns:
 
 +----------------------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Index pattern**                | **Type**     | **Content**                                                                                                                             |
