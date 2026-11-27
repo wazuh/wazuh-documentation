@@ -151,7 +151,7 @@ Perform the steps below on your Wazuh server.
 
       <!-- Rules for journald logs for CRON services-->
       <group name="cron-service,">
-        <!-- rule for groupped logs -->
+        <!-- rule for grouped logs -->
         <rule id="111800" level="0">
           <decoded_as>cron-service</decoded_as>
           <description>Journald logs for CRON.</description>
