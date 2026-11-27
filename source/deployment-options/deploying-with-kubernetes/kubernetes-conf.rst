@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This section outlines Wazuh components within a Kubernetes cluster, including the manager, indexer, and dashboard, and their resource requirements.
+   :description: This section outlines Wazuh components within a Kubernetes cluster, including the Wazuh manager, Wazuh indexer, and Wazuh dashboard, and their resource requirements.
 
 Wazuh Kubernetes requirements and architecture
 ==============================================
 
-This section outlines Wazuh components within a Kubernetes cluster, including the manager, indexer, and dashboard. It describes the resource requirements, storage setup, and controller types used for each component.
+This section outlines Wazuh components within a Kubernetes cluster, including the Wazuh manager, Wazuh indexer, and Wazuh dashboard. It describes the resource requirements, storage setup, and controller types used for each component.
 
 Prerequisites
 -------------
@@ -16,7 +16,7 @@ Before you begin to deploy Wazuh, ensure that the following prerequisites are me
 Kubernetes cluster
 ^^^^^^^^^^^^^^^^^^
 
--  A running Kubernetes cluster with ``kubectl`` configured for communication, Kustomize support for applying manifests (included in ``kubectl`` version 1.21 and later), and the ``git``, ``curl``, and ``openssl`` utilities installed.
+-  A running Kubernetes cluster with ``kubectl`` configured to access the cluster, Kustomize support for applying manifests (included in ``kubectl`` version 1.21 and later), and the ``git``, ``curl``, and ``openssl`` utilities installed.
 -  A container network interface (CNI) plugin that enforces Kubernetes network policies. On Amazon EKS, enable network policy support in the Amazon VPC CNI add-on before deploying.
 
 .. note::
@@ -35,7 +35,7 @@ Storage class
 Amazon EKS
 ~~~~~~~~~~
 
-Amazon EBS CSI driver with appropriate IAM role configuration for Amazon EKS deployments using Kubernetes version 1.23 and later. The CSI driver requires that you assign an IAM role to work properly. For detailed instructions, refer to AWS documentation on `Creating the Amazon EBS CSI driver IAM role <https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html#csi-iam-role>`__.
+Amazon EBS CSI driver with appropriate IAM role configuration for Amazon EKS deployments using Kubernetes version 1.23 and later. For detailed instructions, see the AWS documentation on `Creating the Amazon EBS CSI driver IAM role <https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html#csi-iam-role>`__.
 
 Local cluster
 ~~~~~~~~~~~~~
@@ -70,27 +70,23 @@ Overview
 StatefulSet and Deployment controllers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A StatefulSet manages pods based on identical container specifications. Unlike Deployments, StatefulSets maintain a persistent identity for each pod. Pods are created from the same specification, but are not interchangeable. Each pod retains a persistent identifier that survives rescheduling.
+The Wazuh manager and the Wazuh indexer keep state and run as StatefulSets. Each of their pods keeps its identity and its persistent volume across restarts.
 
-StatefulSets are useful for stateful applications, such as databases that persist data. The Wazuh manager and Wazuh indexer components maintain their states, so we use StatefulSets to ensure state persistence across pod restarts.
+:ref:`Traefik <kubernetes-apply-traefik>` and the Wazuh dashboard run as Deployments. The Wazuh dashboard has one replica and keeps its configuration directory and keystore on the ``wazuh-dashboard-config`` persistent volume claim.
 
-Deployments are intended for stateless applications and are lightweight. :ref:`Traefik <kubernetes-apply-traefik>` doesn't need to maintain state, and runs as a Deployment. The Wazuh dashboard also runs as a Deployment, with one replica. It keeps its configuration directory and keystore on the ``wazuh-dashboard-config`` persistent volume claim.
-
-Persistent volumes (PV) are storage resources in the cluster. They have a lifecycle independent of any individual pod that uses them. This API object captures storage implementation details for NFS, iSCSI, or cloud-provider-specific storage systems.
-
-We use persistent volumes to store data from the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard.
+Persistent volumes store the data of the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard.
 
 For more information, see the `Kubernetes persistent volumes <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`__ documentation.
 
 Pods
 ^^^^
 
-A pod is the smallest and most fundamental deployable unit in Kubernetes. It represents a single instance of a running process in your cluster. In our deployment, each Wazuh component runs inside a container image, and these containers are deployed within pods. You can view how we build Wazuh Docker containers in our `repository <https://github.com/wazuh/wazuh-docker>`__.
+Each Wazuh component runs in a container inside a pod. The Wazuh Docker images are built from the ``wazuh-docker`` `repository <https://github.com/wazuh/wazuh-docker>`__.
 
 Wazuh master
 ~~~~~~~~~~~~
 
-The master pod contains the master node of the Wazuh manager cluster. The master node centralizes and coordinates worker nodes. It ensures critical data remains consistent across the Wazuh manager cluster. Management operations occur only on this node, so the Wazuh API runs here. The master node also serves the enrollment service (``authd``) that Wazuh 4.x agents use on port ``1515``. Wazuh 5.x agents enroll on port ``1517`` through any Wazuh manager node.
+The master pod contains the master node of the Wazuh manager cluster. Management operations occur only on this node, so the Wazuh manager API runs here. Wazuh 5.x agents enroll on port ``1517`` through any Wazuh manager node.
 
 +---------------------+-------------+
 | Image               | Controller  |
@@ -161,7 +157,7 @@ Wazuh manager
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 | wazuh-events       | Wazuh 4.x agent event traffic (legacy ``remoted``) on port ``1514``, served by the Wazuh manager worker nodes. Wazuh 5.x agents don't use this port. |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| wazuh-cluster      | Headless service for internal communication between Wazuh manager nodes on port ``1516``                                                             |
+| wazuh-cluster      | Headless service for internal communication between Wazuh manager nodes on port ``1516``.                                                            |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Network policies
@@ -174,12 +170,12 @@ The following network policies are included:
 -  ``allow-dns``: Allows all pods in the ``wazuh`` namespace to send DNS queries (UDP and TCP port ``53``) to the cluster DNS service (``kube-dns`` in ``kube-system``) so that they can resolve service names.
 -  ``allow-ingress-to-dashboard`` (EKS only): Permits incoming traffic from the ingress controller to port ``443`` of the Wazuh dashboard.
 -  ``allow-ingress-to-manager-master`` (EKS only): Allows incoming traffic from the ingress controller to ports ``1517`` and ``1515`` of Wazuh manager (master).
--  ``allow-ingress-to-manager-worker`` (EKS only): Allows incoming traffic from the ingress controller to ports ``1517`` and ``1514`` of Wazuh manager (worker) .
+-  ``allow-ingress-to-manager-worker`` (EKS only): Allows incoming traffic from the ingress controller to ports ``1517`` and ``1514`` of Wazuh manager (worker).
 -  ``dashboard-egress``: Allows outgoing traffic from Wazuh dashboard pods to port ``9200`` of the Wazuh indexer and port ``55000`` of the Wazuh manager master.
--  ``default-deny-all``: Blocks all incoming and outgoing traffic that is not explicitly allowed by another network policy. This ensures a secure-by-default configuration.
+-  ``default-deny-all``: Blocks all incoming and outgoing traffic that is not explicitly allowed by another network policy.
 -  ``indexer-egress``: Allows outgoing traffic from Wazuh indexer pods to ports ``9200`` and ``9300`` of other indexer nodes for cluster communication.
 -  ``indexer-ingress``: Allows incoming traffic to Wazuh indexer pods from the dashboard (port ``9200``), manager (port ``9200``), and other indexer nodes (port ``9300``).
 -  ``manager-egress-external``: Allows outgoing HTTPS traffic (TCP port ``443``) from Wazuh manager pods to any address. This is required for downloading CTI updates and other external resources.
 -  ``manager-egress``: Allows outgoing traffic from Wazuh manager pods to the Wazuh indexer on port ``9200``.
--  ``wazuh-api-ingress``: Allows incoming traffic to the Wazuh manager master from the Wazuh dashboard on port ``55000`` (Wazuh API) and from other Wazuh manager pods on port ``1516`` (Wazuh cluster communication).
+-  ``wazuh-api-ingress``: Allows incoming traffic to the Wazuh manager master from the Wazuh dashboard on port ``55000`` (Wazuh manager API) and from other Wazuh manager pods on port ``1516`` (Wazuh cluster communication).
 -  ``wazuh-worker-egress``: Allows outgoing traffic from Wazuh manager worker pods to manager ports ``1516`` and ``55000`` for cluster coordination.

@@ -34,7 +34,7 @@ Clone the Wazuh Kubernetes repository for the necessary services and pods:
 Apply Traefik ingress controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Traefik ingress controller routes and load balances external traffic to the appropriate internal Kubernetes services. It is also used to expose the Wazuh services outside the EKS cluster.
+The Traefik ingress controller exposes the Wazuh services outside the EKS cluster.
 
 #. Run the command below to deploy the Traefik CRD:
 
@@ -146,7 +146,7 @@ Perform the steps below to generate the required certificates for the deployment
 
    -  ``<EXTERNAL-IP>`` with the load balancer FQDN shown in the ``EXTERNAL-IP`` column of ``kubectl -n traefik get svc``.
 
-#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<EXTERNAL-IP>`` with the same load balancer FQDN. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517``. Repeat the option for every other address agents will use. The script also issues the Wazuh manager API certificate (``manager-apid.pem``), which the Wazuh manager master needs to start. Its names come from the ``manager`` entry in ``config.yml``. Add any other name or address that clients of the Wazuh manager API use with the ``--api-san`` option.
+#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<EXTERNAL-IP>`` with the same load balancer FQDN. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517``. Repeat the option for every other address agents will use. Add any other name or address that clients of the Wazuh manager API use with the ``--api-san`` option.
 
    .. code-block:: console
 
@@ -176,18 +176,16 @@ Perform the steps below to generate the required certificates for the deployment
       Copying certificates for manager: manager -> config/manager/certs/
       Copying certificates for dashboard: dashboard -> config/dashboard/certs/
       Copying the root CA certificate -> config/root-ca/certs/
-      Setting ownership for indexer indexer (1000:1000)
-      Setting ownership for manager manager (1000:1000)
-      Setting ownership for dashboard dashboard (1000:1000)
-      Setting ownership for root-ca certificates (1000:1000)
       Process completed.
 
-   The script keeps the root CA certificate and its private key in the ``wazuh-ca/`` directory next to ``wazuh-certs-tool.sh`` (owned by ``root``, mode ``0700``) on the machine where you run it, and reuses them on later runs. Protect this directory, because anyone with the key can issue certificates that the Wazuh components trust. To issue new certificates later, remove the ``wazuh-certificates/`` directory first. Otherwise, the script reports success without issuing new certificates. Only ``root-ca.pem`` is copied into the cluster Secrets, so the key stays on this machine. To keep the root CA in another directory, set ``WAZUH_CA_DIR`` to its absolute path on the ``sudo`` command line, for example, ``sudo WAZUH_CA_DIR=<CA_DIRECTORY> bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv --agent-san <EXTERNAL-IP>``. A ``WAZUH_CA_DIR`` exported in your shell doesn't reach the script because ``sudo`` drops it.
+   The script keeps the root CA certificate and its private key in the ``wazuh-ca/`` directory next to ``wazuh-certs-tool.sh`` on the machine where you run it, and reuses them on later runs. Protect this directory, because anyone with the key can issue certificates that the Wazuh components trust. To issue new certificates later, remove the ``wazuh-certificates/`` directory first. Otherwise, the script stops with an error and copies no certificates.
+
+   To keep the root CA in another directory, set ``WAZUH_CA_DIR`` to its absolute path on the ``sudo`` command line, for example, ``sudo WAZUH_CA_DIR=<CA_DIRECTORY> bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv --agent-san <EXTERNAL-IP>``. A ``WAZUH_CA_DIR`` exported in your shell doesn't reach the script because ``sudo`` drops it.
 
 Generate credentials
 ~~~~~~~~~~~~~~~~~~~~
 
-The Wazuh images ship with no default passwords. Each deployment generates its own before the first deployment. Perform the steps below to generate the required credentials.
+The Wazuh images ship with no default passwords. Generate them before the first deployment.
 
 #. Run the ``credentials-conf.sh`` script to generate the credentials and import them via ``secretGenerator`` in the ``kustomization.yml`` file.
 
@@ -210,7 +208,7 @@ The Wazuh images ship with no default passwords. Each deployment generates its o
       Log in to the Wazuh dashboard as 'admin'. Read its password with:
         grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' ./config/credentials/indexer.env | cut -d= -f2-
 
-   The command creates the ``indexer.env``, ``manager.env``, ``dashboard.env``, and ``cluster.key`` files in the ``wazuh/config/credentials/`` directory, holding only the credentials that each component needs, and the Wazuh manager cluster key. Keep these files for the life of the deployment; every ``kubectl apply -k`` and ``kubectl delete -k`` reads them, and a recreated indexer pod retrieves its credentials from them again.
+   The command creates the ``indexer.env``, ``manager.env``, ``dashboard.env``, and ``cluster.key`` files in the ``wazuh/config/credentials/`` directory. Keep these files for the life of the deployment. Every ``kubectl apply -k`` and ``kubectl delete -k`` reads them.
 
 #. Retrieve the generated password for the ``admin`` user. You need it to log in to the Wazuh dashboard after the deployment is completed.
 
@@ -223,7 +221,7 @@ Apply all manifests
 
 The Wazuh Kubernetes cluster manifest for Amazon EKS clusters is located in ``envs/eks``.
 
-You can adjust cluster resources by editing patch files in ``envs/eks/`` or ``envs/local-env/``. These files override specific values in the base manifests for each environment, such as CPU, memory, and storage for persistent volumes.
+You can adjust cluster resources by editing patch files in ``envs/eks/``. These files override specific values in the base manifests for each environment, such as CPU, memory, and storage for persistent volumes.
 
 #. Return to the root of the repository with ``cd ..``, then edit the ``wazuh/base/ingressRoute-tcp-dashboard.yaml`` file and replace the ``<UPDATE-WITH-THE-FQDN-OF-THE-INGRESS>`` placeholder with the fully qualified domain name (FQDN) of the external load balancer created for the Traefik service. This configures TLS pass-through for the Wazuh dashboard.
 
@@ -250,15 +248,13 @@ You can adjust cluster resources by editing patch files in ``envs/eks/`` or ``en
 
    The ``ip-allowlist`` middleware controls which source addresses can reach the Wazuh dashboard through Traefik. It's defined in ``wazuh/base/middleware.yaml`` and allows all addresses (``0.0.0.0/0``) by default. To restrict access, replace ``0.0.0.0/0`` in the ``sourceRange`` list with your trusted address ranges before you apply the manifests.
 
-   Run the command ``kubectl -n traefik get svc`` to get the FQDN of the load balancer created for the Traefik service.
-
 #. Deploy the Wazuh Kubernetes cluster using the ``kustomization`` file:
 
    .. code-block:: console
 
       $ kubectl apply -k envs/eks/
 
-   Refer to the :ref:`verifying the deployment <verifying-the-deployment>` section to confirm the deployment is successful.
+   See the :ref:`verifying the deployment <verifying-the-deployment>` section to confirm the deployment is successful.
 
 .. _local-cluster-deployment:
 
@@ -362,7 +358,7 @@ Perform the steps below to generate the required certificates for the deployment
 
    Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with an IP address of the machine where you run ``kubectl`` that your browser and your Wazuh agents can reach, for example its LAN IP address. You use the same address with ``kubectl port-forward --address`` in the Apply all manifests section. Adding it as an ``ip`` entry puts it in the Wazuh dashboard certificate, so the certificate matches the address you open the dashboard with. The browser still warns until you trust the deployment's root CA, ``wazuh/config/root-ca/certs/root-ca.pem``.
 
-#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with the same address. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517`` through the port-forward. Repeat the option for every other address agents will use. The script also issues the Wazuh manager API certificate (``manager-apid.pem``), which the Wazuh manager master needs to start. Its names come from the ``manager`` entry in ``config.yml``. Add any other name or address that clients of the Wazuh manager API use with the ``--api-san`` option.
+#. Run the ``tools/utils/deployment/certificates-conf.sh`` script to create the certificates and copy them where the ``secretGenerator`` of the ``kustomization.yml`` file imports them. Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with the same address. The ``--agent-san`` option adds it to the agent listener certificate (``manager-remoted.pem``) so that Wazuh agents outside the cluster can verify the Wazuh manager on port ``1517`` through the port-forward. Repeat the option for every other address agents will use. Add any other name or address that clients of the Wazuh manager API use with the ``--api-san`` option.
 
    .. code-block:: console
 
@@ -377,33 +373,20 @@ Perform the steps below to generate the required certificates for the deployment
       Detected manager nodes:   manager
       Detected dashboard nodes: dashboard
       Generating certificates
-      26/10/2026 10:20:41 INFO: Verbose logging redirected to /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-certificates-tool.log
-      26/10/2026 10:20:41 INFO: Generating the root certificate in /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-ca.
-      26/10/2026 10:20:41 WARNING: There is no root CA in /home/ubuntu/wazuh-kubernetes/wazuh/wazuh-ca, so a new one is created. The certificates issued from it do not chain to the root CA of any existing deployment. To add nodes to an existing deployment, stop here and run the tool where its root CA is, or set WAZUH_CA_DIR to a directory with a copy of that root CA and its key.
-      26/10/2026 10:20:42 INFO: Generating Admin certificates.
-      26/10/2026 10:20:42 INFO: Admin certificates created.
-      26/10/2026 10:20:42 INFO: Generating Wazuh indexer certificates.
-      26/10/2026 10:20:42 INFO: Wazuh indexer certificates created.
-      26/10/2026 10:20:44 INFO: Generating Wazuh manager certificates.
-      26/10/2026 10:20:44 INFO: Wazuh manager certificates created.
-      26/10/2026 10:20:44 INFO: Generating Wazuh dashboard certificates.
-      26/10/2026 10:20:44 INFO: Wazuh dashboard certificates created.
       Copying certificates for indexer: indexer -> config/indexer/certs/
       Copying certificates for manager: manager -> config/manager/certs/
       Copying certificates for dashboard: dashboard -> config/dashboard/certs/
       Copying the root CA certificate -> config/root-ca/certs/
-      Setting ownership for indexer indexer (1000:1000)
-      Setting ownership for manager manager (1000:1000)
-      Setting ownership for dashboard dashboard (1000:1000)
-      Setting ownership for root-ca certificates (1000:1000)
       Process completed.
 
-   The script keeps the root CA certificate and its private key in the ``wazuh-ca/`` directory next to ``wazuh-certs-tool.sh`` (owned by ``root``, mode ``0700``) on the machine where you run it, and reuses them on later runs. Protect this directory, because anyone with the key can issue certificates that the Wazuh components trust. To issue new certificates later, remove the ``wazuh-certificates/`` directory first. Otherwise, the script reports success without issuing new certificates. Only ``root-ca.pem`` is copied into the cluster Secrets, so the key stays on this machine. To keep the root CA in another directory, set ``WAZUH_CA_DIR`` to its absolute path on the ``sudo`` command line, for example ``sudo WAZUH_CA_DIR=<CA_DIRECTORY> bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv --agent-san <KUBERNETES_HOST_IP_ADDRESS>``. A ``WAZUH_CA_DIR`` exported in your shell doesn't reach the script because ``sudo`` drops it.
+   The script keeps the root CA certificate and its private key in the ``wazuh-ca/`` directory next to ``wazuh-certs-tool.sh`` on the machine where you run it, and reuses them on later runs. Protect this directory, because anyone with the key can issue certificates that the Wazuh components trust. To issue new certificates later, remove the ``wazuh-certificates/`` directory first. Otherwise, the script stops with an error and copies no certificates.
+
+   To keep the root CA in another directory, set ``WAZUH_CA_DIR`` to its absolute path on the ``sudo`` command line, for example ``sudo WAZUH_CA_DIR=<CA_DIRECTORY> bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv --agent-san <KUBERNETES_HOST_IP_ADDRESS>``. A ``WAZUH_CA_DIR`` exported in your shell doesn't reach the script because ``sudo`` drops it.
 
 Generate credentials
 ~~~~~~~~~~~~~~~~~~~~
 
-The Wazuh images ship with no default passwords. Each deployment generates its own before the first deployment. Perform the steps below to generate the required credentials.
+The Wazuh images ship with no default passwords. Generate them before the first deployment.
 
 #. Run the ``credentials-conf.sh`` script to generate the credentials and import them via ``secretGenerator`` in the ``kustomization.yml`` file.
 
@@ -426,9 +409,9 @@ The Wazuh images ship with no default passwords. Each deployment generates its o
       Log in to the Wazuh dashboard as 'admin'. Read its password with:
         grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' ./config/credentials/indexer.env | cut -d= -f2-
 
-   The command creates the ``indexer.env``, ``manager.env``, ``dashboard.env``, and ``cluster.key`` files in the ``wazuh/config/credentials/`` directory, holding only the credentials that each component needs, and the Wazuh manager cluster key. Keep these files for the life of the deployment; every ``kubectl apply -k`` and ``kubectl delete -k`` reads them, and a recreated indexer pod retrieves its credentials from them again.
+   The command creates the ``indexer.env``, ``manager.env``, ``dashboard.env``, and ``cluster.key`` files in the ``wazuh/config/credentials/`` directory. Keep these files for the life of the deployment. Every ``kubectl apply -k`` and ``kubectl delete -k`` reads them.
 
-#. Retrieve the generated dashboard password to log in after deployment.
+#. Retrieve the generated password for the admin user. You need it to log in to the Wazuh dashboard after the deployment is completed.
 
    .. code-block:: console
 
@@ -489,7 +472,7 @@ You can adjust cluster resources by editing patch files in ``envs/local-env/``. 
 
       $ kubectl -n wazuh wait --for=condition=Ready pod --all --timeout=600s
 
-#. Run the following commands to expose the Wazuh manager ports for agent enrollment and the Wazuh API service using port forwarding:
+#. Run the following commands to expose the Wazuh manager ports for agent enrollment and the Wazuh manager API using port forwarding:
 
    .. code-block:: console
 
@@ -498,24 +481,15 @@ You can adjust cluster resources by editing patch files in ``envs/local-env/``. 
 
    The second command makes the Wazuh manager API reachable on this machine at ``https://localhost:55000``, for scripts and API requests. Skip it if you don't use the Wazuh manager API.
 
-   .. note::
-
-      Wazuh 4.x agents connect on port ``1514`` (``wazuh-events``, Wazuh manager workers) and enroll on port ``1515`` (``wazuh-registration``, Wazuh manager master) with the agent enrollment password. To connect Wazuh 4.x agents, also expose these ports.
-
-      .. code-block:: console
-
-         $ kubectl -n wazuh port-forward service/wazuh-events --address <KUBERNETES_HOST_IP_ADDRESS> 1514:1514 > /tmp/wazuh-events-port-forward.log 2>&1 &
-         $ kubectl -n wazuh port-forward service/wazuh-registration --address <KUBERNETES_HOST_IP_ADDRESS> 1515:1515 > /tmp/wazuh-registration-port-forward.log 2>&1 &
-
-#. Access the Wazuh dashboard using port forwarding. The Wazuh dashboard will be accessible at ``https://<KUBERNETES_HOST_IP_ADDRESS>:8443``:
+#. Access the Wazuh dashboard using port forwarding. The Wazuh dashboard is accessible at ``https://<KUBERNETES_HOST_IP_ADDRESS>:8443``:
 
    .. code-block:: console
 
       $ kubectl -n wazuh port-forward service/dashboard --address <KUBERNETES_HOST_IP_ADDRESS> 8443:443 > /tmp/wazuh-dashboard-port-forward.log 2>&1 &
 
-   Use the same ``<KUBERNETES_HOST_IP_ADDRESS>`` that you added to ``config.yml`` and passed to ``--agent-san``.
+   Use the same ``<KUBERNETES_HOST_IP_ADDRESS>`` that you added to ``config.yml`` and passed to ``--agent-san``. Port forwarding is meant for testing. The port-forwards stop when you close the terminal session or when the pod restarts, and you need to start them again.
 
-   Refer to the :ref:`verifying the deployment <verifying-the-deployment>` section to confirm the deployment is successful.
+   See the :ref:`verifying the deployment <verifying-the-deployment>` section to confirm the deployment is successful.
 
 .. _verifying-the-deployment:
 
@@ -581,7 +555,7 @@ The command output looks similar to this:
 StatefulSets
 ~~~~~~~~~~~~
 
-Run the command below to check the active StatefulSets in the Wazuh namespace:
+Run the command below to check the active StatefulSets in the Wazuh namespace. On Amazon EKS, the Wazuh indexer runs three replicas and the Wazuh manager worker runs two. On a local cluster, each runs one. The following output is from a local cluster:
 
 .. code-block:: console
 
@@ -614,14 +588,8 @@ The command output looks similar to this:
    NAME                              READY   STATUS    RESTARTS      AGE
    wazuh-dashboard-79ccdf499-2k9lw   1/1     Running   0             18h
    wazuh-indexer-0                   1/1     Running   0             18h
-   wazuh-manager-master-0            1/1     Running   3 (15h ago)   18h
-   wazuh-manager-worker-0            1/1     Running   1 (16h ago)   18h
-
-If you enroll Wazuh agents with the enrollment password, read it with the command below. Wazuh 4.x agents enroll with it on port ``1515``. Wazuh 5.x agents can also enroll with it on port ``1517``, but an enrollment token is the recommended method.
-
-.. code-block:: console
-
-   $ kubectl exec -it wazuh-manager-master-0 -n wazuh -- cat /etc/wazuh-manager/authd.pass
+   wazuh-manager-master-0            1/1     Running   0             18h
+   wazuh-manager-worker-0            1/1     Running   0             18h
 
 Wazuh indexer
 ~~~~~~~~~~~~~
@@ -635,7 +603,7 @@ Run the command below from the root of the ``wazuh-kubernetes`` repository. The 
 Accessing the Wazuh dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On Amazon EKS, access the Wazuh dashboard at ``https://<EXTERNAL-IP>``, using the load balancer hostname that you set in ``wazuh/base/ingressRoute-tcp-dashboard.yaml`` and in the dashboard node of ``config.yml``. To use your own domain name instead, point it at the load balancer and use that name in both files before you generate the certificates and deploy.
+On Amazon EKS, access the Wazuh dashboard at ``https://<EXTERNAL-IP>``, using the load balancer hostname that you set in ``wazuh/base/ingressRoute-tcp-dashboard.yaml`` and in the dashboard node of ``config.yml``. To use your own domain name instead, point it at the load balancer and use that name in both files before you generate the certificates and deploy. The browser warns until you trust the deployment's root CA, ``wazuh/config/root-ca/certs/root-ca.pem``.
 
 Check the services to view the ``EXTERNAL-IP``:
 
@@ -653,7 +621,7 @@ The command output looks similar to this:
 
 .. note::
 
-   A local cluster has no Traefik service, so ``kubectl -n traefik get svc`` returns no resources. Use the dashboard port-forward you started in the last step of the Local cluster deployment section. If it is no longer running, for example after the dashboard pod was recreated, start it again:
+   A local cluster has no Traefik service, so ``kubectl -n traefik get svc`` returns no resources. Use the dashboard port-forward you started in the last step of the Local cluster deployment section. If it is no longer running, for example, after the dashboard pod was recreated, start it again:
 
    .. code-block:: console
 
@@ -661,7 +629,7 @@ The command output looks similar to this:
 
    Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with the address you used in the Local cluster deployment section. The dashboard certificate matches that address only if it was added as an ``ip:`` entry to the dashboard node of ``config.yml`` when the certificates were generated. The browser also warns until you trust the deployment's root CA, ``wazuh/config/root-ca/certs/root-ca.pem``.
 
-Log in with the username ``admin`` and the password you read in the Generate credentials section. With the port-forward, the Wazuh dashboard is accessible at ``https://<KUBERNETES_HOST_IP_ADDRESS>:8443``.
+Log in with the username ``admin`` and the password you read in the Generate credentials section. With port forwarding, the Wazuh dashboard is accessible at ``https://<KUBERNETES_HOST_IP_ADDRESS>:8443``.
 
 .. _kubernetes-deploying-wazuh-agent:
 
@@ -684,7 +652,7 @@ Wazuh agents enroll with an enrollment token. The token carries the address that
 #. On the Wazuh dashboard, click **☰** to open the menu and navigate to **Agents management** > **Enrollment tokens**. Click **Create token**.
 #. Fill in the following configuration information
 
-   #. **Address**: The address that the Wazuh agents use to reach the Wazuh manager. It must be one of the names in the Wazuh manager agent listener certificate, otherwise the token is refused with ``address not in certificate SAN``. For Wazuh agents deployed inside the cluster, use ``wazuh-agents.wazuh.svc.cluster.local``. For Wazuh agents outside the cluster, use the Traefik ``EXTERNAL-IP`` (EKS) or ``<KUBERNETES_HOST_IP_ADDRESS>`` of the port-forward (local cluster); that address must have been added to the certificate with ``--agent-san <ADDRESS>`` when you ran ``certificates-conf.sh``. Create one token for each address.
+   #. **Address**: The address that the Wazuh agents use to reach the Wazuh manager. For Wazuh agents inside the cluster, use ``wazuh-agents.wazuh.svc.cluster.local``. For Wazuh agents outside the cluster, use the Traefik ``EXTERNAL-IP`` on Amazon EKS or ``<KUBERNETES_HOST_IP_ADDRESS>`` on a local cluster. The address must be in the Wazuh manager agent listener certificate, which you set with ``--agent-san`` when you ran ``certificates-conf.sh``. Otherwise, the token is refused with ``address not in certificate SAN``. Create one token for each address.
    #. Optional: toggle **Embed CA** to include the CA certificate in the token. Without it, the Wazuh agent downloads the CA from the Wazuh manager during enrollment and installs it only if it matches the pin in the token.
    #. Click **Create**.
 
@@ -709,12 +677,12 @@ Enrolling a Wazuh agent
 
 Follow the steps below to enroll a Wazuh agent outside the cluster in a Wazuh manager running in a Kubernetes environment.
 
-#. Note the following Wazuh agent deployment variables to simplify the installation, enrollment, and configuration process of the Wazuh agent.
+#. Note the following Wazuh agent deployment variables:
 
    -  ``WAZUH_ENROLLMENT_TOKEN``: The enrollment token generated for the agent deployment.
    -  ``WAZUH_AGENT_NAME``: Name of the new Wazuh agent to be enrolled.
 
-#. Use the deployment variables to install the Wazuh agent using the :doc:`Wazuh agent installation </installation-guide/wazuh-agent/index>` guide. The example below shows the command to install the Wazuh agent on a Linux endpoint after adding the :ref:`Wazuh repository <agent-installation-add-wazuh-repository>`.
+#. Use the deployment variables to install the Wazuh agent using the :doc:`Wazuh agent installation </installation-guide/wazuh-agent/index>` guide. The example below shows the command to install the Wazuh agent on a Debian or Ubuntu endpoint after adding the :ref:`Wazuh repository <agent-installation-add-wazuh-repository>`.
 
    .. code-block:: console
 
@@ -748,7 +716,7 @@ Follow the steps below to enroll a Wazuh agent outside the cluster in a Wazuh ma
 Wazuh agent deployment on Kubernetes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh agent can be deployed directly within your Kubernetes environment to monitor workloads, pods, and container activity. This setup provides visibility into the cluster’s runtime behavior, helping detect threats and configuration issues at the container and node levels.
+You can deploy the Wazuh agent in your Kubernetes cluster to monitor its workloads. Each Wazuh agent reports on its own container and collects the logs that you configure it to read.
 
 There are two main deployment models for Wazuh agents in Kubernetes:
 
@@ -791,7 +759,7 @@ The ``wazuh`` namespace denies all ingress traffic by default (``default-deny-al
 Deploying the Wazuh agent as a DaemonSet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is the most common approach for full-cluster monitoring. Each node runs one Wazuh agent, and new nodes get one automatically. The example manifest mounts the node's ``/var/log`` directory, but the Wazuh agent doesn't read it: each Wazuh agent reports on its own container, and its system inventory and configuration assessment describe the Wazuh agent image. To collect the logs of the node and its containers, add ``<localfile>`` entries for the paths under ``/var/log`` to the Wazuh agent configuration.
+This is the most common approach for full-cluster monitoring. Each node runs one Wazuh agent, and new nodes get one automatically. The example manifest mounts the node's ``/var/log`` directory. To collect the logs of the node and its containers, add ``<localfile>`` entries for the paths under ``/var/log`` to the Wazuh agent configuration.
 
 #. Create the Wazuh agent DaemonSet manifest ``wazuh-agent-daemonset.yaml``:
 
@@ -828,6 +796,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
           spec:
             automountServiceAccountToken: false
             terminationGracePeriodSeconds: 20
+
             initContainers:
               # Clear stale PID/lock files left behind by an unclean restart
               - name: cleanup-ossec-stale
@@ -843,6 +812,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                 volumeMounts:
                   - name: ossec-data
                     mountPath: /agent
+
               # Seed /var/ossec into the persistent hostPath on first run only,
               - name: prepare-ossec-tree
                 image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|
@@ -862,6 +832,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                 volumeMounts:
                   - name: ossec-data
                     mountPath: /agent
+
             containers:
               - name: wazuh-agent
                 image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|
@@ -889,6 +860,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                     readOnly: true
                   - name: ossec-data
                     mountPath: /var/ossec
+
             volumes:
               - name: varlog
                 hostPath:
@@ -934,12 +906,12 @@ This is the most common approach for full-cluster monitoring. Each node runs one
 Deploying the Wazuh agent as a Sidecar
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The sidecar approach is ideal for targeted monitoring of sensitive applications or workloads that require isolated log collection. Perform the steps below to deploy Wazuh as a Sidecar:
+The sidecar approach is ideal for targeted monitoring of sensitive applications or workloads that require isolated log collection. Perform the steps below to deploy the Wazuh agent as a sidecar:
 
 #. Modify your application’s deployment to include the Wazuh agent container. In the example below, the Wazuh agent runs alongside the Apache Tomcat application from the ``wazuh-agent-sidecar.yaml`` deployment file:
 
    .. code-block:: yaml
-      :emphasize-lines: 13, 124
+      :emphasize-lines: 13, 129
 
       apiVersion: v1
       kind: Namespace
@@ -973,6 +945,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
           spec:
             automountServiceAccountToken: false
             terminationGracePeriodSeconds: 20
+
             initContainers:
               # Clear stale PID/lock files left behind by an unclean restart
               - name: cleanup-ossec-stale
@@ -988,6 +961,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                 volumeMounts:
                   - name: wazuh-agent-data
                     mountPath: /agent
+
               # Seed /var/ossec into the PVC on first run only
               - name: prepare-ossec-tree
                 image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|
@@ -1015,6 +989,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                 volumeMounts:
                   - name: wazuh-agent-data
                     mountPath: /agent
+
             containers:
               - name: tomcat
                 image: tomcat:10.1-jdk17
@@ -1024,6 +999,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                 volumeMounts:
                   - name: application-data
                     mountPath: /usr/local/tomcat/logs
+
               - name: wazuh-agent
                 image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|
                 imagePullPolicy: IfNotPresent
@@ -1051,6 +1027,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                     mountPath: /var/ossec
                   - name: application-data
                     mountPath: /usr/local/tomcat/logs
+
         volumeClaimTemplates:
           - metadata:
               name: wazuh-agent-data
@@ -1106,7 +1083,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
       :class: output
 
       NAME                           READY   STATUS     RESTARTS   AGE
-      tomcat-wazuh-agent-0   2/2     Running           0          18s
+      tomcat-wazuh-agent-0           2/2     Running    0          18s
 
    Check that the Wazuh agent is enrolled. On the Wazuh dashboard, go to **Agents management** > **Summary** and confirm that the Wazuh agent appears as **Active**. If the pod is running but the Wazuh agent doesn't appear, check the Wazuh agent log:
 
