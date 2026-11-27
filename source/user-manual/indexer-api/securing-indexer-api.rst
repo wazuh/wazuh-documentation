@@ -6,7 +6,7 @@
 Securing the Wazuh indexer API
 ==============================
 
-The communication with the Wazuh indexer API is encrypted with HTTPS by default. The installation generates certificates signed by a root certificate authority (CA) that it creates for the deployment, and you can supply your own certificates instead. The installation also creates an ``admin`` user with administrative access to the Wazuh indexer API and stores its password in ``/etc/wazuh-indexer/export/credentials.env``. We recommend that you change the default password and use certificates signed by a trusted CA, especially when the Wazuh indexer is reachable from the internet.
+The Wazuh indexer API uses HTTPS by default. The installation signs its certificates with a root certificate authority (CA) that it creates, or you can supply your own. The installation also creates an ``admin`` user with administrative access to the Wazuh indexer API and stores its password in ``/etc/wazuh-indexer/export/credentials.env``. We recommend that you change the default password and use certificates signed by a trusted CA, especially when the Wazuh indexer is reachable from the internet.
 
 Recommended changes to secure the Wazuh indexer API
 ---------------------------------------------------
@@ -14,7 +14,7 @@ Recommended changes to secure the Wazuh indexer API
 Change the default password for the administrative users
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use the Wazuh passwords tool to change the password of the Wazuh indexer users that the installation creates: ``admin``, ``kibanaserver``, and ``wazuh-manager``. The tool changes the password, saves a generated password in ``/etc/wazuh-indexer/export/credentials.env``. It updates the keystores of the Wazuh components on the same node.
+Use the Wazuh passwords tool to change the password of the Wazuh indexer users that the installation creates: ``admin``, ``kibanaserver``, and ``wazuh-manager``. The tool changes the password and saves a generated password in ``/etc/wazuh-indexer/export/credentials.env``. It updates the keystores of the Wazuh components on the same node. The kibanaserver and wazuh-manager passwords are also stored in the Wazuh dashboard and Wazuh manager keystores. If those components run on other nodes, the tool warns you to update their keystores and restart them.
 
 #. Run the following command on any Wazuh indexer node to set a random password for the ``admin`` user:
 
@@ -34,7 +34,7 @@ A password you set with ``-p`` is saved in this file only if the file already ex
 
 The ``admin``, ``kibanaserver``, and ``wazuh-manager`` users are reserved. The Wazuh dashboard and the Wazuh indexer API reject password changes for them with ``Resource '<USERNAME>' is reserved.``, so use the Wazuh passwords tool for these users.
 
-For other Wazuh indexer internal users that you create, you can change the password of the user you're logged in as through the Wazuh dashboard or the Wazuh indexer API. On the Wazuh dashboard, click the user avatar, the circle with the first letter of your username in the upper-right corner, and select **Reset password**. Enter the **Current password**, **New password**, and **Re-enter new password** values, then click **Reset**. The Wazuh dashboard logs you out, and you log in again with the new password.
+For other internal users, you can change your own password on the Wazuh dashboard or with the Wazuh indexer API. On the Wazuh dashboard, click the user avatar, the circle with the first letter of your username in the upper-right corner, and select **Reset password**. Enter the **Current password**, **New password**, and **Re-enter new password** values, then click **Reset**. The Wazuh dashboard logs you out, and you log in again with the new password.
 
 To change the password with the API, use the ``_plugins/_security/api/account`` endpoint. The following example changes the password of the current user:
 
@@ -61,7 +61,7 @@ We recommend that you restrict network access to the Wazuh indexer with network 
 Limit API exposure
 ^^^^^^^^^^^^^^^^^^
 
-Exposing all endpoints increases the attack surface of the Wazuh indexer API. You can define which Wazuh indexer API endpoints and HTTP methods are accessible in the ``/etc/wazuh-indexer/opensearch-security/allowlist.yml`` configuration file. The syntax is the following:
+To reduce what an attacker can reach, list the endpoints and HTTP methods that users can call in ``/etc/wazuh-indexer/opensearch-security/allowlist.yml``. The syntax is the following:
 
 .. code-block:: yaml
    :emphasize-lines: 4,5,6,8,9,10
@@ -121,9 +121,9 @@ Then set ``enabled: false`` in the ``allowlist.yml`` file too, so the file match
 Enforce rate limiting
 ^^^^^^^^^^^^^^^^^^^^^
 
-API rate limiting restricts the number of client requests to a Wazuh indexer node within a time frame. It helps prevent resource exhaustion caused by excessive or malicious traffic and keeps the cluster stable and available for all users. Rate limiting also protects against Denial of Service (DoS) attacks and enforces fair usage. You can set limits based on usernames or IP addresses. Add these settings under ``config.dynamic`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file.
+API rate limiting restricts the number of client requests to a Wazuh indexer node within a time frame. You can set limits based on usernames or IP addresses. Add these settings under ``config.dynamic`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file.
 
-The username rate limit sets the number of failed authentication attempts a user can make before the Wazuh indexer blocks the user. The default ``config.yml`` file includes a commented ``auth_failure_listeners`` example under ``config.dynamic``. It differs from the following example: it also defines an IP address rate limiter and uses ``authentication_backend: intern``. The following configuration is an example of username rate limiting:
+The username rate limit sets the number of failed authentication attempts a user can make before the Wazuh indexer blocks the user. The following configuration is an example of username rate limiting:
 
 .. code-block:: yaml
 

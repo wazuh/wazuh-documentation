@@ -6,7 +6,7 @@
 Wazuh indexer API
 =================
 
-The Wazuh indexer API is an open source RESTful API that allows interaction with the Wazuh indexer from the Wazuh dashboard, a command-line tool such as cURL, or any script or program capable of making web requests. The Wazuh indexer API provides endpoints for managing and querying data within the Wazuh indexer. Using this API, you can search events and findings, manage indexes and data streams, and handle data related to security detections and compliance reports. The Wazuh indexer API supports automation and scalability, offering a flexible approach to accessing and analyzing data for security insights, obtaining operational metrics, and reporting.
+The Wazuh indexer API is an open source RESTful API. You can use it from the Wazuh dashboard, from cURL, or from any script that sends web requests. Using this API, you can search events and findings, manage indexes and data streams, and handle data related to security detections and compliance reports. The Wazuh indexer API supports automation and scalability, offering a flexible approach to accessing and analyzing data for security insights, obtaining operational metrics, and reporting.
 
 The Wazuh indexer API capabilities include the following:
 
