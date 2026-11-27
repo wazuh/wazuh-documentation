@@ -76,7 +76,7 @@ Follow these steps to configure an active response that blocks the source IP add
 
 #. From the Wazuh dashboard main menu, navigate to **Explore** > **Active Responses**.
 
-#. Click **Create active response** and complete the configuration form with the following details. The ``block-ip`` executable is an out-of-the-box script that adds firewall rules to drop traffic from the source IP address of the finding. The **Local** location runs the script on the endpoint that generated the finding. The **Stateless** type runs the script once and never reverts it, so the block lasts until you remove the firewall rules. A **Stateful** active response reverts its action after a timeout. See :doc:`Active response </user-manual/capabilities/active-response/index>` for more details.
+#. Click **Create active response** and complete the configuration form with the following details. The ``block-ip`` executable is an out-of-the-box script that adds firewall rules to drop traffic from the source IP address of the finding. The ``Local`` location runs the script on the endpoint that generated the finding. The ``Stateless`` type runs the script once and never reverts it, so the block lasts until you remove the firewall rules. A ``Stateful`` active response reverts its action after a timeout. See :doc:`Active response </user-manual/capabilities/active-response/index>` for more details.
 
    +----------------+-------------------+
    | **Field**      | **Value**         |
@@ -102,7 +102,7 @@ Follow these steps to configure an active response that blocks the source IP add
 
 #. Switch to the **Monitors** tab, then click **Create Monitor**.
 
-   Fill in the following parameters. The **Active Response monitor** type runs the active response that you select in the **Actions** subsection when the trigger condition is met. The value ``b04f7630-f428-5209-89f6-d640238bceac`` is the ID of the ``Cross site scripting strings`` rule. You can find rule IDs in **Ruleset Management** > **Rules**.
+   Fill in the following parameters. The ``Active Response monitor`` type runs the active response that you select in the **Actions** subsection when the trigger condition is met. This filter selects findings tagged attack.t1189, the MITRE ATT&CK technique of the ``Cross site scripting strings`` rule. Don't filter on ``wazuh.rule.id``: rule IDs change when the Wazuh CTI ruleset is updated.
 
    +-----------------------------+-----------------------------------------------------------+
    | **Field**                   | **Value**                                                 |
@@ -121,11 +121,11 @@ Follow these steps to configure an active response that blocks the source IP add
    +-----------------------------+-----------------------------------------------------------+
    | **Query name**              | ``web_attack_ar_query``                                   |
    +-----------------------------+-----------------------------------------------------------+
-   | **Field**                   | ``wazuh.rule.id``                                         |
+   | **Field**                   | ``wazuh.rule.tags``                                       |
    +-----------------------------+-----------------------------------------------------------+
    | **Operator**                | ``is``                                                    |
    +-----------------------------+-----------------------------------------------------------+
-   | **Value**                   | ``b04f7630-f428-5209-89f6-d640238bceac``                  |
+   | **Value**                   | ``attack.t1189``                                          |
    +-----------------------------+-----------------------------------------------------------+
 
    .. thumbnail:: /images/compliance/nist/create-active-response-monitor.png
@@ -219,7 +219,7 @@ The ``block-ip`` active response triggers to block the attacker IP. Navigate to 
    :align: center
    :width: 80%
 
-After you finish this use case, remove the firewall rules on the Ubuntu endpoint so that the attacker endpoint can connect again. The active response type is **Stateless**, so the ``block-ip`` active response never removes them:
+After you finish this use case, remove the firewall rules on the Ubuntu endpoint so that the attacker endpoint can connect again. The active response type is ``Stateless``, so the ``block-ip`` active response never removes them:
 
 .. code-block:: console
 

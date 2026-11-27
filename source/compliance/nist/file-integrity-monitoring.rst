@@ -55,7 +55,7 @@ In this scenario, the Wazuh FIM module monitors the ``/etc/ssh`` directory, whic
 
 #. Click the upper-left menu icon (**☰**) and go to **Endpoint security > File Integrity Monitoring**.
 
-   The finding details show that ``/etc/ssh/sshd_config`` changed, including the differences in the file checksum, the modification made, the modification time, and other information. The first change after the Wazuh agent restarts can show ``Unable to calculate diff due to no previous data stored for this file.`` in the ``file.diff`` field. Later changes show the modified lines. The ``sed`` command also saves a copy of the original file as ``/etc/ssh/sshd_config.<YYYY-MM-DD>``. Because the Wazuh FIM module monitors the whole ``/etc/ssh`` directory, you also see a finding for this new backup file.
+   The finding details show that ``/etc/ssh/sshd_config`` changed, including the file checksum differences, the modification made, the modification time, and other information. The first change after the Wazuh agent restarts can show ``Unable to calculate diff due to no previous data stored for this file.`` in the ``file.diff`` field. Later changes show the modified lines. The ``sed`` command also saves a copy of the original file as ``/etc/ssh/sshd_config.<YYYY-MM-DD>``. Because the Wazuh FIM module monitors the whole ``/etc/ssh`` directory, you also see a finding for this new backup file.
 
    .. thumbnail:: /images/compliance/nist/fim-sshd-config-finding.png
       :title: FIM finding for the sshd_config file
@@ -70,13 +70,13 @@ Wazuh helps meet SI-4 System monitoring by detecting system configuration change
 
 In this scenario, the Wazuh FIM monitors the Uncomplicated Firewall (UFW) rule files in the ``/etc/ufw/`` directory on an Ubuntu 24.04 endpoint. Using who-data, you can get more information like the user, program, or process that made changes to a monitored file or folder. Perform the steps below to monitor and detect changes to the UFW rule files:
 
-#. Switch to the root user, install the audit daemon, and restart it. On Ubuntu 24.04, the ``auditd`` package already includes the ``af_unix`` plugin that who-data monitoring uses, so you don't need ``audispd-plugins``:
+#. Switch to the root user, then install the Audit daemon (``auditd``) and restart the Audit service. Who-data monitoring uses ``auditd`` to find out who made each change. On Ubuntu 24.04, the ``auditd`` package already includes the ``af_unix`` plugin that who-data monitoring needs:
 
    .. code-block:: console
 
       $ sudo su
       # apt-get install auditd
-      # systemctl restart auditd
+      # service auditd restart
 
 #. Add the following configuration to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``.
 
