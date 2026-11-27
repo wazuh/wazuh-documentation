@@ -10,7 +10,7 @@ The Notifications module enables the Wazuh indexer to send alerts, reports, and 
 
 The module acts as a bridge between internal Wazuh indexer components such as Alerting, Reporting, and Index State Management (ISM) and external destinations. When an alert fires or a report is generated, these components call the Notifications module. The notification module resolves the destination type and sends the message through the appropriate transport.
 
-All channel configurations are managed through a unified REST API at ``/_plugins/_notifications/`` and are accessible from the Wazuh Dashboard under **Explore** > **Notifications** > **Channels**.
+All channel configurations are managed through a unified REST API at ``/_plugins/_notifications/`` and are accessible from the Wazuh dashboard under **Explore** > **Notifications** > **Channels**.
 
 Key capabilities
 ----------------
@@ -75,8 +75,8 @@ The following default channels are created:
 | Shuffle Channel   | ``webhook`` | Shuffle SOAR            | ``default_shuffle_channel``   |
 +-------------------+-------------+-------------------------+-------------------------------+
 
-Default channels behaviors
---------------------------
+Default channel behaviors
+-------------------------
 
 The following rules govern how the module creates and manages default channels.
 
@@ -117,18 +117,21 @@ The Notifications module loads default configuration values from the following f
 
 Settings configured in ``/etc/wazuh-indexer/opensearch.yml`` or through the cluster settings API override the values defined in these files.
 
-The following example shows a minimal ``/etc/wazuh-indexer/opensearch.yml`` configuration for the Notifications module. If you set ``opensearch.notifications.core.allowed_config_types``, include ``active_response``. Your list replaces the default list, and Active Response monitors need the ``active_response`` channel type. Setting ``host_deny_list`` replaces the built-in list, so the example list no longer blocks loopback, link-local, or ``192.168.0.0/16`` addresses. Keep every range you still want to block in your list.
+The following example shows a minimal ``/etc/wazuh-indexer/opensearch.yml`` configuration for the Notifications module. If you set ``opensearch.notifications.core.allowed_config_types``, include ``active_response``. Your list replaces the default list, and the Wazuh dashboard offers only the listed channel types. The REST API doesn't check the list. Active Response monitors need the ``active_response`` channel type. Setting ``host_deny_list`` replaces the built-in list, so the example list no longer blocks loopback, link-local, or 192.168.0.0/16 addresses. Keep every range you still want to block in your list.
 
 .. code-block:: yaml
 
    # Notification core settings
    opensearch.notifications.core.email.size_limit: 10000000
+
    opensearch.notifications.core.http.max_connections: 60
    opensearch.notifications.core.http.connection_timeout: 5000
    opensearch.notifications.core.http.socket_timeout: 50000
+
    opensearch.notifications.core.http.host_deny_list:
      - "10.0.0.0/8"
      - "172.16.0.0/12"
+
    # Allowed channel types
    opensearch.notifications.core.allowed_config_types:
      - slack
@@ -141,6 +144,7 @@ The following example shows a minimal ``/etc/wazuh-indexer/opensearch.yml`` conf
      - smtp_account
      - email_group
      - active_response
+
    # Plugin settings
    opensearch.notifications.general.operation_timeout_ms: 60000
    opensearch.notifications.general.default_items_query_count: 100
@@ -167,14 +171,14 @@ The following settings control email message size limits and email header valida
 HTTP connection settings
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following settings control HTTP communication used by Slack, Microsoft Teams, Chime, and custom webhook destinations.
+The following settings control HTTP communication used by Slack, Microsoft Teams, Chime, and custom webhook destinations. They don't apply to email. The module builds its HTTP client the first time it sends a notification after the node starts, so changes to ``max_connections``, ``max_connection_per_route``, ``connection_timeout``, and ``socket_timeout`` take effect only after you restart the Wazuh indexer, even when you make them through the cluster settings API.
 
 +-----------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Setting                                                         | Description                                                                                                                                                      | Type    | Default                                                                                                                                                                    |
 +=================================================================+==================================================================================================================================================================+=========+============================================================================================================================================================================+
 | ``opensearch.notifications.core.http.max_connections``          | Maximum number of concurrent HTTP connections used by the Notifications module.                                                                                  | Integer | 60                                                                                                                                                                         |
 +-----------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``opensearch.notifications.core.max_http_response_size``        | Maximum size, in bytes, of an HTTP response that the Notifications module can process when communicating with external services.                                 | Integer | 104857600                                                                                                                                                                  |
+| ``opensearch.notifications.core.max_http_response_size``        | Maximum size, in bytes, of an HTTP response that the Notifications module can process when communicating with external services.                                 | Integer | ``104857600``                                                                                                                                                              |
 +-----------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``opensearch.notifications.core.http.max_connection_per_route`` | Maximum number of concurrent connections allowed for a single destination endpoint.                                                                              | Integer | 20                                                                                                                                                                         |
 +-----------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -190,13 +194,13 @@ General core settings
 
 The following settings control supported channel types and general module behavior.
 
-+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+--------------+--------------------------+
-| Setting                                                | Description                                                                                                                                | Type         | Default                  |
-+========================================================+============================================================================================================================================+==============+==========================+
-| ``opensearch.notifications.core.allowed_config_types`` | Defines the notification channel types that users can create and manage. Only the specified channel types are available for configuration. | List<String> | Configured channel types |
-+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+--------------+--------------------------+
-| ``opensearch.notifications.core.tooltip_support``      | Enables tooltip information in supported user interfaces that interact with the Notifications module.                                      | Boolean      | true                     |
-+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+--------------+--------------------------+
++--------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+---------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Setting                                                | Description                                                                                                    | Type    | Default                                                                                                                                             |
++========================================================+================================================================================================================+=========+=====================================================================================================================================================+
+| ``opensearch.notifications.core.allowed_config_types`` | Channel types that the Wazuh dashboard offers when you create a channel. The REST API doesn't check this list. | List    | ``slack``, ``chime``, ``microsoft_teams``, ``webhook``, ``email``, ``sns``, ``ses_account``, ``smtp_account``, ``email_group``, ``active_response`` |
++--------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+---------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``opensearch.notifications.core.tooltip_support``      | Enables tooltip information in supported user interfaces that interact with the Notifications module.          | Boolean | true                                                                                                                                                |
++--------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+---------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Module settings
 ---------------
@@ -230,7 +234,7 @@ A request that would create more configurations than a ``max_*`` limit is reject
 Update dynamic settings
 -----------------------
 
-The following Notifications module settings support dynamic updates through the OpenSearch Cluster Settings API. Unlike static settings configured in the ``/etc/wazuh-indexer/opensearch.yml`` file, dynamic settings can be modified without restarting the Wazuh indexer.
+The settings in the Core settings and Module settings tables support dynamic updates through the OpenSearch Cluster Settings API, except the two static ``opensearch.notifications.active_response.*`` settings. The ``http.*`` connection settings are accepted as dynamic updates but take effect only after a restart, as described in HTTP connection settings. Unlike static settings configured in the ``/etc/wazuh-indexer/opensearch.yml`` file, dynamic settings can be modified without restarting the Wazuh indexer.
 
 The following example updates two Notifications module settings as persistent cluster settings:
 
@@ -287,7 +291,7 @@ Email notification channels require an email account configuration to send messa
 The Notifications module supports the following email delivery methods:
 
 -  **SMTP (Simple Mail Transfer Protocol):** used to send email through a mail server such as Microsoft Exchange, Microsoft 365, Gmail, Postfix, or other SMTP-compatible services.
--  **Amazon Simple Email Service (SES)**: which sends email through Amazon Web Services (AWS).
+-  Amazon Simple Email Service (SES): sends email through Amazon Web Services (AWS).
 
 SMTP accounts that require authentication need credentials. To protect sensitive information, the Notifications module stores SMTP credentials in the OpenSearch Keystore rather than plain-text configuration files. SES and SNS channels don't use the keystore. They authenticate with the AWS default credentials chain, optionally assuming the IAM role set in the channel's ``role_arn``.
 
@@ -327,17 +331,39 @@ The Wazuh indexer uses these credentials only when the SMTP sender uses SSL/TLS 
 
       # curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X POST "https://127.0.0.1:9200/_nodes/reload_secure_settings"
 
-SMTP authentication credentials are stored as secure settings in the Wazuh indexer keystore using the following keys, where ``<account_name>`` is the name of the configured SMTP sender:
+SMTP authentication credentials are stored as secure settings in the Wazuh indexer keystore using the following keys, where ``<ACCOUNT_NAME>`` is the name of the configured SMTP sender:
 
 .. code-block:: none
 
-   opensearch.notifications.core.email.<account_name>.username
-   opensearch.notifications.core.email.<account_name>.password
+   opensearch.notifications.core.email.<ACCOUNT_NAME>.username
+   opensearch.notifications.core.email.<ACCOUNT_NAME>.password
 
 Set both the username and the password. If neither is set for the account, the Wazuh indexer connects to the SMTP server without authenticating. If only one is set, it authenticates with an empty value for the other, and the SMTP server rejects the login.
 
 Troubleshooting
 ---------------
+
+Webhook to an internal host is denied
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A webhook-based channel (Slack, Chime, Microsoft Teams, or custom webhook) that targets a host on your network fails with status ``400`` and ``Host of url is denied, based on plugin setting [notification.core.http.host_deny_list]``. The built-in deny list blocks loopback, link-local, private, and other reserved ranges, so webhooks to internal services, such as a self-hosted Jira or Shuffle instance, are denied.
+
+Set ``opensearch.notifications.core.http.host_deny_list`` to the built-in list without the range your endpoint is in. Your value replaces the whole built-in list, so include every other range: ``127.0.0.0/8``, ``169.254.0.0/16``, ``10.0.0.0/8``, ``172.16.0.0/12``, ``192.168.0.0/16``, ``0.0.0.0/8``, ``100.64.0.0/10``, ``192.0.0.0/24``, ``192.0.2.0/24``, ``198.18.0.0/15``, ``192.88.99.0/24``, ``198.51.100.0/24``, ``203.0.113.0/24``, ``224.0.0.0/4``, ``240.0.0.0/4``, ``255.255.255.255/32``, ``::1/128``, ``fe80::/10``, ``fc00::/7``, ``::/128``, ``2001:db8::/32``, and ``ff00::/8``.
+
+Email delivery fails with a connection error
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Email notifications fail with status ``503`` and ``Couldn't connect to host``, or take a long time to fail. Check that the Wazuh indexer node can reach the SMTP server on the configured port, and that the encryption method matches the server. The HTTP timeouts don't apply to email, and the module sets no timeout on SMTP connections, so an unresponsive server can hold up the delivery for a long time.
+
+Webhook delivery times out
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The endpoint takes longer to accept the connection or to answer than ``connection_timeout`` (default 5000 ms) or ``socket_timeout`` (default 50000 ms) allow. Increase the timeouts, then restart the Wazuh indexer on every node. A new timeout takes effect only after a restart.
+
+The SMTP server rejects the authentication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The keystore holds no credentials for the account, so the module connects without authenticating, or it holds only the username or only the password, so the module authenticates with an empty value for the other. Depending on the server, the delivery fails with status 502 (for example, ``530 Authentication required``) or 424 (for example, ``535 Authentication credentials invalid``). The account name in the keystore keys must match the name of the SMTP sender, and both the username and the password must be set. After you change the keystore, reload the secure settings, see :ref:`SMTP account credentials <wazuh_indexer_notifications_smtp_credentials>`. If the reload reports ``access_denied_exception``, the Wazuh indexer can't read the keystore. Restore its ownership and permissions as described there, and reload again.
 
 Active Response requests are not queued
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -349,4 +375,9 @@ A message that doesn't resolve to ``<doc_id>|<index>`` is refused with status ``
 User doesn't have backend roles configured
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-API requests return ``403 Forbidden`` with this message when ``opensearch.notifications.general.filter_by_backend_roles`` is ``true`` and the user has no backend roles. Assign backend roles to the user, or set the setting to ``false``. While the setting is ``true``, users see the configurations created by users who share at least one backend role with them, and configurations with an empty access list, such as the default channels. Users with the ``all_access`` role see all configurations, but they also need at least one backend role. An ``all_access`` user without backend roles gets the same ``403 Forbidden`` response.
+API requests return ``403 Forbidden`` with this message when ``opensearch.notifications.general.filter_by_backend_roles`` is ``true`` and the user has no backend roles. Assign backend roles to the user, or set the setting to ``false``. While the setting is ``true``, users see the configurations created by users who share at least one backend role with them, and configurations with an empty access list, such as the default channels. Users with the ``all_access`` role see all configurations, but they also need at least one backend role. An ``all_access`` user without backend roles gets the same 403 Forbidden response.
+
+Webhook response is truncated
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``status_text`` of a webhook delivery holds only the beginning of the endpoint's response. The module reads at most half of ``opensearch.notifications.core.max_http_response_size``, counted in characters, and drops the rest. The delivery itself still succeeds. Increase the setting if you need the full response.

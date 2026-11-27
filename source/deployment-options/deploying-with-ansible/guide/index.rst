@@ -98,13 +98,13 @@ Access the wazuh-ansible directory
 
    Where:
 
-   -  ``hosts:`` indicates the endpoints where the commands of the playbook will be executed.
-   -  ``roles:`` indicates the roles that will be executed on the hosts.
+   -  ``hosts:`` indicates the endpoints where the playbook runs.
+   -  ``roles:`` indicates the roles that run on the hosts.
 
 Configure the inventory
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``wazuh-aio.yml`` file allows you to deploy an all-in-one Wazuh environment. Add the public and private IP addresses of the endpoint where the Wazuh components will be installed to the ``/etc/ansible/hosts`` Ansible hosts file.
+The ``wazuh-aio.yml`` file allows you to deploy an all-in-one Wazuh environment. Add the public and private IP addresses of the endpoint where you install the Wazuh components to the ``/etc/ansible/hosts`` Ansible hosts file.
 
 The contents of the Ansible host file below:
 
@@ -215,7 +215,7 @@ The command output looks similar to this:
 
    CHANGELOG.md  LICENSE  README.md  SECURITY.md  VERSION.json  docs  requirements.yml  roles  tools  wazuh-agent.yml  wazuh-aio.yml  wazuh-distributed.yml
 
-Using the ``wazuh-distributed.yml`` playbook, we deploy a Wazuh manager and indexer cluster using Ansible. Below is the content of the ``/etc/ansible/roles/wazuh-ansible/wazuh-distributed.yml`` file:
+The ``wazuh-distributed.yml`` playbook deploys a Wazuh manager and indexer cluster. Below is the content of the ``/etc/ansible/roles/wazuh-ansible/wazuh-distributed.yml`` file:
 
 .. code-block:: console
 
@@ -321,13 +321,13 @@ The command output looks similar to this:
 
 **Where:**
 
--  ``hosts:`` specifies the Ansible inventory group name that the playbook will target. The playbook runs on the hosts defined under that group in the inventory file.
--  ``roles:`` section indicates the roles that will be executed on the hosts mentioned above.
+-  ``hosts:`` specifies the Ansible inventory group name that the playbook targets. The playbook runs on the hosts defined under that group in the inventory file.
+-  ``roles:`` section indicates the roles that run on the hosts mentioned above.
 
 Configure the inventory
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``wazuh-distributed.yml`` file allows you to deploy a distributed Wazuh environment. For this guide, the architecture includes 2 Wazuh manager nodes, 3 Wazuh indexer nodes, and a Wazuh dashboard node. Add the public and private IP addresses of the endpoints where the various components of the cluster will be installed to the ``/etc/ansible/hosts`` Ansible hosts file.
+The ``wazuh-distributed.yml`` file allows you to deploy a distributed Wazuh environment. For this guide, the architecture includes 2 Wazuh manager nodes, 3 Wazuh indexer nodes, and a Wazuh dashboard node. Add the public and private IP addresses of the endpoints where you install the components of the cluster to the ``/etc/ansible/hosts`` Ansible hosts file.
 
 The contents of the Ansible host file below:
 
@@ -454,7 +454,7 @@ Each password must have 12 to 64 characters from ``A-Z a-z 0-9 . , _ + : @ % ^ =
 
 The ``-e "source=prerelease"`` option installs the release candidate packages from the pre-release repository. Omit it to install a published release.
 
-The playbook does not change passwords. After you change a password with the Wazuh passwords tool, write the new value to the file of its key on the Ansible control node. In a Wazuh cluster deployment, later runs of the playbook use the ``admin`` and ``wazuh`` users to check the Wazuh indexer and the Wazuh manager API, and stop if either password is rejected. In an all-in-one deployment, the next run copies the new passwords to ``deployment-credentials`` itself. If the tool generated the new password, read it from ``/etc/wazuh-indexer/export/credentials.env`` or ``/etc/wazuh-manager/export/credentials.env`` on the host where you ran the tool. For example, after you change the ``admin`` password, run:
+The playbook does not change passwords. To change a password, see :doc:`Password management </user-manual/user-administration/password-management>`. After you change a password with the Wazuh passwords tool, write the new value to the file of its key on the Ansible control node. In a Wazuh cluster deployment, later runs of the playbook use the ``admin`` and ``wazuh`` users to check the Wazuh indexer and the Wazuh manager API, and stop if either password is rejected. In an all-in-one deployment, the next run copies the new passwords to ``deployment-credentials`` itself. If the tool generated the new password, read it from ``/etc/wazuh-indexer/export/credentials.env`` or ``/etc/wazuh-manager/export/credentials.env`` on the host where you ran the tool. For example, after you change the ``admin`` password, run:
 
 .. code-block:: console
 
@@ -463,14 +463,27 @@ The playbook does not change passwords. After you change a password with the Waz
 After you change the ``kibanaserver`` or ``wazuh-internal-client`` password, update the Wazuh dashboard keystore on each Wazuh dashboard node, and restart the Wazuh dashboard. For example, for ``wazuh-internal-client``, replace ``<NEW_WUI_PASSWORD>`` with the new password and run:
 
 .. code-block:: console
-   :emphasize-lines: 3
+   :emphasize-lines: 1,5
 
-   # /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore remove wazuh_core.hosts.default.password --allow-root
+   # printf '%s' '<NEW_WUI_PASSWORD>' | OSD_PATH_CONF=/etc/wazuh-dashboard /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin wazuh_core.hosts.default.password
+   # chown root:wazuh-dashboard /etc/wazuh-dashboard/opensearch_dashboards.keystore
+   # chmod 640 /etc/wazuh-dashboard/opensearch_dashboards.keystore
    # sed -i '/^WAZUH_MANAGER_WUI_PASSWORD=/d' /etc/wazuh-dashboard/local.env
    # echo 'WAZUH_MANAGER_WUI_PASSWORD=<NEW_WUI_PASSWORD>' >> /etc/wazuh-dashboard/local.env
    # systemctl restart wazuh-dashboard
 
-In an all-in-one deployment, skip the ``sed`` and ``echo`` commands. The Wazuh passwords tool already writes the new passwords to ``/etc/wazuh-dashboard/local.env`` on that host. For ``kibanaserver``, remove ``opensearch.password`` and set ``WAZUH_INDEXER_KIBANASERVER_PASSWORD`` instead.
+In an all-in-one deployment, skip these commands. The Wazuh passwords tool already updates the Wazuh dashboard keystore and ``/etc/wazuh-dashboard/local.env`` on that host, and restarts the Wazuh dashboard. For ``kibanaserver``, write ``opensearch.password`` and set ``WAZUH_INDEXER_KIBANASERVER_PASSWORD`` instead.
+
+After you change the ``wazuh-manager`` password in a Wazuh cluster deployment, write the new password to the Wazuh manager keystore and to ``/etc/wazuh-manager/local.env`` on each Wazuh manager node. Stop the Wazuh manager before you write the keystore. For example, replace ``<NEW_MANAGER_PASSWORD>`` with the new password and run:
+
+.. code-block:: console
+   :emphasize-lines: 2,4
+
+   # systemctl stop wazuh-manager
+   # printf '%s' '<NEW_MANAGER_PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password
+   # sed -i '/^WAZUH_INDEXER_MANAGER_PASSWORD=/d' /etc/wazuh-manager/local.env
+   # echo 'WAZUH_INDEXER_MANAGER_PASSWORD=<NEW_MANAGER_PASSWORD>' >> /etc/wazuh-manager/local.env
+   # systemctl start wazuh-manager
 
 The files in ``deployment-credentials`` hold the passwords in plain text. Restrict access to them. To read a password, open the corresponding file for the Wazuh user. For example, run the following command to read the password of the ``wazuh`` user:
 
@@ -509,8 +522,6 @@ Each clone of the Wazuh Ansible repository holds one deployment. To deploy anoth
 Running the playbook again from the same directory keeps the passwords, the root CA, and the certificates. It leaves the installed Wazuh packages as they are and doesn't write ``local.env`` again. It doesn't download an installed package again, including the release candidate packages installed with ``-e "source=prerelease"``. It restarts a service only when its configuration changes.
 
 To add a Wazuh indexer node to a Wazuh cluster deployment, add the node to the inventory and to the ``wi_cluster`` group, and add it to ``instances``, ``wazuh_indexer_hosts``, and ``indexer_cluster_nodes`` in the playbook. Then run the playbook again for the whole inventory, without ``--limit``. The existing Wazuh indexer nodes accept the new node only when their ``plugins.security.nodes_dn`` setting lists it, and the playbook writes that list from ``instances``. The existing Wazuh indexer nodes restart at the same time to read the new list, so the Wazuh indexer cluster is unavailable until they join it again. The security configuration of the cluster, with its users, roles, and passwords, is kept. If you limit the run to the new node, the run stops before it loads anything and asks for a run with every Wazuh indexer node. A later run with ``--limit`` to Wazuh indexer nodes that are already installed keeps every node of ``instances`` in that list, so it does not restart them. The playbook issues the certificates of the new node from the root CA of the deployment and keeps the certificates of the existing nodes. It adds the new node to the configuration of the Wazuh manager and Wazuh dashboard, and restarts those services.
-
-To change the passwords, see :doc:`Password management </user-manual/user-administration/password-management>`.
 
 Installing the Wazuh agent
 --------------------------
@@ -669,7 +680,7 @@ The ``/etc/ansible/roles/wazuh-ansible/wazuh-agent.yml`` file contains the neces
 
 **Where:**
 
--  ``hosts:`` specifies the Ansible inventory group that contains the endpoints where the Wazuh agent will be installed. The playbook targets the ``agents`` group, so the inventory uses the same group name.
+-  ``hosts:`` specifies the Ansible inventory group that contains the endpoints where you install the Wazuh agent. The playbook targets the ``agents`` group, so the inventory uses the same group name.
 -  ``wazuh_enrollment_token``: is the enrollment token generated on the Wazuh manager. The role passes it to the agent installer as ``WAZUH_ENROLLMENT_TOKEN``.
 -  ``Configure package URLs``: a separate play that runs the ``package-urls`` role before the agent play. The role downloads the list of Wazuh package URLs that the ``wazuh-agent`` role uses, once per run, on the Ansible control node. The play targets the ``agents`` group, so it also runs when you use ``--limit``.
 -  ``tasks:`` includes the ``wazuh-agent`` role on Linux, macOS, and Windows hosts. On Linux and macOS hosts, the role runs with root privileges.
@@ -714,7 +725,7 @@ Replace the value of ``wazuh_enrollment_token`` in the ``/etc/ansible/roles/wazu
          ansible.builtin.include_role:
            name: wazuh-agent
 
-Add the endpoints where the Wazuh agent will be installed to the ``agents`` group of the ``/etc/ansible/hosts`` Ansible hosts file.
+Add the endpoints where you install the Wazuh agent to the ``agents`` group of the ``/etc/ansible/hosts`` Ansible hosts file.
 
 The contents of the Ansible host file below:
 
@@ -732,7 +743,7 @@ The contents of the Ansible host file below:
 
 Where:
 
--  ``ansible_host`` specifies the IP address of the endpoint where the Wazuh agent will be installed. Replace ``<WAZUH_AGENT1_IP>`` and ``<WAZUH_AGENT2_IP>`` with the actual IP addresses or hostnames of the Wazuh agent endpoints.
+-  ``ansible_host`` specifies the IP address of the endpoint where you install the Wazuh agent. Replace ``<WAZUH_AGENT1_IP>`` and ``<WAZUH_AGENT2_IP>`` with the actual IP addresses or hostnames of the Wazuh agent endpoints.
 -  ``ansible_user`` specifies the remote user account Ansible uses to connect over SSH. Replace ``<USERNAME>`` with a valid user account that has the required privileges on the endpoints.
 -  ``ansible_ssh_private_key_file`` specifies the SSH private key used by Ansible to connect to the target hosts. Replace ``<PATH_TO_PRIVATE_KEY_FILE>`` with the full path of the private key file on the Ansible control node.
 -  ``ansible_ssh_common_args='-o StrictHostKeyChecking=no'`` makes SSH accept the host key of each endpoint, new or changed, without asking you to confirm it. Remove it if the Ansible control node already trusts the host keys of the endpoints.
@@ -745,14 +756,14 @@ To install Windows agents, add the following configuration to the ``[agents]`` s
 
 Where:
 
--  ``ansible_host`` specifies the IP address of the endpoint where the Wazuh agent will be installed. Replace ``<WINDOWS_AGENT_IP>`` with the IP address or hostname of the Windows endpoint.
+-  ``ansible_host`` specifies the IP address of the endpoint where you install the Wazuh agent. Replace ``<WINDOWS_AGENT_IP>`` with the IP address or hostname of the Windows endpoint.
 -  ``ansible_user`` specifies the username of an administrator account on the endpoint.
 -  ``ansible_password`` specifies the password of an administrator account on the endpoint.
 -  ``ansible_connection=winrm`` and ``ansible_port=5986`` make Ansible connect to a Windows endpoint over WinRM HTTPS. ``ansible_winrm_transport=ntlm`` makes Ansible sign in with NTLM. Without it, Ansible uses Basic authentication, which WinRM on Windows turns off by default. ``ansible_winrm_server_cert_validation=ignore`` skips the check of the WinRM certificate. Remove it if a CA that the control node trusts signed the certificate.
 
 .. warning::
 
-   Users on the control node can read the ``/etc/ansible/hosts`` file. Ensure the file is adequately protected as the password will be stored in plaintext. Alternatively, store the password with Ansible Vault:
+   Users on the control node can read the ``/etc/ansible/hosts`` file. Ensure the file is adequately protected because it stores the password in plaintext. Alternatively, store the password with Ansible Vault:
 
    .. code-block:: console
       :emphasize-lines: 2
@@ -802,4 +813,4 @@ In the clone on the Ansible control node, ``deployment-credentials`` holds the p
 
 Wazuh agents enrolled with the removed deployment do not reconnect to a new one, even one deployed from the same clone. :doc:`Remove the Wazuh agent </installation-guide/uninstalling-wazuh/agent>` from each endpoint, generate an enrollment token on the new deployment, and store it in place of the old one, as :ref:`Generate an enrollment token <ansible_agent_token>` describes. Then run the agent playbook again.
 
-The playbooks don't upgrade a deployment. Between 5.x releases, upgrade each component as its documentation describes. You can't upgrade a Wazuh manager 4.x, or a 5.0.0 RC 1 or earlier pre-release, in place. Deploy Wazuh 5.0 on new hosts, and move your Wazuh agents and configuration as :doc:`/migration-to-5x/index` describes. The playbooks don't manage the rest of the configuration, so make the configuration changes that guide describes in the configuration files on each host. Later runs of the playbook keep these changes, except for the settings the roles write: ``network.host``, ``node.name``, the cluster discovery settings, and ``plugins.security.nodes_dn`` in ``opensearch.yml``, the JVM heap size, the Wazuh indexer hosts and the cluster node settings in ``wazuh-manager.conf``, and ``opensearch.hosts`` and the Wazuh manager URL in ``opensearch_dashboards.yml``. The playbook resets these settings and restarts the services whose files it changed.
+The playbooks don't upgrade a deployment. Between 5.x releases, upgrade each component as its documentation describes. You can't upgrade a Wazuh manager 4.x, or a 5.0.0 RC 1 or earlier pre-release, in place. Deploy Wazuh 5.0 on new hosts, and move your Wazuh agents and configuration as :doc:`/transitioning/index` describes. The playbooks don't manage the rest of the configuration, so make the configuration changes that guide describes in the configuration files on each host. Later runs of the playbook keep these changes, except for the settings the roles write: ``network.host``, ``node.name``, the cluster discovery settings, and ``plugins.security.nodes_dn`` in ``opensearch.yml``, the JVM heap size, the Wazuh indexer hosts and the cluster node settings in ``wazuh-manager.conf``, and ``opensearch.hosts`` and the Wazuh manager URL in ``opensearch_dashboards.yml``. The playbook resets these settings and restarts the services whose files it changed.

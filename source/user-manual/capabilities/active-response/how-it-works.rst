@@ -18,9 +18,9 @@ The Wazuh Active Response module works with Alerting monitors to run response ac
 
 #. The Wazuh agent receives the command and executes the specified active response script.
 
-After execution, Wazuh stores the results of each active response in the ``wazuh-active-responses*`` index. Each entry includes details such as the active response name, executable, and execution location, which can be reviewed from the Wazuh dashboard.
+Wazuh records each active response that it sends to the agents in the ``wazuh-active-responses*`` index. Each entry includes details such as the active response name, executable, and execution location, which can be reviewed from the Wazuh dashboard. An entry means that Wazuh sent the active response, not that the script ran successfully. To check the result, read the active response log on the endpoint, listed below.
 
-The default ``stream-active-responses-policy`` ISM policy controls the retention period. It rolls over the active response index at 20 GB per primary shard or 200,000,000 documents, and deletes each rolled-over index 3 days after the rollover. Deployments that don't reach the rollover threshold keep active response results until they do. Wazuh restores this default policy on every restart, so don't edit it. To change the retention, create a custom policy in **Indexer management** > **Index Management** > **State management policies** and apply it to the active response indices.
+The default ``stream-active-responses-policy`` Index State Management (ISM) policy controls the retention period. It rolls over the active response index at 20 GB per primary shard or 200,000,000 documents, and deletes each rolled-over index 3 days after the rollover. Deployments that don't reach the rollover threshold keep active response entries until they do. Wazuh restores this default policy on every restart, so don't edit it. To change the retention, create a custom policy in **Indexer management** > **Index Management** > **State management policies** and apply it to the active response indices.
 
 You can find the results of active response script executions in:
 

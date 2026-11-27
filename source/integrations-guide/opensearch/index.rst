@@ -1,570 +1,260 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Find out how to integrate Wazuh with Opensearch in this integration guide.
+   :description: Find out how to export the Wazuh findings and events from the Wazuh indexer to OpenSearch data streams with Logstash, and how to import the OpenSearch Dashboards dashboards.
 
 OpenSearch integration
 ======================
 
-`OpenSearch <https://opensearch.org/>`__ is a distributed, community-driven, Apache 2.0-licensed, 100% open source search and analytics suite used for a broad set of use cases like real-time application monitoring, log analytics, and website search. OpenSearch is a fork from Elasticsearch. They have many similarities in configuration and integration steps.
+The OpenSearch integration exports the Wazuh findings and events from the Wazuh indexer to the data streams of
+another OpenSearch cluster through Logstash, and provides OpenSearch Dashboards dashboards to explore them.
+Before you start, read the :doc:`overview </integrations-guide/index>` at the beginning of this guide. It describes what the integrations export,
+the export window, and the settings that all integrations share.
 
-In this guide, you can find out how to integrate Wazuh with OpenSearch in the following ways:
+Architecture
+------------
 
--  `Wazuh indexer integration using Logstash`_
--  `Wazuh server integration using Logstash`_
+Logstash reads the ``wazuh-findings-v5-*`` data streams and, optionally, the ``wazuh-events-v5-*`` data
+streams from the Wazuh indexer with the ``wazuh-export`` user. It writes every source data stream to its own
+OpenSearch data stream, ``logs-wazuh.findings.*-default`` or ``logs-wazuh.events.*-default``, with the
+``wazuh-logstash`` user. See :ref:`integrations_destination_of_every_source`. The ``wazuh`` index template
+maps the WCS fields of all these data streams, the ``wazuh-logs`` Index State Management (ISM) policy rolls
+them over, and OpenSearch Dashboards shows them in the Wazuh dashboards.
 
-.. thumbnail:: /images/integrations/integration-diagram-opensearch.png
-   :title: OpenSearch integration diagram
-   :align: center
-   :width: 80%
+Prerequisites
+-------------
 
-Wazuh indexer integration using Logstash
-----------------------------------------
+-  Wazuh indexer |WAZUH_CURRENT|, and a read-only user to export with. See :ref:`integrations_security`.
+-  OpenSearch and OpenSearch Dashboards with the security plugin, in a version listed in
+   :ref:`integrations_compatibility`.
+-  Logstash, with the ``logstash-input-opensearch`` and ``logstash-output-opensearch`` plugins.
+-  The ``integrations`` folder of the same version as the Wazuh indexer.
 
-Perform the steps below on your Logstash server. You must install Logstash on a dedicated server or on the server hosting the third-party indexer. We performed these steps on a Linux operating system. Logstash forwards the data from the Wazuh indexer to OpenSearch in the form of indexes.
+The commands in this section use ``opensearch-ca.pem`` for the CA certificate of the destination OpenSearch
+cluster, and ``root-ca.pem`` for the CA certificate of the Wazuh indexer.
 
-Learn more about the :ref:`Wazuh indexer integration <wazuh_indexer_integration>` and its necessary :ref:`considerations <capacity_planning>`.
+Preparing OpenSearch
+--------------------
 
-Installing Logstash
-^^^^^^^^^^^^^^^^^^^
+Run these steps as an OpenSearch administrator.
 
-Perform the following steps to install Logstash and the required plugins. Ensure your `Logstash and OpenSearch versions are compatible <https://opensearch.org/docs/latest/tools/index/#compatibility-matrices>`__.
+Install the index template of the ``logs-wazuh.*-*`` data streams:
 
-#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/docs/reference/logstash/installing-logstash>`__ 9.5.6, the version the integration is tested with.
-#. Install the `logstash-input-opensearch plugin <https://github.com/opensearch-project/logstash-input-opensearch>`__ and the `logstash-output-opensearch plugin <https://github.com/opensearch-project/logstash-output-opensearch>`__ using the following command. These plugins allow reading the data from the Wazuh indexer into the Logstash pipeline and writing the data into OpenSearch.
+.. code-block:: bash
+   :emphasize-lines: 1
 
-   .. code-block:: console
+   curl --cacert opensearch-ca.pem -u admin -X PUT "https://<OPENSEARCH_IP>:9200/_index_template/wazuh" \
+     -H 'Content-Type: application/json' -d @integrations/opensearch/templates/wazuh-index-template.json
 
-      $ sudo env LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 1.0.0 logstash-input-opensearch
-      $ sudo env LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 2.1.1 logstash-output-opensearch
+Install the ISM policy. It applies to the backing indices of ``logs-wazuh.*-*`` created after it, and rolls
+them over at 30 days or 50 GB per primary shard. It doesn't delete any data.
 
-   The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
+.. code-block:: bash
+   :emphasize-lines: 1
 
-#. Copy the Wazuh indexer and OpenSearch root certificates on the Logstash server.
+   curl --cacert opensearch-ca.pem -u admin -X PUT "https://<OPENSEARCH_IP>:9200/_plugins/_ism/policies/wazuh-logs" \
+     -H 'Content-Type: application/json' -d @integrations/opensearch/templates/wazuh-ism-policy.json
 
-   .. note::
-      
-      You can add the certificates to any directory of your choice. For example, we added them in ``/etc/logstash/wazuh-indexer-certs`` and ``/etc/logstash/opensearch-certs`` respectively.
+To install the policy again, for example during an upgrade, OpenSearch needs its current version. Get
+``_seq_no`` and ``_primary_term`` with ``GET _plugins/_ism/policies/wazuh-logs``, and add
+``?if_seq_no=<SEQ_NO>&if_primary_term=<PRIMARY_TERM>`` to the request.
 
-#. Give the ``logstash`` user the necessary permissions to read the copied certificates:
+Retention
+^^^^^^^^^
 
-   .. code-block:: console
+Every upgrade of the integration installs the ``wazuh-logs`` policy again. To delete data, create your own
+policy instead, with a higher ``ism_template`` priority than ``wazuh-logs`` (200), so that it takes over the
+new backing indices. For example, to delete them 90 days after they roll over:
 
-      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
-      $ sudo chmod -R 755 </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem
+.. code-block:: bash
+   :emphasize-lines: 1
 
-   Replace ``</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` with your Wazuh indexer and Opensearch certificate local path on the Logstash endpoint respectively.
-
-Configuring new indexes
-^^^^^^^^^^^^^^^^^^^^^^^
-
-You must define the mappings between the data and the index types to ensure OpenSearch indexes your data correctly. OpenSearch can infer these mappings, but we recommend that you explicitly configure them. Wazuh provides a set of mappings to ensure OpenSearch indexes the data correctly.
-
-You need to use the `logstash/os_template.json <https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-template.json>`__ template to configure this index initialization for your OpenSearch platform.
-
-Create a ``/etc/logstash/templates/`` directory and download the template as ``wazuh.json`` using the following commands:
-
-.. code-block:: console
-
-   # mkdir /etc/logstash/templates
-   # curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-template.json
-
-Load the template into OpenSearch:
-
-.. code-block:: console
-
-   # curl -X PUT "https://<OPENSEARCH_ADDRESS>:9200/_index_template/wazuh" -H 'Content-Type: application/json' -d @/etc/logstash/templates/wazuh.json --cacert </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem -u <OPENSEARCH_USERNAME>
-
-Load the template before Logstash writes its first event. An index that already exists keeps its mappings until the next daily index.
-
-``<OPENSEARCH_ADDRESS>`` must match a name in the OpenSearch certificate.
-
-The ``logstash-output-opensearch`` plugin can't install index templates on Logstash 9, so Logstash doesn't manage the template.
-
-Check that the template exists:
-
-.. code-block:: console
-
-   # curl "https://<OPENSEARCH_ADDRESS>:9200/_index_template/wazuh" --cacert </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem -u <OPENSEARCH_USERNAME>
-
-In OpenSearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
-
-.. code-block:: none
-   :emphasize-lines: 8
-
-   ...
-   "template": {
-     ...
-     "settings": {
-           ...
-           "mapping": {
-            "total_fields": {
-               "limit": 10000
-            }
-           }
-           ...
+   curl --cacert opensearch-ca.pem -u admin -X PUT "https://<OPENSEARCH_IP>:9200/_plugins/_ism/policies/wazuh-logs-90-days" \
+     -H 'Content-Type: application/json' -d '{
+     "policy": {
+       "description": "Rolls over the Wazuh data streams and deletes their indices 90 days after rollover",
+       "default_state": "hot",
+       "states": [
+         {
+           "name": "hot",
+           "actions": [{ "rollover": { "min_index_age": "30d", "min_primary_shard_size": "50gb" } }],
+           "transitions": [{ "state_name": "delete", "conditions": { "min_rollover_age": "90d" } }]
+         },
+         { "name": "delete", "actions": [{ "delete": {} }], "transitions": [] }
+       ],
+       "ism_template": [{ "index_patterns": ["logs-wazuh.*-*"], "priority": 300 }]
      }
-     ...
-   }
-   ...
-
-You can further increase this value by following the `creating an index template <https://opensearch.org/docs/latest/im-plugin/index-templates/>`__ documentation.
-
-Configuring a pipeline
-^^^^^^^^^^^^^^^^^^^^^^
-
-A `Logstash pipeline <https://www.elastic.co/guide/en/logstash/current/configuration.html>`__ allows Logstash to use plugins to read the data from the Wazuh indexes and send them to OpenSearch.
-
-The Logstash pipeline requires access to the following secret values:
-
--  Wazuh indexer credentials
--  OpenSearch credentials
-
-We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/keystore.html>`__ to securely store these values.
-
-#. Run the following commands on your Logstash server to set a keystore password:
-
-   .. code-block:: console
-      :emphasize-lines: 2,3
-
-      $ set +o history
-      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
-      $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
-      $ set -o history
-      $ sudo chown root /etc/sysconfig/logstash
-      $ sudo chmod 600 /etc/sysconfig/logstash
-      $ sudo systemctl start logstash
-
-   Where ``<MY_KEYSTORE_PASSWORD>`` is your keystore password.
-
-   .. note::
-      
-      You need to create the ``/etc/sysconfig`` folder if it does not exist on your server.
-
-#. Run the following commands to securely store the credentials of the Wazuh indexer and OpenSearch in the Logstash keystore.
-
-   .. note::
-
-      When you run each of the commands, you will be prompted to enter your credentials and the credentials will not be visible as you enter them.
-
-      ``OPENSEARCH_USERNAME``, ``OPENSEARCH_PASSWORD``, ``WAZUH_INDEXER_USERNAME``, and ``WAZUH_INDEXER_PASSWORD`` are `keys <https://www.elastic.co/guide/en/logstash/current/keystore.html>`__ representing the secret values you are adding to the Logstash keystore. These keys will be used in the Logstash pipeline.
-
-   #. Create a new Logstash keystore:
-
-      .. code-block:: console
-
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
-   
-   #. Store your OpenSearch username and password:
-
-      .. code-block:: console
-      
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add OPENSEARCH_USERNAME
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add OPENSEARCH_PASSWORD
-
-   #. Store your Wazuh indexer administrator username and password:
-
-      .. code-block:: console
-
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_USERNAME
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_PASSWORD
-
-   Where:
-
-   -  ``OPENSEARCH_USERNAME`` and ``OPENSEARCH_PASSWORD`` are keys representing your OpenSearch username and  password respectively.
-   -  ``WAZUH_INDEXER_USERNAME`` and ``WAZUH_INDEXER_PASSWORD`` are keys representing your Wazuh indexer administrator username and password respectively.
-
-#. Perform the following steps to configure the Logstash pipeline.
-
-   #. Create the configuration file ``wazuh-opensearch.conf`` in ``/etc/logstash/conf.d/`` folder:
-
-      .. code-block:: console
-
-         $ sudo touch /etc/logstash/conf.d/wazuh-opensearch.conf
-   
-   #. Add the following configuration to the ``wazuh-opensearch.conf`` file.  This sets the parameters required to run Logstash.
-
-      .. code-block:: none
-         :emphasize-lines: 3,8,24,31
-
-         input {
-           opensearch {
-            hosts =>  ["<WAZUH_INDEXER_ADDRESS>:9200"]
-            user  =>  "${WAZUH_INDEXER_USERNAME}"
-            password  =>  "${WAZUH_INDEXER_PASSWORD}"
-            index =>  "wazuh-alerts-4.x-*"
-            ssl => true
-            ca_file => "</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem"
-            query =>  '{
-                "query": {
-                   "range": {
-                      "@timestamp": {
-                         "gt": "now-1m"
-                      }
-                   }
-                }
-            }'
-            schedule => "* * * * *"
-           }
-         }
-         
-         output {
-             opensearch {
-               hosts => ["<OPENSEARCH_ADDRESS>"]
-               auth_type => {
-                  type => 'basic'
-                  user => '${OPENSEARCH_USERNAME}'
-                  password => '${OPENSEARCH_PASSWORD}'
-               }
-               index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
-               cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
-               ssl => true
-               manage_template => false
-             }
-         }
-
-      Where:
-
-      -  ``<WAZUH_INDEXER_ADDRESS>`` is your Wazuh indexer address or addresses in case of cluster deployment.
-      -  ``<OPENSEARCH_ADDRESS>`` is your OpenSearch address.
-      -  ``</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem`` is your Wazuh indexer certificate local path on the Wazuh server. For example,  you can use ``/etc/logstash/wazuh-indexer-certs/root-ca.pem`` which is the Wazuh indexer root certificate that was copied earlier.
-      -  ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` is your OpenSearch certificate local path on the Wazuh server. For example, you can use ``/etc/logstash/opensearch-certs/root-ca.pem`` which is the OpenSearch certificate that was copied earlier.
-
-      .. note::
-         
-         For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
-
-Running Logstash
-^^^^^^^^^^^^^^^^
-
-#. Once you have everything set, run Logstash from CLI with your configuration:
-
-   Run the command as the ``logstash`` user. Logstash 9 doesn't run as root, and that user must own the log files that earlier commands created as root:
-
-   .. code-block:: console
-
-      $ sudo systemctl stop logstash
-      $ sudo chown -R logstash:logstash /var/log/logstash
-      $ sudo -E -u logstash /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-opensearch.conf --path.settings /etc/logstash/
-
-   ``sudo -E`` passes ``LOGSTASH_KEYSTORE_PASS`` to Logstash, so run the command in the shell where you exported it. Without it, Logstash reports that the keystore is not valid.
-
-   Make sure to use your own paths for the Logstash executable, the pipeline, and the configuration files.
-
-   Ensure that Wazuh indexer RESTful API port (9200) is open on your Wazuh indexer. To verify that the necessary ports for Wazuh component communication are open, refer to the list of :ref:`required ports <default_ports>`.
-
-#. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as service:
-
-   .. code-block:: console
-
-      $ sudo systemctl enable logstash
-      $ sudo systemctl start logstash
-
-Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
-
-.. note::
-   
-   Any data indexed before the configuration is complete would not be forwarded to the OpenSearch indexes.
-
-   The ``/var/log/logstash/logstash-plain.log`` file in the Logstash instance stores events produced when Logstash runs. View this file in case you need to troubleshoot.
-
-After Logstash is successfully running, check how to :ref:`configure the Wazuh alert index pattern <configuring_wazuh_alerts_index_pattern_in_opensearch>` and :ref:`verify the integration <verifying_opensearch_integration>`.
-
-.. _opensearch_wazuh_server_integration_using_logstash:
-
-Wazuh server integration using Logstash
----------------------------------------
-
-Perform all the steps below on your Wazuh server. Learn more about the :ref:`Wazuh server integration <wazuh_server_integration>` and its necessary :ref:`considerations <capacity_planning>`.
-
-Installing Logstash
-^^^^^^^^^^^^^^^^^^^
-
-We use Logstash to forward security data in the ``/var/ossec/logs/alerts/alerts.json`` alerts file from the Wazuh server to the OpenSearch indexes.
-
-Perform the following steps to install Logstash and the required plugin.
-
-#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/docs/reference/logstash/installing-logstash>`__ 9.5.6, the version the integration is tested with, on the Wazuh server.
-#. Run the following command to install the `logstash-output-opensearch plugin <https://github.com/opensearch-project/logstash-output-opensearch>`__. This plugin allows Logstash to write the data into OpenSearch.
-
-   .. code-block:: console
-
-      $ sudo env LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 2.1.1 logstash-output-opensearch
-
-   The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
-
-#. Copy the OpenSearch root certificate to the Wazuh server. You can add the certificate to any directory of your choice. In our case, we add it in the ``/etc/logstash/opensearch-certs`` directory.
-
-#. Give the ``logstash`` user the necessary permissions to read the copied certificates:
-
-   .. code-block:: console
-
-      $ sudo chmod -R 755 </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem
-
-   Replace ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` with your OpenSearch certificate local path on the Wazuh server.
-
-Configuring new indexes
-^^^^^^^^^^^^^^^^^^^^^^^
-
-You must define the mappings between the data and the index types to ensure Opensearch indexes your data correctly. Opensearch can infer these mappings, but we recommend that you explicitly configure them. Wazuh provides a set of mappings to ensure Opensearch indexes the data correctly.
-
-You need to use the `logstash/os_template.json <https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-template.json>`__ template to configure this index initialization for your Opensearch platform. The ``refresh_interval`` is set to ``5s`` in the template we provide.
-
-Create a ``/etc/logstash/templates/`` directory and download the template as ``wazuh.json`` using the following commands:
-
-.. code-block:: console
-
-   # mkdir /etc/logstash/templates
-   # curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-template.json
-
-Load the template into OpenSearch:
-
-.. code-block:: console
-
-   # curl -X PUT "https://<OPENSEARCH_ADDRESS>:9200/_index_template/wazuh" -H 'Content-Type: application/json' -d @/etc/logstash/templates/wazuh.json --cacert </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem -u <OPENSEARCH_USERNAME>
-
-Load the template before Logstash writes its first event. An index that already exists keeps its mappings until the next daily index.
-
-``<OPENSEARCH_ADDRESS>`` must match a name in the OpenSearch certificate.
-
-The ``logstash-output-opensearch`` plugin can't install index templates on Logstash 9, so Logstash doesn't manage the template.
-
-Check that the template exists:
-
-.. code-block:: console
-
-   # curl "https://<OPENSEARCH_ADDRESS>:9200/_index_template/wazuh" --cacert </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem -u <OPENSEARCH_USERNAME>
-
-In OpenSearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
-
-.. code-block:: none
-   :emphasize-lines: 8
-
-   ...
-   "template": {
-     ...
-     "settings": {
-           ...
-           "mapping": {
-            "total_fields": {
-               "limit": 10000
-            }
-           }
-           ...
-     }
-     ...
-   }
-   ...
-
-You can further increase this value by following the `creating an index template <https://opensearch.org/docs/latest/im-plugin/index-templates/>`__ documentation.
-
-Configuring a pipeline
-^^^^^^^^^^^^^^^^^^^^^^
-
-A `Logstash pipeline <https://www.elastic.co/guide/en/logstash/current/configuration.html>`__ allows Logstash to use plugins to read the data in the Wazuh ``/var/ossec/logs/alerts/alerts.json`` alerts file and send them to OpenSearch.
-
-The Logstash pipeline requires access to your OpenSearch credentials.
-
-We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/keystore.html>`__ to securely store these values.
-
-#. Run the following commands on your Wazuh server to set a keystore password:
-
-   .. code-block:: console
-      :emphasize-lines: 2,3
-
-      $ set +o history
-      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
-      $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
-      $ set -o history
-      $ sudo chown root /etc/sysconfig/logstash
-      $ sudo chmod 600 /etc/sysconfig/logstash
-      $ sudo systemctl start logstash
-
-   Where ``<MY_KEYSTORE_PASSWORD>`` is your keystore password.
-
-   .. note::
-      
-      You need to create the ``/etc/sysconfig`` folder if it does not exist on your server.
-
-#. Run the following commands to securely store the credentials of OpenSearch.
-
-   .. note::
-      
-      When you run each of the commands, you will be prompted to enter your credentials and the credentials will not be visible as you enter them.
-
-      ``OPENSEARCH_USERNAME`` and ``OPENSEARCH_PASSWORD`` are `keys <https://www.elastic.co/guide/en/logstash/current/keystore.html>`__ representing the secret values you are adding to the Logstash keystore. These keys will be used in the Logstash pipeline.
-
-   #. Create a new Logstash keystore:
-
-      .. code-block:: console
-
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
-
-   #. Store your OpenSearch username and password:
-
-      .. code-block:: console
-
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add OPENSEARCH_USERNAME
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add OPENSEARCH_PASSWORD
-
-      Where ``OPENSEARCH_USERNAME`` and ``OPENSEARCH_PASSWORD`` are keys representing your OpenSearch username and password respectively.
-
-#. Perform the following steps to configure the Logstash pipeline.
-
-   #. Create the configuration file ``wazuh-opensearch.conf`` in ``/etc/logstash/conf.d/`` folder:
-
-      .. code-block:: console
-
-         $ sudo touch /etc/logstash/conf.d/wazuh-opensearch.conf
-
-   #. Add the following configuration to the ``wazuh-opensearch.conf`` file. This sets the parameters required to run Logstash.
-
-      .. code-block:: console
-         :emphasize-lines: 15,22
-
-         input {
-           file {
-             id => "wazuh_alerts"
-             codec => "json"
-             start_position => "beginning"
-             stat_interval => "1 second"
-             path => "/var/ossec/logs/alerts/alerts.json"
-             mode => "tail"
-             ecs_compatibility => "disabled"
-           }
-         }
-         
-         output {
-             opensearch {
-               hosts => ["<OPENSEARCH_ADDRESS>"]
-               auth_type => {
-                  type => 'basic'
-                  user => '${OPENSEARCH_USERNAME}'
-                  password => '${OPENSEARCH_PASSWORD}'
-               }
-               index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
-               cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
-               ssl => true
-               manage_template => false
-             }
-         }
-
-      Where:
-
-      -  ``<OPENSEARCH_ADDRESS>`` is your OpenSearch IP address.
-      -  ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` is your OpenSearch certificate local path on the Wazuh server. In our case, we used ``/etc/logstash/opensearch-certs/root-ca.pem``.
-
-      .. note::
-         
-         For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
-
-#. By default the ``/var/ossec/logs/alerts/alerts.json`` file is owned by the ``wazuh`` user with restrictive permissions. You must add the ``logstash`` user to the ``wazuh`` group so it can read the file when running Logstash as a service:
-
-   .. code-block:: console
-
-      $ sudo usermod -a -G wazuh logstash
-
-Running Logstash
-^^^^^^^^^^^^^^^^
-
-#. Once you have everything set, run Logstash from CLI with your configuration:
-
-   Run the command as the ``logstash`` user. Logstash 9 doesn't run as root, and that user must own the log files that earlier commands created as root:
-
-   .. code-block:: console
-
-      $ sudo systemctl stop logstash
-      $ sudo chown -R logstash:logstash /var/log/logstash
-      $ sudo -E -u logstash /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-opensearch.conf --path.settings /etc/logstash/
-
-   ``sudo -E`` passes ``LOGSTASH_KEYSTORE_PASS`` to Logstash, so run the command in the shell where you exported it. Without it, Logstash reports that the keystore is not valid.
-
-   Make sure to use your own paths for the executable, the pipeline, and the configuration files.
-
-   Ensure that Wazuh server RESTful API port (55000) is open on your Wazuh server. To verify that the necessary ports for Wazuh component communication are open, refer to the list of :ref:`required ports <default_ports>`.
-
-#. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as a service:
-
-   .. code-block:: console
-
-      $ sudo systemctl enable logstash
-      $ sudo systemctl start logstash
-
-.. note::
-   
-   Any data indexed before the configuration is complete would not be forwarded to the OpenSearch indexes.
-
-   The ``/var/log/logstash/logstash-plain.log`` file in the Logstash instance stores events generated when Logstash runs. View this file in case you need to troubleshoot.
-
-Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
-
-.. _configuring_wazuh_alerts_index_pattern_in_opensearch:
-
-Configuring the Wazuh alerts index pattern in OpenSearch
---------------------------------------------------------
-
-In Opensearch Dashboards, do the following to create the index pattern name for the Wazuh alerts.
-
-#. Select **☰** > **Management** > **Dashboards Management**.
-#. Choose **Index Patterns** and select **Create index pattern**.
-#. Define ``wazuh-alerts-*`` as the index pattern name.
-#. Select **timestamp** as the primary time field for use with the global time filter. Then **Create the index pattern**.
-#. Open the menu and select **Discover** under **OpenSearch Dashboards**.
-
-.. thumbnail:: /images/integrations/configuring-index-pattern-in-opensearch.gif
-   :title: Configuring the Wazuh alerts index pattern in OpenSearch
+   }'
+
+The existing backing indices keep their policy. To move them to the new one, use ``POST
+_plugins/_ism/change_policy/.ds-logs-wazuh*`` with ``{"policy_id": "wazuh-logs-90-days"}``.
+
+Writer user
+^^^^^^^^^^^
+
+Create the role and the user that Logstash writes with. The role allows creating the data streams, appending
+to them, and adding the mappings of fields that appear for the first time. The security plugin rejects the
+writes if any of these actions is missing.
+
+.. code-block:: bash
+   :emphasize-lines: 1,15,16,17
+
+   curl --cacert opensearch-ca.pem -u admin -X PUT "https://<OPENSEARCH_IP>:9200/_plugins/_security/api/roles/wazuh-logstash-writer" \
+     -H 'Content-Type: application/json' -d '{
+     "description": "Write the Wazuh events and findings exported by Logstash",
+     "cluster_permissions": ["cluster:monitor/main", "indices:data/write/bulk"],
+     "index_permissions": [
+       {
+         "index_patterns": ["logs-wazuh.*-*"],
+         "allowed_actions": [
+           "indices:data/write/index", "indices:data/write/bulk*",
+           "indices:admin/create", "indices:admin/data_stream/create", "indices:admin/mapping/put"
+         ]
+       }
+     ]
+   }'
+   curl --cacert opensearch-ca.pem -u admin -X PUT "https://<OPENSEARCH_IP>:9200/_plugins/_security/api/internalusers/wazuh-logstash" \
+     -H 'Content-Type: application/json' -d '{"password": "<WAZUH_LOGSTASH_PASSWORD>"}'
+   curl --cacert opensearch-ca.pem -u admin -X PUT "https://<OPENSEARCH_IP>:9200/_plugins/_security/api/rolesmapping/wazuh-logstash-writer" \
+     -H 'Content-Type: application/json' -d '{"users": ["wazuh-logstash"]}'
+
+Configuring Logstash
+--------------------
+
+Install the plugins:
+
+.. code-block:: bash
+
+   LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 1.0.0 logstash-input-opensearch
+   LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 2.1.1 logstash-output-opensearch
+
+The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
+
+Copy the pipeline files to a dedicated folder, in this order:
+
+.. code-block:: bash
+
+   mkdir -p /etc/logstash/wazuh
+   cp integrations/logstash/pipeline/wazuh-indexer-input.conf /etc/logstash/wazuh/10-wazuh-indexer-input.conf
+   cp integrations/logstash/pipeline/wazuh-source.conf /etc/logstash/wazuh/20-wazuh-source.conf
+   cp integrations/logstash/pipeline/wazuh-data-stream.conf /etc/logstash/wazuh/30-wazuh-data-stream.conf
+   cp integrations/opensearch/logstash/pipeline/indexer-to-opensearch.conf /etc/logstash/wazuh/40-indexer-to-opensearch.conf
+
+Declare the pipeline in ``/etc/logstash/pipelines.yml``, with a persisted queue and the dead letter queue. The
+pipeline is tested with ECS compatibility disabled.
+
+.. code-block:: yaml
+
+   - pipeline.id: wazuh-opensearch
+     path.config: "/etc/logstash/wazuh/*.conf"
+     pipeline.ecs_compatibility: disabled
+     queue.type: persisted
+     queue.max_bytes: 4gb
+     dead_letter_queue.enable: true
+
+Set the pipeline settings in the environment of the Logstash service, and the secrets in the Logstash
+keystore. See :ref:`integrations_tls_credentials`. In addition to the shared settings, the output uses the
+following settings:
+
++-------------------------+----------+-------------------------------------------------------------------+
+| Setting                 | Default  | Description                                                       |
++=========================+==========+===================================================================+
+| ``OPENSEARCH_HOST``     | required | OpenSearch URL, ``https://<OPENSEARCH_IP>:9200``, or several URLs |
+|                         |          | separated by spaces. The pipeline authenticates with a user and   |
+|                         |          | password only.                                                    |
++-------------------------+----------+-------------------------------------------------------------------+
+| ``OPENSEARCH_USERNAME`` | required | User that Logstash writes with, ``wazuh-logstash`` in this guide. |
++-------------------------+----------+-------------------------------------------------------------------+
+| ``OPENSEARCH_PASSWORD`` | required | Password of that user.                                            |
++-------------------------+----------+-------------------------------------------------------------------+
+| ``OPENSEARCH_CA``       | required | CA certificate of OpenSearch.                                     |
++-------------------------+----------+-------------------------------------------------------------------+
+
+Restart Logstash to apply the changes.
+
+Importing the dashboards
+------------------------
+
+Import ``integrations/opensearch/dashboards.ndjson`` in OpenSearch Dashboards from Dashboards Management >
+Saved objects > Import, or with the API:
+
+.. code-block:: bash
+   :emphasize-lines: 1
+
+   curl --cacert opensearch-ca.pem -u admin -X POST "https://<OPENSEARCH_DASHBOARDS_IP>:5601/api/saved_objects/_import?overwrite=true" \
+     -H 'osd-xsrf: true' -H 'Expect:' --form file=@integrations/opensearch/dashboards.ndjson
+
+The file contains the ``logs-wazuh.findings.*-*`` and ``logs-wazuh.events.*-*`` index patterns, and the
+findings dashboards of the Wazuh dashboard, with the same layout and the same filters:
+
+-  Threat hunting, MITRE ATT&CK, Malware detection, and Case management.
+-  Docker, AWS, Azure, Google Cloud, GitHub, and Office: the findings of each integration.
+-  PCI, GDPR, HIPAA, NIST 800-53, NIST 800-171, ISO 27001, TSC, CMMC, FedRAMP, and NIS2: findings for
+   each compliance framework.
+-  The Agent dashboard of each module, which the Wazuh dashboard shows when you pin a Wazuh agent.
+   Select the Wazuh agent in the control at the top.
+-  The drilldowns of GitHub and Office, which the Wazuh dashboard shows when you click a value in a
+   table. Filter for one value, such as an actor, organization, user, or IP address, in the table at
+   the top.
+
+The dashboard titles start with ``Wazuh -``. The Wazuh - Events overview dashboard shows the events. With
+multi-tenancy enabled, the API imports the dashboards into the tenant of the request. To share them with every
+user, add ``-H 'securitytenant: global'`` to the request. The ``-H 'Expect:'`` option turns off the ``Expect:
+100-continue`` header that curl adds to uploads larger than 1 MB. With multi-tenancy enabled, OpenSearch
+Dashboards 3.9.0 stops when it receives that header with the dashboards file.
+
+.. thumbnail:: /images/integrations/opensearch-threat-hunting-dashboard.png
+   :title: Wazuh - Threat hunting - Overview dashboard in OpenSearch Dashboards
+   :alt: Wazuh - Threat hunting - Overview dashboard in OpenSearch Dashboards
    :align: center
    :width: 80%
 
-.. _verifying_opensearch_integration:
-
-Verifying the integration
--------------------------
-
-To check the integration with OpenSearch, navigate to **Discover** in OpenSearch Dashboards and verify that you can find  the Wazuh security data within the index pattern ``wazuh-alerts-4.x*``.
-
-.. thumbnail:: /images/integrations/finding-security-data-in-opensearch.png
-   :title: Verify finding security data
+.. thumbnail:: /images/integrations/opensearch-events-overview-dashboard.png
+   :title: Wazuh - Events overview dashboard in OpenSearch Dashboards
+   :alt: Wazuh - Events overview dashboard in OpenSearch Dashboards
    :align: center
    :width: 80%
 
-.. _openSearch_dashboards:
+Validating the integration
+--------------------------
 
-OpenSearch dashboards
----------------------
+After the export delay (5 minutes by default) plus one minute, check that the Wazuh data streams exist and
+that the ISM policy manages their backing indices:
 
-Wazuh provides several `dashboards for OpenSearch <https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-dashboards.ndjson>`__. After finishing with the OpenSearch integration setup, these dashboards display your Wazuh alerts in OpenSearch.
+.. code-block:: bash
 
-.. thumbnail:: /images/integrations/security-events-dashboard-for-opensearch.png
-   :title: Threat Hunting dashboard for Opensearch
-   :align: center
-   :width: 80%
+   curl --cacert opensearch-ca.pem -u admin "https://<OPENSEARCH_IP>:9200/_data_stream/logs-wazuh.*?filter_path=data_streams.name"
+   curl --cacert opensearch-ca.pem -u admin "https://<OPENSEARCH_IP>:9200/_plugins/_ism/explain/.ds-logs-wazuh*?filter_path=*.policy_id"
 
-Importing these dashboards defines the index pattern name ``wazuh-alerts-*``. The index pattern name is necessary for creating index names and receiving alerts.
+Compare the document count of a closed time range with the source, as described in
+:ref:`elastic_validating_integration` for Elasticsearch.
 
-Follow the next steps to import the Wazuh dashboards for OpenSearch.
+Troubleshooting
+---------------
 
-#. Run the command below to download the Wazuh dashboard file for OpenSearch.
-
-   #. If you are accessing the OpenSearch dashboard from a  Linux or macOS system:
-
-      .. code-block:: console
-
-         # wget https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-dashboards.ndjson
-
-   #. If you are accessing the Opensearch dashboard from a Windows system (run the command using Powershell):
-
-      .. code-block:: powershell
-
-         # Invoke-WebRequest -Uri "https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-dashboards.ndjson" -OutFile "allDashboards.ndjson"
-
-#. In OpenSearch Dashboards, navigate to **Management** > **Dashboards management**.
-#. Click on **Saved Objects** and click **Import**.
-#. Click on the **Import** icon, browse your files, and select the dashboard file.
-#. Click the **Import** button to start importing then click **Done**.
-#. To find the imported dashboards, navigate to **Dashboard** under **OpenSearch Dashboards**.
-
-.. thumbnail:: /images/integrations/import-dashboard-in-opensearch.gif
-   :title: Import dashboard file in Opensearch
-   :align: center
-   :width: 80%
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| Symptom                                      | Cause and solution                                                                            |
++==============================================+===============================================================================================+
+| No data stream is created, and the Logstash  | The export user can't read the data streams in                                                |
+| log shows a ``security_exception`` from the  | ``WAZUH_EXPORT_INDICES``. Add them to its role.                                               |
+| Wazuh indexer.                               |                                                                                               |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| ``security_exception`` or ``no permissions`` | The writer role lacks a permission on ``logs-wazuh.*-*``, or the data                         |
+| from OpenSearch.                             | stream namespace is outside that pattern.                                                     |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| A data stream is created as a plain index.   | The index template wasn't installed before the first document arrived.                        |
+|                                              | Delete the index, install the template, and export the range again.                           |
+|                                              | See :ref:`integrations_interruptions`.                                                        |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| Findings are missing at the destination, but | The findings were indexed after the run that read their window.                               |
+| events are present.                          | Increase ``WAZUH_EXPORT_DELAY`` above the detector interval, and                              |
+|                                              | export the range again. See :ref:`integrations_export_delay` and                              |
+|                                              | :ref:`integrations_interruptions`.                                                            |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| Documents in the dead letter queue.          | OpenSearch rejected them. Inspect them with the `dead_letter_queue                            |
+|                                              | input                                                                                         |
+|                                              | <https://www.elastic.co/docs/reference/logstash/plugins/plugins-inputs-dead_letter_queue>`__. |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| ``version_conflict_engine_exception``        | Not an error. A document read twice, during a backfill or after a                             |
+|                                              | restart, is dropped as a duplicate. The output doesn't log it.                                |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+

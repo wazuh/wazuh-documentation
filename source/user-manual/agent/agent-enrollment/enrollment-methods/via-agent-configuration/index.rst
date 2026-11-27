@@ -17,7 +17,7 @@ To also verify the identity of the Wazuh manager, configure the certificate auth
 
 .. note::
 
-   We recommend enrolling Wazuh 5.0 agents with an enrollment token instead. The token carries the Wazuh manager address, the enrollment credential, and the CA, so you don't need to edit the Wazuh agent configuration file. See the :doc:`Wazuh manager identity verification </user-manual/agent/agent-enrollment/security-options/manager-identity-verification>` and :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>` sections.
+   We recommend enrolling Wazuh agents with an enrollment token instead. The token carries the Wazuh manager address, the enrollment credential, and the CA, so you don't need to edit the Wazuh agent configuration file. See the :doc:`Wazuh manager identity verification </user-manual/agent/agent-enrollment/security-options/manager-identity-verification>` and :doc:`Deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>` sections.
 
 The following sections show how to enroll the Wazuh agent on different operating systems:
 

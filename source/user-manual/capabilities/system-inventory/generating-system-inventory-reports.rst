@@ -29,6 +29,8 @@ You can export a summary of the properties collected by the Wazuh Syscollector m
       :align: center
       :width: 80%
 
+.. _system_inventory_generating_system_inventory_reports_property_specific_report:
+
 Property-specific report
 ------------------------
 

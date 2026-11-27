@@ -110,6 +110,14 @@ Given a command output, it will be read as one or more log messages depending on
 | **Allowed values**   | Any command line, optionally including arguments   |
 +----------------------+----------------------------------------------------+
 
+.. note::
+
+   The ``ossec.conf`` file isn't parsed as standard XML. Inside ``<command>``:
+
+   -  Write ``>`` and ``&`` directly, for example ``2>/dev/null`` or ``cmd1 && cmd2``.
+   -  Write ``<`` as ``\<``. The backslash stops the Wazuh agent from reading ``<`` as the start of a tag, and the command receives ``\<``. The shell then reads it as a literal ``<``, not as input redirection. Inside single quotes, for example in an ``awk`` program, the shell keeps the backslash, so the program receives ``\<``.
+   -  Don't use XML entities such as ``&gt;``, ``&lt;``, or ``&amp;``. The Wazuh agent doesn't decode them, and the shell reads the ``&`` as running a command in the background.
+
 alias
 ^^^^^
 

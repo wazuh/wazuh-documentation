@@ -38,7 +38,7 @@ The following example shows a simplified event template for the security categor
    }
 
 Event template retention
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Event data streams have short minimum ages for deletion because they primarily serve as an intermediate processing layer. Wazuh deletes a backing index only after it rolls over at 20 GB per primary shard or 200 million documents, and the minimum age for deletion has passed since that rollover. A low-volume deployment that never reaches these limits keeps its events indefinitely.
 
@@ -274,7 +274,7 @@ The following workflow illustrates the process:
 Verifying deployed templates
 ----------------------------
 
-List the templates whose names start with ``wazuh-``. To list every index template, including the ``wazuh-states-*`` and internal templates, run ``GET _cat/templates?v&s=name``:
+In **Indexer management** > **Dev Tools**, list the templates whose names start with ``wazuh-``. To list every index template, including the ``states-*`` and internal templates, run ``GET _cat/templates?v&s=name``:
 
 .. code-block:: none
 
@@ -284,7 +284,7 @@ View a specific template:
 
 .. code-block:: none
 
-   GET /_index_template/<template-name>
+   GET /_index_template/<TEMPLATE_NAME>
 
 List lifecycle policies:
 

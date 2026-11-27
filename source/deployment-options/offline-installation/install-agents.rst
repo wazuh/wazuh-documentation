@@ -6,7 +6,15 @@
 Install Wazuh agents on hosts without Internet access
 =====================================================
 
-The ``wazuh-offline.tar.gz`` file doesn't include the Wazuh agent. On the system with Internet access, download the Wazuh agent package for each endpoint from :doc:`Packages list </installation-guide/packages-list>`, and copy it to the endpoint. Create an enrollment token on the Wazuh manager, as :ref:`Generate the enrollment token <generate_enrollment_token>` describes. In the following commands, replace ``<ENROLLMENT_TOKEN>`` with the token and ``<AGENT_NAME>`` with a name that no other agent uses. Use the file name of the package you downloaded.
+The ``wazuh-offline.tar.gz`` file doesn't include the Wazuh agent. On the system with Internet access, download the Wazuh agent package for each endpoint from :doc:`Packages list </installation-guide/packages-list>`, and copy it to the endpoint. Create an enrollment token on the Wazuh manager, as :ref:`Generate the enrollment token <generate_enrollment_token>` describes. On the Wazuh manager master node, run:
+
+.. code-block:: console
+
+   # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
+
+The token is the only line on standard output, and it starts with ``eyJ``. Copy only that line. The ``id``, ``endpoint``, ``expires``, ``pin``, and ``credential`` lines go to standard error and describe the token. Don't paste the ``pin`` value as the token.
+
+In the following commands, replace ``<ENROLLMENT_TOKEN>`` with the token and ``<AGENT_NAME>`` with a name that no other agent uses. Use the file name of the package you downloaded.
 
 For the graphical installers, the deployment variables, and troubleshooting, see the :doc:`Linux </installation-guide/wazuh-agent/wazuh-agent-package-linux>`, :doc:`Windows </installation-guide/wazuh-agent/wazuh-agent-package-windows>`, and :doc:`macOS </installation-guide/wazuh-agent/wazuh-agent-package-macos>` agent pages.
 
@@ -35,6 +43,8 @@ Linux
 
       # systemctl daemon-reload
       # systemctl enable --now wazuh-agent
+
+   If the token is malformed, the package still installs, but the Wazuh agent has no Wazuh manager configured. The installer prints ``deployment variables refused [ERR_BAD_TOKEN]`` and adds it to ``/var/ossec/logs/ossec.log``. To fix it, save a correct token to a file on the endpoint, and run ``/var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE_PATH>``, as :doc:`wazuh-agent-auth </user-manual/reference/tools/wazuh-agent-auth>` describes. Or remove the package with ``apt remove wazuh-agent``, ``dpkg --purge wazuh-agent``, or ``rpm -e wazuh-agent``, and install it again with all the deployment variables. Reinstalling the same version without removing it, for example with ``apt install --reinstall`` or ``dnf reinstall``, keeps the existing configuration: it reads only ``WAZUH_ENROLLMENT_TOKEN`` and ignores ``WAZUH_AGENT_NAME`` and the group.
 
 Windows
 -------

@@ -65,7 +65,7 @@ You need root user privileges to run the commands below. If you use Docker as a 
 
       # docker image rm wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV| wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV| wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|
 
-   A multi-node deployment also uses the ``nginx:stable`` image. Add it to the command unless another container on this host uses it. If you built the images yourself, also remove the build cache, which the build leaves on the Docker host, with ``docker builder prune -a``.
+   A multi-node deployment also uses the ``nginx:stable`` image. Add it to the command unless another container on this host uses it. If you built the images yourself, also remove the build cache, which the build leaves on the Docker host, with ``docker builder prune -a``. The build also leaves its base images, ``amazonlinux:2023`` and ``public.ecr.aws/amazonlinux/amazonlinux:2023-minimal``. A backup, as described in :ref:`Wazuh service data volumes <docker-service-data-volumes>`, leaves the ``ubuntu:24.04`` image. Remove these images with ``docker image rm`` if no other container uses them.
 
 #. Run the following command to confirm that the deployment's containers are removed:
 

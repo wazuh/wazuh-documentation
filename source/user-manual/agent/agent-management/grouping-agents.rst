@@ -230,18 +230,11 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 #. Once a group is created, its ``agent.conf`` file can be edited to include the specific configuration you wish to assign to this group. For this example, for a group named dbms, the file to be edited is located at ``/etc/wazuh-manager/shared/dbms/agent.conf`` on the Wazuh manager and each agent belonging to this group will receive this file.
 
-#. After connecting to the Wazuh manager, each agent assigned to the group will receive the files contained in the ``/etc/wazuh-manager/shared/dbms/`` folder from the Wazuh manager, including the ``agent.conf`` file that was modified in the previous step. The length of time it takes for the Wazuh manager to push these files to the Wazuh agents depends on the size of the files, the number of agents in the group, and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding merged.mg file) on 100 Wazuh 4.x agents using UDP, less time if using TCP. Wazuh 5.0 agents always communicate over HTTPS (TCP), so this UDP/TCP distinction does not apply to them.
+#. After connecting to the Wazuh manager, each agent assigned to the group will receive the files contained in the ``/etc/wazuh-manager/shared/dbms/`` folder from the Wazuh manager, including the ``agent.conf`` file that was modified in the previous step. This can take several minutes, depending on the size of the files and the number of Wazuh agents in the group.
 
 #. Once a Wazuh agent belongs to a group, it isn't reassigned to that group if it is re-enrolled under another name or ID. After re-enrollment, it belongs to the ``default`` group. Assign it to its groups again, or set them during enrollment with ``<enrollment><groups>`` or ``WAZUH_AGENT_GROUP``.
 
-merged.mg
-^^^^^^^^^
-
-When a Wazuh agent is enrolled in the Wazuh manager for the first time, the Wazuh manager generates a ``merged.mg`` file based on the Wazuh agent's configuration and group membership. Whenever the Wazuh agent's configuration or group membership changes, the Wazuh manager updates the ``merged.mg`` file and sends it to the Wazuh agent.
-
-On the Wazuh manager, the file is located at ``/etc/wazuh-manager/shared/<GROUP_NAME>/merged.mg``. For Wazuh agents that belong to several groups, the Wazuh manager builds a combined file in ``/var/wazuh-manager/var/multigroups/<HASH>/merged.mg``.
-
-On the Wazuh agent, it is located at ``/var/ossec/etc/shared/merged.mg`` for Linux and ``C:\Program Files (x86)\ossec-agent\shared\merged.mg`` on Windows.
+The Wazuh manager sends the group configuration to each Wazuh agent in the ``merged.mg`` file. On the Wazuh agent, it is located at ``/var/ossec/etc/shared/merged.mg`` for Linux and ``C:\Program Files (x86)\ossec-agent\shared\merged.mg`` on Windows.
 
 Manage multiple groups
 ----------------------

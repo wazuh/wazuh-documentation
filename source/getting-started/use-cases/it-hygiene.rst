@@ -8,12 +8,12 @@ IT hygiene
 
 IT hygiene involves maintaining the security, configuration, and visibility of IT assets throughout their lifecycle. Effective IT hygiene helps organizations identify security weaknesses, maintain approved configurations, and detect changes that can increase security risks.
 
-Wazuh helps organizations maintain IT hygiene by collecting endpoint inventory, assessing configurations, monitoring files and processes, identifying vulnerable software, and providing centralized visibility into endpoint activity.
+Wazuh helps organizations maintain IT hygiene with endpoint inventory, configuration assessment, file and process monitoring, and vulnerability detection. It also centralizes visibility into endpoint activity.
 
 Monitoring system inventory
 ---------------------------
 
-An up-to-date :doc:`system inventory </user-manual/capabilities/system-inventory/index>` helps organizations maintain visibility into their IT assets and supports effective IT hygiene. Wazuh agents use the :doc:`Syscollector </user-manual/capabilities/system-inventory/configuration>` module to collect information about hardware, operating systems, installed packages, running processes and services, network interfaces and ports, users, groups, and browser extensions.
+An up-to-date :doc:`system inventory </user-manual/capabilities/system-inventory/index>` helps organizations maintain visibility into their IT assets and supports effective IT hygiene. Wazuh agents use the :doc:`Syscollector </user-manual/capabilities/system-inventory/configuration>` module to collect inventory data. This data covers hardware, operating systems, installed packages, running processes and services, network interfaces and ports, users, groups, and browser extensions.
 
 Security teams can use this inventory to maintain visibility into their assets, identify unexpected changes, and investigate software or services that require attention.
 
@@ -23,7 +23,7 @@ Security teams can use this inventory to maintain visibility into their assets, 
    :align: center
    :width: 80%
 
-You can also generate property-specific reports for a monitored endpoint. For example, you can get a report containing the list of installed software or a list of running processes on a monitored endpoint.
+You can also generate :ref:`property-specific reports <system_inventory_generating_system_inventory_reports_property_specific_report>` for a monitored endpoint. For example, you can get a report containing the list of installed software or a list of running processes on a monitored endpoint.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-report.png
    :title: Property-specific inventory report for a monitored endpoint
@@ -34,7 +34,7 @@ You can also generate property-specific reports for a monitored endpoint. For ex
 Monitoring system configurations
 --------------------------------
 
-Secure system configurations are a core IT hygiene practice that helps organizations reduce their attack surface. The :doc:`Wazuh Security Configuration Assessment (SCA) </user-manual/capabilities/sec-config-assessment/index>` module periodically scans monitored endpoints against policies based on the Center for Internet Security (CIS) Benchmarks and other supported security policies. The scans identify security misconfigurations and configuration weaknesses across monitored endpoints.
+Secure system configurations are a core IT hygiene practice that helps organizations reduce their attack surface. The :doc:`Wazuh Security Configuration Assessment (SCA) </user-manual/capabilities/sec-config-assessment/index>` module periodically scans endpoints against security policies, such as those based on the Center for Internet Security (CIS) Benchmarks. The scans identify security misconfigurations and configuration weaknesses across monitored endpoints.
 
 The **Configuration Assessment** section in the Wazuh dashboard displays the results of each SCA scan for every monitored endpoint. It shows the number of checks performed, passed, failed, and not applicable, along with an overall compliance score based on the applicable checks that passed.
 
@@ -46,7 +46,7 @@ The **Configuration Assessment** section in the Wazuh dashboard displays the res
 
 Security teams can review individual failed checks, view the rationale and remediation guidance, and generate a CSV report to support remediation activities. The report helps organizations identify configuration weaknesses, track remediation progress, and maintain secure endpoint configurations.
 
-The following SCA scan result shows a failed check because the Windows password is below the 14-character minimum required by the CIS Benchmark policy applied to the endpoint. You can implement the remediation suggested in the report to improve the security posture.
+The following SCA scan result shows a failed check for the Windows minimum password length. The CIS Benchmark policy applied to the endpoint requires at least 14 characters. You can implement the remediation suggested in the report to improve the security posture.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/failed-password-policy-check.png
    :title: Failed SCA check for a Windows password shorter than the 14-character CIS Benchmark minimum
@@ -88,11 +88,11 @@ Visibility into running processes and services helps organizations identify soft
 
 The Wazuh agent collects information about running processes and services on monitored endpoints and synchronizes the data with the Wazuh indexer. The Wazuh dashboard centralizes this information, allowing security teams to review processes and services across their environment without inspecting endpoints individually.
 
-Security teams can use this inventory to identify unauthorized applications, investigate services configured to start automatically, and detect software that does not conform to the organization's approved software baseline. The process inventory provides details such as the process name, command line, process identifier (PID), parent PID, and start time. These details help analysts investigate suspicious processes and determine their potential impact on the endpoint.
+Security teams can use this inventory to identify unauthorized applications and investigate services configured to start automatically. They can also detect software outside the approved software baseline of the organization. The process inventory provides details such as the process name, command line, process identifier (PID), parent PID, and start time. These details help analysts investigate suspicious processes and determine their potential impact on the endpoint.
 
 Wazuh detection rules match process and service activity that requires investigation, such as unauthorized services, malicious processes, or activity associated with persistence and privilege escalation.
 
-The **Services** tab of the **IT Hygiene** section displays the services installed on monitored endpoints, including their startup state and operational status.
+The **Services** tab of the :doc:`IT Hygiene </user-manual/capabilities/system-inventory/viewing-system-inventory-data>` section displays the services installed on monitored endpoints, including their startup state and operational status.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/services-tab.png
    :title: Services tab of the IT Hygiene section showing services and their startup and operational status
@@ -113,7 +113,7 @@ Monitoring network activity
 
 Wazuh collects information about network interfaces and listening ports on monitored endpoints through the Syscollector module. This inventory helps organizations identify exposed services and maintain visibility into network-facing activity across their environment.
 
-Security teams can use the **Network** tab of the **IT Hygiene** section in the Wazuh dashboard to review listening ports, associated processes, and network interfaces on monitored endpoints. Network visibility helps identify unexpected open ports, investigate exposed services, and detect unauthorized services that can increase the endpoint's attack surface.
+On the **Network** tab of the **IT Hygiene** section, security teams review listening ports, associated processes, and network interfaces on monitored endpoints. Network visibility helps identify unexpected open ports, investigate exposed services, and detect unauthorized services that can increase the endpoint's attack surface.
 
 The **Network** tab of the **IT Hygiene** section shows the network interfaces and listening ports collected from monitored endpoints.
 
@@ -136,7 +136,7 @@ Wazuh maps Security Configuration Assessment (SCA) checks and security findings 
    :align: center
    :width: 80%
 
-You can drill down to an individual requirement from the **Controls** tab of the **Regulatory Compliance** section to discover where the policy violations occurred. For example, the following image shows the CMMC requirements.
+You can drill down to an individual requirement from the **Controls** tab of the :ref:`Regulatory Compliance <wazuh_dashboard_navigating_the_wazuh_dashboard_regulatory_compliance>` section to discover where the policy violations occurred. For example, the following image shows the CMMC requirements.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/cmmc-requirements.png
    :title: Controls tab of the Regulatory Compliance section showing CMMC requirements
@@ -151,4 +151,3 @@ The image below shows findings generated for vulnerabilities that violate the *C
    :alt: Vulnerability findings that violate CMMC requirement RA.L2-3.11.2
    :align: center
    :width: 80%
-

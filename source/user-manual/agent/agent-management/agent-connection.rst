@@ -29,7 +29,7 @@ You can check the connection status of a Wazuh agent by selecting **Summary** un
    :align: center
    :width: 80%
 
-This option displays the **Endpoints** dashboard with a list of all enrolled Wazuh agents. The list includes the connection status of each Wazuh agent. The Wazuh dashboard also displays a summary with the number of Wazuh agents found for each possible agent connection :ref:`status <agent-connection-states>`: *Active*, *Disconnected*, *Pending*, or *Never connected*.
+This option displays the **Summary** dashboard with a list of all enrolled Wazuh agents. The list includes the connection status of each Wazuh agent. The Wazuh dashboard also displays a summary with the number of Wazuh agents found for each possible agent connection :ref:`status <agent-connection-states>`: *Active*, *Disconnected*, *Pending*, or *Never connected*.
 
 .. thumbnail:: /images/manual/managing-agents/endpoints-summary-dashboard.png
    :title: Agents management summary dashboard
@@ -48,42 +48,22 @@ You can check the :ref:`status <agent-connection-states>` of a Wazuh agent by se
 
 The output looks like this:
 
-.. code-block:: json
+.. code-block:: none
    :class: output
 
    {
      "data": {
        "affected_items": [
          {
-           "os": {
-             "arch": "x86_64",
-             "major": "",
-             "minor": "",
-             "name": "Amazon Linux",
-             "platform": "amzn",
-             "type": "linux",
-             "version": "2023"
-           },
+           ...
            "status": "active",
-           "registerIP": "any",
-           "group": [
-             "default"
-           ],
-           "status_code": 0,
-           "ip": "172.31.20.55",
-           "version": "v5.0.0",
-           "lastKeepAlive": "2026-09-03T17:41:55+00:00",
+           ...
            "id": "001",
            "name": "agent5",
-           "dateAdd": "2026-09-03T13:39:57+00:00"
+           ...
          }
        ],
-       "total_affected_items": 1,
-       "total_failed_items": 0,
-       "failed_items": []
-     },
-     "message": "All selected agents information was returned",
-     "error": 0
+     ...
    }
 
 .. _reading_wazuh_agentd_state_file:
@@ -143,26 +123,13 @@ To check the current status and verify the connection of the Wazuh agent to the 
 Checking network communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh agent communication with the Wazuh manager requires outbound connectivity from the Wazuh agent to the Wazuh manager on port ``1517/TCP`` (HTTPS) by default. Wazuh 4.x agents use port ``1514/TCP`` instead.
+Wazuh agent communication with the Wazuh manager requires outbound connectivity from the Wazuh agent to the Wazuh manager on port ``1517/TCP`` (HTTPS) by default.
 
-The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keeping a connection open, so recent connections usually appear in the ``TIME-WAIT`` state. Run the following commands on the Wazuh agent to verify that it reaches the Wazuh manager. The remote address must match the Wazuh manager IP address.
+Run the following command on the Wazuh agent to verify that it reaches the Wazuh manager.
 
 .. tabs::
 
    .. group-tab:: Linux/Unix
-
-      .. code-block:: console
-
-         # ss -tan '( dport = :1517 )'
-
-      The command output looks similar to this:
-
-      .. code-block:: none
-         :class: output
-
-         State     Recv-Q Send-Q Local Address:Port   Peer Address:Port
-         TIME-WAIT 0      0      192.168.71.11:33432 192.168.71.15:1517
-         TIME-WAIT 0      0      192.168.71.11:33868 192.168.71.15:1517
 
       .. code-block:: console
 
@@ -179,20 +146,6 @@ The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keepi
 
       .. code-block:: pwsh-session
 
-         > Get-NetTCPConnection -RemotePort 1517
-
-      The command output looks similar to this:
-
-      .. code-block:: none
-         :class: output
-
-         LocalAddress  LocalPort RemoteAddress RemotePort    State
-         ------------  --------- ------------- ----------    -----
-         192.168.71.14     54811 192.168.71.15       1517 TimeWait
-         192.168.71.14     54810 192.168.71.15       1517 TimeWait
-
-      .. code-block:: pwsh-session
-
          > Test-NetConnection <WAZUH_MANAGER_ADDRESS> -Port 1517
 
       The command output looks similar to this:
@@ -205,18 +158,6 @@ The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keepi
          TcpTestSucceeded : True
 
    .. group-tab:: macOS
-
-      .. code-block:: console
-
-         # netstat -an -p tcp | grep '\.1517 '
-
-      The command output looks similar to this:
-
-      .. code-block:: none
-         :class: output
-
-         tcp4       0      0  192.168.72.2.50176     192.168.71.15.1517     TIME_WAIT
-         tcp4       0      0  192.168.72.2.50177     192.168.71.15.1517     TIME_WAIT
 
       .. code-block:: console
 

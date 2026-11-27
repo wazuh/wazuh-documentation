@@ -31,7 +31,7 @@ When a worker node connects, the master node validates the connection. The follo
 | The worker node runs a different Wazuh version.                                   | ``3031``       |
 +-----------------------------------------------------------------------------------+----------------+
 
-If a worker node uses a different key, the master node cannot decrypt its messages. It logs error ``3025`` and closes the connection. If the master node closes the connection before the handshake completes three times in a row, the worker node logs a warning. A worker node that loses its connection retries every 10 seconds.
+The master node doesn't register a refused worker node, so ``cluster_control -l`` never lists it. If a worker node uses a different key, the master node cannot decrypt its messages. It logs error ``3025`` and closes the connection. If the master node closes the connection before the handshake completes three times in a row, the worker node logs a warning. A worker node that loses its connection retries every 10 seconds.
 
 
 .. thumbnail:: /images/manual/wazuh-server/server-cluster-diagram.png
@@ -43,25 +43,25 @@ If a worker node uses a different key, the master node cannot decrypt its messag
 Periodic tasks
 --------------
 
-The daemon runs independent tasks on each node. These tasks use fixed intervals that you cannot change through the configuration.
+The daemon runs independent tasks on each node. These tasks use fixed intervals that you cannot change through the configuration. The Task column gives the name that each task logs in ``/var/wazuh-manager/logs/cluster.log``.
 
-+--------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Task**                 | **Runs on** | **Interval**                   | **Purpose**                                                                                                                                         |
-+==========================+=============+================================+=====================================================================================================================================================+
-| Keep alive               | Worker node | 60 s                           | Sends a keep-alive message to the master node. After two failed attempts in a row, the worker node disconnects.                                     |
-+--------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-| Keep alive check         | Master node | 60 s                           | Closes the connection of a worker node that sent no keep-alive message for 120 s.                                                                   |
-+--------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-| Integrity check and sync | Worker node | 9 s                            | Sends the metadata of the synchronized files to the master node. The master node returns the files that are missing, different, or extra.           |
-+--------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-| Local integrity          | Master node | 8 s                            | Recalculates the BLAKE2b hash and modification time of the synchronized files once for all worker nodes.                                            |
-+--------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-| Agent-info sync          | Worker node | 10 s                           | Sends the status, last keep-alive, and metadata of its agents to the master node database.                                                          |
-+--------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-| Local agent-groups       | Master node | 10 s, after a 30 s start delay | Reads new agent group assignments from the master node database and sends them to every connected worker node.                                      |
-+--------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-| Agent-groups receive     | Worker node | On each message                | Applies the group assignments and compares checksums with the master node. After five mismatches in a row, the worker node requests the full table. |
-+--------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
++---------------------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Task**                              | **Runs on** | **Interval**                   | **Purpose**                                                                                                                                         |
++=======================================+=============+================================+=====================================================================================================================================================+
+| Keep Alive                            | Worker node | 60 s                           | Sends a keep-alive message to the master node. After two failed attempts in a row, the worker node disconnects.                                     |
++---------------------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Keep alive                            | Master node | 60 s                           | Closes the connection of a worker node that sent no keep-alive message for 120 s.                                                                   |
++---------------------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Integrity check, Integrity sync       | Worker node | 9 s                            | Sends the metadata of the synchronized files to the master node. The master node returns the files that are missing, different, or extra.           |
++---------------------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Local integrity                       | Master node | 8 s                            | Recalculates the BLAKE2b hash and modification time of the synchronized files once for all worker nodes.                                            |
++---------------------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Agent-info sync                       | Worker node | 10 s                           | Sends the status, last keep-alive, and metadata of its agents to the master node database.                                                          |
++---------------------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Local agent-groups, Agent-groups send | Master node | 10 s, after a 30 s start delay | Reads new agent group assignments from the master node database and sends them to every connected worker node.                                      |
++---------------------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Agent-groups recv                     | Worker node | On each message                | Applies the group assignments and compares checksums with the master node. After five mismatches in a row, the worker node requests the full table. |
++---------------------------------------+-------------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
 
 For the files and data these tasks move, see :ref:`Data synchronization <wazuh_manager_cluster_data_synchronization>`.
 

@@ -6,7 +6,7 @@
 Wazuh RBAC - How to create and map internal users
 =================================================
 
-Wazuh Role-Based Access Control (RBAC) allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables you to manage users' or entities' permissions to system resources.
+Wazuh Role-Based Access Control (RBAC) allows access to Wazuh resources based on the roles and policies assigned to the users.
 
 The Wazuh platform includes an internal user database for authentication. You can also use it alongside an external authentication system, such as SAML, LDAP, or Active Directory. Learn how to create and map Wazuh users in these sections.
 
@@ -23,7 +23,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log in to the Wazuh dashboard as an administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Internal users** to open the internal users page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** → **Users and data access**, and then **Internal users** to open the internal users page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.jpg
       :title: Internal users page
@@ -35,7 +35,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user with Wazuh, follow these steps:
 
-   #. Click the upper-left menu icon **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
+   #. Click the upper-left menu icon **☰** to open the menu on the Wazuh dashboard, go to **Server management** → **API access control**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.jpg
          :title: Wazuh role mapping
@@ -64,7 +64,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log in to the Wazuh dashboard as an administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Internal users** to open the internal users page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** → **Users and data access**, and then **Internal users** to open the internal users page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.jpg
       :title: Internal users page
@@ -76,7 +76,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user to the appropriate role, follow these steps:
 
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** → **Users and data access**, and then **Roles** to open the roles page.
 
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
@@ -91,7 +91,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user with Wazuh, follow these steps:
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** → **API access control**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.jpg
          :title: Wazuh role mapping
@@ -115,7 +115,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    .. note::
 
-      The read-only user can't change anything, and some pages show a permission error or an empty list: **Index Management**, **Snapshot Management**, **Notifications**, **Reporting**, **API access control**, and **Log test**. To give the user read access to Reporting, Notifications, and Snapshot Management, also map the user to the ``reports_read_access``, ``notifications_read_access``, and ``snapshot_management_read_access`` roles in **Indexer management** > **Users and data access** > **Roles**. Index Management has no read-only role. Log test needs the ``cluster:monitor/content_manager/logtest`` permission, which no built-in role includes. Don't map the user to the ``kibana_user`` role, because it gives write access to the Wazuh dashboard configuration.
+      The read-only user can't change anything, and some pages show a permission error or an empty list: **Index Management**, **Snapshot Management**, **Notifications**, **Reporting**, **API access control**, **Ruleset management** → **Detectors**, and **Log test**. To give the user read access to Reporting, Notifications, and Snapshot Management, also map the user to the ``reports_read_access``, ``notifications_read_access``, and ``snapshot_management_read_access`` roles in **Indexer management** → **Users and data access** → **Roles**. To give the user read access to **Ruleset management** → **Detectors**, also map the user to the ``security_analytics_read_access`` role. Index Management has no read-only role. Log test needs the ``cluster:monitor/content_manager/logtest`` permission, which no built-in role includes. Don't map the user to the ``kibana_user`` role, because it gives write access to the Wazuh dashboard configuration.
 
 Creating an internal user and mapping it to Wazuh
 -------------------------------------------------
@@ -124,7 +124,7 @@ Follow these steps to create an internal user and map it to a role of your choic
 
 #. Log in to the Wazuh dashboard as an administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Internal users** to open the internal users page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** → **Users and data access**, and then **Internal users** to open the internal users page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.jpg
       :title: Internal users page
@@ -136,7 +136,7 @@ Follow these steps to create an internal user and map it to a role of your choic
 
 #. To map the user to a given role, follow these steps:
 
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Users and data access**, and then **Roles** to open the roles page. Then select the role you want to map the user to.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** → **Users and data access**, and then **Roles** to open the roles page. Then select the role you want to map the user to.
 
    #. Select the **Mapped users** tab and click **Manage mapping**.
 
@@ -144,7 +144,7 @@ Follow these steps to create an internal user and map it to a role of your choic
 
 #. To map the user with Wazuh, follow these steps:
 
-   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **API access control**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** → **API access control**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.jpg
          :title: Wazuh role mapping
@@ -173,7 +173,7 @@ Limiting a user to one agent group
 
 Follow these steps to let an internal user see only the Wazuh agents of one group, and their findings and events. Replace ``<GROUP>`` with the group name.
 
-#. Click **☰** to open the menu, go to **Server management** > **API access control**, and then **Policies**. Click **Create policy** and set these parameters in **New policy**:
+#. Click **☰** to open the menu, go to **Server management** → **API access control**, and then **Policies**. Click **Create policy** and set these parameters in **New policy**:
 
    -  **Policy name**: a name for the policy.
    -  **Action**: select ``agent:read`` and click **Add**.
@@ -188,18 +188,18 @@ Follow these steps to let an internal user see only the Wazuh agents of one grou
       :align: center
       :width: 80%
 
-#. Go to **Roles**, click **Create role**, enter a **Role name**, and select the policy from step 1 in **Policies**. Save the role.
+#. Go to **Roles**, click **Create role**, enter a **Role name**, and select the policy from step 1 in **Policies**. Click **Create role**.
 
 #. Go to **Roles mapping** and click **Create Role mapping**. Enter a **Role mapping name**, select the role from step 2 in **Roles**, select the user in **Internal users**, and click **Save role mapping**.
 
-#. Go to **Indexer management** > **Users and data access** > **Roles** and click **Create role**. Enter a **Name** and add ``cluster_composite_ops_ro`` in **Cluster permissions**. Add two index permissions:
+#. Go to **Indexer management** → **Users and data access** → **Roles** and click **Create role**. Enter a **Name** and add ``cluster_composite_ops_ro`` in **Cluster permissions**. Add two index permissions:
 
    -  **Index** ``*wazuh-findings-v5*`` and ``*wazuh-events-v5*``, **Index permissions** ``read``, and the document-level security query ``{"term": {"wazuh.agent.groups": "<GROUP>"}}``.
    -  **Index** ``wazuh-states-*``, ``*wazuh-metrics-*``, ``*wazuh-active-responses*``, and ``.kibana*``, **Index permissions** ``read``.
 
    Click **Create**. On the **Mapped users** tab, click **Manage mapping**, add the user, and click **Map**.
 
-   **Agents management** > **Summary** then lists only the agents of ``<GROUP>``. **Threat Hunting** and the other modules then show only their findings and events.
+   **Agents management** → **Summary** then lists only the agents of ``<GROUP>``. **Threat Hunting** and the other modules then show only their findings and events.
 
    .. thumbnail:: /images/manual/user-administration/rbac/agents-management-summary-restricted.png
       :title: Agents management summary restricted to one agent group

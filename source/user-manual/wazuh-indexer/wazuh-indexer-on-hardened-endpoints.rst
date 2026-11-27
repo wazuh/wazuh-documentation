@@ -6,7 +6,7 @@
 Wazuh indexer on hardened endpoints
 ===================================
 
-Hardened Linux hosts often mount ``/tmp`` with the ``noexec`` option, and Debian-based hosts run ``needrestart`` after package operations. This section describes how the Wazuh indexer packages handle both, and what to configure when you change the defaults.
+Hardened Linux hosts often mount ``/tmp`` with the ``noexec`` option, and Debian-based hosts often run ``needrestart`` after package operations. This section describes how the Wazuh indexer packages handle both, and what to configure when you change the defaults.
 
 Temporary directory
 -------------------
@@ -69,7 +69,7 @@ On Debian-based systems, also add a ``needrestart`` rule for the new directory, 
 Service restarts by needrestart
 -------------------------------
 
-On Debian and Ubuntu, ``needrestart`` runs after every ``apt`` operation and restarts the services it considers to be running outdated code. On Ubuntu 24.04 and later, it restarts them without asking for confirmation. The Wazuh indexer deletes the native libraries from its temporary directory right after loading them, so ``needrestart`` would consider it outdated and restart it after every ``apt`` operation, even one unrelated to the Wazuh indexer.
+On Debian and Ubuntu hosts where the ``needrestart`` package is installed, ``needrestart`` runs after every ``apt`` operation and restarts the services it considers to be running outdated code. On Ubuntu 24.04 and later, it restarts them without asking for confirmation. The Wazuh indexer deletes some native libraries, such as the JNA and zstd libraries, from its temporary directory right after loading them, so ``needrestart`` would consider it outdated and restart it after every ``apt`` operation, even one unrelated to the Wazuh indexer. If the ``needrestart`` package isn't installed, as ``dpkg -s needrestart`` reports, it can't restart the Wazuh indexer, and you can skip the rest of this section.
 
 To prevent this, the Wazuh indexer DEB package installs ``/etc/needrestart/conf.d/wazuh-indexer.conf``. This file tells ``needrestart`` to ignore the libraries mapped from the default temporary directory:
 

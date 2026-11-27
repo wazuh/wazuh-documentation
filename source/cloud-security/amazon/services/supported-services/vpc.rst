@@ -54,6 +54,8 @@ Amazon VPC configuration
       :align: center
       :width: 80%
 
+To send the flow logs to a CloudWatch Logs log group instead, select **Send to CloudWatch Logs** as the **Destination**, as described in `Publish flow logs to CloudWatch Logs <https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-cwl.html>`__. Then collect that log group with the ``cloudwatchlogs`` service, using the policy and configuration in :doc:`Amazon CloudWatch Logs </cloud-security/amazon/services/supported-services/cloudwatchlogs>` instead of the ones below. Wazuh decodes these log events as VPC flow logs when they use the **AWS default format**.
+
 .. _vpc_policy_configuration:
 
 Policy configuration

@@ -1,550 +1,243 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Find out how to integrate Wazuh with Elastic in this integration guide.
+   :description: Find out how to export the Wazuh findings and events from the Wazuh indexer to Elasticsearch data streams with Logstash, and how to import the Kibana dashboards.
 
-Elastic Stack integration
+Elasticsearch integration
 =========================
 
-`Elasticsearch <https://www.elastic.co/what-is/elasticsearch>`__ is the central component of the Elastic Stack, (commonly referred to as the `ELK Stack <https://www.elastic.co/elastic-stack/>`__ - Elasticsearch, Logstash, and Kibana), which is a set of free and open tools for data ingestion, enrichment, storage, analysis, and visualization.
+The Elasticsearch integration exports the Wazuh findings and events from the Wazuh indexer to Elasticsearch
+data streams through Logstash, and provides Kibana dashboards to explore them. Before you start, read the
+:doc:`overview </integrations-guide/index>` at the beginning of this guide. It describes what the integrations export, the export window, and the
+settings that all integrations share.
 
-In this guide, you can find out how to integrate Wazuh with Elastic in the following ways:
+Architecture
+------------
 
--  `Wazuh indexer integration using Logstash`_
--  `Wazuh server integration using Logstash`_
+Logstash reads the ``wazuh-findings-v5-*`` data streams and, optionally, the ``wazuh-events-v5-*`` data
+streams from the Wazuh indexer with the ``wazuh-export`` user. It writes every source data stream to its own
+Elasticsearch data stream, ``logs-wazuh.findings.*-default`` or ``logs-wazuh.events.*-default``, with the
+``wazuh-logstash`` user. See :ref:`integrations_destination_of_every_source`. The ``wazuh`` index template
+maps the WCS fields of all these data streams, and Kibana shows them in the Wazuh dashboards.
 
-.. thumbnail:: /images/integrations/integration-diagram-ELK.png
-   :title: ELK integration diagram
-   :align: center
-   :width: 80%
+Prerequisites
+-------------
 
-Wazuh indexer integration using Logstash
-----------------------------------------
+-  Wazuh indexer |WAZUH_CURRENT|, and a read-only user to export with. See :ref:`integrations_security`.
+-  Elasticsearch and Kibana, in a version listed in :ref:`integrations_compatibility`.
+-  Logstash, with the ``logstash-input-opensearch`` plugin to read from the Wazuh indexer. The
+   ``elasticsearch`` output plugin is bundled with Logstash.
+-  The ``integrations`` folder of the same version as the Wazuh indexer.
 
-Perform all the steps described below on your Logstash server. You must install Logstash on a dedicated server or on the server hosting the third-party indexer. We performed the steps on a Linux operating system. Logstash forwards the data from the Wazuh indexer to Elasticsearch in the form of indexes.
+The commands in this section use ``ca.crt`` for the CA certificate of Elasticsearch, and ``root-ca.pem`` for
+the CA certificate of the Wazuh indexer.
 
-Learn more about the :ref:`Wazuh indexer integration <wazuh_indexer_integration>` and its necessary :ref:`considerations <capacity_planning>`.
+Preparing Elasticsearch
+-----------------------
 
-Installing Logstash
-^^^^^^^^^^^^^^^^^^^
+Run these steps as an Elasticsearch administrator.
 
-Perform the following steps to install Logstash and the required plugin.
+Install the index template of the ``logs-wazuh.*-*`` data streams. The template maps the WCS fields and
+assigns the built-in ``logs`` lifecycle policy to the data streams: they roll over at 30 days or 50 GB per
+primary shard, and no data is deleted. Elasticsearch creates the data streams in the ``logsdb`` index mode,
+which it applies to every ``logs-*-*`` data stream to reduce storage.
 
-#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/docs/reference/logstash/installing-logstash>`__ 9.5.6, the version the integration is tested with. Ensure that you consider the `requirements <https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html>`__ and `performance tuning <https://www.elastic.co/guide/en/logstash/current/performance-troubleshooting.html>`__ guidelines for running Logstash.
+.. code-block:: bash
+   :emphasize-lines: 1
 
-   .. note::
+   curl --cacert ca.crt -u elastic -X PUT "https://<ELASTICSEARCH_IP>:9200/_index_template/wazuh" \
+     -H 'Content-Type: application/json' -d @integrations/elastic/templates/wazuh-index-template.json
 
-      Ensure all components of your ELK (Elasticsearch, Logstash, and Kibana) stack are the same version to avoid compatibility issues.
+Retention and other settings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Run the following command to install the `logstash-input-opensearch <https://github.com/opensearch-project/logstash-input-opensearch>`__ plugin. This plugin reads data from the Wazuh indexer into the Logstash pipeline.
+Every upgrade of the integration installs the template again. To change its settings or mappings, create the
+``logs-wazuh@custom`` component template instead. The index template uses this component template when it
+exists, and upgrades keep it. For example, to delete the data 90 days after it rolls over, create a lifecycle
+policy and select it in the component template:
 
-   .. code-block:: console
+.. code-block:: bash
+   :emphasize-lines: 1,10
 
-      $ sudo env LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 1.0.0 logstash-input-opensearch
-
-   The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
-
-#. Copy the Wazuh indexer and Elasticsearch root certificates to the Logstash server. 
-
-   .. note::
-
-      You can add the certificates to any directory of your choice. For example, we added them in ``/etc/logstash/wazuh-indexer-certs`` and ``/etc/logstash/elasticsearch-certs`` respectively.
-
-#. Give the ``logstash`` user the necessary permissions to read the copied certificates:
-
-   .. code-block:: console
-
-      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
-      $ sudo chmod -R 755 </PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem
-
-   Replace ``</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem`` with your Wazuh indexer and Elasticsearch certificate local paths on the Logstash endpoint respectively.
-
-Configuring new indexes
-^^^^^^^^^^^^^^^^^^^^^^^
-
-You must define the mappings between the data and the index types to ensure Elasticsearch indexes your data correctly. Elasticsearch can infer these mappings, but we recommend that you explicitly configure them. Wazuh provides a set of mappings to ensure Elasticsearch indexes the data correctly.
-
-You need to use the `logstash/es_template.json <https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json>`__ template to configure this index initialization for your Elasticsearch platform. The ``refresh_interval`` is set to ``5s`` in the template we provide.
-
-Create a ``/etc/logstash/templates/`` directory and download the template as ``wazuh.json`` using the following commands:
-
-.. code-block:: console
-
-   $ sudo mkdir /etc/logstash/templates
-   $ sudo curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json
-
-In Elasticsearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
-
-.. code-block:: none
-   :emphasize-lines: 8
-
-   ...
-   "template": {
-     ...
-     "settings": {
-           ...
-           "mapping": {
-            "total_fields": {
-               "limit": 10000
-            }
-           }
-           ...
+   curl --cacert ca.crt -u elastic -X PUT "https://<ELASTICSEARCH_IP>:9200/_ilm/policy/wazuh-90-days" \
+     -H 'Content-Type: application/json' -d '{
+     "policy": {
+       "phases": {
+         "hot": { "actions": { "rollover": { "max_age": "30d", "max_primary_shard_size": "50gb" } } },
+         "delete": { "min_age": "90d", "actions": { "delete": {} } }
+       }
      }
-     ...
-   }
-   ...
+   }'
+   curl --cacert ca.crt -u elastic -X PUT "https://<ELASTICSEARCH_IP>:9200/_component_template/logs-wazuh@custom" \
+     -H 'Content-Type: application/json' -d '{"template": {"settings": {"index.lifecycle.name": "wazuh-90-days"}}}'
 
-You can further increase this value by following the `creating an index template <https://www.elastic.co/guide/en/elasticsearch/reference/current/index-templates.html>`__ documentation.
-
-Configuring a pipeline
-^^^^^^^^^^^^^^^^^^^^^^
-
-A `Logstash pipeline <https://www.elastic.co/guide/en/logstash/current/configuration.html>`__ allows Logstash to use plugins to read the data from the Wazuh indexes and send them to Elasticsearch.
-
-The Logstash pipeline requires access to the following secret values:
-
--  Wazuh indexer credentials
--  Elasticsearch credentials
-
-We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/keystore.html>`__ to securely store these values.
-
-#. Run the following commands on your Logstash server to set a keystore password:
-
-   .. code-block:: console
-      :emphasize-lines: 2,3
-
-      $ set +o history
-      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
-      $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
-      $ set -o history
-      $ sudo chown root /etc/sysconfig/logstash
-      $ sudo chmod 600 /etc/sysconfig/logstash
-      $ sudo systemctl start logstash
-
-   Where ``<MY_KEYSTORE_PASSWORD>`` is your keystore password.
-
-   .. note::
-      
-      You need to create the ``/etc/sysconfig`` folder if it does not exist on your server.
-
-#. Run the following commands to securely store the credentials of the Wazuh indexer and Elasticsearch in the Logstash keystore.
-
-   .. note::
-
-      When you run each of the commands, you will be prompted to enter your credentials and the credentials will not be visible as you enter them.
-
-      ``ELASTICSEARCH_USERNAME``, ``ELASTICSEARCH_PASSWORD``, ``WAZUH_INDEXER_USERNAME``, and ``WAZUH_INDEXER_PASSWORD`` are `keys <https://www.elastic.co/guide/en/logstash/current/keystore.html>`__ representing the secret values you are adding to the Logstash keystore. These keys will be used in the Logstash pipeline.
-   
-   #. Create a new Logstash keystore:
-
-      .. code-block:: console
-
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
-   
-   #. Store your Elasticsearch username and password:
-
-      .. code-block:: console
-
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add ELASTICSEARCH_USERNAME
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add ELASTICSEARCH_PASSWORD
-   
-   #. Store your Wazuh indexer administrator username and password:
-
-      .. code-block:: console
-
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_USERNAME
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_PASSWORD
-   
-   Where:
-
-   -  ``ELASTICSEARCH_USERNAME`` and ``ELASTICSEARCH_PASSWORD`` are keys representing your Elasticsearch username and password respectively.
-   -  ``WAZUH_INDEXER_USERNAME`` and ``WAZUH_INDEXER_PASSWORD`` are keys representing your Wazuh indexer administrator username and password respectively.
-
-#. Perform the following steps to configure the Logstash pipeline.
-
-   #. Create the configuration file ``wazuh-elasticsearch.conf`` in ``/etc/logstash/conf.d/`` folder:
-
-      .. code-block:: console
-
-         $ sudo touch /etc/logstash/conf.d/wazuh-elasticsearch.conf
-   
-   #. Add the following configuration to the ``wazuh-elasticsearch.conf`` file. This sets the parameters required to run Logstash.
-
-      .. code-block:: none
-         :emphasize-lines: 3,8,24,29
-
-         input {
-           opensearch {
-            hosts =>  ["<WAZUH_INDEXER_ADDRESS>:9200"]
-            user  =>  "${WAZUH_INDEXER_USERNAME}"
-            password  =>  "${WAZUH_INDEXER_PASSWORD}"
-            index =>  "wazuh-alerts-4.x-*"
-            ssl => true
-            ca_file => "</PATH/TO/LOCAL/WAZUH_INDEXER>/root-ca.pem"
-            query =>  '{
-                "query": {
-                   "range": {
-                      "@timestamp": {
-                         "gt": "now-1m"
-                      }
-                   }
-                }
-            }'
-            schedule => "* * * * *"
-           }
-         }
-
-         output {
-             elasticsearch {
-                  hosts => "<ELASTICSEARCH_ADDRESS>"
-                  index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
-                  user => '${ELASTICSEARCH_USERNAME}'
-                  password => '${ELASTICSEARCH_PASSWORD}'
-                  ssl_enabled => true
-                  ssl_certificate_authorities => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"
-                  template => "/etc/logstash/templates/wazuh.json"
-                  template_name => "wazuh"
-                  template_overwrite => true
-             }
-         }
-
-      Where:
-
-      -  ``<WAZUH_INDEXER_ADDRESS>`` is your Wazuh indexer address or addresses in case of cluster deployment.
-      -  ``<ELASTICSEARCH_ADDRESS>`` is your Elasticsearch IP address.
-      -  ``</PATH/TO/LOCAL/WAZUH_INDEXER>/root-ca.pem`` is your Wazuh indexer certificate local path on the Logstash server. For example,  you can use ``/etc/logstash/wazuh-indexer-certs/root-ca.pem`` which is the Wazuh indexer root certificate that was copied earlier.
-      -  ``</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem`` is your Elasticsearch certificate local path on the Logstash server. For example, you can use ``/etc/logstash/elasticsearch-certs/root-ca.pem`` which is the Elasticsearch certificate that was copied earlier.
-
-      .. note::
-         
-         For testing purposes, you can avoid SSL verification by replacing ``ssl_certificate_authorities => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"`` with ``ssl_verification_mode => "none"``.
-
-         If you are using composable index templates and the _index_template API, set the optional parameter `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__.
-
-Running Logstash
-^^^^^^^^^^^^^^^^
-
-#. Once you have everything set, run Logstash from CLI with your configuration:
-
-   Run the command as the ``logstash`` user. Logstash 9 doesn't run as root, and that user must own the log files that earlier commands created as root:
-
-   .. code-block:: console
-
-      $ sudo systemctl stop logstash
-      $ sudo chown -R logstash:logstash /var/log/logstash
-      $ sudo -E -u logstash /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-elasticsearch.conf --path.settings /etc/logstash/
-
-   ``sudo -E`` passes ``LOGSTASH_KEYSTORE_PASS`` to Logstash, so run the command in the shell where you exported it. Without it, Logstash reports that the keystore is not valid.
-   
-   Make sure to use your own paths for the executable, the pipeline, and the configuration files.
-
-   Ensure that Wazuh indexer RESTful API port (9200) is open on your Wazuh indexer. To verify that the necessary ports for Wazuh component communication are open, refer to the list of :ref:`required ports <default_ports>`.
-
-#. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as a service:
-
-   .. code-block:: console
-
-      $ sudo systemctl enable logstash.service
-      $ sudo systemctl start logstash.service
-
-Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
-
-.. note::
-   
-   Any data indexed before the configuration is complete will not be forwarded to the Elastic indexes.
-
-   The ``/var/log/logstash/logstash-plain.log`` file in the Logstash instance stores events generated when Logstash runs. View this file in case you need to troubleshoot.
-
-After Logstash is successfully running, check how to :ref:`configure the Wazuh alert index pattern <configuring_wazuh_alerts_index_pattern_in_elastic>` and :ref:`verify the integration <verifying_elastic_integration>`.
-
-.. _elastic_stack_wazuh_server_integration_using_logstash:
-
-Wazuh server integration using Logstash
----------------------------------------
-
-Perform all the steps below on your Wazuh server. Learn more about the :ref:`Wazuh server integration <wazuh_server_integration>` and its necessary :ref:`considerations <capacity_planning>`.
-
-Installing Logstash
-^^^^^^^^^^^^^^^^^^^
-
-We use Logstash to forward security data in the ``/var/ossec/logs/alerts/alerts.json`` alerts file from the Wazuh server to the Elasticsearch indexes.
-
-Perform the following steps to install Logstash and the required plugin.
-
-#. Follow the Elastic documentation to `install Logstash <https://www.elastic.co/docs/reference/logstash/installing-logstash>`__ 9.5.6, the version the integration is tested with. Ensure that you consider the `requirements <https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html>`__ and `performance tuning <https://www.elastic.co/guide/en/logstash/current/performance-troubleshooting.html>`__ guidelines for running Logstash.
-
-   .. note::
-      
-      Ensure all components of your ELK (Elasticsearch, Logstash, and Kibana) stack are the same version to avoid compatibility issues. 
-
-#. Run the following command to install the `logstash-output-elasticsearch <https://github.com/logstash-plugins/logstash-output-elasticsearch>`__ plugin. This plugin allows Logstash to write data into Elasticsearch.
-
-   .. code-block:: console
-
-      $ sudo env LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install logstash-output-elasticsearch
-
-   The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
-
-#. Copy the Elasticsearch root certificate to the Wazuh server. You can add the certificate to any directory of your choice. In our case, we add it in ``/etc/logstash/elasticsearch-certs`` directory.
-
-#. Give the ``logstash`` user the necessary permissions to read the copied certificates:
-
-   .. code-block:: console
-
-      $ sudo chmod -R 755 </PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem
-
-   Replace ``</PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem`` with your Elasticsearch certificate local path on the Wazuh server.
-
-Configuring new indexes
-^^^^^^^^^^^^^^^^^^^^^^^
-
-You must define the mappings between the data and the index types to ensure Elasticsearch indexes your data correctly. Elasticsearch can infer these mappings, but we recommend that you explicitly configure them. Wazuh provides a set of mappings to ensure Elasticsearch indexes the data correctly.
-
-You need to use the `logstash/es_template.json <https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json>`__ template to configure this index initialization for your Elasticsearch platform. The ``refresh_interval`` is set to ``5s`` in the template we provide.
-
-Create a ``/etc/logstash/templates/`` directory and download the template as ``wazuh.json`` using the following commands:
-
-.. code-block:: console
-
-   $ sudo mkdir /etc/logstash/templates
-   $ sudo curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json
-
-In Elasticsearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
-
-.. code-block:: none
-   :emphasize-lines: 8
-
-   ...
-   "template": {
-     ...
-     "settings": {
-           ...
-           "mapping": {
-            "total_fields": {
-               "limit": 10000
-            }
-           }
-           ...
-     }
-     ...
-   }
-   ...
-
-You can further increase this value by following the `creating an index template <https://www.elastic.co/guide/en/elasticsearch/reference/current/index-templates.html>`__ documentation.
-
-Configuring a pipeline
-^^^^^^^^^^^^^^^^^^^^^^
-
-A `Logstash pipeline <https://www.elastic.co/guide/en/logstash/current/configuration.html>`__ allows Logstash to use plugins to read the data in the Wazuh ``/var/ossec/logs/alerts/alerts.json`` alert file and send them to Elasticsearch.
-
-The Logstash pipeline requires access to your Elasticsearch credentials.
-
-We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/keystore.html>`__ to securely store these values.
-
-#. Run the following commands on your Wazuh server to set a keystore password:
-
-   .. code-block:: console
-      :emphasize-lines: 2,3
-
-      $ set +o history
-      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
-      $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
-      $ set -o history
-      $ sudo chown root /etc/sysconfig/logstash
-      $ sudo chmod 600 /etc/sysconfig/logstash
-      $ sudo systemctl start logstash
-
-   Where ``<MY_KEYSTORE_PASSWORD>`` is your keystore password.
-
-   .. note::
-      
-      You need to create the ``/etc/sysconfig`` folder if it does not exist on your server.
-
-#. Run the following commands to securely store the credentials of Elasticsearch.
-
-   .. note::
-      
-      When you run each of the commands, you will be prompted to enter your credentials and the credentials will not be visible as you enter them.
-
-      ``ELASTICSEARCH_USERNAME`` and ``ELASTICSEARCH_PASSWORD`` are `keys <https://www.elastic.co/guide/en/logstash/current/keystore.html>`__ representing the secret values you are adding to the Logstash keystore. These keys will be used in the Logstash pipeline.
-
-   #. Create a new Logstash keystore:
-
-      .. code-block:: console
-
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
-   
-   #. Store your Elasticsearch username and password:
-
-      .. code-block:: console
-
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add ELASTICSEARCH_USERNAME
-         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add ELASTICSEARCH_PASSWORD
-
-      Where ``ELASTICSEARCH_USERNAME`` and ``ELASTICSEARCH_PASSWORD`` are keys representing your Elasticsearch username and password respectively.
-
-#. Perform the following steps to configure the Logstash pipeline.
-
-   #. Create the configuration file ``wazuh-elasticsearch.conf`` in ``/etc/logstash/conf.d/`` folder:
-
-      .. code-block:: console
-
-         $ sudo touch /etc/logstash/conf.d/wazuh-elasticsearch.conf
-   
-   #. Add the following configuration to the ``wazuh-elasticsearch.conf`` file. This sets the parameters required to run Logstash.
-
-      .. code-block:: none
-         :emphasize-lines: 15,20
-
-         input {
-           file {
-             id => "wazuh_alerts"
-             codec => "json"
-             start_position => "beginning"
-             stat_interval => "1 second"
-             path => "/var/ossec/logs/alerts/alerts.json"
-             mode => "tail"
-             ecs_compatibility => "disabled"
-           }
-         }
-
-         output {
-             elasticsearch {
-                  hosts => "<ELASTICSEARCH_ADDRESS>"
-                  index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
-                  user => '${ELASTICSEARCH_USERNAME}'
-                  password => '${ELASTICSEARCH_PASSWORD}'
-                  ssl_enabled => true
-                  ssl_certificate_authorities => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"
-                  template => "/etc/logstash/templates/wazuh.json"
-                  template_name => "wazuh"
-                  template_overwrite => true
-             }
-         }
-
-      Where:
-
-      -  ``<ELASTICSEARCH_ADDRESS>`` is your Elasticsearch IP address.
-      -  ``</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem`` is your Elasticsearch root certificate local path on the Wazuh server. For example, you can use ``/etc/logstash/elasticsearch-certs/root-ca.pem`` which is the Elasticsearch root certificate that was copied earlier.
-
-      .. note::
-         
-         For testing purposes, you can avoid SSL verification by replacing ``ssl_certificate_authorities => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"`` with ``ssl_verification_mode => "none"``.
-
-#. By default the ``/var/ossec/logs/alerts/alerts.json`` file is owned by the ``wazuh`` user with restrictive permissions. You must add the ``logstash`` user to the ``wazuh`` group so it can read the file when running Logstash as a service:
-
-   .. code-block:: console
-
-      $ sudo usermod -a -G wazuh logstash
-
-Running Logstash
-^^^^^^^^^^^^^^^^
-
-#. Once you have everything set, run Logstash from CLI with your configuration:
-
-   Run the command as the ``logstash`` user. Logstash 9 doesn't run as root, and that user must own the log files that earlier commands created as root:
-
-   .. code-block:: console
-
-      $ sudo systemctl stop logstash
-      $ sudo chown -R logstash:logstash /var/log/logstash
-      $ sudo -E -u logstash /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-elasticsearch.conf --path.settings /etc/logstash/
-
-   ``sudo -E`` passes ``LOGSTASH_KEYSTORE_PASS`` to Logstash, so run the command in the shell where you exported it. Without it, Logstash reports that the keystore is not valid.
-
-   Make sure to use your own paths for the executable, the pipeline, and the configuration files.
-
-   Ensure that Wazuh server RESTful API port (55000) is open on your Wazuh server. To verify that the necessary ports for Wazuh component communication are open, refer to the list of :ref:`required ports <default_ports>`.
-
-#. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as a service:
-
-   .. code-block:: console
-
-      $ sudo systemctl enable logstash.service
-      $ sudo systemctl start logstash.service
-
-.. note::
-
-   Any data indexed before the configuration is complete would not be forwarded to the Elastic indexes.
-
-   The ``/var/log/logstash/logstash-plain.log`` file in the Logstash instance stores events generated when Logstash runs. View this file in case you need to troubleshoot.
-
-Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
-
-.. _configuring_wazuh_alerts_index_pattern_in_elastic:
-
-Configuring the Wazuh alerts index pattern in Elastic
------------------------------------------------------
-
-In Kibana, do the following to create the index pattern name for the Wazuh alerts.
-
-#. Select **☰** > **Management** > **Stack Management**.
-#. Choose **Kibana** > **Data Views** and select **Create data view**. 
-#. Enter a name for the data view and define ``wazuh-alerts-*`` as the index pattern name.
-#. Select **timestamp** in the **Timestamp fields** dropdown menu. Then **Save data view to Kibana**.
-#. Open the menu and select **Discover** under **Analytics**.
-#. Select **☰** > **Analytics** > **Discover**.
-
-.. thumbnail:: /images/integrations/configuring-index-pattern-in-elastic.gif
-   :title: Configuring the Wazuh alerts index pattern in Elastic
+The change applies to the backing indices created after it. To apply it to the current backing indices
+immediately, roll over every data stream with ``POST <DATA_STREAM>/_rollover``.
+
+Writer user
+^^^^^^^^^^^
+
+Create the role and the user that Logstash writes with. The ``create_doc`` privilege appends documents, and
+``auto_configure`` creates the data streams when their first document arrives:
+
+.. code-block:: bash
+   :emphasize-lines: 1,7,8
+
+   curl --cacert ca.crt -u elastic -X PUT "https://<ELASTICSEARCH_IP>:9200/_security/role/wazuh-logstash-writer" \
+     -H 'Content-Type: application/json' -d '{
+     "description": "Write the Wazuh events and findings exported by Logstash",
+     "cluster": ["monitor"],
+     "indices": [{ "names": ["logs-wazuh.*-*"], "privileges": ["create_doc", "auto_configure"] }]
+   }'
+   curl --cacert ca.crt -u elastic -X PUT "https://<ELASTICSEARCH_IP>:9200/_security/user/wazuh-logstash" \
+     -H 'Content-Type: application/json' -d '{"password": "<WAZUH_LOGSTASH_PASSWORD>", "roles": ["wazuh-logstash-writer"]}'
+
+Configuring Logstash
+--------------------
+
+Install the input plugin:
+
+.. code-block:: bash
+
+   LS_JAVA_OPTS="-Xmx2g" /usr/share/logstash/bin/logstash-plugin install --version 1.0.0 logstash-input-opensearch
+
+The plugin manager needs more memory than the default 1 GB heap of Logstash. ``LS_JAVA_OPTS`` raises it for this command only.
+
+Copy the pipeline files to a dedicated folder, in this order:
+
+.. code-block:: bash
+
+   mkdir -p /etc/logstash/wazuh
+   cp integrations/logstash/pipeline/wazuh-indexer-input.conf /etc/logstash/wazuh/10-wazuh-indexer-input.conf
+   cp integrations/logstash/pipeline/wazuh-source.conf /etc/logstash/wazuh/20-wazuh-source.conf
+   cp integrations/logstash/pipeline/wazuh-data-stream.conf /etc/logstash/wazuh/30-wazuh-data-stream.conf
+   cp integrations/elastic/logstash/pipeline/indexer-to-elastic.conf /etc/logstash/wazuh/40-indexer-to-elastic.conf
+
+Declare the pipeline in ``/etc/logstash/pipelines.yml``, with a persisted queue and the dead letter queue. The
+pipeline is tested with ECS compatibility disabled.
+
+.. code-block:: yaml
+
+   - pipeline.id: wazuh-elastic
+     path.config: "/etc/logstash/wazuh/*.conf"
+     pipeline.ecs_compatibility: disabled
+     queue.type: persisted
+     queue.max_bytes: 4gb
+     dead_letter_queue.enable: true
+
+Set the pipeline settings in the environment of the Logstash service, and the secrets in the Logstash
+keystore. See :ref:`integrations_tls_credentials`. In addition to the shared settings, the output uses the
+following settings:
+
++----------------------+----------+--------------------------------------------------------------------+
+| Setting              | Default  | Description                                                        |
++======================+==========+====================================================================+
+| ``ELASTIC_HOST``     | required | Elasticsearch URL, ``https://<ELASTICSEARCH_IP>:9200``, or several |
+|                      |          | URLs separated by spaces. On Elastic Cloud, use the Elasticsearch  |
+|                      |          | endpoint of the deployment, on port ``443``.                       |
++----------------------+----------+--------------------------------------------------------------------+
+| ``ELASTIC_USERNAME`` | required | User that Logstash writes with, ``wazuh-logstash`` in this guide.  |
++----------------------+----------+--------------------------------------------------------------------+
+| ``ELASTIC_PASSWORD`` | required | Password of that user.                                             |
++----------------------+----------+--------------------------------------------------------------------+
+| ``ELASTIC_CA``       | required | CA certificate of Elasticsearch.                                   |
++----------------------+----------+--------------------------------------------------------------------+
+
+Restart Logstash to apply the changes.
+
+Importing the dashboards
+------------------------
+
+Import ``integrations/elastic/dashboards.ndjson`` in Kibana from Stack Management > Saved objects > Import, or
+with the API:
+
+.. code-block:: bash
+   :emphasize-lines: 1
+
+   curl --cacert ca.crt -u elastic -X POST "https://<KIBANA_IP>:5601/api/saved_objects/_import?overwrite=true" \
+     -H 'kbn-xsrf: true' --form file=@integrations/elastic/dashboards.ndjson
+
+The file contains the ``logs-wazuh.findings.*-*`` and ``logs-wazuh.events.*-*`` data views, and the findings
+dashboards of the Wazuh dashboard, with the same layout and the same filters:
+
+-  Threat hunting, MITRE ATT&CK, Malware detection, and Case management.
+-  Docker, AWS, Azure, Google Cloud, GitHub, and Office: the findings of each integration.
+-  PCI, GDPR, HIPAA, NIST 800-53, NIST 800-171, ISO 27001, TSC, CMMC, FedRAMP, and NIS2: findings for
+   each compliance framework.
+-  The Agent dashboard of each module, which the Wazuh dashboard shows when you pin a Wazuh agent.
+   Select the Wazuh agent in the control at the top.
+-  The drilldowns of GitHub and Office, which the Wazuh dashboard shows when you click a value in a
+   table. Filter for one value, such as an actor, organization, user, or IP address, in the table at
+   the top.
+
+The dashboard titles start with ``Wazuh -``. The Wazuh - Events overview dashboard shows the events. The API
+imports the dashboards into the default space. To import them into another space, use
+``https://<KIBANA_IP>:5601/s/<SPACE>/api/saved_objects/_import``. If Kibana doesn't use TLS, which is its
+default, replace ``https`` with ``http`` and remove ``--cacert ca.crt`` from the request.
+
+.. thumbnail:: /images/integrations/elastic-threat-hunting-dashboard.png
+   :title: Wazuh - Threat hunting - Overview dashboard in Kibana
+   :alt: Wazuh - Threat hunting - Overview dashboard in Kibana
    :align: center
    :width: 80%
 
-.. _verifying_elastic_integration:
-
-Verifying the integration
--------------------------
-
-To check the integration with Elasticsearch, navigate to **Discover** in Kibana and verify that you can find  the Wazuh security data with the data view name you entered.
-
-.. thumbnail:: /images/integrations/finding-security-data-in-elastic.png
-   :title: Verify finding security data
+.. thumbnail:: /images/integrations/elastic-events-overview-dashboard.png
+   :title: Wazuh - Events overview dashboard in Kibana
+   :alt: Wazuh - Events overview dashboard in Kibana
    :align: center
    :width: 80%
 
-.. _elastic_dashboards:
+.. _elastic_validating_integration:
 
-Elastic dashboards
-------------------
+Validating the integration
+--------------------------
 
-Wazuh provides several `dashboards for Elastic Stack <https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-dashboards.ndjson>`__. After finishing with the Elasticsearch integration setup, these dashboards display your Wazuh alerts in Elastic.
+After the export delay (5 minutes by default) plus one minute, check that the Wazuh data streams exist:
 
-.. thumbnail:: /images/integrations/security-events-dashboard-for-elastic.png
-   :title: Security events dashboard for Elastic
-   :align: center
-   :width: 80%
+.. code-block:: bash
 
-Importing these dashboards defines the index pattern name ``wazuh-alerts-*``. The index pattern name is necessary for creating index names and receiving the alerts. We recommend using ``wazuh-alerts-4.x-%{+YYYY.MM.dd}``.
+   curl --cacert ca.crt -u elastic "https://<ELASTICSEARCH_IP>:9200/_data_stream/logs-wazuh.*?filter_path=data_streams.name"
 
-Follow the next steps to import the Wazuh dashboards for Elastic.
+Compare the document count of a closed time range with the source. For example, count the findings of an hour
+that ended more than the export delay ago:
 
-#. Run the command below to download the Wazuh dashboard file for Elastic.
+.. code-block:: bash
+   :emphasize-lines: 2,3
 
-   -  If you are accessing the Elastic dashboard (Kibana) from a Linux or macOS system:
+   range='{"query":{"range":{"@timestamp":{"gte":"2026-10-22T08:00:00Z","lt":"2026-10-22T09:00:00Z"}}}}'
+   curl --cacert root-ca.pem -u wazuh-export "https://<WAZUH_INDEXER_IP>:9200/wazuh-findings-v5-*/_count" -H 'Content-Type: application/json' -d "$range"
+   curl --cacert ca.crt -u elastic "https://<ELASTICSEARCH_IP>:9200/logs-wazuh.findings.*-*/_count" -H 'Content-Type: application/json' -d "$range"
 
-      .. code-block:: console
+Both commands return the same ``count``.
 
-         # wget https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-dashboards.ndjson
-   
-   -  If you are accessing the Elastic dashboard (Kibana) from a Windows system, run the following command in Powershell:
+Troubleshooting
+---------------
 
-      .. code-block:: powershell
-
-         # Invoke-WebRequest -Uri "https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-dashboards.ndjson" -OutFile "allDashboards.ndjson"
-
-#. Navigate to **Management** > **Stack management** in Kibana.
-#. Click on **Saved Objects** and click **Import**.
-#. Click on the **Import** icon, browse your files, and select the dashboard file.
-#. Click the **Import** button to start importing.
-
-   .. thumbnail:: /images/integrations/import-dashboard-in-elastic.gif
-      :title: Import dashboard file in Elastic
-      :align: center
-      :width: 80%
-
-#. To find the imported dashboards,  select **Analytics** > **Dashboard**.
-
-   .. thumbnail:: /images/integrations/finding-imported-dashboard-in-elastic.png
-      :title: Find the imported dashboard
-      :align: center
-      :width: 80%
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| Symptom                                      | Cause and solution                                                                            |
++==============================================+===============================================================================================+
+| No data stream is created, and the Logstash  | The export user can't read the data streams in                                                |
+| log shows a ``security_exception`` from the  | ``WAZUH_EXPORT_INDICES``. Add them to its role.                                               |
+| Wazuh indexer.                               |                                                                                               |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| ``security_exception`` from Elasticsearch.   | The writer role lacks ``create_doc`` or ``auto_configure`` on                                 |
+|                                              | ``logs-wazuh.*-*``, or the data stream namespace is outside that                              |
+|                                              | pattern.                                                                                      |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| Findings are missing at the destination, but | The findings were indexed after the run that read their window.                               |
+| events are present.                          | Increase ``WAZUH_EXPORT_DELAY`` above the detector interval, and                              |
+|                                              | export the range again. See :ref:`integrations_export_delay` and                              |
+|                                              | :ref:`integrations_interruptions`.                                                            |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| Documents in the dead letter queue.          | Elasticsearch rejected them, for example, because of a field mapped                           |
+|                                              | with another type in ``logs-wazuh@custom``. Inspect them with the                             |
+|                                              | `dead_letter_queue input                                                                      |
+|                                              | <https://www.elastic.co/docs/reference/logstash/plugins/plugins-inputs-dead_letter_queue>`__. |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| ``version_conflict_engine_exception``        | Not an error. A document read twice, during a backfill or after a                             |
+|                                              | restart, is dropped as a duplicate. The output doesn't log it.                                |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| The dashboards are empty.                    | Check the time range of the dashboard against the data, and the data                          |
+|                                              | views against the data stream names. A custom                                                 |
+|                                              | ``WAZUH_EXPORT_NAMESPACE`` still matches ``logs-wazuh.findings.*-*``.                         |
++----------------------------------------------+-----------------------------------------------------------------------------------------------+

@@ -195,13 +195,13 @@ The AWS documentation provides steps to configure an EventBridge rule for AWS Se
 Amazon S3 bucket with event notifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Follow the steps below to configure an S3 bucket that reports the creation of events.
+Create the SQS queue first, as described in the :ref:`Amazon Simple Queue Service <simple_queue_service>` section, because the last step below selects it. Follow the steps below to configure an S3 bucket that reports the creation of events.
 
 #. Configure an S3 bucket as defined in the :doc:`configure an AWS S3 bucket </cloud-security/amazon/services/prerequisites/S3-bucket>` section. Use the bucket that you selected as the destination of the Firehose stream.
 #. Go to **Event notifications** inside the **Properties** tab, then click **Create event notification**.
 #. Select **All object create events** in **Event Types**. The bucket then sends a notification for every event that creates an object in it.
 #. Select **SQS queue** in the **Destination** section.
-#. Select **Choose from your SQS** queues, then choose the queue you created previously.
+#. Select **Choose from your SQS** queues, then choose that queue.
 
 .. _simple_queue_service:
 

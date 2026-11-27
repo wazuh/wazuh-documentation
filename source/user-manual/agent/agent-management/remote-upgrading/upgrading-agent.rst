@@ -14,7 +14,7 @@ You can upgrade a Wazuh agent remotely using the Wazuh dashboard, the command li
 
 .. note::
 
-   A Wazuh agent 5.0 or later picks up its upgrade task the next time it contacts the Wazuh manager. A Wazuh agent earlier than 5.0 receives the task from the Wazuh manager at a fixed interval, every 15 minutes by default, so its upgrade can start up to 15 minutes after you request it. The ``remoted.legacy_task_polling_interval`` internal option in ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` sets this interval in seconds, from ``300`` to ``86400``.
+   A Wazuh agent 5.0 or later picks up its upgrade task the next time it contacts the Wazuh manager.
 
 .. warning::
 
@@ -100,10 +100,10 @@ To upgrade agents using the command line, use the :doc:`/var/wazuh-manager/bin/a
 
       All agents are updated.
 
-   If the Wazuh agent is still listed after the delivery interval (``remoted.legacy_task_polling_interval``, 15 minutes by default), check the Wazuh agent log for errors. For a Wazuh agent earlier than 5.0, ``/var/wazuh-manager/logs/wazuh-manager.log`` shows a ``legacy_task_delivery`` line when the Wazuh manager delivers the task.
+   If the Wazuh agent is still listed after a few minutes, check the Wazuh agent log for errors.
 
-Using the RESTful API
----------------------
+Using the Wazuh manager API
+---------------------------
 
 #. List all outdated Wazuh agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agent_controller.get_agent_outdated>`. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN of the Wazuh manager. The first command stores a Wazuh manager API token in ``TOKEN``. Replace ``<WAZUH_MANAGER_API_USER>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with your Wazuh manager API credentials. The token expires after 900 seconds (15 minutes) by default, so get a new one if a request returns 401:
 
@@ -121,34 +121,15 @@ Using the RESTful API
          "data": {
             "affected_items": [
                {
-                  "os": {
-                     "arch": "x86_64",
-                     "major": "10",
-                     "minor": "0",
-                     "name": "Microsoft Windows 11 Home",
-                     "platform": "windows",
-                     "version": "10.0.26200.8457"
-                  },
-                  "lastKeepAlive": "2026-05-26T16:56:18+00:00",
-                  "ip": "192.168.1.101",
-                  "group": [
-                     "default"
-                  ],
+                  ...
                   "name": "windows11",
-                  "registerIP": "any",
                   "id": "008",
-                  "status_code": 0,
-                  "dateAdd": "2026-05-26T16:48:55+00:00",
+                  ...
                   "version": "v4.14.3",
                   "status": "active"
                }
             ],
-            "total_affected_items": 1,
-            "total_failed_items": 0,
-            "failed_items": []
-         },
-         "message": "All selected agents information was returned",
-         "error": 0
+         ...
       }
 
 #. Upgrade the Wazuh agent using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` (here, the Wazuh agent with ID 008). Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN of the Wazuh manager:
@@ -170,19 +151,11 @@ Using the RESTful API
             "total_affected_items": 1,
             "total_failed_items": 0,
             "failed_items": [],
-            "nodes": {
-               "node01": {
-                  "affected_items": [
-                     "008"
-                  ]
-               }
-            }
+            ...
          },
          "message": "All upgrade tasks were created",
          "error": 0
       }
-
-   The ``nodes`` object lists the Wazuh agents affected on each Wazuh manager node.
 
    The ``agents_list`` parameter in the :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` and :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` endpoints allows the value ``all``. When this value is set, an upgrade request will be sent to all Wazuh agents.
 
@@ -198,8 +171,6 @@ Using the RESTful API
 
    When upgrading more than 3000 Wazuh agents at the same time, it is highly recommended that the parameter ``wait_for_complete`` be set to true to avoid a possible API timeout.
 
-   This recommendation is based on testing with a Wazuh manager on a server with a 2.5 GHz AMD EPYC 7000 series processor and 4 GiB memory. Using an agent list with 3000 agents or fewer on a system with similar or better specifications guarantees a response before the API timeout occurs.
-
 #. Following the upgrade, the Wazuh agent restarts automatically. Wazuh 5.0 doesn't record the result of an upgrade task, so check the version of the Wazuh agent to confirm the upgrade using endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>`:
 
    .. code-block:: console
@@ -208,23 +179,19 @@ Using the RESTful API
 
    The command output looks similar to this:
 
-   .. code-block:: json
+   .. code-block:: none
       :class: output
 
       {
         "data": {
-              "affected_items": [
-                {
-                  "id": "008",
-                  "version": "v5.0.0"
-                }
-              ],
-              "total_affected_items": 1,
-              "total_failed_items": 0,
-              "failed_items": []
-        },
-        "message": "All selected agents information was returned",
-        "error": 0
+          "affected_items": [
+            {
+              "id": "008",
+              "version": "v5.0.0"
+            }
+          ],
+          ...
+        }
       }
 
-   If the version doesn't change after the delivery interval (``remoted.legacy_task_polling_interval``, 15 minutes by default), check the Wazuh agent log for errors. For a Wazuh agent earlier than 5.0, ``/var/wazuh-manager/logs/wazuh-manager.log`` shows a ``legacy_task_delivery`` line when the Wazuh manager delivers the task.
+   If the version doesn't change after a few minutes, check the Wazuh agent log for errors.

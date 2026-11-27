@@ -23,10 +23,10 @@ The following parameters are required to make the configurations on the Wazuh in
 -  ``enable_ssl``: Specifies whether to use LDAP over SSL (LDAPS). This can be set to true or false.
 -  ``pemtrustedcas_filepath``: The absolute path to the Privacy Enhanced Mail (PEM) file containing the root Certificate Authority (CA) of your Microsoft Active Directory or LDAP server. This is required when ``enable_ssl`` is set to true.
 -  ``userbase``: Specifies the subtree in the directory where user information is stored.
--  ``usersearch``: The LDAP query that the Security plugin executes to authenticate a user.
+-  ``usersearch``: The LDAP query that the Wazuh indexer executes to authenticate a user.
 -  ``username_attribute``: Specifies the LDAP attribute used to identify the username. If set to null, the Distinguished Name (DN) is used by default.
 -  ``rolebase``: Specifies the directory subtree where role or group information is stored.
--  ``rolesearch``: The LDAP query that the Security plugin executes to determine a user's roles.
+-  ``rolesearch``: The LDAP query that the Wazuh indexer executes to determine a user's roles.
 -  ``userrolename``: Specifies the LDAP attribute in the user entry that contains role or group information when roles are not stored in the groups subtree.
 -  ``rolename``: The attribute of the role entry that should be used as the role name.
 -  ``skip_users``: Array of users that should be skipped when retrieving roles. Wildcards and regular expressions are supported.
@@ -158,7 +158,7 @@ If you don't have a certificate authority server, you can enable LDAPS by creati
 
       > certlm.msc
 
-#. Browse to **Personal** -> **Certificates**, locate the newly created certificate, and copy it into **Trusted Root Certification Authorities** -> **Certificates**.
+#. Browse to **Personal** → **Certificates**, locate the newly created certificate, and copy it into **Trusted Root Certification Authorities** → **Certificates**.
 
    .. thumbnail:: /images/manual/user-administration/ldap/copy-self-signed-certificate.png
       :title: Copy the self-signed certificate to trusted roots
@@ -416,7 +416,7 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
       SUCC: Expected 1 config types for node {"updated_config_types":["rolesmapping"],"updated_config_size":1,"message":null} is 1 (["rolesmapping"]) due to: null
       Done with success
 
-#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. Without it, the Wazuh manager API ignores the role mapping that you create next.
 
    .. code-block:: yaml
       :emphasize-lines: 6
@@ -486,7 +486,7 @@ Map LDAP role to Wazuh read-only role
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, assign the name of the read-only role you have in your LDAP server and click **Map** to confirm the action. In our case, the backend role (CN) is ``wazuh-readonly``.
 
-#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that ``wazuh_core.hosts.default.run_as`` is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. Without it, the Wazuh manager API ignores the role mapping that you create next.
 
    .. code-block:: yaml
       :emphasize-lines: 6
