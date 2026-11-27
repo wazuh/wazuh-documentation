@@ -158,7 +158,7 @@ The last command returns no output. The next Rootcheck scan creates a finding ab
 View the findings
 -----------------
 
-You see a Rootcheck finding about the hidden ``rsyslogd`` process.
+You see the finding ``Wazuh Rootcheck - Rootkit or malware detected``. Its message names the PID of the hidden ``rsyslogd`` process, not its name.
 
 #. In the Wazuh dashboard, go to **Threat intelligence** > **Threat Hunting** and enter ``wazuh.integration.name: wazuh-rootcheck`` in the search bar.
 
@@ -195,6 +195,8 @@ Clean up
 --------
 
 #. Make ``rsyslogd`` visible again with the same ``kill -31 <PID_OF_RSYSLOGD>`` command. The next Rootcheck scan no longer reports it.
+
+#. Restore the default Rootcheck scan frequency. In ``/var/ossec/etc/ossec.conf``, set ``<frequency>`` back to ``43200`` in the ``<rootcheck>`` block and restart the Wazuh agent.
 
 #. Unload the rootkit module. The module must be visible, and it already is if you ran step 4 of :ref:`Attack emulation <poc_hidden_process_attack_emulation>`:
 

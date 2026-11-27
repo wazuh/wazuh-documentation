@@ -122,7 +122,7 @@ Complete the following before you start the use cases:
 
 #. Make sure the RHEL endpoint can reach the Ubuntu and Windows endpoints. The web attack use cases send HTTP requests from it.
 
-#. In **Ruleset management** > **Overview**, check that the integration each use case needs is enabled. If an integration is off, Wazuh drops its events without any message.
+#. In **Ruleset management** > **Overview**, check that these integrations are enabled: ``apache-http``, ``wazuh-fim``, ``wazuh-ioc``, ``wazuh-rootcheck``, ``wazuh-sca``, ``wazuh-vd``, and ``windows``. They're enabled by default. The Docker, AWS, and Network IDS use cases enable the integration they need in their own steps. If an integration is off, Wazuh drops its events without any message.
 
 Wazuh dashboard concepts
 ^^^^^^^^^^^^^^^^^^^^^^^^

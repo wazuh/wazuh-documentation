@@ -65,7 +65,11 @@ Ubuntu endpoint
       $ sudo apt install -y python3-pip
       $ sudo pip3 install --break-system-packages boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
 
-#. Append the following configuration to ``/var/ossec/etc/ossec.conf``. Replace ``<AWS_BUCKET_NAME>`` with the name of your S3 bucket and ``<AWS_PROFILE_NAME>`` with your AWS profile. See :doc:`Configuring AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
+#. Create an IAM user for Wazuh with the ``s3:GetObject`` and ``s3:ListBucket`` permissions on the bucket, plus ``kms:Decrypt`` if the trail encrypts its logs with AWS KMS.
+
+#. Create an access key for the user and save it as root in ``/root/.aws/credentials`` under a profile name, for example ``wazuh-poc``.
+
+#. Append the following configuration to ``/var/ossec/etc/ossec.conf``. Replace ``<AWS_BUCKET_NAME>`` with the name of your S3 bucket and ``<AWS_PROFILE_NAME>`` with that profile name. See :doc:`Configuring AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
 
    .. code-block:: xml
 

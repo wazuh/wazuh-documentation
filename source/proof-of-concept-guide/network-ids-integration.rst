@@ -108,7 +108,7 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-Wait a few minutes before you generate test traffic.
+Wait about 5 minutes before you generate test traffic.
 
 .. _poc_network_ids_verify_data_ingestion:
 

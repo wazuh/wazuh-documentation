@@ -100,7 +100,7 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-Wait a few minutes before you test the configuration. The Wazuh manager applies content changes at its next synchronization.
+Wait about 5 minutes before you test the configuration. The Wazuh manager applies content changes at its next synchronization.
 
 Verify data ingestion
 ---------------------
@@ -140,9 +140,9 @@ Run the following Docker commands on the Ubuntu endpoint to generate events.
 View the findings
 -----------------
 
-You see one finding for each container action, for example ``Command executed inside Docker container - nginx_container`` and ``Interactive shell session started inside Docker container - nginx_container``.
+You see findings for the commands you run in the container and for its pause, unpause, stop, and removal, for example ``Command executed inside Docker container - nginx_container`` and ``Interactive shell session started inside Docker container - nginx_container``. Pulling the image and creating or starting the container raise no finding.
 
-In the Wazuh dashboard, go to **Cloud security** > **Docker** and select **Findings**. You see findings for the image pull and the container activity.
+In the Wazuh dashboard, go to **Cloud security** > **Docker** and select **Findings**. You see findings for the container activity.
 
 .. thumbnail:: /images/poc/docker-findings.png
    :title: Visualize Docker findings
