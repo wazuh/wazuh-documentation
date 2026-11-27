@@ -65,6 +65,8 @@ if ( $('.document').length > 0 ) {
     const regex = /\s+$/g;
     const blockCode = $(this);
 
+    markHeredocPrompts(blockCode);
+
     /* Process prompts: gp elements */
     const gpElements = blockCode.find('.gp');
     gpElements.each(function() {
@@ -144,9 +146,9 @@ if ( $('.document').length > 0 ) {
    */
   function filterCodeBlock(code, parent) {
     const codeClone = code.clone(true);
-    codeClone.find('.gp').empty();
-    let data = codeClone.text();
     const heredocs = findHeredocs(code);
+    codeClone.find('.gp:not(.in-heredoc)').empty();
+    let data = codeClone.text();
     const codeType = getCodeBlockType(parent).toLowerCase();
 
     data = String(data);
@@ -182,6 +184,26 @@ if ( $('.document').length > 0 ) {
     }
     data = data.trim();
     return data;
+  }
+
+  /**
+   * Marks with the class in-heredoc the prompts found on heredoc content lines,
+   * where a leading # (e.g. #!/bin/bash or a comment) is part of the content
+   * so it must be selectable and copied
+   * @param {Obj} code jQuery object containing the code block
+   */
+  function markHeredocPrompts(code) {
+    const heredocs = findHeredocs(code);
+    const walker = document.createTreeWalker(code.get(0), NodeFilter.SHOW_TEXT);
+    let line = 0;
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      const inHeredoc = heredocs.some(({start, finish}) => start <= line && finish >= line);
+      if (inHeredoc) {
+        $(node.parentNode).closest('.gp').addClass('in-heredoc');
+      }
+      line += (node.nodeValue.match(/\n/g) || []).length;
+    }
   }
 
   /**
