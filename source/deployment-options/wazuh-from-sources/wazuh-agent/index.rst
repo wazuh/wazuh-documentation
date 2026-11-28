@@ -492,7 +492,7 @@ This section walks you through downloading the Wazuh source code, compiling it, 
 
          .. code-block:: console
 
-            # cd wazuh-|WAZUH_CURRENT|/src
+            # cd src
             # make TARGET=agent deps
             # make TARGET=agent CC=gcc-14 CXX=g++-14
             # cd ..
@@ -501,7 +501,6 @@ This section walks you through downloading the Wazuh source code, compiling it, 
 
          .. code-block:: console
 
-            # cd wazuh-|WAZUH_CURRENT|
             # ./install.sh
 
 
