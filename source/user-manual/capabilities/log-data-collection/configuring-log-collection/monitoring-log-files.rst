@@ -6,7 +6,7 @@
 Collecting logs from a file
 ============================
 
-Collecting logs from a file allows Wazuh to monitor specific events and ingest new log entries as they are written. This helps you track application activity, system events, and security-relevant changes in near real-time. Wazuh indexes a collected line when an integration decoder classifies it. For lines from your own applications, create a :doc:`custom decoder </user-manual/data-analysis/decoders>`, or enable :ref:`unclassified event storage <wazuh_indexer_indices_enabling_unclassified_events_storage>`.
+Collecting logs from a file allows Wazuh to monitor specific events and ingest new log entries as they are written. Wazuh indexes a collected line when an integration decoder classifies it. For lines from your own applications, create a :doc:`custom decoder </user-manual/data-analysis/decoders>`, or enable :ref:`unclassified event storage <wazuh_indexer_indices_enabling_unclassified_events_storage>`.
 
 .. _monitoring_single_log_file:
 
@@ -40,11 +40,9 @@ Configure the Wazuh agent configuration file on Windows, Linux, and macOS endpoi
      .. code-block:: xml
 
         <localfile>
-          <location>/PATH_TO_FILE/file</location>
+          <location>/PATH_TO_FILE/file.log</location>
           <log_format>syslog</log_format>
         </localfile>
-
-   For best results on macOS, omit the ``.log`` extension from the filename (for example, ``/PATH_TO_FILE/file``) or use a different ``log_format``, such as macOS ULS logs where appropriate.
 
    Where:
 
@@ -67,18 +65,24 @@ Configure the Wazuh agent configuration file on Windows, Linux, and macOS endpoi
 
       # echo "Nov 12 10:15:02 web-01 sshd[2301]: Failed password for invalid user admin from 203.0.113.47 port 50155 ssh2" >> /PATH_TO_FILE/file.log
 
-#. Navigate to **Explore** > **Discover** in the Wazuh dashboard and filter on the event where ``wazuh.protocol.location`` is ``/PATH_TO_FILE/file.log``.
+   On a Windows endpoint, run the following command in PowerShell as an administrator:
+
+   .. code-block:: ps1con
+
+      > "Nov 12 10:15:02 web-01 sshd[2301]: Failed password for invalid user admin from 203.0.113.47 port 50155 ssh2" | Out-File -FilePath C:\PATH_TO_FILE\file.log -Append -Encoding ascii
+
+#. Navigate to **Explore** > **Discover** in the Wazuh dashboard and filter on the event where ``wazuh.protocol.location`` is ``/PATH_TO_FILE/file.log``. On a Windows endpoint, it is ``C:\PATH_TO_FILE\file.log``.
 
    The event shows ``wazuh.integration.name`` ``system-auth`` and ``wazuh.integration.category`` ``system-activity``. Wazuh also generates the ``Failed authentication attempt - admin`` finding.
 
-   Wazuh indexes a line when an integration decoder classifies it. To also index lines that no integration classifies, go to **Ruleset management** > **Overview** and select **Space actions** > **Edit** for the **Standard** space. Switch on **Index unclassified events** and click **Save**. The change takes effect after the Wazuh manager synchronizes the space, about 2 minutes later. Wazuh then indexes these lines in ``wazuh-events-v5-unclassified``, and Discover shows them under the default ``wazuh-events-v5*`` index pattern.
+   To also index lines that no integration classifies, go to **Ruleset management** > **Overview** and select **Space actions** > **Edit** for the **Standard** space. Switch on **Index unclassified events** and click **Save**. The change takes effect after the Wazuh manager synchronizes the space, about 2 minutes later. Wazuh then indexes these lines in ``wazuh-events-v5-unclassified``, and Discover shows them under the default ``wazuh-events-v5*`` index pattern.
 
 .. _monitoring_log_files_wildcard:
 
 Monitoring log files using wildcard patterns
 ----------------------------------------------
 
-Wazuh supports wildcard patterns when monitoring log files, enabling flexible file selection. You can monitor all files starting with and ending with a specific name variable within a monitored endpoint's directory, such as ``file1.log`` and ``file2.log``. To do this, include the wildcard flag ``*`` in the ``<location>`` configuration.
+To monitor several files with one block, include the wildcard flag ``*`` in the ``<location>`` configuration.
 
 Follow these steps to monitor every log file that starts with ``file`` and ends with ``.log`` in a monitored endpoint's directory.
 
@@ -121,12 +125,14 @@ Follow these steps to monitor every log file that starts with ``file`` and ends 
 
 #. Navigate to **Explore** > **Discover** in the Wazuh dashboard and filter on the event where ``wazuh.protocol.location`` is ``/PATH_TO_FILE/file1.log``. The field holds the path of the file that matched the pattern.
 
+.. _configuring_sockets:
+
 Configuring sockets
 ----------------------
 
-A socket is a local communication endpoint that allows the Wazuh agent to send collected log data to another process. By default, the agent sends logs through its standard agent socket, but you can configure an additional socket when another local process needs to read, filter, process, or forward the same logs. The Logcollector module sends logs to UNIX domain sockets on Linux and macOS endpoints.
+A socket is a local communication endpoint that allows the Wazuh agent to send collected log data to another process. By default, the agent sends logs through its standard agent socket. You can configure an additional socket when another local process needs to read, filter, process, or forward the same logs. The Logcollector module sends logs to UNIX domain sockets on Linux and macOS endpoints.
 
-You can use the ``<socket>`` tag to add new output sockets and then configure the Wazuh agent to output logs to that socket. You must create the new socket on your monitored endpoint before adding it to your Wazuh configuration file. You can create the socket with your custom application or with netcat. For example, the command ``nc -lkU /var/run/custom.sock`` creates a new socket ``/var/run/custom.sock``, which you can forward logs to.
+You can use the ``<socket>`` tag to add new output sockets and then configure the Wazuh agent to output logs to that socket. You must create the new socket on your monitored endpoint before adding it to your Wazuh configuration file. You can create the socket with your custom application or with netcat.
 
 Perform the following steps on the monitored endpoint to create a new output socket and forward logs from ``file.log`` to it:
 
@@ -188,7 +194,7 @@ Perform the following steps on the monitored endpoint to create a new output soc
 
       # cat /tmp/custom_socket_capture.log
 
-   The command output looks similar to this:
+   Expected output:
 
    .. code-block:: none
       :class: output
