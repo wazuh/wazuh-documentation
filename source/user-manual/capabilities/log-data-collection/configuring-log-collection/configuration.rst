@@ -6,21 +6,19 @@
 Collecting logs from operating systems
 ========================================
 
-Wazuh collects and consolidates log data from endpoints, applications, and cloud integrations to support security monitoring within your environment.
-
 .. _how-to-collect-windowslogs:
 
 Windows
 --------
 
-Windows logs are records that provide information about events occurring on Windows systems. Windows Event Viewer displays these events and identifies the software, applications, or system components that generated them. The Wazuh manager normalizes collected events into JSON format, making their fields easier to query, filter, and analyze.
+Windows logs record events occurring on Windows systems. Windows Event Viewer displays these events and identifies the software, applications, or system components that generated them. The Wazuh manager normalizes collected events into JSON format, making their fields easier to query, filter, and analyze.
 
 .. _windows_event_channel_log_collection:
 
 Windows log sources
 ^^^^^^^^^^^^^^^^^^^^^
 
-The Event Channel is a Windows logging format supported on Windows Vista and later versions. It provides access to Applications and Services logs, as well as standard Windows logs such as Application, Security, and System. You can also use queries to filter the events collected from these channels. By default, the Wazuh agent monitors the System, Application, and Security event channels. You can configure the agent to monitor additional event channels based on your monitoring requirements.
+The Event Channel is a Windows logging format supported on Windows Vista and later versions. It provides access to Applications and Services logs, as well as standard Windows logs such as Application, Security, and System. You can also use :ref:`queries <reference_ossec_localfile_query>` to filter the events collected from these channels. By default, the Wazuh agent monitors the System, Application, and Security event channels. You can configure the agent to monitor additional event channels based on your monitoring requirements. To add a channel, see :ref:`Monitoring Sysmon events on a Windows endpoint <use_case_monitoring_sysmon_windows>`.
 
 The table below lists the channels and providers supported by the Wazuh agent.
 
@@ -66,14 +64,14 @@ Available channels and providers
 
 .. note::
 
-   The Wazuh agent for Windows endpoints does not support monitoring log files on UNC paths, such as ``\\server\share\file.log``, or on mapped network drives, such as ``Z:\logs\file.log``. It supports only log files on local file systems. If you specify a UNC path or mapped drive in the ``<localfile>`` block of your Windows agent configuration, the agent ignores it, and it does not monitor or alert on those locations.
+   The Wazuh agent for Windows endpoints monitors log files on local file systems only. In the ``<localfile>`` block, use a local path. The agent ignores UNC paths, such as ``\\server\share\file.log``, and mapped network drives, such as ``Z:\logs\file.log``.
 
 .. _how-to-collect-linuxlogs:
 
 Linux
 ------
 
-The Wazuh agent on Linux is a lightweight, persistent daemon that collects system and application logs from the local host and securely forwards them to the Wazuh manager for analysis. The Wazuh agent uses its Logcollector module to read these logs.
+Linux logs record the activity of the kernel, system services, and applications on Linux systems. Depending on the distribution, they go to the systemd journal, to text files under ``/var/log``, or to both. The Wazuh agent collects journal entries with the ``journald`` log format and reads each text file listed in a ``<localfile>`` block.
 
 Linux log sources
 ^^^^^^^^^^^^^^^^^^^
@@ -121,7 +119,7 @@ The table below lists common Linux log sources and whether the Wazuh agent monit
 
 Common Linux log sources the Wazuh agent monitors
 
-The Wazuh agent adds a default ``<localfile>`` block only for the files that exist when the agent is installed. To monitor a file created later, add a ``<localfile>`` block for it. To collect the output of a command, such as ``df -P``, ``netstat -tulpn``, or ``last -n 20``, add a ``<localfile>`` block with ``log_format`` set to ``command`` or ``full_command``.
+The Wazuh agent adds a default ``<localfile>`` block only for the files that exist when the agent is installed. To monitor a file created later, add a ``<localfile>`` block for it. To collect the output of a command, such as ``df -P``, ``netstat -tulpn``, or ``last -n 20``, add a ``<localfile>`` block with ``log_format`` set to ``command`` or ``full_command``. No integration classifies command output, so Wazuh indexes it only when **Index unclassified events** is on. The output then appears in ``wazuh-events-v5-unclassified``, and ``wazuh.protocol.location`` holds the ``<alias>`` value of the block.
 
 Refer to the :ref:`local configuration <reference_ossec_localfile_log_format>` documentation for the full list of supported ``log_format`` values.
 
@@ -130,13 +128,9 @@ Refer to the :ref:`local configuration <reference_ossec_localfile_log_format>` d
 macOS
 ------
 
-The macOS unified logging system (ULS) centralizes log management and storage across all system levels. macOS ULS does not write data to text-based log files, so Wazuh uses the log CLI tool to collect logs from macOS endpoints. The log CLI tool provides an interface for filtering and collecting logs. The ``query`` parameters in the Wazuh configuration allow you to:
+The macOS unified logging system (ULS) centralizes log management and storage across all system levels. macOS ULS does not write data to text-based log files, so Wazuh uses the log CLI tool to collect logs from macOS endpoints.
 
--  Set the message ``level`` you want to collect.
--  Filter by the log ``type``.
--  Use a precise ``predicate`` to filter logs based on their specific characteristics.
-
-Wazuh runs the log CLI tool to collect logs from macOS ULS. On macOS 10.15 and later, it uses the ``--style ndjson`` format and turns each event into a line in the ``--style syslog`` format. A message with line breaks then stays one event. On earlier macOS releases, it uses the ``--style syslog`` format:
+The Wazuh agent ships with the following default ``<localfile>`` block for macOS:
 
 .. code-block:: xml
 
@@ -154,7 +148,7 @@ On macOS 15 and later, ``/etc/sudoers`` contains ``Defaults !log_allowed``, so m
    # chmod 440 /etc/sudoers.d/log_allowed
    # visudo -cf /etc/sudoers.d/log_allowed
 
-You can have only one configuration block with ``log_format`` set to ``macos``. If you add more blocks, only the last one will be used.
+You can have only one configuration block with ``log_format`` set to ``macos``. If you add more blocks, the Wazuh agent uses only the last one.
 
 .. note::
 
@@ -190,7 +184,7 @@ Be as restrictive as possible when filtering the logs. macOS ULS produces a larg
 macOS log sources
 ^^^^^^^^^^^^^^^^^^^
 
-The Wazuh agent ships a default macOS ``<localfile>`` block, using ``log_format=macos``, whose ``<query>`` predicate already covers the sources below. Unlike Linux, where most sources need a ``<localfile>`` block added manually, every source here is collected by default:
+The ``<query>`` predicate of the default block covers the following sources, and the Wazuh agent collects them all by default:
 
 +------------------------+-----------------------------------------------------------+----------------+-------------------------------------------------+
 | Source                 | Process/predicate condition                               | Collected by   | Description                                     |
@@ -248,8 +242,6 @@ The Wazuh agent ships a default macOS ``<localfile>`` block, using ``log_format=
 |                        | "loginwindow.logoutNoReturn")``                           |                |                                                 |
 +------------------------+-----------------------------------------------------------+----------------+-------------------------------------------------+
 
-Sources covered by the default macOS ULS query
-
 .. _macos_uls_log_levels:
 
 macOS ULS log levels
@@ -284,35 +276,5 @@ Useful filtering keys
 -  ``senderImagePath``: Represents the full path of the library, framework, kernel extension, or Mach-O image that originated the event.
 -  ``subsystem``: Specifies the subsystem used to log an event. It only works with log messages generated with os_log(3) APIs.
 -  ``category``: The category used to log an event. Only works with log messages generated with os_log(3) APIs. Provide the subsystem filter when you use the category filter.
-
-Basic comparison operators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
--  ``=``, ``==``: The left-hand expression equals the right-hand expression.
--  ``>=``, ``=>``: The left-hand expression is greater than or equal to the right-hand expression.
--  ``<=``, ``=<``: The left-hand expression is less than or equal to the right-hand expression.
--  ``>``: The left-hand expression is greater than the right-hand expression.
--  ``<``: The left-hand expression is less than the right-hand expression.
--  ``!=``, ``<>``: The left-hand expression is not equal to the right-hand expression.
--  ``BETWEEN``: The left-hand expression is between, or equal to either of, the values specified on the right-hand side. The right-hand side is a two-value array. An array is required to specify the order, giving upper and lower bounds. For example, ``1 BETWEEN { 0, 33 }``, or ``processID BETWEEN { 15320, 16000 }``.
-
-Basic compound predicates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
--  ``AND``, ``&&``: Represents a logical AND.
--  ``OR``, ``||``: Represents a logical OR.
--  ``NOT``, ``!``: Represents a logical NOT.
-
-String comparison operators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-By default, string comparison operators are case-sensitive and diacritic-sensitive. You can modify an operator using the key characters ``c`` and ``d`` within square brackets to specify case and diacritic insensitivity, respectively. For example, ``processImagePath BEGINSWITH[cd] "/usr/libexec"`` matches any process whose full path starts with either ``/usr/libexec``, or ``/USR/LIBEXEC``.
-
--  ``BEGINSWITH``: The left-hand expression begins with the right-hand expression.
--  ``CONTAINS``: The left-hand expression contains the right-hand expression.
--  ``ENDSWITH``: The left-hand expression ends with the right-hand expression.
--  ``LIKE``: The left-hand expression equals the right-hand expression. You can use ``?`` and ``*`` as wildcard characters. ``?`` matches 1 character and ``*`` matches 0 or more characters.
--  ``MATCHES``: The left-hand expression equals the right-hand expression using a regex-style comparison according to ICU v3. For more information, see the `ICU User Guide for Regular Expressions <https://unicode-org.github.io/icu/userguide/strings/regexp.html>`__.
--  ``IN``: Equivalent to an SQL IN operation, the left-hand side must appear in the collection specified by the right-hand side. For example, ``category IN { 'APBonjourCache', 'cas', 'client' }``.
 
 For more information about predicates, see the `Predicate Programming Guide <https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html>`__.

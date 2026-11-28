@@ -8,7 +8,7 @@
 Log data collection
 ===================
 
-Wazuh log data collection gathers and consolidates events from endpoints, applications, and cloud integrations so security teams can support compliance, detect threats, investigate issues, and troubleshoot application or system errors. Wazuh agents use the Logcollector module to collect system and application logs on monitored endpoints and forward them to the Wazuh manager for processing, normalization, and indexing.
+Wazuh log data collection gathers and consolidates events from endpoints, applications, and cloud integrations. Security teams use these events to support compliance, detect threats, investigate issues, and troubleshoot application or system errors. Wazuh agents use the Logcollector module to collect system and application logs and forward them to the Wazuh manager for processing, normalization, and indexing.
 
 
 .. topic:: Contents
