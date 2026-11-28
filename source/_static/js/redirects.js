@@ -626,6 +626,11 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/deployment-options/docker/upgrading-wazuh-docker.html',
     '5.0': '/transitioning/docker-kubernetes-deployments.html#docker-deployments',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
+    '5.0': '/user-manual/capabilities/file-integrity/basic-settings.html',
   }
 );
 
@@ -730,6 +735,7 @@ removedUrls['5.0'] = [
   '/user-manual/capabilities/agentless-monitoring/index.html',
   '/user-manual/capabilities/agentless-monitoring/use-cases.html',
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
+  '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
   '/user-manual/capabilities/log-data-collection/journald.html',
   '/user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence.html',
   '/user-manual/capabilities/malware-detection/clam-av-logs-collection.html',

@@ -12,7 +12,6 @@ Compliance with regulatory standards and laws, such as PCI DSS, requires monitor
 -  Configuration files
 -  Content files
 
-This protects an organization's critical assets and data while helping detect potential security breaches.
 
 You can run scheduled scans with the FIM module to detect file modifications. In this example, the file is ``user_details.txt``, and FIM is scheduled to scan it every 5 minutes.
 
@@ -40,10 +39,6 @@ Perform the following steps to configure the FIM module to monitor a ``user_deta
         <directories>/Users/*/Documents/user_details.txt</directories>
       </syscheck>
 
-   .. note::
-
-      The ``<frequency>`` option is a global setting that defines the scan interval for all files and directories monitored in scheduled mode.
-
 #. Restart the Wazuh agent to apply the configuration:
 
    .. code-block:: console
@@ -58,7 +53,7 @@ Test the configuration
 Visualize the finding
 ----------------------
 
-Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes to the ``user_details.txt`` file.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes to the ``user_details.txt`` file. The finding title is ``Wazuh FIM - File modified - /Users/<USER_NAME>/Documents/user_details.txt``.
 
 .. thumbnail:: /images/manual/fim/changes-user-details-file.png
    :title: Changes to the user_details.txt file
