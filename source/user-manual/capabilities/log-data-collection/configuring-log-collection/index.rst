@@ -8,6 +8,12 @@ Configuring log collection
 
 The section below describes how to configure your Wazuh agent for log collection across Windows, Linux, and macOS endpoints.
 
+.. toctree::
+   :maxdepth: 2
+
+   monitoring-log-files
+   configuration
+
 Configuring a Wazuh agent
 --------------------------
 
@@ -69,9 +75,3 @@ You manage the centralized configuration in the ``agent.conf`` file of a Wazuh a
       :width: 80%
 
 #. To check that an agent applied the block, go to **Agents management** > **Summary**, select the agent, and open **Configuration** > **Log collection**. The file appears under **Logs files**.
-
-.. toctree::
-   :maxdepth: 2
-
-   monitoring-log-files
-   configuration
