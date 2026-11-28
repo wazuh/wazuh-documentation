@@ -1,29 +1,43 @@
 openapi: 3.0.0
 servers:
-  - url: https://api.cloud.wazuh.com/v2
-    description: Wazuh Cloud API
+  - url: https://console.cloud.wazuh.com/api/v1
+    description: Wazuh Console API
 info:
-  title: Wazuh Cloud API
-  description: "Manage your Wazuh Cloud account"
-  version: "2.0.0"
+  title: Wazuh Console API
+  description: |
+    Automate operations on the Wazuh Cloud environments of your organization.
+
+    Every request authenticates with an organization API key sent in the
+    `Authorization` header with the `Bearer` scheme. Editors create API keys in
+    Wazuh Console, under **Organization** > **API Keys**.
+  version: "1.0.0"
 paths:
-  /storage/token:
+  /platform/environments/{cloud_id}/storage/credentials:
     post:
       tags:
         - storage
-      summary: "Generate a token to access the cold storage."
+      operationId: createStorageCredentials
+      summary: "Get temporary credentials to access archive data."
       description: |
-        Wazuh Cloud cold storage is located in AWS S3. This endpoint returns a temporary AWS token
-        to be used in AWS S3 API (s3:ListBucket and s3:GetObject actions).
+        Wazuh Cloud archive data is stored in AWS S3. This endpoint returns temporary
+        AWS credentials that grant read access (s3:ListBucket and s3:GetObject actions)
+        to the archive data of the environment.
       security:
         - api_key: []
-
+      parameters:
+        - name: cloud_id
+          in: path
+          required: true
+          description: Cloud ID of the environment, as shown in the **ID** field of the environment details page in Wazuh Console.
+          schema:
+            type: string
+          example: "0123456789ab"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RequestToken"
+              $ref: "#/components/schemas/StorageCredentialsRequest"
 
       responses:
         "200":
@@ -31,170 +45,96 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Token"
+                $ref: "#/components/schemas/StorageCredentialsResponse"
         "401":
-          description: "Unauthorized"
+          description: "Unauthorized. The API key is missing or invalid, or the environment does not exist or does not belong to the organization of the API key."
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
-        "403":
-          description: "Forbidden"
+                $ref: "#/components/schemas/Error"
+              example:
+                errors:
+                  detail: "Unauthorized"
+        "422":
+          description: "Unprocessable entity. The request body is not valid."
+        "503":
+          description: "Service unavailable. The credentials are temporarily unavailable."
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
-        "415":
-          description: "Unsupported media type"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BasicError"
-        "429":
-          description: "Too many requests"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BasicError"
-        "500":
-          description: "Internal server error"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BasicError"
-  /info:
-    get:
-      summary: Get deployment info of the service
-      tags:
-        - info
-      security:
-        - api_key: []
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeploymentInfo"
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "500":
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/Error"
+              example:
+                errors:
+                  detail: "Cold storage credentials unavailable"
 
 components:
   securitySchemes:
     api_key:
-      type: apiKey
-      name: x-api-key
-      in: header
+      type: http
+      scheme: bearer
+      bearerFormat: API key
+      description: "Organization API key sent as `Authorization: Bearer <API_KEY>`."
 
   schemas:
-    RequestToken:
+    StorageCredentialsRequest:
       type: object
       required:
-        - environment_id
+        - token_expiration
       properties:
         token_expiration:
           type: integer
-          minimum: 900
-          maximum: 3600
-          example: 3600
           format: int32
-        environment_cloud_id:
-          type: string
-          example: "13245356356"
+          minimum: 900
+          maximum: 43200
+          example: 3600
+          description: Validity of the credentials, in seconds (900 to 43200, up to 12 hours).
       additionalProperties: false
 
-    Token:
+    StorageCredentialsResponse:
       type: object
       properties:
-        environment_cloud_id:
+        data:
+          $ref: "#/components/schemas/StorageCredentials"
+      additionalProperties: false
+
+    StorageCredentials:
+      type: object
+      properties:
+        access_key_id:
           type: string
-          pattern: \S+
-          maxLength: 64
-          example: 0123456789ab
-        aws:
+          example: "ASIAXXXXXXXXXXXXXXXX"
+          description: AWS access key ID.
+        secret_access_key:
+          type: string
+          example: "qEzCk63a224...5aB+e4fC1BR0G"
+          description: AWS secret access key.
+        session_token:
+          type: string
+          example: "MRg3t7HIuoA...4o4BXSAcPfUD8"
+          description: AWS session token.
+        expires_at:
+          type: string
+          format: date-time
+          example: "2026-03-05T16:00:00Z"
+          description: Date and time, in UTC, when the credentials expire.
+        bucket:
+          type: string
+          example: "wazuh-cloud-cold-us-east-1/0123456789ab"
+          description: S3 location of the archive data of the environment, in the format `wazuh-cloud-cold-<REGION>/<CLOUD_ID>`.
+        region:
+          type: string
+          example: "us-east-1"
+          description: AWS region where the archive data is stored.
+      additionalProperties: false
+
+    Error:
+      type: object
+      properties:
+        errors:
           type: object
           properties:
-            s3_path:
+            detail:
               type: string
-              pattern: \S+
-              example: wazuh-cloud-cold-us-east-1/0123456789ab
-            region:
-              type: string
-              pattern: (us(-gov)?|ap|ca|cn|eu|sa)-(central|(north|south)?(east|west)?)-\d
-              example: us-east-1
-            credentials:
-              type: object
-              properties:
-                access_key_id:
-                  type: string
-                  pattern: \S+
-                  maxLength: 115
-                  example: "mUdT2dBjlHd...Gh7NniyZKR5If"
-                secret_access_key:
-                  type: string
-                  pattern: \S+
-                  maxLength: 115
-                  example: "qEzCk63a224...5aB+e4fCDBR0G"
-                session_token:
-                  type: string
-                  pattern: \S+
-                  maxLength: 113
-                  example: "MRgpt7HIuoA...4o4BXSAcPfUD8"
-                expires_in:
-                  type: integer
-                  format: int32
-                  minimum: 900
-                  maximum: 3600
-                  example: 3600
-          additionalProperties: false
+              example: "Unauthorized"
+              description: A brief, human-readable description of the error.
       additionalProperties: false
-    
-    DeploymentInfo:
-      type: object
-      additionalProperties: false
-      properties:
-        version:
-          type: string
-          example: "v0.60.6"
-          description: Service version
-        revision:
-          type: string
-          example: "6011"
-          description: Service revision
-        timestamp:
-          type: string
-          example: "2021-02-02T14:24:08.975Z"
-          description: Deployment timestamp
-
-    BasicError:
-      type: object
-      additionalProperties: false
-      required:
-        - message
-        - status_code
-      properties:
-        message:
-          type: string
-          example: "Not found"
-          description: A human readable brief message about the type of error
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-                example: "Environment with Cloud ID 'ig564fst342a' could not be found"
-          description: (Optional) An array or errors describing what happened
-        status_code:
-          type: number
-          example: 404
-          description: HTTP status code of the response

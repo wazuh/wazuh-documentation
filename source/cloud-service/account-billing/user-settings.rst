@@ -1,64 +1,151 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out how to edit your user settings on the Wazuh Cloud Console. Learn more about it in this section of the documentation. 
+   :description: Edit your Wazuh Console personal details, change your password, set up multi-factor authentication, and manage your notifications.
 
-Edit user settings
-===================
+.. _cloud_account_user_settings:
 
-You can edit your account preferences, such as email address and password from the Wazuh Cloud Console. You can also enable multi-factor authentication to increase security and see login method alternatives.
+User settings
+=============
 
-Configure your user profile
----------------------------
+You can edit your personal details, change your password, protect your account with multi-factor authentication (MFA), and choose how Wazuh Console notifies you. These settings apply to your user account in every organization you belong to.
 
-You can configure your name, last name, company name, country, phone number, and website.
+To open your user settings:
 
-#. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ and click the upper-right user icon to open the menu.
-#. Go to **User settings**.
-#. Fill in or edit the fields. **Company** and **Country** are required in order to continue.
-#. Click **Save** to complete the action.
+#. In the header, open the account menu.
+#. Select **User Settings**.
 
-Update your email address
--------------------------
+The **User settings** page has the following tabs:
 
-Each Wazuh Cloud account has a primary email associated with it. If needed, you can change this primary email address.
+-  **Personal Details**
+-  **Password and Security**
+-  **Notifications**
+-  **Notification Settings**
 
-#. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ and click the upper-right user icon to open the menu.
-#. Go to **User settings**.
-#. Click **Email address**.
-#. Enter a new email address and your current password, then click **Save** to confirm the action.
+Personal Details
+----------------
 
-   An email is sent to the new address with a link to confirm the change.
+The **Personal Details** tab shows your profile. All fields are required.
 
-Change your Wazuh Cloud Console password
-----------------------------------------
++-------------------------+--------------------------------------------------------------------------+
+| Field                   | Description                                                              |
++=========================+==========================================================================+
+| **First name**          | Your first name.                                                         |
++-------------------------+--------------------------------------------------------------------------+
+| **Last name**           | Your last name.                                                          |
++-------------------------+--------------------------------------------------------------------------+
+| **Notifications email** | The address where Wazuh Console sends you emails. Organization           |
+|                         | invitations are matched against this address.                            |
++-------------------------+--------------------------------------------------------------------------+
+| **Phone number**        | Your phone number.                                                       |
++-------------------------+--------------------------------------------------------------------------+
+| **Company**             | Your company name.                                                       |
++-------------------------+--------------------------------------------------------------------------+
+| **Country**             | Your country.                                                            |
++-------------------------+--------------------------------------------------------------------------+
+| **State**               | Your state. This field appears only for some countries.                  |
++-------------------------+--------------------------------------------------------------------------+
 
-When you signed up for a Wazuh Cloud account with your email address, you selected a password that you use to log in to the console. If needed, you can change this password.
+To edit your personal details:
 
-If you know your current password:
+#. Select the **Personal Details** tab.
+#. Change the fields you want to update.
+#. Click **Save changes**.
 
-#. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ and click the upper-right user icon to open the menu.
-#. Go to **User settings**.
-#. In **Change password**, enter the current password and provide the new password that you want to use.
-#. Click **Save** to confirm the action.
+Wazuh Console shows **Profile updated successfully.**
 
-If you don’t know your current password:
+.. note::
 
-#. Click on **Forgot my password** on the login page of the Wazuh Cloud Console.
-#. Enter the primary email address for your account and click **Reset password**.
+   The email address you use to sign in can't be changed. You can change the **Notifications email** to receive emails at a different address.
 
-   An email is sent to your address with a link to reset the password.
+Changing the **Company** in your profile doesn't rename your organization. To rename the organization, see :doc:`Organization </cloud-service/organization/index>`.
 
-Enable multi-factor authentication
-----------------------------------
+Password and Security
+---------------------
 
-To add an extra layer of security to your Wazuh Cloud account, you can set up a Virtual MFA Device like Google authenticator.
+The **Password and Security** tab lets you change your password and manage multi-factor authentication.
 
-To enable multi-factor authentication:
+Changing your password
+^^^^^^^^^^^^^^^^^^^^^^
 
-#. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ and click the upper-right user icon to open the menu.
-#. Go to **User settings**.
-#. Under Multi-factor authentication, click **Add MFA** and follow the steps described in the Set up virtual MFA device pane.
-#. Click **Enable MFA** to complete the process.
+#. Select the **Password and Security** tab.
+#. In **Current password**, enter your current password.
+#. In **New password** and **Confirm password**, enter the new password. It must be between 12 and 72 characters long.
+#. Click **Update password**.
 
-   If your device is lost or stolen, contact support through the **Help** section of the Wazuh Cloud Console.
+Wazuh Console shows **Password updated successfully.**
+
+If you don't remember your current password, click **Forgot password?** to receive an email with a link to reset it. See :doc:`Create an account </cloud-service/getting-started/create-account>`.
+
+Setting up multi-factor authentication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With MFA, Wazuh Console asks for a 6-digit verification code from an authenticator app each time you sign in, in addition to your password. You need an authenticator app that supports time-based one-time passwords (TOTP) on your phone or computer.
+
+#. Select the **Password and Security** tab.
+#. Under **Multi-factor authentication is not configured**, click **Set up MFA**.
+#. Open your authenticator app and scan the QR code. If you can't scan it, click **Can't scan the QR code?** and enter the setup key shown in your authenticator app.
+#. Click **Continue**.
+#. In **Verification code**, enter the 6-digit code that your authenticator app shows.
+#. Click **Continue**.
+#. Under **Save your recovery code**, copy the recovery code and store it somewhere safe.
+
+   .. warning::
+
+      This code will not be shown again. Make sure to copy it before continuing.
+
+#. Click **I have saved my recovery code**.
+
+The tab shows **Multi-factor authentication is active**. The next time you sign in, Wazuh Console asks for a verification code.
+
+Using the recovery code
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The recovery code lets you sign in once if your authenticator app is unavailable. Enter it instead of the verification code when you sign in. After you use it, the code is invalid. Generate a new recovery code as soon as you can.
+
+Generating a new recovery code
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generate a new recovery code if you used your code or think someone else might know it. Generating a new code immediately invalidates the previous one.
+
+#. Select the **Password and Security** tab.
+#. Under **Recovery code**, click **Generate new recovery code**.
+#. Click **Generate new code** to confirm.
+#. Click the eye icon (**Show recovery code**) to show the code, and store it somewhere safe.
+#. Click **Ready**.
+
+The code is not shown again after you click **Ready** or leave the page.
+
+Disabling multi-factor authentication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Disabling MFA removes an important layer of security from your account. We don't recommend it.
+
+#. Select the **Password and Security** tab.
+#. Under **Disable multi-factor authentication**, click **Disable MFA**.
+#. Click **Disable MFA** again to confirm.
+
+Wazuh Console shows **Multi-factor authentication has been disabled.** You can set up MFA again at any time.
+
+If you lose access to your authenticator app and your recovery code, contact Wazuh. See :doc:`Support </cloud-service/support>`.
+
+Notifications
+-------------
+
+The **Notifications** tab lists the notifications you received, with the **Notification** text and the date and time it was **Received**. Unread notifications are highlighted, and Wazuh Console marks them as read when you open the tab.
+
+You can also see your latest notifications from the notification bell in the header. Click **See all notifications** to open this tab.
+
+Notification Settings
+---------------------
+
+The **Notification Settings** tab lets you choose how you receive each type of notification. Your notification types are listed under **Your notifications**.
+
+#. Select the **Notification Settings** tab.
+#. Expand a notification type to see its channels.
+#. Turn each channel on or off:
+
+   -  **Notification bell**: The notification appears in the notification bell of the header and in the **Notifications** tab.
+   -  **Email**: The notification is sent to your **Notifications email**.
+
+Wazuh Console saves each change immediately. A notification type with every channel turned off shows **Off**. Some notification types are required, and you can't turn off their channels.

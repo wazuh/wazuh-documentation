@@ -15,7 +15,7 @@
 **North America**
 
 -  Canada: ``ca-central-1``
--  North Virginia: ``us-east-1``
+-  N. Virginia: ``us-east-1``
 -  Ohio: ``us-east-2``
 
 .. End of file

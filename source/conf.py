@@ -144,7 +144,6 @@ exclude_patterns = [
     'upgrade-guide/**',
     'integrations-guide/**',
     'migration-guide/**',
-    'cloud-service/**',
     'development/**',
     'release-notes/**',
 ]
