@@ -16,7 +16,7 @@ Linux endpoint
 
 #. Create a Bash script named ``disk-usage.sh`` in the ``/usr/local/bin/`` directory. The script prints a warning line only when the root partition usage reaches the threshold of 80%:
 
-   .. code-block:: bash
+   .. code-block:: console
 
       # tee /usr/local/bin/disk-usage.sh > /dev/null << 'EOF'
       #!/bin/bash
