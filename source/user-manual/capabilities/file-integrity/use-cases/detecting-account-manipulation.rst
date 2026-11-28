@@ -6,20 +6,20 @@
 Detect account manipulation
 ============================
 
-Account manipulation refers to the creation, modification, or deletion of user accounts or credentials within an organization's IT infrastructure. Monitoring this activity is critical, since unauthorized account manipulation can grant attackers access to sensitive systems and data.
+Account manipulation refers to the creation, modification, or deletion of user accounts or credentials within an organization's IT infrastructure.
 
 To maintain persistence on a victim endpoint, adversaries can alter the SSH ``authorized_keys`` file in Linux. The ``.ssh`` directory within a user's home directory holds this file. For example, for a user named *smith*, you can find the ``authorized_keys`` file located at ``/home/smith/.ssh/authorized_keys``. This file defines the public keys the user can use to log in, with each line representing a single key.
 
-You can configure the Wazuh FIM module to monitor the ``authorized_keys`` file and trigger a finding whenever a user or process modifies its public keys. This lets you act before a system compromise occurs.
+You can configure the Wazuh FIM module to monitor the ``authorized_keys`` file and trigger a finding whenever a user or process modifies its public keys.
 
 Use case description
 ---------------------
 
-+---------------------+---------------------------------------------------------------+
-| Endpoint            | Description                                                   |
-+=====================+===============================================================+
-| **CentOS Stream 9** | The FIM module detects SSH key modification on this endpoint. |
-+---------------------+---------------------------------------------------------------+
++--------------------------------+---------------------------------------------------------------+
+| Endpoint                       | Description                                                   |
++================================+===============================================================+
+| **Red Hat Enterprise Linux 9** | The FIM module detects SSH key modification on this endpoint. |
++--------------------------------+---------------------------------------------------------------+
 
 Configuration
 -------------
@@ -51,7 +51,7 @@ The FIM module expands the wildcard in ``/home/*/.ssh/authorized_keys`` to the f
 Test the configuration
 -----------------------
 
-Log in to the CentOS Stream 9 endpoint as the user whose ``authorized_keys`` file you change, not as root, and run the following commands from the user's home directory. The configuration monitors ``/home/*/.ssh/authorized_keys``, so a change to the ``/root/.ssh/authorized_keys`` file of the root user doesn't generate a finding.
+Log in to the Red Hat Enterprise Linux 9 endpoint as the user whose ``authorized_keys`` file you change, not as root, and run the following commands from the user's home directory. The configuration monitors ``/home/*/.ssh/authorized_keys``, so a change to the ``/root/.ssh/authorized_keys`` file of the root user doesn't generate a finding.
 
 #. Create the ``.ssh`` directory with the correct permissions, then generate an SSH key pair for user authentication and save it as ``.ssh/test_key``:
 
@@ -70,7 +70,7 @@ Log in to the CentOS Stream 9 endpoint as the user whose ``authorized_keys`` fil
 Visualize the finding
 ----------------------
 
-Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes to the ``authorized_keys`` file.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes to the ``authorized_keys`` file. The finding title is ``Wazuh FIM - File modified - /home/<USER_NAME>/.ssh/authorized_keys``, and ``user.name`` shows the user who changed the file.
 
 .. thumbnail:: /images/manual/fim/changes-authorized-keys-file.png
    :title: Changes to the authorized_keys file

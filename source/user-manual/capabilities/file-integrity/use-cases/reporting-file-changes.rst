@@ -8,16 +8,14 @@ Report file changes
 
 The functionality to report file changes lets you confirm that changes to an application or system were implemented correctly. For example, if you modify an application configuration file, the FIM capability reports the specific changes and shows the file's state before and after.
 
-A record of file changes is useful for troubleshooting and auditing. By providing this visibility, the FIM capability plays an important role in effective change management.
-
 Use case description
 ---------------------
 
-+---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Endpoint            | Description                                                                                                                                                                  |
-+=====================+==============================================================================================================================================================================+
-| **CentOS Stream 9** | The FIM module monitors a directory on this endpoint for file changes. It reports the exact changes made to a specified file and hides the changes made to an excluded file. |
-+---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Endpoint                       | Description                                                                                                                                                                  |
++================================+==============================================================================================================================================================================+
+| **Red Hat Enterprise Linux 9** | The FIM module monitors a directory on this endpoint for file changes. It reports the exact changes made to a specified file and hides the changes made to an excluded file. |
++--------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
@@ -71,7 +69,7 @@ Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings**
    :align: center
    :width: 80%
 
-Expand the finding for the ``appreport.conf`` file. The ``file.diff`` field shows the content added to the file. For ``private-file.conf``, ``file.diff`` shows that the diff was truncated because of the ``nodiff`` setting.
+Expand the finding for the ``appreport.conf`` file. The ``file.diff`` field shows the content added to the file.
 
 .. thumbnail:: /images/manual/fim/content-added-to-the-file.png
   :title: Content added to the file
@@ -79,7 +77,7 @@ Expand the finding for the ``appreport.conf`` file. The ``file.diff`` field show
   :align: center
   :width: 80%
 
-Expand the finding for the ``private-file.conf`` file to see information about the changes made to the file. In the image below, in the ``file.diff`` field, you see that FIM does not report the content added to the file.
+Expand the finding for the ``private-file.conf`` file. The ``file.diff`` field shows that the diff was truncated because of the ``nodiff`` setting.
 
 .. thumbnail:: /images/manual/fim/alert-for-the-private-file-conf.png
    :title: Finding for the private-file.conf file

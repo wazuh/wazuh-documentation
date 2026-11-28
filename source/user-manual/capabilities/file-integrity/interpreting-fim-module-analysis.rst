@@ -71,7 +71,7 @@ Each FIM event that a default rule of the ``wazuh-fim`` integration matches gene
 -  ``Wazuh FIM - File modified - <FILE_PATH>``: medium level, MITRE ATT&CK techniques T1565 and T1036.
 -  ``Wazuh FIM - File deleted - <FILE_PATH>``: medium level, MITRE ATT&CK techniques T1070 and T1485.
 
-On Windows endpoints, the file path in a finding is in lowercase, for example ``c:\users\test\documents\audit_docu.txt``. Write the path in lowercase when you filter findings on ``file.path``.
+On Windows endpoints, the file path in a finding is in lowercase, for example ``c:\users\test\documents\audit_docu.txt``. Write the path in lowercase when you filter findings on ``file.path``. To show only the findings for one file, type ``file.path: "<FILE_PATH>"`` in the search bar and press Enter. For a Windows registry key or value, type ``registry.path: "<REGISTRY_PATH>"``. Write the path in quotes, as the finding shows it.
 
 .. thumbnail:: /images/manual/fim/findings.png
    :title: Findings

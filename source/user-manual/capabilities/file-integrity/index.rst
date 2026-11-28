@@ -31,14 +31,13 @@ FIM supports compliance with data security, privacy, and retention requirements 
 
 .. topic:: Contents
 
-    .. toctree::
-        :maxdepth: 2
+   .. toctree::
+      :maxdepth: 2
 
-        how-it-works
-        how-to-configure-fim
-        interpreting-fim-module-analysis
-        basic-settings
-        creating-custom-fim-rules
-        advanced-settings
-        use-cases/index
-        windows-registry-monitoring
+      how-it-works
+      basic-settings
+      interpreting-fim-module-analysis
+      advanced-settings
+      creating-custom-fim-rules
+      use-cases/index
+      windows-registry-monitoring

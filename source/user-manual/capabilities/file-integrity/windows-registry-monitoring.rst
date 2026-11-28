@@ -8,18 +8,14 @@ Windows Registry monitoring
 
 The Windows Registry is a vital part of the Windows operating system. It is a database that stores configuration information for programs and hardware installed on Microsoft Windows operating systems. When you install a program, Windows creates a new subkey in the registry. This subkey contains information such as the program location, version, and startup instructions.
 
-An unauthorized or unexpected change to the registry might result in system instability, application failures, and security breaches. Attackers might modify registry keys to execute malicious code or to maintain persistence on the system. In addition, legitimate software and system updates might also modify the registry. It is essential to track these changes to ensure system stability and security.
+An unauthorized or unexpected change to the registry might result in system instability, application failures, and security breaches. Attackers might modify registry keys to execute malicious code or to maintain persistence on the system.
 
 The Wazuh FIM module scans the Windows Registry periodically and triggers a finding when it detects changes in the entries.
 
 How it works
 ------------
 
-The Wazuh File Integrity Monitoring (FIM) module runs on the Wazuh agent, monitoring Windows Registry entries through scheduled scans to detect additions, modifications, and deletions at fixed intervals. While the default configuration provides basic monitoring, you can customize the FIM settings to specify which Windows Registry entries to monitor based on your environment's requirements.
-
 The FIM module stores checksums and other attributes of monitored Windows Registry entries in a dedicated database on the endpoint. During scans, it compares current values against previously stored ones to identify changes, then reports them to the Wazuh manager, which processes and forwards them to the Wazuh indexer. If an event matches a detection rule, Wazuh generates a security finding.
-
-The Wazuh agent uses a local SQLite database to store the current state of monitored Windows Registry entries, located at ``C:\Program Files (x86)\ossec-agent\queue\fim\db`` on Windows.
 
 The Wazuh agent also synchronizes the current state of the monitored Windows Registry entries with the Wazuh manager, which stores it in the ``wazuh-states-fim-registry-keys`` and ``wazuh-states-fim-registry-values`` indices of the Wazuh indexer.
 
@@ -29,8 +25,6 @@ The Wazuh agent also synchronizes the current state of the monitored Windows Reg
   :align: center
   :width: 80%
 
-The Wazuh manager processes the Windows Registry events it receives from the Wazuh agents using the Wazuh normalization engine. The normalization engine converts the events into JSON documents that conform to the Wazuh Common Schema (WCS). The indexer connector component on the Wazuh manager then securely forwards the normalized events to the Wazuh indexer for indexing, storage, and threat detection.
-
 Configuration
 -------------
 
@@ -38,9 +32,7 @@ To configure the FIM module, specify the registry keys that FIM must monitor for
 
 You can modify the default FIM configuration on the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the Wazuh agent to specify the Windows Registry keys to monitor. You can also configure this capability remotely by using centralized configuration.
 
-The FIM module supports several configuration options for monitoring Windows Registry entries. For example, you can enable all the basic checks with the ``check_all`` attribute, or find the information about the specific change made to a registry entry with the ``report_changes`` attribute. You can find a list of all the supported attributes and options in the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` section of the documentation.
-
-In this guide, you can see different configuration options that you can apply to monitor the Windows Registry.
+You can find a list of all the supported attributes and options in the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` section of the documentation.
 
 Record Windows Registry attributes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -70,8 +62,6 @@ Before you start, create the three test keys with one value each. Run this comma
 
    > 'TestKey1','TestKey2','TestKey3' | ForEach-Object { New-Item -Path "HKLM:\Software\Classes\batfile\$_" -Force; New-ItemProperty -Path "HKLM:\Software\Classes\batfile\$_" -Name Test -Value test -Force }
 
-After you restart the Wazuh agent in step 2, the three keys and their values appear in **Endpoint security** > **File Integrity Monitoring** > **Inventory**, on the **Registry keys** and **Registry values** tabs.
-
 .. thumbnail:: /images/manual/fim/registry-keys-inventory.png
    :title: Registry keys inventory
    :alt: Registry keys tab of the FIM inventory listing the three test keys
@@ -100,16 +90,14 @@ After you restart the Wazuh agent in step 2, the three keys and their values app
 
       > Restart-Service -Name WazuhSvc
 
+After you restart the Wazuh agent in step 2, the three keys and their values appear in **Endpoint security** > **File Integrity Monitoring** > **Inventory**, on the **Registry keys** and **Registry values** tabs.
+
 .. _recursion_level_windows_registry:
 
 Recursion level
 ^^^^^^^^^^^^^^^
 
 You can configure the maximum recursion level allowed for a Windows Registry entity with the ``recursion_level`` option of the ``windows_registry`` option. The allowed values for this option are any integer between 0 and 512.
-
-.. note::
-
-   This 512 limit applies specifically to ``<windows_registry>`` (Windows Registry monitoring). The ``recursion_level`` option for ``<directories>`` is different and supports a lower range. See :ref:`Recursion level <recursion_level_directories>`.
 
 Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` to 3.
 
@@ -222,7 +210,7 @@ Expand the finding. The ``event.reason`` field lists the changed attributes, and
 Adding exclusions
 ^^^^^^^^^^^^^^^^^
 
-You can configure the FIM module to ignore certain Windows Registry keys with the ``registry_ignore`` option. It allows declaring only a single Windows Registry entry. However, you can specify multiple lines to declare multiple registry entries.
+You can configure the FIM module to ignore certain Windows Registry keys with the ``registry_ignore`` option. Each line excludes one entry. Add a line for each entry.
 
 Follow these steps to configure the FIM module to ignore the ``HKEY_LOCAL_MACHINE\Security\Policy`` and any Windows Registry entry that matches the simple regex pattern ``\Enum$`` from FIM results.
 
@@ -298,7 +286,7 @@ Test the configuration
 Visualize the finding
 ^^^^^^^^^^^^^^^^^^^^^
 
-Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes in the Windows startup registries.
+Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes in the Windows startup registries. Wazuh generates a ``Wazuh FIM - Registry created`` finding for each new value, such as ``Wazuh FIM - Registry created - HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run\DemoValue``, and a ``Wazuh FIM - Registry modified`` finding for each key that changed. The ``registry.path`` field shows the key path and the value name.
 
 .. thumbnail:: /images/manual/fim/changed-windows-startup-registries.png
    :title: Changes in the Windows startup registries

@@ -108,6 +108,8 @@ Specifies where the database is going to be stored.
 | **Allowed values**   | disk, memory   |
 +----------------------+----------------+
 
+.. _reference_ossec_syscheck_directories:
+
 directories
 ^^^^^^^^^^^^
 
@@ -956,6 +958,8 @@ Sets the maximum capacity of the queue that stores the audit dispatcher events. 
 .. warning::
    If the queue fills up, some audit events may be lost. However, the next scheduled scan will generate the missing alerts without the audit information.
 
+.. _reference_ossec_syscheck_windows_audit_interval:
+
 windows_audit_interval
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1150,6 +1154,8 @@ Configurations with specific registry keys take precedence over those that use w
    <windows_registry arch="both" check_sum="yes">HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY</windows_registry>
 
 However, the second line does enable hash checking for TEST_KEY. This is a specific key and this setting takes precedence here.
+
+.. _default_syscheck_configuration:
 
 Default syscheck configuration
 ---------------------------------
